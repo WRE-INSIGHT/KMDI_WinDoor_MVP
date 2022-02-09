@@ -1264,14 +1264,40 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = 5;
                             ht_deduction = 11;
 
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            if (parent_name.Contains("MultiMullion")) 
                             {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                if (parent_doxtyle == DockStyle.None &&
+                                    lvl2_parent_Type == "Transom") //T-M-T
                                 {
-                                    ht_deduction = 0;
+                                    if (parentObj_placement == "First")
+                                    {
+                                        ht_deduction = 12;
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        ht_deduction = 13;
+                                        bounds_PointY = 6;
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        bounds_PointY = 6;
+                                        ht_deduction = 1;
+                                    }
+                                }
+                                else if (parent_doxtyle == DockStyle.Fill &&
+                                         lvl2_parent_Type == "") //M-T
+                                {
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        ht_deduction = 0;
+                                    }
                                 }
                             }
+                        }
+                        else if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 10;
                         }
                     }
 
@@ -1292,18 +1318,80 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
                                 bounds_PointX = 10;
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+
+                                if (parent_name.Contains("MultiMullion"))
                                 {
-                                    wd_deduction = 17;
-                                    ht_deduction = 20;
+                                    if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            wd_deduction = 17;
+                                            ht_deduction = 20;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            wd_deduction = 17;
+                                            ht_deduction = 11;
+                                        }
+                                    }
+                                    else if (parent_doxtyle == DockStyle.None &&
+                                             lvl2_parent_Type == "Transom") //T-M-T
+                                    {
+                                        if (parentObj_placement == "First")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                wd_deduction = 15;
+                                                ht_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                wd_deduction = 15;
+                                                ht_deduction = 15;
+                                            }
+                                        }
+                                        else if (parentObj_placement == "Somewhere in Between")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 10;
+                                                wd_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 10;
+                                                wd_deduction = 15;
+                                            }
+                                        }
+                                        else if (parentObj_placement == "Last")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 15;
+                                                wd_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 6;
+                                                wd_deduction = 15;
+                                            }
+                                        }
+                                    }
                                 }
-                                else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                                {
-                                    wd_deduction = 17;
-                                    ht_deduction = 11;
-                                }
+
                             }
                         }
                         else if (zoom == 0.50f)
@@ -1341,17 +1429,71 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
                                 {
-                                    wd_deduction = 17;
-                                    ht_deduction = 20;
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                    {
+                                        wd_deduction = 17;
+                                        ht_deduction = 20;
+                                    }
+                                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        wd_deduction = 17;
+                                        ht_deduction = 11;
+                                    }
                                 }
-                                else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                else if (parent_doxtyle == DockStyle.None &&
+                                         lvl2_parent_Type == "Transom") //T-M-T
                                 {
-                                    wd_deduction = 17;
-                                    ht_deduction = 11;
+                                    if (parentObj_placement == "First")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                            wd_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            wd_deduction = 17;
+                                            ht_deduction = 10;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 15;
+                                            wd_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 6;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1383,15 +1525,66 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
                                 {
-                                    ht_deduction = 20;
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                    {
+                                        ht_deduction = 20;
+                                    }
+                                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        ht_deduction = 11;
+                                    }
                                 }
-                                else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                else if (parent_doxtyle == DockStyle.None &&
+                                         lvl2_parent_Type == "Transom") //T-M-T
                                 {
-                                    ht_deduction = 11;
+                                    if (parentObj_placement == "First")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None )
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 6;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -3186,8 +3379,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
-                                           new Point(pInnerX + pInnerWd, pInnerY));
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
 
@@ -3384,7 +3575,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
-                            if (zoom == 1.0f)
+                            if (zoom == 1.0f || zoom == 0.26f)
                             {
                                 locY = fpnl.ClientRectangle.Height - 1;
                                 locY2 = fpnl.ClientRectangle.Height - 1;
@@ -3442,7 +3633,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
-                            if (zoom == 1.0f)
+                            if (zoom == 1.0f || zoom == 0.26f)
                             {
                                 locX2 = pInnerX + pInnerWd - 2;
 

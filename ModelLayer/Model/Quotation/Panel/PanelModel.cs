@@ -1802,24 +1802,184 @@ namespace ModelLayer.Model.Quotation.Panel
                     top = (Panel_Margin.Top != 0) ? 10 : 0;
                     bot = (Panel_Margin.Bottom != 0) ? 10 : 0;
 
-                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
+                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel == null)
                     {
-                        if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion" &&
-                            Panel_ParentMultiPanelModel.MPanel_Type == "Transom") //M-T stack
+                        if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
                         {
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
-                                Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                            if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Mullion" &&
+                                Panel_ParentMultiPanelModel.MPanel_Type == "Transom") //M-T stack
                             {
-                                left = (Panel_Margin.Left != 0) ? 5 : 0;
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                    Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+                                }
+                            }
+                            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom" &&
+                                     Panel_ParentMultiPanelModel.MPanel_Type == "Mullion") //T-M stack
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                    Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                }
                             }
                         }
-                        else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Type == "Transom" &&
-                                 Panel_ParentMultiPanelModel.MPanel_Type == "Mullion") //T-M stack
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel != null) //meaning 3-stack
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion") //M-T-M
                         {
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
-                                Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                            if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "First")
                             {
-                                top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        right = (Panel_Margin.Right != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    top = (Panel_Margin.Top != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        right = (Panel_Margin.Right != 0) ? 5 : 0;
+                                    }
+                                }
+                            }
+                            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "First")
+                                    {
+                                        left = (Panel_Margin.Left != 0) ? 5 : 0;
+                                    }
+                                    else if (Panel_Placement == "Last")
+                                    {
+                                        right = (Panel_Margin.Right != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        right = (Panel_Margin.Right != 0) ? 5 : 0;
+                                    }
+                                }
+                            }
+                            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "Last")
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "First")
+                                    {
+                                        left = (Panel_Margin.Left != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    if (Panel_Placement == "First")
+                                    {
+                                        left = (Panel_Margin.Left != 0) ? 5 : 0;
+                                    }
+                                }
+                            }
+                        }
+                        else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom") // T-M-T
+                        {
+                            if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "First")
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                                {
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                                    }
+                                }
+                            }
+                            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "First")
+                                    {
+                                        top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    }
+                                    else if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "First")
+                                    {
+                                        top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    }
+                                    else if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 5 : 0;
+                                    }
+                                }
+                            }
+                            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Placement == "Last")
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "First")
+                                {
+                                    if (Panel_Placement == "First")
+                                    {
+                                        top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    }
+                                    else if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 8 : 0;
+                                    }
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between" ||
+                                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    left = (Panel_Margin.Left != 0) ? 5 : 0;
+
+                                    if (Panel_Placement == "First")
+                                    {
+                                        top = (Panel_Margin.Top != 0) ? 5 : 0;
+                                    }
+                                    else if (Panel_Placement == "Last")
+                                    {
+                                        bot = (Panel_Margin.Bottom != 0) ? 8 : 0;
+                                    }
+                                }
                             }
                         }
                     }
@@ -1927,7 +2087,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                         }
                     }
-                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel == null) // 2-stack
                     {
                         if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -2017,6 +2177,26 @@ namespace ModelLayer.Model.Quotation.Panel
                                     {
                                         mpnlHt_deduct = 6;
                                     }
+                                }
+                            }
+                        }
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel != null)
+                    {
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            mpnlWd_deduct = 15;
+                            mpnlHt_deduct = 20;
+
+                            if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type == "Transom") // T-M-T stack
+                            {
+                                if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                                {
+                                    mpnlWd_deduct = 10;
+                                }
+                                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                                {
+                                    mpnlWd_deduct = 14;
                                 }
                             }
                         }

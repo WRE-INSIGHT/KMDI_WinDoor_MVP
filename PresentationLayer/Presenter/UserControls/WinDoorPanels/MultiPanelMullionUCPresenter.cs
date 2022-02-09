@@ -1248,12 +1248,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (zoom <= 0.26f)
                     {
-                        bounds_PointX = 5;
-                        wd_deduction = 10;
-
                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             bounds_PointX = 10;
+                            wd_deduction = 17;
+
+                            if (parentObj_placement == "First")
+                            {
+                                wd_deduction = 15;
+                            }
+                            else if (parentObj_placement == "Somewhere in Between")
+                            {
+                                bounds_PointX = 5;
+                                wd_deduction = 10;
+                            }
+                            else if (parentObj_placement == "Last")
+                            {
+                                bounds_PointX = 5;
+                                wd_deduction = 15;
+                            }
+                        }
+                        else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        {
+                            bounds_PointX = 5;
+                            wd_deduction = 10;
                         }
                     }
                     else if (zoom == 1.0f)
@@ -1293,21 +1311,35 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom <= 0.26f)
                         {
-                            bounds_PointY = 5;
-                            
-                            if (lvl2_parent_Type != "")
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                             {
-                                ht_deduction = 8 + 3;
-                            }
-                            else if (lvl2_parent_Type == "")
-                            {
-                                ht_deduction = 8 + 4;
-                            }
+                                bounds_PointY = 5;
 
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                                if (lvl2_parent_Type != "")
+                                {
+                                    ht_deduction = 8 + 3;
+                                }
+                                else if (lvl2_parent_Type == "")
+                                {
+                                    ht_deduction = 8 + 4;
+                                }
+                            }
+                            else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
                                 bounds_PointY = 10;
-                                ht_deduction = 17;
+                                if (parent_name.Contains("MultiTransom"))
+                                {
+                                    if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //T-M
+                                    {
+                                        ht_deduction = 17;
+                                    }
+                                    else if (parent_doxtyle == DockStyle.None &&
+                                             lvl2_parent_Type == "Mullion") //M-T-M
+                                    {
+                                        ht_deduction = 16;
+                                    }
+                                }
                             }
 
                         }
@@ -1326,28 +1358,32 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom <= 0.26f)
                         {
-                            if (lvl2_parent_Type != "")
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                             {
-                                bounds_PointY = 2 + 3;
-                                ht_deduction = 8 + 3;
+                                if (lvl2_parent_Type != "")
+                                {
+                                    bounds_PointY = 2 + 3;
+                                    ht_deduction = 8 + 3;
+                                }
+                                else if (lvl2_parent_Type == "")
+                                {
+                                    bounds_PointY = 2 + 4;
+                                    ht_deduction = 8 + 4;
+                                }
                             }
-                            else if (lvl2_parent_Type == "")
+                            else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
-                                bounds_PointY = 2 + 4;
-                                ht_deduction = 8 + 4;
-                            }
+                                bounds_PointY = 5;
 
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                            {
                                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {
-                                    ht_deduction = 7;
+                                    ht_deduction = 6;
                                 }
                                 else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
                                          _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                                 {
-                                    ht_deduction = 17;
+                                    ht_deduction = 16;
                                 }
                             }
                         }
@@ -1406,9 +1442,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        if (zoom <= 0.26f)
+                        if (parent_name.Contains("MultiTransom"))
                         {
-                            wd_deduction = 20;
+                            if (parent_doxtyle == DockStyle.Fill &&
+                                     lvl2_parent_Type == "") //T-M
+                            {
+                                if (zoom <= 0.26f)
+                                {
+                                    wd_deduction = 20;
+                                }
+                            }
                         }
                     }
                 }
@@ -2640,7 +2683,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
-                            if (zoom == 1.0f)
+                            if (zoom == 1.0f || zoom <= 0.26f)
                             {
                                 locY = fpnl.ClientRectangle.Height - 1;
                                 locY2 = fpnl.ClientRectangle.Height - 1;
@@ -2833,7 +2876,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
-                            if (zoom == 1.0f)
+                            if (zoom == 1.0f || zoom == 0.26f)
                             {
                                 locY = fpnl.ClientRectangle.Height - 1;
                                 locY2 = fpnl.ClientRectangle.Height - 1;
