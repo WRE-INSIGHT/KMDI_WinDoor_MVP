@@ -909,6 +909,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelRioOptionsVisibility2; // for 2 diff foil color
+        public bool Panel_RioOptionsVisibility2
+        {
+            get
+            {
+                return _panelRioOptionsVisibility2;
+            }
+            set
+            {
+                _panelRioOptionsVisibility2 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _panelRotolineOptionsVisibility;
         public bool Panel_RotolineOptionsVisibility
         {
@@ -1119,13 +1133,27 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelRioArtNo = value;
+               NotifyPropertyChanged();
+            }
+        }
+
+        private Rio_HandleArtNo _panelRioArtNo2; // for 2 diff color 
+        public Rio_HandleArtNo Panel_RioArtNo2
+        {
+            get
+            {
+                return _panelRioArtNo2;
+            }
+            set
+            {
+                _panelRioArtNo2 = value;
                 NotifyPropertyChanged();
             }
         }
 
         public ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
         public Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
-        public Cylinder_CoverArtNo Panel_CylinderCoverArtNo2 { get; set; } //for outer foil color
+        public Cylinder_CoverArtNo Panel_CylinderCoverArtNo2 { get; set; } //for 2 diff foil color
 
         private Rotoline_HandleArtNo _panelRotolineArtNo;
         public Rotoline_HandleArtNo Panel_RotolineArtNo
@@ -5367,6 +5395,14 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "",
                                    "Sash",
                                    @"");
+            if (Panel_RioOptionsVisibility2 == true)
+            {
+                tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo2.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+            }
         }
 
         public void Insert_ProfileKnobCylinder_MaterialList(DataTable tbl_explosion)
@@ -5489,7 +5525,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                   "Sash",
                                   @"");
             }
-                
+
         }
 
         public void Insert_WeldableCornerJoint_MaterialList(DataTable tbl_explosion)

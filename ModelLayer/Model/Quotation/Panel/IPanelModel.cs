@@ -51,6 +51,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_HandleOptionsVisibility { get; set; }
         bool Panel_RotoswingOptionsVisibility { get; set; }
         bool Panel_RioOptionsVisibility { get; set; }
+        bool Panel_RioOptionsVisibility2 { get; set; }
         bool Panel_RotolineOptionsVisibility { get; set; }
         bool Panel_MVDOptionsVisibility { get; set; }
         bool Panel_RotaryOptionsVisibility { get; set; }
@@ -116,6 +117,7 @@ namespace ModelLayer.Model.Quotation.Panel
         Rotoswing_HandleArtNo Panel_RotoswingArtNo { get; set; }
         Rotary_HandleArtNo Panel_RotaryArtNo { get; set; }
         Rio_HandleArtNo Panel_RioArtNo { get; set; }
+        Rio_HandleArtNo Panel_RioArtNo2 { get; set; }
         ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo { get; set; }
         Cylinder_CoverArtNo Panel_CylinderCoverArtNo { get; set; }
 
