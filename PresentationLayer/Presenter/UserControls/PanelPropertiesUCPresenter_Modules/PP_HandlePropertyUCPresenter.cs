@@ -221,7 +221,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                                 _panelModel.AdjustPropertyPanelHeight("minusRio");
                                 _panelModel.AdjustHandlePropertyHeight("minusRio");
-                                MessageBox.Show("deduct");
                             }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
@@ -303,7 +302,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                                 _panelModel.AdjustPropertyPanelHeight("minusRio");
                                 _panelModel.AdjustHandlePropertyHeight("minusRio");
-                                MessageBox.Show("deduct");
                             }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
@@ -406,13 +404,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
                         if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
-                            inside_color != outside_color)// && _panelModel.Panel_RioOptionsVisibility2 == false)
+                            inside_color != outside_color)
                         {
                             _panelModel.Panel_RioOptionsVisibility2 = true;
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
                             _panelModel.AdjustPropertyPanelHeight("addRio");
                             _panelModel.AdjustHandlePropertyHeight("addRio");
-                            MessageBox.Show("true");
                         }
                         else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
                             inside_color == outside_color)
@@ -485,7 +482,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                                 _panelModel.AdjustPropertyPanelHeight("minusRio");
                                 _panelModel.AdjustHandlePropertyHeight("minusRio");
-                                MessageBox.Show("deduct");
                             }
                         }
                         else if (curr_handleType == Handle_Type._MVD)
@@ -567,7 +563,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                                 _panelModel.AdjustPropertyPanelHeight("minusRio");
                                 _panelModel.AdjustHandlePropertyHeight("minusRio");
-                                MessageBox.Show("deduct");
                             }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
@@ -649,7 +644,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                                 _panelModel.AdjustPropertyPanelHeight("minusRio");
                                 _panelModel.AdjustHandlePropertyHeight("minusRio");
-                                MessageBox.Show("deduct");
                             }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
