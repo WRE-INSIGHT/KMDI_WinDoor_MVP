@@ -466,7 +466,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
-                                if (_multiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type == "")
+                                if (_multiPanelModel.MPanel_ParentModel?.MPanel_ParentModel?.MPanel_Type == "")
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -478,13 +478,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                                     }
                                 }
-                                else if (_multiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Type != "")
+                                else if (_multiPanelModel.MPanel_ParentModel?.MPanel_ParentModel?.MPanel_Type != "")
                                 {
-                                    if (_multiPanelModel.MPanel_ParentModel.MPanel_Placement != "Last")
+                                    if (_multiPanelModel.MPanel_ParentModel?.MPanel_Placement != "Last")
                                     {
                                         suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                                     }
-                                    else if (_multiPanelModel.MPanel_ParentModel.MPanel_Placement == "Last")
+                                    else if (_multiPanelModel.MPanel_ParentModel?.MPanel_Placement == "Last")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -808,12 +808,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 }
-            }
+        }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+}
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
