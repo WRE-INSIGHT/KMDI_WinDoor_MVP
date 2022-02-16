@@ -99,94 +99,70 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
-            UserControl basePL = (UserControl)sender;
-            //dito ilagay ang drawing ng red-arrowlines
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            try
+            {
+                UserControl basePL = (UserControl)sender;
+                //dito ilagay ang drawing ng red-arrowlines
+                Graphics g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int ctrl_Y = 35;
-            Pen redP = new Pen(Color.Red);
-            redP.Width = 3.5f;
-            Font dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-            Font dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                int ctrl_Y = 35;
+                Pen redP = new Pen(Color.Red);
+                redP.Width = 3.5f;
+                Font dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                Font dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
 
-            if (_windoorModel.WD_zoom == 0.26f)
-            {
-                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-            }
-            else if (_windoorModel.WD_zoom == 0.17f)
-            {
-                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
-            }
-            else if (_windoorModel.WD_zoom == 0.13f)
-            {
-                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
-            }
-            else if (_windoorModel.WD_zoom == 0.10f)
-            {
-                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
-            }
-            else
-            {
-                dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-                dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-            }
-
-            int total_panel = 0, total_mpanel = 0;
-            foreach (IFrameModel frame in _windoorModel.lst_frame)
-            {
-                total_panel += frame.Lst_Panel.Count();
-                total_mpanel += frame.Lst_MultiPanel.Count();
-                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                if (_windoorModel.WD_zoom == 0.26f)
                 {
-                    total_panel += mpnl.MPanelLst_Panel.Count();
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
                 }
-            }
-
-            if (total_panel > 1 || total_mpanel >= 1)
-            {
-                decimal[,] actual_arr_wd_locX = new decimal[total_panel, 2];
-                decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
-                int ndx = 0;
-
-                if (total_panel > 1 && total_mpanel == 0)
+                else if (_windoorModel.WD_zoom == 0.17f)
                 {
-                    foreach (IFrameModel frame in _windoorModel.lst_frame)
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                }
+                else if (_windoorModel.WD_zoom == 0.13f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                }
+                else if (_windoorModel.WD_zoom == 0.10f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                }
+                else
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                }
+
+                int total_panel = 0, total_mpanel = 0;
+                foreach (IFrameModel frame in _windoorModel.lst_frame)
+                {
+                    total_panel += frame.Lst_Panel.Count();
+                    total_mpanel += frame.Lst_MultiPanel.Count();
+                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
-                        foreach (IPanelModel pnl in frame.Lst_Panel)
-                        {
-                            Control ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
-                            string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
-                            string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
-
-                            decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
-                            decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
-                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
-                            actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                            actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                            ndx++;
-                        }
-                        
+                        total_panel += mpnl.MPanelLst_Panel.Count();
                     }
                 }
-                else if (total_mpanel >= 1)
-                {
-                    foreach (IFrameModel frame in _windoorModel.lst_frame)
-                    {
-                        foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
-                        {
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                            {
-                                Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
-                                string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
 
+                if (total_panel > 1 || total_mpanel >= 1)
+                {
+                    decimal[,] actual_arr_wd_locX = new decimal[total_panel, 2];
+                    decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
+                    int ndx = 0;
+
+                    if (total_panel > 1 && total_mpanel == 0)
+                    {
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
+                        {
+                            foreach (IPanelModel pnl in frame.Lst_Panel)
+                            {
+                                Control ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
+                                string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
                                 string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
 
                                 decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
@@ -199,67 +175,207 @@ namespace PresentationLayer.Presenter.UserControls
                                 actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                 ndx++;
                             }
+
                         }
                     }
-                }
-
-                List<decimal> wds = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
-                List<decimal> hts = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
-
-                float locX = 0;
-                foreach (decimal wd in wds)
-                {
-                    string dmnsion_w = wd.ToString();
-
-                    if (dmnsion_w.Contains(".0"))
+                    else if (total_mpanel >= 1)
                     {
-                        dmnsion_w = dmnsion_w.Replace(".0", "");
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
+                        {
+                            foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                            {
+                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                {
+                                    Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
+                                    string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+
+                                    string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                                    decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                                    decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                                    actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                    actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+
+                                    actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                    actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                    ndx++;
+                                }
+                            }
+                        }
                     }
 
-                    if (_windoorModel.WD_zoom == 0.26f)
-                    {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.17f)
-                    {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.13f)
-                    {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.10f)
-                    {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
-                    }
-                    else
-                    {
-                        dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-                    }
+                    List<decimal> wds = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                    List<decimal> hts = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
 
-                    float DispWd_float = float.Parse(dmnsion_w);
-
-                    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom),
-                                                         (ctrl_Y - 17));// * _windoorModel.WD_zoom);
-                    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.WD_zoom),
-                                                       (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
-
-                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
-                    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
-
-                    //arrow for WIDTH
-                    PointF[] arrwhd_pnts_W1 =
+                    float locX = 0;
+                    foreach (decimal wd in wds)
                     {
+                        string dmnsion_w = wd.ToString();
+
+                        if (dmnsion_w.Contains(".0"))
+                        {
+                            dmnsion_w = dmnsion_w.Replace(".0", "");
+                        }
+
+                        if (_windoorModel.WD_zoom == 0.26f)
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.17f)
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.13f)
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.10f)
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                        }
+
+                        float DispWd_float = float.Parse(dmnsion_w);
+
+                        PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.WD_zoom),
+                                                             (ctrl_Y - 17));// * _windoorModel.WD_zoom);
+                        PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.WD_zoom),
+                                                           (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
+
+                        Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
+                        double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+                        //arrow for WIDTH
+                        PointF[] arrwhd_pnts_W1 =
+                        {
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
                             dmnsion_w_startP,
                             new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
                     };
 
-                    PointF[] arrwhd_pnts_W2 =
-                    {
+                        PointF[] arrwhd_pnts_W2 =
+                        {
                             new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
                             dmnsion_w_endP,
                             new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                        };
+
+                        if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                        {
+                            g.DrawLines(redP, arrwhd_pnts_W1);
+                            g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                            g.DrawLines(redP, arrwhd_pnts_W2);
+                            TextRenderer.DrawText(g,
+                                                  dmnsion_w,
+                                                  dmnsion_font_wd,
+                                                  new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                                new Size(s.Width, s.Height)),
+                                                  Color.Black,
+                                                  SystemColors.Control,
+                                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                        }
+                        //arrow for WIDTH
+                        locX += DispWd_float;
+                    }
+
+                    float locY = 0;
+                    foreach (decimal ht in hts)
+                    {
+                        //arrow for HEIGHT
+                        string dmnsion_h = ht.ToString();
+                        float DispHt_float = float.Parse(dmnsion_h);
+
+                        PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
+                        PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.WD_zoom));
+
+                        if (dmnsion_h.Contains(".0"))
+                        {
+                            dmnsion_h = dmnsion_h.Replace(".0", "");
+                        }
+
+                        if (_windoorModel.WD_zoom == 0.26f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.17f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.13f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
+                        }
+                        else if (_windoorModel.WD_zoom == 0.10f)
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
+                        }
+
+                        Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
+
+                        double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+                        PointF[] arrwhd_pnts_H1 =
+                        {
+                        new PointF(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                        dmnsion_h_startP,
+                        new PointF(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                    };
+
+                        PointF[] arrwhd_pnts_H2 =
+                        {
+                        new PointF(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                        dmnsion_h_endP,
+                        new PointF(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                    };
+
+                        if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                        {
+                            g.DrawLines(redP, arrwhd_pnts_H1);
+                            g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                            g.DrawLines(redP, arrwhd_pnts_H2);
+                            TextRenderer.DrawText(g,
+                                                  dmnsion_h,
+                                                  dmnsion_font_ht,
+                                                  new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                                new Size(s2.Width, s2.Height)),
+                                                  Color.Black,
+                                                  SystemColors.Control,
+                                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                        }
+                        //arrow for HEIGHT
+                        locY += DispHt_float;
+                    }
+                }
+                else if (total_panel == 1 && total_mpanel == 0)
+                {
+                    string dmnsion_w = _windoorModel.WD_width.ToString();
+                    Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
+                    Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
+
+                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
+                    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+                    //arrow for WIDTH
+                    Point[] arrwhd_pnts_W1 =
+                    {
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                            dmnsion_w_startP,
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                        };
+
+                    Point[] arrwhd_pnts_W2 =
+                    {
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                            dmnsion_w_endP,
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
                         };
 
                     if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
@@ -277,62 +393,29 @@ namespace PresentationLayer.Presenter.UserControls
                                               TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                     }
                     //arrow for WIDTH
-                    locX += DispWd_float;
-                }
 
-                float locY = 0;
-                foreach (decimal ht in hts)
-                {
+
                     //arrow for HEIGHT
-                    string dmnsion_h = ht.ToString();
-                    float DispHt_float = float.Parse(dmnsion_h);
-
-                    PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.WD_zoom));
-                    PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.WD_zoom));
-
-                    if (dmnsion_h.Contains(".0"))
-                    {
-                        dmnsion_h = dmnsion_h.Replace(".0", "");
-                    }
-
-                    if (_windoorModel.WD_zoom == 0.26f)
-                    {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 2, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.17f)
-                    {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 4, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.13f)
-                    {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 5, FontStyle.Bold);
-                    }
-                    else if (_windoorModel.WD_zoom == 0.10f)
-                    {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
-                    }
-                    else
-                    {
-                        dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
-                    }
+                    string dmnsion_h = _windoorModel.WD_height.ToString();
+                    Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
+                    Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
 
                     Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
-
                     double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
-                    PointF[] arrwhd_pnts_H1 =
+                    Point[] arrwhd_pnts_H1 =
                     {
-                        new PointF(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
-                        dmnsion_h_startP,
-                        new PointF(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
-                    };
+                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                    dmnsion_h_startP,
+                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                };
 
-                    PointF[] arrwhd_pnts_H2 =
+                    Point[] arrwhd_pnts_H2 =
                     {
-                        new PointF(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
-                        dmnsion_h_endP,
-                        new PointF(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
-                    };
+                    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                    dmnsion_h_endP,
+                    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                };
 
                     if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
                     {
@@ -349,87 +432,11 @@ namespace PresentationLayer.Presenter.UserControls
                                               TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                     }
                     //arrow for HEIGHT
-                    locY += DispHt_float;
                 }
             }
-            else if (total_panel == 1 && total_mpanel == 0)
+            catch (Exception ex)
             {
-                string dmnsion_w = _windoorModel.WD_width.ToString();
-                Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
-                Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
-
-                Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
-                double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
-
-                //arrow for WIDTH
-                Point[] arrwhd_pnts_W1 =
-                {
-                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
-                            dmnsion_w_startP,
-                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-                        };
-
-                Point[] arrwhd_pnts_W2 =
-                {
-                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
-                            dmnsion_w_endP,
-                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
-                        };
-
-                if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-                {
-                    g.DrawLines(redP, arrwhd_pnts_W1);
-                    g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
-                    g.DrawLines(redP, arrwhd_pnts_W2);
-                    TextRenderer.DrawText(g,
-                                          dmnsion_w,
-                                          dmnsion_font_wd,
-                                          new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
-                                                        new Size(s.Width, s.Height)),
-                                          Color.Black,
-                                          SystemColors.Control,
-                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                }
-                //arrow for WIDTH
-
-
-                //arrow for HEIGHT
-                string dmnsion_h = _windoorModel.WD_height.ToString();
-                Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
-                Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
-
-                Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
-                double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
-
-                Point[] arrwhd_pnts_H1 =
-                {
-                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
-                    dmnsion_h_startP,
-                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
-                };
-
-                Point[] arrwhd_pnts_H2 =
-                {
-                    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
-                    dmnsion_h_endP,
-                    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
-                };
-
-                if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-                {
-                    g.DrawLines(redP, arrwhd_pnts_H1);
-                    g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
-                    g.DrawLines(redP, arrwhd_pnts_H2);
-                    TextRenderer.DrawText(g,
-                                          dmnsion_h,
-                                          dmnsion_font_ht,
-                                          new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
-                                                        new Size(s2.Width, s2.Height)),
-                                          Color.Black,
-                                          SystemColors.Control,
-                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                }
-                //arrow for HEIGHT
+                MessageBox.Show(ex.Message);
             }
         }
 
