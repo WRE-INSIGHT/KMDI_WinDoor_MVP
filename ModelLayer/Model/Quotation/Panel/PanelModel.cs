@@ -1830,7 +1830,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     top = (Panel_Margin.Top != 0) ? 10 : 0;
                     bot = (Panel_Margin.Bottom != 0) ? 10 : 0;
 
-                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel == null)
+                    if (Panel_ParentMultiPanelModel.MPanel_ParentModel?.MPanel_ParentModel == null)
                     {
                         if (Panel_ParentMultiPanelModel.MPanel_ParentModel != null)
                         {
@@ -1854,7 +1854,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                         }
                     }
-                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel != null) //meaning 3-stack
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel?.MPanel_ParentModel != null) //meaning 3-stack
                     {
                         if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion") //M-T-M
                         {
