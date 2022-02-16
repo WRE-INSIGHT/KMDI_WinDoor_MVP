@@ -611,7 +611,17 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
             }
 
-            Frame_ExplosionHeight = _frameHeight + 5;
+            int botFrameDiff = 14;// 14 = difference of 7502 & 7507 thickness
+            if (Frame_Type == Frame_Padding.Door &&
+                Frame_BotFrameEnable == true &&
+                Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
+            }
+            else
+            {
+                Frame_ExplosionHeight = _frameHeight + 5;
+            }
 
             if (Frame_If_InwardMotorizedCasement)
             {
@@ -634,7 +644,18 @@ namespace ModelLayer.Model.Quotation.Frame
                 reinf_size = 43;
             }
 
-            Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
+
+            if (Frame_Type == Frame_Padding.Door &&
+               Frame_BotFrameEnable == true &&
+               Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+            }
+            else
+            {
+                Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
+            }
+            
             if (Frame_If_InwardMotorizedCasement)
             {
                 Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
@@ -964,6 +985,12 @@ namespace ModelLayer.Model.Quotation.Frame
                                    Frame_ExplosionWidth - 28,//14 * 2 = 28, 14 = difference of 7507 & 7502 thickness 
                                    "Frame",
                                    @"\  /");
+
+                tbl_explosion.Rows.Add("Bottom Frame Reinf Width " + FrameReinf_ArticleNo._R676,
+                                 1, "pc(s)",
+                                 Frame_ReinfWidth.ToString(),
+                                 "Frame",
+                                 @"|  |");
             }
             else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
             {

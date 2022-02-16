@@ -293,7 +293,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location);
         void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm);
         void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion);
-
+        void Insert_LatchAndDeadboltStriker_MaterialList(DataTable tbl_explosion);
         int Add_SashPerimeter_screws4fab();
         int Add_StrikerAC_screws4fab();
         int Add_Espagnolette_screws4fab();
