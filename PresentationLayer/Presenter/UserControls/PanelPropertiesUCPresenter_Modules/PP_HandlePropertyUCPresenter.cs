@@ -253,6 +253,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                    MessageBox.Show("add multi pnl rotoswing");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -334,6 +339,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                    MessageBox.Show("add multi pnl rotary");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -404,6 +414,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
                         if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                            _panelModel.Panel_Type.Contains("Casement") &&
                             inside_color != outside_color)
                         {
                             _panelModel.Panel_RioOptionsVisibility2 = true;
@@ -438,6 +449,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
 
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
+                                MessageBox.Show("add multi pnl rio");
+                            }
                         }
 
                         _panelModel.Panel_RioOptionsVisibility = true;
@@ -512,6 +529,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                    MessageBox.Show("add multi pnl rotoline");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._MVD)
                             {
@@ -593,6 +615,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                    MessageBox.Show("add multi pnl MVD");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -672,6 +699,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                    MessageBox.Show("add multi pnl none");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
