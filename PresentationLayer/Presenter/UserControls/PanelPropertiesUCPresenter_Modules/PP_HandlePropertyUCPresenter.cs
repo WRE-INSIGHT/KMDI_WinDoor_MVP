@@ -256,7 +256,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_RioOptionsVisibility2 == true)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                                    MessageBox.Show("add multi pnl rotoswing");
                                 }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
@@ -342,7 +341,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_RioOptionsVisibility2 == true)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                                    MessageBox.Show("add multi pnl rotary");
                                 }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
@@ -453,7 +451,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             if (_panelModel.Panel_RioOptionsVisibility2 == true)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
-                                MessageBox.Show("add multi pnl rio");
                             }
                         }
 
@@ -532,7 +529,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_RioOptionsVisibility2 == true)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                                    MessageBox.Show("add multi pnl rotoline");
                                 }
                             }
                             else if (curr_handleType == Handle_Type._MVD)
@@ -618,7 +614,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_RioOptionsVisibility2 == true)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                                    MessageBox.Show("add multi pnl MVD");
                                 }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
@@ -702,7 +697,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 if (_panelModel.Panel_RioOptionsVisibility2 == true)
                                 {
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
-                                    MessageBox.Show("add multi pnl none");
                                 }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
