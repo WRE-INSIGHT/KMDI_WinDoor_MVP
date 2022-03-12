@@ -32,7 +32,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IMainPresenter _mainPresenter;
         //private IBasePlatformImagerUCPresenter _basePlatformImagerUCP;
 
-        bool _mouseDown, _initialLoad, _keydown;
+        bool _mouseDown, //_initialLoad, 
+            _keydown;
         private Point _point_of_origin;
 
         CommonFunctions _commonfunc = new CommonFunctions();
@@ -815,7 +816,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public IMullionUC GetMullion()
         {
-            _initialLoad = true;
+            //_initialLoad = true;
             _mullionUC.ThisBinding(CreateBindingDictionary());
             return _mullionUC;
         }
@@ -893,7 +894,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public void SetInitialLoadFalse()
         {
-            _initialLoad = false;
+            //_initialLoad = false;
         }
 
         public void FocusOnThisMullionDiv()

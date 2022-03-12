@@ -163,17 +163,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
                 _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
 
-                string imgr_type = "";
+                //string imgr_type = "";
 
                 if (_multiPanelMullionUCP != null)
                 {
                     _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
-                    imgr_type = "MullionImager";
+                    //imgr_type = "MullionImager";
                 }
                 if (_multiPanelTransomUCP != null)
                 {
                     _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
-                    imgr_type = "TransomImager";
+                    //imgr_type = "TransomImager";
                 }
 
                 IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
