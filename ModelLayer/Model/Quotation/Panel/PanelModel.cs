@@ -340,6 +340,17 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelChkText = "R";
                     }
                 }
+                else if (_panelType.Contains("TiltNTurn"))
+                {
+                    if (value == true)
+                    {
+                        _panelChkText = "Mod2";
+                    }
+                    else if (value == false)
+                    {
+                        _panelChkText = "Mod1";
+                    }
+                }
                 _panelOrient = value;
                 NotifyPropertyChanged();
             }

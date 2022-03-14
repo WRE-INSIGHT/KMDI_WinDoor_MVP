@@ -870,6 +870,11 @@ namespace PresentationLayer.Presenter
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
+
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());

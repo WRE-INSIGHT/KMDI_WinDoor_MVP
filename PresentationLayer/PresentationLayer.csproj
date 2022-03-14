@@ -667,6 +667,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.Designer.cs">
       <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_TiltNTurnPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TransomUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -890,6 +896,9 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.resx">
       <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.resx">
+      <DependentUpon>Thumbs_TiltNTurnPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TransomUC.resx">
       <DependentUpon>Thumbs_TransomUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -951,6 +960,7 @@
     <Content Include="Resources\refresh_30px.png" />
     <Content Include="Resources\SinglePanel.png" />
     <None Include="Resources\SlidingPanel.png" />
+    <None Include="Resources\TiltNTurnPanel.png" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

@@ -61,16 +61,24 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
-        public bool Panel_ExtensionOptionsVisibility
+        private int _panelHeight;
+        public int Panel_DisplayHeight
         {
             get
             {
-                return extensionToolStripMenuItem.Checked;
+                return _panelHeight;
             }
-
             set
             {
-                extensionToolStripMenuItem.Checked = value;
+                _panelHeight = value;
+                if (_panelHeight >= 2100)
+                {
+                    extensionToolStripMenuItem.Visible = true;
+                }
+                else if (_panelHeight < 2100)
+                {
+                    extensionToolStripMenuItem.Visible = false;
+                }
             }
         }
 
@@ -145,7 +153,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Orient"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
-            this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
+            //this.DataBindings.Add(ModelBinding["Panel_ExtensionOptionsVisibility"]);
             this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
 

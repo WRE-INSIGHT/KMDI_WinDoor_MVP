@@ -1201,6 +1201,42 @@ namespace PresentationLayer.Presenter.UserControls
                 g.DrawLine(new Pen(Color.Black), new PointF(arwStart_x1, center_y1),
                                                  new PointF(arwEnd_x2, center_y1));
             }
+            else if (panelModel.Panel_Type == "TiltNTurn Panel")
+            {
+                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                       Ppoint.Y + inner_line,
+                                                                       (client_wd - (inner_line * 2)) - w,
+                                                                       (client_ht - (inner_line * 2)) - w));
+
+                Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
+
+                Pen dgrayPen = new Pen(Color.DimGray);
+                dgrayPen.DashStyle = DashStyle.Dash;
+                dgrayPen.Width = 3;
+
+                int sashW = client_wd,
+                    sashH = client_ht;
+
+                g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                     new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH));
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH),
+                                     new Point(sashPoint.X + sashW, sashPoint.Y));
+
+                if (panelModel.Panel_Orient == true)//Left
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
+                                             new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
+                }
+                else if (panelModel.Panel_Orient == false)//Right
+                {
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
+                                         new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X, sashH + sashPoint.Y));
+                }
+            }
         }
 
         private void Draw_MultiPanel(PaintEventArgs e, IMultiPanelModel mpanelModel, Point Mpoint)

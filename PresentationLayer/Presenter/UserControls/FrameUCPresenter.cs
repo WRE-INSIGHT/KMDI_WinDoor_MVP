@@ -38,6 +38,9 @@ namespace PresentationLayer.Presenter.UserControls
         private IAwningPanelImagerUCPresenter _awningImagerUCP;
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
+        private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
+
+
         private IMultiPanelMullionUCPresenter _multiUCP;
         private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
@@ -62,6 +65,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 IAwningPanelUCPresenter awningUCP,
                                 IAwningPanelImagerUCPresenter awningImagerUCP,
                                 ISlidingPanelUCPresenter slidingUCP,
+                                ITiltNTurnPanelUCPresenter tiltNTurnUCP,
                                 ICasementPanelImagerUCPresenter casementImagerUCP,
                                 ISlidingPanelImagerUCPresenter slidingImagerUCP,
                                 IMultiPanelServices multipanelServices,
@@ -83,6 +87,7 @@ namespace PresentationLayer.Presenter.UserControls
             _awningImagerUCP = awningImagerUCP;
             _slidingUCP = slidingUCP;
             _slidingImagerUCP = slidingImagerUCP;
+            _tiltNTurnUCP = tiltNTurnUCP;
             _multipanelServices = multipanelServices;
             _multiUCP = multiUCP;
             _multiTransomUCP = multiTransomUCP;
@@ -451,6 +456,31 @@ namespace PresentationLayer.Presenter.UserControls
                     //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
                     //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
                     //_frameImagerUCP.AddControl((UserControl)slidingImagerUC);
+                    _basePlatformImagerUCP.InvalidateBasePlatform();
+                }
+                else if (data == "TiltNTurn Panel")
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
+                    ITiltNTurnPanelUCPresenter tiltNTurnUCP = _tiltNTurnUCP.GetNewInstance(_unityC,
+                                                                                           _panelModel,
+                                                                                           _frameModel,
+                                                                                           _mainPresenter,
+                                                                                           this);
+                    ITiltNTurnPanelUC tiltnTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
+                    frame.Controls.Add((UserControl)tiltnTurnUC);
+
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
