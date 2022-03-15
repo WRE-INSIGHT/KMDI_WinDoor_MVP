@@ -1109,6 +1109,9 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
+                        //clear previous basePlatformUC
+                        _pnlMain.Controls.Clear();
+
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
@@ -1117,6 +1120,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
+                        _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -1138,10 +1142,12 @@ namespace PresentationLayer.Presenter
                         BotToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
 
+                        _mainView.RemoveBinding();
                         _mainView.RemoveBinding(_mainView.GetLblSize());
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
 
                         _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
+                        _basePlatformPresenter.RemoveBindingView();
                         _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
                         _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
                         _pnlItems.PerformLayout();
@@ -1162,7 +1168,14 @@ namespace PresentationLayer.Presenter
                                                                    FrameProfile_ArticleNo._7502,
                                                                    _windoorModel,
                                                                    null,
-                                                                   frameID);
+                                                                   frameID,
+                                                                   "",
+                                                                   true,
+                                                                   true,
+                                                                   null,
+                                                                   null,
+                                                                   null,
+                                                                   (UserControl)_frameUC);
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
@@ -1202,6 +1215,43 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
+
+        public void Frame_Save_UserControl()
+        {
+            foreach (UserControl uc in _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls)
+            {
+                if (uc is IFrameUC)
+                {
+
+                }
+            }
+        }
+
+        public void Load_Windoor_Item(IWindoorModel item)
+        {
+            //set mainview
+            SetMainViewTitle(input_qrefno,
+                             item.WD_name,
+                             item.WD_profile,
+                             false);
+            _quotationModel.Select_Current_Windoor(item);
+
+            //clear
+            _pnlMain.Controls.Clear();
+            _pnlPropertiesBody.Controls.Clear();
+
+            //basePlatform
+            _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
+            AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+            _basePlatformPresenter.InvalidateBasePlatform();
+
+            //frames
+            foreach (IFrameModel frame in item.lst_frame)
+            {
+                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(frame);
+                AddFrameUC(frame, framePropUCP);
+            }
+        }
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
         {
@@ -1741,7 +1791,7 @@ namespace PresentationLayer.Presenter
 
         public void AddItemInfoUC(IWindoorModel wndr)
         {
-            IItemInfoUCPresenter itemInfoUCP = (ItemInfoUCPresenter)_itemInfoUCPresenter.GetNewInstance(wndr, _unityC);
+            IItemInfoUCPresenter itemInfoUCP = (ItemInfoUCPresenter)_itemInfoUCPresenter.GetNewInstance(wndr, _unityC, this);
             _itemInfoUC = itemInfoUCP.GetItemInfoUC();
             _pnlItems.Controls.Add((UserControl)_itemInfoUC);
         }

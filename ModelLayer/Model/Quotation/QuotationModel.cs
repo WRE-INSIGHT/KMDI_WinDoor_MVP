@@ -1487,6 +1487,16 @@ namespace ModelLayer.Model.Quotation
             return Material_List;
         }
 
+        public void Select_Current_Windoor(IWindoorModel item)
+        {
+            foreach (IWindoorModel wndr_item in Lst_Windoor)
+            {
+                wndr_item.WD_Selected = false;
+            }
+
+            item.WD_Selected = true;
+        }
+
         public QuotationModel(string quotation_ref_no,
                               List<IWindoorModel> lst_Windoor)
         {

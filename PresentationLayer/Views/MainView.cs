@@ -187,6 +187,11 @@ namespace PresentationLayer.Views
             this.DataBindings.Add(binding["WD_zoom"]);
         }
 
+        public void RemoveBinding()
+        {
+            this.DataBindings.Clear();
+        }
+
         public void RemoveBinding(Control ctrl)
         {
             ctrl.DataBindings.Clear();

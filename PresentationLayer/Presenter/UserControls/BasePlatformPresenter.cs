@@ -694,5 +694,10 @@ namespace PresentationLayer.Presenter.UserControls
                 frames.InvalidateThisControls();
             }
         }
+
+        public void RemoveBindingView()
+        {
+            _basePlatfomrUC.RemoveBindingThis();
+        }
     }
 }

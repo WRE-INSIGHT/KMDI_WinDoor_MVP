@@ -13,6 +13,28 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class ItemInfoUC : UserControl, IItemInfoUC
     {
+        private bool _wdSelected;
+        public bool WD_Selected
+        {
+            get
+            {
+                return _wdSelected;
+            }
+
+            set
+            {
+                _wdSelected = value;
+                if (_wdSelected)
+                {
+                    lbl_item.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    lbl_item.ForeColor = Color.Black;
+                }
+            }
+        }
+
         public ItemInfoUC()
         {
             InitializeComponent();
@@ -67,6 +89,7 @@ namespace PresentationLayer.Views.UserControls
         //}
 
         public event EventHandler ItemInfoUCLoadEventRaised;
+        public event MouseEventHandler lblItemMouseDoubleClickEventRaised;
 
         public void BringToFrontThis()
         {
@@ -86,7 +109,15 @@ namespace PresentationLayer.Views.UserControls
             lbl_desc.DataBindings.Add(windoorModelBinding["WD_description"]);
             this.DataBindings.Add(windoorModelBinding["WD_visibility"]);
             pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_image"]);
+            this.DataBindings.Add(windoorModelBinding["WD_Selected"]);
         }
 
+        private void lbl_item_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, lblItemMouseDoubleClickEventRaised, e);
+            }
+        }
     }
 }

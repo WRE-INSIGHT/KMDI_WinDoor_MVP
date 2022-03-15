@@ -23,5 +23,6 @@ namespace PresentationLayer.Views.UserControls
         void PerformLayoutThis();
         void ClearBinding(Control ctrl);
         FlowLayoutPanel GetFlpMain();
+        void RemoveBindingThis();
     }
 }

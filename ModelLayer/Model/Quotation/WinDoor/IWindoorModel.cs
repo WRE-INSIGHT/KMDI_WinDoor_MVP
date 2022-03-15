@@ -40,6 +40,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Foil_Color WD_OutsideColor { get; set; }
         decimal WD_PlasticCover { get; set; }
         bool WD_CmenuDeleteVisibility { get; set; }
+        bool WD_Selected { get; set; }
         float GetZoom_forRendering();
         void SetImageRenderingZoom();
         void SetZoom();

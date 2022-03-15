@@ -22,5 +22,6 @@ namespace PresentationLayer.Presenter.UserControls
         List<decimal> HeightList_ToPaint(int flpMain_height, decimal[,] arr_ht_locY);
         void ViewDeleteControl(UserControl control);
         void Invalidate_flpMainControls();
+        void RemoveBindingView();
     }
 }

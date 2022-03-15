@@ -30,6 +30,7 @@ namespace PresentationLayer.Views
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
+        void RemoveBinding();
         void RemoveBinding(Control ctrl);
 
         Panel GetPanelMain();

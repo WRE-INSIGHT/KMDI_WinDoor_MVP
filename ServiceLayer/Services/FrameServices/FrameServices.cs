@@ -12,6 +12,7 @@ using ModelLayer.Model.Quotation.Divider;
 using static ModelLayer.Model.Quotation.QuotationModel;
 using static EnumerationTypeLayer.EnumerationTypes;
 using ModelLayer.Model.Quotation.WinDoor;
+using System.Windows.Forms;
 
 namespace ServiceLayer.Services.FrameServices
 {
@@ -38,7 +39,8 @@ namespace ServiceLayer.Services.FrameServices
                                        FrameProfile_ArticleNo frameArtNo,
                                        IWindoorModel frameWindoorModel,
                                        BottomFrameTypes frameBotFrameType,
-                                       bool frameBotFrameEnable)
+                                       bool frameBotFrameEnable,
+                                       UserControl frameUC)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -54,7 +56,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frameArtNo,
                                            frameWindoorModel,
                                            frameBotFrameType,
-                                           frameBotFrameEnable);
+                                           frameBotFrameEnable,
+                                           frameUC);
             ValidateModel(fr);
 
             return fr;
@@ -79,7 +82,8 @@ namespace ServiceLayer.Services.FrameServices
                                          bool frameBotFrameEnable = true,
                                          List<IPanelModel> lst_Panel = null,
                                          List<IMultiPanelModel> lst_MPanel = null,
-                                         List<IDividerModel> lst_Divider = null)
+                                         List<IDividerModel> lst_Divider = null,
+                                         UserControl frameUC = null)
         {
             if (frame_name == "")
             {
@@ -103,6 +107,11 @@ namespace ServiceLayer.Services.FrameServices
                 frameBotFrameType = BottomFrameTypes._7507;
             }
 
+            if (frameUC == null)
+            {
+                frameUC = new UserControl();
+            }
+
             IFrameModel _frameModel = CreateFrame(frame_id,
                                                      frame_name,
                                                      frame_width,
@@ -117,7 +126,8 @@ namespace ServiceLayer.Services.FrameServices
                                                      frameArtNo,
                                                      frameWindoorModel,
                                                      frameBotFrameType,
-                                                     frameBotFrameEnable);
+                                                     frameBotFrameEnable,
+                                                     frameUC);
 
             return _frameModel;
         }

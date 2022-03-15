@@ -21,5 +21,6 @@ namespace ModelLayer.Model.Quotation
         int Plastic_CoverQty_Total { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         DataTable GetListOfMaterials(IWindoorModel item);
+        void Select_Current_Windoor(IWindoorModel item);
     }
 }

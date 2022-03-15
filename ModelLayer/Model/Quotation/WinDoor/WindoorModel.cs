@@ -381,7 +381,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public Foil_Color WD_OutsideColor { get; set; }
 
         private decimal _wdPlasticCover;
-        [Description("Plastic Cover in kG")]
+        [Description("Plastic Cover in kg")]
         public decimal WD_PlasticCover
         {
             get
@@ -423,6 +423,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
                         }
                     }
                 }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _wdSelected;
+        public bool WD_Selected
+        {
+            get
+            {
+                return _wdSelected;
+            }
+
+            set
+            {
+                _wdSelected = value;
                 NotifyPropertyChanged();
             }
         }

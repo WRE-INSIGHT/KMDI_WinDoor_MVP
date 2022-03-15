@@ -280,6 +280,21 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private UserControl _frameUC;
+        public UserControl Frame_UC
+        {
+            get
+            {
+                return _frameUC;
+            }
+
+            set
+            {
+                _frameUC = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Method
 
         public void SetZoom()
@@ -1027,7 +1042,8 @@ namespace ModelLayer.Model.Quotation.Frame
                           FrameProfile_ArticleNo frameArtNo,
                           IWindoorModel frameWindoorModel,
                           BottomFrameTypes frameBotFrameType,
-                          bool frameBotFrameEnable)
+                          bool frameBotFrameEnable,
+                          UserControl frameUC)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -1045,6 +1061,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_CmenuDeleteVisibility = true;
             Frame_BotFrameArtNo = frameBotFrameType;
             Frame_BotFrameEnable = frameBotFrameEnable;
+            Frame_UC = frameUC;
 
             FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
         }
