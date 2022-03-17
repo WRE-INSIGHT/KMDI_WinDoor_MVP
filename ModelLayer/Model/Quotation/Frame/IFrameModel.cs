@@ -34,6 +34,7 @@ namespace ModelLayer.Model.Quotation.Frame
         BottomFrameTypes Frame_BotFrameArtNo { get; set; }
         bool Frame_BotFrameEnable { get; set; }
         UserControl Frame_UC { get; set; }
+        UserControl Frame_PropertiesUC { get; set; }
         int[] Arr_padding_norm { get; }
         int[] Arr_padding_withmpnl { get; }
 

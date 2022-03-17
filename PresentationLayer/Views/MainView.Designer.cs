@@ -299,7 +299,7 @@
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -665,7 +665,7 @@
             this.pnlProperties.Controls.Add(this.label2);
             this.pnlProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
-            this.pnlProperties.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlProperties.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProperties.Name = "pnlProperties";
             this.pnlProperties.Size = new System.Drawing.Size(149, 495);
             this.pnlProperties.TabIndex = 4;
@@ -680,7 +680,7 @@
             this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkView.Location = new System.Drawing.Point(104, 3);
-            this.chkView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkView.Margin = new System.Windows.Forms.Padding(2);
             this.chkView.Name = "chkView";
             this.chkView.Size = new System.Drawing.Size(40, 23);
             this.chkView.TabIndex = 2;
@@ -692,7 +692,7 @@
             this.pnlPropertiesBody.AutoScroll = true;
             this.pnlPropertiesBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 29);
-            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
             this.pnlPropertiesBody.Size = new System.Drawing.Size(147, 464);
             this.pnlPropertiesBody.TabIndex = 1;
@@ -780,7 +780,7 @@
             this.lblZoom.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblZoom.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZoom.Location = new System.Drawing.Point(67, 1);
-            this.lblZoom.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lblZoom.Margin = new System.Windows.Forms.Padding(3);
             this.lblZoom.Name = "lblZoom";
             this.lblZoom.Size = new System.Drawing.Size(29, 19);
             this.lblZoom.TabIndex = 1;

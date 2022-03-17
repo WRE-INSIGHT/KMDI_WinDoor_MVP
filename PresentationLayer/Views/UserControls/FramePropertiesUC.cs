@@ -31,6 +31,29 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private Frame_Padding _frameType;
+        public Frame_Padding Frame_Type
+        {
+            get
+            {
+                return _frameType;
+            }
+            set
+            {
+                _frameType = value;
+                if (_frameType == Frame_Padding.Concrete)
+                {
+                    pnl_Dimensions.Enabled = false;
+                    pnl_specs.Enabled = false;
+                }
+                else
+                {
+                    pnl_Dimensions.Enabled = true;
+                    pnl_specs.Enabled = true;
+                }
+            }
+        }
+
         public FramePropertiesUC()
         {
             InitializeComponent();
@@ -78,6 +101,7 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(frameModelBinding["FrameProp_Height"]);
             lbl_frameName.DataBindings.Add(frameModelBinding["Frame_Name"]);
             this.DataBindings.Add(frameModelBinding["Frame_Visible"]);
+            this.DataBindings.Add(frameModelBinding["Frame_Type"]);
             num_fWidth.DataBindings.Add(frameModelBinding["Frame_Width"]);
             num_fHeight.DataBindings.Add(frameModelBinding["Frame_Height"]);
             rdBtn_Window.DataBindings.Add(frameModelBinding["Frame_Type_Window"]);

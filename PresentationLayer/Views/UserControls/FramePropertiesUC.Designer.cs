@@ -35,7 +35,7 @@
             this.num_fWidth = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
             this.num_fHeight = new System.Windows.Forms.NumericUpDown();
-            this.pbl_specs = new System.Windows.Forms.Panel();
+            this.pnl_specs = new System.Windows.Forms.Panel();
             this.cmb_FrameReinf = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_Specs = new System.Windows.Forms.Label();
@@ -48,17 +48,17 @@
             this.pnl_rdBtnDoor = new System.Windows.Forms.Panel();
             this.pnl_rdBtnConcrete = new System.Windows.Forms.Panel();
             this.pnl_Body = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_Dimensions = new System.Windows.Forms.Panel();
             this.pnl_frameProperties = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).BeginInit();
-            this.pbl_specs.SuspendLayout();
+            this.pnl_specs.SuspendLayout();
             this.pnl_frameLbl.SuspendLayout();
             this.pnl_rdBtnWdw.SuspendLayout();
             this.pnl_rdBtnDoor.SuspendLayout();
             this.pnl_rdBtnConcrete.SuspendLayout();
             this.pnl_Body.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnl_Dimensions.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_frameName
@@ -91,7 +91,6 @@
             this.rdBtn_Concrete.TabStop = true;
             this.rdBtn_Concrete.Text = "Concrete";
             this.rdBtn_Concrete.UseVisualStyleBackColor = true;
-            this.rdBtn_Concrete.Visible = false;
             this.rdBtn_Concrete.CheckedChanged += new System.EventHandler(this.rdBtn_CheckedChanged);
             // 
             // lbl_Width
@@ -158,20 +157,20 @@
             0});
             this.num_fHeight.ValueChanged += new System.EventHandler(this.num_fHeight_ValueChanged_1);
             // 
-            // pbl_specs
+            // pnl_specs
             // 
-            this.pbl_specs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbl_specs.Controls.Add(this.cmb_FrameReinf);
-            this.pbl_specs.Controls.Add(this.label1);
-            this.pbl_specs.Controls.Add(this.lbl_Specs);
-            this.pbl_specs.Controls.Add(this.lbl_FrameProfile);
-            this.pbl_specs.Controls.Add(this.lbl_FrameReinf);
-            this.pbl_specs.Controls.Add(this.cmb_FrameProfile);
-            this.pbl_specs.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbl_specs.Location = new System.Drawing.Point(0, 81);
-            this.pbl_specs.Name = "pbl_specs";
-            this.pbl_specs.Size = new System.Drawing.Size(154, 102);
-            this.pbl_specs.TabIndex = 12;
+            this.pnl_specs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_specs.Controls.Add(this.cmb_FrameReinf);
+            this.pnl_specs.Controls.Add(this.label1);
+            this.pnl_specs.Controls.Add(this.lbl_Specs);
+            this.pnl_specs.Controls.Add(this.lbl_FrameProfile);
+            this.pnl_specs.Controls.Add(this.lbl_FrameReinf);
+            this.pnl_specs.Controls.Add(this.cmb_FrameProfile);
+            this.pnl_specs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_specs.Location = new System.Drawing.Point(0, 81);
+            this.pnl_specs.Name = "pnl_specs";
+            this.pnl_specs.Size = new System.Drawing.Size(154, 102);
+            this.pnl_specs.TabIndex = 12;
             // 
             // cmb_FrameReinf
             // 
@@ -284,12 +283,11 @@
             this.pnl_rdBtnConcrete.Name = "pnl_rdBtnConcrete";
             this.pnl_rdBtnConcrete.Size = new System.Drawing.Size(154, 26);
             this.pnl_rdBtnConcrete.TabIndex = 16;
-            this.pnl_rdBtnConcrete.Visible = false;
             // 
             // pnl_Body
             // 
-            this.pnl_Body.Controls.Add(this.pbl_specs);
-            this.pnl_Body.Controls.Add(this.panel1);
+            this.pnl_Body.Controls.Add(this.pnl_specs);
+            this.pnl_Body.Controls.Add(this.pnl_Dimensions);
             this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Body.Location = new System.Drawing.Point(0, 99);
             this.pnl_Body.Margin = new System.Windows.Forms.Padding(0);
@@ -297,18 +295,18 @@
             this.pnl_Body.Size = new System.Drawing.Size(154, 186);
             this.pnl_Body.TabIndex = 17;
             // 
-            // panel1
+            // pnl_Dimensions
             // 
-            this.panel1.Controls.Add(this.lbl_Width);
-            this.panel1.Controls.Add(this.num_fHeight);
-            this.panel1.Controls.Add(this.num_fWidth);
-            this.panel1.Controls.Add(this.lbl_Height);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(154, 81);
-            this.panel1.TabIndex = 13;
+            this.pnl_Dimensions.Controls.Add(this.lbl_Width);
+            this.pnl_Dimensions.Controls.Add(this.num_fHeight);
+            this.pnl_Dimensions.Controls.Add(this.num_fWidth);
+            this.pnl_Dimensions.Controls.Add(this.lbl_Height);
+            this.pnl_Dimensions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_Dimensions.Location = new System.Drawing.Point(0, 0);
+            this.pnl_Dimensions.Margin = new System.Windows.Forms.Padding(2);
+            this.pnl_Dimensions.Name = "pnl_Dimensions";
+            this.pnl_Dimensions.Size = new System.Drawing.Size(154, 81);
+            this.pnl_Dimensions.TabIndex = 13;
             // 
             // pnl_frameProperties
             // 
@@ -335,16 +333,16 @@
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).EndInit();
-            this.pbl_specs.ResumeLayout(false);
-            this.pbl_specs.PerformLayout();
+            this.pnl_specs.ResumeLayout(false);
+            this.pnl_specs.PerformLayout();
             this.pnl_frameLbl.ResumeLayout(false);
             this.pnl_frameLbl.PerformLayout();
             this.pnl_rdBtnWdw.ResumeLayout(false);
             this.pnl_rdBtnDoor.ResumeLayout(false);
             this.pnl_rdBtnConcrete.ResumeLayout(false);
             this.pnl_Body.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnl_Dimensions.ResumeLayout(false);
+            this.pnl_Dimensions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,7 +358,7 @@
         private System.Windows.Forms.ComboBox cmb_FrameProfile;
         private System.Windows.Forms.Label lbl_FrameProfile;
         private System.Windows.Forms.Label lbl_FrameReinf;
-        private System.Windows.Forms.Panel pbl_specs;
+        private System.Windows.Forms.Panel pnl_specs;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_Specs;
         private System.Windows.Forms.ComboBox cmb_FrameReinf;
@@ -371,6 +369,6 @@
         private System.Windows.Forms.Panel pnl_rdBtnConcrete;
         private System.Windows.Forms.Panel pnl_Body;
         private System.Windows.Forms.Panel pnl_frameProperties;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_Dimensions;
     }
 }

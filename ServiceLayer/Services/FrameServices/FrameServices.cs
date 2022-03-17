@@ -40,7 +40,8 @@ namespace ServiceLayer.Services.FrameServices
                                        IWindoorModel frameWindoorModel,
                                        BottomFrameTypes frameBotFrameType,
                                        bool frameBotFrameEnable,
-                                       UserControl frameUC)
+                                       UserControl frameUC,
+                                       UserControl framePropertiesUC)
         {
             IFrameModel fr = new FrameModel(frame_id,
                                            frame_name,
@@ -57,7 +58,8 @@ namespace ServiceLayer.Services.FrameServices
                                            frameWindoorModel,
                                            frameBotFrameType,
                                            frameBotFrameEnable,
-                                           frameUC);
+                                           frameUC,
+                                           framePropertiesUC);
             ValidateModel(fr);
 
             return fr;
@@ -83,7 +85,8 @@ namespace ServiceLayer.Services.FrameServices
                                          List<IPanelModel> lst_Panel = null,
                                          List<IMultiPanelModel> lst_MPanel = null,
                                          List<IDividerModel> lst_Divider = null,
-                                         UserControl frameUC = null)
+                                         UserControl frameUC = null,
+                                         UserControl framePropertiesUC = null)
         {
             if (frame_name == "")
             {
@@ -112,6 +115,11 @@ namespace ServiceLayer.Services.FrameServices
                 frameUC = new UserControl();
             }
 
+            if (framePropertiesUC == null)
+            {
+                framePropertiesUC = new UserControl();
+            }
+
             IFrameModel _frameModel = CreateFrame(frame_id,
                                                      frame_name,
                                                      frame_width,
@@ -127,7 +135,8 @@ namespace ServiceLayer.Services.FrameServices
                                                      frameWindoorModel,
                                                      frameBotFrameType,
                                                      frameBotFrameEnable,
-                                                     frameUC);
+                                                     frameUC,
+                                                     framePropertiesUC);
 
             return _frameModel;
         }

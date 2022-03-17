@@ -27,7 +27,8 @@ namespace ServiceLayer.Services.FrameServices
                                   List<IPanelModel> lst_Panel = null,
                                   List<IMultiPanelModel> lst_MPanel = null,
                                   List<IDividerModel> lst_Divider = null,
-                                  UserControl frameUC = null);
+                                  UserControl frameUC = null,
+                                  UserControl framePropertiesUC = null);
         void ValidateModel(IFrameModel frameModel);
     }
 }
