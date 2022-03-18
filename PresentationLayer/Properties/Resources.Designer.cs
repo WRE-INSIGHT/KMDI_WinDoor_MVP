@@ -93,6 +93,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_arrow_104px {
+            get {
+                object obj = ResourceManager.GetObject("back_arrow_104px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel_30px {
             get {
                 object obj = ResourceManager.GetObject("cancel_30px", resourceCulture);
@@ -211,6 +221,16 @@ namespace PresentationLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap forward_button_104px {
+            get {
+                object obj = ResourceManager.GetObject("forward_button_104px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icons8_closed_window {
@@ -296,6 +316,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap refresh_30px {
             get {
                 object obj = ResourceManager.GetObject("refresh_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_filled_100px {
+            get {
+                object obj = ResourceManager.GetObject("search_filled_100px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

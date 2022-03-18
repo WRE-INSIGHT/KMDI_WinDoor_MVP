@@ -59,6 +59,9 @@ namespace PresentationLayer
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICostEngrLandingView, CostEngrLandingView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICostEngrLandingPresenter, CostEngrLandingPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
