@@ -78,6 +78,8 @@
     <Compile Include="CommonMethods\CommonFunctions.cs" />
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
@@ -214,6 +216,13 @@
     <Compile Include="Views\CostEngrLandingView.Designer.cs">
       <DependentUpon>CostEngrLandingView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\AssignProjectsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\AssignProjectsView.Designer.cs">
+      <DependentUpon>AssignProjectsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
     <Compile Include="Views\CreateNewGlassColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -709,6 +718,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CostEngrLandingView.resx">
       <DependentUpon>CostEngrLandingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\AssignProjectsView.resx">
+      <DependentUpon>AssignProjectsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
       <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>

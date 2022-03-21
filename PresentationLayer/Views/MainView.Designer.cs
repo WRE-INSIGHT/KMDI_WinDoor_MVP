@@ -52,6 +52,7 @@
             this.costingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CostingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.assignProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -284,7 +285,8 @@
             // 
             this.costingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CostingItemsToolStripMenuItem,
-            this.defaultValuesToolStripMenuItem});
+            this.defaultValuesToolStripMenuItem,
+            this.assignProjectsToolStripMenuItem});
             this.costingToolStripMenuItem.Name = "costingToolStripMenuItem";
             this.costingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.costingToolStripMenuItem.Text = "Cos&ting";
@@ -293,15 +295,22 @@
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
+            // 
+            // assignProjectsToolStripMenuItem
+            // 
+            this.assignProjectsToolStripMenuItem.Name = "assignProjectsToolStripMenuItem";
+            this.assignProjectsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.assignProjectsToolStripMenuItem.Text = "Assign Projects";
+            this.assignProjectsToolStripMenuItem.Click += new System.EventHandler(this.assignProjectsToolStripMenuItem_Click);
             // 
             // ViewToolStripMenuItem
             // 
@@ -923,5 +932,6 @@
         private System.Windows.Forms.ToolStripMenuItem spacerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripMenuItem assignProjectsToolStripMenuItem;
     }
 }

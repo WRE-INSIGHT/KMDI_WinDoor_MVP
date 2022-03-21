@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CostEngrLandingView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_backNav = new System.Windows.Forms.Button();
+            this.lbl_nav = new System.Windows.Forms.Label();
             this.btn_forwardNav = new System.Windows.Forms.Button();
+            this.btn_backNav = new System.Windows.Forms.Button();
             this.tab_Nav = new System.Windows.Forms.TabControl();
             this.tabPage_ProjectAssigned = new System.Windows.Forms.TabPage();
-            this.tabPage_CustRef = new System.Windows.Forms.TabPage();
-            this.lbl_nav = new System.Windows.Forms.Label();
             this.pnl_top = new System.Windows.Forms.Panel();
             this.btn_SearchProj = new System.Windows.Forms.Button();
             this.txt_SearchProj = new System.Windows.Forms.TextBox();
+            this.tabPage_CustRef = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tab_Nav.SuspendLayout();
             this.tabPage_ProjectAssigned.SuspendLayout();
@@ -56,21 +57,15 @@
             this.panel1.Size = new System.Drawing.Size(384, 29);
             this.panel1.TabIndex = 2;
             // 
-            // btn_backNav
+            // lbl_nav
             // 
-            this.btn_backNav.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btn_backNav.BackgroundImage = global::PresentationLayer.Properties.Resources.back_arrow_104px;
-            this.btn_backNav.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_backNav.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_backNav.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_backNav.FlatAppearance.BorderSize = 0;
-            this.btn_backNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_backNav.Location = new System.Drawing.Point(0, 0);
-            this.btn_backNav.Name = "btn_backNav";
-            this.btn_backNav.Size = new System.Drawing.Size(31, 29);
-            this.btn_backNav.TabIndex = 2;
-            this.btn_backNav.UseVisualStyleBackColor = false;
-            this.btn_backNav.Click += new System.EventHandler(this.btn_backNav_Click);
+            this.lbl_nav.AutoSize = true;
+            this.lbl_nav.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nav.Location = new System.Drawing.Point(67, 5);
+            this.lbl_nav.Name = "lbl_nav";
+            this.lbl_nav.Size = new System.Drawing.Size(56, 19);
+            this.lbl_nav.TabIndex = 4;
+            this.lbl_nav.Text = "lbl_nav";
             // 
             // btn_forwardNav
             // 
@@ -87,6 +82,22 @@
             this.btn_forwardNav.TabIndex = 3;
             this.btn_forwardNav.UseVisualStyleBackColor = false;
             this.btn_forwardNav.Click += new System.EventHandler(this.btn_forwardNav_Click);
+            // 
+            // btn_backNav
+            // 
+            this.btn_backNav.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btn_backNav.BackgroundImage = global::PresentationLayer.Properties.Resources.back_arrow_104px;
+            this.btn_backNav.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_backNav.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_backNav.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_backNav.FlatAppearance.BorderSize = 0;
+            this.btn_backNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_backNav.Location = new System.Drawing.Point(0, 0);
+            this.btn_backNav.Name = "btn_backNav";
+            this.btn_backNav.Size = new System.Drawing.Size(31, 29);
+            this.btn_backNav.TabIndex = 2;
+            this.btn_backNav.UseVisualStyleBackColor = false;
+            this.btn_backNav.Click += new System.EventHandler(this.btn_backNav_Click);
             // 
             // tab_Nav
             // 
@@ -109,26 +120,6 @@
             this.tabPage_ProjectAssigned.TabIndex = 0;
             this.tabPage_ProjectAssigned.Text = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.UseVisualStyleBackColor = true;
-            // 
-            // tabPage_CustRef
-            // 
-            this.tabPage_CustRef.Location = new System.Drawing.Point(4, 26);
-            this.tabPage_CustRef.Name = "tabPage_CustRef";
-            this.tabPage_CustRef.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_CustRef.Size = new System.Drawing.Size(376, 502);
-            this.tabPage_CustRef.TabIndex = 1;
-            this.tabPage_CustRef.Text = "tabPage_CustRef";
-            this.tabPage_CustRef.UseVisualStyleBackColor = true;
-            // 
-            // lbl_nav
-            // 
-            this.lbl_nav.AutoSize = true;
-            this.lbl_nav.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_nav.Location = new System.Drawing.Point(67, 5);
-            this.lbl_nav.Name = "lbl_nav";
-            this.lbl_nav.Size = new System.Drawing.Size(56, 19);
-            this.lbl_nav.TabIndex = 4;
-            this.lbl_nav.Text = "lbl_nav";
             // 
             // pnl_top
             // 
@@ -164,6 +155,16 @@
             this.txt_SearchProj.Size = new System.Drawing.Size(339, 29);
             this.txt_SearchProj.TabIndex = 0;
             // 
+            // tabPage_CustRef
+            // 
+            this.tabPage_CustRef.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_CustRef.Name = "tabPage_CustRef";
+            this.tabPage_CustRef.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_CustRef.Size = new System.Drawing.Size(376, 502);
+            this.tabPage_CustRef.TabIndex = 1;
+            this.tabPage_CustRef.Text = "tabPage_CustRef";
+            this.tabPage_CustRef.UseVisualStyleBackColor = true;
+            // 
             // CostEngrLandingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -173,6 +174,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

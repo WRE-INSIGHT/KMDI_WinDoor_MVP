@@ -86,12 +86,12 @@ namespace PresentationLayer.Presenter
 
                 if (userModel != null)
                 {
-                    //_mainPresenter.SetValues(userModel, _loginView, _unityC);
-                    //_mainPresenter.GetMainView().ShowMainView();
+                    _mainPresenter.SetValues(userModel, _loginView, _unityC);
+                    _mainPresenter.GetMainView().ShowMainView();
                     setPropertiesSettings();
                     _loginView.frmVisibility = false;
-                    _CELandingPresenter.SetValues(userModel, _loginView, _unityC);
-                    _CELandingPresenter.ShowThisView();
+                    //_CELandingPresenter.SetValues(userModel, _loginView, _unityC);
+                    //_CELandingPresenter.ShowThisView();
                 }
             }
             catch (Exception ex)

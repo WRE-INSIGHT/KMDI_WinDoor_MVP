@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using CommonComponents;
+using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
@@ -7,6 +8,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.CommonMethods;
+using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
@@ -61,7 +63,6 @@ namespace PresentationLayer.Presenter
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
         private IControlsUCPresenter _controlsUCP;
-
         private IFixedPanelUCPresenter _fixedPanelUCPresenter;
         private IExplosionPresenter _explosionPresenter;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
@@ -70,6 +71,7 @@ namespace PresentationLayer.Presenter
         private ICreateNewGlassTypePresenter _createNewGlassTypePresenter;
         private ICreateNewGlassColorPresenter _createNewGlassColorPresenter;
         private ICreateNewGlassSpacerPresenter _createNewGlassSpacerPresenter;
+        private IAssignProjectsPresenter _assignProjPresenter;
 
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
@@ -417,7 +419,8 @@ namespace PresentationLayer.Presenter
                              ICreateNewGlassTypePresenter createNewGlassTypePresenter,
                              ICreateNewGlassColorPresenter createNewGlassColorPresenter,
                              ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter,
-                             IChangeItemColorPresenter changeItemColorPresenter)
+                             IChangeItemColorPresenter changeItemColorPresenter,
+                             IAssignProjectsPresenter assignProjPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -440,6 +443,7 @@ namespace PresentationLayer.Presenter
             _createNewGlassColorPresenter = createNewGlassColorPresenter;
             _createNewGlassSpacerPresenter = createNewGlassSpacerPresenter;
             _changeItemColorPresenter = changeItemColorPresenter;
+            _assignProjPresenter = assignProjPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -524,9 +528,24 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
             _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
+            _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
         }
 
         #region Events
+
+        private void _mainView_assignProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                IAssignProjectsPresenter assignProj = _assignProjPresenter.GetNewInstance(_unityC, this);
+                assignProj.ShowThisView();
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                throw new Exception("Error Message: " + ex.Message);
+            }
+        }
 
         private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {

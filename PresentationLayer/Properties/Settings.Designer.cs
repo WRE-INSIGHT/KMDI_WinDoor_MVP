@@ -83,16 +83,13 @@ namespace PresentationLayer.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\'121.58.229.248,49107\';Network Library=DBMSSOCN;Initial Catalog=\'KMDI" +
-            "DATA\';User ID=\'kmdiadmin\';Password=\'kmdiadmin\';")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=\'121.58.229.248,49107\';Network Library=DBMSSOCN;Initial Catalog=\'DWMS" +
+            "_DB\';User ID=\'kmdiadmin\';Password=\'kmdiadmin\';")]
         public string slqcon {
             get {
                 return ((string)(this["slqcon"]));
-            }
-            set {
-                this["slqcon"] = value;
             }
         }
     }

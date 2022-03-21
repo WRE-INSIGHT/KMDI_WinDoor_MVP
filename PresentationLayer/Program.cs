@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
+using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -14,6 +15,7 @@ using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Module
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
+using PresentationLayer.Views.Costing_Head;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using PresentationLayer.Views.UserControls.Dividers;
@@ -22,12 +24,14 @@ using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
 using ServiceLayer.Services.DividerServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
+using ServiceLayer.Services.ProjectQuoteServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.WindoorServices;
@@ -59,6 +63,9 @@ namespace PresentationLayer
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IAssignProjectsView, AssignProjectsView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAssignProjectsPresenter, AssignProjectsPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<ICostEngrLandingView, CostEngrLandingView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICostEngrLandingPresenter, CostEngrLandingPresenter>(new ContainerControlledLifetimeManager())
 
@@ -82,6 +89,8 @@ namespace PresentationLayer
 
                 .RegisterType<IDividerServices, DividerServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDividerModel, DividerModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -262,7 +271,9 @@ namespace PresentationLayer
                 .RegisterType<IPP_2dHingePropertyUC, PP_2dHingePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_2dHingePropertyUCPresenter, PP_2dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
+                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
+                ;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

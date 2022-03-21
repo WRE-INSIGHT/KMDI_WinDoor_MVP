@@ -13,6 +13,8 @@ namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
     {
+        #region GetSet
+
         public string Nickname
         {
             set
@@ -147,6 +149,7 @@ namespace PresentationLayer.Views
                 return colorToolStripMenuItem;
             }
         }
+        #endregion
 
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
@@ -164,6 +167,7 @@ namespace PresentationLayer.Views
         public event EventHandler ChangeItemColorClickEventRaised;
         public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
+        public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -347,6 +351,11 @@ namespace PresentationLayer.Views
         public void SetActiveControl(Control control)
         {
             this.ActiveControl = control;
+        }
+
+        private void assignProjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, assignProjectsToolStripMenuItemClickEventRaised, e);
         }
     }
 }
