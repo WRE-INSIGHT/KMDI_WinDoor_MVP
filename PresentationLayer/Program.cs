@@ -24,10 +24,12 @@ using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.Employee;
 using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
 using ServiceLayer.Services.DividerServices;
+using ServiceLayer.Services.EmployeeServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
@@ -66,6 +68,9 @@ namespace PresentationLayer
                 .RegisterType<IAssignProjectsView, AssignProjectsView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IAssignProjectsPresenter, AssignProjectsPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICostEngrEmployeeView, CostEngrEmployeeView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICostEngrEmployeePresenter, CostEngrEmployeePresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<ICostEngrLandingView, CostEngrLandingView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICostEngrLandingPresenter, CostEngrLandingPresenter>(new ContainerControlledLifetimeManager())
 
@@ -91,6 +96,7 @@ namespace PresentationLayer
                 .RegisterType<IDividerModel, DividerModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -273,6 +279,7 @@ namespace PresentationLayer
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
                 ;
 
             Application.EnableVisualStyles();

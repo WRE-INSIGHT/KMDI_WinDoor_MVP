@@ -39,6 +39,7 @@ namespace PresentationLayer.Views.Costing_Head
         }
 
         public event EventHandler AssignProjectsViewLoadEventRaised;
+        public event EventHandler assignCostEngrToolStripMenuItemClickEventRaised;
 
         CommonMethods.CommonFunctions common_func = new CommonMethods.CommonFunctions();
 
@@ -50,6 +51,11 @@ namespace PresentationLayer.Views.Costing_Head
         private void dgv_Projects_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             common_func.rowpostpaint(sender, e);
+        }
+
+        private void assignCostEngrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, assignCostEngrToolStripMenuItemClickEventRaised, e);
         }
     }
 }

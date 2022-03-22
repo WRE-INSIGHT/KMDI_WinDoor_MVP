@@ -538,6 +538,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 IAssignProjectsPresenter assignProj = _assignProjPresenter.GetNewInstance(_unityC, this);
+                assignProj.Set_UserModel(_userModel);
                 assignProj.ShowThisView();
             }
             catch (Exception ex)

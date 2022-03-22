@@ -79,7 +79,9 @@
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\CostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\ICostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
@@ -222,7 +224,14 @@
     <Compile Include="Views\Costing Head\AssignProjectsView.Designer.cs">
       <DependentUpon>AssignProjectsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\CostEngrEmployeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\CostEngrEmployeeView.Designer.cs">
+      <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
+    <Compile Include="Views\Costing Head\ICostEngrEmployeeView.cs" />
     <Compile Include="Views\CreateNewGlassColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -721,6 +730,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Costing Head\AssignProjectsView.resx">
       <DependentUpon>AssignProjectsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\CostEngrEmployeeView.resx">
+      <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
       <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>

@@ -49,7 +49,7 @@
             this.pnl_top.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_top.Location = new System.Drawing.Point(0, 0);
             this.pnl_top.Name = "pnl_top";
-            this.pnl_top.Size = new System.Drawing.Size(784, 29);
+            this.pnl_top.Size = new System.Drawing.Size(789, 29);
             this.pnl_top.TabIndex = 3;
             // 
             // btn_SearchProj
@@ -62,7 +62,7 @@
             this.btn_SearchProj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SearchProj.Location = new System.Drawing.Point(754, 0);
             this.btn_SearchProj.Name = "btn_SearchProj";
-            this.btn_SearchProj.Size = new System.Drawing.Size(30, 29);
+            this.btn_SearchProj.Size = new System.Drawing.Size(35, 29);
             this.btn_SearchProj.TabIndex = 1;
             this.btn_SearchProj.UseVisualStyleBackColor = false;
             // 
@@ -80,6 +80,7 @@
             // 
             this.dgv_Projects.AllowUserToAddRows = false;
             this.dgv_Projects.AllowUserToDeleteRows = false;
+            this.dgv_Projects.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgv_Projects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Projects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -88,7 +89,7 @@
             this.dgv_Projects.Location = new System.Drawing.Point(0, 29);
             this.dgv_Projects.Name = "dgv_Projects";
             this.dgv_Projects.ReadOnly = true;
-            this.dgv_Projects.Size = new System.Drawing.Size(784, 392);
+            this.dgv_Projects.Size = new System.Drawing.Size(789, 392);
             this.dgv_Projects.TabIndex = 4;
             this.dgv_Projects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Projects_RowPostPaint);
             // 
@@ -104,12 +105,13 @@
             this.assignCostEngrToolStripMenuItem.Name = "assignCostEngrToolStripMenuItem";
             this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.assignCostEngrToolStripMenuItem.Text = "Assign Cost Engr";
+            this.assignCostEngrToolStripMenuItem.Click += new System.EventHandler(this.assignCostEngrToolStripMenuItem_Click);
             // 
             // AssignProjectsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 421);
+            this.ClientSize = new System.Drawing.Size(789, 421);
             this.Controls.Add(this.dgv_Projects);
             this.Controls.Add(this.pnl_top);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

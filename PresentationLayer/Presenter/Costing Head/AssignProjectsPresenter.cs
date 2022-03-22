@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.User;
 using PresentationLayer.Views.Costing_Head;
 using ServiceLayer.Services.ProjectQuoteServices;
 using System;
@@ -19,15 +20,19 @@ namespace PresentationLayer.Presenter.Costing_Head
 
         private IUnityContainer _unityC;
 
+        private IUserModel _userModel;
         private IProjectQuoteServices _projQuoteServices;
         private IMainPresenter _mainPresenter;
+        private ICostEngrEmployeePresenter _ceEmpPresenter;
 
         DataGridView _dgvProj;
 
-        public AssignProjectsPresenter(IAssignProjectsView assignProjView, IProjectQuoteServices projQuoteServices)
+        public AssignProjectsPresenter(IAssignProjectsView assignProjView, IProjectQuoteServices projQuoteServices,
+                                       ICostEngrEmployeePresenter ceEmpPresenter)
         {
             _assignProjView = assignProjView;
             _projQuoteServices = projQuoteServices;
+            _ceEmpPresenter = ceEmpPresenter;
 
             _dgvProj = _assignProjView.DGV_Projects;
             SubscribeToEventsSetup();
@@ -36,6 +41,22 @@ namespace PresentationLayer.Presenter.Costing_Head
         private void SubscribeToEventsSetup()
         {
             _assignProjView.AssignProjectsViewLoadEventRaised += _assignProjView_AssignProjectsViewLoadEventRaised;
+            _assignProjView.assignCostEngrToolStripMenuItemClickEventRaised += _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised;
+        }
+
+        private void _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            if (_dgvProj.SelectedRows.Count > 0)
+            {
+                ICostEngrEmployeePresenter ceEmpPresenter = _ceEmpPresenter.GetNewInstance(_unityC, this);
+                ceEmpPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
+                ceEmpPresenter.Set_UserModel(_userModel);
+                ceEmpPresenter.ShowThisView();
+            }
+            else
+            {
+                MessageBox.Show("Please select project(s)");
+            }
         }
 
         private async void _assignProjView_AssignProjectsViewLoadEventRaised(object sender, EventArgs e)
@@ -51,7 +72,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             }
         }
 
-        private async Task Load_DGVProjects(string searchStr)
+        public async Task Load_DGVProjects(string searchStr)
         {
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
             _dgvProj.DataSource = dt;
@@ -64,6 +85,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             _dgvProj.Columns["Id"].Visible = false;
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Quote_Id"].Visible = false;
+            _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
 
             _dgvProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
@@ -71,6 +93,11 @@ namespace PresentationLayer.Presenter.Costing_Head
         public void ShowThisView()
         {
             _assignProjView.ShowThis();
+        }
+
+        public void Set_UserModel(IUserModel userModel)
+        {
+            _userModel = userModel;
         }
 
         public IAssignProjectsPresenter GetNewInstance(IUnityContainer unityC,

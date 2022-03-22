@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.Costing_Head
         string SearchProjStr { get; }
 
         event EventHandler AssignProjectsViewLoadEventRaised;
+        event EventHandler assignCostEngrToolStripMenuItemClickEventRaised;
 
         void ShowThis();
     }
