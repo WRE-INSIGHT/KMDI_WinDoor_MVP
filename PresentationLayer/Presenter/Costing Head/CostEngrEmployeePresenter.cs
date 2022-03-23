@@ -28,6 +28,8 @@ namespace PresentationLayer.Presenter.Costing_Head
 
         private CheckedListBox _chkCEList;
         private DataGridViewSelectedRowCollection _dgvProjSelectedRows;
+        private Panel _pnlStatus;
+        private Label _lblStatus;
 
         public CostEngrEmployeePresenter(ICostEngrEmployeeView ceEmpView, IEmployeeServices empServices,
                                          IProjectQuoteServices pqServices)
@@ -37,6 +39,8 @@ namespace PresentationLayer.Presenter.Costing_Head
             _pqServices = pqServices;
 
             _chkCEList = _ceEmpView.ChkList_CE;
+            _pnlStatus = _ceEmpView.Pnl_Status;
+            _lblStatus = _ceEmpView.Lbl_Status;
 
             SubscribeToEventsSetup();
         }
@@ -47,13 +51,13 @@ namespace PresentationLayer.Presenter.Costing_Head
             _ceEmpView.btnAcceptClickEventRaised += _ceEmpView_btnAcceptClickEventRaised;
         }
 
-        private void _ceEmpView_btnAcceptClickEventRaised(object sender, EventArgs e)
+        private async void _ceEmpView_btnAcceptClickEventRaised(object sender, EventArgs e)
         {
             try
             {
                 foreach (DataGridViewRow row in _dgvProjSelectedRows)
                 {
-                    _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Id"].Value), _userModel.UserID);
+                    await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
 
                     foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
                     {
@@ -65,16 +69,28 @@ namespace PresentationLayer.Presenter.Costing_Head
                                                                                  Convert.ToInt32(row.Cells["Quote_Id"].Value),
                                                                                  DateTime.Now);
 
-                        _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                        await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
                     }
                 }
 
-                _assignProjPresenter.Load_DGVProjects("");
+                await _assignProjPresenter.Load_DGVProjects("");
             }
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                throw new Exception("Error Message: " + ex.Message);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+        }
+
+        private void Set_LoadingStatus(string status)
+        {
+            if (_pnlStatus.Visible == false)
+            {
+                _pnlStatus.Visible = true;
+            }
+            else if (_pnlStatus.Visible == true)
+            {
+                _lblStatus.Text = status;
             }
         }
 
@@ -87,7 +103,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                throw new Exception("Error Message: " + ex.Message);
+                MessageBox.Show("Error Message: " + ex.Message);
             }
         }
 

@@ -25,9 +25,9 @@ namespace ServiceLayer.Services.ProjectQuoteServices
             return await _projQuoteRepo.Get_AssignedProjects(searchStr);
         }
 
-        public async Task<int> Delete_ProjQuote(int id, int user_id)
+        public async Task<int> Delete_ProjQuote(int proj_id, int user_id)
         {
-            return await _projQuoteRepo.Delete_ProjQuote(id, user_id);
+            return await _projQuoteRepo.Delete_ProjQuote(proj_id, user_id);
         }
 
         public async Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id)

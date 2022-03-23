@@ -18,6 +18,8 @@ namespace PresentationLayer.Views.Costing_Head
             InitializeComponent();
         }
 
+        #region GetSet
+
         public CheckedListBox ChkList_CE
         {
             get
@@ -25,6 +27,24 @@ namespace PresentationLayer.Views.Costing_Head
                 return chkList_CE;
             }
         }
+
+        public Panel Pnl_Status
+        {
+            get
+            {
+                return pnl_Status;
+            }
+        }
+
+        public Label Lbl_Status
+        {
+            get
+            {
+                return lbl_Status;
+            }
+        }
+
+        #endregion
 
         public void ShowThis()
         {

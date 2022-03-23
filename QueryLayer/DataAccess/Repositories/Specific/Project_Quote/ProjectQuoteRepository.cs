@@ -49,7 +49,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             return dt;
         }
 
-        public async Task<int> Delete_ProjQuote(int id, int user_id)
+        public async Task<int> Delete_ProjQuote(int proj_id, int user_id)
         {
             int affected_row = 0;
 
@@ -65,8 +65,8 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Transaction = sqltrans;
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
-                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Delete";
-                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "DeleteProject";
+                        sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = proj_id;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();

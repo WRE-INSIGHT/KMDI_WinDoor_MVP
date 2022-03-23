@@ -65,6 +65,7 @@
             this.btn_SearchProj.Size = new System.Drawing.Size(35, 29);
             this.btn_SearchProj.TabIndex = 1;
             this.btn_SearchProj.UseVisualStyleBackColor = false;
+            this.btn_SearchProj.Click += new System.EventHandler(this.btn_SearchProj_Click);
             // 
             // txt_SearchProj
             // 
@@ -75,6 +76,7 @@
             this.txt_SearchProj.Name = "txt_SearchProj";
             this.txt_SearchProj.Size = new System.Drawing.Size(754, 29);
             this.txt_SearchProj.TabIndex = 0;
+            this.txt_SearchProj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SearchProj_KeyDown);
             // 
             // dgv_Projects
             // 

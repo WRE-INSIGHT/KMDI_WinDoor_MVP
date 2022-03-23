@@ -40,6 +40,7 @@ namespace PresentationLayer.Views.Costing_Head
 
         public event EventHandler AssignProjectsViewLoadEventRaised;
         public event EventHandler assignCostEngrToolStripMenuItemClickEventRaised;
+        public event EventHandler btnSearchProjClickEventRaised;
 
         CommonMethods.CommonFunctions common_func = new CommonMethods.CommonFunctions();
 
@@ -56,6 +57,19 @@ namespace PresentationLayer.Views.Costing_Head
         private void assignCostEngrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, assignCostEngrToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void btn_SearchProj_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSearchProjClickEventRaised, e);
+        }
+
+        private void txt_SearchProj_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_SearchProj.PerformClick();
+            }
         }
     }
 }

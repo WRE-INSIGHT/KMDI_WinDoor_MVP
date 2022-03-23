@@ -42,6 +42,20 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             _assignProjView.AssignProjectsViewLoadEventRaised += _assignProjView_AssignProjectsViewLoadEventRaised;
             _assignProjView.assignCostEngrToolStripMenuItemClickEventRaised += _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised;
+            _assignProjView.btnSearchProjClickEventRaised += _assignProjView_btnSearchProjClickEventRaised;
+        }
+
+        private async void _assignProjView_btnSearchProjClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                await Load_DGVProjects(_assignProjView.SearchProjStr);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private void _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -68,14 +82,40 @@ namespace PresentationLayer.Presenter.Costing_Head
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                throw new Exception("Error Message: " + ex.Message);
+                MessageBox.Show("Error Message: " + ex.Message);
             }
         }
 
         public async Task Load_DGVProjects(string searchStr)
         {
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
-            _dgvProj.DataSource = dt;
+            DataTable bindable_dt = dt.Clone();
+
+            for (int i = 0; i < dt.Rows.Count ; i++)
+            {
+                int proj_id = Convert.ToInt32(dt.Rows[i]["Project_Id"].ToString());
+
+                bool isDupe = false;
+                for (int j = 0; j < bindable_dt.Rows.Count ; j++)
+                {
+                    int bind_proj_id = Convert.ToInt32(bindable_dt.Rows[j]["Project_Id"].ToString());
+                    if (proj_id == bind_proj_id)
+                    {
+                        bindable_dt.Rows[j]["Cost Engr In-Charge"] += "," + Environment.NewLine + dt.Rows[i]["Cost Engr In-Charge"].ToString();
+                        isDupe = true;
+                        break;
+                    }
+                }
+
+                if (!isDupe)
+                {
+                    bindable_dt.ImportRow(dt.Rows[i]);
+                }
+            }
+
+            _dgvProj.DataSource = bindable_dt;
+            _dgvProj.Columns["Cost Engr In-Charge"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            _dgvProj.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             foreach (DataGridViewColumn col in _dgvProj.Columns)
             {
@@ -86,6 +126,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Quote_Id"].Visible = false;
             _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
+            _dgvProj.Columns["Emp_Id"].Visible = false;
 
             _dgvProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }

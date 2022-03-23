@@ -544,7 +544,7 @@ namespace PresentationLayer.Presenter
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                throw new Exception("Error Message: " + ex.Message);
+                MessageBox.Show("Error Message: " + ex.Message);
             }
         }
 
