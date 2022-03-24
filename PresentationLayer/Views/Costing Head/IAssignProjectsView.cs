@@ -11,7 +11,9 @@ namespace PresentationLayer.Views.Costing_Head
         event EventHandler AssignProjectsViewLoadEventRaised;
         event EventHandler assignCostEngrToolStripMenuItemClickEventRaised;
         event EventHandler btnSearchProjClickEventRaised;
+        event EventHandler customerRefNoToolStripMenuItemClickEventRaised;
 
         void ShowThis();
+        void SetEnableThis(bool enabled);
     }
 }

@@ -11,5 +11,6 @@ namespace PresentationLayer.Presenter.Costing_Head
 
         void ShowThisView();
         void Set_UserModel(IUserModel userModel);
+        void SetEnableThisView(bool enable);
     }
 }

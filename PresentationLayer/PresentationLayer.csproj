@@ -80,8 +80,10 @@
     <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\CostEngrEmployeePresenter.cs" />
+    <Compile Include="Presenter\Costing Head\CustomerRefNoPresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\ICostEngrEmployeePresenter.cs" />
+    <Compile Include="Presenter\Costing Head\ICustomerRefNoPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
@@ -230,8 +232,15 @@
     <Compile Include="Views\Costing Head\CostEngrEmployeeView.Designer.cs">
       <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\CustomerRefNoView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\CustomerRefNoView.Designer.cs">
+      <DependentUpon>CustomerRefNoView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
     <Compile Include="Views\Costing Head\ICostEngrEmployeeView.cs" />
+    <Compile Include="Views\Costing Head\ICustomerRefNoView.cs" />
     <Compile Include="Views\CreateNewGlassColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -734,6 +743,9 @@
     <EmbeddedResource Include="Views\Costing Head\CostEngrEmployeeView.resx">
       <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\CustomerRefNoView.resx">
+      <DependentUpon>CustomerRefNoView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
       <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -994,6 +1006,7 @@
     <Content Include="Resources\MultiplePanelSliding.png" />
     <Content Include="Resources\plus2_104px.png" />
     <Content Include="Resources\plus_104px.png" />
+    <None Include="Resources\plus_math_96px.png" />
     <Content Include="Resources\redo_30px.png" />
     <Content Include="Resources\refresh_30px.png" />
     <None Include="Resources\search_filled_100px.png" />

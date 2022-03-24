@@ -24,15 +24,17 @@ namespace PresentationLayer.Presenter.Costing_Head
         private IProjectQuoteServices _projQuoteServices;
         private IMainPresenter _mainPresenter;
         private ICostEngrEmployeePresenter _ceEmpPresenter;
+        private ICustomerRefNoPresenter _custRefNoPresenter;
 
         DataGridView _dgvProj;
 
         public AssignProjectsPresenter(IAssignProjectsView assignProjView, IProjectQuoteServices projQuoteServices,
-                                       ICostEngrEmployeePresenter ceEmpPresenter)
+                                       ICostEngrEmployeePresenter ceEmpPresenter, ICustomerRefNoPresenter custRefNoPresenter)
         {
             _assignProjView = assignProjView;
             _projQuoteServices = projQuoteServices;
             _ceEmpPresenter = ceEmpPresenter;
+            _custRefNoPresenter = custRefNoPresenter;
 
             _dgvProj = _assignProjView.DGV_Projects;
             SubscribeToEventsSetup();
@@ -43,6 +45,24 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignProjView.AssignProjectsViewLoadEventRaised += _assignProjView_AssignProjectsViewLoadEventRaised;
             _assignProjView.assignCostEngrToolStripMenuItemClickEventRaised += _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised;
             _assignProjView.btnSearchProjClickEventRaised += _assignProjView_btnSearchProjClickEventRaised;
+            _assignProjView.customerRefNoToolStripMenuItemClickEventRaised += _assignProjView_customerRefNoToolStripMenuItemClickEventRaised;
+        }
+
+        private void _assignProjView_customerRefNoToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            if (_dgvProj.SelectedRows.Count > 0)
+            {
+                ICustomerRefNoPresenter custrefnoPresenter = _custRefNoPresenter.GetNewInstance(_unityC, this);
+                custrefnoPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
+                custrefnoPresenter.Set_UserModel(_userModel);
+                custrefnoPresenter.ShowThisView();
+
+                _assignProjView.SetEnableThis(false);
+            }
+            else
+            {
+                MessageBox.Show("Please select project(s)");
+            }
         }
 
         private async void _assignProjView_btnSearchProjClickEventRaised(object sender, EventArgs e)
@@ -152,6 +172,11 @@ namespace PresentationLayer.Presenter.Costing_Head
             presenter._mainPresenter = mainPresenter;
 
             return presenter;
+        }
+
+        public void SetEnableThisView(bool enable)
+        {
+            _assignProjView.SetEnableThis(enable);
         }
     }
 }

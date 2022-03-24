@@ -41,5 +41,9 @@ namespace CommonComponents
         {
             controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
         }
+        public static void RaiseFormClosedEvent(object objectRaisingEvent, FormClosedEventHandler controlEventHandlerRaised, FormClosedEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
+        }
     }
 }

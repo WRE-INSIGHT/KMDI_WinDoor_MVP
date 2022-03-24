@@ -37,6 +37,7 @@
             this.dgv_Projects = new System.Windows.Forms.DataGridView();
             this.cmenu_dgvProj = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.assignCostEngrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customerRefNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Projects)).BeginInit();
             this.cmenu_dgvProj.SuspendLayout();
@@ -98,16 +99,24 @@
             // cmenu_dgvProj
             // 
             this.cmenu_dgvProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.assignCostEngrToolStripMenuItem});
+            this.assignCostEngrToolStripMenuItem,
+            this.customerRefNoToolStripMenuItem});
             this.cmenu_dgvProj.Name = "cmenu_dgvProj";
-            this.cmenu_dgvProj.Size = new System.Drawing.Size(164, 26);
+            this.cmenu_dgvProj.Size = new System.Drawing.Size(169, 70);
             // 
             // assignCostEngrToolStripMenuItem
             // 
             this.assignCostEngrToolStripMenuItem.Name = "assignCostEngrToolStripMenuItem";
-            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.assignCostEngrToolStripMenuItem.Text = "Assign Cost Engr";
             this.assignCostEngrToolStripMenuItem.Click += new System.EventHandler(this.assignCostEngrToolStripMenuItem_Click);
+            // 
+            // customerRefNoToolStripMenuItem
+            // 
+            this.customerRefNoToolStripMenuItem.Name = "customerRefNoToolStripMenuItem";
+            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.customerRefNoToolStripMenuItem.Text = "Customer Ref. No";
+            this.customerRefNoToolStripMenuItem.Click += new System.EventHandler(this.customerRefNoToolStripMenuItem_Click);
             // 
             // AssignProjectsView
             // 
@@ -142,5 +151,6 @@
         private System.Windows.Forms.DataGridView dgv_Projects;
         private System.Windows.Forms.ContextMenuStrip cmenu_dgvProj;
         private System.Windows.Forms.ToolStripMenuItem assignCostEngrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customerRefNoToolStripMenuItem;
     }
 }

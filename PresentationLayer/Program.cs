@@ -24,10 +24,12 @@ using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.Customer_Ref_No;
 using QueryLayer.DataAccess.Repositories.Specific.Employee;
 using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
+using ServiceLayer.Services.CustomerRefNoServices;
 using ServiceLayer.Services.DividerServices;
 using ServiceLayer.Services.EmployeeServices;
 using ServiceLayer.Services.FrameServices;
@@ -74,6 +76,9 @@ namespace PresentationLayer
                 .RegisterType<ICostEngrLandingView, CostEngrLandingView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICostEngrLandingPresenter, CostEngrLandingPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICustomerRefNoView, CustomerRefNoView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomerRefNoPresenter, CustomerRefNoPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
@@ -97,6 +102,7 @@ namespace PresentationLayer
 
                 .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomerRefNoServices, CustomerRefNoServices>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -280,6 +286,7 @@ namespace PresentationLayer
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
                 ;
 
             Application.EnableVisualStyles();

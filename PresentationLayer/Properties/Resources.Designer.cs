@@ -313,6 +313,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap plus_math_96px {
+            get {
+                object obj = ResourceManager.GetObject("plus_math_96px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plus2_104px {
             get {
                 object obj = ResourceManager.GetObject("plus2_104px", resourceCulture);

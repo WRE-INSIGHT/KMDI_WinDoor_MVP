@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\Repositories\Specific\BaseSpecificRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Specific\Customer_Ref_No\CustomerRefNoRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Employee\EmployeeRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Project_Quote\ProjectQuoteRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\User\UserRepository.cs" />
@@ -63,6 +64,7 @@
       <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
