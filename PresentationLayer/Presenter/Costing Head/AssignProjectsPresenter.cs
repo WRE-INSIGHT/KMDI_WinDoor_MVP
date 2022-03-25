@@ -109,33 +109,34 @@ namespace PresentationLayer.Presenter.Costing_Head
         public async Task Load_DGVProjects(string searchStr)
         {
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
-            DataTable bindable_dt = dt.Clone();
+            _dgvProj.DataSource = dt;
+            //DataTable bindable_dt = dt.Clone();
 
-            for (int i = 0; i < dt.Rows.Count ; i++)
-            {
-                int proj_id = Convert.ToInt32(dt.Rows[i]["Project_Id"].ToString());
+            //for (int i = 0; i < dt.Rows.Count ; i++)
+            //{
+            //    int proj_id = Convert.ToInt32(dt.Rows[i]["Project_Id"].ToString());
 
-                bool isDupe = false;
-                for (int j = 0; j < bindable_dt.Rows.Count ; j++)
-                {
-                    int bind_proj_id = Convert.ToInt32(bindable_dt.Rows[j]["Project_Id"].ToString());
-                    if (proj_id == bind_proj_id)
-                    {
-                        bindable_dt.Rows[j]["Cost Engr In-Charge"] += "," + Environment.NewLine + dt.Rows[i]["Cost Engr In-Charge"].ToString();
-                        isDupe = true;
-                        break;
-                    }
-                }
+            //    bool isDupe = false;
+            //    for (int j = 0; j < bindable_dt.Rows.Count ; j++)
+            //    {
+            //        int bind_proj_id = Convert.ToInt32(bindable_dt.Rows[j]["Project_Id"].ToString());
+            //        if (proj_id == bind_proj_id)
+            //        {
+            //            bindable_dt.Rows[j]["Cost Engr In-Charge"] += "," + Environment.NewLine + dt.Rows[i]["Cost Engr In-Charge"].ToString();
+            //            isDupe = true;
+            //            break;
+            //        }
+            //    }
 
-                if (!isDupe)
-                {
-                    bindable_dt.ImportRow(dt.Rows[i]);
-                }
-            }
+            //    if (!isDupe)
+            //    {
+            //        bindable_dt.ImportRow(dt.Rows[i]);
+            //    }
+            //}
 
-            _dgvProj.DataSource = bindable_dt;
-            _dgvProj.Columns["Cost Engr In-Charge"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            _dgvProj.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            //_dgvProj.DataSource = bindable_dt;
+            //_dgvProj.Columns["Cost Engr In-Charge"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //_dgvProj.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             foreach (DataGridViewColumn col in _dgvProj.Columns)
             {

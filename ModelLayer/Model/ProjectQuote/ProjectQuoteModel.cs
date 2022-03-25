@@ -13,6 +13,6 @@ namespace ModelLayer.Model.ProjectQuote
         public int PQ_CustRefId { get; set; }
         public int PQ_EmployeeId { get; set; } //assigned CE
         public int PQ_QuoteId { get; set; }
-        public DateTime PQ_DateAssigned { get; set; }
+        public DateTime? PQ_DateAssigned { get; set; }
     }
 }

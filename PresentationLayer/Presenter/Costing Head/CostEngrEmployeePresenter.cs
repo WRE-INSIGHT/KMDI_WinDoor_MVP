@@ -55,25 +55,32 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             try
             {
-                foreach (DataGridViewRow row in _dgvProjSelectedRows)
+                if (_chkCEList.CheckedItems.Count > 0)
                 {
-                    await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
-
-                    foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
+                    foreach (DataGridViewRow row in _dgvProjSelectedRows)
                     {
-                        int emp_id = Convert.ToInt32(chkListVal["Id"]);
-                        IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
-                                                                                 Convert.ToInt32(row.Cells["Project_Id"].Value),
-                                                                                 Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value),
-                                                                                 emp_id,
-                                                                                 Convert.ToInt32(row.Cells["Quote_Id"].Value),
-                                                                                 DateTime.Now);
+                        await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
 
-                        await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                        foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
+                        {
+                            int emp_id = Convert.ToInt32(chkListVal["Id"]);
+                            IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
+                                                                                     Convert.ToInt32(row.Cells["Project_Id"].Value),
+                                                                                     Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value),
+                                                                                     emp_id,
+                                                                                     Convert.ToInt32(row.Cells["Quote_Id"].Value),
+                                                                                     DateTime.Now);
+
+                            await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                        }
                     }
-                }
 
-                await _assignProjPresenter.Load_DGVProjects("");
+                    await _assignProjPresenter.Load_DGVProjects("");
+                }
+                else if (_chkCEList.CheckedItems.Count <= 0)
+                {
+                    MessageBox.Show("Invalid selection");
+                }
             }
             catch (Exception ex)
             {

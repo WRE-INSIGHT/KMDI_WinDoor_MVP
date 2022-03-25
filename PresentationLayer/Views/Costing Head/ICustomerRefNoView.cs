@@ -16,5 +16,6 @@ namespace PresentationLayer.Views.Costing_Head
         event FormClosedEventHandler CustomerRefNoViewFormClosedEventRaised;
 
         void ShowThis();
+        void CloseThis();
     }
 }

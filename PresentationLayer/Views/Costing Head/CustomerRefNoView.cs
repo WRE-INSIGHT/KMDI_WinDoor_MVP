@@ -83,5 +83,15 @@ namespace PresentationLayer.Views.Costing_Head
         {
             EventHelpers.RaiseFormClosedEvent(sender, CustomerRefNoViewFormClosedEventRaised, e);
         }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public void CloseThis()
+        {
+            this.Close();
+        }
     }
 }

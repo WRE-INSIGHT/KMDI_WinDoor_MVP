@@ -35,12 +35,17 @@ namespace ServiceLayer.Services.ProjectQuoteServices
             return await _projQuoteRepo.Insert_ProjQuote(pqModel, user_id);
         }
 
+        public async Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id)
+        {
+            return await _projQuoteRepo.Update_ProjQuote(pqModel, user_id);
+        }
+
         private IProjectQuoteModel CreateProjectQuote(int pq_id,
                                                       int pq_ProjId,
                                                       int pq_CustRefId,
                                                       int pq_EmployeeId,
                                                       int pq_QuoteId,
-                                                      DateTime pq_DateAssigned)
+                                                      DateTime? pq_DateAssigned)
         {
             ProjectQuoteModel pqModel = new ProjectQuoteModel();
             pqModel.PQ_Id = pq_id;
@@ -60,7 +65,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
                                                   int pq_CustRefId,
                                                   int pq_EmployeeId,
                                                   int pq_QuoteId,
-                                                  DateTime pq_DateAssigned)
+                                                  DateTime? pq_DateAssigned)
         {
             IProjectQuoteModel pqModel = CreateProjectQuote(pq_id,
                                                             pq_ProjId,

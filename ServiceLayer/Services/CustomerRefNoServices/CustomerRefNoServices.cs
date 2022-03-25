@@ -43,7 +43,6 @@ namespace ServiceLayer.Services.CustomerRefNoServices
             return custrefnoModel;
         }
 
-
         private void ValidateModel(ICustomerRefNoModel custrefnoModel)
         {
             _modelCheck.ValidateModelDataAnnotations(custrefnoModel);

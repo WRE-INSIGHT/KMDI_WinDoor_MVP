@@ -13,5 +13,6 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<DataTable> Get_AssignedProjects(string searchStr);
         Task<int> Delete_ProjQuote(int proj_id, int user_id);
         Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id);
+        Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id);
     }
 }
