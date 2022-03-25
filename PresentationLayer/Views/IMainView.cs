@@ -22,11 +22,12 @@ namespace PresentationLayer.Views
         event EventHandler ChangeItemColorClickEventRaised;
         event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
+        event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
-        bool ItemToolStripEnabled { get;  set; }
+        bool ItemToolStripEnabled { get; set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);

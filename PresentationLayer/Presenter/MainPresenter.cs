@@ -70,7 +70,8 @@ namespace PresentationLayer.Presenter
         private ICreateNewGlassTypePresenter _createNewGlassTypePresenter;
         private ICreateNewGlassColorPresenter _createNewGlassColorPresenter;
         private ICreateNewGlassSpacerPresenter _createNewGlassSpacerPresenter;
-
+        private ICustomArrowHeadPresenter _customArrowHeadPresenter;
+        private ICustomArrowHeadUCPresenter _customArrowHeadUCP;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -417,7 +418,9 @@ namespace PresentationLayer.Presenter
                              ICreateNewGlassTypePresenter createNewGlassTypePresenter,
                              ICreateNewGlassColorPresenter createNewGlassColorPresenter,
                              ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter,
-                             IChangeItemColorPresenter changeItemColorPresenter)
+                             IChangeItemColorPresenter changeItemColorPresenter,
+                             ICustomArrowHeadPresenter customArrowHeadPresenter,
+                             ICustomArrowHeadUCPresenter customArrowHeadUCP)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -440,6 +443,8 @@ namespace PresentationLayer.Presenter
             _createNewGlassColorPresenter = createNewGlassColorPresenter;
             _createNewGlassSpacerPresenter = createNewGlassSpacerPresenter;
             _changeItemColorPresenter = changeItemColorPresenter;
+            _customArrowHeadPresenter = customArrowHeadPresenter;
+            _customArrowHeadUCP = customArrowHeadUCP;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -447,9 +452,9 @@ namespace PresentationLayer.Presenter
             return _mainView;
         }
 
-        public void SetLblStatus(string status, 
-                                 bool visibility, 
-                                 Control controlRaised = null, 
+        public void SetLblStatus(string status,
+                                 bool visibility,
+                                 Control controlRaised = null,
                                  IDividerModel divModel = null,
                                  IPanelModel prev_pnl = null, //selected panelModel / prevPanel
                                  IPanelModel nxt_pnl = null,
@@ -524,8 +529,14 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
             _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
+            _mainView.customArrowHeadToolStripMenuItemClickEventRaised += new EventHandler(OncustomArrowHeadToolStripMenuItemClickEventRaised);
         }
 
+        private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel);
+            customArrowHeadPresenter.GetICustomArrowHeadView(_unityC).ShowCustomArrowHead();
+        }
         #region Events
 
         private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -681,7 +692,7 @@ namespace PresentationLayer.Presenter
 
             if (incompatibility_str != "")
             {
-                DialogResult dr =  MessageBox.Show("Incompatibility(s) detected, Do you wish to proceed?" + incompatibility_str, "Incompatibility Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show("Incompatibility(s) detected, Do you wish to proceed?" + incompatibility_str, "Incompatibility Check", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dr == DialogResult.Yes)
                 {
                     proceed = true;
@@ -1255,7 +1266,7 @@ namespace PresentationLayer.Presenter
                         else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                  espag_art == Espagnolette_ArticleNo._630963)
                         {
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 &&
                                  (sash_art == SashProfile_ArticleNo._374 ||
                                   sash_art == SashProfile_ArticleNo._373)))
                             {
@@ -1316,7 +1327,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                 {
-                                    if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                    if (!(frame_art == FrameProfile_ArticleNo._7507 &&
                                          (sash_art == SashProfile_ArticleNo._374 ||
                                           sash_art == SashProfile_ArticleNo._373)))
                                     {
@@ -1384,7 +1395,7 @@ namespace PresentationLayer.Presenter
                             else if (espag_art == Espagnolette_ArticleNo._642105 || espag_art == Espagnolette_ArticleNo._642089 ||
                                      espag_art == Espagnolette_ArticleNo._630963)
                             {
-                                if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                if (!(frame_art == FrameProfile_ArticleNo._7507 &&
                                      (sash_art == SashProfile_ArticleNo._374 ||
                                       sash_art == SashProfile_ArticleNo._373)))
                                 {
@@ -1446,7 +1457,7 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (ext == Extension_ArticleNo._641798 || ext == Extension_ArticleNo._567639 || ext == Extension_ArticleNo._630956)
                                     {
-                                        if (!(frame_art == FrameProfile_ArticleNo._7507 && 
+                                        if (!(frame_art == FrameProfile_ArticleNo._7507 &&
                                             (sash_art == SashProfile_ArticleNo._374 ||
                                              sash_art == SashProfile_ArticleNo._373)))
                                         {
@@ -1473,7 +1484,7 @@ namespace PresentationLayer.Presenter
                 {
                     if (div.Div_ChkDM == true && div.Div_DMPanel != null)
                     {
-                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533 && 
+                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533 &&
                             (div.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) == false)
                         {
                             incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
@@ -1486,7 +1497,7 @@ namespace PresentationLayer.Presenter
                             incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : " + div.Div_DMPanel.Panel_SashProfileArtNo.DisplayName + ", Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
                         }
                     }
-                    else if(div.Div_ChkDM == true && div.Div_DMPanel == null)
+                    else if (div.Div_ChkDM == true && div.Div_DMPanel == null)
                     {
                         incompatibility += "\n\nOn " + div.Div_Name + "\nSash Profile : no selected panel, Dummy Mullion : " + div.Div_DMArtNo.DisplayName;
                     }

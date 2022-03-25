@@ -256,15 +256,29 @@ namespace PresentationLayer
                 .RegisterType<IPP_2dHingePropertyUC, PP_2dHingePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_2dHingePropertyUCPresenter, PP_2dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICustomArrowHeadUC, CustomArrowHeadUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomArrowHeadUCPresenter, CustomArrowHeadUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICustomArrowHeadView, CustomArrowHeadView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomArrowHeadPresenter, CustomArrowHeadPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ILoginPresenter loginPresenter = UnityC.Resolve<LoginPresenter>();
+            //ILoginPresenter loginPresenter = UnityC.Resolve<LoginPresenter>();
 
-            ILoginView loginView = loginPresenter.GetLoginView(UnityC);
-            Application.Run((LoginView)loginView);
+            //ILoginView loginView = loginPresenter.GetLoginView(UnityC);
+            //Application.Run((LoginView)loginView);
+
+            ICustomArrowHeadPresenter presenter = UnityC.Resolve<CustomArrowHeadPresenter>();
+
+            ICustomArrowHeadView view = presenter.GetICustomArrowHeadView(UnityC);
+            Application.Run((CustomArrowHeadView)view);
         }
     }
 }

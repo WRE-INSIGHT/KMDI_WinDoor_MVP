@@ -1,7 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
 using System.Drawing;
-using ModelLayer.Model.Quotation.Panel;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
@@ -29,8 +28,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
 
-        int frameIDCounter { get;  set; }
-        int panelIDCounter { get;  set; }
+        int frameIDCounter { get; set; }
+        int panelIDCounter { get; set; }
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }
         int PanelGlassID_Counter { get; set; }
@@ -46,5 +45,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
         void SetPanelGlassID();
         void SetMiddleCloser_onPanel();
         void SetDimensions_basePlatform();
+
+        //custom arrow head
+        bool Pnl_ArrowHeightVisibility { get; set; }
+        bool Pnl_ArrowWidthVisibility { get; set; }
+        int Lbl_ArrowHtCount { get; set; }
+        int lbl_ArrowWdCount { get; set; }
+
     }
 }
