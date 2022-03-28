@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using PresentationLayer.CommonMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,20 @@ namespace PresentationLayer.Views
             InitializeComponent();
         }
 
+        #region GetSet
+
+        public DataGridView DGV_ASsignedProject
+        {
+            get
+            {
+                return dgv_AssignedProjects;
+            }
+        }
+
+        #endregion
+
         public event EventHandler CostEngrLandingViewLoadEventRaised;
+        public event DataGridViewCellMouseEventHandler dgvAssignedProjectsCellMouseDoubleClickEventRaised;
 
         public void ShowThis()
         {
@@ -38,6 +52,23 @@ namespace PresentationLayer.Views
         private void btn_forwardNav_Click(object sender, EventArgs e)
         {
             tab_Nav.SelectedIndex += 1;
+        }
+
+        CommonFunctions common = new CommonFunctions();
+
+        private void dgv_AssignedProjects_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            common.rowpostpaint(sender, e);
+        }
+
+        private void dgv_AssignedProjects_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, dgvAssignedProjectsCellMouseDoubleClickEventRaised, e);
+        }
+
+        public void SetText_LblNav(string text)
+        {
+            lbl_nav.Text = text;
         }
     }
 }

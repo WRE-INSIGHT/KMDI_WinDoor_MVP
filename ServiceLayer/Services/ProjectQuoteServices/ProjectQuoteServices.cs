@@ -81,5 +81,10 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         {
             _modelCheck.ValidateModelDataAnnotations(pqModel);
         }
+
+        public async Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_acctType)
+        {
+            return await _projQuoteRepo.Get_ProjectByCostEngrID(searchStr, user_id, user_acctType);
+        }
     }
 }

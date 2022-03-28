@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CostEngrLandingView));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_nav = new System.Windows.Forms.Label();
@@ -39,10 +41,15 @@
             this.btn_SearchProj = new System.Windows.Forms.Button();
             this.txt_SearchProj = new System.Windows.Forms.TextBox();
             this.tabPage_CustRef = new System.Windows.Forms.TabPage();
+            this.dgv_AssignedProjects = new System.Windows.Forms.DataGridView();
+            this.dgv_CustRefNo = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.tab_Nav.SuspendLayout();
             this.tabPage_ProjectAssigned.SuspendLayout();
             this.pnl_top.SuspendLayout();
+            this.tabPage_CustRef.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -101,22 +108,25 @@
             // 
             // tab_Nav
             // 
+            this.tab_Nav.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tab_Nav.Controls.Add(this.tabPage_ProjectAssigned);
             this.tab_Nav.Controls.Add(this.tabPage_CustRef);
-            this.tab_Nav.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tab_Nav.Location = new System.Drawing.Point(0, 29);
+            this.tab_Nav.Location = new System.Drawing.Point(0, 5);
             this.tab_Nav.Name = "tab_Nav";
             this.tab_Nav.SelectedIndex = 0;
-            this.tab_Nav.Size = new System.Drawing.Size(384, 532);
+            this.tab_Nav.Size = new System.Drawing.Size(384, 556);
             this.tab_Nav.TabIndex = 3;
             // 
             // tabPage_ProjectAssigned
             // 
+            this.tabPage_ProjectAssigned.Controls.Add(this.dgv_AssignedProjects);
             this.tabPage_ProjectAssigned.Controls.Add(this.pnl_top);
             this.tabPage_ProjectAssigned.Location = new System.Drawing.Point(4, 26);
             this.tabPage_ProjectAssigned.Name = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_ProjectAssigned.Size = new System.Drawing.Size(376, 502);
+            this.tabPage_ProjectAssigned.Size = new System.Drawing.Size(376, 526);
             this.tabPage_ProjectAssigned.TabIndex = 0;
             this.tabPage_ProjectAssigned.Text = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.UseVisualStyleBackColor = true;
@@ -157,21 +167,54 @@
             // 
             // tabPage_CustRef
             // 
+            this.tabPage_CustRef.Controls.Add(this.dgv_CustRefNo);
             this.tabPage_CustRef.Location = new System.Drawing.Point(4, 26);
             this.tabPage_CustRef.Name = "tabPage_CustRef";
             this.tabPage_CustRef.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_CustRef.Size = new System.Drawing.Size(376, 502);
+            this.tabPage_CustRef.Size = new System.Drawing.Size(376, 526);
             this.tabPage_CustRef.TabIndex = 1;
             this.tabPage_CustRef.Text = "tabPage_CustRef";
             this.tabPage_CustRef.UseVisualStyleBackColor = true;
+            // 
+            // dgv_AssignedProjects
+            // 
+            this.dgv_AssignedProjects.AllowUserToAddRows = false;
+            this.dgv_AssignedProjects.AllowUserToDeleteRows = false;
+            this.dgv_AssignedProjects.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_AssignedProjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_AssignedProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AssignedProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_AssignedProjects.Location = new System.Drawing.Point(3, 32);
+            this.dgv_AssignedProjects.Name = "dgv_AssignedProjects";
+            this.dgv_AssignedProjects.ReadOnly = true;
+            this.dgv_AssignedProjects.Size = new System.Drawing.Size(370, 491);
+            this.dgv_AssignedProjects.TabIndex = 6;
+            this.dgv_AssignedProjects.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_AssignedProjects_CellMouseDoubleClick);
+            this.dgv_AssignedProjects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_AssignedProjects_RowPostPaint);
+            // 
+            // dgv_CustRefNo
+            // 
+            this.dgv_CustRefNo.AllowUserToAddRows = false;
+            this.dgv_CustRefNo.AllowUserToDeleteRows = false;
+            this.dgv_CustRefNo.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_CustRefNo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_CustRefNo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_CustRefNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_CustRefNo.Location = new System.Drawing.Point(3, 3);
+            this.dgv_CustRefNo.Name = "dgv_CustRefNo";
+            this.dgv_CustRefNo.ReadOnly = true;
+            this.dgv_CustRefNo.Size = new System.Drawing.Size(370, 520);
+            this.dgv_CustRefNo.TabIndex = 7;
             // 
             // CostEngrLandingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 561);
-            this.Controls.Add(this.tab_Nav);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tab_Nav);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -189,6 +232,9 @@
             this.tabPage_ProjectAssigned.ResumeLayout(false);
             this.pnl_top.ResumeLayout(false);
             this.pnl_top.PerformLayout();
+            this.tabPage_CustRef.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,5 +250,7 @@
         private System.Windows.Forms.Panel pnl_top;
         private System.Windows.Forms.Button btn_SearchProj;
         private System.Windows.Forms.TextBox txt_SearchProj;
+        private System.Windows.Forms.DataGridView dgv_AssignedProjects;
+        private System.Windows.Forms.DataGridView dgv_CustRefNo;
     }
 }

@@ -98,6 +98,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
+            this.selectProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -134,7 +135,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.syncToolStripMenuItem});
+            this.syncToolStripMenuItem,
+            this.selectProjectToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -149,13 +151,13 @@
             this.colorToolStripMenuItem,
             this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
             // 
             this.QuotationToolStripMenuItem.Name = "QuotationToolStripMenuItem";
-            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.QuotationToolStripMenuItem.Text = "&Quotation";
             this.QuotationToolStripMenuItem.Click += new System.EventHandler(this.QuotationToolStripMenuItem_Click);
             // 
@@ -166,7 +168,7 @@
             this.PremiLineToolStripMenuItem});
             this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
-            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ItemToolStripMenuItem.Text = "I&tem";
             // 
             // C70ToolStripMenuItem
@@ -190,13 +192,13 @@
             this.doubleToolStripMenuItem,
             this.tripleToolStripMenuItem});
             this.glassToolStripMenuItem.Name = "glassToolStripMenuItem";
-            this.glassToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.glassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.glassToolStripMenuItem.Text = "Glass";
             // 
             // singleToolStripMenuItem
             // 
             this.singleToolStripMenuItem.Name = "singleToolStripMenuItem";
-            this.singleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.singleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.singleToolStripMenuItem.Text = "Single";
             this.singleToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
@@ -206,7 +208,7 @@
             this.DoubleInsulatedToolStripMenuItem,
             this.DoubleLaminatedToolStripMenuItem});
             this.doubleToolStripMenuItem.Name = "doubleToolStripMenuItem";
-            this.doubleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.doubleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.doubleToolStripMenuItem.Text = "Double";
             // 
             // DoubleInsulatedToolStripMenuItem
@@ -229,7 +231,7 @@
             this.TripleInsulatedToolStripMenuItem,
             this.TripleLaminatedToolStripMenuItem});
             this.tripleToolStripMenuItem.Name = "tripleToolStripMenuItem";
-            this.tripleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.tripleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tripleToolStripMenuItem.Text = "Triple";
             // 
             // TripleInsulatedToolStripMenuItem
@@ -249,21 +251,21 @@
             // glassTypeToolStripMenuItem
             // 
             this.glassTypeToolStripMenuItem.Name = "glassTypeToolStripMenuItem";
-            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.glassTypeToolStripMenuItem.Text = "Glass Type";
             this.glassTypeToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // colorToolStripMenuItem
             // 
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colorToolStripMenuItem.Text = "Color";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // spacerToolStripMenuItem
             // 
             this.spacerToolStripMenuItem.Name = "spacerToolStripMenuItem";
-            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.spacerToolStripMenuItem.Text = "Spacer";
             this.spacerToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
@@ -271,14 +273,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -821,6 +823,13 @@
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
             // 
+            // selectProjectToolStripMenuItem
+            // 
+            this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectProjectToolStripMenuItem.Text = "Select Project";
+            this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -933,5 +942,6 @@
         private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripMenuItem assignProjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectProjectToolStripMenuItem;
     }
 }

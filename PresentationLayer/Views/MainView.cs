@@ -168,6 +168,7 @@ namespace PresentationLayer.Views
         public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
+        public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -356,6 +357,11 @@ namespace PresentationLayer.Views
         private void assignProjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, assignProjectsToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, selectProjectToolStripMenuItemClickEventRaised, e);
         }
     }
 }

@@ -90,8 +90,6 @@ namespace PresentationLayer.Presenter
                     _mainPresenter.GetMainView().ShowMainView();
                     setPropertiesSettings();
                     _loginView.frmVisibility = false;
-                    //_CELandingPresenter.SetValues(userModel, _loginView, _unityC);
-                    //_CELandingPresenter.ShowThisView();
                 }
             }
             catch (Exception ex)

@@ -47,7 +47,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                 {
                                     while (rdr.Read())
                                     {
-                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Costing" || rdr.GetString(3) == "Programmer")
+                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Cost Engr" || rdr.GetString(3) == "Cost Engr Head" || rdr.GetString(3) == "Programmer")
                                         {
                                             user.UserID = rdr.GetInt32(0);
                                             user.Fullname = rdr.GetString(1);
@@ -56,6 +56,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                             user.Username = rdr.GetString(4);
                                             user.Password = rdr.GetString(5);
                                             user.ProfilePath = rdr.GetString(6);
+                                            user.EmployeeID = rdr.GetInt32(7);
                                         }
                                         else
                                         {

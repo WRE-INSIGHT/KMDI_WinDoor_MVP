@@ -9,6 +9,7 @@ namespace ModelLayer.Model.User
     public class UserModel : IUserModel
     {
         public int UserID { get; set; }
+        public int EmployeeID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Fullname { get; set; }

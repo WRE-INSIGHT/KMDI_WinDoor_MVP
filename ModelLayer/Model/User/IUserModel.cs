@@ -8,6 +8,7 @@
         string Password { get; set; }
         string ProfilePath { get; set; }
         int UserID { get; set; }
+        int EmployeeID { get; set; }
         string Username { get; set; }
     }
 }

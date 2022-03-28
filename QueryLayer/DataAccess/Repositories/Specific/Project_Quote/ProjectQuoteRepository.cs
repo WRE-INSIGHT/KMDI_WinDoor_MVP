@@ -143,5 +143,37 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                 return affected_row;
             }
         }
+
+        public async Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_role)
+        {
+            DataTable dt = new DataTable();
+            SqlDataAdapter sqladapter = new SqlDataAdapter();
+
+            using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
+            {
+                await sqlcon.OpenAsync();
+                using (SqlCommand sqlcmd = sqlcon.CreateCommand())
+                {
+                    using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                    {
+
+                        sqlcmd.Connection = sqlcon;
+                        sqlcmd.Transaction = sqltrans;
+                        sqlcmd.CommandText = "Project_Quote_Stp";
+                        sqlcmd.CommandType = CommandType.StoredProcedure;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetProjectBy_CostEngrID_OrAdminID";
+                        sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = user_id;
+                        sqlcmd.Parameters.Add("@User_Role", SqlDbType.VarChar).Value = user_role;
+                        sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
+
+                        sqladapter.SelectCommand = sqlcmd;
+                        sqladapter.Fill(dt);
+                        sqltrans.Commit();
+                    }
+                }
+            }
+
+            return dt;
+        }
     }
 }

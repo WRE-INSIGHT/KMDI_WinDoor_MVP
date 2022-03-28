@@ -6,7 +6,7 @@ namespace PresentationLayer.Presenter
 {
     public interface ICostEngrLandingPresenter
     {
-        void SetValues(IUserModel userModel, ILoginView loginView, IUnityContainer unityC);
+        ICostEngrLandingPresenter GetNewInstance(IUserModel userModel, IMainPresenter mainPresenter, IUnityContainer unityC);
         void ShowThisView();
     }
 }

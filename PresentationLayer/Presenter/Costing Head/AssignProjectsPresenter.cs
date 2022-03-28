@@ -52,12 +52,34 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             if (_dgvProj.SelectedRows.Count > 0)
             {
-                ICustomerRefNoPresenter custrefnoPresenter = _custRefNoPresenter.GetNewInstance(_unityC, this);
-                custrefnoPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
-                custrefnoPresenter.Set_UserModel(_userModel);
-                custrefnoPresenter.ShowThisView();
+                bool has_emp_id = false;
 
-                _assignProjView.SetEnableThis(false);
+                if (_dgvProj.SelectedRows.Count > 1)
+                {
+
+                    foreach (DataGridViewRow row in _dgvProj.SelectedRows)
+                    {
+                        if (row.Cells["Emp_Id"].Value.ToString() != "")
+                        {
+                            has_emp_id = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!has_emp_id)
+                {
+                    ICustomerRefNoPresenter custrefnoPresenter = _custRefNoPresenter.GetNewInstance(_unityC, this);
+                    custrefnoPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
+                    custrefnoPresenter.Set_UserModel(_userModel);
+                    custrefnoPresenter.ShowThisView();
+
+                    _assignProjView.SetEnableThis(false);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid selection");
+                }
             }
             else
             {

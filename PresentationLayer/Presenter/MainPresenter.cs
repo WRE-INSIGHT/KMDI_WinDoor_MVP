@@ -72,7 +72,7 @@ namespace PresentationLayer.Presenter
         private ICreateNewGlassColorPresenter _createNewGlassColorPresenter;
         private ICreateNewGlassSpacerPresenter _createNewGlassSpacerPresenter;
         private IAssignProjectsPresenter _assignProjPresenter;
-
+        private ICostEngrLandingPresenter _ceLandingPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -420,7 +420,8 @@ namespace PresentationLayer.Presenter
                              ICreateNewGlassColorPresenter createNewGlassColorPresenter,
                              ICreateNewGlassSpacerPresenter createNewGlassSpacerPresenter,
                              IChangeItemColorPresenter changeItemColorPresenter,
-                             IAssignProjectsPresenter assignProjPresenter)
+                             IAssignProjectsPresenter assignProjPresenter,
+                             ICostEngrLandingPresenter ceLandingPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -444,6 +445,7 @@ namespace PresentationLayer.Presenter
             _createNewGlassSpacerPresenter = createNewGlassSpacerPresenter;
             _changeItemColorPresenter = changeItemColorPresenter;
             _assignProjPresenter = assignProjPresenter;
+            _ceLandingPresenter = ceLandingPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -529,6 +531,21 @@ namespace PresentationLayer.Presenter
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
             _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
             _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
+            _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
+        }
+
+        private void _mainView_selectProjectToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                ICostEngrLandingPresenter ceLandingPresenter = _ceLandingPresenter.GetNewInstance(_userModel, this, _unityC);
+                ceLandingPresenter.ShowThisView();
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         #region Events
