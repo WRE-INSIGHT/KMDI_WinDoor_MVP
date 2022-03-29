@@ -24,7 +24,9 @@ namespace PresentationLayer.Presenter
         private ICustomerRefNoPresenter _custRefNoPresenter;
 
         private DataGridView _dgvAssignedProj;
+        private DataGridView _dgvCustRefNo;
 
+        private int _tPageNav_selectedIndex;
         public CostEngrLandingPresenter(ICostEngrLandingView CELandingView, IProjectQuoteServices projQuoteServices, ICustomerRefNoPresenter custRefNoPresenter)
         {
             _CELandingView = CELandingView;
@@ -32,6 +34,7 @@ namespace PresentationLayer.Presenter
             _custRefNoPresenter = custRefNoPresenter;
 
             _dgvAssignedProj = _CELandingView.DGV_ASsignedProject;
+            _dgvCustRefNo = _CELandingView.DGV_CustRefNo;
             SubscribeToEventsSetup();
         }
 
@@ -39,13 +42,41 @@ namespace PresentationLayer.Presenter
         {
             _CELandingView.CostEngrLandingViewLoadEventRaised += _CELandingView_CostEngrLandingViewLoadEventRaised;
             _CELandingView.dgvAssignedProjectsCellMouseDoubleClickEventRaised += _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised;
+            _CELandingView.btnforwardNavClick += _CELandingView_btnforwardNavClick;
+            _CELandingView.btnbackNavClickEventRaised += _CELandingView_btnbackNavClickEventRaised;
         }
 
-        private void _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
+        private void _CELandingView_btnbackNavClickEventRaised(object sender, EventArgs e)
+        {
+            int index = _tPageNav_selectedIndex - 1;
+            SetSelectedIndex_TPageNav(index);
+        }
+
+        private void _CELandingView_btnforwardNavClick(object sender, EventArgs e)
+        {
+            int index = _tPageNav_selectedIndex + 1;
+            SetSelectedIndex_TPageNav(index);
+        }
+
+        private void SetSelectedIndex_TPageNav(int index)
+        {
+            if (_CELandingView.SetSelectedIndex_TabpageNav(index))
+            {
+                _tPageNav_selectedIndex = index;
+            }
+        }
+
+        private async void _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
             {
+                int proj_id = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
+                string proj_name = _dgvAssignedProj.Rows[e.RowIndex].Cells["Project Name"].Value.ToString();
+                _CELandingView.SetText_LblNav(proj_name);
 
+                int index = _tPageNav_selectedIndex + 1;
+                SetSelectedIndex_TPageNav(index);
+                await Load_DGV_CustRefNo(proj_id);
             }
         }
 
@@ -75,6 +106,21 @@ namespace PresentationLayer.Presenter
             _dgvAssignedProj.Columns["Project_Id"].Visible = false;
 
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
+        }
+
+        private async Task Load_DGV_CustRefNo(int proj_id)
+        {
+            DataTable dt = await _projQuoteServices.Get_CustRefNoByProjectID(proj_id, _userModel.EmployeeID, _userModel.AccountType);
+            _dgvCustRefNo.DataSource = dt;
+
+
+            foreach (DataGridViewColumn col in _dgvCustRefNo.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            _dgvCustRefNo.Columns["Customer_Reference_Id"].Visible = false;
+            _dgvCustRefNo.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 
         public void ShowThisView()

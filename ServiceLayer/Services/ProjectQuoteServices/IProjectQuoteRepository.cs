@@ -15,5 +15,6 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_role);
+        Task<DataTable> Get_CustRefNoByProjectID(int projId, int user_id, string user_role);
     }
 }

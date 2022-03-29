@@ -12,10 +12,11 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_acctType);
+        Task<DataTable> Get_CustRefNoByProjectID(int projId, int user_id, string user_role);
         IProjectQuoteModel AddProjectQuote(int pq_id,
                                            int pq_ProjId,
-                                           int pq_CustRefId,
-                                           int pq_EmployeeId,
+                                           int? pq_CustRefId,
+                                           int? pq_EmployeeId,
                                            int pq_QuoteId,
                                            DateTime? pq_DateAssigned);
     }

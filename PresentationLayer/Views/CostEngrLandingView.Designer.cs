@@ -37,24 +37,25 @@
             this.btn_backNav = new System.Windows.Forms.Button();
             this.tab_Nav = new System.Windows.Forms.TabControl();
             this.tabPage_ProjectAssigned = new System.Windows.Forms.TabPage();
+            this.dgv_AssignedProjects = new System.Windows.Forms.DataGridView();
             this.pnl_top = new System.Windows.Forms.Panel();
             this.btn_SearchProj = new System.Windows.Forms.Button();
             this.txt_SearchProj = new System.Windows.Forms.TextBox();
             this.tabPage_CustRef = new System.Windows.Forms.TabPage();
-            this.dgv_AssignedProjects = new System.Windows.Forms.DataGridView();
             this.dgv_CustRefNo = new System.Windows.Forms.DataGridView();
+            this.tabPage_Quotation = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tab_Nav.SuspendLayout();
             this.tabPage_ProjectAssigned.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).BeginInit();
             this.pnl_top.SuspendLayout();
             this.tabPage_CustRef.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.lbl_nav);
             this.panel1.Controls.Add(this.btn_forwardNav);
             this.panel1.Controls.Add(this.btn_backNav);
@@ -76,8 +77,8 @@
             // 
             // btn_forwardNav
             // 
-            this.btn_forwardNav.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btn_forwardNav.BackgroundImage = global::PresentationLayer.Properties.Resources.forward_button_104px;
+            this.btn_forwardNav.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_forwardNav.BackgroundImage = global::PresentationLayer.Properties.Resources.enabled_forward_button_104px;
             this.btn_forwardNav.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_forwardNav.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_forwardNav.Dock = System.Windows.Forms.DockStyle.Left;
@@ -92,11 +93,12 @@
             // 
             // btn_backNav
             // 
-            this.btn_backNav.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btn_backNav.BackgroundImage = global::PresentationLayer.Properties.Resources.back_arrow_104px;
+            this.btn_backNav.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_backNav.BackgroundImage = global::PresentationLayer.Properties.Resources.disabled_back_arrow_104px;
             this.btn_backNav.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_backNav.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_backNav.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_backNav.Enabled = false;
             this.btn_backNav.FlatAppearance.BorderSize = 0;
             this.btn_backNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_backNav.Location = new System.Drawing.Point(0, 0);
@@ -113,6 +115,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tab_Nav.Controls.Add(this.tabPage_ProjectAssigned);
             this.tab_Nav.Controls.Add(this.tabPage_CustRef);
+            this.tab_Nav.Controls.Add(this.tabPage_Quotation);
             this.tab_Nav.Location = new System.Drawing.Point(0, 5);
             this.tab_Nav.Name = "tab_Nav";
             this.tab_Nav.SelectedIndex = 0;
@@ -130,6 +133,23 @@
             this.tabPage_ProjectAssigned.TabIndex = 0;
             this.tabPage_ProjectAssigned.Text = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.UseVisualStyleBackColor = true;
+            // 
+            // dgv_AssignedProjects
+            // 
+            this.dgv_AssignedProjects.AllowUserToAddRows = false;
+            this.dgv_AssignedProjects.AllowUserToDeleteRows = false;
+            this.dgv_AssignedProjects.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_AssignedProjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_AssignedProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_AssignedProjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_AssignedProjects.Location = new System.Drawing.Point(3, 32);
+            this.dgv_AssignedProjects.Name = "dgv_AssignedProjects";
+            this.dgv_AssignedProjects.ReadOnly = true;
+            this.dgv_AssignedProjects.Size = new System.Drawing.Size(370, 491);
+            this.dgv_AssignedProjects.TabIndex = 6;
+            this.dgv_AssignedProjects.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_AssignedProjects_CellMouseDoubleClick);
+            this.dgv_AssignedProjects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_AssignedProjects_RowPostPaint);
             // 
             // pnl_top
             // 
@@ -176,23 +196,6 @@
             this.tabPage_CustRef.Text = "tabPage_CustRef";
             this.tabPage_CustRef.UseVisualStyleBackColor = true;
             // 
-            // dgv_AssignedProjects
-            // 
-            this.dgv_AssignedProjects.AllowUserToAddRows = false;
-            this.dgv_AssignedProjects.AllowUserToDeleteRows = false;
-            this.dgv_AssignedProjects.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgv_AssignedProjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_AssignedProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_AssignedProjects.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_AssignedProjects.Location = new System.Drawing.Point(3, 32);
-            this.dgv_AssignedProjects.Name = "dgv_AssignedProjects";
-            this.dgv_AssignedProjects.ReadOnly = true;
-            this.dgv_AssignedProjects.Size = new System.Drawing.Size(370, 491);
-            this.dgv_AssignedProjects.TabIndex = 6;
-            this.dgv_AssignedProjects.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_AssignedProjects_CellMouseDoubleClick);
-            this.dgv_AssignedProjects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_AssignedProjects_RowPostPaint);
-            // 
             // dgv_CustRefNo
             // 
             this.dgv_CustRefNo.AllowUserToAddRows = false;
@@ -207,6 +210,16 @@
             this.dgv_CustRefNo.ReadOnly = true;
             this.dgv_CustRefNo.Size = new System.Drawing.Size(370, 520);
             this.dgv_CustRefNo.TabIndex = 7;
+            this.dgv_CustRefNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_CustRefNo_RowPostPaint);
+            // 
+            // tabPage_Quotation
+            // 
+            this.tabPage_Quotation.Location = new System.Drawing.Point(4, 26);
+            this.tabPage_Quotation.Name = "tabPage_Quotation";
+            this.tabPage_Quotation.Size = new System.Drawing.Size(376, 526);
+            this.tabPage_Quotation.TabIndex = 2;
+            this.tabPage_Quotation.Text = "tabPage1";
+            this.tabPage_Quotation.UseVisualStyleBackColor = true;
             // 
             // CostEngrLandingView
             // 
@@ -230,10 +243,10 @@
             this.panel1.PerformLayout();
             this.tab_Nav.ResumeLayout(false);
             this.tabPage_ProjectAssigned.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).EndInit();
             this.pnl_top.ResumeLayout(false);
             this.pnl_top.PerformLayout();
             this.tabPage_CustRef.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_AssignedProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).EndInit();
             this.ResumeLayout(false);
 
@@ -252,5 +265,6 @@
         private System.Windows.Forms.TextBox txt_SearchProj;
         private System.Windows.Forms.DataGridView dgv_AssignedProjects;
         private System.Windows.Forms.DataGridView dgv_CustRefNo;
+        private System.Windows.Forms.TabPage tabPage_Quotation;
     }
 }

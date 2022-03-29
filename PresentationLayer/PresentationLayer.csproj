@@ -988,6 +988,8 @@
     <None Include="Resources\ExtensionBot.png" />
     <None Include="Resources\ExtensionLeft.png" />
     <None Include="Resources\ExtensionRight.png" />
+    <None Include="Resources\enabled_forward_button_104px.png" />
+    <None Include="Resources\enabled_back_arrow_104px .png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

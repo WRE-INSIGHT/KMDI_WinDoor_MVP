@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.ProjectQuote;
 using ModelLayer.Model.User;
 using PresentationLayer.Views.Costing_Head;
 using ServiceLayer.Services.ProjectQuoteServices;
@@ -46,6 +47,37 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignProjView.assignCostEngrToolStripMenuItemClickEventRaised += _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised;
             _assignProjView.btnSearchProjClickEventRaised += _assignProjView_btnSearchProjClickEventRaised;
             _assignProjView.customerRefNoToolStripMenuItemClickEventRaised += _assignProjView_customerRefNoToolStripMenuItemClickEventRaised;
+            _assignProjView.clearToolStripMenuItemClickEventRaised += _assignProjView_clearToolStripMenuItemClickEventRaised;
+        }
+
+        private async void _assignProjView_clearToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DialogResult.Yes == MessageBox.Show("Are you sure?", "Clear Assigned", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    foreach (DataGridViewRow row in _dgvProj.SelectedRows)
+                    {
+                        await _projQuoteServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+
+                        IProjectQuoteModel pqModel = _projQuoteServices.AddProjectQuote(0,
+                                                                                        Convert.ToInt32(row.Cells["Project_Id"].Value),
+                                                                                        null,
+                                                                                        null,
+                                                                                        Convert.ToInt32(row.Cells["Quote_Id"].Value),
+                                                                                        null);
+
+                        await _projQuoteServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                    }
+
+                    await Load_DGVProjects("");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private void _assignProjView_customerRefNoToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -132,33 +164,6 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
             _dgvProj.DataSource = dt;
-            //DataTable bindable_dt = dt.Clone();
-
-            //for (int i = 0; i < dt.Rows.Count ; i++)
-            //{
-            //    int proj_id = Convert.ToInt32(dt.Rows[i]["Project_Id"].ToString());
-
-            //    bool isDupe = false;
-            //    for (int j = 0; j < bindable_dt.Rows.Count ; j++)
-            //    {
-            //        int bind_proj_id = Convert.ToInt32(bindable_dt.Rows[j]["Project_Id"].ToString());
-            //        if (proj_id == bind_proj_id)
-            //        {
-            //            bindable_dt.Rows[j]["Cost Engr In-Charge"] += "," + Environment.NewLine + dt.Rows[i]["Cost Engr In-Charge"].ToString();
-            //            isDupe = true;
-            //            break;
-            //        }
-            //    }
-
-            //    if (!isDupe)
-            //    {
-            //        bindable_dt.ImportRow(dt.Rows[i]);
-            //    }
-            //}
-
-            //_dgvProj.DataSource = bindable_dt;
-            //_dgvProj.Columns["Cost Engr In-Charge"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //_dgvProj.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             foreach (DataGridViewColumn col in _dgvProj.Columns)
             {

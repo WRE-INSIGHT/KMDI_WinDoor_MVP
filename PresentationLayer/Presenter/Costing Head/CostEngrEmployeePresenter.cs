@@ -55,7 +55,34 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             try
             {
-                if (_chkCEList.CheckedItems.Count > 0)
+                string trans_mode = "";
+
+                if (_dgvProjSelectedRows.Count == 1)
+                {
+                    string custRefNo = _dgvProjSelectedRows[0].Cells["Customer_Reference_Id"].Value.ToString();
+                    if (_chkCEList.CheckedItems.Count == 1 && custRefNo != "")
+                    {
+                        trans_mode = "Update";
+                    }
+                    else if (_chkCEList.CheckedItems.Count > 1)
+                    {
+                        trans_mode = "Insert";
+                    }
+                }
+                else if (_dgvProjSelectedRows.Count > 1)
+                {
+                    if (_chkCEList.CheckedItems.Count > 0)
+                    {
+                        trans_mode = "Insert";
+                    }
+                    else if (_chkCEList.CheckedItems.Count <= 0)
+                    {
+                        MessageBox.Show("Invalid selection");
+                    }
+                }
+
+
+                if (trans_mode == "Insert")
                 {
                     foreach (DataGridViewRow row in _dgvProjSelectedRows)
                     {
@@ -64,23 +91,40 @@ namespace PresentationLayer.Presenter.Costing_Head
                         foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
                         {
                             int emp_id = Convert.ToInt32(chkListVal["Id"]);
+                            int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                            int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+
                             IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
                                                                                      Convert.ToInt32(row.Cells["Project_Id"].Value),
-                                                                                     Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value),
+                                                                                     custRefNo_id,
                                                                                      emp_id,
-                                                                                     Convert.ToInt32(row.Cells["Quote_Id"].Value),
+                                                                                     quote_id,
                                                                                      DateTime.Now);
 
                             await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
                         }
                     }
-
-                    await _assignProjPresenter.Load_DGVProjects("");
                 }
-                else if (_chkCEList.CheckedItems.Count <= 0)
+                else if (trans_mode == "Update")
                 {
-                    MessageBox.Show("Invalid selection");
+                    DataGridViewRow row = _dgvProjSelectedRows[0];
+                    DataRowView chkVal = _chkCEList.CheckedItems[0] as DataRowView;
+
+                    int emp_id = Convert.ToInt32(chkVal["Id"]);
+                    int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                    int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+
+                    IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
+                                                                             Convert.ToInt32(row.Cells["Project_Id"].Value),
+                                                                             custRefNo_id,
+                                                                             emp_id,
+                                                                             quote_id,
+                                                                             DateTime.Now);
+
+                    await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
                 }
+
+                await _assignProjPresenter.Load_DGVProjects("");
             }
             catch (Exception ex)
             {

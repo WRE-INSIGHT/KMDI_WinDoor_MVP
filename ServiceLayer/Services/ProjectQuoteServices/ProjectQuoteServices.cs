@@ -42,8 +42,8 @@ namespace ServiceLayer.Services.ProjectQuoteServices
 
         private IProjectQuoteModel CreateProjectQuote(int pq_id,
                                                       int pq_ProjId,
-                                                      int pq_CustRefId,
-                                                      int pq_EmployeeId,
+                                                      int? pq_CustRefId,
+                                                      int? pq_EmployeeId,
                                                       int pq_QuoteId,
                                                       DateTime? pq_DateAssigned)
         {
@@ -62,8 +62,8 @@ namespace ServiceLayer.Services.ProjectQuoteServices
 
         public IProjectQuoteModel AddProjectQuote(int pq_id,
                                                   int pq_ProjId,
-                                                  int pq_CustRefId,
-                                                  int pq_EmployeeId,
+                                                  int? pq_CustRefId,
+                                                  int? pq_EmployeeId,
                                                   int pq_QuoteId,
                                                   DateTime? pq_DateAssigned)
         {
@@ -85,6 +85,11 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         public async Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_acctType)
         {
             return await _projQuoteRepo.Get_ProjectByCostEngrID(searchStr, user_id, user_acctType);
+        }
+
+        public async Task<DataTable> Get_CustRefNoByProjectID(int projId, int user_id, string user_role)
+        {
+            return await _projQuoteRepo.Get_CustRefNoByProjectID(projId, user_id, user_role);
         }
     }
 }

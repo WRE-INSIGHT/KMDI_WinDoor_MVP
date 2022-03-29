@@ -42,6 +42,7 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler assignCostEngrToolStripMenuItemClickEventRaised;
         public event EventHandler btnSearchProjClickEventRaised;
         public event EventHandler customerRefNoToolStripMenuItemClickEventRaised;
+        public event EventHandler clearToolStripMenuItemClickEventRaised;
 
         CommonMethods.CommonFunctions common_func = new CommonMethods.CommonFunctions();
 
@@ -81,6 +82,11 @@ namespace PresentationLayer.Views.Costing_Head
         public void SetEnableThis(bool enabled)
         {
             this.Enabled = enabled;
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, clearToolStripMenuItemClickEventRaised, e);
         }
     }
 }
