@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CostEngrLandingView));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_nav = new System.Windows.Forms.Label();
@@ -44,6 +45,9 @@
             this.tabPage_CustRef = new System.Windows.Forms.TabPage();
             this.dgv_CustRefNo = new System.Windows.Forms.DataGridView();
             this.tabPage_Quotation = new System.Windows.Forms.TabPage();
+            this.dgv_QuoteNo = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_AddNewQuote = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tab_Nav.SuspendLayout();
             this.tabPage_ProjectAssigned.SuspendLayout();
@@ -51,6 +55,9 @@
             this.pnl_top.SuspendLayout();
             this.tabPage_CustRef.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).BeginInit();
+            this.tabPage_Quotation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_QuoteNo)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,10 +85,11 @@
             // btn_forwardNav
             // 
             this.btn_forwardNav.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_forwardNav.BackgroundImage = global::PresentationLayer.Properties.Resources.enabled_forward_button_104px;
+            this.btn_forwardNav.BackgroundImage = global::PresentationLayer.Properties.Resources.disabled_forward_button_104px;
             this.btn_forwardNav.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_forwardNav.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_forwardNav.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_forwardNav.Enabled = false;
             this.btn_forwardNav.FlatAppearance.BorderSize = 0;
             this.btn_forwardNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_forwardNav.Location = new System.Drawing.Point(31, 0);
@@ -210,16 +218,60 @@
             this.dgv_CustRefNo.ReadOnly = true;
             this.dgv_CustRefNo.Size = new System.Drawing.Size(370, 520);
             this.dgv_CustRefNo.TabIndex = 7;
+            this.dgv_CustRefNo.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CustRefNo_CellMouseDoubleClick);
             this.dgv_CustRefNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_CustRefNo_RowPostPaint);
             // 
             // tabPage_Quotation
             // 
+            this.tabPage_Quotation.Controls.Add(this.dgv_QuoteNo);
+            this.tabPage_Quotation.Controls.Add(this.panel2);
             this.tabPage_Quotation.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Quotation.Name = "tabPage_Quotation";
             this.tabPage_Quotation.Size = new System.Drawing.Size(376, 526);
             this.tabPage_Quotation.TabIndex = 2;
             this.tabPage_Quotation.Text = "tabPage1";
             this.tabPage_Quotation.UseVisualStyleBackColor = true;
+            // 
+            // dgv_QuoteNo
+            // 
+            this.dgv_QuoteNo.AllowUserToAddRows = false;
+            this.dgv_QuoteNo.AllowUserToDeleteRows = false;
+            this.dgv_QuoteNo.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            this.dgv_QuoteNo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_QuoteNo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_QuoteNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_QuoteNo.Location = new System.Drawing.Point(0, 29);
+            this.dgv_QuoteNo.Name = "dgv_QuoteNo";
+            this.dgv_QuoteNo.ReadOnly = true;
+            this.dgv_QuoteNo.Size = new System.Drawing.Size(376, 497);
+            this.dgv_QuoteNo.TabIndex = 8;
+            this.dgv_QuoteNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_QuoteNo_RowPostPaint);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.Controls.Add(this.btn_AddNewQuote);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(376, 29);
+            this.panel2.TabIndex = 9;
+            // 
+            // btn_AddNewQuote
+            // 
+            this.btn_AddNewQuote.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btn_AddNewQuote.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_AddNewQuote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_AddNewQuote.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_AddNewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_AddNewQuote.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_AddNewQuote.Location = new System.Drawing.Point(289, 0);
+            this.btn_AddNewQuote.Name = "btn_AddNewQuote";
+            this.btn_AddNewQuote.Size = new System.Drawing.Size(87, 29);
+            this.btn_AddNewQuote.TabIndex = 1;
+            this.btn_AddNewQuote.Text = "+ Add new ";
+            this.btn_AddNewQuote.UseVisualStyleBackColor = false;
             // 
             // CostEngrLandingView
             // 
@@ -248,6 +300,9 @@
             this.pnl_top.PerformLayout();
             this.tabPage_CustRef.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_CustRefNo)).EndInit();
+            this.tabPage_Quotation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_QuoteNo)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,5 +321,8 @@
         private System.Windows.Forms.DataGridView dgv_AssignedProjects;
         private System.Windows.Forms.DataGridView dgv_CustRefNo;
         private System.Windows.Forms.TabPage tabPage_Quotation;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btn_AddNewQuote;
+        private System.Windows.Forms.DataGridView dgv_QuoteNo;
     }
 }

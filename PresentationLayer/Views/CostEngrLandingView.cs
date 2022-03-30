@@ -37,12 +37,21 @@ namespace PresentationLayer.Views
             }
         }
 
+        public DataGridView DGV_QuoteNo
+        {
+            get
+            {
+                return dgv_QuoteNo;
+            }
+        }
+
         #endregion
 
         public event EventHandler CostEngrLandingViewLoadEventRaised;
         public event DataGridViewCellMouseEventHandler dgvAssignedProjectsCellMouseDoubleClickEventRaised;
         public event EventHandler btnbackNavClickEventRaised;
         public event EventHandler btnforwardNavClick;
+        public event DataGridViewCellMouseEventHandler dgvCustRefNoCellMouseDoubleClickEventRaised;
 
         public void ShowThis()
         {
@@ -51,6 +60,7 @@ namespace PresentationLayer.Views
 
         private void CostEngrLandingView_Load(object sender, EventArgs e)
         {
+            lbl_nav.Text = "";
             EventHelpers.RaiseEvent(sender, CostEngrLandingViewLoadEventRaised, e);
         }
 
@@ -81,6 +91,7 @@ namespace PresentationLayer.Views
             lbl_nav.Text = text;
         }
 
+        private int _tabNav_MaxSelectedIndex;
         public bool SetSelectedIndex_TabpageNav(int index)
         {
             bool has_set = false;
@@ -91,6 +102,11 @@ namespace PresentationLayer.Views
             else if (index <= tab_Nav.TabCount -1)
             {
                 has_set = true;
+
+                if (index > _tabNav_MaxSelectedIndex)
+                {
+                    _tabNav_MaxSelectedIndex = index;
+                }
             }
 
             if (has_set)
@@ -111,8 +127,16 @@ namespace PresentationLayer.Views
 
             if (index < tab_Nav.TabPages.Count - 1)
             {
-                btn_forwardNav.Enabled = true;
-                btn_forwardNav.BackgroundImage = Properties.Resources.enabled_forward_button_104px;
+                if (_tabNav_MaxSelectedIndex > tab_Nav.SelectedIndex)
+                {
+                    btn_forwardNav.Enabled = true;
+                    btn_forwardNav.BackgroundImage = Properties.Resources.enabled_forward_button_104px;
+                }
+                else
+                {
+                    btn_forwardNav.Enabled = false;
+                    btn_forwardNav.BackgroundImage = Properties.Resources.disabled_forward_button_104px;
+                }
             }
             else if (index >= tab_Nav.TabPages.Count - 1)
             {
@@ -126,6 +150,16 @@ namespace PresentationLayer.Views
         private void dgv_CustRefNo_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             common.rowpostpaint(sender, e);
+        }
+
+        private void dgv_CustRefNo_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, dgvCustRefNoCellMouseDoubleClickEventRaised, e);
+        }
+
+        private void dgv_QuoteNo_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            common.rowpostpaint(sender, e); 
         }
     }
 }

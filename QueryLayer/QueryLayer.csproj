@@ -44,6 +44,7 @@
     <Compile Include="DataAccess\Repositories\Specific\Customer_Ref_No\CustomerRefNoRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Employee\EmployeeRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Project_Quote\ProjectQuoteRepository.cs" />
+    <Compile Include="DataAccess\Repositories\Specific\Quotation\QuotationRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\User\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

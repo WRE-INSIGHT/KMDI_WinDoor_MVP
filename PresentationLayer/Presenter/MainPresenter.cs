@@ -79,6 +79,7 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
 
         private string input_qrefno;
+        private DateTime _quotationDate;
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
@@ -1065,7 +1066,7 @@ namespace PresentationLayer.Presenter
                 {
                     SetMainViewTitle(input_qrefno.ToUpper());
                     ItemToolStrip_Enable();
-                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno);
+                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate);
 
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;

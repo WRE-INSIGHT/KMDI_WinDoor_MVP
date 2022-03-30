@@ -31,6 +31,7 @@ namespace ModelLayer.Model.Quotation
         public int Expansion_BoltQty_Total { get; set; }
         public int Rebate_Qty { get; set; }
         public int Plastic_CoverQty_Total { get; set; }
+        public DateTime Quotation_Date { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {

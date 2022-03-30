@@ -63,6 +63,7 @@
     <Compile Include="Services\ProjectQuoteServices\IProjectQuoteRepository.cs" />
     <Compile Include="Services\ProjectQuoteServices\IProjectQuoteServices.cs" />
     <Compile Include="Services\ProjectQuoteServices\ProjectQuoteServices.cs" />
+    <Compile Include="Services\QuotationServices\IQuotationRepository.cs" />
     <Compile Include="Services\QuotationServices\IQuotationServices.cs" />
     <Compile Include="Services\QuotationServices\QuotationServices.cs" />
     <Compile Include="Services\UserServices\IUserRepository.cs" />
