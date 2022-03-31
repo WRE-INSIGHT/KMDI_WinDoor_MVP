@@ -207,7 +207,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
 
             return dt;
         }
-        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefNo, int user_id, string user_role)
+        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefId, int user_id, string user_role)
         {
             DataTable dt = new DataTable();
             SqlDataAdapter sqladapter = new SqlDataAdapter();
@@ -228,7 +228,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = user_id;
                         sqlcmd.Parameters.Add("@User_Role", SqlDbType.VarChar).Value = user_role;
                         sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = projId;
-                        sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = custRefNo;
+                        sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = custRefId;
 
                         sqladapter.SelectCommand = sqlcmd;
                         sqladapter.Fill(dt);

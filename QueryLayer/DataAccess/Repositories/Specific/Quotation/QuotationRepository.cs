@@ -21,7 +21,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Quotation
 
         public async Task<int> Insert_Quotation(IQuotationModel quotationModel, int user_id)
         {
-            int affected_row = 0;
+            int inserted_id = 0;
 
             using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
             {
@@ -35,17 +35,17 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Quotation
                         sqlcmd.Transaction = sqltrans;
                         sqlcmd.CommandText = "Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
-                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Create";
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Insert_returnVal_insertedId";
                         sqlcmd.Parameters.Add("@Quote_Ref_No", SqlDbType.VarChar).Value = quotationModel.Quotation_ref_no;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
-                        
 
-                        affected_row = await sqlcmd.ExecuteNonQueryAsync();
+
+                        inserted_id = (Int32) await sqlcmd.ExecuteScalarAsync();
                         sqltrans.Commit();
                     }
                 }
 
-                return affected_row;
+                return inserted_id;
             }
         }
     }

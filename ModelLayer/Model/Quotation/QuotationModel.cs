@@ -15,6 +15,8 @@ namespace ModelLayer.Model.Quotation
 {
     public class QuotationModel : IQuotationModel
     {
+        public int Quotation_Id { get;set; }
+
         public List<IWindoorModel> Lst_Windoor { get; set; }
 
         [Required(ErrorMessage = "Quotation reference number is Required")]

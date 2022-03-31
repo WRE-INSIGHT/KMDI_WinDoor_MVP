@@ -10,6 +10,7 @@ namespace ServiceLayer.Services.QuotationServices
     {
         IQuotationModel AddQuotationModel(string quotation_ref_no,
                                           DateTime quote_date,
+                                          int quote_id = 0,
                                           List<IWindoorModel> lst_wndr = null);
         void ValidateModel(IQuotationModel quotationModel);
         Task<int> Insert_Quotation(IQuotationModel quotationModel, int user_id);

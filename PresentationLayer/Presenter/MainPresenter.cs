@@ -78,7 +78,8 @@ namespace PresentationLayer.Presenter
 
         private FrameModel.Frame_Padding frameType;
 
-        private string input_qrefno;
+        private int _quoteId;
+        private string input_qrefno, _projectName, _custRefNo;
         private DateTime _quotationDate;
 
         CommonFunctions _commonfunc = new CommonFunctions();
@@ -395,6 +396,53 @@ namespace PresentationLayer.Presenter
             get
             {
                 return _controlRaised_forDMSelection;
+            }
+        }
+
+        public DateTime inputted_quoteDate
+        {
+            get
+            {
+                return _quotationDate;
+            }
+            set
+            {
+                _quotationDate = value;
+            }
+        }
+
+        public int inputted_quoteId
+        {
+            get
+            {
+                return _quoteId;
+            }
+            set
+            {
+                _quoteId = value;
+            }
+        }
+
+        public string inputted_projectName
+        {
+            get
+            {
+                return _projectName;
+            }
+            set
+            {
+                _projectName = value;
+            }
+        }
+        public string inputted_custRefNo
+        {
+            get
+            {
+                return _custRefNo;
+            }
+            set
+            {
+                _custRefNo = value;
             }
         }
 
@@ -992,7 +1040,9 @@ namespace PresentationLayer.Presenter
             _quotationModel = null;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
-            _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+            _pnlMain.Controls.Clear();
+            //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+            _basePlatformPresenter.RemoveBindingView();
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
@@ -1019,10 +1069,14 @@ namespace PresentationLayer.Presenter
             _mainView.GetPanelBot().Enabled = false;
         }
 
-        private void SetMainViewTitle(string qrefno, string itemname, string profiletype, bool saved)
+        private void SetMainViewTitle(string qrefno, string project_name, string cust_ref_no, string itemname, string profiletype, bool saved)
         {
-            _mainView.mainview_title = qrefno.ToUpper() + " >> " + itemname + " (" + profiletype + ")";
+            _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
+        }
+        private void SetMainViewTitle(string qrefno, string project_name, string cust_ref_no)
+        {
+            _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" +  qrefno.ToUpper() + ")";
         }
         private void SetMainViewTitle(string qrefno)
         {
@@ -1064,9 +1118,9 @@ namespace PresentationLayer.Presenter
                 }
                 else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame)
                 {
-                    SetMainViewTitle(input_qrefno.ToUpper());
+                    SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
                     ItemToolStrip_Enable();
-                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate);
+                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
 
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
@@ -1131,6 +1185,8 @@ namespace PresentationLayer.Presenter
 
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
@@ -1139,6 +1195,7 @@ namespace PresentationLayer.Presenter
                         BotToolStrip_Enable();
 
                         _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.RemoveBinding();
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
@@ -1176,6 +1233,8 @@ namespace PresentationLayer.Presenter
 
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
@@ -1229,6 +1288,8 @@ namespace PresentationLayer.Presenter
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
@@ -1304,6 +1365,8 @@ namespace PresentationLayer.Presenter
             //set mainview
             _windoorModel = item;
             SetMainViewTitle(input_qrefno,
+                             _projectName,
+                             _custRefNo,
                              item.WD_name,
                              item.WD_profile,
                              false);

@@ -20,11 +20,13 @@ namespace ServiceLayer.Services.QuotationServices
             _quotationRepo = quotationRepo;
         }
 
-        private IQuotationModel CreateQuotationModel(string quotation_ref_no,
+        private IQuotationModel CreateQuotationModel(int quote_id,
+                                                    string quotation_ref_no,
                                                     DateTime quote_date,
                                                     List<IWindoorModel> lst_wndr)
         {
             QuotationModel qModel = new QuotationModel(quotation_ref_no, lst_wndr);
+            qModel.Quotation_Id = quote_id;
             qModel.Quotation_Date = quote_date;
 
             ValidateModel(qModel);
@@ -33,6 +35,7 @@ namespace ServiceLayer.Services.QuotationServices
 
         public IQuotationModel AddQuotationModel(string quotation_ref_no,
                                                  DateTime quote_date,
+                                                 int quote_id = 0,
                                                  List<IWindoorModel> lst_wndr = null)
         {
             if (lst_wndr == null)
@@ -40,7 +43,7 @@ namespace ServiceLayer.Services.QuotationServices
                 lst_wndr = new List<IWindoorModel>();
             }
 
-            IQuotationModel _quotationModel = CreateQuotationModel(quotation_ref_no, quote_date, lst_wndr);
+            IQuotationModel _quotationModel = CreateQuotationModel(quote_id, quotation_ref_no, quote_date, lst_wndr);
 
             return _quotationModel;
         }

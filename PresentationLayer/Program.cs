@@ -27,6 +27,7 @@ using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using QueryLayer.DataAccess.Repositories.Specific.Customer_Ref_No;
 using QueryLayer.DataAccess.Repositories.Specific.Employee;
 using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
+using QueryLayer.DataAccess.Repositories.Specific.Quotation;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
 using ServiceLayer.Services.CustomerRefNoServices;
@@ -287,6 +288,7 @@ namespace PresentationLayer
                 .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))
                 ;
 
             Application.EnableVisualStyles();

@@ -8,6 +8,7 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
@@ -24,7 +25,11 @@ namespace PresentationLayer.Presenter
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }
         DataTable GlassSpacerDT { get; set; }
+        int inputted_quoteId { get; set; }
         string inputted_quotationRefNo { get; set; }
+        string inputted_projectName { get; set; }
+        string inputted_custRefNo { get; set; }
+        DateTime inpputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }

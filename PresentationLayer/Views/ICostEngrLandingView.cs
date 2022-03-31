@@ -12,12 +12,15 @@ namespace PresentationLayer.Views
         event EventHandler CostEngrLandingViewLoadEventRaised;
         event DataGridViewCellMouseEventHandler dgvAssignedProjectsCellMouseDoubleClickEventRaised;
         event DataGridViewCellMouseEventHandler dgvCustRefNoCellMouseDoubleClickEventRaised;
+        event DataGridViewCellMouseEventHandler dgvQuoteNoCellMouseDoubleClickEventRaised;
         event EventHandler btnbackNavClickEventRaised;
         event EventHandler btnforwardNavClick;
+        event EventHandler btnAddNewQuoteClickEventRaised;
 
         bool SetSelectedIndex_TabpageNav(int index);
 
         void ShowThis();
+        void CloseThis();
         void SetText_LblNav(string text);
     }
 }

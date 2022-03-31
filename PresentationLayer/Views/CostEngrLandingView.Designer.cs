@@ -246,6 +246,7 @@
             this.dgv_QuoteNo.ReadOnly = true;
             this.dgv_QuoteNo.Size = new System.Drawing.Size(376, 497);
             this.dgv_QuoteNo.TabIndex = 8;
+            this.dgv_QuoteNo.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_QuoteNo_CellMouseDoubleClick);
             this.dgv_QuoteNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_QuoteNo_RowPostPaint);
             // 
             // panel2
@@ -272,6 +273,7 @@
             this.btn_AddNewQuote.TabIndex = 1;
             this.btn_AddNewQuote.Text = "+ Add new ";
             this.btn_AddNewQuote.UseVisualStyleBackColor = false;
+            this.btn_AddNewQuote.Click += new System.EventHandler(this.btn_AddNewQuote_Click);
             // 
             // CostEngrLandingView
             // 

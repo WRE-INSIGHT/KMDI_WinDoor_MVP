@@ -52,6 +52,8 @@ namespace PresentationLayer.Views
         public event EventHandler btnbackNavClickEventRaised;
         public event EventHandler btnforwardNavClick;
         public event DataGridViewCellMouseEventHandler dgvCustRefNoCellMouseDoubleClickEventRaised;
+        public event EventHandler btnAddNewQuoteClickEventRaised;
+        public event DataGridViewCellMouseEventHandler dgvQuoteNoCellMouseDoubleClickEventRaised;
 
         public void ShowThis()
         {
@@ -160,6 +162,21 @@ namespace PresentationLayer.Views
         private void dgv_QuoteNo_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             common.rowpostpaint(sender, e); 
+        }
+
+        private void btn_AddNewQuote_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddNewQuoteClickEventRaised, e);
+        }
+
+        private void dgv_QuoteNo_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, dgvQuoteNoCellMouseDoubleClickEventRaised, e);
+        }
+
+        public void CloseThis()
+        {
+            this.Close();
         }
     }
 }
