@@ -195,7 +195,6 @@ namespace PresentationLayer.Views
 
         public ComboBox Spacer2()
         {
-
             return cmbBetweenTheGlass2;
         }
 

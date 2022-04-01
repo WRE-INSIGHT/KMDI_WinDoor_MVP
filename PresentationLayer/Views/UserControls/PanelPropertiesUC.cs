@@ -51,6 +51,13 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
+        public event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
+        public event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
+        public event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
+        public event EventHandler btnSelectGlassThicknessClickedEventRaised;
+        public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
+        public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {

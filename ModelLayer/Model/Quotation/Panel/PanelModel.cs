@@ -309,6 +309,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Casement"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
@@ -320,6 +321,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Awning"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "Invrt";
@@ -331,6 +333,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Sliding"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
