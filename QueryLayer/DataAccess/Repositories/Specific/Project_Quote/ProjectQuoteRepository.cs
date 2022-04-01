@@ -36,7 +36,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Transaction = sqltrans;
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
-                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Get";
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetProjectToAssign_Admin";
                         sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
 
                         sqladapter.SelectCommand = sqlcmd;

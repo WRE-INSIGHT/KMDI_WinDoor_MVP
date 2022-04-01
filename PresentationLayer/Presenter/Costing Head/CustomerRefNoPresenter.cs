@@ -114,7 +114,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                                 {
                                     int custRefNo_id = Convert.ToInt32(chkListVal["Id"]);
                                     int emp_id = (row.Cells["Emp_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Emp_Id"].Value);
-                                    int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                                    int quote_id = 0; // (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
 
                                     IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
                                                                                              Convert.ToInt32(row.Cells["Project_Id"].Value),
@@ -141,7 +141,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                                 {
                                     int custRefNo_id = Convert.ToInt32(chkListVal["Id"]);
                                     int emp_id = (row_0.Cells["Emp_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row_0.Cells["Emp_Id"].Value);
-                                    int quote_id = (row_0.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row_0.Cells["Quote_Id"].Value);
+                                    int quote_id = 0; // (row_0.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row_0.Cells["Quote_Id"].Value);
 
                                     IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row_0.Cells["Id"].Value),
                                                                                              Convert.ToInt32(row_0.Cells["Project_Id"].Value),
@@ -169,7 +169,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                                 {
                                     int custRefNo_id = Convert.ToInt32(chkListVal["Id"]);
                                     int emp_id = (row.Cells["Emp_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Emp_Id"].Value);
-                                    int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                                    int quote_id = 0; // (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
 
                                     IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
                                                                                              Convert.ToInt32(row.Cells["Project_Id"].Value),

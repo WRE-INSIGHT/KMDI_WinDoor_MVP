@@ -60,7 +60,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                 if (_dgvProjSelectedRows.Count == 1)
                 {
                     string custRefNo = _dgvProjSelectedRows[0].Cells["Customer_Reference_Id"].Value.ToString();
-                    if (_chkCEList.CheckedItems.Count == 1 && custRefNo != "")
+                    if (_chkCEList.CheckedItems.Count == 1)
                     {
                         trans_mode = "Update";
                     }
@@ -92,7 +92,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                         {
                             int emp_id = Convert.ToInt32(chkListVal["Id"]);
                             int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
-                            int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                            int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
 
                             IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
                                                                                      Convert.ToInt32(row.Cells["Project_Id"].Value),
@@ -112,7 +112,7 @@ namespace PresentationLayer.Presenter.Costing_Head
 
                     int emp_id = Convert.ToInt32(chkVal["Id"]);
                     int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
-                    int quote_id = (row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                    int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
 
                     IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
                                                                              Convert.ToInt32(row.Cells["Project_Id"].Value),

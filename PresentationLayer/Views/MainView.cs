@@ -149,6 +149,7 @@ namespace PresentationLayer.Views
                 return colorToolStripMenuItem;
             }
         }
+
         #endregion
 
         public event EventHandler MainViewLoadEventRaised;
@@ -362,6 +363,11 @@ namespace PresentationLayer.Views
         private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, selectProjectToolStripMenuItemClickEventRaised, e);
+        }
+
+        public void Set_AssignProject_Visibility(bool visibility)
+        {
+            assignProjectsToolStripMenuItem.Visible = visibility;
         }
     }
 }

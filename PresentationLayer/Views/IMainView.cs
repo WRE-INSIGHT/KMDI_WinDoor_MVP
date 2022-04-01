@@ -54,6 +54,7 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Color { get; }
         Form GetThis();
         void FocusOnMainForm();
+        void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);
     }
 }

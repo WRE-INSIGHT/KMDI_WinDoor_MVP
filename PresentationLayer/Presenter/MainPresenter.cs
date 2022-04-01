@@ -583,6 +583,8 @@ namespace PresentationLayer.Presenter
             _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
         }
 
+        #region Events
+
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -596,8 +598,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Error Message: " + ex.Message);
             }
         }
-
-        #region Events
 
         private void _mainView_assignProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -1318,6 +1318,14 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
+
+        public void Set_User_View()
+        {
+            if (_userModel.AccountType == "Cost Engr")
+            {
+                _mainView.Set_AssignProject_Visibility(false);
+            }
+        }
 
         public void Frame_Save_PropertiesUC()
         {

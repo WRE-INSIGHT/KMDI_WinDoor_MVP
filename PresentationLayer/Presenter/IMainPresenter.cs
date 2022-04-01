@@ -85,6 +85,7 @@ namespace PresentationLayer.Presenter
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
         void Run_GetListOfMaterials_SpecificItem();
+        void Set_User_View();
         void DeleteMultiPanelPropertiesUC(int multiPanelID);
         void DeleteDividerPropertiesUC(int divID);
         void DeletePanelPropertiesUC(int panelID);

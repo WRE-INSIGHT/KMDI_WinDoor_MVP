@@ -87,6 +87,7 @@ namespace PresentationLayer.Presenter
                 if (userModel != null)
                 {
                     _mainPresenter.SetValues(userModel, _loginView, _unityC);
+                    _mainPresenter.Set_User_View();
                     _mainPresenter.GetMainView().ShowMainView();
                     setPropertiesSettings();
                     _loginView.frmVisibility = false;
