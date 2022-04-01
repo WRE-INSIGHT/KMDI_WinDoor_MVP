@@ -91,7 +91,7 @@ namespace PresentationLayer.Presenter
                     {
                         _mainPresenter.inputted_quotationRefNo = _quoteNo;
                         _mainPresenter.inputted_quoteId = _quoteId;
-                        _mainPresenter.inpputted_quoteDate = _quoteDate;
+                        _mainPresenter.inputted_quoteDate = _quoteDate;
                         _mainPresenter.inputted_projectName = _projName;
                         _mainPresenter.inputted_custRefNo = _custRefNo;
                         _mainPresenter.Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");

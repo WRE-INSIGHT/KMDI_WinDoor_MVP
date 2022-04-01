@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenter
         string inputted_quotationRefNo { get; set; }
         string inputted_projectName { get; set; }
         string inputted_custRefNo { get; set; }
-        DateTime inpputted_quoteDate { get; set; }
+        DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }
