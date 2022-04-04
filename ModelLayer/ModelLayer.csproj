@@ -47,6 +47,8 @@
     <Compile Include="Model\CustomerRefNo\ICustomerRefNoModel.cs" />
     <Compile Include="Model\ProjectQuote\IProjectQuoteModel.cs" />
     <Compile Include="Model\ProjectQuote\ProjectQuoteModel.cs" />
+    <Compile Include="Model\Quotation\Concrete\ConcreteModel.cs" />
+    <Compile Include="Model\Quotation\Concrete\IConcreteModel.cs" />
     <Compile Include="Model\Quotation\Divider\DividerModel.cs" />
     <Compile Include="Model\Quotation\Divider\IDividerModel.cs" />
     <Compile Include="Model\Quotation\Frame\FrameModel.cs" />

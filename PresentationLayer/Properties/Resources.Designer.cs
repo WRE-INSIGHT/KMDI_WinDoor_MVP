@@ -63,6 +63,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddNew_Concrete {
+            get {
+                object obj = ResourceManager.GetObject("AddNew_Concrete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddNew_Door {
             get {
                 object obj = ResourceManager.GetObject("AddNew_Door", resourceCulture);

@@ -67,6 +67,7 @@
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnNConcrete = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.CloudStoragetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -415,6 +416,7 @@
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsBtnNwin,
             this.tsBtnNdoor,
+            this.tsBtnNConcrete,
             this.openToolStripButton,
             this.CloudStoragetoolStripButton,
             this.saveToolStripButton,
@@ -456,6 +458,16 @@
             this.tsBtnNdoor.Size = new System.Drawing.Size(24, 32);
             this.tsBtnNdoor.Text = "New Door";
             this.tsBtnNdoor.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
+            // 
+            // tsBtnNConcrete
+            // 
+            this.tsBtnNConcrete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBtnNConcrete.Enabled = false;
+            this.tsBtnNConcrete.Image = global::PresentationLayer.Properties.Resources.AddNew_Concrete;
+            this.tsBtnNConcrete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnNConcrete.Name = "tsBtnNConcrete";
+            this.tsBtnNConcrete.Size = new System.Drawing.Size(24, 29);
+            this.tsBtnNConcrete.Text = "New Concrete";
             // 
             // openToolStripButton
             // 
@@ -944,5 +956,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripMenuItem assignProjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tsBtnNConcrete;
     }
 }
