@@ -108,6 +108,7 @@
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
@@ -327,6 +328,12 @@
     <Compile Include="Views\UserControls\BasePlatformUC.Designer.cs">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ConcretePropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ConcretePropertiesUC.Designer.cs">
+      <DependentUpon>ConcretePropertiesUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ConcreteUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -421,6 +428,7 @@
     </Compile>
     <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
+    <Compile Include="Views\UserControls\IConcretePropertiesUC.cs" />
     <Compile Include="Views\UserControls\IConcreteUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
     <Compile Include="Views\UserControls\IDividerPropertiesUC.cs" />
@@ -790,6 +798,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ConcretePropertiesUC.resx">
+      <DependentUpon>ConcretePropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ConcreteUC.resx">
       <DependentUpon>ConcreteUC.cs</DependentUpon>

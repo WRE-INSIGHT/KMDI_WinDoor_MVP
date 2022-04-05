@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Divider;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -30,6 +31,7 @@ using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
 using QueryLayer.DataAccess.Repositories.Specific.Quotation;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
+using ServiceLayer.Services.ConcreteServices;
 using ServiceLayer.Services.CustomerRefNoServices;
 using ServiceLayer.Services.DividerServices;
 using ServiceLayer.Services.EmployeeServices;
@@ -100,6 +102,9 @@ namespace PresentationLayer
 
                 .RegisterType<IDividerServices, DividerServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDividerModel, DividerModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IConcreteServices, ConcreteServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcreteModel, ConcreteModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
@@ -283,6 +288,9 @@ namespace PresentationLayer
 
                 .RegisterType<IPP_2dHingePropertyUC, PP_2dHingePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_2dHingePropertyUCPresenter, PP_2dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))

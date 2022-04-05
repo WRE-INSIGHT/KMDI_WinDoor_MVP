@@ -50,12 +50,13 @@ namespace PresentationLayer.Views
         {
             get
             {
-                return tsBtnNwin.Enabled = tsBtnNdoor.Enabled;
+                return tsBtnNwin.Enabled = tsBtnNdoor.Enabled = tsBtnNConcrete.Enabled;
             }
             set
             {
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
+                tsBtnNConcrete.Enabled = value;
             }
         }
 
@@ -156,6 +157,7 @@ namespace PresentationLayer.Views
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
+        public event EventHandler NewConcreteButtonClickEventRaised;
         public event EventHandler NewQuotationMenuItemClickEventRaised;
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
@@ -368,6 +370,16 @@ namespace PresentationLayer.Views
         public void Set_AssignProject_Visibility(bool visibility)
         {
             assignProjectsToolStripMenuItem.Visible = visibility;
+        }
+
+        private void tsBtnNConcrete_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NewConcreteButtonClickEventRaised, e);
+        }
+
+        private void invertOrientationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

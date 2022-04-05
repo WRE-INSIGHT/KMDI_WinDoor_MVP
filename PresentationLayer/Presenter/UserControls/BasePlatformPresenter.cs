@@ -451,6 +451,11 @@ namespace PresentationLayer.Presenter.UserControls
             _flpMain.Controls.Add((UserControl)frame);
         }
 
+        public void AddConcrete(IConcreteUC concreteUC)
+        {
+            _flpMain.Controls.Add((UserControl)concreteUC);
+        }
+
         public void InvalidateBasePlatform()
         {
             _basePlatfomrUC.InvalidateThis();

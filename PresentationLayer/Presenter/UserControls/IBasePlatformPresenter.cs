@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IBasePlatformUC getBasePlatformViewUC();
         void AddFrame(IFrameUC frame);
+        void AddConcrete(IConcreteUC concreteUC);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();
         void Invalidate_flpMain();

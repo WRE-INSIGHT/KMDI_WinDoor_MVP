@@ -46,6 +46,8 @@
     <Compile Include="CommonServices\IModelDataAnnotationCheck.cs" />
     <Compile Include="CommonServices\ModelDataAnnotationCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ConcreteServices\ConcreteServices.cs" />
+    <Compile Include="Services\ConcreteServices\IConcreteServices.cs" />
     <Compile Include="Services\CustomerRefNoServices\CustomerRefNoServices.cs" />
     <Compile Include="Services\CustomerRefNoServices\ICustomerRefNoRepository.cs" />
     <Compile Include="Services\CustomerRefNoServices\ICustomerRefNoServices.cs" />

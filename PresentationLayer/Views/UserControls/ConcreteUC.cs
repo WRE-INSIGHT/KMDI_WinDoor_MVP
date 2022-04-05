@@ -27,11 +27,10 @@ namespace PresentationLayer.Views.UserControls
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            this.DataBindings.Add(ModelBinding["Frame_ID"]);
-            this.DataBindings.Add(ModelBinding["Frame_WidthToBind"]);
-            this.DataBindings.Add(ModelBinding["Frame_HeightToBind"]);
-            this.DataBindings.Add(ModelBinding["Frame_Name"]);
-            this.DataBindings.Add(ModelBinding["Frame_CmenuDeleteVisibility"]);
+            this.DataBindings.Add(ModelBinding["Concrete_ID"]);
+            this.DataBindings.Add(ModelBinding["Concrete_WidthToBind"]);
+            this.DataBindings.Add(ModelBinding["Concrete_HeightToBind"]);
+            this.DataBindings.Add(ModelBinding["Concrete_Name"]);
         }
 
         private void ConcreteUC_Paint(object sender, PaintEventArgs e)

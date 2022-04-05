@@ -24,6 +24,7 @@ namespace PresentationLayer.Views
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
+        event EventHandler NewConcreteButtonClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }

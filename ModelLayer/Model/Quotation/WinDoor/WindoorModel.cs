@@ -10,6 +10,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Divider;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.Concrete;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -306,6 +307,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         public List<IFrameModel> lst_frame { get; set; }
+        public List<IConcreteModel> lst_concrete { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -334,6 +337,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _frameIDCounter = value;
             }
         }
+
+        public int concreteIDCounter { get; set; }
 
         private int _panelIDCounter;
         public int panelIDCounter
@@ -603,6 +608,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             //float wd_zoom,
                             string wd_Profile,
                             List<IFrameModel> wdlstframe,
+                            List<IConcreteModel> wdlstconcrete,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
                             Foil_Color wd_outisdecolor)
@@ -620,6 +626,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             //WD_zoom = wd_zoom;
             WD_profile = wd_Profile;
             lst_frame = wdlstframe;
+            lst_concrete = wdlstconcrete;
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;

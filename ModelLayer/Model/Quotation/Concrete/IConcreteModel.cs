@@ -13,7 +13,7 @@
         int Concrete_WidthToBind { get; set; }
         float Concrete_Zoom { get; set; }
 
-        void Set_DimensionsToBind_using_FrameZoom();
+        void Set_DimensionsToBind_using_ConcreteZoom();
         void Set_ImagerDimensions_using_ImagerZoom();
     }
 }

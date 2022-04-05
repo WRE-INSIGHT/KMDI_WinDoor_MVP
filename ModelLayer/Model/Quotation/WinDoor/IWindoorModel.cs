@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using ModelLayer.Model.Quotation.Panel;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.Concrete;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -28,8 +29,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
         List<IFrameModel> lst_frame { get; set; }
+        List<IConcreteModel> lst_concrete { get; set; }
 
         int frameIDCounter { get;  set; }
+        int concreteIDCounter { get; set; }
         int panelIDCounter { get;  set; }
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }

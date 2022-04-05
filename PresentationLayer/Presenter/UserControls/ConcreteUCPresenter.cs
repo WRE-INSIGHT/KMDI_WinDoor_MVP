@@ -4,6 +4,7 @@ using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,18 +38,23 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _concreteUC_ConcreteUCPaintEventRaised(object sender, PaintEventArgs e)
         {
-            Pen blkPen = new Pen(Color.Black);
-
             Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            UserControl pfr = (UserControl)sender;
+            UserControl concrete = (UserControl)sender;
+
+            int cond = concrete.Width + concrete.Height;
+
+            for (int i = 10; i < cond; i += 10)
+            {
+                g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
+            }
 
             int w = 1;
-            int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                              0,
-                                                             pfr.ClientRectangle.Width - w,
-                                                             pfr.ClientRectangle.Height - w));
+                                                             concrete.ClientRectangle.Width - w,
+                                                             concrete.ClientRectangle.Height - w));
         }
 
         private void _concreteUC_ConcreteUCLoadEventRaised(object sender, EventArgs e)
@@ -69,19 +75,19 @@ namespace PresentationLayer.Presenter.UserControls
             unityC
                 .RegisterType<IConcreteUC, ConcreteUC>()
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>();
-            ConcreteUCPresenter Presenter = unityC.Resolve<ConcreteUCPresenter>();
-            Presenter._concreteModel = concreteModel;
-            Presenter._mainPresenter = mainPresenter;
-            Presenter._unityC = unityC;
-            Presenter._basePlatformUCP = basePlatformUCP;
+            ConcreteUCPresenter presenter = unityC.Resolve<ConcreteUCPresenter>();
+            presenter._concreteModel = concreteModel;
+            presenter._mainPresenter = mainPresenter;
+            presenter._unityC = unityC;
+            presenter._basePlatformUCP = basePlatformUCP;
 
-            return Presenter;
+            return presenter;
         }
 
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
-            binding.Add("Concrete_HeightToBind", new Binding("Width", _concreteModel, "Concrete_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Concrete_WidthToBind", new Binding("Width", _concreteModel, "Concrete_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Concrete_HeightToBind", new Binding("Height", _concreteModel, "Concrete_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Concrete_ID", new Binding("Concrete_ID", _concreteModel, "Concrete_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Concrete_Name", new Binding("Name", _concreteModel, "Concrete_Name", true, DataSourceUpdateMode.OnPropertyChanged));

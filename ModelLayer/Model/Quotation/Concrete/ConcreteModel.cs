@@ -1,17 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ModelLayer.Model.Quotation.Concrete
 {
-    public class ConcreteModel : IConcreteModel
+    public class ConcreteModel : IConcreteModel, INotifyPropertyChanged
     {
         public int Concrete_Id { get; set; }
         public string Concrete_Name { get; set; }
-        public int Concrete_Width { get; set; }
-        public int Concrete_Height { get; set; }
+
+
+        [Required(ErrorMessage = "Concrete_Width is Required")]
+        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Concrete Width bigger than or equal {1}")]
+        private int _concreteWd;
+        public int Concrete_Width
+        {
+            get
+            {
+                return _concreteWd;
+            }
+            set
+            {
+                _concreteWd = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [Required(ErrorMessage = "Concrete_Height is Required")]
+        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Concrete Height bigger than or equal {1}")]
+        private int _concreteHt;
+        public int Concrete_Height
+        {
+            get
+            {
+                return _concreteHt;
+            }
+            set
+            {
+                _concreteHt = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Concrete_WidthToBind { get; set; }
         public int Concrete_HeightToBind { get; set; }
         public int Concrete_ImagerWidthToBind { get; set; }
@@ -19,9 +54,15 @@ namespace ModelLayer.Model.Quotation.Concrete
         public float Concrete_ImagerZoom { get; set; }
         public float Concrete_Zoom { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         #region Method
 
-        public void Set_DimensionsToBind_using_FrameZoom()
+        public void Set_DimensionsToBind_using_ConcreteZoom()
         {
             decimal wd_flt_convert_dec = Convert.ToDecimal(Concrete_Width * Concrete_Zoom);
             decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;

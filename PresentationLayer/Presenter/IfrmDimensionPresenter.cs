@@ -15,6 +15,8 @@ namespace PresentationLayer.Presenter
         bool mainPresenter_qoutationInputBox_ClickedOK { get; set; }
         bool mainPresenter_newItem_ClickedOK { get; set; }
         bool mainPresenter_AddedFrame_ClickedOK { get; set; }
+        bool mainPresenter_AddedConcrete_ClickedOK { get; set; }
+
         IfrmDimensionView GetDimensionView();
         void SetPresenters(IMainPresenter mainPresenter);
         void SetPresenters(IMultiPanelMullionUCPresenter multiUCP);

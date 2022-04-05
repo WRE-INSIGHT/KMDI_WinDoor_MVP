@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.WinDoor;
 using System.Collections.Generic;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -23,6 +24,7 @@ namespace ServiceLayer.Services.WindoorServices
                                       float WD_zoom = 1.0f,
                                       int WD_price = 0,
                                       decimal WD_discount = 0.0M,
-                                      List<IFrameModel> lst_frame = null);
+                                      List<IFrameModel> lst_frame = null,
+                                      List<IConcreteModel> lst_concrete = null);
     }
 }

@@ -73,6 +73,7 @@ namespace PresentationLayer.Presenter
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
                                 bool AddedFrame,
+                                bool AddedConcrete,
                                 frmDimensionPresenter.Show_Purpose purpose,
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,
