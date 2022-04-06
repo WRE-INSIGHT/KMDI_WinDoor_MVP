@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IConcretePropertiesUC
+    public interface IConcretePropertiesUC : IViewCommon
     {
-        int FrameID { get; set; }
+        int Concrete_ID { get; set; }
 
         event EventHandler ConcretePropertiesUCLoadEventRaised;
         event EventHandler numcHeightValueChangedEventRaised;

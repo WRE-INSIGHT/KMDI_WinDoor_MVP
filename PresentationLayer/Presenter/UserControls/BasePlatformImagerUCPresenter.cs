@@ -56,18 +56,43 @@ namespace PresentationLayer.Presenter.UserControls
 
             float zoom = _windoorModel.WD_zoom_forImageRenderer;
 
+            List<int> ht_of_first_frameObj_on_Left = new List<int>();
+
+            int flocX = 0, flocY = 0, total_wd_covered = 0, frame_row = 0;
+
             foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
-                int flocX = 0, flocY = 0,
-                    frame_pads_all = frame.FrameImageRenderer_Padding_int.All,
+                int frame_pads_all = frame.FrameImageRenderer_Padding_int.All,
                     frame_pads_top = frame.FrameImageRenderer_Padding_int.Top,
                     frame_pads_left = frame.FrameImageRenderer_Padding_int.Left,
                     added_loc_based_on_ParentMpnl_ndx = 0;
 
                 Draw_Frame(e, frame, new Point(flocX, flocY));
 
-                flocX += frame.Frame_Width;
-                flocY += frame.Frame_Height;
+                total_wd_covered += frame.FrameImageRenderer_Width;
+
+                if (frame_row == 0)
+                {
+                    ht_of_first_frameObj_on_Left.Add(frame.FrameImageRenderer_Height);
+                    frame_row++;
+                }
+
+                if (total_wd_covered < _windoorModel.WD_width_4basePlatform_forImageRenderer)
+                {
+                    flocX += frame.FrameImageRenderer_Width;
+                    flocY = 0;
+                }
+                else if (total_wd_covered >= _windoorModel.WD_width_4basePlatform_forImageRenderer)
+                {
+                    flocX = 0;
+                    flocY = ht_of_first_frameObj_on_Left[frame_row - 1];
+
+                    ht_of_first_frameObj_on_Left.Add(frame.FrameImageRenderer_Height);
+                    frame_row++;
+                }
+
+                //flocX += frame.FrameImageRenderer_Width;
+                //flocY += frame.FrameImageRenderer_Height;
 
                 if (frame.Lst_Panel.Count == 1)
                 {
@@ -980,7 +1005,7 @@ namespace PresentationLayer.Presenter.UserControls
                 left_pads = frameModel.FrameImageRenderer_Padding_int.Left,
                 bot_pads = frameModel.FrameImageRenderer_Padding_int.Bottom;
 
-            Rectangle pnl_inner = new Rectangle(new Point(top_pads, left_pads),
+            Rectangle pnl_inner = new Rectangle(new Point(fPoint.X + left_pads, fPoint.Y + top_pads),
                                                 new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),
                                                          frameModel.FrameImageRenderer_Height - (top_pads + bot_pads)));
 
@@ -1010,15 +1035,15 @@ namespace PresentationLayer.Presenter.UserControls
 
             //if (pfr.Controls.Count == 0)
             //{
-                g.DrawRectangle(blkPen, pnl_inner);
+            g.DrawRectangle(blkPen, pnl_inner);
             //}
 
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
             g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(fPoint.X,
                                                                    fPoint.Y,
-                                                                   frameModel.Frame_Width - w,
-                                                                   frameModel.Frame_Height - w));
+                                                                   frameModel.FrameImageRenderer_Width - w,
+                                                                   frameModel.FrameImageRenderer_Height - w));
         }
 
         private void Draw_Panel(PaintEventArgs e, IPanelModel panelModel, Point Ppoint)

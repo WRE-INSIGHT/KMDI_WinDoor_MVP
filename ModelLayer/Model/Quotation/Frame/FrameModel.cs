@@ -19,8 +19,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public enum Frame_Padding
         {
             Window = 26,
-            Door = 33,
-            Concrete
+            Door = 33
         }
 
         private static int _frame_basicDeduction = 10;
@@ -1079,7 +1078,7 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_UC = frameUC;
             Frame_PropertiesUC = framePropertiesUC;
 
-            FrameProp_Height = constants.frame_propertyHeight_default;// - constants.frame_property_concretePanelHeight;
+            FrameProp_Height = constants.frame_propertyHeight_default;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
@@ -62,6 +63,7 @@ namespace PresentationLayer.Presenter
         void AddWndrList_QuotationModel(IWindoorModel wndr);
         void AddFrameList_WindoorModel(IFrameModel frameModel);
         void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel);
+        void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel);
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();
@@ -91,6 +93,7 @@ namespace PresentationLayer.Presenter
         void DeleteDividerPropertiesUC(int divID);
         void DeletePanelPropertiesUC(int panelID);
         void DeleteFramePropertiesUC(int frameID);
+        void DeleteConcretePropertiesUC(int concreteID);
         void Fit_MyControls_byControlsLocation();
         void Fit_MyImager_byImagersLocation();
         void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);

@@ -136,6 +136,9 @@ namespace PresentationLayer
                 .RegisterType<IFramePropertiesUC, FramePropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFramePropertiesUCPresenter, FramePropertiesUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IConcretePropertiesUC, ConcretePropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcretePropertiesUCPresenter, ConcretePropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IpromptYesNo, promptYesNo>(new ContainerControlledLifetimeManager())
                 .RegisterType<IpromptYesNoPresenter, promptYesNoPresenter>(new ContainerControlledLifetimeManager())
 

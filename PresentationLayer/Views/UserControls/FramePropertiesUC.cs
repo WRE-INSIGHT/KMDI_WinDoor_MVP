@@ -41,16 +41,6 @@ namespace PresentationLayer.Views.UserControls
             set
             {
                 _frameType = value;
-                if (_frameType == Frame_Padding.Concrete)
-                {
-                    pnl_Dimensions.Enabled = false;
-                    pnl_specs.Enabled = false;
-                }
-                else
-                {
-                    pnl_Dimensions.Enabled = true;
-                    pnl_specs.Enabled = true;
-                }
             }
         }
 
@@ -106,7 +96,6 @@ namespace PresentationLayer.Views.UserControls
             num_fHeight.DataBindings.Add(frameModelBinding["Frame_Height"]);
             rdBtn_Window.DataBindings.Add(frameModelBinding["Frame_Type_Window"]);
             rdBtn_Door.DataBindings.Add(frameModelBinding["Frame_Type_Door"]);
-            rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
             cmb_FrameProfile.DataBindings.Add(frameModelBinding["Frame_ArtNo"]);
             cmb_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
         }
@@ -130,7 +119,6 @@ namespace PresentationLayer.Views.UserControls
         {
             rdBtn_Window.Enabled = frameTypeEnabled;
             rdBtn_Door.Enabled = frameTypeEnabled;
-            rdBtn_Concrete.Enabled = frameTypeEnabled;
         }
 
         private void cmb_FrameProfile_SelectedValueChanged(object sender, EventArgs e)

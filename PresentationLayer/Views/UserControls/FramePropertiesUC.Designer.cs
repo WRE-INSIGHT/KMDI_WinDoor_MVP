@@ -30,7 +30,6 @@
         {
             this.lbl_frameName = new System.Windows.Forms.Label();
             this.rdBtn_Window = new System.Windows.Forms.RadioButton();
-            this.rdBtn_Concrete = new System.Windows.Forms.RadioButton();
             this.lbl_Width = new System.Windows.Forms.Label();
             this.num_fWidth = new System.Windows.Forms.NumericUpDown();
             this.lbl_Height = new System.Windows.Forms.Label();
@@ -46,7 +45,6 @@
             this.pnl_rdBtnWdw = new System.Windows.Forms.Panel();
             this.rdBtn_Door = new System.Windows.Forms.RadioButton();
             this.pnl_rdBtnDoor = new System.Windows.Forms.Panel();
-            this.pnl_rdBtnConcrete = new System.Windows.Forms.Panel();
             this.pnl_Body = new System.Windows.Forms.Panel();
             this.pnl_Dimensions = new System.Windows.Forms.Panel();
             this.pnl_frameProperties = new System.Windows.Forms.Panel();
@@ -56,7 +54,6 @@
             this.pnl_frameLbl.SuspendLayout();
             this.pnl_rdBtnWdw.SuspendLayout();
             this.pnl_rdBtnDoor.SuspendLayout();
-            this.pnl_rdBtnConcrete.SuspendLayout();
             this.pnl_Body.SuspendLayout();
             this.pnl_Dimensions.SuspendLayout();
             this.SuspendLayout();
@@ -81,17 +78,6 @@
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
             this.rdBtn_Window.CheckedChanged += new System.EventHandler(this.rdBtn_CheckedChanged);
-            // 
-            // rdBtn_Concrete
-            // 
-            this.rdBtn_Concrete.Location = new System.Drawing.Point(4, 0);
-            this.rdBtn_Concrete.Name = "rdBtn_Concrete";
-            this.rdBtn_Concrete.Size = new System.Drawing.Size(140, 23);
-            this.rdBtn_Concrete.TabIndex = 3;
-            this.rdBtn_Concrete.TabStop = true;
-            this.rdBtn_Concrete.Text = "Concrete";
-            this.rdBtn_Concrete.UseVisualStyleBackColor = true;
-            this.rdBtn_Concrete.CheckedChanged += new System.EventHandler(this.rdBtn_CheckedChanged);
             // 
             // lbl_Width
             // 
@@ -275,21 +261,12 @@
             this.pnl_rdBtnDoor.Size = new System.Drawing.Size(154, 26);
             this.pnl_rdBtnDoor.TabIndex = 15;
             // 
-            // pnl_rdBtnConcrete
-            // 
-            this.pnl_rdBtnConcrete.Controls.Add(this.rdBtn_Concrete);
-            this.pnl_rdBtnConcrete.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_rdBtnConcrete.Location = new System.Drawing.Point(0, 73);
-            this.pnl_rdBtnConcrete.Name = "pnl_rdBtnConcrete";
-            this.pnl_rdBtnConcrete.Size = new System.Drawing.Size(154, 26);
-            this.pnl_rdBtnConcrete.TabIndex = 16;
-            // 
             // pnl_Body
             // 
             this.pnl_Body.Controls.Add(this.pnl_specs);
             this.pnl_Body.Controls.Add(this.pnl_Dimensions);
             this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_Body.Location = new System.Drawing.Point(0, 99);
+            this.pnl_Body.Location = new System.Drawing.Point(0, 73);
             this.pnl_Body.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_Body.Name = "pnl_Body";
             this.pnl_Body.Size = new System.Drawing.Size(154, 186);
@@ -312,7 +289,7 @@
             // 
             this.pnl_frameProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_frameProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_frameProperties.Location = new System.Drawing.Point(0, 285);
+            this.pnl_frameProperties.Location = new System.Drawing.Point(0, 259);
             this.pnl_frameProperties.Name = "pnl_frameProperties";
             this.pnl_frameProperties.Size = new System.Drawing.Size(154, 6);
             this.pnl_frameProperties.TabIndex = 18;
@@ -324,12 +301,11 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_frameProperties);
             this.Controls.Add(this.pnl_Body);
-            this.Controls.Add(this.pnl_rdBtnConcrete);
             this.Controls.Add(this.pnl_rdBtnDoor);
             this.Controls.Add(this.pnl_rdBtnWdw);
             this.Controls.Add(this.pnl_frameLbl);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(154, 291);
+            this.Size = new System.Drawing.Size(154, 265);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).EndInit();
@@ -339,7 +315,6 @@
             this.pnl_frameLbl.PerformLayout();
             this.pnl_rdBtnWdw.ResumeLayout(false);
             this.pnl_rdBtnDoor.ResumeLayout(false);
-            this.pnl_rdBtnConcrete.ResumeLayout(false);
             this.pnl_Body.ResumeLayout(false);
             this.pnl_Dimensions.ResumeLayout(false);
             this.pnl_Dimensions.PerformLayout();
@@ -350,7 +325,6 @@
         #endregion
         private System.Windows.Forms.Label lbl_frameName;
         private System.Windows.Forms.RadioButton rdBtn_Window;
-        private System.Windows.Forms.RadioButton rdBtn_Concrete;
         private System.Windows.Forms.Label lbl_Width;
         private System.Windows.Forms.NumericUpDown num_fWidth;
         private System.Windows.Forms.Label lbl_Height;
@@ -366,7 +340,6 @@
         private System.Windows.Forms.Panel pnl_rdBtnWdw;
         private System.Windows.Forms.RadioButton rdBtn_Door;
         private System.Windows.Forms.Panel pnl_rdBtnDoor;
-        private System.Windows.Forms.Panel pnl_rdBtnConcrete;
         private System.Windows.Forms.Panel pnl_Body;
         private System.Windows.Forms.Panel pnl_frameProperties;
         private System.Windows.Forms.Panel pnl_Dimensions;

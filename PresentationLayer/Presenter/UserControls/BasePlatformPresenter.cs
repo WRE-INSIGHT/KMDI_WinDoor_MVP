@@ -693,10 +693,17 @@ namespace PresentationLayer.Presenter.UserControls
 
         public void Invalidate_flpMainControls()
         {
-            foreach (IFrameUC frames in _flpMain.Controls)
+            foreach (object obj in _flpMain.Controls)
             {
-                frames.InvalidateThis();
-                frames.InvalidateThisControls();
+                if (obj is IFrameUC)
+                {
+                    (obj as IFrameUC).InvalidateThis();
+                    (obj as IFrameUC).InvalidateThisControls();
+                }
+                else if (obj is IConcreteUC)
+                {
+                    (obj as IConcreteUC).InvalidateThis();
+                }
             }
         }
 

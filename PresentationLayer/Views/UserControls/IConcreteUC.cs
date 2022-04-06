@@ -11,7 +11,9 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler ConcreteUCLoadEventRaised;
         event EventHandler ConcreteUCMouseEnterEventRaised;
         event EventHandler ConcreteUCMouseLeaveEventRaised;
+        event EventHandler deleteToolStripMenuItemClickEventRaised;
         event PaintEventHandler ConcreteUCPaintEventRaised;
 
+        void InvalidateThis();
     }
 }

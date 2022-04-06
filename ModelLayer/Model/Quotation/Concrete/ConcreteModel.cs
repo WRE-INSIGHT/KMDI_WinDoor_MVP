@@ -47,8 +47,34 @@ namespace ModelLayer.Model.Quotation.Concrete
             }
         }
 
-        public int Concrete_WidthToBind { get; set; }
-        public int Concrete_HeightToBind { get; set; }
+        private int _concreteWdToBind;
+        public int Concrete_WidthToBind
+        {
+            get
+            {
+                return _concreteWdToBind;
+            }
+            set
+            {
+                _concreteWdToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _concreteHtToBind;
+        public int Concrete_HeightToBind
+        {
+            get
+            {
+                return _concreteHtToBind;
+            }
+            set
+            {
+                _concreteHtToBind = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Concrete_ImagerWidthToBind { get; set; }
         public int Concrete_ImagerHeightToBind { get; set; }
         public float Concrete_ImagerZoom { get; set; }

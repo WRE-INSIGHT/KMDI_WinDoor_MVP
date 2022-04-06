@@ -34,6 +34,36 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _concreteUC.ConcreteUCLoadEventRaised += _concreteUC_ConcreteUCLoadEventRaised;
             _concreteUC.ConcreteUCPaintEventRaised += _concreteUC_ConcreteUCPaintEventRaised;
+            _concreteUC.deleteToolStripMenuItemClickEventRaised += _concreteUC_deleteToolStripMenuItemClickEventRaised;
+        }
+
+        private void _concreteUC_deleteToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Are you sure you want to DELETE?",
+                                "Deletion",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    DeleteConcrete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+        }
+
+        private void DeleteConcrete()
+        {
+            _basePlatformUCP.ViewDeleteControl((UserControl)_concreteUC);
+            _basePlatformUCP.InvalidateBasePlatform();
+            _basePlatformUCP.Invalidate_flpMain();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.DeleteConcretePropertiesUC(_concreteModel.Concrete_Id);
+            _mainPresenter.DeleteConcrete_OnConcreteList_WindoorModel(_concreteModel);
         }
 
         private void _concreteUC_ConcreteUCPaintEventRaised(object sender, PaintEventArgs e)

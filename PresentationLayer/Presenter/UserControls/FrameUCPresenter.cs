@@ -550,49 +550,36 @@ namespace PresentationLayer.Presenter.UserControls
 
             UserControl pfr = (UserControl)sender;
 
-            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Concrete)
-            {
-                int cond = pfr.Width + pfr.Height;
-
-                for (int i = 10; i < cond; i += 10)
-                {
-                    g.DrawLine(Pens.Black, new Point(0, i), new Point(i, 0));
-                }
-
-            }
-            else
-            {
-
-                int top_pads = _frameModel.Frame_Padding_int.Top,
+            int top_pads = _frameModel.Frame_Padding_int.Top,
                     right_pads = _frameModel.Frame_Padding_int.Right,
                     left_pads = _frameModel.Frame_Padding_int.Left,
                     bot_pads = _frameModel.Frame_Padding_int.Bottom;
 
-                Rectangle pnl_inner = new Rectangle();
+            Rectangle pnl_inner = new Rectangle();
 
-                //if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
-                //    _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
-                //{
-                //    pnl_inner = new Rectangle(new Point(15, 15),
-                //                              new Size(pfr.ClientRectangle.Width - (15 * 2),
-                //                                       pfr.ClientRectangle.Height - (15 * 2)));
-                //}
-                //else
-                //{
-                pnl_inner = new Rectangle(new Point(top_pads, left_pads),
-                                                new Size(pfr.ClientRectangle.Width - (right_pads + left_pads),
-                                                         pfr.ClientRectangle.Height - (top_pads + bot_pads)));
-                //}
+            //if (_frameModel.Frame_Zoom == 0.26f || _frameModel.Frame_Zoom == 0.17f || 
+            //    _frameModel.Frame_Zoom == 0.13f || _frameModel.Frame_Zoom == 0.10f)
+            //{
+            //    pnl_inner = new Rectangle(new Point(15, 15),
+            //                              new Size(pfr.ClientRectangle.Width - (15 * 2),
+            //                                       pfr.ClientRectangle.Height - (15 * 2)));
+            //}
+            //else
+            //{
+            pnl_inner = new Rectangle(new Point(top_pads, left_pads),
+                                            new Size(pfr.ClientRectangle.Width - (right_pads + left_pads),
+                                                     pfr.ClientRectangle.Height - (top_pads + bot_pads)));
+            //}
 
-                g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
 
-                int pInnerX = pnl_inner.Location.X,
-                pInnerY = pnl_inner.Location.Y,
-                pInnerWd = pnl_inner.Width,
-                pInnerHt = pnl_inner.Height;
+            int pInnerX = pnl_inner.Location.X,
+            pInnerY = pnl_inner.Location.Y,
+            pInnerWd = pnl_inner.Width,
+            pInnerHt = pnl_inner.Height;
 
-                Point[] corner_points = new[]
-                {
+            Point[] corner_points = new[]
+            {
                     new Point(0,0),
                     new Point(pInnerX,pInnerY),
                     new Point(pfr.ClientRectangle.Width,0),
@@ -603,15 +590,14 @@ namespace PresentationLayer.Presenter.UserControls
                     new Point(pInnerX + pInnerWd,pInnerY + pInnerHt)
                 };
 
-                for (int i = 0; i < corner_points.Length - 1; i += 2)
-                {
-                    g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
-                }
+            for (int i = 0; i < corner_points.Length - 1; i += 2)
+            {
+                g.DrawLine(blkPen, corner_points[i], corner_points[i + 1]);
+            }
 
-                if (pfr.Controls.Count == 0)
-                {
-                    g.DrawRectangle(blkPen, pnl_inner);
-                }
+            if (pfr.Controls.Count == 0)
+            {
+                g.DrawRectangle(blkPen, pnl_inner);
             }
 
             int w = 1;

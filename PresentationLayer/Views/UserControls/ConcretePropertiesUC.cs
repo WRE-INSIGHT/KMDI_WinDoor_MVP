@@ -18,19 +18,7 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
-        private int frameID;
-        public int FrameID
-        {
-            get
-            {
-                return frameID;
-            }
-
-            set
-            {
-                frameID = value;
-            }
-        }
+        public int Concrete_ID { get; set; }
 
         public event EventHandler ConcretePropertiesUCLoadEventRaised;
         public event EventHandler numcWidthValueChangedEventRaised;
@@ -40,6 +28,7 @@ namespace PresentationLayer.Views.UserControls
         {
             num_cWidth.Maximum = decimal.MaxValue;
             num_cHeight.Maximum = decimal.MaxValue;
+            this.Dock = DockStyle.Top;
             EventHelpers.RaiseEvent(sender, ConcretePropertiesUCLoadEventRaised, e);
         }
 
@@ -56,6 +45,14 @@ namespace PresentationLayer.Views.UserControls
         public void BringToFrontThis()
         {
             this.BringToFront();
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            this.DataBindings.Add(ModelBinding["Concrete_ID"]);
+            lbl_ConcreteName.DataBindings.Add(ModelBinding["Concrete_Name"]);
+            num_cWidth.DataBindings.Add(ModelBinding["Concrete_Width"]);
+            num_cHeight.DataBindings.Add(ModelBinding["Concrete_Height"]);
         }
     }
 }

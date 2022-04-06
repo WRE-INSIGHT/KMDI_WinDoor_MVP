@@ -23,6 +23,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ConcreteUCLoadEventRaised;
         public event EventHandler ConcreteUCMouseEnterEventRaised;
         public event EventHandler ConcreteUCMouseLeaveEventRaised;
+        public event EventHandler deleteToolStripMenuItemClickEventRaised;
         public event PaintEventHandler ConcreteUCPaintEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -59,6 +60,16 @@ namespace PresentationLayer.Views.UserControls
         private void ConcreteUC_MouseLeave(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ConcreteUCMouseLeaveEventRaised, e);
+        }
+
+        public void InvalidateThis()
+        {
+            this.Invalidate();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteToolStripMenuItemClickEventRaised, e);
         }
     }
 }

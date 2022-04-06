@@ -133,6 +133,7 @@
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IConcretePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IDividerPropertiesUCPresenter.cs" />

@@ -66,6 +66,7 @@ namespace PresentationLayer.Presenter
         private IfrmDimensionPresenter _frmDimensionPresenter;
         private IItemInfoUCPresenter _itemInfoUCPresenter;
         private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
+        private IConcretePropertiesUCPresenter _concretePropertiesUCPresenter;
         private IControlsUCPresenter _controlsUCP;
         private IFixedPanelUCPresenter _fixedPanelUCPresenter;
         private IExplosionPresenter _explosionPresenter;
@@ -462,6 +463,7 @@ namespace PresentationLayer.Presenter
                              IItemInfoUCPresenter itemInfoUCPresenter,
                              IFrameServices frameServices,
                              IFramePropertiesUCPresenter framePropertiesPresenter,
+                             IConcretePropertiesUCPresenter concretePropertiesUCPresenter,
                              IFixedPanelUCPresenter fixedPanelUCPresenter,
                              IPanelServices panelServices,
                              IConcreteServices concreteServices,
@@ -489,6 +491,7 @@ namespace PresentationLayer.Presenter
             _itemInfoUCPresenter = itemInfoUCPresenter;
             _frameServices = frameServices;
             _framePropertiesUCPresenter = framePropertiesPresenter;
+            _concretePropertiesUCPresenter = concretePropertiesUCPresenter;
             _fixedPanelUCPresenter = fixedPanelUCPresenter;
             _panelServices = panelServices;
             _concreteServices = concreteServices;
@@ -1350,6 +1353,7 @@ namespace PresentationLayer.Presenter
                         _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
 
                         AddConcreteList_WindoorModel(_concreteModel);
+                        IConcretePropertiesUCPresenter concretePropertiesUCPresenter = AddConcretePropertiesUC(_concreteModel);
                         AddConcreteUC(_concreteModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
@@ -2033,6 +2037,15 @@ namespace PresentationLayer.Presenter
             return FramePropertiesUCP;
         }
 
+        private IConcretePropertiesUCPresenter AddConcretePropertiesUC(IConcreteModel concreteModel)
+        {
+            IConcretePropertiesUCPresenter concretePropertiesUCPresenter = _concretePropertiesUCPresenter.GetNewInstance(concreteModel, _unityC, this);
+            IConcretePropertiesUC concretePropertiesUC = concretePropertiesUCPresenter.GetConcretePropertiesUC();
+            _pnlPropertiesBody.Controls.Add((UserControl)concretePropertiesUC);
+
+            return concretePropertiesUCPresenter;
+        }
+
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Add(frameModel);
@@ -2046,6 +2059,11 @@ namespace PresentationLayer.Presenter
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Remove(frameModel);
+        }
+
+        public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)
+        {
+            _windoorModel.lst_concrete.Remove(concreteModel);
         }
 
         public IFramePropertiesUC GetFrameProperties(int frameID)
@@ -2178,6 +2196,18 @@ namespace PresentationLayer.Presenter
                 if (frameProperties.FrameID == frameID)
                 {
                     ((UserControl)frameProperties).Parent.Controls.Remove((UserControl)frameProperties);
+                }
+            }
+        }
+
+        public void DeleteConcretePropertiesUC(int concreteID)
+        {
+            var propertiesUC = _commonfunc.GetAll(_pnlPropertiesBody, "ConcretePropertiesUC");
+            foreach (IConcretePropertiesUC concreteProperties in propertiesUC)
+            {
+                if (concreteProperties.Concrete_ID == concreteID)
+                {
+                    ((UserControl)concreteProperties).Parent.Controls.Remove((UserControl)concreteProperties);
                 }
             }
         }
