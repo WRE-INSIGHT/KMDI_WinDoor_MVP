@@ -447,6 +447,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public List<decimal> lst_wd_redArrowLines { get; set; }
+
+        public List<decimal> lst_ht_redArrowLines { get; set; }
+
         #region Methods
 
         public void SetDimensions_basePlatform()
@@ -632,6 +636,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_OutsideColor = wd_outisdecolor;
 
             WD_CmenuDeleteVisibility = true;
+
+            lst_wd_redArrowLines = new List<decimal>();
+            lst_ht_redArrowLines = new List<decimal>();
         }
     }
 }

@@ -28,9 +28,9 @@ namespace PresentationLayer.Tests
              * |_____|_____|
              */
             int total_wd = 400;
-            int[,] given_arr = new int[2, 2] { { 200, 0 }, { 200, 200 } };
+            decimal[,] given_arr = new decimal[2, 2] { { 200, 0 }, { 200, 200 } };
 
-            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
 
             Assert.AreEqual(2, actual_lst.Count);
             Assert.AreEqual(200, actual_lst[0]);
@@ -47,9 +47,9 @@ namespace PresentationLayer.Tests
              * |_____|___|_____|
              */
             int total_wd = 400;
-            int[,] given_arr = new int[3, 2] { { 100, 0 }, { 200, 100 }, { 100, 300} };
+            decimal[,] given_arr = new decimal[3, 2] { { 100, 0 }, { 200, 100 }, { 100, 300} };
 
-            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(100, actual_lst[0]);
@@ -68,14 +68,14 @@ namespace PresentationLayer.Tests
              * |____|_____|____|
              */
             int total_wd = 400;
-            int[,] given_arr = new int[5, 2] { { 200, 0 }, 
+            decimal[,] given_arr = new decimal[5, 2] { { 200, 0 }, 
                                                { 200, 200 }, 
                                                { 100, 0 }, 
                                                { 200, 100 } , 
                                                { 100, 300 }
                                             };
 
-            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(100, actual_lst[0]);
@@ -95,7 +95,7 @@ namespace PresentationLayer.Tests
              *  |_______|_______|_______|
              */
             int total_wd = 1800;
-            int[,] given_arr = new int[6, 2] { { 600, 0 },
+            decimal[,] given_arr = new decimal[6, 2] { { 600, 0 },
                                                { 600, 0 },
                                                { 600, 600 },
                                                { 600, 600 },
@@ -103,7 +103,7 @@ namespace PresentationLayer.Tests
                                                { 600, 1200 }
                                             };
 
-            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(600, actual_lst[0]);
@@ -123,7 +123,7 @@ namespace PresentationLayer.Tests
              *  |_______|_______|_______|
              */
             int total_wd = 2400;
-            int[,] given_arr = new int[11, 2] { { 792, 690 },
+            decimal[,] given_arr = new decimal[11, 2] { { 792, 690 },
                                                 { 804, 484 },
                                                 { 804, 896 },
                                                 { 402, 484 },
@@ -136,7 +136,7 @@ namespace PresentationLayer.Tests
                                                 { 402, 999 }
                                             };
 
-            List<int> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.WidthList_ToPaint(total_wd, given_arr);
 
             Assert.AreEqual(5, actual_lst.Count);
             Assert.AreEqual(402, actual_lst[0]);
@@ -156,9 +156,9 @@ namespace PresentationLayer.Tests
              * |________|
              */
             int total_ht = 400;
-            int[,] given_arr = new int[2, 2] { { 200, 0 }, { 200, 200 } };
+            decimal[,] given_arr = new decimal[2, 2] { { 200, 0 }, { 200, 200 } };
 
-            List<int> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
 
             Assert.AreEqual(2, actual_lst.Count);
             Assert.AreEqual(200, actual_lst[0]);
@@ -178,9 +178,9 @@ namespace PresentationLayer.Tests
              */
 
             int total_ht = 400;
-            int[,] given_arr = new int[3, 2] { { 100, 0 }, { 200, 100 }, { 100, 300 } };
+            decimal[,] given_arr = new decimal[3, 2] { { 100, 0 }, { 200, 100 }, { 100, 300 } };
 
-            List<int> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(100, actual_lst[0]);
@@ -203,14 +203,14 @@ namespace PresentationLayer.Tests
              */
 
             int total_ht = 400;
-            int[,] given_arr = new int[5, 2] { { 200, 0 },
+            decimal[,] given_arr = new decimal[5, 2] { { 200, 0 },
                                                { 200, 200 },
                                                { 100, 0 },
                                                { 200, 100 } ,
                                                { 100, 300 }
                                             };
 
-            List<int> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(100, actual_lst[0]);
@@ -230,7 +230,7 @@ namespace PresentationLayer.Tests
              *  |_______|_______|_______|
              */
             int total_ht = 1600;
-            int[,] given_arr = new int[6, 2] { { 533, 0 },
+            decimal[,] given_arr = new decimal[6, 2] { { 533, 0 },
                                                { 533, 0 },
                                                { 533, 533 },
                                                { 533, 533 },
@@ -238,7 +238,7 @@ namespace PresentationLayer.Tests
                                                { 533, 1066 }
                                             };
 
-            List<int> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
+            List<decimal> actual_lst = _basePlatformPresenter.HeightList_ToPaint(total_ht, given_arr);
 
             Assert.AreEqual(3, actual_lst.Count);
             Assert.AreEqual(533, actual_lst[0]);

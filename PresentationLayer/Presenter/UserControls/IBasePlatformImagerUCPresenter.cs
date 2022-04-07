@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using Unity;
@@ -15,5 +17,7 @@ namespace PresentationLayer.Presenter.UserControls
         void BringToFront_baseImager();
         void SendToBack_baseImager();
         void DeleteControl(UserControl frameImagerUC);
+
+        List<Point> OuterFrame_DrawPoints(List<Size> frameImager_sizes, int basePlatformImage_Width);
     }
 }

@@ -379,11 +379,6 @@ namespace PresentationLayer.Presenter.UserControls
                     IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
                     frame.Controls.Add((UserControl)fixedUC);
 
-                    //IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC, 
-                    //                                                                             _panelModel, 
-                    //                                                                             _frameImagerUCP);
-                    //IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                    //_frameImagerUCP.AddControl((UserControl)fixedImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Casement Panel")
@@ -409,9 +404,6 @@ namespace PresentationLayer.Presenter.UserControls
                     ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
                     frame.Controls.Add((UserControl)casementUC);
 
-                    //ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    //ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
-                    //_frameImagerUCP.AddControl((UserControl)casementImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Awning Panel")
@@ -437,9 +429,6 @@ namespace PresentationLayer.Presenter.UserControls
                     IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                     frame.Controls.Add((UserControl)awningUC);
 
-                    //IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    //IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
-                    //_frameImagerUCP.AddControl((UserControl)awningImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "Sliding Panel")
@@ -453,9 +442,6 @@ namespace PresentationLayer.Presenter.UserControls
                     ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
                     frame.Controls.Add((UserControl)slidingUC);
 
-                    //ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC, _panelModel, _frameImagerUCP);
-                    //ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
-                    //_frameImagerUCP.AddControl((UserControl)slidingImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
                 else if (data == "TiltNTurn Panel")
