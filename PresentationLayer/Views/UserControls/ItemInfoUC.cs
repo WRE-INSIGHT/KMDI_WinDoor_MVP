@@ -40,54 +40,6 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
-        //public DockStyle dok
-        //{
-        //    set
-        //    {
-        //        this.Dock = value;
-        //    }
-        //}
-
-        //public string ItemDesc
-        //{
-        //    set
-        //    {
-        //        lbl_desc.Text = value;
-        //    }
-        //}
-
-        //public string ItemDimension
-        //{
-        //    set
-        //    {
-        //        lbl_dimension.Text = value;
-        //    }
-        //}
-
-        //public Image ItemImage
-        //{
-        //    set
-        //    {
-        //        pbox_itemImage.Image = value;
-        //    }
-        //}
-
-        //public string ItemName
-        //{
-        //    set
-        //    {
-        //        lbl_item.Text = value;
-        //    }
-        //}
-
-        //public bool ItemVisibility
-        //{
-        //    set
-        //    {
-        //        this.Visible = value;
-        //    }
-        //}
-
         public event EventHandler ItemInfoUCLoadEventRaised;
         public event MouseEventHandler lblItemMouseDoubleClickEventRaised;
 

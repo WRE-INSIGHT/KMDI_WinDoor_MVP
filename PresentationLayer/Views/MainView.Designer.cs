@@ -152,7 +152,7 @@
             this.colorToolStripMenuItem,
             this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -275,20 +275,20 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.selectProjectToolStripMenuItem.Text = "Select Project";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
             // 
@@ -306,20 +306,20 @@
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
             // assignProjectsToolStripMenuItem
             // 
             this.assignProjectsToolStripMenuItem.Name = "assignProjectsToolStripMenuItem";
-            this.assignProjectsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assignProjectsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.assignProjectsToolStripMenuItem.Text = "Assign Projects";
             this.assignProjectsToolStripMenuItem.Click += new System.EventHandler(this.assignProjectsToolStripMenuItem_Click);
             // 
@@ -337,7 +337,7 @@
             this.autoDescriptionToolStripMenuItem.CheckOnClick = true;
             this.autoDescriptionToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoDescriptionToolStripMenuItem.Name = "autoDescriptionToolStripMenuItem";
-            this.autoDescriptionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autoDescriptionToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.autoDescriptionToolStripMenuItem.Text = "Auto Description";
             // 
             // toolsToolStripMenuItem
@@ -379,7 +379,7 @@
             // 
             this.invertOrientationToolStripMenuItem.CheckOnClick = true;
             this.invertOrientationToolStripMenuItem.Name = "invertOrientationToolStripMenuItem";
-            this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.invertOrientationToolStripMenuItem.Text = "Invert Orientation";
             this.invertOrientationToolStripMenuItem.Click += new System.EventHandler(this.invertOrientationToolStripMenuItem_Click);
             // 
@@ -503,13 +503,13 @@
             // refreshToolStripButton
             // 
             this.refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.refreshToolStripButton.Enabled = false;
             this.refreshToolStripButton.Image = global::PresentationLayer.Properties.Resources.refresh_30px;
             this.refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshToolStripButton.Name = "refreshToolStripButton";
             this.refreshToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.refreshToolStripButton.Text = "Refresh image";
             this.refreshToolStripButton.ToolTipText = "Refresh image";
+            this.refreshToolStripButton.Click += new System.EventHandler(this.refreshToolStripButton_Click);
             // 
             // printToolStripButton
             // 

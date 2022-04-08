@@ -172,6 +172,7 @@ namespace PresentationLayer.Views
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
+        public event EventHandler refreshToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -380,6 +381,11 @@ namespace PresentationLayer.Views
         private void invertOrientationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void refreshToolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
         }
     }
 }

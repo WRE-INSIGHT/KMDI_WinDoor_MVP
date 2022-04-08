@@ -26,6 +26,7 @@ using ServiceLayer.Services.WindoorServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -594,6 +595,24 @@ namespace PresentationLayer.Presenter
             _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
             _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
             _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
+            _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_refreshToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                Bitmap bm = new Bitmap(_windoorModel.WD_width_4basePlatform_forImageRenderer, _windoorModel.WD_height_4basePlatform_forImageRenderer);
+                UserControl basePl_imager = _basePlatformImagerUCPresenter.GetBasePlatformImagerUC() as UserControl;
+                basePl_imager.DrawToBitmap(bm, new Rectangle(0, 0, _windoorModel.WD_width_4basePlatform_forImageRenderer, _windoorModel.WD_height_4basePlatform_forImageRenderer));
+                //_mainView.SetImage(bm);
+                _windoorModel.WD_image = bm;
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         #region Events
