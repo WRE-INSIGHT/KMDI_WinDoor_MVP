@@ -91,7 +91,7 @@ namespace PresentationLayer.Presenter.UserControls
             return frame_points;
         }
 
-        public Point Panel_DrawPoints(Point framePoint, int frame_topPad, int frame_leftPad)
+        public Point Panel_MPanel_DrawPoints_ParentIsFrame(Point framePoint, int frame_topPad, int frame_leftPad)
         {
             return new Point(framePoint.X + frame_leftPad, framePoint.Y + frame_topPad);
         }
@@ -591,12 +591,19 @@ namespace PresentationLayer.Presenter.UserControls
                     //Draw panel per frame
                     if (frameModel.Lst_Panel.Count() == 1)
                     {
-                        Point pPoint = Panel_DrawPoints(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
+                        Point pPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
                         Draw_Panel(e, frameModel.Lst_Panel[0], pPoint);
                     }
-                    else if (frameModel.Lst_Panel.Count() > 1 && frameModel.Lst_MultiPanel.Count() > 0)
+                    else if (frameModel.Lst_MultiPanel.Count() > 0)
                     {
                         //Draw_MultiPanel
+                        IMultiPanelModel multiPanelModel = frameModel.Lst_MultiPanel[0];
+
+                        if (multiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+                        {
+                            Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
+                            Draw_MultiPanel(e, multiPanelModel, MPoint);
+                        }
                     }
                 }
 
@@ -1260,7 +1267,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             float zoom = mpanelModel.MPanelImageRenderer_Zoom;
 
-            int client_wd = mpanelModel.MPanelImageRenderer_Width, 
+            int client_wd = mpanelModel.MPanelImageRenderer_Width,
                 client_ht = mpanelModel.MPanelImageRenderer_Height;
 
             Rectangle mpnl_bounds = new Rectangle(Mpoint, new Size(client_wd, client_ht));

@@ -1004,6 +1004,10 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
+                _unityC, "Louver Panel", new UserControl()).GetControlUC());
+
+            _pnlControlSub.Controls.Add(
+                (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(

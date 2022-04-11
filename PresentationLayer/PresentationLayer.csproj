@@ -190,6 +190,7 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\IAwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ICasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\ILouverPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\FixedPanelImagerUCPresenter.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelTransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ISlidingPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ITiltNTurnPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\LouverPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\MultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\MultiPanelTransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
@@ -602,6 +604,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\CasementPanelUC.Designer.cs">
       <DependentUpon>CasementPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\ILouverPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -661,6 +664,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ITiltNTurnPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\LouverPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\LouverPanelUC.Designer.cs">
+      <DependentUpon>LouverPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -937,6 +946,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.resx">
       <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\LouverPanelUC.resx">
+      <DependentUpon>LouverPanelUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.resx">
       <DependentUpon>MultiPanelMullionUC.cs</DependentUpon>
