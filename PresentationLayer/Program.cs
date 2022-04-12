@@ -175,6 +175,9 @@ namespace PresentationLayer
                 .RegisterType<ITiltNTurnPanelUC, TiltNTurnPanelUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ITiltNTurnPanelUCPresenter, TiltNTurnPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ILouverPanelUC, LouverPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ILouverPanelUCPresenter, LouverPanelUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
 

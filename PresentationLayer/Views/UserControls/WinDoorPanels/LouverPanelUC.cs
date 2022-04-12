@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls.WinDoorPanels
 {
-    public partial class LouverPanelUC : UserControl, ILouverPanelUC
+    public partial class LouverPanelUC : UserControl, ILouverPanelUC, IPanelUC
     {
         public LouverPanelUC()
         {
@@ -66,6 +66,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public bool pnl_Orientation { get; set; }
+
         public event EventHandler louverPanelUCLoadEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
         public event EventHandler louverPanelUCMouseEnterEventRaised;
@@ -87,15 +89,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseEvent(sender, louverPanelUCMouseEnterEventRaised, e);
         }
+        private void LouverPanelUC_MouseLeave(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, louverPanelUCMouseLeaveEventRaised, e);
+        }
 
         private void LouverPanelUC_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, louverPanelUCSizeChangedEventRaised, e);
-        }
-
-        private void LouverPanelUC_Leave(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, louverPanelUCMouseLeaveEventRaised, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -123,11 +124,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["Panel_Dock"]);
             this.DataBindings.Add(ModelBinding["Panel_WidthToBind"]);
             this.DataBindings.Add(ModelBinding["Panel_HeightToBind"]);
-            this.DataBindings.Add(ModelBinding["Panel_DisplayHeight"]);
             this.DataBindings.Add(ModelBinding["Panel_Visibility"]);
             this.DataBindings.Add(ModelBinding["Panel_Margin"]);
             this.DataBindings.Add(ModelBinding["Panel_Placement"]);
             this.DataBindings.Add(ModelBinding["Panel_CmenuDeleteVisibility"]);
         }
+
     }
 }

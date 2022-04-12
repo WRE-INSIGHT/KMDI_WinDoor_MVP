@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
+        private ILouverPanelUCPresenter _louverPanelUCP;
 
 
         private IMultiPanelMullionUCPresenter _multiUCP;
@@ -66,6 +67,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 IAwningPanelImagerUCPresenter awningImagerUCP,
                                 ISlidingPanelUCPresenter slidingUCP,
                                 ITiltNTurnPanelUCPresenter tiltNTurnUCP,
+                                ILouverPanelUCPresenter louverPanelUCP,
                                 ICasementPanelImagerUCPresenter casementImagerUCP,
                                 ISlidingPanelImagerUCPresenter slidingImagerUCP,
                                 IMultiPanelServices multipanelServices,
@@ -88,6 +90,7 @@ namespace PresentationLayer.Presenter.UserControls
             _slidingUCP = slidingUCP;
             _slidingImagerUCP = slidingImagerUCP;
             _tiltNTurnUCP = tiltNTurnUCP;
+            _louverPanelUCP = louverPanelUCP;
             _multipanelServices = multipanelServices;
             _multiUCP = multiUCP;
             _multiTransomUCP = multiTransomUCP;
@@ -468,6 +471,29 @@ namespace PresentationLayer.Presenter.UserControls
                     frame.Controls.Add((UserControl)tiltnTurnUC);
 
                     _basePlatformImagerUCP.InvalidateBasePlatform();
+                }
+                else if (data == "Louver Panel")
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    _panelModel.AdjustPropertyPanelHeight("addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
+                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
+                    ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
+                                                                                            _panelModel,
+                                                                                            _frameModel,
+                                                                                            _mainPresenter,
+                                                                                            this);
+                    ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                    frame.Controls.Add((UserControl)louverPanelUC);
                 }
             }
             _mainPresenter.Run_GetListOfMaterials_SpecificItem();

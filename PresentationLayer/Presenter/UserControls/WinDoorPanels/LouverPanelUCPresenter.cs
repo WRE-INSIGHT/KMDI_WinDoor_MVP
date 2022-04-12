@@ -8,6 +8,8 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +38,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private IDividerServices _divServices;
 
-
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
         bool _initialLoad;
@@ -63,7 +64,127 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _louverPanelUC.louverPanelUCMouseEnterEventRaised += _louverPanelUC_louverPanelUCMouseEnterEventRaised;
             _louverPanelUC.louverPanelUCMouseLeaveEventRaised += _louverPanelUC_louverPanelUCMouseLeaveEventRaised;
             _louverPanelUC.louverPanelUCSizeChangedEventRaised += _louverPanelUC_louverPanelUCSizeChangedEventRaised;
+            _louverPanelUC.louverPanelUCPaintEventRaised += _louverPanelUC_louverPanelUCPaintEventRaised;
             _louverPanelUC.deleteToolStripClickedEventRaised += _louverPanelUC_deleteToolStripClickedEventRaised;
+        }
+
+        private void _louverPanelUC_louverPanelUCPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                UserControl louver = (UserControl)sender;
+
+                Graphics g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                Pen p = new Pen(Color.Black);
+                Pen p2 = new Pen(Color.Black, 2);
+                Pen LvrPen = new Pen(Color.Black, 7);
+                Pen LvrPen2 = new Pen(Color.FromArgb(240, 240, 240), 7);
+
+                Brush b = new SolidBrush(Color.Black);
+
+                int font_size = 30,
+                    outer_line = 10,
+                    inner_line = 15;
+
+                int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
+
+                if (ndx_zoomPercentage == 3)
+                {
+                    font_size = 25;
+                }
+                else if (ndx_zoomPercentage == 2)
+                {
+                    font_size = 15;
+                    outer_line = 5;
+                    inner_line = 8;
+                }
+                else if (ndx_zoomPercentage == 1)
+                {
+                    font_size = 13;
+                    outer_line = 3;
+                    inner_line = 7;
+                }
+                else if (ndx_zoomPercentage == 0)
+                {
+                    font_size = 8;
+                    outer_line = 3;
+                    inner_line = 7;
+                }
+
+
+                g.DrawRectangle(new Pen(color, 2), new Rectangle(0,
+                                                                 0,
+                                                                 louver.ClientRectangle.Width - 2,
+                                                                 louver.ClientRectangle.Height - 2));
+
+
+
+                // jelusi
+
+                int Lvr_NewLocation = 0,
+                    Lvr_Gap = 0,
+                    pInnerY = 0,
+                    pInnerX = 0,
+                    pInnerHt = louver.Height,
+                    pInnerWd = louver.Width,
+                    NoOfBaldes = _panelModel.Panel_LouverBladesCount;
+                double Lvr_GlassHt = 0;
+
+
+                //side blade
+                for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
+                {
+                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;//33 + (33 * 0.75);
+                    Lvr_NewLocation = ((pInnerY + 20) + Lvr_Gap) + (int)Lvr_GlassHt;
+                    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
+
+
+                    Point[] LvrSideBlade =
+                     {
+                        new Point(pInnerY + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point(pInnerY + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                        new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point(pInnerY+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                        new Point(pInnerY-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                        new Point(pInnerY-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                     };
+
+                    for (int i = 0; i < LvrSideBlade.Length; i += 2)
+                    {
+                        if (i == 4)
+                        {
+                            e.Graphics.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
+
+                        }
+                        else
+                        {
+                            e.Graphics.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
+
+                        }
+                    }
+                    //    //blade
+                    Point[] blade =
+                    {
+                        new Point(pInnerX,Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((int)louver.Height - pInnerX,Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((int)louver.Width - 19,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
+                        new Point(pInnerX,Lvr_NewLocation+(int)Lvr_GlassHt)
+                    };
+                    for (int i = 0; i < blade.Length; i += 2)
+                    {
+                        e.Graphics.DrawLine(p, blade[i], blade[i + 1]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private void _louverPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
@@ -76,19 +197,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         }
 
+        Color color = Color.Black;
+
         private void _louverPanelUC_louverPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
         {
-
+            color = Color.Black;
+            ((IPanelUC)_louverPanelUC).InvalidateThis();
         }
 
         private void _louverPanelUC_louverPanelUCMouseEnterEventRaised(object sender, EventArgs e)
         {
-
+            color = Color.Blue;
+            ((IPanelUC)_louverPanelUC).InvalidateThis();
         }
 
         private void _louverPanelUC_louverPanelUCLoadEventRaised(object sender, EventArgs e)
         {
             _louverPanelUC.ThisBinding(CreateBindingDictionary());
+            _panelModel.Set_LouverBladesCount();
         }
 
         public ILouverPanelUC GetLouverPanelUC()
@@ -167,7 +293,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             panelBinding.Add("Panel_Dock", new Binding("Dock", _panelModel, "Panel_Dock", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_WidthToBind", new Binding("Width", _panelModel, "Panel_WidthToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_HeightToBind", new Binding("Height", _panelModel, "Panel_HeightToBind", true, DataSourceUpdateMode.OnPropertyChanged));
-            panelBinding.Add("Panel_DisplayHeight", new Binding("Panel_DisplayHeight", _panelModel, "Panel_DisplayHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Visibility", new Binding("Visible", _panelModel, "Panel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Margin", new Binding("Margin", _panelModel, "Panel_MarginToBind", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Placement", new Binding("Panel_Placement", _panelModel, "Panel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
