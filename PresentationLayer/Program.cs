@@ -270,15 +270,15 @@ namespace PresentationLayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //ILoginPresenter loginPresenter = UnityC.Resolve<LoginPresenter>();
+            ILoginPresenter loginPresenter = UnityC.Resolve<LoginPresenter>();
 
-            //ILoginView loginView = loginPresenter.GetLoginView(UnityC);
-            //Application.Run((LoginView)loginView);
+            ILoginView loginView = loginPresenter.GetLoginView(UnityC);
+            Application.Run((LoginView)loginView);
 
-            ICustomArrowHeadPresenter presenter = UnityC.Resolve<CustomArrowHeadPresenter>();
+            //ICustomArrowHeadPresenter presenter = UnityC.Resolve<CustomArrowHeadPresenter>();
 
-            ICustomArrowHeadView view = presenter.GetICustomArrowHeadView(UnityC);
-            Application.Run((CustomArrowHeadView)view);
+            //ICustomArrowHeadView view = presenter.GetICustomArrowHeadView();
+            //Application.Run((CustomArrowHeadView)view);
         }
     }
 }

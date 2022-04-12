@@ -50,7 +50,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool Pnl_ArrowHeightVisibility { get; set; }
         bool Pnl_ArrowWidthVisibility { get; set; }
         int Lbl_ArrowHtCount { get; set; }
-        int lbl_ArrowWdCount { get; set; }
-
+        int Lbl_ArrowWdCount { get; set; }
+        Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+        int Div_ArrowCount { get; set; }
     }
 }

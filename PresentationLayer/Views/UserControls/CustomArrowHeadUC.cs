@@ -6,6 +6,7 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class CustomArrowHeadUC : UserControl, ICustomArrowHeadUC
     {
+
         public CustomArrowHeadUC()
         {
             InitializeComponent();
@@ -35,6 +36,21 @@ namespace PresentationLayer.Views.UserControls
                 nud_ArrowSize.Value = value;
             }
         }
+
+        public int ArrowCount
+        {
+            get
+            {
+                return Convert.ToInt32(lbl_count.Text);
+            }
+            set
+            {
+                int arrow = Convert.ToInt32(lbl_count.Text);
+                arrow = value;
+            }
+        }
+
+
         public event EventHandler NudArrowSizeValueChangeEventRaised;
         public event EventHandler BtnDeleteArrowHeadClickEventRaised;
 

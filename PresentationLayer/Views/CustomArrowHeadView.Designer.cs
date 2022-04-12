@@ -48,18 +48,18 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(24, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 17);
+            this.label1.Size = new System.Drawing.Size(81, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Arrows Width";
+            this.label1.Text = "Arrow Width";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(269, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 17);
+            this.label2.Size = new System.Drawing.Size(85, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Arrows Height";
+            this.label2.Text = "Arrow Height";
             // 
             // pnl_ArrowWidth
             // 
@@ -89,12 +89,13 @@
             // 
             // btn_AddArrowHeadHeight
             // 
-            this.btn_AddArrowHeadHeight.Location = new System.Drawing.Point(378, 21);
+            this.btn_AddArrowHeadHeight.Location = new System.Drawing.Point(386, 21);
             this.btn_AddArrowHeadHeight.Name = "btn_AddArrowHeadHeight";
             this.btn_AddArrowHeadHeight.Size = new System.Drawing.Size(83, 25);
             this.btn_AddArrowHeadHeight.TabIndex = 7;
             this.btn_AddArrowHeadHeight.Text = "Add";
             this.btn_AddArrowHeadHeight.UseVisualStyleBackColor = true;
+            this.btn_AddArrowHeadHeight.Click += new System.EventHandler(this.btn_AddArrowHeadHeight_Click);
             // 
             // btn_SaveCustomArrow
             // 
@@ -105,6 +106,7 @@
             this.btn_SaveCustomArrow.TabIndex = 8;
             this.btn_SaveCustomArrow.Text = "Save";
             this.btn_SaveCustomArrow.UseVisualStyleBackColor = true;
+            this.btn_SaveCustomArrow.Click += new System.EventHandler(this.btn_SaveCustomArrow_Click);
             // 
             // label3
             // 
@@ -186,6 +188,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CustomArrowHeadView";
             this.Text = "CustomArrowHeadView";
+            this.Load += new System.EventHandler(this.CustomArrowHeadView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

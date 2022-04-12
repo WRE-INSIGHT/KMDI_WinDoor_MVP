@@ -534,8 +534,8 @@ namespace PresentationLayer.Presenter
 
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel);
-            customArrowHeadPresenter.GetICustomArrowHeadView(_unityC).ShowCustomArrowHead();
+            ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel, this);
+            customArrowHeadPresenter.GetICustomArrowHeadView().ShowCustomArrowHead();
         }
         #region Events
 

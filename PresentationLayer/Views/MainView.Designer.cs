@@ -62,6 +62,7 @@
             this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -97,7 +98,6 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
-            this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -149,13 +149,13 @@
             this.colorToolStripMenuItem,
             this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
             // 
             this.QuotationToolStripMenuItem.Name = "QuotationToolStripMenuItem";
-            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.QuotationToolStripMenuItem.Text = "&Quotation";
             this.QuotationToolStripMenuItem.Click += new System.EventHandler(this.QuotationToolStripMenuItem_Click);
             // 
@@ -166,7 +166,7 @@
             this.PremiLineToolStripMenuItem});
             this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
-            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ItemToolStripMenuItem.Text = "I&tem";
             // 
             // C70ToolStripMenuItem
@@ -190,7 +190,7 @@
             this.doubleToolStripMenuItem,
             this.tripleToolStripMenuItem});
             this.glassToolStripMenuItem.Name = "glassToolStripMenuItem";
-            this.glassToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.glassToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.glassToolStripMenuItem.Text = "Glass";
             // 
             // singleToolStripMenuItem
@@ -249,21 +249,21 @@
             // glassTypeToolStripMenuItem
             // 
             this.glassTypeToolStripMenuItem.Name = "glassTypeToolStripMenuItem";
-            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.glassTypeToolStripMenuItem.Text = "Glass Type";
             this.glassTypeToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // colorToolStripMenuItem
             // 
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.colorToolStripMenuItem.Text = "Color";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // spacerToolStripMenuItem
             // 
             this.spacerToolStripMenuItem.Name = "spacerToolStripMenuItem";
-            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.spacerToolStripMenuItem.Text = "Spacer";
             this.spacerToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
@@ -271,14 +271,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -386,6 +386,13 @@
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
             this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
+            // 
+            // customArrowHeadToolStripMenuItem
+            // 
+            this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
+            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
+            this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -664,7 +671,7 @@
             this.pnlProperties.Controls.Add(this.label2);
             this.pnlProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
-            this.pnlProperties.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlProperties.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProperties.Name = "pnlProperties";
             this.pnlProperties.Size = new System.Drawing.Size(149, 495);
             this.pnlProperties.TabIndex = 4;
@@ -679,7 +686,7 @@
             this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkView.Location = new System.Drawing.Point(104, 3);
-            this.chkView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkView.Margin = new System.Windows.Forms.Padding(2);
             this.chkView.Name = "chkView";
             this.chkView.Size = new System.Drawing.Size(40, 23);
             this.chkView.TabIndex = 2;
@@ -691,7 +698,7 @@
             this.pnlPropertiesBody.AutoScroll = true;
             this.pnlPropertiesBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 29);
-            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
             this.pnlPropertiesBody.Size = new System.Drawing.Size(147, 464);
             this.pnlPropertiesBody.TabIndex = 1;
@@ -779,7 +786,7 @@
             this.lblZoom.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblZoom.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZoom.Location = new System.Drawing.Point(67, 1);
-            this.lblZoom.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lblZoom.Margin = new System.Windows.Forms.Padding(3);
             this.lblZoom.Name = "lblZoom";
             this.lblZoom.Size = new System.Drawing.Size(29, 19);
             this.lblZoom.TabIndex = 1;
@@ -810,13 +817,6 @@
             this.lblSize.Text = "400 x 400";
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
-            // 
-            // customArrowHeadToolStripMenuItem
-            // 
-            this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
-            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
-            this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
             // MainView
             // 

@@ -8,9 +8,14 @@ namespace PresentationLayer.Presenter
 {
     public interface ICustomArrowHeadPresenter : IPresenterCommon
     {
-        ICustomArrowHeadView GetICustomArrowHeadView(IUnityContainer unityC);
+        ICustomArrowHeadView GetICustomArrowHeadView();
         void Remove_ArrowHeadUCP(ICustomArrowHeadUCPresenter CustomArrowHeadUCP);
         int ArrowWD_Count { get; set; }
-        ICustomArrowHeadPresenter GetNewInstance(IUnityContainer unityC, ICustomArrowHeadUCPresenter customArrowHeadUC, IWindoorModel windoorModel); // 
+        int ArrowHT_Count { get; set; }
+        void ComputeTotalArrowLenght();
+        ICustomArrowHeadPresenter GetNewInstance(IUnityContainer unityC,
+                                                 ICustomArrowHeadUCPresenter customArrowHeadUC,
+                                                 IWindoorModel windoorModel,
+                                                 IMainPresenter mainPresenter); // 
     }
 }

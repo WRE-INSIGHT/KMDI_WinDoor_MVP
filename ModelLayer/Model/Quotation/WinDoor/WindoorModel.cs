@@ -426,10 +426,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-
-
-
-
         //custom arrows methods
         private bool _pnl_arrowHeightVisibility;
         public bool Pnl_ArrowHeightVisibility
@@ -472,7 +468,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         private int _lbl_arrowWdCount;
-        public int lbl_ArrowWdCount
+        public int Lbl_ArrowWdCount
         {
             get
             {
@@ -484,6 +480,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+
+        public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+        public int Div_ArrowCount { get; set; }
 
         #region Methods
 

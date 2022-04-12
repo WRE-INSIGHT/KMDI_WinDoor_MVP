@@ -10,11 +10,13 @@ namespace PresentationLayer.Views
         event EventHandler BtnAddArrowHeadHeightCkickEventRaised;
         event EventHandler BtnAddArrowHeadWidthCkickEventRaised;
         event EventHandler BtnSaveCustomArrowCkickEventRaised;
+        event EventHandler CustomArrowHeadViewLoadEventRaised;
         void ShowCustomArrowHead();
         Panel GetPnlArrowWD();
         Panel GetPnlArrowHT();
         void SetBtnSaveBackColor(Color color);
-        void SetLblTotalCladdingLength_Text(string totalArrowWd, string totalArrowHT);
+        void SetLblTotalArrowLength_Text(string totalArrowWd, string totalArrowHt);
+
 
     }
 }
