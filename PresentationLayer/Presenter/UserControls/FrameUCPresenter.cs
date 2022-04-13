@@ -265,7 +265,7 @@ namespace PresentationLayer.Presenter.UserControls
                 MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
 
                 if (ht >= 2000 ||
-                    (wd >= 1600 && ht >= 1500))
+                   (wd >= 1600 && ht >= 1500))
                 {
                     motor = MotorizedMech_ArticleNo._409990E;
                 }
@@ -475,17 +475,17 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (data == "Louver Panel")
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
 
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustPropertyPanelHeight("addSash");
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.AdjustPropertyPanelHeight("addHandle");
+                    //_panelModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    //_panelModel.AdjustPropertyPanelHeight("addSash");
+                    //_panelModel.AdjustPropertyPanelHeight("addGlass");
+                    //_panelModel.AdjustPropertyPanelHeight("addHandle");
 
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                    //_panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
 
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,

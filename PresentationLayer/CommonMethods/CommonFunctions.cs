@@ -34,15 +34,15 @@ namespace PresentationLayer.CommonMethods
                                            ITransomUCPresenter _transomUCP,
                                            IUnityContainer _unityC,
                                            IMullionUCPresenter _mullionUCP,
-                                           IMullionImagerUCPresenter _mullionImagerUCP,
-                                           ITransomImagerUCPresenter _transomImagerUCP,
+                                           //IMullionImagerUCPresenter _mullionImagerUCP,
+                                           //ITransomImagerUCPresenter _transomImagerUCP,
                                            int divID,
                                            IMultiPanelModel multiPanelModel = null,
                                            IPanelModel panelModel = null,
                                            IMultiPanelTransomUCPresenter multiTransomUCP = null,
-                                           IMultiPanelMullionUCPresenter multiMullionUCP = null,
-                                           IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
-                                           IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
+                                           IMultiPanelMullionUCPresenter multiMullionUCP = null)
+                                           //IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
+                                           //IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
         {
             FlowLayoutPanel parentfpnl = new FlowLayoutPanel();
             IMultiPanelModel parentModel = null;
@@ -176,15 +176,15 @@ namespace PresentationLayer.CommonMethods
                                                                           frameModel.Frame_Type.ToString(),
                                                                           true);
 
-                    transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
-                                                                        divModel,
-                                                                        parentModel,
-                                                                        frameModel,
-                                                                        multiTransomImagerUCP,
-                                                                        transomUC);
-                    ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
-                    multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
-                    parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+                    //transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                    //                                                    divModel,
+                    //                                                    parentModel,
+                    //                                                    frameModel,
+                    //                                                    multiTransomImagerUCP,
+                    //                                                    transomUC);
+                    //ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                    //multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                    //parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
 
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
@@ -222,16 +222,16 @@ namespace PresentationLayer.CommonMethods
                                                                           frameModel.Frame_Type.ToString(),
                                                                           true);
 
-                    mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
-                                                                        divModel,
-                                                                        parentModel,
-                                                                        frameModel,
-                                                                        multiMullionImagerUCP,
-                                                                        mullionUC);
+                    //mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
+                    //                                                    divModel,
+                    //                                                    parentModel,
+                    //                                                    frameModel,
+                    //                                                    multiMullionImagerUCP,
+                    //                                                    mullionUC);
 
-                    IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
-                    multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
-                    parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+                    //IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
+                    //multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                    //parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
 
                 }
             }

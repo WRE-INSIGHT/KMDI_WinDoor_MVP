@@ -204,7 +204,8 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
-                if (_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
+                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && 
+                    _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
                 {
                     _panelModel.Panel_MiddleCloserVisibility = true;
 
@@ -221,12 +222,16 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
 
-                    _panelModel.AdjustPropertyPanelHeight("addGlass");
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    if (_panelModel.Panel_Type.Contains("Louver") == false)
+                    {
+                        _panelModel.AdjustPropertyPanelHeight("addGlass");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    }
                 }
 
-                if (_panelModel.Panel_Type.Contains("Fixed") == false || _panelModel.Panel_SashPropertyVisibility == true)
+                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) ||
+                    _panelModel.Panel_SashPropertyVisibility == true)
                 {
                     if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                     {
@@ -244,7 +249,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                if (_panelModel.Panel_Type.Contains("Fixed") == false)
+                if (_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false)
                 {
                     if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                     {
@@ -414,11 +419,15 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
-                _pnlPanelSpecs.Controls.Add(glassProp);
-                glassProp.Dock = DockStyle.Top;
-                glassProp.BringToFront();
+                if (_panelModel.Panel_Type.Contains("Louver") == false)
+                {
+                    IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(glassProp);
+                    glassProp.Dock = DockStyle.Top;
+                    glassProp.BringToFront();
+
+                }
 
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
@@ -444,6 +453,7 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_Type", new Binding("Text", _panelModel, "Panel_Type", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_ChkText", new Binding("Text", _panelModel, "Panel_ChkText", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_Orient", new Binding("Checked", _panelModel, "Panel_Orient", true, DataSourceUpdateMode.OnPropertyChanged));
+            panelBinding.Add("Panel_OrientVisibility", new Binding("Visible", _panelModel, "Panel_OrientVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_PropertyHeight", new Binding("Height", _panelModel, "Panel_PropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             

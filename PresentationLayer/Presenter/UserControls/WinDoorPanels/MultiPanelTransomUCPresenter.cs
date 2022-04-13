@@ -919,15 +919,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _transomUCP,
                                                         _unityC,
                                                         _mullionUCP,
-                                                        _mullionImagerUCP,
-                                                        _transomImagerUCP,
+                                                        //_mullionImagerUCP,
+                                                        //_transomImagerUCP,
                                                         _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         null,
                                                         _multiPanelTransomUCP,
-                                                        _multiMullionUCP_given,
-                                                        _multiMullionImagerUCP_Given,
-                                                        _multiPanelTransomImagerUCP);
+                                                        _multiMullionUCP_given);
+                                                        //_multiMullionImagerUCP_Given,
+                                                        //_multiPanelTransomImagerUCP);
             }
 
             if (parent_ctrl.Name.Contains("flp_Multi"))

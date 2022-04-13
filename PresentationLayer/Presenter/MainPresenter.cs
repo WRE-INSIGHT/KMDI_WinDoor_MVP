@@ -598,6 +598,8 @@ namespace PresentationLayer.Presenter
             _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
         }
 
+        #region Events
+
         private void _mainView_refreshToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -614,8 +616,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Error Message: " + ex.Message);
             }
         }
-
-        #region Events
 
         private void _mainView_NewConcreteButtonClickEventRaised(object sender, EventArgs e)
         {
@@ -1238,9 +1238,9 @@ namespace PresentationLayer.Presenter
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        _mainView.GetThis().Controls.Add(bpUC);
+                        //_basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        //UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        //_mainView.GetThis().Controls.Add(bpUC);
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
@@ -1285,9 +1285,9 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        _mainView.GetThis().Controls.Add(bpUC);
+                        //_basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        //UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        //_mainView.GetThis().Controls.Add(bpUC);
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());

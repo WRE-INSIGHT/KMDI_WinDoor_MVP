@@ -959,15 +959,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _transomUCP,
                                                         _unityC,
                                                         _mullionUCP,
-                                                        _mullionImagerUCP,
-                                                        _transomImagerUCP,
+                                                        //_mullionImagerUCP,
+                                                        //_transomImagerUCP,
                                                         _mainPresenter.GetDividerCount(),
                                                         _multiPanelModel,
                                                         null,
                                                         _multiPanelTransomUCP,
-                                                        _multiPanelMullionUCP,
-                                                        _multiMullionImagerUCP_parent,
-                                                        _multiPanelTransomImagerUCP_parent);
+                                                        _multiPanelMullionUCP);
+                                                        //_multiMullionImagerUCP_parent,
+                                                        //_multiPanelTransomImagerUCP_parent);
             }
 
             if (_frameModel != null)

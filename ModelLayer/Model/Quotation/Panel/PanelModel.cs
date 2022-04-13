@@ -274,6 +274,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_SashPropertyVisibility = false;
                     }
                 }
+                else if (value.Contains("Louver"))
+                {
+                    Panel_SashPropertyVisibility = false;
+                }
                 else
                 {
                     Panel_HandleOptionsVisibility = true;
@@ -355,6 +359,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
                 _panelOrient = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelOrientVisibility;
+        public bool Panel_OrientVisibility
+        {
+            get
+            {
+                return _panelOrientVisibility;
+            }
+            set
+            {
+                _panelOrientVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -6536,6 +6554,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptions = panelHingeOptions;
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
+            Panel_OrientVisibility = true;
+
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;

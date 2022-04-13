@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -84,36 +85,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 Brush b = new SolidBrush(Color.Black);
 
-                int font_size = 30,
-                    outer_line = 10,
-                    inner_line = 15;
-
-                int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
-
-                if (ndx_zoomPercentage == 3)
-                {
-                    font_size = 25;
-                }
-                else if (ndx_zoomPercentage == 2)
-                {
-                    font_size = 15;
-                    outer_line = 5;
-                    inner_line = 8;
-                }
-                else if (ndx_zoomPercentage == 1)
-                {
-                    font_size = 13;
-                    outer_line = 3;
-                    inner_line = 7;
-                }
-                else if (ndx_zoomPercentage == 0)
-                {
-                    font_size = 8;
-                    outer_line = 3;
-                    inner_line = 7;
-                }
-
-
                 g.DrawRectangle(new Pen(color, 2), new Rectangle(0,
                                                                  0,
                                                                  louver.ClientRectangle.Width - 2,
@@ -140,11 +111,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     Lvr_NewLocation = ((pInnerY + 20) + Lvr_Gap) + (int)Lvr_GlassHt;
                     Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
 
-
                     Point[] LvrSideBlade =
                      {
-                        new Point(pInnerY + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point(pInnerY + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((pInnerY - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
 
                         new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point(pInnerY+4, Lvr_NewLocation+(int)Lvr_GlassHt),
@@ -157,26 +127,25 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (i == 4)
                         {
-                            e.Graphics.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
-
+                            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
                         }
                         else
                         {
-                            e.Graphics.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
-
+                            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
                         }
                     }
-                    //    //blade
+
+                    //blade
                     Point[] blade =
                     {
                         new Point(pInnerX,Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((int)louver.Height - pInnerX,Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((int)louver.Width - 19,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
+                        new Point((int)louver.Height - pInnerX - 7,Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((int)louver.Width ,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
                         new Point(pInnerX,Lvr_NewLocation+(int)Lvr_GlassHt)
                     };
                     for (int i = 0; i < blade.Length; i += 2)
                     {
-                        e.Graphics.DrawLine(p, blade[i], blade[i + 1]);
+                        g.DrawLine(p, blade[i], blade[i + 1]);
                     }
                 }
             }
@@ -189,12 +158,151 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _louverPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
+            try
+            {
+                #region Delete Divider
+                if (_multiPanelModel != null &&
+                    _multiPanelModel.MPanel_DividerEnabled &&
+                    _panelModel.Panel_Placement != "Last")
+                {
+                    int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_louverPanelUC);
 
+                    Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
+                    _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
+
+                    //string imgr_type = "";
+
+                    if (_multiPanelMullionUCP != null)
+                    {
+                        _multiPanelMullionUCP.DeletePanel((UserControl)divUC);
+                        //imgr_type = "MullionImager";
+                    }
+                    if (_multiPanelTransomUCP != null)
+                    {
+                        _multiPanelTransomUCP.DeletePanel((UserControl)divUC);
+                        //imgr_type = "TransomImager";
+                    }
+
+                    IDividerModel div = _multiPanelModel.MPanelLst_Divider.Find(divd => divd.Div_Name == divUC.Name);
+                    _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
+                    div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
+                    _frameModel.Lst_Divider.Remove(div);
+
+                    _multiPanelModel.DeductPropertyPanelHeight(div.Div_PropHeight);
+                    _frameModel.DeductPropertyPanelHeight(div.Div_PropHeight);
+                }
+
+                #endregion
+
+                #region Delete Louver
+
+                if (_multiPanelModel != null)
+                {
+                    _multiPanelModel.DeleteControl_MPanelLstObjects((UserControl)_louverPanelUC, _frameModel.Frame_Type.ToString());
+                    Control imager = _commonFunctions.FindImagerControl(_panelModel.Panel_ID, "Panel", _multiPanelModel);
+                    _multiPanelModel.MPanelLst_Imagers.Remove(imager);
+
+                    _multiPanelModel.Reload_PanelMargin();
+
+                    _multiPanelModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
+                }
+                if (_multiPanelMullionUCP != null)
+                {
+                    _multiPanelMullionUCP.DeletePanel((UserControl)_louverPanelUC);
+                }
+                if (_multiPanelTransomUCP != null)
+                {
+                    _multiPanelTransomUCP.DeletePanel((UserControl)_louverPanelUC);
+                }
+                if (_frameUCP != null)
+                {
+                    _frameUCP.ViewDeleteControl((UserControl)_louverPanelUC);
+                }
+
+                if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
+                {
+                    _multiPanelModel.Object_Indexer();
+                    _multiPanelModel.Reload_PanelMargin();
+                    _multiPanelModel.Reload_MultiPanelMargin();
+                    _commonFunctions.Automatic_Div_Addition(_mainPresenter,
+                                                            _frameModel,
+                                                            _divServices,
+                                                            //_frameUCP,
+                                                            _transomUCP,
+                                                            _unityC,
+                                                            _mullionUCP,
+                                                            _mainPresenter.GetDividerCount(),
+                                                            _multiPanelModel,
+                                                            _panelModel,
+                                                            _multiPanelTransomUCP,
+                                                            _multiPanelMullionUCP);
+                }
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+                _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+
+                if (_frameModel != null)
+                {
+                    _frameModel.Lst_Panel.Remove(_panelModel);
+                }
+                if (_multiPanelModel != null)
+                {
+                    _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
+                }
+
+                _frameModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
+                _mainPresenter.DeductPanelGlassID();
+                _mainPresenter.SetPanelGlassID();
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                #endregion
+
+                _mainPresenter.DeselectDivider();
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
+        int prev_Width = 0,
+            prev_Height = 0;
+
+        bool _HeightChange = false,
+             _WidthChange = false;
         private void _louverPanelUC_louverPanelUCSizeChangedEventRaised(object sender, EventArgs e)
         {
+            try
+            {
+                if (!_initialLoad)
+                {
+                    int thisWd = ((UserControl)sender).Width,
+                        thisHt = ((UserControl)sender).Height,
+                        pnlModelWd = _panelModel.Panel_WidthToBind,
+                        pnlModelHt = _panelModel.Panel_HeightToBind;
 
+                    if (thisWd != pnlModelWd || prev_Width != pnlModelWd)
+                    {
+                        //_multiPanelModel.MPanel_Width = thisWd;
+                        _WidthChange = true;
+                    }
+                    if (thisHt != pnlModelHt || prev_Height != pnlModelHt)
+                    {
+                        //_multiPanelModel.MPanel_Height = thisHt;
+                        _HeightChange = true;
+                    }
+                }
+                prev_Width = _panelModel.Panel_WidthToBind;
+                prev_Height = _panelModel.Panel_HeightToBind;
+
+                _tmr.Start();
+                ((UserControl)sender).Invalidate();
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         Color color = Color.Black;
@@ -214,6 +322,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private void _louverPanelUC_louverPanelUCLoadEventRaised(object sender, EventArgs e)
         {
             _louverPanelUC.ThisBinding(CreateBindingDictionary());
+
+            _panelModel.Panel_OrientVisibility = false;
             _panelModel.Set_LouverBladesCount();
         }
 

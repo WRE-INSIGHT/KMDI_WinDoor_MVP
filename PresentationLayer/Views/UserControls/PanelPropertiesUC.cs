@@ -51,13 +51,6 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler PanelPropertiesLoadEventRaised;
         public event EventHandler ChkOrientationCheckChangedEventRaised;
-        public event EventHandler CmbGlazingArtNoSelectedValueChangedEventRaised;
-        public event EventHandler CmbFilmTypeSelectedValueChangedEventRaised;
-        public event EventHandler CmbSashProfileSelectedValueChangedEventRaised;
-        public event EventHandler CmbSashReinfSelectedValueChangedEventRaised;
-        public event EventHandler btnSelectGlassThicknessClickedEventRaised;
-        public event EventHandler CmbGlassTypeSelectedValueChangedEventRaised;
-        public event EventHandler CmbHandleTypeSelectedValueChangedEventRaised;
 
         private void PanelPropertiesUC_Load(object sender, EventArgs e)
         {
@@ -75,6 +68,7 @@ namespace PresentationLayer.Views.UserControls
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            chk_Orientation.DataBindings.Add(ModelBinding["Panel_OrientVisibility"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_PropertyHeight"]);
