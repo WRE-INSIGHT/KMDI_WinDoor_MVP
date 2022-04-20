@@ -36,8 +36,7 @@ namespace PresentationLayer.Views.UserControls
                 nud_ArrowSize.Value = value;
             }
         }
-
-        public int ArrowCount
+        public int ArrowCountWD
         {
             get
             {
@@ -45,10 +44,23 @@ namespace PresentationLayer.Views.UserControls
             }
             set
             {
-                int arrow = Convert.ToInt32(lbl_count.Text);
-                arrow = value;
+                lbl_count.Text = Convert.ToString(value);
             }
         }
+
+        public int ArrowCountHT
+        {
+            get
+            {
+                return Convert.ToInt32(lbl_count.Text);
+            }
+            set
+            {
+                lbl_count.Text = Convert.ToString(value);
+            }
+        }
+
+
 
 
         public event EventHandler NudArrowSizeValueChangeEventRaised;

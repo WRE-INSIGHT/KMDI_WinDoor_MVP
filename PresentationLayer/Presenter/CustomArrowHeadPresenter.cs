@@ -64,6 +64,7 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
+
         public CustomArrowHeadPresenter(ICustomArrowHeadView customArrowHead,
                                         ICustomArrowHeadUCPresenter customArrowHeadUCP)
         {
@@ -105,15 +106,12 @@ namespace PresentationLayer.Presenter
             {
                 _windoorModel.Div_ArrowWdLengthList = arrowWdLength_Lst;
                 MessageBox.Show("Saved");
-
             }
 
         }
-
         private void _customArrowHead_BtnAddArrowHeadWidthCkickEventRaised(object sender, EventArgs e)
         {
             ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
-            CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowCount++;
             _lst_arrowUCP.Add(CustomArrowHeadUCPresenter);
             UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter.GetCustomArrowUC();
             CustomArrowHeadUC.Dock = DockStyle.Top;
@@ -121,6 +119,8 @@ namespace PresentationLayer.Presenter
             CustomArrowHeadUC.BringToFront();
             ArrowWD_Count++;
             _windoorModel.Lbl_ArrowWdCount++;
+            CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowCountWD = ArrowWD_Count;
+
         }
 
         private void _customArrowHead_BtnAddArrowHeadHeightCkickEventRaised(object sender, EventArgs e)
@@ -133,6 +133,8 @@ namespace PresentationLayer.Presenter
             CustomArrowHeadUC.BringToFront();
             ArrowHT_Count++;
             _windoorModel.Lbl_ArrowHtCount++;
+            CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowCountHT = ArrowHT_Count;
+
         }
 
         public ICustomArrowHeadView GetICustomArrowHeadView()
@@ -148,7 +150,7 @@ namespace PresentationLayer.Presenter
         {
             int totalArrowWdLength = 0,
                 totalArrowHtLength = 0;
-        
+
             foreach (ICustomArrowHeadUCPresenter ArrowHead in _lst_arrowUCP)
             {
                 Control CustomArrowHead = ((UserControl)ArrowHead.GetCustomArrowUC()).Parent;
