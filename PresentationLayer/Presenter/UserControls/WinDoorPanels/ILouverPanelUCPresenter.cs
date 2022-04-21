@@ -12,5 +12,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter, IFrameUCPresenter frameUCP);
         ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter, IMultiPanelModel multiPanelModel, IMultiPanelMullionUCPresenter multiPanelUCP);
         ILouverPanelUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IFrameModel frameModel, IMainPresenter mainPresenter, IMultiPanelModel multiPanelModel, IMultiPanelTransomUCPresenter multiPanelTransomUCP);
+        void SetInitialLoadFalse();
     }
 }

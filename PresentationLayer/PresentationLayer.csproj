@@ -706,6 +706,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.Designer.cs">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_LouverPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -968,6 +974,9 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.resx">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.resx">
+      <DependentUpon>Thumbs_LouverPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.resx">
       <DependentUpon>Thumbs_MullionUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1037,6 +1046,7 @@
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />
+    <None Include="Resources\LouverPanel.png" />
     <Content Include="Resources\minus2_104px.png" />
     <Content Include="Resources\minus_104px.png" />
     <Content Include="Resources\Mullion.png" />

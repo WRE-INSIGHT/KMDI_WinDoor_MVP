@@ -1004,7 +1004,7 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Louver Panel", new UserControl()).GetControlUC());
+                _unityC, "Louver Panel", new Thumbs_LouverPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(

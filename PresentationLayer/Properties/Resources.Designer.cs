@@ -303,6 +303,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LouverPanel {
+            get {
+                object obj = ResourceManager.GetObject("LouverPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap minus2_104px {
             get {
                 object obj = ResourceManager.GetObject("minus2_104px", resourceCulture);

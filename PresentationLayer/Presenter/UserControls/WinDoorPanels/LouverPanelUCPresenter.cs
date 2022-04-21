@@ -410,5 +410,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             return panelBinding;
         }
+
+        public void SetInitialLoadFalse()
+        {
+            _initialLoad = false;
+        }
     }
 }
