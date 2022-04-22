@@ -928,18 +928,46 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         if (MPanel_Placement == "Somewhere in Between")
                         {
                             mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
+                        else if (MPanel_Placement == "First" || MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 16;
                         }
                     }
                     else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 15;
+
+                        if (MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 10;
+                            mpnlHt_deduct = 10;
+                        }
+                        else if (MPanel_Placement == "First" || MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 16;
+                        }
                     }
                     else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 10;
+
+                        if (MPanel_Placement == "Last")
+                        {
+                            mpnlHt_deduct = 5;
+                        }
+                        else if (MPanel_Placement == "First")
+                        {
+                            mpnlHt_deduct = 15;
+                        }
+                        else if (MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnlWd_deduct = 9;
+                        }
                     }
                 }
 
@@ -1202,20 +1230,29 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 parent_htToBind = MPanel_ParentModel.MPanel_HeightToBind,
                 totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
                 div_count = MPanel_ParentModel.MPanel_Divisions,
-                wd = 0, ht = 0 ;
+                wd = 0, ht = 0, divSize = 0;
+
+            if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
+            {
+                divSize = 13;
+            }
+            else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+            {
+                divSize = 16;
+            }
 
             if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
                 MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {
-                    wd = (parent_wdToBind - (13 * div_count)) / totalpanel_inside_parentMpanel; //13 px first, then the deduction will occur on Adapt_sizeToBind_MPanelDivMPanel_Controls() 
+                    wd = (parent_wdToBind - (divSize * div_count)) / totalpanel_inside_parentMpanel; //13 px first, then the deduction will occur on Adapt_sizeToBind_MPanelDivMPanel_Controls() 
                     ht = parent_htToBind;
                 }
                 else if (MPanel_ParentModel.MPanel_Type == "Transom")
                 {
                     wd = parent_wdToBind;
-                    ht = (parent_htToBind - (13 * div_count)) / totalpanel_inside_parentMpanel;
+                    ht = (parent_htToBind - (divSize * div_count)) / totalpanel_inside_parentMpanel;
                 }
             }
             else if (MPanel_Zoom == 0.50f)
@@ -1461,9 +1498,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                 MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
+                        }
+                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        {
+                            ht_deduct = 15;
                         }
                     }
 
@@ -1659,7 +1700,45 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(10, 0, 10, 10);
+                                if (MPanel_ParentModel.MPanel_ParentModel == null)
+                                {
+                                    if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                    {
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(10, 0, 10, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(10, 0, 10, 10);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        pnl_margin = new Padding(10, 0, 10, 10);
+                                    }
+                                }
+                                else if (MPanel_ParentModel.MPanel_ParentModel != null) //3-stack mpanels
+                                {
+                                    if (MPanel_ParentModel.MPanel_Placement == "Last")
+                                    {
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(10, 0, 10, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(10, 0, 10, 10);
+                                        }
+                                    }
+                                    else if (MPanel_ParentModel.MPanel_Placement != "Last")
+                                    {
+                                        pnl_margin = new Padding(10, 0, 10, 10);
+                                    }
+                                }
+
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1678,22 +1757,45 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                if (MPanel_ParentModel.MPanel_ParentModel == null)
                                 {
-                                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
-                                        pnl_margin = new Padding(8, 0, 10, 0);
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(8, 0, 10, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(8, 0, 10, 10);
+                                        }
                                     }
                                     else
                                     {
                                         pnl_margin = new Padding(8, 0, 10, 10);
                                     }
                                 }
-                                else
+                                else if (MPanel_ParentModel.MPanel_ParentModel != null)
                                 {
-                                    pnl_margin = new Padding(8, 0, 10, 10);
+                                    if (MPanel_ParentModel.MPanel_Placement == "Last")
+                                    {
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(8, 0, 10, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(8, 0, 10, 10);
+                                        }
+                                    }
+                                    else if (MPanel_ParentModel.MPanel_Placement != "Last")
+                                    {
+                                        pnl_margin = new Padding(8, 0, 10, 10);
+                                    }
                                 }
+
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1712,7 +1814,45 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(10, 0, 0, 10);
+                                if (MPanel_ParentModel.MPanel_ParentModel == null)
+                                {
+                                    if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                    {
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(10, 0, 0, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(10, 0, 0, 10);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        pnl_margin = new Padding(10, 0, 0, 10);
+                                    }
+                                }
+                                else if (MPanel_ParentModel.MPanel_ParentModel != null)
+                                {
+                                    if (MPanel_ParentModel.MPanel_Placement == "Last")
+                                    {
+                                        if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            pnl_margin = new Padding(10, 0, 0, 0);
+                                        }
+                                        else
+                                        {
+                                            pnl_margin = new Padding(10, 0, 0, 10);
+                                        }
+                                    }
+                                    else if (MPanel_ParentModel.MPanel_Placement != "Last")
+                                    {
+                                        pnl_margin = new Padding(10, 0, 0, 10);
+                                    }
+                                }
+
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1982,9 +2122,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Sum(div => div.Div_HeightToBind) +
-                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom),
+                        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+
+                    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
@@ -2208,9 +2350,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHeight_Controls = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom) +
-                                               MPanelLst_Divider.Sum(div => div.Div_HeightToBind) +
-                                               MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom),
+                        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+
+                    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
                     while (diff_MPanelHt_VS_MyCtrlsHeight > 0)

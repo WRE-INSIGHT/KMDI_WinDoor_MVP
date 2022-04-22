@@ -344,11 +344,18 @@ namespace PresentationLayer.Presenter.UserControls
             centerHingeProp.Dock = DockStyle.Top;
             centerHingeProp.BringToFront();
 
-            IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
-            UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
-            _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
-            ntcenterHingeProp.Dock = DockStyle.Top;
-            ntcenterHingeProp.BringToFront();
+            try
+            {
+                IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
+                UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
+                _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
+                ntcenterHingeProp.Dock = DockStyle.Top;
+                ntcenterHingeProp.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             if (_panelModel.Panel_SashPropertyVisibility == true)
             {
@@ -383,11 +390,19 @@ namespace PresentationLayer.Presenter.UserControls
             cdPropUC.Dock = DockStyle.Top;
             cdPropUC.BringToFront();
 
-            IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-            UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
-            _pnlPanelSpecs.Controls.Add(extPropUC);
-            extPropUC.Dock = DockStyle.Top;
-            extPropUC.BringToFront();
+
+            try
+            {
+                IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
+                _pnlPanelSpecs.Controls.Add(extPropUC);
+                extPropUC.Dock = DockStyle.Top;
+                extPropUC.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             if (_panelModel.Panel_Type.Contains("Casement"))
             {
@@ -410,15 +425,15 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                 }
             }
-
-            IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-            UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
-            _pnlPanelSpecs.Controls.Add(glassProp);
-            glassProp.Dock = DockStyle.Top;
-            glassProp.BringToFront();
-
+            
             try
             {
+                IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
+                _pnlPanelSpecs.Controls.Add(glassProp);
+                glassProp.Dock = DockStyle.Top;
+                glassProp.BringToFront();
+
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
                 _pnlPanelSpecs.Controls.Add(gbarProp);

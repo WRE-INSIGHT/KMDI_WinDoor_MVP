@@ -238,38 +238,216 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private int divSize = 0;
         private void _multiPanelTransomUC_flpMultiDragDropEventRaised(object sender, DragEventArgs e)
         {
-            FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
-            List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
-
-            string data = lst_data[0].ToString();
-            int divCount = Convert.ToInt32(lst_data[1]);
-            int iteration = Convert.ToInt32(lst_data[2]);
-
-            int multiPanel_boundsWD = _multiPanelModel.MPanel_Width - 20,
-                multiPanel_boundsHT = _multiPanelModel.MPanel_Height - 20,
-                totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
-
-            if (_frameModel.Frame_Type.ToString().Contains("Window"))
+            try
             {
-                divSize = 26;
-            }
-            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-            {
-                divSize = 33;
-            }
+                FlowLayoutPanel fpnl = (FlowLayoutPanel)sender; //Control na babagsakan
+                List<object> lst_data = e.Data.GetData(e.Data.GetFormats()[0]) as List<object>;
 
-            for (int i = 0; i < iteration; i++)
-            {
-                if (data.Contains("Multi-Panel")) //if Multi-Panel
+                string data = lst_data[0].ToString();
+                int divCount = Convert.ToInt32(lst_data[1]);
+                int iteration = Convert.ToInt32(lst_data[2]);
+
+                int multiPanel_boundsWD = _multiPanelModel.MPanel_Width - 20,
+                    multiPanel_boundsHT = _multiPanelModel.MPanel_Height - 20,
+                    totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
+
+                if (_frameModel.Frame_Type.ToString().Contains("Window"))
                 {
-                    if (_multiPanelModel.MPanel_StackNo < 3)
-                    {
-                        int suggest_Wd = _multiPanelModel.MPanel_Width,
-                            suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                    divSize = 26;
+                }
+                else if (_frameModel.Frame_Type.ToString().Contains("Door"))
+                {
+                    divSize = 33;
+                }
 
-                        int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
-                            mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
-                            mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
+                for (int i = 0; i < iteration; i++)
+                {
+                    if (data.Contains("Multi-Panel")) //if Multi-Panel
+                    {
+                        if (_multiPanelModel.MPanel_StackNo < 3)
+                        {
+                            int suggest_Wd = _multiPanelModel.MPanel_Width,
+                                suggest_HT = (((_multiPanelModel.MPanel_Height) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+
+                            int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
+                                mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
+                                mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
+
+                            string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                            decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+
+                            int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+                            int DisplayHT_singleDecimalPlace = 0;
+
+                            string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
+
+                            FlowDirection flow = FlowDirection.LeftToRight;
+                            if (data.Contains("Transom"))
+                            {
+                                flow = FlowDirection.TopDown;
+                            }
+
+                            int increment_StackNo = _multiPanelModel.MPanel_StackNo + 1;
+
+                            IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
+                                                                                                  suggest_HT,
+                                                                                                  mpanelDisplayWidth,
+                                                                                                  mpanelDisplayWidthDecimal,
+                                                                                                  mpanelDisplayHeight,
+                                                                                                  DisplayHT_singleDecimalPlace,
+                                                                                                  fpnl,
+                                                                                                  (UserControl)_frameUCP.GetFrameUC(),
+                                                                                                  _frameModel,
+                                                                                                  true,
+                                                                                                  flow,
+                                                                                                  _frameModel.Frame_Zoom,
+                                                                                                  _mainPresenter.GetMultiPanelCount(),
+                                                                                                  DockStyle.None,
+                                                                                                  increment_StackNo,
+                                                                                                  _multiPanelModel.GetNextIndex(),
+                                                                                                  _multiPanelModel,
+                                                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                                                  "",
+                                                                                                  divCount);
+                            _frameModel.Lst_MultiPanel.Add(mPanelModel);
+                            _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
+                            _multiPanelModel.Reload_MultiPanelMargin();
+
+                            mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                            mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
+
+                            IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
+                            UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
+                            multiPropUC.Dock = DockStyle.Top;
+                            _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
+                            multiPropUC.BringToFront();
+
+                            _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "add");
+                            _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
+
+                            if (data.Contains("Mullion"))
+                            {
+
+                                IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
+                                                                                                                                 mPanelModel,
+                                                                                                                                 _frameModel,
+                                                                                                                                 _multiPanelTransomImagerUCP);
+                                IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
+                                _multiPanelTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
+                                _basePlatformImagerUCP.InvalidateBasePlatform();
+                                _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
+
+                                IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
+                                                                                                         mPanelModel,
+                                                                                                         _frameModel,
+                                                                                                         _mainPresenter,
+                                                                                                         _frameUCP,
+                                                                                                         this,
+                                                                                                         multiPropUCP,
+                                                                                                         _frameImagerUCP,
+                                                                                                         _basePlatformImagerUCP,
+                                                                                                         multiMullionImagerUCP,
+                                                                                                         _multiPanelTransomImagerUCP);
+                                IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                                fpnl.Controls.Add((UserControl)multiUC);
+                                multiUCP.SetInitialLoadFalse();
+                                _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC, _frameModel.Frame_Type.ToString());
+                                _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)multiUC, _frameModel.Frame_Type.ToString());
+
+                                if (mPanelModel.MPanel_Placement == "Last")
+                                {
+                                    if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f &&
+                                        _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                                    {
+                                        _multiPanelModel.Fit_MyControls_Dimensions();
+                                    }
+                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                                    _multiPanelModel.Adjust_ControlDisplaySize();
+                                    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                                }
+                                else if (mPanelModel.MPanel_Placement != "Last")
+                                {
+                                    IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
+                                                                                          divSize,
+                                                                                          fpnl,
+                                                                                          DividerModel.DividerType.Transom,
+                                                                                          true,
+                                                                                          _frameModel.Frame_Zoom,
+                                                                                          Divider_ArticleNo._7536,
+                                                                                          _multiPanelModel.MPanel_DisplayWidth,
+                                                                                          _multiPanelModel.MPanel_DisplayHeight,
+                                                                                          _multiPanelModel,
+                                                                                          _frameModel,
+                                                                                          _mainPresenter.GetDividerCount(),
+                                                                                          _frameModel.FrameImageRenderer_Zoom,
+                                                                                          _frameModel.Frame_Type.ToString());
+                                    divModel.SetDimensionsToBind_using_DivZoom();
+                                    divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
+
+                                    _frameModel.Lst_Divider.Add(divModel);
+                                    _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+                                    IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                                    UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                                    divPropUC.Dock = DockStyle.Top;
+                                    _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                                    divPropUC.BringToFront();
+
+                                    _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Div", "add");
+
+                                    ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
+                                                                                                divModel,
+                                                                                                _multiPanelModel,
+                                                                                                this,
+                                                                                                _frameModel,
+                                                                                                _mainPresenter);
+                                    ITransomUC transomUC = transomUCP.GetTransom();
+                                    fpnl.Controls.Add((UserControl)transomUC);
+                                    transomUCP.SetInitialLoadFalse();
+                                    _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+                                    _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+
+                                    ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                                                                                                                  divModel,
+                                                                                                                  _multiPanelModel,
+                                                                                                                  _frameModel,
+                                                                                                                  _multiPanelTransomImagerUCP,
+                                                                                                                  transomUC);
+                                    ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                                    _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                                    _multiPanelModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+
+                                    _basePlatformImagerUCP.InvalidateBasePlatform();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Maximum stacks reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                    else
+                    {
+                        int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
+                            suggest_HT = 0,
+                            suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
+                            suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
+
+                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                                suggest_HT = _multiPanelModel.MPanel_Height - 10;
+                            }
+                        }
 
                         string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
                         decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
@@ -277,516 +455,365 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
                         int DisplayHT_singleDecimalPlace = 0;
 
-                        string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+                        string[] DisplayWD_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
 
-                        if (DisplayHT_dec_split.Count() > 1)
+                        if (DisplayWD_dec_split.Count() > 1)
                         {
-                            DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                         }
 
-                        FlowDirection flow = FlowDirection.LeftToRight;
-                        if (data.Contains("Transom"))
+                        if (_multiPanelModel.MPanel_DividerEnabled)
                         {
-                            flow = FlowDirection.TopDown;
-                        }
-
-                        int increment_StackNo = _multiPanelModel.MPanel_StackNo + 1;
-
-                        IMultiPanelModel mPanelModel = _multipanelServices.AddMultiPanelModel(suggest_Wd,
-                                                                                              suggest_HT,
-                                                                                              mpanelDisplayWidth,
-                                                                                              mpanelDisplayWidthDecimal,
-                                                                                              mpanelDisplayHeight,
-                                                                                              DisplayHT_singleDecimalPlace,
-                                                                                              fpnl,
-                                                                                              (UserControl)_frameUCP.GetFrameUC(),
-                                                                                              _frameModel,
-                                                                                              true,
-                                                                                              flow,
-                                                                                              _frameModel.Frame_Zoom,
-                                                                                              _mainPresenter.GetMultiPanelCount(),
-                                                                                              DockStyle.None,
-                                                                                              increment_StackNo,
-                                                                                              _multiPanelModel.GetNextIndex(),
-                                                                                              _multiPanelModel,
-                                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                                              "",
-                                                                                              divCount);
-                        _frameModel.Lst_MultiPanel.Add(mPanelModel);
-                        _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
-                        _multiPanelModel.Reload_MultiPanelMargin();
-
-                        mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                        mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
-
-                        IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
-                        UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
-                        multiPropUC.Dock = DockStyle.Top;
-                        _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
-                        multiPropUC.BringToFront();
-
-                        _multiPanelModel.AdjustPropertyPanelHeight("Mpanel", "add");
-                        _frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
-
-                        if (data.Contains("Mullion"))
-                        {
-
-                            IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
-                                                                                                                             mPanelModel,
-                                                                                                                             _frameModel,
-                                                                                                                             _multiPanelTransomImagerUCP);
-                            IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                            _multiPanelTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
-                            _basePlatformImagerUCP.InvalidateBasePlatform();
-                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
-
-                            IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                     mPanelModel,
-                                                                                                     _frameModel,
-                                                                                                     _mainPresenter,
-                                                                                                     _frameUCP,
-                                                                                                     this,
-                                                                                                     multiPropUCP,
-                                                                                                     _frameImagerUCP,
-                                                                                                     _basePlatformImagerUCP,
-                                                                                                     multiMullionImagerUCP,
-                                                                                                     _multiPanelTransomImagerUCP);
-                            IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                            fpnl.Controls.Add((UserControl)multiUC);
-                            multiUCP.SetInitialLoadFalse();
-                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)multiUC, _frameModel.Frame_Type.ToString());
-                            _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)multiUC, _frameModel.Frame_Type.ToString());
-
-                            if (mPanelModel.MPanel_Placement == "Last")
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
-                                if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f &&
-                                    _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                                if (_multiPanelModel.MPanel_ParentModel?.MPanel_ParentModel?.MPanel_Type == "")
                                 {
-                                    _multiPanelModel.Fit_MyControls_Dimensions();
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                    }
+                                    else
+                                    {
+                                        suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                    }
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                                _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                _multiPanelModel.Adjust_ControlDisplaySize();
-                                _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                                else if (_multiPanelModel.MPanel_ParentModel?.MPanel_ParentModel?.MPanel_Type != "")
+                                {
+                                    if (_multiPanelModel.MPanel_ParentModel?.MPanel_Placement != "Last")
+                                    {
+                                        suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                    }
+                                    else if (_multiPanelModel.MPanel_ParentModel?.MPanel_Placement == "Last")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                        }
+                                        else
+                                        {
+                                            suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                        }
+                                    }
+                                }
                             }
-                            else if (mPanelModel.MPanel_Placement != "Last")
-                            {
-                                IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
-                                                                                      divSize,
-                                                                                      fpnl,
-                                                                                      DividerModel.DividerType.Transom,
-                                                                                      true,
-                                                                                      _frameModel.Frame_Zoom,
-                                                                                      Divider_ArticleNo._7536,
-                                                                                      _multiPanelModel.MPanel_DisplayWidth,
-                                                                                      _multiPanelModel.MPanel_DisplayHeight,
-                                                                                      _multiPanelModel,
-                                                                                      _frameModel,
-                                                                                      _mainPresenter.GetDividerCount(),
-                                                                                      _frameModel.FrameImageRenderer_Zoom,
-                                                                                      _frameModel.Frame_Type.ToString());
-                                divModel.SetDimensionsToBind_using_DivZoom();
-                                divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
-
-                                _frameModel.Lst_Divider.Add(divModel);
-                                _multiPanelModel.MPanelLst_Divider.Add(divModel);
-
-                                IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
-                                UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
-                                divPropUC.Dock = DockStyle.Top;
-                                _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
-                                divPropUC.BringToFront();
-
-                                _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
-                                _frameModel.AdjustPropertyPanelHeight("Div", "add");
-
-                                ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
-                                                                                            divModel,
-                                                                                            _multiPanelModel,
-                                                                                            this,
-                                                                                            _frameModel,
-                                                                                            _mainPresenter);
-                                ITransomUC transomUC = transomUCP.GetTransom();
-                                fpnl.Controls.Add((UserControl)transomUC);
-                                transomUCP.SetInitialLoadFalse();
-                                _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
-                                _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
-
-                                ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
-                                                                                                              divModel,
-                                                                                                              _multiPanelModel,
-                                                                                                              _frameModel,
-                                                                                                              _multiPanelTransomImagerUCP,
-                                                                                                              transomUC);
-                                ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
-                                _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
-                                _multiPanelModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
-
-                                _basePlatformImagerUCP.InvalidateBasePlatform();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Maximum stacks reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                }
-                else
-                {
-                    int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
-                        suggest_HT = 0,
-                        suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
-                        suggest_DisplayWDDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal;
-
-                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    {
-                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                        {
-                            suggest_HT = _multiPanelModel.MPanel_Height - 10;
-                        }
-                    }
-
-                    string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
-                    decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
-
-                    int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
-                    int DisplayHT_singleDecimalPlace = 0;
-
-                    string[] DisplayWD_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
-
-                    if (DisplayWD_dec_split.Count() > 1)
-                    {
-                        DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
-                    }
-
-                    if (_multiPanelModel.MPanel_DividerEnabled)
-                    {
-                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                            {
-                                suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                            }
-                            else
+                            else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                             {
                                 suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             }
                         }
-                        else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
-                            suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            suggest_HT = multiPanel_boundsHT / totalPanelCount;
                         }
-                    }
-                    else if (!_multiPanelModel.MPanel_DividerEnabled)
-                    {
-                        suggest_HT = multiPanel_boundsHT / totalPanelCount;
-                    }
 
-                    if (_multiPanelModel.MPanel_ParentModel != null)
-                    {
-                        suggest_Wd = multiPanel_boundsWD + 2;
-                    }
+                        if (_multiPanelModel.MPanel_ParentModel != null)
+                        {
+                            suggest_Wd = multiPanel_boundsWD + 2;
+                        }
 
-                    IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
+                        IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
-                    MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
-                    if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
-                    {
-                        midArtNo = MiddleCloser_ArticleNo._1WC70DB;
-                    }
-                    else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
-                             _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
-                    {
-                        midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
-                    }
-
-                    MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
-
-                    if (suggest_HT >= 2000 ||
-                       (suggest_Wd >= 1600 && suggest_HT >= 1500))
-                    {
-                        motor = MotorizedMech_ArticleNo._409990E;
-                    }
-                    else
-                    {
+                        MiddleCloser_ArticleNo midArtNo = MiddleCloser_ArticleNo._None;
                         if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
                         {
-                            motor = MotorizedMech_ArticleNo._41555B;
+                            midArtNo = MiddleCloser_ArticleNo._1WC70DB;
                         }
                         else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
                                  _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
                         {
-                            motor = MotorizedMech_ArticleNo._41556C;
+                            midArtNo = MiddleCloser_ArticleNo._1WC70WHT;
                         }
-                    }
 
-                    Rotoswing_HandleArtNo handleArtNo = null;
-                    Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+                        MotorizedMech_ArticleNo motor = MotorizedMech_ArticleNo._41556C;
 
-                    if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
-                        inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
-                    {
-                        handleArtNo = Rotoswing_HandleArtNo._RSC833307;
-                    }
-                    else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
-                             inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
-                             inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
-                             inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
-                    {
-                        handleArtNo = Rotoswing_HandleArtNo._RSC773452;
-                    }
-
-                    _panelModel = _panelServices.AddPanelModel(suggest_Wd,
-                                                               suggest_HT,
-                                                               fpnl,
-                                                               (UserControl)_frameUCP.GetFrameUC(),
-                                                               (UserControl)framePropUC,
-                                                               (UserControl)_multiPanelTransomUC,
-                                                               data,
-                                                               true,
-                                                               _frameModel.Frame_Zoom,
-                                                               _frameModel,
-                                                               _multiPanelModel,
-                                                               suggest_DisplayWD,
-                                                               suggest_DisplayWDDecimal,
-                                                               suggest_DisplayHT,
-                                                               DisplayHT_singleDecimalPlace,
-                                                               GlazingBead_ArticleNo._2452,
-                                                               GlassFilm_Types._None,
-                                                               SashProfile_ArticleNo._7581,
-                                                               SashReinf_ArticleNo._R675,
-                                                               GlassType._Single,
-                                                               Espagnolette_ArticleNo._None,
-                                                               Striker_ArticleNo._M89ANTA,
-                                                               midArtNo,
-                                                               LockingKit_ArticleNo._None,
-                                                               motor,
-                                                               Handle_Type._Rotoswing,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               Extension_ArticleNo._None,
-                                                               false,
-                                                               false,
-                                                               false,
-                                                               false,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               0,
-                                                               handleArtNo,
-                                                               GeorgianBar_ArticleNo._None,
-                                                               0,
-                                                               0,
-                                                               false,
-                                                               _mainPresenter.GetPanelCount(),
-                                                               _mainPresenter.GetPanelGlassID(),
-                                                               _frameModel.FrameImageRenderer_Zoom,
-                                                               _multiPanelModel.GetNextIndex(),
-                                                               DockStyle.None);
-                    _panelModel.Panel_CornerDriveOptionsVisibility = false;
-                    _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
-                    _multiPanelModel.Reload_PanelMargin();
-
-                    _panelModel.SetDimensionsToBind_using_ZoomPercentage();
-                    _panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
-                    _panelModel.SetPanelMargin_using_ZoomPercentage();
-                    _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
-
-                    IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
-                    panelPropUC.Dock = DockStyle.Top;
-                    _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-                    panelPropUC.BringToFront();
-
-                    if (data == "Fixed Panel")
-                    {
-                        IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
-                                                                                   _panelModel,
-                                                                                   _frameModel,
-                                                                                   _mainPresenter,
-                                                                                   _multiPanelModel,
-                                                                                   this,
-                                                                                   _multiPanelTransomImagerUCP);
-                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                        fpnl.Controls.Add((UserControl)fixedUC);
-                        fixedUCP.SetInitialLoadFalse();
-                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
-
-                        IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC,
-                                                                                                     _panelModel,
-                                                                                                     _multiPanelTransomImagerUCP);
-                        IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
-                        _multiPanelTransomImagerUCP.AddControl((UserControl)fixedImagerUC);
-                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)fixedImagerUC);
-
-                        _basePlatformImagerUCP.InvalidateBasePlatform();
-                    }
-                    else if (data == "Casement Panel")
-                    {
-                        ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
-                                                                                            _panelModel,
-                                                                                            _frameModel,
-                                                                                            _mainPresenter,
-                                                                                            _multiPanelModel,
-                                                                                            this,
-                                                                                            _multiPanelTransomImagerUCP);
-                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                        fpnl.Controls.Add((UserControl)casementUC);
-                        casementUCP.SetInitialLoadFalse();
-                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)casementUC, _frameModel.Frame_Type.ToString());
-
-                        ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC,
-                                                                                                              _panelModel,
-                                                                                                              _multiPanelTransomImagerUCP);
-                        ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
-                        _multiPanelTransomImagerUCP.AddControl((UserControl)casementImagerUC);
-                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)casementImagerUC);
-
-                        _basePlatformImagerUCP.InvalidateBasePlatform();
-                    }
-                    else if (data == "Awning Panel")
-                    {
-                        IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
-                                                                                      _panelModel,
-                                                                                      _frameModel,
-                                                                                      _mainPresenter,
-                                                                                      _multiPanelModel,
-                                                                                      this,
-                                                                                      _multiPanelTransomImagerUCP);
-                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                        fpnl.Controls.Add((UserControl)awningUC);
-                        awningUCP.SetInitialLoadFalse();
-                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)awningUC, _frameModel.Frame_Type.ToString());
-
-                        IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC,
-                                                                                                        _panelModel,
-                                                                                                        _multiPanelTransomImagerUCP);
-                        IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
-                        _multiPanelTransomImagerUCP.AddControl((UserControl)awningImagerUC);
-                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)awningImagerUC);
-
-                        _basePlatformImagerUCP.InvalidateBasePlatform();
-                    }
-                    else if (data == "Sliding Panel")
-                    {
-                        ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
-                                                                                         _panelModel,
-                                                                                         _frameModel,
-                                                                                         _mainPresenter,
-                                                                                         _multiPanelModel,
-                                                                                         this,
-                                                                                         _multiPanelTransomImagerUCP);
-                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                        fpnl.Controls.Add((UserControl)slidingUC);
-                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)slidingUC, _frameModel.Frame_Type.ToString());
-                        slidingUCP.SetInitialLoadFalse();
-
-                        ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC,
-                                                                                                           _panelModel,
-                                                                                                           _multiPanelTransomImagerUCP);
-                        ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
-                        _multiPanelTransomImagerUCP.AddControl((UserControl)slidingImagerUC);
-                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)slidingImagerUC);
-
-                        _basePlatformImagerUCP.InvalidateBasePlatform();
-                    }
-
-                    if (_panelModel.Panel_Placement == "Last")
-                    {
-                        if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f ||
-                            _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                        if (suggest_HT >= 2000 ||
+                           (suggest_Wd >= 1600 && suggest_HT >= 1500))
                         {
-                            _multiPanelModel.Fit_MyControls_Dimensions();
+                            motor = MotorizedMech_ArticleNo._409990E;
                         }
-                        _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                        //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                        else
+                        {
+                            if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._DarkBrown)
+                            {
+                                motor = MotorizedMech_ArticleNo._41555B;
+                            }
+                            else if (_frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._White ||
+                                     _frameModel.Frame_WindoorModel.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                motor = MotorizedMech_ArticleNo._41556C;
+                            }
+                        }
 
-                        _mainPresenter.Fit_MyControls_byControlsLocation();
-                        //_mainPresenter.Fit_MyImager_byImagersLocation();
-                        _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        Rotoswing_HandleArtNo handleArtNo = null;
+                        Foil_Color inside_color = _frameModel.Frame_WindoorModel.WD_InsideColor;
+
+                        if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                            inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                        {
+                            handleArtNo = Rotoswing_HandleArtNo._RSC833307;
+                        }
+                        else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                                 inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                                 inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                                 inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                                 inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                        {
+                            handleArtNo = Rotoswing_HandleArtNo._RSC773452;
+                        }
+
+                        _panelModel = _panelServices.AddPanelModel(suggest_Wd,
+                                                                   suggest_HT,
+                                                                   fpnl,
+                                                                   (UserControl)_frameUCP.GetFrameUC(),
+                                                                   (UserControl)framePropUC,
+                                                                   (UserControl)_multiPanelTransomUC,
+                                                                   data,
+                                                                   true,
+                                                                   _frameModel.Frame_Zoom,
+                                                                   _frameModel,
+                                                                   _multiPanelModel,
+                                                                   suggest_DisplayWD,
+                                                                   suggest_DisplayWDDecimal,
+                                                                   suggest_DisplayHT,
+                                                                   DisplayHT_singleDecimalPlace,
+                                                                   GlazingBead_ArticleNo._2452,
+                                                                   GlassFilm_Types._None,
+                                                                   SashProfile_ArticleNo._7581,
+                                                                   SashReinf_ArticleNo._R675,
+                                                                   GlassType._Single,
+                                                                   Espagnolette_ArticleNo._None,
+                                                                   Striker_ArticleNo._M89ANTA,
+                                                                   midArtNo,
+                                                                   LockingKit_ArticleNo._None,
+                                                                   motor,
+                                                                   Handle_Type._Rotoswing,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   Extension_ArticleNo._None,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   false,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   0,
+                                                                   handleArtNo,
+                                                                   GeorgianBar_ArticleNo._None,
+                                                                   0,
+                                                                   0,
+                                                                   false,
+                                                                   _mainPresenter.GetPanelCount(),
+                                                                   _mainPresenter.GetPanelGlassID(),
+                                                                   _frameModel.FrameImageRenderer_Zoom,
+                                                                   _multiPanelModel.GetNextIndex(),
+                                                                   DockStyle.None);
+                        _panelModel.Panel_CornerDriveOptionsVisibility = false;
+                        _multiPanelModel.MPanelLst_Panel.Add(_panelModel);
+                        _multiPanelModel.Reload_PanelMargin();
+
+                        _panelModel.SetDimensionsToBind_using_ZoomPercentage();
+                        _panelModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                        _panelModel.SetPanelMargin_using_ZoomPercentage();
+                        _panelModel.SetPanelMarginImager_using_ImageZoomPercentage();
+
+                        IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                        UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
+                        panelPropUC.Dock = DockStyle.Top;
+                        _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
+                        panelPropUC.BringToFront();
+
+                        if (data == "Fixed Panel")
+                        {
+                            IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
+                                                                                       _panelModel,
+                                                                                       _frameModel,
+                                                                                       _mainPresenter,
+                                                                                       _multiPanelModel,
+                                                                                       this,
+                                                                                       _multiPanelTransomImagerUCP);
+                            IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                            fpnl.Controls.Add((UserControl)fixedUC);
+                            fixedUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
+
+                            IFixedPanelImagerUCPresenter fixedImagerUCP = _fixedImagerUCP.GetNewInstance(_unityC,
+                                                                                                         _panelModel,
+                                                                                                         _multiPanelTransomImagerUCP);
+                            IFixedPanelImagerUC fixedImagerUC = fixedImagerUCP.GetFixedPanelImagerUC();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)fixedImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)fixedImagerUC);
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
+                        else if (data == "Casement Panel")
+                        {
+                            ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
+                                                                                                _panelModel,
+                                                                                                _frameModel,
+                                                                                                _mainPresenter,
+                                                                                                _multiPanelModel,
+                                                                                                this,
+                                                                                                _multiPanelTransomImagerUCP);
+                            ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                            fpnl.Controls.Add((UserControl)casementUC);
+                            casementUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)casementUC, _frameModel.Frame_Type.ToString());
+
+                            ICasementPanelImagerUCPresenter casementImagerUCP = _casementImagerUCP.GetNewInstance(_unityC,
+                                                                                                                  _panelModel,
+                                                                                                                  _multiPanelTransomImagerUCP);
+                            ICasementPanelImagerUC casementImagerUC = casementImagerUCP.GetCasementPanelImagerUC();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)casementImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)casementImagerUC);
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
+                        else if (data == "Awning Panel")
+                        {
+                            IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
+                                                                                          _panelModel,
+                                                                                          _frameModel,
+                                                                                          _mainPresenter,
+                                                                                          _multiPanelModel,
+                                                                                          this,
+                                                                                          _multiPanelTransomImagerUCP);
+                            IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                            fpnl.Controls.Add((UserControl)awningUC);
+                            awningUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)awningUC, _frameModel.Frame_Type.ToString());
+
+                            IAwningPanelImagerUCPresenter awningImagerUCP = _awningImagerUCP.GetNewInstance(_unityC,
+                                                                                                            _panelModel,
+                                                                                                            _multiPanelTransomImagerUCP);
+                            IAwningPanelImagerUC awningImagerUC = awningImagerUCP.GetAwningPanelUC();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)awningImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)awningImagerUC);
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
+                        else if (data == "Sliding Panel")
+                        {
+                            ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
+                                                                                             _panelModel,
+                                                                                             _frameModel,
+                                                                                             _mainPresenter,
+                                                                                             _multiPanelModel,
+                                                                                             this,
+                                                                                             _multiPanelTransomImagerUCP);
+                            ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                            fpnl.Controls.Add((UserControl)slidingUC);
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)slidingUC, _frameModel.Frame_Type.ToString());
+                            slidingUCP.SetInitialLoadFalse();
+
+                            ISlidingPanelImagerUCPresenter slidingImagerUCP = _slidingImagerUCP.GetNewInstance(_unityC,
+                                                                                                               _panelModel,
+                                                                                                               _multiPanelTransomImagerUCP);
+                            ISlidingPanelImagerUC slidingImagerUC = slidingImagerUCP.GetSlidingPanelImagerUC();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)slidingImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)slidingImagerUC);
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
+
+                        if (_panelModel.Panel_Placement == "Last")
+                        {
+                            if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f ||
+                                _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                            {
+                                _multiPanelModel.Fit_MyControls_Dimensions();
+                            }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
+
+                            _mainPresenter.Fit_MyControls_byControlsLocation();
+                            _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                        }
+                        else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
+                        {
+                            IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
+                                                                                  divSize,
+                                                                                  fpnl,
+                                                                                  //(UserControl)_frameUCP.GetFrameUC(),
+                                                                                  DividerModel.DividerType.Transom,
+                                                                                  true,
+                                                                                  _frameModel.Frame_Zoom,
+                                                                                  Divider_ArticleNo._7536,
+                                                                                  _multiPanelModel.MPanel_DisplayWidth,
+                                                                                  _multiPanelModel.MPanel_DisplayHeight,
+                                                                                  _multiPanelModel,
+                                                                                  _frameModel,
+                                                                                  _mainPresenter.GetDividerCount(),
+                                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                                  _frameModel.Frame_Type.ToString());
+                            divModel.SetDimensionsToBind_using_DivZoom();
+                            divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
+
+                            _frameModel.Lst_Divider.Add(divModel);
+                            _multiPanelModel.MPanelLst_Divider.Add(divModel);
+
+                            IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
+                            UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                            divPropUC.Dock = DockStyle.Top;
+                            _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
+                            divPropUC.BringToFront();
+
+                            _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
+                            _frameModel.AdjustPropertyPanelHeight("Div", "add");
+
+                            ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
+                                                                                        divModel,
+                                                                                        _multiPanelModel,
+                                                                                        this,
+                                                                                        _frameModel,
+                                                                                        _mainPresenter);
+                            ITransomUC transomUC = transomUCP.GetTransom();
+                            fpnl.Controls.Add((UserControl)transomUC);
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+                            transomUCP.SetInitialLoadFalse();
+
+                            ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                                                                                                          divModel,
+                                                                                                          _multiPanelModel,
+                                                                                                          _frameModel,
+                                                                                                          _multiPanelTransomImagerUCP,
+                                                                                                          transomUC);
+                            ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                            _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                            _multiPanelModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
                     }
-                    else if (_multiPanelModel.MPanel_DividerEnabled && _panelModel.Panel_Placement != "Last")
+                    foreach (Control ctrl in fpnl.Controls)
                     {
-                        IDividerModel divModel = _divServices.AddDividerModel(_multiPanelModel.MPanel_Width,
-                                                                              divSize,
-                                                                              fpnl,
-                                                                              //(UserControl)_frameUCP.GetFrameUC(),
-                                                                              DividerModel.DividerType.Transom,
-                                                                              true,
-                                                                              _frameModel.Frame_Zoom,
-                                                                              Divider_ArticleNo._7536,
-                                                                              _multiPanelModel.MPanel_DisplayWidth,
-                                                                              _multiPanelModel.MPanel_DisplayHeight,
-                                                                              _multiPanelModel,
-                                                                              _frameModel,
-                                                                              _mainPresenter.GetDividerCount(),
-                                                                              _frameModel.FrameImageRenderer_Zoom,
-                                                                              _frameModel.Frame_Type.ToString());
-                        divModel.SetDimensionsToBind_using_DivZoom();
-                        divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
-
-                        _frameModel.Lst_Divider.Add(divModel);
-                        _multiPanelModel.MPanelLst_Divider.Add(divModel);
-
-                        IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
-                        UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
-                        divPropUC.Dock = DockStyle.Top;
-                        _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(divPropUC);
-                        divPropUC.BringToFront();
-
-                        _multiPanelModel.AdjustPropertyPanelHeight("Div", "add");
-                        _frameModel.AdjustPropertyPanelHeight("Div", "add");
-
-                        ITransomUCPresenter transomUCP = _transomUCP.GetNewInstance(_unityC,
-                                                                                    divModel,
-                                                                                    _multiPanelModel,
-                                                                                    this,
-                                                                                    _frameModel,
-                                                                                    _mainPresenter);
-                        ITransomUC transomUC = transomUCP.GetTransom();
-                        fpnl.Controls.Add((UserControl)transomUC);
-                        _multiPanelModel.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
-                        transomUCP.SetInitialLoadFalse();
-
-                        ITransomImagerUCPresenter transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
-                                                                                                      divModel,
-                                                                                                      _multiPanelModel,
-                                                                                                      _frameModel,
-                                                                                                      _multiPanelTransomImagerUCP,
-                                                                                                      transomUC);
-                        ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
-                        _multiPanelTransomImagerUCP.AddControl((UserControl)transomImagerUC);
-                        _multiPanelModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
-
-                        _basePlatformImagerUCP.InvalidateBasePlatform();
+                        if (ctrl.Name.Contains("Multi"))
+                        {
+                            ctrl.Controls[0].Invalidate(); //Invalidate the fpnl inside
+                        }
+                        else
+                        {
+                            ctrl.Invalidate(); //Divider
+                        }
                     }
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 }
-                foreach (Control ctrl in fpnl.Controls)
-                {
-                    if (ctrl.Name.Contains("Multi"))
-                    {
-                        ctrl.Controls[0].Invalidate(); //Invalidate the fpnl inside
-                    }
-                    else
-                    {
-                        ctrl.Invalidate(); //Divider
-                    }
-                }
-                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-            }
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+}
 
         private void _multiPanelTransomUC_deleteClickedEventRaised(object sender, EventArgs e)
         {
@@ -994,15 +1021,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
 
-            if (zoom == 0.26f || zoom == 0.17f ||
-                zoom == 0.13f || zoom == 0.10f)
-            {
-                pInnerX = 15;
-                pInnerY = 15;
-                pInnerWd = fpnl.ClientRectangle.Width - 30;
-                pInnerHt = fpnl.ClientRectangle.Height - 30;
-            }
-
             int ht_ToBind = _multiPanelModel.MPanel_HeightToBind,
                 wd_ToBind = _multiPanelModel.MPanel_WidthToBind;
 
@@ -1018,15 +1036,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
 
-            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
-                (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None))
+            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
-                corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
+                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                {
+                    corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
+                    corner_points[5] = new Point(pInnerX, fpnl.ClientRectangle.Height - 1);
 
-                corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
-                corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                    corner_points[6] = new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height - 1);
+                    corner_points[7] = new Point(pInnerX + pInnerWd, fpnl.ClientRectangle.Height - 1);
+                }
             }
 
             GraphicsPath gpath = new GraphicsPath();
@@ -1177,41 +1197,107 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (parent_name.Contains("MultiMullion"))
                 #region Parent is MultiPanel Mullion
                 {
-                    if (zoom == 0.26f)
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
-                        bounds_PointY = 5;
-                        ht_deduction = 10;
-
-                        if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        if (zoom == 0.26f)
                         {
-                            bounds_PointY = 10;
+                            bounds_PointY = 5;
+                            ht_deduction = 10;
+                        }
+                        else if (zoom == 1.0f)
+                        {
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)(20 * zoom);
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointY = 5;
+                            ht_deduction = 11;
+                        }
+                        else if (zoom <= 0.17f)
+                        {
+                            bounds_PointY = 5;
+                            ht_deduction = 10;
+                            if (thisObj_placement == "Last")
+                            {
+                                if (parentObj_placement == "First")
+                                {
+                                    bounds_PointY += 3;
+                                    ht_deduction += 3;
+                                }
+                                else if (parentObj_placement == "Last")
+                                {
+                                    ht_deduction += 3;
+                                }
+                            }
                         }
                     }
-                    else if (zoom == 1.0f)
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        bounds_PointY = (int)(10 * zoom);
-                        ht_deduction = (int)(20 * zoom);
-                    }
-                    else if (zoom == 0.50f)
-                    {
-                        bounds_PointY = 5;
-                        ht_deduction = 11;
-                    }
-                    else if (zoom <= 0.17f)
-                    {
-                        bounds_PointY = 5;
-                        ht_deduction = 10;
-                        if (thisObj_placement == "Last")
+                        if (zoom == 1.0f)
                         {
-                            if (parentObj_placement == "First")
+                            bounds_PointY = (int)(10 * zoom);
+                            ht_deduction = (int)(20 * zoom);
+
+                            if (parent_name.Contains("MultiMullion") &&
+                                parent_doxtyle == DockStyle.None &&
+                                lvl2_parent_Type == "Transom") //T-M-T
                             {
-                                bounds_PointY += 3;
-                                ht_deduction += 3;
+                                if (parentObj_placement == "First")
+                                {
+                                    ht_deduction = 22;
+                                }
+                                else if (parentObj_placement == "Somewhere in Between")
+                                {
+                                    ht_deduction = 23;
+                                    bounds_PointY = 11;
+                                }
+                                else if (parentObj_placement == "Last")
+                                {
+                                    bounds_PointY = 11;
+                                    ht_deduction = 12;
+                                }
                             }
-                            else if (parentObj_placement == "Last")
+                        }
+                        else if (zoom == 0.50f)
+                        {
+                            bounds_PointY = 5;
+                            ht_deduction = 11;
+
+                            if (parent_name.Contains("MultiMullion")) 
                             {
-                                ht_deduction += 3;
+                                if (parent_doxtyle == DockStyle.None &&
+                                    lvl2_parent_Type == "Transom") //T-M-T
+                                {
+                                    if (parentObj_placement == "First")
+                                    {
+                                        ht_deduction = 12;
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        ht_deduction = 13;
+                                        bounds_PointY = 6;
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        bounds_PointY = 6;
+                                        ht_deduction = 1;
+                                    }
+                                }
+                                else if (parent_doxtyle == DockStyle.Fill &&
+                                         lvl2_parent_Type == "") //M-T
+                                {
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        ht_deduction = 0;
+                                    }
+                                }
                             }
+                        }
+                        else if (zoom <= 0.26f)
+                        {
+                            bounds_PointY = 10;
                         }
                     }
 
@@ -1220,11 +1306,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (zoom <= 0.26f)
                         {
                             bounds_PointX = 5;
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                            {
-                                bounds_PointX = 10;
-                            }
-
                             if (lvl2_parent_Type != "")
                             {
                                 wd_deduction = 8 + 3;
@@ -1232,6 +1313,85 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             else if (lvl2_parent_Type == "")
                             {
                                 wd_deduction = 8 + 4;
+                            }
+
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                bounds_PointX = 10;
+
+                                if (parent_name.Contains("MultiMullion"))
+                                {
+                                    if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            wd_deduction = 17;
+                                            ht_deduction = 20;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            wd_deduction = 17;
+                                            ht_deduction = 11;
+                                        }
+                                    }
+                                    else if (parent_doxtyle == DockStyle.None &&
+                                             lvl2_parent_Type == "Transom") //T-M-T
+                                    {
+                                        if (parentObj_placement == "First")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                wd_deduction = 15;
+                                                ht_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                wd_deduction = 15;
+                                                ht_deduction = 15;
+                                            }
+                                        }
+                                        else if (parentObj_placement == "Somewhere in Between")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 10;
+                                                wd_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 10;
+                                                wd_deduction = 15;
+                                            }
+                                        }
+                                        else if (parentObj_placement == "Last")
+                                        {
+                                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 15;
+                                                wd_deduction = 15;
+                                            }
+                                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                            {
+                                                bounds_PointY = 5;
+                                                ht_deduction = 6;
+                                                wd_deduction = 15;
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
                         }
                         else if (zoom == 0.50f)
@@ -1266,6 +1426,76 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 bounds_PointX = 6;
                                 wd_deduction = 8 + 4;
                             }
+
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
+                                {
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                    {
+                                        wd_deduction = 17;
+                                        ht_deduction = 20;
+                                    }
+                                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        wd_deduction = 17;
+                                        ht_deduction = 11;
+                                    }
+                                }
+                                else if (parent_doxtyle == DockStyle.None &&
+                                         lvl2_parent_Type == "Transom") //T-M-T
+                                {
+                                    if (parentObj_placement == "First")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                            wd_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            wd_deduction = 17;
+                                            ht_deduction = 10;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 15;
+                                            wd_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 6;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         else if (zoom == 0.50f)
                         {
@@ -1292,6 +1522,71 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 bounds_PointX = 4;
                                 wd_deduction = 5 + 4;
                             }
+
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                if (parent_doxtyle == DockStyle.Fill &&
+                                        lvl2_parent_Type == "") //M-T
+                                {
+                                    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                    {
+                                        ht_deduction = 20;
+                                    }
+                                    else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                    {
+                                        ht_deduction = 11;
+                                    }
+                                }
+                                else if (parent_doxtyle == DockStyle.None &&
+                                         lvl2_parent_Type == "Transom") //T-M-T
+                                {
+                                    if (parentObj_placement == "First")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            ht_deduction = 15;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Somewhere in Between")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 10;
+                                        }
+                                    }
+                                    else if (parentObj_placement == "Last")
+                                    {
+                                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 15;
+                                        }
+                                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None )
+                                        {
+                                            bounds_PointY = 5;
+                                            ht_deduction = 6;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         else if (zoom == 0.50f)
                         {
@@ -1314,27 +1609,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        if (zoom == 0.50f)
+                        if (zoom == 1.0f && lvl2_parent_Type == "")
                         {
-                            ht_deduction = bSizeDeduction - botFrameDeduct;
-                        }
-                        else if (zoom <= 0.26f)
-                        {
-                            bounds_PointY = 10;
-
-                            if (thisObj_placement != "Somewhere in Between")
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
-                                wd_deduction = 17;
-                            }
-
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
-                            {
-                                
-                                ht_deduction = 20;
-                            }
-                            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                            {
-                                ht_deduction = 15;
+                                ht_deduction = bSizeDeduction - 9;
                             }
                         }
                     }
@@ -2468,9 +2747,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
-                    g.DrawLine(Pens.Black, new Point(0, 0),
-                                           new Point(pInnerX, pInnerY));
-
                     int loc_X = 0, 
                         loc_Y = fpnl.ClientRectangle.Height,
                         loc2_Y = pInnerY + pInnerHt;
@@ -2484,11 +2760,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             else if (zoom <= 0.26f)
                             {
-                                loc_Y = fpnl.ClientRectangle.Height + 5;
-                                loc2_Y = pInnerY + pInnerHt + 5;
+                                loc_Y = fpnl.ClientRectangle.Height;
+                                loc2_Y = pInnerY + pInnerHt;
+                            }
+                        }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom <= 0.26f)
+                            {
+                                loc_Y = fpnl.ClientRectangle.Height - 1;
+                                loc2_Y = fpnl.ClientRectangle.Height - 1;
                             }
                         }
                     }
+
+                    g.DrawLine(Pens.Black, new Point(0, 0),
+                                           new Point(pInnerX, pInnerY));
 
                     g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
                                            new Point(pInnerX, loc2_Y));
@@ -2531,8 +2819,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             else if (zoom <= 0.26f)
                             {
-                                botLine_locY = fpnl.ClientRectangle.Height + 5;
-                                botLine_locY2 = pInnerY + pInnerHt + 5;
+                                botLine_locY = fpnl.ClientRectangle.Height;
+                                botLine_locY2 = pInnerY + pInnerHt;
+                            }
+                        }
+                        else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom <= 0.26f)
+                            {
+                                botLine_locY = fpnl.ClientRectangle.Height - 1;
+                                botLine_locY2 = fpnl.ClientRectangle.Height - 1;
                             }
                         }
                     }
@@ -3082,8 +3379,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Somewhere in Between")
                 #region Somewhere in Between in a FIRST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, 0),
-                                           new Point(pInnerX + pInnerWd, pInnerY));
                     divs_bounds_values[0].Y -= 2;
                     divs_bounds_values[0].Height += 2;
 
@@ -3272,8 +3567,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.DrawLine(Pens.Black, new Point(0, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX, pInnerY + pInnerHt));
+                    int locY = fpnl.ClientRectangle.Height,
+                        locY2 = pInnerY + pInnerHt;
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom == 0.26f)
+                            {
+                                locY = fpnl.ClientRectangle.Height - 1;
+                                locY2 = fpnl.ClientRectangle.Height - 1;
+                            }
+                        }
+                    }
+
+                    g.DrawLine(Pens.Black, new Point(0, locY),
+                                           new Point(pInnerX, locY2));
 
                     divs_bounds_values[1].Height += 2;
 
@@ -3313,8 +3624,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a LAST SUB-PLATFORM (MultiMullion) in a MAIN PLATFORM (MultiTransom)
                 {
-                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, fpnl.ClientRectangle.Height),
-                                           new Point(pInnerX + pInnerWd, pInnerY + pInnerHt));
+                    int locY = fpnl.ClientRectangle.Height,
+                        locY2 = pInnerY + pInnerHt,
+                        locX2 = pInnerX + pInnerWd;
+
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        {
+                            if (zoom == 1.0f || zoom == 0.26f)
+                            {
+                                locX2 = pInnerX + pInnerWd - 2;
+
+                                locY = fpnl.ClientRectangle.Height - 1;
+                                locY2 = fpnl.ClientRectangle.Height - 1;
+                            }
+                        }
+                    }
+
+                    g.DrawLine(Pens.Black, new Point(fpnl.ClientRectangle.Width, locY),
+                                           new Point(locX2, locY2));
 
                     divs_bounds_values[1].Height += 2;
 

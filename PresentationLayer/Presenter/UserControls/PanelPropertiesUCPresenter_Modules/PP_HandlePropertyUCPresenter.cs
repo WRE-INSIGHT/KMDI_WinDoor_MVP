@@ -5,9 +5,6 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -218,6 +215,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                             _panelModel.AdjustPropertyPanelHeight("minusRio");
                             _panelModel.AdjustHandlePropertyHeight("minusRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                _panelModel.AdjustPropertyPanelHeight("minusRio");
+                                _panelModel.AdjustHandlePropertyHeight("minusRio");
+                            }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
                         {
@@ -249,6 +253,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -285,12 +293,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswing");
                             _panelModel.AdjustPropertyPanelHeight("minusRotoswing");
                             _panelModel.AdjustHandlePropertyHeight("minusRotoswing");
+
                         }
                         else if (curr_handleType == Handle_Type._Rio)
                         {
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                             _panelModel.AdjustPropertyPanelHeight("minusRio");
                             _panelModel.AdjustHandlePropertyHeight("minusRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                _panelModel.AdjustPropertyPanelHeight("minusRio");
+                                _panelModel.AdjustHandlePropertyHeight("minusRio");
+                            }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
                         {
@@ -322,6 +338,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -387,6 +407,26 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.AdjustPropertyPanelHeight("addRio");
                         _panelModel.AdjustHandlePropertyHeight("addRio");
 
+
+                        Foil_Color inside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
+                        Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
+
+                        if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                            _panelModel.Panel_Type.Contains("Casement") &&
+                            inside_color != outside_color)
+                        {
+                            _panelModel.Panel_RioOptionsVisibility2 = true;
+                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
+                            _panelModel.AdjustPropertyPanelHeight("addRio");
+                            _panelModel.AdjustHandlePropertyHeight("addRio");
+                        }
+                        else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door &&
+                            inside_color == outside_color)
+                        {
+                            _panelModel.Panel_RioOptionsVisibility2 = false;
+                        }
+
+
                         if (_panelModel.Panel_ParentMultiPanelModel != null)
                         {
                             if (curr_handleType == Handle_Type._Rotary)
@@ -407,6 +447,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
 
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
+                            }
                         }
 
                         _panelModel.Panel_RioOptionsVisibility = true;
@@ -445,6 +490,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                             _panelModel.AdjustPropertyPanelHeight("minusRio");
                             _panelModel.AdjustHandlePropertyHeight("minusRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                _panelModel.AdjustPropertyPanelHeight("minusRio");
+                                _panelModel.AdjustHandlePropertyHeight("minusRio");
+                            }
                         }
                         else if (curr_handleType == Handle_Type._MVD)
                         {
@@ -474,6 +526,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._MVD)
                             {
@@ -519,6 +575,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                             _panelModel.AdjustPropertyPanelHeight("minusRio");
                             _panelModel.AdjustHandlePropertyHeight("minusRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                _panelModel.AdjustPropertyPanelHeight("minusRio");
+                                _panelModel.AdjustHandlePropertyHeight("minusRio");
+                            }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
                         {
@@ -548,6 +611,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -593,6 +660,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
                             _panelModel.AdjustPropertyPanelHeight("minusRio");
                             _panelModel.AdjustHandlePropertyHeight("minusRio");
+
+                            if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                            {
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                _panelModel.AdjustPropertyPanelHeight("minusRio");
+                                _panelModel.AdjustHandlePropertyHeight("minusRio");
+                            }
                         }
                         else if (curr_handleType == Handle_Type._Rotoline)
                         {
@@ -620,6 +694,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             else if (curr_handleType == Handle_Type._Rio)
                             {
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                if (_panelModel.Panel_RioOptionsVisibility2 == true)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRio");
+                                }
                             }
                             else if (curr_handleType == Handle_Type._Rotoline)
                             {
@@ -640,7 +718,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_EspagnoletteOptionsVisibility = false;
                         _panelModel.Panel_ExtensionOptionsVisibility = false;
 
-                        if (_panelModel.Panel_ParentMultiPanelModel != null && 
+                        if (_panelModel.Panel_ParentMultiPanelModel != null &&
                             _panelModel.Panel_CornerDriveOptionsVisibility == true)
                         {
                             IDividerModel div_prev = null,
@@ -820,7 +898,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_MVDOptionsVisibility = false;
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
-
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
@@ -885,7 +962,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_HandlePropertyUCPresenter presenter = unityC.Resolve<PP_HandlePropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
-
             return presenter;
         }
 
@@ -897,7 +973,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_HandleOptionsHeight", new Binding("Height", _panelModel, "Panel_HandleOptionsHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Frame_ArtNo", new Binding("Frame_ArtNo", _panelModel.Panel_ParentFrameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", _panelModel, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             return binding;
         }
     }

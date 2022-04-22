@@ -62,6 +62,7 @@
             this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -123,9 +124,8 @@
             this.toolsToolStripMenuItem});
             this.mnsMainMenu.Location = new System.Drawing.Point(0, 0);
             this.mnsMainMenu.Name = "mnsMainMenu";
-            this.mnsMainMenu.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
             this.mnsMainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.mnsMainMenu.Size = new System.Drawing.Size(1445, 28);
+            this.mnsMainMenu.Size = new System.Drawing.Size(1084, 24);
             this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
             // 
@@ -136,7 +136,7 @@
             this.saveAsToolStripMenuItem,
             this.syncToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -149,13 +149,13 @@
             this.colorToolStripMenuItem,
             this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
             // 
             this.QuotationToolStripMenuItem.Name = "QuotationToolStripMenuItem";
-            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.QuotationToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.QuotationToolStripMenuItem.Text = "&Quotation";
             this.QuotationToolStripMenuItem.Click += new System.EventHandler(this.QuotationToolStripMenuItem_Click);
             // 
@@ -166,20 +166,20 @@
             this.PremiLineToolStripMenuItem});
             this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
-            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ItemToolStripMenuItem.Text = "I&tem";
             // 
             // C70ToolStripMenuItem
             // 
             this.C70ToolStripMenuItem.Name = "C70ToolStripMenuItem";
-            this.C70ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.C70ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.C70ToolStripMenuItem.Text = "&C70";
             this.C70ToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
             // 
             // PremiLineToolStripMenuItem
             // 
             this.PremiLineToolStripMenuItem.Name = "PremiLineToolStripMenuItem";
-            this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.PremiLineToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.PremiLineToolStripMenuItem.Text = "P&remiLine";
             this.PremiLineToolStripMenuItem.Click += new System.EventHandler(this.CreateNewItem_Clicked);
             // 
@@ -190,13 +190,13 @@
             this.doubleToolStripMenuItem,
             this.tripleToolStripMenuItem});
             this.glassToolStripMenuItem.Name = "glassToolStripMenuItem";
-            this.glassToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.glassToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.glassToolStripMenuItem.Text = "Glass";
             // 
             // singleToolStripMenuItem
             // 
             this.singleToolStripMenuItem.Name = "singleToolStripMenuItem";
-            this.singleToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.singleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.singleToolStripMenuItem.Text = "Single";
             this.singleToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
@@ -206,20 +206,20 @@
             this.DoubleInsulatedToolStripMenuItem,
             this.DoubleLaminatedToolStripMenuItem});
             this.doubleToolStripMenuItem.Name = "doubleToolStripMenuItem";
-            this.doubleToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.doubleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.doubleToolStripMenuItem.Text = "Double";
             // 
             // DoubleInsulatedToolStripMenuItem
             // 
             this.DoubleInsulatedToolStripMenuItem.Name = "DoubleInsulatedToolStripMenuItem";
-            this.DoubleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.DoubleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.DoubleInsulatedToolStripMenuItem.Text = "Insulated";
             this.DoubleInsulatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
             // DoubleLaminatedToolStripMenuItem
             // 
             this.DoubleLaminatedToolStripMenuItem.Name = "DoubleLaminatedToolStripMenuItem";
-            this.DoubleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.DoubleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.DoubleLaminatedToolStripMenuItem.Text = "Laminated";
             this.DoubleLaminatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
@@ -229,41 +229,41 @@
             this.TripleInsulatedToolStripMenuItem,
             this.TripleLaminatedToolStripMenuItem});
             this.tripleToolStripMenuItem.Name = "tripleToolStripMenuItem";
-            this.tripleToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
+            this.tripleToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.tripleToolStripMenuItem.Text = "Triple";
             // 
             // TripleInsulatedToolStripMenuItem
             // 
             this.TripleInsulatedToolStripMenuItem.Name = "TripleInsulatedToolStripMenuItem";
-            this.TripleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.TripleInsulatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.TripleInsulatedToolStripMenuItem.Text = "Insulated";
             this.TripleInsulatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
             // TripleLaminatedToolStripMenuItem
             // 
             this.TripleLaminatedToolStripMenuItem.Name = "TripleLaminatedToolStripMenuItem";
-            this.TripleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.TripleLaminatedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.TripleLaminatedToolStripMenuItem.Text = "Laminated";
             this.TripleLaminatedToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGlass_Click);
             // 
             // glassTypeToolStripMenuItem
             // 
             this.glassTypeToolStripMenuItem.Name = "glassTypeToolStripMenuItem";
-            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.glassTypeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.glassTypeToolStripMenuItem.Text = "Glass Type";
             this.glassTypeToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // colorToolStripMenuItem
             // 
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.colorToolStripMenuItem.Text = "Color";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
             // spacerToolStripMenuItem
             // 
             this.spacerToolStripMenuItem.Name = "spacerToolStripMenuItem";
-            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
+            this.spacerToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.spacerToolStripMenuItem.Text = "Spacer";
             this.spacerToolStripMenuItem.Click += new System.EventHandler(this.glassTypeColorSpacerToolStripMenuItem_Click);
             // 
@@ -271,14 +271,14 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // costingToolStripMenuItem
@@ -287,20 +287,20 @@
             this.CostingItemsToolStripMenuItem,
             this.defaultValuesToolStripMenuItem});
             this.costingToolStripMenuItem.Name = "costingToolStripMenuItem";
-            this.costingToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.costingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.costingToolStripMenuItem.Text = "Cos&ting";
             // 
             // CostingItemsToolStripMenuItem
             // 
             this.CostingItemsToolStripMenuItem.Enabled = false;
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
-            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
             // 
             // defaultValuesToolStripMenuItem
             // 
             this.defaultValuesToolStripMenuItem.Name = "defaultValuesToolStripMenuItem";
-            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.defaultValuesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.defaultValuesToolStripMenuItem.Text = "Default values";
             this.defaultValuesToolStripMenuItem.Visible = false;
             // 
@@ -309,7 +309,7 @@
             this.ViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autoDescriptionToolStripMenuItem});
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.ViewToolStripMenuItem.Text = "View";
             // 
             // autoDescriptionToolStripMenuItem
@@ -318,7 +318,7 @@
             this.autoDescriptionToolStripMenuItem.CheckOnClick = true;
             this.autoDescriptionToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoDescriptionToolStripMenuItem.Name = "autoDescriptionToolStripMenuItem";
-            this.autoDescriptionToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.autoDescriptionToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.autoDescriptionToolStripMenuItem.Text = "Auto Description";
             // 
             // toolsToolStripMenuItem
@@ -329,21 +329,22 @@
             this.editorToolStripMenuItem,
             this.listOfMaterialsToolStripMenuItem,
             this.changeItemColorToolStripMenuItem,
-            this.glassBalancingToolStripMenuItem});
+            this.glassBalancingToolStripMenuItem,
+            this.customArrowHeadToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // changeSyncDirectoryToolStripMenuItem
             // 
             this.changeSyncDirectoryToolStripMenuItem.Name = "changeSyncDirectoryToolStripMenuItem";
-            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.changeSyncDirectoryToolStripMenuItem.Text = "Change sync directory";
             // 
             // syncLocalToCloudToolStripMenuItem
             // 
             this.syncLocalToCloudToolStripMenuItem.Name = "syncLocalToCloudToolStripMenuItem";
-            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.syncLocalToCloudToolStripMenuItem.Text = "Sync local to cloud";
             // 
             // editorToolStripMenuItem
@@ -351,21 +352,21 @@
             this.editorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.invertOrientationToolStripMenuItem});
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.editorToolStripMenuItem.Text = "Editor";
             // 
             // invertOrientationToolStripMenuItem
             // 
             this.invertOrientationToolStripMenuItem.CheckOnClick = true;
             this.invertOrientationToolStripMenuItem.Name = "invertOrientationToolStripMenuItem";
-            this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.invertOrientationToolStripMenuItem.Text = "Invert Orientation";
             // 
             // listOfMaterialsToolStripMenuItem
             // 
             this.listOfMaterialsToolStripMenuItem.Enabled = false;
             this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
-            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
             this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
             // 
@@ -373,7 +374,7 @@
             // 
             this.changeItemColorToolStripMenuItem.Enabled = false;
             this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
-            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.changeItemColorToolStripMenuItem.Text = "Change Item Color";
             this.changeItemColorToolStripMenuItem.Click += new System.EventHandler(this.changeItemColorToolStripMenuItem_Click);
             // 
@@ -381,10 +382,17 @@
             // 
             this.glassBalancingToolStripMenuItem.CheckOnClick = true;
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
-            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
+            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
             this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
+            // 
+            // customArrowHeadToolStripMenuItem
+            // 
+            this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
+            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
+            this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -406,10 +414,10 @@
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status});
-            this.tsMain.Location = new System.Drawing.Point(0, 28);
+            this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.tsMain.Size = new System.Drawing.Size(1445, 39);
+            this.tsMain.Size = new System.Drawing.Size(1084, 32);
             this.tsMain.TabIndex = 1;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -420,7 +428,7 @@
             this.tsBtnNwin.Image = global::PresentationLayer.Properties.Resources.AddNew_Window;
             this.tsBtnNwin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNwin.Name = "tsBtnNwin";
-            this.tsBtnNwin.Size = new System.Drawing.Size(24, 36);
+            this.tsBtnNwin.Size = new System.Drawing.Size(24, 29);
             this.tsBtnNwin.Text = "New Window";
             this.tsBtnNwin.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
             // 
@@ -432,7 +440,7 @@
             this.tsBtnNdoor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnNdoor.Margin = new System.Windows.Forms.Padding(0);
             this.tsBtnNdoor.Name = "tsBtnNdoor";
-            this.tsBtnNdoor.Size = new System.Drawing.Size(24, 39);
+            this.tsBtnNdoor.Size = new System.Drawing.Size(24, 32);
             this.tsBtnNdoor.Text = "New Door";
             this.tsBtnNdoor.Click += new System.EventHandler(this.CreateNewFrame_Clicked);
             // 
@@ -442,7 +450,7 @@
             this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(24, 36);
+            this.openToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.openToolStripButton.Text = "&Open";
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
@@ -453,7 +461,7 @@
             this.CloudStoragetoolStripButton.Image = global::PresentationLayer.Properties.Resources.cloud_storage_40px;
             this.CloudStoragetoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CloudStoragetoolStripButton.Name = "CloudStoragetoolStripButton";
-            this.CloudStoragetoolStripButton.Size = new System.Drawing.Size(24, 36);
+            this.CloudStoragetoolStripButton.Size = new System.Drawing.Size(24, 29);
             this.CloudStoragetoolStripButton.Text = "Open Cloud storage";
             // 
             // saveToolStripButton
@@ -463,7 +471,7 @@
             this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(24, 36);
+            this.saveToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.saveToolStripButton.Text = "&Save";
             // 
             // refreshToolStripButton
@@ -473,7 +481,7 @@
             this.refreshToolStripButton.Image = global::PresentationLayer.Properties.Resources.refresh_30px;
             this.refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshToolStripButton.Name = "refreshToolStripButton";
-            this.refreshToolStripButton.Size = new System.Drawing.Size(24, 36);
+            this.refreshToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.refreshToolStripButton.Text = "Refresh image";
             this.refreshToolStripButton.ToolTipText = "Refresh image";
             // 
@@ -483,7 +491,7 @@
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(24, 36);
+            this.printToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.printToolStripButton.Text = "&Print";
             this.printToolStripButton.Visible = false;
             // 
@@ -493,7 +501,7 @@
             this.tsb_Undo.Image = ((System.Drawing.Image)(resources.GetObject("tsb_Undo.Image")));
             this.tsb_Undo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_Undo.Name = "tsb_Undo";
-            this.tsb_Undo.Size = new System.Drawing.Size(24, 36);
+            this.tsb_Undo.Size = new System.Drawing.Size(24, 29);
             this.tsb_Undo.Text = "Undo";
             this.tsb_Undo.Visible = false;
             // 
@@ -503,7 +511,7 @@
             this.tsb_Redo.Image = ((System.Drawing.Image)(resources.GetObject("tsb_Redo.Image")));
             this.tsb_Redo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsb_Redo.Name = "tsb_Redo";
-            this.tsb_Redo.Size = new System.Drawing.Size(24, 36);
+            this.tsb_Redo.Size = new System.Drawing.Size(24, 29);
             this.tsb_Redo.Text = "Redo";
             this.tsb_Redo.Visible = false;
             // 
@@ -511,7 +519,7 @@
             // 
             this.tsprogress_Loading.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsprogress_Loading.Name = "tsprogress_Loading";
-            this.tsprogress_Loading.Size = new System.Drawing.Size(133, 36);
+            this.tsprogress_Loading.Size = new System.Drawing.Size(100, 29);
             this.tsprogress_Loading.Visible = false;
             // 
             // deleteItemToolStripButton1
@@ -520,7 +528,7 @@
             this.deleteItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.delete_file_30px;
             this.deleteItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteItemToolStripButton1.Name = "deleteItemToolStripButton1";
-            this.deleteItemToolStripButton1.Size = new System.Drawing.Size(24, 36);
+            this.deleteItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.deleteItemToolStripButton1.Text = "Delete item";
             this.deleteItemToolStripButton1.ToolTipText = "Delete item";
             this.deleteItemToolStripButton1.Click += new System.EventHandler(this.deleteItemToolStripButton1_Click);
@@ -545,7 +553,7 @@
             // 
             this.tsLbl_Loading.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsLbl_Loading.Name = "tsLbl_Loading";
-            this.tsLbl_Loading.Size = new System.Drawing.Size(78, 36);
+            this.tsLbl_Loading.Size = new System.Drawing.Size(61, 29);
             this.tsLbl_Loading.Text = "Initializing";
             this.tsLbl_Loading.Visible = false;
             // 
@@ -554,7 +562,7 @@
             this.tsLbl_Status.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsLbl_Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.tsLbl_Status.Name = "tsLbl_Status";
-            this.tsLbl_Status.Size = new System.Drawing.Size(167, 36);
+            this.tsLbl_Status.Size = new System.Drawing.Size(134, 29);
             this.tsLbl_Status.Text = "TransomUC_1 Selected";
             this.tsLbl_Status.Visible = false;
             // 
@@ -564,20 +572,18 @@
             this.pnlRight.Controls.Add(this.pnlItems);
             this.pnlRight.Controls.Add(this.label6);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(1222, 67);
-            this.pnlRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRight.Location = new System.Drawing.Point(916, 56);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(223, 613);
+            this.pnlRight.Size = new System.Drawing.Size(168, 497);
             this.pnlRight.TabIndex = 6;
             // 
             // pnlItems
             // 
             this.pnlItems.AutoScroll = true;
             this.pnlItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlItems.Location = new System.Drawing.Point(0, 35);
-            this.pnlItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlItems.Location = new System.Drawing.Point(0, 29);
             this.pnlItems.Name = "pnlItems";
-            this.pnlItems.Size = new System.Drawing.Size(221, 576);
+            this.pnlItems.Size = new System.Drawing.Size(166, 466);
             this.pnlItems.TabIndex = 1;
             // 
             // label6
@@ -586,9 +592,8 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(0, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(221, 35);
+            this.label6.Size = new System.Drawing.Size(166, 29);
             this.label6.TabIndex = 0;
             this.label6.Text = "Items";
             // 
@@ -596,8 +601,7 @@
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 67);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 56);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -607,9 +611,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1222, 613);
-            this.splitContainer1.SplitterDistance = 176;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(916, 497);
+            this.splitContainer1.SplitterDistance = 131;
             this.splitContainer1.TabIndex = 7;
             // 
             // pnlControlMain
@@ -618,18 +621,16 @@
             this.pnlControlMain.Controls.Add(this.label1);
             this.pnlControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControlMain.Location = new System.Drawing.Point(0, 0);
-            this.pnlControlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlControlMain.Name = "pnlControlMain";
-            this.pnlControlMain.Size = new System.Drawing.Size(174, 611);
+            this.pnlControlMain.Size = new System.Drawing.Size(129, 495);
             this.pnlControlMain.TabIndex = 5;
             // 
             // pnlControlSub
             // 
             this.pnlControlSub.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlControlSub.Location = new System.Drawing.Point(0, 35);
-            this.pnlControlSub.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlControlSub.Location = new System.Drawing.Point(0, 29);
             this.pnlControlSub.Name = "pnlControlSub";
-            this.pnlControlSub.Size = new System.Drawing.Size(174, 576);
+            this.pnlControlSub.Size = new System.Drawing.Size(129, 466);
             this.pnlControlSub.TabIndex = 1;
             // 
             // label1
@@ -640,7 +641,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 35);
+            this.label1.Size = new System.Drawing.Size(129, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Controls";
             // 
@@ -648,7 +649,6 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -658,9 +658,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pnlMain);
-            this.splitContainer2.Size = new System.Drawing.Size(1039, 611);
-            this.splitContainer2.SplitterDistance = 200;
-            this.splitContainer2.SplitterWidth = 5;
+            this.splitContainer2.Size = new System.Drawing.Size(779, 495);
+            this.splitContainer2.SplitterDistance = 149;
             this.splitContainer2.TabIndex = 5;
             // 
             // pnlProperties
@@ -672,9 +671,9 @@
             this.pnlProperties.Controls.Add(this.label2);
             this.pnlProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProperties.Location = new System.Drawing.Point(0, 0);
-            this.pnlProperties.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlProperties.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProperties.Name = "pnlProperties";
-            this.pnlProperties.Size = new System.Drawing.Size(200, 611);
+            this.pnlProperties.Size = new System.Drawing.Size(149, 495);
             this.pnlProperties.TabIndex = 4;
             // 
             // chkView
@@ -686,10 +685,10 @@
             this.chkView.FlatAppearance.BorderSize = 0;
             this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkView.Location = new System.Drawing.Point(146, 4);
-            this.chkView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkView.Location = new System.Drawing.Point(104, 3);
+            this.chkView.Margin = new System.Windows.Forms.Padding(2);
             this.chkView.Name = "chkView";
-            this.chkView.Size = new System.Drawing.Size(47, 27);
+            this.chkView.Size = new System.Drawing.Size(40, 23);
             this.chkView.TabIndex = 2;
             this.chkView.Text = "View";
             this.chkView.UseVisualStyleBackColor = false;
@@ -698,10 +697,10 @@
             // 
             this.pnlPropertiesBody.AutoScroll = true;
             this.pnlPropertiesBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 35);
-            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlPropertiesBody.Location = new System.Drawing.Point(0, 29);
+            this.pnlPropertiesBody.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPropertiesBody.Name = "pnlPropertiesBody";
-            this.pnlPropertiesBody.Size = new System.Drawing.Size(198, 574);
+            this.pnlPropertiesBody.Size = new System.Drawing.Size(147, 464);
             this.pnlPropertiesBody.TabIndex = 1;
             this.pnlPropertiesBody.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlPropertiesBody_Scroll);
             // 
@@ -713,7 +712,7 @@
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(198, 35);
+            this.label2.Size = new System.Drawing.Size(147, 29);
             this.label2.TabIndex = 0;
             this.label2.Text = "Properties";
             // 
@@ -724,9 +723,8 @@
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(834, 611);
+            this.pnlMain.Size = new System.Drawing.Size(626, 495);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
             // 
@@ -744,11 +742,10 @@
             this.pnlBot.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBot.Enabled = false;
             this.pnlBot.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlBot.Location = new System.Drawing.Point(0, 680);
-            this.pnlBot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlBot.Location = new System.Drawing.Point(0, 553);
             this.pnlBot.Name = "pnlBot";
-            this.pnlBot.Padding = new System.Windows.Forms.Padding(4, 1, 4, 1);
-            this.pnlBot.Size = new System.Drawing.Size(1445, 31);
+            this.pnlBot.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.pnlBot.Size = new System.Drawing.Size(1084, 25);
             this.pnlBot.TabIndex = 8;
             // 
             // btnPlusZoom
@@ -759,10 +756,10 @@
             this.btnPlusZoom.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnPlusZoom.FlatAppearance.BorderSize = 0;
             this.btnPlusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlusZoom.Location = new System.Drawing.Point(151, 1);
+            this.btnPlusZoom.Location = new System.Drawing.Point(121, 1);
             this.btnPlusZoom.Margin = new System.Windows.Forms.Padding(0);
             this.btnPlusZoom.Name = "btnPlusZoom";
-            this.btnPlusZoom.Size = new System.Drawing.Size(33, 29);
+            this.btnPlusZoom.Size = new System.Drawing.Size(25, 23);
             this.btnPlusZoom.TabIndex = 4;
             this.btnPlusZoom.UseVisualStyleBackColor = true;
             this.btnPlusZoom.Click += new System.EventHandler(this.btnPlusZoom_Click);
@@ -775,10 +772,10 @@
             this.btnMinusZoom.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnMinusZoom.FlatAppearance.BorderSize = 0;
             this.btnMinusZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinusZoom.Location = new System.Drawing.Point(118, 1);
+            this.btnMinusZoom.Location = new System.Drawing.Point(96, 1);
             this.btnMinusZoom.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinusZoom.Name = "btnMinusZoom";
-            this.btnMinusZoom.Size = new System.Drawing.Size(33, 29);
+            this.btnMinusZoom.Size = new System.Drawing.Size(25, 23);
             this.btnMinusZoom.TabIndex = 3;
             this.btnMinusZoom.UseVisualStyleBackColor = true;
             this.btnMinusZoom.Click += new System.EventHandler(this.btnMinusZoom_Click);
@@ -788,10 +785,10 @@
             this.lblZoom.AutoSize = true;
             this.lblZoom.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblZoom.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZoom.Location = new System.Drawing.Point(83, 1);
-            this.lblZoom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblZoom.Location = new System.Drawing.Point(67, 1);
+            this.lblZoom.Margin = new System.Windows.Forms.Padding(3);
             this.lblZoom.Name = "lblZoom";
-            this.lblZoom.Size = new System.Drawing.Size(35, 23);
+            this.lblZoom.Size = new System.Drawing.Size(29, 19);
             this.lblZoom.TabIndex = 1;
             this.lblZoom.Text = "0%";
             this.lblZoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -800,10 +797,9 @@
             // 
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblWelcome.Location = new System.Drawing.Point(1318, 1);
-            this.lblWelcome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWelcome.Location = new System.Drawing.Point(982, 1);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(123, 23);
+            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
             this.lblWelcome.TabIndex = 2;
             this.lblWelcome.Text = "Welcome, User";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -814,10 +810,9 @@
             this.lblSize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSize.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblSize.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(4, 1);
-            this.lblSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSize.Location = new System.Drawing.Point(3, 1);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(79, 21);
+            this.lblSize.Size = new System.Drawing.Size(64, 17);
             this.lblSize.TabIndex = 0;
             this.lblSize.Text = "400 x 400";
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -825,9 +820,9 @@
             // 
             // MainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 711);
+            this.ClientSize = new System.Drawing.Size(1084, 578);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.pnlRight);
             this.Controls.Add(this.tsMain);
@@ -835,7 +830,6 @@
             this.Controls.Add(this.pnlBot);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -935,5 +929,6 @@
         private System.Windows.Forms.ToolStripMenuItem spacerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripMenuItem customArrowHeadToolStripMenuItem;
     }
 }

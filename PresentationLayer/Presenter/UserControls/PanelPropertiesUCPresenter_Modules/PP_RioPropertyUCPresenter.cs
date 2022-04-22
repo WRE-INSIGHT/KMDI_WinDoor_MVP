@@ -3,9 +3,6 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -31,6 +28,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_rioPropertyUC.PPRioPropertyLoadEventRaised += _pp_rioPropertyUC_PPRioPropertyLoadEventRaised;
             _pp_rioPropertyUC.cmbRioArtNoSelectedValueChangedEventRaised += _pp_rioPropertyUC_cmbRioArtNoSelectedValueChangedEventRaised;
+            _pp_rioPropertyUC.cmbRioArtNo2SelectedValueChangedEventRaised += _pp_rioPropertyUC_cmbRioArtNo2SelectedValueChangedEventRaised;
+        }
+
+        private void _pp_rioPropertyUC_cmbRioArtNo2SelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            if (!_initialLoad)
+            {
+                _panelModel.Panel_RioArtNo2 = (Rio_HandleArtNo)((ComboBox)sender).SelectedValue;
+            }
         }
 
         private void _pp_rioPropertyUC_cmbRioArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -45,6 +51,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_rioPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_RioArtNo = Rio_HandleArtNo._C050C108019;
+            _panelModel.Panel_RioArtNo2 = Rio_HandleArtNo._C050C108019;
+
             _initialLoad = false;
         }
 
@@ -69,7 +77,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("Panel_RioArtNo", new Binding("Text", _panelModel, "Panel_RioArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_RioArtNo2", new Binding("Text", _panelModel, "Panel_RioArtNo2", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_RioOptionsVisibility", new Binding("Visible", _panelModel, "Panel_RioOptionsVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_RioOptionsVisibility2", new Binding("Visible", _panelModel, "Panel_RioOptionsVisibility2", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

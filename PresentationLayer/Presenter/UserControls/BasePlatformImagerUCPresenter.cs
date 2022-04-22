@@ -49,7 +49,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _basePlatformImagerUC_flpFrameDragDropPaintEventRaised(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            Panel pnl = (Panel)sender;
+            FlowLayoutPanel pnl = (FlowLayoutPanel)sender;
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -529,6 +529,12 @@ namespace PresentationLayer.Presenter.UserControls
                                                            0,
                                                            pnl.ClientRectangle.Width - w,
                                                            pnl.ClientRectangle.Height - w));
+
+
+            //Bitmap bbm = new Bitmap(pnl.Size.Width, pnl.Size.Height);
+            //pnl.DrawToBitmap(bbm, new Rectangle(0, 0, pnl.Size.Width, pnl.Size.Height));
+
+            //_windoorModel.WD_flpImage = bbm;
         }
 
         private int Find_LocY_Inside_MpanelParent(int mpnl_ndx, IMultiPanelModel mpnl)
@@ -1428,6 +1434,14 @@ namespace PresentationLayer.Presenter.UserControls
         public void DeleteControl(UserControl frameImagerUC)
         {
             _flpMain.Controls.Remove(frameImagerUC);
+        }
+
+        public void SetWdFlpImage()
+        {
+            Bitmap bbm = new Bitmap(_flpMain.Size.Width, _flpMain.Size.Height);
+            _flpMain.DrawToBitmap(bbm, new Rectangle(0, 0, _flpMain.Size.Width, _flpMain.Size.Height));
+
+            _windoorModel.WD_flpImage = bbm;
         }
     }
 }

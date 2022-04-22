@@ -81,6 +81,7 @@
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassTypePresenter.cs" />
+    <Compile Include="Presenter\CustomArrowHeadPresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Presenter\ICreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassSpacerPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassTypePresenter.cs" />
+    <Compile Include="Presenter\ICustomArrowHeadPresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\CustomArrowHeadUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingBracketPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter_Modules\DP_CladdingPropertyUCPresenter.cs" />
@@ -124,6 +127,7 @@
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ICustomArrowHeadUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IDividerPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFrameImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IFramePropertiesUCPresenter.cs" />
@@ -228,6 +232,12 @@
     <Compile Include="Views\CreateNewGlassView.Designer.cs">
       <DependentUpon>CreateNewGlassView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomArrowHeadView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CustomArrowHeadView.Designer.cs">
+      <DependentUpon>CustomArrowHeadView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExplosionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +261,7 @@
     <Compile Include="Views\ICreateNewGlassSpacerView.cs" />
     <Compile Include="Views\ICreateNewGlassTypeView.cs" />
     <Compile Include="Views\ICreateNewGlassView.cs" />
+    <Compile Include="Views\ICustomArrowHeadView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\IGlassThicknessListView.cs" />
@@ -292,6 +303,12 @@
     </Compile>
     <Compile Include="Views\UserControls\ControlsUC.Designer.cs">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CustomArrowHeadUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\CustomArrowHeadUC.Designer.cs">
+      <DependentUpon>CustomArrowHeadUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\DividerPropertiesUC.cs">
       <SubType>UserControl</SubType>
@@ -376,6 +393,7 @@
     <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
+    <Compile Include="Views\UserControls\ICustomArrowHeadUC.cs" />
     <Compile Include="Views\UserControls\IDividerPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IFrameImagerUC.cs" />
     <Compile Include="Views\UserControls\IFramePropertiesUC.cs" />
@@ -695,6 +713,9 @@
     <EmbeddedResource Include="Views\CreateNewGlassView.resx">
       <DependentUpon>CreateNewGlassView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CustomArrowHeadView.resx">
+      <DependentUpon>CustomArrowHeadView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExplosionView.resx">
       <DependentUpon>ExplosionView.cs</DependentUpon>
     </EmbeddedResource>
@@ -721,6 +742,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
       <DependentUpon>ControlsUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\CustomArrowHeadUC.resx">
+      <DependentUpon>CustomArrowHeadUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\DividerPropertiesUC.resx">
       <DependentUpon>DividerPropertiesUC.cs</DependentUpon>

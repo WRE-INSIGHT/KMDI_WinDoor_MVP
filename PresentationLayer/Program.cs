@@ -256,6 +256,15 @@ namespace PresentationLayer
                 .RegisterType<IPP_2dHingePropertyUC, PP_2dHingePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_2dHingePropertyUCPresenter, PP_2dHingePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ICustomArrowHeadUC, CustomArrowHeadUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomArrowHeadUCPresenter, CustomArrowHeadUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICustomArrowHeadView, CustomArrowHeadView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomArrowHeadPresenter, CustomArrowHeadPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
 
             Application.EnableVisualStyles();
@@ -265,6 +274,11 @@ namespace PresentationLayer
 
             ILoginView loginView = loginPresenter.GetLoginView(UnityC);
             Application.Run((LoginView)loginView);
+
+            //ICustomArrowHeadPresenter presenter = UnityC.Resolve<CustomArrowHeadPresenter>();
+
+            //ICustomArrowHeadView view = presenter.GetICustomArrowHeadView();
+            //Application.Run((CustomArrowHeadView)view);
         }
     }
 }

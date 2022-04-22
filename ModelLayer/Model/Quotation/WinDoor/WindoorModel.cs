@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using ModelLayer.Model.Quotation.Frame;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Drawing;
-using ModelLayer.Model.Quotation.Panel;
+﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
-using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Panel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+using System.Runtime.CompilerServices;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
@@ -158,7 +156,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         private bool _wdOrientation;
         public bool WD_orientation
         {
-            get {
+            get
+            {
                 return _wdOrientation;
             }
             set
@@ -305,6 +304,22 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private Image _wdFlpImage;
+        public Image WD_flpImage
+        {
+            get
+            {
+                return _wdImage;
+            }
+
+            set
+            {
+                _wdImage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public List<IFrameModel> lst_frame { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -427,6 +442,64 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        //custom arrows methods
+        private bool _pnl_arrowHeightVisibility;
+        public bool Pnl_ArrowHeightVisibility
+        {
+            get
+            {
+                return _pnl_arrowHeightVisibility;
+            }
+            set
+            {
+                _pnl_arrowHeightVisibility = value;
+            }
+        }
+
+        private bool _pnl_arrowWidthVisibility;
+        public bool Pnl_ArrowWidthVisibility
+        {
+            get
+            {
+                return _pnl_arrowWidthVisibility;
+            }
+            set
+            {
+                _pnl_arrowWidthVisibility = value;
+            }
+        }
+
+        private int _lbl_arrowCount;
+        public int Lbl_ArrowHtCount
+        {
+            get
+            {
+                return _lbl_arrowCount;
+            }
+            set
+            {
+                _lbl_arrowCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _lbl_arrowWdCount;
+        public int Lbl_ArrowWdCount
+        {
+            get
+            {
+                return _lbl_arrowWdCount;
+            }
+            set
+            {
+                _lbl_arrowWdCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+        public int Div_ArrowCount { get; set; }
+
         #region Methods
 
         public void SetDimensions_basePlatform()
@@ -444,7 +517,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             int area = _wdHeight * _wdWidth;
             float zm = 1.0f;
-            
+
             if (area <= 360000) //400w x 400h to 600w x 600h
             {
                 zm = _arr_zoomPercentage[5];
@@ -563,7 +636,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 {
                     pnl.Panel_MiddleCloserArtNo = midArt;
                 }
-                foreach (IMultiPanelModel mpnl  in fr.Lst_MultiPanel)
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
                     foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                     {
