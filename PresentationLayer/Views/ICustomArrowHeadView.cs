@@ -11,7 +11,8 @@ namespace PresentationLayer.Views
         event EventHandler BtnAddArrowHeadWidthCkickEventRaised;
         event EventHandler BtnSaveCustomArrowCkickEventRaised;
         event EventHandler CustomArrowHeadViewLoadEventRaised;
-        event PaintEventHandler pnlFramePaintEventRaised;
+        event PaintEventHandler pnl_CustomArrowPaintEventRaised;
+        PictureBox GetPbox();
 
         void ShowCustomArrowHead();
         Panel GetPnlArrowWD();

@@ -189,6 +189,7 @@
             this.pnl_CustomArrow.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
             this.pnl_CustomArrow.Size = new System.Drawing.Size(477, 436);
             this.pnl_CustomArrow.TabIndex = 15;
+            this.pnl_CustomArrow.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_CustomArrow_Paint);
             // 
             // pbox_frame
             // 

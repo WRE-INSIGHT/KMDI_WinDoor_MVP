@@ -310,12 +310,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             get
             {
-                return _wdImage;
+                return _wdFlpImage;
             }
 
             set
             {
-                _wdImage = value;
+                _wdFlpImage = value;
                 NotifyPropertyChanged();
             }
         }
@@ -484,6 +484,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _lbl_arrowCount = value;
+            }
+        }
+
         private bool _wdSelected;
         public bool WD_Selected
         {

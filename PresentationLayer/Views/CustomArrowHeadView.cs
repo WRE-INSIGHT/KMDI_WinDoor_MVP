@@ -17,6 +17,7 @@ namespace PresentationLayer.Views
         public event EventHandler BtnSaveCustomArrowCkickEventRaised;
         public event EventHandler CustomArrowHeadViewLoadEventRaised;
         public event PaintEventHandler pnlFramePaintEventRaised;
+        public event PaintEventHandler pnl_CustomArrowPaintEventRaised;
 
 
         public Panel GetPnlArrowWD()
@@ -34,7 +35,7 @@ namespace PresentationLayer.Views
         }
 
 
-  
+
 
         public void SetBtnSaveBackColor(Color color)
         {
@@ -69,9 +70,14 @@ namespace PresentationLayer.Views
             this.Show();
         }
 
+        public PictureBox GetPbox()
+        {
+            return pbox_frame;
+        }
+
         private void CustomArrowHeadView_Load(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, CustomArrowHeadViewLoadEventRaised , e);
+            EventHelpers.RaiseEvent(sender, CustomArrowHeadViewLoadEventRaised, e);
         }
 
         private void btn_SaveCustomArrow_Click(object sender, EventArgs e)
@@ -84,9 +90,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, BtnAddArrowHeadHeightCkickEventRaised, e);
         }
 
-        private void pnl_Frame_Paint(object sender, PaintEventArgs e)
+        private void pnl_CustomArrow_Paint(object sender, PaintEventArgs e)
         {
-            EventHelpers.RaisePaintEvent(sender, pnlFramePaintEventRaised , e);
+            EventHelpers.RaisePaintEvent(sender, pnl_CustomArrowPaintEventRaised, e);
         }
     }
 }

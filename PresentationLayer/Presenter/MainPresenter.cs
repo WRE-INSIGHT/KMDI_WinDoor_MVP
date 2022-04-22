@@ -599,18 +599,18 @@ namespace PresentationLayer.Presenter
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
             _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
             _mainView.customArrowHeadToolStripMenuItemClickEventRaised += new EventHandler(OncustomArrowHeadToolStripMenuItemClickEventRaised);
+            _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
+            _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
+            _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
+            _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
         }
 
-        
+
         #region Events
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel, this);
             customArrowHeadPresenter.GetICustomArrowHeadView().ShowCustomArrowHead();
-            _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
-            _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
-            _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
-            _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
         }
 
 
@@ -1139,7 +1139,7 @@ namespace PresentationLayer.Presenter
         }
         private void SetMainViewTitle(string qrefno, string project_name, string cust_ref_no)
         {
-            _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" +  qrefno.ToUpper() + ")";
+            _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ")";
         }
         private void SetMainViewTitle(string qrefno)
         {
@@ -1252,9 +1252,9 @@ namespace PresentationLayer.Presenter
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
 
-                        //_basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                        //UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        //_mainView.GetThis().Controls.Add(bpUC);
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
@@ -1299,9 +1299,9 @@ namespace PresentationLayer.Presenter
                         _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
-                        //_basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                        //UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                        //_mainView.GetThis().Controls.Add(bpUC);
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
 
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());

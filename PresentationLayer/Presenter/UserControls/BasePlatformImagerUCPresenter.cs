@@ -10,10 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -56,8 +53,6 @@ namespace PresentationLayer.Presenter.UserControls
 
         public List<Point> OuterFrame_DrawPoints(List<Size> frameImager_sizes, int basePlatformImage_Width_minus70)
         {
-            FlowLayoutPanel pnl = (FlowLayoutPanel)sender;
-            Graphics g = e.Graphics;
             List<Point> frame_points = new List<Point>();
             List<int> curr_LocY = new List<int>();
 
@@ -100,8 +95,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _basePlatformImagerUC_flpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
                 Graphics g = e.Graphics;
 
@@ -617,12 +612,12 @@ namespace PresentationLayer.Presenter.UserControls
                                                                0,
                                                                fpnl.ClientRectangle.Width - w,
                                                                fpnl.ClientRectangle.Height - w));
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show("Error Message: " + ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger log = new Logger(ex.Message, ex.StackTrace);
+            //    MessageBox.Show("Error Message: " + ex.Message);
+            //}
         }
 
         private int Find_LocY_Inside_MpanelParent(int mpnl_ndx, IMultiPanelModel mpnl)
@@ -822,17 +817,17 @@ namespace PresentationLayer.Presenter.UserControls
 
                 //if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
                 //{
-                    g.DrawLines(redP, arrwhd_pnts_W1);
-                    g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
-                    g.DrawLines(redP, arrwhd_pnts_W2);
-                    TextRenderer.DrawText(g,
-                                          dmnsion_w,
-                                          dmnsion_font_wd,
-                                          new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
-                                                        new Size(s.Width, s.Height)),
-                                          Color.Black,
-                                          Color.White,
-                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                g.DrawLines(redP, arrwhd_pnts_W1);
+                g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                g.DrawLines(redP, arrwhd_pnts_W2);
+                TextRenderer.DrawText(g,
+                                      dmnsion_w,
+                                      dmnsion_font_wd,
+                                      new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                    new Size(s.Width, s.Height)),
+                                      Color.Black,
+                                      Color.White,
+                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 //}
                 //arrow for WIDTH
 
@@ -861,17 +856,17 @@ namespace PresentationLayer.Presenter.UserControls
 
                 //if (_flpMain.Controls.OfType<IFrameImagerUC>().Where(fr => fr.thisVisible == true).Count() > 0)
                 //{
-                    g.DrawLines(redP, arrwhd_pnts_H1);
-                    g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
-                    g.DrawLines(redP, arrwhd_pnts_H2);
-                    TextRenderer.DrawText(g,
-                                          dmnsion_h,
-                                          dmnsion_font_ht,
-                                          new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
-                                                        new Size(s2.Width, s2.Height)),
-                                          Color.Black,
-                                          Color.White,
-                                          TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                g.DrawLines(redP, arrwhd_pnts_H1);
+                g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                g.DrawLines(redP, arrwhd_pnts_H2);
+                TextRenderer.DrawText(g,
+                                      dmnsion_h,
+                                      dmnsion_font_ht,
+                                      new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                    new Size(s2.Width, s2.Height)),
+                                      Color.Black,
+                                      Color.White,
+                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 //}
                 //arrow for HEIGHT
             }
@@ -1099,7 +1094,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                    (client_wd - (outer_line * 2)) - w,
                                                                    (client_ht - (outer_line * 2)) - w));
 
-            
+
 
             if (panelModel.Panel_Type == "Fixed Panel")
             {

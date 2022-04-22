@@ -5,7 +5,6 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -97,7 +96,7 @@ namespace PresentationLayer.Presenter.UserControls
             return frame;
         }
 
-        
+
         private void OnbasePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
             try
@@ -219,7 +218,7 @@ namespace PresentationLayer.Presenter.UserControls
                     float locX = 0;
                     foreach (decimal wd in _windoorModel.lst_wd_redArrowLines)
                     {
-                        locX += Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
+                        locX = Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
                     }
 
                     float locY = 0;
@@ -525,7 +524,7 @@ namespace PresentationLayer.Presenter.UserControls
                 arr_wd[i] = arr_wd_locX[i, 0];
             }
 
-            for (int i = 0; i < arr_wd_locX.GetLength(0) ; i++)
+            for (int i = 0; i < arr_wd_locX.GetLength(0); i++)
             {
                 arr_locX[i] = arr_wd_locX[i, 1];
             }
@@ -564,7 +563,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 curr_lst_wd = lst_wd[i];
                 total_wd += curr_lst_wd;
-                if (total_wd <= flpMain_width || total_wd-2 <= flpMain_width)
+                if (total_wd <= flpMain_width || total_wd - 2 <= flpMain_width)
                 {
                     Width_List.Add(curr_lst_wd);
                 }

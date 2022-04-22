@@ -25,11 +25,11 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public int Arrow_Size
+        public decimal Arrow_Size
         {
             get
             {
-                return (int)nud_ArrowSize.Value;
+                return nud_ArrowSize.Value;
             }
             set
             {
@@ -74,6 +74,11 @@ namespace PresentationLayer.Views.UserControls
         private void nud_ArrowSize_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NudArrowSizeValueChangeEventRaised, e);
+        }
+
+        private void CustomArrowHeadUC_Load(object sender, EventArgs e)
+        {
+            nud_ArrowSize.Maximum = decimal.MaxValue;
         }
     }
 }
