@@ -10,10 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -98,8 +95,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _basePlatformImagerUC_flpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 FlowLayoutPanel fpnl = (FlowLayoutPanel)sender;
                 Graphics g = e.Graphics;
 
@@ -773,12 +770,12 @@ namespace PresentationLayer.Presenter.UserControls
                                                                0,
                                                                fpnl.ClientRectangle.Width - w,
                                                                fpnl.ClientRectangle.Height - w));
-            }
-            catch (Exception ex)
-            {
-                Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show("Error Message: " + ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger log = new Logger(ex.Message, ex.StackTrace);
+            //    MessageBox.Show("Error Message: " + ex.Message);
+            //}
         }
 
         private int Find_LocY_Inside_MpanelParent(int mpnl_ndx, IMultiPanelModel mpnl)
@@ -1250,7 +1247,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                                    (client_wd - (outer_line * 2)) - w,
                                                                    (client_ht - (outer_line * 2)) - w));
 
-            
+
 
             if (panelModel.Panel_Type == "Fixed Panel")
             {
@@ -1637,6 +1634,14 @@ namespace PresentationLayer.Presenter.UserControls
         public void DeleteControl(UserControl frameImagerUC)
         {
             _flpMain.Controls.Remove(frameImagerUC);
+        }
+
+        public void SetWdFlpImage()
+        {
+            Bitmap bbm = new Bitmap(_flpMain.Size.Width, _flpMain.Size.Height);
+            _flpMain.DrawToBitmap(bbm, new Rectangle(0, 0, _flpMain.Size.Width, _flpMain.Size.Height));
+
+            _windoorModel.WD_flpImage = bbm;
         }
     }
 }

@@ -1,14 +1,8 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
 namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
@@ -170,6 +164,7 @@ namespace PresentationLayer.Views
         public event EventHandler ChangeItemColorClickEventRaised;
         public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
+        public event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
         public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         public event EventHandler refreshToolStripButtonClickEventRaised;
@@ -183,7 +178,7 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-        
+
         private void MainView_Load(object sender, EventArgs e)
         {
             pnlProperties.Size = new Size(185, 629);
@@ -219,7 +214,7 @@ namespace PresentationLayer.Views
                 EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
             }
         }
-        
+
         private void QuotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(this, NewQuotationMenuItemClickEventRaised, e);
@@ -242,12 +237,11 @@ namespace PresentationLayer.Views
             //    btnMinusZoom.Enabled = false;
             //}
         }
-
         public Panel GetPanelItems()
         {
             return pnlItems;
         }
-        
+
         private void CreateNewItem_Clicked(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CreateNewItemClickEventRaised, e);
@@ -358,6 +352,11 @@ namespace PresentationLayer.Views
             this.ActiveControl = control;
         }
 
+        private void customArrowHeadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, customArrowHeadToolStripMenuItemClickEventRaised, e);
+        }
+        
         private void assignProjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, assignProjectsToolStripMenuItemClickEventRaised, e);

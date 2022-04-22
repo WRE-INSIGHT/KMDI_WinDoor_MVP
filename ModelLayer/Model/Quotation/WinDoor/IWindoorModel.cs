@@ -1,7 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
 using System.Drawing;
-using ModelLayer.Model.Quotation.Panel;
 using static EnumerationTypeLayer.EnumerationTypes;
 using ModelLayer.Model.Quotation.Concrete;
 
@@ -28,6 +27,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float WD_zoom { get; set; }
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
+        Image WD_flpImage { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         List<IConcreteModel> lst_concrete { get; set; }
 
@@ -54,5 +54,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
         void SetPanelGlassID();
         void SetMiddleCloser_onPanel();
         void SetDimensions_basePlatform();
+
+        //custom arrow head
+        bool Pnl_ArrowHeightVisibility { get; set; }
+        bool Pnl_ArrowWidthVisibility { get; set; }
+        int Lbl_ArrowHtCount { get; set; }
+        int Lbl_ArrowWdCount { get; set; }
+        Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+        int Div_ArrowCount { get; set; }
     }
 }

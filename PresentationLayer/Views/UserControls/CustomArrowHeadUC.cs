@@ -1,0 +1,84 @@
+﻿using CommonComponents;
+using System;
+using System.Windows.Forms;
+
+namespace PresentationLayer.Views.UserControls
+{
+    public partial class CustomArrowHeadUC : UserControl, ICustomArrowHeadUC
+    {
+
+        public CustomArrowHeadUC()
+        {
+            InitializeComponent();
+        }
+
+        private int _arrowWidthId;
+        public int ArrowWidthId
+        {
+            get
+            {
+                return _arrowWidthId;
+            }
+            set
+            {
+                _arrowWidthId = value;
+            }
+        }
+
+        public decimal Arrow_Size
+        {
+            get
+            {
+                return nud_ArrowSize.Value;
+            }
+            set
+            {
+                nud_ArrowSize.Value = value;
+            }
+        }
+        public int ArrowCountWD
+        {
+            get
+            {
+                return Convert.ToInt32(lbl_count.Text);
+            }
+            set
+            {
+                lbl_count.Text = Convert.ToString(value);
+            }
+        }
+
+        public int ArrowCountHT
+        {
+            get
+            {
+                return Convert.ToInt32(lbl_count.Text);
+            }
+            set
+            {
+                lbl_count.Text = Convert.ToString(value);
+            }
+        }
+
+
+
+
+        public event EventHandler NudArrowSizeValueChangeEventRaised;
+        public event EventHandler BtnDeleteArrowHeadClickEventRaised;
+
+        private void btn_DeleteArrowHead_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, BtnDeleteArrowHeadClickEventRaised, e);
+        }
+
+        private void nud_ArrowSize_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NudArrowSizeValueChangeEventRaised, e);
+        }
+
+        private void CustomArrowHeadUC_Load(object sender, EventArgs e)
+        {
+            nud_ArrowSize.Maximum = decimal.MaxValue;
+        }
+    }
+}

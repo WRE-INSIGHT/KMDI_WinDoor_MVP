@@ -64,6 +64,7 @@
             this.listOfMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -348,7 +349,8 @@
             this.editorToolStripMenuItem,
             this.listOfMaterialsToolStripMenuItem,
             this.changeItemColorToolStripMenuItem,
-            this.glassBalancingToolStripMenuItem});
+            this.glassBalancingToolStripMenuItem,
+            this.customArrowHeadToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -407,6 +409,13 @@
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
             this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
+            // 
+            // customArrowHeadToolStripMenuItem
+            // 
+            this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
+            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
+            this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -955,6 +964,7 @@
         private System.Windows.Forms.ToolStripMenuItem spacerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem glassBalancingToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripMenuItem customArrowHeadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem assignProjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tsBtnNConcrete;

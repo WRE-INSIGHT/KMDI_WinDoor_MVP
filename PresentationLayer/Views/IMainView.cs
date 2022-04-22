@@ -23,6 +23,7 @@ namespace PresentationLayer.Views
         event EventHandler ChangeItemColorClickEventRaised;
         event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
+        event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
         event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         event EventHandler NewConcreteButtonClickEventRaised;
@@ -31,7 +32,7 @@ namespace PresentationLayer.Views
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
-        bool ItemToolStripEnabled { get;  set; }
+        bool ItemToolStripEnabled { get; set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
@@ -59,5 +60,7 @@ namespace PresentationLayer.Views
         void FocusOnMainForm();
         void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);
+
+
     }
 }
