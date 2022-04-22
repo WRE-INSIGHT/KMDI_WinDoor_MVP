@@ -49,6 +49,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private ISlidingPanelUCPresenter _slidingUCP;
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
+        private ILouverPanelUCPresenter _louverPanelUCP;
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
@@ -95,6 +96,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             IAwningPanelUCPresenter awningUCP,
                                             ISlidingPanelUCPresenter slidingUCP,
                                             ITiltNTurnPanelUCPresenter tiltNTurnUCP,
+                                            ILouverPanelUCPresenter louverPanelUCP,
                                             IPanelServices panelServices,
                                             IMultiPanelServices multipanelServices,
                                             IPanelPropertiesUCPresenter panelPropertiesUCP,
@@ -120,6 +122,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _awningUCP = awningUCP;
             _slidingUCP = slidingUCP;
             _tiltNTurnUCP = tiltNTurnUCP;
+            _louverPanelUCP = louverPanelUCP;
             _panelServices = panelServices;
             _multipanelServices = multipanelServices;
             _panelPropertiesUCP = panelPropertiesUCP;
@@ -743,6 +746,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)tiltnTurnUC);
                             tiltNTurnUCP.SetInitialLoadFalse();
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)tiltnTurnUC, _frameModel.Frame_Type.ToString());
+
+                            _basePlatformImagerUCP.InvalidateBasePlatform();
+                        }
+                        else if (data == "Louver Panel")
+                        {
+                            ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
+                                                                                                   _panelModel,
+                                                                                                   _frameModel,
+                                                                                                   _mainPresenter,
+                                                                                                   _multiPanelModel,
+                                                                                                   this);
+                            ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                            fpnl.Controls.Add((UserControl)louverPanelUC);
+                            louverPanelUCP.SetInitialLoadFalse();
+                            _multiPanelModel.AddControl_MPanelLstObjects((UserControl)louverPanelUC, _frameModel.Frame_Type.ToString());
 
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }

@@ -138,10 +138,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     //blade
                     Point[] blade =
                     {
-                        new Point(pInnerX,Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((int)louver.Height - pInnerX - 7,Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point(pInnerX, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((int)louver.Width - pInnerX - 7, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point((int)louver.Width ,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
-                        new Point(pInnerX,Lvr_NewLocation+(int)Lvr_GlassHt)
+                        new Point(pInnerX, Lvr_NewLocation+(int)Lvr_GlassHt)
                     };
                     for (int i = 0; i < blade.Length; i += 2)
                     {

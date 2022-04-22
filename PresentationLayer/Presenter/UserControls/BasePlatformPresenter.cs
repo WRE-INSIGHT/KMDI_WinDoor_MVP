@@ -190,13 +190,12 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
-                            foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                            if (frame.Lst_Panel.Count >= 1 && frame.Lst_MultiPanel.Count == 0)
                             {
-                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                foreach (IPanelModel pnl in frame.Lst_Panel)
                                 {
-                                    Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
+                                    Control frame_ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
                                     string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
-
                                     string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
 
                                     decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
@@ -205,9 +204,37 @@ namespace PresentationLayer.Presenter.UserControls
                                     actual_arr_wd_locX[ndx, 0] = DispWd_dec;
                                     actual_arr_ht_locY[ndx, 0] = DispHt_dec;
 
-                                    actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                    actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                    Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
+
+                                    int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
+                                        ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
+
+                                    actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                    actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                     ndx++;
+                                }
+                            }
+                            else if (frame.Lst_Panel.Count == 0 && frame.Lst_MultiPanel.Count >= 1)
+                            {
+                                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                                {
+                                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                    {
+                                        Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
+                                        string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+
+                                        string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                                        decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                                        decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                                        actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                        actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+
+                                        actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                        actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                        ndx++;
+                                    }
                                 }
                             }
                         }
@@ -219,13 +246,13 @@ namespace PresentationLayer.Presenter.UserControls
                     float locX = 0;
                     foreach (decimal wd in _windoorModel.lst_wd_redArrowLines)
                     {
-                        locX += Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
+                        locX = Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
                     }
 
                     float locY = 0;
                     foreach (decimal ht in _windoorModel.lst_ht_redArrowLines)
                     {
-                        Draw_Arrow_Height(ht, e, locY, dmnsion_font_ht, ctrl_Y);
+                        locY = Draw_Arrow_Height(ht, e, locY, dmnsion_font_ht, ctrl_Y);
                     }
                 }
                 else if (total_panel == 1 && total_mpanel == 0)
