@@ -23,6 +23,7 @@ namespace PresentationLayer.Views
         event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
+        event EventHandler refreshToolStripButtonClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }
@@ -53,5 +54,7 @@ namespace PresentationLayer.Views
         Form GetThis();
         void FocusOnMainForm();
         void SetActiveControl(Control control);
+
+
     }
 }

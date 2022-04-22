@@ -15,5 +15,6 @@ namespace PresentationLayer.Presenter.UserControls
         void BringToFront_baseImager();
         void SendToBack_baseImager();
         void DeleteControl(UserControl frameImagerUC);
+        void SetWdFlpImage();
     }
 }

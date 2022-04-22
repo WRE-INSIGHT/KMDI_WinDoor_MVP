@@ -17,6 +17,7 @@ namespace PresentationLayer.Presenter
         private ICustomArrowHeadUCPresenter _customArrowHeadUCP;
         private IWindoorModel _windoorModel;
         private IMainPresenter _mainPresenter;
+        private IBasePlatformImagerUCPresenter _basePlatformImagerUCPresenter;
 
         private List<ICustomArrowHeadUCPresenter> _lst_arrowUCP = new List<ICustomArrowHeadUCPresenter>();
 
@@ -66,13 +67,14 @@ namespace PresentationLayer.Presenter
         }
 
         public CustomArrowHeadPresenter(ICustomArrowHeadView customArrowHead,
-                                        ICustomArrowHeadUCPresenter customArrowHeadUCP)
+                                        ICustomArrowHeadUCPresenter customArrowHeadUCP,
+                                        IBasePlatformImagerUCPresenter basePlatformImagerUCPresenter)
         {
             _customArrowHeadUCP = customArrowHeadUCP;
             _customArrowHead = customArrowHead;
             _customArrowHeadPnlWD = _customArrowHead.GetPnlArrowWD();
             _customArrowHeadPnlHT = _customArrowHead.GetPnlArrowHT();
-
+            _basePlatformImagerUCPresenter = basePlatformImagerUCPresenter;
 
             subscribeToEventSetup();
         }
@@ -83,10 +85,25 @@ namespace PresentationLayer.Presenter
             _customArrowHead.BtnAddArrowHeadWidthCkickEventRaised += _customArrowHead_BtnAddArrowHeadWidthCkickEventRaised;
             _customArrowHead.BtnSaveCustomArrowCkickEventRaised += _customArrowHead_BtnSaveCustomArrowCkickEventRaised;
             _customArrowHead.CustomArrowHeadViewLoadEventRaised += _customArrowHead_CustomArrowHeadViewLoadEventRaised;
+            _customArrowHead.pnlFramePaintEventRaised += _customArrowHead_pnlFramePaintEventRaised;
+        }
+
+        private void _customArrowHead_pnlFramePaintEventRaised(object sender, PaintEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void _customArrowHead_CustomArrowHeadViewLoadEventRaised(object sender, EventArgs e)
         {
+
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.SetWdFlpImage();
             _customArrowHead.ThisBinding(CreateBindingDictionary());
         }
 
@@ -193,6 +210,7 @@ namespace PresentationLayer.Presenter
             binding.Add("Lbl_ArrowHtCount", new Binding("Text", _windoorModel, "Lbl_ArrowHtCount", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Pnl_ArrowHeightVisibility", new Binding("Visible", _windoorModel, "Pnl_ArrowHeightVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Pnl_ArrowWidthVisibility", new Binding("Visible", _windoorModel, "Pnl_ArrowWidthVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

@@ -41,6 +41,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lbl_ArrowWdCount = new System.Windows.Forms.Label();
             this.lbl_ArrowHtCount = new System.Windows.Forms.Label();
+            this.pnl_CustomArrow = new System.Windows.Forms.Panel();
+            this.pbox_frame = new System.Windows.Forms.PictureBox();
+            this.pnl_CustomArrow.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -63,6 +67,9 @@
             // 
             // pnl_ArrowWidth
             // 
+            this.pnl_ArrowWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnl_ArrowWidth.AutoScroll = true;
             this.pnl_ArrowWidth.Location = new System.Drawing.Point(27, 78);
             this.pnl_ArrowWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnl_ArrowWidth.Name = "pnl_ArrowWidth";
@@ -71,6 +78,10 @@
             // 
             // pnl_ArrowHeight
             // 
+            this.pnl_ArrowHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnl_ArrowHeight.AutoScroll = true;
+            this.pnl_ArrowHeight.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_ArrowHeight.Location = new System.Drawing.Point(272, 78);
             this.pnl_ArrowHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnl_ArrowHeight.Name = "pnl_ArrowHeight";
@@ -99,7 +110,7 @@
             // 
             // btn_SaveCustomArrow
             // 
-            this.btn_SaveCustomArrow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_SaveCustomArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_SaveCustomArrow.Location = new System.Drawing.Point(205, 408);
             this.btn_SaveCustomArrow.Name = "btn_SaveCustomArrow";
             this.btn_SaveCustomArrow.Size = new System.Drawing.Size(78, 38);
@@ -166,11 +177,35 @@
             this.lbl_ArrowHtCount.TabIndex = 14;
             this.lbl_ArrowHtCount.Text = "0";
             // 
+            // pnl_CustomArrow
+            // 
+            this.pnl_CustomArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_CustomArrow.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnl_CustomArrow.Controls.Add(this.pbox_frame);
+            this.pnl_CustomArrow.Location = new System.Drawing.Point(475, 10);
+            this.pnl_CustomArrow.Name = "pnl_CustomArrow";
+            this.pnl_CustomArrow.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
+            this.pnl_CustomArrow.Size = new System.Drawing.Size(477, 436);
+            this.pnl_CustomArrow.TabIndex = 15;
+            // 
+            // pbox_frame
+            // 
+            this.pbox_frame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbox_frame.Location = new System.Drawing.Point(70, 35);
+            this.pbox_frame.Name = "pbox_frame";
+            this.pbox_frame.Size = new System.Drawing.Size(407, 401);
+            this.pbox_frame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_frame.TabIndex = 0;
+            this.pbox_frame.TabStop = false;
+            // 
             // CustomArrowHeadView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 452);
+            this.Controls.Add(this.pnl_CustomArrow);
             this.Controls.Add(this.lbl_ArrowHtCount);
             this.Controls.Add(this.lbl_ArrowWdCount);
             this.Controls.Add(this.lbl_ArrowHeightLength);
@@ -189,6 +224,8 @@
             this.Name = "CustomArrowHeadView";
             this.Text = "CustomArrowHeadView";
             this.Load += new System.EventHandler(this.CustomArrowHeadView_Load);
+            this.pnl_CustomArrow.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,5 +246,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbl_ArrowWdCount;
         private System.Windows.Forms.Label lbl_ArrowHtCount;
+        private System.Windows.Forms.Panel pnl_CustomArrow;
+        private System.Windows.Forms.PictureBox pbox_frame;
     }
 }

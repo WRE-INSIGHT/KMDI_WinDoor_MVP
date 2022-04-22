@@ -304,6 +304,22 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private Image _wdFlpImage;
+        public Image WD_flpImage
+        {
+            get
+            {
+                return _wdImage;
+            }
+
+            set
+            {
+                _wdImage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public List<IFrameModel> lst_frame { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

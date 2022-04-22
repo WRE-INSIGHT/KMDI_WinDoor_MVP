@@ -159,6 +159,7 @@ namespace PresentationLayer.Views
         public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         public event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
+        public event EventHandler refreshToolStripButtonClickEventRaised;
 
 
         public MainView()
@@ -224,7 +225,6 @@ namespace PresentationLayer.Views
             //    btnMinusZoom.Enabled = false;
             //}
         }
-
         public Panel GetPanelItems()
         {
             return pnlItems;

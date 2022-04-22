@@ -26,6 +26,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float WD_zoom { get; set; }
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
+        Image WD_flpImage { get; set; }
         List<IFrameModel> lst_frame { get; set; }
 
         int frameIDCounter { get; set; }

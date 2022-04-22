@@ -531,13 +531,13 @@ namespace PresentationLayer.Presenter
             _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
             _mainView.customArrowHeadToolStripMenuItemClickEventRaised += new EventHandler(OncustomArrowHeadToolStripMenuItemClickEventRaised);
         }
-
+        #region Events
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel, this);
             customArrowHeadPresenter.GetICustomArrowHeadView().ShowCustomArrowHead();
         }
-        #region Events
+
 
         private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
