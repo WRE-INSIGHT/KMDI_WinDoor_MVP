@@ -12,6 +12,8 @@ namespace PresentationLayer.Views.UserControls
     public interface IFramePropertiesUC: IViewCommon
     {
         int FrameID { get; set; }
+        Frame_Padding Frame_Type { get; set; }
+
         event EventHandler FramePropertiesLoadEventRaised;
         event EventHandler NumFHeightValueChangedEventRaised;
         event EventHandler NumFWidthValueChangedEventRaised;

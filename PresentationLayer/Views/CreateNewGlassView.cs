@@ -195,14 +195,13 @@ namespace PresentationLayer.Views
 
         public ComboBox Spacer2()
         {
-
             return cmbBetweenTheGlass2;
         }
 
         public event EventHandler NewGlassViewLoadEventRaised;
         public event EventHandler GlassThicknessTextChange;
         public event EventHandler BtnAddGlassClick;
-        public event EventHandler CmbClickEventRaised;
+        //public event EventHandler CmbClickEventRaised;
 
         public CreateNewGlassView()
         {

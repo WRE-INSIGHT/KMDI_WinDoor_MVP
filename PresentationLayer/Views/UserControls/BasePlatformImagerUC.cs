@@ -19,6 +19,7 @@ namespace PresentationLayer.Views.UserControls
         }
 
         public event EventHandler basePlatformSizeChangedEventRaised;
+        public event EventHandler BasePlatformImagerUCLoadEventRaised;
         public event PaintEventHandler basePlatformPaintEventRaised;
         public event PaintEventHandler flpFrameDragDropPaintEventRaised;
 
@@ -67,6 +68,11 @@ namespace PresentationLayer.Views.UserControls
         public void SendToBack_baseImager()
         {
             this.SendToBack();
+        }
+
+        private void BasePlatformImagerUC_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, BasePlatformImagerUCLoadEventRaised, e);
         }
     }
 }

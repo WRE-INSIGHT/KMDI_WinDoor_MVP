@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.QuotationModel;
 
@@ -25,7 +26,9 @@ namespace ServiceLayer.Services.FrameServices
                                   bool frameBotFrameEnable = true,
                                   List<IPanelModel> lst_Panel = null,
                                   List<IMultiPanelModel> lst_MPanel = null,
-                                  List<IDividerModel> lst_Divider = null);
+                                  List<IDividerModel> lst_Divider = null,
+                                  UserControl frameUC = null,
+                                  UserControl framePropertiesUC = null);
         void ValidateModel(IFrameModel frameModel);
     }
 }

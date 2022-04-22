@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.Concrete;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -321,6 +322,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
 
         public List<IFrameModel> lst_frame { get; set; }
+        public List<IConcreteModel> lst_concrete { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -349,6 +352,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _frameIDCounter = value;
             }
         }
+
+        public int concreteIDCounter { get; set; }
 
         private int _panelIDCounter;
         public int panelIDCounter
@@ -396,7 +401,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public Foil_Color WD_OutsideColor { get; set; }
 
         private decimal _wdPlasticCover;
-        [Description("Plastic Cover in kG")]
+        [Description("Plastic Cover in kg")]
         public decimal WD_PlasticCover
         {
             get
@@ -479,6 +484,17 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _lbl_arrowCount = value;
+        private bool _wdSelected;
+        public bool WD_Selected
+        {
+            get
+            {
+                return _wdSelected;
+            }
+
+            set
+            {
+                _wdSelected = value;
                 NotifyPropertyChanged();
             }
         }
@@ -499,6 +515,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         public int Div_ArrowCount { get; set; }
+        public List<decimal> lst_wd_redArrowLines { get; set; }
+
+        public List<decimal> lst_ht_redArrowLines { get; set; }
 
         #region Methods
 
@@ -661,6 +680,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             //float wd_zoom,
                             string wd_Profile,
                             List<IFrameModel> wdlstframe,
+                            List<IConcreteModel> wdlstconcrete,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
                             Foil_Color wd_outisdecolor)
@@ -678,11 +698,15 @@ namespace ModelLayer.Model.Quotation.WinDoor
             //WD_zoom = wd_zoom;
             WD_profile = wd_Profile;
             lst_frame = wdlstframe;
+            lst_concrete = wdlstconcrete;
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;
 
             WD_CmenuDeleteVisibility = true;
+
+            lst_wd_redArrowLines = new List<decimal>();
+            lst_ht_redArrowLines = new List<decimal>();
         }
     }
 }

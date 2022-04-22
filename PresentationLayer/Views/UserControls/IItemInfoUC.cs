@@ -8,7 +8,10 @@ namespace PresentationLayer.Views.UserControls
 {
     public interface IItemInfoUC: IViewCommon
     {
+        bool WD_Selected { get; set; }
+
         event EventHandler ItemInfoUCLoadEventRaised;
+        event MouseEventHandler lblItemMouseDoubleClickEventRaised;
         //string ItemName { set; }
         //string ItemDimension { set; }
         //string ItemDesc { set; }

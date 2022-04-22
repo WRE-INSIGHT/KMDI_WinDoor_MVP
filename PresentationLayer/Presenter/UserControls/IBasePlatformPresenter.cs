@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IBasePlatformUC getBasePlatformViewUC();
         void AddFrame(IFrameUC frame);
+        void AddConcrete(IConcreteUC concreteUC);
         void InvalidateBasePlatform();
         void PerformLayoutBasePlatform();
         void Invalidate_flpMain();
@@ -22,5 +23,6 @@ namespace PresentationLayer.Presenter.UserControls
         List<decimal> HeightList_ToPaint(int flpMain_height, decimal[,] arr_ht_locY);
         void ViewDeleteControl(UserControl control);
         void Invalidate_flpMainControls();
+        void RemoveBindingView();
     }
 }

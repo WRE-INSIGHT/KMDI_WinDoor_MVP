@@ -274,6 +274,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_SashPropertyVisibility = false;
                     }
                 }
+                else if (value.Contains("Louver"))
+                {
+                    Panel_SashPropertyVisibility = false;
+                }
                 else
                 {
                     Panel_HandleOptionsVisibility = true;
@@ -309,6 +313,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Casement"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
@@ -320,6 +325,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Awning"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "Invrt";
@@ -331,6 +337,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (_panelType.Contains("Sliding"))
                 {
+                    Panel_SashPropertyVisibility = true;
                     if (value == true)
                     {
                         _panelChkText = "L";
@@ -340,7 +347,32 @@ namespace ModelLayer.Model.Quotation.Panel
                         _panelChkText = "R";
                     }
                 }
+                else if (_panelType.Contains("TiltNTurn"))
+                {
+                    if (value == true)
+                    {
+                        _panelChkText = "Mod2";
+                    }
+                    else if (value == false)
+                    {
+                        _panelChkText = "Mod1";
+                    }
+                }
                 _panelOrient = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelOrientVisibility;
+        public bool Panel_OrientVisibility
+        {
+            get
+            {
+                return _panelOrientVisibility;
+            }
+            set
+            {
+                _panelOrientVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -614,6 +646,8 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        public int Panel_LouverBladesCount { get; set; }
 
         #region Explosion
         private int _panelGlassID;
@@ -1790,6 +1824,76 @@ namespace ModelLayer.Model.Quotation.Panel
         #endregion
 
         #region Methods
+
+        public void Set_LouverBladesCount()
+        {
+            int frameHT = Panel_Height;
+
+            if (frameHT <= 320)
+            {
+                Panel_LouverBladesCount = 2;
+            }
+            else if (frameHT >= 321 && frameHT <= 460)
+            {
+                Panel_LouverBladesCount = 3;
+            }
+            else if (frameHT >= 461 && frameHT <= 600)
+            {
+                Panel_LouverBladesCount = 4;
+            }
+            else if (frameHT >= 601 && frameHT <= 740)
+            {
+                Panel_LouverBladesCount = 5;
+            }
+            else if (frameHT >= 741 && frameHT <= 880)
+            {
+                Panel_LouverBladesCount = 6;
+            }
+            else if (frameHT >= 881 && frameHT <= 1020)
+            {
+                Panel_LouverBladesCount = 7;
+            }
+            else if (frameHT >= 1021 && frameHT <= 1160)
+            {
+                Panel_LouverBladesCount = 8;
+            }
+            else if (frameHT >= 1161 && frameHT <= 1300)
+            {
+                Panel_LouverBladesCount = 9;
+            }
+            else if (frameHT >= 1301 && frameHT <= 1440)
+            {
+                Panel_LouverBladesCount = 10;
+            }
+            else if (frameHT >= 1401 && frameHT <= 1580)
+            {
+                Panel_LouverBladesCount = 11;
+            }
+            else if (frameHT >= 1581 && frameHT <= 1720)
+            {
+                Panel_LouverBladesCount = 12;
+            }
+            else if (frameHT >= 1721 && frameHT <= 1860)
+            {
+                Panel_LouverBladesCount = 13;
+            }
+            else if (frameHT >= 1861 && frameHT <= 2000)
+            {
+                Panel_LouverBladesCount = 14;
+            }
+            else if (frameHT >= 2001 && frameHT <= 2140)
+            {
+                Panel_LouverBladesCount = 15;
+            }
+            else if (frameHT >= 2141 && frameHT <= 2280)
+            {
+                Panel_LouverBladesCount = 16;
+            }
+            else if (frameHT >= 2281 && frameHT <= 2420)
+            {
+                Panel_LouverBladesCount = 17;
+            }
+        }
 
         public void Imager_SetDimensionsToBind_FrameParent()
         {
@@ -6450,6 +6554,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptions = panelHingeOptions;
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
+            Panel_OrientVisibility = true;
+
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;

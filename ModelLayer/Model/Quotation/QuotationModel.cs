@@ -15,6 +15,8 @@ namespace ModelLayer.Model.Quotation
 {
     public class QuotationModel : IQuotationModel
     {
+        public int Quotation_Id { get;set; }
+
         public List<IWindoorModel> Lst_Windoor { get; set; }
 
         [Required(ErrorMessage = "Quotation reference number is Required")]
@@ -31,6 +33,7 @@ namespace ModelLayer.Model.Quotation
         public int Expansion_BoltQty_Total { get; set; }
         public int Rebate_Qty { get; set; }
         public int Plastic_CoverQty_Total { get; set; }
+        public DateTime Quotation_Date { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -1485,6 +1488,16 @@ namespace ModelLayer.Model.Quotation
                                    "Frame");
 
             return Material_List;
+        }
+
+        public void Select_Current_Windoor(IWindoorModel item)
+        {
+            foreach (IWindoorModel wndr_item in Lst_Windoor)
+            {
+                wndr_item.WD_Selected = false;
+            }
+
+            item.WD_Selected = true;
         }
 
         public QuotationModel(string quotation_ref_no,

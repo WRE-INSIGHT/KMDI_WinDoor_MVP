@@ -28,14 +28,15 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                     await sqlcon.OpenAsync();
                     using (SqlCommand sqlcmd = sqlcon.CreateCommand())
                     {
-                        using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "stp_Login")))
+                        using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "LogIn_Stp")))
                         {
                             sqlcmd.Connection = sqlcon;
                             sqlcmd.Transaction = sqltrans;
-                            sqlcmd.CommandText = "stp_Login";
+                            sqlcmd.CommandText = "LogIn_Stp";
                             sqlcmd.CommandType = CommandType.StoredProcedure;
                             sqlcmd.Parameters.AddWithValue("@UserName", userLoginModel.Username);
-                            sqlcmd.Parameters.AddWithValue("@Password", Encrypt(userLoginModel.Password));
+                            sqlcmd.Parameters.AddWithValue("@Password", userLoginModel.Password);
+                            //sqlcmd.Parameters.AddWithValue("@Password", Encrypt(userLoginModel.Password));
                             using (SqlDataReader rdr = sqlcmd.ExecuteReader())
                             {
                                 if (!rdr.HasRows)
@@ -46,7 +47,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                 {
                                     while (rdr.Read())
                                     {
-                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Costing")
+                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Cost Engr" || rdr.GetString(3) == "Cost Engr Head" || rdr.GetString(3) == "Programmer")
                                         {
                                             user.UserID = rdr.GetInt32(0);
                                             user.Fullname = rdr.GetString(1);
@@ -55,6 +56,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                             user.Username = rdr.GetString(4);
                                             user.Password = rdr.GetString(5);
                                             user.ProfilePath = rdr.GetString(6);
+                                            user.EmployeeID = rdr.GetInt32(7);
                                         }
                                         else
                                         {

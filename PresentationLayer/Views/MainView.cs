@@ -7,6 +7,8 @@ namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
     {
+        #region GetSet
+
         public string Nickname
         {
             set
@@ -42,12 +44,13 @@ namespace PresentationLayer.Views
         {
             get
             {
-                return tsBtnNwin.Enabled = tsBtnNdoor.Enabled;
+                return tsBtnNwin.Enabled = tsBtnNdoor.Enabled = tsBtnNConcrete.Enabled;
             }
             set
             {
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
+                tsBtnNConcrete.Enabled = value;
             }
         }
 
@@ -142,10 +145,13 @@ namespace PresentationLayer.Views
             }
         }
 
+        #endregion
+
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
+        public event EventHandler NewConcreteButtonClickEventRaised;
         public event EventHandler NewQuotationMenuItemClickEventRaised;
         public event EventHandler PanelMainSizeChangedEventRaised;
         public event EventHandler CreateNewItemClickEventRaised;
@@ -159,8 +165,9 @@ namespace PresentationLayer.Views
         public event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         public event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         public event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
+        public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
+        public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         public event EventHandler refreshToolStripButtonClickEventRaised;
-
 
         public MainView()
         {
@@ -182,6 +189,11 @@ namespace PresentationLayer.Views
         {
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
             this.DataBindings.Add(binding["WD_zoom"]);
+        }
+
+        public void RemoveBinding()
+        {
+            this.DataBindings.Clear();
         }
 
         public void RemoveBinding(Control ctrl)
@@ -343,6 +355,36 @@ namespace PresentationLayer.Views
         private void customArrowHeadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, customArrowHeadToolStripMenuItemClickEventRaised, e);
+        }
+        
+        private void assignProjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, assignProjectsToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, selectProjectToolStripMenuItemClickEventRaised, e);
+        }
+
+        public void Set_AssignProject_Visibility(bool visibility)
+        {
+            assignProjectsToolStripMenuItem.Visible = visibility;
+        }
+
+        private void tsBtnNConcrete_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NewConcreteButtonClickEventRaised, e);
+        }
+
+        private void invertOrientationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void refreshToolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
         }
     }
 }

@@ -17,11 +17,13 @@ namespace PresentationLayer.Presenter
     {
         ILoginView _loginView;
         private IMainPresenter _mainPresenter;
+        private ICostEngrLandingPresenter _CELandingPresenter;
         private IUserServices _userService;
         private IUserLoginModel _userLoginModel;
         private IUnityContainer _unityC;
 
-        public ILoginView GetLoginView(IUnityContainer unityC) {
+        public ILoginView GetLoginView(IUnityContainer unityC)
+        {
             _unityC = unityC;
             return _loginView;
         }
@@ -31,12 +33,17 @@ namespace PresentationLayer.Presenter
             _loginView = loginView;
         }
 
-        public LoginPresenter(ILoginView loginView, IMainPresenter mainPresenter, IUserServices userService, IUserLoginModel userLoginModel)
+        public LoginPresenter(ILoginView loginView, 
+                              IMainPresenter mainPresenter, 
+                              IUserServices userService, 
+                              IUserLoginModel userLoginModel,
+                              ICostEngrLandingPresenter CELandingPresenter)
         {
             _loginView = loginView;
             _mainPresenter = mainPresenter;
             _userService = userService;
             _userLoginModel = userLoginModel;
+            _CELandingPresenter = CELandingPresenter;
             SubscribeToEventsSetup();
         }
 
@@ -80,6 +87,7 @@ namespace PresentationLayer.Presenter
                 if (userModel != null)
                 {
                     _mainPresenter.SetValues(userModel, _loginView, _unityC);
+                    _mainPresenter.Set_User_View();
                     _mainPresenter.GetMainView().ShowMainView();
                     setPropertiesSettings();
                     _loginView.frmVisibility = false;

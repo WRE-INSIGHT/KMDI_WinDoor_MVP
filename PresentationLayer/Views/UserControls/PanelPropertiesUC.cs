@@ -68,6 +68,7 @@ namespace PresentationLayer.Views.UserControls
             lbl_Type.DataBindings.Add(ModelBinding["Panel_Type"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_ChkText"]);
             chk_Orientation.DataBindings.Add(ModelBinding["Panel_Orient"]);
+            chk_Orientation.DataBindings.Add(ModelBinding["Panel_OrientVisibility"]);
             this.DataBindings.Add(ModelBinding["PanelGlass_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
             this.DataBindings.Add(ModelBinding["Panel_PropertyHeight"]);

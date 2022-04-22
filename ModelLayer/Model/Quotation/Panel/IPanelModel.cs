@@ -28,6 +28,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_ID { get; set; }
         string Panel_Name { get; set; }
         bool Panel_Orient { get; set; }
+        bool Panel_OrientVisibility { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
         int Panel_OriginalWidth { get; set; }
@@ -56,6 +57,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_MVDOptionsVisibility { get; set; }
         bool Panel_RotaryOptionsVisibility { get; set; }
         int Panel_HandleOptionsHeight { get; set; }
+        int Panel_LouverBladesCount { get; set; }
         Color Panel_BackColor { get; set; }
 
         #region Explosion
@@ -223,6 +225,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
 
+        void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
         void SetPanelMarginImager_using_ImageZoomPercentage();

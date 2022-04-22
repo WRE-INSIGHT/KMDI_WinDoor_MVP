@@ -7,6 +7,7 @@ namespace PresentationLayer.Views.UserControls
     public interface IBasePlatformImagerUC : IViewCommon
     {
         event EventHandler basePlatformSizeChangedEventRaised;
+        event EventHandler BasePlatformImagerUCLoadEventRaised;
         event PaintEventHandler basePlatformPaintEventRaised;
         event PaintEventHandler flpFrameDragDropPaintEventRaised;
         void InvalidateThis();

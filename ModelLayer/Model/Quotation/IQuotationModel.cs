@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.WinDoor;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -7,6 +8,7 @@ namespace ModelLayer.Model.Quotation
     public interface IQuotationModel
     {
         string Quotation_ref_no { get; set; }
+        DateTime Quotation_Date { get; set; }
 
         int Frame_PUFoamingQty_Total { get; set; }
         int Frame_SealantWHQty_Total { get; set; }
@@ -21,5 +23,6 @@ namespace ModelLayer.Model.Quotation
         int Plastic_CoverQty_Total { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         DataTable GetListOfMaterials(IWindoorModel item);
+        void Select_Current_Windoor(IWindoorModel item);
     }
 }

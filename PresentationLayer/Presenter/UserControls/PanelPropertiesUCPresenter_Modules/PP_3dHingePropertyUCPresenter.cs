@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
-        bool _initialLoad = true;
+        //bool _initialLoad = true;
 
         public PP_3dHingePropertyUCPresenter(IPP_3dHingePropertyUC pp_3DHingePropertyUC)
         {
@@ -33,7 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_3DHingePropertyUC_PP3dHingeLoadEventRaised(object sender, EventArgs e)
         {
             _pp_3DHingePropertyUC.ThisBinding(CreateBindingDictionary());
-            _initialLoad = false;
+            //_initialLoad = false;
         }
 
         public IPP_3dHingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
