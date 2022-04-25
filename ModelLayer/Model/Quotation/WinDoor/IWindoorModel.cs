@@ -1,8 +1,8 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Frame;
 using System.Collections.Generic;
 using System.Drawing;
 using static EnumerationTypeLayer.EnumerationTypes;
-using ModelLayer.Model.Quotation.Concrete;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -31,9 +31,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         List<IFrameModel> lst_frame { get; set; }
         List<IConcreteModel> lst_concrete { get; set; }
 
-        int frameIDCounter { get;  set; }
+        int frameIDCounter { get; set; }
         int concreteIDCounter { get; set; }
-        int panelIDCounter { get;  set; }
+        int panelIDCounter { get; set; }
         int mpanelIDCounter { get; set; }
         int divIDCounter { get; set; }
         int PanelGlassID_Counter { get; set; }
@@ -56,11 +56,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
         void SetDimensions_basePlatform();
 
         //custom arrow head
-        bool Pnl_ArrowHeightVisibility { get; set; }
-        bool Pnl_ArrowWidthVisibility { get; set; }
+
+        //bool Pnl_ArrowHeightVisibility { get; set; }
+        //bool Pnl_ArrowWidthVisibility { get; set; }
         int Lbl_ArrowHtCount { get; set; }
         int Lbl_ArrowWdCount { get; set; }
         Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         int Div_ArrowCount { get; set; }
+        bool WD_customArrowToggle { get; set; }
     }
 }

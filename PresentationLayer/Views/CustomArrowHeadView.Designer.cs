@@ -182,7 +182,7 @@
             this.pnl_CustomArrow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnl_CustomArrow.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnl_CustomArrow.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_CustomArrow.Controls.Add(this.pbox_frame);
             this.pnl_CustomArrow.Location = new System.Drawing.Point(475, 10);
             this.pnl_CustomArrow.Name = "pnl_CustomArrow";
@@ -197,7 +197,6 @@
             this.pbox_frame.Location = new System.Drawing.Point(70, 35);
             this.pbox_frame.Name = "pbox_frame";
             this.pbox_frame.Size = new System.Drawing.Size(407, 401);
-            this.pbox_frame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbox_frame.TabIndex = 0;
             this.pbox_frame.TabStop = false;
             // 

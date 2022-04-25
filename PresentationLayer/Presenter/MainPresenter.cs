@@ -609,8 +609,16 @@ namespace PresentationLayer.Presenter
         #region Events
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel, this);
-            customArrowHeadPresenter.GetICustomArrowHeadView().ShowCustomArrowHead();
+            if (_windoorModel.WD_customArrowToggle == false)
+            {
+                ICustomArrowHeadPresenter customArrowHeadPresenter = _customArrowHeadPresenter.GetNewInstance(_unityC, _customArrowHeadUCP, _windoorModel, this);
+                customArrowHeadPresenter.GetICustomArrowHeadView().ShowCustomArrowHead();
+                _windoorModel.WD_customArrowToggle = true;
+            }
+            else if (_windoorModel.WD_customArrowToggle == true)
+            {
+                _windoorModel.WD_customArrowToggle = false;
+            }
         }
 
 
@@ -2018,6 +2026,7 @@ namespace PresentationLayer.Presenter
             Dictionary<string, Binding> mainPresenterBinding = new Dictionary<string, Binding>();
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
+            mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return mainPresenterBinding;
         }

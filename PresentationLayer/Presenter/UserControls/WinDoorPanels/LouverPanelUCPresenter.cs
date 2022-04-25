@@ -11,9 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -101,14 +98,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     pInnerHt = louver.Height,
                     pInnerWd = louver.Width,
                     NoOfBaldes = _panelModel.Panel_LouverBladesCount;
-                double Lvr_GlassHt = 0;
 
+                float Ht_Allowance = 20 * _frameModel.Frame_Zoom; // tag 10px na allowance sa taas at baba if 100%
+                double Lvr_GlassHt = 0;
 
                 //side blade
                 for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
                 {
-                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;//33 + (33 * 0.75);
-                    Lvr_NewLocation = ((pInnerY + 20) + Lvr_Gap) + (int)Lvr_GlassHt;
+                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;
+                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
                     Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
 
                     Point[] LvrSideBlade =

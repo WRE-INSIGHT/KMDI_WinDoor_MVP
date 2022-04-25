@@ -157,7 +157,7 @@ namespace PresentationLayer.Presenter.UserControls
                     decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
                     int ndx = 0;
 
-                    if (total_panel > 1 && total_mpanel == 0)
+                    if (total_panel > 1 && total_mpanel == 0) // single panel
                     {
                         foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
@@ -185,7 +185,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                         }
                     }
-                    else if (total_mpanel >= 1)
+                    else if (total_mpanel >= 1) // multiple panel
                     {
                         foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
@@ -239,8 +239,11 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                     }
 
-                    _windoorModel.lst_wd_redArrowLines = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
-                    _windoorModel.lst_ht_redArrowLines = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                    if (_windoorModel.WD_customArrowToggle == false)
+                    {
+                        _windoorModel.lst_wd_redArrowLines = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                        _windoorModel.lst_ht_redArrowLines = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                    }
 
                     float locX = 0;
                     foreach (decimal wd in _windoorModel.lst_wd_redArrowLines)

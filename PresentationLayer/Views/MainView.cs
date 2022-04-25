@@ -145,6 +145,20 @@ namespace PresentationLayer.Views
             }
         }
 
+
+        public bool CustomArrowHeadToggle
+        {
+            get
+            {
+                return customArrowHeadToolStripMenuItem.Checked;
+            }
+
+            set
+            {
+                customArrowHeadToolStripMenuItem.Checked = value;
+            }
+        }
+
         #endregion
 
         public event EventHandler MainViewLoadEventRaised;
@@ -189,6 +203,7 @@ namespace PresentationLayer.Views
         {
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
             this.DataBindings.Add(binding["WD_zoom"]);
+            this.DataBindings.Add(binding["WD_customArrowToggle"]);
         }
 
         public void RemoveBinding()
@@ -356,7 +371,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, customArrowHeadToolStripMenuItemClickEventRaised, e);
         }
-        
+
         private void assignProjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, assignProjectsToolStripMenuItemClickEventRaised, e);
@@ -379,7 +394,7 @@ namespace PresentationLayer.Views
 
         private void invertOrientationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void refreshToolStripButton_Click(object sender, EventArgs e)

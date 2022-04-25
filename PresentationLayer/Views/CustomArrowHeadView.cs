@@ -16,9 +16,14 @@ namespace PresentationLayer.Views
         public event EventHandler BtnAddArrowHeadHeightCkickEventRaised;
         public event EventHandler BtnSaveCustomArrowCkickEventRaised;
         public event EventHandler CustomArrowHeadViewLoadEventRaised;
-        public event PaintEventHandler pnlFramePaintEventRaised;
         public event PaintEventHandler pnl_CustomArrowPaintEventRaised;
 
+
+
+        public Panel GetPnlCustomArrow()
+        {
+            return pnl_CustomArrow;
+        }
 
         public Panel GetPnlArrowWD()
         {
@@ -57,8 +62,8 @@ namespace PresentationLayer.Views
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            pnl_ArrowHeight.DataBindings.Add(ModelBinding["Pnl_ArrowHeightVisibility"]);
-            pnl_ArrowWidth.DataBindings.Add(ModelBinding["Pnl_ArrowWidthVisibility"]);
+            //pnl_ArrowHeight.DataBindings.Add(ModelBinding["Pnl_ArrowHeightVisibility"]);
+            //pnl_ArrowWidth.DataBindings.Add(ModelBinding["Pnl_ArrowWidthVisibility"]);
             lbl_ArrowHtCount.DataBindings.Add(ModelBinding["Lbl_ArrowHtCount"]);
             lbl_ArrowWdCount.DataBindings.Add(ModelBinding["Lbl_ArrowWdCount"]);
             pbox_frame.DataBindings.Add(ModelBinding["pboxFrame"]);

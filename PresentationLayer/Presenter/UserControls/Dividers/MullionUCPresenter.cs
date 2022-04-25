@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.CommonMethods;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.Dividers;
-using Unity;
-using System.Windows.Forms;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using ModelLayer.Model.Quotation.Divider;
-using CommonComponents;
-using ModelLayer.Model.Quotation.MultiPanel;
-using PresentationLayer.Presenter.UserControls.WinDoorPanels;
-using ModelLayer.Model.Quotation.Frame;
-using PresentationLayer.CommonMethods;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using ModelLayer.Model.Quotation.Panel;
+using System.Linq;
+using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -188,7 +186,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Width++;
                                     prev_pnl.Panel_DisplayWidth++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -261,7 +259,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Width--;
                                     nxt_pnl.Panel_DisplayWidth--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -352,7 +350,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     prev_pnl.Panel_Width--;
                                     prev_pnl.Panel_DisplayWidth--;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -425,7 +423,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     nxt_pnl.Panel_Width++;
                                     nxt_pnl.Panel_DisplayWidth++;
 
-                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                         _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
                                         nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -639,7 +637,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.MPanelLst_Objects.Count();
 
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel &&
-                    e.Button == MouseButtons.Left && _mouseDown) 
+                    e.Button == MouseButtons.Left && _mouseDown)
                 {
                     if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                     {
@@ -702,7 +700,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_pnl.Panel_Width += mullion_movement;
                                 prev_pnl.Panel_DisplayWidth += mullion_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -775,7 +773,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_pnl.Panel_Width -= mullion_movement;
                                 nxt_pnl.Panel_DisplayWidth -= mullion_movement;
 
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f || 
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
                                     _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -836,13 +834,13 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             return mullionUCP;
         }
 
-        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                   IDividerModel divModel,
                                                   IMultiPanelModel multiPanelModel,
                                                   IMultiPanelMullionUCPresenter multiMullionUCP,
                                                   IFrameModel frameModel,
                                                   IMainPresenter mainPresenter)//,
-                                                  //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
+                                                                               //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
         {
             unityC
                 .RegisterType<IMullionUC, MullionUC>()
@@ -858,13 +856,13 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             return mullionUCP;
         }
 
-        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                  IDividerModel divModel, 
-                                                  IMultiPanelModel multiPanelModel, 
-                                                  IMultiPanelTransomUCPresenter multiTransomUCP, 
+        public IMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                  IDividerModel divModel,
+                                                  IMultiPanelModel multiPanelModel,
+                                                  IMultiPanelTransomUCPresenter multiTransomUCP,
                                                   IFrameModel frameModel,
                                                   IMainPresenter mainPresenter)//,
-                                                  //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
+                                                                               //IBasePlatformImagerUCPresenter basePlatformImagerUCP)
         {
             unityC
                .RegisterType<IMullionUC, MullionUC>()

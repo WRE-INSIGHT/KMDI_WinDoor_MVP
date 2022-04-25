@@ -12,16 +12,16 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
-        private int _arrowWidthId;
-        public int ArrowWidthId
+        private int _arrowId;
+        public int ArrowId
         {
             get
             {
-                return _arrowWidthId;
+                return _arrowId;
             }
             set
             {
-                _arrowWidthId = value;
+                _arrowId = value;
             }
         }
 
@@ -77,6 +77,10 @@ namespace PresentationLayer.Views.UserControls
         }
 
         private void CustomArrowHeadUC_Load(object sender, EventArgs e)
+        {
+            //nud_ArrowSize.Maximum = decimal.MaxValue;
+        }
+        public void SetNudMaxValue()
         {
             nud_ArrowSize.Maximum = decimal.MaxValue;
         }

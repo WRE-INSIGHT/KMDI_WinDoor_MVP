@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System;
@@ -8,7 +9,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using static EnumerationTypeLayer.EnumerationTypes;
-using ModelLayer.Model.Quotation.Concrete;
 
 namespace ModelLayer.Model.Quotation.WinDoor
 {
@@ -448,31 +448,32 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         //custom arrows methods
-        private bool _pnl_arrowHeightVisibility;
-        public bool Pnl_ArrowHeightVisibility
-        {
-            get
-            {
-                return _pnl_arrowHeightVisibility;
-            }
-            set
-            {
-                _pnl_arrowHeightVisibility = value;
-            }
-        }
 
-        private bool _pnl_arrowWidthVisibility;
-        public bool Pnl_ArrowWidthVisibility
-        {
-            get
-            {
-                return _pnl_arrowWidthVisibility;
-            }
-            set
-            {
-                _pnl_arrowWidthVisibility = value;
-            }
-        }
+        //private bool _pnl_arrowHeightVisibility;
+        //public bool Pnl_ArrowHeightVisibility
+        //{
+        //    get
+        //    {
+        //        return _pnl_arrowHeightVisibility;
+        //    }
+        //    set
+        //    {
+        //        _pnl_arrowHeightVisibility = value;
+        //    }
+        //}
+
+        //private bool _pnl_arrowWidthVisibility;
+        //public bool Pnl_ArrowWidthVisibility
+        //{
+        //    get
+        //    {
+        //        return _pnl_arrowWidthVisibility;
+        //    }
+        //    set
+        //    {
+        //        _pnl_arrowWidthVisibility = value;
+        //    }
+        //}
 
         private int _lbl_arrowCount;
         public int Lbl_ArrowHtCount
@@ -484,6 +485,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _lbl_arrowCount = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -521,6 +523,22 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public List<decimal> lst_wd_redArrowLines { get; set; }
 
         public List<decimal> lst_ht_redArrowLines { get; set; }
+
+        private bool _WD_customArrowToggle;
+        public bool WD_customArrowToggle
+        {
+            get
+            {
+                return _WD_customArrowToggle;
+            }
+
+            set
+            {
+                _WD_customArrowToggle = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #region Methods
 
@@ -707,7 +725,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_OutsideColor = wd_outisdecolor;
 
             WD_CmenuDeleteVisibility = true;
-
+            WD_customArrowToggle = false;
             lst_wd_redArrowLines = new List<decimal>();
             lst_ht_redArrowLines = new List<decimal>();
         }

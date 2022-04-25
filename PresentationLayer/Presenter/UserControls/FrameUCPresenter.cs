@@ -483,6 +483,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                                                             this);
                     ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
                     frame.Controls.Add((UserControl)louverPanelUC);
+
+                    _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
