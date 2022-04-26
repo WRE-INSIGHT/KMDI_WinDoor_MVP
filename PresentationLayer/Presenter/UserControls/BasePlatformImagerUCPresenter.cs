@@ -627,10 +627,10 @@ namespace PresentationLayer.Presenter.UserControls
                                             //    objLocX += mlocX; //addition of frame_pads and div wd
                                             //}
                                             //else 
-                                            if (zoom <= 0.26f)
-                                            {
-                                                objLocX += 13;
-                                            }
+                                            //if (zoom <= 0.26f)
+                                            //{
+                                            //    objLocX += 13;
+                                            //}
                                         }
 
                                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
@@ -671,10 +671,10 @@ namespace PresentationLayer.Presenter.UserControls
                                             //    objLocX += mlocX; //addition of frame_pads and div wd
                                             //}
                                             //else 
-                                            if (zoom <= 0.26f)
-                                            {
-                                                objLocX += 13;
-                                            }
+                                            //if (zoom <= 0.26f)
+                                            //{
+                                            //    objLocX += 13;
+                                            //}
                                         }
 
                                         Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
@@ -703,10 +703,10 @@ namespace PresentationLayer.Presenter.UserControls
                                             //    objLocY += mlocY; //addition of frame_pads and div wd
                                             //}
                                             //else 
-                                            if (zoom <= 0.26f)
-                                            {
-                                                objLocY += 13;
-                                            }
+                                            //if (zoom <= 0.26f)
+                                            //{
+                                            //    objLocY += 13;
+                                            //}
                                         }
 
                                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
@@ -747,10 +747,10 @@ namespace PresentationLayer.Presenter.UserControls
                                             //    objLocY += mlocY; //addition of frame_pads and div wd
                                             //}
                                             //else 
-                                            if (zoom <= 0.26f)
-                                            {
-                                                objLocY += 13;
-                                            }
+                                            //if (zoom <= 0.26f)
+                                            //{
+                                            //    objLocY += 13;
+                                            //}
                                         }
                                         Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
 
