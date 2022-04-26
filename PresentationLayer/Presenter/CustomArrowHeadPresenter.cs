@@ -287,7 +287,6 @@ namespace PresentationLayer.Presenter
                 _customArrowHeadPnl.Invalidate();
                 MessageBox.Show("Saved");
             }
-            Console.WriteLine(lst_arrowWdLength.Count + " lst_arrowWdLength.Count \n " + Environment.NewLine + lst_arrowHtLength.Count + " lst_arrowHtLength.Count");
         }
         private void _customArrowHead_BtnAddArrowHeadWidthCkickEventRaised(object sender, EventArgs e)
         {

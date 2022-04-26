@@ -627,10 +627,10 @@ namespace PresentationLayer.Presenter.UserControls
                                         //    objLocX += mlocX; //addition of frame_pads and div wd
                                         //}
                                         //else 
-                                        if (zoom <= 0.26f)
-                                        {
-                                            objLocX += 13;
-                                        }
+                                        //if (zoom <= 0.26f)
+                                        //{
+                                        //    objLocX += 13;
+                                        //}
                                     }
 
                                     Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
@@ -772,7 +772,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            fpnl.ClientRectangle.Width - w,
                                                            fpnl.ClientRectangle.Height - w));
             //}
-            //catch (Exception ex)
+            //catch (Exception ex)l
             //{
             //    Logger log = new Logger(ex.Message, ex.StackTrace);
             //    MessageBox.Show("Error Message: " + ex.Message);

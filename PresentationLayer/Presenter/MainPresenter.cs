@@ -2015,7 +2015,7 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
-                        mpanel.Fit_MyControls_ImagersToBindDimensions();
+                       // mpanel.Fit_MyControls_ImagersToBindDimensions();
                     }
                 }
             }

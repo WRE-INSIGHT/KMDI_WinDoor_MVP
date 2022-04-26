@@ -39,9 +39,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, BtnAddArrowHeadWidthCkickEventRaised, e);
         }
 
-
-
-
         public void SetBtnSaveBackColor(Color color)
         {
             btn_SaveCustomArrow.BackColor = color;
@@ -62,8 +59,6 @@ namespace PresentationLayer.Views
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            //pnl_ArrowHeight.DataBindings.Add(ModelBinding["Pnl_ArrowHeightVisibility"]);
-            //pnl_ArrowWidth.DataBindings.Add(ModelBinding["Pnl_ArrowWidthVisibility"]);
             lbl_ArrowHtCount.DataBindings.Add(ModelBinding["Lbl_ArrowHtCount"]);
             lbl_ArrowWdCount.DataBindings.Add(ModelBinding["Lbl_ArrowWdCount"]);
             pbox_frame.DataBindings.Add(ModelBinding["pboxFrame"]);
