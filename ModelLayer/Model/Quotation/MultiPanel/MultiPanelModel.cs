@@ -1565,7 +1565,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
-
                 if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
@@ -1575,18 +1574,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     pnl.SetDimensionToBind_using_BaseDimension();
                 }
-
-                pnl.PanelImageRenderer_Zoom = MPanelImageRenderer_Zoom;
-                if (MPanelImageRenderer_Zoom == 0.17f || MPanelImageRenderer_Zoom == 0.26f ||
-                    MPanelImageRenderer_Zoom == 0.13f || MPanelImageRenderer_Zoom == 0.10f)
-                {
-
-                }
-                else
-                {
-                    pnl.SetDimensionsImagerToBind_using_BaseDimension();
-                }
-
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }

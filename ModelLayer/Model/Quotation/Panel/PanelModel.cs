@@ -2445,10 +2445,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
             Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
 
-        }
-
-        public void SetDimensionsImagerToBind_using_BaseDimension()
-        {
             PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * PanelImageRenderer_Zoom);
             PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * PanelImageRenderer_Zoom);
         }
