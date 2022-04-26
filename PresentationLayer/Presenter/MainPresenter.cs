@@ -1,4 +1,4 @@
-﻿using CommonComponents;
+using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
@@ -2015,7 +2015,7 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
-                       // mpanel.Fit_MyControls_ImagersToBindDimensions();
+                        //mpanel.Fit_MyControls_ImagersToBindDimensions();
                     }
                 }
             }
