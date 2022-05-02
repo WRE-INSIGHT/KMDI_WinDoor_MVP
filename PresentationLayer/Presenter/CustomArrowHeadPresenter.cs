@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
+
 namespace PresentationLayer.Presenter
 {
     public class CustomArrowHeadPresenter : ICustomArrowHeadPresenter
@@ -34,6 +35,7 @@ namespace PresentationLayer.Presenter
         private int _arrowId;
         private List<ICustomArrowHeadUC> lst_arrowWd = new List<ICustomArrowHeadUC>();
         private List<ICustomArrowHeadUC> lst_arrowHt = new List<ICustomArrowHeadUC>();
+
 
 
         private int _arrowWD_count;
@@ -85,51 +87,7 @@ namespace PresentationLayer.Presenter
             _customArrowHead.BtnSaveCustomArrowCkickEventRaised += _customArrowHead_BtnSaveCustomArrowCkickEventRaised;
             _customArrowHead.CustomArrowHeadViewLoadEventRaised += _customArrowHead_CustomArrowHeadViewLoadEventRaised;
             _customArrowHead.pnl_CustomArrowPaintEventRaised += _customArrowHead_pnl_CustomArrowPaintEventRaised;
-            _customArrowHead.CustomArrowHeadViewLoadEventRaised += _customArrowHead_CustomArrowHeadViewLoadEventRaised1;
         }
-
-        private void _customArrowHead_CustomArrowHeadViewLoadEventRaised1(object sender, EventArgs e)
-        {
-            if (_windoorModel.lst_ht_redArrowLines.Count > 0)
-            {
-                foreach (decimal arrowHt in _windoorModel.lst_ht_redArrowLines)
-                {
-                    ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter1 = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
-                    _lst_arrowUCP.Add(CustomArrowHeadUCPresenter1);
-                    UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter1.GetCustomArrowUC();
-                    CustomArrowHeadUC.Dock = DockStyle.Top;
-                    _customArrowHeadPnlHT.Controls.Add(CustomArrowHeadUC);
-                    CustomArrowHeadUC.BringToFront();
-                    (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
-                    (CustomArrowHeadUC as ICustomArrowHeadUC).Arrow_Size = arrowHt;
-                    _windoorModel.Lbl_ArrowHtCount = _windoorModel.lst_ht_redArrowLines.Count;
-                    ArrowHT_Count++;
-                    CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowCountHT = ArrowHT_Count;
-                    lst_arrowHt.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
-
-                }
-            }
-
-            if (_windoorModel.lst_wd_redArrowLines.Count > 0)
-            {
-                foreach (decimal arrowWd in _windoorModel.lst_wd_redArrowLines)
-                {
-                    ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
-                    _lst_arrowUCP.Add(CustomArrowHeadUCPresenter);
-                    UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter.GetCustomArrowUC();
-                    CustomArrowHeadUC.Dock = DockStyle.Top;
-                    _customArrowHeadPnlWD.Controls.Add(CustomArrowHeadUC);
-                    CustomArrowHeadUC.BringToFront();
-                    (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
-                    (CustomArrowHeadUC as ICustomArrowHeadUC).Arrow_Size = arrowWd;
-                    _windoorModel.Lbl_ArrowWdCount = _windoorModel.lst_wd_redArrowLines.Count;
-                    ArrowWD_Count++;
-                    CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowCountWD = ArrowWD_Count;
-                    lst_arrowWd.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
-                }
-            }
-        }
-
         private void _customArrowHead_pnl_CustomArrowPaintEventRaised(object sender, PaintEventArgs e)
         {
             Panel basePL = (Panel)sender;
@@ -159,21 +117,28 @@ namespace PresentationLayer.Presenter
                 }
             }
 
-            if (total_panel > 1 || total_mpanel >= 1)
+            if (total_panel > 1 || total_mpanel >= 1) // multiplePanel
             {
+                int TotalArrowWidthBounds = basePL.Width - 70,
+                    TotalArrowHeightBounds = basePL.Height - 35;
+
                 float locX = 0;
-                foreach (decimal wd in _windoorModel.lst_wd_redArrowLines)
+                foreach (KeyValuePair<int, decimal> KV_Wd in _windoorModel.Dictionary_wd_redArrowLines)
                 {
-                    locX += Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
+                    decimal WidthPercentage = KV_Wd.Value / _customArrowHead.Lbl_ArrowWidthLength,
+                            FinalWidth = WidthPercentage * TotalArrowWidthBounds;
+                    locX = Draw_Arrow_Width(KV_Wd.Value, FinalWidth, e, locX, dmnsion_font_wd, ctrl_Y);
                 }
 
                 float locY = 0;
-                foreach (decimal ht in _windoorModel.lst_ht_redArrowLines)
+                foreach (KeyValuePair<int, decimal> KV_Ht in _windoorModel.Dictionary_ht_redArrowLines)
                 {
-                    locY += Draw_Arrow_Height(ht, e, locY, dmnsion_font_ht, ctrl_Y);
+                    decimal HeightPercentage = KV_Ht.Value / _customArrowHead.Lbl_ArrowHeightLength,
+                            Finalheight = HeightPercentage * TotalArrowHeightBounds;
+                    locY = Draw_Arrow_Height(KV_Ht.Value, Finalheight, e, locY, dmnsion_font_ht, ctrl_Y);
                 }
             }
-            else if (total_panel == 1 && total_mpanel == 0)
+            else if (total_panel == 1 && total_mpanel == 0) // panel
             {
                 string dmnsion_w = _windoorModel.WD_width.ToString();
                 Point dmnsion_w_startP = new Point(pbox.Location.X, ctrl_Y - 17);
@@ -257,35 +222,79 @@ namespace PresentationLayer.Presenter
 
         private void _customArrowHead_CustomArrowHeadViewLoadEventRaised(object sender, EventArgs e)
         {
-
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.SetWdFlpImage();
             _customArrowHead.ThisBinding(CreateBindingDictionary());
+
+            if (_windoorModel.Dictionary_ht_redArrowLines.Count > 0)
+            {
+                foreach (KeyValuePair<int, decimal> arrowHt in _windoorModel.Dictionary_ht_redArrowLines)
+                {
+                    ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter1 = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
+                    _lst_arrowUCP.Add(CustomArrowHeadUCPresenter1);
+                    UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter1.GetCustomArrowUC();
+                    CustomArrowHeadUC.Dock = DockStyle.Top;
+                    _customArrowHeadPnlHT.Controls.Add(CustomArrowHeadUC);
+                    CustomArrowHeadUC.BringToFront();
+                    (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
+                    (CustomArrowHeadUC as ICustomArrowHeadUC).Arrow_Size = arrowHt.Value;
+                    _windoorModel.Lbl_ArrowHtCount = _windoorModel.Dictionary_ht_redArrowLines.Count;
+                    ArrowHT_Count++;
+                    CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowCountHT = ArrowHT_Count;
+                    lst_arrowHt.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
+                    _arrowId++;
+                    CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowId = _arrowId;
+                }
+            }
+
+            if (_windoorModel.Dictionary_wd_redArrowLines.Count > 0)
+            {
+                foreach (KeyValuePair<int, decimal> arrowWd in _windoorModel.Dictionary_wd_redArrowLines)
+                {
+                    ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
+                    _lst_arrowUCP.Add(CustomArrowHeadUCPresenter);
+                    UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter.GetCustomArrowUC();
+                    CustomArrowHeadUC.Dock = DockStyle.Top;
+                    _customArrowHeadPnlWD.Controls.Add(CustomArrowHeadUC);
+                    CustomArrowHeadUC.BringToFront();
+                    (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
+                    (CustomArrowHeadUC as ICustomArrowHeadUC).Arrow_Size = arrowWd.Value;
+                    _windoorModel.Lbl_ArrowWdCount = _windoorModel.Dictionary_wd_redArrowLines.Count;
+                    ArrowWD_Count++;
+                    CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowCountWD = ArrowWD_Count;
+                    lst_arrowWd.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
+                    _arrowId++;
+                    CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowId = _arrowId;
+                }
+            }
+
+
+
         }
 
         private void _customArrowHead_BtnSaveCustomArrowCkickEventRaised(object sender, EventArgs e)
         {
-            List<decimal> lst_arrowWdLength = new List<decimal>();
-            List<decimal> lst_arrowHtLength = new List<decimal>();
+            Dictionary<int, decimal> lst_arrowWdLength = new Dictionary<int, decimal>();
+            Dictionary<int, decimal> lst_arrowHtLength = new Dictionary<int, decimal>();
 
             foreach (ICustomArrowHeadUC arrow_Wd in lst_arrowWd.OrderBy(x => x.ArrowId))
             {
 
-                lst_arrowWdLength.Add(((ICustomArrowHeadUC)arrow_Wd).Arrow_Size);
+                lst_arrowWdLength.Add(arrow_Wd.ArrowId, ((ICustomArrowHeadUC)arrow_Wd).Arrow_Size);
             }
 
-            foreach (Control arrow_Ht in lst_arrowHt.OrderBy(x => x.ArrowId))
+            foreach (ICustomArrowHeadUC arrow_Ht in lst_arrowHt.OrderBy(x => x.ArrowId))
             {
-                lst_arrowHtLength.Add(((ICustomArrowHeadUC)arrow_Ht).Arrow_Size);
+                lst_arrowHtLength.Add(arrow_Ht.ArrowId, ((ICustomArrowHeadUC)arrow_Ht).Arrow_Size);
             }
 
 
             if (lst_arrowWdLength.Count > 0 &&
                 lst_arrowHtLength.Count > 0)
             {
-                _windoorModel.lst_wd_redArrowLines = lst_arrowWdLength;
-                _windoorModel.lst_ht_redArrowLines = lst_arrowHtLength;
+                _windoorModel.Dictionary_wd_redArrowLines = lst_arrowWdLength;
+                _windoorModel.Dictionary_ht_redArrowLines = lst_arrowHtLength;
                 _customArrowHeadPnl.Invalidate();
-                MessageBox.Show("Saved");
+                _customArrowHead.SetBtnSaveBackColor(Color.ForestGreen);
             }
         }
         private void _customArrowHead_BtnAddArrowHeadWidthCkickEventRaised(object sender, EventArgs e)
@@ -301,8 +310,9 @@ namespace PresentationLayer.Presenter
             _windoorModel.Lbl_ArrowWdCount++; // Left Btn Add
             _arrowId++;
             CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowId = _arrowId;
-
             lst_arrowWd.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
+            (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
+            _customArrowHead.SetBtnSaveBackColor(SystemColors.Control);
         }
 
         private void _customArrowHead_BtnAddArrowHeadHeightCkickEventRaised(object sender, EventArgs e)
@@ -318,8 +328,9 @@ namespace PresentationLayer.Presenter
             _windoorModel.Lbl_ArrowHtCount++; // Left Btn Add
             _arrowId++;
             CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowId = _arrowId;
-
             lst_arrowHt.Add(CustomArrowHeadUC as ICustomArrowHeadUC);
+            (CustomArrowHeadUC as ICustomArrowHeadUC).SetNudMaxValue();
+            _customArrowHead.SetBtnSaveBackColor(SystemColors.Control);
         }
 
         public ICustomArrowHeadView GetICustomArrowHeadView()
@@ -333,8 +344,8 @@ namespace PresentationLayer.Presenter
 
         public void ComputeTotalArrowLenght()
         {
-            decimal totalArrowWdLength = 0,
-                    totalArrowHtLength = 0;
+            decimal arrowWidthLength = 0,
+                    arrowHeightLength = 0;
 
             foreach (ICustomArrowHeadUCPresenter ArrowHead in _lst_arrowUCP)
             {
@@ -342,34 +353,54 @@ namespace PresentationLayer.Presenter
 
                 if (CustomArrowHead.Name == "pnl_ArrowHeight")
                 {
-                    totalArrowHtLength += ArrowHead.GetCustomArrowUC().Arrow_Size;
+                    arrowHeightLength += ArrowHead.GetCustomArrowUC().Arrow_Size;
                 }
                 else if (CustomArrowHead.Name == "pnl_ArrowWidth")
                 {
-                    totalArrowWdLength += ArrowHead.GetCustomArrowUC().Arrow_Size;
+                    arrowWidthLength += ArrowHead.GetCustomArrowUC().Arrow_Size;
                 }
             }
 
-            _customArrowHead.SetLblTotalArrowLength_Text(totalArrowWdLength.ToString(), totalArrowHtLength.ToString());
+            _customArrowHead.Lbl_ArrowWidthLength = arrowWidthLength;
+            _customArrowHead.Lbl_ArrowHeightLength = arrowHeightLength;
 
+            if (_customArrowHead.Lbl_ArrowHeightLength == _windoorModel.WD_height)
+            {
+                _customArrowHead.SetLblTotalArrowLengthHeight_BackColor(Color.ForestGreen);
+            }
+            else
+            {
+                _customArrowHead.SetLblTotalArrowLengthHeight_BackColor(Color.IndianRed);
+            }
+
+            if (_customArrowHead.Lbl_ArrowWidthLength == _windoorModel.WD_width)
+            {
+                _customArrowHead.SetLblTotalArrowLengthWidth_BackColor(Color.ForestGreen);
+            }
+            else
+            {
+                _customArrowHead.SetLblTotalArrowLengthWidth_BackColor(Color.IndianRed);
+            }
         }
 
-        private float Draw_Arrow_Width(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
+
+
+        private float Draw_Arrow_Width(decimal txt_width, decimal actual_width, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
         {
             Graphics g = e.Graphics;
 
-            string dmnsion_w = wd.ToString();
+            string dmnsion_w = txt_width.ToString();
 
             if (dmnsion_w.Contains(".0"))
             {
                 dmnsion_w = dmnsion_w.Replace(".0", "");
             }
 
-            float DispWd_float = float.Parse(dmnsion_w);
+            float DispWd_float = (float)actual_width;
 
-            PointF dmnsion_w_startP = new PointF(_pboxFrame.Location.X + (locX * _windoorModel.WD_zoom),
+            PointF dmnsion_w_startP = new PointF(_pboxFrame.Location.X + locX,// * _windoorModel.WD_zoom),
                                                  (ctrl_Y - 17));// * _windoorModel.WD_zoom);
-            PointF dmnsion_w_endP = new PointF((_pboxFrame.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.WD_zoom),
+            PointF dmnsion_w_endP = new PointF((_pboxFrame.Location.X - 3) + (locX + DispWd_float),// * _windoorModel.WD_zoom),
                                                (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
 
             Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
@@ -410,16 +441,16 @@ namespace PresentationLayer.Presenter
             return locX;
         }
 
-        private float Draw_Arrow_Height(decimal ht, PaintEventArgs e, float locY, Font dmnsion_font_ht, int ctrl_Y)
+        private float Draw_Arrow_Height(decimal txt_height, decimal actual_height, PaintEventArgs e, float locY, Font dmnsion_font_ht, int ctrl_Y)
         {
             //arrow for HEIGHT
             Graphics g = e.Graphics;
 
-            string dmnsion_h = ht.ToString();
-            float DispHt_float = float.Parse(dmnsion_h);
+            string dmnsion_h = txt_height.ToString();
+            float DispHt_float = (float)actual_height;
 
-            PointF dmnsion_h_startP = new PointF(70 - 17, _pboxFrame.Location.Y + (locY * _windoorModel.WD_zoom));
-            PointF dmnsion_h_endP = new PointF(70 - 17, (_pboxFrame.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.WD_zoom));
+            PointF dmnsion_h_startP = new PointF(70 - 17, _pboxFrame.Location.Y + locY);// * _windoorModel.WD_zoom));
+            PointF dmnsion_h_endP = new PointF(70 - 17, (_pboxFrame.Location.Y - 3) + locY + DispHt_float);// * _windoorModel.WD_zoom));
 
             if (dmnsion_h.Contains(".0"))
             {
@@ -464,7 +495,15 @@ namespace PresentationLayer.Presenter
             return locY;
         }
 
+        public void remove_Lst_arrowHt(ICustomArrowHeadUC customArrowHeadUc)
+        {
+            lst_arrowHt.Remove(customArrowHeadUc);
+        }
 
+        public void remove_Lst_arrowWd(ICustomArrowHeadUC customArrowHeadUc)
+        {
+            lst_arrowWd.Remove(customArrowHeadUc);
+        }
 
 
         public ICustomArrowHeadPresenter GetNewInstance(IUnityContainer unityC,

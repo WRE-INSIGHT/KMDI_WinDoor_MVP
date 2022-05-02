@@ -19,7 +19,14 @@ namespace PresentationLayer.Views
         Panel GetPnlArrowHT();
         void SetBtnSaveBackColor(Color color);
         void SetLblTotalArrowLength_Text(string totalArrowWd, string totalArrowHt);
+        void SetLblTotalArrowLengthHeight_BackColor(Color lbl_heightColor);
+        void SetLblTotalArrowLengthWidth_BackColor(Color lbl_widthColor);
+
+
         Panel GetPnlCustomArrow();
+
+        decimal Lbl_ArrowHeightLength { get; set; }
+        decimal Lbl_ArrowWidthLength { get; set; }
 
 
     }

@@ -8,6 +8,32 @@ namespace PresentationLayer.Views
 {
     public partial class CustomArrowHeadView : Form, ICustomArrowHeadView
     {
+        public decimal Lbl_ArrowHeightLength
+        {
+            get
+            {
+                return Convert.ToDecimal(lbl_ArrowHeightLength.Text);
+            }
+            set
+            {
+                lbl_ArrowHeightLength.Text = value.ToString();
+            }
+
+        }
+
+        public decimal Lbl_ArrowWidthLength
+        {
+            get
+            {
+                return Convert.ToDecimal(lbl_ArrowWidthLength.Text);
+            }
+            set
+            {
+                lbl_ArrowWidthLength.Text = value.ToString();
+            }
+
+        }
+
         public CustomArrowHeadView()
         {
             InitializeComponent();
@@ -48,19 +74,21 @@ namespace PresentationLayer.Views
         {
             lbl_ArrowWidthLength.Text = totalArrowWd;
             lbl_ArrowHeightLength.Text = totalArrowHt;
-            //SetLblTotalArrowLength_BackColor();
         }
 
-        private void SetLblTotalArrowLength_BackColor()
+        public void SetLblTotalArrowLengthWidth_BackColor(Color lbl_widthColor)
         {
-            int totalArrowHT = Convert.ToInt32(lbl_ArrowHeightLength.Text);
-            int totalArrowWD = Convert.ToInt32(lbl_ArrowWidthLength.Text);
+            lbl_ArrowWidthLength.BackColor = lbl_widthColor;
+        }
+        public void SetLblTotalArrowLengthHeight_BackColor(Color lbl_heightColor)
+        {
+            lbl_ArrowHeightLength.BackColor = lbl_heightColor;
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            lbl_ArrowHtCount.DataBindings.Add(ModelBinding["Lbl_ArrowHtCount"]);
-            lbl_ArrowWdCount.DataBindings.Add(ModelBinding["Lbl_ArrowWdCount"]);
+            lbl_ArrowHtCount.DataBindings.Add(ModelBinding["Lbl_ArrowHtCount"]);//left ng btn add
+            lbl_ArrowWdCount.DataBindings.Add(ModelBinding["Lbl_ArrowWdCount"]);//left ng btn add
             pbox_frame.DataBindings.Add(ModelBinding["pboxFrame"]);
         }
 
@@ -94,5 +122,11 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaisePaintEvent(sender, pnl_CustomArrowPaintEventRaised, e);
         }
+
+        private void CustomArrowHeadView_SizeChanged(object sender, EventArgs e)
+        {
+            pnl_CustomArrow.Invalidate();
+        }
+
     }
 }

@@ -44,9 +44,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         decimal WD_PlasticCover { get; set; }
         bool WD_CmenuDeleteVisibility { get; set; }
         bool WD_Selected { get; set; }
-        List<decimal> lst_wd_redArrowLines { get; set; }
-        List<decimal> lst_ht_redArrowLines { get; set; }
-
+        Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
+        Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
 
         float GetZoom_forRendering();
         void SetImageRenderingZoom();

@@ -241,20 +241,20 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (_windoorModel.WD_customArrowToggle == false)
                     {
-                        _windoorModel.lst_wd_redArrowLines = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
-                        _windoorModel.lst_ht_redArrowLines = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                        _windoorModel.Dictionary_wd_redArrowLines = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                        _windoorModel.Dictionary_ht_redArrowLines = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
                     }
 
                     float locX = 0;
-                    foreach (decimal wd in _windoorModel.lst_wd_redArrowLines)
+                    foreach (KeyValuePair<int, decimal> wd in _windoorModel.Dictionary_wd_redArrowLines)
                     {
-                        locX = Draw_Arrow_Width(wd, e, locX, dmnsion_font_wd, ctrl_Y);
+                        locX = Draw_Arrow_Width(wd.Value, e, locX, dmnsion_font_wd, ctrl_Y);
                     }
 
                     float locY = 0;
-                    foreach (decimal ht in _windoorModel.lst_ht_redArrowLines)
+                    foreach (KeyValuePair<int, decimal> ht in _windoorModel.Dictionary_ht_redArrowLines)
                     {
-                        locY = Draw_Arrow_Height(ht, e, locY, dmnsion_font_ht, ctrl_Y);
+                        locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                     }
                 }
                 else if (total_panel == 1 && total_mpanel == 0)
@@ -542,9 +542,9 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
 
-        public List<decimal> WidthList_ToPaint(int flpMain_width, decimal[,] arr_wd_locX)
+        public Dictionary<int, decimal> WidthList_ToPaint(int flpMain_width, decimal[,] arr_wd_locX)
         {
-            List<decimal> Width_List = new List<decimal>();
+            Dictionary<int, decimal> Width_Dictionary = new Dictionary<int, decimal>();
 
             decimal[] arr_wd = new decimal[arr_wd_locX.GetLength(0)];
             decimal[] arr_locX = new decimal[arr_wd_locX.GetLength(0)];
@@ -589,13 +589,15 @@ namespace PresentationLayer.Presenter.UserControls
 
             decimal total_wd = 0,
                     curr_lst_wd = 0;
+            int id = 0;
             for (int i = 0; i < lst_wd.Count; i++)
             {
                 curr_lst_wd = lst_wd[i];
                 total_wd += curr_lst_wd;
                 if (total_wd <= flpMain_width || total_wd - 2 <= flpMain_width)
                 {
-                    Width_List.Add(curr_lst_wd);
+                    id++;
+                    Width_Dictionary.Add(id, curr_lst_wd);
                 }
                 else if (total_wd > flpMain_width)
                 {
@@ -603,12 +605,12 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            return Width_List;
+            return Width_Dictionary;
         }
 
-        public List<decimal> HeightList_ToPaint(int flpMain_height, decimal[,] arr_ht_locY)
+        public Dictionary<int, decimal> HeightList_ToPaint(int flpMain_height, decimal[,] arr_ht_locY)
         {
-            List<decimal> Height_List = new List<decimal>();
+            Dictionary<int, decimal> Height_Dictionary = new Dictionary<int, decimal>();
 
             decimal[] arr_ht = new decimal[arr_ht_locY.GetLength(0)];
             decimal[] arr_locY = new decimal[arr_ht_locY.GetLength(0)];
@@ -654,13 +656,15 @@ namespace PresentationLayer.Presenter.UserControls
 
             decimal total_ht = 0,
                     curr_lst_ht = 0;
+            int id = 0;
             for (int i = 0; i < lst_ht.Count; i++)
             {
                 curr_lst_ht = lst_ht[i];
                 total_ht += curr_lst_ht;
                 if (total_ht <= flpMain_height || total_ht - 2 <= flpMain_height)
                 {
-                    Height_List.Add(curr_lst_ht);
+                    id++;
+                    Height_Dictionary.Add(id, curr_lst_ht);
                 }
                 else if (total_ht > flpMain_height)
                 {
@@ -668,7 +672,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-            return Height_List;
+            return Height_Dictionary;
         }
 
         public void Invalidate_flpMain()

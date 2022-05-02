@@ -520,9 +520,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         public int Div_ArrowCount { get; set; }
-        public List<decimal> lst_wd_redArrowLines { get; set; }
+        public Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
 
-        public List<decimal> lst_ht_redArrowLines { get; set; }
+        public Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
 
         private bool _WD_customArrowToggle;
         public bool WD_customArrowToggle
@@ -726,8 +726,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
             WD_CmenuDeleteVisibility = true;
             WD_customArrowToggle = false;
-            lst_wd_redArrowLines = new List<decimal>();
-            lst_ht_redArrowLines = new List<decimal>();
+            Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
+            Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
         }
     }
 }
