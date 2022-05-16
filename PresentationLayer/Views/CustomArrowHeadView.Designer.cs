@@ -104,7 +104,7 @@
             // pnl_ArrowWidth
             // 
             this.pnl_ArrowWidth.AutoScroll = true;
-            this.pnl_ArrowWidth.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pnl_ArrowWidth.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_ArrowWidth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_ArrowWidth.Location = new System.Drawing.Point(0, 52);
             this.pnl_ArrowWidth.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -176,7 +176,7 @@
             // pnl_ArrowHeight
             // 
             this.pnl_ArrowHeight.AutoScroll = true;
-            this.pnl_ArrowHeight.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnl_ArrowHeight.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_ArrowHeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_ArrowHeight.Location = new System.Drawing.Point(0, 52);
             this.pnl_ArrowHeight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

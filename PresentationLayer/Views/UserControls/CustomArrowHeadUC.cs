@@ -60,7 +60,17 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-
+        public string ArrowHeadName
+        {
+            get
+            {
+                return lbl_ArrowHead.Text;
+            }
+            set
+            {
+                lbl_ArrowHead.Text = value;
+            }
+        }
 
 
         public event EventHandler NudArrowSizeValueChangeEventRaised;

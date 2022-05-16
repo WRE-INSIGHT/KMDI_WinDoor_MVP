@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls
         int ArrowCountWD { get; set; }
         int ArrowCountHT { get; set; }
         void SetNudMaxValue();
+        string ArrowHeadName { get; set; }
 
 
         event EventHandler NudArrowSizeValueChangeEventRaised;

@@ -232,6 +232,7 @@ namespace PresentationLayer.Presenter
                     ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter1 = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
                     _lst_arrowUCP.Add(CustomArrowHeadUCPresenter1);
                     UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter1.GetCustomArrowUC();
+                    CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowHeadName = "Height";
                     CustomArrowHeadUC.Dock = DockStyle.Top;
                     _customArrowHeadPnlHT.Controls.Add(CustomArrowHeadUC);
                     CustomArrowHeadUC.BringToFront();
@@ -253,6 +254,7 @@ namespace PresentationLayer.Presenter
                     ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
                     _lst_arrowUCP.Add(CustomArrowHeadUCPresenter);
                     UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter.GetCustomArrowUC();
+                    CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowHeadName = "Width";
                     CustomArrowHeadUC.Dock = DockStyle.Top;
                     _customArrowHeadPnlWD.Controls.Add(CustomArrowHeadUC);
                     CustomArrowHeadUC.BringToFront();
@@ -302,6 +304,7 @@ namespace PresentationLayer.Presenter
             ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
             _lst_arrowUCP.Add(CustomArrowHeadUCPresenter);
             UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter.GetCustomArrowUC();
+            CustomArrowHeadUCPresenter.GetCustomArrowUC().ArrowHeadName = "Width";
             CustomArrowHeadUC.Dock = DockStyle.Top;
             _customArrowHeadPnlWD.Controls.Add(CustomArrowHeadUC);
             CustomArrowHeadUC.BringToFront();
@@ -320,6 +323,7 @@ namespace PresentationLayer.Presenter
             ICustomArrowHeadUCPresenter CustomArrowHeadUCPresenter1 = _customArrowHeadUCP.GetNewInstance(_unityC, this, _windoorModel);
             _lst_arrowUCP.Add(CustomArrowHeadUCPresenter1);
             UserControl CustomArrowHeadUC = (UserControl)CustomArrowHeadUCPresenter1.GetCustomArrowUC();
+            CustomArrowHeadUCPresenter1.GetCustomArrowUC().ArrowHeadName = "Height";
             CustomArrowHeadUC.Dock = DockStyle.Top;
             _customArrowHeadPnlHT.Controls.Add(CustomArrowHeadUC);
             CustomArrowHeadUC.BringToFront();

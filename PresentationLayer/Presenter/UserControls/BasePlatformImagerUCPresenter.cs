@@ -230,7 +230,7 @@ namespace PresentationLayer.Presenter.UserControls
             Mpnl_point = new Point(mloc_X, mloc_Y);
 
 
-            return MpnlParent_point;
+            return Mpnl_point;
         }
 
         private void _basePlatformImagerUC_flpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
@@ -1164,7 +1164,7 @@ namespace PresentationLayer.Presenter.UserControls
             float DispWd_float = float.Parse(dmnsion_w);
 
             PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.GetZoom_forRendering()),
-                                                 (ctrl_Y - 17));// * _windoorModel.WD_zoom);
+                                                 (ctrl_Y - 17));// * _windoorModel.WD_zoom;)
             PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.GetZoom_forRendering()),
                                                (ctrl_Y - 17)); // * _windoorModel.WD_zoom);
 
