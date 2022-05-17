@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
@@ -28,6 +27,7 @@ namespace PresentationLayer.Views
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         event EventHandler NewConcreteButtonClickEventRaised;
         event EventHandler refreshToolStripButtonClickEventRaised;
+        event EventHandler printQuoteToolStripMenuItemClickRaiseEvent;
 
         string Nickname { set; }
         string mainview_title { get; set; }

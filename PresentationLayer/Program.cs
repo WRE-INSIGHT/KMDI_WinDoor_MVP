@@ -304,6 +304,12 @@ namespace PresentationLayer
                 .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPrintQuoteView, PrintQuoteView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPrintQuotePresenter, PrintQuotePresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IQuoteItemListView, QuoteItemListView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IQuoteItemListPresenter, QuoteItemListPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

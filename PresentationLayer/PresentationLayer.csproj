@@ -48,6 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +58,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -104,10 +107,14 @@
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
+    <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
+    <Compile Include="Presenter\QuoteItemListPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
@@ -311,7 +318,9 @@
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
+    <Compile Include="Views\IQuoteItemListView.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,11 +333,23 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PrintQuoteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PrintQuoteView.Designer.cs">
+      <DependentUpon>PrintQuoteView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\promptYesNo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\promptYesNo.Designer.cs">
       <DependentUpon>promptYesNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuoteItemListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QuoteItemListView.Designer.cs">
+      <DependentUpon>QuoteItemListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\BasePlatformImagerUC.cs">
       <SubType>UserControl</SubType>
@@ -827,8 +848,14 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrintQuoteView.resx">
+      <DependentUpon>PrintQuoteView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\promptYesNo.resx">
       <DependentUpon>promptYesNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QuoteItemListView.resx">
+      <DependentUpon>QuoteItemListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformImagerUC.resx">
       <DependentUpon>BasePlatformImagerUC.cs</DependentUpon>
@@ -1080,6 +1107,7 @@
     <Content Include="Resources\plus2_104px.png" />
     <Content Include="Resources\plus_104px.png" />
     <None Include="Resources\plus_math_96px.png" />
+    <None Include="Resources\print.png" />
     <Content Include="Resources\redo_30px.png" />
     <Content Include="Resources\refresh_30px.png" />
     <None Include="Resources\search_filled_100px.png" />

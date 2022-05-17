@@ -101,6 +101,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
+            this.printQuoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -153,7 +154,7 @@
             this.colorToolStripMenuItem,
             this.spacerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -276,20 +277,20 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.selectProjectToolStripMenuItem.Text = "Select Project";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
             // 
@@ -298,7 +299,8 @@
             this.costingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CostingItemsToolStripMenuItem,
             this.defaultValuesToolStripMenuItem,
-            this.assignProjectsToolStripMenuItem});
+            this.assignProjectsToolStripMenuItem,
+            this.printQuoteToolStripMenuItem});
             this.costingToolStripMenuItem.Name = "costingToolStripMenuItem";
             this.costingToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.costingToolStripMenuItem.Text = "Cos&ting";
@@ -853,6 +855,13 @@
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSize.Click += new System.EventHandler(this.lblSize_Click);
             // 
+            // printQuoteToolStripMenuItem
+            // 
+            this.printQuoteToolStripMenuItem.Name = "printQuoteToolStripMenuItem";
+            this.printQuoteToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.printQuoteToolStripMenuItem.Text = "Print Quote";
+            this.printQuoteToolStripMenuItem.Click += new System.EventHandler(this.printQuoteToolStripMenuItem_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -968,5 +977,6 @@
         private System.Windows.Forms.ToolStripMenuItem assignProjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tsBtnNConcrete;
+        private System.Windows.Forms.ToolStripMenuItem printQuoteToolStripMenuItem;
     }
 }

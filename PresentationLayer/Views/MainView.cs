@@ -182,6 +182,7 @@ namespace PresentationLayer.Views
         public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         public event EventHandler refreshToolStripButtonClickEventRaised;
+        public event EventHandler printQuoteToolStripMenuItemClickRaiseEvent;
 
         public MainView()
         {
@@ -400,6 +401,12 @@ namespace PresentationLayer.Views
         private void refreshToolStripButton_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
+        }
+
+        private void printQuoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, printQuoteToolStripMenuItemClickRaiseEvent, e);
+
         }
     }
 }

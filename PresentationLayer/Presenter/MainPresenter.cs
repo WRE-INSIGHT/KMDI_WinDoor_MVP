@@ -82,6 +82,8 @@ namespace PresentationLayer.Presenter
         private IAssignProjectsPresenter _assignProjPresenter;
         private ICostEngrLandingPresenter _ceLandingPresenter;
         private IConcreteUCPresenter _concreteUCPresenter;
+        private IQuoteItemListPresenter _quoteItemListPresenter;
+        private IPrintQuotePresenter _printQuotePresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -484,7 +486,9 @@ namespace PresentationLayer.Presenter
                              ICustomArrowHeadUCPresenter customArrowHeadUCP,
                              IAssignProjectsPresenter assignProjPresenter,
                              ICostEngrLandingPresenter ceLandingPresenter,
-                             IConcreteUCPresenter concreteUCPresenter)
+                             IConcreteUCPresenter concreteUCPresenter,
+                             IQuoteItemListPresenter quoteItemListPresenter,
+                             IPrintQuotePresenter printQuotePresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -514,6 +518,9 @@ namespace PresentationLayer.Presenter
             _assignProjPresenter = assignProjPresenter;
             _ceLandingPresenter = ceLandingPresenter;
             _concreteUCPresenter = concreteUCPresenter;
+            _quoteItemListPresenter = quoteItemListPresenter;
+            _printQuotePresenter = printQuotePresenter;
+
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -603,10 +610,17 @@ namespace PresentationLayer.Presenter
             _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
             _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
             _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
+            _mainView.printQuoteToolStripMenuItemClickRaiseEvent += _mainView_printQuoteToolStripMenuItemClickRaiseEvent;
         }
 
-
         #region Events
+
+        private void _mainView_printQuoteToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        {
+            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC);
+            quoteItem.GetQuoteItemListView().showQuoteItemList();
+        }
+
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             if (_windoorModel.WD_customArrowToggle == false)
@@ -2015,7 +2029,7 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
-                       // mpanel.Fit_MyControls_ImagersToBindDimensions();
+                        // mpanel.Fit_MyControls_ImagersToBindDimensions();
                     }
                 }
             }
