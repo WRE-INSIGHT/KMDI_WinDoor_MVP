@@ -12,6 +12,8 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler TSbtnPrintClickEventRaised;
+        public event EventHandler QuoteItemListViewLoadEventRaised;
+
 
 
         private void TSbtnPrint_Click(object sender, EventArgs e)
@@ -26,7 +28,12 @@ namespace PresentationLayer.Views
 
         private void QuoteItemListView_Load(object sender, EventArgs e)
         {
+            EventHelpers.RaiseEvent(sender, QuoteItemListViewLoadEventRaised, e);
+        }
 
+        public Panel GetPnlPrintBody()
+        {
+            return pnlPrintBody;
         }
 
     }

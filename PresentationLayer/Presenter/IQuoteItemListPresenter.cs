@@ -1,4 +1,7 @@
-﻿using PresentationLayer.Views;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Views;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -6,6 +9,10 @@ namespace PresentationLayer.Presenter
     public interface IQuoteItemListPresenter
     {
         IQuoteItemListView GetQuoteItemListView();
-        IQuoteItemListPresenter GetNewInstance(IUnityContainer unityC);
+        IQuoteItemListPresenter GetNewInstance(IUnityContainer unityC,
+                                               IQuotationModel quotationModel, 
+                                               IQuoteItemListUCPresenter quoteItemListUCPresenter, 
+                                               IWindoorModel windoorModel);
+        //
     }
 }

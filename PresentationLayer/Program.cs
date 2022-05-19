@@ -310,6 +310,9 @@ namespace PresentationLayer
                 .RegisterType<IQuoteItemListView, QuoteItemListView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IQuoteItemListPresenter, QuoteItemListPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IQuoteItemListUC, QuoteItemListUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IQuoteItemListUCPresenter, QuoteItemListUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

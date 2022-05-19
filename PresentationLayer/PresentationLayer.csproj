@@ -154,6 +154,7 @@
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IMultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IPanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IQuoteItemListUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\QuoteItemListUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
@@ -480,6 +482,7 @@
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -630,6 +633,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\QuoteItemListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\QuoteItemListUC.Designer.cs">
+      <DependentUpon>QuoteItemListUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
       <SubType>UserControl</SubType>
@@ -976,6 +985,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.resx">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\QuoteItemListUC.resx">
+      <DependentUpon>QuoteItemListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
       <DependentUpon>AwningPanelUC.cs</DependentUpon>

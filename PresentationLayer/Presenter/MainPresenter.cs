@@ -84,6 +84,7 @@ namespace PresentationLayer.Presenter
         private IConcreteUCPresenter _concreteUCPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IPrintQuotePresenter _printQuotePresenter;
+        private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -488,7 +489,8 @@ namespace PresentationLayer.Presenter
                              ICostEngrLandingPresenter ceLandingPresenter,
                              IConcreteUCPresenter concreteUCPresenter,
                              IQuoteItemListPresenter quoteItemListPresenter,
-                             IPrintQuotePresenter printQuotePresenter)
+                             IPrintQuotePresenter printQuotePresenter,
+                             IQuoteItemListUCPresenter quoteItemListUCPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -520,6 +522,7 @@ namespace PresentationLayer.Presenter
             _concreteUCPresenter = concreteUCPresenter;
             _quoteItemListPresenter = quoteItemListPresenter;
             _printQuotePresenter = printQuotePresenter;
+            _quoteItemListUCPresenter = quoteItemListUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -617,7 +620,7 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_printQuoteToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC);
+            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel);
             quoteItem.GetQuoteItemListView().showQuoteItemList();
         }
 

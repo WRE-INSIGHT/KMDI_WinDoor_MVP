@@ -39,10 +39,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dtp_Date = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.txt_QuoteNo = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_CustRef = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,10 +54,6 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.dtp_Date);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txt_QuoteNo);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txt_CustRef);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -138,7 +130,7 @@
             // 
             this.dtp_Date.CustomFormat = "MMM. dd, yyyy";
             this.dtp_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Date.Location = new System.Drawing.Point(84, 101);
+            this.dtp_Date.Location = new System.Drawing.Point(84, 24);
             this.dtp_Date.Name = "dtp_Date";
             this.dtp_Date.Size = new System.Drawing.Size(152, 25);
             this.dtp_Date.TabIndex = 7;
@@ -146,45 +138,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 104);
+            this.label4.Location = new System.Drawing.Point(40, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 19);
             this.label4.TabIndex = 6;
             this.label4.Text = "Date";
-            // 
-            // txt_QuoteNo
-            // 
-            this.txt_QuoteNo.Location = new System.Drawing.Point(84, 62);
-            this.txt_QuoteNo.Name = "txt_QuoteNo";
-            this.txt_QuoteNo.Size = new System.Drawing.Size(152, 25);
-            this.txt_QuoteNo.TabIndex = 5;
-            this.txt_QuoteNo.Text = "3D6568";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 19);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Quote No.";
-            // 
-            // txt_CustRef
-            // 
-            this.txt_CustRef.Location = new System.Drawing.Point(84, 23);
-            this.txt_CustRef.Name = "txt_CustRef";
-            this.txt_CustRef.Size = new System.Drawing.Size(152, 25);
-            this.txt_CustRef.TabIndex = 3;
-            this.txt_CustRef.Text = "1E2648";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Cust. Ref";
             // 
             // reportViewer1
             // 
@@ -228,10 +186,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker dtp_Date;
         private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.TextBox txt_QuoteNo;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_CustRef;
-        private System.Windows.Forms.Label label2;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }
