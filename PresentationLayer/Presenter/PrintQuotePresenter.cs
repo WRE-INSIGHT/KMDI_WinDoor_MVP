@@ -1,4 +1,8 @@
-﻿using PresentationLayer.Views;
+﻿using Microsoft.Reporting.WinForms;
+using PresentationLayer.DataTables;
+using PresentationLayer.Views;
+using System;
+using System.Windows.Forms;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -13,14 +17,52 @@ namespace PresentationLayer.Presenter
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
             _printQuoteView = printQuoteView;
-            
+
 
             SubscribrToEventSetup();
         }
 
         private void SubscribrToEventSetup()
         {
+            _printQuoteView.btnRefreshClickEventRaised += _printQuoteView_btnRefreshClickEventRaised;
+            _printQuoteView.PrintQuoteViewLoadEventRaised += _printQuoteView_PrintQuoteViewLoadEventRaised;
+        }
 
+        private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
+        {
+            _printQuoteView.GetReportViewer().RefreshReport();
+        }
+
+        private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)
+        {
+            try
+            {
+                ReportDataSource RDSQuote = new ReportDataSource();
+                RDSQuote.Name = "DataSet1";
+                RDSQuote.Value = _printQuoteView.GetBindingSource();
+
+                _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
+                //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
+                _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
+  
+
+                ReportParameter[] RParam = new ReportParameter[4];
+                RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
+                RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+
+                _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
+                _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
+                _printQuoteView.GetReportViewer().ZoomPercent = 75;
+                _printQuoteView.GetReportViewer().RefreshReport();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public IPrintQuoteView GetPrintQuoteView()

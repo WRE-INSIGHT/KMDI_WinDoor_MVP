@@ -1,8 +1,11 @@
 ﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls;
 using System;
+using System.IO;
 using System.Windows.Forms;
 using Unity;
 
@@ -19,6 +22,7 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
 
 
+        string itemName, itemDesc, ItemDimension;
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
                                       IPrintQuotePresenter printQuotePresenter)
@@ -36,39 +40,87 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewLoadEventRaised += _quoteItemListView_QuoteItemListViewLoadEventRaised;
         }
 
+
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
         {
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
-                IQuoteItemListUCPresenter quoteItemListUCP = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
-                UserControl quoteItem = (UserControl)quoteItemListUCP.GetiQuoteItemListUC();
+                _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
                 _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
                 quoteItem.Dock = DockStyle.Top;
                 quoteItem.BringToFront();
 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-                quoteItemListUCP.GetiQuoteItemListUC().GetTboxItemName().Text = wdm.WD_name;
-                quoteItemListUCP.GetiQuoteItemListUC().GetTboxDimension().Text = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
-                quoteItemListUCP.GetiQuoteItemListUC().GetRtboxDesc().Text = "";
-                quoteItemListUCP.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName= wdm.WD_name;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension= wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc= "";
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
             }
 
         }
 
+
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
+         
+
+            DSQuotation _dsq = new DSQuotation();
+            /*
+          ID
+          dtItemName
+          dtDescription
+          dtDimension
+          dtImage
+          dtQuantity
+          dtPrice
+          dtDiscount
+          dtNetPrice
+           */
+
+            populateitemInfo();
+
+            for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            {
+               
+                MemoryStream mstream = new MemoryStream();
+                _quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] arrimage = mstream.ToArray();
+                string byteToStr = Convert.ToBase64String(arrimage);
+
+                _dsq.dtQuote.Rows.Add(_quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName,
+                                      _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc,
+                                      _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension,
+                                      byteToStr,
+                                      1,    
+                                      0,
+                                      0,
+                                      0);
+
+                
+
+            }
+
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+         
+
+
         }
 
+        public void populateitemInfo()
+        {
+            IQuoteItemListUCPresenter quoteItemLUCP = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
+            itemName = quoteItemLUCP.GetiQuoteItemListUC().ItemName;
+            itemDesc = quoteItemLUCP.GetiQuoteItemListUC().itemDesc;
+            ItemDimension = quoteItemLUCP.GetiQuoteItemListUC().itemDimension;
+        }
 
         public IQuoteItemListView GetQuoteItemListView()
         {
             return _quoteItemListView;
         }
-
-
-
 
         public IQuoteItemListPresenter GetNewInstance(IUnityContainer unityC,
                                                       IQuotationModel quotationModel,

@@ -79,6 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
+    <Compile Include="DataTables\DSQuotation.cs">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataTables\DSQuotation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
@@ -812,6 +820,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1061,6 +1070,17 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\TiltNTurnPanelUC.resx">
       <DependentUpon>TiltNTurnPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataTables\DSQuotation.xsc">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </None>
+    <None Include="DataTables\DSQuotation.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSQuotation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataTables\DSQuotation.xss">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

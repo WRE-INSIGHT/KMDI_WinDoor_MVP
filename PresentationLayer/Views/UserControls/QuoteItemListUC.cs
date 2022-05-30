@@ -1,6 +1,5 @@
 ﻿using CommonComponents;
 using System;
-
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
@@ -12,34 +11,63 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
 
+        public string ItemName
+        {
+            get
+            {
+                return tboxItemName.Text;
+            }
+            set
+            {
+                tboxItemName.Text = value;
+            }
+        }
+
+        public string itemDimension
+        {
+            get
+            {
+                return tboxDimension.Text;
+            }
+            set
+            {
+                tboxDimension.Text = value;
+            }
+        }
+
+        public string itemDesc
+        {
+            get
+            {
+                return rtboxDesc.Text;
+            }
+            set
+            {
+                rtboxDesc.Text = value;
+            }
+        }
 
         public event EventHandler QuoteItemListUCLoadEventRaised;
-
 
         private void QuoteItemListUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, QuoteItemListUCLoadEventRaised, e);
         }
 
-        //public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        //public TextBox GetTboxItemName()
         //{
-        //    pboxItemImage.DataBindings.Add(ModelBinding["PbItemImage"]);
+        //    return tboxItemName;
         //}
 
-        public TextBox GetTboxItemName()
-        {
-            return tboxItemName;
-        }
+        //public TextBox GetTboxDimension()
+        //{
+        //    return tboxDimension;
+        //}
 
-        public TextBox GetTboxDimension()
-        {
-            return tboxDimension;
-        }
-
-        public RichTextBox GetRtboxDesc()
-        {
-            return rtboxDesc;
-        }
+        //public RichTextBox GetRtboxDesc()
+        //{
+        //    return rtboxDesc;
+        //}
 
         public PictureBox GetPboxItemImage()
         {

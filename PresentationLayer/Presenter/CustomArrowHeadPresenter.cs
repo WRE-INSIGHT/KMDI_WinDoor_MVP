@@ -530,7 +530,7 @@ namespace PresentationLayer.Presenter
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
-            binding.Add("Lbl_ArrowWdCount", new Binding("Text", _windoorModel, "Lbl_ArrowWdCount", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Lbl_ArrowWdCount", new Binding("Text", _windoorModel,  "Lbl_ArrowWdCount", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Lbl_ArrowHtCount", new Binding("Text", _windoorModel, "Lbl_ArrowHtCount", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
 

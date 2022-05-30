@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_QuoteItemListUCLoadEventRaised(object sender, System.EventArgs e)
         {
-            //  _quoteItemListUC.ThisBinding(CreateBindingDictionary());
+       
         }
 
         public IQuoteItemListUC GetiQuoteItemListUC()
@@ -37,14 +37,7 @@ namespace PresentationLayer.Presenter.UserControls
             return _quoteItemListUC;
         }
 
-        //public Dictionary<string, Binding> CreateBindingDictionary()
-        //{
-        //    Dictionary<string, Binding> bind = new Dictionary<string, Binding>();
-
-        //    bind.Add("PbItemImage", new Binding("Image", _windoorModel, "WD_image", true, DataSourceUpdateMode.OnPropertyChanged));
-
-        //    return bind;
-        //}
+  
 
         public IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IWindoorModel windoorModel)

@@ -7,10 +7,14 @@ namespace PresentationLayer.Views.UserControls
     {
         event EventHandler QuoteItemListUCLoadEventRaised;
 
-        TextBox GetTboxItemName();
-        TextBox GetTboxDimension();
-        RichTextBox GetRtboxDesc();
+        //TextBox GetTboxItemName();
+        //TextBox GetTboxDimension();
+        //RichTextBox GetRtboxDesc();
         PictureBox GetPboxItemImage();
+
+        string ItemName { get; set; }
+        string itemDimension { get; set; }
+        string itemDesc { get; set; }
 
     }
 }
