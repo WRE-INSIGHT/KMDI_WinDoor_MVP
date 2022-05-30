@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Unity;
 
@@ -42,6 +43,9 @@ namespace PresentationLayer.Presenter.UserControls
                 _customArrowHeadPresenter.ArrowHT_Count--;
                 _windoorModel.Lbl_ArrowHtCount--;
                 _customArrowHeadPresenter.Remove_ArrowHeadUCP(this);
+                _windoorModel.Dictionary_ht_redArrowLines.Remove(_customArrowHeadUC.ArrowId);
+                _customArrowHeadPresenter.remove_Lst_arrowHt(_customArrowHeadUC);
+                _customArrowHeadPresenter.GetICustomArrowHeadView().SetBtnSaveBackColor(SystemColors.Control);
             }
 
             if (CustomArrowHeadUCParent.Name == "pnl_ArrowWidth")
@@ -49,10 +53,11 @@ namespace PresentationLayer.Presenter.UserControls
                 _customArrowHeadPresenter.ArrowWD_Count--;
                 _windoorModel.Lbl_ArrowWdCount--;
                 _customArrowHeadPresenter.Remove_ArrowHeadUCP(this);
+                _windoorModel.Dictionary_wd_redArrowLines.Remove(_customArrowHeadUC.ArrowId);
+                _customArrowHeadPresenter.remove_Lst_arrowWd(_customArrowHeadUC);
+                _customArrowHeadPresenter.GetICustomArrowHeadView().SetBtnSaveBackColor(SystemColors.Control);
             }
-
             _customArrowHeadPresenter.ComputeTotalArrowLenght();
-
         }
 
         public ICustomArrowHeadUC GetCustomArrowUC()

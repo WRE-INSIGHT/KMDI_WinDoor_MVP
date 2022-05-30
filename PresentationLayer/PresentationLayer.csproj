@@ -48,6 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +58,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,7 +79,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonMethods\CommonFunctions.cs" />
+    <Compile Include="DataTables\DSQuotation.cs">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataTables\DSQuotation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\CostEngrEmployeePresenter.cs" />
+    <Compile Include="Presenter\Costing Head\CustomerRefNoPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\ICostEngrEmployeePresenter.cs" />
+    <Compile Include="Presenter\Costing Head\ICustomerRefNoPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
@@ -86,6 +104,7 @@
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\IChangeItemColorPresenter.cs" />
+    <Compile Include="Presenter\ICostEngrLandingPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassSpacerPresenter.cs" />
@@ -96,12 +115,18 @@
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
+    <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
+    <Compile Include="Presenter\QuoteItemListPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\CustomArrowHeadUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
@@ -126,6 +151,8 @@
     <Compile Include="Presenter\UserControls\FrameUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IBasePlatformPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IConcretePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ICustomArrowHeadUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IDividerPropertiesUCPresenter.cs" />
@@ -135,6 +162,7 @@
     <Compile Include="Presenter\UserControls\IItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IMultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IPanelPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IQuoteItemListUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ItemInfoUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\MultiPanelPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter.cs" />
@@ -176,12 +204,14 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\QuoteItemListUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\FixedPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IAwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ICasementPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IFixedPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\ILouverPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\CasementPanelImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\Imagers\FixedPanelImagerUCPresenter.cs" />
@@ -197,9 +227,12 @@
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\IMultiPanelTransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ISlidingPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\ITiltNTurnPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\LouverPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\MultiPanelMullionUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\MultiPanelTransomUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\SlidingPanelUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\TiltNTurnPanelUCPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ChangeItemColorView.cs">
@@ -208,6 +241,33 @@
     <Compile Include="Views\ChangeItemColorView.Designer.cs">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\CostEngrLandingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CostEngrLandingView.Designer.cs">
+      <DependentUpon>CostEngrLandingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\AssignProjectsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\AssignProjectsView.Designer.cs">
+      <DependentUpon>AssignProjectsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\CostEngrEmployeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\CostEngrEmployeeView.Designer.cs">
+      <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\CustomerRefNoView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\CustomerRefNoView.Designer.cs">
+      <DependentUpon>CustomerRefNoView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
+    <Compile Include="Views\Costing Head\ICostEngrEmployeeView.cs" />
+    <Compile Include="Views\Costing Head\ICustomerRefNoView.cs" />
     <Compile Include="Views\CreateNewGlassColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +317,7 @@
       <DependentUpon>GlassThicknessListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IChangeItemColorView.cs" />
+    <Compile Include="Views\ICostEngrLandingView.cs" />
     <Compile Include="Views\ICreateNewGlassColorView.cs" />
     <Compile Include="Views\ICreateNewGlassSpacerView.cs" />
     <Compile Include="Views\ICreateNewGlassTypeView.cs" />
@@ -267,7 +328,9 @@
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
+    <Compile Include="Views\IQuoteItemListView.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,11 +343,23 @@
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PrintQuoteView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PrintQuoteView.Designer.cs">
+      <DependentUpon>PrintQuoteView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\promptYesNo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\promptYesNo.Designer.cs">
       <DependentUpon>promptYesNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuoteItemListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QuoteItemListView.Designer.cs">
+      <DependentUpon>QuoteItemListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\BasePlatformImagerUC.cs">
       <SubType>UserControl</SubType>
@@ -297,6 +372,18 @@
     </Compile>
     <Compile Include="Views\UserControls\BasePlatformUC.Designer.cs">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ConcretePropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ConcretePropertiesUC.Designer.cs">
+      <DependentUpon>ConcretePropertiesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ConcreteUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ConcreteUC.Designer.cs">
+      <DependentUpon>ConcreteUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ControlsUC.cs">
       <SubType>UserControl</SubType>
@@ -392,6 +479,8 @@
     </Compile>
     <Compile Include="Views\UserControls\IBasePlatformImagerUC.cs" />
     <Compile Include="Views\UserControls\IBasePlatformUC.cs" />
+    <Compile Include="Views\UserControls\IConcretePropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IConcreteUC.cs" />
     <Compile Include="Views\UserControls\IControlsUC.cs" />
     <Compile Include="Views\UserControls\ICustomArrowHeadUC.cs" />
     <Compile Include="Views\UserControls\IDividerPropertiesUC.cs" />
@@ -401,6 +490,7 @@
     <Compile Include="Views\UserControls\IItemInfoUC.cs" />
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
+    <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -552,6 +642,12 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\QuoteItemListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\QuoteItemListUC.Designer.cs">
+      <DependentUpon>QuoteItemListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -564,6 +660,7 @@
     <Compile Include="Views\UserControls\WinDoorPanels\CasementPanelUC.Designer.cs">
       <DependentUpon>CasementPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\ILouverPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\Imagers\AwningPanelImagerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -622,6 +719,13 @@
     <Compile Include="Views\UserControls\WinDoorPanels\IMultiPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\IPanelUC.cs" />
     <Compile Include="Views\UserControls\WinDoorPanels\ISlidingPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\ITiltNTurnPanelUC.cs" />
+    <Compile Include="Views\UserControls\WinDoorPanels\LouverPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\LouverPanelUC.Designer.cs">
+      <DependentUpon>LouverPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -658,6 +762,12 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.Designer.cs">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_LouverPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -682,11 +792,23 @@
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.Designer.cs">
       <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.Designer.cs">
+      <DependentUpon>Thumbs_TiltNTurnPanelUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TransomUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TransomUC.Designer.cs">
       <DependentUpon>Thumbs_TransomUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\TiltNTurnPanelUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\WinDoorPanels\TiltNTurnPanelUC.Designer.cs">
+      <DependentUpon>TiltNTurnPanelUC.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -698,8 +820,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CostEngrLandingView.resx">
+      <DependentUpon>CostEngrLandingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\AssignProjectsView.resx">
+      <DependentUpon>AssignProjectsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\CostEngrEmployeeView.resx">
+      <DependentUpon>CostEngrEmployeeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\CustomerRefNoView.resx">
+      <DependentUpon>CustomerRefNoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
       <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>
@@ -731,14 +866,26 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrintQuoteView.resx">
+      <DependentUpon>PrintQuoteView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\promptYesNo.resx">
       <DependentUpon>promptYesNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QuoteItemListView.resx">
+      <DependentUpon>QuoteItemListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformImagerUC.resx">
       <DependentUpon>BasePlatformImagerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformUC.resx">
       <DependentUpon>BasePlatformUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ConcretePropertiesUC.resx">
+      <DependentUpon>ConcretePropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ConcreteUC.resx">
+      <DependentUpon>ConcreteUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ControlsUC.resx">
       <DependentUpon>ControlsUC.cs</DependentUpon>
@@ -848,6 +995,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.resx">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\QuoteItemListUC.resx">
+      <DependentUpon>QuoteItemListUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
       <DependentUpon>AwningPanelUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -875,6 +1025,9 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Imagers\SlidingPanelImagerUC.resx">
       <DependentUpon>SlidingPanelImagerUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\LouverPanelUC.resx">
+      <DependentUpon>LouverPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\MultiPanelMullionUC.resx">
       <DependentUpon>MultiPanelMullionUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -893,6 +1046,9 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_FixedPanelUC.resx">
       <DependentUpon>Thumbs_FixedPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_LouverPanelUC.resx">
+      <DependentUpon>Thumbs_LouverPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_MullionUC.resx">
       <DependentUpon>Thumbs_MullionUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -905,9 +1061,26 @@
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_SlidingPanelUC.resx">
       <DependentUpon>Thumbs_SlidingPanelUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TiltNTurnPanelUC.resx">
+      <DependentUpon>Thumbs_TiltNTurnPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\Thumbs\Thumbs_TransomUC.resx">
       <DependentUpon>Thumbs_TransomUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\TiltNTurnPanelUC.resx">
+      <DependentUpon>TiltNTurnPanelUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataTables\DSQuotation.xsc">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </None>
+    <None Include="DataTables\DSQuotation.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSQuotation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataTables\DSQuotation.xss">
+      <DependentUpon>DSQuotation.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -923,10 +1096,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AddNew_Concrete.png" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
     <None Include="Resources\AwningPanel.png" />
+    <None Include="Resources\back_arrow_104px.png" />
     <Content Include="Resources\box_important_40px.png" />
     <Content Include="Resources\cancel_30px.png" />
     <Content Include="Resources\cancel_40px.png" />
@@ -942,15 +1117,19 @@
     <None Include="Resources\ExtensionBot.png" />
     <None Include="Resources\ExtensionLeft.png" />
     <None Include="Resources\ExtensionRight.png" />
+    <None Include="Resources\enabled_forward_button_104px.png" />
+    <None Include="Resources\enabled_back_arrow_104px .png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />
     <None Include="Resources\FixedPanel2.png" />
+    <None Include="Resources\forward_button_104px.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />
+    <None Include="Resources\LouverPanel.png" />
     <Content Include="Resources\minus2_104px.png" />
     <Content Include="Resources\minus_104px.png" />
     <Content Include="Resources\Mullion.png" />
@@ -959,10 +1138,14 @@
     <Content Include="Resources\MultiplePanelSliding.png" />
     <Content Include="Resources\plus2_104px.png" />
     <Content Include="Resources\plus_104px.png" />
+    <None Include="Resources\plus_math_96px.png" />
+    <None Include="Resources\print.png" />
     <Content Include="Resources\redo_30px.png" />
     <Content Include="Resources\refresh_30px.png" />
+    <None Include="Resources\search_filled_100px.png" />
     <Content Include="Resources\SinglePanel.png" />
     <None Include="Resources\SlidingPanel.png" />
+    <None Include="Resources\TiltNTurnPanel.png" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>

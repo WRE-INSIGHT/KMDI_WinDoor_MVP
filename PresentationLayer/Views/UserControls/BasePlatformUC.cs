@@ -101,5 +101,10 @@ namespace PresentationLayer.Views.UserControls
         {
             ctrl.DataBindings.Clear();
         }
+
+        public void RemoveBindingThis()
+        {
+            this.DataBindings.Clear();
+        }
     }
 }

@@ -33,9 +33,10 @@ namespace ModelLayer.Model.Quotation.Frame
         float Frame_Zoom { get; set; }
         BottomFrameTypes Frame_BotFrameArtNo { get; set; }
         bool Frame_BotFrameEnable { get; set; }
+        UserControl Frame_UC { get; set; }
+        UserControl Frame_PropertiesUC { get; set; }
         int[] Arr_padding_norm { get; }
         int[] Arr_padding_withmpnl { get; }
-
 
         void SetDeductFramePadding(bool mode, bool is_mpanel = true);
         void SetZoom();

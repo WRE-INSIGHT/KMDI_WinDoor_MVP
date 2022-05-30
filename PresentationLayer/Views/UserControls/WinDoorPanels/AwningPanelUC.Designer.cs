@@ -42,12 +42,12 @@
             this.deleteToolStripMenuItem,
             this.extensionToolStripMenuItem});
             this.cmenu_awning.Name = "cmenu_casement";
-            this.cmenu_awning.Size = new System.Drawing.Size(142, 52);
+            this.cmenu_awning.Size = new System.Drawing.Size(126, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(141, 24);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -55,19 +55,17 @@
             // 
             this.extensionToolStripMenuItem.CheckOnClick = true;
             this.extensionToolStripMenuItem.Name = "extensionToolStripMenuItem";
-            this.extensionToolStripMenuItem.Size = new System.Drawing.Size(141, 24);
+            this.extensionToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.extensionToolStripMenuItem.Text = "Extension";
             this.extensionToolStripMenuItem.Click += new System.EventHandler(this.extensionToolStripMenuItem_Click);
             // 
             // AwningPanelUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AwningPanelUC";
-            this.Size = new System.Drawing.Size(200, 185);
             this.SizeChanged += new System.EventHandler(this.AwningPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AwningPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AwningPanelUC_MouseClick);

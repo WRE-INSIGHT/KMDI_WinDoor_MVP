@@ -1,4 +1,5 @@
-﻿using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using System;
@@ -309,18 +310,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
         {
             get
             {
-                return _wdImage;
+                return _wdFlpImage;
             }
 
             set
             {
-                _wdImage = value;
+                _wdFlpImage = value;
                 NotifyPropertyChanged();
             }
         }
 
 
         public List<IFrameModel> lst_frame { get; set; }
+        public List<IConcreteModel> lst_concrete { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -349,6 +352,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 _frameIDCounter = value;
             }
         }
+
+        public int concreteIDCounter { get; set; }
 
         private int _panelIDCounter;
         public int panelIDCounter
@@ -396,7 +401,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public Foil_Color WD_OutsideColor { get; set; }
 
         private decimal _wdPlasticCover;
-        [Description("Plastic Cover in kG")]
+        [Description("Plastic Cover in kg")]
         public decimal WD_PlasticCover
         {
             get
@@ -443,31 +448,32 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         //custom arrows methods
-        private bool _pnl_arrowHeightVisibility;
-        public bool Pnl_ArrowHeightVisibility
-        {
-            get
-            {
-                return _pnl_arrowHeightVisibility;
-            }
-            set
-            {
-                _pnl_arrowHeightVisibility = value;
-            }
-        }
 
-        private bool _pnl_arrowWidthVisibility;
-        public bool Pnl_ArrowWidthVisibility
-        {
-            get
-            {
-                return _pnl_arrowWidthVisibility;
-            }
-            set
-            {
-                _pnl_arrowWidthVisibility = value;
-            }
-        }
+        //private bool _pnl_arrowHeightVisibility;
+        //public bool Pnl_ArrowHeightVisibility
+        //{
+        //    get
+        //    {
+        //        return _pnl_arrowHeightVisibility;
+        //    }
+        //    set
+        //    {
+        //        _pnl_arrowHeightVisibility = value;
+        //    }
+        //}
+
+        //private bool _pnl_arrowWidthVisibility;
+        //public bool Pnl_ArrowWidthVisibility
+        //{
+        //    get
+        //    {
+        //        return _pnl_arrowWidthVisibility;
+        //    }
+        //    set
+        //    {
+        //        _pnl_arrowWidthVisibility = value;
+        //    }
+        //}
 
         private int _lbl_arrowCount;
         public int Lbl_ArrowHtCount
@@ -479,6 +485,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _lbl_arrowCount = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _wdSelected;
+        public bool WD_Selected
+        {
+            get
+            {
+                return _wdSelected;
+            }
+
+            set
+            {
+                _wdSelected = value;
                 NotifyPropertyChanged();
             }
         }
@@ -499,6 +520,25 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         public int Div_ArrowCount { get; set; }
+        public Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
+
+        public Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
+
+        private bool _WD_customArrowToggle;
+        public bool WD_customArrowToggle
+        {
+            get
+            {
+                return _WD_customArrowToggle;
+            }
+
+            set
+            {
+                _WD_customArrowToggle = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #region Methods
 
@@ -661,6 +701,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             //float wd_zoom,
                             string wd_Profile,
                             List<IFrameModel> wdlstframe,
+                            List<IConcreteModel> wdlstconcrete,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
                             Foil_Color wd_outisdecolor)
@@ -678,11 +719,15 @@ namespace ModelLayer.Model.Quotation.WinDoor
             //WD_zoom = wd_zoom;
             WD_profile = wd_Profile;
             lst_frame = wdlstframe;
+            lst_concrete = wdlstconcrete;
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;
 
             WD_CmenuDeleteVisibility = true;
+            WD_customArrowToggle = false;
+            Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
+            Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
         }
     }
 }

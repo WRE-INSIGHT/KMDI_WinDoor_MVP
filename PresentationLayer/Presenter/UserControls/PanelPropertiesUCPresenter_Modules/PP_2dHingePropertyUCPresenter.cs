@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
-        bool _initialLoad = true;
+        //bool _initialLoad = true;
 
         public PP_2dHingePropertyUCPresenter(IPP_2dHingePropertyUC pp_2dHingePropertUC)
         {
@@ -33,7 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_2dHingePropertUC_PP2dHingeLoadEventRaised(object sender, EventArgs e)
         {
             _pp_2dHingePropertUC.ThisBinding(CreateBindingDictionary());
-            _initialLoad = false;
+            //_initialLoad = false;
         }
 
         public IPP_2dHingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)

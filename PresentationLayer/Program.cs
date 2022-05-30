@@ -1,10 +1,12 @@
-﻿using ModelLayer.Model.Quotation.Divider;
+﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
+using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -14,6 +16,7 @@ using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Module
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
+using PresentationLayer.Views.Costing_Head;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using PresentationLayer.Views.UserControls.Dividers;
@@ -22,12 +25,20 @@ using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.Customer_Ref_No;
+using QueryLayer.DataAccess.Repositories.Specific.Employee;
+using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
+using QueryLayer.DataAccess.Repositories.Specific.Quotation;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
+using ServiceLayer.Services.ConcreteServices;
+using ServiceLayer.Services.CustomerRefNoServices;
 using ServiceLayer.Services.DividerServices;
+using ServiceLayer.Services.EmployeeServices;
 using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
+using ServiceLayer.Services.ProjectQuoteServices;
 using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.WindoorServices;
@@ -59,6 +70,18 @@ namespace PresentationLayer
                 .RegisterType<IMainView, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainPresenter, MainPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IAssignProjectsView, AssignProjectsView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAssignProjectsPresenter, AssignProjectsPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICostEngrEmployeeView, CostEngrEmployeeView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICostEngrEmployeePresenter, CostEngrEmployeePresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICostEngrLandingView, CostEngrLandingView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICostEngrLandingPresenter, CostEngrLandingPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ICustomerRefNoView, CustomerRefNoView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomerRefNoPresenter, CustomerRefNoPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserServices, UserServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserModel, UserModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
@@ -79,6 +102,13 @@ namespace PresentationLayer
 
                 .RegisterType<IDividerServices, DividerServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDividerModel, DividerModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IConcreteServices, ConcreteServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcreteModel, ConcreteModel>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICustomerRefNoServices, CustomerRefNoServices>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IModelDataAnnotationCheck, ModelDataAnnotationCheck>(new ContainerControlledLifetimeManager())
 
@@ -105,6 +135,9 @@ namespace PresentationLayer
 
                 .RegisterType<IFramePropertiesUC, FramePropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFramePropertiesUCPresenter, FramePropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IConcretePropertiesUC, ConcretePropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcretePropertiesUCPresenter, ConcretePropertiesUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IpromptYesNo, promptYesNo>(new ContainerControlledLifetimeManager())
                 .RegisterType<IpromptYesNoPresenter, promptYesNoPresenter>(new ContainerControlledLifetimeManager())
@@ -138,6 +171,12 @@ namespace PresentationLayer
 
                 .RegisterType<ISlidingPanelImagerUC, SlidingPanelImagerUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISlidingPanelImagerUCPresenter, SlidingPanelImagerUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ITiltNTurnPanelUC, TiltNTurnPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ITiltNTurnPanelUCPresenter, TiltNTurnPanelUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ILouverPanelUC, LouverPanelUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ILouverPanelUCPresenter, LouverPanelUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IMultiPanelMullionUC, MultiPanelMullionUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>(new ContainerControlledLifetimeManager())
@@ -265,7 +304,25 @@ namespace PresentationLayer
                 .RegisterType<IDividerPropertiesUC, DividerPropertiesUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDividerPropertiesUCPresenter, DividerPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr));
+                .RegisterType<IPrintQuoteView, PrintQuoteView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPrintQuotePresenter, PrintQuotePresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IQuoteItemListView, QuoteItemListView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IQuoteItemListPresenter, QuoteItemListPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IQuoteItemListUC, QuoteItemListUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IQuoteItemListUCPresenter, QuoteItemListUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))
+                ;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

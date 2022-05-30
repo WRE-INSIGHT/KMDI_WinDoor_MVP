@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
@@ -8,6 +9,7 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
@@ -24,7 +26,11 @@ namespace PresentationLayer.Presenter
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }
         DataTable GlassSpacerDT { get; set; }
+        int inputted_quoteId { get; set; }
         string inputted_quotationRefNo { get; set; }
+        string inputted_projectName { get; set; }
+        string inputted_custRefNo { get; set; }
+        DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }
@@ -57,6 +63,7 @@ namespace PresentationLayer.Presenter
         void AddWndrList_QuotationModel(IWindoorModel wndr);
         void AddFrameList_WindoorModel(IFrameModel frameModel);
         void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel);
+        void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel);
         int GetPanelCount();
         int GetMultiPanelCount();
         int GetDividerCount();
@@ -68,6 +75,7 @@ namespace PresentationLayer.Presenter
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
                                 bool AddedFrame,
+                                bool AddedConcrete,
                                 frmDimensionPresenter.Show_Purpose purpose,
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,
@@ -80,12 +88,15 @@ namespace PresentationLayer.Presenter
                                 IMullionUCPresenter mullionUCP = null);
         void DeselectDivider();
         void Run_GetListOfMaterials_SpecificItem();
+        void Set_User_View();
         void DeleteMultiPanelPropertiesUC(int multiPanelID);
         void DeleteDividerPropertiesUC(int divID);
         void DeletePanelPropertiesUC(int panelID);
         void DeleteFramePropertiesUC(int frameID);
+        void DeleteConcretePropertiesUC(int concreteID);
         void Fit_MyControls_byControlsLocation();
         void Fit_MyImager_byImagersLocation();
         void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);
+        void Load_Windoor_Item(IWindoorModel item);
     }
 }

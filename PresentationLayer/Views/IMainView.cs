@@ -23,7 +23,11 @@ namespace PresentationLayer.Views
         event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
+        event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
+        event EventHandler selectProjectToolStripMenuItemClickEventRaised;
+        event EventHandler NewConcreteButtonClickEventRaised;
         event EventHandler refreshToolStripButtonClickEventRaised;
+        event EventHandler printQuoteToolStripMenuItemClickRaiseEvent;
 
         string Nickname { set; }
         string mainview_title { get; set; }
@@ -32,6 +36,7 @@ namespace PresentationLayer.Views
         bool CreateNewWindoorBtnEnabled { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
+        void RemoveBinding();
         void RemoveBinding(Control ctrl);
 
         Panel GetPanelMain();
@@ -53,6 +58,7 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Color { get; }
         Form GetThis();
         void FocusOnMainForm();
+        void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);
 
 

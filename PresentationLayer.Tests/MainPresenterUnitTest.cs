@@ -125,7 +125,7 @@ namespace PresentationLayer.Tests
 
             //act
             _mainPresenter.inputted_quotationRefNo = "SAMPLE123";
-            _mainPresenter.Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+            _mainPresenter.Scenario_Quotation(true, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
 
             //assert
             Assert.AreEqual(expected_quotation, _mainView.mainview_title);
@@ -157,6 +157,7 @@ namespace PresentationLayer.Tests
             _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              false,
                                               frmDimensionPresenter.Show_Purpose.Quotation,
                                               _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumWidth,
                                               _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumHeight,
@@ -199,7 +200,7 @@ namespace PresentationLayer.Tests
 
             //act
             _mainPresenter.frameType_MainPresenter = exp_frameType;
-            _mainPresenter.Scenario_Quotation(false, false, true,
+            _mainPresenter.Scenario_Quotation(false, false, true, false,
                                               frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
                                               0,
                                               0,
@@ -207,6 +208,7 @@ namespace PresentationLayer.Tests
             _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              false,
                                               _mainPresenter.frmDimension_MainPresenter.purpose,
                                               exp_fWd,
                                               exp_fHt,
@@ -247,7 +249,7 @@ namespace PresentationLayer.Tests
 
             //act
             _mainPresenter.inputted_quotationRefNo = "SAMPLE123";
-            _mainPresenter.Scenario_Quotation(true, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+            _mainPresenter.Scenario_Quotation(true, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
 
             //assert
             Assert.AreEqual(expected_quotation, _mainView.mainview_title);
@@ -279,6 +281,7 @@ namespace PresentationLayer.Tests
             _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              false,
                                               frmDimensionPresenter.Show_Purpose.Quotation,
                                               _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumWidth,
                                               _mainPresenter.frmDimension_MainPresenter.GetDimensionView().InumHeight,
@@ -320,7 +323,7 @@ namespace PresentationLayer.Tests
 
             //act
             _mainPresenter.frameType_MainPresenter = exp_frameType;
-            _mainPresenter.Scenario_Quotation(false, false, true,
+            _mainPresenter.Scenario_Quotation(false, false, true, false,
                                               frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
                                               0,
                                               0,
@@ -328,6 +331,7 @@ namespace PresentationLayer.Tests
             _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              false,
                                               _mainPresenter.frmDimension_MainPresenter.purpose,
                                               exp_fWd,
                                               exp_fHt,
@@ -355,7 +359,7 @@ namespace PresentationLayer.Tests
 
             //act
             _mainPresenter.frameType_MainPresenter = exp_frameType2;
-            _mainPresenter.Scenario_Quotation(false, false, true,
+            _mainPresenter.Scenario_Quotation(false, false, true, false,
                                               frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
                                               0,
                                               0,
@@ -363,6 +367,7 @@ namespace PresentationLayer.Tests
             _mainPresenter.Scenario_Quotation(_mainPresenter.frmDimension_MainPresenter.mainPresenter_qoutationInputBox_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_newItem_ClickedOK,
                                               _mainPresenter.frmDimension_MainPresenter.mainPresenter_AddedFrame_ClickedOK,
+                                              false,
                                               _mainPresenter.frmDimension_MainPresenter.purpose,
                                               exp_fWd2,
                                               exp_fHt2,

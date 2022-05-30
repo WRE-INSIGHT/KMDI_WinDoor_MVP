@@ -34,15 +34,15 @@ namespace PresentationLayer.CommonMethods
                                            ITransomUCPresenter _transomUCP,
                                            IUnityContainer _unityC,
                                            IMullionUCPresenter _mullionUCP,
-                                           IMullionImagerUCPresenter _mullionImagerUCP,
-                                           ITransomImagerUCPresenter _transomImagerUCP,
+                                           //IMullionImagerUCPresenter _mullionImagerUCP,
+                                           //ITransomImagerUCPresenter _transomImagerUCP,
                                            int divID,
                                            IMultiPanelModel multiPanelModel = null,
                                            IPanelModel panelModel = null,
                                            IMultiPanelTransomUCPresenter multiTransomUCP = null,
-                                           IMultiPanelMullionUCPresenter multiMullionUCP = null,
-                                           IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
-                                           IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
+                                           IMultiPanelMullionUCPresenter multiMullionUCP = null)
+                                           //IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
+                                           //IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
         {
             FlowLayoutPanel parentfpnl = new FlowLayoutPanel();
             IMultiPanelModel parentModel = null;
@@ -176,15 +176,15 @@ namespace PresentationLayer.CommonMethods
                                                                           frameModel.Frame_Type.ToString(),
                                                                           true);
 
-                    transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
-                                                                        divModel,
-                                                                        parentModel,
-                                                                        frameModel,
-                                                                        multiTransomImagerUCP,
-                                                                        transomUC);
-                    ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
-                    multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
-                    parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
+                    //transomImagerUCP = _transomImagerUCP.GetNewInstance(_unityC,
+                    //                                                    divModel,
+                    //                                                    parentModel,
+                    //                                                    frameModel,
+                    //                                                    multiTransomImagerUCP,
+                    //                                                    transomUC);
+                    //ITransomImagerUC transomImagerUC = transomImagerUCP.GetTransomImager();
+                    //multiTransomImagerUCP.AddControl((UserControl)transomImagerUC);
+                    //parentModel.MPanelLst_Imagers.Add((UserControl)transomImagerUC);
 
                 }
                 else if (parentModel.MPanel_Type == "Mullion")
@@ -222,16 +222,16 @@ namespace PresentationLayer.CommonMethods
                                                                           frameModel.Frame_Type.ToString(),
                                                                           true);
 
-                    mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
-                                                                        divModel,
-                                                                        parentModel,
-                                                                        frameModel,
-                                                                        multiMullionImagerUCP,
-                                                                        mullionUC);
+                    //mullionImagerUCP = _mullionImagerUCP.GetNewInstance(_unityC,
+                    //                                                    divModel,
+                    //                                                    parentModel,
+                    //                                                    frameModel,
+                    //                                                    multiMullionImagerUCP,
+                    //                                                    mullionUC);
 
-                    IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
-                    multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
-                    parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
+                    //IMullionImagerUC mullionImagerUC = mullionImagerUCP.GetMullionImager();
+                    //multiMullionImagerUCP.AddControl((UserControl)mullionImagerUC);
+                    //parentModel.MPanelLst_Imagers.Add((UserControl)mullionImagerUC);
 
                 }
             }
@@ -612,63 +612,63 @@ namespace PresentationLayer.CommonMethods
             return Mullion_Points;
         }
 
-        public List<Point[]> GetMullionDrawingPoints2(int width,
-                                                      int height,
-                                                      UserControl prev_obj,
-                                                      UserControl nxt_obj,
-                                                      Frame_Padding frame_type,
-                                                      float zoom)
-        {
-            List<Point[]> Mullion_Points = new List<Point[]>();
-            int accessible_Wd = width - 2,
-                accessible_Ht = height - 2,
-                Ht_beforeCurve = height - 5;
+        //public List<Point[]> GetMullionDrawingPoints2(int width,
+        //                                              int height,
+        //                                              UserControl prev_obj,
+        //                                              UserControl nxt_obj,
+        //                                              Frame_Padding frame_type,
+        //                                              float zoom)
+        //{
+        //    List<Point[]> Mullion_Points = new List<Point[]>();
+        //    int accessible_Wd = width - 2,
+        //        accessible_Ht = height - 2,
+        //        Ht_beforeCurve = height - 5;
 
-            int start_wd = 1,
-                end_wd = width - 1,
-                start_ht = 1,
-                end_ht = height - 1;
+        //    int start_wd = 1,
+        //        end_wd = width - 1,
+        //        start_ht = 1,
+        //        end_ht = height - 1;
 
-            Point[] leftLine = new Point[2];
-            Point[] botCurve = new Point[3];
-            Point[] rightLine = new Point[2];
-            Point[] upperCurve = new Point[3];
+        //    Point[] leftLine = new Point[2];
+        //    Point[] botCurve = new Point[3];
+        //    Point[] rightLine = new Point[2];
+        //    Point[] upperCurve = new Point[3];
 
-            if (prev_obj is IPanelUC)
-            {
-                leftLine[0] = new Point((int)(1 * zoom), (int)(5 * zoom));
-                leftLine[1] = new Point((int)(1 * zoom), (int)(Ht_beforeCurve * zoom));
+        //    if (prev_obj is IPanelUC)
+        //    {
+        //        leftLine[0] = new Point((int)(1 * zoom), (int)(5 * zoom));
+        //        leftLine[1] = new Point((int)(1 * zoom), (int)(Ht_beforeCurve * zoom));
 
-                botCurve[0] = new Point((int)(1 * zoom), Ht_beforeCurve);
-                botCurve[1] = new Point((int)((accessible_Wd / 2) * zoom), accessible_Ht);
-                botCurve[2] = new Point((int)(accessible_Wd * zoom), Ht_beforeCurve);
-            }
+        //        botCurve[0] = new Point((int)(1 * zoom), Ht_beforeCurve);
+        //        botCurve[1] = new Point((int)((accessible_Wd / 2) * zoom), accessible_Ht);
+        //        botCurve[2] = new Point((int)(accessible_Wd * zoom), Ht_beforeCurve);
+        //    }
 
-            if (nxt_obj is IPanelUC || nxt_obj == null)
-            {
-                rightLine[0] = new Point((int)(accessible_Wd * zoom), Ht_beforeCurve);
-                rightLine[1] = new Point((int)(accessible_Wd * zoom), 5);
+        //    if (nxt_obj is IPanelUC || nxt_obj == null)
+        //    {
+        //        rightLine[0] = new Point((int)(accessible_Wd * zoom), Ht_beforeCurve);
+        //        rightLine[1] = new Point((int)(accessible_Wd * zoom), 5);
 
-                upperCurve[0] = new Point((int)(accessible_Wd * zoom), 5);
-                upperCurve[1] = new Point(accessible_Wd / 2, 1);
-                upperCurve[2] = new Point(1, 5);
-            }
+        //        upperCurve[0] = new Point((int)(accessible_Wd * zoom), 5);
+        //        upperCurve[1] = new Point(accessible_Wd / 2, 1);
+        //        upperCurve[2] = new Point(1, 5);
+        //    }
 
-            Mullion_Points.Add(leftLine);
-            Mullion_Points.Add(botCurve);
-            Mullion_Points.Add(rightLine);
-            Mullion_Points.Add(upperCurve);
+        //    Mullion_Points.Add(leftLine);
+        //    Mullion_Points.Add(botCurve);
+        //    Mullion_Points.Add(rightLine);
+        //    Mullion_Points.Add(upperCurve);
 
-            for (int i = 0; i < Mullion_Points.Count() ; i++)
-            {
-                for (int j = 0; j < Mullion_Points[i].Count() ; j++)
-                {
-                    Mullion_Points[i][j] = new Point((int)(Mullion_Points[i][j].X * zoom), (int)(Mullion_Points[i][j].Y * zoom));
-                }
-            }
+        //    for (int i = 0; i < Mullion_Points.Count() ; i++)
+        //    {
+        //        for (int j = 0; j < Mullion_Points[i].Count() ; j++)
+        //        {
+        //            Mullion_Points[i][j] = new Point((int)(Mullion_Points[i][j].X * zoom), (int)(Mullion_Points[i][j].Y * zoom));
+        //        }
+        //    }
 
-            return Mullion_Points;
-        }
+        //    return Mullion_Points;
+        //}
 
         public List<Point[]> GetTransomDrawingPoints(int width,
                                                      int height,

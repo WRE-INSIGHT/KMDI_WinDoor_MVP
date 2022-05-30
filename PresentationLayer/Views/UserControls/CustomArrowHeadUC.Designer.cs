@@ -46,6 +46,8 @@
             // 
             // nud_ArrowSize
             // 
+            this.nud_ArrowSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nud_ArrowSize.Location = new System.Drawing.Point(61, 2);
             this.nud_ArrowSize.Name = "nud_ArrowSize";
             this.nud_ArrowSize.Size = new System.Drawing.Size(76, 22);
@@ -54,8 +56,7 @@
             // 
             // btn_DeleteArrowHead
             // 
-            this.btn_DeleteArrowHead.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_DeleteArrowHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_DeleteArrowHead.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_DeleteArrowHead.FlatAppearance.BorderSize = 0;
             this.btn_DeleteArrowHead.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
@@ -91,6 +92,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CustomArrowHeadUC";
             this.Size = new System.Drawing.Size(167, 25);
+            this.Load += new System.EventHandler(this.CustomArrowHeadUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_ArrowSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

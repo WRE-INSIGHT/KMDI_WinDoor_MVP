@@ -31,7 +31,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMainPresenter _mainPresenter;
 
-        bool _mouseDown, _initialLoad, _keydown;
+        bool _mouseDown, //_initialLoad, 
+            _keydown;
         private Point _point_of_origin;
 
         CommonFunctions _commonfunc = new CommonFunctions();
@@ -833,7 +834,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public ITransomUC GetTransom()
         {
-            _initialLoad = true;
+            //_initialLoad = true;
             _transomUC.ThisBinding(CreateBindingDictionary());
             return _transomUC;
         }
@@ -892,7 +893,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
         public void SetInitialLoadFalse()
         {
-            _initialLoad = false;
+            //_initialLoad = false;
         }
 
         public void FocusOnThisTransomDiv()

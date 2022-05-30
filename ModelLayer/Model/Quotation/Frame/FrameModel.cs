@@ -19,8 +19,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public enum Frame_Padding
         {
             Window = 26,
-            Door = 33,
-            Concrete
+            Door = 33
         }
 
         private static int _frame_basicDeduction = 10;
@@ -276,6 +275,35 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameBotFrameEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private UserControl _frameUC;
+        public UserControl Frame_UC
+        {
+            get
+            {
+                return _frameUC;
+            }
+
+            set
+            {
+                _frameUC = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private UserControl _framePropertiesUC;
+        public UserControl Frame_PropertiesUC
+        {
+            get
+            {
+                return _framePropertiesUC;
+            }
+            set
+            {
+                _framePropertiesUC = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1027,7 +1055,9 @@ namespace ModelLayer.Model.Quotation.Frame
                           FrameProfile_ArticleNo frameArtNo,
                           IWindoorModel frameWindoorModel,
                           BottomFrameTypes frameBotFrameType,
-                          bool frameBotFrameEnable)
+                          bool frameBotFrameEnable,
+                          UserControl frameUC,
+                          UserControl framePropertiesUC)
         {
             Frame_ID = frameID;
             Frame_Name = frameName;
@@ -1045,8 +1075,10 @@ namespace ModelLayer.Model.Quotation.Frame
             Frame_CmenuDeleteVisibility = true;
             Frame_BotFrameArtNo = frameBotFrameType;
             Frame_BotFrameEnable = frameBotFrameEnable;
+            Frame_UC = frameUC;
+            Frame_PropertiesUC = framePropertiesUC;
 
-            FrameProp_Height = constants.frame_propertyHeight_default - constants.frame_property_concretePanelHeight;
+            FrameProp_Height = constants.frame_propertyHeight_default;
         }
     }
 }

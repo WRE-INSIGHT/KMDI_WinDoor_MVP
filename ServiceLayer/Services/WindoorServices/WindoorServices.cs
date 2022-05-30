@@ -7,6 +7,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Frame;
 using ServiceLayer.CommonServices;
 using static EnumerationTypeLayer.EnumerationTypes;
+using ModelLayer.Model.Quotation.Concrete;
 
 namespace ServiceLayer.Services.WindoorServices
 {
@@ -32,6 +33,7 @@ namespace ServiceLayer.Services.WindoorServices
                                            float WD_zoom,
                                            string WD_Profile,
                                            List<IFrameModel> lst_frame,
+                                           List<IConcreteModel> lst_concrete,
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
                                            Foil_Color wd_outisdecolor)
@@ -48,6 +50,7 @@ namespace ServiceLayer.Services.WindoorServices
                                                   WD_orientation,
                                                   WD_Profile,
                                                   lst_frame,
+                                                  lst_concrete,
                                                   wd_basecolor,
                                                   wd_insidecolor,
                                                   wd_outisdecolor);
@@ -71,7 +74,8 @@ namespace ServiceLayer.Services.WindoorServices
                                              float WD_zoom = 1.0f,
                                              int WD_price = 0,
                                              decimal WD_discount = 0.0M,
-                                             List<IFrameModel> lst_frame = null)
+                                             List<IFrameModel> lst_frame = null,
+                                             List<IConcreteModel> lst_concrete = null)
         {
             if (WD_name == "")
             {
@@ -85,7 +89,10 @@ namespace ServiceLayer.Services.WindoorServices
             {
                 lst_frame = new List<IFrameModel>();
             }
-
+            if (lst_concrete == null)
+            {
+                lst_concrete = new List<IConcreteModel>();
+            }
             IWindoorModel _windoorModel = CreateWindoor(WD_ID,
                                                         WD_name,
                                                         WD_description,
@@ -99,6 +106,7 @@ namespace ServiceLayer.Services.WindoorServices
                                                         WD_zoom,
                                                         WD_Profile,
                                                         lst_frame,
+                                                        lst_concrete,
                                                         wd_basecolor, 
                                                         wd_insidecolor,
                                                         wd_outisdecolor);

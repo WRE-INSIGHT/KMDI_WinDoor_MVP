@@ -31,6 +31,19 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private Frame_Padding _frameType;
+        public Frame_Padding Frame_Type
+        {
+            get
+            {
+                return _frameType;
+            }
+            set
+            {
+                _frameType = value;
+            }
+        }
+
         public FramePropertiesUC()
         {
             InitializeComponent();
@@ -78,11 +91,11 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(frameModelBinding["FrameProp_Height"]);
             lbl_frameName.DataBindings.Add(frameModelBinding["Frame_Name"]);
             this.DataBindings.Add(frameModelBinding["Frame_Visible"]);
+            this.DataBindings.Add(frameModelBinding["Frame_Type"]);
             num_fWidth.DataBindings.Add(frameModelBinding["Frame_Width"]);
             num_fHeight.DataBindings.Add(frameModelBinding["Frame_Height"]);
             rdBtn_Window.DataBindings.Add(frameModelBinding["Frame_Type_Window"]);
             rdBtn_Door.DataBindings.Add(frameModelBinding["Frame_Type_Door"]);
-            rdBtn_Concrete.DataBindings.Add(frameModelBinding["Frame_Type_Concrete"]);
             cmb_FrameProfile.DataBindings.Add(frameModelBinding["Frame_ArtNo"]);
             cmb_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
         }
@@ -106,7 +119,6 @@ namespace PresentationLayer.Views.UserControls
         {
             rdBtn_Window.Enabled = frameTypeEnabled;
             rdBtn_Door.Enabled = frameTypeEnabled;
-            rdBtn_Concrete.Enabled = frameTypeEnabled;
         }
 
         private void cmb_FrameProfile_SelectedValueChanged(object sender, EventArgs e)

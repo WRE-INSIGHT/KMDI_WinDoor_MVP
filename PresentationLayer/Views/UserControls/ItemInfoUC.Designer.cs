@@ -64,6 +64,7 @@
             this.lbl_item.Tag = "lbl_item";
             this.lbl_item.Text = "lbl_item";
             this.lbl_item.UseMnemonic = false;
+            this.lbl_item.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDoubleClick);
             // 
             // pnl_itmbot_
             // 
