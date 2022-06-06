@@ -4,11 +4,8 @@ using ModelLayer.Model.User;
 using PresentationLayer.Views.Costing_Head;
 using ServiceLayer.Services.ProjectQuoteServices;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -134,7 +131,14 @@ namespace PresentationLayer.Presenter.Costing_Head
 
         private void _assignProjView_assignCostEngrToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            if (_dgvProj.SelectedRows.Count > 0)
+            //foreach (DataGridViewRow row in _dgvProj.SelectedRows)
+            //{
+            //    Console.WriteLine("customer ref: " + row.Cells["Customer_Reference"].Value.ToString());
+            //}
+
+            if (_dgvProj.SelectedRows.Count > 0 // 
+                                                // row.Cells["Customer_Reference"].Value.ToString() != null
+                   )
             {
                 ICostEngrEmployeePresenter ceEmpPresenter = _ceEmpPresenter.GetNewInstance(_unityC, this);
                 ceEmpPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
@@ -145,6 +149,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             {
                 MessageBox.Show("Please select project(s)");
             }
+
         }
 
         private async void _assignProjView_AssignProjectsViewLoadEventRaised(object sender, EventArgs e)

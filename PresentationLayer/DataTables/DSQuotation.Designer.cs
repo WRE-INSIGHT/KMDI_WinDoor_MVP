@@ -295,6 +295,8 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtNetPrice;
             
+            private global::System.Data.DataColumn columndtItemNumber;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtQuoteDataTable() {
@@ -394,6 +396,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtItemNumberColumn {
+                get {
+                    return this.columndtItemNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtQuoteRow AdddtQuoteRow(string dtItemName, string dtDescription, string dtDimension, string dtImage, int dtQuantity, decimal dtPrice, decimal dtDiscount, decimal dtNetPrice) {
+            public dtQuoteRow AdddtQuoteRow(string dtItemName, string dtDescription, string dtDimension, string dtImage, int dtQuantity, decimal dtPrice, decimal dtDiscount, decimal dtNetPrice, string dtItemNumber) {
                 dtQuoteRow rowdtQuoteRow = ((dtQuoteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtItemName,
@@ -439,7 +449,8 @@ namespace PresentationLayer.DataTables {
                         dtQuantity,
                         dtPrice,
                         dtDiscount,
-                        dtNetPrice};
+                        dtNetPrice,
+                        dtItemNumber};
                 rowdtQuoteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtQuoteRow);
                 return rowdtQuoteRow;
@@ -470,6 +481,7 @@ namespace PresentationLayer.DataTables {
                 this.columndtPrice = base.Columns["dtPrice"];
                 this.columndtDiscount = base.Columns["dtDiscount"];
                 this.columndtNetPrice = base.Columns["dtNetPrice"];
+                this.columndtItemNumber = base.Columns["dtItemNumber"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +503,8 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtDiscount);
                 this.columndtNetPrice = new global::System.Data.DataColumn("dtNetPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtNetPrice);
+                this.columndtItemNumber = new global::System.Data.DataColumn("dtItemNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtItemNumber);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -761,6 +775,22 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtItemNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtQuote.dtItemNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtItemNumber\' in table \'dtQuote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtQuote.dtItemNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsdtItemNameNull() {
                 return this.IsNull(this.tabledtQuote.dtItemNameColumn);
             }
@@ -853,6 +883,18 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdtNetPriceNull() {
                 this[this.tabledtQuote.dtNetPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtItemNumberNull() {
+                return this.IsNull(this.tabledtQuote.dtItemNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtItemNumberNull() {
+                this[this.tabledtQuote.dtItemNumberColumn] = global::System.Convert.DBNull;
             }
         }
         

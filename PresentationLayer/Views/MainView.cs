@@ -31,11 +31,15 @@ namespace PresentationLayer.Views
                 {
                     listOfMaterialsToolStripMenuItem.Enabled = true;
                     changeItemColorToolStripMenuItem.Enabled = true;
+                    saveAsToolStripMenuItem.Enabled = true;
+                    CostingItemsToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
                     listOfMaterialsToolStripMenuItem.Enabled = false;
                     changeItemColorToolStripMenuItem.Enabled = false;
+                    saveAsToolStripMenuItem.Enabled = false;
+                    CostingItemsToolStripMenuItem.Enabled = false;
                 }
             }
         }
@@ -182,7 +186,9 @@ namespace PresentationLayer.Views
         public event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         public event EventHandler refreshToolStripButtonClickEventRaised;
-        public event EventHandler printQuoteToolStripMenuItemClickRaiseEvent;
+        public event EventHandler CostingItemsToolStripMenuItemClickRaiseEvent;
+        public event EventHandler saveAsToolStripMenuItemClickEventRaised;
+        public event EventHandler saveToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -403,10 +409,35 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
         }
 
-        private void printQuoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, printQuoteToolStripMenuItemClickRaiseEvent, e);
+     
 
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = Properties.Settings.Default.WndrDir;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                EventHelpers.RaiseEvent(sender, saveAsToolStripMenuItemClickEventRaised, e);
+            }
+        }
+
+        public SaveFileDialog GetSaveFileDialog()
+        {
+            return saveFileDialog1;
+        }
+
+        public ToolStripLabel GetToolStripLabelSync()
+        {
+            return tsp_Sync;
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, saveToolStripButtonClickEventRaised, e);
+        }
+
+        private void CostingItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
         }
     }
 }

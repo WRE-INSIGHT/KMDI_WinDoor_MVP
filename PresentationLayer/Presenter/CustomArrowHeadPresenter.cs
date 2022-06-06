@@ -280,7 +280,6 @@ namespace PresentationLayer.Presenter
 
             foreach (ICustomArrowHeadUC arrow_Wd in lst_arrowWd.OrderBy(x => x.ArrowId))
             {
-
                 lst_arrowWdLength.Add(arrow_Wd.ArrowId, ((ICustomArrowHeadUC)arrow_Wd).Arrow_Size);
             }
 

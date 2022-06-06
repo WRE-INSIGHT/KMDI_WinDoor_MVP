@@ -3,8 +3,11 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
-using PresentationLayer.Views.UserControls;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 using Unity;
@@ -20,12 +23,16 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
+        private IMainPresenter _mainPresenter;
+
+        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+        private List<int> _lstItemArea = new List<int>();
 
 
-        string itemName, itemDesc, ItemDimension;
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
-                                      IPrintQuotePresenter printQuotePresenter)
+                                      IPrintQuotePresenter printQuotePresenter
+                                      )
         {
             _quoteItemListView = quoteItemListView;
             _printQuotePresenter = printQuotePresenter;
@@ -40,7 +47,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewLoadEventRaised += _quoteItemListView_QuoteItemListViewLoadEventRaised;
         }
 
-
+        int TotalItemArea = 0;
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
         {
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
@@ -51,20 +58,21 @@ namespace PresentationLayer.Presenter
                 quoteItem.Dock = DockStyle.Top;
                 quoteItem.BringToFront();
 
-                IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName= wdm.WD_name;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension= wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc= "";
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
-            }
 
+                IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = "";
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
+                this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
+                TotalItemArea = wdm.WD_width * wdm.WD_height;
+                this._lstItemArea.Add(TotalItemArea);
+            }
         }
 
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
-         
-
             DSQuotation _dsq = new DSQuotation();
             /*
           ID
@@ -76,45 +84,84 @@ namespace PresentationLayer.Presenter
           dtPrice
           dtDiscount
           dtNetPrice
-           */
-
-            populateitemInfo();
+           */ 
 
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
-               
+                int max = this._lstItemArea[0],
+                    itemSizePercentage,
+                    ItemScalingSize;
+                for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                {
+                    max = Math.Max(max, this._lstItemArea[ii]);
+                }
+                itemSizePercentage = (this._lstItemArea[i] / max);
+                ItemScalingSize = (this._lstItemArea[i] / max) * itemSizePercentage;
+
                 MemoryStream mstream = new MemoryStream();
-                _quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                Image img = _quotationModel.Lst_Windoor[i].WD_image;
+                var resizedImg = ResizeImage(img, 290, 500);
+
+                //MessageBox.Show("Width: " + img.Width + ", Height: " + img.Height);
+                resizedImg.Save(mstream, ImageFormat.Png);
+                //_quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+
+
                 byte[] arrimage = mstream.ToArray();
                 string byteToStr = Convert.ToBase64String(arrimage);
 
-                _dsq.dtQuote.Rows.Add(_quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName,
-                                      _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc,
-                                      _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension,
+                IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+
+                _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemDesc,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemDimension,
                                       byteToStr,
-                                      1,    
+                                      1,
                                       0,
                                       0,
-                                      0);
+                                      0,
+                                      i + 1);
 
-                
-
+             
             }
 
-            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this);
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-         
-
-
         }
 
-        public void populateitemInfo()
+        public static Bitmap ResizeImage(Image image, int width, int height)
         {
-            IQuoteItemListUCPresenter quoteItemLUCP = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
-            itemName = quoteItemLUCP.GetiQuoteItemListUC().ItemName;
-            itemDesc = quoteItemLUCP.GetiQuoteItemListUC().itemDesc;
-            ItemDimension = quoteItemLUCP.GetiQuoteItemListUC().itemDimension;
+            var destRect = new Rectangle(0, 0, width, height);
+            //create new destImage object
+            var destImage = new Bitmap(width, height);
+
+            //maintains DPI regardless of physical size
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                //determines whether pixels from a source image overwrite or are combined with background pixels.
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                //determines the rendering quality level of layered images.
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                // determines how intermediate values between two endpoints are calculated
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                //specifies whether lines, curves, and the edges of filled areas use smoothing 
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                //affects rendering quality when drawing the new image
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    //prevents ghosting around the image borders
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
 
         public IQuoteItemListView GetQuoteItemListView()
@@ -125,7 +172,8 @@ namespace PresentationLayer.Presenter
         public IQuoteItemListPresenter GetNewInstance(IUnityContainer unityC,
                                                       IQuotationModel quotationModel,
                                                       IQuoteItemListUCPresenter quoteItemListUCPresenter,
-                                                      IWindoorModel windoorModel)
+                                                      IWindoorModel windoorModel,
+                                                      IMainPresenter mainPresenter)
         {
             unityC
                     .RegisterType<IQuoteItemListPresenter, QuoteItemListPresenter>()
@@ -135,6 +183,7 @@ namespace PresentationLayer.Presenter
             quoteItemList._quotationModel = quotationModel;
             quoteItemList._quoteItemListUCPresenter = quoteItemListUCPresenter;
             quoteItemList._windoorModel = windoorModel;
+            quoteItemList._mainPresenter = mainPresenter;
             //quoteItemList._printQuotePresenter = printQuotePresenter;
 
             return quoteItemList;

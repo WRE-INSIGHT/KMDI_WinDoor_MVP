@@ -1,13 +1,7 @@
 ﻿using CommonComponents;
 using PresentationLayer.CommonMethods;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
@@ -101,7 +95,7 @@ namespace PresentationLayer.Views
             {
                 has_set = false;
             }
-            else if (index <= tab_Nav.TabCount -1)
+            else if (index <= tab_Nav.TabCount - 1)
             {
                 has_set = true;
 
@@ -161,7 +155,7 @@ namespace PresentationLayer.Views
 
         private void dgv_QuoteNo_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            common.rowpostpaint(sender, e); 
+            common.rowpostpaint(sender, e);
         }
 
         private void btn_AddNewQuote_Click(object sender, EventArgs e)
@@ -178,5 +172,11 @@ namespace PresentationLayer.Views
         {
             this.Close();
         }
+
+        public void resizeForm(int formWidth, int formHeight)
+        {
+            this.Size = new Size(formWidth, formHeight);
+        }
+
     }
 }

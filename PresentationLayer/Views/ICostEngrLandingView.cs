@@ -22,5 +22,6 @@ namespace PresentationLayer.Views
         void ShowThis();
         void CloseThis();
         void SetText_LblNav(string text);
+        void resizeForm(int formWidth, int formHeight);
     }
 }

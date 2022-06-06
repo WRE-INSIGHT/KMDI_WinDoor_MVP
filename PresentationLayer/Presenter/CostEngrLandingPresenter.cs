@@ -182,33 +182,38 @@ namespace PresentationLayer.Presenter
                 if (_tPageNav_selectedIndex == 0)
                 {
                     _CELandingView.SetText_LblNav("");
+                    _CELandingView.resizeForm(800, 600);
                 }
                 else if (_tPageNav_selectedIndex == 1)
                 {
                     _CELandingView.SetText_LblNav(_projName);
+                    _CELandingView.resizeForm(376, 600);
                 }
                 else if (_tPageNav_selectedIndex == 2)
                 {
                     _CELandingView.SetText_LblNav(_projName + @"\" + _custRefNo);
+                    _CELandingView.resizeForm(376, 600);
                 }
             }
         }
 
         private async void _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {
+           
             try
             {
                 if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                 {
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
-                    _projName= _dgvAssignedProj.Rows[e.RowIndex].Cells["Project Name"].Value.ToString();
-                    _dateAssigned = (DateTime) _dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
+                    _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
+                    _dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
                     _CELandingView.SetText_LblNav(_projName);
 
                     int index = _tPageNav_selectedIndex + 1;
                     SetSelectedIndex_TPageNav(index);
                     await Load_DGV_CustRefNo(_projId);
                 }
+               
             }
             catch (Exception ex)
             {

@@ -69,7 +69,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 29);
+            this.panel1.Size = new System.Drawing.Size(784, 29);
             this.panel1.TabIndex = 2;
             // 
             // lbl_nav
@@ -127,7 +127,7 @@
             this.tab_Nav.Location = new System.Drawing.Point(0, 5);
             this.tab_Nav.Name = "tab_Nav";
             this.tab_Nav.SelectedIndex = 0;
-            this.tab_Nav.Size = new System.Drawing.Size(384, 556);
+            this.tab_Nav.Size = new System.Drawing.Size(784, 556);
             this.tab_Nav.TabIndex = 3;
             // 
             // tabPage_ProjectAssigned
@@ -137,7 +137,7 @@
             this.tabPage_ProjectAssigned.Location = new System.Drawing.Point(4, 26);
             this.tabPage_ProjectAssigned.Name = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_ProjectAssigned.Size = new System.Drawing.Size(376, 526);
+            this.tabPage_ProjectAssigned.Size = new System.Drawing.Size(776, 526);
             this.tabPage_ProjectAssigned.TabIndex = 0;
             this.tabPage_ProjectAssigned.Text = "tabPage_ProjectAssigned";
             this.tabPage_ProjectAssigned.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@
             this.dgv_AssignedProjects.Location = new System.Drawing.Point(3, 32);
             this.dgv_AssignedProjects.Name = "dgv_AssignedProjects";
             this.dgv_AssignedProjects.ReadOnly = true;
-            this.dgv_AssignedProjects.Size = new System.Drawing.Size(370, 491);
+            this.dgv_AssignedProjects.Size = new System.Drawing.Size(770, 491);
             this.dgv_AssignedProjects.TabIndex = 6;
             this.dgv_AssignedProjects.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_AssignedProjects_CellMouseDoubleClick);
             this.dgv_AssignedProjects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_AssignedProjects_RowPostPaint);
@@ -166,7 +166,7 @@
             this.pnl_top.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_top.Location = new System.Drawing.Point(3, 3);
             this.pnl_top.Name = "pnl_top";
-            this.pnl_top.Size = new System.Drawing.Size(370, 29);
+            this.pnl_top.Size = new System.Drawing.Size(770, 29);
             this.pnl_top.TabIndex = 2;
             // 
             // btn_SearchProj
@@ -177,9 +177,9 @@
             this.btn_SearchProj.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_SearchProj.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_SearchProj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_SearchProj.Location = new System.Drawing.Point(339, 0);
+            this.btn_SearchProj.Location = new System.Drawing.Point(693, 0);
             this.btn_SearchProj.Name = "btn_SearchProj";
-            this.btn_SearchProj.Size = new System.Drawing.Size(31, 29);
+            this.btn_SearchProj.Size = new System.Drawing.Size(77, 29);
             this.btn_SearchProj.TabIndex = 1;
             this.btn_SearchProj.UseVisualStyleBackColor = false;
             // 
@@ -190,7 +190,7 @@
             this.txt_SearchProj.Location = new System.Drawing.Point(0, 0);
             this.txt_SearchProj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txt_SearchProj.Name = "txt_SearchProj";
-            this.txt_SearchProj.Size = new System.Drawing.Size(339, 29);
+            this.txt_SearchProj.Size = new System.Drawing.Size(693, 29);
             this.txt_SearchProj.TabIndex = 0;
             // 
             // tabPage_CustRef
@@ -199,7 +199,7 @@
             this.tabPage_CustRef.Location = new System.Drawing.Point(4, 26);
             this.tabPage_CustRef.Name = "tabPage_CustRef";
             this.tabPage_CustRef.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_CustRef.Size = new System.Drawing.Size(376, 526);
+            this.tabPage_CustRef.Size = new System.Drawing.Size(352, 526);
             this.tabPage_CustRef.TabIndex = 1;
             this.tabPage_CustRef.Text = "tabPage_CustRef";
             this.tabPage_CustRef.UseVisualStyleBackColor = true;
@@ -216,7 +216,7 @@
             this.dgv_CustRefNo.Location = new System.Drawing.Point(3, 3);
             this.dgv_CustRefNo.Name = "dgv_CustRefNo";
             this.dgv_CustRefNo.ReadOnly = true;
-            this.dgv_CustRefNo.Size = new System.Drawing.Size(370, 520);
+            this.dgv_CustRefNo.Size = new System.Drawing.Size(346, 520);
             this.dgv_CustRefNo.TabIndex = 7;
             this.dgv_CustRefNo.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CustRefNo_CellMouseDoubleClick);
             this.dgv_CustRefNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_CustRefNo_RowPostPaint);
@@ -227,7 +227,7 @@
             this.tabPage_Quotation.Controls.Add(this.panel2);
             this.tabPage_Quotation.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Quotation.Name = "tabPage_Quotation";
-            this.tabPage_Quotation.Size = new System.Drawing.Size(376, 526);
+            this.tabPage_Quotation.Size = new System.Drawing.Size(352, 526);
             this.tabPage_Quotation.TabIndex = 2;
             this.tabPage_Quotation.Text = "tabPage1";
             this.tabPage_Quotation.UseVisualStyleBackColor = true;
@@ -244,7 +244,7 @@
             this.dgv_QuoteNo.Location = new System.Drawing.Point(0, 29);
             this.dgv_QuoteNo.Name = "dgv_QuoteNo";
             this.dgv_QuoteNo.ReadOnly = true;
-            this.dgv_QuoteNo.Size = new System.Drawing.Size(376, 497);
+            this.dgv_QuoteNo.Size = new System.Drawing.Size(352, 497);
             this.dgv_QuoteNo.TabIndex = 8;
             this.dgv_QuoteNo.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_QuoteNo_CellMouseDoubleClick);
             this.dgv_QuoteNo.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_QuoteNo_RowPostPaint);
@@ -256,7 +256,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(376, 29);
+            this.panel2.Size = new System.Drawing.Size(352, 29);
             this.panel2.TabIndex = 9;
             // 
             // btn_AddNewQuote
@@ -267,7 +267,7 @@
             this.btn_AddNewQuote.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_AddNewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_AddNewQuote.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_AddNewQuote.Location = new System.Drawing.Point(289, 0);
+            this.btn_AddNewQuote.Location = new System.Drawing.Point(265, 0);
             this.btn_AddNewQuote.Name = "btn_AddNewQuote";
             this.btn_AddNewQuote.Size = new System.Drawing.Size(87, 29);
             this.btn_AddNewQuote.TabIndex = 1;
@@ -279,7 +279,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 561);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tab_Nav);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

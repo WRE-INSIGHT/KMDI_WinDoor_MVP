@@ -613,14 +613,67 @@ namespace PresentationLayer.Presenter
             _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
             _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
             _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
-            _mainView.printQuoteToolStripMenuItemClickRaiseEvent += _mainView_printQuoteToolStripMenuItemClickRaiseEvent;
+            _mainView.CostingItemsToolStripMenuItemClickRaiseEvent += _mainView_CostingItemsToolStripMenuItemClickRaiseEvent;
+            _mainView.saveAsToolStripMenuItemClickEventRaised += _mainView_saveAsToolStripMenuItemClickEventRaised;
+            _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
         }
+
+
 
         #region Events
 
-        private void _mainView_printQuoteToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        string wndrfile = "",
+              searchStr = "",
+              todo,
+              mainTodo;
+        public bool online_login = true;
+        int x = 50;
+
+        private void _mainView_saveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel);
+            _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
+            if (wndrfile != "")
+            {
+                string txtfile = wndrfile.Replace(".wndr", ".txt");
+                //File.WriteAllLines(txtfile,);
+                File.SetAttributes(txtfile, FileAttributes.Hidden);
+                File.Delete(txtfile);
+                if (online_login != true)
+                {
+                    int startFileName = txtfile.LastIndexOf("\\") + 1;
+                    string outFile = txtfile.Substring(startFileName, txtfile.LastIndexOf(".") - startFileName) + ".wndr";
+                    searchStr = outFile;
+                    x = 50;
+                    _mainView.GetToolStripLabelSync().Image = Properties.Resources.cloud_sync_40px;
+                    _mainView.GetToolStripLabelSync().Visible = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            _mainView.GetSaveFileDialog().FileName = this.inputted_quotationRefNo;
+            if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            {
+                wndrfile = _mainView.GetSaveFileDialog().FileName;
+            }
+            else
+            {
+                if (!_mainView.mainview_title.Contains(wndrfile))
+                {
+                    _mainView.mainview_title += "( " + wndrfile + " )";
+                }
+            }
+            //save btn event ilagay d2
+        }
+
+        private void _mainView_CostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        {
+            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
             quoteItem.GetQuoteItemListView().showQuoteItemList();
         }
 
