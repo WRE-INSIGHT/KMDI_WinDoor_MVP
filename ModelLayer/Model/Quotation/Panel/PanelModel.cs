@@ -1167,7 +1167,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelRioArtNo = value;
-               NotifyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 

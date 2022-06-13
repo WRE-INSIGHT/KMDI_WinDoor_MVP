@@ -176,7 +176,7 @@
               <Width>0.22569in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.93899in</Width>
+              <Width>1.95556in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.03685in</Width>
@@ -512,6 +512,7 @@
                           </Paragraphs>
                           <rd:DefaultName>dtItemName</rd:DefaultName>
                           <Top>0.01389in</Top>
+                          <Left>0.01657in</Left>
                           <Height>0.20833in</Height>
                           <Width>1.93899in</Width>
                           <Style>
@@ -528,6 +529,7 @@
                           <Source>Database</Source>
                           <Value>=Fields!dtImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
+                          <Sizing>FitProportional</Sizing>
                           <Top>0.25in</Top>
                           <Height>1.2in</Height>
                           <Width>1.9in</Width>
@@ -799,7 +801,7 @@
         <Top>0.9771in</Top>
         <Left>0.3244in</Left>
         <Height>1.48125in</Height>
-        <Width>7.33546in</Width>
+        <Width>7.35203in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>

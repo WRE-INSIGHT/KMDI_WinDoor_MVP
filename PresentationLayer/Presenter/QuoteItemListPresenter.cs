@@ -1,4 +1,6 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
@@ -24,6 +26,8 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
+     
+        
 
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
@@ -58,15 +62,17 @@ namespace PresentationLayer.Presenter
                 quoteItem.Dock = DockStyle.Top;
                 quoteItem.BringToFront();
 
-
+                _mainPresenter.panelTypeCount();
+                 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = "";
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_description;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
                 this._lstItemArea.Add(TotalItemArea);
+
             }
         }
 
@@ -88,25 +94,57 @@ namespace PresentationLayer.Presenter
 
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
-                int max = this._lstItemArea[0],
-                    itemSizePercentage,
-                    ItemScalingSize;
-                for (int ii = 1; ii < this._lstItemArea.Count; ii++)
-                {
-                    max = Math.Max(max, this._lstItemArea[ii]);
-                }
-                itemSizePercentage = (this._lstItemArea[i] / max);
-                ItemScalingSize = (this._lstItemArea[i] / max) * itemSizePercentage;
+                #region ScalingItemSizePicture
+                //int max = this._lstItemArea[0],
+                //    ItemNewWidth,
+                //    ItemNewHeight,
+                //    maxHeight = 190,
+                //    maxWidth = 190,
+                //    wdAndHtDiff;
+                //decimal itemSizePercentage;
+
+                //int currentItem = this._lstItemArea[i],
+                //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+
+                //decimal ProportionItemSizePercentage;
+
+                //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                //{
+                //    max = Math.Max(max, this._lstItemArea[ii]);
+                //}
+
+                //itemSizePercentage = (decimal)currentItem / (decimal)max;
+                ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                //if (itemWidth > itemHeight)
+                //{
+                //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
+                //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                //}
+                //else if (itemWidth < itemHeight)
+                //{
+                //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                //}
+                //else
+                //{
+
+                //}
+
+                //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
+
+
+                //resizedImg.Save(mstream, ImageFormat.Png);
+                #endregion
 
                 MemoryStream mstream = new MemoryStream();
                 Image img = _quotationModel.Lst_Windoor[i].WD_image;
-                var resizedImg = ResizeImage(img, 290, 500);
-
-                //MessageBox.Show("Width: " + img.Width + ", Height: " + img.Height);
-                resizedImg.Save(mstream, ImageFormat.Png);
-                //_quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-
-
+                 
+                _quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
 
                 byte[] arrimage = mstream.ToArray();
                 string byteToStr = Convert.ToBase64String(arrimage);
@@ -122,15 +160,15 @@ namespace PresentationLayer.Presenter
                                       0,
                                       0,
                                       i + 1);
-
-             
             }
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+
         }
 
+        //for ScalingItemSizePicture
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
@@ -184,6 +222,9 @@ namespace PresentationLayer.Presenter
             quoteItemList._quoteItemListUCPresenter = quoteItemListUCPresenter;
             quoteItemList._windoorModel = windoorModel;
             quoteItemList._mainPresenter = mainPresenter;
+            
+
+
             //quoteItemList._printQuotePresenter = printQuotePresenter;
 
             return quoteItemList;

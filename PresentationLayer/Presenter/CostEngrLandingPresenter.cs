@@ -124,7 +124,8 @@ namespace PresentationLayer.Presenter
                                                                                                   _custRefId,
                                                                                                   _userModel.EmployeeID,
                                                                                                   inserted_quoteId,
-                                                                                                  _dateAssigned);
+                                                                                                  _dateAssigned
+                                                                                                  );
 
                         int affected_rows = await _projQuoteServices.Insert_ProjQuote(projectQuoteModel, _userModel.UserID);
                     }
@@ -199,21 +200,21 @@ namespace PresentationLayer.Presenter
 
         private async void _CELandingView_dgvAssignedProjectsCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
         {
-           
+
             try
             {
                 if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                 {
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
-                    _dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
+                    //_dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
                     _CELandingView.SetText_LblNav(_projName);
 
                     int index = _tPageNav_selectedIndex + 1;
                     SetSelectedIndex_TPageNav(index);
                     await Load_DGV_CustRefNo(_projId);
                 }
-               
+
             }
             catch (Exception ex)
             {

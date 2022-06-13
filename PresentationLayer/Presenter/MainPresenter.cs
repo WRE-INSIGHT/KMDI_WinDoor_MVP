@@ -32,6 +32,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter
 {
@@ -622,6 +623,8 @@ namespace PresentationLayer.Presenter
 
         #region Events
 
+
+
         string wndrfile = "",
               searchStr = "",
               todo,
@@ -673,8 +676,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_CostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
-            quoteItem.GetQuoteItemListView().showQuoteItemList();
+            IQuoteItemListPresenter quoteItesm = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
+            quoteItesm.GetQuoteItemListView().showQuoteItemList();
         }
 
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -1088,35 +1091,35 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
+                _unityC, _quotationModel, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
+                _unityC, _quotationModel, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Louver Panel", new Thumbs_LouverPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Louver Panel", new Thumbs_LouverPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
 
             _glassThicknessDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
             _glassThicknessDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
@@ -1494,6 +1497,101 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
+
+        string FrameType,
+               AllItemDescription;
+
+
+        public void panelTypeCount()
+        {
+            int fixedCount = 0,
+                AwningCount = 0,
+                CasementCount = 0,
+                SlidingCount = 0,
+                LouverCount = 0,
+                TiltNTurnCount = 0;
+
+            List<string> lst_glassThickness = new List<string>();
+            List<string> lst_glassFilm = new List<string>();
+
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                foreach (IFrameModel fr in _windoorModel.lst_frame)
+                {
+                    if (fr.Frame_Type == Frame_Padding.Window)
+                    {
+                        FrameType = "Window";
+                    }
+                    else if (fr.Frame_Type == Frame_Padding.Door)
+                    {
+                        FrameType = "Door";
+                    }
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    {
+                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                        {
+                            if (pnl.Panel_Type.Contains("Fixed"))
+                            {
+                                fixedCount += 1;
+                            }
+                            if (pnl.Panel_Type.Contains("Awning"))
+                            {
+                                AwningCount += 1;
+                            }
+                            if (pnl.Panel_Type.Contains("Casement"))
+                            {
+                                CasementCount += 1;
+                            }
+                            
+                            if (pnl.Panel_GlassThicknessDesc != null)
+                            {
+                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
+                            }
+                            if (pnl.Panel_GlassFilm != null)
+                            {
+                                lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
+                            }
+                            Console.WriteLine(pnl.Panel_GlassFilm);
+                        }
+                    }
+                }
+                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
+                List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
+
+                AllItemDescription =  wdm.WD_description + "\n";
+                if (fixedCount != 0)
+                {
+                    AllItemDescription = AllItemDescription + fixedCount.ToString() + " Fixed " + FrameType + "\n" ;
+                }
+                if (AwningCount != 0)
+                {
+                    AllItemDescription = AllItemDescription + AwningCount.ToString() + " Awning " + FrameType + "\n";
+                }
+                if (CasementCount != 0)
+                {
+                    AllItemDescription = AllItemDescription + CasementCount.ToString() + " Casement " + FrameType + "\n";
+                }
+
+                foreach (string GT in lst_glassThicknessDistinct)
+                {
+                    AllItemDescription += GT;
+                }
+
+                if (lst_glassFilmDistinct != null)
+                {
+                    foreach (string GF in lst_glassFilmDistinct)
+                    {
+                        AllItemDescription += "with " + GF + "\n";
+                    }
+                }
+                
+
+                wdm.WD_description = AllItemDescription;
+               
+            }
+        }
+
 
         public void Set_User_View()
         {
