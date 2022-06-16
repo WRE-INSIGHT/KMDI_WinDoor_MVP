@@ -97,14 +97,14 @@ namespace PresentationLayer.Presenter
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
 
 
-                if (lst_Description != null)
-                {
-                    wdm.WD_description = "C70 Profile\n";
-                    for (int ii = 0; ii < lst_Description.Count; ii++)
-                    {
-                        wdm.WD_description += lst_Description[ii];
-                    }
-                }
+                //if (lst_Description != null)
+                //{
+                //    wdm.WD_description = "C70 Profile\n";
+                //    for (int ii = 0; ii < lst_Description.Count; ii++)
+                //    {
+                //        wdm.WD_description += lst_Description[ii];
+                //    }
+                //}
 
 
 
@@ -314,7 +314,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     motorizeDesc = " Panel";
                                 }
-                                wdm.WD_description = "";
+                                
                                 if (fixedCount != 0 && pnl.Panel_Type.Contains("Fixed"))
                                 {
                                     AllItemDescription = AllItemDescription + fixedCount.ToString() + motorizeDesc + " Fixed " + FrameTypeDesc + "\n";
@@ -344,8 +344,8 @@ namespace PresentationLayer.Presenter
                                 AllItemDescription += GeorgianBarHorizontalDesc;
                                 AllItemDescription += GeorgianBarVerticalDesc;
 
-                               
-                               // wdm.WD_description = AllItemDescription;
+                                //lst_Description.Add(AllItemDescription);
+                                 wdm.WD_description = AllItemDescription;
 
                             }
                         }
@@ -367,7 +367,7 @@ namespace PresentationLayer.Presenter
                             wdm.WD_description = "C70 Profile\n1 Panel Casement " + FrameTypeDesc;
                         }
                     }
-                                lst_Description.Add(AllItemDescription);
+                                
 
                 }
 
