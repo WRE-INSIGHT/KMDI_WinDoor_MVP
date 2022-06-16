@@ -19,6 +19,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
                                            int? pq_CustRefId,
                                            int? pq_EmployeeId,
                                            int pq_QuoteId,
-                                           DateTime? pq_DateAssigned);
+                                           DateTime? pq_DateAssigned
+                                           );
     }
 }

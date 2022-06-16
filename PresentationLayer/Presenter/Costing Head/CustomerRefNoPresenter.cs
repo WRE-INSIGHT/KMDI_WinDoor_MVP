@@ -6,10 +6,7 @@ using PresentationLayer.Views.Costing_Head;
 using ServiceLayer.Services.CustomerRefNoServices;
 using ServiceLayer.Services.ProjectQuoteServices;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -148,7 +145,8 @@ namespace PresentationLayer.Presenter.Costing_Head
                                                                                              custRefNo_id,
                                                                                              emp_id,
                                                                                              quote_id,
-                                                                                             DateTime.Now);
+                                                                                             null//DateTime.Now
+                                                                                             );
 
                                     await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
                                 }

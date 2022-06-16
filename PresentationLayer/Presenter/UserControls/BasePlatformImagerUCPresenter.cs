@@ -1142,7 +1142,7 @@ namespace PresentationLayer.Presenter.UserControls
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 //arrow for HEIGHT
             }
-
+            
             Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
             basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
             //bm.Save(@"C:\Users\Minrivel\Pictures\Saved Pictures\2.png", ImageFormat.Png);

@@ -1,10 +1,7 @@
 ﻿using ModelLayer.Model.ProjectQuote;
 using ServiceLayer.CommonServices;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
@@ -45,7 +42,8 @@ namespace ServiceLayer.Services.ProjectQuoteServices
                                                       int? pq_CustRefId,
                                                       int? pq_EmployeeId,
                                                       int pq_QuoteId,
-                                                      DateTime? pq_DateAssigned)
+                                                      DateTime? pq_DateAssigned
+                                                      )
         {
             ProjectQuoteModel pqModel = new ProjectQuoteModel();
             pqModel.PQ_Id = pq_id;
@@ -65,14 +63,16 @@ namespace ServiceLayer.Services.ProjectQuoteServices
                                                   int? pq_CustRefId,
                                                   int? pq_EmployeeId,
                                                   int pq_QuoteId,
-                                                  DateTime? pq_DateAssigned)
+                                                  DateTime? pq_DateAssigned
+                                                  )
         {
             IProjectQuoteModel pqModel = CreateProjectQuote(pq_id,
                                                             pq_ProjId,
                                                             pq_CustRefId,
                                                             pq_EmployeeId,
                                                             pq_QuoteId,
-                                                            pq_DateAssigned);
+                                                            pq_DateAssigned
+                                                            );
 
             return pqModel;
         }

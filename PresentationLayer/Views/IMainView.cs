@@ -27,7 +27,9 @@ namespace PresentationLayer.Views
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         event EventHandler NewConcreteButtonClickEventRaised;
         event EventHandler refreshToolStripButtonClickEventRaised;
-        event EventHandler printQuoteToolStripMenuItemClickRaiseEvent;
+        event EventHandler CostingItemsToolStripMenuItemClickRaiseEvent;
+        event EventHandler saveAsToolStripMenuItemClickEventRaised;
+        event EventHandler saveToolStripButtonClickEventRaised;
 
         string Nickname { set; }
         string mainview_title { get; set; }
@@ -48,6 +50,7 @@ namespace PresentationLayer.Views
         MenuStrip GetMNSMainMenu();
         ToolStrip GetTSMain();
         ToolStripLabel GetLblSelectedDivider();
+        ToolStripLabel GetToolStripLabelSync();
         ToolStripMenuItem Glass_Single { get; }
         ToolStripMenuItem Glass_DoubleInsulated { get; }
         ToolStripMenuItem Glass_DoubleLaminated { get; }
@@ -57,6 +60,8 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Spacer { get; }
         ToolStripMenuItem Color { get; }
         Form GetThis();
+        SaveFileDialog GetSaveFileDialog();
+
         void FocusOnMainForm();
         void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);

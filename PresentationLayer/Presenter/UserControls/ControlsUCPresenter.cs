@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PresentationLayer.Views.UserControls;
+﻿using Microsoft.VisualBasic;
+using ModelLayer.Model.Quotation;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using Unity;
-using System.Drawing;
-using ModelLayer.Model.Quotation.Panel;
-using Microsoft.VisualBasic;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -20,7 +16,9 @@ namespace PresentationLayer.Presenter.UserControls
         private IFixedPanelUCPresenter _fixedUCP;
 
         private IUnityContainer _unityC;
-
+        private IQuotationModel _quotationModel;
+        // private IWindoorModel _windorModel;
+        public List<string> Lst_PanelType { get; set; }
         private string customText;
         private Panel _pnlWindoorPanel;
 
@@ -120,12 +118,27 @@ namespace PresentationLayer.Presenter.UserControls
                 lst_obj.Add(_controlUC.Iteration);
 
                 ctrl.DoDragDrop(lst_obj, DragDropEffects.Move);
+               // this.Lst_PanelType.Add(_controlUC.CustomText);
             }
+
+            //for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            //{
+            //    IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+            //    string desc = wdm.WD_description;
+
+            //    desc = desc + " " + _controlUC.CustomText;
+            //}
+
+
+            //   _windorModel.lst_frame[i].Frame_Name.Contains("Fixed");
         }
 
-        public IControlsUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                   string customtext, 
-                                                   UserControl usercontrol)
+        public IControlsUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                   IQuotationModel quotationModel,
+                                                   //IWindoorModel windorModel,
+                                                   string customtext,
+                                                   UserControl usercontrol
+                                                   )
         {
             unityC
                 .RegisterType<IControlsUC, ControlsUC>()
@@ -134,7 +147,9 @@ namespace PresentationLayer.Presenter.UserControls
             controlUCP.customText = customtext;
             controlUCP.AddWinDoorPanel(usercontrol);
             controlUCP.WireAllControls((UserControl)controlUCP.GetControlUC());
+            controlUCP._quotationModel = quotationModel;
             controlUCP._unityC = unityC;
+            //controlUCP._windorModel = windorModel;
 
             return controlUCP;
         }

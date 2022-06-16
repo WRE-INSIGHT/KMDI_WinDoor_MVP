@@ -23,6 +23,7 @@
               <xs:element name="dtPrice" msprop:Generator_ColumnVarNameInTable="columndtPrice" msprop:Generator_ColumnPropNameInRow="dtPrice" msprop:Generator_ColumnPropNameInTable="dtPriceColumn" msprop:Generator_UserColumnName="dtPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="dtDiscount" msprop:Generator_ColumnVarNameInTable="columndtDiscount" msprop:Generator_ColumnPropNameInRow="dtDiscount" msprop:Generator_ColumnPropNameInTable="dtDiscountColumn" msprop:Generator_UserColumnName="dtDiscount" type="xs:decimal" minOccurs="0" />
               <xs:element name="dtNetPrice" msprop:Generator_ColumnVarNameInTable="columndtNetPrice" msprop:Generator_ColumnPropNameInRow="dtNetPrice" msprop:Generator_ColumnPropNameInTable="dtNetPriceColumn" msprop:Generator_UserColumnName="dtNetPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtItemNumber" msprop:Generator_ColumnVarNameInTable="columndtItemNumber" msprop:Generator_ColumnPropNameInRow="dtItemNumber" msprop:Generator_ColumnPropNameInTable="dtItemNumberColumn" msprop:Generator_UserColumnName="dtItemNumber" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

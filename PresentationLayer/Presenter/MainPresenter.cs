@@ -32,6 +32,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter
 {
@@ -613,15 +614,70 @@ namespace PresentationLayer.Presenter
             _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
             _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
             _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
-            _mainView.printQuoteToolStripMenuItemClickRaiseEvent += _mainView_printQuoteToolStripMenuItemClickRaiseEvent;
+            _mainView.CostingItemsToolStripMenuItemClickRaiseEvent += _mainView_CostingItemsToolStripMenuItemClickRaiseEvent;
+            _mainView.saveAsToolStripMenuItemClickEventRaised += _mainView_saveAsToolStripMenuItemClickEventRaised;
+            _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
         }
+
+
 
         #region Events
 
-        private void _mainView_printQuoteToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+
+
+        string wndrfile = "",
+              searchStr = "",
+              todo,
+              mainTodo;
+        public bool online_login = true;
+        int x = 50;
+
+        private void _mainView_saveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            IQuoteItemListPresenter quoteItem = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel);
-            quoteItem.GetQuoteItemListView().showQuoteItemList();
+            _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
+            if (wndrfile != "")
+            {
+                string txtfile = wndrfile.Replace(".wndr", ".txt");
+                //File.WriteAllLines(txtfile,);
+                File.SetAttributes(txtfile, FileAttributes.Hidden);
+                File.Delete(txtfile);
+                if (online_login != true)
+                {
+                    int startFileName = txtfile.LastIndexOf("\\") + 1;
+                    string outFile = txtfile.Substring(startFileName, txtfile.LastIndexOf(".") - startFileName) + ".wndr";
+                    searchStr = outFile;
+                    x = 50;
+                    _mainView.GetToolStripLabelSync().Image = Properties.Resources.cloud_sync_40px;
+                    _mainView.GetToolStripLabelSync().Visible = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            _mainView.GetSaveFileDialog().FileName = this.inputted_quotationRefNo;
+            if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            {
+                wndrfile = _mainView.GetSaveFileDialog().FileName;
+            }
+            else
+            {
+                if (!_mainView.mainview_title.Contains(wndrfile))
+                {
+                    _mainView.mainview_title += "( " + wndrfile + " )";
+                }
+            }
+            //save btn event ilagay d2
+        }
+
+        private void _mainView_CostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        {
+            IQuoteItemListPresenter quoteItesm = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
+            quoteItesm.GetQuoteItemListView().showQuoteItemList();
         }
 
         private void OncustomArrowHeadToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -1035,35 +1091,35 @@ namespace PresentationLayer.Presenter
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
+                _unityC, _quotationModel, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
+                _unityC, _quotationModel, "Multi-Panel (Mullion)", new Thumbs_MultiPanelMullionUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Louver Panel", new Thumbs_LouverPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Louver Panel", new Thumbs_LouverPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "TiltNTurn Panel", new Thumbs_TiltNTurnPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Sliding Panel", new Thumbs_SlidingPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Awning Panel", new Thumbs_AwningPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Casement Panel", new Thumbs_CasementPanelUC()).GetControlUC());
 
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
-                _unityC, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
+                _unityC, _quotationModel, "Fixed Panel", new Thumbs_FixedPanelUC()).GetControlUC());
 
             _glassThicknessDT.Columns.Add(CreateColumn("TotalThickness", "TotalThickness", "System.Decimal"));
             _glassThicknessDT.Columns.Add(CreateColumn("Description", "Description", "System.String"));
@@ -1441,7 +1497,7 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
-
+        
         public void Set_User_View()
         {
             if (_userModel.AccountType == "Cost Engr")
