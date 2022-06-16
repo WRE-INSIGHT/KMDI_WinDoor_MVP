@@ -52,8 +52,8 @@ namespace PresentationLayer.Presenter
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 
-        void SetLblStatus(string status, bool visibility, 
-                          Control controlRaised = null, 
+        void SetLblStatus(string status, bool visibility,
+                          Control controlRaised = null,
                           IDividerModel divModel = null,
                           IPanelModel prev_pnl = null,
                           IPanelModel nxt_pnl = null,
@@ -98,6 +98,6 @@ namespace PresentationLayer.Presenter
         void Fit_MyImager_byImagersLocation();
         void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);
         void Load_Windoor_Item(IWindoorModel item);
-        void panelTypeCount();
+
     }
 }
