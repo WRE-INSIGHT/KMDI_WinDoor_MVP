@@ -40,6 +40,9 @@ namespace PresentationLayer.Presenter
         private List<string> lst_glassThickness = new List<string>();
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
+        private List<string> lst_DuplicatePnl = new List<string>();
+
+
 
 
         int fixedCount = 0,
@@ -90,30 +93,62 @@ namespace PresentationLayer.Presenter
                 quoteItem.BringToFront();
 
 
-                itemDescription();
+                List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
 
-
-
-                IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-
+                #region DuplicatedItemListStringManipulation
                 //count duplicate in list
                 Dictionary<string, int> freqMap = lst_Description.GroupBy(x => x)
                                                 .Where(g => g.Count() > 1)
                                                 .ToDictionary(x => x.Key, x => x.Count());
 
-                Console.WriteLine("[Value, Count]: " + String.Join(",", freqMap));
-
-
-
-
-                if (lst_Description != null)
+                string DuplicatePnlAndCount = String.Join("", freqMap);
+                if (DuplicatePnlAndCount != string.Empty)
                 {
-                    wdm.WD_description = "C70 Profile\n";
-                    for (int ii = 0; ii < lst_Description.Count; ii++)
+                    string NewDuplicatePnlAndCount = DuplicatePnlAndCount.Replace("]", string.Empty);
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace("[", "\n");
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace(",", string.Empty);
+                    string[] words = NewDuplicatePnlAndCount.Split('\n');
+
+                    for (int a = 0; a < words.Length; a++)
                     {
-                        wdm.WD_description += lst_Description[ii];
+                        if (a != 0)
+                        {
+                            string split1 = words[a],
+                                   split2 = words[a + 1];
+                            string DuplicatePnl = split1.Replace("1", split2) + "\n";
+
+                            lst_DuplicatePnl.Add(DuplicatePnl);
+                            a++;
+                        }
                     }
                 }
+                #endregion
+
+                #region NonDuplicatedItemListStringManipulation
+
+
+                //Not Duplicated Item
+                Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
+                                               .Where(b => b.Count() == 1)
+                                               .ToDictionary(a => a.Key, a => a.Count());
+
+                string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
+                string NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
+                NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
+                #endregion
+
+                IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+
+                if (lst_DescriptionDistinct != null)
+                {
+                    wdm.WD_description = "C70 Profile\n" + NewNoneDuplicatePnlAndCount;
+                    for (int ii = 0; ii < lst_DuplicatePnl.Count; ii++)
+                    {
+                        string lst_DescDist = lst_DuplicatePnl[ii];
+                        wdm.WD_description += lst_DescDist;
+                    }
+                }
+
 
 
 
