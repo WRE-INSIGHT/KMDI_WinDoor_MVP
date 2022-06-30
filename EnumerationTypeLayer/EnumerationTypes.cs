@@ -712,5 +712,15 @@ namespace EnumerationTypeLayer
 
             private BottomFrameTypes(int value, string displayName) : base(value, displayName) { }
         }
+        public class SlidingTypes : Enumeration<SlidingTypes, int>
+        {
+            public static readonly SlidingTypes _FoldAndSlide = new SlidingTypes(0, "Fold and Slide");
+            public static readonly SlidingTypes _LiftAndSlide = new SlidingTypes(1, "Lift and Slide");
+            public static readonly SlidingTypes _Pivot = new SlidingTypes(2, "Sliding Pivot");
+            public static readonly SlidingTypes _Paraslide = new SlidingTypes(3, "Paraslide");
+            public static readonly SlidingTypes _TopHung = new SlidingTypes(4, "Top Hung");
+
+            private SlidingTypes(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

@@ -23,15 +23,15 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public string itemDimension
+        public string itemWindoorNumber
         {
             get
             {
-                return tboxDimension.Text;
+                return tboxWindoorNumber.Text;
             }
             set
             {
-                tboxDimension.Text = value;
+                tboxWindoorNumber.Text = value;
             }
         }
 
@@ -47,32 +47,133 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
-        public event EventHandler QuoteItemListUCLoadEventRaised;
-
-        private void QuoteItemListUC_Load(object sender, EventArgs e)
+        public NumericUpDown itemQuantity
         {
-            EventHelpers.RaiseEvent(sender, QuoteItemListUCLoadEventRaised, e);
+            get
+            {
+                return NudItemQuantity;
+            }
+            set
+            {
+                NudItemQuantity.Value = Convert.ToDecimal(value);
+            }
         }
 
-        //public TextBox GetTboxItemName()
-        //{
-        //    return tboxItemName;
-        //}
+        public NumericUpDown itemDiscount
+        {
+            get
+            {
+                return NudItemDiscount;
+            }
+            set
+            {
+                NudItemDiscount.Value = Convert.ToDecimal(value);
+            }
+        }
 
-        //public TextBox GetTboxDimension()
-        //{
-        //    return tboxDimension;
-        //}
+        public NumericUpDown itemPrice
+        {
+            get
+            {
+                return nudItemPrice;
+            }
+            set
+            {
+                nudItemPrice.Value = Convert.ToDecimal(value);
+            }
+        }
 
-        //public RichTextBox GetRtboxDesc()
-        //{
-        //    return rtboxDesc;
-        //}
+        public event EventHandler QuoteItemListUCLoadEventRaised;
+        public event EventHandler LblPriceDoubleClickEventRaised;
+        public event EventHandler LblDiscountDoubleClickEventRaised;
+        public event EventHandler lblQuantityDoubleClickEventRaised;
+        public event EventHandler NudItemQuantityValueChangedEventRaised;
+        public event EventHandler NudItemDiscountValueChangedEventRaised;
+        public event EventHandler NudItemPriceValueChangedEventRaised;
+        public event EventHandler ComputeNetPriceTextChangeEventRaised;
+        public event KeyEventHandler NudItemPriceKeyDownEventRaised;
+        public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
+        public event KeyEventHandler NudItemQuantityKeyDownEventRaised;
 
         public PictureBox GetPboxItemImage()
         {
             return pboxItemImage;
         }
 
+        public Label GetLblQuantity()
+        {
+            return lblQuantity;
+        }
+
+        public Label GetLblDiscount()
+        {
+            return lblDiscount;
+        }
+
+        public Label GetLblPrice()
+        {
+            return lblPrice;
+        }
+        public Label GetLblNetPrice()
+        {
+            return lblNetPrice;
+        }
+
+
+
+        private void QuoteItemListUC_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, QuoteItemListUCLoadEventRaised, e);
+        }
+
+        private void ComputeNetPriceTextChange(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ComputeNetPriceTextChangeEventRaised, e);
+        }
+
+        private void lblQuantity_DoubleClick(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, lblQuantityDoubleClickEventRaised, e);
+        }
+
+        private void lblPrice_DoubleClick(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, LblPriceDoubleClickEventRaised, e);
+        }
+
+        private void lblDiscount_DoubleClick(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, LblDiscountDoubleClickEventRaised, e);
+        }
+
+        private void NudItemQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NudItemQuantityValueChangedEventRaised, e);
+        }
+
+        private void nudItemPrice_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NudItemPriceValueChangedEventRaised, e);
+        }
+
+        private void NudItemDiscount_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NudItemDiscountValueChangedEventRaised, e);
+        }
+
+        private void NudItemQuantity_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(sender, NudItemQuantityKeyDownEventRaised, e);
+        }
+
+        private void nudItemPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(sender, NudItemPriceKeyDownEventRaised, e);
+        }
+
+        private void NudItemDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(sender, NudItemDiscountKeyDownEventRaised, e);
+        }
     }
 }

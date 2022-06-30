@@ -34,29 +34,25 @@ namespace PresentationLayer.Presenter
 
 
 
-        #region GlobalVariables
+        #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
         private List<string> lst_glassThickness = new List<string>();
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
+        private List<string> lst_DuplicatePnl = new List<string>();
+        string NewNoneDuplicatePnlAndCount, lst_DescDist;
 
 
-        int fixedCount = 0,
-            AwningCount = 0,
-            CasementCount = 0,
-            SlidingCount = 0,
-            LouverCount = 0,
-            TiltNTurnCount = 0,
-            GeorgianBarVerticalQty = 0,
+
+        int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
 
         string FrameTypeDesc,
             AllItemDescription,
             motorizeDesc,
             GeorgianBarHorizontalDesc,
-            GeorgianBarVerticalDesc,
-            all;
+            GeorgianBarVerticalDesc;
 
 
         #endregion
@@ -89,28 +85,13 @@ namespace PresentationLayer.Presenter
                 quoteItem.Dock = DockStyle.Top;
                 quoteItem.BringToFront();
 
-             
                 itemDescription();
-
-
 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
 
-
-                if (lst_Description != null)
-                {
-                    wdm.WD_description = "C70 Profile\n";
-                    for (int ii = 0; ii < lst_Description.Count; ii++)
-                    {
-                        wdm.WD_description += lst_Description[ii];
-                    }
-                }
-
-
-
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_description;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; // dimension --> location
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" + wdm.WD_description;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
@@ -194,21 +175,22 @@ namespace PresentationLayer.Presenter
 
                 IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
 
+
+
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemDimension,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
                                       byteToStr,
-                                      1,
-                                      0,
-                                      0,
-                                      0,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                      Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                       i + 1);
             }
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-
         }
 
         //for ScalingItemSizePicture
@@ -246,13 +228,14 @@ namespace PresentationLayer.Presenter
         }
 
 
-
-
         public void itemDescription()
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                foreach (IFrameModel fr in _windoorModel.lst_frame)
+                lst_DuplicatePnl.Clear();
+                lst_Description.Clear();
+                NewNoneDuplicatePnlAndCount = string.Empty;
+                foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     if (fr.Frame_Type == Frame_Padding.Window)
                     {
@@ -263,74 +246,113 @@ namespace PresentationLayer.Presenter
                         FrameTypeDesc = "Door";
                     }
 
+
+
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
-                                if (pnl.Panel_Type.Contains("Fixed"))
-                                {
-                                    fixedCount += 1;
-                                }
-                                else if (pnl.Panel_Type.Contains("Awning"))
-                                {
-                                    AwningCount += 1;
-                                }
-                                else if (pnl.Panel_Type.Contains("Casement"))
-                                {
-                                    CasementCount += 1;
-                                }
-
-                                if (pnl.Panel_GlassThicknessDesc != null)
-                                {
-                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
-                                }
-                                if (pnl.Panel_GlassFilm.ToString() != "None")
-                                {
-                                    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
-                                }
-
-
-
-
-                                if (pnl.Panel_GeorgianBarOptionVisibility == true)
-                                {
-                                    GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
-                                    GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-
-                                    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
-                                    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
-                                }
-
                                 List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
                                 List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
 
-                                if (pnl.Panel_MotorizedOptionVisibility == true)
+                                #region 1stApproach
+                                //if (pnl.Panel_Type.Contains("Fixed"))
+                                //{
+                                //    fixedCount += 1;
+                                //}
+                                //else if (pnl.Panel_Type.Contains("Awning"))
+                                //{
+                                //    AwningCount += 1;
+                                //}
+                                //else if (pnl.Panel_Type.Contains("Casement"))
+                                //{
+                                //    CasementCount += 1;
+                                //}
+
+                                //if (pnl.Panel_GlassThicknessDesc != null)
+                                //{
+                                //    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
+                                //}
+                                //if (pnl.Panel_GlassFilm.ToString() != "None")
+                                //{
+                                //    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
+                                //}
+
+
+
+
+                                //if (pnl.Panel_GeorgianBarOptionVisibility == true)
+                                //{
+                                //    GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
+                                //    GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
+
+                                //    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                                //    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                                //}
+
+
+                                //if (pnl.Panel_MotorizedOptionVisibility == true)
+                                //{
+                                //    motorizeDesc = " Panel Motorized";
+                                //}
+                                //else
+                                //{
+                                //    motorizeDesc = " Panel";
+                                //}
+
+                                //if (fixedCount != 0 && pnl.Panel_Type.Contains("Fixed"))
+                                //{
+                                //    AllItemDescription = AllItemDescription + fixedCount.ToString() + motorizeDesc + " Fixed " + FrameTypeDesc + "\n";
+                                //}
+                                //if (AwningCount != 0 && pnl.Panel_Type.Contains("Awning"))
+                                //{
+                                //    AllItemDescription = AllItemDescription + AwningCount.ToString() + motorizeDesc + " Awning " + FrameTypeDesc + "\n";
+                                //}
+                                //if (CasementCount != 0 && pnl.Panel_Type.Contains("Casement"))
+                                //{
+                                //    AllItemDescription = AllItemDescription + CasementCount.ToString() + motorizeDesc + " Casement " + FrameTypeDesc + "\n";
+                                //}
+
+                                //List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
+                                //List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
+
+                                //foreach (string GT in lst_glassThicknessDistinct)
+                                //{
+                                //    AllItemDescription += GT;
+                                //}
+
+                                //if (lst_glassFilmDistinct != null)
+                                //{
+                                //    foreach (string GF in lst_glassFilmDistinct)
+                                //    {
+                                //        AllItemDescription += "with " + GF + "\n";
+                                //    }
+                                //}
+
+                                //AllItemDescription += GeorgianBarHorizontalDesc;
+                                //AllItemDescription += GeorgianBarVerticalDesc;
+
+                                ////lst_Description.Add(AllItemDescription);
+                                // wdm.WD_description = AllItemDescription;
+                                #endregion
+
+                                //GlassThickness
+                                if (pnl.Panel_GlassThicknessDesc != null)
                                 {
-                                    motorizeDesc = " Panel Motorized";
-                                }
-                                else
-                                {
-                                    motorizeDesc = " Panel";
-                                }
-                                wdm.WD_description = "";
-                                if (fixedCount != 0 && pnl.Panel_Type.Contains("Fixed"))
-                                {
-                                    AllItemDescription = AllItemDescription + fixedCount.ToString() + motorizeDesc + " Fixed " + FrameTypeDesc + "\n";
-                                }
-                                if (AwningCount != 0 && pnl.Panel_Type.Contains("Awning"))
-                                {
-                                    AllItemDescription = AllItemDescription + AwningCount.ToString() + motorizeDesc + " Awning " + FrameTypeDesc + "\n";
-                                }
-                                if (CasementCount != 0 && pnl.Panel_Type.Contains("Casement"))
-                                {
-                                    AllItemDescription = AllItemDescription + CasementCount.ToString() + motorizeDesc + " Casement " + FrameTypeDesc + "\n";
+                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
                                 }
 
                                 foreach (string GT in lst_glassThicknessDistinct)
                                 {
                                     AllItemDescription += GT;
+                                }
+
+                                //Glassfilm
+                                if (pnl.Panel_GlassFilm.ToString() != "None")
+                                {
+                                    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
                                 }
 
                                 if (lst_glassFilmDistinct != null)
@@ -341,39 +363,112 @@ namespace PresentationLayer.Presenter
                                     }
                                 }
 
-                                AllItemDescription += GeorgianBarHorizontalDesc;
-                                AllItemDescription += GeorgianBarVerticalDesc;
+                                //GeorgianBar
+                                if (pnl.Panel_GeorgianBarOptionVisibility == true)
+                                {
+                                    GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
+                                    GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
 
-                               
-                               // wdm.WD_description = AllItemDescription;
+                                    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                                    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
 
+                                    AllItemDescription += GeorgianBarHorizontalDesc;
+                                    AllItemDescription += GeorgianBarVerticalDesc;
+                                }
+
+                                //panel name desc
+                                #region panelNameDesc
+                                if (pnl.Panel_MotorizedOptionVisibility == true)
+                                {
+                                    motorizeDesc = "1 Panel Motorized";
+                                }
+                                else
+                                {
+                                    motorizeDesc = "1 Panel";
+                                }
+
+                                AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+
+                                #endregion
+
+                                lst_Description.Add(AllItemDescription);
                             }
+
                         }
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
-                        IPanelModel pnl = fr.Lst_Panel[0];
-
-                        if (pnl.Panel_Type.Contains("Fixed"))
+                        IPanelModel Singlepnl = fr.Lst_Panel[0];
+                        if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            wdm.WD_description = "C70 Profile\n1 Panel Fixed " + FrameTypeDesc;
+                            motorizeDesc = "Panel Motorized ";
+                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
                         }
-                        else if (pnl.Panel_Type.Contains("Awning"))
+                        else
                         {
-                            wdm.WD_description = "C70 Profile\n1 Panel Awning " + FrameTypeDesc;
-                        }
-                        else if (pnl.Panel_Type.Contains("Casement"))
-                        {
-                            wdm.WD_description = "C70 Profile\n1 Panel Casement " + FrameTypeDesc;
+                            motorizeDesc = "";
+                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
                         }
                     }
-                                lst_Description.Add(AllItemDescription);
-
                 }
 
-            }
+                #region DuplicatedItemListStringManipulation
+                //count duplicate in list
+                Dictionary<string, int> freqMap = lst_Description.GroupBy(x => x)
+                                                .Where(g => g.Count() > 1)
+                                                .ToDictionary(x => x.Key, x => x.Count());
 
+                string DuplicatePnlAndCount = String.Join("", freqMap);
+                if (DuplicatePnlAndCount != string.Empty)
+                {
+                    string NewDuplicatePnlAndCount = DuplicatePnlAndCount.Replace("]", string.Empty);
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace("[", "\n");
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace(",", string.Empty);
+                    string[] words = NewDuplicatePnlAndCount.Split('\n');
+
+                    for (int a = 0; a < words.Length; a++)
+                    {
+                        if (a != 0)
+                        {
+                            string split1 = words[a],
+                                   split2 = words[a + 1];
+                            string DuplicatePnl = split1.Replace("1", split2) + "\n";
+
+                            lst_DuplicatePnl.Add(DuplicatePnl);
+                            a++;
+                        }
+                    }
+                }
+                #endregion
+
+                #region NonDuplicatedItemListStringManipulation
+
+
+                //Not Duplicated Item
+                Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
+                                               .Where(b => b.Count() == 1)
+                                               .ToDictionary(a => a.Key, a => a.Count());
+
+                string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
+                NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
+                NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
+                #endregion
+
+                List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
+
+                if (lst_DescriptionDistinct.Count != 0)
+                {
+                    wdm.WD_description = wdm.WD_profile + "\n" + NewNoneDuplicatePnlAndCount;
+                    for (int i = 0; i < lst_DuplicatePnl.Count; i++)
+                    {
+                        lst_DescDist = lst_DuplicatePnl[i];
+                        wdm.WD_description += lst_DescDist;
+                    }
+                }
+            }
         }
+
+
 
         public IQuoteItemListView GetQuoteItemListView()
         {

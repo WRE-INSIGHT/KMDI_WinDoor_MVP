@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PresentationLayer.Views.UserControls;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Panel;
+using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
-using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
-using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
-using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -204,13 +200,16 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
-                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && 
+                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) &&
                     _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
                 {
                     _panelModel.Panel_MiddleCloserVisibility = true;
 
-                    _panelModel.AdjustPropertyPanelHeight("addMC");
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                    if (!_panelModel.Panel_Type.Contains("Sliding"))
+                    {
+                        _panelModel.AdjustPropertyPanelHeight("addMC");
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                    }
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
@@ -359,11 +358,13 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_panelModel.Panel_SashPropertyVisibility == true)
                 {
+                    _panelModel.Panel_MotorizedOptionVisibility = true;
                     IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
                     _pnlPanelSpecs.Controls.Add(motorized);
                     motorized.Dock = DockStyle.Top;
                     motorized.BringToFront();
+                    _panelModel.Panel_MotorizedOptionVisibility = false;
 
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
@@ -371,11 +372,14 @@ namespace PresentationLayer.Presenter.UserControls
                     handle.Dock = DockStyle.Top;
                     handle.BringToFront();
 
-                    IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC);
-                    UserControl mc = (UserControl)mcUCP.GetMiddleCloserPropertyUC();
-                    _pnlPanelSpecs.Controls.Add(mc);
-                    mc.Dock = DockStyle.Top;
-                    mc.BringToFront();
+                    if (!_panelModel.Panel_Type.Contains("Sliding"))
+                    {
+                        IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC);
+                        UserControl mc = (UserControl)mcUCP.GetMiddleCloserPropertyUC();
+                        _pnlPanelSpecs.Controls.Add(mc);
+                        mc.Dock = DockStyle.Top;
+                        mc.BringToFront();
+                    }
 
                     IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();
@@ -456,7 +460,7 @@ namespace PresentationLayer.Presenter.UserControls
             panelBinding.Add("Panel_OrientVisibility", new Binding("Visible", _panelModel, "Panel_OrientVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("PanelGlass_ID", new Binding("PanelGlass_ID", _panelModel, "PanelGlass_ID", true, DataSourceUpdateMode.OnPropertyChanged));
             panelBinding.Add("Panel_PropertyHeight", new Binding("Height", _panelModel, "Panel_PropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             return panelBinding;
         }
 
