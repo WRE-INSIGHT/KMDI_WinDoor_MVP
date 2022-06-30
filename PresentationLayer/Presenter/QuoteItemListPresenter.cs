@@ -34,32 +34,25 @@ namespace PresentationLayer.Presenter
 
 
 
-        #region GlobalVariables
+        #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
         private List<string> lst_glassThickness = new List<string>();
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
+        string NewNoneDuplicatePnlAndCount, lst_DescDist;
 
 
 
-
-        int fixedCount = 0,
-            AwningCount = 0,
-            CasementCount = 0,
-            SlidingCount = 0,
-            LouverCount = 0,
-            TiltNTurnCount = 0,
-            GeorgianBarVerticalQty = 0,
+        int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
 
         string FrameTypeDesc,
             AllItemDescription,
             motorizeDesc,
             GeorgianBarHorizontalDesc,
-            GeorgianBarVerticalDesc,
-            all;
+            GeorgianBarVerticalDesc;
 
 
         #endregion
@@ -92,69 +85,13 @@ namespace PresentationLayer.Presenter
                 quoteItem.Dock = DockStyle.Top;
                 quoteItem.BringToFront();
 
-
-                List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
-
-                #region DuplicatedItemListStringManipulation
-                //count duplicate in list
-                Dictionary<string, int> freqMap = lst_Description.GroupBy(x => x)
-                                                .Where(g => g.Count() > 1)
-                                                .ToDictionary(x => x.Key, x => x.Count());
-
-                string DuplicatePnlAndCount = String.Join("", freqMap);
-                if (DuplicatePnlAndCount != string.Empty)
-                {
-                    string NewDuplicatePnlAndCount = DuplicatePnlAndCount.Replace("]", string.Empty);
-                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace("[", "\n");
-                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace(",", string.Empty);
-                    string[] words = NewDuplicatePnlAndCount.Split('\n');
-
-                    for (int a = 0; a < words.Length; a++)
-                    {
-                        if (a != 0)
-                        {
-                            string split1 = words[a],
-                                   split2 = words[a + 1];
-                            string DuplicatePnl = split1.Replace("1", split2) + "\n";
-
-                            lst_DuplicatePnl.Add(DuplicatePnl);
-                            a++;
-                        }
-                    }
-                }
-                #endregion
-
-                #region NonDuplicatedItemListStringManipulation
-
-
-                //Not Duplicated Item
-                Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
-                                               .Where(b => b.Count() == 1)
-                                               .ToDictionary(a => a.Key, a => a.Count());
-
-                string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
-                string NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
-                NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
-                #endregion
+                itemDescription();
 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
 
-                if (lst_DescriptionDistinct != null)
-                {
-                    wdm.WD_description = "C70 Profile\n" + NewNoneDuplicatePnlAndCount;
-                    for (int ii = 0; ii < lst_DuplicatePnl.Count; ii++)
-                    {
-                        string lst_DescDist = lst_DuplicatePnl[ii];
-                        wdm.WD_description += lst_DescDist;
-                    }
-                }
-
-
-
-
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDimension = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_description;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; // dimension --> location
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" + wdm.WD_description;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
@@ -238,21 +175,22 @@ namespace PresentationLayer.Presenter
 
                 IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
 
+
+
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemDimension,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
                                       byteToStr,
-                                      1,
-                                      0,
-                                      0,
-                                      0,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
+                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                      Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                       i + 1);
             }
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-
         }
 
         //for ScalingItemSizePicture
@@ -290,13 +228,14 @@ namespace PresentationLayer.Presenter
         }
 
 
-
-
         public void itemDescription()
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                foreach (IFrameModel fr in _windoorModel.lst_frame)
+                lst_DuplicatePnl.Clear();
+                lst_Description.Clear();
+                NewNoneDuplicatePnlAndCount = string.Empty;
+                foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     if (fr.Frame_Type == Frame_Padding.Window)
                     {
@@ -306,6 +245,8 @@ namespace PresentationLayer.Presenter
                     {
                         FrameTypeDesc = "Door";
                     }
+
+
 
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
@@ -439,58 +380,95 @@ namespace PresentationLayer.Presenter
                                 #region panelNameDesc
                                 if (pnl.Panel_MotorizedOptionVisibility == true)
                                 {
-                                    motorizeDesc = " Panel Motorized";
+                                    motorizeDesc = "1 Panel Motorized";
                                 }
                                 else
                                 {
-                                    motorizeDesc = " Panel";
+                                    motorizeDesc = "1 Panel";
                                 }
 
-                                if (pnl.Panel_Type.Contains("Fixed"))
-                                {
-                                    AllItemDescription = motorizeDesc + " Fixed " + FrameTypeDesc + "\n";
-                                }
-                                else if (pnl.Panel_Type.Contains("Awning"))
-                                {
-                                    AllItemDescription = motorizeDesc + " Awning " + FrameTypeDesc + "\n";
-                                }
-                                else if (pnl.Panel_Type.Contains("Casement"))
-                                {
-                                    AllItemDescription = motorizeDesc + " Casement " + FrameTypeDesc + "\n";
-                                }
+                                AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+
                                 #endregion
 
                                 lst_Description.Add(AllItemDescription);
-
-
-
                             }
+
                         }
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
-                        IPanelModel pnl = fr.Lst_Panel[0];
-
-                        if (pnl.Panel_Type.Contains("Fixed"))
+                        IPanelModel Singlepnl = fr.Lst_Panel[0];
+                        if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            wdm.WD_description = "C70 Profile\n1 Panel Fixed " + FrameTypeDesc;
+                            motorizeDesc = "Panel Motorized ";
+                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
                         }
-                        else if (pnl.Panel_Type.Contains("Awning"))
+                        else
                         {
-                            wdm.WD_description = "C70 Profile\n1 Panel Awning " + FrameTypeDesc;
-                        }
-                        else if (pnl.Panel_Type.Contains("Casement"))
-                        {
-                            wdm.WD_description = "C70 Profile\n1 Panel Casement " + FrameTypeDesc;
+                            motorizeDesc = "";
+                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
                         }
                     }
-
-
                 }
 
-            }
+                #region DuplicatedItemListStringManipulation
+                //count duplicate in list
+                Dictionary<string, int> freqMap = lst_Description.GroupBy(x => x)
+                                                .Where(g => g.Count() > 1)
+                                                .ToDictionary(x => x.Key, x => x.Count());
 
+                string DuplicatePnlAndCount = String.Join("", freqMap);
+                if (DuplicatePnlAndCount != string.Empty)
+                {
+                    string NewDuplicatePnlAndCount = DuplicatePnlAndCount.Replace("]", string.Empty);
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace("[", "\n");
+                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace(",", string.Empty);
+                    string[] words = NewDuplicatePnlAndCount.Split('\n');
+
+                    for (int a = 0; a < words.Length; a++)
+                    {
+                        if (a != 0)
+                        {
+                            string split1 = words[a],
+                                   split2 = words[a + 1];
+                            string DuplicatePnl = split1.Replace("1", split2) + "\n";
+
+                            lst_DuplicatePnl.Add(DuplicatePnl);
+                            a++;
+                        }
+                    }
+                }
+                #endregion
+
+                #region NonDuplicatedItemListStringManipulation
+
+
+                //Not Duplicated Item
+                Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
+                                               .Where(b => b.Count() == 1)
+                                               .ToDictionary(a => a.Key, a => a.Count());
+
+                string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
+                NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
+                NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
+                #endregion
+
+                List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
+
+                if (lst_DescriptionDistinct.Count != 0)
+                {
+                    wdm.WD_description = wdm.WD_profile + "\n" + NewNoneDuplicatePnlAndCount;
+                    for (int i = 0; i < lst_DuplicatePnl.Count; i++)
+                    {
+                        lst_DescDist = lst_DuplicatePnl[i];
+                        wdm.WD_description += lst_DescDist;
+                    }
+                }
+            }
         }
+
+
 
         public IQuoteItemListView GetQuoteItemListView()
         {
