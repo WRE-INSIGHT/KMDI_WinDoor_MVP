@@ -280,8 +280,11 @@ namespace PresentationLayer.Presenter.UserControls
                 if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn"))
                 {
                     _panelModel.Panel_HingeOptionsVisibility = true;
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-                    _panelModel.AdjustPropertyPanelHeight("addHinge");
+
+                    
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        _panelModel.AdjustPropertyPanelHeight("addHinge");
+                   
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
@@ -331,13 +334,15 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                     }
                 }
-
-                IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
-                _pnlPanelSpecs.Controls.Add(hingeProp);
-                hingeProp.Dock = DockStyle.Top;
-                hingeProp.BringToFront();
-
+                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(hingeProp);
+                    hingeProp.Dock = DockStyle.Top;
+                    hingeProp.BringToFront();
+                }
+              
                 IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
                 _pnlPanelSpecs.Controls.Add(_2dhingeProp);
