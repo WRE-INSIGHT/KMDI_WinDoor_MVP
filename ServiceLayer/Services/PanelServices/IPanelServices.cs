@@ -1,8 +1,7 @@
-﻿using System.Windows.Forms;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.Frame;
+﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
-using static ModelLayer.Model.Quotation.QuotationModel;
+using ModelLayer.Model.Quotation.Panel;
+using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.PanelServices
@@ -68,6 +67,8 @@ namespace ServiceLayer.Services.PanelServices
                                   DockStyle panelDock = DockStyle.Fill,
                                   string panelName = "",
                                   bool panelOrient = false,
-                                  HingeOption panelHingeOptions = null);
+                                  HingeOption panelHingeOptions = null,
+                                  bool panelSlidingTypeVisibility = false,
+                                  SlidingTypes panelSlidingTypes = null);
     }
 }

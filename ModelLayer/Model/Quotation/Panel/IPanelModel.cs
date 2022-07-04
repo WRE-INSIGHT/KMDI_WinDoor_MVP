@@ -59,6 +59,9 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_HandleOptionsHeight { get; set; }
         int Panel_LouverBladesCount { get; set; }
         Color Panel_BackColor { get; set; }
+
+        SlidingTypes Panel_SlidingTypes { get; set; }
+        bool Panel_SlidingTypeVisibility { get; set; }
         #region Explosion
 
         int PanelGlass_ID { get; set; }

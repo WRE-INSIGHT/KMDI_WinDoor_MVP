@@ -185,6 +185,7 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_SlidingTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_2dHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_3dHingePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_CenterHingePropertyUCPresenter.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotolinePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RotoswingPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SashPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_SlidingTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\QuoteItemListUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\AwningPanelUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\CasementPanelUCPresenter.cs" />
@@ -528,6 +530,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SlidingTypePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -641,6 +644,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.Designer.cs">
+      <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\QuoteItemListUC.cs">
       <SubType>UserControl</SubType>
@@ -994,6 +1003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.resx">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.resx">
+      <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\QuoteItemListUC.resx">
       <DependentUpon>QuoteItemListUC.cs</DependentUpon>
