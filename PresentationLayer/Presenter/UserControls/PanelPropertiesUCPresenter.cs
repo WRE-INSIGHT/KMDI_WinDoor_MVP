@@ -29,6 +29,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_3dHingePropertyUCPresenter _pp_3dHingePropertyUCPresenter;
         private IPP_2dHingePropertyUCPresenter _pp_2dHingePropertyUCPresenter;
         private IPP_MiddleCloserPropertyUCPresenter _pp_middleCloserPropertyUCP;
+        private IPP_SlidingTypePropertyUCPresenter _pp_slidingTypePropertyUCP;
 
         private IUnityContainer _unityC;
 
@@ -47,7 +48,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_NTCenterHingePropertyUCPresenter pp_ntCenterHingePropertyUCPresenter,
                                           IPP_3dHingePropertyUCPresenter pp_3dHingePropertyUCPresenter,
                                           IPP_2dHingePropertyUCPresenter pp_2dHingePropertyUCPresenter,
-                                          IPP_MiddleCloserPropertyUCPresenter pp_middleCloserPropertyUCP)
+                                          IPP_MiddleCloserPropertyUCPresenter pp_middleCloserPropertyUCP,
+                                          IPP_SlidingTypePropertyUCPresenter pp_slidingTypePropertyUCP)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -64,6 +66,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_2dHingePropertyUCPresenter = pp_2dHingePropertyUCPresenter;
             _pp_middleCloserPropertyUCP = pp_middleCloserPropertyUCP;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
+            _pp_slidingTypePropertyUCP = pp_slidingTypePropertyUCP;
 
             SubscribeToEventsSetup();
         }
@@ -270,6 +273,14 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
+                if (_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel);
+                    UserControl slidingTypeUCPresenter = (UserControl)slidingTypePresenter.GetSlidingTypePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(slidingTypeUCPresenter);
+                    slidingTypeUCPresenter.Dock = DockStyle.Top;
+                    slidingTypeUCPresenter.BringToFront();
+                }
 
                 IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
@@ -280,8 +291,11 @@ namespace PresentationLayer.Presenter.UserControls
                 if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn"))
                 {
                     _panelModel.Panel_HingeOptionsVisibility = true;
+
+
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                     _panelModel.AdjustPropertyPanelHeight("addHinge");
+
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
@@ -332,11 +346,21 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
-                _pnlPanelSpecs.Controls.Add(hingeProp);
-                hingeProp.Dock = DockStyle.Top;
-                hingeProp.BringToFront();
+                if (_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.Panel_SlidingTypeVisibility = true;
+                    _panelModel.AdjustPropertyPanelHeight("addSlidingType");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+                }
+
+                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(hingeProp);
+                    hingeProp.Dock = DockStyle.Top;
+                    hingeProp.BringToFront();
+                }
 
                 IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
@@ -422,6 +446,8 @@ namespace PresentationLayer.Presenter.UserControls
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                     }
                 }
+
+               
 
                 if (_panelModel.Panel_Type.Contains("Louver") == false)
                 {
