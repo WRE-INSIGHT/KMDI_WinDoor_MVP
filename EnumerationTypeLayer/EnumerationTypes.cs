@@ -722,5 +722,14 @@ namespace EnumerationTypeLayer
 
             private SlidingTypes(int value, string displayName) : base(value, displayName) { }
         }
+        public class SashType : Enumeration<SashType, int>
+        {
+            public static readonly SashType _noLeft = new SashType(0, "No Left");
+            public static readonly SashType _noRight = new SashType(1, "No Right");
+            public static readonly SashType _noBoth = new SashType(2, "No Both");
+            public static readonly SashType _Full = new SashType(3, "Full");
+
+            private SashType(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

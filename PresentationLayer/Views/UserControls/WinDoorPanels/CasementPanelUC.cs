@@ -83,6 +83,13 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler casementPanelUCMouseLeaveEventRaised;
         public event EventHandler deleteToolStripClickedEventRaised;
         public event MouseEventHandler casementPanelUCMouseClickEventRaised;
+        public event MouseEventHandler casementPanelUCMouseMoveEventRaised;
+        public event MouseEventHandler casementPanelUCMouseDownEventRaised;
+        public event MouseEventHandler casementPanelUCMouseUpEventRaised;
+        public event EventHandler noRightToolStripClickedEventRaised;
+        public event EventHandler noLeftToolStripClickedEventRaised;
+        public event EventHandler noBothToolStripClickedEventRaised;
+        public event EventHandler fullToolStripClickedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -140,5 +147,42 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseEvent(sender, deleteToolStripClickedEventRaised, e);
         }
+
+        private void noRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noRightToolStripClickedEventRaised, e);
+        }
+
+        private void noLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noLeftToolStripClickedEventRaised, e);
+        }
+
+        private void noBothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noBothToolStripClickedEventRaised, e);
+        }
+
+        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, fullToolStripClickedEventRaised, e);
+        }
+
+        private void CasementPanelUC_MouseUp(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, casementPanelUCMouseUpEventRaised, e);
+        }
+
+        private void CasementPanelUC_MouseMove(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, casementPanelUCMouseMoveEventRaised, e);
+        }
+
+        private void CasementPanelUC_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, casementPanelUCMouseDownEventRaised, e);
+        }
+
+       
     }
 }

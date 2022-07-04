@@ -12,6 +12,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         int MPanel_ID { get; set; }
         string MPanel_Placement { get; set; }
         bool MPanel_CmenuDeleteVisibility { get; set; }
+        bool MPanel_DividerEnabledVisibility { get; set; }
         void DeletePanel(UserControl obj);
         void InvalidateFlp();
         ToolStripMenuItem GetDivEnabler();

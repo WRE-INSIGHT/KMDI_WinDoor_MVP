@@ -13,6 +13,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -1315,12 +1316,15 @@ namespace PresentationLayer.Presenter.UserControls
         {
             Graphics g = e.Graphics;
             int w = 2;
+            int outerLineDeduction = 18;
+            int innerLineDeduction = 13;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
             int client_wd = 0, client_ht = 0;
 
             client_wd = panelModel.PanelImageRenderer_Width;
             client_ht = panelModel.PanelImageRenderer_Height;
+
 
             Rectangle panel_bounds = new Rectangle(Ppoint, new Size(client_wd, client_ht));
 
@@ -1363,23 +1367,109 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (panelModel.Panel_Type != "Louver Panel")
             {
-                g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
-                                                                   Ppoint.Y + outer_line,
-                                                                   (client_wd - (outer_line * 2)) - w,
-                                                                   (client_ht - (outer_line * 2)) - w));
+                //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
+                //                                                   Ppoint.Y + outer_line,
+                //                                                   (client_wd - (outer_line * 2)) - w,
+                //                                                   (client_ht - (outer_line * 2)) - w));
+                if (panelModel.Panel_Sash_Type == SashType._noRight)
+                {
+
+                    //outer Line
+                    PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                    PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
+                    PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine5, outerLine6);
+
+                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        //inner Line 
+                        PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                        PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
+                        PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine6 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                    }
+                }
+
+                else if (panelModel.Panel_Sash_Type == SashType._noLeft)
+                {
+                    //outer Line
+                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine5, outerLine6);
+                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        //inner Line 
+                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                        PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine6 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
+                    }
+                }
+                else if (panelModel.Panel_Sash_Type == SashType._noBoth)
+                {
+                    //outer Line
+                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line);
+                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
+
+                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        //inner Line
+                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line);
+                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
+                        e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
+                    }
+                }
+                else if (panelModel.Panel_Sash_Type == SashType._Full)
+                {
+                    //outer Line
+                    g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + outer_line,
+                                                                      Ppoint.Y + outer_line,
+                                                                      (client_wd - (outer_line * 2)) - w,
+                                                                      (client_ht - (outer_line * 2)) - w));
+
+                    if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
+                    {
+                        //inner Line
+                        g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
+                                                                      Ppoint.Y + inner_line,
+                                                                      (client_wd - (inner_line * 2)) - w,
+                                                                      (client_ht - (inner_line * 2)) - w));
+                    }
+                }
             }
 
 
             if (panelModel.Panel_Type == "Fixed Panel")
             {
-                if (panelModel.Panel_Orient == true)
-                {
-                    g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                           Ppoint.Y + inner_line,
-                                                                           (client_wd - (inner_line * 2)) - w,
-                                                                           (client_ht - (inner_line * 2)) - w));
 
-                }
 
                 Font drawFont = new Font("Times New Roman", font_size);// * zoom);
                 StringFormat drawFormat = new StringFormat();
@@ -1389,10 +1479,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (panelModel.Panel_Type == "Casement Panel")
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                       Ppoint.Y + inner_line,
-                                                                       (client_wd - (inner_line * 2)) - w,
-                                                                       (client_ht - (inner_line * 2)) - w));
+
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
@@ -1420,10 +1507,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (panelModel.Panel_Type == "Awning Panel")
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                       Ppoint.Y + inner_line,
-                                                                       (client_wd - (inner_line * 2)) - w,
-                                                                       (client_ht - (inner_line * 2)) - w));
+
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
@@ -1451,28 +1535,92 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (panelModel.Panel_Type == "Sliding Panel")
             {
-                g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
-                                                                       Ppoint.Y + inner_line,
-                                                                       (client_wd - (inner_line * 2)) - w,
-                                                                       (client_ht - (inner_line * 2)) - w));
-                Point sashPoint = new Point(Ppoint.X + 25, Ppoint.Y);
 
+
+
+
+
+                Point sashPoint = new Point(Ppoint.X + 25, Ppoint.Y);
                 int sashW = client_wd,
                     sashH = client_ht;
 
                 float arwStart_x1 = sashPoint.X + (sashW / 20),
                       center_y1 = sashPoint.Y + (sashH / 2),
                       arwEnd_x2 = ((sashPoint.X + sashW) - arwStart_x1) + (sashW / 20),
+                       //arwEnd_x2 = ((sashW - (sashPoint.X - sashW)) + sashPoint.X) - (sashW / 10),
                       arwHeadUp_x3,
                       arwHeadUp_y3 = center_y1 - (center_y1 / 4),
                       arwHeadUp_x4,
                       arwHeadUp_y4 = center_y1 + (center_y1 / 4);
 
 
+               if (panelModel.Panel_Orient == false)
+                {
+                    arwHeadUp_x3 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
+                    arwHeadUp_x4 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
+
+                    //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                    //                                 new PointF(arwEnd_x2, center_y1));
+                    //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                    //                                 new PointF(arwEnd_x2, center_y1));
+
+                    //sliding
+                    PointF sliding1 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                    PointF sliding2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                    PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                    PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                    PointF sliding5 = new PointF(arwEnd_x2, center_y1);
+                    PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                    PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                    PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
+                    if (sliding1.X == 59)
+                        //g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
+                        g.FillRectangle(Brushes.Red, Ppoint.X + 25, Ppoint.Y, sashW - 50, sashH);
+
+
+
+                    //paraslide
+                    //PointF paraslide1 = new PointF(arwStart_x1, arwHeadUp_y3);
+                    //PointF paraslide2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                    //PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                    //PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                    //PointF paraslide5 = new PointF(arwEnd_x2, center_y1);
+                    //PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                    //PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                    //PointF paraslide8 = new PointF(arwStart_x1 * 2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                    //PointF paraslide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y3);
+
+                        //PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
+
+                        //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+
+                        //LiftAndSlide
+                        //PointF LiftAndSlide1 = new PointF(arwStart_x1, arwHeadUp_y4);
+                        //PointF LiftAndSlide2 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        //PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        //PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        //PointF LiftAndSlide5 = new PointF(arwEnd_x2, center_y1);
+                        //PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        //PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        //PointF LiftAndSlide8 = new PointF(arwStart_x1 * 2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        //PointF LiftAndSlide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y4);
+
+                        //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
+
+                        //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                }
+
+                //g.DrawLine(new Pen(Color.Black), new PointF(arwStart_x1, center_y1),
+                //                                 new PointF(arwEnd_x2, center_y1));
                 if (panelModel.Panel_Orient == true)
                 {
                     arwHeadUp_x3 = sashPoint.X + arwStart_x1 + (sashW / 10);
                     arwHeadUp_x4 = sashPoint.X + arwStart_x1 + (sashW / 10);
+
+                    //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                    //                                 new PointF(arwStart_x1, center_y1));
+                    //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                    //                                 new PointF(arwStart_x1, center_y1));
 
                     //sliding
                     PointF sliding1 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
@@ -1485,6 +1633,8 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF[] slidingcurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
                     g.FillPolygon(new SolidBrush(Color.Black), slidingcurvePoints);
+
+
 
                     //paraslide
                     //PointF paraslide1 = new PointF(arwEnd_x2, arwHeadUp_y3);
@@ -1516,54 +1666,9 @@ namespace PresentationLayer.Presenter.UserControls
 
                     //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
                 }
-                else if (panelModel.Panel_Orient == false)
-                {
-                    arwHeadUp_x3 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
-                    arwHeadUp_x4 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
-
-                    //sliding
-                    PointF sliding1 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF sliding2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    PointF sliding5 = new PointF(arwEnd_x2, center_y1);
-                    PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
-
-                    g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
-
-                    //paraslide
-                    //PointF paraslide1 = new PointF(arwStart_x1, arwHeadUp_y3);
-                    //PointF paraslide2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF paraslide5 = new PointF(arwEnd_x2, center_y1);
-                    //PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide8 = new PointF(arwStart_x1 * 2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y3);
-
-                    //PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
-
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
-
-                    //LiftAndSlide
-                    //PointF LiftAndSlide1 = new PointF(arwStart_x1, arwHeadUp_y4);
-                    //PointF LiftAndSlide2 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF LiftAndSlide5 = new PointF(arwEnd_x2, center_y1);
-                    //PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide8 = new PointF(arwStart_x1 * 2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y4);
-
-                    //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
-
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
-                }
             }
+
+            
             else if (panelModel.Panel_Type == "TiltNTurn Panel")
             {
                 g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,

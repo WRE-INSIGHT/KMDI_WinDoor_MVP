@@ -9,7 +9,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler deleteToolStripClickedEventRaised;
         event EventHandler slidingPanelUCMouseEnterEventRaised;
         event EventHandler slidingPanelUCMouseLeaveEventRaised;
+        event MouseEventHandler slidingPanelUCMouseMoveEventRaised;
+        event MouseEventHandler slidingPanelUCMouseDownEventRaised;
+        event MouseEventHandler slidingPanelUCMouseUpEventRaised;
         event PaintEventHandler slidingPanelUCPaintEventRaised;
         event EventHandler slidingPanelUCSizeChangedEventRaised;
+        event EventHandler noRightToolStripClickedEventRaised;
+        event EventHandler noLeftToolStripClickedEventRaised;
+        event EventHandler noBothToolStripClickedEventRaised;
+        event EventHandler fullToolStripClickedEventRaised;
     }
 }

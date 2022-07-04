@@ -87,6 +87,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event PaintEventHandler slidingPanelUCPaintEventRaised;
         public event EventHandler slidingPanelUCSizeChangedEventRaised;
 
+
+        public event MouseEventHandler slidingPanelUCMouseMoveEventRaised;
+        public event MouseEventHandler slidingPanelUCMouseDownEventRaised;
+        public event MouseEventHandler slidingPanelUCMouseUpEventRaised;
+        public event EventHandler noRightToolStripClickedEventRaised;
+        public event EventHandler noLeftToolStripClickedEventRaised;
+        public event EventHandler noBothToolStripClickedEventRaised;
+        public event EventHandler fullToolStripClickedEventRaised;
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_ID"]);
@@ -138,5 +147,42 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             this.Invalidate();
         }
+
+        private void noRightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noRightToolStripClickedEventRaised, e);
+        }
+
+        private void noLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noLeftToolStripClickedEventRaised, e);
+        }
+
+        private void noBothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noBothToolStripClickedEventRaised, e);
+        }
+
+        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, fullToolStripClickedEventRaised, e);
+        }
+
+        private void SlidingPanelUC_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, slidingPanelUCMouseDownEventRaised, e);
+        }
+
+        private void SlidingPanelUC_MouseMove(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, slidingPanelUCMouseMoveEventRaised, e);
+        }
+
+        private void SlidingPanelUC_MouseUp(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, slidingPanelUCMouseUpEventRaised, e);
+        }
+
+       
     }
 }

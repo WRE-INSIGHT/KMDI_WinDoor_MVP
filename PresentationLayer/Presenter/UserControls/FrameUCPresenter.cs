@@ -353,6 +353,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                            0,
                                                            handleArtNo,
                                                            GeorgianBar_ArticleNo._None,
+                                                           SashType._Full,
                                                            0,
                                                            0,
                                                            false,

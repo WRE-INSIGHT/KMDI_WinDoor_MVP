@@ -15,6 +15,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -74,7 +75,153 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _slidingPanelUC.slidingPanelUCMouseLeaveEventRaised += _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised;
             _slidingPanelUC.deleteToolStripClickedEventRaised += _slidingPanelUC_deleteToolStripClickedEventRaised;
             _slidingPanelUC.slidingPanelUCSizeChangedEventRaised += _slidingPanelUC_slidingPanelUCSizeChangedEventRaised;
+            _slidingPanelUC.slidingPanelUCMouseMoveEventRaised += _slidingPanelUC_slidingPanelUCMouseMoveEventRaised;
+            _slidingPanelUC.slidingPanelUCMouseDownEventRaised += _slidingPanelUC_slidingPanelUCMouseDownEventRaised;
+            _slidingPanelUC.slidingPanelUCMouseUpEventRaised += _slidingPanelUC_slidingPanelUCMouseUpEventRaised;
+            _slidingPanelUC.noBothToolStripClickedEventRaised += _slidingPanelUC_noBothToolStripClickedEventRaised;
+            _slidingPanelUC.noLeftToolStripClickedEventRaised += _slidingPanelUC_noLeftToolStripClickedEventRaised;
+            _slidingPanelUC.noRightToolStripClickedEventRaised += _slidingPanelUC_noRightToolStripClickedEventRaised;
+            _slidingPanelUC.fullToolStripClickedEventRaised += _slidingPanelUC_fullToolStripClickedEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+        private bool isLeft = false;
+        //private bool isRight = false;
+        private int sashDeduction = 20;
+        private Point _point_of_origin;
+        private void _slidingPanelUC_fullToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Sash_Type = SashType._Full;
+            ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
+        private void _slidingPanelUC_noRightToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Sash_Type = SashType._noRight;
+            ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
+        private void _slidingPanelUC_noLeftToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Sash_Type = SashType._noLeft;
+            ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+        }
+        private void _slidingPanelUC_noBothToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_Sash_Type = SashType._noBoth;
+            ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
+        private void _slidingPanelUC_slidingPanelUCMouseUpEventRaised(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isLeft = false;
+            }
+        }
+        private void _slidingPanelUC_slidingPanelUCMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                UserControl me = (UserControl)sender;
+                _point_of_origin = e.Location;
+                if ((e.Location.X > -1) && (e.Location.X < 5) && (_panelModel.Panel_Placement == "Last" || _panelModel.Panel_Placement == "Somewhere in Between"))
+                {
+                    isLeft = true;
+                }
+            }
+        }
+        private void _slidingPanelUC_slidingPanelUCMouseMoveEventRaised(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (_multiPanelModel != null &&
+                !_multiPanelModel.MPanel_DividerEnabled && _multiPanelModel.GetCount_MPanelLst_Object() > 1)
+                {
+                    UserControl me = (UserControl)sender;
+                    if ((e.Location.X > -1) && (e.Location.X < 5) && (_panelModel.Panel_Placement == "Last" || _panelModel.Panel_Placement == "Somewhere in Between"))
+                    {
+                        me.Cursor = Cursors.VSplit;
+                    }
+                    //else if (((e.Location.X > me.Width - 5) && (e.Location.X < me.Width)) && (_panelModel.Panel_Placement == "First" || _panelModel.Panel_Placement == "Somewhere in Between"))
+                    //{
+                    //    me.Cursor = Cursors.VSplit;
+                    //}
+                    else
+                    {
+                        me.Cursor = Cursors.Hand;
+                    }
+                    if (isLeft)
+                    {
+                        int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
+                        //Get Panel from left side of Mullion
+                        Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
+                        Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+
+                        if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                        {
+                            //Get Panel from right side of Mullion
+                            pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                        }
+                        int expected_Panel1MinWD = 0,
+                            expected_Panel2MinWD = 0,
+                            mullion_movement = 0;
+                        IPanelModel prev_pnl = null,
+                                    pres_pnl = null;
+                        //Get the expected Panel w
+                        if (prev_ctrl is IPanelUC)
+                        {
+                            prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
+                            expected_Panel1MinWD = prev_pnl.Panel_WidthToBind + (e.X - _point_of_origin.X);
+                        }
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                            expected_Panel2MinWD = pres_pnl.Panel_WidthToBind - (e.X - _point_of_origin.X);
+                        }
+                        FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
+                        int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
+                            actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
+                        if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel && e.Button == MouseButtons.Left)
+                        {
+                            if (me_indx != 0 && flp.Controls.Count > (me_indx))
+                            {
+                                if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
+                                {
+                                    mullion_movement = (e.X - _point_of_origin.X);
+                                    if (prev_ctrl is IPanelUC)
+                                    {
+                                        prev_pnl.Panel_Width += mullion_movement;
+                                        prev_pnl.Panel_DisplayWidth += mullion_movement;
+                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                        prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
+                                        //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        //{
+                                        //    mpnl.SetDimensions_childObjs();
+                                        //}
+                                    }
+                                    if (pres_ctrl is IPanelUC)
+                                    {
+                                        pres_pnl.Panel_Width -= mullion_movement;
+                                        pres_pnl.Panel_DisplayWidth -= mullion_movement;
+                                        pres_pnl.SetDimensionToBind_using_BaseDimension();
+                                        pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
+                                    }
+                                }
+                            }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                        }
+                    }
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         int prev_Width = 0,
@@ -182,13 +329,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _frameUCP.ViewDeleteControl((UserControl)_slidingPanelUC);
             }
 
-            if (_multiPanelModel != null && _multiPanelModel.MPanel_DividerEnabled)
+            if (_multiPanelModel != null)
             {
 
                 _multiPanelModel.Object_Indexer();
                 _multiPanelModel.Reload_PanelMargin();
                 _multiPanelModel.Reload_MultiPanelMargin();
-                _commonFunctions.Automatic_Div_Addition(_mainPresenter,
+                if (_multiPanelModel.MPanel_DividerEnabled)
+                {
+                    _commonFunctions.Automatic_Div_Addition(_mainPresenter,
                                                         _frameModel,
                                                         _divServices,
                                                         //_frameUCP,
@@ -202,6 +351,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _panelModel,
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
+                }
                 //_multiPanelMullionImagerUCP,
                 //_multiPanelTransomImagerUCP);
             }
@@ -218,8 +368,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_multiPanelModel != null)
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
-            }
 
+                if (_multiPanelModel.GetCount_MPanelLst_Object() > 0)
+                {
+                    foreach (IPanelModel pnlModel in _multiPanelModel.MPanelLst_Panel)
+                    {
+                        if (!pnlModel.Panel_Name.Contains("Sliding"))
+                        {
+                            _multiPanelModel.MPanel_DividerEnabledVisibility = true;
+                        }
+                        else
+                        {
+                            _multiPanelModel.MPanel_DividerEnabledVisibility = false;
+                            break;
+                        }
+                    }
+                }else
+                {
+                    _multiPanelModel.MPanel_DividerEnabledVisibility = true;
+                }
+            }
+            
             #endregion
         }
 
@@ -276,16 +445,51 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                            sliding.ClientRectangle.Height - w));
 
             Color col = Color.Black;
-            g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+            if (_panelModel.Panel_Sash_Type == SashType._noRight)
+            {
+                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
                                                            outer_line,
-                                                           (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                           (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                            (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                          inner_line,
+                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+            }
 
-            g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                           inner_line,
-                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
-                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
-
+            else if (_panelModel.Panel_Sash_Type == SashType._noLeft)
+            {
+                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                          outer_line,
+                                                          (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                          (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                          inner_line,
+                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+            }
+            else if (_panelModel.Panel_Sash_Type == SashType._noBoth)
+            {
+                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
+                                                         outer_line,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
+                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
+                                                          inner_line,
+                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
+                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+            }
+            else if (_panelModel.Panel_Sash_Type == SashType._Full)
+            {
+                g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                         outer_line,
+                                                         (sliding.ClientRectangle.Width - (outer_line * 2)) - w,
+                                                         (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
+                                                          inner_line,
+                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
+                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+            }
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);
 
             Pen dgrayPen = new Pen(Color.DimGray);
@@ -309,6 +513,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 arwHeadUp_x3 = sashPoint.X + arwStart_x1 + (sashW / 10);
                 arwHeadUp_x4 = sashPoint.X + arwStart_x1 + (sashW / 10);
 
+                //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                //                                 new PointF(arwStart_x1, center_y1));
+                //g.DrawLine(new Pen(Color.Black), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                //                                 new PointF(arwStart_x1, center_y1));
+
                 //sliding
                 PointF sliding1 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
                 PointF sliding2 = new PointF(arwEnd_x2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
@@ -320,6 +529,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 PointF[] slidingcurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
                 g.FillPolygon(new SolidBrush(Color.Black), slidingcurvePoints);
+
+
 
                 //paraslide
                 //PointF paraslide1 = new PointF(arwEnd_x2, arwHeadUp_y3);
@@ -350,11 +561,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
 
                 //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+
+
             }
             else if (_panelModel.Panel_Orient == false)
             {
                 arwHeadUp_x3 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
                 arwHeadUp_x4 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
+
+                //g.DrawLine(new Pen(Color.ForestGreen), new PointF(arwHeadUp_x3, arwHeadUp_y3),
+                //                                 new PointF(arwEnd_x2, center_y1));
+                //g.DrawLine(new Pen(Color.Firebrick), new PointF(arwHeadUp_x4, arwHeadUp_y4),
+                //                                 new PointF(arwEnd_x2, center_y1));
 
                 //sliding
                 PointF sliding1 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
@@ -367,6 +585,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
                 g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
+
+
 
                 //paraslide
                 //PointF paraslide1 = new PointF(arwStart_x1, arwHeadUp_y3);
@@ -397,7 +617,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
 
                 //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+
+
             }
+
+            //g.DrawLine(new Pen(Color.Black), new PointF(arwStart_x1, center_y1),
+            //                                 new PointF(arwEnd_x2, center_y1));
 
             if (_timer_count != 0 && _timer_count < 8)
             {
