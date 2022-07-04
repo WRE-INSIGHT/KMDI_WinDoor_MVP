@@ -34,6 +34,7 @@
         public int panel_property_MiddleCloserOptionsheight = 50;
         public int panel_property_espagnoletteOptionsheight_default = 28;
         public int panel_property_3dHingeOptionsheight = 30;
+        public int panel_property_SlidingTypeOptionsheight = 28;
 
         #endregion
 

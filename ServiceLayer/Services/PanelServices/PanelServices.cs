@@ -76,7 +76,9 @@ namespace ServiceLayer.Services.PanelServices
                                             int panelGeorgianBarVerticalQty,
                                             int panelGeorgianBarHorizontalQty,
                                             bool panelGeorgianBarOptionVisibility,
-                                            HingeOption panelHingeOptions)
+                                            HingeOption panelHingeOptions,
+                                            bool panelSlidingTypeVisibility,
+                                            SlidingTypes panelSlidingTypes)
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -137,7 +139,9 @@ namespace ServiceLayer.Services.PanelServices
                                              panelGeorgianBarVerticalQty,
                                              panelGeorgianBarHorizontalQty,
                                              panelGeorgianBarOptionVisibility,
-                                             panelHingeOptions);
+                                             panelHingeOptions,
+                                             panelSlidingTypeVisibility,
+                                             panelSlidingTypes);
 
             ValidateModel(pnl);
             return pnl;
@@ -207,7 +211,9 @@ namespace ServiceLayer.Services.PanelServices
                                          DockStyle panelDock = DockStyle.Fill,
                                          string panelName = "",
                                          bool panelOrient = false,
-                                         HingeOption panelHingeOptions = null)
+                                         HingeOption panelHingeOptions = null,
+                                         bool panelSlidingTypeVisibility = false,
+                                         SlidingTypes panelSlidingTypes = null)
         {
             if (panelName == "")
             {
@@ -219,6 +225,10 @@ namespace ServiceLayer.Services.PanelServices
                 panelHingeOptions = HingeOption._FrictionStay;
             }
 
+            if (panelSlidingTypes == null)
+            {
+                panelSlidingTypes = SlidingTypes._Premiline;
+            }
             IPanelModel _panelModel = CreatePanelModel(panelID,
                                                        panelName,
                                                        panelWd,
@@ -278,7 +288,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGeorgianBarVerticalQty,
                                                        panelGeorgianBarHorizontalQty,
                                                        panelGeorgianBarOptionVisibility,
-                                                       panelHingeOptions);
+                                                       panelHingeOptions,
+                                                       panelSlidingTypeVisibility,
+                                                       panelSlidingTypes);
 
             return _panelModel;
         }

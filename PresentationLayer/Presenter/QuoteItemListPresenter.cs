@@ -41,7 +41,10 @@ namespace PresentationLayer.Presenter
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
-        string NewNoneDuplicatePnlAndCount, lst_DescDist;
+        string NewNoneDuplicatePnlAndCount,
+               lst_DescDist,
+               glassThick,
+               glassFilm;
 
 
 
@@ -77,6 +80,8 @@ namespace PresentationLayer.Presenter
         int TotalItemArea = 0;
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
         {
+
+
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
             {
                 _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
@@ -86,8 +91,31 @@ namespace PresentationLayer.Presenter
                 quoteItem.BringToFront();
 
                 itemDescription();
+                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
+                List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
+
+                foreach (string GT in lst_glassThicknessDistinct)
+                {
+                    glassThick += GT;
+                }
+
+                foreach (string GF in lst_glassFilmDistinct)
+                {
+                    glassFilm += "with " + GF + "\n";
+                }
+
+                if (GeorgianBarHorizontalQty > 0)
+                {
+                    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                }
+
+                if (GeorgianBarVerticalQty > 0)
+                {
+                    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                }
 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+                wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; // dimension --> location
@@ -254,8 +282,7 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
-                                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
-                                List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
+
 
                                 #region 1stApproach
                                 //if (pnl.Panel_Type.Contains("Fixed"))
@@ -344,24 +371,13 @@ namespace PresentationLayer.Presenter
                                     lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
                                 }
 
-                                foreach (string GT in lst_glassThicknessDistinct)
-                                {
-                                    AllItemDescription += GT;
-                                }
-
                                 //Glassfilm
                                 if (pnl.Panel_GlassFilm.ToString() != "None")
                                 {
                                     lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
                                 }
 
-                                if (lst_glassFilmDistinct != null)
-                                {
-                                    foreach (string GF in lst_glassFilmDistinct)
-                                    {
-                                        AllItemDescription += "with " + GF + "\n";
-                                    }
-                                }
+
 
                                 //GeorgianBar
                                 if (pnl.Panel_GeorgianBarOptionVisibility == true)
@@ -369,11 +385,10 @@ namespace PresentationLayer.Presenter
                                     GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
 
-                                    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
-                                    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
 
-                                    AllItemDescription += GeorgianBarHorizontalDesc;
-                                    AllItemDescription += GeorgianBarVerticalDesc;
+
+                                    //AllItemDescription += GeorgianBarHorizontalDesc;
+                                    //AllItemDescription += GeorgianBarVerticalDesc;
                                 }
 
                                 //panel name desc
@@ -464,8 +479,13 @@ namespace PresentationLayer.Presenter
                         lst_DescDist = lst_DuplicatePnl[i];
                         wdm.WD_description += lst_DescDist;
                     }
+
                 }
+
+
             }
+
+
         }
 
 

@@ -683,7 +683,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
             }
-            
+
             if (Frame_If_InwardMotorizedCasement)
             {
                 Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
@@ -875,6 +875,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusMC")
                 {
                     FrameProp_Height -= constants.panel_property_MiddleCloserOptionsheight;
+                }
+                else if (mode == "addSlidingType")
+                {
+                    FrameProp_Height += constants.panel_property_SlidingTypeOptionsheight;
+                }
+                else if (mode == "minusSlidingType")
+                {
+                    FrameProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
                 }
             }
             else if (objtype == "Div")

@@ -1847,6 +1847,40 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
 
+
+
+        private SlidingTypes _panel_SlidingTypes;
+        public SlidingTypes Panel_SlidingTypes
+        {
+            get
+            {
+                return _panel_SlidingTypes;
+            }
+
+            set
+            {
+                _panel_SlidingTypes = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
+        private bool _panel_SlidingTypeVisibility;
+        public bool Panel_SlidingTypeVisibility
+        {
+            get
+            {
+                return _panel_SlidingTypeVisibility;
+            }
+
+            set
+            {
+                _panel_SlidingTypeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -2889,6 +2923,15 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_MiddleCloserOptionsheight;
             }
+            else if (mode == "addSlidingType")
+            {
+                Panel_PropertyHeight += constants.panel_property_SlidingTypeOptionsheight;
+            }
+            else if (mode == "minusSlidingType")
+            {
+                Panel_PropertyHeight -= constants.panel_property_SlidingTypeOptionsheight;
+            }
+
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -6561,7 +6604,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelGeorgianBarVerticalQty,
                           int panelGeorgianBarHorizontalQty,
                           bool panelGeorgianBarOptionVisibility,
-                          HingeOption panelHingeOptions)
+                          HingeOption panelHingeOptions,
+                          bool panelSlidingTypeVisibility,
+                          SlidingTypes panelSlidingTypes)
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -6629,6 +6674,8 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;
             Panel_HingeOptions = panelHingeOptions;
+            Panel_SlidingTypeVisibility = panelSlidingTypeVisibility;
+            Panel_SlidingTypes = panelSlidingTypes;
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
             Panel_OrientVisibility = true;
