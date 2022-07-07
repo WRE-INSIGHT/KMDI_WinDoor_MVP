@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelLayer.Model.Quotation.WinDoor;
+﻿using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.WinDoor;
 using ServiceLayer.CommonServices;
+using System.Collections.Generic;
 using static EnumerationTypeLayer.EnumerationTypes;
-using ModelLayer.Model.Quotation.Concrete;
 
 namespace ServiceLayer.Services.WindoorServices
 {
@@ -20,15 +16,15 @@ namespace ServiceLayer.Services.WindoorServices
             _modelCheck = modelCheck;
         }
 
-        private IWindoorModel CreateWindoor(int WD_id, 
-                                           string WD_name, 
-                                           string WD_description, 
-                                           int WD_width, 
-                                           int WD_height, 
-                                           int WD_price, 
-                                           int WD_quantity, 
-                                           decimal WD_discount, 
-                                           bool WD_visibility, 
+        private IWindoorModel CreateWindoor(int WD_id,
+                                           string WD_name,
+                                           string WD_description,
+                                           int WD_width,
+                                           int WD_height,
+                                           int WD_price,
+                                           int WD_quantity,
+                                           decimal WD_discount,
+                                           bool WD_visibility,
                                            bool WD_orientation,
                                            float WD_zoom,
                                            string WD_Profile,
@@ -36,7 +32,8 @@ namespace ServiceLayer.Services.WindoorServices
                                            List<IConcreteModel> lst_concrete,
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
-                                           Foil_Color wd_outisdecolor)
+                                           Foil_Color wd_outisdecolor,
+                                           int wd_costingPoints)
         {
             IWindoorModel wndr = new WindoorModel(WD_id,
                                                   WD_name,
@@ -53,7 +50,8 @@ namespace ServiceLayer.Services.WindoorServices
                                                   lst_concrete,
                                                   wd_basecolor,
                                                   wd_insidecolor,
-                                                  wd_outisdecolor);
+                                                  wd_outisdecolor,
+                                                  wd_costingPoints);
 
             ValidateModel(wndr);
             return wndr;
@@ -75,7 +73,8 @@ namespace ServiceLayer.Services.WindoorServices
                                              int WD_price = 0,
                                              decimal WD_discount = 0.0M,
                                              List<IFrameModel> lst_frame = null,
-                                             List<IConcreteModel> lst_concrete = null)
+                                             List<IConcreteModel> lst_concrete = null,
+                                             int wd_costingPoints = 0)
         {
             if (WD_name == "")
             {
@@ -107,9 +106,10 @@ namespace ServiceLayer.Services.WindoorServices
                                                         WD_Profile,
                                                         lst_frame,
                                                         lst_concrete,
-                                                        wd_basecolor, 
+                                                        wd_basecolor,
                                                         wd_insidecolor,
-                                                        wd_outisdecolor);
+                                                        wd_outisdecolor,
+                                                        wd_costingPoints);
 
             return _windoorModel;
         }

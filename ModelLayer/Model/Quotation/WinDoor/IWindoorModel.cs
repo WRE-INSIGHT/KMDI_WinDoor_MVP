@@ -63,5 +63,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         int Div_ArrowCount { get; set; }
         bool WD_customArrowToggle { get; set; }
+        decimal WD_CostingPoints { get; set; }
     }
 }

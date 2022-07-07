@@ -275,7 +275,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_panelModel.Panel_Type.Contains("Sliding"))
                 {
-                    IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel);
+                    IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel,_mainPresenter);
                     UserControl slidingTypeUCPresenter = (UserControl)slidingTypePresenter.GetSlidingTypePropertyUC();
                     _pnlPanelSpecs.Controls.Add(slidingTypeUCPresenter);
                     slidingTypeUCPresenter.Dock = DockStyle.Top;

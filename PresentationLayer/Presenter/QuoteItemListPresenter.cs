@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -15,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter
@@ -30,10 +32,6 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
 
-
-
-
-
         #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
@@ -41,23 +39,35 @@ namespace PresentationLayer.Presenter
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
-        string NewNoneDuplicatePnlAndCount,
+
+        int GeorgianBarVerticalQty = 0,
+            GeorgianBarHorizontalQty = 0,
+            CostingPoints = 0,
+            CostPerPoints = 60,
+            LaborCost = 0;
+
+        string FrameTypeDesc,
+               AllItemDescription,
+               motorizeDesc,
+               GeorgianBarHorizontalDesc,
+               GeorgianBarVerticalDesc,
+               NewNoneDuplicatePnlAndCount,
                lst_DescDist,
                glassThick,
                glassFilm;
 
-
-
-        int GeorgianBarVerticalQty = 0,
-            GeorgianBarHorizontalQty = 0;
-
-        string FrameTypeDesc,
-            AllItemDescription,
-            motorizeDesc,
-            GeorgianBarHorizontalDesc,
-            GeorgianBarVerticalDesc;
-
-
+        decimal FramePricePerLinearMeter = 1023.29m,
+                FrameReinPricePerLinearMeter = 33.73m,
+                SashPricePerLinearMeter = 1210.27m,
+                SashReinPricePerLinearMeter = 24.53m,
+                GlazingBeadPricePerLinearMeter = 56.45m,
+                FramePrice,
+                FrameReinPrice,
+                SashPrice,
+                SashReinPrice,
+                GbPrice,
+                FramePerimeter,
+                SashPerimeter;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -91,6 +101,8 @@ namespace PresentationLayer.Presenter
                 quoteItem.BringToFront();
 
                 itemDescription();
+                ItemCostingPoints();
+
                 List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
                 List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
 
@@ -115,16 +127,38 @@ namespace PresentationLayer.Presenter
                 }
 
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+
                 wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
+                LaborCost = CostingPoints * CostPerPoints;
+
+
+                string costingPointsDesc = "\n\nTotal Points: " + CostingPoints,
+                       laborCostDesc = "\n\nLabor Cost: " + LaborCost,
+                       FramePriceDesc = "\n\nFrame Price per linear meter: " + FramePrice,
+                       FrameReinPriceDesc = "\n\nFrame Rein Price per linear meter: " + FrameReinPrice,
+                       SashPriceDesc = "\n\nSash Price per linear meter: " + SashPrice,
+                       SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + SashReinPrice,
+                       GBPriceDesc = "\n\nGB Price per linear meter: " + GbPrice;
+
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; // dimension --> location
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" + wdm.WD_description;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
+                                                                          + wdm.WD_description
+                                                                          + costingPointsDesc
+                                                                          + laborCostDesc
+                                                                          + FramePriceDesc
+                                                                          + FrameReinPriceDesc
+                                                                          + SashPriceDesc
+                                                                          + SashReinPriceDesc
+                                                                          + GBPriceDesc;
+
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = LaborCost;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = LaborCost.ToString();
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
                 this._lstItemArea.Add(TotalItemArea);
-
             }
         }
 
@@ -488,7 +522,122 @@ namespace PresentationLayer.Presenter
 
         }
 
+        public void ItemCostingPoints()
+        {
 
+            int ProfileColorPoints = 13;
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                foreach (IFrameModel fr in wdm.lst_frame)
+                {
+                    #region baseOnDimensionAndColorPoints
+                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                    {
+                        if (wdm.WD_width >= 2000)
+                        {
+                            ProfileColorPoints = 16;
+                        }
+                        else if (wdm.WD_height >= 2000)
+                        {
+                            ProfileColorPoints = 16;
+                        }
+                        else if (wdm.WD_width >= 3000)
+                        {
+                            ProfileColorPoints = 18;
+                        }
+                        else if (wdm.WD_height >= 3000)
+                        {
+                            ProfileColorPoints = 18;
+                        }
+
+                        CostingPoints += ProfileColorPoints * 4;
+                    }
+                    else
+                    {
+                        ProfileColorPoints = 14;
+                        if (wdm.WD_width >= 2000)
+                        {
+                            ProfileColorPoints = 18;
+                        }
+                        else if (wdm.WD_height >= 2000)
+                        {
+                            ProfileColorPoints = 18;
+                        }
+                        else if (wdm.WD_width >= 3000)
+                        {
+                            ProfileColorPoints = 19;
+                        }
+                        else if (wdm.WD_height >= 3000)
+                        {
+                            ProfileColorPoints = 19;
+                        }
+
+                        CostingPoints += ProfileColorPoints * 4;
+                    }
+                    #endregion
+
+                    #region FramePrice
+                    FramePerimeter = (wdm.WD_height + wdm.WD_width) * 2;
+
+
+                    FramePrice = (FramePerimeter / 1000) * FramePricePerLinearMeter;
+                    FrameReinPrice = (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                    #endregion
+
+                    if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
+                    {
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                        {
+                            foreach (IDividerModel div in mpnl.MPanelLst_Divider)
+                            {
+                                CostingPoints -= 2;
+                            }
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                if (pnl.Panel_SashPropertyVisibility == true)
+                                {
+                                    #region SashPrice 
+                                    SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
+
+                                    SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                                    #endregion
+
+                                    CostingPoints += ProfileColorPoints * 4;
+                                }
+                                if (pnl.Panel_ChkText == "dsash")
+                                {
+                                    #region SashPrice 
+                                    SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
+
+                                    SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                                    #endregion
+
+                                    CostingPoints += ProfileColorPoints * 4;
+                                }
+                            }
+                        }
+                    }
+                    else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
+                    {
+                        IPanelModel Singlepnl = fr.Lst_Panel[0];
+                        if (Singlepnl.Panel_SashPropertyVisibility == true)
+                        {
+                            #region SashPrice 
+                            SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+
+                            SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                            SashReinPrice = (SashPerimeter / 1000) * SashReinPricePerLinearMeter;
+                            GbPrice = (SashPerimeter / 1000) * GlazingBeadPricePerLinearMeter;
+                            #endregion
+
+                            CostingPoints += ProfileColorPoints * 4;
+                        }
+                    }
+                }
+            }
+
+        }
 
         public IQuoteItemListView GetQuoteItemListView()
         {

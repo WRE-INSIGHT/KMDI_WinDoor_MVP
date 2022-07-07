@@ -25,6 +25,7 @@ namespace ServiceLayer.Services.WindoorServices
                                       int WD_price = 0,
                                       decimal WD_discount = 0.0M,
                                       List<IFrameModel> lst_frame = null,
-                                      List<IConcreteModel> lst_concrete = null);
+                                      List<IConcreteModel> lst_concrete = null,
+                                      int wd_costingPoints = 0);
     }
 }
