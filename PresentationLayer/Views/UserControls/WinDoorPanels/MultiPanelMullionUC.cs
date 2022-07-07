@@ -59,6 +59,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                 _mpanelCmenuDeleteVisibility = value;
             }
         }
+       
 
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;

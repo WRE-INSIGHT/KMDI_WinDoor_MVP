@@ -522,7 +522,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelDividerEnabled = value;
             }
         }
-
+      
         private float _mpanelZoom;
         public float MPanel_Zoom
         {
@@ -590,7 +590,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
                     }
-                    else if(MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                    else if (MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
                     {
                         foreach (IPanelModel pnl in MPanelLst_Panel)
                         {
@@ -1284,7 +1284,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanel_WidthToBind = wd;
             MPanel_HeightToBind = ht;
         }
-        
+
         public void Imager_SetDimensionsToBind_using_ParentMultiPanelModel()
         {
             int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
@@ -1538,7 +1538,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             wd = MPanel_FrameModelParent.FrameImageRenderer_Width - (MPanel_FrameModelParent.FrameImageRenderer_Padding_int.Left + MPanel_FrameModelParent.FrameImageRenderer_Padding_int.Right);
             ht = MPanel_FrameModelParent.FrameImageRenderer_Height - (MPanel_FrameModelParent.FrameImageRenderer_Padding_int.Top + MPanel_FrameModelParent.FrameImageRenderer_Padding_int.Bottom);
-                
+
             MPanelImageRenderer_Width = wd;
             MPanelImageRenderer_Height = ht;
         }
@@ -1620,6 +1620,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 pnl_margin = new Padding(0, 10, 10, 10);
                                 pnl.Panel_Placement = "Last";
+
                             }
                             else
                             {
@@ -1955,7 +1956,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return visiblePanelCount + visibleMPanelCount + visibleDivider;
         }
 
-        public void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control, 
+        public void Adapt_sizeToBind_MPanelDivMPanel_Controls(Control current_control,
                                                               string frameType,
                                                               bool if_auto_added = false)
         {
@@ -2049,7 +2050,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         }
 
-        public void AddControl_MPanelLstObjects(Control control, 
+        public void AddControl_MPanelLstObjects(Control control,
                                                 string frameType,
                                                 bool if_auto_added = false)
         {
@@ -2076,7 +2077,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
 
             int next_indx = MPanelLst_Objects.IndexOf(control) + 1; //needed to check if the last object index hits the totalCount of MPanelLst_Objects
-                                                                    
+
             if (prev_indx >= 0 &&
                 ((placement == "Somewhere in Between" && MPanelLst_Objects.Count() == next_indx) ||
                   placement == "Last"))
@@ -2086,9 +2087,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             MPanelLst_Objects.Remove(control);
         }
-        
-        private void Adjust_prev_obj_dimension(Control control, 
-                                               int previous_indx, 
+
+        private void Adjust_prev_obj_dimension(Control control,
+                                               int previous_indx,
                                                int pixel_count)
         {
             if (control.Name.Contains("MultiMullion") || control.Name.Contains("MultiTransom"))
@@ -2231,7 +2232,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
-        
+
         public void Fit_MyControls_ImagersToBindDimensions()
         {
             if (MPanelLst_Objects.Count() > 0)
@@ -2411,7 +2412,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             List<Control> visible_obj = MPanelLst_Objects.Where(obj => obj.Visible == true).ToList();
 
-            for (int i = 0; i < visible_obj.Count() ; i++)
+            for (int i = 0; i < visible_obj.Count(); i++)
             {
                 Control obj = MPanelLst_Objects[i];
 
@@ -2486,7 +2487,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
-        
+
         public IEnumerable<Control> GetVisibleObjects()
         {
             return MPanelLst_Objects.Where(obj => obj.Visible == true);

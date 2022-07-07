@@ -723,5 +723,14 @@ namespace EnumerationTypeLayer
 
             private SlidingTypes(int value, string displayName) : base(value, displayName) { }
         }
+        public class OverlapSash : Enumeration<OverlapSash, int>
+        {
+            public static readonly OverlapSash _Left = new OverlapSash(0, "Left");
+            public static readonly OverlapSash _Right = new OverlapSash(1, "Right");
+            public static readonly OverlapSash _Both = new OverlapSash(2, "Both");
+            public static readonly OverlapSash _None = new OverlapSash(3, "None");
+
+            private OverlapSash(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

@@ -168,7 +168,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             if (_multiPanelModel.MPanelLst_Objects.Count() < totalCount_objs_to_accomodate)
             {
-                if ((data.Contains("Multi-Panel") && data.Contains("Mullion")))
+                if (data.Contains("Multi-Panel") && data.Contains("Mullion"))
                 {
                     e.Effect = DragDropEffects.None;
                 }
@@ -612,6 +612,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                0,
                                                                                handleArtNo,
                                                                                GeorgianBar_ArticleNo._None,
+                                                                               OverlapSash._None,
                                                                                0,
                                                                                0,
                                                                                false,
@@ -703,7 +704,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)slidingUC);
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)slidingUC, _frameModel.Frame_Type.ToString());
                             slidingUCP.SetInitialLoadFalse();
-
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                         else if (data == "TiltNTurn Panel")
@@ -3541,7 +3541,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             multiPanelBinding.Add("MPanel_Visibility", new Binding("Visible", _multiPanelModel, "MPanel_Visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_Placement", new Binding("MPanel_Placement", _multiPanelModel, "MPanel_Placement", true, DataSourceUpdateMode.OnPropertyChanged));
             multiPanelBinding.Add("MPanel_CmenuDeleteVisibility", new Binding("MPanel_CmenuDeleteVisibility", _multiPanelModel, "MPanel_CmenuDeleteVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
             return multiPanelBinding;
         }
 

@@ -41,7 +41,9 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_Visibility { get; set; }
         float PanelImageRenderer_Zoom { get; set; }
         int Panel_Index_Inside_MPanel { get; set; }
+        int Panel_Index_Inside_SPanel { get; set; }
         string Panel_Placement { get; set; }
+        OverlapSash Panel_Overlap_Sash { get; set; }
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
         Padding PanelImageRenderer_Margin { get; set; }
@@ -235,6 +237,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Imager_SetDimensionsToBind_using_ZoomPercentage();
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+        void Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
         void SetDimensionToBind_using_BaseDimension();
         void SetDimensionImagerToBind_using_BaseDimension();
         void AdjustPropertyPanelHeight(string mode);

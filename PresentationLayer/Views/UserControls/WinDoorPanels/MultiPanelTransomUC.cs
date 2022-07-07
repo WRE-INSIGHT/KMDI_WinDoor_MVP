@@ -61,6 +61,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+      
+
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;
         public event EventHandler flpMultiMouseLeaveEventRaised;

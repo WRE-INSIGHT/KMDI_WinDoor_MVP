@@ -100,6 +100,13 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler fixedPanelMouseEnterEventRaised;
         public event EventHandler fixedPanelMouseLeaveEventRaised;
         public event EventHandler fixedPanelSizeChangedEventRaised;
+        public event MouseEventHandler fixedPanelUCMouseMoveEventRaised;
+        public event MouseEventHandler fixedPanelUCMouseDownEventRaised;
+        public event MouseEventHandler fixedPanelUCMouseUpEventRaised;
+        public event EventHandler rightToolStripClickedEventRaised;
+        public event EventHandler leftToolStripClickedEventRaised;
+        public event EventHandler bothToolStripClickedEventRaised;
+        public event EventHandler noneToolStripClickedEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
@@ -153,5 +160,42 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseEvent(this, fixedPanelSizeChangedEventRaised, e);
         }
+
+        private void RightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rightToolStripClickedEventRaised, e);
+        }
+
+        private void LeftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, leftToolStripClickedEventRaised, e);
+        }
+
+        private void BothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, bothToolStripClickedEventRaised, e);
+        }
+
+        private void NoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, noneToolStripClickedEventRaised, e);
+        }
+
+        private void FixedPanelUC_MouseUp(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseUpEventRaised, e);
+        }
+
+        private void FixedPanelUC_MouseMove(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseMoveEventRaised, e);
+        }
+
+        private void FixedPanelUC_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseDownEventRaised, e);
+        }
+
+     
     }
 }
