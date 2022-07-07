@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_SlidingTypePropertyUC GetSlidingTypePropertyUC();
 
         IPP_SlidingTypePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                          IPanelModel panelModel);
+                                                          IPanelModel panelModel,
+                                                          IMainPresenter mainPresenter);
     }
 }

@@ -12,6 +12,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_SlidingTypePropertyUC _slidingTypePropertyUC;
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
+        private IMainPresenter _mainPresenter;
 
         public PP_SlidingTypePropertyUCPresenter(IPP_SlidingTypePropertyUC slidingTypePropertyUC)
         {
@@ -30,7 +31,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             ComboBox cmbSlidingType = (ComboBox)sender;
             _panelModel.Panel_SlidingTypes = (SlidingTypes)cmbSlidingType.SelectedValue;
-            }
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
 
         private void _slidingTypePropertyUC_PPSlidingTypePropertyUCLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -42,7 +44,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _slidingTypePropertyUC;
         }
         public IPP_SlidingTypePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                                 IPanelModel panelModel)
+                                                                 IPanelModel panelModel,
+                                                                 IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_SlidingTypePropertyUC, PP_SlidingTypePropertyUC>()
@@ -50,6 +53,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_SlidingTypePropertyUCPresenter SlidingTypePresenter = unityC.Resolve<PP_SlidingTypePropertyUCPresenter>();
             SlidingTypePresenter._unityC = unityC;
             SlidingTypePresenter._panelModel = panelModel;
+            SlidingTypePresenter._mainPresenter = mainPresenter;
 
             return SlidingTypePresenter;
         }

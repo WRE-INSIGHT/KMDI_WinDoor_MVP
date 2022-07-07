@@ -13,6 +13,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -1474,94 +1475,114 @@ namespace PresentationLayer.Presenter.UserControls
                     arwHeadUp_x3 = sashPoint.X + arwStart_x1 + (sashW / 10);
                     arwHeadUp_x4 = sashPoint.X + arwStart_x1 + (sashW / 10);
 
-                    //sliding
-                    PointF sliding1 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF sliding2 = new PointF(arwEnd_x2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    PointF sliding5 = new PointF(arwStart_x1, center_y1);
-                    PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF[] slidingcurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
+                    if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
+                        panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
+                        panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
+                        panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
+                    {
+                        //sliding
+                        PointF sliding1 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF sliding2 = new PointF(arwEnd_x2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF sliding5 = new PointF(arwStart_x1, center_y1);
+                        PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF[] slidingcurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
-                    g.FillPolygon(new SolidBrush(Color.Black), slidingcurvePoints);
+                        g.FillPolygon(new SolidBrush(Color.Black), slidingcurvePoints);
+                    }
+                    else if (panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
+                    {
+                        //paraslide
+                        PointF paraslide1 = new PointF(arwEnd_x2, arwHeadUp_y3);
+                        PointF paraslide2 = new PointF(arwEnd_x2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF paraslide5 = new PointF(arwStart_x1, center_y1);
+                        PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF paraslide8 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF paraslide9 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), arwHeadUp_y3);
 
-                    //paraslide
-                    //PointF paraslide1 = new PointF(arwEnd_x2, arwHeadUp_y3);
-                    //PointF paraslide2 = new PointF(arwEnd_x2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF paraslide5 = new PointF(arwStart_x1, center_y1);
-                    //PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide8 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide9 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), arwHeadUp_y3);
+                        PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
 
-                    //PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
+                        g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                    }
+                    else if (panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
+                    {
+                        //LiftAndSlide
+                        PointF LiftAndSlide1 = new PointF(arwEnd_x2, arwHeadUp_y4);
+                        PointF LiftAndSlide2 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF LiftAndSlide5 = new PointF(arwStart_x1, center_y1);
+                        PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF LiftAndSlide8 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF LiftAndSlide9 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), arwHeadUp_y4);
 
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                        PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
 
-                    //LiftAndSlide
-                    //PointF LiftAndSlide1 = new PointF(arwEnd_x2, arwHeadUp_y4);
-                    //PointF LiftAndSlide2 = new PointF(arwEnd_x2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF LiftAndSlide5 = new PointF(arwStart_x1, center_y1);
-                    //PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide8 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide9 = new PointF(arwEnd_x2 - ((center_y1 + (arwHeadUp_y4 - center_y1) / 2) - (center_y1 - (center_y1 - arwHeadUp_y3) / 2)), arwHeadUp_y4);
-
-                    //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
-
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                        g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                    }
                 }
                 else if (panelModel.Panel_Orient == false)
                 {
                     arwHeadUp_x3 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
                     arwHeadUp_x4 = ((sashPoint.X + sashW) - arwStart_x1) - (sashW / 10);
 
-                    //sliding
-                    PointF sliding1 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF sliding2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    PointF sliding5 = new PointF(arwEnd_x2, center_y1);
-                    PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
+                    if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
+                      panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
+                      panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
+                      panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
+                    {
+                        //sliding
+                        PointF sliding1 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF sliding2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF sliding3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF sliding4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF sliding5 = new PointF(arwEnd_x2, center_y1);
+                        PointF sliding6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF sliding7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
-                    g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
+                        g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
+                    }
+                    else if (panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
+                    {
+                        //paraslide
+                        PointF paraslide1 = new PointF(arwStart_x1, arwHeadUp_y3);
+                        PointF paraslide2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF paraslide5 = new PointF(arwEnd_x2, center_y1);
+                        PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF paraslide8 = new PointF(arwStart_x1 * 2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF paraslide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y3);
 
-                    //paraslide
-                    //PointF paraslide1 = new PointF(arwStart_x1, arwHeadUp_y3);
-                    //PointF paraslide2 = new PointF(arwStart_x1, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF paraslide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF paraslide5 = new PointF(arwEnd_x2, center_y1);
-                    //PointF paraslide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF paraslide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide8 = new PointF(arwStart_x1 * 2, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF paraslide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y3);
+                        PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
 
-                    //PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
+                        g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                    }
+                    else if (panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
+                    {
+                        //LiftAndSlide
+                        PointF LiftAndSlide1 = new PointF(arwStart_x1, arwHeadUp_y4);
+                        PointF LiftAndSlide2 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
+                        PointF LiftAndSlide5 = new PointF(arwEnd_x2, center_y1);
+                        PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
+                        PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
+                        PointF LiftAndSlide8 = new PointF(arwStart_x1 * 2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
+                        PointF LiftAndSlide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y4);
 
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                        PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
 
-                    //LiftAndSlide
-                    //PointF LiftAndSlide1 = new PointF(arwStart_x1, arwHeadUp_y4);
-                    //PointF LiftAndSlide2 = new PointF(arwStart_x1, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide3 = new PointF(arwHeadUp_x4, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide4 = new PointF(arwHeadUp_x4, arwHeadUp_y4);
-                    //PointF LiftAndSlide5 = new PointF(arwEnd_x2, center_y1);
-                    //PointF LiftAndSlide6 = new PointF(arwHeadUp_x3, arwHeadUp_y3);
-                    //PointF LiftAndSlide7 = new PointF(arwHeadUp_x3, center_y1 - (center_y1 - arwHeadUp_y3) / 2);
-                    //PointF LiftAndSlide8 = new PointF(arwStart_x1 * 2, center_y1 + (arwHeadUp_y4 - center_y1) / 2);
-                    //PointF LiftAndSlide9 = new PointF(arwStart_x1 * 2, arwHeadUp_y4);
-
-                    //PointF[] paraslideCurvePoints = { LiftAndSlide1, LiftAndSlide2, LiftAndSlide7, LiftAndSlide4, LiftAndSlide5, LiftAndSlide6, LiftAndSlide3, LiftAndSlide8, LiftAndSlide9 };
-
-                    //g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                        g.FillPolygon(new SolidBrush(Color.Black), paraslideCurvePoints);
+                    }
                 }
             }
             else if (panelModel.Panel_Type == "TiltNTurn Panel")
