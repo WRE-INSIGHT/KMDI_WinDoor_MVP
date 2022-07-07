@@ -61,18 +61,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
-        public bool MPanel_DividerEnabledVisibility
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+      
 
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;

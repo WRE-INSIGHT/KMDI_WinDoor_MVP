@@ -15,9 +15,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event MouseEventHandler casementPanelUCMouseDownEventRaised;
         event MouseEventHandler casementPanelUCMouseUpEventRaised;
         event MouseEventHandler casementPanelUCMouseClickEventRaised;
-        event EventHandler noRightToolStripClickedEventRaised;
-        event EventHandler noLeftToolStripClickedEventRaised;
-        event EventHandler noBothToolStripClickedEventRaised;
-        event EventHandler fullToolStripClickedEventRaised;
+        event EventHandler rightToolStripClickedEventRaised;
+        event EventHandler leftToolStripClickedEventRaised;
+        event EventHandler bothToolStripClickedEventRaised;
+        event EventHandler noneToolStripClickedEventRaised;
     }
 }

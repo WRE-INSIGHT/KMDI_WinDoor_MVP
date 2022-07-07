@@ -618,7 +618,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                    0,
                                                                    handleArtNo,
                                                                    GeorgianBar_ArticleNo._None,
-                                                                   SashType._Full,
+                                                                   OverlapSash._None,
                                                                    0,
                                                                    0,
                                                                    false,

@@ -529,7 +529,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
             bool prevCtrl_isPanel = false;
 
-            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+                if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
             {
                 prevCtrl_isPanel = true;
             }

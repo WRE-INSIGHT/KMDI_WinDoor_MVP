@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.cmenu_casement = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sashTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noLeftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.noBothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overlapSashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_casement.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,55 +43,55 @@
             // 
             this.cmenu_casement.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.sashTypeToolStripMenuItem});
+            this.overlapSashToolStripMenuItem});
             this.cmenu_casement.Name = "cmenu_casement";
-            this.cmenu_casement.Size = new System.Drawing.Size(126, 48);
+            this.cmenu_casement.Size = new System.Drawing.Size(143, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // sashTypeToolStripMenuItem
+            // overlapSashToolStripMenuItem
             // 
-            this.sashTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noRightToolStripMenuItem,
-            this.noLeftToolStripMenuItem,
-            this.noBothToolStripMenuItem,
-            this.fullToolStripMenuItem});
-            this.sashTypeToolStripMenuItem.Name = "sashTypeToolStripMenuItem";
-            this.sashTypeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.sashTypeToolStripMenuItem.Text = "Sash Type";
+            this.overlapSashToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rightToolStripMenuItem,
+            this.leftToolStripMenuItem,
+            this.bothToolStripMenuItem,
+            this.noneToolStripMenuItem});
+            this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
-            // noRightToolStripMenuItem
+            // rightToolStripMenuItem
             // 
-            this.noRightToolStripMenuItem.Name = "noRightToolStripMenuItem";
-            this.noRightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.noRightToolStripMenuItem.Text = "No Right";
-            this.noRightToolStripMenuItem.Click += new System.EventHandler(this.noRightToolStripMenuItem_Click);
+            this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Text = "Right";
+            this.rightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
-            // noLeftToolStripMenuItem
+            // leftToolStripMenuItem
             // 
-            this.noLeftToolStripMenuItem.Name = "noLeftToolStripMenuItem";
-            this.noLeftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.noLeftToolStripMenuItem.Text = "No Left";
-            this.noLeftToolStripMenuItem.Click += new System.EventHandler(this.noLeftToolStripMenuItem_Click);
+            this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Text = "Left";
+            this.leftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
-            // noBothToolStripMenuItem
+            // bothToolStripMenuItem
             // 
-            this.noBothToolStripMenuItem.Name = "noBothToolStripMenuItem";
-            this.noBothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.noBothToolStripMenuItem.Text = "No Both";
-            this.noBothToolStripMenuItem.Click += new System.EventHandler(this.noBothToolStripMenuItem_Click);
+            this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
+            this.bothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bothToolStripMenuItem.Text = "Both";
+            this.bothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
-            // fullToolStripMenuItem
+            // noneToolStripMenuItem
             // 
-            this.fullToolStripMenuItem.Name = "fullToolStripMenuItem";
-            this.fullToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fullToolStripMenuItem.Text = "Full";
-            this.fullToolStripMenuItem.Click += new System.EventHandler(this.fullToolStripMenuItem_Click);
+            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Text = "None";
+            this.noneToolStripMenuItem.Click += new System.EventHandler(this.NoneToolStripMenuItem_Click);
             // 
             // CasementPanelUC
             // 
@@ -117,10 +117,10 @@
 
         private System.Windows.Forms.ContextMenuStrip cmenu_casement;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sashTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noRightToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noLeftToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem noBothToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fullToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem overlapSashToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bothToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
     }
 }

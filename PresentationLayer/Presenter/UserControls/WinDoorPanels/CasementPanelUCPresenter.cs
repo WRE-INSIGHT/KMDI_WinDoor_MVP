@@ -82,35 +82,35 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _casementUC.casementPanelUCMouseDownEventRaised += _casementUC_casementPanelUCMouseDownEventRaised;
             _casementUC.casementPanelUCMouseMoveEventRaised += _casementUC_casementPanelUCMouseMoveEventRaised;
             _casementUC.casementPanelUCMouseUpEventRaised += _casementUC_casementPanelUCMouseUpEventRaised;
-            _casementUC.noBothToolStripClickedEventRaised += _casementUC_noBothToolStripClickedEventRaised;
-            _casementUC.noLeftToolStripClickedEventRaised += _casementUC_noLeftToolStripClickedEventRaised;
-            _casementUC.noRightToolStripClickedEventRaised += _casementUC_noRightToolStripClickedEventRaised;
-            _casementUC.fullToolStripClickedEventRaised += _casementUC_fullToolStripClickedEventRaised;
+            _casementUC.bothToolStripClickedEventRaised += _casementUC_BothToolStripClickedEventRaised;
+            _casementUC.leftToolStripClickedEventRaised += _casementUC_LeftToolStripClickedEventRaised;
+            _casementUC.rightToolStripClickedEventRaised += _casementUC_RightToolStripClickedEventRaised;
+            _casementUC.noneToolStripClickedEventRaised += _casementUC_NoneToolStripClickedEventRaised;
             _tmr.Tick += _tmr_Tick;
         }
-        private void _casementUC_fullToolStripClickedEventRaised(object sender, EventArgs e)
+        private void _casementUC_NoneToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Sash_Type = SashType._Full;
+            _panelModel.Panel_Overlap_Sash = OverlapSash._None;
             ((IPanelUC)_casementUC).InvalidateThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
 
-        private void _casementUC_noRightToolStripClickedEventRaised(object sender, EventArgs e)
+        private void _casementUC_RightToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Sash_Type = SashType._noRight;
+            _panelModel.Panel_Overlap_Sash = OverlapSash._Right;
             ((IPanelUC)_casementUC).InvalidateThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
-        private void _casementUC_noLeftToolStripClickedEventRaised(object sender, EventArgs e)
+        private void _casementUC_LeftToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Sash_Type = SashType._noLeft;
+            _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
             ((IPanelUC)_casementUC).InvalidateThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
-        private void _casementUC_noBothToolStripClickedEventRaised(object sender, EventArgs e)
+        private void _casementUC_BothToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Sash_Type = SashType._noBoth;
+            _panelModel.Panel_Overlap_Sash = OverlapSash._Both;
             ((IPanelUC)_casementUC).InvalidateThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
@@ -717,7 +717,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                            casement.ClientRectangle.Height - w));
 
             Color col = Color.Black;
-            if (_panelModel.Panel_Sash_Type == SashType._noRight)
+            if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
             {
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
                                                            outer_line,
@@ -729,7 +729,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
             }
 
-            else if (_panelModel.Panel_Sash_Type == SashType._noLeft)
+            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
             {
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
                                                           outer_line,
@@ -740,7 +740,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
             }
-            else if (_panelModel.Panel_Sash_Type == SashType._noBoth)
+            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
             {
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
                                                          outer_line,
@@ -751,7 +751,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           (casement.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
                                                           (casement.ClientRectangle.Height - (inner_line * 2)) - w));
             }
-            else if (_panelModel.Panel_Sash_Type == SashType._Full)
+            else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
                                                          outer_line,

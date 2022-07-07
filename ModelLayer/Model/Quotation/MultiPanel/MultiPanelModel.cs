@@ -522,21 +522,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelDividerEnabled = value;
             }
         }
-        private bool _mpanelDividerEnabledVisibility;
-        public bool MPanel_DividerEnabledVisibility
-        {
-            get
-            {
-                return _mpanelDividerEnabledVisibility;
-            }
-
-            set
-            {
-                _mpanelDividerEnabledVisibility = value;
-                NotifyPropertyChanged();
-            }
-
-        }
+      
         private float _mpanelZoom;
         public float MPanel_Zoom
         {
@@ -3320,7 +3306,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelLst_Imagers = mpanelLstImagers;
             MPanel_ParentModel = mpanelParentModel;
             MPanel_DividerEnabled = true;
-            MPanel_DividerEnabledVisibility = true;
             MPanelImageRenderer_Zoom = mpanelImageRendererZoom;
             MPanel_Zoom = mpanelZoom;
             MPanel_FrameModelParent = mpanelFrameModelParent;

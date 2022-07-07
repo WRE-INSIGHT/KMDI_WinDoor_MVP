@@ -16,9 +16,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event MouseEventHandler fixedPanelUCMouseDownEventRaised;
         event MouseEventHandler fixedPanelUCMouseUpEventRaised;
         int PanelGlass_ID { get; set; }
-        event EventHandler noRightToolStripClickedEventRaised;
-        event EventHandler noLeftToolStripClickedEventRaised;
-        event EventHandler noBothToolStripClickedEventRaised;
-        event EventHandler fullToolStripClickedEventRaised;
+        event EventHandler rightToolStripClickedEventRaised;
+        event EventHandler leftToolStripClickedEventRaised;
+        event EventHandler bothToolStripClickedEventRaised;
+        event EventHandler noneToolStripClickedEventRaised;
     }
 }

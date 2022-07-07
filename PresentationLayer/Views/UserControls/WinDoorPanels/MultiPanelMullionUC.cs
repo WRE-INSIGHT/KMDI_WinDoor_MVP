@@ -59,19 +59,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                 _mpanelCmenuDeleteVisibility = value;
             }
         }
-        private bool _mpanelDividerEnabledVisibility;
-        public bool MPanel_DividerEnabledVisibility
-        {
-            get
-            {
-                return _mpanelDividerEnabledVisibility;
-            }
-
-            set
-            {
-                _mpanelDividerEnabledVisibility = value;
-            }
-        }
+       
 
         public event PaintEventHandler flpMulltiPaintEventRaised;
         public event EventHandler flpMultiMouseEnterEventRaised;
@@ -98,7 +86,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Visibility"]);
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
             this.DataBindings.Add(ModelBinding["MPanel_CmenuDeleteVisibility"]);
-            cmenu_mulltiP.DataBindings.Add(ModelBinding["MPanel_DividerEnabledVisibility"]);
         }
 
         private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)

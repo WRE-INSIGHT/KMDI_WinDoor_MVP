@@ -723,14 +723,14 @@ namespace EnumerationTypeLayer
 
             private SlidingTypes(int value, string displayName) : base(value, displayName) { }
         }
-        public class SashType : Enumeration<SashType, int>
+        public class OverlapSash : Enumeration<OverlapSash, int>
         {
-            public static readonly SashType _noLeft = new SashType(0, "No Left");
-            public static readonly SashType _noRight = new SashType(1, "No Right");
-            public static readonly SashType _noBoth = new SashType(2, "No Both");
-            public static readonly SashType _Full = new SashType(3, "Full");
+            public static readonly OverlapSash _Left = new OverlapSash(0, "Left");
+            public static readonly OverlapSash _Right = new OverlapSash(1, "Right");
+            public static readonly OverlapSash _Both = new OverlapSash(2, "Both");
+            public static readonly OverlapSash _None = new OverlapSash(3, "None");
 
-            private SashType(int value, string displayName) : base(value, displayName) { }
+            private OverlapSash(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

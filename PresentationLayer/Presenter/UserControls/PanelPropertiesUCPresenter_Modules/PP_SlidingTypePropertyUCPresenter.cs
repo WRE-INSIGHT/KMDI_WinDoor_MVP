@@ -30,7 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             ComboBox cmbSlidingType = (ComboBox)sender;
             _panelModel.Panel_SlidingTypes = (SlidingTypes)cmbSlidingType.SelectedValue;
-            }
+        }
 
         private void _slidingTypePropertyUC_PPSlidingTypePropertyUCLoadEventRaised(object sender, System.EventArgs e)
         {

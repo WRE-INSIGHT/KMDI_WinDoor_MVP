@@ -86,10 +86,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event MouseEventHandler casementPanelUCMouseMoveEventRaised;
         public event MouseEventHandler casementPanelUCMouseDownEventRaised;
         public event MouseEventHandler casementPanelUCMouseUpEventRaised;
-        public event EventHandler noRightToolStripClickedEventRaised;
-        public event EventHandler noLeftToolStripClickedEventRaised;
-        public event EventHandler noBothToolStripClickedEventRaised;
-        public event EventHandler fullToolStripClickedEventRaised;
+        public event EventHandler rightToolStripClickedEventRaised;
+        public event EventHandler leftToolStripClickedEventRaised;
+        public event EventHandler bothToolStripClickedEventRaised;
+        public event EventHandler noneToolStripClickedEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -148,24 +148,24 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseEvent(sender, deleteToolStripClickedEventRaised, e);
         }
 
-        private void noRightToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noRightToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, rightToolStripClickedEventRaised, e);
         }
 
-        private void noLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LeftToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noLeftToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, leftToolStripClickedEventRaised, e);
         }
 
-        private void noBothToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BothToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noBothToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, bothToolStripClickedEventRaised, e);
         }
 
-        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, fullToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, noneToolStripClickedEventRaised, e);
         }
 
         private void CasementPanelUC_MouseUp(object sender, MouseEventArgs e)

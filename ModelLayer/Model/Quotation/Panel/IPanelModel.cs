@@ -43,7 +43,7 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_Index_Inside_MPanel { get; set; }
         int Panel_Index_Inside_SPanel { get; set; }
         string Panel_Placement { get; set; }
-        SashType Panel_Sash_Type { get; set; }
+        OverlapSash Panel_Overlap_Sash { get; set; }
         Padding Panel_Margin { get; set; }
         Padding Panel_MarginToBind { get; set; }
         Padding PanelImageRenderer_Margin { get; set; }

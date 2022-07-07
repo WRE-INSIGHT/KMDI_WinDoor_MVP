@@ -49,16 +49,16 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        private SashType _panelSashType;
-        public SashType Panel_Sash_Type
+        private OverlapSash _panelOverlapSash;
+        public OverlapSash Panel_Overlap_Sash
         {
             get
             {
-                return _panelSashType;
+                return _panelOverlapSash;
             }
             set
             {
-                _panelSashType = value;
+                _panelOverlapSash = value;
             }
         }
         private DockStyle _panelDock;
@@ -6600,7 +6600,7 @@ namespace ModelLayer.Model.Quotation.Panel
                           int panelExtRight2Qty,
                           Rotoswing_HandleArtNo panelRotoswingArtNo,
                           GeorgianBar_ArticleNo panelGeorgianBarArtNo,
-                          SashType panelSashType,
+                          OverlapSash panelOverlapSash,
                           int panelGeorgianBarVerticalQty,
                           int panelGeorgianBarHorizontalQty,
                           bool panelGeorgianBarOptionVisibility,
@@ -6669,7 +6669,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtRight2Qty = panelExtRight2Qty;
             Panel_RotoswingArtNo = panelRotoswingArtNo;
             Panel_GeorgianBarArtNo = panelGeorgianBarArtNo;
-            Panel_Sash_Type = panelSashType;
+            Panel_Overlap_Sash = panelOverlapSash;
             Panel_GeorgianBar_VerticalQty = panelGeorgianBarVerticalQty;
             Panel_GeorgianBar_HorizontalQty = panelGeorgianBarHorizontalQty;
             Panel_GeorgianBarOptionVisibility = panelGeorgianBarOptionVisibility;

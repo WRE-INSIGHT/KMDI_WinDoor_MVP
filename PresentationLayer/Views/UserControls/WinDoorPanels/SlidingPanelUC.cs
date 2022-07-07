@@ -91,10 +91,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event MouseEventHandler slidingPanelUCMouseMoveEventRaised;
         public event MouseEventHandler slidingPanelUCMouseDownEventRaised;
         public event MouseEventHandler slidingPanelUCMouseUpEventRaised;
-        public event EventHandler noRightToolStripClickedEventRaised;
-        public event EventHandler noLeftToolStripClickedEventRaised;
-        public event EventHandler noBothToolStripClickedEventRaised;
-        public event EventHandler fullToolStripClickedEventRaised;
+        public event EventHandler rightToolStripClickedEventRaised;
+        public event EventHandler leftToolStripClickedEventRaised;
+        public event EventHandler bothToolStripClickedEventRaised;
+        public event EventHandler noneToolStripClickedEventRaised;
+        public event MouseEventHandler slidingPanelUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -136,6 +137,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             {
                 cmenu_sliding.Show(new Point(MousePosition.X, MousePosition.Y));
             }
+            EventHelpers.RaiseMouseEvent(sender, slidingPanelUCMouseClickEventRaised, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,24 +150,24 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.Invalidate();
         }
 
-        private void noRightToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noRightToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, rightToolStripClickedEventRaised, e);
         }
 
-        private void noLeftToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LeftToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noLeftToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, leftToolStripClickedEventRaised, e);
         }
 
-        private void noBothToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BothToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, noBothToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, bothToolStripClickedEventRaised, e);
         }
 
-        private void fullToolStripMenuItem_Click(object sender, EventArgs e)
+        private void noneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, fullToolStripClickedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, noneToolStripClickedEventRaised, e);
         }
 
         private void SlidingPanelUC_MouseDown(object sender, MouseEventArgs e)

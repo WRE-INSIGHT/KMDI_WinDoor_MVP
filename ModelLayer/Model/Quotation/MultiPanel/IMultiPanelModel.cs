@@ -29,7 +29,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         string MPanel_Placement { get; set; }
         IMultiPanelModel MPanel_ParentModel { get; set; }
         bool MPanel_DividerEnabled { get; set; }
-        bool MPanel_DividerEnabledVisibility { get; set; }
         float MPanelImageRenderer_Zoom { get; set; }
         Control MPanel_Parent { get; set; }
         UserControl MPanel_FrameGroup { get; set; }
