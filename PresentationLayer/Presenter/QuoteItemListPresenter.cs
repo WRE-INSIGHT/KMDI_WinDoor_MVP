@@ -42,9 +42,7 @@ namespace PresentationLayer.Presenter
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0,
-            CostingPoints = 0,
-            CostPerPoints = 60,
-            LaborCost = 0;
+            CostPerPoints = 60;
 
         string FrameTypeDesc,
                AllItemDescription,
@@ -67,7 +65,12 @@ namespace PresentationLayer.Presenter
                 SashReinPrice,
                 GbPrice,
                 FramePerimeter,
-                SashPerimeter;
+                SashPerimeter,
+                ProfileColorPoints = 13,
+                CostingPoints = 0,
+                InstallationPoints = 0,
+                LaborCost = 0,
+                InstallationCost = 0;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -130,16 +133,16 @@ namespace PresentationLayer.Presenter
 
                 wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
                 LaborCost = CostingPoints * CostPerPoints;
+                InstallationCost = InstallationPoints * CostPerPoints;
 
-
-                string costingPointsDesc = "\n\nTotal Points: " + CostingPoints,
-                       laborCostDesc = "\n\nLabor Cost: " + LaborCost,
-                       FramePriceDesc = "\n\nFrame Price per linear meter: " + FramePrice,
-                       FrameReinPriceDesc = "\n\nFrame Rein Price per linear meter: " + FrameReinPrice,
-                       SashPriceDesc = "\n\nSash Price per linear meter: " + SashPrice,
-                       SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + SashReinPrice,
-                       GBPriceDesc = "\n\nGB Price per linear meter: " + GbPrice;
-
+                string costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2),
+                       laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2),
+                       FramePriceDesc = "\n\nFrame Price per linear meter: " + Math.Round(FramePrice, 2),
+                       FrameReinPriceDesc = "\n\nFrame Rein Price per linear meter: " + Math.Round(FrameReinPrice, 2),
+                       SashPriceDesc = "\n\nSash Price per linear meter: " + Math.Round(SashPrice, 2),
+                       SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + Math.Round(SashReinPrice, 2),
+                       GBPriceDesc = "\n\nGB Price per linear meter: " + Math.Round(GbPrice, 2),
+                       InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
@@ -147,6 +150,7 @@ namespace PresentationLayer.Presenter
                                                                           + wdm.WD_description
                                                                           + costingPointsDesc
                                                                           + laborCostDesc
+                                                                          + InstallationCostDesc
                                                                           + FramePriceDesc
                                                                           + FrameReinPriceDesc
                                                                           + SashPriceDesc
@@ -525,7 +529,7 @@ namespace PresentationLayer.Presenter
         public void ItemCostingPoints()
         {
 
-            int ProfileColorPoints = 13;
+
 
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
@@ -552,6 +556,7 @@ namespace PresentationLayer.Presenter
                         }
 
                         CostingPoints += ProfileColorPoints * 4;
+                        InstallationPoints += (ProfileColorPoints / 3) * 4;
                     }
                     else
                     {
@@ -574,6 +579,7 @@ namespace PresentationLayer.Presenter
                         }
 
                         CostingPoints += ProfileColorPoints * 4;
+                        InstallationPoints += (ProfileColorPoints / 3) * 4;
                     }
                     #endregion
 
@@ -592,6 +598,7 @@ namespace PresentationLayer.Presenter
                             foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                             {
                                 CostingPoints -= 2;
+                                InstallationPoints -= 2;
                             }
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
@@ -604,6 +611,7 @@ namespace PresentationLayer.Presenter
                                     #endregion
 
                                     CostingPoints += ProfileColorPoints * 4;
+                                    InstallationPoints += (ProfileColorPoints / 3) * 4;
                                 }
                                 if (pnl.Panel_ChkText == "dsash")
                                 {
@@ -614,6 +622,7 @@ namespace PresentationLayer.Presenter
                                     #endregion
 
                                     CostingPoints += ProfileColorPoints * 4;
+                                    InstallationPoints += (ProfileColorPoints / 3) * 4;
                                 }
                             }
                         }
@@ -632,6 +641,7 @@ namespace PresentationLayer.Presenter
                             #endregion
 
                             CostingPoints += ProfileColorPoints * 4;
+                            InstallationPoints += (ProfileColorPoints / 3) * 4;
                         }
                     }
                 }

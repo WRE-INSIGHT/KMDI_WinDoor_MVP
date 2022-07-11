@@ -203,16 +203,14 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
-                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) &&
-                    _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
+                if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && _panelModel.Panel_Type.Contains("Sliding") == false &&
+                     _panelModel.Panel_HingeOptions == HingeOption._FrictionStay)
                 {
                     _panelModel.Panel_MiddleCloserVisibility = true;
 
-                    if (!_panelModel.Panel_Type.Contains("Sliding"))
-                    {
-                        _panelModel.AdjustPropertyPanelHeight("addMC");
-                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
-                    }
+                    _panelModel.AdjustPropertyPanelHeight("addMC");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
@@ -237,7 +235,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn"))
+                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn") || _panelModel.Panel_Type.Contains("Sliding"))
                         {
                             _panelModel.AdjustPropertyPanelHeight("addSash");
 
@@ -255,7 +253,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (_panelModel.Panel_ParentFrameModel != null && _panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn"))
+                        if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn") || _panelModel.Panel_Type.Contains("Sliding"))
                         {
                             _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
                             _panelModel.AdjustPropertyPanelHeight("addHandle");
@@ -275,7 +273,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_panelModel.Panel_Type.Contains("Sliding"))
                 {
-                    IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel,_mainPresenter);
+                    IPP_SlidingTypePropertyUCPresenter slidingTypePresenter = _pp_slidingTypePropertyUCP.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl slidingTypeUCPresenter = (UserControl)slidingTypePresenter.GetSlidingTypePropertyUC();
                     _pnlPanelSpecs.Controls.Add(slidingTypeUCPresenter);
                     slidingTypeUCPresenter.Dock = DockStyle.Top;
@@ -360,42 +358,43 @@ namespace PresentationLayer.Presenter.UserControls
                     _pnlPanelSpecs.Controls.Add(hingeProp);
                     hingeProp.Dock = DockStyle.Top;
                     hingeProp.BringToFront();
+
+
+                    IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(_2dhingeProp);
+                    _2dhingeProp.Dock = DockStyle.Top;
+                    _2dhingeProp.BringToFront();
+
+                    IPP_CenterHingePropertyUCPresenter centerHingePropUCP = _pp_centerHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
+                    UserControl centerHingeProp = (UserControl)centerHingePropUCP.GetCenterHingePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(centerHingeProp);
+                    centerHingeProp.Dock = DockStyle.Top;
+                    centerHingeProp.BringToFront();
+
+                    IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
+                    UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
+                    ntcenterHingeProp.Dock = DockStyle.Top;
+                    ntcenterHingeProp.BringToFront();
+
                 }
-
-                IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
-                _pnlPanelSpecs.Controls.Add(_2dhingeProp);
-                _2dhingeProp.Dock = DockStyle.Top;
-                _2dhingeProp.BringToFront();
-
-                IPP_CenterHingePropertyUCPresenter centerHingePropUCP = _pp_centerHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
-                UserControl centerHingeProp = (UserControl)centerHingePropUCP.GetCenterHingePropertyUC();
-                _pnlPanelSpecs.Controls.Add(centerHingeProp);
-                centerHingeProp.Dock = DockStyle.Top;
-                centerHingeProp.BringToFront();
-
-                IPP_NTCenterHingePropertyUCPresenter ntcenterHingePropUCP = _pp_ntCenterHingePropertyUCPresenter.GetNewInstance(_panelModel, _unityC);
-                UserControl ntcenterHingeProp = (UserControl)ntcenterHingePropUCP.GetNTCenterHingePropertyUC();
-                _pnlPanelSpecs.Controls.Add(ntcenterHingeProp);
-                ntcenterHingeProp.Dock = DockStyle.Top;
-                ntcenterHingeProp.BringToFront();
-
                 if (_panelModel.Panel_SashPropertyVisibility == true)
                 {
-                    if (_panelModel.Panel_Type.Contains("Sliding"))
-                    {
-                        _panelModel.Panel_MotorizedOptionVisibility = true;
-                    }
+                    //if (_panelModel.Panel_Type.Contains("Sliding"))
+                    //{
+                    //    _panelModel.Panel_MotorizedOptionVisibility = true;
+                    //}
                     IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
                     _pnlPanelSpecs.Controls.Add(motorized);
                     motorized.Dock = DockStyle.Top;
                     motorized.BringToFront();
-                    if (_panelModel.Panel_Type.Contains("Sliding"))
-                    {
-                        _panelModel.Panel_MotorizedOptionVisibility = false;
-                    }
-                   
+                    //if (_panelModel.Panel_Type.Contains("Sliding"))
+                    //{
+                    //    _panelModel.Panel_MotorizedOptionVisibility = false;
+                    //}
+
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
                     _pnlPanelSpecs.Controls.Add(handle);
@@ -409,27 +408,31 @@ namespace PresentationLayer.Presenter.UserControls
                         _pnlPanelSpecs.Controls.Add(mc);
                         mc.Dock = DockStyle.Top;
                         mc.BringToFront();
+
+
+                        IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                        UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();
+                        _pnlPanelSpecs.Controls.Add(_3dprop);
+                        _3dprop.Dock = DockStyle.Top;
+                        _3dprop.BringToFront();
+
+
+
+                        IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                        UserControl cdPropUC = (UserControl)cdPropUCP.GetPPCornerDriveUC();
+                        _pnlPanelSpecs.Controls.Add(cdPropUC);
+                        cdPropUC.Dock = DockStyle.Top;
+                        cdPropUC.BringToFront();
+
+
+                        IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                        UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
+                        _pnlPanelSpecs.Controls.Add(extPropUC);
+                        extPropUC.Dock = DockStyle.Top;
+                        extPropUC.BringToFront();
                     }
 
-                    IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                    UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();
-                    _pnlPanelSpecs.Controls.Add(_3dprop);
-                    _3dprop.Dock = DockStyle.Top;
-                    _3dprop.BringToFront();
                 }
-
-                IPP_CornerDrivePropertyUCPresenter cdPropUCP = _pp_cornerDrivePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                UserControl cdPropUC = (UserControl)cdPropUCP.GetPPCornerDriveUC();
-                _pnlPanelSpecs.Controls.Add(cdPropUC);
-                cdPropUC.Dock = DockStyle.Top;
-                cdPropUC.BringToFront();
-
-
-                IPP_ExtensionPropertyUCPresenter extPropUCP = _pp_extensionPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
-                UserControl extPropUC = (UserControl)extPropUCP.GetPPExtensionUC();
-                _pnlPanelSpecs.Controls.Add(extPropUC);
-                extPropUC.Dock = DockStyle.Top;
-                extPropUC.BringToFront();
 
                 if (_panelModel.Panel_Type.Contains("Casement"))
                 {
@@ -453,7 +456,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-               
+
 
                 if (_panelModel.Panel_Type.Contains("Louver") == false)
                 {
