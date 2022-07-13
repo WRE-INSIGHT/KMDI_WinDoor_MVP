@@ -2638,7 +2638,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     else
                     {
                         
-                        double asd = (double)((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - Math.Truncate((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel);
+                        double asd = (double)((double)((Panel_Width * Panel_ParentMultiPanelModel.MPanel_Zoom) - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - Math.Truncate((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel);
                         if(asd > 0.5)
                         {
                             pnl_wd = (int)Math.Round((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
@@ -2652,7 +2652,34 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             pnl_wd = (int)Math.Round((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
                         }
-                       
+                        if (Panel_Overlap_Sash == OverlapSash._Right || Panel_Overlap_Sash == OverlapSash._Left)
+                        {
+                            int sashWidth = 0;
+                            if (Panel_ParentMultiPanelModel.MPanel_Zoom == 0.17f || Panel_ParentMultiPanelModel.MPanel_Zoom == 0.26f ||
+                                Panel_ParentMultiPanelModel.MPanel_Zoom == 0.13f || Panel_ParentMultiPanelModel.MPanel_Zoom == 0.10f)
+                            {
+                                sashWidth = 10;
+                            }
+                            else
+                            {
+                                sashWidth = 16;
+                            }
+                            Panel_WidthToBind += sashWidth;
+                            //int sashDiv = sashWidth / (Panel_ParentMultiPanelModel.MPanel_Divisions);
+                            //foreach (IPanelModel pnl in Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                            //{
+                            //    if (Panel_Name != pnl.Panel_Name)
+                            //    {
+                            //        pnl.Panel_WidthToBind += sashDiv;
+                            //        pnl.Panel_Width += sashDiv;
+                            //    }
+                            //    else
+                            //    {
+                            //        pnl.Panel_WidthToBind -= sashWidth;
+                            //        pnl.Panel_Width -= sashWidth;
+                            //    }
+                            //}
+                        }
                         Console.WriteLine(pnl_wd);
                       
                     }

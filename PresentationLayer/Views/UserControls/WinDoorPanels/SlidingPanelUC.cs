@@ -138,6 +138,9 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                 cmenu_sliding.Show(new Point(MousePosition.X, MousePosition.Y));
             }
             EventHelpers.RaiseMouseEvent(sender, slidingPanelUCMouseClickEventRaised, e);
+            Console.WriteLine(this.Width);
+            Console.WriteLine(this.Parent.Width);
+            Console.WriteLine();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

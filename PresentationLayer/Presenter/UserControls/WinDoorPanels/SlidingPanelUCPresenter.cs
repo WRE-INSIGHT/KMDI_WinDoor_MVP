@@ -104,9 +104,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
         private void _slidingPanelUC_RightToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            if (_panelModel.Panel_Overlap_Sash != OverlapSash._Right)
+            if (_panelModel.Panel_Overlap_Sash != OverlapSash._Right && _panelModel.Panel_Overlap_Sash != OverlapSash._Left)
             {
-                _panelModel.Panel_Overlap_Sash = OverlapSash._Right;
                 int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
                 //Get Panel from left side of Mullion
                 Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
@@ -117,7 +116,59 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
                 }
                 IPanelModel pres_pnl = null;
-                int add = 16 / (_multiPanelModel.MPanel_Divisions );
+
+                int sashWidth = 0;
+                if (_multiPanelModel.MPanel_Zoom == 0.17f || _multiPanelModel.MPanel_Zoom == 0.26f ||
+                    _multiPanelModel.MPanel_Zoom == 0.13f || _multiPanelModel.MPanel_Zoom == 0.10f)
+                {
+                    sashWidth = 10;
+                }else
+                {
+                    sashWidth = 16;
+                }
+
+                int sashDiv = sashWidth / (_multiPanelModel.MPanel_Divisions );
+                //Get the expected Panel w
+                if (pres_ctrl is IPanelUC)
+                {
+                    pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                }
+                if (pres_ctrl is IPanelUC)
+                {
+                    pres_pnl.Panel_WidthToBind -= sashWidth;
+                    pres_pnl.Panel_Width -= sashWidth;
+
+                }
+                foreach (IPanelModel ctrl in _multiPanelModel.MPanelLst_Panel)
+                {
+                    if (pres_ctrl.Name != ctrl.Panel_Name)
+                    {
+                        ctrl.Panel_WidthToBind += sashDiv;
+                        ctrl.Panel_Width += sashDiv;
+                    }
+
+                }
+            }
+            _panelModel.Panel_Overlap_Sash = OverlapSash._Right;
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+            ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+        }
+        private void _slidingPanelUC_LeftToolStripClickedEventRaised(object sender, EventArgs e)
+        {
+            if (_panelModel.Panel_Overlap_Sash != OverlapSash._Right && _panelModel.Panel_Overlap_Sash != OverlapSash._Left)
+            {
+                int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
+                //Get Panel from left side of Mullion
+                Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+
+                if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                {
+                    //Get Panel from right side of Mullion
+                    pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                }
+                IPanelModel pres_pnl = null;
+                int add = 16 / (_multiPanelModel.MPanel_Divisions);
                 //Get the expected Panel w
                 if (pres_ctrl is IPanelUC)
                 {
@@ -138,14 +189,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
 
                 }
-                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                ((IPanelUC)_slidingPanelUC).InvalidateThis();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
-        }
-        private void _slidingPanelUC_LeftToolStripClickedEventRaised(object sender, EventArgs e)
-        {
             _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             ((IPanelUC)_slidingPanelUC).InvalidateThis();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
@@ -444,7 +490,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int outer_line = 10,
                 inner_line = 15;
-
+            float ArrowExpectedWidth = 0
+                    , ArrowExpectedHeight = 0
+                    , arrowStartingX = 0
+                    , arrowStartingY = 0;
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
             if (ndx_zoomPercentage == 2)
@@ -479,6 +528,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                arrowStartingX += (inner_line/2);
             }
 
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
@@ -491,6 +541,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                arrowStartingX -= (inner_line / 2);
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
             {
@@ -533,7 +584,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             //        ArrowExpectedWidth = (float)(sashH * 0.5) ;
             //        ArrowExpectedHeight = (float)(sashH * 0.3);
-            //        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+            //        arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
             //        arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
             //        g.FillRectangle(new SolidBrush(Color.Black), arrowStartingX, arrowStartingY, ArrowExpectedWidth, ArrowExpectedHeight);
             //        float arwStart_x1 = sashPoint.X + (sashW / 20),
@@ -571,10 +622,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             
             if (_panelModel.Panel_Orient == false)
             {
-                float ArrowExpectedWidth = 0
-                    , ArrowExpectedHeight = 0
-                    , arrowStartingX = 0
-                    , arrowStartingY = 0;
+                
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
@@ -595,7 +643,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF sliding1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF sliding2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -624,7 +672,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         ArrowExpectedHeight = (float)(sashW * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF paraslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                     PointF paraslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -655,7 +703,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         ArrowExpectedHeight = (float)(sashW * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF liftandslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
@@ -672,10 +720,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Orient == true)
             {
-                float ArrowExpectedWidth = 0
-                    , ArrowExpectedHeight = 0
-                    , arrowStartingX = 0
-                    , arrowStartingY = 0;
+                
 
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -697,7 +742,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
 
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF sliding1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF sliding2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -726,7 +771,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         ArrowExpectedHeight = (float)(sashW * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF paraslide1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                     PointF paraslide2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -757,7 +802,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         ArrowExpectedHeight = (float)(sashW * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF liftandslide1 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide2 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
