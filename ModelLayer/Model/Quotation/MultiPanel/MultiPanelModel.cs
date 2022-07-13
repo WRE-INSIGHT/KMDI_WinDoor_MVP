@@ -1562,6 +1562,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void SetZoomPanels()
         {
+           
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
@@ -1577,8 +1578,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
-        }
+            Console.WriteLine();
 
+        }
         public void SetZoomMPanels()
         {
             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)

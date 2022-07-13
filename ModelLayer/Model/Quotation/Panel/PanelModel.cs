@@ -2505,7 +2505,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
             Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
         }
-
+        int count = 0;
         public void SetDimensionImagerToBind_using_BaseDimension()
         {
             PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * PanelImageRenderer_Zoom);
@@ -2629,13 +2629,33 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
                     div_movement = Panel_OriginalDisplayWidth - Panel_DisplayWidth;
-
                     decimal divMove_convert_dec = Convert.ToDecimal(div_movement * Panel_Zoom);
                     decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
+                    if(Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                        pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                    else
+                    {
+                        
+                        double asd = (double)((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - Math.Truncate((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel);
+                        if(asd > 0.5)
+                        {
+                            pnl_wd = (int)Math.Round((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
 
-                    pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
+                        }
+                        else if ((asd * totalpanel_inside_parentMpanel) > 0.5)
+                        {
+                            pnl_wd = (int)Math.Round((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int + 1;
+                        }
+                        else
+                        {
+                            pnl_wd = (int)Math.Round((double)(parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
+                        }
+                       
+                        Console.WriteLine(pnl_wd);
+                      
+                    }
                     pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
