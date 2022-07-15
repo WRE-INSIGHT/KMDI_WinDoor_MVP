@@ -451,6 +451,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else
                     {
+                        double suggest_WdWithDecimal = 0;
                         int suggest_Wd = 0,
                             suggest_HT = _multiPanelModel.MPanel_Height - 20,
                             suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
@@ -506,6 +507,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
                             suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
+                            suggest_WdWithDecimal = (double)((double)_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
                         }
 
                         if (_multiPanelModel.MPanel_ParentModel != null)
@@ -565,6 +567,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         IPanelModel _panelModel = _panelServices.AddPanelModel(suggest_Wd,
+                                                                               suggest_WdWithDecimal,
                                                                                suggest_HT,
                                                                                fpnl,
                                                                                (UserControl)_frameUCP.GetFrameUC(),

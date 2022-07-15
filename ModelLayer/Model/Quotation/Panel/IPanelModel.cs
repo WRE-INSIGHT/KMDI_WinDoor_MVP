@@ -31,6 +31,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_OrientVisibility { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
+        double Panel_WidthWithDecimal { get; set; }
         int Panel_OriginalWidth { get; set; }
         int PanelImageRenderer_Width { get; set; }
         int Panel_WidthToBind { get; set; }

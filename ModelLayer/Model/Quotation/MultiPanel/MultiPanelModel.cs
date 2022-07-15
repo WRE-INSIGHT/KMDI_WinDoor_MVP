@@ -1562,7 +1562,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void SetZoomPanels()
         {
-           
+            double allDecimal = 0;
+            int mpnlOriginalWidth = 0;
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
@@ -1570,16 +1571,67 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
                     pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                   
+                    pnl.SetPanelMargin_using_ZoomPercentage();
+                    pnl.SetPanelMarginImager_using_ImageZoomPercentage();
+                    if (MPanel_DividerEnabled)
+                    {
+                        mpnlOriginalWidth = MPanel_Width - 20;
+                        allDecimal += ((MPanel_WidthToBind - 10) * ((double)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                    }
                 }
                 else
                 {
                     pnl.SetDimensionToBind_using_BaseDimension();
-                }
-                pnl.SetPanelMargin_using_ZoomPercentage();
-                pnl.SetPanelMarginImager_using_ImageZoomPercentage();
-            }
-            Console.WriteLine();
 
+                    pnl.SetPanelMargin_using_ZoomPercentage();
+
+                    pnl.SetPanelMarginImager_using_ImageZoomPercentage();
+
+                    if (MPanel_DividerEnabled)
+                    {
+                        mpnlOriginalWidth = MPanel_Width - 20;
+                        //allDecimal += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
+                        double adas = (MPanel_WidthToBind - (pnl.Panel_Zoom * 20)) * ((double)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth);
+                        allDecimal += adas - Math.Truncate(adas);
+                    }
+                }
+            }
+            if (MPanel_DividerEnabled)
+            {
+                allDecimal = Math.Round(allDecimal);
+                int counter = MPanelLst_Panel.Count;
+                foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
+                {
+                    if (allDecimal != 0)
+                    {
+                        if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                        MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            int asd = pnlForDecimalDistribution.Panel_WidthToBind;
+                            pnlForDecimalDistribution.Panel_WidthToBind = Convert.ToInt32(Math.Round((MPanel_WidthToBind - 10) * ((double)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                            counter--;
+                            if (pnlForDecimalDistribution.Panel_WidthToBind > asd || (counter == 0 && allDecimal != 0))
+                            {
+                                pnlForDecimalDistribution.Panel_WidthToBind += 1;
+                                allDecimal--;
+                            }
+                        }
+                        else
+                        {
+                            int asd = pnlForDecimalDistribution.Panel_WidthToBind;
+                            pnlForDecimalDistribution.Panel_WidthToBind = Convert.ToInt32(Math.Round((MPanel_WidthToBind - (pnlForDecimalDistribution.Panel_Zoom * 20)) * ((double)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                            counter--;
+                            if (pnlForDecimalDistribution.Panel_WidthToBind > asd || (counter == 0 && allDecimal != 0))
+                            {
+                                pnlForDecimalDistribution.Panel_WidthToBind += 1;
+                                allDecimal--;
+
+                            }
+                        }
+                    }
+                }
+            }
         }
         public void SetZoomMPanels()
         {

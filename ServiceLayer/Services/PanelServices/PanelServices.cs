@@ -20,6 +20,7 @@ namespace ServiceLayer.Services.PanelServices
         private IPanelModel CreatePanelModel(int panelID,
                                             string panelName,
                                             int panelWd,
+                                            double panelWdWithDecimal,
                                             int panelHt,
                                             DockStyle panelDock,
                                             string panelType,
@@ -83,6 +84,7 @@ namespace ServiceLayer.Services.PanelServices
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
                                              panelWd,
+                                             panelWdWithDecimal,
                                              panelHt,
                                              panelDock,
                                              panelType,
@@ -153,6 +155,7 @@ namespace ServiceLayer.Services.PanelServices
         }
 
         public IPanelModel AddPanelModel(int panelWd,
+                                         double panelWdWithDecimal,
                                          int panelHt,
                                          Control panelParent,
                                          UserControl panelFrameGroup,
@@ -232,6 +235,7 @@ namespace ServiceLayer.Services.PanelServices
             IPanelModel _panelModel = CreatePanelModel(panelID,
                                                        panelName,
                                                        panelWd,
+                                                       panelWdWithDecimal,
                                                        panelHt,
                                                        panelDock,
                                                        panelType,
