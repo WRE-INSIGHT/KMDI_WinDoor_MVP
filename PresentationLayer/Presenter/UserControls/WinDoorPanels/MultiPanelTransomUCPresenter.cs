@@ -442,7 +442,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else
                     {
-                        double suggest_WdWithDecimal = _multiPanelModel.MPanel_Width - 20;
+                        decimal suggest_WdWithDecimal = (decimal)_multiPanelModel.MPanel_Width - 20;
                         int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                             suggest_HT = 0,
                             suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,

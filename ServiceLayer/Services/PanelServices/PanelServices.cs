@@ -20,7 +20,7 @@ namespace ServiceLayer.Services.PanelServices
         private IPanelModel CreatePanelModel(int panelID,
                                             string panelName,
                                             int panelWd,
-                                            double panelWdWithDecimal,
+                                            decimal panelWdWithDecimal,
                                             int panelHt,
                                             DockStyle panelDock,
                                             string panelType,
@@ -155,7 +155,7 @@ namespace ServiceLayer.Services.PanelServices
         }
 
         public IPanelModel AddPanelModel(int panelWd,
-                                         double panelWdWithDecimal,
+                                         decimal panelWdWithDecimal,
                                          int panelHt,
                                          Control panelParent,
                                          UserControl panelFrameGroup,

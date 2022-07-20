@@ -156,7 +156,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 bot_deduct = 0;
             }
-            double wdWithDecimal = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2;
+            decimal wdWithDecimal = (decimal)_frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2;
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
 

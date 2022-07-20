@@ -743,14 +743,11 @@ namespace PresentationLayer.Presenter.UserControls
                         if (mpnl.MPanel_Parent.Name.Contains("Frame"))
                         {
                             Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
-
                             int mlocX = MPoint.X,
                                 mlocY = MPoint.Y,
                                 objLocX = 0,
                                 objLocY = 0;
-
                             Draw_MultiPanel(e, mpnl, MPoint);
-
                             if (mpnl.MPanel_Type == "Mullion")
                             {
                                 foreach (Control ctrl in mpnl.MPanelLst_Objects)
@@ -766,7 +763,6 @@ namespace PresentationLayer.Presenter.UserControls
                                         }
                                         else if (panelModel.Panel_Placement != "First")
                                         {
-
                                         }
                                         
                                         Draw_Panel(e, panelModel, new Point(objLocX + 1, objLocY));
@@ -1319,7 +1315,10 @@ namespace PresentationLayer.Presenter.UserControls
             int outerLineDeduction = 18;
             int innerLineDeduction = 13;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
-
+            float ArrowExpectedWidth = 0
+                        , ArrowExpectedHeight = 0
+                        , arrowStartingX = 0
+                        , arrowStartingY = 0;
             int client_wd = 0, client_ht = 0;
 
             client_wd = panelModel.PanelImageRenderer_Width;
@@ -1333,7 +1332,7 @@ namespace PresentationLayer.Presenter.UserControls
             int font_size = 30,
                 outer_line = 10,
                 inner_line = 15;
-
+            int sashOverlapValue = 0;
             if (panelModel.PanelImageRenderer_Zoom == 0.28f)
             {
                 font_size = 25;
@@ -1381,9 +1380,9 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine5, outerLine6);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine5, outerLine6);
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
@@ -1398,6 +1397,7 @@ namespace PresentationLayer.Presenter.UserControls
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
                     }
+                    sashOverlapValue += inner_line;
                 }
 
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
@@ -1409,9 +1409,9 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine5, outerLine6);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine5, outerLine6);
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
@@ -1425,6 +1425,8 @@ namespace PresentationLayer.Presenter.UserControls
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
                     }
+                    arrowStartingX -= inner_line;
+                    sashOverlapValue += inner_line;
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
@@ -1433,8 +1435,8 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 3), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
@@ -1446,11 +1448,13 @@ namespace PresentationLayer.Presenter.UserControls
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
                     }
+                    arrowStartingX -= inner_line;
+                    sashOverlapValue += inner_line + (inner_line / 2);
                 }
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
                 {
                     //outer Line
-                    g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + outer_line,
+                    g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
                                                                       Ppoint.Y + outer_line,
                                                                       (client_wd - (outer_line * 2)) - w,
                                                                       (client_ht - (outer_line * 2)) - w));
@@ -1487,21 +1491,21 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW = client_wd,
+                int sashW  = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)//Left
                 {
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y),
                                              new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))));
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))),
-                                         new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y + sashH));
                 }
                 else if (panelModel.Panel_Orient == false)//Right
                 {
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
-                                         new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW + sashOverlapValue), (sashPoint.Y + (sashH / 2))),
                                          new Point(sashPoint.X, sashH + sashPoint.Y));
                 }
             }
@@ -1515,22 +1519,22 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW = client_wd,
+                int sashW  = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)
                 {
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
-                                         new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH));
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH),
-                                         new Point(sashPoint.X + sashW, sashPoint.Y));
+                                         new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y + sashH));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y + sashH),
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y));
                 }
                 else if (panelModel.Panel_Orient == false)
                 {
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y + sashH),
-                                     new Point(sashPoint.X + (sashW / 2), sashPoint.Y));
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y),
-                                         new Point(sashPoint.X + sashW, sashH + sashPoint.Y));
+                                     new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y),
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), sashH + sashPoint.Y));
                 }
             }
             else if (panelModel.Panel_Type == "Sliding Panel")
@@ -1540,31 +1544,28 @@ namespace PresentationLayer.Presenter.UserControls
                     sashH = client_ht;
                 if (panelModel.Panel_Orient == false)
                 {
-                    float ArrowExpectedWidth = 0
-                        , ArrowExpectedHeight = 0
-                        , arrowStartingX = 0 
-                        , arrowStartingY = 0;
+                    
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
                     {
                         //sliding
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.2);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.2);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF sliding1 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                         PointF sliding2 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -1580,20 +1581,20 @@ namespace PresentationLayer.Presenter.UserControls
                     else if (panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
                     {
                         //paraslide
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.3);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.3);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF paraslide1 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                         PointF paraslide2 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -1611,20 +1612,20 @@ namespace PresentationLayer.Presenter.UserControls
                     else if (panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
                     {
                         //LiftAndSlide
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.3);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.3);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF liftandslide1 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                         PointF liftandslide2 = new PointF(arrowStartingX + Ppoint.X, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
@@ -1641,10 +1642,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Orient == true)
                 {
-                    float ArrowExpectedWidth = 0
-                        , ArrowExpectedHeight = 0
-                        , arrowStartingX = 0
-                        , arrowStartingY = 0;
+                   
 
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                         panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -1652,21 +1650,21 @@ namespace PresentationLayer.Presenter.UserControls
                         panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
                     {
                         //sliding
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.2);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.2);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
 
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF sliding1 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                         PointF sliding2 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -1682,20 +1680,20 @@ namespace PresentationLayer.Presenter.UserControls
                     else if (panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
                     {
                         //paraslide
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.3);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.3);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF paraslide1 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                         PointF paraslide2 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -1713,20 +1711,20 @@ namespace PresentationLayer.Presenter.UserControls
                     else if (panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
                     {
                         //LiftAndSlide
-                        if (sashW >= sashH)
+                        if ((sashW + sashOverlapValue) >= sashH)
                         {
 
                             ArrowExpectedWidth = (float)(sashH * 0.3);
                             ArrowExpectedHeight = (float)(sashH * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        else if (sashW < sashH)
+                        else if ((sashW + sashOverlapValue) < sashH)
                         {
-                            ArrowExpectedWidth = (float)(sashW * 0.3);
-                            ArrowExpectedHeight = (float)(sashW * 0.3);
+                            ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                            ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
-                        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                        arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                         arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                         PointF liftandslide1 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                         PointF liftandslide2 = new PointF(arrowStartingX + Ppoint.X + ArrowExpectedWidth, Ppoint.Y + arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
@@ -1764,22 +1762,22 @@ namespace PresentationLayer.Presenter.UserControls
                     sashH = client_ht;
 
                 g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
-                                     new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH));
-                g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW / 2), sashPoint.Y + sashH),
-                                     new Point(sashPoint.X + sashW, sashPoint.Y));
+                                     new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y + sashH));
+                g.DrawLine(dgrayPen, new Point(sashPoint.X + ((sashW + sashOverlapValue) / 2), sashPoint.Y + sashH),
+                                     new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y));
 
                 if (panelModel.Panel_Orient == true)//Left
                 {
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, sashPoint.Y),
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y),
                                              new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))));
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, (sashPoint.Y + (sashH / 2))),
-                                         new Point(sashPoint.X + sashW, sashPoint.Y + sashH));
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), sashPoint.Y + sashH));
                 }
                 else if (panelModel.Panel_Orient == false)//Right
                 {
                     g.DrawLine(dgrayPen, new Point(sashPoint.X, sashPoint.Y),
-                                         new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))));
-                    g.DrawLine(dgrayPen, new Point(sashPoint.X + sashW, (sashPoint.Y + (sashH / 2))),
+                                         new Point(sashPoint.X + (sashW + sashOverlapValue), (sashPoint.Y + (sashH / 2))));
+                    g.DrawLine(dgrayPen, new Point(sashPoint.X + (sashW + sashOverlapValue), (sashPoint.Y + (sashH / 2))),
                                          new Point(sashPoint.X, sashH + sashPoint.Y));
                 }
             }

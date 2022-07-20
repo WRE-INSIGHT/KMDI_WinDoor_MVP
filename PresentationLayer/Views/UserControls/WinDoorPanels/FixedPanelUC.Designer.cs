@@ -46,12 +46,12 @@
             this.deleteToolStripMenuItem,
             this.overlapSashToolStripMenuItem});
             this.cmenu_fxd.Name = "cmenu_fxd";
-            this.cmenu_fxd.Size = new System.Drawing.Size(153, 70);
+            this.cmenu_fxd.Size = new System.Drawing.Size(143, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -63,34 +63,34 @@
             this.bothToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
-            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.leftToolStripMenuItem.Text = "Left";
             this.leftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
             // bothToolStripMenuItem
             // 
             this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
-            this.bothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.bothToolStripMenuItem.Text = "Both";
             this.bothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.NoneToolStripMenuItem_Click);
             // 
@@ -106,7 +106,6 @@
             this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.FixedPanelUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseMove);

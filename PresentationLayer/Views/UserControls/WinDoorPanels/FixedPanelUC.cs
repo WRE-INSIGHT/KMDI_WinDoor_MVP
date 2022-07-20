@@ -107,6 +107,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler leftToolStripClickedEventRaised;
         public event EventHandler bothToolStripClickedEventRaised;
         public event EventHandler noneToolStripClickedEventRaised;
+        public event MouseEventHandler fixedPanelUCMouseClickEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
@@ -132,8 +133,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
+                if (this.Parent.Name.Contains("Frame"))
+                    overlapSashToolStripMenuItem.Visible = false;
+                else
+                    overlapSashToolStripMenuItem.Visible = true;
                 cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
             }
+            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseClickEventRaised, e);
+
+
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -196,6 +204,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseDownEventRaised, e);
         }
 
-     
+        
     }
 }

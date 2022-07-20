@@ -451,7 +451,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else
                     {
-                        double suggest_WdWithDecimal = 0;
+                        decimal suggest_WdWithDecimal = 0;
                         int suggest_Wd = 0,
                             suggest_HT = _multiPanelModel.MPanel_Height - 20,
                             suggest_DisplayHT = _multiPanelModel.MPanel_DisplayHeight,
@@ -503,11 +503,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_multiPanelModel.MPanel_DividerEnabled)
                         {
                             suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            suggest_WdWithDecimal = (decimal)((decimal)((decimal)(_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                         }
                         else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
                             suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
-                            suggest_WdWithDecimal = (double)((double)_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
+                            
+                            suggest_WdWithDecimal = (decimal)(_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
                         }
 
                         if (_multiPanelModel.MPanel_ParentModel != null)
@@ -856,6 +858,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 MessageBox.Show(ex.Message);
             }
+                _multiPanelModel.SetZoomPanelsDecimals();
         }
 
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)
