@@ -320,7 +320,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-
         public List<IFrameModel> lst_frame { get; set; }
         public List<IConcreteModel> lst_concrete { get; set; }
 

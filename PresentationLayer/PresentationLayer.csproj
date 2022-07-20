@@ -118,11 +118,13 @@
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\SetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
@@ -333,6 +335,7 @@
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
+    <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +365,12 @@
     </Compile>
     <Compile Include="Views\QuoteItemListView.Designer.cs">
       <DependentUpon>QuoteItemListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SetTopViewSlidingPanellingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SetTopViewSlidingPanellingView.Designer.cs">
+      <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\BasePlatformImagerUC.cs">
       <SubType>UserControl</SubType>
@@ -883,6 +892,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QuoteItemListView.resx">
       <DependentUpon>QuoteItemListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SetTopViewSlidingPanellingView.resx">
+      <DependentUpon>SetTopViewSlidingPanellingView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\BasePlatformImagerUC.resx">
       <DependentUpon>BasePlatformImagerUC.cs</DependentUpon>

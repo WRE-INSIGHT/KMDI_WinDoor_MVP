@@ -30,6 +30,7 @@ namespace PresentationLayer.Views
         event EventHandler CostingItemsToolStripMenuItemClickRaiseEvent;
         event EventHandler saveAsToolStripMenuItemClickEventRaised;
         event EventHandler saveToolStripButtonClickEventRaised;
+        event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
 
         string Nickname { set; }
         string mainview_title { get; set; }

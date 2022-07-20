@@ -86,6 +86,7 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IPrintQuotePresenter _printQuotePresenter;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
+        private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
@@ -491,7 +492,8 @@ namespace PresentationLayer.Presenter
                              IConcreteUCPresenter concreteUCPresenter,
                              IQuoteItemListPresenter quoteItemListPresenter,
                              IPrintQuotePresenter printQuotePresenter,
-                             IQuoteItemListUCPresenter quoteItemListUCPresenter)
+                             IQuoteItemListUCPresenter quoteItemListUCPresenter,
+                             ISetTopViewSlidingPanellingPresenter setTopViewSlidingPanellingPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -524,6 +526,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter = quoteItemListPresenter;
             _printQuotePresenter = printQuotePresenter;
             _quoteItemListUCPresenter = quoteItemListUCPresenter;
+            _setTopViewSlidingPanellingPresenter = setTopViewSlidingPanellingPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -617,13 +620,22 @@ namespace PresentationLayer.Presenter
             _mainView.CostingItemsToolStripMenuItemClickRaiseEvent += _mainView_CostingItemsToolStripMenuItemClickRaiseEvent;
             _mainView.saveAsToolStripMenuItemClickEventRaised += _mainView_saveAsToolStripMenuItemClickEventRaised;
             _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
+            _mainView.slidingTopViewToolStripMenuItemClickRaiseEvent += _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent;
         }
 
 
-
         #region Events
+        private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        {
+            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
+            TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
+        }
 
 
+        private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
+        {
+       
+        }
 
         string wndrfile = "",
               searchStr = "",

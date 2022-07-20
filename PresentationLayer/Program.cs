@@ -316,6 +316,9 @@ namespace PresentationLayer
                 .RegisterType<IPP_SlidingTypePropertyUC, PP_SlidingTypePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_SlidingTypePropertyUCPresenter, PP_SlidingTypePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISetTopViewSlidingPanellingView, SetTopViewSlidingPanellingView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISetTopViewSlidingPanellingPresenter, SetTopViewSlidingPanellingPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

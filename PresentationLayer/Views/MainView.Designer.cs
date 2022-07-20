@@ -65,6 +65,7 @@
             this.changeItemColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.slidingTopViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -353,7 +354,8 @@
             this.listOfMaterialsToolStripMenuItem,
             this.changeItemColorToolStripMenuItem,
             this.glassBalancingToolStripMenuItem,
-            this.customArrowHeadToolStripMenuItem});
+            this.customArrowHeadToolStripMenuItem,
+            this.slidingTopViewToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -419,6 +421,13 @@
             this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
             this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
+            // 
+            // slidingTopViewToolStripMenuItem
+            // 
+            this.slidingTopViewToolStripMenuItem.Name = "slidingTopViewToolStripMenuItem";
+            this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.slidingTopViewToolStripMenuItem.Text = "Sliding Top View";
+            this.slidingTopViewToolStripMenuItem.Click += new System.EventHandler(this.slidingTopViewToolStripMenuItem_Click);
             // 
             // tsMain
             // 
@@ -977,5 +986,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton tsBtnNConcrete;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem slidingTopViewToolStripMenuItem;
     }
 }

@@ -59,6 +59,14 @@ namespace PresentationLayer.Presenter
                 SashPricePerLinearMeter = 1210.27m,
                 SashReinPricePerLinearMeter = 24.53m,
                 GlazingBeadPricePerLinearMeter = 56.45m,
+                FS_16HD_casementPricePerPiece = 825.81m,
+                FS_26HD_casementPricePerPiece = 1839.35m,
+                Glass_6mmClr_PricePerSqrMeter = 670.00m,
+                Glass_10mmClr_PricePerSqrMeter = 1662.00m,
+                Glass_12mmClr_PricePerSqrMeter = 1941.00m,
+                Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
+                Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
+                Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
                 FramePrice,
                 FrameReinPrice,
                 SashPrice,
@@ -66,11 +74,14 @@ namespace PresentationLayer.Presenter
                 GbPrice,
                 FramePerimeter,
                 SashPerimeter,
+                GlassPrice,
                 ProfileColorPoints = 13,
                 CostingPoints = 0,
                 InstallationPoints = 0,
                 LaborCost = 0,
-                InstallationCost = 0;
+                InstallationCost = 0,
+                FittingAndSuppliesCost,
+                TotaPrice;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -142,7 +153,19 @@ namespace PresentationLayer.Presenter
                        SashPriceDesc = "\n\nSash Price per linear meter: " + Math.Round(SashPrice, 2),
                        SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + Math.Round(SashReinPrice, 2),
                        GBPriceDesc = "\n\nGB Price per linear meter: " + Math.Round(GbPrice, 2),
-                       InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
+                       InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2),
+                       FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
+
+                TotaPrice = Math.Round(LaborCost, 2) +
+                            Math.Round(InstallationCost, 2) +
+                            Math.Round(FramePrice, 2) +
+                            Math.Round(FrameReinPrice, 2) +
+                            Math.Round(SashPrice, 2) +
+                            Math.Round(SashReinPrice, 2) +
+                            Math.Round(GbPrice, 2) +
+                            Math.Round(FittingAndSuppliesCost, 2);
+
+                TotaPrice = (TotaPrice * 1.3m) + TotaPrice;
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
@@ -155,11 +178,12 @@ namespace PresentationLayer.Presenter
                                                                           + FrameReinPriceDesc
                                                                           + SashPriceDesc
                                                                           + SashReinPriceDesc
-                                                                          + GBPriceDesc;
+                                                                          + GBPriceDesc
+                                                                          + FittingAndSuppliesDesc;
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = LaborCost;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = LaborCost.ToString();
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = TotaPrice;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = TotaPrice.ToString();
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
                 this._lstItemArea.Add(TotalItemArea);
@@ -321,7 +345,6 @@ namespace PresentationLayer.Presenter
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
 
-
                                 #region 1stApproach
                                 //if (pnl.Panel_Type.Contains("Fixed"))
                                 //{
@@ -415,15 +438,11 @@ namespace PresentationLayer.Presenter
                                     lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
                                 }
 
-
-
                                 //GeorgianBar
                                 if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
                                     GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-
-
 
                                     //AllItemDescription += GeorgianBarHorizontalDesc;
                                     //AllItemDescription += GeorgianBarVerticalDesc;
@@ -528,11 +547,17 @@ namespace PresentationLayer.Presenter
 
         public void ItemCostingPoints()
         {
-
-
-
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
+                TotaPrice = 0;
+                LaborCost = 0;
+                InstallationCost = 0;
+                FramePrice = 0;
+                FrameReinPrice = 0;
+                SashPrice = 0;
+                SashReinPrice = 0;
+                GbPrice = 0;
+
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     #region baseOnDimensionAndColorPoints
@@ -602,12 +627,40 @@ namespace PresentationLayer.Presenter
                             }
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
+
+
+
+
                                 if (pnl.Panel_SashPropertyVisibility == true)
                                 {
                                     #region SashPrice 
                                     SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
 
                                     SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                                    SashReinPrice = (SashPerimeter / 1000) * SashReinPricePerLinearMeter;
+                                    GbPrice = (SashPerimeter / 1000) * GlazingBeadPricePerLinearMeter;
+                                    #endregion
+
+                                    #region FrictionStayPrice
+                                    if (pnl.Panel_Type.Contains("Casement"))
+                                    {
+                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                        {
+                                            FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
+                                        }
+                                    }
+
+                                    if (pnl.Panel_Type.Contains("Awning"))
+                                    {
+                                        if (pnl.Panel_SashHeight >= 800)
+                                        {
+                                            FittingAndSuppliesCost = FS_26HD_casementPricePerPiece * 2;
+                                        }
+                                        else
+                                        {
+                                            FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
+                                        }
+                                    }
                                     #endregion
 
                                     CostingPoints += ProfileColorPoints * 4;
@@ -619,6 +672,8 @@ namespace PresentationLayer.Presenter
                                     SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
 
                                     SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                                    SashReinPrice = (SashPerimeter / 1000) * SashReinPricePerLinearMeter;
+                                    GbPrice = (SashPerimeter / 1000) * GlazingBeadPricePerLinearMeter;
                                     #endregion
 
                                     CostingPoints += ProfileColorPoints * 4;
@@ -630,6 +685,7 @@ namespace PresentationLayer.Presenter
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
+
                         if (Singlepnl.Panel_SashPropertyVisibility == true)
                         {
                             #region SashPrice 
@@ -640,9 +696,87 @@ namespace PresentationLayer.Presenter
                             GbPrice = (SashPerimeter / 1000) * GlazingBeadPricePerLinearMeter;
                             #endregion
 
-                            CostingPoints += ProfileColorPoints * 4;
-                            InstallationPoints += (ProfileColorPoints / 3) * 4;
+                            #region FrictionStayPrice
+                            if (Singlepnl.Panel_Type.Contains("Casement"))
+                            {
+                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
+                                {
+                                    FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
+                                }
+                            }
+
+                            if (Singlepnl.Panel_Type.Contains("Awning"))
+                            {
+                                if (Singlepnl.Panel_SashHeight >= 800)
+                                {
+                                    FittingAndSuppliesCost = FS_26HD_casementPricePerPiece * 2;
+                                }
+                                else
+                                {
+                                    FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
+                                }
+                            }
+                            #endregion 
                         }
+
+                        if (Singlepnl.Panel_ChkText == "dsash")
+                        {
+                            #region SashPrice 
+                            SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+
+                            SashPrice = (SashPerimeter / 1000) * SashPricePerLinearMeter;
+                            SashReinPrice = (SashPerimeter / 1000) * SashReinPricePerLinearMeter;
+                            GbPrice = (SashPerimeter / 1000) * GlazingBeadPricePerLinearMeter;
+                            #endregion 
+                        }
+
+                        #region Glass 
+
+                        if (Singlepnl.Panel_GlassThickness >= 6.0f &&
+                            Singlepnl.Panel_GlassThickness <= 9.0f)
+                        {
+                            if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_6mmTemp_PricePerSqrMeter;
+                            }
+                            else
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_6mmClr_PricePerSqrMeter;
+                            }
+                            Console.WriteLine("six to nine" + Singlepnl.Panel_GlassThicknessDesc);
+                        }
+                        else if (Singlepnl.Panel_GlassThickness == 10.0f ||
+                         Singlepnl.Panel_GlassThickness == 11.0f)
+                        {
+                            if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_10mmTemp_PricePerSqrMeter;
+                            }
+                            else
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_10mmClr_PricePerSqrMeter;
+                            }
+
+                            Console.WriteLine("ten to eleven");
+                        }
+                        else if (Singlepnl.Panel_GlassThickness >= 12.0f)
+                        {
+                            if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_12mmTemp_PricePerSqrMeter;
+                            }
+                            else
+                            {
+                                GlassPrice = (Singlepnl.Panel_SashHeight * Singlepnl.Panel_SashWidth) * Glass_12mmClr_PricePerSqrMeter;
+                            }
+
+                            Console.WriteLine("twelve above");
+                        }
+
+                        #endregion
+
+                        CostingPoints += ProfileColorPoints * 4;
+                        InstallationPoints += (ProfileColorPoints / 3) * 4;
                     }
                 }
             }

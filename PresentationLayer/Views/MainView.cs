@@ -189,6 +189,7 @@ namespace PresentationLayer.Views
         public event EventHandler CostingItemsToolStripMenuItemClickRaiseEvent;
         public event EventHandler saveAsToolStripMenuItemClickEventRaised;
         public event EventHandler saveToolStripButtonClickEventRaised;
+        public event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
 
         public MainView()
         {
@@ -409,7 +410,7 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
         }
 
-     
+
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -438,6 +439,11 @@ namespace PresentationLayer.Views
         private void CostingItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
+        }
+
+        private void slidingTopViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, slidingTopViewToolStripMenuItemClickRaiseEvent, e);
         }
     }
 }
