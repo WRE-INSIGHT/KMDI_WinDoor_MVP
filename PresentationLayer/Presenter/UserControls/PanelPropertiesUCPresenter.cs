@@ -382,14 +382,20 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_panelModel.Panel_SashPropertyVisibility == true)
                 {
-                    _panelModel.Panel_MotorizedOptionVisibility = true;
+                    if (_panelModel.Panel_Type.Contains("Sliding"))
+                    {
+                        _panelModel.Panel_MotorizedOptionVisibility = true;
+                    }
                     IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
                     _pnlPanelSpecs.Controls.Add(motorized);
                     motorized.Dock = DockStyle.Top;
                     motorized.BringToFront();
-                    _panelModel.Panel_MotorizedOptionVisibility = false;
-
+                    if (_panelModel.Panel_Type.Contains("Sliding"))
+                    {
+                        _panelModel.Panel_MotorizedOptionVisibility = false;
+                    }
+                   
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
                     _pnlPanelSpecs.Controls.Add(handle);
