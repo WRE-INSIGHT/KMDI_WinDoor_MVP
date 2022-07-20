@@ -88,69 +88,307 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _slidingPanelUC_slidingPanelUCMouseClickEventRaised(object sender, MouseEventArgs e)
         {
-            slidingUC = (UserControl)sender;
+             slidingUC = (UserControl)sender;
+            try
+            {
+            //       Console.WriteLine("**Panel Width*" + _panelModel.Panel_WidthWithDecimal);
+            //Console.WriteLine("**Panel Width To Bind*" + _multiPanelModel.MPanel_WidthToBind);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private bool isLeft = false;
         private UserControl slidingUC;
         //private bool isRight = false;
-        private int sashDeduction = 20;
+        private int sashDeduction = 16;
         private Point _point_of_origin;
         private void _slidingPanelUC_NoneToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Overlap_Sash = OverlapSash._None;
-            ((IPanelUC)_slidingPanelUC).InvalidateThis();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
+               actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
+            if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+            {
+                var flp = (Control)slidingUC.Parent; //MultiPanel Container
+                if (flp.Name.Contains("MultiMullion"))
+                {
+                    int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
+                    //Get Panel from left side of Mullion
+                    Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+
+                    if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                    {
+                        //Get Panel from right side of Mullion
+                        pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                    }
+                    IPanelModel pres_pnl = null;
+                    int sashDiv = 16 / (_multiPanelModel.MPanel_Divisions + 1);
+                    //Get the expected Panel w
+                    if (pres_ctrl is IPanelUC)
+                    {
+                        pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                    }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left || _panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width += 16;
+                            pres_pnl.Panel_WidthWithDecimal += (decimal)16;
+                            pres_pnl.SetDimensionToBind_using_BaseDimension();
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width -= sashDiv;
+                            pnl.Panel_WidthWithDecimal -= (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width += 32;
+                            pres_pnl.Panel_WidthWithDecimal += (decimal)32;
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width -= 32 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Panel_WidthWithDecimal -= (decimal)32 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                }
+
+                _panelModel.Panel_Overlap_Sash = OverlapSash._None;
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            }
         }
         private void _slidingPanelUC_RightToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            if (_panelModel.Panel_Overlap_Sash != OverlapSash._Right)
+            int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
+               actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
+            if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
             {
+                var flp = (Control)slidingUC.Parent; //MultiPanel Container
+                if (flp.Name.Contains("MultiMullion"))
+                {
+
+                    int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
+                    //Get Panel from left side of Mullion
+                    Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+
+                    if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                    {
+                        //Get Panel from right side of Mullion
+                        pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                    }
+                    IPanelModel pres_pnl = null;
+                    int sashDiv = 16 / (_multiPanelModel.MPanel_Divisions + 1);
+                    //Get the expected Panel w
+                    if (pres_ctrl is IPanelUC)
+                    {
+                        pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                    }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width -= 16;
+                            pres_pnl.Panel_WidthWithDecimal -= (decimal)16;
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width += sashDiv;
+                            pnl.Panel_WidthWithDecimal += (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width += 16;
+                            pres_pnl.Panel_WidthWithDecimal += (decimal)16;
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width -= sashDiv;
+                            pnl.Panel_WidthWithDecimal -= (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                }
                 _panelModel.Panel_Overlap_Sash = OverlapSash._Right;
-                //int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
-                ////Get Panel from left side of Mullion
-                //Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
-
-                //if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
-                //{
-                //    //Get Panel from right side of Mullion
-                //    pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
-                //}
-                //IPanelModel pres_pnl = null;
-                //int add = 10 / (_multiPanelModel.MPanel_Divisions + 1);
-                ////Get the expected Panel w
-                //if (pres_ctrl is IPanelUC)
-                //{
-                //    pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
-                //}
-                //if (pres_ctrl is IPanelUC)
-                //{
-                //    pres_pnl.Panel_WidthToBind -= 10;
-
-                //}
-                //foreach(IPanelModel ctrl in _multiPanelModel.MPanelLst_Panel)
-                //{
-                //    if(pres_ctrl != ctrl)
-                //        ctrl.Panel_WidthToBind += add;
-                    
-                //}
-                //_mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                ((IPanelUC)_slidingPanelUC).InvalidateThis();
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                ((IPanelUC)_slidingPanelUC).InvalidateThis();
             }
         }
         private void _slidingPanelUC_LeftToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
-            ((IPanelUC)_slidingPanelUC).InvalidateThis();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
+               actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
+            if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+            {
+                var flp = (Control)slidingUC.Parent; //MultiPanel Container
+                if (flp.Name.Contains("MultiMullion"))
+                {
+                    int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
+                    //Get Panel from left side of Mullion
+                    Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
 
+                    if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                    {
+                        //Get Panel from right side of Mullion
+                        pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                    }
+                    IPanelModel pres_pnl = null;
+                    int sashDiv = 16 / (_multiPanelModel.MPanel_Divisions + 1);
+                    //Get the expected Panel w
+                    if (pres_ctrl is IPanelUC)
+                    {
+                        pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                    }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width -= 16;
+                            pres_pnl.Panel_WidthWithDecimal -= (decimal)16;
+                            pres_pnl.SetDimensionToBind_using_BaseDimension();
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width += sashDiv;
+                            pnl.Panel_WidthWithDecimal += (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width += 16;
+                            pres_pnl.Panel_WidthWithDecimal += (decimal)16;
+                            //pres_pnl.SetDimensionToBind_using_BaseDimension();
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width -= sashDiv;
+                            pnl.Panel_WidthWithDecimal -= (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                }
+                _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            }
         }
         private void _slidingPanelUC_BothToolStripClickedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_Overlap_Sash = OverlapSash._Both;
-            ((IPanelUC)_slidingPanelUC).InvalidateThis();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
+               actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
+            if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+            {
+                var flp = (Control)slidingUC.Parent; //MultiPanel Container
+                if (flp.Name.Contains("MultiMullion"))
+                {
+                    int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)slidingUC);
+                    //Get Panel from left side of Mullion
+                    Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+
+                    if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                    {
+                        //Get Panel from right side of Mullion
+                        pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
+                    }
+                    IPanelModel pres_pnl = null;
+
+
+                    //Get the expected Panel w
+                    if (pres_ctrl is IPanelUC)
+                    {
+                        pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                    }
+                    if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right || _panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                    {
+                        int sashDiv = 16 / (_multiPanelModel.MPanel_Divisions + 1);
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width -= 16;
+                            pres_pnl.Panel_WidthWithDecimal -= (decimal)16;
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width += sashDiv;
+                            pnl.Panel_WidthWithDecimal += (decimal)16 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                    else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                    {
+                        int sashDiv = 32 / (_multiPanelModel.MPanel_Divisions + 1);
+                        if (pres_ctrl is IPanelUC)
+                        {
+                            pres_pnl.Panel_Width -= 32;
+                            pres_pnl.Panel_WidthWithDecimal -= (decimal)32;
+                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                        }
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            pnl.Panel_Width += sashDiv;
+                            pnl.Panel_WidthWithDecimal += (decimal)32 / (_multiPanelModel.MPanel_Divisions + 1);
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        }
+                        _multiPanelModel.SetZoomPanels();
+                        _multiPanelModel.SetZoomPanelsDecimals();
+                    }
+                }
+
+                _panelModel.Panel_Overlap_Sash = OverlapSash._Both;
+                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            }
         }
         private void _slidingPanelUC_slidingPanelUCMouseUpEventRaised(object sender, MouseEventArgs e)
         {
@@ -194,32 +432,49 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (isLeft)
                     {
                         int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
-                        //Get Panel from left side of Mullion
+
                         Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
-                        Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
+                        Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
 
                         if (_multiPanelModel.GetCount_MPanelLst_Object() > me_indx)
                         {
-                            //Get Panel from right side of Mullion
                             pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx];
                         }
+
                         int expected_Panel1MinWD = 0,
                             expected_Panel2MinWD = 0,
                             mullion_movement = 0;
+
+                        IMultiPanelModel prev_mpanel = null,
+                                         nxt_mpnl = null;
+
                         IPanelModel prev_pnl = null,
                                     pres_pnl = null;
-                        //Get the expected Panel w
-                        if (prev_ctrl is IPanelUC)
+
+                        if (prev_ctrl is IMultiPanelUC)
+                        {
+                            prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
+                            expected_Panel1MinWD = prev_mpanel.MPanel_WidthToBind + (e.X - _point_of_origin.X);
+                        }
+                        else if (prev_ctrl is IPanelUC)
                         {
                             prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
                             expected_Panel1MinWD = prev_pnl.Panel_WidthToBind + (e.X - _point_of_origin.X);
                         }
-                        if (pres_ctrl is IPanelUC)
+
+                        if (pres_ctrl is IMultiPanelUC)
+                        {
+                            nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == pres_ctrl.Name);
+                            expected_Panel2MinWD = nxt_mpnl.MPanel_WidthToBind - (e.X - _point_of_origin.X);
+                        }
+                        else if (pres_ctrl is IPanelUC)
                         {
                             pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
                             expected_Panel2MinWD = pres_pnl.Panel_WidthToBind - (e.X - _point_of_origin.X);
                         }
+
                         FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
+
                         int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
                             actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                         if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel && e.Button == MouseButtons.Left)
@@ -229,31 +484,161 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                                 {
                                     mullion_movement = (e.X - _point_of_origin.X);
-                                    if (prev_ctrl is IPanelUC)
+
+                                    if (prev_ctrl is IMultiPanelUC)
+                                    {
+                                        prev_mpanel.MPanel_Width += mullion_movement;
+                                        prev_mpanel.MPanel_DisplayWidth += mullion_movement;
+
+                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                        {
+                                            prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                                            prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
+                                            prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
+
+                                            foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
+                                            {
+                                                mpanel.SetDimensions_childObjs(mullion_movement, "prev");
+                                                mpanel.SetDimensions_childPanelObjs(mullion_movement);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
+
+                                            prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
+                                            prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
+
+                                            foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
+                                            {
+                                                mpanel.MPanel_Width += mullion_movement;
+                                                mpanel.MPanel_DisplayWidth += mullion_movement;
+
+                                                mpanel.SetDimensionsToBind_MullionDivMovement();
+                                                mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
+
+                                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
+                                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
+                                            }
+
+                                            foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
+                                            {
+                                                div.Div_Width += mullion_movement;
+                                                div.Div_DisplayWidth += mullion_movement;
+
+                                                div.SetDimensionsToBind_using_DivZoom();
+                                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                                            }
+                                        }
+                                    }
+                                    else if (prev_ctrl is IPanelUC)
                                     {
                                         prev_pnl.Panel_Width += mullion_movement;
+                                        prev_pnl.Panel_WidthWithDecimal += mullion_movement;
                                         prev_pnl.Panel_DisplayWidth += mullion_movement;
-                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
-                                        prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
-                                        //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                                        //{
-                                        //    mpnl.SetDimensions_childObjs();
-                                        //}
+
+                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                        {
+                                            prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                        }
+                                        else
+                                        {
+                                            prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                            {
+                                                mpnl.SetDimensions_childObjs();
+                                            }
+                                        }
                                     }
-                                    if (pres_ctrl is IPanelUC)
+
+                                    if (pres_ctrl is IMultiPanelUC)
+                                    {
+                                        nxt_mpnl.MPanel_Width -= mullion_movement;
+                                        nxt_mpnl.MPanel_DisplayWidth -= mullion_movement;
+
+                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                        {
+                                            nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                                            nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
+                                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
+
+                                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                                            {
+                                                mpanel.SetDimensions_childObjs(-mullion_movement, "nxt");
+                                                mpanel.SetDimensions_childPanelObjs(-mullion_movement);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                            nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
+
+                                            nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
+                                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
+
+                                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                                            {
+                                                mpanel.MPanel_Width -= mullion_movement;
+                                                mpanel.MPanel_DisplayWidth -= mullion_movement;
+
+                                                mpanel.SetDimensionsToBind_MullionDivMovement();
+                                                mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
+
+                                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
+                                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
+                                            }
+
+                                            foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                                            {
+                                                div.Div_Width += mullion_movement;
+                                                div.Div_DisplayWidth += mullion_movement;
+
+                                                div.SetDimensionsToBind_using_DivZoom();
+                                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                                            }
+                                        }
+
+                                    }
+                                    else if (pres_ctrl is IPanelUC)
                                     {
                                         pres_pnl.Panel_Width -= mullion_movement;
+                                        pres_pnl.Panel_WidthWithDecimal -= mullion_movement;
                                         pres_pnl.Panel_DisplayWidth -= mullion_movement;
-                                        pres_pnl.SetDimensionToBind_using_BaseDimension();
-                                        pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
+
+                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
+                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
+                                        {
+                                            pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                                        }
+                                        else
+                                        {
+                                            pres_pnl.SetDimensionToBind_using_BaseDimension();
+                                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                            {
+                                                mpnl.SetDimensions_childObjs();
+                                            }
+                                        }
+
                                     }
                                 }
                             }
+                            _multiPanelModel.SetZoomPanelsDecimals();
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         }
+                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                     }
-                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                    
+
                 }
             }
             catch (Exception ex)
@@ -261,6 +646,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         int prev_Width = 0,
@@ -440,7 +826,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             int outer_line = 10,
                 inner_line = 15;
-
+            float ArrowExpectedWidth = 0
+                    , ArrowExpectedHeight = 0
+                    , arrowStartingX = 0
+                    , arrowStartingY = 0;
+            int sashOverlapValue = 0;
             int ndx_zoomPercentage = Array.IndexOf(_mainPresenter.windoorModel_MainPresenter.Arr_ZoomPercentage, _frameModel.Frame_Zoom);
 
             if (ndx_zoomPercentage == 2)
@@ -468,13 +858,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
             {
                 g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
-                                                           outer_line,
-                                                           (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                           (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
+                                                               outer_line,
+                                                               (sliding.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                               (sliding.ClientRectangle.Height - (outer_line * 2)) - w));
                 g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
-                                                          inner_line,
-                                                          (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
-                                                          (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                                                               inner_line,
+                                                               (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
+                                                               (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+              
+                sashOverlapValue += inner_line;
             }
 
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
@@ -487,6 +879,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                arrowStartingX -= inner_line;
+                sashOverlapValue += inner_line;
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
             {
@@ -498,6 +892,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w + (sashDeduction * 2),
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+                arrowStartingX -= inner_line;
+                sashOverlapValue += inner_line * 2;
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
@@ -509,6 +905,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
+               
             }
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);
 
@@ -529,7 +926,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             //        ArrowExpectedWidth = (float)(sashH * 0.5) ;
             //        ArrowExpectedHeight = (float)(sashH * 0.3);
-            //        arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+            //        arrowStartingX += (sashW / 2) - (ArrowExpectedWidth / 2);
             //        arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
             //        g.FillRectangle(new SolidBrush(Color.Black), arrowStartingX, arrowStartingY, ArrowExpectedWidth, ArrowExpectedHeight);
             //        float arwStart_x1 = sashPoint.X + (sashW / 20),
@@ -567,31 +964,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             
             if (_panelModel.Panel_Orient == false)
             {
-                float ArrowExpectedWidth = 0
-                    , ArrowExpectedHeight = 0
-                    , arrowStartingX = 0
-                    , arrowStartingY = 0;
+                
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
                 {
                     //sliding
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.2);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.2);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
 
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF sliding1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF sliding2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -607,20 +1001,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
                 {
                     //paraslide
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.3);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.3);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF paraslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                     PointF paraslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -638,20 +1032,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
                 {
                     //LiftAndSlide
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.3);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.3);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF liftandslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
@@ -668,10 +1062,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Orient == true)
             {
-                float ArrowExpectedWidth = 0
-                    , ArrowExpectedHeight = 0
-                    , arrowStartingX = 0
-                    , arrowStartingY = 0;
+                
 
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -679,21 +1070,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _panelModel.Panel_SlidingTypes == SlidingTypes._TopHung)
                 {
                     //sliding
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.2);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.2);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
 
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF sliding1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF sliding2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -709,20 +1100,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_SlidingTypes == SlidingTypes._Paraslide)
                 {
                     //paraslide
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.3);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.3);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF paraslide1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
                     PointF paraslide2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
@@ -740,20 +1131,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else if (_panelModel.Panel_SlidingTypes == SlidingTypes._LiftAndSlide)
                 {
                     //LiftAndSlide
-                    if (sashW >= sashH)
+                    if ((sashW + sashOverlapValue) >= sashH)
                     {
 
                         ArrowExpectedWidth = (float)(sashH * 0.3);
                         ArrowExpectedHeight = (float)(sashH * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    else if (sashW < sashH)
+                    else if ((sashW + sashOverlapValue) < sashH)
                     {
-                        ArrowExpectedWidth = (float)(sashW * 0.3);
-                        ArrowExpectedHeight = (float)(sashW * 0.3);
+                        ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.3);
+                        ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
                         //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                     }
-                    arrowStartingX = (sashW / 2) - (ArrowExpectedWidth / 2);
+                    arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
                     PointF liftandslide1 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide2 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));

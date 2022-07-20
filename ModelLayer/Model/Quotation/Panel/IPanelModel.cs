@@ -31,8 +31,10 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_OrientVisibility { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
+        decimal Panel_WidthWithDecimal { get; set; }
         int Panel_OriginalWidth { get; set; }
         int PanelImageRenderer_Width { get; set; }
+        decimal PanelImageRenderer_WidthWithDecimal { get; set; }
         int Panel_WidthToBind { get; set; }
         int Panel_DisplayWidth { get; set; }
         int Panel_DisplayWidthDecimal { get; set; }
@@ -237,7 +239,6 @@ namespace ModelLayer.Model.Quotation.Panel
         void Imager_SetDimensionsToBind_using_ZoomPercentage();
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-        void Imager_SetDimensionsToBind_usingZoom_below26_with_SlidingMovement();
         void SetDimensionToBind_using_BaseDimension();
         void SetDimensionImagerToBind_using_BaseDimension();
         void AdjustPropertyPanelHeight(string mode);

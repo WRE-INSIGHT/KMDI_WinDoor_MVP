@@ -135,12 +135,13 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
+                if (this.Parent.Name.Contains("Frame"))
+                    overlapSashToolStripMenuItem.Visible = false;
+                else
+                    overlapSashToolStripMenuItem.Visible = true;
                 cmenu_casement.Show(new Point(MousePosition.X, MousePosition.Y));
             }
-            else if (e.Button == MouseButtons.Left)
-            {
-                EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
-            }
+            EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

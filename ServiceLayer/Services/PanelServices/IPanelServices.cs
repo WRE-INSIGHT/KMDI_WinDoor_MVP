@@ -10,6 +10,7 @@ namespace ServiceLayer.Services.PanelServices
     {
         void ValidateModel(IPanelModel panelModel);
         IPanelModel AddPanelModel(int panelWd,
+                                  decimal panelWdWithDecimal,
                                   int panelHt,
                                   Control panelParent,
                                   UserControl panelFrameGroup,
