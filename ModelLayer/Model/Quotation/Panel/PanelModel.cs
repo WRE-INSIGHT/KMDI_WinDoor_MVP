@@ -2548,7 +2548,6 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelImageRenderer_Width = pnl_wd;
             PanelImageRenderer_WidthWithDecimal = pnl_wd_decimal;
             PanelImageRenderer_Height = pnl_ht;
-            Console.WriteLine(PanelImageRenderer_WidthWithDecimal);
         }
 
         public void SetDimensionToBind_using_BaseDimension()

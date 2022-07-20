@@ -1623,6 +1623,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
                     }
+                    Console.WriteLine(pnlForDecimalDistribution.Panel_WidthToBind);
                 }
             }
         }
