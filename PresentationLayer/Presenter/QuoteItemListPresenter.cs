@@ -39,6 +39,8 @@ namespace PresentationLayer.Presenter
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
+        private List<decimal> lstTotalPrice = new List<decimal>();
+
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0,
@@ -52,7 +54,16 @@ namespace PresentationLayer.Presenter
                NewNoneDuplicatePnlAndCount,
                lst_DescDist,
                glassThick,
-               glassFilm;
+               glassFilm,
+               costingPointsDesc,
+               laborCostDesc,
+               FramePriceDesc,
+               FrameReinPriceDesc,
+               SashPriceDesc,
+               SashReinPriceDesc,
+               GBPriceDesc,
+               InstallationCostDesc,
+               FittingAndSuppliesDesc;
 
         decimal FramePricePerLinearMeter = 1023.29m,
                 FrameReinPricePerLinearMeter = 33.73m,
@@ -143,29 +154,8 @@ namespace PresentationLayer.Presenter
                 IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
 
                 wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
-                LaborCost = CostingPoints * CostPerPoints;
-                InstallationCost = InstallationPoints * CostPerPoints;
 
-                string costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2),
-                       laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2),
-                       FramePriceDesc = "\n\nFrame Price per linear meter: " + Math.Round(FramePrice, 2),
-                       FrameReinPriceDesc = "\n\nFrame Rein Price per linear meter: " + Math.Round(FrameReinPrice, 2),
-                       SashPriceDesc = "\n\nSash Price per linear meter: " + Math.Round(SashPrice, 2),
-                       SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + Math.Round(SashReinPrice, 2),
-                       GBPriceDesc = "\n\nGB Price per linear meter: " + Math.Round(GbPrice, 2),
-                       InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2),
-                       FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
-
-                TotaPrice = Math.Round(LaborCost, 2) +
-                            Math.Round(InstallationCost, 2) +
-                            Math.Round(FramePrice, 2) +
-                            Math.Round(FrameReinPrice, 2) +
-                            Math.Round(SashPrice, 2) +
-                            Math.Round(SashReinPrice, 2) +
-                            Math.Round(GbPrice, 2) +
-                            Math.Round(FittingAndSuppliesCost, 2);
-
-                TotaPrice = (TotaPrice * 1.3m) + TotaPrice;
+                Console.WriteLine(Math.Round(lstTotalPrice[i], 2));
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
@@ -182,8 +172,8 @@ namespace PresentationLayer.Presenter
                                                                           + FittingAndSuppliesDesc;
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = TotaPrice;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = TotaPrice.ToString();
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(lstTotalPrice[i], 2);  //TotaPrice;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
                 this._lstItemArea.Add(TotalItemArea);
@@ -194,6 +184,7 @@ namespace PresentationLayer.Presenter
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
             DSQuotation _dsq = new DSQuotation();
+
             /*
           ID
           dtItemName
@@ -549,15 +540,6 @@ namespace PresentationLayer.Presenter
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                TotaPrice = 0;
-                LaborCost = 0;
-                InstallationCost = 0;
-                FramePrice = 0;
-                FrameReinPrice = 0;
-                SashPrice = 0;
-                SashReinPrice = 0;
-                GbPrice = 0;
-
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     #region baseOnDimensionAndColorPoints
@@ -627,10 +609,6 @@ namespace PresentationLayer.Presenter
                             }
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
-
-
-
-
                                 if (pnl.Panel_SashPropertyVisibility == true)
                                 {
                                     #region SashPrice 
@@ -644,10 +622,7 @@ namespace PresentationLayer.Presenter
                                     #region FrictionStayPrice
                                     if (pnl.Panel_Type.Contains("Casement"))
                                     {
-                                        if (pnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
-                                        {
-                                            FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
-                                        }
+                                        FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
                                     }
 
                                     if (pnl.Panel_Type.Contains("Awning"))
@@ -699,10 +674,7 @@ namespace PresentationLayer.Presenter
                             #region FrictionStayPrice
                             if (Singlepnl.Panel_Type.Contains("Casement"))
                             {
-                                if (Singlepnl.Panel_FSCasementArtNo == FrictionStayCasement_ArticleNo._16HD)
-                                {
-                                    FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
-                                }
+                                FittingAndSuppliesCost = FS_16HD_casementPricePerPiece * 2;
                             }
 
                             if (Singlepnl.Panel_Type.Contains("Awning"))
@@ -779,6 +751,49 @@ namespace PresentationLayer.Presenter
                         InstallationPoints += (ProfileColorPoints / 3) * 4;
                     }
                 }
+
+
+
+                LaborCost = CostingPoints * CostPerPoints;
+                InstallationCost = InstallationPoints * CostPerPoints;
+
+                TotaPrice = Math.Round(LaborCost, 2) +
+                            Math.Round(InstallationCost, 2) +
+                            Math.Round(FramePrice, 2) +
+                            Math.Round(FrameReinPrice, 2) +
+                            Math.Round(SashPrice, 2) +
+                            Math.Round(SashReinPrice, 2) +
+                            Math.Round(GbPrice, 2) +
+                            Math.Round(FittingAndSuppliesCost, 2);
+
+                TotaPrice = (TotaPrice * 1.3m) + TotaPrice;
+
+                lstTotalPrice.Add(TotaPrice);
+
+
+
+                //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
+                //laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
+                //FramePriceDesc = "\n\nFrame Price per linear meter: " + Math.Round(FramePrice, 2);
+                //FrameReinPriceDesc = "\n\nFrame Rein Price per linear meter: " + Math.Round(FrameReinPrice, 2);
+                //SashPriceDesc = "\n\nSash Price per linear meter: " + Math.Round(SashPrice, 2);
+                //SashReinPriceDesc = "\n\nSash Rein Price per linear meter: " + Math.Round(SashReinPrice, 2);
+                //GBPriceDesc = "\n\nGB Price per linear meter: " + Math.Round(GbPrice, 2);
+                //InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
+                //FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
+
+
+                CostingPoints = 0;
+                InstallationPoints = 0;
+                TotaPrice = 0;
+                LaborCost = 0;
+                InstallationCost = 0;
+                FramePrice = 0;
+                FrameReinPrice = 0;
+                SashPrice = 0;
+                SashReinPrice = 0;
+                GbPrice = 0;
+                FittingAndSuppliesCost = 0;
             }
 
         }
