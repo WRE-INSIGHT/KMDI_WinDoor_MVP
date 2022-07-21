@@ -201,6 +201,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
+               
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
                 if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && _panelModel.Panel_Type.Contains("Sliding") == false &&

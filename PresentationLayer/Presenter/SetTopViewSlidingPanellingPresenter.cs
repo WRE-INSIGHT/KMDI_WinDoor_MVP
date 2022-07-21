@@ -25,10 +25,11 @@ namespace PresentationLayer.Presenter
         PictureBox _pboxFrame;
         Panel _pnlPanelling;
 
-        int pnlCounter = 0,
+        int pnlLeftCounter = 0,
+            pnlRightCounter = 0,
             line_X_Distance,
             pnlCount;
-
+        string lineLocation;
         public SetTopViewSlidingPanellingPresenter(ISetTopViewSlidingPanellingView setTopViewSlidingPanelling)
         {
             _setTopViewSlidingPanelling = setTopViewSlidingPanelling;
@@ -45,27 +46,24 @@ namespace PresentationLayer.Presenter
             _setTopViewSlidingPanelling.pnlPanellingPaintEventRaised += _setTopViewSlidingPanelling_pnlPanellingPaintEventRaised;
             _setTopViewSlidingPanelling.btnAddLeftLineClickEventRaised += _setTopViewSlidingPanelling_btnAddLeftLineClickEventRaised;
             _setTopViewSlidingPanelling.btnMinusLeftLineClickEventRaised += _setTopViewSlidingPanelling_btnMinusLeftLineClickEventRaised;
+            _setTopViewSlidingPanelling.btnAddRightLineClickEventRaised += _setTopViewSlidingPanelling_btnAddRightLineClickEventRaised;
+            _setTopViewSlidingPanelling.btnMinusRightLineClickEventRaised += _setTopViewSlidingPanelling_btnMinusRightLineClickEventRaised;
         }
 
-        private void _setTopViewSlidingPanelling_btnMinusLeftLineClickEventRaised(object sender, EventArgs e)
+        private void _setTopViewSlidingPanelling_btnMinusRightLineClickEventRaised(object sender, EventArgs e)
         {
-            pnlCounter -= 1;
-            //line_X_Distance -= (_pnlPanelling.Width / (pnlCount * 2)) * pnlCounter + 1;
-            _pnlPanelling.Invalidate();
-            Console.WriteLine(pnlCounter);
-
+            if (pnlRightCounter != 0)
+            {
+                pnlRightCounter -= 1;
+                //line_X_Distance -= (_pnlPanelling.Width / (pnlCount * 2)) * pnlRightCounter + 1;
+                _pnlPanelling.Invalidate();
+                Console.WriteLine(pnlRightCounter);
+            }
         }
 
-        private void _setTopViewSlidingPanelling_btnAddLeftLineClickEventRaised(object sender, EventArgs e)
+        private void _setTopViewSlidingPanelling_btnAddRightLineClickEventRaised(object sender, EventArgs e)
         {
-            pnlCounter += 1; 
-            _pnlPanelling.Invalidate();
-            Console.WriteLine(pnlCounter);
-
-        }
-
-        private void _setTopViewSlidingPanelling_pnlPanellingPaintEventRaised(object sender, PaintEventArgs e)
-        {
+            lineLocation = "Right";
             foreach (IFrameModel fr in _windoorModel.lst_frame)
             {
                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -77,38 +75,104 @@ namespace PresentationLayer.Presenter
 
                 }
             }
-            Graphics g = e.Graphics;
-
-            int line_LtR_Y = _pnlPanelling.Height - 10;
-            if (pnlCount != 0)
+            if (pnlCount > (pnlLeftCounter + pnlRightCounter))
             {
-                line_X_Distance = _pnlPanelling.Width / (pnlCount * 2);
+                pnlRightCounter += 1;
+                _pnlPanelling.Invalidate();
+                Console.WriteLine(pnlRightCounter);
             }
-           
+        }
 
-            int InitialDistance = 0;
-
-            for (int a = 0; a < pnlCounter; a++)
+        private void _setTopViewSlidingPanelling_btnMinusLeftLineClickEventRaised(object sender, EventArgs e)
+        {
+            if (pnlLeftCounter != 0)
             {
-                if (InitialDistance == 0)
-                {  
-                    InitialDistance = line_X_Distance * a;
-                }
+                pnlLeftCounter -= 1;
+                //line_X_Distance -= (_pnlPanelling.Width / (pnlCount * 2)) * pnlLeftCounter + 1;
+                _pnlPanelling.Invalidate();
+                Console.WriteLine(pnlLeftCounter);
+            }
 
-                int x1 = InitialDistance,
-                    x2 = InitialDistance + (line_X_Distance / 2);
+        }
 
-
-                if (a % 2 == 0)
+        private void _setTopViewSlidingPanelling_btnAddLeftLineClickEventRaised(object sender, EventArgs e)
+        {
+            lineLocation = "Left";
+            foreach (IFrameModel fr in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                 {
-                    g.DrawLine(new Pen(Color.Gold, 5), new Point(x1, line_LtR_Y), new Point(x2, 10));
+                    if (mpnl.MPanel_DividerEnabled == false)
+                    {
+                        pnlCount = mpnl.MPanelLst_Panel.Count;
+                    }
+
                 }
-                else
+            }
+            if (pnlCount > (pnlLeftCounter + pnlRightCounter))
+            {
+                pnlLeftCounter += 1;
+                _pnlPanelling.Invalidate();
+                Console.WriteLine(pnlLeftCounter);
+            }
+
+        }
+
+        private void _setTopViewSlidingPanelling_pnlPanellingPaintEventRaised(object sender, PaintEventArgs e)
+        {
+            
+            Graphics g = e.Graphics;
+            if (lineLocation != null)
+            {
+                int line_LtR_Y = _pnlPanelling.Height - 10;
+                if (pnlCount != 0)
                 {
-                    g.DrawLine(new Pen(Color.Gold, 5), new Point(x2, line_LtR_Y ), new Point(x1, 10));
+                    line_X_Distance = _pnlPanelling.Width / pnlCount;
                 }
-                Console.WriteLine(x1 + "\n" + x2 + "\n\n");
-                InitialDistance = x2;
+                int InitialDistance = 20;
+                for (int a = 0; a < pnlLeftCounter; a++)
+                {
+                   
+
+                    int x1 = InitialDistance,
+                        x2 = InitialDistance + (line_X_Distance / 2);
+
+
+                    if (a % 2 == 0)
+                    {
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x2, 10));
+                    }
+                    else
+                    {
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y), new Point(x1, 10));
+                    }
+                    Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+                    InitialDistance = x2;
+                }
+                if (pnlCount != 0)
+                {
+                    line_X_Distance = -System.Math.Abs(_pnlPanelling.Width / pnlCount);
+                }
+                InitialDistance = _pnlPanelling.Width - 20;
+                for (int a = 0; a < pnlRightCounter; a++)
+                {
+                   
+
+                    int x1 = InitialDistance,
+                        x2 = InitialDistance + (line_X_Distance / 2);
+
+
+                    if (a % 2 == 0)
+                    {
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x2, 10));
+                    }
+                    else
+                    {
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y), new Point(x1, 10));
+                    }
+                    Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+                    InitialDistance = x2;
+                }
             }
         }
 
@@ -241,6 +305,10 @@ namespace PresentationLayer.Presenter
                 //}
                 //arrow for HEIGHT
             }
+            Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
+            basePL.DrawToBitmap(bm, new Rectangle(0, 0, basePL.Size.Width, basePL.Size.Height));
+            //bm.Save(@"C:\Users\Minrivel\Pictures\Saved Pictures\2.png", ImageFormat.Png);
+
         }
 
         private void _setTopViewSlidingPanelling_SetTopViewSlidingPanellingViewLoadEventRaised(object sender, System.EventArgs e)
@@ -355,22 +423,16 @@ namespace PresentationLayer.Presenter
             }
             //arrow for HEIGHT
             locY += DispHt_float;
-
             return locY;
         }
-
-
         public ISetTopViewSlidingPanellingView GetSetTopViewSlidingPanellingView()
         {
             return _setTopViewSlidingPanelling;
         }
-
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
-
             binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
-
             return binding;
         }
 
