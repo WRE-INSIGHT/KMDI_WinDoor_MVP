@@ -2690,7 +2690,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
-                    if(Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                         pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     else
                     {
@@ -2710,7 +2710,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
 
-                    pnl_ht = (((parent_MpanelHeight - mpnlHt_deduct) - (divSize * div_count) ) / totalpanel_inside_parentMpanel) - divMove_int;
+                    pnl_ht = (((parent_MpanelHeight - mpnlHt_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     pnl_wd = parent_MpanelWidth - mpnlWd_deduct;
                 }
             }
@@ -2743,7 +2743,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
                     decimal divMove_dec_times2 = divMove_dec * 2;
                     divMove_int = Convert.ToInt32(divMove_dec_times2);
-                    if(Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                         pnl_wd = (((parent_MpanelWidth) - (13 * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     else
                     {
@@ -2777,7 +2777,7 @@ namespace ModelLayer.Model.Quotation.Panel
             PanelImageRenderer_Width = pnl_wd;
             PanelImageRenderer_Height = pnl_ht;
         }
-       
+
         public void AdjustPropertyPanelHeight(string mode)
         {
             if (mode == "addChkMotorized")
