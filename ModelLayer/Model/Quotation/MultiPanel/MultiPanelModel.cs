@@ -1,17 +1,15 @@
-﻿using System;
+﻿using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Variables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModelLayer.Model.Quotation.Panel;
-using ModelLayer.Model.Quotation.Divider;
-using ModelLayer.Model.Quotation.Frame;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
-using ModelLayer.Variables;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -522,7 +520,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 _mpanelDividerEnabled = value;
             }
         }
-      
+
         private float _mpanelZoom;
         public float MPanel_Zoom
         {
@@ -1604,7 +1602,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             int PanelWidthToBindOriginal = pnlForDecimalDistribution.Panel_WidthToBind;
                             int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((MPanel_WidthToBind - 10) * ((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
                             MPanelCount--;
-                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount  < PanelDecimals))
+                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount < PanelDecimals))
                             {
                                 pnlForDecimalDistribution.Panel_WidthToBind += 1;
                                 PanelDecimals--;
@@ -1637,20 +1635,20 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
-                    
+
                     mpnlOriginalWidth = MPanel_Width - 20;
                     PanelDecimals += (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
                     pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                   
+
                 }
                 else
                 {
                     mpnlOriginalWidth = MPanel_Width - 20;
                     //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
-                    decimal PanelWidthDecimal = (decimal)((decimal)(MPanelImageRenderer_Width ) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                    decimal PanelWidthDecimal = (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
                     PanelDecimals += PanelWidthDecimal - Math.Truncate(PanelWidthDecimal);
                     pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                    
+
                 }
             }
             PanelDecimals = Math.Round(PanelDecimals);
@@ -1684,7 +1682,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                     }
                 }
-                
+
             }
         }
         public void SetZoomMPanels()
@@ -3349,6 +3347,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.div_property_claddingBracketOptionsHeight;
                 }
+                else if (mode == "addSlidingType")
+                {
+                    MPanelProp_Height += constants.panel_property_SlidingTypeOptionsheight;
+                }
+                else if (mode == "minusSlidingType")
+                {
+                    MPanelProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
+                }
+
             }
             else if (objtype == "Mpanel")
             {
