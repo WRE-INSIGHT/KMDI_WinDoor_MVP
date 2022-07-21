@@ -349,10 +349,10 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_SlidingTypeVisibility = true;
                     _panelModel.AdjustPropertyPanelHeight("addSlidingType");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
-                    //if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    //{
-                    //    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
-                    //}
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+                    }
                 }
 
                 if (!_panelModel.Panel_Type.Contains("Sliding"))
@@ -384,12 +384,12 @@ namespace PresentationLayer.Presenter.UserControls
 
                 }
                 if (_panelModel.Panel_SashPropertyVisibility == true)
-                { 
+                {
                     IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
                     _pnlPanelSpecs.Controls.Add(motorized);
                     motorized.Dock = DockStyle.Top;
-                    motorized.BringToFront(); 
+                    motorized.BringToFront();
 
                     IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
