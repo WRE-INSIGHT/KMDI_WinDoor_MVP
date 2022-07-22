@@ -162,6 +162,20 @@ namespace PresentationLayer.Views
                 customArrowHeadToolStripMenuItem.Checked = value;
             }
         }
+        private int _propertiesScroll;
+        public int PropertiesScroll
+        {
+            get
+            {
+                return _propertiesScroll;
+            }
+
+            set
+            {
+                _propertiesScroll = value;
+                pnlPropertiesBody.VerticalScroll.Value = value;
+            }
+        }
 
         #endregion
 
@@ -212,6 +226,7 @@ namespace PresentationLayer.Views
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
             this.DataBindings.Add(binding["WD_zoom"]);
             this.DataBindings.Add(binding["WD_customArrowToggle"]);
+            this.DataBindings.Add(binding["WD_PropertiesScroll"]);
         }
 
         public void RemoveBinding()
@@ -322,7 +337,10 @@ namespace PresentationLayer.Views
 
         private void deleteItemToolStripButton1_Click(object sender, EventArgs e)
         {
+            pnlPropertiesBody.VerticalScroll.Minimum = 100;
             EventHelpers.RaiseEvent(sender, DeleteToolStripButtonClickEventRaised, e);
+            Console.WriteLine(pnlPropertiesBody.VerticalScroll.LargeChange);
+            Console.WriteLine(pnlPropertiesBody.VerticalScroll.Minimum);
         }
 
         private void listOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)

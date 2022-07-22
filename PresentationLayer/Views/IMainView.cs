@@ -37,6 +37,7 @@ namespace PresentationLayer.Views
         float Zoom { get; set; }
         bool ItemToolStripEnabled { get; set; }
         bool CreateNewWindoorBtnEnabled { get; set; }
+        int PropertiesScroll { get; set; }
         void ShowMainView();
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding();

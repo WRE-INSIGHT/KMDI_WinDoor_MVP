@@ -139,6 +139,20 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        private int _wdPropertiesScroll;
+        public int WD_PropertiesScroll
+        {
+            get
+            {
+                return _wdPropertiesScroll;
+            }
+
+            set
+            {
+                _wdPropertiesScroll = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _wdVisibility;
         public bool WD_visibility
@@ -740,6 +754,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_customArrowToggle = false;
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
+            WD_PropertiesScroll = 0;
         }
     }
 }

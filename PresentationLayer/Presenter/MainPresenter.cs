@@ -957,6 +957,8 @@ namespace PresentationLayer.Presenter
         bool toggle;
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
+
+            _windoorModel.WD_PropertiesScroll += 10;
             toggle = !toggle;
             if (toggle == true)
             {
@@ -1344,8 +1346,8 @@ namespace PresentationLayer.Presenter
                         AddWndrList_QuotationModel(_windoorModel);
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
-
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
+                       _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
 
@@ -2112,7 +2114,7 @@ namespace PresentationLayer.Presenter
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
             return mainPresenterBinding;
         }
 

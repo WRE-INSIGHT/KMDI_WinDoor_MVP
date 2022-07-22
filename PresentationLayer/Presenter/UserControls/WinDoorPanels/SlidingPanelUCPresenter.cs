@@ -88,11 +88,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _slidingPanelUC_slidingPanelUCMouseClickEventRaised(object sender, MouseEventArgs e)
         {
-             slidingUC = (UserControl)sender;
             try
             {
-            //       Console.WriteLine("**Panel Width*" + _panelModel.Panel_WidthWithDecimal);
-            //Console.WriteLine("**Panel Width To Bind*" + _multiPanelModel.MPanel_WidthToBind);
+                //       Console.WriteLine("**Panel Width*" + _panelModel.Panel_WidthWithDecimal);
+                //Console.WriteLine("**Panel Width To Bind*" + _multiPanelModel.MPanel_WidthToBind);
+                slidingUC = (UserControl)sender;
+
+
             }
             catch (Exception)
             {

@@ -26,11 +26,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_width_4basePlatform_forImageRenderer { get; set; }
         float WD_zoom { get; set; }
         float WD_zoom_forImageRenderer { get; }
+        int WD_PropertiesScroll { get; set; }
+
         Image WD_image { get; set; }
         Image WD_flpImage { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         List<IConcreteModel> lst_concrete { get; set; }
-
         int frameIDCounter { get; set; }
         int concreteIDCounter { get; set; }
         int panelIDCounter { get; set; }
