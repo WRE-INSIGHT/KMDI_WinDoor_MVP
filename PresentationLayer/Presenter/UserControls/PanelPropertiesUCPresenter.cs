@@ -349,6 +349,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     _panelModel.Panel_SlidingTypeVisibility = true;
                     _panelModel.AdjustPropertyPanelHeight("addSlidingType");
+
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {

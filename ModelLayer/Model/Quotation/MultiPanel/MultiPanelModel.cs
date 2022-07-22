@@ -3288,6 +3288,15 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_MiddleCloserOptionsheight;
                 }
+                else if (mode == "addSlidingType")
+                {
+                    MPanelProp_Height += constants.panel_property_SlidingTypeOptionsheight;
+                }
+                else if (mode == "minusSlidingType")
+                {
+                    MPanelProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
+                }
+
             }
             else if (objtype == "Div")
             {
