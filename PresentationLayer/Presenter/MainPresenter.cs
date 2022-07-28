@@ -32,7 +32,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter
 {
@@ -627,14 +626,14 @@ namespace PresentationLayer.Presenter
         #region Events
         private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
+            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
         }
 
 
         private void _mainView_selectProjectToolStripMenuItemClickEventRaised1(object sender, EventArgs e)
         {
-       
+
         }
 
         string wndrfile = "",
@@ -1509,7 +1508,7 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region Functions
-        
+
         public void Set_User_View()
         {
             if (_userModel.AccountType == "Cost Engr")

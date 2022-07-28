@@ -99,7 +99,10 @@ namespace PresentationLayer.Views.UserControls
         {
             return pboxItemImage;
         }
-
+        public PictureBox GetPboxTopView()
+        {
+            return pboxTopView;
+        }
         public Label GetLblQuantity()
         {
             return lblQuantity;

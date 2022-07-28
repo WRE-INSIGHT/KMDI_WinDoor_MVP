@@ -38,12 +38,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.tboxItemName = new System.Windows.Forms.TextBox();
+            this.pboxTopView = new System.Windows.Forms.PictureBox();
             this.NudItemQuantity = new System.Windows.Forms.NumericUpDown();
             this.NudItemDiscount = new System.Windows.Forms.NumericUpDown();
             this.nudItemPrice = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxTopView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).BeginInit();
@@ -137,6 +139,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.pboxItemImage);
             this.panel2.Controls.Add(this.tboxItemName);
+            this.panel2.Controls.Add(this.pboxTopView);
             this.panel2.Location = new System.Drawing.Point(1, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 165);
@@ -144,11 +147,10 @@
             // 
             // pboxItemImage
             // 
-            this.pboxItemImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pboxItemImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pboxItemImage.Location = new System.Drawing.Point(0, 25);
             this.pboxItemImage.Name = "pboxItemImage";
-            this.pboxItemImage.Size = new System.Drawing.Size(200, 140);
+            this.pboxItemImage.Size = new System.Drawing.Size(200, 110);
             this.pboxItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxItemImage.TabIndex = 20;
             this.pboxItemImage.TabStop = false;
@@ -162,6 +164,16 @@
             this.tboxItemName.Name = "tboxItemName";
             this.tboxItemName.Size = new System.Drawing.Size(200, 25);
             this.tboxItemName.TabIndex = 21;
+            // 
+            // pboxTopView
+            // 
+            this.pboxTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pboxTopView.Location = new System.Drawing.Point(0, 135);
+            this.pboxTopView.Name = "pboxTopView";
+            this.pboxTopView.Size = new System.Drawing.Size(200, 30);
+            this.pboxTopView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxTopView.TabIndex = 22;
+            this.pboxTopView.TabStop = false;
             // 
             // NudItemQuantity
             // 
@@ -230,6 +242,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxTopView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).EndInit();
@@ -252,5 +265,6 @@
         private System.Windows.Forms.NumericUpDown NudItemQuantity;
         private System.Windows.Forms.NumericUpDown NudItemDiscount;
         private System.Windows.Forms.NumericUpDown nudItemPrice;
+        private System.Windows.Forms.PictureBox pboxTopView;
     }
 }

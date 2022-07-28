@@ -320,6 +320,38 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        private Image _wdSlidingTopViewImage;
+        public Image WD_SlidingTopViewImage
+        {
+            get
+            {
+                return _wdSlidingTopViewImage;
+            }
+
+            set
+            {
+                _wdSlidingTopViewImage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private bool _wdSlidingTopViewVisibility;
+        public bool WD_SlidingTopViewVisibility
+        {
+            get
+            {
+                return _wdSlidingTopViewVisibility;
+            }
+
+            set
+            {
+                _wdSlidingTopViewVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public List<IFrameModel> lst_frame { get; set; }
         public List<IConcreteModel> lst_concrete { get; set; }
 
@@ -446,34 +478,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        //custom arrows methods
-
-        //private bool _pnl_arrowHeightVisibility;
-        //public bool Pnl_ArrowHeightVisibility
-        //{
-        //    get
-        //    {
-        //        return _pnl_arrowHeightVisibility;
-        //    }
-        //    set
-        //    {
-        //        _pnl_arrowHeightVisibility = value;
-        //    }
-        //}
-
-        //private bool _pnl_arrowWidthVisibility;
-        //public bool Pnl_ArrowWidthVisibility
-        //{
-        //    get
-        //    {
-        //        return _pnl_arrowWidthVisibility;
-        //    }
-        //    set
-        //    {
-        //        _pnl_arrowWidthVisibility = value;
-        //    }
-        //}
-
         private int _lbl_arrowCount;
         public int Lbl_ArrowHtCount
         {
@@ -548,6 +552,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
             set
             {
                 _wdCostingPoints = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _wdpboxImagerHeight;
+        public int WD_pboxImagerHeight
+        {
+            get
+            {
+                return _wdpboxImagerHeight;
+            }
+            set
+            {
+                _wdpboxImagerHeight = value;
                 NotifyPropertyChanged();
             }
         }

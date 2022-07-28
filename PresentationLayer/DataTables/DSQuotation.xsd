@@ -12,7 +12,7 @@
   <xs:element name="DSQuotation" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSQuotation" msprop:Generator_UserDSName="DSQuotation">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="dtQuote" msprop:Generator_TableClassName="dtQuoteDataTable" msprop:Generator_TableVarName="tabledtQuote" msprop:Generator_RowChangedName="dtQuoteRowChanged" msprop:Generator_TablePropName="dtQuote" msprop:Generator_RowDeletingName="dtQuoteRowDeleting" msprop:Generator_RowChangingName="dtQuoteRowChanging" msprop:Generator_RowEvHandlerName="dtQuoteRowChangeEventHandler" msprop:Generator_RowDeletedName="dtQuoteRowDeleted" msprop:Generator_RowClassName="dtQuoteRow" msprop:Generator_UserTableName="dtQuote" msprop:Generator_RowEvArgName="dtQuoteRowChangeEvent">
+        <xs:element name="dtQuote" msprop:Generator_TableClassName="dtQuoteDataTable" msprop:Generator_TableVarName="tabledtQuote" msprop:Generator_TablePropName="dtQuote" msprop:Generator_RowDeletingName="dtQuoteRowDeleting" msprop:Generator_RowChangingName="dtQuoteRowChanging" msprop:Generator_RowEvHandlerName="dtQuoteRowChangeEventHandler" msprop:Generator_RowDeletedName="dtQuoteRowDeleted" msprop:Generator_UserTableName="dtQuote" msprop:Generator_RowChangedName="dtQuoteRowChanged" msprop:Generator_RowEvArgName="dtQuoteRowChangeEvent" msprop:Generator_RowClassName="dtQuoteRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="dtItemName" msprop:Generator_ColumnVarNameInTable="columndtItemName" msprop:Generator_ColumnPropNameInRow="dtItemName" msprop:Generator_ColumnPropNameInTable="dtItemNameColumn" msprop:Generator_UserColumnName="dtItemName" type="xs:string" minOccurs="0" />
@@ -24,6 +24,7 @@
               <xs:element name="dtDiscount" msprop:Generator_ColumnVarNameInTable="columndtDiscount" msprop:Generator_ColumnPropNameInRow="dtDiscount" msprop:Generator_ColumnPropNameInTable="dtDiscountColumn" msprop:Generator_UserColumnName="dtDiscount" type="xs:decimal" minOccurs="0" />
               <xs:element name="dtNetPrice" msprop:Generator_ColumnVarNameInTable="columndtNetPrice" msprop:Generator_ColumnPropNameInRow="dtNetPrice" msprop:Generator_ColumnPropNameInTable="dtNetPriceColumn" msprop:Generator_UserColumnName="dtNetPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="dtItemNumber" msprop:Generator_ColumnVarNameInTable="columndtItemNumber" msprop:Generator_ColumnPropNameInRow="dtItemNumber" msprop:Generator_ColumnPropNameInTable="dtItemNumberColumn" msprop:Generator_UserColumnName="dtItemNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="dtTopViewImage" msprop:Generator_ColumnVarNameInTable="columndtTopViewImage" msprop:Generator_ColumnPropNameInRow="dtTopViewImage" msprop:Generator_ColumnPropNameInTable="dtTopViewImageColumn" msprop:Generator_UserColumnName="dtTopViewImage" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

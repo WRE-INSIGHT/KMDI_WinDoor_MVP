@@ -28,25 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbox_itemImage = new System.Windows.Forms.PictureBox();
             this.lbl_item = new System.Windows.Forms.Label();
             this.pnl_itmbot_ = new System.Windows.Forms.Panel();
             this.lbl_desc = new System.Windows.Forms.Label();
             this.lbl_dimension = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
+            this.pbox_itemImage = new System.Windows.Forms.PictureBox();
+            this.pboxSlidingTopView = new System.Windows.Forms.PictureBox();
             this.pnl_itmbot_.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxSlidingTopView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbox_itemImage
-            // 
-            this.pbox_itemImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbox_itemImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbox_itemImage.Location = new System.Drawing.Point(0, 20);
-            this.pbox_itemImage.Name = "pbox_itemImage";
-            this.pbox_itemImage.Size = new System.Drawing.Size(166, 220);
-            this.pbox_itemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbox_itemImage.TabIndex = 4;
-            this.pbox_itemImage.TabStop = false;
             // 
             // lbl_item
             // 
@@ -102,29 +93,51 @@
             this.lbl_dimension.Text = "lbldimension_";
             this.lbl_dimension.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // pbox_itemImage
+            // 
+            this.pbox_itemImage.Location = new System.Drawing.Point(-1, 20);
+            this.pbox_itemImage.Name = "pbox_itemImage";
+            this.pbox_itemImage.Size = new System.Drawing.Size(166, 178);
+            this.pbox_itemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbox_itemImage.TabIndex = 9;
+            this.pbox_itemImage.TabStop = false;
+            // 
+            // pboxSlidingTopView
+            // 
+            this.pboxSlidingTopView.BackColor = System.Drawing.SystemColors.Control;
+            this.pboxSlidingTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pboxSlidingTopView.Location = new System.Drawing.Point(0, 200);
+            this.pboxSlidingTopView.Name = "pboxSlidingTopView";
+            this.pboxSlidingTopView.Size = new System.Drawing.Size(166, 40);
+            this.pboxSlidingTopView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pboxSlidingTopView.TabIndex = 10;
+            this.pboxSlidingTopView.TabStop = false;
+            // 
             // ItemInfoUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pbox_itemImage);
+            this.Controls.Add(this.pboxSlidingTopView);
             this.Controls.Add(this.lbl_item);
             this.Controls.Add(this.pnl_itmbot_);
             this.Name = "ItemInfoUC";
             this.Size = new System.Drawing.Size(166, 373);
             this.Load += new System.EventHandler(this.ItemInfoUC_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).EndInit();
             this.pnl_itmbot_.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxSlidingTopView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        public System.Windows.Forms.PictureBox pbox_itemImage;
         public System.Windows.Forms.Label lbl_item;
         private System.Windows.Forms.Panel pnl_itmbot_;
         public System.Windows.Forms.Label lbl_desc;
         public System.Windows.Forms.Label lbl_dimension;
+        public System.Windows.Forms.PictureBox pbox_itemImage;
+        public System.Windows.Forms.PictureBox pboxSlidingTopView;
     }
 }

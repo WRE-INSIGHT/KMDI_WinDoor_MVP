@@ -172,6 +172,7 @@ namespace PresentationLayer.Presenter
                                                                           + FittingAndSuppliesDesc;
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(lstTotalPrice[i], 2);  //TotaPrice;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
@@ -247,12 +248,19 @@ namespace PresentationLayer.Presenter
                 #endregion
 
                 MemoryStream mstream = new MemoryStream();
-                Image img = _quotationModel.Lst_Windoor[i].WD_image;
+                MemoryStream mstream2 = new MemoryStream();
+                Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                      topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
-                _quotationModel.Lst_Windoor[i].WD_image.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+                topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
 
-                byte[] arrimage = mstream.ToArray();
-                string byteToStr = Convert.ToBase64String(arrimage);
+                byte[] arrimageForItemImage = mstream.ToArray();
+                byte[] arrimageForTopView = mstream2.ToArray();
+
+                string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+
 
                 IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
 
@@ -261,12 +269,13 @@ namespace PresentationLayer.Presenter
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
                                       lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                      byteToStr,
+                                      byteToStrForItemImage,
                                       (int)lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
                                       (int)lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
                                       (int)lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                       Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
-                                      i + 1);
+                                      i + 1,
+                                      byteToStrForTopView);
             }
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
@@ -609,6 +618,51 @@ namespace PresentationLayer.Presenter
                             }
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
+                                #region Glass 
+
+                                if (pnl.Panel_GlassThickness >= 6.0f &&
+                                    pnl.Panel_GlassThickness <= 9.0f)
+                                {
+                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_6mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_6mmClr_PricePerSqrMeter;
+                                    }
+                                    Console.WriteLine("six to nine" + pnl.Panel_GlassThicknessDesc);
+                                }
+                                else if (pnl.Panel_GlassThickness == 10.0f ||
+                                 pnl.Panel_GlassThickness == 11.0f)
+                                {
+                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_10mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_10mmClr_PricePerSqrMeter;
+                                    }
+
+                                    Console.WriteLine("ten to eleven");
+                                }
+                                else if (pnl.Panel_GlassThickness >= 12.0f)
+                                {
+                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_12mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice = (pnl.Panel_SashHeight * pnl.Panel_SashWidth) * Glass_12mmClr_PricePerSqrMeter;
+                                    }
+
+                                    Console.WriteLine("twelve above");
+                                }
+
+                                #endregion
+
                                 if (pnl.Panel_SashPropertyVisibility == true)
                                 {
                                     #region SashPrice 

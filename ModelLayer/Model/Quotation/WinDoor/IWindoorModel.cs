@@ -28,6 +28,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
         Image WD_flpImage { get; set; }
+        Image WD_SlidingTopViewImage { get; set; }
+        bool WD_SlidingTopViewVisibility { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         List<IConcreteModel> lst_concrete { get; set; }
 
@@ -64,5 +66,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int Div_ArrowCount { get; set; }
         bool WD_customArrowToggle { get; set; }
         decimal WD_CostingPoints { get; set; }
+        int WD_pboxImagerHeight { get; set; }
     }
 }
