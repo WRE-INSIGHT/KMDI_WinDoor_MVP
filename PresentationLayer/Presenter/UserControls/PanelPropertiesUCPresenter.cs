@@ -453,9 +453,6 @@ namespace PresentationLayer.Presenter.UserControls
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                     }
                 }
-
-
-
                 if (_panelModel.Panel_Type.Contains("Louver") == false)
                 {
                     IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
@@ -465,7 +462,6 @@ namespace PresentationLayer.Presenter.UserControls
                     glassProp.BringToFront();
 
                 }
-
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
                 _pnlPanelSpecs.Controls.Add(gbarProp);

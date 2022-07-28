@@ -858,7 +858,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 MessageBox.Show(ex.Message);
             }
-                _multiPanelModel.SetZoomPanelsDecimals();
+            _multiPanelModel.SetImagerZoomPanelsWithDecimals();
         }
 
         private void _multiPanelMullionUC_deleteClickedEventRaised(object sender, EventArgs e)

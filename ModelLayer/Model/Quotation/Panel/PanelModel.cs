@@ -1905,7 +1905,6 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-
         #endregion
 
         #region Methods
@@ -2552,13 +2551,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetDimensionToBind_using_BaseDimension()
         {
-            if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
-                Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+            if (Panel_ParentMultiPanelModel != null)
+            {
+                if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                else
+                {
+                    int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
+                    int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                    Panel_WidthToBind = pnl_wd;
+                }
+            }
             else
             {
-                int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
-                int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                Panel_WidthToBind = pnl_wd;
+                Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
             }
             Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
         }
@@ -2695,8 +2701,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     else
                     {
                         int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
-                        Console.WriteLine(Panel_Width);
-                        Console.WriteLine(Panel_WidthToBind);
                         pnl_wd = Convert.ToInt32(Math.Floor((parent_MpanelWidth - 10) * ((double)Panel_WidthWithDecimal / mpnlOriginalWidth)));
                     }
                     pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
@@ -2749,7 +2753,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
                         pnl_wd = Convert.ToInt32(Math.Floor((parent_MpanelWidth) * ((decimal)Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                        Console.WriteLine(pnl_wd);
                     }
                     //pnl_wd = ((parent_MpanelWidth) / totalpanel_inside_parentMpanel) - divMove_int;
                     pnl_ht = parent_MpanelHeight;
@@ -6698,7 +6701,6 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_BackColor = Color.DarkGray;
             Panel_CmenuDeleteVisibility = true;
             Panel_OrientVisibility = true;
-
             Panel_PropertyHeight = constants.panel_propertyHeight_default;
             Panel_HandleOptionsHeight = constants.panel_property_handleOptionsHeight;
             Panel_RotoswingOptionsHeight = constants.panel_property_rotoswingOptionsheight_default;

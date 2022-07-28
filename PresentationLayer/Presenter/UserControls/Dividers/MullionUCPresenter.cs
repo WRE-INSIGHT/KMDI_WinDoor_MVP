@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.Dividers;
@@ -68,7 +69,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             UserControl me = (UserControl)sender;
             int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
             FlowLayoutPanel flp = (FlowLayoutPanel)me.Parent; //MultiPanel Container
-
             Control prev_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx - 1];
             Control nxt_ctrl = null;
 
@@ -458,6 +458,66 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 _mainPresenter.SetSelectedDivider(_divModel, null, this);
             }
+            try
+            {
+                //       Console.WriteLine("**Panel Width*" + _panelModel.Panel_WidthWithDecimal);
+                //Console.WriteLine("**Panel Width To Bind*" + _multiPanelModel.MPanel_WidthToBind);
+                UserControl mullionUC = (UserControl)sender;
+
+
+                IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                int pnlPropertyHeight = 382;
+                int divPropertyHeight = 0;
+                foreach (IFrameModel fr in wdm.lst_frame)
+                {
+
+                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    {
+                        Panel mpnlParent = (Panel)mullionUC.Parent;
+                        foreach(Control ctrl in mpnlParent.Controls)
+                        {
+
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            {
+                                if (ctrl.Name == mullionUC.Name)
+                                {
+                                    if (pnl.Panel_Name == ctrl.Name)
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                    }
+                                }
+                            }
+                           
+                            foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                            {
+                                if (ctrl.Name == mullionUC.Name)
+                                {
+                                    if (dvd.Div_Name == ctrl.Name)
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        divPropertyHeight += dvd.Div_PropHeight;
+                                    }
+                                }
+                            }
+                            if (ctrl.Name == mullionUC.Name)
+                                break;
+
+                        }
+                    }
+                }
+                wdm.WD_PropertiesScroll = pnlPropertyHeight + divPropertyHeight;
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void _mullionUC_mullionUCSizeChangedEventRaised(object sender, EventArgs e)
@@ -589,6 +649,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         {
             try
             {
+
                 UserControl me = (UserControl)sender;
                 int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)sender);
 
@@ -794,7 +855,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             }
                         }
                     }
-                    _multiPanelModel.SetZoomPanelsDecimals();
+                    _multiPanelModel.SetImagerZoomPanelsWithDecimals();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

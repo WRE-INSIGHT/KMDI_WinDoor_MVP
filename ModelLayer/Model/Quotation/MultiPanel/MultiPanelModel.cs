@@ -1621,11 +1621,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             }
                         }
                     }
-                    Console.WriteLine(pnlForDecimalDistribution.Panel_WidthToBind);
                 }
             }
         }
-        public void SetZoomPanelsDecimals()
+        public void SetImagerZoomPanelsWithDecimals()
         {
             decimal PanelDecimals = 0;
             int mpnlOriginalWidth = 0;

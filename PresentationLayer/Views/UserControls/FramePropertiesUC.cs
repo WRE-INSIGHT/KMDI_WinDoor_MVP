@@ -84,7 +84,6 @@ namespace PresentationLayer.Views.UserControls
 
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
         }
-
         public void ThisBinding(Dictionary<string, Binding> frameModelBinding)
         {
             this.DataBindings.Add(frameModelBinding["Frame_ID"]);
@@ -99,48 +98,39 @@ namespace PresentationLayer.Views.UserControls
             cmb_FrameProfile.DataBindings.Add(frameModelBinding["Frame_ArtNo"]);
             cmb_FrameReinf.DataBindings.Add(frameModelBinding["Frame_ReinfArtNo"]);
         }
-
         private void num_fWidth_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NumFWidthValueChangedEventRaised, e);
         }
-
         private void num_fHeight_ValueChanged_1(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NumFHeightValueChangedEventRaised, e);
         }
-
         private void rdBtn_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, RdBtnCheckedChangedEventRaised, e);
         }
-
         public void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled)
         {
             rdBtn_Window.Enabled = frameTypeEnabled;
             rdBtn_Door.Enabled = frameTypeEnabled;
         }
-
         private void cmb_FrameProfile_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbFrameProfileSelectedValueChangedEventRaised, e);
         }
-
         private void cmb_FrameReinf_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbFrameReinfSelectedValueChangedEventRaised, e);
         }
-
         public Panel GetFramePropertiesPNL()
         {
             return pnl_frameProperties;
         }
-
         public Panel GetBodyPropertiesPNL()
         {
             return pnl_Body;
         }
-
         public void AddHT_PanelBody(int addht)
         {
             pnl_Body.Height += addht;

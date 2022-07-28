@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 namespace PresentationLayer.Views
 {
@@ -174,6 +175,7 @@ namespace PresentationLayer.Views
             {
                 _propertiesScroll = value;
                 pnlPropertiesBody.VerticalScroll.Value = value;
+                pnlPropertiesBody.ScrollControlIntoView(pnlPropertiesBody);
             }
         }
 
@@ -339,8 +341,6 @@ namespace PresentationLayer.Views
         {
             pnlPropertiesBody.VerticalScroll.Minimum = 100;
             EventHelpers.RaiseEvent(sender, DeleteToolStripButtonClickEventRaised, e);
-            Console.WriteLine(pnlPropertiesBody.VerticalScroll.LargeChange);
-            Console.WriteLine(pnlPropertiesBody.VerticalScroll.Minimum);
         }
 
         private void listOfMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
