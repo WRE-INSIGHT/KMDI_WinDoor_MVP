@@ -958,7 +958,6 @@ namespace PresentationLayer.Presenter
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
 
-            _windoorModel.WD_PropertiesScroll += 10;
             toggle = !toggle;
             if (toggle == true)
             {
@@ -2114,7 +2113,7 @@ namespace PresentationLayer.Presenter
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
-            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
+            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnValidation));
             return mainPresenterBinding;
         }
 

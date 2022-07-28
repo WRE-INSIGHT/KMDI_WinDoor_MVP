@@ -81,6 +81,13 @@ namespace PresentationLayer.Views.UserControls
             {
                 cmenu_mpanel.Show(new Point(MousePosition.X, MousePosition.Y));
             }
+            Console.WriteLine("pnl height" + pnl_MultiPanelProperties.Height);
+            Console.WriteLine("this height" + this.Height);
+        }
+
+        private void pnl_MultiPanelProperties_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine(pnl_MultiPanelProperties.Height);
         }
     }
 }
