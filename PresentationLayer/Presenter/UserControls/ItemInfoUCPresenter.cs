@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommonComponents;
-using PresentationLayer.Views.UserControls;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.WinDoor;
-using Unity;
+using PresentationLayer.Views.UserControls;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls
 {
@@ -58,6 +55,10 @@ namespace PresentationLayer.Presenter.UserControls
             windoorBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_image", new Binding("Image", _windoorModel, "WD_image", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_Selected", new Binding("WD_Selected", _windoorModel, "WD_Selected", true, DataSourceUpdateMode.OnPropertyChanged));
+            windoorBinding.Add("WD_SlidingTopViewVisibility", new Binding("Visible", _windoorModel, "WD_SlidingTopViewVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            windoorBinding.Add("WD_SlidingTopViewImage", new Binding("Image", _windoorModel, "WD_SlidingTopViewImage", true, DataSourceUpdateMode.OnPropertyChanged));
+            //windoorBinding.Add("WD_pboxImagerHeight", new Binding("Height", _windoorModel, "WD_pboxImagerHeight", true, DataSourceUpdateMode.OnPropertyChanged));
+
 
             return windoorBinding;
         }

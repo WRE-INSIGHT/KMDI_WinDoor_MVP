@@ -639,7 +639,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                     }
-                    
+
 
                 }
             }
@@ -796,7 +796,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
-            
+
             #endregion
         }
 
@@ -867,7 +867,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                inner_line,
                                                                (sliding.ClientRectangle.Width - (inner_line * 2)) - w + sashDeduction,
                                                                (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
-              
+
                 sashOverlapValue += inner_line;
             }
 
@@ -907,14 +907,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           inner_line,
                                                           (sliding.ClientRectangle.Width - (inner_line * 2)) - w,
                                                           (sliding.ClientRectangle.Height - (inner_line * 2)) - w));
-               
+
             }
             Point sashPoint = new Point(sliding.ClientRectangle.X + 25, sliding.ClientRectangle.Y);
 
             Pen dgrayPen = new Pen(Color.DimGray);
             dgrayPen.DashStyle = DashStyle.Dash;
             dgrayPen.Width = 3;
-           
+
             int sashW = sliding.Width,
                 sashH = sliding.Height;
             //float ArrowExpectedWidth = 0
@@ -954,7 +954,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             //        g.FillPolygon(new SolidBrush(Color.Red), slidingCurvePoints);
 
             //}
-          
+
             float arwStart_x1 = sashPoint.X + (sashW / 20),
                   center_y1 = sashPoint.Y + (sashH / 2),
                   arwEnd_x2 = ((sashPoint.X + sashW) - arwStart_x1) + (sashW / 20),
@@ -963,10 +963,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                   arwHeadUp_x4,
                   arwHeadUp_y4 = center_y1 + (center_y1 / 4);
 
-            
+
             if (_panelModel.Panel_Orient == false)
             {
-                
+
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
@@ -989,13 +989,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-                    PointF sliding1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7),arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7),ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF sliding5 = new PointF(arrowStartingX + ArrowExpectedWidth,(ArrowExpectedHeight / 2) + arrowStartingY);
-                    PointF sliding6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7),arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
-                    PointF sliding7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7),arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding1 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding2 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
+                    PointF sliding5 = new PointF(arrowStartingX + ArrowExpectedWidth, (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF sliding6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
+                    PointF sliding7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.7), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
                     g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
@@ -1018,13 +1018,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-                    PointF paraslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
-                    PointF paraslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF paraslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF paraslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF paraslide5 = new PointF(arrowStartingX + ArrowExpectedWidth,(ArrowExpectedHeight / 2) + arrowStartingY);
-                    PointF paraslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
-                    PointF paraslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide1 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
+                    PointF paraslide2 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
+                    PointF paraslide5 = new PointF(arrowStartingX + ArrowExpectedWidth, (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF paraslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
+                    PointF paraslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF paraslide8 = new PointF(paraslide1.X + (paraslide3.Y - paraslide7.Y), paraslide7.Y);
                     PointF paraslide9 = new PointF(paraslide1.X + (paraslide3.Y - paraslide7.Y), paraslide1.Y);
                     PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
@@ -1049,13 +1049,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-                    PointF liftandslide1 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
-                    PointF liftandslide2 = new PointF(arrowStartingX,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
-                    PointF liftandslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF liftandslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF liftandslide5 = new PointF(arrowStartingX + ArrowExpectedWidth,(ArrowExpectedHeight / 2) + arrowStartingY);
-                    PointF liftandslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
-                    PointF liftandslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8),arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF liftandslide1 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF liftandslide2 = new PointF(arrowStartingX, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
+                    PointF liftandslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF liftandslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
+                    PointF liftandslide5 = new PointF(arrowStartingX + ArrowExpectedWidth, (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF liftandslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
+                    PointF liftandslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.8), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide8 = new PointF(liftandslide1.X + (liftandslide3.Y - liftandslide7.Y), liftandslide3.Y);
                     PointF liftandslide9 = new PointF(liftandslide1.X + (liftandslide3.Y - liftandslide7.Y), liftandslide2.Y);
                     PointF[] paraslideCurvePoints = { liftandslide1, liftandslide2, liftandslide9, liftandslide8, liftandslide3, liftandslide4, liftandslide5, liftandslide6, liftandslide7 };
@@ -1064,7 +1064,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Orient == true)
             {
-                
+
 
                 if (_panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                     _panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -1088,13 +1088,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-                    PointF sliding1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3),arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF sliding4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3),ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF sliding5 = new PointF(arrowStartingX,(ArrowExpectedHeight / 2) + arrowStartingY);
-                    PointF sliding6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3),arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
-                    PointF sliding7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3),arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding1 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding2 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF sliding4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
+                    PointF sliding5 = new PointF(arrowStartingX, (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF sliding6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
+                    PointF sliding7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.3), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF[] slidingCurvePoints = { sliding1, sliding2, sliding3, sliding4, sliding5, sliding6, sliding7 };
 
                     g.FillPolygon(new SolidBrush(Color.Black), slidingCurvePoints);
@@ -1117,13 +1117,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
                     arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-                    PointF paraslide1 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
-                    PointF paraslide2 = new PointF(arrowStartingX + ArrowExpectedWidth,arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF paraslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2),arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
-                    PointF paraslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2),ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF paraslide5 = new PointF(arrowStartingX,(ArrowExpectedHeight / 2) + arrowStartingY);
-                    PointF paraslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2),arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
-                    PointF paraslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2),arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide1 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.3));
+                    PointF paraslide2 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
+                    PointF paraslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
+                    PointF paraslide5 = new PointF(arrowStartingX, (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF paraslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
+                    PointF paraslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF paraslide8 = new PointF(paraslide1.X - (paraslide3.Y - paraslide7.Y), paraslide7.Y);
                     PointF paraslide9 = new PointF(paraslide1.X - (paraslide3.Y - paraslide7.Y), paraslide1.Y);
                     PointF[] paraslideCurvePoints = { paraslide1, paraslide2, paraslide3, paraslide4, paraslide5, paraslide6, paraslide7, paraslide8, paraslide9 };
@@ -1152,7 +1152,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     PointF liftandslide2 = new PointF(arrowStartingX + ArrowExpectedWidth, arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.3));
                     PointF liftandslide3 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (ArrowExpectedHeight / 2) + (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide4 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2));
-                    PointF liftandslide5 = new PointF(arrowStartingX, + (ArrowExpectedHeight / 2) + arrowStartingY);
+                    PointF liftandslide5 = new PointF(arrowStartingX, +(ArrowExpectedHeight / 2) + arrowStartingY);
                     PointF liftandslide6 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (float)(ArrowExpectedHeight * 0.2));
                     PointF liftandslide7 = new PointF(arrowStartingX + (float)(ArrowExpectedWidth * 0.2), arrowStartingY + (ArrowExpectedHeight / 2) - (float)(ArrowExpectedHeight * 0.15));
                     PointF liftandslide8 = new PointF(liftandslide1.X - (liftandslide3.Y - liftandslide7.Y), liftandslide3.Y);
@@ -1165,7 +1165,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
 
-           
+
 
             if (_timer_count != 0 && _timer_count < 8)
             {

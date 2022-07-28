@@ -1,13 +1,8 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -32,6 +27,18 @@ namespace PresentationLayer.Views.UserControls
                 {
                     lbl_item.ForeColor = Color.Black;
                 }
+            }
+        }
+        public int PboxItemImagerHeight
+        {
+            get
+            {
+                return pbox_itemImage.Height;
+            }
+
+            set
+            {
+                pbox_itemImage.Height = value;
             }
         }
 
@@ -62,6 +69,9 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Add(windoorModelBinding["WD_visibility"]);
             pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_image"]);
             this.DataBindings.Add(windoorModelBinding["WD_Selected"]);
+            pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewImage"]);
+            pboxSlidingTopView.DataBindings.Add(windoorModelBinding["WD_SlidingTopViewVisibility"]);
+            //pbox_itemImage.DataBindings.Add(windoorModelBinding["WD_pboxImagerHeight"]);
         }
 
         private void lbl_item_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -71,5 +81,7 @@ namespace PresentationLayer.Views.UserControls
                 EventHelpers.RaiseMouseEvent(sender, lblItemMouseDoubleClickEventRaised, e);
             }
         }
+
+
     }
 }

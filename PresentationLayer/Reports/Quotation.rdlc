@@ -711,8 +711,26 @@
                           <Sizing>FitProportional</Sizing>
                           <Top>0.04519in</Top>
                           <Left>0.02778in</Left>
-                          <Height>1.37778in</Height>
+                          <Height>1.08959in</Height>
                           <Width>2.30916in</Width>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>5pt</PaddingLeft>
+                            <PaddingRight>5pt</PaddingRight>
+                          </Style>
+                        </Image>
+                        <Image Name="Image4">
+                          <Source>Database</Source>
+                          <Value>=Fields!dtTopViewImage.Value</Value>
+                          <MIMEType>image/png</MIMEType>
+                          <Sizing>FitProportional</Sizing>
+                          <Top>1.16255in</Top>
+                          <Left>0.01389in</Left>
+                          <Height>0.25278in</Height>
+                          <Width>2.30916in</Width>
+                          <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1571,6 +1589,10 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
         </Field>
         <Field Name="dtItemNumber">
           <DataField>dtItemNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtTopViewImage">
+          <DataField>dtTopViewImage</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
