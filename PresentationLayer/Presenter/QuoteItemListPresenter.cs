@@ -253,7 +253,11 @@ namespace PresentationLayer.Presenter
                       topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
                 itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-                topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+
+                if (topView != null)
+                {
+                    topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                }
 
                 byte[] arrimageForItemImage = mstream.ToArray();
                 byte[] arrimageForTopView = mstream2.ToArray();
@@ -264,7 +268,7 @@ namespace PresentationLayer.Presenter
 
                 IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
 
-
+                _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,

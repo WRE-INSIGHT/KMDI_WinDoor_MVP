@@ -147,6 +147,7 @@
             // 
             // pboxItemImage
             // 
+            this.pboxItemImage.BackColor = System.Drawing.Color.White;
             this.pboxItemImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pboxItemImage.Location = new System.Drawing.Point(0, 25);
             this.pboxItemImage.Name = "pboxItemImage";
@@ -167,6 +168,7 @@
             // 
             // pboxTopView
             // 
+            this.pboxTopView.BackColor = System.Drawing.Color.White;
             this.pboxTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pboxTopView.Location = new System.Drawing.Point(0, 135);
             this.pboxTopView.Name = "pboxTopView";

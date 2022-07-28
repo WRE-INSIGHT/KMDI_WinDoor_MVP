@@ -42,6 +42,7 @@
             // lbl_item
             // 
             this.lbl_item.AutoEllipsis = true;
+            this.lbl_item.BackColor = System.Drawing.SystemColors.Control;
             this.lbl_item.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_item.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbl_item.Dock = System.Windows.Forms.DockStyle.Top;
@@ -59,6 +60,7 @@
             // 
             // pnl_itmbot_
             // 
+            this.pnl_itmbot_.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_itmbot_.Controls.Add(this.lbl_desc);
             this.pnl_itmbot_.Controls.Add(this.lbl_dimension);
             this.pnl_itmbot_.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -104,7 +106,7 @@
             // 
             // pboxSlidingTopView
             // 
-            this.pboxSlidingTopView.BackColor = System.Drawing.SystemColors.Control;
+            this.pboxSlidingTopView.BackColor = System.Drawing.Color.White;
             this.pboxSlidingTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pboxSlidingTopView.Location = new System.Drawing.Point(0, 200);
             this.pboxSlidingTopView.Name = "pboxSlidingTopView";
@@ -117,6 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pbox_itemImage);
             this.Controls.Add(this.pboxSlidingTopView);
