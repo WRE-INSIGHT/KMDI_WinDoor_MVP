@@ -58,6 +58,7 @@
             // 
             // pnl_panelling
             // 
+            this.pnl_panelling.BackColor = System.Drawing.Color.White;
             this.pnl_panelling.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_panelling.Location = new System.Drawing.Point(45, 0);
             this.pnl_panelling.Name = "pnl_panelling";
@@ -141,7 +142,7 @@
             // 
             // pnl_SlidingArrow
             // 
-            this.pnl_SlidingArrow.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_SlidingArrow.BackColor = System.Drawing.Color.White;
             this.pnl_SlidingArrow.Controls.Add(this.pbox_frame);
             this.pnl_SlidingArrow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_SlidingArrow.Location = new System.Drawing.Point(0, 0);

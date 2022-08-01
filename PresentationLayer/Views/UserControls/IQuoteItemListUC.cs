@@ -21,6 +21,7 @@ namespace PresentationLayer.Views.UserControls
         NumericUpDown itemDiscount { get; set; }
         NumericUpDown itemPrice { get; set; }
         PictureBox GetPboxItemImage();
+        PictureBox GetPboxTopView();
         Label GetLblQuantity();
         Label GetLblDiscount();
         Label GetLblPrice();
