@@ -78,8 +78,7 @@ namespace PresentationLayer.Presenter
 
         public IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
                                                    IQuoteItemListPresenter quoteItemListPresenter,
-                                                    IMainPresenter mainPresenter
-                                                    )
+                                                   IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPrintQuoteView, PrintQuoteView>()

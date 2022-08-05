@@ -127,14 +127,14 @@
   <data name="ExtensionTop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExtensionTop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddNew_Door" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddNew_Door.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="plus_math_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\plus_math_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MultiplePanelTransom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiplePanel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="disabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enabled_forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="print" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="refresh_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,6 +151,9 @@
   <data name="search_filled_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_filled_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SlidingPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SlidingPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="plus2_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus2_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,8 +166,8 @@
   <data name="icons8_closed_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_closed_window.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExtensionBot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExtensionBot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddNew_Door" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddNew_Door.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddNew_Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddNew_Window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,14 +187,14 @@
   <data name="loading2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cancel_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExtensionBot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtensionBot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cloud_sync_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloud_sync_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="plus_math_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plus_math_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancel_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TiltNTurnPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TiltNTurnPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,8 +208,8 @@
   <data name="Transom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Transom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SlidingPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SlidingPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="disabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enabled_forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LouverPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LouverPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,7 +229,7 @@
   <data name="enabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="print" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

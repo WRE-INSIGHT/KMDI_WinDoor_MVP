@@ -28,6 +28,19 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtGlassSummary" msprop:Generator_TableClassName="dtGlassSummaryDataTable" msprop:Generator_TableVarName="tabledtGlassSummary" msprop:Generator_RowChangedName="dtGlassSummaryRowChanged" msprop:Generator_TablePropName="dtGlassSummary" msprop:Generator_RowDeletingName="dtGlassSummaryRowDeleting" msprop:Generator_RowChangingName="dtGlassSummaryRowChanging" msprop:Generator_RowEvHandlerName="dtGlassSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="dtGlassSummaryRowDeleted" msprop:Generator_RowClassName="dtGlassSummaryRow" msprop:Generator_UserTableName="dtGlassSummary" msprop:Generator_RowEvArgName="dtGlassSummaryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="dtQuoteNo" msprop:Generator_ColumnVarNameInTable="columndtQuoteNo" msprop:Generator_ColumnPropNameInRow="dtQuoteNo" msprop:Generator_ColumnPropNameInTable="dtQuoteNoColumn" msprop:Generator_UserColumnName="dtQuoteNo" type="xs:string" minOccurs="0" />
+              <xs:element name="dtItemNo" msprop:Generator_ColumnVarNameInTable="columndtItemNo" msprop:Generator_ColumnPropNameInRow="dtItemNo" msprop:Generator_ColumnPropNameInTable="dtItemNoColumn" msprop:Generator_UserColumnName="dtItemNo" type="xs:int" minOccurs="0" />
+              <xs:element name="dtQuantity" msprop:Generator_ColumnVarNameInTable="columndtQuantity" msprop:Generator_ColumnPropNameInRow="dtQuantity" msprop:Generator_ColumnPropNameInTable="dtQuantityColumn" msprop:Generator_UserColumnName="dtQuantity" type="xs:int" minOccurs="0" />
+              <xs:element name="dtSize" msprop:Generator_ColumnVarNameInTable="columndtSize" msprop:Generator_ColumnPropNameInRow="dtSize" msprop:Generator_ColumnPropNameInTable="dtSizeColumn" msprop:Generator_UserColumnName="dtSize" type="xs:string" minOccurs="0" />
+              <xs:element name="dtArea" msprop:Generator_ColumnVarNameInTable="columndtArea" msprop:Generator_ColumnPropNameInRow="dtArea" msprop:Generator_ColumnPropNameInTable="dtAreaColumn" msprop:Generator_UserColumnName="dtArea" type="xs:decimal" minOccurs="0" />
+              <xs:element name="dtReference" msprop:Generator_ColumnVarNameInTable="columndtReference" msprop:Generator_ColumnPropNameInRow="dtReference" msprop:Generator_ColumnPropNameInTable="dtReferenceColumn" msprop:Generator_UserColumnName="dtReference" type="xs:string" minOccurs="0" />
+              <xs:element name="dtLocation" msprop:Generator_ColumnVarNameInTable="columndtLocation" msprop:Generator_ColumnPropNameInRow="dtLocation" msprop:Generator_ColumnPropNameInTable="dtLocationColumn" msprop:Generator_UserColumnName="dtLocation" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
