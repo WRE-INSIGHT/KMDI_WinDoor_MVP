@@ -12,6 +12,7 @@ namespace ServiceLayer.Services.PanelServices
         IPanelModel AddPanelModel(int panelWd,
                                   decimal panelWdWithDecimal,
                                   int panelHt,
+                                  decimal panelHtWithDecimal,
                                   Control panelParent,
                                   UserControl panelFrameGroup,
                                   UserControl panelFramePropertiesGroup,

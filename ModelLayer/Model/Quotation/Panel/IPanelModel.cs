@@ -18,8 +18,10 @@ namespace ModelLayer.Model.Quotation.Panel
         UserControl Panel_FrameGroup { get; set; }
         UserControl Panel_FramePropertiesGroup { get; set; }
         int Panel_Height { get; set; }
+        decimal Panel_HeightWithDecimal { get; set; }
         int Panel_OriginalHeight { get; set; }
         int PanelImageRenderer_Height { get; set; }
+        decimal PanelImageRenderer_HeightWithDecimal { get; set; }
         int Panel_HeightToBind { get; set; }
         int Panel_DisplayHeight { get; set; }
         int Panel_DisplayHeightDecimal { get; set; }

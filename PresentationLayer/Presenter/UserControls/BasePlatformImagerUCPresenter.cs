@@ -93,12 +93,13 @@ namespace PresentationLayer.Presenter.UserControls
         {
             return new Point(framePoint.X + frame_leftPad, framePoint.Y + frame_topPad);
         }
-        Point MpnlParent_points = new Point();
-        public Point MPanel_DrawPoints_ParentIsMpanelLvl2(Point framePoint, int frame_topPad, int frame_leftPad, IMultiPanelModel lvl2_Parent, IMultiPanelModel multiPanelModel)
+        public Point MPanel_DrawPoints_ParentIsMpanelLvl2(Point framePoint, int frame_topPad, int frame_leftPad, IMultiPanelModel lvl2_Parent, IMultiPanelModel multiPanelModel, PaintEventArgs e)
         {
             Point Mpnl_point = new Point();
             Point MpnlParent_point = new Point();
-        
+            float zoom = _windoorModel.WD_zoom_forImageRenderer;
+            //Console.WriteLine("2nd lvl" + lvl2_Parent.MPanel_Name);
+            //Console.WriteLine("MPanel" + multiPanelModel.MPanel_Name);
             int mParentLoc_X = framePoint.X + frame_leftPad,
                 mParentLoc_Y = framePoint.Y + frame_topPad;
 
@@ -111,26 +112,39 @@ namespace PresentationLayer.Presenter.UserControls
                     if (parentMpnl_obj.Name.Contains("PanelUC_"))
                     {
                         IPanelModel panelModel = multiPanelModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                        Draw_Panel(e, panelModel, new Point(mParentLoc_X, mParentLoc_Y));
                         mParentLoc_X += panelModel.PanelImageRenderer_Width;
                     }
                     else if (parentMpnl_obj.Name.Contains("MullionUC_"))
                     {
                         IDividerModel divModel = multiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                        int locY_deduct = 0;
+
+                        if (zoom == 1.0f)
+                        {
+                            locY_deduct = 10;
+                        }
+                        else if (zoom <= 0.50f)
+                        {
+                            locY_deduct = 5;
+                        }
+                        Draw_Divider(e, divModel, new Point(mParentLoc_X, mParentLoc_Y - locY_deduct));
                         mParentLoc_X += divModel.DivImageRenderer_Width;
                     }
                     else if (parentMpnl_obj.Name.Contains("MultiTransom_"))
                     {
                         IMultiPanelModel mpnlModel = multiPanelModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                        Draw_MultiPanel(e, mpnlModel, new Point(mParentLoc_X, mParentLoc_Y));
                         mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
 
-                        if (parentMpnl_obj.Name == multiPanelModel.MPanel_Name)
-                        {
-                            break;
-                        }
-                        else if (parentMpnl_obj.Name != multiPanelModel.MPanel_Name)
-                        {
-                            mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
-                        }
+                        //if (parentMpnl_obj.Name == multiPanelModel.MPanel_Name)
+                        //{
+                        //    break;
+                        //}
+                        //else if (parentMpnl_obj.Name != multiPanelModel.MPanel_Name)
+                        //{
+                        //    mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
+                        //}
 
                     }
                 }
@@ -139,36 +153,44 @@ namespace PresentationLayer.Presenter.UserControls
                     if (parentMpnl_obj.Name.Contains("PanelUC_"))
                     {
                         IPanelModel panelModel = multiPanelModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                        Draw_Panel(e, panelModel, new Point(mParentLoc_X, mParentLoc_Y));
                         mParentLoc_Y += panelModel.PanelImageRenderer_Height;
                     }
                     else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                     {
                         IDividerModel divModel = multiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                        int locX_deduct = 0;
+
+                        if (zoom == 1.0f)
+                        {
+                            locX_deduct = 10;
+                        }
+                        else if (zoom <= 0.50f)
+                        {
+                            locX_deduct = 5;
+                        }
+                        Draw_Divider(e, divModel, new Point(mParentLoc_X - locX_deduct, mParentLoc_Y));
                         mParentLoc_Y += divModel.DivImageRenderer_Height;
                     }
                     else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
                     {
                         IMultiPanelModel mpnlModel = multiPanelModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                        Draw_MultiPanel(e, mpnlModel, new Point(mParentLoc_X, mParentLoc_Y));
                         mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
 
-                        if (parentMpnl_obj.Name == multiPanelModel.MPanel_Name)
-                        {
-                            break;
-                        }
-                        else if (parentMpnl_obj.Name != multiPanelModel.MPanel_Name)
-                        {
-                            mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
-                        }
+                        //if (parentMpnl_obj.Name == multiPanelModel.MPanel_Name)
+                        //{
+                        //    break;
+                        //}
+                        //else if (parentMpnl_obj.Name != multiPanelModel.MPanel_Name)
+                        //{
+                        //    mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
+                        //}
                     }
                 }
             }
             //}
             MpnlParent_point = new Point(mParentLoc_X, mParentLoc_Y);
-
-            MpnlParent_points = MpnlParent_point;
-
-
-
             int mloc_X = mParentLoc_X,
                 mloc_Y = mParentLoc_Y;
 
@@ -180,6 +202,7 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         IPanelModel panelModel = lvl2_Parent.MPanelLst_Panel.Find(panel => panel.Panel_Name == obj.Name);
                         mloc_X += panelModel.PanelImageRenderer_Width;
+                        
                     }
                     else if (obj.Name.Contains("MullionUC_"))
                     {
@@ -229,13 +252,9 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-
             Mpnl_point = new Point(mloc_X, mloc_Y);
-
-
             return Mpnl_point;
         }
-
         private void _basePlatformImagerUC_flpFrameDragDropPaintEventRaised(object sender, PaintEventArgs e)
         {
             //try
@@ -722,7 +741,7 @@ namespace PresentationLayer.Presenter.UserControls
             int basePlatformImage_Width_minus70 = _windoorModel.WD_width_4basePlatform_forImageRenderer - 70;
 
             List<Point> frame_points = OuterFrame_DrawPoints(frame_sizes, basePlatformImage_Width_minus70);
-            Console.WriteLine();
+           
             for (int i = 0; i < frame_points.Count; i++)
             {
                 IFrameModel frameModel = _windoorModel.lst_frame[i];
@@ -738,7 +757,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     //Draw_MultiPanel
                     //foreach (IMultiPanelModel mpnl in frameModel.Lst_MultiPanel)
-
+                    
                    
                     for (int ii = 0; ii < frameModel.Lst_MultiPanel.Count; ii++)
                     {
@@ -752,68 +771,124 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                         {
+                            Console.WriteLine();
                             int mParentLoc_X = 0,
-                              mParentLoc_Y = 0;
-                            foreach (IMultiPanelModel mpnlModel in mpnl.MPanelLst_MultiPanel)
+                                mParentLoc_Y = 0;
+                            foreach (IMultiPanelModel mpnlModel in mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                             {
-                                Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
-                                Draw_MultiPanelParent(mpnlModel, MPoint, zoom, e);
-                                foreach (Control parentMpnl_obj in mpnlModel.MPanelLst_Objects)
+                                Console.WriteLine(mpnlModel.MPanel_Name);
+                                MPanel_DrawPoints_ParentIsMpanelLvl2(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X, mpnl.MPanel_ParentModel, mpnlModel, e);
+                                foreach (Control parentMpnl_obj in mpnlModel.MPanel_Parent.Controls)
                                 {
-                                    if (mpnlModel.MPanel_Parent.Name == "Mullion")
+                                    if (mpnl.MPanel_Name == parentMpnl_obj.Name)
                                     {
-                                        if (parentMpnl_obj.Name.Contains("PanelUC_"))
+                                        if (mpnl.MPanel_Type == "Mullion")
                                         {
-                                            IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
-                                            mParentLoc_Y += panelModel.PanelImageRenderer_Width;
+                                            if (parentMpnl_obj.Name.Contains("PanelUC_"))
+                                            {
+                                                IPanelModel panelModel = mpnlModel.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_Y += panelModel.PanelImageRenderer_Height;
+                                            }
+                                            else if (parentMpnl_obj.Name.Contains("TransomUC_"))
+                                            {
+                                                IDividerModel divModel = mpnlModel.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                                                mParentLoc_Y += divModel.DivImageRenderer_Height;
+                                            }
+                                            else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
+                                            {
+                                                IMultiPanelModel multiPanelModel = mpnlModel.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
+                                            }
+                                            mParentLoc_Y+= 14;
                                         }
-                                        else if (parentMpnl_obj.Name.Contains("MullionUC_"))
+                                        else if (mpnl.MPanel_Type == "Transom")
                                         {
-                                            IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                            mParentLoc_Y += divModel.DivImageRenderer_Width;
+                                            if (parentMpnl_obj.Name.Contains("PanelUC_"))
+                                            {
+                                                IPanelModel panelModel = mpnlModel.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_X += panelModel.PanelImageRenderer_Width;
+                                            }
+                                            else if (parentMpnl_obj.Name.Contains("MullionUC_"))
+                                            {
+                                                IDividerModel divModel = mpnlModel.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                                                mParentLoc_X += divModel.DivImageRenderer_Width;
+                                            }
+                                            else if (parentMpnl_obj.Name.Contains("MultiTransom_"))
+                                            {
+                                                IMultiPanelModel multiPanelModel = mpnlModel.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
+                                            }
+                                            mParentLoc_X += 14;
                                         }
-                                        else if (parentMpnl_obj.Name.Contains("MultiTransom_"))
-                                        {
-                                            IMultiPanelModel multiPanelModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
-                                            mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Width;
-                                        }
-                                    }
-                                    else if (mpnlModel.MPanel_Type == "Transom")
-                                    {
-                                        if (parentMpnl_obj.Name.Contains("PanelUC_"))
-                                        {
-                                            IPanelModel panelModel = mpnl.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
-                                            mParentLoc_X += panelModel.PanelImageRenderer_Height;
-                                        }
-                                        else if (parentMpnl_obj.Name.Contains("TransomUC_"))
-                                        {
-                                            IDividerModel divModel = mpnl.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                            mParentLoc_X += divModel.DivImageRenderer_Height;
-                                        }
-                                        else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
-                                        {
-                                            IMultiPanelModel multiPanelModel = mpnl.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
-                                            mParentLoc_X += multiPanelModel.MPanelImageRenderer_Height;
-                                        }
+                                        
+                                        break;
                                     }
                                 }
+
+
                             }
-
-                            
-
+                            Console.WriteLine();
+                            //Console.WriteLine(mParentLoc_X);
+                            //Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
+                            //Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
+                            //mParentLoc_X = 0;
+                            //mParentLoc_Y = 0;
+                            //bool isMultiPanelName = false;
+                            //foreach (Control parentMpnl_obj in mpnl.MPanel_Parent.Controls)
+                            //{
+                            //    if (mpnl.MPanel_Type == "Mullion")
+                            //    {
+                            //        if (parentMpnl_obj.Name.Contains("PanelUC_"))
+                            //        {
+                            //            IPanelModel panelModel = mpnl.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_Y += panelModel.PanelImageRenderer_Height;
+                            //        }
+                            //        else if (parentMpnl_obj.Name.Contains("TransomUC_"))
+                            //        {
+                            //            IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_Y += divModel.DivImageRenderer_Height;
+                            //        }
+                            //        else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
+                            //        {
+                            //            IMultiPanelModel multiPanelModel = mpnl.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
+                            //        }
+                            //    }
+                            //    else if (mpnl.MPanel_Type == "Transom")
+                            //    {
+                            //        if (parentMpnl_obj.Name.Contains("PanelUC_"))
+                            //        {
+                            //            IPanelModel panelModel = mpnl.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_X += panelModel.PanelImageRenderer_Width;
+                            //        }
+                            //        else if (parentMpnl_obj.Name.Contains("MullionUC_"))
+                            //        {
+                            //            IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_X += divModel.DivImageRenderer_Width;
+                            //        }
+                            //        else if (parentMpnl_obj.Name.Contains("MultiTransom_"))
+                            //        {
+                            //            IMultiPanelModel multiPanelModel = mpnl.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
+                            //            mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
+                            //        }
+                            //    }
+                            //    if (isMultiPanelName)
+                            //        break;
+                            //    int lastObject = mpnl.MPanel_Parent.Controls.IndexOf(parentMpnl_obj);
+                            //    if (mpnl.MPanel_Name == parentMpnl_obj.Name)
+                            //    {
+                            //        isMultiPanelName = true;
+                            //    }
+                            //}
                         }
-
                     }
                 }
             }
-            Console.WriteLine();
-
             Color col = Color.Black;
-
             int w = 2;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
             g.DrawRectangle(new Pen(col, w), new Rectangle(0,
-                                                                       0,
+                                                           0,
                                                            fpnl.ClientRectangle.Width - w,
                                                            fpnl.ClientRectangle.Height - w));
             //}
@@ -823,7 +898,6 @@ namespace PresentationLayer.Presenter.UserControls
             //    MessageBox.Show("Error Message: " + ex.Message);
             //}
         }
-
         private void Draw_MultiPanelParent(IMultiPanelModel mpnl, Point MPoint, float zoom, PaintEventArgs e)
         {
             int mlocX = MPoint.X,

@@ -442,7 +442,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else
                     {
-                        decimal suggest_WdWithDecimal = (decimal)_multiPanelModel.MPanel_Width - 20;
+                        decimal suggest_WdWithDecimal = (decimal)_multiPanelModel.MPanel_Width - 20,
+                                suggest_HTWithDecimal = 0;
                         int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                             suggest_HT = 0,
                             suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
@@ -508,13 +509,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                             {
+
                                 suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                suggest_HTWithDecimal = (decimal)((decimal)((decimal)(_multiPanelModel.MPanel_Height - 20) - (decimal)(divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             }
                         }
                         else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
                             suggest_HT = multiPanel_boundsHT / totalPanelCount;
-
+                            suggest_HTWithDecimal = (decimal)multiPanel_boundsHT / totalPanelCount;
                         }
 
                         if (_multiPanelModel.MPanel_ParentModel != null)
@@ -575,6 +578,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _panelModel = _panelServices.AddPanelModel(suggest_Wd,
                                                                    suggest_WdWithDecimal,
                                                                    suggest_HT,
+                                                                   suggest_HTWithDecimal,
                                                                    fpnl,
                                                                    (UserControl)_frameUCP.GetFrameUC(),
                                                                    (UserControl)framePropUC,
@@ -969,6 +973,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
+            Console.WriteLine(_multiPanelModel.MPanel_Width);
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {

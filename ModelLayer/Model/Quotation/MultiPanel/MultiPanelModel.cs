@@ -1228,7 +1228,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
                 div_count = MPanel_ParentModel.MPanel_Divisions,
                 wd = 0, ht = 0, divSize = 0;
-
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
                 divSize = 13;
@@ -1559,8 +1558,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void SetZoomPanels()
         {
-            decimal PanelDecimals = 0;
-            int mpnlOriginalWidth = 0;
+            
+            decimal PanelWidthDecimals = 0,
+                    PanelHeightDecimals = 0;
+            int mpnlOriginalWidth = 0,
+                mpnlOriginalHeight = 0;
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
@@ -1568,33 +1570,96 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
                     pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                    if (!MPanel_DividerEnabled)
+                    if(MPanel_Type == "Transom")
                     {
-                        mpnlOriginalWidth = MPanel_Width - 20;
-                        PanelDecimals += ((MPanel_WidthToBind - 10) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((MPanel_WidthToBind - 10) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                        if (!MPanel_DividerEnabled)
+                        {
+                            mpnlOriginalHeight = MPanel_Height - 20;
+                            PanelHeightDecimals += ((MPanel_HeightToBind - 10) * ((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight)) - Math.Truncate((MPanel_HeightToBind - 10) * ((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight));
+                        }
                     }
+                    else if(MPanel_Type == "Mullion")
+                    {
+                        if (!MPanel_DividerEnabled)
+                        {
+                            mpnlOriginalWidth = MPanel_Width - 20;
+                            PanelWidthDecimals += ((MPanel_WidthToBind - 10) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((MPanel_WidthToBind - 10) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                        }
+                    }
+
+
                 }
                 else
                 {
                     pnl.SetDimensionToBind_using_BaseDimension();
-                    if (!MPanel_DividerEnabled)
+
+                    if (MPanel_Type == "Transom")
                     {
-                        mpnlOriginalWidth = MPanel_Width - 20;
-                        //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
-                        decimal PanelWidthDecimal = (decimal)(MPanel_WidthToBind - (pnl.Panel_Zoom * 20)) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth);
-                        PanelDecimals += PanelWidthDecimal - Math.Truncate(PanelWidthDecimal);
+                        if (!MPanel_DividerEnabled)
+                        {
+                            mpnlOriginalHeight = MPanel_Height - 20;
+                            //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
+                            decimal PanelHeightDecimal = (decimal)(MPanel_HeightToBind - (pnl.Panel_Zoom * 20)) * ((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight);
+                            PanelHeightDecimals += PanelHeightDecimal - Math.Truncate(PanelHeightDecimal);
+                        }
                     }
+                    else if (MPanel_Type == "Mullion")
+                    {
+                        if (!MPanel_DividerEnabled)
+                        {
+                            mpnlOriginalWidth = MPanel_Width - 20;
+                            //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
+                            decimal PanelWidthDecimal = (decimal)(MPanel_WidthToBind - (pnl.Panel_Zoom * 20)) * ((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth);
+                            PanelWidthDecimals += PanelWidthDecimal - Math.Truncate(PanelWidthDecimal);
+                        }
+
+                    }
+                    
                 }
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
-            if (!MPanel_DividerEnabled)
+            if (MPanel_Type == "Transom")
             {
-                PanelDecimals = Math.Round(PanelDecimals);
+                PanelHeightDecimals = Math.Round(PanelHeightDecimals);
                 int MPanelCount = MPanelLst_Panel.Count;
                 foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
                 {
-                    if (PanelDecimals != 0)
+                    if (PanelHeightDecimals != 0)
+                    {
+                        if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                        MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            int PanelHeightToBindOriginal = pnlForDecimalDistribution.Panel_HeightToBind;
+                            int PanelHeightToBindConverted = Convert.ToInt32(Math.Round((MPanel_HeightToBind - 10) * ((decimal)pnlForDecimalDistribution.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                            MPanelCount--;
+                            if (PanelHeightToBindConverted > PanelHeightToBindOriginal || (MPanelCount < PanelHeightDecimals))
+                            {
+                                pnlForDecimalDistribution.Panel_HeightToBind += 1;
+                                PanelHeightDecimals--;
+                            }
+                        }
+                        else
+                        {
+                            int PanelHeightToBindOriginal = pnlForDecimalDistribution.Panel_HeightToBind;
+                            int PanelHeightToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanel_HeightToBind - (pnlForDecimalDistribution.Panel_Zoom * 20)) * ((decimal)pnlForDecimalDistribution.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                            MPanelCount--;
+                            if (PanelHeightToBindConverted > PanelHeightToBindOriginal || (MPanelCount <= PanelHeightDecimals))
+                            {
+                                pnlForDecimalDistribution.Panel_HeightToBind += 1;
+                                PanelHeightDecimals--;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (MPanel_Type == "Mullion")
+            {
+                PanelWidthDecimals = Math.Round(PanelWidthDecimals);
+                int MPanelCount = MPanelLst_Panel.Count;
+                foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
+                {
+                    if (PanelWidthDecimals != 0)
                     {
                         if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
                         MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
@@ -1602,10 +1667,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             int PanelWidthToBindOriginal = pnlForDecimalDistribution.Panel_WidthToBind;
                             int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((MPanel_WidthToBind - 10) * ((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
                             MPanelCount--;
-                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount < PanelDecimals))
+                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount < PanelWidthDecimals))
                             {
                                 pnlForDecimalDistribution.Panel_WidthToBind += 1;
-                                PanelDecimals--;
+                                PanelWidthDecimals--;
                             }
                         }
                         else
@@ -1613,21 +1678,23 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             int PanelWidthToBindOriginal = pnlForDecimalDistribution.Panel_WidthToBind;
                             int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanel_WidthToBind - (pnlForDecimalDistribution.Panel_Zoom * 20)) * ((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
                             MPanelCount--;
-                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount <= PanelDecimals))
+                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount <= PanelWidthDecimals))
                             {
                                 pnlForDecimalDistribution.Panel_WidthToBind += 1;
-                                PanelDecimals--;
-
+                                PanelWidthDecimals--;
                             }
                         }
                     }
                 }
             }
+            
         }
         public void SetImagerZoomPanelsWithDecimals()
         {
-            decimal PanelDecimals = 0;
-            int mpnlOriginalWidth = 0;
+            decimal PanelWidthDecimals = 0,
+                    PanelHeightDecimals = 0;
+            int mpnlOriginalWidth = 0,
+                mpnlOriginalHeight = 0;
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
@@ -1635,54 +1702,116 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
 
-                    mpnlOriginalWidth = MPanel_Width - 20;
-                    PanelDecimals += (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
-                    pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                    if (MPanel_Type == "Transom")
+                    {
+                        mpnlOriginalHeight = MPanel_Height - 20;
+                        PanelHeightDecimals += (decimal)((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight)) - Math.Truncate((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight));
+                        pnl.PanelImageRenderer_Height = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                    }
+                    else if (MPanel_Type == "Mullion")
+                    {
+                        mpnlOriginalWidth = MPanel_Width - 20;
+                        PanelWidthDecimals += (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                        pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                    }
 
                 }
                 else
                 {
-                    mpnlOriginalWidth = MPanel_Width - 20;
-                    //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
-                    decimal PanelWidthDecimal = (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
-                    PanelDecimals += PanelWidthDecimal - Math.Truncate(PanelWidthDecimal);
-                    pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                    if (MPanel_Type == "Transom")
+                    {
+                        mpnlOriginalHeight = MPanel_Height - 20;
+                        //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
+                        decimal PanelHeightDecimal = (decimal)((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight)) - Math.Truncate((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight));
+                        PanelHeightDecimals += PanelHeightDecimal - Math.Truncate(PanelHeightDecimal);
+                        pnl.PanelImageRenderer_Height = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnl.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                    }
+                    else if (MPanel_Type == "Mullion")
+                    {
+                        mpnlOriginalWidth = MPanel_Width - 20;
+                        //PanelDecimals += ((MPanel_WidthToBind - 10) * Double.Parse(((double)pnl.Panel_Width / mpnlOriginalWidth).ToString("0.00"))) - Math.Truncate((MPanel_WidthToBind - 10) * ((double)pnl.Panel_Width / mpnlOriginalWidth));
+                        decimal PanelWidthDecimal = (decimal)((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)) - Math.Truncate((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth));
+                        PanelWidthDecimals += PanelWidthDecimal - Math.Truncate(PanelWidthDecimal);
+                        pnl.PanelImageRenderer_Width = Convert.ToInt32(Math.Floor((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnl.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                    }
+                   
 
                 }
             }
-            PanelDecimals = Math.Round(PanelDecimals);
-            int MPanelCount = MPanelLst_Panel.Count;
-            foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
+            if (MPanel_Type == "Transom")
             {
-                if (PanelDecimals != 0)
+                PanelHeightDecimals = Math.Round(PanelHeightDecimals);
+                int MPanelCount = MPanelLst_Panel.Count;
+                foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
                 {
-                    if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
-                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                    if (PanelHeightDecimals != 0)
                     {
-                        int PanelWidthToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Width;
-                        int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                        MPanelCount--;
-                        if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount < PanelDecimals))
+                        if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                        MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                         {
-                            pnlForDecimalDistribution.PanelImageRenderer_Width += 1;
-                            PanelDecimals--;
+                            int PanelHeightToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Height;
+                            int PanelHeightToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnlForDecimalDistribution.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                            MPanelCount--;
+                            if (PanelHeightToBindConverted > PanelHeightToBindOriginal || (MPanelCount < PanelHeightDecimals))
+                            {
+                                pnlForDecimalDistribution.PanelImageRenderer_Height += 1;
+                                PanelHeightDecimals--;
+                            }
                         }
-                    }
-                    else
-                    {
-                        int PanelWidthToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Width;
-                        int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
-                        MPanelCount--;
-                        if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount <= PanelDecimals))
+                        else
                         {
-                            pnlForDecimalDistribution.PanelImageRenderer_Width += 1;
-                            PanelDecimals--;
+                            int PanelHeightToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Height;
+                            int PanelHeightToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Height) * (decimal)((decimal)pnlForDecimalDistribution.Panel_HeightWithDecimal / mpnlOriginalHeight)));
+                            MPanelCount--;
+                            if (PanelHeightToBindConverted > PanelHeightToBindOriginal || (MPanelCount <= PanelHeightDecimals))
+                            {
+                                pnlForDecimalDistribution.PanelImageRenderer_Height += 1;
+                                PanelHeightDecimals--;
 
+                            }
                         }
                     }
+
+                }
+            }
+            else if (MPanel_Type == "Mullion")
+            {
+                PanelWidthDecimals = Math.Round(PanelWidthDecimals);
+                int MPanelCount = MPanelLst_Panel.Count;
+                foreach (IPanelModel pnlForDecimalDistribution in MPanelLst_Panel)
+                {
+                    if (PanelWidthDecimals != 0)
+                    {
+                        if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                        MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            int PanelWidthToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Width;
+                            int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                            MPanelCount--;
+                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount < PanelWidthDecimals))
+                            {
+                                pnlForDecimalDistribution.PanelImageRenderer_Width += 1;
+                                PanelWidthDecimals--;
+                            }
+                        }
+                        else
+                        {
+                            int PanelWidthToBindOriginal = pnlForDecimalDistribution.PanelImageRenderer_Width;
+                            int PanelWidthToBindConverted = Convert.ToInt32(Math.Round((decimal)(MPanelImageRenderer_Width) * (decimal)((decimal)pnlForDecimalDistribution.Panel_WidthWithDecimal / mpnlOriginalWidth)));
+                            MPanelCount--;
+                            if (PanelWidthToBindConverted > PanelWidthToBindOriginal || (MPanelCount <= PanelWidthDecimals))
+                            {
+                                pnlForDecimalDistribution.PanelImageRenderer_Width += 1;
+                                PanelWidthDecimals--;
+
+                            }
+                        }
+                    }
+
                 }
 
             }
+            
         }
         public void SetZoomMPanels()
         {
@@ -1703,6 +1832,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void Reload_PanelMargin()
         {
+            Console.WriteLine(MPanel_Width);
             List<IPanelModel> Lst_visiblePnl = MPanelLst_Panel;
             int visiblePnl_count = Lst_visiblePnl.Count();
 

@@ -855,7 +855,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             }
                         }
                     }
-                    _multiPanelModel.SetImagerZoomPanelsWithDecimals();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

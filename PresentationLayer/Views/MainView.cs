@@ -173,9 +173,18 @@ namespace PresentationLayer.Views
 
             set
             {
-                _propertiesScroll = value;
-                pnlPropertiesBody.VerticalScroll.Value = value;
-                pnlPropertiesBody.ScrollControlIntoView(pnlPropertiesBody);
+                try
+                {
+                    _propertiesScroll = value;
+                    pnlPropertiesBody.VerticalScroll.Value = value;
+                    pnlPropertiesBody.ScrollControlIntoView(pnlPropertiesBody);
+
+                }
+                catch (Exception)
+                {
+
+                }
+              
             }
         }
 
