@@ -368,14 +368,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                                 if (mPanelModel.MPanel_Placement == "Last")
                                 {
-                                    if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f &&
-                                        _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                                    if (_multiPanelModel.MPanel_Zoom == 0.5 || _multiPanelModel.MPanel_Zoom == 1)
                                     {
                                         _multiPanelModel.Fit_MyControls_Dimensions();
+
                                     }
-                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                    _multiPanelModel.Adjust_ControlDisplaySize();
+                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
+
+                                    _mainPresenter.Fit_MyControls_byControlsLocation();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
@@ -442,8 +443,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     else
                     {
-                        decimal suggest_WdWithDecimal = (decimal)_multiPanelModel.MPanel_Width - 20,
-                                suggest_HTWithDecimal = 0;
                         int suggest_Wd = _multiPanelModel.MPanel_Width - 20,
                             suggest_HT = 0,
                             suggest_DisplayWD = _multiPanelModel.MPanel_DisplayWidth,
@@ -511,13 +510,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
 
                                 suggest_HT = (((_multiPanelModel.MPanel_Height - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                                suggest_HTWithDecimal = (decimal)((decimal)((decimal)(_multiPanelModel.MPanel_Height - 20) - (decimal)(divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             }
                         }
                         else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
                             suggest_HT = multiPanel_boundsHT / totalPanelCount;
-                            suggest_HTWithDecimal = (decimal)multiPanel_boundsHT / totalPanelCount;
                         }
 
                         if (_multiPanelModel.MPanel_ParentModel != null)
@@ -576,9 +573,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         _panelModel = _panelServices.AddPanelModel(suggest_Wd,
-                                                                   suggest_WdWithDecimal,
                                                                    suggest_HT,
-                                                                   suggest_HTWithDecimal,
                                                                    fpnl,
                                                                    (UserControl)_frameUCP.GetFrameUC(),
                                                                    (UserControl)framePropUC,
@@ -775,11 +770,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (_panelModel.Panel_Placement == "Last")
                         {
-                            if (_multiPanelModel.MPanel_Zoom != 0.26f && _multiPanelModel.MPanel_Zoom != 0.17f ||
-                                _multiPanelModel.MPanel_Zoom != 0.13f && _multiPanelModel.MPanel_Zoom != 0.10f)
+                            if (_multiPanelModel.MPanel_Zoom == 0.5 || _multiPanelModel.MPanel_Zoom == 1)
                             {
                                 _multiPanelModel.Fit_MyControls_Dimensions();
+                               
                             }
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
 
                             _mainPresenter.Fit_MyControls_byControlsLocation();

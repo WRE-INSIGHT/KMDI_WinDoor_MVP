@@ -771,12 +771,10 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                         {
-                            Console.WriteLine();
                             int mParentLoc_X = 0,
                                 mParentLoc_Y = 0;
                             foreach (IMultiPanelModel mpnlModel in mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                             {
-                                Console.WriteLine(mpnlModel.MPanel_Name);
                                 MPanel_DrawPoints_ParentIsMpanelLvl2(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X, mpnl.MPanel_ParentModel, mpnlModel, e);
                                 foreach (Control parentMpnl_obj in mpnlModel.MPanel_Parent.Controls)
                                 {
@@ -821,13 +819,11 @@ namespace PresentationLayer.Presenter.UserControls
                                             mParentLoc_X += 14;
                                         }
                                         
-                                        break;
                                     }
                                 }
 
 
                             }
-                            Console.WriteLine();
                             //Console.WriteLine(mParentLoc_X);
                             //Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(frame_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
                             //Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
@@ -880,6 +876,7 @@ namespace PresentationLayer.Presenter.UserControls
                             //        isMultiPanelName = true;
                             //    }
                             //}
+                            break;
                         }
                     }
                 }
