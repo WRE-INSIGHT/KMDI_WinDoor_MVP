@@ -944,7 +944,70 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
+            
+            #region Georgian Bar
 
+            int GBpointResultX, GBpointResultY,
+                penThickness = 0, penThicknessResult = 0,
+                pInnerWd = sliding.ClientRectangle.Width,
+                pInnerHt = sliding.ClientRectangle.Height,
+                verticalQty = _panelModel.Panel_GeorgianBar_VerticalQty,
+                horizontalQty = _panelModel.Panel_GeorgianBar_HorizontalQty,
+                GeorgianBar_GapX = 0,
+                GeorgianBar_GapY = 0,
+                pInnerX = 0,
+                pInnerY = 0;
+
+            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                penThickness = 10;
+                penThicknessResult = penThickness + 10;
+            }
+            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+            {
+                penThickness = 20;
+                penThicknessResult = penThickness - 10;
+            }
+
+            Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
+
+            //vertical
+            for (int ii = 0; ii < verticalQty; ii++)
+            {
+                GBpointResultX = ((pInnerX + pInnerWd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (pInnerWd + (pInnerX)) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = new[]
+              {
+
+                  new Point(GBpointResultX,pInnerX+1),
+                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
+             };
+                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
+                }
+            }
+
+            //Horizontal
+
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pInnerY + pInnerHt) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (pInnerHt + (pInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = new[]
+              {
+
+                  new Point(pInnerY+1,GBpointResultY ),
+                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
+             };
+                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
+                }
+            }
+
+            #endregion
+            
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
@@ -1298,68 +1361,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
 
-            #region Georgian Bar
-
-            int GBpointResultX, GBpointResultY,
-                penThickness = 0, penThicknessResult = 0,
-                pInnerWd = sliding.ClientRectangle.Width,
-                pInnerHt = sliding.ClientRectangle.Height,
-                verticalQty = _panelModel.Panel_GeorgianBar_VerticalQty,
-                horizontalQty = _panelModel.Panel_GeorgianBar_HorizontalQty,
-                GeorgianBar_GapX = 0,
-                GeorgianBar_GapY = 0,
-                pInnerX = 0,
-                pInnerY = 0;
-
-            if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-            {
-                penThickness = 10;
-                penThicknessResult = penThickness + 10;
-            }
-            else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-            {
-                penThickness = 20;
-                penThicknessResult = penThickness - 10;
-            }
-
-            Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
-
-            //vertical
-            for (int ii = 0; ii < verticalQty; ii++)
-            {
-                GBpointResultX = ((pInnerX + pInnerWd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
-                GeorgianBar_GapX += (pInnerWd + (pInnerX)) / (verticalQty + 1);
-                Point[] GeorgianBar_PointsX = new[]
-              {
-
-                  new Point(GBpointResultX,pInnerX+1),
-                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
-             };
-                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
-                {
-                    g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
-                }
-            }
-
-            //Horizontal
-
-            for (int ii = 0; ii < horizontalQty; ii++)
-            {
-                GBpointResultY = ((pInnerY + pInnerHt) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
-                GeorgianBar_GapY += (pInnerHt + (pInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBar_PointsY = new[]
-              {
-
-                  new Point(pInnerY+1,GBpointResultY ),
-                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
-             };
-                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
-                {
-                    g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
-                }
-            }
-
-            #endregion
 
 
             Font drawFont = new Font("Times New Roman", font_size);
@@ -1367,16 +1368,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             drawFormat.Alignment = StringAlignment.Center;
             drawFormat.LineAlignment = StringAlignment.Center;
 
+            if ((sashW + sashOverlapValue) >= sashH)
+            {
+                ArrowExpectedHeight = (float)(sashH * 0.3);
+            }
+            else if ((sashW + sashOverlapValue) < sashH)
+            {
+                ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
+            }
+
+            arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
+              //ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2);
+
             RectangleF rect = new RectangleF(0,
-                                            (sliding.ClientRectangle.Height / 2) + 33,
-                                             sliding.ClientRectangle.Width,
+                                            (ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2)), //sliding.ClientRectangle.Height / 2) + 33,
+                                            sliding.ClientRectangle.Width,
                                             10);
 
             g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
-               new Font("Segoe UI", 8.0f, FontStyle.Bold),
-               new SolidBrush(Color.Black),
-               rect,
-               drawFormat);
+                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                         new SolidBrush(Color.Black),
+                         rect,
+                         drawFormat);
 
 
 
