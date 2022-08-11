@@ -203,7 +203,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (pnl.Panel_Name == slidingUC.Name)
                         {
-                            propertyHeight +=  constants.frame_propertyHeight_default - 4 + framePropertyHeight;
+                            propertyHeight += constants.frame_propertyHeight_default - 4 + framePropertyHeight;
                             isTrue = true;
                             break;
                         }
@@ -933,7 +933,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             Graphics g = e.Graphics;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            
+
             #region Georgian Bar
 
             int GBpointResultX, GBpointResultY,
@@ -996,11 +996,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             #endregion
-            
+
             int w = 1;
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
-            int font_size = 30, 
+            int font_size = 30,
                 outer_line = 10,
                 inner_line = 15;
             float ArrowExpectedWidth = 0
@@ -1100,7 +1100,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 sashH = sliding.Height;
 
             #region old algo for drawing
-             
+
             //float ArrowExpectedWidth = 0
             //    , ArrowExpectedHeight = 0
             //    , arrowStartingX
@@ -1367,7 +1367,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             arrowStartingY = (sashH / 2) - (ArrowExpectedHeight / 2);
-              //ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2);
+            //ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2);
 
             RectangleF rect = new RectangleF(0,
                                             (ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2)), //sliding.ClientRectangle.Height / 2) + 33,

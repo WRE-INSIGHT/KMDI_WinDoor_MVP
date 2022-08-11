@@ -34,11 +34,11 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                ReportDataSource RDSQuote = new ReportDataSource();
-                RDSQuote.Name = "DataSet1";
-                RDSQuote.Value = _printGlassSummary.GetBindingSource();
+                ReportDataSource RDSGlassSummary = new ReportDataSource();
+                RDSGlassSummary.Name = "DataSet1";
+                RDSGlassSummary.Value = _printGlassSummary.GetBindingSource();
 
-                _printGlassSummary.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
+                _printGlassSummary.GetReportViewer().LocalReport.DataSources.Add(RDSGlassSummary);
                 _printGlassSummary.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.GlassSummary.rdlc";
 
 
