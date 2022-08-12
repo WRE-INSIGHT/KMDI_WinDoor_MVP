@@ -243,6 +243,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic {
+            get {
+                object obj = ResourceManager.GetObject("external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FixedPanel {
             get {
                 object obj = ResourceManager.GetObject("FixedPanel", resourceCulture);

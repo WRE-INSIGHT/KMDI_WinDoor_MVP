@@ -141,12 +141,14 @@
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
     <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
@@ -358,6 +360,7 @@
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
@@ -373,6 +376,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintGlassSummaryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PrintGlassSummaryView.Designer.cs">
+      <DependentUpon>PrintGlassSummaryView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PrintQuoteView.cs">
       <SubType>Form</SubType>
@@ -864,6 +873,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
@@ -909,6 +919,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrintGlassSummaryView.resx">
+      <DependentUpon>PrintGlassSummaryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PrintQuoteView.resx">
       <DependentUpon>PrintQuoteView.cs</DependentUpon>
@@ -1170,6 +1183,7 @@
     <None Include="Resources\ExtensionRight.png" />
     <None Include="Resources\enabled_forward_button_104px.png" />
     <None Include="Resources\enabled_back_arrow_104px .png" />
+    <None Include="Resources\external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

@@ -155,5 +155,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             return dividerEnabledToolStripMenuItem;
         }
+        private void flp_MultiMullion_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("Height " + this.Height);
+            Console.WriteLine("Width " + this.Width);
+        }
     }
 }

@@ -760,7 +760,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             else if (prev_ctrl is IPanelUC)
                             {
                                 prev_pnl.Panel_Width += mullion_movement;
-                                prev_pnl.Panel_WidthWithDecimal += mullion_movement;
                                 prev_pnl.Panel_DisplayWidth += mullion_movement;
 
                                 if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
@@ -834,7 +833,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             else if (nxt_ctrl is IPanelUC)
                             {
                                 nxt_pnl.Panel_Width -= mullion_movement;
-                                nxt_pnl.Panel_WidthWithDecimal -= mullion_movement;
                                 nxt_pnl.Panel_DisplayWidth -= mullion_movement;
 
                                 if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
@@ -855,8 +853,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             }
                         }
                     }
-                    _multiPanelModel.SetImagerZoomPanelsWithDecimals();
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();

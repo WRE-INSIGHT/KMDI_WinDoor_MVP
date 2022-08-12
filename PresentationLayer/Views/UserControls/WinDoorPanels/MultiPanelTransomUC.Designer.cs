@@ -50,6 +50,7 @@
             this.flp_MultiTransom.DragDrop += new System.Windows.Forms.DragEventHandler(this.flp_MultiTransom_DragDrop);
             this.flp_MultiTransom.DragOver += new System.Windows.Forms.DragEventHandler(this.flp_MultiTransom_DragOver);
             this.flp_MultiTransom.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_MultiTransom_Paint);
+            this.flp_MultiTransom.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flp_MultiTransom_MouseClick);
             this.flp_MultiTransom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flp_MultiTransom_MouseDown);
             this.flp_MultiTransom.MouseEnter += new System.EventHandler(this.flp_MultiTransom_MouseEnter);
             this.flp_MultiTransom.MouseLeave += new System.EventHandler(this.flp_MultiTransom_MouseLeave);
@@ -61,7 +62,7 @@
             this.deleteToolStripMenuItem,
             this.dividerEnabledToolStripMenuItem});
             this.cmenu_mulltiP.Name = "cmenu_mulltiP";
-            this.cmenu_mulltiP.Size = new System.Drawing.Size(157, 92);
+            this.cmenu_mulltiP.Size = new System.Drawing.Size(157, 70);
             // 
             // divCountToolStripMenuItem
             // 

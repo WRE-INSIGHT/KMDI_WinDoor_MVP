@@ -12,6 +12,7 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler TSbtnPrintClickEventRaised;
+        public event EventHandler TSbtnGlassSummaryClickEventRaised;
         public event EventHandler QuoteItemListViewLoadEventRaised;
 
 
@@ -36,5 +37,9 @@ namespace PresentationLayer.Views
             return pnlPrintBody;
         }
 
+        private void TSbtnGlassSummary_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, TSbtnGlassSummaryClickEventRaised, e);
+        }
     }
 }

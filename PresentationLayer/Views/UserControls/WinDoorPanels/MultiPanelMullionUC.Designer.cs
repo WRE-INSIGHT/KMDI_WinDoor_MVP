@@ -50,6 +50,7 @@
             this.flp_MultiMullion.DragDrop += new System.Windows.Forms.DragEventHandler(this.flp_MultiMullion_DragDrop);
             this.flp_MultiMullion.DragOver += new System.Windows.Forms.DragEventHandler(this.flp_MultiMullion_DragOver);
             this.flp_MultiMullion.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_Multi_Paint);
+            this.flp_MultiMullion.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flp_MultiMullion_MouseClick);
             this.flp_MultiMullion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.flp_MultiMullion_MouseDown);
             this.flp_MultiMullion.MouseEnter += new System.EventHandler(this.flp_MultiMullion_MouseEnter);
             this.flp_MultiMullion.MouseLeave += new System.EventHandler(this.flp_MultiMullion_MouseLeave);

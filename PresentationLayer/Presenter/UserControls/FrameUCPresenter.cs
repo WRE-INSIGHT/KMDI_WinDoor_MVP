@@ -156,7 +156,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 bot_deduct = 0;
             }
-            decimal wdWithDecimal = (decimal)_frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2;
+            
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
 
@@ -306,7 +306,6 @@ namespace PresentationLayer.Presenter.UserControls
                 _frameModel.SetDeductFramePadding(false, false);
 
                 _panelModel = _panelServices.AddPanelModel(wd,
-                                                           wdWithDecimal,
                                                            ht,
                                                            frame,
                                                            frame,

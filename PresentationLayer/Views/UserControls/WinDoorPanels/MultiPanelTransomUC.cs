@@ -157,6 +157,14 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             return dividerEnabledToolStripMenuItem;
         }
+       
 
+        private void flp_MultiTransom_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("Height " + this.Height);
+            Console.WriteLine("Width " + this.Width);
+            Console.WriteLine(this.Parent.Name);
+            Console.WriteLine(this.Location);
+        }
     }
 }

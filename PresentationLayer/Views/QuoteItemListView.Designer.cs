@@ -36,6 +36,7 @@
             this.pnlPrintHeader = new System.Windows.Forms.Panel();
             this.TSbtnPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.TSbtnGlassSummary = new System.Windows.Forms.ToolStripButton();
             this.pnlPrintHeader.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -121,12 +122,23 @@
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSbtnPrint});
+            this.TSbtnPrint,
+            this.TSbtnGlassSummary});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(868, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // TSbtnGlassSummary
+            // 
+            this.TSbtnGlassSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSbtnGlassSummary.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
+            this.TSbtnGlassSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSbtnGlassSummary.Name = "TSbtnGlassSummary";
+            this.TSbtnGlassSummary.Size = new System.Drawing.Size(23, 22);
+            this.TSbtnGlassSummary.Text = "Print";
+            this.TSbtnGlassSummary.Click += new System.EventHandler(this.TSbtnGlassSummary_Click);
             // 
             // QuoteItemListView
             // 
@@ -160,5 +172,6 @@
         private System.Windows.Forms.Panel pnlPrintHeader;
         private System.Windows.Forms.ToolStripButton TSbtnPrint;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton TSbtnGlassSummary;
     }
 }

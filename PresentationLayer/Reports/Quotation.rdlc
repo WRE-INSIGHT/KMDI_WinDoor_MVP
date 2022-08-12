@@ -205,10 +205,10 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>2.44034in</Top>
-        <Left>7.05965in</Left>
+        <Top>2.45349in</Top>
+        <Left>6.36697in</Left>
         <Height>0.25in</Height>
-        <Width>0.90358in</Width>
+        <Width>1.505in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1050,8 +1050,8 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0.97917in</Top>
-        <Left>0.20982in</Left>
+        <Top>0.96454in</Top>
+        <Left>0.24486in</Left>
         <Height>1.46117in</Height>
         <Width>7.62711in</Width>
         <ZIndex>5</ZIndex>
@@ -1064,10 +1064,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.76174in</Height>
+    <Height>2.7228in</Height>
     <Style />
   </Body>
-  <Width>8.05289in</Width>
+  <Width>8in</Width>
   <Page>
     <PageHeader>
       <Height>1.2091in</Height>
@@ -1400,7 +1400,7 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
           <Width>1.66135in</Width>
           <ZIndex>1</ZIndex>
           <Visibility>
-            <Hidden>=IIF(Globals!PageNumber &gt; 1,False,True)</Hidden>
+            <Hidden>=IIF(Globals!PageNumber &gt;= 2,False,True)</Hidden>
           </Visibility>
           <Style>
             <Border>

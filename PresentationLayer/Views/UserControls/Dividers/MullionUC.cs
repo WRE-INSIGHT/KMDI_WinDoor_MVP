@@ -85,6 +85,9 @@ namespace PresentationLayer.Views.UserControls.Dividers
             //{
             //    cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
             //}
+            Console.WriteLine(this.Width);
+            Console.WriteLine(this.Location);
+            Console.WriteLine(this.Parent.Name);
         }
 
         private void MullionUC_MouseEnter(object sender, EventArgs e)
