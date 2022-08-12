@@ -369,7 +369,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
 
-                                    _mainPresenter.Fit_MyControls_byControlsLocation();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
@@ -748,7 +747,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                            _mainPresenter.Fit_MyControls_byControlsLocation();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
 
                         }

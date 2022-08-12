@@ -157,7 +157,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         }
         private void flp_MultiMullion_MouseClick(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(flp_MultiMullion.Height);
+            Console.WriteLine("Height " + this.Height);
+            Console.WriteLine("Width " + this.Width);
         }
     }
 }

@@ -96,6 +96,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("MPanel Renderer Width " + _multiPanelModel.MPanelImageRenderer_Width);
                 Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
                 Console.WriteLine("MPanel Renderer Height " + _multiPanelModel.MPanelImageRenderer_Height);
+                Console.WriteLine("Sliding Height " + _panelModel.Panel_HeightToBind);
+                Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Sliding Width " + _panelModel.Panel_WidthToBind);
+                Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_WidthToBind);
+                Console.WriteLine();
                 slidingUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
