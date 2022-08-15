@@ -574,6 +574,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R677;
                 }
+                else if (value == FrameProfile_ArticleNo._2060)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._V226;
+                }
                 NotifyPropertyChanged();
             }
         }

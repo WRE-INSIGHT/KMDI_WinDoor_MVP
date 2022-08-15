@@ -36,6 +36,7 @@
             this.numHeight = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmb_SystemOption = new System.Windows.Forms.ComboBox();
             this.rad_PremiLine = new System.Windows.Forms.RadioButton();
             this.rad_c70 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
@@ -138,6 +139,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cmb_SystemOption);
             this.panel2.Controls.Add(this.rad_PremiLine);
             this.panel2.Controls.Add(this.rad_c70);
             this.panel2.Location = new System.Drawing.Point(6, 10);
@@ -145,30 +147,40 @@
             this.panel2.Size = new System.Drawing.Size(172, 30);
             this.panel2.TabIndex = 9;
             // 
+            // cmb_SystemOption
+            // 
+            this.cmb_SystemOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_SystemOption.FormattingEnabled = true;
+            this.cmb_SystemOption.Location = new System.Drawing.Point(6, 3);
+            this.cmb_SystemOption.Name = "cmb_SystemOption";
+            this.cmb_SystemOption.Size = new System.Drawing.Size(160, 25);
+            this.cmb_SystemOption.TabIndex = 2;
+            this.cmb_SystemOption.SelectedValueChanged += new System.EventHandler(this.cmb_SystemOption_SelectedValueChanged);
+            // 
             // rad_PremiLine
             // 
             this.rad_PremiLine.AutoSize = true;
-            this.rad_PremiLine.Location = new System.Drawing.Point(77, 3);
+            this.rad_PremiLine.Location = new System.Drawing.Point(200, 200);
             this.rad_PremiLine.Name = "rad_PremiLine";
             this.rad_PremiLine.Size = new System.Drawing.Size(87, 23);
             this.rad_PremiLine.TabIndex = 1;
             this.rad_PremiLine.TabStop = true;
             this.rad_PremiLine.Text = "PremiLine";
             this.rad_PremiLine.UseVisualStyleBackColor = true;
-            this.rad_PremiLine.CheckedChanged += new System.EventHandler(this.radbtn_CheckedChanged);
+            this.rad_PremiLine.Visible = false;
             // 
             // rad_c70
             // 
             this.rad_c70.AutoSize = true;
             this.rad_c70.Checked = true;
-            this.rad_c70.Location = new System.Drawing.Point(12, 3);
+            this.rad_c70.Location = new System.Drawing.Point(200, 200);
             this.rad_c70.Name = "rad_c70";
             this.rad_c70.Size = new System.Drawing.Size(52, 23);
             this.rad_c70.TabIndex = 0;
             this.rad_c70.TabStop = true;
             this.rad_c70.Text = "C70";
             this.rad_c70.UseVisualStyleBackColor = true;
-            this.rad_c70.CheckedChanged += new System.EventHandler(this.radbtn_CheckedChanged);
+            this.rad_c70.Visible = false;
             // 
             // frmDimensionView
             // 
@@ -211,5 +223,6 @@
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.RadioButton rad_PremiLine;
         public System.Windows.Forms.RadioButton rad_c70;
+        private System.Windows.Forms.ComboBox cmb_SystemOption;
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views
 {
@@ -57,21 +53,35 @@ namespace PresentationLayer.Views
             }
         }
 
-        public bool c70rRadBtn_CheckState
+       // private SystemProfile_Option _SelectedSystem;
+        public string SelectedSystem
         {
+            get
+            {
+                return cmb_SystemOption.Text;
+            }
+
             set
             {
-                rad_c70.Checked = value;
+                cmb_SystemOption.Text = value;
             }
         }
 
-        public bool premiLineRadBtn_CheckState
-        {
-            set
-            {
-                rad_PremiLine.Checked = value;
-            }
-        }
+        //public bool c70rRadBtn_CheckState
+        //{
+        //    set
+        //    {
+        //        rad_c70.Checked = value;
+        //    }
+        //}
+
+        //public bool premiLineRadBtn_CheckState
+        //{
+        //    set
+        //    {
+        //        rad_PremiLine.Checked = value;
+        //    }
+        //}
 
         public int thisHeight
         {
@@ -97,7 +107,8 @@ namespace PresentationLayer.Views
         public event EventHandler btnCancelClickedEventRaised;
         public event EventHandler btnOKClickedEventRaised;
         public event EventHandler frmDimensionLoadEventRaised;
-        public event EventHandler radbtnCheckChangedEventRaised;
+        public event EventHandler cmbSystemOptionSelectedValueChangedEventRaised;
+        //public event EventHandler radbtnCheckChangedEventRaised;
 
         public void ShowfrmDimension()
         {
@@ -105,6 +116,12 @@ namespace PresentationLayer.Views
         }
         private void frmDimensionView_Load(object sender, EventArgs e)
         {
+            List<SystemProfile_Option> systemType = new List<SystemProfile_Option>();
+            foreach (SystemProfile_Option item in SystemProfile_Option.GetAll())
+            {
+                systemType.Add(item);
+            }
+            cmb_SystemOption.DataSource = systemType;
             EventHelpers.RaiseEvent(this, frmDimensionLoadEventRaised, e);
         }
 
@@ -123,10 +140,10 @@ namespace PresentationLayer.Views
             this.Hide();
         }
 
-        private void radbtn_CheckedChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, radbtnCheckChangedEventRaised, e);
-        }
+        //private void radbtn_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    EventHelpers.RaiseEvent(sender, radbtnCheckChangedEventRaised, e);
+        //}
 
         private const int CP_NOCLOSE_BUTTON = 0x200;
         protected override CreateParams CreateParams
@@ -137,6 +154,11 @@ namespace PresentationLayer.Views
                 myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
                 return myCp;
             }
+        }
+
+        private void cmb_SystemOption_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbSystemOptionSelectedValueChangedEventRaised, e);
         }
     }
 }

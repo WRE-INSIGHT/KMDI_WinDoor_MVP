@@ -3,9 +3,6 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -52,9 +49,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
                 if (sel_sash != curr_sash && _panelModel.Panel_Type.Contains("Fixed") == false)
                 {
-                    if (sel_sash == SashProfile_ArticleNo._7581)
+                    if (sel_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
                     {
-                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                        if (sel_sash == SashProfile_ArticleNo._2067)
+                        {
+                            _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                        }
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
@@ -141,7 +145,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
                                 }
 
-                                if (curr_sash == SashProfile_ArticleNo._7581)
+                                if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
                                 {
                                     _panelModel.Panel_HingeOptionsVisibility = false;
 
@@ -202,13 +206,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
                         }
                     }
-                    else if(sel_sash == SashProfile_ArticleNo._395)
+                    else if (sel_sash == SashProfile_ArticleNo._395)
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
-                            if (curr_sash == SashProfile_ArticleNo._7581)
+                            if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
                             {
                                 _panelModel.Panel_HingeOptionsVisibility = false;
 
