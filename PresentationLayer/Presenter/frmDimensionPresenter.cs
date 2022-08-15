@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PresentationLayer.Views;
-using PresentationLayer.Presenter.UserControls;
-using ModelLayer.Model.Quotation.WinDoor;
-using ModelLayer.Model.Quotation.Frame;
-using CommonComponents;
-using System.Windows.Forms;
+﻿using CommonComponents;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Views;
+using System;
+using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -129,7 +123,24 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.frmDimensionLoadEventRaised += new EventHandler(OnfrmDimensionLoadEventRaised);
             _frmDimensionView.btnOKClickedEventRaised += new EventHandler(OnbtnOKClickedEventRaised);
             _frmDimensionView.btnCancelClickedEventRaised += new EventHandler(OnbtnCancelClickedEventRaised);
-            _frmDimensionView.radbtnCheckChangedEventRaised += new EventHandler(OnradbtnCheckChangedEventRaised);
+            // _frmDimensionView.radbtnCheckChangedEventRaised += new EventHandler(OnradbtnCheckChangedEventRaised);
+            _frmDimensionView.cmbSystemOptionSelectedValueChangedEventRaised += _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised;
+        }
+
+        private void _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_frmDimensionView.SelectedSystem == SystemProfile_Option._C70.ToString())
+            {
+                profile_type = "C70 Profile";
+            }
+            else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._Premiline.ToString())
+            {
+                profile_type = "PremiLine Profile";
+            }
+            else if (_frmDimensionView.SelectedSystem == SystemProfile_Option._G58.ToString())
+            {
+                profile_type = "G58 Profile";
+            }
         }
 
         private void OnradbtnCheckChangedEventRaised(object sender, EventArgs e)
@@ -229,8 +240,8 @@ namespace PresentationLayer.Presenter
             {
                 _frmDimensionView.thisHeight = 193;
             }
-            else if (purpose == Show_Purpose.CreateNew_Item || 
-                     purpose == Show_Purpose.CreateNew_Frame || 
+            else if (purpose == Show_Purpose.CreateNew_Item ||
+                     purpose == Show_Purpose.CreateNew_Frame ||
                      purpose == Show_Purpose.ChangeBasePlatformSize ||
                      purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {

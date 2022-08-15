@@ -1281,7 +1281,7 @@ namespace PresentationLayer.Presenter
 
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
-                    _frmDimensionPresenter.SetProfileType("C70 Profile");
+                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
@@ -1345,7 +1345,7 @@ namespace PresentationLayer.Presenter
 
                         _mainView.Zoom = _windoorModel.WD_zoom;
                         _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
-                       _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
 

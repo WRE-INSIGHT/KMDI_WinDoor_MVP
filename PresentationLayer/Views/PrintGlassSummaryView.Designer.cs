@@ -112,6 +112,6 @@
         private System.Windows.Forms.DateTimePicker dtp_Date;
         private System.Windows.Forms.Label label4;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private System.Windows.Forms.BindingSource BSGlassSummary;
+        public System.Windows.Forms.BindingSource BSGlassSummary;
     }
 }

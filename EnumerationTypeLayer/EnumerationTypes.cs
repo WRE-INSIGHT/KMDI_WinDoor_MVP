@@ -4,10 +4,20 @@ namespace EnumerationTypeLayer
 {
     public class EnumerationTypes
     {
+        public class SystemProfile_Option : Enumeration<SystemProfile_Option>
+        {
+            public static readonly SystemProfile_Option _C70 = new SystemProfile_Option(0, "C70");
+            public static readonly SystemProfile_Option _G58 = new SystemProfile_Option(1, "G58");
+            public static readonly SystemProfile_Option _Premiline = new SystemProfile_Option(2, "Premiline");
+
+            private SystemProfile_Option(int value, string displayName) : base(value, displayName) { }
+        }
         public class FrameProfile_ArticleNo : Enumeration<FrameProfile_ArticleNo>
         {
             public static readonly FrameProfile_ArticleNo _7502 = new FrameProfile_ArticleNo(0, "7502");
             public static readonly FrameProfile_ArticleNo _7507 = new FrameProfile_ArticleNo(1, "7507");
+            public static readonly FrameProfile_ArticleNo _2060 = new FrameProfile_ArticleNo(2, "2060"); //G58
+
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -15,6 +25,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly FrameReinf_ArticleNo _R676 = new FrameReinf_ArticleNo(0, "R676");
             public static readonly FrameReinf_ArticleNo _R677 = new FrameReinf_ArticleNo(1, "R677");
+            public static readonly FrameReinf_ArticleNo _V226 = new FrameReinf_ArticleNo(2, "V226"); //G58
+
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -22,7 +34,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly Divider_ArticleNo _7536 = new Divider_ArticleNo(0, "7536");
             public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(1, "7538");
-            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(2, "None");
+            public static readonly Divider_ArticleNo _2069 = new Divider_ArticleNo(2, "2069");
+            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(3, "None");
             private Divider_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -30,7 +43,8 @@ namespace EnumerationTypeLayer
         {
             public static readonly DividerReinf_ArticleNo _R677 = new DividerReinf_ArticleNo(0, "R677");
             public static readonly DividerReinf_ArticleNo _R686 = new DividerReinf_ArticleNo(1, "R686");
-            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(2, "None");
+            public static readonly DividerReinf_ArticleNo _V226 = new DividerReinf_ArticleNo(2, "V226");//G58
+            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(3, "None");
             private DividerReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -70,6 +84,8 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2433 = new GlazingBead_ArticleNo(8, "2433");
             public static readonly GlazingBead_ArticleNo _2432 = new GlazingBead_ArticleNo(9, "2432");
             public static readonly GlazingBead_ArticleNo _2431 = new GlazingBead_ArticleNo(10, "2431");
+            public static readonly GlazingBead_ArticleNo _1681 = new GlazingBead_ArticleNo(10, "1681");//G58 21.5 thickness
+
             private GlazingBead_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
         public class GlassFilm_Types : Enumeration<GlassFilm_Types, int>
@@ -132,6 +148,8 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _373 = new SashProfile_ArticleNo(2, "373"); //inward
             public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
             public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
+            public static readonly SashProfile_ArticleNo _2067 = new SashProfile_ArticleNo(5, "2067"); //G58
+
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -141,6 +159,8 @@ namespace EnumerationTypeLayer
             public static readonly SashReinf_ArticleNo _R675 = new SashReinf_ArticleNo(1, "R675");
             public static readonly SashReinf_ArticleNo _655 = new SashReinf_ArticleNo(2, "655");
             public static readonly SashReinf_ArticleNo _207 = new SashReinf_ArticleNo(3, "207");
+            public static readonly SashReinf_ArticleNo _V226 = new SashReinf_ArticleNo(4, "V226");//G58
+
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
