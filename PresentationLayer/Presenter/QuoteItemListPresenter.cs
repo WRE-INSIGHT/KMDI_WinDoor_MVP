@@ -47,7 +47,8 @@ namespace PresentationLayer.Presenter
             GeorgianBarHorizontalQty = 0,
             CostPerPoints = 60;
         bool ChckDM = false,
-             ChckPlasticWedge = false;
+             ChckPlasticWedge = false,
+             check1stFrame = false;
 
 
         string FrameTypeDesc,
@@ -282,7 +283,6 @@ namespace PresentationLayer.Presenter
         {
             DSQuotation _dsq = new DSQuotation();
             /*
-            dtQuoteNo
             dtItemNo
             dtQuantity
             dtSize
@@ -292,8 +292,12 @@ namespace PresentationLayer.Presenter
             */
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
+                int i = 0;
+
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
+                    IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -306,9 +310,20 @@ namespace PresentationLayer.Presenter
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
                     {
+                        IPanelModel Singlepnl = fr.Lst_Panel[0];
+                        decimal pnlArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
+
+                        _dsq.dtGlassSummary.Rows.Add(1,
+                                                     1,
+                                                     Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
+                                                     Math.Round(pnlArea, 3),
+                                                     lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                                     lstQuoteUC.GetiQuoteItemListUC().ItemName
+                                                     );
 
                     }
                 }
+                i++;
             }
 
             IPrintGlassSummaryPresenter printGlass = _printGlassSummaryPresenter.GetNewInstance(_unityC, this, _mainPresenter);
@@ -707,13 +722,25 @@ namespace PresentationLayer.Presenter
                         //GlassThickness & Glassfilm
                         if (Singlepnl.Panel_GlassThicknessDesc != null)
                         {
-                            if (Singlepnl.Panel_GlassFilm.ToString() != "None")
+                            
+                            string addNewLine = "";
+
+                            if (check1stFrame == false)
                             {
-                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                addNewLine = "\n";
+                                check1stFrame = true;
                             }
                             else
                             {
-                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                addNewLine = "";
+                            }
+                            if (Singlepnl.Panel_GlassFilm.ToString() != "None")
+                            {
+                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                            }
+                            else
+                            {
+                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + "\n");
                             }
                         }
 
@@ -807,19 +834,19 @@ namespace PresentationLayer.Presenter
                     #region baseOnDimensionAndColorPoints
                     if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                     {
-                        if (wdm.WD_width >= 2000)
+                        if (fr.Frame_Width >= 2000)
                         {
                             ProfileColorPoints = 16;
                         }
-                        else if (wdm.WD_height >= 2000)
+                        else if (fr.Frame_Height >= 2000)
                         {
                             ProfileColorPoints = 16;
                         }
-                        else if (wdm.WD_width >= 3000)
+                        else if (fr.Frame_Width >= 3000)
                         {
                             ProfileColorPoints = 18;
                         }
-                        else if (wdm.WD_height >= 3000)
+                        else if (fr.Frame_Height >= 3000)
                         {
                             ProfileColorPoints = 18;
                         }
@@ -830,19 +857,19 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         ProfileColorPoints = 14;
-                        if (wdm.WD_width >= 2000)
+                        if (fr.Frame_Width >= 2000)
                         {
                             ProfileColorPoints = 18;
                         }
-                        else if (wdm.WD_height >= 2000)
+                        else if (fr.Frame_Height >= 2000)
                         {
                             ProfileColorPoints = 18;
                         }
-                        else if (wdm.WD_width >= 3000)
+                        else if (fr.Frame_Width >= 3000)
                         {
                             ProfileColorPoints = 19;
                         }
-                        else if (wdm.WD_height >= 3000)
+                        else if (fr.Frame_Height >= 3000)
                         {
                             ProfileColorPoints = 19;
                         }
@@ -853,7 +880,7 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     #region FramePrice
-                    FramePerimeter = (wdm.WD_height + wdm.WD_width) * 2;
+                    FramePerimeter = (fr.Frame_Height + fr.Frame_Width) * 2;
 
                     if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                     {
@@ -873,19 +900,19 @@ namespace PresentationLayer.Presenter
                         FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7507;
                     }
 
-                    FramePrice = (FramePerimeter / 1000) * FramePricePerLinearMeter;
-                    FrameReinPrice = (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                    FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
+                    FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
                     #endregion
 
                     #region SealantPrice
                     if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
                     {
-                        SealantPrice = _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_Clear +
+                        SealantPrice += _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_Clear +
                                         _quotationModel.Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
                     }
                     else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                     {
-                        SealantPrice = _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_BrownBlack +
+                        SealantPrice += _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_BrownBlack +
                                        _quotationModel.Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                     }
                     #endregion
@@ -895,7 +922,7 @@ namespace PresentationLayer.Presenter
                     {
                         if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                         {
-                            ThresholdPrice = (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
+                            ThresholdPrice += (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
                         }
                     }
                     #endregion
@@ -909,7 +936,7 @@ namespace PresentationLayer.Presenter
                         ChckPlasticWedge = false;
                     }
 
-                    PUFoamingPrice = _quotationModel.Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
+                    PUFoamingPrice += _quotationModel.Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
@@ -1503,7 +1530,7 @@ namespace PresentationLayer.Presenter
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
 
                         if (Singlepnl.Panel_SashPropertyVisibility == true)
-                        { 
+                        {
                             if (Singlepnl.Panel_Type.Contains("Casement"))
                             {
                                 MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
@@ -2090,7 +2117,7 @@ namespace PresentationLayer.Presenter
                 SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
                 GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
                 DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
-               // GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
+                // GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
                 FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
                 AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
                 AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
