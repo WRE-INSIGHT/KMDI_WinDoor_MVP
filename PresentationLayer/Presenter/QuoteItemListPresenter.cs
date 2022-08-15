@@ -86,8 +86,11 @@ namespace PresentationLayer.Presenter
                 FramePricePerLinearMeter_7507_WoodGrain = 507.99m,
                 FramePricePerLinearMeter_7502_White = 332.57m,
                 FramePricePerLinearMeter_7507_White = 354.28m,
+                FramePricePerLinearMeter_2060_White = 271.35m,//G58
                 FrameReinPricePerLinearMeter_7502 = 123.55m,
                 FrameReinPricePerLinearMeter_7507 = 406.86m,
+                G58ReinPricePerLinearMeter_V226 = 140.69m,//G58 reinforcement for frame, sash and divider
+
                 SashPricePerLinearMeter_7581_WoodGrain = 550.13m,
                 SashPricePerLinearMeter_373_WoodGrain = 712.66m,
                 SashPricePerLinearMeter_374_WoodGrain = 801.83m,
@@ -96,6 +99,7 @@ namespace PresentationLayer.Presenter
                 SashPricePerLinearMeter_373_White = 511.72m,
                 SashPricePerLinearMeter_374_White = 511.72m,
                 SashPricePerLinearMeter_395_White = 412.47m,
+                SashPricePerLinearMeter_2067_White = 303.50m,
                 SashReinPricePerLinearMeter_7581 = 89.86m,
                 SashReinPricePerLinearMeter_373And374 = 835.18m,
                 SashReinPricePerLinearMeter_395 = 305.14m,
@@ -104,6 +108,7 @@ namespace PresentationLayer.Presenter
 
                 Divider_7536_PricePerSqrMeter = 663.32m,
                 Divider_7538_PricePerSqrMeter = 817.34m,
+                Divider_2069_PricePerSqrMeter = 284.12m, // G58
                 DividerRein_7536_PricePerSqrMeter = 866.23m,
                 DividerRein_7538_PricePerSqrMeter = 858.52m,
         #endregion
@@ -187,8 +192,9 @@ namespace PresentationLayer.Presenter
                 PlasticWedgePricePerPiece = 10.09m,
         #endregion
         #region AncillaryProfile
-
+            GlazingGasketPricePerLinearMeter = 32.64m,
             GlazingBeadPricePerLinearMeter = 56.45m,
+            GlazingBead_G58PricePerLinearMeter = 117.72m,
             GeorgianBar_0724Price = 154.93m,
             GeorgianBar_0726Price = 307.75m,
             CoverProfile_0914Price = 20.68m,
@@ -245,6 +251,7 @@ namespace PresentationLayer.Presenter
                 ThresholdPrice,
                 CoverProfileCost,
                 GBSpacerPrice,
+                GlazingGasketPrice,
                 PlasticWedgePrice,
                 SealantPrice,
                 PUFoamingPrice,
@@ -722,7 +729,7 @@ namespace PresentationLayer.Presenter
                         //GlassThickness & Glassfilm
                         if (Singlepnl.Panel_GlassThicknessDesc != null)
                         {
-                            
+
                             string addNewLine = "";
 
                             if (check1stFrame == false)
@@ -896,8 +903,22 @@ namespace PresentationLayer.Presenter
                     }
                     else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7507)
                     {
-                        FramePricePerLinearMeter = FramePricePerLinearMeter_7507_WoodGrain;
+                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                        {
+                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                        }
+                        else
+                        {
+                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_WoodGrain;
+                        }
                         FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7507;
+                    }
+                    else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                    {
+
+                        FramePricePerLinearMeter = FramePricePerLinearMeter_2060_White;
+                        FrameReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+                        GlazingGasketPrice += (FramePerimeter / 1000) * GlazingGasketPricePerLinearMeter;
                     }
 
                     FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
@@ -962,6 +983,12 @@ namespace PresentationLayer.Presenter
                                         DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7538_PricePerSqrMeter;
                                         MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
                                     }
+                                    else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                    {
+                                        DivPrice += (div.Div_Width / 1000m) * Divider_2069_PricePerSqrMeter;
+                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * G58ReinPricePerLinearMeter_V226;
+                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                    }
                                 }
                                 else if (mpnl.MPanel_Type == "Mullion")
                                 {
@@ -977,6 +1004,12 @@ namespace PresentationLayer.Presenter
                                         DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
                                         DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
                                         MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                    }
+                                    else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                    {
+                                        DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
+                                        DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
+                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
                                     }
                                 }
                                 #endregion
@@ -1271,10 +1304,26 @@ namespace PresentationLayer.Presenter
 
                                         SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
                                     }
+                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                        SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                    }
 
                                     SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                     SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+
+                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    {
+                                        GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                    }
+                                    else
+                                    {
+                                        GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    }
+
                                     #endregion
 
                                     #region EspagPrice
@@ -1779,6 +1828,13 @@ namespace PresentationLayer.Presenter
                                 }
                                 SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
                             }
+                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                            {
+                                SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                            }
 
                             SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                             SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
@@ -2067,7 +2123,8 @@ namespace PresentationLayer.Presenter
                 AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                        Math.Round(GbPrice, 2) +
                                        Math.Round(GeorgianBarCost, 2) +
-                                       Math.Round(CoverProfileCost, 2);
+                                       Math.Round(CoverProfileCost, 2) +
+                                       Math.Round(GlazingGasketPrice, 2);
 
                 AccesorriesCost = Math.Round(EndCapPrice, 2) +
                                   Math.Round(MechJointPrice, 2) +
