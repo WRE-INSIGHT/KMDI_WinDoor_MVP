@@ -158,6 +158,10 @@
             this.reportViewer1.TabIndex = 3;
             this.reportViewer1.ZoomPercent = 75;
             // 
+            // BSQuotation
+            // 
+            this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
+            // 
             // PrintQuoteView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
