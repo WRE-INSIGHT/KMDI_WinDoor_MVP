@@ -687,8 +687,6 @@ namespace PresentationLayer.DataTables {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtGlassSummaryDataTable : global::System.Data.TypedTableBase<dtGlassSummaryRow> {
             
-            private global::System.Data.DataColumn columndtQuoteNo;
-            
             private global::System.Data.DataColumn columndtItemNo;
             
             private global::System.Data.DataColumn columndtQuantity;
@@ -732,14 +730,6 @@ namespace PresentationLayer.DataTables {
             protected dtGlassSummaryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn dtQuoteNoColumn {
-                get {
-                    return this.columndtQuoteNo;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -827,10 +817,9 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtGlassSummaryRow AdddtGlassSummaryRow(string dtQuoteNo, int dtItemNo, int dtQuantity, string dtSize, decimal dtArea, string dtReference, string dtLocation) {
+            public dtGlassSummaryRow AdddtGlassSummaryRow(int dtItemNo, int dtQuantity, string dtSize, decimal dtArea, string dtReference, string dtLocation) {
                 dtGlassSummaryRow rowdtGlassSummaryRow = ((dtGlassSummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        dtQuoteNo,
                         dtItemNo,
                         dtQuantity,
                         dtSize,
@@ -859,7 +848,6 @@ namespace PresentationLayer.DataTables {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columndtQuoteNo = base.Columns["dtQuoteNo"];
                 this.columndtItemNo = base.Columns["dtItemNo"];
                 this.columndtQuantity = base.Columns["dtQuantity"];
                 this.columndtSize = base.Columns["dtSize"];
@@ -871,8 +859,6 @@ namespace PresentationLayer.DataTables {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columndtQuoteNo = new global::System.Data.DataColumn("dtQuoteNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndtQuoteNo);
                 this.columndtItemNo = new global::System.Data.DataColumn("dtItemNo", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtItemNo);
                 this.columndtQuantity = new global::System.Data.DataColumn("dtQuantity", typeof(int), null, global::System.Data.MappingType.Element);
@@ -1322,22 +1308,6 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string dtQuoteNo {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtGlassSummary.dtQuoteNoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dtQuoteNo\' in table \'dtGlassSummary\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtGlassSummary.dtQuoteNoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int dtItemNo {
                 get {
                     try {
@@ -1430,18 +1400,6 @@ namespace PresentationLayer.DataTables {
                 set {
                     this[this.tabledtGlassSummary.dtLocationColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdtQuoteNoNull() {
-                return this.IsNull(this.tabledtGlassSummary.dtQuoteNoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdtQuoteNoNull() {
-                this[this.tabledtGlassSummary.dtQuoteNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

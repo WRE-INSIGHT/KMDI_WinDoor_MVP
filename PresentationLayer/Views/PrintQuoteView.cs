@@ -84,5 +84,9 @@ namespace PresentationLayer.Views
             return dtp_Date;
         }
 
+        private void BSQuotation_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

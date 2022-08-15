@@ -42,9 +42,10 @@ namespace PresentationLayer.Presenter
                 _printGlassSummary.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.GlassSummary.rdlc";
 
 
-                ReportParameter[] RParam = new ReportParameter[1];
-                RParam[0] = new ReportParameter("deyt", _dtpGlassSummary.Value.ToString("MM/dd/yyyy"));
-
+                ReportParameter[] RParam = new ReportParameter[3];
+                RParam[0] = new ReportParameter("deyt1", _dtpGlassSummary.Value.ToString("MM/dd/yyyy"));
+                RParam[1] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                RParam[2] = new ReportParameter("ProjectName", _mainPresenter.inputted_projectName);
 
                 _printGlassSummary.GetReportViewer().LocalReport.SetParameters(RParam);
                 _printGlassSummary.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
@@ -56,11 +57,12 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show(ex.Message);
             }
+            Console.WriteLine(_dtpGlassSummary.Value.ToString("MM/dd/yyyy"));
         }
 
         private void _printGlassSummary_PringGlassSummaryViewLoadEventRaised(object sender, EventArgs e)
         {
-            _dtpGlassSummary.Value = DateTime.Now;
+            _printGlassSummary_btnRefreshClickEventRaised(sender, e);
         }
 
         public IPrintGlassSummaryView GetPrintGlassSummaryView()
