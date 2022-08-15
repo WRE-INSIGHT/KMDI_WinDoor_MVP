@@ -1456,8 +1456,34 @@ namespace PresentationLayer.Presenter.UserControls
                         , arrowStartingY = 0;
             int client_wd = 0, client_ht = 0;
 
-            client_wd = panelModel.PanelImageRenderer_Width;
-            client_ht = panelModel.PanelImageRenderer_Height;
+
+            
+
+
+            if (panelModel.Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+            {
+                client_wd = panelModel.PanelImageRenderer_Width;
+                client_ht = panelModel.PanelImageRenderer_Height;
+            }
+            else if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+            {
+                if(panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                {
+                  
+                    client_wd = panelModel.PanelImageRenderer_Width;
+                    client_ht = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
+                }
+                else if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                {
+                    client_wd = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
+                    client_ht = panelModel.PanelImageRenderer_Height;
+                }
+
+
+            }
+                
+
+
 
 
             Rectangle panel_bounds = new Rectangle(Ppoint, new Size(client_wd, client_ht));

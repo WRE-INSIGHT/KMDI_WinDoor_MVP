@@ -320,6 +320,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 mpnl.SetZoomDivider();
                 mpnl.SetZoomMPanels();
                 mpnl.Reload_PanelMargin();
+
             }
 
             foreach (IPanelModel pnl in Lst_Panel)

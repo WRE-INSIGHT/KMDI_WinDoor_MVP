@@ -159,6 +159,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             Console.WriteLine("Height " + this.Height);
             Console.WriteLine("Width " + this.Width);
+            Console.WriteLine("Location " + this.Location);
         }
     }
 }

@@ -130,7 +130,7 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
-    <Compile Include="Presenter\UserControls\ConcreteUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\WinDoorPanels\ConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\CustomArrowHeadUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\DividerPropertiesUCPresenter.cs" />
