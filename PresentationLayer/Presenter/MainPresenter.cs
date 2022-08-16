@@ -2100,8 +2100,16 @@ namespace PresentationLayer.Presenter
                     if (mpanel.MPanelLst_Objects.Count() == (mpanel.MPanel_Divisions * 2) + 1)
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
-                        // mpanel.Fit_MyControls_ImagersToBindDimensions();
+                        mpanel.Fit_MyControls_ImagersToBindDimensions();
+                        foreach (IMultiPanelModel mpanels in mpanel.MPanelLst_MultiPanel)
+                        {
+                            foreach (IPanelModel pnl in mpanels.MPanelLst_Panel)
+                            {
+                                pnl.SetDimensionToBind_2ndlvl_using_BaseDimension();
+                            }
+                        }
                     }
+                   
                 }
             }
         }

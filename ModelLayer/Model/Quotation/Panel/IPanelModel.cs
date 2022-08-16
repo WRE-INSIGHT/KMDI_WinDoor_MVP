@@ -238,6 +238,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
         void SetDimensionToBind_using_BaseDimension();
+        void SetDimensionToBind_2ndlvl_using_BaseDimension();
         void SetDimensionImagerToBind_using_BaseDimension();
         void AdjustPropertyPanelHeight(string mode);
         void AdjustMotorizedPropertyHeight(string mode);

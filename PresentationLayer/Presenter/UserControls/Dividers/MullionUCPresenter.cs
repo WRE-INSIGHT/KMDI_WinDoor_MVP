@@ -734,7 +734,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                                     prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
                                     prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
-
+                                    
                                     foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                     {
                                         mpanel.MPanel_Width += mullion_movement;
@@ -746,7 +746,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
                                         mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
                                     }
-
+                                    
                                     foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
                                     {
                                         div.Div_Width += mullion_movement;
@@ -818,7 +818,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
                                         mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
                                     }
-
+                                    
                                     foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
                                     {
                                         div.Div_Width += mullion_movement;
@@ -853,7 +853,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             }
                         }
                     }
+                   
                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                    _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

@@ -94,7 +94,9 @@ namespace PresentationLayer.Views.UserControls.Dividers
             //{
             //    cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
             //}
-            Console.WriteLine(this.Width);
+            Console.WriteLine(this.Height);
+            Console.WriteLine(this.Location);
+            Console.WriteLine(this.Parent.Name);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
