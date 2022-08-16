@@ -1,14 +1,9 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
-using CommonComponents;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
@@ -79,7 +74,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                     espag == Espagnolette_ArticleNo._628809)
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
-                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581))
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -87,7 +83,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 else if (espag == Espagnolette_ArticleNo._642105 || espag == Espagnolette_ArticleNo._642089 ||
                      espag == Espagnolette_ArticleNo._630963)
                 {
-                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                         (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                          Panel_SashProfileArtNo == SashProfile_ArticleNo._373)))
                     {
@@ -125,12 +121,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             string text = ((ComboBox)sender).Items[e.Index].ToString();
             Espagnolette_ArticleNo espag = (Espagnolette_ArticleNo)((ComboBox)sender).Items[e.Index];
 
-            if (espag == Espagnolette_ArticleNo._741012 || espag == Espagnolette_ArticleNo._EQ87NT || 
+            if (espag == Espagnolette_ArticleNo._741012 || espag == Espagnolette_ArticleNo._EQ87NT ||
                 espag == Espagnolette_ArticleNo._628806 || espag == Espagnolette_ArticleNo._628807 ||
                 espag == Espagnolette_ArticleNo._628809)
             {
                 if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
-                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581))
+                    (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
@@ -142,7 +139,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             else if (espag == Espagnolette_ArticleNo._642105 || espag == Espagnolette_ArticleNo._642089 ||
                      espag == Espagnolette_ArticleNo._630963)
             {
-                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 && 
+                if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
                 {
