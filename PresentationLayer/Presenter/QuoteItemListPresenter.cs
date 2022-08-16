@@ -381,7 +381,6 @@ namespace PresentationLayer.Presenter
 
                 wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
-                Console.WriteLine(Math.Round(lstTotalPrice[i], 2));
 
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                 _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
@@ -1066,7 +1065,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     if (pnl.Panel_Type.Contains("Casement"))
                                     {
-                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
                                         {
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
 
@@ -1584,7 +1583,7 @@ namespace PresentationLayer.Presenter
                             {
                                 MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
 
-                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
                                 {
                                     if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
                                     {
@@ -2235,6 +2234,7 @@ namespace PresentationLayer.Presenter
                 GbPrice = 0;
                 GeorgianBarCost = 0;
                 CoverProfileCost = 0;
+                GlazingGasketPrice = 0;
 
                 AccesorriesCost = 0;
                 EndCapPrice = 0;

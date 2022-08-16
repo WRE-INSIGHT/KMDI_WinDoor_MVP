@@ -370,7 +370,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void SetDimensionsToBind_using_DivZoom()
         {
-            int wd = Div_MPanelParent.MPanel_WidthToBind, 
+            int wd = Div_MPanelParent.MPanel_WidthToBind,
                 ht = Div_MPanelParent.MPanel_HeightToBind,
                 divsize = 0;
 
@@ -513,6 +513,12 @@ namespace ModelLayer.Model.Quotation.Divider
                     Div_ReinfArtNo = DividerReinf_ArticleNo._R686;
                     Div_MechJoinArtNo = Divider_MechJointArticleNo._AV585;
                 }
+                else if (value == Divider_ArticleNo._2069)
+                {
+                    Div_ReinfArtNo = DividerReinf_ArticleNo._V226;
+                    Div_MechJoinArtNo = Divider_MechJointArticleNo._9U18;
+                }
+
                 NotifyPropertyChanged();
             }
         }

@@ -280,6 +280,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ButtHingeVisibility = true;
                         }
                     }
+                    //else if (sel_sash == SashProfile_ArticleNo._2067)
+                    //{
+                    //    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._V226;
+                    //}
                     curr_sash = sel_sash;
                 }
             }
