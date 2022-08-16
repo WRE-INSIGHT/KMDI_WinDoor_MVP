@@ -1025,6 +1025,10 @@ namespace PresentationLayer.Presenter
             {
                 Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile");
             }
+            else if (tsmItem.Name == "G58ToolStripMenuItem")
+            {
+                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile");
+            }
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)

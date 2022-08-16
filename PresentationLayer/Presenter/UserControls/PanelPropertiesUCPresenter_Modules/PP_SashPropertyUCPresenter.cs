@@ -145,7 +145,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
                                 }
 
-                                if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067)
+                                if (curr_sash == SashProfile_ArticleNo._7581 || sel_sash == SashProfile_ArticleNo._2067) //
                                 {
                                     _panelModel.Panel_HingeOptionsVisibility = false;
 
