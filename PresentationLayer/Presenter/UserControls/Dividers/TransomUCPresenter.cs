@@ -118,7 +118,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         _keydown = false;
                         break;
 
-                    case Keys.Up:
+                    case Keys.Down:
                         if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                         {
                             if (nxt_ctrl is IMultiPanelUC)
@@ -282,7 +282,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                         break;
 
-                    case Keys.Down:
+                    case Keys.Up:
                         if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                         {
                             if (prev_ctrl is IMultiPanelUC)
