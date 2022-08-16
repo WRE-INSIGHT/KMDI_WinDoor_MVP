@@ -1459,17 +1459,11 @@ namespace PresentationLayer.Presenter.UserControls
 
             
 
-
-            if (panelModel.Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+            if(panelModel.Panel_ParentMultiPanelModel != null)
             {
-                client_wd = panelModel.PanelImageRenderer_Width;
-                client_ht = panelModel.PanelImageRenderer_Height;
-            }
-            else if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-            {
-                if(panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
-                  
+
                     client_wd = panelModel.PanelImageRenderer_Width;
                     client_ht = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
                 }
@@ -1478,8 +1472,11 @@ namespace PresentationLayer.Presenter.UserControls
                     client_wd = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
                     client_ht = panelModel.PanelImageRenderer_Height;
                 }
-
-
+            }
+            else
+            {
+                client_wd = panelModel.PanelImageRenderer_Width;
+                client_ht = panelModel.PanelImageRenderer_Height;
             }
                 
 

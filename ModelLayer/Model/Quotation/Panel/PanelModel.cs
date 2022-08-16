@@ -2238,6 +2238,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     int mpnl_deduct = 0;
                     if (Panel_Zoom == 0.5)
                     {
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        {
+                        }
+                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                        }
+
+
                         if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
                         {
                             mpnl_deduct = 9;
@@ -2253,24 +2261,49 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else
                     {
-                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                         {
-                            mpnl_deduct = 16; // 8 + 8
-                                              // left margin is 8
-                                              // right margin is 8
+                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                            {
+                                mpnl_deduct = 16; // 8 + 8
+                                                  // left margin is 8
+                                                  // right margin is 8
+                            }
+                            else
+                            {
+                                mpnl_deduct = 18; // 10 + 8
+                                                  //if MPanel_Placement is "First"
+                                                  // left margin is 10
+                                                  // right margin is 8
+
+                                //if MPanel_Placement is "Last"
+                                // left margin is 8
+                                // right margin is 10
+
+                            }
                         }
-                        else
+                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
-                            mpnl_deduct = 18; // 10 + 8
-                                              //if MPanel_Placement is "First"
-                                              // left margin is 10
-                                              // right margin is 8
+                            //if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                            //{
+                            //    mpnl_deduct = 10; // 10 + 10
+                            //                      // left margin is 10
+                            //                      // right margin is 10
+                            //}
+                            //else
+                            //{
+                            //    mpnl_deduct = 22; // 12 + 10
+                            //                      //if MPanel_Placement is "First"
+                            //                      // left margin is 12
+                            //                      // right margin is 10
 
-                            //if MPanel_Placement is "Last"
-                            // left margin is 8
-                            // right margin is 10
+                            //    //if MPanel_Placement is "Last"
+                            //    // left margin is 10
+                            //    // right margin is 12
 
+                            //}
                         }
+                       
                     }
                     if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                     {
