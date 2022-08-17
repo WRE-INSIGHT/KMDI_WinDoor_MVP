@@ -88,7 +88,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelWidth = value;
             }
         }
-      
+
 
         private int _panelOriginalWidth;
         public int Panel_OriginalWidth
@@ -187,7 +187,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelHeight = value;
             }
         }
-      
+
         public int Panel_OriginalHeight { get; set; }
 
         [Description("Virtual Height that is dependent on Panel_Height and Panel_Zoom and varies accordingly. (not intended for user to use)")]
@@ -508,7 +508,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-       
+
 
         private int _panelImage_Width;
         public int PanelImageRenderer_Width
@@ -524,7 +524,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-       
+
         private Padding _paneImage_Margin;
         public Padding PanelImageRenderer_Margin
         {
@@ -702,7 +702,11 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGlassThickness = value;
-                if (value == 6.0f ||
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                {
+                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._1681;
+                }
+                else if (value == 6.0f ||
                     value == 8.0f)
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
@@ -755,6 +759,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
                 }
+
                 NotifyPropertyChanged();
             }
         }
@@ -852,7 +857,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             set
             {
-                _panelSashProfileArtNo = value;
+                _panelSashProfileArtNo = value; 
                 NotifyPropertyChanged();
             }
         }
@@ -2303,7 +2308,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                             //}
                         }
-                       
+
                     }
                     if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                     {
@@ -2572,10 +2577,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 //        pnl_wd = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - mpnl_deduct);
                 //        pnl_ht = (int)(Panel_OriginalHeight * Panel_Zoom);
                 //    }
-                      
+
                 //}
 
-                
+
             }
 
             Panel_WidthToBind = pnl_wd;
@@ -2671,7 +2676,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
-                   if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         pnl_ht = (int)(Panel_OriginalHeight * PanelImageRenderer_Zoom) - deduct;
                         pnl_wd = (int)(Panel_OriginalWidth * PanelImageRenderer_Zoom);
@@ -2886,7 +2891,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         pnl_ht = ((parent_MpanelHeight - mpnlHt_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
                     }
-                    
+
                     pnl_wd = parent_MpanelWidth - mpnlWd_deduct;
                 }
             }
@@ -2941,7 +2946,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         pnl_ht = (parent_MpanelHeight / totalpanel_inside_parentMpanel) - divMove_int;
                     }
-                   
+
                     pnl_wd = parent_MpanelWidth;
                 }
             }

@@ -409,6 +409,8 @@ namespace PresentationLayer.Presenter
                 this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                 TotalItemArea = wdm.WD_width * wdm.WD_height;
                 this._lstItemArea.Add(TotalItemArea);
+
+
             }
         }
 
@@ -559,6 +561,7 @@ namespace PresentationLayer.Presenter
             {
                 lst_DuplicatePnl.Clear();
                 lst_Description.Clear();
+                lst_glassThickness.Clear();
                 NewNoneDuplicatePnlAndCount = string.Empty;
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
@@ -1078,7 +1081,11 @@ namespace PresentationLayer.Presenter
                                                 FSPrice += FS_16HD_casementPricePerPiece * 2;
                                             }
 
-                                            if (pnl.Panel_ExtensionOptionsVisibility == true)
+                                            if (pnl.Panel_ExtensionOptionsVisibility == true &&
+                                                pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                                 pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                                 pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                                 pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
                                             {
                                                 if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
                                                     pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
@@ -1125,7 +1132,11 @@ namespace PresentationLayer.Presenter
 
                                                 #region ExtensionPrice
 
-                                                if (pnl.Panel_ExtensionOptionsVisibility == true)
+                                                if (pnl.Panel_ExtensionOptionsVisibility == true &&
+                                                    pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                                    pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                                    pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                                    pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
                                                 {
                                                     if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._630956 ||
                                                         pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._630956 ||
@@ -1594,7 +1605,11 @@ namespace PresentationLayer.Presenter
                                         FSPrice += FS_16HD_casementPricePerPiece * 2;
                                     }
 
-                                    if (Singlepnl.Panel_ExtensionOptionsVisibility == true)
+                                    if (Singlepnl.Panel_ExtensionOptionsVisibility == true &&
+                                        Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
                                     {
                                         if (Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
                                             Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
@@ -1641,7 +1656,11 @@ namespace PresentationLayer.Presenter
                                         #endregion
 
                                         #region ExtensionPrice 
-                                        if (Singlepnl.Panel_ExtensionOptionsVisibility == true)
+                                        if (Singlepnl.Panel_ExtensionOptionsVisibility == true &&
+                                            Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                            Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                            Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                            Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
                                         {
                                             if (Singlepnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._630956 ||
                                                 Singlepnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._630956 ||
@@ -2204,6 +2223,7 @@ namespace PresentationLayer.Presenter
                 PUFoamingPrice = 0;
 
                 FittingAndSuppliesCost = 0;
+                FSPrice = 0;
                 RestrictorStayPrice = 0;
                 CornerDrivePrice = 0;
                 SnapInKeepPrice = 0;

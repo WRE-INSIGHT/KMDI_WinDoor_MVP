@@ -1907,48 +1907,56 @@ namespace PresentationLayer.Presenter
 
             foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
-                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                try
                 {
-                    string gbmode = "";
-                    bool same_sash = false;
-                    SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
-                    bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
-                    bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                    {
+                        string gbmode = "";
+                        bool same_sash = false;
+                        SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                        bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                        bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
 
-                    if (allWithSash == true && allNoSash == false)
-                    {
-                        gbmode = "withSash";
-                        int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
-                        if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                        if (allWithSash == true && allNoSash == false)
                         {
-                            same_sash = true;
-                        }
-                        else
-                        {
-                            same_sash = false;
-                        }
-                    }
-                    else if (allWithSash == false && allNoSash == true)
-                    {
-                        gbmode = "noSash";
-                    }
-                    else if (allWithSash == false && allNoSash == false)
-                    {
-                        gbmode = "";
-                    }
-
-                    if (gbmode != "")
-                    {
-                        if (same_sash == true || gbmode == "noSash")
-                        {
-                            if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                            gbmode = "withSash";
+                            int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                            if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
                             {
-                                unbalancedGlass_cnt++;
+                                same_sash = true;
+                            }
+                            else
+                            {
+                                same_sash = false;
                             }
                         }
-                    }
+                        else if (allWithSash == false && allNoSash == true)
+                        {
+                            gbmode = "noSash";
+                        }
+                        else if (allWithSash == false && allNoSash == false)
+                        {
+                            gbmode = "";
+                        }
 
+                        if (gbmode != "")
+                        {
+                            if (same_sash == true || gbmode == "noSash")
+                            {
+                                if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                {
+                                    unbalancedGlass_cnt++;
+                                }
+                            }
+                        }
+
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+              
             }
 
             return unbalancedGlass_cnt;
