@@ -17,6 +17,7 @@ namespace PresentationLayer.Views
         event EventHandler ButtonPlusZoomClickEventRaised;
         event EventHandler ButtonMinusZoomClickEventRaised;
         event EventHandler DeleteToolStripButtonClickEventRaised;
+        event EventHandler ViewImagerToolStripButtonClickEventRaised;
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         event EventHandler CreateNewGlassClickEventRaised;
         event EventHandler ChangeItemColorClickEventRaised;
@@ -42,7 +43,6 @@ namespace PresentationLayer.Views
         void ThisBinding(Dictionary<string, Binding> binding);
         void RemoveBinding();
         void RemoveBinding(Control ctrl);
-
         Panel GetPanelMain();
         Panel GetPanelItems();
         Panel GetPanelPropertiesBody();

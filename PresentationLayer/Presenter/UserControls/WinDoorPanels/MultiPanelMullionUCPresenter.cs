@@ -498,16 +498,36 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                         }
+                        //int expectedWidth = 0;
+                        //foreach(IMultiPanelModel cmpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                        //{
+                        //    expectedWidth += cmpnl.MPanel_Width;
+                        //}
+                        //foreach (IPanelModel cpnl in _multiPanelModel.MPanelLst_Panel)
+                        //{
+                        //    expectedWidth += cpnl.Panel_Width;
+                        //}
+                        //foreach (IDividerModel cdvd in _multiPanelModel.MPanelLst_Divider)
+                        //{
+                        //    expectedWidth += cdvd.Div_Width;
+                        //}
+                        //if(expectedWidth == 0)
+                        //{
+                            if (_multiPanelModel.MPanel_DividerEnabled)
+                            {
+                                suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            }
+                            else if (!_multiPanelModel.MPanel_DividerEnabled)
+                            {
+                                suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
+                            }
 
-                        if (_multiPanelModel.MPanel_DividerEnabled)
-                        {
-                            suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                        }
-                        else if (!_multiPanelModel.MPanel_DividerEnabled)
-                        {
-                            suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
-                        }
-
+                        //}
+                        //else
+                        //{
+                        //    suggest_Wd = _multiPanelModel.MPanel_Width - expectedWidth;
+                        //}
+                        
                         if (_multiPanelModel.MPanel_ParentModel != null)
                         {
                             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)

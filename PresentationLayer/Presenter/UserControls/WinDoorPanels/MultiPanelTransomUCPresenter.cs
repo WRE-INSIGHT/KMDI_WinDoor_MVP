@@ -777,7 +777,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
-
+                           
                             _mainPresenter.Fit_MyControls_byControlsLocation();
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                         }
@@ -849,6 +849,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+
                 }
             }
             catch (Exception ex)

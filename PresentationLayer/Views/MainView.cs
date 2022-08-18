@@ -215,6 +215,7 @@ namespace PresentationLayer.Views
         public event EventHandler saveAsToolStripMenuItemClickEventRaised;
         public event EventHandler saveToolStripButtonClickEventRaised;
         public event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
+        public event EventHandler ViewImagerToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -244,7 +245,6 @@ namespace PresentationLayer.Views
         {
             this.DataBindings.Clear();
         }
-
         public void RemoveBinding(Control ctrl)
         {
             ctrl.DataBindings.Clear();
@@ -348,7 +348,7 @@ namespace PresentationLayer.Views
 
         private void deleteItemToolStripButton1_Click(object sender, EventArgs e)
         {
-            pnlPropertiesBody.VerticalScroll.Minimum = 100;
+            //pnlPropertiesBody.VerticalScroll.Minimum = 100;
             EventHelpers.RaiseEvent(sender, DeleteToolStripButtonClickEventRaised, e);
         }
 
@@ -471,6 +471,11 @@ namespace PresentationLayer.Views
         private void slidingTopViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, slidingTopViewToolStripMenuItemClickRaiseEvent, e);
+        }
+
+        private void ViewImagerToolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, ViewImagerToolStripButtonClickEventRaised, e);
         }
     }
 }
