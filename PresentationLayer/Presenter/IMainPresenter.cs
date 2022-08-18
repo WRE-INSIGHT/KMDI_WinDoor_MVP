@@ -98,6 +98,5 @@ namespace PresentationLayer.Presenter
         void Fit_MyImager_byImagersLocation();
         void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);
         void Load_Windoor_Item(IWindoorModel item);
-
     }
 }

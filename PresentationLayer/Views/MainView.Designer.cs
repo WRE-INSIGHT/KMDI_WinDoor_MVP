@@ -104,6 +104,7 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -458,7 +459,8 @@
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
             this.tsLbl_Loading,
-            this.tsLbl_Status});
+            this.tsLbl_Status,
+            this.ViewImagerToolStripButton1});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -879,6 +881,16 @@
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
             // 
+            // ViewImagerToolStripButton1
+            // 
+            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
+            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -997,5 +1009,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem slidingTopViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem G58ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton ViewImagerToolStripButton1;
     }
 }
