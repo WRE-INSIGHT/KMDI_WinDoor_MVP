@@ -621,6 +621,20 @@ namespace PresentationLayer.Presenter
             _mainView.saveAsToolStripMenuItemClickEventRaised += _mainView_saveAsToolStripMenuItemClickEventRaised;
             _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
             _mainView.slidingTopViewToolStripMenuItemClickRaiseEvent += _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent;
+            _mainView.ViewImagerToolStripButtonClickEventRaised += _mainView_ViewImagerToolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
         }
 
 
@@ -706,16 +720,12 @@ namespace PresentationLayer.Presenter
             }
         }
 
-
+       
         private void _mainView_refreshToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                Bitmap bm = new Bitmap(_windoorModel.WD_width_4basePlatform_forImageRenderer, _windoorModel.WD_height_4basePlatform_forImageRenderer);
-                UserControl basePl_imager = _basePlatformImagerUCPresenter.GetBasePlatformImagerUC() as UserControl;
-                basePl_imager.DrawToBitmap(bm, new Rectangle(0, 0, _windoorModel.WD_width_4basePlatform_forImageRenderer, _windoorModel.WD_height_4basePlatform_forImageRenderer));
-                //_mainView.SetImage(bm);
-                _windoorModel.WD_image = bm;
+                Load_Windoor_Item(_windoorModel);
             }
             catch (Exception ex)
             {
@@ -957,16 +967,57 @@ namespace PresentationLayer.Presenter
         bool toggle;
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                if (_quotationModel != null)
+                {
 
-            toggle = !toggle;
-            if (toggle == true)
-            {
-                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        if (wdm == _windoorModel)
+                        {
+                            foreach(IItemInfoUC itemInfo in _pnlItems.Controls)
+                            {
+                                if(itemInfo.WD_Selected == true)
+                                {
+                                    _pnlItems.Controls.Remove((UserControl)itemInfo);
+                                }
+
+                            }
+                            wdm.lst_frame.Clear();
+                            _quotationModel.Lst_Windoor.Remove(wdm);
+
+                            break;
+                        }
+                    }
+                    
+                    _pnlPropertiesBody.Controls.Clear();
+                    _pnlMain.Controls.Clear();
+                    //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                    _basePlatformPresenter.RemoveBindingView();
+                    SetMainViewTitle("");
+                    CreateNewWindoorBtn_Disable();
+                    int count = 1;
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        wdm.WD_name = "Item " + count;
+                        count++;
+                    }
+                    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                    {
+                        Load_Windoor_Item(wdm);
+                        break;
+                    }
+                    if (_quotationModel.Lst_Windoor.Count == 0)
+                    {
+                        Clearing_Operation();
+                    }
+
+
+                }
             }
-            else if (toggle == false)
-            {
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            }
+            
         }
 
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -1524,6 +1575,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
             }
+            Load_Windoor_Item(_windoorModel);
         }
         #endregion
 
@@ -1576,6 +1628,10 @@ namespace PresentationLayer.Presenter
 
         public void Load_Windoor_Item(IWindoorModel item)
         {
+            _basePlatformImagerUCPresenter.SendToBack_baseImager();
+
+           
+          
             //save frame
             Frame_Save_UserControl();
             Frame_Save_PropertiesUC();
@@ -1589,15 +1645,20 @@ namespace PresentationLayer.Presenter
                              item.WD_profile,
                              false);
             _quotationModel.Select_Current_Windoor(item);
-
+          
             //clear
             _pnlMain.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
-
+            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+        
             //basePlatform
             _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
             AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
             _basePlatformPresenter.InvalidateBasePlatform();
+
+            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+            UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+            _mainView.GetThis().Controls.Add(bpUC);
 
             //frames
             foreach (IFrameModel frame in item.lst_frame)
@@ -1605,7 +1666,12 @@ namespace PresentationLayer.Presenter
                 _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
                 _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
             }
+
             _pnlPropertiesBody.Refresh();
+            _mainView.RemoveBinding(_mainView.GetLblSize());
+            _mainView.RemoveBinding();
+            _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
         }
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
@@ -2395,6 +2461,7 @@ namespace PresentationLayer.Presenter
             return col;
         }
 
+       
         #endregion
 
     }

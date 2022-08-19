@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation.WinDoor
@@ -368,7 +369,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public List<IFrameModel> lst_frame { get; set; }
         public List<IConcreteModel> lst_concrete { get; set; }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

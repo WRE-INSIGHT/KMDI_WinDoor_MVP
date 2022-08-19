@@ -524,6 +524,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
+                _mainPresenter.Load_Windoor_Item(_frameModel.Frame_WindoorModel);
+
             }
         }
 
@@ -671,9 +673,9 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.DeleteFramePropertiesUC(_frameModel.Frame_ID);
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
-
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.DeselectDivider();
         }

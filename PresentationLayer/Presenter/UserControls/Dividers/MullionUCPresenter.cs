@@ -278,7 +278,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                             }
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                         }
                         break;
 
@@ -442,7 +443,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 }
                             }
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                         }
                         break;
                 }
