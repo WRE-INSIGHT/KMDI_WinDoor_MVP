@@ -2708,10 +2708,11 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public void SetDimensionToBind_using_BaseDimension()
         {
-            if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+            if (Panel_ParentMultiPanelModel != null)
             {
-                if (Panel_ParentMultiPanelModel != null)
+                if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
+
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
@@ -2725,14 +2726,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
                 else
-                {
-                    Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                    Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                }
-            }
-            else if (Panel_ParentMultiPanelModel != null)
-            {
-                if (Panel_ParentMultiPanelModel != null)
                 {
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
@@ -2748,11 +2741,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_HeightToBind = pnl_ht;
                     }
                 }
-                else
-                {
-                    Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                    Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                }
+            }
+
+            else
+            {
+                Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
             }
         }
         public void SetDimensionImagerToBind_using_BaseDimension()
