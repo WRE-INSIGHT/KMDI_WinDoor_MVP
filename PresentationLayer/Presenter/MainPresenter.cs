@@ -107,6 +107,7 @@ namespace PresentationLayer.Presenter
         private ToolStripLabel _tsLblStatus;
         private ToolStrip _tsMain;
         private MenuStrip _msMainMenu;
+        private Base_Color baseColor;
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -769,7 +770,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Scenario_Quotation(false, false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "");
+                Scenario_Quotation(false, false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
             }
             catch (Exception ex)
             {
@@ -1089,6 +1090,7 @@ namespace PresentationLayer.Presenter
             _frmDimensionPresenter.SetPresenters(this);
             _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.ChangeBasePlatformSize;
             _frmDimensionPresenter.SetProfileType(_windoorModel.WD_profile);
+            _frmDimensionPresenter.SetBaseColor(_windoorModel.WD_BaseColor.ToString());
             _frmDimensionPresenter.SetHeight();
             _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
             _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
@@ -1099,15 +1101,15 @@ namespace PresentationLayer.Presenter
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile");
+                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile");
+                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "G58ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile");
+                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
         }
 
@@ -1127,7 +1129,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                    Scenario_Quotation(false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                 }
             }
             else
@@ -1140,7 +1142,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "");
+                    Scenario_Quotation(true, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
                 }
             }
         }
@@ -1156,7 +1158,7 @@ namespace PresentationLayer.Presenter
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
-            Scenario_Quotation(false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "");
+            Scenario_Quotation(false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
 
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -1349,7 +1351,8 @@ namespace PresentationLayer.Presenter
                                        frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
                                        int frmDimension_numHt,
-                                       string frmDimension_profileType)
+                                       string frmDimension_profileType,
+                                       string frmDimension_baseColor)
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
@@ -1366,6 +1369,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
@@ -1378,6 +1382,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = true;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
@@ -1391,6 +1396,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = purpose;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
                     _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
                     _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = true;
@@ -1415,13 +1421,22 @@ namespace PresentationLayer.Presenter
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete)
                 {
-                    if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
+                    if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
+                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
+                        baseColor = Base_Color._White;
+                    }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._DarkBrown.ToString())
+                    {
+                        baseColor = Base_Color._DarkBrown;
+                    }
+                    if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
+                    { 
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
-                                                                         Base_Color._Ivory,
+                                                                         baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         _windoorModel.SetDimensions_basePlatform();
@@ -1469,7 +1484,7 @@ namespace PresentationLayer.Presenter
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
-                                                                         Base_Color._Ivory,
+                                                                         baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
@@ -2051,7 +2066,7 @@ namespace PresentationLayer.Presenter
                 {
                     MessageBox.Show(ex.Message);
                 }
-              
+
             }
 
             return unbalancedGlass_cnt;
@@ -2226,7 +2241,7 @@ namespace PresentationLayer.Presenter
                             }
                         }
                     }
-                   
+
                 }
             }
         }

@@ -16,6 +16,7 @@ namespace PresentationLayer.Presenter
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
 
         private string profile_type;
+        private string _baseColor;
         private bool _isFrmClosed;
         public enum Show_Purpose
         {
@@ -52,6 +53,19 @@ namespace PresentationLayer.Presenter
             set
             {
                 profile_type = value;
+            }
+        }
+
+        public string baseColor_frmDimensionPresenter
+        {
+            get
+            {
+                return _baseColor;
+            }
+
+            set
+            {
+                _baseColor = value;
             }
         }
 
@@ -123,8 +137,21 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.frmDimensionLoadEventRaised += new EventHandler(OnfrmDimensionLoadEventRaised);
             _frmDimensionView.btnOKClickedEventRaised += new EventHandler(OnbtnOKClickedEventRaised);
             _frmDimensionView.btnCancelClickedEventRaised += new EventHandler(OnbtnCancelClickedEventRaised);
-            // _frmDimensionView.radbtnCheckChangedEventRaised += new EventHandler(OnradbtnCheckChangedEventRaised);
-            _frmDimensionView.cmbSystemOptionSelectedValueChangedEventRaised += _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised;
+            _frmDimensionView.cmbSystemOptionSelectedValueChangedEventRaised += new EventHandler(_frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised);
+            _frmDimensionView.cmbBaseColorOptionSelectedValueChangedEventRaised += new EventHandler(_frmDimensionView_cmbBaseColorOptionSelectedValueChangedEventRaised);
+        }
+
+        private void _frmDimensionView_cmbBaseColorOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_frmDimensionView.SelectedBaseColor == Base_Color._Ivory.ToString() ||
+                _frmDimensionView.SelectedBaseColor == Base_Color._White.ToString())
+            {
+                _baseColor = "White";
+            }
+            else if (_frmDimensionView.SelectedBaseColor == Base_Color._DarkBrown.ToString())
+            {
+                _baseColor = "Dark Brown";
+            }
         }
 
         private void _frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -142,20 +169,7 @@ namespace PresentationLayer.Presenter
                 profile_type = "G58 Profile";
             }
         }
-
-        private void OnradbtnCheckChangedEventRaised(object sender, EventArgs e)
-        {
-            RadioButton radbtn = (RadioButton)sender;
-            if (radbtn.Name == "rad_c70")
-            {
-                profile_type = "C70 Profile";
-            }
-            else if (radbtn.Name == "rad_PremiLine")
-            {
-                profile_type = "PremiLine Profile";
-            }
-        }
-
+  
         private void OnbtnCancelClickedEventRaised(object sender, EventArgs e)
         {
             _isFrmClosed = true;
@@ -195,7 +209,8 @@ namespace PresentationLayer.Presenter
                                                       purpose,
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,
-                                                      profile_type);
+                                                      profile_type,
+                                                      _baseColor);
                 }
             }
             catch (Exception ex)
@@ -207,6 +222,9 @@ namespace PresentationLayer.Presenter
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)
         {
+            _baseColor = "White";
+            profile_type = "C70 Profile";
+            //_frmDimensionView.dimension_height = 203;
             //kapag binalik mo to magagalaw yung sa line 99 ng MultiPanelMullionUCPresenter
             //_frmDimensionView.InumWidth = 400;
             //_frmDimensionView.InumHeight = 400;
@@ -234,18 +252,23 @@ namespace PresentationLayer.Presenter
             profile_type = profileType;
         }
 
+        public void SetBaseColor(string baseColor)
+        {
+            _baseColor = baseColor;
+        }
+
         public void SetHeight()
         {
             if (purpose == Show_Purpose.Quotation)
             {
-                _frmDimensionView.thisHeight = 193;
+                _frmDimensionView.thisHeight = 203;
             }
             else if (purpose == Show_Purpose.CreateNew_Item ||
                      purpose == Show_Purpose.CreateNew_Frame ||
                      purpose == Show_Purpose.ChangeBasePlatformSize ||
                      purpose == Show_Purpose.AddPanelIntoMultiPanel)
             {
-                _frmDimensionView.thisHeight = 156;
+                _frmDimensionView.thisHeight = 140;
             }
         }
 
