@@ -1,7 +1,6 @@
 ﻿using CommonComponents;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -53,7 +52,7 @@ namespace PresentationLayer.Views
             }
         }
 
-       // private SystemProfile_Option _SelectedSystem;
+        // private SystemProfile_Option _SelectedSystem;
         public string SelectedSystem
         {
             get
@@ -67,21 +66,18 @@ namespace PresentationLayer.Views
             }
         }
 
-        //public bool c70rRadBtn_CheckState
-        //{
-        //    set
-        //    {
-        //        rad_c70.Checked = value;
-        //    }
-        //}
+        public string SelectedBaseColor
+        {
+            get
+            {
+                return cmb_BaseColorOption.Text;
+            }
 
-        //public bool premiLineRadBtn_CheckState
-        //{
-        //    set
-        //    {
-        //        rad_PremiLine.Checked = value;
-        //    }
-        //}
+            set
+            {
+                cmb_BaseColorOption.Text = value;
+            }
+        }
 
         public int thisHeight
         {
@@ -108,7 +104,7 @@ namespace PresentationLayer.Views
         public event EventHandler btnOKClickedEventRaised;
         public event EventHandler frmDimensionLoadEventRaised;
         public event EventHandler cmbSystemOptionSelectedValueChangedEventRaised;
-        //public event EventHandler radbtnCheckChangedEventRaised;
+        public event EventHandler cmbBaseColorOptionSelectedValueChangedEventRaised;
 
         public void ShowfrmDimension()
         {
@@ -122,6 +118,14 @@ namespace PresentationLayer.Views
                 systemType.Add(item);
             }
             cmb_SystemOption.DataSource = systemType;
+
+            List<Base_Color> BaseColor = new List<Base_Color>();
+            foreach (Base_Color item in Base_Color.GetAll())
+            {
+                BaseColor.Add(item);
+            }
+            cmb_BaseColorOption.DataSource = BaseColor;
+
             EventHelpers.RaiseEvent(this, frmDimensionLoadEventRaised, e);
         }
 
@@ -140,11 +144,6 @@ namespace PresentationLayer.Views
             this.Hide();
         }
 
-        //private void radbtn_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    EventHelpers.RaiseEvent(sender, radbtnCheckChangedEventRaised, e);
-        //}
-
         private const int CP_NOCLOSE_BUTTON = 0x200;
         protected override CreateParams CreateParams
         {
@@ -159,6 +158,11 @@ namespace PresentationLayer.Views
         private void cmb_SystemOption_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbSystemOptionSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_BaseColorOption_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbBaseColorOptionSelectedValueChangedEventRaised, e);
         }
     }
 }

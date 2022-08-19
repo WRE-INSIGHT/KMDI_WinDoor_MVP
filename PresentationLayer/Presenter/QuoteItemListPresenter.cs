@@ -971,49 +971,53 @@ namespace PresentationLayer.Presenter
                                 InstallationPoints -= 2;
 
                                 #region Transom/MullionAndMechJointPrice 
-                                if (mpnl.MPanel_Type == "Transom")
-                                {
-                                    if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                if (mpnl.MPanel_DividerEnabled == true)
+                                {  
+                                    if (mpnl.MPanel_Type == "Transom")
                                     {
-                                        DivPrice += ((div.Div_Width) / 1000m) * Divider_7536_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
+                                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                        {
+                                            DivPrice += ((div.Div_Width) / 1000m) * Divider_7536_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7536_PricePerSqrMeter;
+                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
+                                        }
+                                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                        {
+                                            DivPrice += (div.Div_Width / 1000m) * Divider_7538_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7538_PricePerSqrMeter;
+                                            MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                        }
+                                        else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                        {
+                                            DivPrice += (div.Div_Width / 1000m) * Divider_2069_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * G58ReinPricePerLinearMeter_V226;
+                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                        }
                                     }
-                                    else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                    else if (mpnl.MPanel_Type == "Mullion")
                                     {
-                                        DivPrice += (div.Div_Width / 1000m) * Divider_7538_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                        MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
-                                    }
-                                    else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                    {
-                                        DivPrice += (div.Div_Width / 1000m) * Divider_2069_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
-                                    }
-                                }
-                                else if (mpnl.MPanel_Type == "Mullion")
-                                {
-                                    if (div.Div_ArtNo == Divider_ArticleNo._7536)
-                                    {
-                                        DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
-                                    }
+                                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                        {
+                                            DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
+                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
+                                        }
 
-                                    else if (div.Div_ArtNo == Divider_ArticleNo._7538)
-                                    {
-                                        DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                        MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
-                                    }
-                                    else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                    {
-                                        DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                        MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                        {
+                                            DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
+                                            MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                        }
+                                        else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                        {
+                                            DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
+                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                        }
                                     }
                                 }
+
                                 #endregion
 
                                 #region DM_Endcap_SBoltStriker_Price
@@ -2178,31 +2182,24 @@ namespace PresentationLayer.Presenter
 
                 lstTotalPrice.Add(TotaPrice);
 
+                costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
 
+                InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
+                laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
+                MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
 
-                //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
-
-                //InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
-                //laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
-                //MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
-
-                //FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
-                //FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
-                //SashPriceDesc = "\n\nSash Price : " + Math.Round(SashPrice, 2);
-                //SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
-                //GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
-                //DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
-                //// GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
-                //FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
-                //AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
-                //AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
-                //sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
-                //PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
-
-
-
-
-
+                FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
+                FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
+                SashPriceDesc = "\n\nSash Price : " + Math.Round(SashPrice, 2);
+                SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
+                GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
+                DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
+                GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
+                FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
+                AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
+                AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
+                sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
+                PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
 
                 CostingPoints = 0;
                 InstallationPoints = 0;

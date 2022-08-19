@@ -773,8 +773,15 @@
                       <rd:DefaultName>dtPrice</rd:DefaultName>
                       <Style>
                         <Border>
+                          <Color>LightGrey</Color>
                           <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -813,6 +820,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1064,8 +1072,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.7228in</Height>
-    <Style />
+    <Height>2.75405in</Height>
+    <Style>
+      <Border>
+        <Color>LightGrey</Color>
+        <Style>None</Style>
+      </Border>
+    </Style>
   </Body>
   <Width>8in</Width>
   <Page>
@@ -1416,7 +1429,7 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.70261in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1441,8 +1454,8 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>0.65261in</Top>
-          <Left>0.05552in</Left>
+          <Top>0.38889in</Top>
+          <Left>0.07427in</Left>
           <Height>0.25in</Height>
           <Width>7.88896in</Width>
           <Visibility>
@@ -1476,8 +1489,8 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.26042in</Top>
-          <Left>6.74728in</Left>
+          <Top>0.06944in</Top>
+          <Left>6.72234in</Left>
           <Height>0.25in</Height>
           <Width>0.73959in</Width>
           <ZIndex>1</ZIndex>
@@ -1510,8 +1523,8 @@ Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.26042in</Top>
-          <Left>7.48687in</Left>
+          <Top>0.06944in</Top>
+          <Left>7.46193in</Left>
           <Height>0.25in</Height>
           <Width>0.40626in</Width>
           <ZIndex>2</ZIndex>

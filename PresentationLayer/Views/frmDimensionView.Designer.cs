@@ -36,9 +36,10 @@
             this.numHeight = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmb_BaseColorOption = new System.Windows.Forms.ComboBox();
             this.cmb_SystemOption = new System.Windows.Forms.ComboBox();
-            this.rad_PremiLine = new System.Windows.Forms.RadioButton();
-            this.rad_c70 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             this.panel1.SuspendLayout();
@@ -125,62 +126,67 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.numWidth);
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.numHeight);
-            this.panel1.Location = new System.Drawing.Point(6, 42);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 64);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(172, 100);
             this.panel1.TabIndex = 8;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.cmb_BaseColorOption);
             this.panel2.Controls.Add(this.cmb_SystemOption);
-            this.panel2.Controls.Add(this.rad_PremiLine);
-            this.panel2.Controls.Add(this.rad_c70);
-            this.panel2.Location = new System.Drawing.Point(6, 10);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(172, 30);
+            this.panel2.Size = new System.Drawing.Size(172, 164);
             this.panel2.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 19);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Base Color";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 19);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "System Type";
+            // 
+            // cmb_BaseColorOption
+            // 
+            this.cmb_BaseColorOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_BaseColorOption.FormattingEnabled = true;
+            this.cmb_BaseColorOption.Location = new System.Drawing.Point(87, 34);
+            this.cmb_BaseColorOption.Name = "cmb_BaseColorOption";
+            this.cmb_BaseColorOption.Size = new System.Drawing.Size(80, 25);
+            this.cmb_BaseColorOption.TabIndex = 3;
+            this.cmb_BaseColorOption.SelectedValueChanged += new System.EventHandler(this.cmb_BaseColorOption_SelectedValueChanged);
             // 
             // cmb_SystemOption
             // 
             this.cmb_SystemOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_SystemOption.FormattingEnabled = true;
-            this.cmb_SystemOption.Location = new System.Drawing.Point(6, 3);
+            this.cmb_SystemOption.Location = new System.Drawing.Point(88, 3);
             this.cmb_SystemOption.Name = "cmb_SystemOption";
-            this.cmb_SystemOption.Size = new System.Drawing.Size(160, 25);
+            this.cmb_SystemOption.Size = new System.Drawing.Size(80, 25);
             this.cmb_SystemOption.TabIndex = 2;
             this.cmb_SystemOption.SelectedValueChanged += new System.EventHandler(this.cmb_SystemOption_SelectedValueChanged);
-            // 
-            // rad_PremiLine
-            // 
-            this.rad_PremiLine.AutoSize = true;
-            this.rad_PremiLine.Location = new System.Drawing.Point(200, 200);
-            this.rad_PremiLine.Name = "rad_PremiLine";
-            this.rad_PremiLine.Size = new System.Drawing.Size(87, 23);
-            this.rad_PremiLine.TabIndex = 1;
-            this.rad_PremiLine.TabStop = true;
-            this.rad_PremiLine.Text = "PremiLine";
-            this.rad_PremiLine.UseVisualStyleBackColor = true;
-            this.rad_PremiLine.Visible = false;
-            // 
-            // rad_c70
-            // 
-            this.rad_c70.AutoSize = true;
-            this.rad_c70.Checked = true;
-            this.rad_c70.Location = new System.Drawing.Point(200, 200);
-            this.rad_c70.Name = "rad_c70";
-            this.rad_c70.Size = new System.Drawing.Size(52, 23);
-            this.rad_c70.TabIndex = 0;
-            this.rad_c70.TabStop = true;
-            this.rad_c70.Text = "C70";
-            this.rad_c70.UseVisualStyleBackColor = true;
-            this.rad_c70.Visible = false;
             // 
             // frmDimensionView
             // 
@@ -188,7 +194,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(184, 152);
+            this.ClientSize = new System.Drawing.Size(172, 164);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -221,8 +227,9 @@
         public System.Windows.Forms.NumericUpDown numHeight;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        public System.Windows.Forms.RadioButton rad_PremiLine;
-        public System.Windows.Forms.RadioButton rad_c70;
         private System.Windows.Forms.ComboBox cmb_SystemOption;
+        private System.Windows.Forms.ComboBox cmb_BaseColorOption;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
