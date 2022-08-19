@@ -126,6 +126,7 @@ namespace PresentationLayer.Views
             }
             cmb_BaseColorOption.DataSource = BaseColor;
 
+
             EventHelpers.RaiseEvent(this, frmDimensionLoadEventRaised, e);
         }
 

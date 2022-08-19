@@ -222,6 +222,8 @@ namespace PresentationLayer.Presenter
 
         private void OnfrmDimensionLoadEventRaised(object sender, EventArgs e)
         {
+            _baseColor = "White";
+            profile_type = "C70 Profile";
             //_frmDimensionView.dimension_height = 203;
             //kapag binalik mo to magagalaw yung sa line 99 ng MultiPanelMullionUCPresenter
             //_frmDimensionView.InumWidth = 400;
