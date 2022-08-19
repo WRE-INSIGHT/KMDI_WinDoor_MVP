@@ -1,10 +1,6 @@
-﻿using PresentationLayer.Views;
-using PresentationLayer.Presenter.UserControls;
-using System;
+﻿using PresentationLayer.Presenter.UserControls.WinDoorPanels;
+using PresentationLayer.Views;
 using static PresentationLayer.Presenter.frmDimensionPresenter;
-using ModelLayer.Model.Quotation.Frame;
-using System.Windows.Forms;
-using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -12,6 +8,7 @@ namespace PresentationLayer.Presenter
     {
         Show_Purpose purpose { get; set; }
         string profileType_frmDimensionPresenter { get; set; }
+        string baseColor_frmDimensionPresenter { get; set; }
         bool mainPresenter_qoutationInputBox_ClickedOK { get; set; }
         bool mainPresenter_newItem_ClickedOK { get; set; }
         bool mainPresenter_AddedFrame_ClickedOK { get; set; }
@@ -22,6 +19,7 @@ namespace PresentationLayer.Presenter
         void SetPresenters(IMultiPanelMullionUCPresenter multiUCP);
         void SetPresenters(IMultiPanelTransomUCPresenter multiTransomUCP);
         void SetProfileType(string profileType);
+        void SetBaseColor(string baseColor);
         void SetHeight();
         void SetValues(int numWD, int numHT);
         bool GetfrmResult();

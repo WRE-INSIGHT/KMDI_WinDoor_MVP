@@ -3294,7 +3294,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 int inward_motorized_deduction = 0;
 
-                if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+                if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._R676 ||
+                    Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._V226)
                 {
                     Panel_SashWidth = Panel_DisplayWidth - (26 * 2) + 5;
                     Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
