@@ -198,7 +198,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - Rotoswing 
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._None;
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -854,11 +854,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (handle == Handle_Type._Rotoswing)
             {
+
                 _panelModel.Panel_RotoswingOptionsVisibility = true;
                 _panelModel.Panel_RotaryOptionsVisibility = false;
                 _panelModel.Panel_RioOptionsVisibility = false;
                 _panelModel.Panel_RotolineOptionsVisibility = false;
                 _panelModel.Panel_MVDOptionsVisibility = false;
+                 
+                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
 
