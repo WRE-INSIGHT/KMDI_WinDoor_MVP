@@ -264,6 +264,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 for (int i = 0; i < iteration; i++)
                 {
+                    if (_multiPanelModel != null)
+                    {
+                        int expected_total_controls_inside_parentMpanel = (_multiPanelModel.MPanel_Divisions * 2) + 1,
+                               actual_total_controls_inside_parentMpanel = _multiPanelModel.MPanelLst_Objects.Count();
+
+                        if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+                        {
+                            break;
+                        }
+                    }
                     IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
                     if (data.Contains("Multi-Panel"))
                     {

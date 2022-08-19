@@ -12,9 +12,12 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IItemInfoUC _itemInfoUC;
         private IWindoorModel _windoorModel;
-
+        private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
-
+        private bool _isDragging = false;
+        private int _mX = 0;
+        private int _mY = 0;
+        private int _DDradius = 40;
         public ItemInfoUCPresenter(IItemInfoUC itemInfoUC)
         {
             _itemInfoUC = itemInfoUC;
@@ -25,6 +28,42 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _itemInfoUC.ItemInfoUCLoadEventRaised += new EventHandler(OnItemInfoUCLoadEventRaised);
             _itemInfoUC.lblItemMouseDoubleClickEventRaised += _itemInfoUC_lblItemMouseDoubleClickEventRaised;
+            _itemInfoUC.lblItemMouseDownEventRaised += _itemInfoUC_lblItemMouseDownEventRaised;
+            _itemInfoUC.lblItemMouseMoveEventRaised += _itemInfoUC_lblItemMouseMoveEventRaised;
+            _itemInfoUC.lblItemMouseUpEventRaised += _itemInfoUC_lblItemMouseUpEventRaised;
+        }
+
+        private void _itemInfoUC_lblItemMouseUpEventRaised(object sender, MouseEventArgs e)
+        {
+            _isDragging = false;
+        }
+
+        private void _itemInfoUC_lblItemMouseMoveEventRaised(object sender, MouseEventArgs e)
+        {
+            if (!_isDragging)
+            {
+                // This is a check to see if the mouse is moving while pressed.
+                // Without this, the DragDrop is fired directly when the control is clicked, now you have to drag a few pixels first.
+                if (e.Button == MouseButtons.Left && _DDradius > 0)
+                {
+                    int num1 = _mX - e.X;
+                    int num2 = _mY - e.Y;
+                    if (((num1 * num1) + (num2 * num2)) > _DDradius)
+                    {
+
+                        GetNewInstance(_windoorModel, _unityC, _mainPresenter).GetItemInfoUC().GetItemInfo().DoDragDrop(GetNewInstance(_windoorModel, _unityC, _mainPresenter).GetItemInfoUC().GetItemInfo(), DragDropEffects.All);
+                        _isDragging = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void _itemInfoUC_lblItemMouseDownEventRaised(object sender, MouseEventArgs e)
+        {
+            _mX = e.X;
+            _mY = e.Y;
+            this._isDragging = false;
         }
 
         private void _itemInfoUC_lblItemMouseDoubleClickEventRaised(object sender, MouseEventArgs e)
@@ -71,7 +110,7 @@ namespace PresentationLayer.Presenter.UserControls
             ItemInfoUCPresenter itemInfoUCP = unityC.Resolve<ItemInfoUCPresenter>();
             itemInfoUCP._windoorModel = wndr;
             itemInfoUCP._mainPresenter = mainPresenter;
-
+            itemInfoUCP._unityC = unityC;
             return itemInfoUCP;
         }
 

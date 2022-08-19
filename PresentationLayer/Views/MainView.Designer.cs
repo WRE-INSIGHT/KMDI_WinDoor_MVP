@@ -83,7 +83,10 @@
             this.tsp_Sync = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
+            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -104,10 +107,10 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -625,9 +628,20 @@
             this.tsLbl_Status.Text = "TransomUC_1 Selected";
             this.tsLbl_Status.Visible = false;
             // 
+            // ViewImagerToolStripButton1
+            // 
+            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
+            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
+            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.ViewImagerToolStripButton1.Text = "View Imager";
+            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
             // pnlRight
             // 
             this.pnlRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRight.Controls.Add(this.toolStrip1);
             this.pnlRight.Controls.Add(this.pnlItems);
             this.pnlRight.Controls.Add(this.label6);
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
@@ -636,14 +650,42 @@
             this.pnlRight.Size = new System.Drawing.Size(168, 497);
             this.pnlRight.TabIndex = 6;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SortItemtoolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(141, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(67, 22);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // SortItemtoolStripButton1
+            // 
+            this.SortItemtoolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SortItemtoolStripButton1.Image = global::PresentationLayer.Properties.Resources.icons8_front_sorting_96px;
+            this.SortItemtoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SortItemtoolStripButton1.Name = "SortItemtoolStripButton1";
+            this.SortItemtoolStripButton1.Size = new System.Drawing.Size(24, 19);
+            this.SortItemtoolStripButton1.Text = "Sort Items";
+            this.SortItemtoolStripButton1.Click += new System.EventHandler(this.SortItemtoolStripButton1_Click);
+            // 
             // pnlItems
             // 
+            this.pnlItems.AllowDrop = true;
             this.pnlItems.AutoScroll = true;
             this.pnlItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlItems.Location = new System.Drawing.Point(0, 29);
             this.pnlItems.Name = "pnlItems";
             this.pnlItems.Size = new System.Drawing.Size(166, 466);
             this.pnlItems.TabIndex = 1;
+            this.pnlItems.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlItems_DragDrop);
+            this.pnlItems.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlItems_DragEnter);
             // 
             // label6
             // 
@@ -881,16 +923,6 @@
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
             // 
-            // ViewImagerToolStripButton1
-            // 
-            this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
-            this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";
-            this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
-            this.ViewImagerToolStripButton1.Text = "View Imager";
-            this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,6 +945,8 @@
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
             this.pnlRight.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1010,5 +1044,7 @@
         private System.Windows.Forms.ToolStripMenuItem slidingTopViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem G58ToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton ViewImagerToolStripButton1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton SortItemtoolStripButton1;
     }
 }

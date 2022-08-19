@@ -83,8 +83,10 @@ namespace PresentationLayer.Presenter
         private ICostEngrLandingPresenter _ceLandingPresenter;
         private IConcreteUCPresenter _concreteUCPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
+        private ISortItemPresenter _sortItemPresenter;
         private IPrintQuotePresenter _printQuotePresenter;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
+        private ISortItemUCPresenter _sortItemUCPresenter;
         private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
@@ -492,7 +494,9 @@ namespace PresentationLayer.Presenter
                              IQuoteItemListPresenter quoteItemListPresenter,
                              IPrintQuotePresenter printQuotePresenter,
                              IQuoteItemListUCPresenter quoteItemListUCPresenter,
-                             ISetTopViewSlidingPanellingPresenter setTopViewSlidingPanellingPresenter)
+                             ISetTopViewSlidingPanellingPresenter setTopViewSlidingPanellingPresenter,
+                             ISortItemPresenter sortItemPresenter,
+                             ISortItemUCPresenter sortItemUCPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -526,7 +530,8 @@ namespace PresentationLayer.Presenter
             _printQuotePresenter = printQuotePresenter;
             _quoteItemListUCPresenter = quoteItemListUCPresenter;
             _setTopViewSlidingPanellingPresenter = setTopViewSlidingPanellingPresenter;
-
+            _sortItemPresenter = sortItemPresenter;
+            _sortItemUCPresenter = sortItemUCPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -621,6 +626,33 @@ namespace PresentationLayer.Presenter
             _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
             _mainView.slidingTopViewToolStripMenuItemClickRaiseEvent += _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent;
             _mainView.ViewImagerToolStripButtonClickEventRaised += _mainView_ViewImagerToolStripButtonClickEventRaised;
+            _mainView.ItemsDragEventRaiseEvent += _mainView_ItemsDragEventRaiseEvent;
+            _mainView.SortItemButtonClickEventRaised += _mainView_SortItemButtonClickEventRaised;
+        }
+
+        private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
+        {
+            //ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+            //_sortItemPresenter.GetSortItemView().showSortItem();
+        }
+
+        private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
+        {
+            Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
+            var item = _mainView.GetPanelItems().GetChildAtPoint(p);
+            int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
+            //IItemInfoUC lbl = e.Data.GetData("PresentationLayer.Views.UserControls.ItemInfoUC") as IItemInfoUC;
+            //foreach (IItemInfoUC ctrl in _mainView.GetPanelItems().Controls)
+            //{
+            //    if(lbl.WD_Item == ctrl.WD_Item)
+            //    {
+            //        _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)ctrl, index);
+            //        MessageBox.Show(ctrl.WD_Item);
+
+            //    }
+            //}
+            _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)_itemInfoUC, index);
+            _mainView.GetPanelItems().Invalidate();
         }
 
         private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -994,9 +1026,6 @@ namespace PresentationLayer.Presenter
                     _pnlPropertiesBody.Controls.Clear();
                     _pnlMain.Controls.Clear();
                     //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-                    _basePlatformPresenter.RemoveBindingView();
-                    SetMainViewTitle("");
-                    CreateNewWindoorBtn_Disable();
                     int count = 1;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {

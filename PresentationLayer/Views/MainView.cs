@@ -216,6 +216,8 @@ namespace PresentationLayer.Views
         public event EventHandler saveToolStripButtonClickEventRaised;
         public event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
         public event EventHandler ViewImagerToolStripButtonClickEventRaised;
+        public event DragEventHandler ItemsDragEventRaiseEvent;
+        public event EventHandler SortItemButtonClickEventRaised;
 
         public MainView()
         {
@@ -476,6 +478,21 @@ namespace PresentationLayer.Views
         private void ViewImagerToolStripButton1_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, ViewImagerToolStripButtonClickEventRaised, e);
+        }
+
+        private void pnlItems_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void pnlItems_DragDrop(object sender, DragEventArgs e)
+        {
+            EventHelpers.RaiseDragEvent(sender, ItemsDragEventRaiseEvent, e);
+        }
+
+        private void SortItemtoolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, SortItemButtonClickEventRaised, e);
         }
     }
 }

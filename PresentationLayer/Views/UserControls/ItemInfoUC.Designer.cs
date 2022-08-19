@@ -56,7 +56,11 @@
             this.lbl_item.Tag = "lbl_item";
             this.lbl_item.Text = "lbl_item";
             this.lbl_item.UseMnemonic = false;
+            this.lbl_item.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbl_item_DragEnter);
             this.lbl_item.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDoubleClick);
+            this.lbl_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDown);
+            this.lbl_item.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseMove);
+            this.lbl_item.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseUp);
             // 
             // pnl_itmbot_
             // 

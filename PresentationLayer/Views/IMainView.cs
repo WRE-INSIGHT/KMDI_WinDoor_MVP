@@ -10,6 +10,7 @@ namespace PresentationLayer.Views
         event EventHandler MainViewClosingEventRaised;
         event EventHandler OpenToolStripButtonClickEventRaised;
         event EventHandler NewFrameButtonClickEventRaised;
+        event EventHandler SortItemButtonClickEventRaised;
         event EventHandler NewQuotationMenuItemClickEventRaised;
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
@@ -32,7 +33,7 @@ namespace PresentationLayer.Views
         event EventHandler saveAsToolStripMenuItemClickEventRaised;
         event EventHandler saveToolStripButtonClickEventRaised;
         event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
-
+        event DragEventHandler ItemsDragEventRaiseEvent;
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
