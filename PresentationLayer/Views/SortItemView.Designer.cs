@@ -33,19 +33,20 @@
             // 
             // pnlSortItem
             // 
+            this.pnlSortItem.AllowDrop = true;
             this.pnlSortItem.AutoScroll = true;
             this.pnlSortItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSortItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSortItem.Location = new System.Drawing.Point(0, 0);
             this.pnlSortItem.Name = "pnlSortItem";
-            this.pnlSortItem.Size = new System.Drawing.Size(671, 276);
+            this.pnlSortItem.Size = new System.Drawing.Size(584, 597);
             this.pnlSortItem.TabIndex = 6;
             // 
             // SortItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(671, 276);
+            this.ClientSize = new System.Drawing.Size(584, 597);
             this.Controls.Add(this.pnlSortItem);
             this.Name = "SortItemView";
             this.Text = "SortItem";

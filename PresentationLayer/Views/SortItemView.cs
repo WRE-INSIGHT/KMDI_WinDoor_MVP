@@ -25,13 +25,15 @@ namespace PresentationLayer.Views
             this.Show();
         }
 
-        private void SortItemView_Load(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, SortItemViewLoadEventRaised, e);
-        }
+        
         public Panel GetPnlSortItem()
         {
             return pnlSortItem;
+        }
+
+        private void SortItemView_Load(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, SortItemViewLoadEventRaised, e);
         }
     }
 }

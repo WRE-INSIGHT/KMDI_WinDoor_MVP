@@ -633,8 +633,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
         {
-            //ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            //_sortItemPresenter.GetSortItemView().showSortItem();
+            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+            sortItem.GetSortItemView().showSortItem();
         }
 
         private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
@@ -757,7 +757,39 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Load_Windoor_Item(_windoorModel);
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+
+
+
+                //save frame
+                Frame_Save_UserControl();
+                Frame_Save_PropertiesUC();
+
+                //set mainview
+                SetMainViewTitle(input_qrefno,
+                                 _projectName,
+                                 _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
+                _quotationModel.Select_Current_Windoor(_windoorModel);
+
+                //clear
+                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+
+                //basePlatform
+              
+
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                _mainView.GetThis().Controls.Add(bpUC);
+
+                _mainView.RemoveBinding(_mainView.GetLblSize());
+                _mainView.RemoveBinding();
+                _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _basePlatformPresenter.InvalidateBasePlatform();
+
             }
             catch (Exception ex)
             {
@@ -1685,7 +1717,7 @@ namespace PresentationLayer.Presenter
             AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
             _basePlatformPresenter.InvalidateBasePlatform();
 
-            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
             UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
             _mainView.GetThis().Controls.Add(bpUC);
 

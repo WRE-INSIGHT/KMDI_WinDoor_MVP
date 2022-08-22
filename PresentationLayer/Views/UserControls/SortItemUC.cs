@@ -11,6 +11,9 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
         public event EventHandler SortItemUCLoadEventRaised;
+        public event MouseEventHandler lblItemMouseMoveEventRaised;
+        public event MouseEventHandler lblItemMouseDownEventRaised;
+        public event MouseEventHandler lblItemMouseUpEventRaised;
 
         public string ItemName
         {
@@ -27,17 +30,17 @@ namespace PresentationLayer.Views.UserControls
         {
             return pboxItemImage;
         }
-        //public string itemWindoorNumber
-        //{
-        //    get
-        //    {
-        //        return tboxWindoorNumber.Text;
-        //    }
-        //    set
-        //    {
-        //        tboxWindoorNumber.Text = value;
-        //    }
-        //}
+        public string itemDimension
+        {
+            get
+            {
+                return lbl_dimension.Text;
+            }
+            set
+            {
+                lbl_dimension.Text = value;
+            }
+        }
         public string itemDesc
         {
             get
@@ -52,6 +55,26 @@ namespace PresentationLayer.Views.UserControls
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);
+        }
+
+        private void lbl_item_MouseMove(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, lblItemMouseMoveEventRaised, e);
+        }
+
+        private void lbl_item_MouseUp(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, lblItemMouseUpEventRaised, e);
+        }
+
+        private void lbl_item_MouseDown(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(sender, lblItemMouseDownEventRaised, e);
+        }
+
+        public UserControl GetSortItem()
+        {
+            return this;
         }
     }
 }
