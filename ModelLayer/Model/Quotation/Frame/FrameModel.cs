@@ -669,7 +669,7 @@ namespace ModelLayer.Model.Quotation.Frame
             }
 
             int reinf_size = 0;
-            if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676)
+            if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676 || Frame_ReinfArtNo == FrameReinf_ArticleNo._V226)
             {
                 reinf_size = 29;
             }
