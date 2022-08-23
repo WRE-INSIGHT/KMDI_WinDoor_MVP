@@ -76,6 +76,7 @@ namespace PresentationLayer.Presenter
                                 bool NewItem_OkClicked,
                                 bool AddedFrame,
                                 bool AddedConcrete,
+                                bool OpenWindoorFile,
                                 frmDimensionPresenter.Show_Purpose purpose,
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,

@@ -48,12 +48,14 @@ namespace PresentationLayer.Views
         Panel GetPanelItems();
         Panel GetPanelPropertiesBody();
         Panel GetPanelBot();
+        Panel GetPanelRight();
         Panel GetPanelControlSub();
         Label GetLblSize();
         MenuStrip GetMNSMainMenu();
         ToolStrip GetTSMain();
         ToolStripLabel GetLblSelectedDivider();
         ToolStripLabel GetToolStripLabelSync();
+        ToolStripLabel GetToolStripLabelLoading();
         ToolStripMenuItem Glass_Single { get; }
         ToolStripMenuItem Glass_DoubleInsulated { get; }
         ToolStripMenuItem Glass_DoubleLaminated { get; }
@@ -64,7 +66,9 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Color { get; }
         Form GetThis();
         SaveFileDialog GetSaveFileDialog();
-
+        OpenFileDialog GetOpenFileDialog();
+        ToolStripProgressBar GetTsProgressLoading();
+        SplitContainer GetSCMain();
         void FocusOnMainForm();
         void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);

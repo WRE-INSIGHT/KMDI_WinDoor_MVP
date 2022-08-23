@@ -25,10 +25,13 @@ using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.WindoorServices;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -38,7 +41,7 @@ namespace PresentationLayer.Presenter
     public class MainPresenter : IMainPresenter
     {
         #region GlobalVar
-
+        Class.csFunctions csfunc = new Class.csFunctions();
         IMainView _mainView;
 
         private IUnityContainer _unityC;
@@ -696,7 +699,7 @@ namespace PresentationLayer.Presenter
             if (wndrfile != "")
             {
                 string txtfile = wndrfile.Replace(".wndr", ".txt");
-                //File.WriteAllLines(txtfile,);
+                File.WriteAllLines(txtfile, Saving_dotwndr());
                 File.SetAttributes(txtfile, FileAttributes.Hidden);
                 File.Delete(txtfile);
                 if (online_login != true)
@@ -714,10 +717,10 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        
 
         private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            _mainView.GetSaveFileDialog().FileName = this.inputted_quotationRefNo;
             if (wndrfile != _mainView.GetSaveFileDialog().FileName)
             {
                 wndrfile = _mainView.GetSaveFileDialog().FileName;
@@ -729,9 +732,167 @@ namespace PresentationLayer.Presenter
                     _mainView.mainview_title += "( " + wndrfile + " )";
                 }
             }
-            //save btn event ilagay d2
+            saveToolStripButton_Click(sender, e);
+        }
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            //saveToolStripButton.Enabled = false;
+            //UppdateDictionaries();
+            _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
+            if (wndrfile != "")
+            {
+                string txtfile = wndrfile.Replace(".wndr", ".txt");
+                File.WriteAllLines(txtfile, Saving_dotwndr());
+                File.SetAttributes(txtfile, FileAttributes.Hidden);
+                csfunc.EncryptFile(txtfile);
+                File.Delete(txtfile);
+
+                //if (online_login && updatefile_bgw.IsBusy != true)
+                //{
+                    int startFileName = txtfile.LastIndexOf("\\") + 1;
+                    string outFile = txtfile.Substring(startFileName, txtfile.LastIndexOf(".") - startFileName) + ".wndr";
+                    searchStr = outFile;
+                    todo = "GetFile";
+                    x = 50; // for fadeoutImage
+                    //tsp_Sync.Image = Properties.Resources.cloud_sync_40px;
+                    //tsp_Sync.Visible = true;
+                    //CostingItems.Rows.Clear();
+                    //updatefile_bgw.RunWorkerAsync();
+                //}
+            }
+            else
+            {
+                //MessageBox.Show(this, "Please save your progress locally or online to prevent data loss", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
+        private List<string> Saving_dotwndr()
+        {
+            #region Save
+
+            List<string> wndr_content = new List<string>();
+            wndr_content.Add("QuoteId: " + _quoteId);
+            wndr_content.Add("ProjectName: " + _projectName);
+            wndr_content.Add("CustomerRefNo: " + _custRefNo);
+            wndr_content.Add("Quotation_ref_no: " + _quotationModel.Quotation_ref_no);
+            wndr_content.Add("Quotation_Date: " + _quotationModel.Quotation_Date);
+            wndr_content.Add("Frame_PUFoamingQty_Total: " + _quotationModel.Frame_PUFoamingQty_Total);
+            wndr_content.Add("Frame_SealantWHQty_Total: " + _quotationModel.Frame_SealantWHQty_Total);
+            wndr_content.Add("Glass_SealantWHQty_Total: " + _quotationModel.Glass_SealantWHQty_Total);
+            wndr_content.Add("GlazingSpacer_TotalQty: " + _quotationModel.GlazingSpacer_TotalQty);
+            wndr_content.Add("GlazingSeal_TotalQty: " + _quotationModel.GlazingSeal_TotalQty);
+            wndr_content.Add("Screws_for_Fabrication: " + _quotationModel.Screws_for_Fabrication);
+            wndr_content.Add("Expansion_BoltQty_Total: " + _quotationModel.Expansion_BoltQty_Total);
+            wndr_content.Add("Screws_for_Installation: " + _quotationModel.Screws_for_Installation);
+            wndr_content.Add("Screws_for_Cladding: " + _quotationModel.Screws_for_Cladding);
+            wndr_content.Add("Rebate_Qty: " + _quotationModel.Rebate_Qty);
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                //float[] Arr_ZoomPercentage { get; }
+                wndr_content.Add("(");
+                wndr_content.Add("WD_description: " + wdm.WD_description);
+                wndr_content.Add("WD_profile: " + wdm.WD_profile);
+                wndr_content.Add("WD_discount: " + wdm.WD_discount);
+                wndr_content.Add("WD_height: " + wdm.WD_height);
+                wndr_content.Add("WD_height_4basePlatform: " + wdm.WD_height_4basePlatform);
+                wndr_content.Add("WD_height_4basePlatform_forImageRenderer: " + wdm.WD_height_4basePlatform_forImageRenderer);
+                wndr_content.Add("WD_id: " + wdm.WD_id);
+                wndr_content.Add("WD_name: " + wdm.WD_name);
+                wndr_content.Add("WD_orientation: " + wdm.WD_orientation);
+                wndr_content.Add("WD_price: " + wdm.WD_price);
+                wndr_content.Add("WD_quantity: " + wdm.WD_quantity);
+                wndr_content.Add("WD_visibility: " + wdm.WD_visibility);
+                wndr_content.Add("WD_width: " + wdm.WD_width);
+                wndr_content.Add("WD_width_4basePlatform: " + wdm.WD_width_4basePlatform);
+                wndr_content.Add("WD_width_4basePlatform_forImageRenderer: " + wdm.WD_width_4basePlatform_forImageRenderer);
+                wndr_content.Add("WD_zoom: " + wdm.WD_zoom);
+                wndr_content.Add("WD_zoom_forImageRenderer: " + wdm.WD_zoom_forImageRenderer);
+                wndr_content.Add("WD_PropertiesScroll: " + wdm.WD_PropertiesScroll);
+                wndr_content.Add("WD_SlidingTopViewVisibility: " + wdm.WD_SlidingTopViewVisibility);
+                wndr_content.Add("frameIDCounter: " + wdm.frameIDCounter);
+                wndr_content.Add("concreteIDCounter: " + wdm.concreteIDCounter);
+                wndr_content.Add("panelIDCounter: " + wdm.panelIDCounter);
+                wndr_content.Add("mpanelIDCounter: " + wdm.mpanelIDCounter);
+                wndr_content.Add("divIDCounter: " + wdm.divIDCounter);
+                wndr_content.Add("PanelGlassID_Counter: " + wdm.PanelGlassID_Counter);
+                wndr_content.Add("WD_BaseColor: " + wdm.WD_BaseColor);
+                wndr_content.Add("WD_InsideColor: " + wdm.WD_InsideColor);
+                wndr_content.Add("WD_OutsideColor: " + wdm.WD_OutsideColor);
+                wndr_content.Add("WD_PlasticCover: " + wdm.WD_PlasticCover);
+                wndr_content.Add("WD_CmenuDeleteVisibility: " + wdm.WD_CmenuDeleteVisibility);
+                wndr_content.Add("WD_Selected: " + wdm.WD_Selected);
+                wndr_content.Add("Lbl_ArrowHtCount: " + wdm.Lbl_ArrowHtCount);
+                wndr_content.Add("Lbl_ArrowWdCount: " + wdm.Lbl_ArrowWdCount);
+                wndr_content.Add("Div_ArrowCount: " + wdm.Div_ArrowCount);
+                wndr_content.Add("WD_customArrowToggle: " + wdm.WD_customArrowToggle);
+                wndr_content.Add("WD_CostingPoints: " + wdm.WD_CostingPoints);
+                wndr_content.Add("WD_pboxImagerHeight: " + wdm.WD_pboxImagerHeight);
+                foreach (IFrameModel frm in wdm.lst_frame)
+                {
+                    wndr_content.Add("{");
+                    wndr_content.Add("\tFrame_Name: " + frm.Frame_Name);
+                    wndr_content.Add("\tFrame_Height: " + frm.Frame_Height);
+                    wndr_content.Add("\tFrame_Width: " + frm.Frame_Width);
+                    wndr_content.Add("\tFrame_BasicDeduction: " + frm.Frame_BasicDeduction);
+                    wndr_content.Add("\tFrame_HeightToBind: " + frm.Frame_HeightToBind);
+                    wndr_content.Add("\tFrameImageRenderer_Height: " + frm.FrameImageRenderer_Height);
+                    wndr_content.Add("\tFrame_ID: " + frm.Frame_ID);
+                    wndr_content.Add("\tFrame_WidthToBind: " + frm.Frame_WidthToBind);
+                    wndr_content.Add("\tFrameImageRenderer_Width: " + frm.FrameImageRenderer_Width);
+                    wndr_content.Add("\tFrame_Visible: " + frm.Frame_Visible);
+                    wndr_content.Add("\tFrameProp_Height: " + frm.FrameProp_Height);
+                    wndr_content.Add("\tFrameImageRenderer_Zoom: " + frm.FrameImageRenderer_Zoom);
+                    wndr_content.Add("\tFrame_Zoom: " + frm.Frame_Zoom);
+                    wndr_content.Add("\tFrame_BotFrameEnable: " + frm.Frame_BotFrameEnable);
+                    wndr_content.Add("\tFrame_Deduction: " + frm.Frame_Deduction);
+                    wndr_content.Add("\tFrame_ExplosionWidth: " + frm.Frame_ExplosionWidth);
+                    wndr_content.Add("\tFrame_ExplosionHeight: " + frm.Frame_ExplosionHeight);
+                    wndr_content.Add("\tFrame_ReinfWidth: " + frm.Frame_ReinfWidth);
+                    wndr_content.Add("\tFrame_ReinfHeight: " + frm.Frame_ReinfHeight);
+                    wndr_content.Add("\tFrame_CmenuDeleteVisibility: " + frm.Frame_CmenuDeleteVisibility);
+                    wndr_content.Add("\tFrame_If_InwardMotorizedCasement: " + frm.Frame_If_InwardMotorizedCasement);
+                    //MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
+                    //MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
+                    //FrameProfile_ArticleNo Frame_ArtNo { get; set; }
+                    //IWindoorModel Frame_WindoorModel { get; set; }
+                    //UserControl Frame_UC { get; set; }
+                    //UserControl Frame_PropertiesUC { get; set; }
+                    //BottomFrameTypes Frame_BotFrameArtNo { get; set; }
+                    //Padding Frame_Padding_int { get; set; }
+                    //Padding FrameImageRenderer_Padding_int { get; set; }
+                    //List<IPanelModel> Lst_Panel { get; set; }
+                    //List<IMultiPanelModel> Lst_MultiPanel { get; set; }
+                    //List<IDividerModel> Lst_Divider { get; set; }
+                    //int[] Arr_padding_norm { get; }
+                    //int[] Arr_padding_withmpnl { get; }
+                    //FrameModel.Frame_Padding Frame_Type { get; set; }
+                    //int Add_framePerimeter_screws4fab();
+                    //int Add_MilledFrameWidth_screws4fab();
+                    //foreach(IPanelModel pnl in frm.Lst_Panel)
+                    //{
+
+                    //}
+                    //foreach (IMultiPanelModel
+                    //foreach(IDividerModel
+                    //wndr_content.Add("}");
+                }
+                foreach (IConcreteModel crm in wdm.lst_concrete)
+                {
+
+                }
+                wndr_content.Add(")");
+
+                //float GetZoom_forRendering();
+                //Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
+                //Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
+                //Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+
+            }
+            #endregion
+
+            return wndr_content;
+        }
         private void _mainView_CostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             IQuoteItemListPresenter quoteItesm = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
@@ -802,7 +963,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Scenario_Quotation(false, false, false, true, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
+                Scenario_Quotation(false, false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
             }
             catch (Exception ex)
             {
@@ -1133,15 +1294,15 @@ namespace PresentationLayer.Presenter
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "G58ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
         }
 
@@ -1161,7 +1322,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                    Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                 }
             }
             else
@@ -1174,7 +1335,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                    Scenario_Quotation(true, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
                 }
             }
         }
@@ -1190,14 +1351,400 @@ namespace PresentationLayer.Presenter
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
-            Scenario_Quotation(false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            Scenario_Quotation(false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
-
+        string[] file_lines;
+        bool onload = false;
+        BackgroundWorker bgw = new BackgroundWorker();
+        BackgroundWorker updatefile_bgw = new BackgroundWorker();
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-            // dito ilagay ang loading ng wndr file
-        }
+            try
+            {
+                //_mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+                if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
+                {
+                    Clearing_Operation();
+                    wndrfile = _mainView.GetOpenFileDialog().FileName;
 
+                    csfunc.DecryptFile(wndrfile);
+
+                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                    string outFile = wndrfile.Substring(0, startFileName) +
+                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+
+                    file_lines = File.ReadAllLines(outFile);
+                    File.SetAttributes(outFile, FileAttributes.Hidden);
+                    onload = true;
+                    //StartWorker("Open_WndrFiles");
+                    int frmDimension_numWd = 0;
+                    int frmDimension_numHt = 0;
+                    string frmDimension_profileType = "";
+                    string frmDimension_baseColor = "";
+
+                    foreach (string str in file_lines)
+                    {
+
+                        string row_str = str.Replace("\t", "");
+                        if (row_str.Contains("QuoteId"))
+                        {
+                            _quoteId = Convert.ToInt32(row_str.Substring(9));
+                        }
+                        if (row_str.Contains("ProjectName"))
+                        {
+                            _projectName = row_str.Substring(13);
+                        }
+                        if (row_str.Contains("CustomerRefNo"))
+                        {
+                            _custRefNo = row_str.Substring(15);
+                        }
+                        if (row_str.Contains("Quotation_ref_no"))
+                        {
+                            inputted_quotationRefNo = row_str.Substring(18);
+                        }
+                        if (row_str.Contains("Quotation_Date"))
+                        {
+                            inputted_quoteDate = Convert.ToDateTime(row_str.Substring(16));
+                            Scenario_Quotation(false, false, false, false, true, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                        }
+                        if (row_str.Contains("Frame_PUFoamingQty_Total"))
+                        {
+                        }
+                        if (row_str.Contains("Frame_SealantWHQty_Total"))
+                        {
+                        }
+                        if (row_str.Contains("Glass_SealantWHQty_Total"))
+                        {
+
+                        }
+                        if (row_str.Contains("GlazingSpacer_TotalQty"))
+                        {
+
+                        }
+                        if (row_str.Contains("GlazingSeal_TotalQty"))
+                        {
+
+                        }
+                        if (row_str.Contains("Screws_for_Fabrication"))
+                        {
+
+                        }
+                        if (row_str.Contains("Expansion_BoltQty_Total"))
+                        {
+
+                        }
+                        if (row_str.Contains("Screws_for_Installation"))
+                        {
+
+                        }
+                        if (row_str.Contains("Screws_for_Cladding"))
+                        {
+
+                        }
+                        if (row_str.Contains("Rebate_Qty"))
+                        {
+                        }
+                        //Windoor Model
+                        if (row_str.Contains("WD_description"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_profile"))
+                        {
+                            frmDimension_profileType = row_str.Substring(12);
+                        }
+                        if (row_str.Contains("WD_discount"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_height:"))
+                        {
+                            frmDimension_numHt = Convert.ToInt32(row_str.Substring(10));
+                        }
+                        if (row_str.Contains("WD_height_4basePlatform"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_height_4basePlatform_forImageRenderer"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_id"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_name"))
+                        {
+                            //_windoorModel.WD_name = row_str.Substring(9);
+
+                        }
+                        if (row_str.Contains("WD_orientation"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_price"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_quantity"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_visibility"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_width:"))
+                        {
+                            frmDimension_numWd = Convert.ToInt32(row_str.Substring(10));
+                        }
+                        if (row_str.Contains("WD_width_4basePlatform"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_width_4basePlatform_forImageRenderer"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_zoom"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_zoom_forImageRenderer"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_PropertiesScroll"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_SlidingTopViewVisibility"))
+                        {
+
+                        }
+                        if (row_str.Contains("frameIDCounter"))
+                        {
+
+                        }
+                        if (row_str.Contains("concreteIDCounter"))
+                        {
+
+                        }
+                        if (row_str.Contains("panelIDCounter"))
+                        {
+
+                        }
+                        if (row_str.Contains("mpanelIDCounter"))
+                        {
+
+                        }
+                        if (row_str.Contains("divIDCounter"))
+                        {
+
+                        }
+                        if (row_str.Contains("PanelGlassID_Counter"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_BaseColor"))
+                        {
+                            frmDimension_baseColor = row_str.Substring(14);
+                        }
+                        if (row_str.Contains("WD_InsideColor"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_OutsideColor"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_PlasticCover"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_CmenuDeleteVisibility"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_Selected"))
+                        {
+
+                        }
+                        if (row_str.Contains("Lbl_ArrowHtCount"))
+                        {
+
+                        }
+                        if (row_str.Contains("Lbl_ArrowWdCount"))
+                        {
+
+                        }
+                        if (row_str.Contains("Div_ArrowCount"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_customArrowToggle"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_CostingPoints"))
+                        {
+
+                        }
+                        if (row_str.Contains("WD_pboxImagerHeight"))
+                        {
+                            Scenario_Quotation(false,
+                                      true,
+                                      false,
+                                      false,
+                                      true,
+                                      frmDimensionPresenter.Show_Purpose.OpenWndrFile,
+                                      frmDimension_numWd,
+                                      frmDimension_numHt,
+                                      frmDimension_profileType,
+                                      frmDimension_baseColor);
+                            //Load_Windoor_Item(_windoorModel);
+                        }
+                        // Frame Model
+
+                        if (row_str.Contains("Frame_Height:"))
+                        {
+                            frmDimension_numHt = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Width:"))
+                        {
+                            frmDimension_numWd = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                            Scenario_Quotation(false,
+                                     false,
+                                     true,
+                                     false,
+                                     false,
+                                     frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                     frmDimension_numWd,
+                                     frmDimension_numHt,
+                                     frmDimension_profileType,
+                                     frmDimension_baseColor);
+                        }
+                        if (row_str.Contains("Frame_BasicDeduction"))
+                        {
+                            Console.WriteLine(row_str);
+                        }
+                        if (row_str.Contains("Frame_HeightToBind"))
+                        {
+                            _frameModel.Frame_HeightToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+
+                        }
+                        if (row_str.Contains("FrameImageRenderer_Height"))
+                        {
+                            _frameModel.FrameImageRenderer_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ID"))
+                        {
+                            _frameModel.Frame_ID = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Name"))
+                        {
+                            _frameModel.Frame_Name = row_str.Substring(12);
+                        }
+
+                        if (row_str.Contains("Frame_WidthToBind"))
+                        {
+                            _frameModel.Frame_WidthToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("FrameImageRenderer_Width"))
+                        {
+                            _frameModel.FrameImageRenderer_Width = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Visible"))
+                        {
+                            _frameModel.Frame_Visible = Convert.ToBoolean(row_str.Substring(15));
+                        }
+                        if (row_str.Contains("FrameProp_Height"))
+                        {
+                            _frameModel.FrameProp_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("FrameImageRenderer_Zoom"))
+                        {
+                            _frameModel.FrameImageRenderer_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Zoom"))
+                        {
+                            _frameModel.Frame_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_BotFrameEnable"))
+                        {
+                            _frameModel.Frame_BotFrameEnable = Convert.ToBoolean(row_str.Substring(22));
+                        }
+                        if (row_str.Contains("Frame_Deduction"))
+                        {
+                        }
+                        if (row_str.Contains("Frame_ExplosionWidth"))
+                        {
+                            _frameModel.Frame_ExplosionWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ExplosionHeight"))
+                        {
+                            _frameModel.Frame_ExplosionHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ReinfWidth"))
+                        {
+                            _frameModel.Frame_ReinfWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ReinfHeight"))
+                        {
+                            _frameModel.Frame_ReinfHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_CmenuDeleteVisibility"))
+                        {
+                            _frameModel.Frame_CmenuDeleteVisibility = Convert.ToBoolean(row_str.Substring(29));
+                        }
+                        if (row_str.Contains("Frame_If_InwardMotorizedCasement"))
+                        {
+                            _frameModel.Frame_If_InwardMotorizedCasement = Convert.ToBoolean(row_str.Substring(34));
+                        }
+
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void StartWorker(string todo)
+        {
+            if (bgw.IsBusy != true)
+            {
+                mainTodo = todo;
+                bgw.RunWorkerAsync();
+                if (todo == "Open_WndrFiles")
+                {
+                    _mainView.GetToolStripLabelLoading().Text = "Initializing";
+                    ToggleMode(true, false);
+                }
+                else
+                {
+                    ToggleMode(false, false);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show(_mainView.GetThis(), "Please Wait!", "Loading", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void ToggleMode(bool visibility, bool enabled)
+        {
+            _mainView.GetToolStripLabelLoading().Visible = visibility;
+            _mainView.GetTsProgressLoading().Visible = visibility;
+
+            _mainView.GetMNSMainMenu().Enabled = enabled;
+            _mainView.GetSCMain().Enabled = enabled;
+            _mainView.GetPanelRight().Enabled = enabled;
+            _mainView.GetTSMain().Enabled = enabled;
+        }
         private void OnMainViewClosingEventRaised(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
@@ -1218,7 +1765,6 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FirstTym = false;
             }
             _mainView.Nickname = _userModel.Nickname;
-
             _pnlControlSub.Controls.Add(
                 (UserControl)_controlsUCP.GetNewInstance(
                 _unityC, _quotationModel, "Multi-Panel (Transom)", new Thumbs_MultiPanelTransomUC()).GetControlUC());
@@ -1303,9 +1849,512 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Tinted Gray");
             _colorDT.Rows.Add("Tinted Bronze");
             _colorDT.Rows.Add("Tinted Green");
+            bgw.WorkerReportsProgress = true;
+            bgw.WorkerSupportsCancellation = true;
+            bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
+            bgw.ProgressChanged += Bgw_ProgressChanged;
+            bgw.DoWork += Bgw_DoWork;
         }
 
         #endregion
+        private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            try
+            {
+                switch (mainTodo)
+                {
+                    case "Open_WndrFiles":
+                        Opening_dotwndr(e.ProgressPercentage);
+
+                        _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
+                        if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
+                        {
+                            _mainView.GetToolStripLabelLoading().Text += ".";
+                        }
+                        else
+                        {
+                            _mainView.GetToolStripLabelLoading().Text = "Initializing";
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message, "Error Occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Opening_dotwndr(int row)
+        {
+            //string row_str = file_lines[row];
+            //Console.WriteLine(row_str);
+            //if (row == 0)
+            //{
+            //    quotation_ref_no = Text = file_lines[0];
+            //}
+
+            //if (row_str == "(")
+            //{
+            //    flpMain.Controls.Clear();
+            //    flpMain2.Controls.Clear();
+            //    pnlPropertiesBody.Controls.Clear();
+            //    inside_item = flpMain.Visible = true;
+            //}
+            //else if (row_str.Contains("FrameName"))
+            //{
+            //    inside_frame = true;
+            //}
+            //else if (row_str.Contains("PanelName"))
+            //{
+            //    inside_panel = true;
+            //}
+            //else if (row_str.Contains("MultiName"))
+            //{
+            //    inside_multi = true;
+            //}
+            //else if (row_str.Contains("DivdName"))
+            //{
+            //    inside_divider = true;
+            //}
+            //else if (row_str.Contains("DivdName"))
+            //{
+            //    inside_divider = true;
+            //}
+            //else if (row_str == "\t}")
+            //{
+            //    if (inside_frame)
+            //    {
+            //        frname = "";
+            //        frwidth = 0;
+            //        frheight = 0;
+            //        frwndr = 0;
+            //        inside_frame = false;
+            //    }
+            //    else if (inside_panel)
+            //    {
+            //        pnlwidth = 0;
+            //        pnlheight = 0;
+            //        pnlwndrtype = "";
+            //        pnl_Orientation = "";
+            //        pnl_Parent = "";
+            //        frameGroup = "";
+            //        inside_panel = false;
+            //    }
+            //    else if (inside_multi)
+            //    {
+            //        multi_Name = "";
+            //        multi_Size = "";
+            //        multidivnum = "";
+            //        multi_Tabindex = 0;
+            //        multi_type = "";
+            //        multi_Parent = "";
+            //        inside_multi = false;
+            //    }
+            //    else if (inside_divider)
+            //    {
+            //        divd_name = "";
+            //        divd_width = 0;
+            //        divd_height = 0;
+            //        divd_TabIndex = 0;
+            //        divd_Parent = "";
+            //        inside_divider = false;
+            //    }
+            //}
+            //else if (row_str == ")")
+            //{
+            //    //Panel_Painter();
+
+            //    trkZoom.Value = (int)(fzoom * 100.0f);
+            //    trkZoom_ValueChanged(new object(), new EventArgs());
+
+            //    refreshToolStripButton.PerformClick();
+            //    UppdateDictionaries();
+            //    fpwidth = 0;
+            //    fpheight = 0;
+            //    fptype = "";
+            //    fstatus = "";
+            //    fName = "";
+            //    fprice = 0.0M;
+            //    fqty = 0;
+            //    fdiscount = 0.0M;
+            //    fzoom = 0.0f;
+            //    fdesc = "";
+
+            //    itemControlsSearch("lbldesc");
+
+            //    pnlPropertiesBody.VerticalScroll.Value = pnlPropertiesBody.VerticalScroll.Maximum;
+            //    pnlPropertiesBody.PerformLayout();
+
+            //    //Label lbl = new Label();
+            //    //lbl = itemControlsSearch("lbldesc");
+            //    //lbl.Text = UpdateLblDescription(lbl.AccessibleDescription);
+            //}
+
+            //switch (inside_item)
+            //{
+            //    case true:
+            //        if (row_str.Contains("FID"))
+            //        {
+            //            fid = row_str.Remove(0, 5);
+            //        }
+            //        else if (row_str.Contains("FName"))
+            //        {
+            //            Text = quotation_ref_no + " >> " + row_str.Remove(0, 7);
+            //            fName = row_str.Remove(0, 7);
+            //        }
+            //        else if (row_str.Contains("FWidth"))
+            //        {
+            //            fpwidth = Convert.ToInt32(row_str.Remove(0, 8));
+            //        }
+            //        else if (row_str.Contains("FHeight"))
+            //        {
+            //            fpheight = Convert.ToInt32(row_str.Remove(0, 9));
+            //        }
+            //        else if (row_str.Contains("FProfile"))
+            //        {
+            //            fptype = row_str.Remove(0, 10);
+            //        }
+            //        else if (row_str.Contains("FStatus"))
+            //        {
+            //            fstatus = row_str.Remove(0, 9);
+            //            fprice = Convert.ToDecimal(file_lines[row + 1].Remove(0, 8));
+            //            fqty = Convert.ToInt32(file_lines[row + 2].Remove(0, 6));
+            //            fdiscount = Convert.ToDecimal(file_lines[row + 3].Remove(0, 11));
+            //            fzoom = float.Parse(file_lines[row + 4].Remove(0, 7));
+            //            fdesc = file_lines[row + 5].Remove(0, 7);
+
+            //            for (int i = row + 6; i < file_lines.Count(); i++)
+            //            {
+            //                string raw_desc = file_lines[i];
+            //                if (!raw_desc.Contains("{"))
+            //                {
+            //                    fdesc += "\n" + raw_desc;
+            //                }
+            //                else
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //        if (fpwidth != 0 && fpheight != 0 && fptype != "" && fstatus != "" && fName != "" && fid != "")
+            //        {
+            //            paint_flpMain = true;
+            //            AddProfile(fpwidth + 70, fpheight + 35, pnlItems.Controls.Count + 1, fptype, Convert.ToBoolean(fstatus));
+            //            inside_item = false;
+            //        }
+
+            //        break;
+            //    case false:
+            //        if (inside_frame)
+            //        {
+            //            if (row_str.Contains("FrameName"))
+            //            {
+            //                frname = row_str.Trim().Remove(0, 11);
+            //            }
+            //            else if (row_str.Contains("FrWidth"))
+            //            {
+            //                frwidth = Convert.ToInt32(row_str.Trim().Remove(0, 9));
+            //            }
+            //            else if (row_str.Contains("FrHeight"))
+            //            {
+            //                frheight = Convert.ToInt32(row_str.Trim().Remove(0, 10));
+            //            }
+            //            else if (row_str.Contains("FrWndr"))
+            //            {
+            //                frwndr = Convert.ToInt32(row_str.Trim().Remove(0, 8));
+            //            }
+
+            //            if (frname != "" && frwidth != 0 && frheight != 0 && frwndr != 0)
+            //            {
+            //                AddFrame(frname, frwidth, frheight, frwndr);
+            //            }
+            //        }
+
+            //        else if (inside_panel)
+            //        {
+            //            if (row_str.Contains("DockStyle"))
+            //            {
+            //                switch (row_str.Trim().Remove(0, 11))
+            //                {
+            //                    case "Fill":
+            //                        dok = DockStyle.Fill;
+            //                        break;
+            //                    case "None":
+            //                        dok = DockStyle.None;
+            //                        break;
+            //                }
+            //            }
+            //            else if (row_str.Contains("PWidth"))
+            //            {
+            //                pnlwidth = Convert.ToInt32(row_str.Trim().Remove(0, 8));
+            //            }
+            //            else if (row_str.Contains("PHeight"))
+            //            {
+            //                pnlheight = Convert.ToInt32(row_str.Trim().Remove(0, 9));
+            //            }
+            //            else if (row_str.Contains("WndrType"))
+            //            {
+            //                //pnlwndrtype = row_str.Trim().Remove(0, 10);
+            //                pnlwndrtype = row_str.Trim().Replace("WndrType: ", "");
+            //            }
+            //            else if (row_str.Contains("Orientation"))
+            //            {
+            //                pnl_Orientation = row_str.Trim().Remove(0, 13);
+            //            }
+            //            else if (row_str.Contains("ChkText"))
+            //            {
+            //                pnl_OrientationText = row_str.TrimStart().Remove(0, 9);
+            //            }
+            //            else if (row_str.Contains("Parent"))
+            //            {
+            //                pnl_Parent = row_str.Trim().Remove(0, 8);
+            //            }
+            //            else if (row_str.Contains("FrameGroup"))
+            //            {
+            //                frameGroup = row_str.Trim().Remove(0, 12);
+            //            }
+
+            //            if (pnlwidth != 0 &&
+            //                pnlheight != 0 &&
+            //                //pnlwndrtype != "" &&
+            //                pnl_Orientation != "" &&
+            //                //pnl_OrientationText != "" &&
+            //                pnl_Parent != "" &&
+            //                frameGroup != "")
+            //            {
+            //                AddPanel();
+            //            }
+            //        }
+
+            //        else if (inside_multi)
+            //        {
+            //            if (row_str.Contains("DockStyle"))
+            //            {
+            //                switch (row_str.Trim().Remove(0, 11))
+            //                {
+            //                    case "Fill":
+            //                        multidok = DockStyle.Fill;
+            //                        break;
+            //                    case "None":
+            //                        multidok = DockStyle.None;
+            //                        break;
+            //                }
+            //            }
+            //            else if (row_str.Contains("MultiName"))
+            //            {
+            //                multi_Name = row_str.Trim().Remove(0, 11);
+            //            }
+            //            else if (row_str.Contains("DivSize"))
+            //            {
+            //                multi_Size = row_str.Trim().Remove(0, 9);
+            //            }
+            //            else if (row_str.Contains("DivTabIndex"))
+            //            {
+            //                multi_Tabindex = Convert.ToInt32(row_str.Trim().Remove(0, 13));
+            //            }
+            //            else if (row_str.Contains("DivType"))
+            //            {
+            //                multi_type = row_str.Trim().Remove(0, 9);
+            //            }
+            //            else if (row_str.Contains("DivNum"))
+            //            {
+            //                multidivnum = row_str.Trim().Remove(0, 8);
+            //            }
+            //            else if (row_str.Contains("Parent"))
+            //            {
+            //                multi_Parent = row_str.Trim().Remove(0, 8);
+            //            }
+
+            //            if (multi_Name != "" &&
+            //                multi_Size != "" &&
+            //                multidivnum != "" &&
+            //                multi_Tabindex != 0 &&
+            //                multi_type != "" &&
+            //                multi_Parent != "")
+            //            {
+            //                AddMultiPanel();
+            //            }
+            //        }
+
+            //        else if (inside_divider)
+            //        {
+            //            if (row_str.Contains("DivdName"))
+            //            {
+            //                divd_name = row_str.Trim().Remove(0, 10);
+            //            }
+            //            else if (row_str.Contains("DivdWidth"))
+            //            {
+            //                divd_width = Convert.ToInt32(row_str.Trim().Remove(0, 11));
+            //            }
+            //            else if (row_str.Contains("DivdHeight"))
+            //            {
+            //                divd_height = Convert.ToInt32(row_str.Trim().Remove(0, 12));
+            //            }
+            //            else if (row_str.Contains("DivdTabIndex"))
+            //            {
+            //                divd_TabIndex = Convert.ToInt32(row_str.Trim().Remove(0, 14));
+            //            }
+            //            else if (row_str.Contains("Parent"))
+            //            {
+            //                divd_Parent = row_str.Trim().Remove(0, 8);
+            //            }
+
+            //            if (divd_name != "" &&
+            //                divd_width != 0 &&
+            //                divd_height != 0 &&
+            //                divd_TabIndex != 0 &&
+            //                divd_Parent != "")
+            //            {
+            //                AddDivider();
+            //            }
+            //        }
+            //        break;
+            //}
+        }
+
+        string sql_Transaction_result;
+        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                switch (mainTodo)
+                {
+                    case "Open_WndrFiles":
+                        for (int i = 0; i < file_lines.Length; i++)
+                        {
+                            if (bgw.CancellationPending == true)
+                            {
+                                e.Cancel = true;
+                            }
+                            else
+                            {
+                                bgw.ReportProgress(i);
+                            }
+                        }
+                        //e.Result = e.Argument.ToString();
+                        break;
+
+                    //case "GetCloudFiles":
+                    //    var objds = csq.CostingQuery_ReturnDS("GetCloudFiles", "", (int)info[0]);
+                    //    sql_Transaction_result = objds.Item1;
+                    //    e.Result = objds.Item2;
+                    //    break;
+
+                    default:
+                        break;
+                }
+            }
+            catch (SqlException ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                if (ex.Number == -2)
+                {
+                    MessageBox.Show("Request timed out", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (ex.Number == 1232)
+                {
+                    MessageBox.Show("Please check internet connection", "Network Disconnected?", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Number == 19)
+                {
+                    MessageBox.Show("Server is down", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                ToggleMode(false, true);
+            }
+        }
+
+        private void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Error != null || e.Cancelled == true)
+                {
+                    _mainView.GetToolStripLabelLoading().Text = "Error";
+                    ToggleMode(false, true);
+                    _mainView.GetToolStripLabelLoading().Visible = true;
+                    onload = false;
+                }
+                else
+                {
+                    switch (mainTodo)
+                    {
+                        case "Open_WndrFiles":
+                           
+                            _mainView.GetToolStripLabelLoading().Text = "Finished";
+                            ToggleMode(false, true);
+                            _mainView.GetToolStripLabelLoading().Visible = true;
+                            //autoDescription = true;
+                            onload = false;
+                            //tmr_fadeOutText.Enabled = true;
+                            //tmr_fadeOutText.Start();
+
+                            int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                            string outFile = wndrfile.Substring(0, startFileName) +
+                                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                            File.Delete(outFile);
+                            break;
+
+                        case "GetCloudFiles":
+                            //if (sql_Transaction_result == "Committed")
+                            //{
+                            //    frmQuoteList frm = new frmQuoteList();
+                            //    frm.ds = (DataSet)e.Result;
+                            //    ToggleMode(false, true);
+                            //    frm.info = info;
+                            //    if (frm.ShowDialog() == DialogResult.OK)
+                            //    {
+                            //        Clearing_Operation();
+
+
+                            //        wndrfile = frm.FileName;
+
+                            //        csfunc.DecryptFile(wndrfile);
+
+                            //        int startFileName1 = wndrfile.LastIndexOf("\\") + 1;
+                            //        string outFile1 = wndrfile.Substring(0, startFileName1) +
+                            //                         wndrfile.Substring(startFileName1, wndrfile.LastIndexOf(".") - startFileName1) + ".txt";
+
+                            //        file_lines = File.ReadAllLines(outFile1);
+                            //        File.SetAttributes(outFile1, FileAttributes.Hidden);
+                            //        tsprogress_Loading.Maximum = file_lines.Length;
+
+                            //        autoDescription = false;
+                            //        onload = true;
+
+                            //        StartWorker("Open_WndrFiles");
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    ToggleMode(false, true);
+                            //}
+                            //break;
+
+                        default:
+                            break;
+                    }
+                    //sql_Transaction_result = "";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         #region ViewUpdate(Controls)
 
@@ -1380,6 +2429,7 @@ namespace PresentationLayer.Presenter
                                        bool NewItem_OkClicked,
                                        bool AddedFrame,
                                        bool AddedConcrete,
+                                       bool OpenWindoorFile,
                                        frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
                                        int frmDimension_numHt,
@@ -1388,11 +2438,11 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
-                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete)
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
                     Clearing_Operation();
                 }
-                else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete)
+                else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
                     SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
                     ItemToolStrip_Enable();
@@ -1409,7 +2459,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete)
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
@@ -1422,7 +2472,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -1436,7 +2486,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -1448,10 +2498,26 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) //from Open Windoor File
+                {
+                    ItemToolStrip_Enable();
+                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
+
+                    _frmDimensionPresenter.SetPresenters(this);
+                    _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.OpenWndrFile;
+                    _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
+                    _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
+                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
+                    _frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
+                  
+                }
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
-                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete)
+                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -1469,6 +2535,58 @@ namespace PresentationLayer.Presenter
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
                                                                          baseColor,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
+
+                        _windoorModel.SetDimensions_basePlatform();
+                        AddWndrList_QuotationModel(_windoorModel);
+
+                        _mainView.Zoom = _windoorModel.WD_zoom;
+                        _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
+
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+
+                        AddItemInfoUC(_windoorModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+                        ItemToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+                        BotToolStrip_Enable();
+
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.RemoveBinding();
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+                if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
+                {
+                    if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
+                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                    {
+                        baseColor = Base_Color._White;
+                    }
+                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._DarkBrown.ToString())
+                    {
+                        baseColor = Base_Color._DarkBrown;
+                    }
+                    if (purpose == frmDimensionPresenter.Show_Purpose.OpenWndrFile)
+                    {
+                        _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         Base_Color._DarkBrown,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         _windoorModel.SetDimensions_basePlatform();
@@ -1502,7 +2620,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete) //Add new Item
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -1556,7 +2674,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete) //add frame
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -1598,7 +2716,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete) //add concrete
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile) //add concrete
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
@@ -1619,6 +2737,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
+                
             }
         }
 

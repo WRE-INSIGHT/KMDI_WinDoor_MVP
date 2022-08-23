@@ -383,7 +383,15 @@ namespace PresentationLayer.Views
         {
             return tsMain;
         }
+        public OpenFileDialog GetOpenFileDialog()
+        {
+            return openFileDialog1;
+        }
 
+        public ToolStripProgressBar GetTsProgressLoading()
+        {
+            return tsprogress_Loading;
+        }
         public MenuStrip GetMNSMainMenu()
         {
             return mnsMainMenu;
@@ -493,6 +501,21 @@ namespace PresentationLayer.Views
         private void SortItemtoolStripButton1_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemButtonClickEventRaised, e);
+        }
+
+        public ToolStripLabel GetToolStripLabelLoading()
+        {
+            return tsLbl_Loading;
+        }
+
+        public SplitContainer GetSCMain()
+        {
+            return splitContainer1;
+        }
+
+        public Panel GetPanelRight()
+        {
+            return pnlRight;
         }
     }
 }

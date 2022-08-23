@@ -25,7 +25,8 @@ namespace PresentationLayer.Presenter
             CreateNew_Frame = 3,
             ChangeBasePlatformSize = 4,
             AddPanelIntoMultiPanel = 5,
-            CreateNew_Concrete = 6
+            CreateNew_Concrete = 6,
+            OpenWndrFile = 7
         }
 
         private Show_Purpose this_purpose;
@@ -120,6 +121,19 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public bool mainPresenter_OpenWindoorFile_ClickedOK
+        {
+            get
+            {
+                return _mainPresenter_OpenWindoorFile_ClickedOK;
+            }
+
+            set
+            {
+                _mainPresenter_OpenWindoorFile_ClickedOK = value;
+            }
+        }
+
         #endregion
 
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
@@ -180,6 +194,7 @@ namespace PresentationLayer.Presenter
         private bool _mainPresenter_newItem_ClickedOK;
         private bool _mainPresenter_AddedFrame_ClickedOK;
         private bool _mainPresenter_AddedConcrete_ClickedOK;
+        private bool _mainPresenter_OpenWindoorFile_ClickedOK;
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
             try
@@ -206,6 +221,7 @@ namespace PresentationLayer.Presenter
                                                       _mainPresenter_newItem_ClickedOK,
                                                       _mainPresenter_AddedFrame_ClickedOK,
                                                       _mainPresenter_AddedConcrete_ClickedOK,
+                                                      _mainPresenter_OpenWindoorFile_ClickedOK,
                                                       purpose,
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,
