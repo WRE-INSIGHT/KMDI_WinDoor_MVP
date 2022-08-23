@@ -720,25 +720,13 @@ namespace PresentationLayer.Presenter
                         //GlassThickness & Glassfilm
                         if (Singlepnl.Panel_GlassThicknessDesc != null)
                         {
-
-                            string addNewLine = "";
-
-                            if (check1stFrame == false)
-                            {
-                                addNewLine = "\n";
-                                check1stFrame = true;
-                            }
-                            else
-                            {
-                                addNewLine = "";
-                            }
                             if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                             {
-                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
                             }
                             else
                             {
-                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
                             }
                         }
 
