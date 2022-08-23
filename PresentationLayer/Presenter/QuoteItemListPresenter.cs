@@ -37,6 +37,7 @@ namespace PresentationLayer.Presenter
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
         private List<string> lst_glassThickness = new List<string>();
+        private List<string> lst_glassThicknessPerItem = new List<string>();
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
@@ -359,19 +360,6 @@ namespace PresentationLayer.Presenter
                     itemDescription();
                     ItemCostingPoints();
 
-                    List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
-                    List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
-
-                    foreach (string GT in lst_glassThicknessDistinct)
-                    {
-                        glassThick += GT;
-                    }
-
-                    foreach (string GF in lst_glassFilmDistinct)
-                    {
-                        glassFilm += "with " + GF + "\n";
-                    }
-
                     if (GeorgianBarHorizontalQty > 0)
                     {
                         GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
@@ -384,13 +372,11 @@ namespace PresentationLayer.Presenter
 
                     IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
 
-                    wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
-
-
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
                                                                               + wdm.WD_description
+                                                                              + lst_glassThicknessPerItem[i] + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc
                                                                               + costingPointsDesc
                                                                               + laborCostDesc
                                                                               + InstallationCostDesc
@@ -573,7 +559,6 @@ namespace PresentationLayer.Presenter
             {
                 lst_DuplicatePnl.Clear();
                 lst_Description.Clear();
-                lst_glassThickness.Clear();
                 NewNoneDuplicatePnlAndCount = string.Empty;
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
@@ -586,8 +571,7 @@ namespace PresentationLayer.Presenter
                         FrameTypeDesc = "Door";
                     }
 
-
-
+                    #region MultiPnl
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -689,20 +673,11 @@ namespace PresentationLayer.Presenter
                                     }
                                 }
 
-
-                                //if (pnl.Panel_GlassFilm.ToString() != "None")
-                                //{
-                                //    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
-                                //}
-
                                 //GeorgianBar
                                 if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
                                     GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-
-                                    //AllItemDescription += GeorgianBarHorizontalDesc;
-                                    //AllItemDescription += GeorgianBarVerticalDesc;
                                 }
 
                                 //panel name desc
@@ -725,6 +700,8 @@ namespace PresentationLayer.Presenter
 
                         }
                     }
+                    #endregion
+                    #region SinglePnl 
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -765,11 +742,6 @@ namespace PresentationLayer.Presenter
                             }
                         }
 
-                        //Glassfilm
-                        //if (Singlepnl.Panel_GlassFilm.ToString() != "None")
-                        //{
-                        //    lst_glassFilm.Add(Singlepnl.Panel_GlassFilm.ToString());
-                        //}
 
                         //GeorgianBar
                         if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
@@ -777,11 +749,11 @@ namespace PresentationLayer.Presenter
                             GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                             GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
 
-                            //AllItemDescription += GeorgianBarHorizontalDesc;
-                            //AllItemDescription += GeorgianBarVerticalDesc;
                         }
 
                     }
+                    #endregion
+
                 }
 
                 #region DuplicatedItemListStringManipulation
@@ -839,7 +811,18 @@ namespace PresentationLayer.Presenter
 
                 }
 
+                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
+                if (lst_glassThicknessDistinct.Count != 0)
+                {
+                    for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
+                    {
+                        glassThick += lst_glassThicknessDistinct[i];
+                    }
+                    lst_glassThicknessPerItem.Add(glassThick);
+                }
+                glassThick = string.Empty;
+                lst_glassThickness.Clear();
             }
 
 
@@ -940,7 +923,7 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     #region SealantPrice
-                     
+
 
                     Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height)) / 3570);
 
@@ -974,7 +957,7 @@ namespace PresentationLayer.Presenter
                     }
 
                     PUFoamingPrice += _quotationModel.Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
-
+                    #region MultiPnl 
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -1614,6 +1597,9 @@ namespace PresentationLayer.Presenter
                             }
                         }
                     }
+                    #endregion 
+                    #region SinglePnl
+
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -2147,6 +2133,8 @@ namespace PresentationLayer.Presenter
                         }
                     }
 
+                    #endregion
+
                 }
 
                 LaborCost = CostingPoints * CostPerPoints;
@@ -2220,24 +2208,24 @@ namespace PresentationLayer.Presenter
 
                 lstTotalPrice.Add(TotaPrice);
 
-                costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
+                //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
 
-                InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
-                laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
-                MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
+                //InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
+                //laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
+                //MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
 
-                FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
-                FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
-                SashPriceDesc = "\n\nSash Price : " + Math.Round(SashPrice, 2);
-                SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
-                GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
-                DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
-                GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
-                FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
-                AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
-                AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
-                sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
-                PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
+                //FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
+                //FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
+                //SashPriceDesc = "\n\nSash Price : " + Math.Round(SashPrice, 2);
+                //SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
+                //GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
+                //DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
+                //GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
+                //FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
+                //AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
+                //AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
+                //sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
+                //PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
 
                 CostingPoints = 0;
                 InstallationPoints = 0;
