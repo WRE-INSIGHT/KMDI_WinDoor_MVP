@@ -55,7 +55,8 @@ namespace PresentationLayer.Presenter
              check1stFrame = false;
 
 
-        string FrameTypeDesc,
+        string glass,
+               FrameTypeDesc,
                AllItemDescription,
                motorizeDesc,
                GeorgianBarHorizontalDesc,
@@ -371,12 +372,19 @@ namespace PresentationLayer.Presenter
                     }
 
                     IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-
+                    if (lst_glassThicknessPerItem.Count != 0)
+                    {
+                        glass = lst_glassThicknessPerItem[i];
+                    }
+                    //else
+                    //{
+                    //    glass = string.Empty;
+                    //}
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
                                                                               + wdm.WD_description
-                                                                              + lst_glassThicknessPerItem[i] + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc
+                                                                              + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc
                                                                               + costingPointsDesc
                                                                               + laborCostDesc
                                                                               + InstallationCostDesc
@@ -672,6 +680,10 @@ namespace PresentationLayer.Presenter
                                         lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
+                                else
+                                {
+                                    lst_glassThickness.Add(string.Empty);
+                                }
 
                                 //GeorgianBar
                                 if (pnl.Panel_GeorgianBarOptionVisibility == true)
@@ -701,6 +713,7 @@ namespace PresentationLayer.Presenter
                         }
                     }
                     #endregion
+
                     #region SinglePnl 
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
@@ -728,6 +741,10 @@ namespace PresentationLayer.Presenter
                             {
                                 lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
                             }
+                        }
+                        else
+                        {
+                            lst_glassThickness.Add(string.Empty);
                         }
 
 
