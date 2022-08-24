@@ -29,6 +29,7 @@ namespace PresentationLayer.Views.UserControls
                 }
             }
         }
+       
         public int PboxItemImagerHeight
         {
             get
@@ -49,6 +50,9 @@ namespace PresentationLayer.Views.UserControls
 
         public event EventHandler ItemInfoUCLoadEventRaised;
         public event MouseEventHandler lblItemMouseDoubleClickEventRaised;
+        public event MouseEventHandler lblItemMouseMoveEventRaised;
+        public event MouseEventHandler lblItemMouseDownEventRaised;
+        public event MouseEventHandler lblItemMouseUpEventRaised;
 
         public void BringToFrontThis()
         {
@@ -82,6 +86,51 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        private void lbl_item_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+        public string WD_Item
+        {
+            get
+            {
+                return lbl_item.Text;
+            }
 
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private void lbl_item_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, lblItemMouseDownEventRaised, e);
+            }
+        }
+
+        private void lbl_item_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, lblItemMouseMoveEventRaised, e);
+            }
+        }
+
+        private void lbl_item_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, lblItemMouseUpEventRaised, e);
+            }
+            //_isDragging = false;
+        }
+
+        public UserControl GetItemInfo()
+        {
+            return this;
+        }
     }
 }

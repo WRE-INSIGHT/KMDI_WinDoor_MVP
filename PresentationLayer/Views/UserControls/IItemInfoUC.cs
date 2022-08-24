@@ -8,16 +8,19 @@ namespace PresentationLayer.Views.UserControls
     {
         bool WD_Selected { get; set; }
         int PboxItemImagerHeight { get; set; }
-
+        string WD_Item { get; set; }
         event EventHandler ItemInfoUCLoadEventRaised;
         event MouseEventHandler lblItemMouseDoubleClickEventRaised;
-
+        event MouseEventHandler lblItemMouseMoveEventRaised;
+        event MouseEventHandler lblItemMouseDownEventRaised;
+        event MouseEventHandler lblItemMouseUpEventRaised;
         //string ItemName { set; }
         //string ItemDimension { set; }
         //string ItemDesc { set; }
         //Image ItemImage { set; }
         //bool ItemVisibility { set; }
         //DockStyle dok { set; }
+        UserControl GetItemInfo();
         void BringToFrontThis();
         //void ThisBinding(Dictionary<string, Binding> windoorModelBinding);
     }

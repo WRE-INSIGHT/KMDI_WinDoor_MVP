@@ -313,6 +313,12 @@ namespace PresentationLayer
                 .RegisterType<IQuoteItemListUC, QuoteItemListUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IQuoteItemListUCPresenter, QuoteItemListUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISortItemView, SortItemView>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISortItemPresenter, SortItemPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISortItemUC, SortItemUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISortItemUCPresenter, SortItemUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IPP_SlidingTypePropertyUC, PP_SlidingTypePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_SlidingTypePropertyUCPresenter, PP_SlidingTypePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 

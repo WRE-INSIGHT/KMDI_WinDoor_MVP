@@ -10,6 +10,7 @@ namespace PresentationLayer.Views
         event EventHandler MainViewClosingEventRaised;
         event EventHandler OpenToolStripButtonClickEventRaised;
         event EventHandler NewFrameButtonClickEventRaised;
+        event EventHandler SortItemButtonClickEventRaised;
         event EventHandler NewQuotationMenuItemClickEventRaised;
         event EventHandler PanelMainSizeChangedEventRaised;
         event EventHandler CreateNewItemClickEventRaised;
@@ -32,7 +33,7 @@ namespace PresentationLayer.Views
         event EventHandler saveAsToolStripMenuItemClickEventRaised;
         event EventHandler saveToolStripButtonClickEventRaised;
         event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
-
+        event DragEventHandler ItemsDragEventRaiseEvent;
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
@@ -47,12 +48,14 @@ namespace PresentationLayer.Views
         Panel GetPanelItems();
         Panel GetPanelPropertiesBody();
         Panel GetPanelBot();
+        Panel GetPanelRight();
         Panel GetPanelControlSub();
         Label GetLblSize();
         MenuStrip GetMNSMainMenu();
         ToolStrip GetTSMain();
         ToolStripLabel GetLblSelectedDivider();
         ToolStripLabel GetToolStripLabelSync();
+        ToolStripLabel GetToolStripLabelLoading();
         ToolStripMenuItem Glass_Single { get; }
         ToolStripMenuItem Glass_DoubleInsulated { get; }
         ToolStripMenuItem Glass_DoubleLaminated { get; }
@@ -63,7 +66,9 @@ namespace PresentationLayer.Views
         ToolStripMenuItem Color { get; }
         Form GetThis();
         SaveFileDialog GetSaveFileDialog();
-
+        OpenFileDialog GetOpenFileDialog();
+        ToolStripProgressBar GetTsProgressLoading();
+        SplitContainer GetSCMain();
         void FocusOnMainForm();
         void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);

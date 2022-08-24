@@ -269,6 +269,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 for (int i = 0; i < iteration; i++)
                 {
+                    if (_multiPanelModel != null)
+                    {
+                        int expected_total_controls_inside_parentMpanel = (_multiPanelModel.MPanel_Divisions * 2) + 1,
+                               actual_total_controls_inside_parentMpanel = _multiPanelModel.MPanelLst_Objects.Count();
+
+                        if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+                        {
+                            break;
+                        }
+                    }
                     if (data.Contains("Multi-Panel")) //if Multi-Panel
                     {
                         if (_multiPanelModel.MPanel_StackNo < 3)
