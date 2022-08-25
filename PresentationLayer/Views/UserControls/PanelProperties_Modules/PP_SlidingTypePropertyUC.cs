@@ -25,8 +25,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_SlidingType.DataSource = SlidingType;
 
             EventHelpers.RaiseEvent(sender, PPSlidingTypePropertyUCLoadEventRaised, e);
+            cmb_SlidingType.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
         }
-
+        private void ComboBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
         private void cmb_SlidingType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbSlidingTypeSelectedValueChangedEventRaised, e);

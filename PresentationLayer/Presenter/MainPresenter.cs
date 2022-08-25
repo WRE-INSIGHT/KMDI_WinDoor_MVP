@@ -786,37 +786,38 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("Screws_for_Installation: " + _quotationModel.Screws_for_Installation);
             wndr_content.Add("Screws_for_Cladding: " + _quotationModel.Screws_for_Cladding);
             wndr_content.Add("Rebate_Qty: " + _quotationModel.Rebate_Qty);
+            wndr_content.Add("Plastic_CoverQty_Total: " + _quotationModel.Plastic_CoverQty_Total);
 
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 //float[] Arr_ZoomPercentage { get; }
                 wndr_content.Add("(");
-                wndr_content.Add("WD_description: " + wdm.WD_description);
                 wndr_content.Add("WD_profile: " + wdm.WD_profile);
-                wndr_content.Add("WD_discount: " + wdm.WD_discount);
                 wndr_content.Add("WD_height: " + wdm.WD_height);
+                wndr_content.Add("WD_BaseColor: " + wdm.WD_BaseColor);
+                wndr_content.Add("WD_width: " + wdm.WD_width);
+                wndr_content.Add("WD_name: " + wdm.WD_name);
+                wndr_content.Add("WD_description: " + wdm.WD_description);
+                wndr_content.Add("WD_discount: " + wdm.WD_discount);
                 wndr_content.Add("WD_height_4basePlatform: " + wdm.WD_height_4basePlatform);
                 wndr_content.Add("WD_height_4basePlatform_forImageRenderer: " + wdm.WD_height_4basePlatform_forImageRenderer);
                 wndr_content.Add("WD_id: " + wdm.WD_id);
-                wndr_content.Add("WD_name: " + wdm.WD_name);
                 wndr_content.Add("WD_orientation: " + wdm.WD_orientation);
                 wndr_content.Add("WD_price: " + wdm.WD_price);
                 wndr_content.Add("WD_quantity: " + wdm.WD_quantity);
                 wndr_content.Add("WD_visibility: " + wdm.WD_visibility);
-                wndr_content.Add("WD_width: " + wdm.WD_width);
                 wndr_content.Add("WD_width_4basePlatform: " + wdm.WD_width_4basePlatform);
                 wndr_content.Add("WD_width_4basePlatform_forImageRenderer: " + wdm.WD_width_4basePlatform_forImageRenderer);
                 wndr_content.Add("WD_zoom: " + wdm.WD_zoom);
                 wndr_content.Add("WD_zoom_forImageRenderer: " + wdm.WD_zoom_forImageRenderer);
                 wndr_content.Add("WD_PropertiesScroll: " + wdm.WD_PropertiesScroll);
                 wndr_content.Add("WD_SlidingTopViewVisibility: " + wdm.WD_SlidingTopViewVisibility);
-                wndr_content.Add("frameIDCounter: " + wdm.frameIDCounter);
+                //wndr_content.Add("frameIDCounter: " + wdm.frameIDCounter);
                 wndr_content.Add("concreteIDCounter: " + wdm.concreteIDCounter);
                 wndr_content.Add("panelIDCounter: " + wdm.panelIDCounter);
                 wndr_content.Add("mpanelIDCounter: " + wdm.mpanelIDCounter);
                 wndr_content.Add("divIDCounter: " + wdm.divIDCounter);
                 wndr_content.Add("PanelGlassID_Counter: " + wdm.PanelGlassID_Counter);
-                wndr_content.Add("WD_BaseColor: " + wdm.WD_BaseColor);
                 wndr_content.Add("WD_InsideColor: " + wdm.WD_InsideColor);
                 wndr_content.Add("WD_OutsideColor: " + wdm.WD_OutsideColor);
                 wndr_content.Add("WD_PlasticCover: " + wdm.WD_PlasticCover);
@@ -831,13 +832,14 @@ namespace PresentationLayer.Presenter
                 foreach (IFrameModel frm in wdm.lst_frame)
                 {
                     wndr_content.Add("{");
-                    wndr_content.Add("\tFrame_Name: " + frm.Frame_Name);
                     wndr_content.Add("\tFrame_Height: " + frm.Frame_Height);
                     wndr_content.Add("\tFrame_Width: " + frm.Frame_Width);
+                    wndr_content.Add("\tFrame_Name: " + frm.Frame_Name);
                     wndr_content.Add("\tFrame_BasicDeduction: " + frm.Frame_BasicDeduction);
                     wndr_content.Add("\tFrame_HeightToBind: " + frm.Frame_HeightToBind);
                     wndr_content.Add("\tFrameImageRenderer_Height: " + frm.FrameImageRenderer_Height);
                     wndr_content.Add("\tFrame_ID: " + frm.Frame_ID);
+                    wndr_content.Add("\tFrame_Type: " + frm.Frame_Type);
                     wndr_content.Add("\tFrame_WidthToBind: " + frm.Frame_WidthToBind);
                     wndr_content.Add("\tFrameImageRenderer_Width: " + frm.FrameImageRenderer_Width);
                     wndr_content.Add("\tFrame_Visible: " + frm.Frame_Visible);
@@ -852,30 +854,263 @@ namespace PresentationLayer.Presenter
                     wndr_content.Add("\tFrame_ReinfHeight: " + frm.Frame_ReinfHeight);
                     wndr_content.Add("\tFrame_CmenuDeleteVisibility: " + frm.Frame_CmenuDeleteVisibility);
                     wndr_content.Add("\tFrame_If_InwardMotorizedCasement: " + frm.Frame_If_InwardMotorizedCasement);
-                    //MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
-                    //MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
-                    //FrameProfile_ArticleNo Frame_ArtNo { get; set; }
-                    //IWindoorModel Frame_WindoorModel { get; set; }
-                    //UserControl Frame_UC { get; set; }
-                    //UserControl Frame_PropertiesUC { get; set; }
-                    //BottomFrameTypes Frame_BotFrameArtNo { get; set; }
-                    //Padding Frame_Padding_int { get; set; }
-                    //Padding FrameImageRenderer_Padding_int { get; set; }
-                    //List<IPanelModel> Lst_Panel { get; set; }
-                    //List<IMultiPanelModel> Lst_MultiPanel { get; set; }
-                    //List<IDividerModel> Lst_Divider { get; set; }
+                    wndr_content.Add("\tFrame_MilledArtNo: " + frm.Frame_MilledArtNo);
+                    wndr_content.Add("\tFrame_MilledReinfArtNo: " + frm.Frame_MilledReinfArtNo);
+                    wndr_content.Add("\tFrame_ArtNo: " + frm.Frame_ArtNo);
+                    wndr_content.Add("\tFrame_ReinfArtNo: " + frm.Frame_ReinfArtNo);
+
+                    //IWindoorModel Frame_WindoorModel
+                    //UserControl Frame_UC
+                    //UserControl Frame_PropertiesUC
+                    //BottomFrameTypes Frame_BotFrameArtNo
+                    //Padding Frame_Padding_int
+                    //Padding FrameImageRenderer_Padding_int
+                    //List<IPanelModel> Lst_Panel
+                    //List<IMultiPanelModel> Lst_MultiPanel
+                    //List<IDividerModel> Lst_Divider
                     //int[] Arr_padding_norm { get; }
                     //int[] Arr_padding_withmpnl { get; }
-                    //FrameModel.Frame_Padding Frame_Type { get; set; }
                     //int Add_framePerimeter_screws4fab();
                     //int Add_MilledFrameWidth_screws4fab();
-                    //foreach(IPanelModel pnl in frm.Lst_Panel)
-                    //{
+                    foreach (IPanelModel pnl in frm.Lst_Panel)
+                    {
+                        wndr_content.Add("\t#");
+                        wndr_content.Add("\t\tPanel_ChkText: " + pnl.Panel_ChkText);
+                        wndr_content.Add("\t\tPanel_Dock: " + pnl.Panel_Dock);
+                        wndr_content.Add("\t\tPanel_Parent: " + pnl.Panel_Parent);
+                        wndr_content.Add("\t\tPanel_MultiPanelGroup: " + pnl.Panel_MultiPanelGroup);
+                        wndr_content.Add("\t\tPanel_FrameGroup: " + pnl.Panel_FrameGroup);
+                        wndr_content.Add("\t\tPanel_FramePropertiesGroup: " + pnl.Panel_FramePropertiesGroup);
+                        wndr_content.Add("\t\tPanel_Height: " + pnl.Panel_Height);
+                        wndr_content.Add("\t\tPanel_OriginalHeight: " + pnl.Panel_OriginalHeight);
+                        wndr_content.Add("\t\tPanelImageRenderer_Height: " + pnl.PanelImageRenderer_Height);
+                        wndr_content.Add("\t\tPanel_HeightToBind: " + pnl.Panel_HeightToBind);
+                        wndr_content.Add("\t\tPanel_DisplayHeight: " + pnl.Panel_DisplayHeight);
+                        wndr_content.Add("\t\tPanel_DisplayHeightDecimal: " + pnl.Panel_DisplayHeightDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalDisplayHeight: " + pnl.Panel_OriginalDisplayHeight);
+                        wndr_content.Add("\t\tPanel_OriginalDisplayHeightDecimal: " + pnl.Panel_OriginalDisplayHeightDecimal);
+                        wndr_content.Add("\t\tPanel_ID: " + pnl.Panel_ID);
+                        wndr_content.Add("\t\tPanel_Name: " + pnl.Panel_Name);
+                        wndr_content.Add("\t\tPanel_Orient: " + pnl.Panel_Orient);
+                        wndr_content.Add("\t\tPanel_OrientVisibility: " + pnl.Panel_OrientVisibility);
+                        wndr_content.Add("\t\tPanel_Type: " + pnl.Panel_Type);
+                        wndr_content.Add("\t\tPanel_Width: " + pnl.Panel_Width);
+                        wndr_content.Add("\t\tPanel_OriginalWidth: " + pnl.Panel_OriginalWidth);
+                        wndr_content.Add("\t\tPanelImageRenderer_Width: " + pnl.PanelImageRenderer_Width);
+                        wndr_content.Add("\t\tPanel_WidthToBind: " + pnl.Panel_WidthToBind);
+                        wndr_content.Add("\t\tPanel_DisplayWidth: " + pnl.Panel_DisplayWidth);
+                        wndr_content.Add("\t\tPanel_DisplayWidthDecimal: " + pnl.Panel_DisplayWidthDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalDisplayWidth: " + pnl.Panel_OriginalDisplayWidth);
+                        wndr_content.Add("\t\tPanel_OriginalDisplayWidthDecimal: " + pnl.Panel_OriginalDisplayWidthDecimal);
+                        wndr_content.Add("\t\tPanel_Visibility: " + pnl.Panel_Visibility);
+                        wndr_content.Add("\t\tPanelImageRenderer_Zoom: " + pnl.PanelImageRenderer_Zoom);
+                        wndr_content.Add("\t\tPanel_Index_Inside_MPanel: " + pnl.Panel_Index_Inside_MPanel);
+                        wndr_content.Add("\t\tPanel_Index_Inside_SPanel: " + pnl.Panel_Index_Inside_SPanel);
+                        wndr_content.Add("\t\tPanel_Placement: " + pnl.Panel_Placement);
+                        wndr_content.Add("\t\tPanel_Overlap_Sash: " + pnl.Panel_Overlap_Sash);
+                        wndr_content.Add("\t\tPanel_Margin: " + pnl.Panel_Margin);
+                        wndr_content.Add("\t\tPanel_MarginToBind: " + pnl.Panel_MarginToBind);
+                        wndr_content.Add("\t\tPanelImageRenderer_Margin: " + pnl.PanelImageRenderer_Margin);
+                        wndr_content.Add("\t\tPanel_Zoom: " + pnl.Panel_Zoom);
+                        wndr_content.Add("\t\tPanel_ParentMultiPanelModel: " + pnl.Panel_ParentMultiPanelModel);
+                        wndr_content.Add("\t\tPanel_PropertyHeight: " + pnl.Panel_PropertyHeight);
+                        wndr_content.Add("\t\tPanel_HandleOptionsVisibility: " + pnl.Panel_HandleOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_RotoswingOptionsVisibility: " + pnl.Panel_RotoswingOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_RioOptionsVisibility: " + pnl.Panel_RioOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_RioOptionsVisibility2: " + pnl.Panel_RioOptionsVisibility2);
+                        wndr_content.Add("\t\tPanel_RotolineOptionsVisibility: " + pnl.Panel_RotolineOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_MVDOptionsVisibility: " + pnl.Panel_MVDOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_RotaryOptionsVisibility: " + pnl.Panel_RotaryOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_HandleOptionsHeight: " + pnl.Panel_HandleOptionsHeight);
+                        wndr_content.Add("\t\tPanel_LouverBladesCount: " + pnl.Panel_LouverBladesCount);
+                        wndr_content.Add("\t\tPanel_BackColor: " + pnl.Panel_BackColor);
+                        wndr_content.Add("\t\tPanel_SlidingTypes: " + pnl.Panel_SlidingTypes);
+                        wndr_content.Add("\t\tPanel_SlidingTypeVisibility: " + pnl.Panel_SlidingTypeVisibility);
+                        #region Explosion
 
-                    //}
-                    //foreach (IMultiPanelModel
-                    //foreach(IDividerModel
-                    //wndr_content.Add("}");
+                        //int PanelGlass_ID
+                        //string Panel_GlassThicknessDesc
+                        //float Panel_GlassThickness
+                        //GlazingBead_ArticleNo PanelGlazingBead_ArtNo
+                        //GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo
+                        //GBSpacer_ArticleNo Panel_GBSpacerArtNo
+                        //bool Panel_ChkGlazingAdaptor
+                        //int Panel_GlazingBeadWidth
+                        //int Panel_GlazingBeadWidthDecimal
+                        //int Panel_GlazingBeadHeight
+                        //int Panel_GlazingBeadHeightDecimal
+                        //int Panel_GlassWidth
+                        //int Panel_GlassWidthDecimal
+                        //int Panel_OriginalGlassWidth
+                        //int Panel_OriginalGlassWidthDecimal
+                        //int Panel_GlassHeight
+                        //int Panel_GlassHeightDecimal
+                        //int Panel_OriginalGlassHeight
+                        //int Panel_OriginalGlassHeightDecimal
+                        //int Panel_GlassPropertyHeight
+                        //int Panel_GlazingSpacerQty
+                        //GlassFilm_Types Panel_GlassFilm
+                        //bool Panel_SashPropertyVisibility
+                        //SashProfile_ArticleNo Panel_SashProfileArtNo
+                        //SashReinf_ArticleNo Panel_SashReinfArtNo
+                        //int Panel_SashWidth
+                        //int Panel_SashWidthDecimal
+                        //int Panel_SashHeight
+                        //int Panel_SashHeightDecimal
+                        //int Panel_OriginalSashWidth
+                        //int Panel_OriginalSashWidthDecimal
+                        //int Panel_OriginalSashHeight
+                        //int Panel_OriginalSashHeightDecimal
+                        //int Panel_SashReinfWidth
+                        //int Panel_SashReinfWidthDecimal
+                        //int Panel_SashReinfHeight
+                        //int Panel_SashReinfHeightDecimal
+
+                        //CoverProfile_ArticleNo Panel_CoverProfileArtNo
+                        //CoverProfile_ArticleNo Panel_CoverProfileArtNo2
+                        //FrictionStay_ArticleNo Panel_FrictionStayArtNo
+                        //FrictionStayCasement_ArticleNo Panel_FSCasementArtNo
+                        //SnapInKeep_ArticleNo Panel_SnapInKeepArtNo
+                        //FixedCam_ArticleNo Panel_FixedCamArtNo
+                        //_30x25Cover_ArticleNo Panel_30x25CoverArtNo
+                        //MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo
+                        //CoverForMotor_ArticleNo Panel_CoverForMotorArtNo
+                        //_2DHinge_ArticleNo Panel_2dHingeArtNo
+                        //PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo
+                        //FalsePole_ArticleNo Panel_FalsePoleArtNo
+                        //SupportingFrame_ArticleNo Panel_SupportingFrameArtNo
+                        //Plate_ArticleNo Panel_PlateArtNo
+
+                        //Handle_Type Panel_HandleType
+                        //Rotoswing_HandleArtNo Panel_RotoswingArtNo
+                        //Rotary_HandleArtNo Panel_RotaryArtNo
+                        //Rio_HandleArtNo Panel_RioArtNo
+                        //Rio_HandleArtNo Panel_RioArtNo2
+                        //ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo
+                        //Cylinder_CoverArtNo Panel_CylinderCoverArtNo
+
+                        //Rotoline_HandleArtNo Panel_RotolineArtNo
+                        //MVD_HandleArtNo Panel_MVDArtNo
+                        //Espagnolette_ArticleNo Panel_EspagnoletteArtNo
+                        //bool Panel_EspagnoletteOptionsVisibility
+
+                        //Extension_ArticleNo Panel_ExtensionTopArtNo
+                        //Extension_ArticleNo Panel_ExtensionTop2ArtNo
+                        //Extension_ArticleNo Panel_ExtensionTop3ArtNo
+                        //Extension_ArticleNo Panel_ExtensionBotArtNo
+                        //Extension_ArticleNo Panel_ExtensionBot2ArtNo
+                        //Extension_ArticleNo Panel_ExtensionLeftArtNo
+                        //Extension_ArticleNo Panel_ExtensionLeft2ArtNo
+                        //Extension_ArticleNo Panel_ExtensionRightArtNo
+                        //Extension_ArticleNo Panel_ExtensionRight2ArtNo
+
+                        //bool Panel_ExtTopChk
+                        //bool Panel_ExtTop2Chk
+                        //bool Panel_ExtBotChk
+                        //bool Panel_ExtLeftChk
+
+                        //bool Panel_ExtRightChk
+                        //int Panel_ExtTopQty
+                        //int Panel_ExtBotQty
+                        //int Panel_ExtLeftQty
+                        //int Panel_ExtRightQty
+
+                        //int Panel_ExtTop2Qty
+                        //int Panel_ExtTop3Qty
+                        //int Panel_ExtBot2Qty
+                        //int Panel_ExtLeft2Qty
+                        //int Panel_ExtRight2Qty
+
+                        //CornerDrive_ArticleNo Panel_CornerDriveArtNo
+                        //bool Panel_CornerDriveOptionsVisibility
+                        //bool Panel_ExtensionOptionsVisibility
+                        //int Panel_RotoswingOptionsHeight
+                        //PlasticWedge_ArticleNo Panel_PlasticWedge
+                        //int Panel_PlasticWedgeQty
+                        //MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
+                        //LockingKit_ArticleNo Panel_LockingKitArtNo
+                        //GlassType Panel_GlassType
+
+                        //Striker_ArticleNo Panel_StrikerArtno_A //for Awning
+                        //int Panel_StrikerQty_A
+
+                        //Striker_ArticleNo Panel_StrikerArtno_C //for Casement
+                        //int Panel_StrikerQty_C
+
+                        //int Panel_MiddleCloserPairQty
+                        //bool Panel_MotorizedOptionVisibility
+                        //MotorizedMech_ArticleNo Panel_MotorizedMechArtNo
+                        //int Panel_MotorizedPropertyHeight
+                        //int Panel_MotorizedMechQty
+                        //int Panel_MotorizedMechSetQty
+                        //int Panel_2DHingeQty
+                        //_2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized
+                        //int Panel_2DHingeQty_nonMotorized
+                        //bool Panel_2dHingeVisibility_nonMotorized
+                        //_3dHinge_ArticleNo Panel_3dHingeArtNo
+                        //int Panel_3dHingeQty
+                        //bool Panel_3dHingePropertyVisibility
+                        //ButtHinge_ArticleNo Panel_ButtHingeArtNo
+                        //int Panel_ButtHingeQty
+                        //bool Panel_2dHingeVisibility
+                        //bool Panel_ButtHingeVisibility
+                        //AdjustableStriker_ArticleNo Panel_AdjStrikerArtNo
+                        //int Panel_AdjStrikerQty
+                        //RestrictorStay_ArticleNo Panel_RestrictorStayArtNo
+                        //int Panel_RestrictorStayQty
+
+                        //int Panel_ExtensionPropertyHeight
+                        //GeorgianBar_ArticleNo Panel_GeorgianBarArtNo
+                        //int Panel_GeorgianBar_VerticalQty
+                        //int Panel_GeorgianBar_HorizontalQty
+                        //bool Panel_GeorgianBarOptionVisibility
+
+                        //HingeOption Panel_HingeOptions
+                        //int Panel_HingeOptionsPropertyHeight
+                        //bool Panel_HingeOptionsVisibility
+                        //CenterHingeOption Panel_CenterHingeOptions
+                        //bool Panel_CenterHingeOptionsVisibility
+                        //NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo
+                        //StayBearingK_ArticleNo Panel_StayBearingKArtNo
+                        //StayBearingPin_ArticleNo Panel_StayBearingPinArtNo
+                        //StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo
+                        //TopCornerHinge_ArticleNo Panel_TopCornerHingeArtNo
+                        //TopCornerHingeCover_ArticleNo Panel_TopCornerHingeCoverArtNo
+                        //TopCornerHingeSpacer_ArticleNo Panel_TopCornerHingeSpacerArtNo
+                        //CornerHingeK_ArticleNo Panel_CornerHingeKArtNo
+                        //CornerPivotRestK_ArticleNo Panel_CornerPivotRestKArtNo
+                        //CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo
+                        //CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo
+                        //CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo
+                        //WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo
+                        //LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo
+
+                        //bool Panel_CmenuDeleteVisibility
+                        //bool Panel_NTCenterHingeVisibility
+                        //bool Panel_MiddleCloserVisibility
+
+                        //bool Panel_MotorizedpnlOptionVisibility
+
+                        //int Add_SashPerimeter_screws4fab();
+                        //int Add_StrikerAC_screws4fab();
+                        //int Add_Espagnolette_screws4fab();
+                        //int Add_Extension_screws4fab();
+                        //int Add_FSCasement_screws4fab();
+                        //int Add_FGAwning_screws4fab();
+                        //int Add_Hinges_screws4fab();
+                        //int Add_MotorizedMech_screws4Inst();
+                        #endregion
+                    }
+                    foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                    {
+                        foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                        {
+                        }
+                        foreach (IPanelModel pnl in frm.Lst_Panel)
+                        {
+                        }
+                    }
+                    wndr_content.Add("}");
                 }
                 foreach (IConcreteModel crm in wdm.lst_concrete)
                 {
@@ -884,9 +1119,9 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add(")");
 
                 //float GetZoom_forRendering();
-                //Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
-                //Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
-                //Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
+                //Dictionary<int, decimal> Dictionary_ht_redArrowLines
+                //Dictionary<int, decimal> Dictionary_wd_redArrowLines
+                //Dictionary<int, int> Div_ArrowWdLengthList
 
             }
             #endregion
@@ -954,6 +1189,7 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -1376,334 +1612,9 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     File.SetAttributes(outFile, FileAttributes.Hidden);
                     onload = true;
-                    //StartWorker("Open_WndrFiles");
-                    int frmDimension_numWd = 0;
-                    int frmDimension_numHt = 0;
-                    string frmDimension_profileType = "";
-                    string frmDimension_baseColor = "";
-
-                    foreach (string str in file_lines)
-                    {
-
-                        string row_str = str.Replace("\t", "");
-                        if (row_str.Contains("QuoteId"))
-                        {
-                            _quoteId = Convert.ToInt32(row_str.Substring(9));
-                        }
-                        if (row_str.Contains("ProjectName"))
-                        {
-                            _projectName = row_str.Substring(13);
-                        }
-                        if (row_str.Contains("CustomerRefNo"))
-                        {
-                            _custRefNo = row_str.Substring(15);
-                        }
-                        if (row_str.Contains("Quotation_ref_no"))
-                        {
-                            inputted_quotationRefNo = row_str.Substring(18);
-                        }
-                        if (row_str.Contains("Quotation_Date"))
-                        {
-                            inputted_quoteDate = Convert.ToDateTime(row_str.Substring(16));
-                            Scenario_Quotation(false, false, false, false, true, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                        }
-                        if (row_str.Contains("Frame_PUFoamingQty_Total"))
-                        {
-                        }
-                        if (row_str.Contains("Frame_SealantWHQty_Total"))
-                        {
-                        }
-                        if (row_str.Contains("Glass_SealantWHQty_Total"))
-                        {
-
-                        }
-                        if (row_str.Contains("GlazingSpacer_TotalQty"))
-                        {
-
-                        }
-                        if (row_str.Contains("GlazingSeal_TotalQty"))
-                        {
-
-                        }
-                        if (row_str.Contains("Screws_for_Fabrication"))
-                        {
-
-                        }
-                        if (row_str.Contains("Expansion_BoltQty_Total"))
-                        {
-
-                        }
-                        if (row_str.Contains("Screws_for_Installation"))
-                        {
-
-                        }
-                        if (row_str.Contains("Screws_for_Cladding"))
-                        {
-
-                        }
-                        if (row_str.Contains("Rebate_Qty"))
-                        {
-                        }
-                        //Windoor Model
-                        if (row_str.Contains("WD_description"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_profile"))
-                        {
-                            frmDimension_profileType = row_str.Substring(12);
-                        }
-                        if (row_str.Contains("WD_discount"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_height:"))
-                        {
-                            frmDimension_numHt = Convert.ToInt32(row_str.Substring(10));
-                        }
-                        if (row_str.Contains("WD_height_4basePlatform"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_height_4basePlatform_forImageRenderer"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_id"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_name"))
-                        {
-                            //_windoorModel.WD_name = row_str.Substring(9);
-
-                        }
-                        if (row_str.Contains("WD_orientation"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_price"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_quantity"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_visibility"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_width:"))
-                        {
-                            frmDimension_numWd = Convert.ToInt32(row_str.Substring(10));
-                        }
-                        if (row_str.Contains("WD_width_4basePlatform"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_width_4basePlatform_forImageRenderer"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_zoom"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_zoom_forImageRenderer"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_PropertiesScroll"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_SlidingTopViewVisibility"))
-                        {
-
-                        }
-                        if (row_str.Contains("frameIDCounter"))
-                        {
-
-                        }
-                        if (row_str.Contains("concreteIDCounter"))
-                        {
-
-                        }
-                        if (row_str.Contains("panelIDCounter"))
-                        {
-
-                        }
-                        if (row_str.Contains("mpanelIDCounter"))
-                        {
-
-                        }
-                        if (row_str.Contains("divIDCounter"))
-                        {
-
-                        }
-                        if (row_str.Contains("PanelGlassID_Counter"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_BaseColor"))
-                        {
-                            frmDimension_baseColor = row_str.Substring(14);
-                        }
-                        if (row_str.Contains("WD_InsideColor"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_OutsideColor"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_PlasticCover"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_CmenuDeleteVisibility"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_Selected"))
-                        {
-
-                        }
-                        if (row_str.Contains("Lbl_ArrowHtCount"))
-                        {
-
-                        }
-                        if (row_str.Contains("Lbl_ArrowWdCount"))
-                        {
-
-                        }
-                        if (row_str.Contains("Div_ArrowCount"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_customArrowToggle"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_CostingPoints"))
-                        {
-
-                        }
-                        if (row_str.Contains("WD_pboxImagerHeight"))
-                        {
-                            Scenario_Quotation(false,
-                                      true,
-                                      false,
-                                      false,
-                                      true,
-                                      frmDimensionPresenter.Show_Purpose.OpenWndrFile,
-                                      frmDimension_numWd,
-                                      frmDimension_numHt,
-                                      frmDimension_profileType,
-                                      frmDimension_baseColor);
-                            //Load_Windoor_Item(_windoorModel);
-                        }
-                        // Frame Model
-
-                        if (row_str.Contains("Frame_Height:"))
-                        {
-                            frmDimension_numHt = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_Width:"))
-                        {
-                            frmDimension_numWd = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                            Scenario_Quotation(false,
-                                     false,
-                                     true,
-                                     false,
-                                     false,
-                                     frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
-                                     frmDimension_numWd,
-                                     frmDimension_numHt,
-                                     frmDimension_profileType,
-                                     frmDimension_baseColor);
-                        }
-                        if (row_str.Contains("Frame_BasicDeduction"))
-                        {
-                            Console.WriteLine(row_str);
-                        }
-                        if (row_str.Contains("Frame_HeightToBind"))
-                        {
-                            _frameModel.Frame_HeightToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-
-                        }
-                        if (row_str.Contains("FrameImageRenderer_Height"))
-                        {
-                            _frameModel.FrameImageRenderer_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_ID"))
-                        {
-                            _frameModel.Frame_ID = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_Name"))
-                        {
-                            _frameModel.Frame_Name = row_str.Substring(12);
-                        }
-
-                        if (row_str.Contains("Frame_WidthToBind"))
-                        {
-                            _frameModel.Frame_WidthToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("FrameImageRenderer_Width"))
-                        {
-                            _frameModel.FrameImageRenderer_Width = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_Visible"))
-                        {
-                            _frameModel.Frame_Visible = Convert.ToBoolean(row_str.Substring(15));
-                        }
-                        if (row_str.Contains("FrameProp_Height"))
-                        {
-                            _frameModel.FrameProp_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("FrameImageRenderer_Zoom"))
-                        {
-                            _frameModel.FrameImageRenderer_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_Zoom"))
-                        {
-                            _frameModel.Frame_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_BotFrameEnable"))
-                        {
-                            _frameModel.Frame_BotFrameEnable = Convert.ToBoolean(row_str.Substring(22));
-                        }
-                        if (row_str.Contains("Frame_Deduction"))
-                        {
-                        }
-                        if (row_str.Contains("Frame_ExplosionWidth"))
-                        {
-                            _frameModel.Frame_ExplosionWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_ExplosionHeight"))
-                        {
-                            _frameModel.Frame_ExplosionHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_ReinfWidth"))
-                        {
-                            _frameModel.Frame_ReinfWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_ReinfHeight"))
-                        {
-                            _frameModel.Frame_ReinfHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
-                        }
-                        if (row_str.Contains("Frame_CmenuDeleteVisibility"))
-                        {
-                            _frameModel.Frame_CmenuDeleteVisibility = Convert.ToBoolean(row_str.Substring(29));
-                        }
-                        if (row_str.Contains("Frame_If_InwardMotorizedCasement"))
-                        {
-                            _frameModel.Frame_If_InwardMotorizedCasement = Convert.ToBoolean(row_str.Substring(34));
-                        }
-
-
-                    }
+                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+                    StartWorker("Open_WndrFiles");
+                    
 
                 }
             }
@@ -1865,7 +1776,6 @@ namespace PresentationLayer.Presenter
                 {
                     case "Open_WndrFiles":
                         Opening_dotwndr(e.ProgressPercentage);
-
                         _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
                         if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
                         {
@@ -1887,332 +1797,837 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message, "Error Occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        bool inside_quotation, inside_item, inside_frame, inside_panel, inside_multi, inside_divider;
+        int frmDimension_numWd = 0,
+            frmDimension_numHt = 0;
+        string frmDimension_profileType = "",
+               frmDimension_baseColor = "";
+        bool ons = false;
         private void Opening_dotwndr(int row)
         {
-            //string row_str = file_lines[row];
-            //Console.WriteLine(row_str);
+            string row_str = file_lines[row].Replace("\t", "");
+            Console.WriteLine(row_str);
             //if (row == 0)
             //{
             //    quotation_ref_no = Text = file_lines[0];
             //}
+           
 
-            //if (row_str == "(")
-            //{
-            //    flpMain.Controls.Clear();
-            //    flpMain2.Controls.Clear();
-            //    pnlPropertiesBody.Controls.Clear();
-            //    inside_item = flpMain.Visible = true;
-            //}
-            //else if (row_str.Contains("FrameName"))
-            //{
-            //    inside_frame = true;
-            //}
-            //else if (row_str.Contains("PanelName"))
-            //{
-            //    inside_panel = true;
-            //}
-            //else if (row_str.Contains("MultiName"))
-            //{
-            //    inside_multi = true;
-            //}
-            //else if (row_str.Contains("DivdName"))
-            //{
-            //    inside_divider = true;
-            //}
-            //else if (row_str.Contains("DivdName"))
-            //{
-            //    inside_divider = true;
-            //}
-            //else if (row_str == "\t}")
-            //{
-            //    if (inside_frame)
-            //    {
-            //        frname = "";
-            //        frwidth = 0;
-            //        frheight = 0;
-            //        frwndr = 0;
-            //        inside_frame = false;
-            //    }
-            //    else if (inside_panel)
-            //    {
-            //        pnlwidth = 0;
-            //        pnlheight = 0;
-            //        pnlwndrtype = "";
-            //        pnl_Orientation = "";
-            //        pnl_Parent = "";
-            //        frameGroup = "";
-            //        inside_panel = false;
-            //    }
-            //    else if (inside_multi)
-            //    {
-            //        multi_Name = "";
-            //        multi_Size = "";
-            //        multidivnum = "";
-            //        multi_Tabindex = 0;
-            //        multi_type = "";
-            //        multi_Parent = "";
-            //        inside_multi = false;
-            //    }
-            //    else if (inside_divider)
-            //    {
-            //        divd_name = "";
-            //        divd_width = 0;
-            //        divd_height = 0;
-            //        divd_TabIndex = 0;
-            //        divd_Parent = "";
-            //        inside_divider = false;
-            //    }
-            //}
-            //else if (row_str == ")")
-            //{
-            //    //Panel_Painter();
+            if (row_str.Contains("Quotation_ref_no"))
+            {
+                inside_quotation = true;
+            }
+            else if (row_str == "(")
+            {
+                inside_item = true;
+            }
+            else if (row_str == "{")
+            {
+                inside_frame = true;
 
-            //    trkZoom.Value = (int)(fzoom * 100.0f);
-            //    trkZoom_ValueChanged(new object(), new EventArgs());
+            }
+            else if (row_str.Contains("PanelName"))
+            {
+                inside_panel = true;
+            }
+            else if (row_str.Contains("MultiName"))
+            {
+                inside_multi = true;
+            }
+            else if (row_str.Contains("DivdName"))
+            {
+                inside_divider = true;
+            }
+            else if (row_str.Contains("DivdName"))
+            {
+                inside_divider = true;
+            }
+            else if (row_str == "}")
+            {
+                frmDimension_numWd = 0; ;
+                frmDimension_numHt = 0;
+                frmDimension_profileType = "";
+                frmDimension_baseColor = "";
+                //if (inside_frame)
+                //{
+                //    frname = "";
+                //    frwidth = 0;
+                //    frheight = 0;
+                //    frwndr = 0;
+                //    inside_frame = false;
+                //}
+                //else if (inside_panel)
+                //{
+                //    pnlwidth = 0;
+                //    pnlheight = 0;
+                //    pnlwndrtype = "";
+                //    pnl_Orientation = "";
+                //    pnl_Parent = "";
+                //    frameGroup = "";
+                //    inside_panel = false;
+                //}
+                //else if (inside_multi)
+                //{
+                //    multi_Name = "";
+                //    multi_Size = "";
+                //    multidivnum = "";
+                //    multi_Tabindex = 0;
+                //    multi_type = "";
+                //    multi_Parent = "";
+                //    inside_multi = false;
+                //}
+                //else if (inside_divider)
+                //{
+                //    divd_name = "";
+                //    divd_width = 0;
+                //    divd_height = 0;
+                //    divd_TabIndex = 0;
+                //    divd_Parent = "";
+                //    inside_divider = false;
+                //}
+            }
+            else if (row_str == ")")
+            {
+              
+                ////Panel_Painter();
 
-            //    refreshToolStripButton.PerformClick();
-            //    UppdateDictionaries();
-            //    fpwidth = 0;
-            //    fpheight = 0;
-            //    fptype = "";
-            //    fstatus = "";
-            //    fName = "";
-            //    fprice = 0.0M;
-            //    fqty = 0;
-            //    fdiscount = 0.0M;
-            //    fzoom = 0.0f;
-            //    fdesc = "";
+                //trkZoom.Value = (int)(fzoom * 100.0f);
+                //trkZoom_ValueChanged(new object(), new EventArgs());
 
-            //    itemControlsSearch("lbldesc");
+                //refreshToolStripButton.PerformClick();
+                //UppdateDictionaries();
+                //fpwidth = 0;
+                //fpheight = 0;
+                //fptype = "";
+                //fstatus = "";
+                //fName = "";
+                //fprice = 0.0M;
+                //fqty = 0;
+                //fdiscount = 0.0M;
+                //fzoom = 0.0f;
+                //fdesc = "";
 
-            //    pnlPropertiesBody.VerticalScroll.Value = pnlPropertiesBody.VerticalScroll.Maximum;
-            //    pnlPropertiesBody.PerformLayout();
+                //itemControlsSearch("lbldesc");
 
-            //    //Label lbl = new Label();
-            //    //lbl = itemControlsSearch("lbldesc");
-            //    //lbl.Text = UpdateLblDescription(lbl.AccessibleDescription);
-            //}
+                //pnlPropertiesBody.VerticalScroll.Value = pnlPropertiesBody.VerticalScroll.Maximum;
+                //pnlPropertiesBody.PerformLayout();
 
-            //switch (inside_item)
-            //{
-            //    case true:
-            //        if (row_str.Contains("FID"))
-            //        {
-            //            fid = row_str.Remove(0, 5);
-            //        }
-            //        else if (row_str.Contains("FName"))
-            //        {
-            //            Text = quotation_ref_no + " >> " + row_str.Remove(0, 7);
-            //            fName = row_str.Remove(0, 7);
-            //        }
-            //        else if (row_str.Contains("FWidth"))
-            //        {
-            //            fpwidth = Convert.ToInt32(row_str.Remove(0, 8));
-            //        }
-            //        else if (row_str.Contains("FHeight"))
-            //        {
-            //            fpheight = Convert.ToInt32(row_str.Remove(0, 9));
-            //        }
-            //        else if (row_str.Contains("FProfile"))
-            //        {
-            //            fptype = row_str.Remove(0, 10);
-            //        }
-            //        else if (row_str.Contains("FStatus"))
-            //        {
-            //            fstatus = row_str.Remove(0, 9);
-            //            fprice = Convert.ToDecimal(file_lines[row + 1].Remove(0, 8));
-            //            fqty = Convert.ToInt32(file_lines[row + 2].Remove(0, 6));
-            //            fdiscount = Convert.ToDecimal(file_lines[row + 3].Remove(0, 11));
-            //            fzoom = float.Parse(file_lines[row + 4].Remove(0, 7));
-            //            fdesc = file_lines[row + 5].Remove(0, 7);
+                ////Label lbl = new Label();
+                ////lbl = itemControlsSearch("lbldesc");
+                ////lbl.Text = UpdateLblDescription(lbl.AccessibleDescription);
+            }
 
-            //            for (int i = row + 6; i < file_lines.Count(); i++)
-            //            {
-            //                string raw_desc = file_lines[i];
-            //                if (!raw_desc.Contains("{"))
-            //                {
-            //                    fdesc += "\n" + raw_desc;
-            //                }
-            //                else
-            //                {
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //        if (fpwidth != 0 && fpheight != 0 && fptype != "" && fstatus != "" && fName != "" && fid != "")
-            //        {
-            //            paint_flpMain = true;
-            //            AddProfile(fpwidth + 70, fpheight + 35, pnlItems.Controls.Count + 1, fptype, Convert.ToBoolean(fstatus));
-            //            inside_item = false;
-            //        }
+            switch (inside_quotation)
+            {
+                case true:
+                    if (row_str.Contains("QuoteId"))
+                    {
+                        _quoteId = Convert.ToInt32(row_str.Substring(9));
+                    }
+                    else if (row_str.Contains("ProjectName"))
+                    {
+                        _projectName = row_str.Substring(13);
+                    }
+                    else if (row_str.Contains("CustomerRefNo"))
+                    {
+                        _custRefNo = row_str.Substring(15);
+                    }
+                    else if (row_str.Contains("Quotation_ref_no"))
+                    {
+                        inputted_quotationRefNo = row_str.Substring(18);
+                    }
+                    else if (row_str.Contains("Quotation_Date"))
+                    {
+                        inputted_quoteDate = Convert.ToDateTime(row_str.Substring(16));
+                        Scenario_Quotation(false, false, false, false, true, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                    }
+                    else if (row_str.Contains("Frame_PUFoamingQty_Total"))
+                    {
+                        _quotationModel.Frame_PUFoamingQty_Total = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("Frame_SealantWHQty_Total"))
+                    {
+                        _quotationModel.Frame_SealantWHQty_Total = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("Glass_SealantWHQty_Total"))
+                    {
+                        _quotationModel.Glass_SealantWHQty_Total = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("GlazingSpacer_TotalQty"))
+                    {
+                        _quotationModel.GlazingSpacer_TotalQty = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("GlazingSeal_TotalQty"))
+                    {
+                        _quotationModel.GlazingSeal_TotalQty = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("Screws_for_Fabrication"))
+                    {
+                        _quotationModel.Screws_for_Fabrication = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("Expansion_BoltQty_Total"))
+                    {
+                        _quotationModel.Expansion_BoltQty_Total = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
 
-            //        break;
-            //    case false:
-            //        if (inside_frame)
-            //        {
-            //            if (row_str.Contains("FrameName"))
-            //            {
-            //                frname = row_str.Trim().Remove(0, 11);
-            //            }
-            //            else if (row_str.Contains("FrWidth"))
-            //            {
-            //                frwidth = Convert.ToInt32(row_str.Trim().Remove(0, 9));
-            //            }
-            //            else if (row_str.Contains("FrHeight"))
-            //            {
-            //                frheight = Convert.ToInt32(row_str.Trim().Remove(0, 10));
-            //            }
-            //            else if (row_str.Contains("FrWndr"))
-            //            {
-            //                frwndr = Convert.ToInt32(row_str.Trim().Remove(0, 8));
-            //            }
+                    }
+                    else if (row_str.Contains("Screws_for_Installation"))
+                    {
+                        _quotationModel.Screws_for_Installation = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
 
-            //            if (frname != "" && frwidth != 0 && frheight != 0 && frwndr != 0)
-            //            {
-            //                AddFrame(frname, frwidth, frheight, frwndr);
-            //            }
-            //        }
+                    }
+                    else if (row_str.Contains("Screws_for_Cladding"))
+                    {
+                        _quotationModel.Screws_for_Cladding = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                    }
+                    else if (row_str.Contains("Rebate_Qty"))
+                    {
+                        _quotationModel.Rebate_Qty = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        inside_quotation = false;
+                    }
+                    break;
+                case false:
+                    if (inside_item)
+                    {
+                        
+                        if (row_str.Contains("WD_profile"))
+                        {
+                            frmDimension_profileType = row_str.Substring(12);
+                        }
+                        if (row_str.Contains("WD_height:"))
+                        {
+                            frmDimension_numHt = Convert.ToInt32(row_str.Substring(10));
+                        }
+                        if (row_str.Contains("WD_BaseColor"))
+                        {
+                            frmDimension_baseColor = row_str.Substring(14);
+                        }
+                        if (row_str.Contains("WD_width:"))
+                        {
+                            frmDimension_numWd = Convert.ToInt32(row_str.Substring(10));
+                            Scenario_Quotation(false,
+                                     true,
+                                     false,
+                                     false,
+                                     true,
+                                     frmDimensionPresenter.Show_Purpose.CreateNew_Item,
+                                     frmDimension_numWd,
+                                     frmDimension_numHt,
+                                     frmDimension_profileType,
+                                     frmDimension_baseColor);
+                        }
+                        //if (row_str.Contains("WD_name"))
+                        //{
+                        //    _windoorModel.WD_name = row_str.Substring(9);
+                        //}
+                        //if (row_str.Contains("WD_description"))
+                        //{
+                        //    _windoorModel.WD_description = row_str.Substring(16);
+                        //}
 
-            //        else if (inside_panel)
-            //        {
-            //            if (row_str.Contains("DockStyle"))
-            //            {
-            //                switch (row_str.Trim().Remove(0, 11))
-            //                {
-            //                    case "Fill":
-            //                        dok = DockStyle.Fill;
-            //                        break;
-            //                    case "None":
-            //                        dok = DockStyle.None;
-            //                        break;
-            //                }
-            //            }
-            //            else if (row_str.Contains("PWidth"))
-            //            {
-            //                pnlwidth = Convert.ToInt32(row_str.Trim().Remove(0, 8));
-            //            }
-            //            else if (row_str.Contains("PHeight"))
-            //            {
-            //                pnlheight = Convert.ToInt32(row_str.Trim().Remove(0, 9));
-            //            }
-            //            else if (row_str.Contains("WndrType"))
-            //            {
-            //                //pnlwndrtype = row_str.Trim().Remove(0, 10);
-            //                pnlwndrtype = row_str.Trim().Replace("WndrType: ", "");
-            //            }
-            //            else if (row_str.Contains("Orientation"))
-            //            {
-            //                pnl_Orientation = row_str.Trim().Remove(0, 13);
-            //            }
-            //            else if (row_str.Contains("ChkText"))
-            //            {
-            //                pnl_OrientationText = row_str.TrimStart().Remove(0, 9);
-            //            }
-            //            else if (row_str.Contains("Parent"))
-            //            {
-            //                pnl_Parent = row_str.Trim().Remove(0, 8);
-            //            }
-            //            else if (row_str.Contains("FrameGroup"))
-            //            {
-            //                frameGroup = row_str.Trim().Remove(0, 12);
-            //            }
+                        //if (row_str.Contains("WD_discount"))
+                        //{
+                        //    //_windoorModel.WD_discount = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
 
-            //            if (pnlwidth != 0 &&
-            //                pnlheight != 0 &&
-            //                //pnlwndrtype != "" &&
-            //                pnl_Orientation != "" &&
-            //                //pnl_OrientationText != "" &&
-            //                pnl_Parent != "" &&
-            //                frameGroup != "")
-            //            {
-            //                AddPanel();
-            //            }
-            //        }
+                        //if (row_str.Contains("WD_height_4basePlatform"))
+                        //{
+                        //    _windoorModel.WD_height_4basePlatform = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("WD_height_4basePlatform_forImageRenderer"))
+                        //{
+                        //    _windoorModel.WD_height_4basePlatform_forImageRenderer = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("WD_id"))
+                        //{
+                        //    _windoorModel.WD_id = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
 
-            //        else if (inside_multi)
-            //        {
-            //            if (row_str.Contains("DockStyle"))
-            //            {
-            //                switch (row_str.Trim().Remove(0, 11))
-            //                {
-            //                    case "Fill":
-            //                        multidok = DockStyle.Fill;
-            //                        break;
-            //                    case "None":
-            //                        multidok = DockStyle.None;
-            //                        break;
-            //                }
-            //            }
-            //            else if (row_str.Contains("MultiName"))
-            //            {
-            //                multi_Name = row_str.Trim().Remove(0, 11);
-            //            }
-            //            else if (row_str.Contains("DivSize"))
-            //            {
-            //                multi_Size = row_str.Trim().Remove(0, 9);
-            //            }
-            //            else if (row_str.Contains("DivTabIndex"))
-            //            {
-            //                multi_Tabindex = Convert.ToInt32(row_str.Trim().Remove(0, 13));
-            //            }
-            //            else if (row_str.Contains("DivType"))
-            //            {
-            //                multi_type = row_str.Trim().Remove(0, 9);
-            //            }
-            //            else if (row_str.Contains("DivNum"))
-            //            {
-            //                multidivnum = row_str.Trim().Remove(0, 8);
-            //            }
-            //            else if (row_str.Contains("Parent"))
-            //            {
-            //                multi_Parent = row_str.Trim().Remove(0, 8);
-            //            }
+                        //if (row_str.Contains("WD_orientation"))
+                        //{
+                        //    //_windoorModel.WD_orientation = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("WD_price"))
+                        //{
+                        //    _windoorModel.WD_price = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("WD_quantity"))
+                        //{
+                        //    _windoorModel.WD_quantity = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("WD_visibility"))
+                        //{
+                        //    //_windoorModel.WD_visibility = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
 
-            //            if (multi_Name != "" &&
-            //                multi_Size != "" &&
-            //                multidivnum != "" &&
-            //                multi_Tabindex != 0 &&
-            //                multi_type != "" &&
-            //                multi_Parent != "")
-            //            {
-            //                AddMultiPanel();
-            //            }
-            //        }
+                        if (row_str.Contains("WD_width_4basePlatform"))
+                        {
+                            //_windoorModel.WD_width_4basePlatform = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_width_4basePlatform_forImageRenderer"))
+                        {
+                            //_windoorModel.WD_width_4basePlatform_forImageRenderer = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_zoom"))
+                        {
+                            //_windoorModel.WD_zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_zoom_forImageRenderer"))
+                        {
+                            //_windoorModel.WD_zoom_forImageRenderer = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_PropertiesScroll"))
+                        {
+                            _windoorModel.WD_PropertiesScroll = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_SlidingTopViewVisibility"))
+                        {
+                            _windoorModel.WD_SlidingTopViewVisibility = Convert.ToBoolean(row_str.Substring(29));
+                        }
+                        if (row_str.Contains("frameIDCounter"))
+                        {
+                            //_windoorModel.frameIDCounter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("concreteIDCounter"))
+                        {
+                            _windoorModel.concreteIDCounter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("panelIDCounter"))
+                        {
+                            _windoorModel.panelIDCounter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("mpanelIDCounter"))
+                        {
+                            _windoorModel.mpanelIDCounter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("divIDCounter"))
+                        {
+                            _windoorModel.divIDCounter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("PanelGlassID_Counter"))
+                        {
+                            _windoorModel.PanelGlassID_Counter = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
 
-            //        else if (inside_divider)
-            //        {
-            //            if (row_str.Contains("DivdName"))
-            //            {
-            //                divd_name = row_str.Trim().Remove(0, 10);
-            //            }
-            //            else if (row_str.Contains("DivdWidth"))
-            //            {
-            //                divd_width = Convert.ToInt32(row_str.Trim().Remove(0, 11));
-            //            }
-            //            else if (row_str.Contains("DivdHeight"))
-            //            {
-            //                divd_height = Convert.ToInt32(row_str.Trim().Remove(0, 12));
-            //            }
-            //            else if (row_str.Contains("DivdTabIndex"))
-            //            {
-            //                divd_TabIndex = Convert.ToInt32(row_str.Trim().Remove(0, 14));
-            //            }
-            //            else if (row_str.Contains("Parent"))
-            //            {
-            //                divd_Parent = row_str.Trim().Remove(0, 8);
-            //            }
+                        if (row_str.Contains("WD_InsideColor"))
+                        {
+                            Foil_Color fcolor = Foil_Color._GreyOak;
+                            foreach (Foil_Color color in Foil_Color.GetAll())
+                            {
+                                if (color.ToString() == row_str.Substring(16))
+                                {
+                                    fcolor = color;
+                                    break;
+                                }
+                            }
+                            _windoorModel.WD_InsideColor = fcolor;
+                        }
+                        if (row_str.Contains("WD_OutsideColor"))
+                        {
+                            Foil_Color fcolor = Foil_Color._GreyOak;
+                            foreach (Foil_Color color in Foil_Color.GetAll())
+                            {
+                                if (color.ToString() == row_str.Substring(16))
+                                {
+                                    fcolor = color;
+                                    break;
+                                }
+                            }
+                            _windoorModel.WD_OutsideColor = fcolor;
+                        }
+                        if (row_str.Contains("WD_PlasticCover"))
+                        {
+                            _windoorModel.WD_PlasticCover = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_CmenuDeleteVisibility"))
+                        {
+                            _windoorModel.WD_CmenuDeleteVisibility = Convert.ToBoolean(row_str.Substring(26));
+                        }
+                        if (row_str.Contains("WD_Selected"))
+                        {
+                            _windoorModel.WD_Selected = Convert.ToBoolean(row_str.Substring(13));
+                        }
+                        if (row_str.Contains("Lbl_ArrowHtCount"))
+                        {
+                            _windoorModel.Lbl_ArrowHtCount = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Lbl_ArrowWdCount"))
+                        {
+                            _windoorModel.Lbl_ArrowWdCount = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Div_ArrowCount"))
+                        {
+                            _windoorModel.Div_ArrowCount = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_customArrowToggle"))
+                        {
+                            _windoorModel.WD_customArrowToggle = Convert.ToBoolean(row_str.Substring(22));
+                        }
+                        if (row_str.Contains("WD_CostingPoints"))
+                        {
+                            _windoorModel.WD_CostingPoints = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("WD_pboxImagerHeight"))
+                        {
+                            _windoorModel.WD_pboxImagerHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                            inside_item = false;
+                        }
+                    }
+                    else if (inside_frame)
+                    {
+                        if (row_str.Contains("Frame_Height:"))
+                        {
+                            frmDimension_numHt = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Width:"))
+                        {
+                            frmDimension_numWd = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                            Scenario_Quotation(false,
+                                     true,
+                                     false,
+                                     false,
+                                     true,
+                                     frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                     frmDimension_numWd,
+                                     frmDimension_numHt,
+                                     frmDimension_profileType,
+                                     frmDimension_baseColor);
+                        }
+                        if (row_str.Contains("Frame_BasicDeduction"))
+                        {
+                            Console.WriteLine(row_str);
+                        }
+                        if (row_str.Contains("Frame_HeightToBind"))
+                        {
+                            //_frameModel.Frame_HeightToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
 
-            //            if (divd_name != "" &&
-            //                divd_width != 0 &&
-            //                divd_height != 0 &&
-            //                divd_TabIndex != 0 &&
-            //                divd_Parent != "")
-            //            {
-            //                AddDivider();
-            //            }
-            //        }
-            //        break;
-            //}
+                        }
+                        if (row_str.Contains("FrameImageRenderer_Height"))
+                        {
+                            //_frameModel.FrameImageRenderer_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ID"))
+                        {
+                            _frameModel.Frame_ID = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Type"))
+                        {
+                            if (row_str.Contains("Window"))
+                            {
+                                _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
+                            }
+                            else
+                            {
+                                _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
+                            }
+                        }
+                        if (row_str.Contains("Frame_Name"))
+                        {
+                            _frameModel.Frame_Name = row_str.Substring(12);
+                        }
+
+                        if (row_str.Contains("Frame_WidthToBind"))
+                        {
+                            //_frameModel.Frame_WidthToBind = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("FrameImageRenderer_Width"))
+                        {
+                            //_frameModel.FrameImageRenderer_Width = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_Visible"))
+                        {
+                            _frameModel.Frame_Visible = Convert.ToBoolean(row_str.Substring(15));
+                        }
+                        if (row_str.Contains("FrameProp_Height"))
+                        {
+                            _frameModel.FrameProp_Height = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        //if (row_str.Contains("FrameImageRenderer_Zoom"))
+                        //{
+                        //    _frameModel.FrameImageRenderer_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        //if (row_str.Contains("Frame_Zoom"))
+                        //{
+                        //    _frameModel.Frame_Zoom = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        //}
+                        if (row_str.Contains("Frame_BotFrameEnable"))
+                        {
+                            _frameModel.Frame_BotFrameEnable = Convert.ToBoolean(row_str.Substring(22));
+                        }
+                        if (row_str.Contains("Frame_Deduction"))
+                        {
+                        }
+                        if (row_str.Contains("Frame_ExplosionWidth"))
+                        {
+                            _frameModel.Frame_ExplosionWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ExplosionHeight"))
+                        {
+                            _frameModel.Frame_ExplosionHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ReinfWidth"))
+                        {
+                            _frameModel.Frame_ReinfWidth = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_ReinfHeight"))
+                        {
+                            _frameModel.Frame_ReinfHeight = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                        }
+                        if (row_str.Contains("Frame_CmenuDeleteVisibility"))
+                        {
+                            _frameModel.Frame_CmenuDeleteVisibility = Convert.ToBoolean(row_str.Substring(29));
+                        }
+                        if (row_str.Contains("Frame_If_InwardMotorizedCasement"))
+                        {
+                            _frameModel.Frame_If_InwardMotorizedCasement = Convert.ToBoolean(row_str.Substring(34));
+                        }
+                        if (row_str.Contains("Frame_MilledArtNo:"))
+                        {
+                            foreach (MilledFrame_ArticleNo artcNo in MilledFrame_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == row_str.Substring(19))
+                                {
+                                    _frameModel.Frame_MilledArtNo = artcNo;
+                                    break;
+                                }
+                            }
+
+                        }
+                        if (row_str.Contains("Frame_MilledReinfArtNo:"))
+                        {
+                            foreach (MilledFrameReinf_ArticleNo artcNo in MilledFrameReinf_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == row_str.Substring(24))
+                                {
+                                    _frameModel.Frame_MilledReinfArtNo = artcNo;
+                                    break;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Frame_ArtNo:"))
+                        {
+                            foreach (FrameProfile_ArticleNo artcNo in FrameProfile_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == row_str.Substring(13))
+                                {
+                                    _frameModel.Frame_ArtNo = artcNo;
+                                    break;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Frame_ReinfArtNo:"))
+                        {
+                            foreach (FrameReinf_ArticleNo artcNo in FrameReinf_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == row_str.Substring(18))
+                                {
+                                    _frameModel.Frame_ReinfArtNo = artcNo;
+                                    break;
+                                }
+                            }
+                            inside_frame = false;
+                        }
+                    }
+
+                    else if (inside_panel)
+                    {
+                        if (row_str.Contains("Panel_ChkText:"))
+                        {
+                            
+                        }
+                        if (row_str.Contains("Panel_Dock:"))
+                        {
+                            //switch (row_str.Substring(15))
+                            //{
+                            //    case "Fill":
+                            //        _frameUCPresenter.
+                            //        break;
+                            //    case "None":
+                            //        dok = DockStyle.None;
+                            //        break;
+                            //}
+                        }
+                        if (row_str.Contains("Panel_Parent:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_MultiPanelGroup:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_FrameGroup:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_FramePropertiesGroup:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Height:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalHeight:"))
+                        {
+
+                        }
+                        if (row_str.Contains("PanelImageRenderer_Height:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_HeightToBind:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_DisplayHeight:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_DisplayHeightDecimal:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalDisplayHeight:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalDisplayHeightDecimal:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_ID:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Name:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Orient:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OrientVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Type:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Width:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalWidth:"))
+                        {
+
+                        }
+                        if (row_str.Contains("PanelImageRenderer_Width:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_WidthToBind:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_DisplayWidth:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_DisplayWidthDecimal:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalDisplayWidth:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_OriginalDisplayWidthDecimal:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Visibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("PanelImageRenderer_Zoom:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Index_Inside_MPanel:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Index_Inside_SPanel:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Placement:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Overlap_Sash:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Margin:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_MarginToBind:"))
+                        {
+
+                        }
+                        if (row_str.Contains("PanelImageRenderer_Margin:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_Zoom:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_ParentMultiPanelModel:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_PropertyHeight:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_HandleOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_RotoswingOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_RioOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_RioOptionsVisibility2:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_RotolineOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_MVDOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_RotaryOptionsVisibility:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_HandleOptionsHeight:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_LouverBladesCount:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_BackColor:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_SlidingTypes:"))
+                        {
+
+                        }
+                        if (row_str.Contains("Panel_SlidingTypeVisibility:"))
+                        {
+                            inside_panel = false;
+                        }
+                    }
+
+                    //else if (inside_multi)
+                    //{
+                    //    if (row_str.Contains("DockStyle"))
+                    //    {
+                    //        switch (row_str.Trim().Remove(0, 11))
+                    //        {
+                    //            case "Fill":
+                    //                multidok = DockStyle.Fill;
+                    //                break;
+                    //            case "None":
+                    //                multidok = DockStyle.None;
+                    //                break;
+                    //        }
+                    //    }
+                    //    else if (row_str.Contains("MultiName"))
+                    //    {
+                    //        multi_Name = row_str.Trim().Remove(0, 11);
+                    //    }
+                    //    else if (row_str.Contains("DivSize"))
+                    //    {
+                    //        multi_Size = row_str.Trim().Remove(0, 9);
+                    //    }
+                    //    else if (row_str.Contains("DivTabIndex"))
+                    //    {
+                    //        multi_Tabindex = Convert.ToInt32(row_str.Trim().Remove(0, 13));
+                    //    }
+                    //    else if (row_str.Contains("DivType"))
+                    //    {
+                    //        multi_type = row_str.Trim().Remove(0, 9);
+                    //    }
+                    //    else if (row_str.Contains("DivNum"))
+                    //    {
+                    //        multidivnum = row_str.Trim().Remove(0, 8);
+                    //    }
+                    //    else if (row_str.Contains("Parent"))
+                    //    {
+                    //        multi_Parent = row_str.Trim().Remove(0, 8);
+                    //    }
+
+                    //    if (multi_Name != "" &&
+                    //        multi_Size != "" &&
+                    //        multidivnum != "" &&
+                    //        multi_Tabindex != 0 &&
+                    //        multi_type != "" &&
+                    //        multi_Parent != "")
+                    //    {
+                    //        AddMultiPanel();
+                    //    }
+                    //}
+
+                    //else if (inside_divider)
+                    //{
+                    //    if (row_str.Contains("DivdName"))
+                    //    {
+                    //        divd_name = row_str.Trim().Remove(0, 10);
+                    //    }
+                    //    else if (row_str.Contains("DivdWidth"))
+                    //    {
+                    //        divd_width = Convert.ToInt32(row_str.Trim().Remove(0, 11));
+                    //    }
+                    //    else if (row_str.Contains("DivdHeight"))
+                    //    {
+                    //        divd_height = Convert.ToInt32(row_str.Trim().Remove(0, 12));
+                    //    }
+                    //    else if (row_str.Contains("DivdTabIndex"))
+                    //    {
+                    //        divd_TabIndex = Convert.ToInt32(row_str.Trim().Remove(0, 14));
+                    //    }
+                    //    else if (row_str.Contains("Parent"))
+                    //    {
+                    //        divd_Parent = row_str.Trim().Remove(0, 8);
+                    //    }
+
+                    //    if (divd_name != "" &&
+                    //        divd_width != 0 &&
+                    //        divd_height != 0 &&
+                    //        divd_TabIndex != 0 &&
+                    //        divd_Parent != "")
+                    //    {
+                    //        AddDivider();
+                    //    }
+                    //}
+                    break;
+            }
         }
 
         string sql_Transaction_result;
@@ -2223,6 +2638,7 @@ namespace PresentationLayer.Presenter
                 switch (mainTodo)
                 {
                     case "Open_WndrFiles":
+                        inside_quotation = true;
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -2507,11 +2923,11 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.OpenWndrFile;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
-                    _frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
-                    _frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
+                    //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
+                    //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
                   
                 }
             }
@@ -2537,10 +2953,8 @@ namespace PresentationLayer.Presenter
                                                                          baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
-
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
-
                         _mainView.Zoom = _windoorModel.WD_zoom;
                         _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -2571,29 +2985,25 @@ namespace PresentationLayer.Presenter
                 }
                 if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
                 {
-                    if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
-                              _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
-                        baseColor = Base_Color._White;
-                    }
-                    else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._DarkBrown.ToString())
-                    {
-                        baseColor = Base_Color._DarkBrown;
-                    }
-                    if (purpose == frmDimensionPresenter.Show_Purpose.OpenWndrFile)
-                    {
+                        Frame_Save_UserControl();
+                        Frame_Save_PropertiesUC();
+
+                        //clear previous basePlatformUC
+                        _pnlMain.Controls.Clear();
+
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
                                                                          _quotationModel.Lst_Windoor.Count() + 1,
-                                                                         Base_Color._DarkBrown,
+                                                                         baseColor,
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
-                        _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
+                        _quotationModel.Select_Current_Windoor(_windoorModel);
+                        _windoorModel.SetDimensions_basePlatform();
 
-                        _mainView.Zoom = _windoorModel.WD_zoom;
-                        _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
@@ -2601,7 +3011,7 @@ namespace PresentationLayer.Presenter
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
 
-                        AddItemInfoUC(_windoorModel);
+                        AddItemInfoUC(_windoorModel); //add item information user control
 
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
@@ -2610,13 +3020,59 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_name,
                                          _windoorModel.WD_profile,
                                          false);
-                        ItemToolStrip_Enable();
-                        CreateNewWindoorBtn_Enable();
-                        BotToolStrip_Enable();
 
-                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        BotToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+
                         _mainView.RemoveBinding();
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
                         _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+
+                        _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
+                        _basePlatformPresenter.RemoveBindingView();
+                        _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                        _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
+                        _pnlItems.PerformLayout();
+
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
+                    {
+                        int frameID = _windoorModel.frameIDCounter += 1;
+                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                   frmDimension_numHt,
+                                                                   frameType,
+                                                                   _windoorModel.WD_zoom_forImageRenderer,
+                                                                   _windoorModel.WD_zoom,
+                                                                   FrameProfile_ArticleNo._7502,
+                                                                   _windoorModel,
+                                                                   null,
+                                                                   frameID,
+                                                                   "",
+                                                                   true,
+                                                                   true,
+                                                                   null,
+                                                                   null,
+                                                                   null,
+                                                                   (UserControl)_frameUC,
+                                                                   (UserControl)_framePropertiesUC);
+                        _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                        _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                        _frameModel.Set_FramePadding();
+
+                        AddFrameList_WindoorModel(_frameModel);
+                        IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
+                        AddFrameUC(_frameModel, framePropUCP);
+
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
+                                         false);
+
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }

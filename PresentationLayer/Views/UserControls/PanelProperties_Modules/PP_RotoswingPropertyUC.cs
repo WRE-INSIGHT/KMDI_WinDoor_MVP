@@ -32,8 +32,12 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_RotoswingNo.DataSource = rotoswing;
 
             EventHelpers.RaiseEvent(this, PPRotoswingPropertyLoadEventRaised, e);
+            cmb_RotoswingNo.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
         }
-
+        private void ComboBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
         private void cmb_RotoswingNo_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbRotoswingNoSelectedValueEventRaised, e);

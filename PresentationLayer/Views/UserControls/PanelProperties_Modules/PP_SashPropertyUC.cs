@@ -38,8 +38,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 sashReinf.Add(item);
             }
             cmb_SashReinf.DataSource = sashReinf;
-
+            cmb_SashProfile.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
+            cmb_SashReinf.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
             EventHelpers.RaiseEvent(this, PPSashPropertyLoadEventRaised, e);
+        }
+
+        private void ComboBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
         }
 
         private void cmb_SashProfile_SelectedValueChanged(object sender, EventArgs e)

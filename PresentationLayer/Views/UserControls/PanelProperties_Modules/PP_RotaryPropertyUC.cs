@@ -40,8 +40,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_RotaryArtNo.DataSource = rotary;
 
             EventHelpers.RaiseEvent(this, PPRotaryPropertyLoadEventRaised, e);
+            cmb_RotaryArtNo.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
+            cmb_LockingKit.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
         }
-
+        private void ComboBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
         private void cmb_RotaryArtNo_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbRotaryArtNoSelectedValueChangedEventRaised, e);
