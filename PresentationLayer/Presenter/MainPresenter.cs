@@ -2110,33 +2110,30 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("WD_InsideColor"))
                         {
-                            Foil_Color fcolor = Foil_Color._GreyOak;
                             foreach (Foil_Color color in Foil_Color.GetAll())
                             {
+                                string asd = row_str.Substring(16);
                                 if (color.ToString() == row_str.Substring(16))
                                 {
-                                    fcolor = color;
+                                    _windoorModel.WD_InsideColor = color;
                                     break;
                                 }
                             }
-                            _windoorModel.WD_InsideColor = fcolor;
                         }
                         if (row_str.Contains("WD_OutsideColor"))
                         {
-                            Foil_Color fcolor = Foil_Color._GreyOak;
                             foreach (Foil_Color color in Foil_Color.GetAll())
                             {
                                 if (color.ToString() == row_str.Substring(16))
                                 {
-                                    fcolor = color;
+                                    _windoorModel.WD_OutsideColor = color;
                                     break;
                                 }
                             }
-                            _windoorModel.WD_OutsideColor = fcolor;
                         }
                         if (row_str.Contains("WD_PlasticCover"))
                         {
-                            _windoorModel.WD_PlasticCover = Convert.ToInt32(Regex.Match(row_str, @"\d+").Value);
+                            _windoorModel.WD_PlasticCover = Convert.ToDecimal(row_str.Substring(17));
                         }
                         if (row_str.Contains("WD_CmenuDeleteVisibility"))
                         {
