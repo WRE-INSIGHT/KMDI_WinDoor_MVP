@@ -316,23 +316,37 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
+                                if (pnl.Panel_GlassThicknessDesc != null)
+                                {
+                                    decimal pnlGlassArea = (pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m);
 
+                                    _dsq.dtGlassSummary.Rows.Add(i,
+                                                                 1,
+                                                                 pnl.Panel_GlassWidth + "w x " + pnl.Panel_GlassHeight + "h",
+                                                                 Math.Round(pnlGlassArea, 3),
+                                                                 lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                                                 lstQuoteUC.GetiQuoteItemListUC().ItemName
+                                                                 );
+                                }
                             }
                         }
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
-                        decimal pnlArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
 
-                        _dsq.dtGlassSummary.Rows.Add(1,
-                                                     1,
-                                                     Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
-                                                     Math.Round(pnlArea, 3),
-                                                     lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                                     lstQuoteUC.GetiQuoteItemListUC().ItemName
-                                                     );
+                        if (Singlepnl.Panel_GlassThicknessDesc != null)
+                        {
+                            decimal pnlGlassArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
 
+                            _dsq.dtGlassSummary.Rows.Add(i,
+                                                         1,
+                                                         Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
+                                                         Math.Round(pnlGlassArea, 3),
+                                                         lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                                         lstQuoteUC.GetiQuoteItemListUC().ItemName
+                                                         );
+                        }
                     }
                 }
                 i++;
