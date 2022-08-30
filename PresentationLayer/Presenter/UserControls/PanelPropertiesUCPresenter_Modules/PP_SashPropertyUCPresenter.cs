@@ -93,34 +93,38 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
                                 }
                             }
-
-                            _panelModel.Panel_HingeOptionsVisibility = true;
-                            _panelModel.AdjustPropertyPanelHeight("addHinge");
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-                            if (_panelModel.Panel_ParentMultiPanelModel != null)
+                            else if (curr_sash != SashProfile_ArticleNo._7581 && curr_sash != SashProfile_ArticleNo._2067)
                             {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-                            }
 
-                            _panelModel.Panel_MiddleCloserVisibility = true;
-                            _panelModel.AdjustPropertyPanelHeight("addMC");
-                            _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
-                            if (_panelModel.Panel_ParentMultiPanelModel != null)
-                            {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
-                            }
-
-                            if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
-                            {
-                                _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
-                                _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
-
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                                _panelModel.Panel_HingeOptionsVisibility = true;
+                                _panelModel.AdjustPropertyPanelHeight("addHinge");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                                 {
-                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                                }
+
+                                _panelModel.Panel_MiddleCloserVisibility = true;
+                                _panelModel.AdjustPropertyPanelHeight("addMC");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMC");
+                                }
+
+                                if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
+                                {
+                                    _panelModel.Panel_2dHingeVisibility_nonMotorized = true;
+                                    _panelModel.AdjustPropertyPanelHeight("add2dHingeField");
+
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                    {
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add2dHingeField");
+                                    }
                                 }
                             }
+
                         }
                         else if (_panelModel.Panel_MotorizedOptionVisibility == true)
                         {

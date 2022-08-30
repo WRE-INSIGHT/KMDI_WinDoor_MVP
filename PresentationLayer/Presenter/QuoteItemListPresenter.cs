@@ -37,6 +37,7 @@ namespace PresentationLayer.Presenter
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
         private List<string> lst_glassThickness = new List<string>();
+        private List<string> lst_glassThicknessPerItem = new List<string>();
         private List<string> lst_glassFilm = new List<string>();
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
@@ -45,13 +46,17 @@ namespace PresentationLayer.Presenter
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0,
-            CostPerPoints = 60;
+            CostPerPoints = 60,
+            Frame_SealantWHQty_Total = 0,
+            Glass_SealantWHQty_Total = 0;
+
         bool ChckDM = false,
              ChckPlasticWedge = false,
              check1stFrame = false;
 
 
-        string FrameTypeDesc,
+        string glass,
+               FrameTypeDesc,
                AllItemDescription,
                motorizeDesc,
                GeorgianBarHorizontalDesc,
@@ -311,23 +316,37 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
+                                if (pnl.Panel_GlassThicknessDesc != null)
+                                {
+                                    decimal pnlGlassArea = (pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m);
 
+                                    _dsq.dtGlassSummary.Rows.Add(i,
+                                                                 1,
+                                                                 pnl.Panel_GlassWidth + "w x " + pnl.Panel_GlassHeight + "h",
+                                                                 Math.Round(pnlGlassArea, 3),
+                                                                 lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                                                 lstQuoteUC.GetiQuoteItemListUC().ItemName
+                                                                 );
+                                }
                             }
                         }
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
-                        decimal pnlArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
 
-                        _dsq.dtGlassSummary.Rows.Add(1,
-                                                     1,
-                                                     Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
-                                                     Math.Round(pnlArea, 3),
-                                                     lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                                     lstQuoteUC.GetiQuoteItemListUC().ItemName
-                                                     );
+                        if (Singlepnl.Panel_GlassThicknessDesc != null)
+                        {
+                            decimal pnlGlassArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
 
+                            _dsq.dtGlassSummary.Rows.Add(i,
+                                                         1,
+                                                         Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
+                                                         Math.Round(pnlGlassArea, 3),
+                                                         lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                                         lstQuoteUC.GetiQuoteItemListUC().ItemName
+                                                         );
+                        }
                     }
                 }
                 i++;
@@ -341,76 +360,77 @@ namespace PresentationLayer.Presenter
         int TotalItemArea = 0;
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
         {
-
-
-            for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            try
             {
-                _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
-                UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
-                _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
-                quoteItem.Dock = DockStyle.Top;
-                quoteItem.BringToFront();
 
-                itemDescription();
-                ItemCostingPoints();
 
-                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
-                List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
-
-                foreach (string GT in lst_glassThicknessDistinct)
+                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    glassThick += GT;
+                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                    UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
+                    _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
+                    quoteItem.Dock = DockStyle.Top;
+                    quoteItem.BringToFront();
+
+                    itemDescription();
+                    ItemCostingPoints();
+
+                    if (GeorgianBarHorizontalQty > 0)
+                    {
+                        GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                    }
+
+                    if (GeorgianBarVerticalQty > 0)
+                    {
+                        GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                    }
+
+                    IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+                    if (lst_glassThicknessPerItem.Count != 0)
+                    {
+                        glass = lst_glassThicknessPerItem[i];
+                    }
+                    //else
+                    //{
+                    //    glass = string.Empty;
+                    //}
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
+                                                                              + wdm.WD_description
+                                                                              + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc
+                                                                              + costingPointsDesc
+                                                                              + laborCostDesc
+                                                                              + InstallationCostDesc
+                                                                              + GlassDesc
+                                                                              + MaterialCostDesc
+                                                                              + FramePriceDesc
+                                                                              + FrameReinPriceDesc
+                                                                              + SashPriceDesc
+                                                                              + SashReinPriceDesc
+                                                                              + DivPriceDesc
+                                                                              + FittingAndSuppliesDesc
+                                                                              + AncillaryProfileCostDesc
+                                                                              + AccesorriesCostDesc
+                                                                              + sealantDesc
+                                                                              + PUFoamingDesc;
+
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(lstTotalPrice[i], 2);  //TotaPrice;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
+                    this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
+                    TotalItemArea = wdm.WD_width * wdm.WD_height;
+                    this._lstItemArea.Add(TotalItemArea);
+
+
+
                 }
+            }
+            catch (Exception ex)
+            {
 
-                foreach (string GF in lst_glassFilmDistinct)
-                {
-                    glassFilm += "with " + GF + "\n";
-                }
-
-                if (GeorgianBarHorizontalQty > 0)
-                {
-                    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
-                }
-
-                if (GeorgianBarVerticalQty > 0)
-                {
-                    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
-                }
-
-                IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-
-                wdm.WD_description += glassThick + glassFilm + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
-
-
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
-                                                                          + wdm.WD_description
-                                                                          + costingPointsDesc
-                                                                          + laborCostDesc
-                                                                          + InstallationCostDesc
-                                                                          + GlassDesc
-                                                                          + MaterialCostDesc
-                                                                          + FramePriceDesc
-                                                                          + FrameReinPriceDesc
-                                                                          + SashPriceDesc
-                                                                          + SashReinPriceDesc
-                                                                          + DivPriceDesc
-                                                                          + FittingAndSuppliesDesc
-                                                                          + AncillaryProfileCostDesc
-                                                                          + AccesorriesCostDesc
-                                                                          + sealantDesc
-                                                                          + PUFoamingDesc;
-
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(lstTotalPrice[i], 2);  //TotaPrice;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
-                this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
-                TotalItemArea = wdm.WD_width * wdm.WD_height;
-                this._lstItemArea.Add(TotalItemArea);
-
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -561,7 +581,6 @@ namespace PresentationLayer.Presenter
             {
                 lst_DuplicatePnl.Clear();
                 lst_Description.Clear();
-                lst_glassThickness.Clear();
                 NewNoneDuplicatePnlAndCount = string.Empty;
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
@@ -574,8 +593,7 @@ namespace PresentationLayer.Presenter
                         FrameTypeDesc = "Door";
                     }
 
-
-
+                    #region MultiPnl
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -676,21 +694,16 @@ namespace PresentationLayer.Presenter
                                         lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
-
-
-                                //if (pnl.Panel_GlassFilm.ToString() != "None")
-                                //{
-                                //    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
-                                //}
+                                else
+                                {
+                                    lst_glassThickness.Add(string.Empty);
+                                }
 
                                 //GeorgianBar
                                 if (pnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
                                     GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-
-                                    //AllItemDescription += GeorgianBarHorizontalDesc;
-                                    //AllItemDescription += GeorgianBarVerticalDesc;
                                 }
 
                                 //panel name desc
@@ -713,6 +726,9 @@ namespace PresentationLayer.Presenter
 
                         }
                     }
+                    #endregion
+
+                    #region SinglePnl 
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -731,33 +747,20 @@ namespace PresentationLayer.Presenter
                         //GlassThickness & Glassfilm
                         if (Singlepnl.Panel_GlassThicknessDesc != null)
                         {
-
-                            string addNewLine = "";
-
-                            if (check1stFrame == false)
-                            {
-                                addNewLine = "\n";
-                                check1stFrame = true;
-                            }
-                            else
-                            {
-                                addNewLine = "";
-                            }
                             if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                             {
-                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
                             }
                             else
                             {
-                                lst_glassThickness.Add(addNewLine + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
                             }
                         }
+                        else
+                        {
+                            lst_glassThickness.Add(string.Empty);
+                        }
 
-                        //Glassfilm
-                        //if (Singlepnl.Panel_GlassFilm.ToString() != "None")
-                        //{
-                        //    lst_glassFilm.Add(Singlepnl.Panel_GlassFilm.ToString());
-                        //}
 
                         //GeorgianBar
                         if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
@@ -765,11 +768,11 @@ namespace PresentationLayer.Presenter
                             GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                             GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
 
-                            //AllItemDescription += GeorgianBarHorizontalDesc;
-                            //AllItemDescription += GeorgianBarVerticalDesc;
                         }
 
                     }
+                    #endregion
+
                 }
 
                 #region DuplicatedItemListStringManipulation
@@ -827,7 +830,18 @@ namespace PresentationLayer.Presenter
 
                 }
 
+                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
+                if (lst_glassThicknessDistinct.Count != 0)
+                {
+                    for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
+                    {
+                        glassThick += lst_glassThicknessDistinct[i];
+                    }
+                    lst_glassThicknessPerItem.Add(glassThick);
+                }
+                glassThick = string.Empty;
+                lst_glassThickness.Clear();
             }
 
 
@@ -928,15 +942,17 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     #region SealantPrice
+
+
+                    Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height)) / 3570);
+
                     if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
                     {
-                        SealantPrice += _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_Clear +
-                                        _quotationModel.Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                        SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan_Clear;
                     }
                     else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                     {
-                        SealantPrice += _quotationModel.Frame_SealantWHQty_Total * SealantPricePerCan_BrownBlack +
-                                       _quotationModel.Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                        SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                     }
                     #endregion
 
@@ -960,7 +976,7 @@ namespace PresentationLayer.Presenter
                     }
 
                     PUFoamingPrice += _quotationModel.Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
-
+                    #region MultiPnl 
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -1579,6 +1595,18 @@ namespace PresentationLayer.Presenter
                                             GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                         }
                                     }
+
+                                    //sealant for glass
+                                    Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) / 6842));
+
+                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    }
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    }
                                     #endregion
 
 
@@ -1588,6 +1616,9 @@ namespace PresentationLayer.Presenter
                             }
                         }
                     }
+                    #endregion 
+                    #region SinglePnl
+
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -2102,12 +2133,26 @@ namespace PresentationLayer.Presenter
                                     GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                 }
                             }
+
+                            //sealant for glass
+                            Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) / 6842));
+
+                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                            {
+                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                            }
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            {
+                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                            }
                             #endregion
 
                             CostingPoints += ProfileColorPoints * 4;
                             InstallationPoints += (ProfileColorPoints / 3) * 4;
                         }
                     }
+
+                    #endregion
 
                 }
 

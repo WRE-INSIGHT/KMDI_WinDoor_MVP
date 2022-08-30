@@ -21,8 +21,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
-    private ConstantVariables constants = new ConstantVariables();
+
+        private ConstantVariables constants = new ConstantVariables();
 
         private int _mpanelID;
         public int MPanel_ID
@@ -581,7 +581,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     pnl.SetDimensionToBind_2ndlvl_using_BaseDimension();
                 }
             }
-            
+
         }
 
         public void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt)
@@ -1586,7 +1586,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         public void SetZoomPanels()
         {
-            
+
             decimal PanelWidthDecimals = 0,
                     PanelHeightDecimals = 0;
             int mpnlOriginalWidth = 0,
@@ -1598,7 +1598,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
                 {
                     pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                    if(MPanel_Type == "Transom")
+                    if (MPanel_Type == "Transom")
                     {
                         if (!MPanel_DividerEnabled)
                         {
@@ -1606,7 +1606,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             PanelHeightDecimals += ((MPanel_HeightToBind - 10) * ((decimal)pnl.Panel_Height / mpnlOriginalHeight)) - Math.Truncate((MPanel_HeightToBind - 10) * ((decimal)pnl.Panel_Height / mpnlOriginalHeight));
                         }
                     }
-                    else if(MPanel_Type == "Mullion")
+                    else if (MPanel_Type == "Mullion")
                     {
                         if (!MPanel_DividerEnabled)
                         {
@@ -1642,7 +1642,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
 
                     }
-                    
+
                 }
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
@@ -1715,9 +1715,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                 }
             }
-            
+
         }
-        
+
         public void SetZoomMPanels()
         {
             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -2651,7 +2651,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #endregion
 
-        #region Explosion
+        #region  n
 
         public int MPanel_OriginalDisplayWidth { get; set; }
         public int MPanel_OriginalDisplayWidthDecimal { get; set; }
@@ -2691,7 +2691,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
             decimal Equal_GlassSize = 0;
 
-            if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+            if (MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._7502 || MPanel_FrameModelParent.Frame_ArtNo == FrameProfile_ArticleNo._2060)
             {
                 frame_thickness = 33;
             }
@@ -2700,7 +2700,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 frame_thickness = 47;
             }
 
-            if (sash == SashProfile_ArticleNo._7581)
+            if (sash == SashProfile_ArticleNo._7581 || sash == SashProfile_ArticleNo._2067)
             {
                 sash_bite = 7;
             }
@@ -2723,7 +2723,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (div.Div_ChkDM == false)
                             {
-                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536 || div.Div_ArtNo == Divider_ArticleNo._2069)
                                 {
                                     div_deduction += 42;
                                 }
@@ -2783,7 +2783,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536 || div.Div_ArtNo == Divider_ArticleNo._2069)
                             {
                                 div_deduction += 42;
                             }
@@ -2846,10 +2846,10 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (div.Div_ChkDM == false)
                             {
-                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                if (div.Div_ArtNo == Divider_ArticleNo._7536 || div.Div_ArtNo == Divider_ArticleNo._2069)
                                 {
                                     div_deduction += 42;
-                                    if (sash == SashProfile_ArticleNo._7581)
+                                    if (sash == SashProfile_ArticleNo._7581 || sash == SashProfile_ArticleNo._2067)
                                     {
                                         TM_sashBite_deduction += 14;
                                     }
@@ -2936,7 +2936,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                         foreach (IDividerModel div in MPanelLst_Divider)
                         {
-                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                            if (div.Div_ArtNo == Divider_ArticleNo._7536 || div.Div_ArtNo == Divider_ArticleNo._2069)
                             {
                                 div_deduction += (42 - 14);
                             }
