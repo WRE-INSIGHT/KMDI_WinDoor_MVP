@@ -33,5 +33,6 @@ namespace PresentationLayer.Views.UserControls
         ContextMenuStrip GetFrameCmenu();
         void DeleteControl(UserControl control);
         void PerformLayoutThis();
+        UserControl GetThis();
     }
 }

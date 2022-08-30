@@ -34,8 +34,14 @@ namespace PresentationLayer.Presenter.UserControls
             _sortItemUC.lblItemMouseDownEventRaised += _sortItemUC_lblItemMouseDownEventRaised;
             _sortItemUC.lblItemMouseMoveEventRaised += _sortItemUC_lblItemMouseMoveEventRaised;
             _sortItemUC.lblItemMouseUpEventRaised += _sortItemUC_lblItemMouseUpEventRaised;
-
+            _sortItemUC.DuplicateToolStripButtonClickEventRaised += _sortItemUC_DuplicateToolStripButtonClickEventRaised;
         }
+
+        private void _sortItemUC_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            
+        }
+
         private void _sortItemUC_lblItemMouseUpEventRaised(object sender, MouseEventArgs e)
         {
             _isDragging = false;
@@ -54,7 +60,7 @@ namespace PresentationLayer.Presenter.UserControls
                     if (((num1 * num1) + (num2 * num2)) > _DDradius)
                     {
 
-                        GetNewInstance(_unityC, _windoorModel).GetSortItemUC().GetSortItem().DoDragDrop(GetNewInstance(_unityC, _windoorModel).GetSortItemUC().GetSortItem(), DragDropEffects.All);
+                        _sortItemUC.GetSortItem().DoDragDrop(_sortItemUC.GetSortItem(), DragDropEffects.All);
                         _isDragging = true;
                         return;
                     }

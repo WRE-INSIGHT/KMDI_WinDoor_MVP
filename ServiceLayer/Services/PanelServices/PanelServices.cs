@@ -217,9 +217,10 @@ namespace ServiceLayer.Services.PanelServices
         {
             if (panelName == "")
             {
+
                 panelName = panelType.Replace(" Panel", "") + "PanelUC_" + panelID;
             }
-
+            
             if (panelHingeOptions == null)
             {
                 panelHingeOptions = HingeOption._FrictionStay;

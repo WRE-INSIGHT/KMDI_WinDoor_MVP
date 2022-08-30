@@ -28,15 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rtboxDesc = new System.Windows.Forms.RichTextBox();
+            this.lbl_dimension = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.lbl_item = new System.Windows.Forms.Label();
-            this.lbl_dimension = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,6 +66,24 @@
             this.rtboxDesc.Size = new System.Drawing.Size(327, 58);
             this.rtboxDesc.TabIndex = 17;
             this.rtboxDesc.Text = "";
+            // 
+            // lbl_dimension
+            // 
+            this.lbl_dimension.AutoEllipsis = true;
+            this.lbl_dimension.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_dimension.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_dimension.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_dimension.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbl_dimension.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_dimension.ForeColor = System.Drawing.Color.Black;
+            this.lbl_dimension.Location = new System.Drawing.Point(0, 0);
+            this.lbl_dimension.Name = "lbl_dimension";
+            this.lbl_dimension.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dimension.Size = new System.Drawing.Size(327, 20);
+            this.lbl_dimension.TabIndex = 22;
+            this.lbl_dimension.Tag = "";
+            this.lbl_dimension.Text = "lbl_dimension";
+            this.lbl_dimension.UseMnemonic = false;
             // 
             // panel2
             // 
@@ -97,30 +120,34 @@
             this.lbl_item.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_item.Size = new System.Drawing.Size(271, 20);
             this.lbl_item.TabIndex = 22;
-            this.lbl_item.Tag = "lbl_item";
+            this.lbl_item.Tag = "";
             this.lbl_item.Text = "lbl_item";
             this.lbl_item.UseMnemonic = false;
+            this.lbl_item.Click += new System.EventHandler(this.lbl_item_Click);
             this.lbl_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDown);
             this.lbl_item.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseMove);
             this.lbl_item.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseUp);
             // 
-            // lbl_dimension
+            // contextMenuStrip1
             // 
-            this.lbl_dimension.AutoEllipsis = true;
-            this.lbl_dimension.BackColor = System.Drawing.SystemColors.Control;
-            this.lbl_dimension.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_dimension.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_dimension.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_dimension.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_dimension.ForeColor = System.Drawing.Color.Black;
-            this.lbl_dimension.Location = new System.Drawing.Point(0, 0);
-            this.lbl_dimension.Name = "lbl_dimension";
-            this.lbl_dimension.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_dimension.Size = new System.Drawing.Size(327, 20);
-            this.lbl_dimension.TabIndex = 22;
-            this.lbl_dimension.Tag = "";
-            this.lbl_dimension.Text = "lbl_dimension";
-            this.lbl_dimension.UseMnemonic = false;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem,
+            this.duplicateToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.duplicateToolStripMenuItem.Text = "Duplicate";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // SortItemUC
             // 
@@ -135,6 +162,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -147,5 +175,8 @@
         private System.Windows.Forms.PictureBox pboxItemImage;
         public System.Windows.Forms.Label lbl_dimension;
         public System.Windows.Forms.Label lbl_item;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
     }
 }

@@ -13,6 +13,8 @@ namespace PresentationLayer.Views.UserControls
         event MouseEventHandler lblItemMouseDownEventRaised;
         event MouseEventHandler lblItemMouseUpEventRaised;
         event EventHandler SortItemUCLoadEventRaised;
+        event EventHandler DeleteToolStripButtonClickEventRaised;
+        event EventHandler DuplicateToolStripButtonClickEventRaised;
         string ItemName { get; set; }
         //string itemWindoorNumber { get; set; }
         string itemDesc { get; set; }

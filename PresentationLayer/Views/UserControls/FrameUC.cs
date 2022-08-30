@@ -194,5 +194,10 @@ namespace PresentationLayer.Views.UserControls
         {
             InvalidateThis();
         }
+
+        public UserControl GetThis()
+        {
+            return this;
+        }
     }
 }

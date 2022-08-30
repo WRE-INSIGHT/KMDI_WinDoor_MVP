@@ -56,6 +56,7 @@
             this.lbl_item.Tag = "lbl_item";
             this.lbl_item.Text = "lbl_item";
             this.lbl_item.UseMnemonic = false;
+            this.lbl_item.TextChanged += new System.EventHandler(this.lbl_item_TextChanged);
             this.lbl_item.DragEnter += new System.Windows.Forms.DragEventHandler(this.lbl_item_DragEnter);
             this.lbl_item.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDoubleClick);
             this.lbl_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDown);

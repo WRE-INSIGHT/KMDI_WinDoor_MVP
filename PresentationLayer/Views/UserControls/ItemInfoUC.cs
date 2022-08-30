@@ -132,5 +132,10 @@ namespace PresentationLayer.Views.UserControls
         {
             return this;
         }
+
+        private void lbl_item_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

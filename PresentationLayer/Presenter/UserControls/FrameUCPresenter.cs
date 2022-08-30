@@ -502,6 +502,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)

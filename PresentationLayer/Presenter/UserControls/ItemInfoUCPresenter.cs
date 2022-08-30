@@ -40,23 +40,23 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _itemInfoUC_lblItemMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
-            if (!_isDragging)
-            {
-                // This is a check to see if the mouse is moving while pressed.
-                // Without this, the DragDrop is fired directly when the control is clicked, now you have to drag a few pixels first.
-                if (e.Button == MouseButtons.Left && _DDradius > 0)
-                {
-                    int num1 = _mX - e.X;
-                    int num2 = _mY - e.Y;
-                    if (((num1 * num1) + (num2 * num2)) > _DDradius)
-                    {
+            //if (!_isDragging)
+            //{
+            //    This is a check to see if the mouse is moving while pressed.
+            //    Without this, the DragDrop is fired directly when the control is clicked, now you have to drag a few pixels first.
+            //    if (e.Button == MouseButtons.Left && _DDradius > 0)
+            //    {
+            //        int num1 = _mX - e.X;
+            //        int num2 = _mY - e.Y;
+            //        if (((num1 * num1) + (num2 * num2)) > _DDradius)
+            //        {
 
-                        GetNewInstance(_windoorModel, _unityC, _mainPresenter).GetItemInfoUC().GetItemInfo().DoDragDrop(GetNewInstance(_windoorModel, _unityC, _mainPresenter).GetItemInfoUC().GetItemInfo(), DragDropEffects.All);
-                        _isDragging = true;
-                        return;
-                    }
-                }
-            }
+            //            _itemInfoUC.GetItemInfo().DoDragDrop(_itemInfoUC.GetItemInfo(), DragDropEffects.All);
+            //            _isDragging = true;
+            //            return;
+            //        }
+            //    }
+            //}
         }
 
         private void _itemInfoUC_lblItemMouseDownEventRaised(object sender, MouseEventArgs e)

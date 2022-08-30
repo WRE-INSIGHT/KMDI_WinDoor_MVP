@@ -19,6 +19,8 @@ namespace PresentationLayer.Views
         }
 
         public event EventHandler SortItemViewLoadEventRaised;
+        public event DragEventHandler SortItemDragDropEventRaiseEvent;
+        public event DragEventHandler SortItemDragEnterEventRaiseEvent;
 
         public void showSortItem()
         {
@@ -34,6 +36,16 @@ namespace PresentationLayer.Views
         private void SortItemView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemViewLoadEventRaised, e);
+        }
+
+        private void pnlSortItem_DragEnter(object sender, DragEventArgs e)
+        {
+            EventHelpers.RaiseDragEvent(sender, SortItemDragEnterEventRaiseEvent, e);
+        }
+
+        private void pnlSortItem_DragDrop(object sender, DragEventArgs e)
+        {
+            EventHelpers.RaiseDragEvent(sender, SortItemDragDropEventRaiseEvent, e);
         }
     }
 }

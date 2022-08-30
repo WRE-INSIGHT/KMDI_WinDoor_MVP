@@ -14,6 +14,8 @@ namespace PresentationLayer.Views.UserControls
         public event MouseEventHandler lblItemMouseMoveEventRaised;
         public event MouseEventHandler lblItemMouseDownEventRaised;
         public event MouseEventHandler lblItemMouseUpEventRaised;
+        public event EventHandler DeleteToolStripButtonClickEventRaised;
+        public event EventHandler DuplicateToolStripButtonClickEventRaised;
 
         public string ItemName
         {
@@ -75,6 +77,15 @@ namespace PresentationLayer.Views.UserControls
         public UserControl GetSortItem()
         {
             return this;
+        }
+
+        private void lbl_item_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.Name);
+        }
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
         }
     }
 }

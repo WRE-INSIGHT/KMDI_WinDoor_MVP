@@ -31,6 +31,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
@@ -91,7 +92,7 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private ISortItemUCPresenter _sortItemUCPresenter;
         private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
-
+        private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
         private FrameModel.Frame_Padding frameType;
@@ -117,7 +118,12 @@ namespace PresentationLayer.Presenter
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
         private IDividerPropertiesUCPresenter _divPropUCP_forDMSelection;
-
+        private IFixedPanelUCPresenter _fixedUCP;
+        private ICasementPanelUCPresenter _casementUCP;
+        private IAwningPanelUCPresenter _awningUCP;
+        private ISlidingPanelUCPresenter _slidingUCP;
+        private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
+        private ILouverPanelUCPresenter _louverPanelUCP;
         #endregion
 
         #region GetSet
@@ -500,7 +506,17 @@ namespace PresentationLayer.Presenter
                              IQuoteItemListUCPresenter quoteItemListUCPresenter,
                              ISetTopViewSlidingPanellingPresenter setTopViewSlidingPanellingPresenter,
                              ISortItemPresenter sortItemPresenter,
-                             ISortItemUCPresenter sortItemUCPresenter)
+                             ISortItemUCPresenter sortItemUCPresenter,
+                             IPanelPropertiesUCPresenter panelPropertiesUCP,
+                             IFixedPanelUCPresenter fixedUCP,
+                             ICasementPanelUCPresenter casementUCP,
+                             IAwningPanelUCPresenter awningUCP,
+                             ISlidingPanelUCPresenter slidingUCP,
+                             ITiltNTurnPanelUCPresenter tiltNTurnUCP,
+                             ILouverPanelUCPresenter louverPanelUCP
+                             
+                             
+                             )
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -536,6 +552,13 @@ namespace PresentationLayer.Presenter
             _setTopViewSlidingPanellingPresenter = setTopViewSlidingPanellingPresenter;
             _sortItemPresenter = sortItemPresenter;
             _sortItemUCPresenter = sortItemUCPresenter;
+            _panelPropertiesUCP = panelPropertiesUCP;
+            _fixedUCP = fixedUCP;
+            _casementUCP = casementUCP;
+            _awningUCP = awningUCP;
+            _slidingUCP = slidingUCP;
+            _tiltNTurnUCP = tiltNTurnUCP;
+            _louverPanelUCP = louverPanelUCP;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -636,15 +659,17 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
         {
-            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            sortItem.GetSortItemView().showSortItem();
+            
+            
+                ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+                sortItem.GetSortItemView().showSortItem();
         }
 
         private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
         {
-            Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
-            var item = _mainView.GetPanelItems().GetChildAtPoint(p);
-            int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
+            //Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
+            //var item = _mainView.GetPanelItems().GetChildAtPoint(p);
+            //int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
             //IItemInfoUC lbl = e.Data.GetData("PresentationLayer.Views.UserControls.ItemInfoUC") as IItemInfoUC;
             //foreach (IItemInfoUC ctrl in _mainView.GetPanelItems().Controls)
             //{
@@ -655,8 +680,30 @@ namespace PresentationLayer.Presenter
 
             //    }
             //}
-            _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)_itemInfoUC, index);
-            _mainView.GetPanelItems().Invalidate();
+            //_mainView.GetPanelItems().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
+            //List<IWindoorModel> lstwndr = new List<IWindoorModel>();
+            //foreach (UserControl uc in _mainView.GetPanelItems().Controls)
+            //{
+            //    for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            //    {
+            //        IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+            //        if (uc.Name == wdm.WD_name)
+            //        {
+            //            wdm.WD_name = "Item " + itemCount;
+            //            lstwndr.Add(wdm);
+            //        }
+            //    }
+            //}
+            //lstwndr.Reverse();
+            //_quotationModel.Lst_Windoor.Clear();
+            //_quotationModel.Lst_Windoor = lstwndr;
+            //int itemCount = 1;
+            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            //{
+            //    wdm.WD_name = "Item " + itemCount;
+            //    itemCount++;
+            //}
+            //_mainView.GetPanelItems().Invalidate();
         }
 
         private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -874,6 +921,22 @@ namespace PresentationLayer.Presenter
                     //int Add_MilledFrameWidth_screws4fab();
                     foreach (IPanelModel pnl in frm.Lst_Panel)
                     {
+                        //foreach (Object item in typeof(IPanelModel).GetProperties())
+                        //{
+                        //    Type t = item.GetType();
+                        //    PropertyInfo[] props = t.GetProperties();
+                        //    foreach (var prop in props)
+                        //    {
+                        //        if (prop.GetIndexParameters().Length == 0)
+                        //            Console.WriteLine("   {0} ({1}): {2}", prop.Name,
+                        //                              prop.PropertyType.Name,
+                        //                              prop.GetValue(item));
+                        //        else
+                        //            Console.WriteLine("   {0} ({1}): <Indexed>", prop.Name,
+                        //                              prop.PropertyType.Name);
+
+                        //    }
+                        //}
                         wndr_content.Add("\t#");
                         wndr_content.Add("\t\tPanel_ChkText: " + pnl.Panel_ChkText);
                         wndr_content.Add("\t\tPanel_Dock: " + pnl.Panel_Dock);
@@ -883,7 +946,7 @@ namespace PresentationLayer.Presenter
                         wndr_content.Add("\t\tPanel_FramePropertiesGroup: " + pnl.Panel_FramePropertiesGroup);
                         wndr_content.Add("\t\tPanel_Height: " + pnl.Panel_Height);
                         wndr_content.Add("\t\tPanel_OriginalHeight: " + pnl.Panel_OriginalHeight);
-                        wndr_content.Add("\t\tPanelImageRenderer_Height: " + pnl.PanelImageRenderer_Height);
+                        wndr_content.Add("\t\tPanel_ImageRenderer_Height: " + pnl.PanelImageRenderer_Height);
                         wndr_content.Add("\t\tPanel_HeightToBind: " + pnl.Panel_HeightToBind);
                         wndr_content.Add("\t\tPanel_DisplayHeight: " + pnl.Panel_DisplayHeight);
                         wndr_content.Add("\t\tPanel_DisplayHeightDecimal: " + pnl.Panel_DisplayHeightDecimal);
@@ -896,14 +959,14 @@ namespace PresentationLayer.Presenter
                         wndr_content.Add("\t\tPanel_Type: " + pnl.Panel_Type);
                         wndr_content.Add("\t\tPanel_Width: " + pnl.Panel_Width);
                         wndr_content.Add("\t\tPanel_OriginalWidth: " + pnl.Panel_OriginalWidth);
-                        wndr_content.Add("\t\tPanelImageRenderer_Width: " + pnl.PanelImageRenderer_Width);
+                        wndr_content.Add("\t\tPanel_ImageRenderer_Width: " + pnl.PanelImageRenderer_Width);
                         wndr_content.Add("\t\tPanel_WidthToBind: " + pnl.Panel_WidthToBind);
                         wndr_content.Add("\t\tPanel_DisplayWidth: " + pnl.Panel_DisplayWidth);
                         wndr_content.Add("\t\tPanel_DisplayWidthDecimal: " + pnl.Panel_DisplayWidthDecimal);
                         wndr_content.Add("\t\tPanel_OriginalDisplayWidth: " + pnl.Panel_OriginalDisplayWidth);
                         wndr_content.Add("\t\tPanel_OriginalDisplayWidthDecimal: " + pnl.Panel_OriginalDisplayWidthDecimal);
                         wndr_content.Add("\t\tPanel_Visibility: " + pnl.Panel_Visibility);
-                        wndr_content.Add("\t\tPanelImageRenderer_Zoom: " + pnl.PanelImageRenderer_Zoom);
+                        wndr_content.Add("\t\tPanel_ImageRenderer_Zoom: " + pnl.PanelImageRenderer_Zoom);
                         wndr_content.Add("\t\tPanel_Index_Inside_MPanel: " + pnl.Panel_Index_Inside_MPanel);
                         wndr_content.Add("\t\tPanel_Index_Inside_SPanel: " + pnl.Panel_Index_Inside_SPanel);
                         wndr_content.Add("\t\tPanel_Placement: " + pnl.Panel_Placement);
@@ -927,170 +990,155 @@ namespace PresentationLayer.Presenter
                         wndr_content.Add("\t\tPanel_SlidingTypes: " + pnl.Panel_SlidingTypes);
                         wndr_content.Add("\t\tPanel_SlidingTypeVisibility: " + pnl.Panel_SlidingTypeVisibility);
                         #region Explosion
-
-                        //int PanelGlass_ID
-                        //string Panel_GlassThicknessDesc
-                        //float Panel_GlassThickness
-                        //GlazingBead_ArticleNo PanelGlazingBead_ArtNo
-                        //GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo
-                        //GBSpacer_ArticleNo Panel_GBSpacerArtNo
-                        //bool Panel_ChkGlazingAdaptor
-                        //int Panel_GlazingBeadWidth
-                        //int Panel_GlazingBeadWidthDecimal
-                        //int Panel_GlazingBeadHeight
-                        //int Panel_GlazingBeadHeightDecimal
-                        //int Panel_GlassWidth
-                        //int Panel_GlassWidthDecimal
-                        //int Panel_OriginalGlassWidth
-                        //int Panel_OriginalGlassWidthDecimal
-                        //int Panel_GlassHeight
-                        //int Panel_GlassHeightDecimal
-                        //int Panel_OriginalGlassHeight
-                        //int Panel_OriginalGlassHeightDecimal
-                        //int Panel_GlassPropertyHeight
-                        //int Panel_GlazingSpacerQty
-                        //GlassFilm_Types Panel_GlassFilm
-                        //bool Panel_SashPropertyVisibility
-                        //SashProfile_ArticleNo Panel_SashProfileArtNo
-                        //SashReinf_ArticleNo Panel_SashReinfArtNo
-                        //int Panel_SashWidth
-                        //int Panel_SashWidthDecimal
-                        //int Panel_SashHeight
-                        //int Panel_SashHeightDecimal
-                        //int Panel_OriginalSashWidth
-                        //int Panel_OriginalSashWidthDecimal
-                        //int Panel_OriginalSashHeight
-                        //int Panel_OriginalSashHeightDecimal
-                        //int Panel_SashReinfWidth
-                        //int Panel_SashReinfWidthDecimal
-                        //int Panel_SashReinfHeight
-                        //int Panel_SashReinfHeightDecimal
-
-                        //CoverProfile_ArticleNo Panel_CoverProfileArtNo
-                        //CoverProfile_ArticleNo Panel_CoverProfileArtNo2
-                        //FrictionStay_ArticleNo Panel_FrictionStayArtNo
-                        //FrictionStayCasement_ArticleNo Panel_FSCasementArtNo
-                        //SnapInKeep_ArticleNo Panel_SnapInKeepArtNo
-                        //FixedCam_ArticleNo Panel_FixedCamArtNo
-                        //_30x25Cover_ArticleNo Panel_30x25CoverArtNo
-                        //MotorizedDivider_ArticleNo Panel_MotorizedDividerArtNo
-                        //CoverForMotor_ArticleNo Panel_CoverForMotorArtNo
-                        //_2DHinge_ArticleNo Panel_2dHingeArtNo
-                        //PushButtonSwitch_ArticleNo Panel_PushButtonSwitchArtNo
-                        //FalsePole_ArticleNo Panel_FalsePoleArtNo
-                        //SupportingFrame_ArticleNo Panel_SupportingFrameArtNo
-                        //Plate_ArticleNo Panel_PlateArtNo
-
-                        //Handle_Type Panel_HandleType
-                        //Rotoswing_HandleArtNo Panel_RotoswingArtNo
-                        //Rotary_HandleArtNo Panel_RotaryArtNo
-                        //Rio_HandleArtNo Panel_RioArtNo
-                        //Rio_HandleArtNo Panel_RioArtNo2
-                        //ProfileKnobCylinder_ArtNo Panel_ProfileKnobCylinderArtNo
-                        //Cylinder_CoverArtNo Panel_CylinderCoverArtNo
-
-                        //Rotoline_HandleArtNo Panel_RotolineArtNo
-                        //MVD_HandleArtNo Panel_MVDArtNo
-                        //Espagnolette_ArticleNo Panel_EspagnoletteArtNo
-                        //bool Panel_EspagnoletteOptionsVisibility
-
-                        //Extension_ArticleNo Panel_ExtensionTopArtNo
-                        //Extension_ArticleNo Panel_ExtensionTop2ArtNo
-                        //Extension_ArticleNo Panel_ExtensionTop3ArtNo
-                        //Extension_ArticleNo Panel_ExtensionBotArtNo
-                        //Extension_ArticleNo Panel_ExtensionBot2ArtNo
-                        //Extension_ArticleNo Panel_ExtensionLeftArtNo
-                        //Extension_ArticleNo Panel_ExtensionLeft2ArtNo
-                        //Extension_ArticleNo Panel_ExtensionRightArtNo
-                        //Extension_ArticleNo Panel_ExtensionRight2ArtNo
-
-                        //bool Panel_ExtTopChk
-                        //bool Panel_ExtTop2Chk
-                        //bool Panel_ExtBotChk
-                        //bool Panel_ExtLeftChk
-
-                        //bool Panel_ExtRightChk
-                        //int Panel_ExtTopQty
-                        //int Panel_ExtBotQty
-                        //int Panel_ExtLeftQty
-                        //int Panel_ExtRightQty
-
-                        //int Panel_ExtTop2Qty
-                        //int Panel_ExtTop3Qty
-                        //int Panel_ExtBot2Qty
-                        //int Panel_ExtLeft2Qty
-                        //int Panel_ExtRight2Qty
-
-                        //CornerDrive_ArticleNo Panel_CornerDriveArtNo
-                        //bool Panel_CornerDriveOptionsVisibility
-                        //bool Panel_ExtensionOptionsVisibility
-                        //int Panel_RotoswingOptionsHeight
-                        //PlasticWedge_ArticleNo Panel_PlasticWedge
-                        //int Panel_PlasticWedgeQty
-                        //MiddleCloser_ArticleNo Panel_MiddleCloserArtNo
-                        //LockingKit_ArticleNo Panel_LockingKitArtNo
-                        //GlassType Panel_GlassType
-
-                        //Striker_ArticleNo Panel_StrikerArtno_A //for Awning
-                        //int Panel_StrikerQty_A
-
-                        //Striker_ArticleNo Panel_StrikerArtno_C //for Casement
-                        //int Panel_StrikerQty_C
-
-                        //int Panel_MiddleCloserPairQty
-                        //bool Panel_MotorizedOptionVisibility
-                        //MotorizedMech_ArticleNo Panel_MotorizedMechArtNo
-                        //int Panel_MotorizedPropertyHeight
-                        //int Panel_MotorizedMechQty
-                        //int Panel_MotorizedMechSetQty
-                        //int Panel_2DHingeQty
-                        //_2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized
-                        //int Panel_2DHingeQty_nonMotorized
-                        //bool Panel_2dHingeVisibility_nonMotorized
-                        //_3dHinge_ArticleNo Panel_3dHingeArtNo
-                        //int Panel_3dHingeQty
-                        //bool Panel_3dHingePropertyVisibility
-                        //ButtHinge_ArticleNo Panel_ButtHingeArtNo
-                        //int Panel_ButtHingeQty
-                        //bool Panel_2dHingeVisibility
-                        //bool Panel_ButtHingeVisibility
-                        //AdjustableStriker_ArticleNo Panel_AdjStrikerArtNo
-                        //int Panel_AdjStrikerQty
-                        //RestrictorStay_ArticleNo Panel_RestrictorStayArtNo
-                        //int Panel_RestrictorStayQty
-
-                        //int Panel_ExtensionPropertyHeight
-                        //GeorgianBar_ArticleNo Panel_GeorgianBarArtNo
-                        //int Panel_GeorgianBar_VerticalQty
-                        //int Panel_GeorgianBar_HorizontalQty
-                        //bool Panel_GeorgianBarOptionVisibility
-
-                        //HingeOption Panel_HingeOptions
-                        //int Panel_HingeOptionsPropertyHeight
-                        //bool Panel_HingeOptionsVisibility
-                        //CenterHingeOption Panel_CenterHingeOptions
-                        //bool Panel_CenterHingeOptionsVisibility
-                        //NTCenterHinge_ArticleNo Panel_NTCenterHingeArticleNo
-                        //StayBearingK_ArticleNo Panel_StayBearingKArtNo
-                        //StayBearingPin_ArticleNo Panel_StayBearingPinArtNo
-                        //StayBearingCover_ArticleNo Panel_StayBearingCoverArtNo
-                        //TopCornerHinge_ArticleNo Panel_TopCornerHingeArtNo
-                        //TopCornerHingeCover_ArticleNo Panel_TopCornerHingeCoverArtNo
-                        //TopCornerHingeSpacer_ArticleNo Panel_TopCornerHingeSpacerArtNo
-                        //CornerHingeK_ArticleNo Panel_CornerHingeKArtNo
-                        //CornerPivotRestK_ArticleNo Panel_CornerPivotRestKArtNo
-                        //CornerHingeCoverK_ArticleNo Panel_CornerHingeCoverKArtNo
-                        //CoverForCornerPivotRestVertical_ArticleNo Panel_CoverForCornerPivotRestVerticalArtNo
-                        //CoverForCornerPivotRest_ArticleNo Panel_CoverForCornerPivotRestArtNo
-                        //WeldableCornerJoint_ArticleNo Panel_WeldableCArtNo
-                        //LatchDeadboltStriker_ArticleNo Panel_LatchDeadboltStrikerArtNo
-
-                        //bool Panel_CmenuDeleteVisibility
-                        //bool Panel_NTCenterHingeVisibility
-                        //bool Panel_MiddleCloserVisibility
-
-                        //bool Panel_MotorizedpnlOptionVisibility
-
+                        wndr_content.Add("\t\tExplosion");
+                        wndr_content.Add("\t\tPanel_GlassID: " + pnl.PanelGlass_ID);
+                        wndr_content.Add("\t\tPanel_GlassThicknessDesc: " + pnl.Panel_GlassThicknessDesc);
+                        wndr_content.Add("\t\tPanel_GlassThickness: " + pnl.Panel_GlassThickness);
+                        wndr_content.Add("\t\tPanel_GlazingBeadArtNo: " + pnl.PanelGlazingBead_ArtNo);
+                        wndr_content.Add("\t\tPanel_GlazingAdaptorArtNo: " + pnl.Panel_GlazingAdaptorArtNo);
+                        wndr_content.Add("\t\tPanel_GBSpacerArtNo: " + pnl.Panel_GBSpacerArtNo);
+                        wndr_content.Add("\t\tPanel_ChkGlazingAdaptor: " + pnl.Panel_ChkGlazingAdaptor);
+                        wndr_content.Add("\t\tPanel_GlazingBeadWidth: " + pnl.Panel_GlazingBeadWidth);
+                        wndr_content.Add("\t\tPanel_GlazingBeadWidthDecimal: " + pnl.Panel_GlazingBeadWidthDecimal);
+                        wndr_content.Add("\t\tPanel_GlazingBeadHeight: " + pnl.Panel_GlazingBeadHeight);
+                        wndr_content.Add("\t\tPanel_GlazingBeadHeightDecimal: " + pnl.Panel_GlazingBeadHeightDecimal);
+                        wndr_content.Add("\t\tPanel_GlassWidth: " + pnl.Panel_GlassWidth);
+                        wndr_content.Add("\t\tPanel_GlassWidthDecimal: " + pnl.Panel_GlassWidthDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalGlassWidth: " + pnl.Panel_OriginalGlassWidth);
+                        wndr_content.Add("\t\tPanel_OriginalGlassWidthDecimal: " + pnl.Panel_OriginalGlassWidthDecimal);
+                        wndr_content.Add("\t\tPanel_GlassHeight: " + pnl.Panel_GlassHeight);
+                        wndr_content.Add("\t\tPanel_GlassHeightDecimal: " + pnl.Panel_GlassHeightDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalGlassHeight: " + pnl.Panel_OriginalGlassHeight);
+                        wndr_content.Add("\t\tPanel_OriginalGlassHeightDecimal: " + pnl.Panel_OriginalGlassHeightDecimal);
+                        wndr_content.Add("\t\tPanel_GlassPropertyHeight: " + pnl.Panel_GlassPropertyHeight);
+                        wndr_content.Add("\t\tPanel_GlazingSpacerQty: " + pnl.Panel_GlazingSpacerQty);
+                        wndr_content.Add("\t\tPanel_GlassFilm: " + pnl.Panel_GlassFilm);
+                        wndr_content.Add("\t\tPanel_SashPropertyVisibility: " + pnl.Panel_SashPropertyVisibility);
+                        wndr_content.Add("\t\tPanel_SashProfileArtNo: " + pnl.Panel_SashProfileArtNo);
+                        wndr_content.Add("\t\tPanel_SashReinfArtNo: " + pnl.Panel_SashReinfArtNo);
+                        wndr_content.Add("\t\tPanel_SashWidth: " + pnl.Panel_SashWidth);
+                        wndr_content.Add("\t\tPanel_SashWidthDecimal: " + pnl.Panel_SashWidthDecimal);
+                        wndr_content.Add("\t\tPanel_SashHeight: " + pnl.Panel_SashHeight);
+                        wndr_content.Add("\t\tPanel_SashHeightDecimal: " + pnl.Panel_SashHeightDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalSashWidth: " + pnl.Panel_OriginalSashWidth);
+                        wndr_content.Add("\t\tPanel_OriginalSashWidthDecimal: " + pnl.Panel_OriginalSashWidthDecimal);
+                        wndr_content.Add("\t\tPanel_OriginalSashHeight: " + pnl.Panel_OriginalSashHeight);
+                        wndr_content.Add("\t\tPanel_OriginalSashHeightDecimal: " + pnl.Panel_OriginalSashHeightDecimal);
+                        wndr_content.Add("\t\tPanel_SashReinfWidth: " + pnl.Panel_SashReinfWidth);
+                        wndr_content.Add("\t\tPanel_SashReinfWidthDecimal: " + pnl.Panel_SashReinfWidthDecimal);
+                        wndr_content.Add("\t\tPanel_SashReinfHeight: " + pnl.Panel_SashReinfHeight);
+                        wndr_content.Add("\t\tPanel_SashReinfHeightDecimal: " + pnl.Panel_SashReinfHeightDecimal);
+                        wndr_content.Add("\t\tPanel_CoverProfileArtNo: " + pnl.Panel_CoverProfileArtNo);
+                        wndr_content.Add("\t\tPanel_CoverProfileArtNo2: " + pnl.Panel_CoverProfileArtNo2);
+                        wndr_content.Add("\t\tPanel_FrictionStayArtNo: " + pnl.Panel_FrictionStayArtNo);
+                        wndr_content.Add("\t\tPanel_FSCasementArtNo: " + pnl.Panel_FSCasementArtNo);
+                        wndr_content.Add("\t\tPanel_SnapInKeepArtNo: " + pnl.Panel_SnapInKeepArtNo);
+                        wndr_content.Add("\t\tPanel_FixedCamArtNo: " + pnl.Panel_FixedCamArtNo);
+                        wndr_content.Add("\t\tPanel_30x25CoverArtNo: " + pnl.Panel_30x25CoverArtNo);
+                        wndr_content.Add("\t\tPanel_MotorizedDividerArtNo: " + pnl.Panel_MotorizedDividerArtNo);
+                        wndr_content.Add("\t\tPanel_CoverForMotorArtNo: " + pnl.Panel_CoverForMotorArtNo);
+                        wndr_content.Add("\t\tPanel_2dHingeArtNo: " + pnl.Panel_2dHingeArtNo);
+                        wndr_content.Add("\t\tPanel_PushButtonSwitchArtNo: " + pnl.Panel_PushButtonSwitchArtNo);
+                        wndr_content.Add("\t\tPanel_FalsePoleArtNo: " + pnl.Panel_FalsePoleArtNo);
+                        wndr_content.Add("\t\tPanel_SupportingFrameArtNo: " + pnl.Panel_SupportingFrameArtNo);
+                        wndr_content.Add("\t\tPanel_PlateArtNo: " + pnl.Panel_PlateArtNo);
+                        wndr_content.Add("\t\tPanel_HandleType: " + pnl.Panel_HandleType);
+                        wndr_content.Add("\t\tPanel_RotoswingArtNo: " + pnl.Panel_RotoswingArtNo);
+                        wndr_content.Add("\t\tPanel_RotaryArtNo: " + pnl.Panel_RotaryArtNo);
+                        wndr_content.Add("\t\tPanel_RioArtNo: " + pnl.Panel_RioArtNo);
+                        wndr_content.Add("\t\tPanel_RioArtNo2: " + pnl.Panel_RioArtNo2);
+                        wndr_content.Add("\t\tPanel_ProfileKnobCylinderArtNo: " + pnl.Panel_ProfileKnobCylinderArtNo);
+                        wndr_content.Add("\t\tPanel_CylinderCoverArtNo: " + pnl.Panel_CylinderCoverArtNo);
+                        wndr_content.Add("\t\tPanel_RotolineArtNo: " + pnl.Panel_RotolineArtNo);
+                        wndr_content.Add("\t\tPanel_MVDArtNo: " + pnl.Panel_MVDArtNo);
+                        wndr_content.Add("\t\tPanel_EspagnoletteArtNo: " + pnl.Panel_EspagnoletteArtNo);
+                        wndr_content.Add("\t\tPanel_EspagnoletteOptionsVisibility: " + pnl.Panel_EspagnoletteOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_ExtensionTopArtNo: " + pnl.Panel_ExtensionTopArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionTop2ArtNo: " + pnl.Panel_ExtensionTop2ArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionTop3ArtNo: " + pnl.Panel_ExtensionTop3ArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionBotArtNo: " + pnl.Panel_ExtensionBotArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionBot2ArtNo: " + pnl.Panel_ExtensionBot2ArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionLeftArtNo: " + pnl.Panel_ExtensionLeftArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionLeft2ArtNo: " + pnl.Panel_ExtensionLeft2ArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionRightArtNo: " + pnl.Panel_ExtensionRightArtNo);
+                        wndr_content.Add("\t\tPanel_ExtensionRight2ArtNo: " + pnl.Panel_ExtensionRight2ArtNo);
+                        wndr_content.Add("\t\tPanel_ExtTopChk: " + pnl.Panel_ExtTopChk);
+                        wndr_content.Add("\t\tPanel_ExtTop2Chk: " + pnl.Panel_ExtTop2Chk);
+                        wndr_content.Add("\t\tPanel_ExtBotChk: " + pnl.Panel_ExtBotChk);
+                        wndr_content.Add("\t\tPanel_ExtLeftChk: " + pnl.Panel_ExtLeftChk);
+                        wndr_content.Add("\t\tPanel_ExtRightChk: " + pnl.Panel_ExtRightChk);
+                        wndr_content.Add("\t\tPanel_ExtTopQty: " + pnl.Panel_ExtTopQty);
+                        wndr_content.Add("\t\tPanel_ExtBotQty: " + pnl.Panel_ExtBotQty);
+                        wndr_content.Add("\t\tPanel_ExtLeftQty: " + pnl.Panel_ExtLeftQty);
+                        wndr_content.Add("\t\tPanel_ExtRightQty: " + pnl.Panel_ExtRightQty);
+                        wndr_content.Add("\t\tPanel_ExtTop2Qty: " + pnl.Panel_ExtTop2Qty);
+                        wndr_content.Add("\t\tPanel_ExtTop3Qty: " + pnl.Panel_ExtTop3Qty);
+                        wndr_content.Add("\t\tPanel_ExtBot2Qty: " + pnl.Panel_ExtBot2Qty);
+                        wndr_content.Add("\t\tPanel_ExtLeft2Qty: " + pnl.Panel_ExtLeft2Qty);
+                        wndr_content.Add("\t\tPanel_ExtRight2Qty: " + pnl.Panel_ExtRight2Qty);
+                        wndr_content.Add("\t\tPanel_CornerDriveArtNo: " + pnl.Panel_CornerDriveArtNo);
+                        wndr_content.Add("\t\tPanel_CornerDriveOptionsVisibility: " + pnl.Panel_CornerDriveOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_ExtensionOptionsVisibility: " + pnl.Panel_ExtensionOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_RotoswingOptionsHeight: " + pnl.Panel_RotoswingOptionsHeight);
+                        wndr_content.Add("\t\tPanel_PlasticWedge: " + pnl.Panel_PlasticWedge);
+                        wndr_content.Add("\t\tPanel_PlasticWedgeQty: " + pnl.Panel_PlasticWedgeQty);
+                        wndr_content.Add("\t\tPanel_MiddleCloserArtNo: " + pnl.Panel_MiddleCloserArtNo);
+                        wndr_content.Add("\t\tPanel_LockingKitArtNo: " + pnl.Panel_LockingKitArtNo);
+                        wndr_content.Add("\t\tPanel_GlassType: " + pnl.Panel_GlassType);
+                        wndr_content.Add("\t\tPanel_StrikerArtno_A: " + pnl.Panel_StrikerArtno_A);
+                        wndr_content.Add("\t\tPanel_StrikerQty_A: " + pnl.Panel_StrikerQty_A);
+                        wndr_content.Add("\t\tPanel_StrikerArtno_C: " + pnl.Panel_StrikerArtno_C);
+                        wndr_content.Add("\t\tPanel_StrikerQty_C: " + pnl.Panel_StrikerQty_C);
+                        wndr_content.Add("\t\tPanel_MiddleCloserPairQty: " + pnl.Panel_MiddleCloserPairQty);
+                        wndr_content.Add("\t\tPanel_MotorizedOptionVisibility: " + pnl.Panel_MotorizedOptionVisibility);
+                        wndr_content.Add("\t\tPanel_MotorizedMechArtNo: " + pnl.Panel_MotorizedMechArtNo);
+                        wndr_content.Add("\t\tPanel_MotorizedPropertyHeight: " + pnl.Panel_MotorizedPropertyHeight);
+                        wndr_content.Add("\t\tPanel_MotorizedMechQty: " + pnl.Panel_MotorizedMechQty);
+                        wndr_content.Add("\t\tPanel_MotorizedMechSetQty: " + pnl.Panel_MotorizedMechSetQty);
+                        wndr_content.Add("\t\tPanel_2DHingeQty: " + pnl.Panel_2DHingeQty);
+                        wndr_content.Add("\t\tPanel_2dHingeArtNo_nonMotorized: " + pnl.Panel_2dHingeArtNo_nonMotorized);
+                        wndr_content.Add("\t\tPanel_2DHingeQty_nonMotorized: " + pnl.Panel_2DHingeQty_nonMotorized);
+                        wndr_content.Add("\t\tPanel_2dHingeVisibility_nonMotorized: " + pnl.Panel_2dHingeVisibility_nonMotorized);
+                        wndr_content.Add("\t\tPanel_3dHingeArtNo: " + pnl.Panel_3dHingeArtNo);
+                        wndr_content.Add("\t\tPanel_3dHingeQty: " + pnl.Panel_3dHingeQty);
+                        wndr_content.Add("\t\tPanel_3dHingePropertyVisibility: " + pnl.Panel_3dHingePropertyVisibility);
+                        wndr_content.Add("\t\tPanel_ButtHingeArtNo: " + pnl.Panel_ButtHingeArtNo);
+                        wndr_content.Add("\t\tPanel_ButtHingeQty: " + pnl.Panel_ButtHingeQty);
+                        wndr_content.Add("\t\tPanel_2dHingeVisibility: " + pnl.Panel_2dHingeVisibility);
+                        wndr_content.Add("\t\tPanel_ButtHingeVisibility: " + pnl.Panel_ButtHingeVisibility);
+                        wndr_content.Add("\t\tPanel_AdjStrikerArtNo: " + pnl.Panel_AdjStrikerArtNo);
+                        wndr_content.Add("\t\tPanel_AdjStrikerQty: " + pnl.Panel_AdjStrikerQty);
+                        wndr_content.Add("\t\tPanel_RestrictorStayArtNo: " + pnl.Panel_RestrictorStayArtNo);
+                        wndr_content.Add("\t\tPanel_RestrictorStayQty: " + pnl.Panel_RestrictorStayQty);
+                        wndr_content.Add("\t\tPanel_ExtensionPropertyHeight: " + pnl.Panel_ExtensionPropertyHeight);
+                        wndr_content.Add("\t\tPanel_GeorgianBarArtNo: " + pnl.Panel_GeorgianBarArtNo);
+                        wndr_content.Add("\t\tPanel_GeorgianBar_VerticalQty: " + pnl.Panel_GeorgianBar_VerticalQty);
+                        wndr_content.Add("\t\tPanel_GeorgianBar_HorizontalQty: " + pnl.Panel_GeorgianBar_HorizontalQty);
+                        wndr_content.Add("\t\tPanel_GeorgianBarOptionVisibility: " + pnl.Panel_GeorgianBarOptionVisibility);
+                        wndr_content.Add("\t\tPanel_HingeOptions: " + pnl.Panel_HingeOptions);
+                        wndr_content.Add("\t\tPanel_HingeOptionsPropertyHeight: " + pnl.Panel_HingeOptionsPropertyHeight);
+                        wndr_content.Add("\t\tPanel_HingeOptionsVisibility: " + pnl.Panel_HingeOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_CenterHingeOptions: " + pnl.Panel_CenterHingeOptions);
+                        wndr_content.Add("\t\tPanel_CenterHingeOptionsVisibility: " + pnl.Panel_CenterHingeOptionsVisibility);
+                        wndr_content.Add("\t\tPanel_NTCenterHingeArticleNo: " + pnl.Panel_NTCenterHingeArticleNo);
+                        wndr_content.Add("\t\tPanel_StayBearingKArtNo: " + pnl.Panel_StayBearingKArtNo);
+                        wndr_content.Add("\t\tPanel_StayBearingPinArtNo: " + pnl.Panel_StayBearingPinArtNo);
+                        wndr_content.Add("\t\tPanel_StayBearingCoverArtNo: " + pnl.Panel_StayBearingCoverArtNo);
+                        wndr_content.Add("\t\tPanel_TopCornerHingeArtNo: " + pnl.Panel_TopCornerHingeArtNo);
+                        wndr_content.Add("\t\tPanel_TopCornerHingeCoverArtNo: " + pnl.Panel_TopCornerHingeCoverArtNo);
+                        wndr_content.Add("\t\tPanel_TopCornerHingeSpacerArtNo: " + pnl.Panel_TopCornerHingeSpacerArtNo);
+                        wndr_content.Add("\t\tPanel_CornerHingeKArtNo: " + pnl.Panel_CornerHingeKArtNo);
+                        wndr_content.Add("\t\tPanel_CornerPivotRestKArtNo: " + pnl.Panel_CornerPivotRestKArtNo);
+                        wndr_content.Add("\t\tPanel_CornerHingeCoverKArtNo: " + pnl.Panel_CornerHingeCoverKArtNo);
+                        wndr_content.Add("\t\tPanel_CoverForCornerPivotRestVerticalArtNo: " + pnl.Panel_CoverForCornerPivotRestVerticalArtNo);
+                        wndr_content.Add("\t\tPanel_CoverForCornerPivotRestArtNo: " + pnl.Panel_CoverForCornerPivotRestArtNo);
+                        wndr_content.Add("\t\tPanel_WeldableCArtNo: " + pnl.Panel_WeldableCArtNo);
+                        wndr_content.Add("\t\tPanel_LatchDeadboltStrikerArtNo: " + pnl.Panel_LatchDeadboltStrikerArtNo);
+                        wndr_content.Add("\t\tPanel_CmenuDeleteVisibility: " + pnl.Panel_CmenuDeleteVisibility);
+                        wndr_content.Add("\t\tPanel_NTCenterHingeVisibility: " + pnl.Panel_NTCenterHingeVisibility);
+                        wndr_content.Add("\t\tPanel_MiddleCloserVisibility: " + pnl.Panel_MiddleCloserVisibility);
+                        wndr_content.Add("\t\tPanel_MotorizedpnlOptionVisibility: " + pnl.Panel_MotorizedpnlOptionVisibility);
+                        
                         //int Add_SashPerimeter_screws4fab();
                         //int Add_StrikerAC_screws4fab();
                         //int Add_Espagnolette_screws4fab();
@@ -1117,7 +1165,7 @@ namespace PresentationLayer.Presenter
 
                 }
                 wndr_content.Add(")");
-
+                wndr_content.Add("EndofFile");
                 //float GetZoom_forRendering();
                 //Dictionary<int, decimal> Dictionary_ht_redArrowLines
                 //Dictionary<int, decimal> Dictionary_wd_redArrowLines
@@ -1613,6 +1661,7 @@ namespace PresentationLayer.Presenter
                     File.SetAttributes(outFile, FileAttributes.Hidden);
                     onload = true;
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Open_WndrFiles");
                     
 
@@ -1803,10 +1852,214 @@ namespace PresentationLayer.Presenter
         string frmDimension_profileType = "",
                frmDimension_baseColor = "";
         bool ons = false;
+
+        //Panel 
+        string panel_Name,
+               panel_ChkText,
+               panel_Type,
+               panel_Placement;
+        int panel_Height,
+            panel_OriginalHeight,
+            panel_ImageRenderer_Height,
+            panel_HeightToBind,
+            panel_DisplayHeight,
+            panel_DisplayHeightDecimal,
+            panel_OriginalDisplayHeight,
+            panel_OriginalDisplayHeightDecimal,
+            panel_ID,
+            panel_Width,
+            panel_OriginalWidth,
+            panel_ImageRenderer_Width,
+            panel_WidthToBind,
+            panel_DisplayWidth,
+            panel_DisplayWidthDecimal,
+            panel_OriginalDisplayWidth,
+            panel_OriginalDisplayWidthDecimal,
+            panel_Index_Inside_MPanel,
+            panel_Index_Inside_SPanel,
+            panel_PropertyHeight,
+            panel_HandleOptionsHeight,
+            panel_LouverBladesCount;
+        bool panel_Orient,
+             panel_OrientVisibility,
+             panel_Visibility,
+             panel_HandleOptionsVisibility,
+             panel_RotoswingOptionsVisibility,
+             panel_RioOptionsVisibility,
+             panel_RioOptionsVisibility2,
+             panel_RotolineOptionsVisibility,
+             panel_MVDOptionsVisibility,
+             panel_RotaryOptionsVisibility,
+             panel_SlidingTypeVisibility;
+        float panel_ImageRendererZoom,
+              panel_Zoom;
+
+        DockStyle panel_Dock;
+        Control panel_Parent;
+        UserControl panel_MultiPanelGroup,
+                    panel_FrameGroup,
+                    panel_FramePropertiesGroup;
+        OverlapSash panel_OverlapSash;
+        Padding panel_Margin,
+                panel_MarginToBind,
+                panel_ImageRenderer_Margin;
+        IFrameModel panel_ParentFrameModel;
+        IMultiPanelModel panel_ParentMultiPanelModel;
+        Color panel_BackColor;
+        SlidingTypes panel_SlidingTypes;
+
+        #region Explosion Param 
+        string panel_GlassThicknessDesc;
+        float panel_GlassThickness;
+        bool panel_ChkGlazingAdaptor,
+             panel_SashPropertyVisibility,
+             panel_EspagnoletteOptionsVisibility,
+             panel_ExtTopChk,
+             panel_ExtTop2Chk,
+             panel_ExtBotChk,
+             panel_ExtLeftChk,
+             panel_ExtRightChk,
+             panel_CornerDriveOptionsVisibility,
+             panel_ExtensionOptionsVisibility,
+             panel_MotorizedOptionVisibility,
+             panel_2dHingeVisibility_nonMotorized,
+             panel_3dHingePropertyVisibility,
+             panel_2dHingeVisibility,
+             panel_ButtHingeVisibility,
+             panel_GeorgianBarOptionVisibility,
+             panel_HingeOptionsVisibility,
+             panel_CenterHingeOptionsVisibility,
+             panel_CmenuDeleteVisibility,
+             panel_NTCenterHingeVisibility,
+             panel_MiddleCloserVisibility,
+             panel_MotorizedpnlOptionVisibility;
+        int panel_GlassID,
+            panel_GlazingBeadWidth,
+            panel_GlazingBeadWidthDecimal,
+            panel_GlazingBeadHeight,
+            panel_GlazingBeadHeightDecimal,
+            panel_GlassWidth,
+            panel_GlassWidthDecimal,
+            panel_OriginalGlassWidth,
+            panel_OriginalGlassWidthDecimal,
+            panel_GlassHeight,
+            panel_GlassHeightDecimal,
+            panel_OriginalGlassHeight,
+            panel_OriginalGlassHeightDecimal,
+            panel_GlassPropertyHeight,
+            panel_GlazingSpacerQty,
+            panel_SashWidth,
+            panel_SashWidthDecimal,
+            panel_SashHeight,
+            panel_SashHeightDecimal,
+            panel_OriginalSashWidth,
+            panel_OriginalSashWidthDecimal,
+            panel_OriginalSashHeight,
+            panel_OriginalSashHeightDecimal,
+            panel_SashReinfWidth,
+            panel_SashReinfWidthDecimal,
+            panel_SashReinfHeight,
+            panel_SashReinfHeightDecimal,
+            panel_ExtTopQty,
+            panel_ExtBotQty,
+            panel_ExtLeftQty,
+            panel_ExtRightQty,
+            panel_ExtTop2Qty,
+            panel_ExtTop3Qty,
+            panel_ExtBot2Qty,
+            panel_ExtLeft2Qty,
+            panel_ExtRight2Qty,
+            panel_RotoswingOptionsHeight,
+            panel_PlasticWedgeQty,
+            panel_StrikerQty_A,
+            panel_StrikerQty_C,
+            panel_MiddleCloserPairQty,
+            panel_MotorizedPropertyHeight,
+            panel_MotorizedMechQty,
+            panel_MotorizedMechSetQty,
+            panel_2DHingeQty,
+            panel_2DHingeQty_nonMotorized,
+            panel_3dHingeQty,
+            panel_ButtHingeQty,
+            panel_AdjStrikerQty,
+            panel_RestrictorStayQty,
+            panel_ExtensionPropertyHeight,
+            panel_GeorgianBar_VerticalQty,
+            panel_GeorgianBar_HorizontalQty,
+            panel_HingeOptionsPropertyHeight;
+        GlazingBead_ArticleNo panel_GlazingBeadArtNo;
+        GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
+        GBSpacer_ArticleNo panel_GBSpacerArtNo;
+        GlassFilm_Types panel_GlassFilm;
+        SashProfile_ArticleNo panel_SashProfileArtNo;
+        SashReinf_ArticleNo panel_SashReinfArtNo;
+        CoverProfile_ArticleNo panel_CoverProfileArtNo,
+                               panel_CoverProfileArtNo2;
+        FrictionStay_ArticleNo panel_FrictionStayArtNo;
+        FrictionStayCasement_ArticleNo panel_FSCasementArtNo;
+        SnapInKeep_ArticleNo panel_SnapInKeepArtNo;
+        FixedCam_ArticleNo panel_FixedCamArtNo;
+        _30x25Cover_ArticleNo panel_30x25CoverArtNo;
+        MotorizedDivider_ArticleNo panel_MotorizedDividerArtNo;
+        CoverForMotor_ArticleNo panel_CoverForMotorArtNo;
+        _2DHinge_ArticleNo panel_2dHingeArtNo;
+        _2DHinge_ArticleNo panel_2dHingeArtNo_nonMotorized;
+        PushButtonSwitch_ArticleNo panel_PushButtonSwitchArtNo;
+        FalsePole_ArticleNo panel_FalsePoleArtNo;
+        SupportingFrame_ArticleNo panel_SupportingFrameArtNo;
+        Plate_ArticleNo panel_PlateArtNo;
+        Handle_Type panel_HandleType;
+        Rotoswing_HandleArtNo panel_RotoswingArtNo;
+        Rotary_HandleArtNo panel_RotaryArtNo;
+        Rio_HandleArtNo panel_RioArtNo;
+        Rio_HandleArtNo panel_RioArtNo2;
+        ProfileKnobCylinder_ArtNo panel_ProfileKnobCylinderArtNo;
+        Cylinder_CoverArtNo panel_CylinderCoverArtNo;
+        Rotoline_HandleArtNo panel_RotolineArtNo;
+        MVD_HandleArtNo panel_MVDArtNo;
+        Espagnolette_ArticleNo panel_EspagnoletteArtNo;
+        Extension_ArticleNo panel_ExtensionTopArtNo,
+                            panel_ExtensionTop2ArtNo,
+                            panel_ExtensionTop3ArtNo,
+                            panel_ExtensionBotArtNo,
+                            panel_ExtensionBot2ArtNo,
+                            panel_ExtensionLeftArtNo,
+                            panel_ExtensionLeft2ArtNo,
+                            panel_ExtensionRightArtNo,
+                            panel_ExtensionRight2ArtNo;
+        CornerDrive_ArticleNo panel_CornerDriveArtNo;
+        PlasticWedge_ArticleNo panel_PlasticWedge;
+        MiddleCloser_ArticleNo panel_MiddleCloserArtNo;
+        LockingKit_ArticleNo panel_LockingKitArtNo;
+        GlassType panel_GlassType;
+        Striker_ArticleNo panel_StrikerArtno_A; //for Awning
+        Striker_ArticleNo panel_StrikerArtno_C; //for Casement
+        MotorizedMech_ArticleNo panel_MotorizedMechArtNo;
+        _3dHinge_ArticleNo panel_3dHingeArtNo;
+        ButtHinge_ArticleNo panel_ButtHingeArtNo;
+        AdjustableStriker_ArticleNo panel_AdjStrikerArtNo;
+        RestrictorStay_ArticleNo panel_RestrictorStayArtNo;
+        GeorgianBar_ArticleNo panel_GeorgianBarArtNo;
+        HingeOption panel_HingeOptions;
+        CenterHingeOption panel_CenterHingeOptions;
+        NTCenterHinge_ArticleNo panel_NTCenterHingeArticleNo;
+        StayBearingK_ArticleNo panel_StayBearingKArtNo;
+        StayBearingPin_ArticleNo panel_StayBearingPinArtNo;
+        StayBearingCover_ArticleNo panel_StayBearingCoverArtNo;
+        TopCornerHinge_ArticleNo panel_TopCornerHingeArtNo;
+        TopCornerHingeCover_ArticleNo panel_TopCornerHingeCoverArtNo;
+        TopCornerHingeSpacer_ArticleNo panel_TopCornerHingeSpacerArtNo;
+        CornerHingeK_ArticleNo panel_CornerHingeKArtNo;
+        CornerPivotRestK_ArticleNo panel_CornerPivotRestKArtNo;
+        CornerHingeCoverK_ArticleNo panel_CornerHingeCoverKArtNo;
+        CoverForCornerPivotRestVertical_ArticleNo panel_CoverForCornerPivotRestVerticalArtNo;
+        CoverForCornerPivotRest_ArticleNo panel_CoverForCornerPivotRestArtNo;
+        WeldableCornerJoint_ArticleNo panel_WeldableCArtNo;
+        LatchDeadboltStriker_ArticleNo panel_LatchDeadboltStrikerArtNo;
+        #endregion
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
-            Console.WriteLine(row_str);
             //if (row == 0)
             //{
             //    quotation_ref_no = Text = file_lines[0];
@@ -1826,7 +2079,7 @@ namespace PresentationLayer.Presenter
                 inside_frame = true;
 
             }
-            else if (row_str.Contains("PanelName"))
+            else if (row_str.Contains("#"))
             {
                 inside_panel = true;
             }
@@ -1886,6 +2139,7 @@ namespace PresentationLayer.Presenter
                 //    inside_divider = false;
                 //}
             }
+            
             else if (row_str == ")")
             {
               
@@ -2329,31 +2583,29 @@ namespace PresentationLayer.Presenter
                     {
                         if (row_str.Contains("Panel_ChkText:"))
                         {
-                            
+                            panel_ChkText = row_str.Substring(15);
                         }
                         if (row_str.Contains("Panel_Dock:"))
                         {
-                            //switch (row_str.Substring(15))
-                            //{
-                            //    case "Fill":
-                            //        _frameUCPresenter.
-                            //        break;
-                            //    case "None":
-                            //        dok = DockStyle.None;
-                            //        break;
-                            //}
+                            switch (row_str.Substring(12))
+                            {
+                                case "Fill":
+                                    panel_Dock = DockStyle.Fill;
+                                    break;
+                                case "None":
+                                    panel_Dock = DockStyle.None;
+                                    break;
+                            }
                         }
                         if (row_str.Contains("Panel_Parent:"))
                         {
-
+                            panel_Parent = _frameModel.Frame_UC;
                         }
                         if (row_str.Contains("Panel_MultiPanelGroup:"))
                         {
-
                         }
                         if (row_str.Contains("Panel_FrameGroup:"))
                         {
-
                         }
                         if (row_str.Contains("Panel_FramePropertiesGroup:"))
                         {
@@ -2361,184 +2613,1572 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("Panel_Height:"))
                         {
-
+                            //panel_Height = Convert.ToInt32(row_str.Substring(14));
                         }
                         if (row_str.Contains("Panel_OriginalHeight:"))
                         {
-
+                            panel_OriginalHeight = Convert.ToInt32(row_str.Substring(22));
                         }
-                        if (row_str.Contains("PanelImageRenderer_Height:"))
+                        if (row_str.Contains("Panel_ImageRenderer_Height:"))
                         {
-
+                            panel_ImageRenderer_Height = Convert.ToInt32(row_str.Substring(27));
                         }
                         if (row_str.Contains("Panel_HeightToBind:"))
                         {
-
+                            panel_HeightToBind = Convert.ToInt32(row_str.Substring(20));
                         }
                         if (row_str.Contains("Panel_DisplayHeight:"))
                         {
-
+                            panel_DisplayHeight = Convert.ToInt32(row_str.Substring(21));
                         }
                         if (row_str.Contains("Panel_DisplayHeightDecimal:"))
                         {
-
+                            panel_DisplayHeightDecimal = Convert.ToInt32(row_str.Substring(28));
                         }
                         if (row_str.Contains("Panel_OriginalDisplayHeight:"))
                         {
-
+                            panel_OriginalDisplayHeight = Convert.ToInt32(row_str.Substring(29));
                         }
                         if (row_str.Contains("Panel_OriginalDisplayHeightDecimal:"))
                         {
-
+                            panel_OriginalDisplayHeightDecimal = Convert.ToInt32(row_str.Substring(36));
                         }
                         if (row_str.Contains("Panel_ID:"))
                         {
-
+                            panel_ID = Convert.ToInt32(row_str.Substring(10));
                         }
                         if (row_str.Contains("Panel_Name:"))
                         {
-
+                            panel_Name = Convert.ToString(row_str.Substring(12));
                         }
                         if (row_str.Contains("Panel_Orient:"))
                         {
-
+                            panel_Orient = Convert.ToBoolean(row_str.Substring(14));
                         }
                         if (row_str.Contains("Panel_OrientVisibility:"))
                         {
-
+                            panel_OrientVisibility = Convert.ToBoolean(row_str.Substring(24));
                         }
                         if (row_str.Contains("Panel_Type:"))
                         {
-
+                            panel_Type = row_str.Substring(12);
                         }
                         if (row_str.Contains("Panel_Width:"))
                         {
-
+                            //panel_Width = Convert.ToInt32(row_str.Substring(13));
                         }
                         if (row_str.Contains("Panel_OriginalWidth:"))
                         {
-
+                            panel_OriginalWidth = Convert.ToInt32(row_str.Substring(21));
                         }
-                        if (row_str.Contains("PanelImageRenderer_Width:"))
+                        if (row_str.Contains("Panel_ImageRenderer_Width:"))
                         {
-
+                            panel_ImageRenderer_Width = Convert.ToInt32(row_str.Substring(26));
                         }
                         if (row_str.Contains("Panel_WidthToBind:"))
                         {
-
+                            panel_WidthToBind = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_DisplayWidth:"))
                         {
-
+                            panel_DisplayWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_DisplayWidthDecimal:"))
                         {
-
+                            panel_DisplayWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_OriginalDisplayWidth:"))
                         {
+                            panel_OriginalDisplayWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
 
                         }
                         if (row_str.Contains("Panel_OriginalDisplayWidthDecimal:"))
                         {
-
+                            panel_OriginalDisplayWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_Visibility:"))
                         {
-
+                            panel_Visibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
-                        if (row_str.Contains("PanelImageRenderer_Zoom:"))
+                        if (row_str.Contains("Panel_ImageRenderer_Zoom:"))
                         {
-
+                            panel_ImageRendererZoom = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_Index_Inside_MPanel:"))
                         {
-
+                            panel_Index_Inside_MPanel = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_Index_Inside_SPanel:"))
                         {
+                            panel_Index_Inside_SPanel = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
 
                         }
                         if (row_str.Contains("Panel_Placement:"))
                         {
-
+                            panel_Placement = row_str.Substring(row_str.IndexOf(":") + 1);
                         }
                         if (row_str.Contains("Panel_Overlap_Sash:"))
                         {
-
+                            foreach(OverlapSash pnl_ovrlpsash in OverlapSash.GetAll())
+                            {
+                                if (pnl_ovrlpsash.ToString() == row_str.Substring(20))
+                                {
+                                    panel_OverlapSash = pnl_ovrlpsash;
+                                }
+                            }
                         }
                         if (row_str.Contains("Panel_Margin:"))
                         {
-
+                            //panel_Index_Inside_SPanel = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_MarginToBind:"))
                         {
-
+                            //panel_WidthToBind = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("PanelImageRenderer_Margin:"))
                         {
-
+                            //panel_WidthToBind = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_Zoom:"))
                         {
-
+                            
+                            panel_Zoom = float.Parse(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_ParentMultiPanelModel:"))
                         {
-
+                            //panel_ParentMultiPanelModel = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_PropertyHeight:"))
                         {
-
+                            panel_PropertyHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_HandleOptionsVisibility:"))
                         {
-
+                            panel_HandleOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_RotoswingOptionsVisibility:"))
                         {
-
+                            panel_RotoswingOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_RioOptionsVisibility:"))
                         {
-
+                            panel_RioOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_RioOptionsVisibility2:"))
                         {
-
+                            panel_RioOptionsVisibility2 = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_RotolineOptionsVisibility:"))
                         {
-
+                            panel_RotolineOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_MVDOptionsVisibility:"))
                         {
-
+                            panel_MVDOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_RotaryOptionsVisibility:"))
                         {
-
+                            panel_RotaryOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_HandleOptionsHeight:"))
                         {
-
+                            panel_HandleOptionsHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_LouverBladesCount:"))
                         {
-
+                            panel_LouverBladesCount = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
                         }
                         if (row_str.Contains("Panel_BackColor:"))
                         {
 
+                            Console.WriteLine();
+                            panel_BackColor = ColorTranslator.FromHtml(row_str.Substring(row_str.IndexOf("[") + 1, row_str.IndexOf("]") - 1 - row_str.IndexOf("[")));
                         }
                         if (row_str.Contains("Panel_SlidingTypes:"))
                         {
-
+                            foreach (SlidingTypes pnl_slidingType in SlidingTypes.GetAll())
+                            {
+                                int ass = row_str.IndexOf(":");
+                                string asda = row_str.Substring(row_str.IndexOf(": ") + 1).Trim();
+                                if (pnl_slidingType.ToString() == row_str.Substring(row_str.IndexOf(": ") + 1).Trim())
+                                {
+                                    panel_SlidingTypes = pnl_slidingType;
+                                }
+                            }
                         }
                         if (row_str.Contains("Panel_SlidingTypeVisibility:"))
                         {
-                            inside_panel = false;
+                            panel_SlidingTypeVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                            
                         }
+                        //Explosion
+                        else if (row_str.Contains("Panel_GlassID:"))
+                        {
+                            panel_GlassID = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassThicknessDesc:"))
+                        {
+                            panel_GlassThicknessDesc = row_str.Substring(row_str.IndexOf(":") + 1);
+                        }
+                        else if (row_str.Contains("Panel_GlassThickness:"))
+                        {
+                            panel_GlassThickness = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingBeadArtNo:"))
+                        {
+                            foreach(GlazingBead_ArticleNo gban in GlazingBead_ArticleNo.GetAll())
+                            {
+                                if(gban.ToString()  == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GlazingBeadArtNo = gban;
+                                }
+                            }
+                           
+                        }
+                        else if (row_str.Contains("Panel_GlazingAdaptorArtNo:"))
+                        {
+                            foreach(GlazingAdaptor_ArticleNo gaan in GlazingAdaptor_ArticleNo.GetAll())
+                            {
+                                if (gaan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GlazingAdaptorArtNo = gaan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_GBSpacerArtNo:"))
+                        {
+                            foreach (GBSpacer_ArticleNo gaan in GBSpacer_ArticleNo.GetAll())
+                            {
+                                if (gaan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GBSpacerArtNo = gaan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ChkGlazingAdaptor:"))
+                        {
+
+                            panel_ChkGlazingAdaptor = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingBeadWidth:"))
+                        {
+                            panel_GlazingBeadWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingBeadWidthDecimal:"))
+                        {
+                            panel_GlazingBeadWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingBeadHeight:"))
+                        {
+                            panel_GlazingBeadHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingBeadHeightDecimal:"))
+                        {
+                            panel_GlazingBeadHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassWidth:"))
+                        {
+                            panel_GlassWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassWidthDecimal:"))
+                        {
+                            panel_GlassWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalGlassWidth:"))
+                        {
+                            panel_OriginalGlassWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalGlassWidthDecimal:"))
+                        {
+                            panel_OriginalGlassWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassHeight:"))
+                        {
+                            panel_GlassHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassHeightDecimal:"))
+                        {
+                            panel_GlassHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalGlassHeight:"))
+                        {
+                            panel_OriginalGlassHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalGlassHeightDecimal:"))
+                        {
+                            panel_OriginalGlassHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassPropertyHeight:"))
+                        {
+                            panel_GlassPropertyHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlazingSpacerQty:"))
+                        {
+                            panel_GlazingSpacerQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GlassFilm:"))
+                        {
+                            foreach (GlassFilm_Types gft in GlassFilm_Types.GetAll())
+                            {
+                                if (gft.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GlassFilm = gft;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SashPropertyVisibility:"))
+                        {
+                            panel_SashPropertyVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashProfileArtNo:"))
+                        {
+                            foreach (SashProfile_ArticleNo span in SashProfile_ArticleNo.GetAll())
+                            {
+                                if (span.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_SashProfileArtNo = span;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SashReinfArtNo:"))
+                        {
+                            foreach (SashReinf_ArticleNo sran in SashReinf_ArticleNo.GetAll())
+                            {
+                                if (sran.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_SashReinfArtNo = sran;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SashWidth:"))
+                        {
+                            panel_SashWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashWidthDecimal:"))
+                        {
+                            panel_SashWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashHeight:"))
+                        {
+                            panel_SashHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashHeightDecimal:"))
+                        {
+                            panel_SashHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalSashWidth:"))
+                        {
+                            panel_OriginalSashWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalSashWidthDecimal:"))
+                        {
+                            panel_OriginalSashWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalSashHeight:"))
+                        {
+                            panel_OriginalSashHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_OriginalSashHeightDecimal:"))
+                        {
+                            panel_OriginalSashHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashReinfWidth:"))
+                        {
+                            panel_SashReinfWidth = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashReinfWidthDecimal:"))
+                        {
+                            panel_SashReinfWidthDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashReinfHeight:"))
+                        {
+                            panel_SashReinfHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_SashReinfHeightDecimal:"))
+                        {
+                            panel_SashReinfHeightDecimal = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_CoverProfileArtNo:"))
+                        {
+                            foreach (CoverProfile_ArticleNo cpan in CoverProfile_ArticleNo.GetAll())
+                            {
+                                if (cpan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CoverProfileArtNo = cpan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CoverProfileArtNo2:"))
+                        {
+                            foreach (CoverProfile_ArticleNo cpan in CoverProfile_ArticleNo.GetAll())
+                            {
+                                if (cpan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CoverProfileArtNo2 = cpan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_FrictionStayArtNo:"))
+                        {
+                            foreach (FrictionStay_ArticleNo fsan in FrictionStay_ArticleNo.GetAll())
+                            {
+                                if (fsan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_FrictionStayArtNo = fsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_FSCasementArtNo:"))
+                        {
+                            foreach (FrictionStayCasement_ArticleNo fscan in FrictionStayCasement_ArticleNo.GetAll())
+                            {
+                                if (fscan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_FSCasementArtNo = fscan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SnapInKeepArtNo:"))
+                        {
+                            foreach (SnapInKeep_ArticleNo sikan in SnapInKeep_ArticleNo.GetAll())
+                            {
+                                if (sikan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_SnapInKeepArtNo = sikan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_FixedCamArtNo:"))
+                        {
+                            foreach (FixedCam_ArticleNo fcan in FixedCam_ArticleNo.GetAll())
+                            {
+                                if (fcan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_FixedCamArtNo = fcan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_30x25CoverArtNo:"))
+                        {
+                            foreach (_30x25Cover_ArticleNo can in _30x25Cover_ArticleNo.GetAll())
+                            {
+                                if (can.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_30x25CoverArtNo = can;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_MotorizedDividerArtNo:"))
+                        {
+                            foreach (MotorizedDivider_ArticleNo mdan in MotorizedDivider_ArticleNo.GetAll())
+                            {
+                                if (mdan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_MotorizedDividerArtNo = mdan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CoverForMotorArtNo:"))
+                        {
+                            foreach (CoverForMotor_ArticleNo cfman in CoverForMotor_ArticleNo.GetAll())
+                            {
+                                if (cfman.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CoverForMotorArtNo = cfman;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_2dHingeArtNo:"))
+                        {
+                            foreach (_2DHinge_ArticleNo han in _2DHinge_ArticleNo.GetAll())
+                            {
+                                if (han.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_2dHingeArtNo = han;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PushButtonSwitchArtNo:"))
+                        {
+                            foreach (PushButtonSwitch_ArticleNo pbsan in PushButtonSwitch_ArticleNo.GetAll())
+                            {
+                                if (pbsan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_PushButtonSwitchArtNo = pbsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_FalsePoleArtNo:"))
+                        {
+                            foreach (FalsePole_ArticleNo fpan in FalsePole_ArticleNo.GetAll())
+                            {
+                                if (fpan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_FalsePoleArtNo = fpan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SupportingFrameArtNo:"))
+                        {
+                            foreach (SupportingFrame_ArticleNo sfan in SupportingFrame_ArticleNo.GetAll())
+                            {
+                                if (sfan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_SupportingFrameArtNo = sfan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PlateArtNo:"))
+                        {
+                            foreach (Plate_ArticleNo pan in Plate_ArticleNo.GetAll())
+                            {
+                                if (pan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_PlateArtNo = pan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_HandleType:"))
+                        {
+                            foreach (Handle_Type ht in Handle_Type.GetAll())
+                            {
+                                if (ht.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_HandleType = ht;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RotoswingArtNo:"))
+                        {
+                            foreach (Rotoswing_HandleArtNo rhan in Rotoswing_HandleArtNo.GetAll())
+                            {
+                                if (rhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RotoswingArtNo = rhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RotaryArtNo:"))
+                        {
+                            foreach (Rotary_HandleArtNo rhan in Rotary_HandleArtNo.GetAll())
+                            {
+                                if (rhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RotaryArtNo = rhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RioArtNo:"))
+                        {
+                            foreach (Rio_HandleArtNo rhan in Rio_HandleArtNo.GetAll())
+                            {
+                                if (rhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RioArtNo = rhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RioArtNo2:"))
+                        {
+                            foreach (Rio_HandleArtNo rhan in Rio_HandleArtNo.GetAll())
+                            {
+                                if (rhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RioArtNo2 = rhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ProfileKnobCylinderArtNo:"))
+                        {
+                            foreach (ProfileKnobCylinder_ArtNo pkcan in ProfileKnobCylinder_ArtNo.GetAll())
+                            {
+                                if (pkcan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ProfileKnobCylinderArtNo = pkcan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CylinderCoverArtNo:"))
+                        {
+                            foreach (Cylinder_CoverArtNo ccan in Cylinder_CoverArtNo.GetAll())
+                            {
+                                if (ccan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CylinderCoverArtNo = ccan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RotolineArtNo:"))
+                        {
+                            foreach (Rotoline_HandleArtNo rhan in Rotoline_HandleArtNo.GetAll())
+                            {
+                                if (rhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RotolineArtNo = rhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_MVDArtNo:"))
+                        {
+                            foreach (MVD_HandleArtNo mvdhan in MVD_HandleArtNo.GetAll())
+                            {
+                                if (mvdhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_MVDArtNo = mvdhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_EspagnoletteArtNo:"))
+                        {
+                            foreach (Espagnolette_ArticleNo ean in Espagnolette_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_EspagnoletteArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_EspagnoletteOptionsVisibility:"))
+                        {
+                            panel_EspagnoletteOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtensionTopArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionTopArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionTop2ArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionTop2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionTop3ArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionTop3ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionBotArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionBotArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionBot2ArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionBot2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionLeftArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionLeftArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionLeft2ArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionLeft2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionRightArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionRightArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtensionRight2ArtNo:"))
+                        {
+                            foreach (Extension_ArticleNo ean in Extension_ArticleNo.GetAll())
+                            {
+                                if (ean.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ExtensionRight2ArtNo = ean;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ExtTopChk:"))
+                        {
+
+                            panel_ExtTopChk = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtTop2Chk:"))
+                        {
+                            panel_ExtTop2Chk = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtBotChk:"))
+                        {
+                            panel_ExtBotChk = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtLeftChk:"))
+                        {
+                            panel_ExtLeftChk = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtRightChk:"))
+                        {
+                            panel_ExtRightChk = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtTopQty:"))
+                        {
+                            panel_ExtTopQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtBotQty:"))
+                        {
+                            panel_ExtBotQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtLeftQty:"))
+                        {
+                            panel_ExtLeftQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtRightQty:"))
+                        {
+                            panel_ExtRightQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtTop2Qty:"))
+                        {
+                            panel_ExtTop2Qty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtTop3Qty:"))
+                        {
+                            panel_ExtTop3Qty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtBot2Qty:"))
+                        {
+                            panel_ExtBot2Qty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtLeft2Qty:"))
+                        {
+                            panel_ExtLeft2Qty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtRight2Qty:"))
+                        {
+                            panel_ExtRight2Qty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_CornerDriveArtNo:"))
+                        {
+                            foreach (CornerDrive_ArticleNo cdan in CornerDrive_ArticleNo.GetAll())
+                            {
+                                if (cdan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CornerDriveArtNo = cdan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerDriveOptionsVisibility:"))
+                        {
+                            panel_CornerDriveOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtensionOptionsVisibility:"))
+                        {
+                            panel_ExtensionOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_RotoswingOptionsHeight:"))
+                        {
+                            panel_RotoswingOptionsHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_PlasticWedge:"))
+                        {
+                            foreach (PlasticWedge_ArticleNo pwan in PlasticWedge_ArticleNo.GetAll())
+                            {
+                                if (pwan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_PlasticWedge = pwan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PlasticWedgeQty:"))
+                        {
+                            panel_PlasticWedgeQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MiddleCloserArtNo:"))
+                        {
+                            foreach (MiddleCloser_ArticleNo mcan in MiddleCloser_ArticleNo.GetAll())
+                            {
+                                if (mcan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_MiddleCloserArtNo = mcan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LockingKitArtNo:"))
+                        {
+                            foreach (LockingKit_ArticleNo lkan in LockingKit_ArticleNo.GetAll())
+                            {
+                                if (lkan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_LockingKitArtNo = lkan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_GlassType:"))
+                        {
+                            foreach (GlassType gt in GlassType.GetAll())
+                            {
+                                if (gt.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GlassType = gt;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StrikerArtno_A:"))
+                        {
+                            foreach (Striker_ArticleNo san in Striker_ArticleNo.GetAll())
+                            {
+                                if (san.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_StrikerArtno_A = san;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StrikerQty_A:"))
+                        {
+                            panel_StrikerQty_A = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_StrikerArtno_C:"))
+                        {
+                            foreach (Striker_ArticleNo san in Striker_ArticleNo.GetAll())
+                            {
+                                if (san.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_StrikerArtno_C = san;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StrikerQty_C:"))
+                        {
+                            panel_StrikerQty_C = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MiddleCloserPairQty:"))
+                        {
+                            panel_MiddleCloserPairQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MotorizedOptionVisibility:"))
+                        {
+                            panel_MotorizedOptionVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MotorizedMechArtNo:"))
+                        {
+                            foreach (MotorizedMech_ArticleNo mman in MotorizedMech_ArticleNo.GetAll())
+                            {
+                                if (mman.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_MotorizedMechArtNo = mman;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_MotorizedPropertyHeight:"))
+                        {
+                            panel_MotorizedPropertyHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MotorizedMechQty:"))
+                        {
+                            panel_MotorizedMechQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MotorizedMechSetQty:"))
+                        {
+                            panel_MotorizedMechSetQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_2DHingeQty:"))
+                        {
+                            panel_2DHingeQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_2dHingeArtNo_nonMotorized:"))
+                        {
+                            foreach (_2DHinge_ArticleNo han in _2DHinge_ArticleNo.GetAll())
+                            {
+                                if (han.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_2dHingeArtNo_nonMotorized = han;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_2DHingeQty_nonMotorized:"))
+                        {
+                            panel_2DHingeQty_nonMotorized = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_2dHingeVisibility_nonMotorized:"))
+                        {
+                            panel_2dHingeVisibility_nonMotorized = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_3dHingeArtNo:"))
+                        {
+                            foreach (_3dHinge_ArticleNo han in _3dHinge_ArticleNo.GetAll())
+                            {
+                                if (han.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_3dHingeArtNo = han;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_3dHingeQty:"))
+                        {
+                            panel_3dHingeQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_3dHingePropertyVisibility:"))
+                        {
+                            panel_3dHingePropertyVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ButtHingeArtNo:"))
+                        {
+                            foreach (ButtHinge_ArticleNo bhan in ButtHinge_ArticleNo.GetAll())
+                            {
+                                if (bhan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_ButtHingeArtNo = bhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_ButtHingeQty:"))
+                        {
+
+                            panel_ButtHingeQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_2dHingeVisibility:"))
+                        {
+                            panel_2dHingeVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ButtHingeVisibility:"))
+                        {
+                            panel_ButtHingeVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_AdjStrikerArtNo:"))
+                        {
+                            foreach (AdjustableStriker_ArticleNo asan in AdjustableStriker_ArticleNo.GetAll())
+                            {
+                                if (asan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_AdjStrikerArtNo = asan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_AdjStrikerQty:"))
+                        {
+                            panel_AdjStrikerQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_RestrictorStayArtNo:"))
+                        {
+                            foreach (RestrictorStay_ArticleNo rsan in RestrictorStay_ArticleNo.GetAll())
+                            {
+                                if (rsan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_RestrictorStayArtNo = rsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RestrictorStayQty:"))
+                        {
+                            panel_RestrictorStayQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_ExtensionPropertyHeight:"))
+                        {
+                            panel_ExtensionPropertyHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GeorgianBarArtNo:"))
+                        {
+                            foreach (GeorgianBar_ArticleNo gban in GeorgianBar_ArticleNo.GetAll())
+                            {
+                                if (gban.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_GeorgianBarArtNo = gban;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_GeorgianBar_VerticalQty:"))
+                        {
+                            panel_GeorgianBar_VerticalQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GeorgianBar_HorizontalQty:"))
+                        {
+                            panel_GeorgianBar_HorizontalQty = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_GeorgianBarOptionVisibility:"))
+                        {
+                            panel_GeorgianBarOptionVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_HingeOptions:"))
+                        {
+                            foreach (HingeOption ho in HingeOption.GetAll())
+                            {
+                                if (ho.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_HingeOptions = ho;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_HingeOptionsPropertyHeight:"))
+                        {
+                            panel_HingeOptionsPropertyHeight = Convert.ToInt32(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_HingeOptionsVisibility:"))
+                        {
+                            panel_HingeOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_CenterHingeOptions:"))
+                        {
+                            foreach (CenterHingeOption cho in CenterHingeOption.GetAll())
+                            {
+                                if (cho.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CenterHingeOptions = cho;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CenterHingeOptionsVisibility:"))
+                        {
+                            panel_CenterHingeOptionsVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_NTCenterHingeArticleNo:"))
+                        {
+                            foreach (NTCenterHinge_ArticleNo ntchan in NTCenterHinge_ArticleNo.GetAll())
+                            {
+                                if (ntchan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_NTCenterHingeArticleNo = ntchan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StayBearingKArtNo:"))
+                        {
+                            foreach (StayBearingK_ArticleNo sbkan in StayBearingK_ArticleNo.GetAll())
+                            {
+                                if (sbkan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_StayBearingKArtNo = sbkan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StayBearingPinArtNo:"))
+                        {
+                            foreach (StayBearingPin_ArticleNo sbpan in StayBearingPin_ArticleNo.GetAll())
+                            {
+                                if (sbpan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_StayBearingPinArtNo = sbpan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_StayBearingCoverArtNo:"))
+                        {
+                            foreach (StayBearingCover_ArticleNo sbcan in StayBearingCover_ArticleNo.GetAll())
+                            {
+                                if (sbcan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_StayBearingCoverArtNo = sbcan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_TopCornerHingeArtNo:"))
+                        {
+                            foreach (TopCornerHinge_ArticleNo tchan in TopCornerHinge_ArticleNo.GetAll())
+                            {
+                                if (tchan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_TopCornerHingeArtNo = tchan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_TopCornerHingeCoverArtNo:"))
+                        {
+                            foreach (TopCornerHingeCover_ArticleNo tchcan in TopCornerHingeCover_ArticleNo.GetAll())
+                            {
+                                if (tchcan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_TopCornerHingeCoverArtNo = tchcan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_TopCornerHingeSpacerArtNo:"))
+                        {
+                            foreach (TopCornerHingeSpacer_ArticleNo tchsan in TopCornerHingeSpacer_ArticleNo.GetAll())
+                            {
+                                if (tchsan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_TopCornerHingeSpacerArtNo = tchsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerHingeKArtNo:"))
+                        {
+                            foreach (CornerHingeK_ArticleNo chkan in CornerHingeK_ArticleNo.GetAll())
+                            {
+                                if (chkan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CornerHingeKArtNo = chkan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerPivotRestKArtNo:"))
+                        {
+                            foreach (CornerPivotRestK_ArticleNo cprkan in CornerPivotRestK_ArticleNo.GetAll())
+                            {
+                                if (cprkan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CornerPivotRestKArtNo = cprkan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CornerHingeCoverKArtNo:"))
+                        {
+                            foreach (CornerHingeCoverK_ArticleNo chckan in CornerHingeCoverK_ArticleNo.GetAll())
+                            {
+                                if (chckan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CornerHingeCoverKArtNo = chckan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CoverForCornerPivotRestVerticalArtNo:"))
+                        {
+                            foreach (CoverForCornerPivotRestVertical_ArticleNo cfcprvan in CoverForCornerPivotRestVertical_ArticleNo.GetAll())
+                            {
+                                if (cfcprvan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CoverForCornerPivotRestVerticalArtNo = cfcprvan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CoverForCornerPivotRestArtNo:"))
+                        {
+                            foreach (CoverForCornerPivotRest_ArticleNo cfcpran in CoverForCornerPivotRest_ArticleNo.GetAll())
+                            {
+                                if (cfcpran.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_CoverForCornerPivotRestArtNo = cfcpran;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_WeldableCArtNo:"))
+                        {
+                            foreach (WeldableCornerJoint_ArticleNo wcjan in WeldableCornerJoint_ArticleNo.GetAll())
+                            {
+                                if (wcjan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_WeldableCArtNo = wcjan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LatchDeadboltStrikerArtNo:"))
+                        {
+                            foreach (LatchDeadboltStriker_ArticleNo ldsan in LatchDeadboltStriker_ArticleNo.GetAll())
+                            {
+                                if (ldsan.ToString() == row_str.Substring(row_str.IndexOf(":") + 1))
+                                {
+                                    panel_LatchDeadboltStrikerArtNo = ldsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CmenuDeleteVisibility:"))
+                        {
+                            panel_CmenuDeleteVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_NTCenterHingeVisibility:"))
+                        {
+                            panel_NTCenterHingeVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MiddleCloserVisibility:"))
+                        {
+                            panel_MiddleCloserVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                        }
+                        else if (row_str.Contains("Panel_MotorizedpnlOptionVisibility:"))
+                        {
+                            panel_MotorizedpnlOptionVisibility = Convert.ToBoolean(row_str.Substring(row_str.IndexOf(":") + 1));
+                            IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
+                                                           panel_Height,
+                                                           (Control)_frameModel.Frame_UC,
+                                                           (UserControl)panel_FrameGroup,
+                                                           (UserControl)panel_FramePropertiesGroup,
+                                                           (UserControl)panel_MultiPanelGroup,
+                                                           panel_Type,
+                                                           panel_Visibility,
+                                                           _frameModel.Frame_Zoom,
+                                                           _frameModel,
+                                                           null,
+                                                           panel_DisplayWidth,
+                                                           panel_DisplayWidthDecimal,
+                                                           panel_DisplayHeight,
+                                                           panel_DisplayHeightDecimal,
+                                                           panel_GlazingBeadArtNo,
+                                                           panel_GlassFilm,
+                                                           panel_SashProfileArtNo,
+                                                           panel_SashReinfArtNo,
+                                                           panel_GlassType,
+                                                           panel_EspagnoletteArtNo,
+                                                           //panel_StrikerArtNo,
+                                                           Striker_ArticleNo._M89ANTA,
+                                                           panel_MiddleCloserArtNo,
+                                                           panel_LockingKitArtNo,
+                                                           panel_MotorizedMechArtNo,
+                                                           panel_HandleType,
+                                                           panel_ExtensionTopArtNo,
+                                                           panel_ExtensionTop2ArtNo,
+                                                           panel_ExtensionBotArtNo,
+                                                           panel_ExtensionBot2ArtNo,
+                                                           panel_ExtensionLeftArtNo,
+                                                           panel_ExtensionLeft2ArtNo,
+                                                           panel_ExtensionRightArtNo,
+                                                           panel_ExtensionRight2ArtNo,
+                                                           panel_ExtTopChk,
+                                                           panel_ExtBotChk,
+                                                           panel_ExtLeftChk,
+                                                           panel_ExtRightChk,
+                                                           panel_ExtTopQty,
+                                                           panel_ExtBotQty,
+                                                           panel_ExtLeftQty,
+                                                           panel_ExtRightQty,
+                                                           panel_ExtTop2Qty,
+                                                           panel_ExtBot2Qty,
+                                                           panel_ExtLeft2Qty,
+                                                           panel_ExtRight2Qty,
+                                                           panel_RotoswingArtNo,
+                                                           panel_GeorgianBarArtNo,
+                                                           panel_OverlapSash,
+                                                           panel_GeorgianBar_VerticalQty,
+                                                           panel_GeorgianBar_HorizontalQty,
+                                                           panel_GeorgianBarOptionVisibility,
+                                                           panel_ID,
+                                                           panel_GlassID,
+                                                           panel_ImageRendererZoom,
+                                                           panel_Index_Inside_MPanel,
+                                                           panel_Dock,
+                                                           panel_Name,
+                                                           panel_Orient,
+                                                           panel_HingeOptions,
+                                                           panel_SlidingTypeVisibility,
+                                                           panel_SlidingTypes);
+
+                            pnlModel.Panel_ChkText = panel_ChkText;
+                            pnlModel.Panel_Type = panel_Type;
+                            pnlModel.Panel_Placement = panel_Placement;
+                            pnlModel.Panel_OriginalHeight = panel_OriginalHeight;
+                            pnlModel.PanelImageRenderer_Height = panel_ImageRenderer_Height;
+                            pnlModel.Panel_HeightToBind = panel_HeightToBind;
+                            pnlModel.Panel_OriginalDisplayHeight = panel_OriginalDisplayHeight;
+                            pnlModel.Panel_OriginalDisplayHeightDecimal = panel_OriginalDisplayHeightDecimal;
+                            pnlModel.PanelImageRenderer_Width = panel_ImageRenderer_Width;
+                            pnlModel.Panel_WidthToBind = panel_WidthToBind;
+                            pnlModel.Panel_OriginalDisplayWidth = panel_OriginalDisplayWidth;
+                            pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
+                            pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
+                            pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
+                            pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
+                            pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
+                            pnlModel.Panel_Orient = panel_Orient;
+                            pnlModel.Panel_OrientVisibility = panel_OrientVisibility;
+                            pnlModel.Panel_HandleOptionsVisibility = panel_HandleOptionsVisibility;
+                            pnlModel.Panel_RotoswingOptionsVisibility = panel_RotoswingOptionsVisibility;
+                            pnlModel.Panel_RioOptionsVisibility = panel_RioOptionsVisibility;
+                            pnlModel.Panel_RioOptionsVisibility2 = panel_RioOptionsVisibility2;
+                            pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
+                            pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
+                            pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
+                            #region Explosion
+                            pnlModel.PanelGlass_ID = panel_GlassID;
+                            pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
+                            pnlModel.Panel_GlassThickness = panel_GlassThickness;
+                            pnlModel.PanelGlazingBead_ArtNo = panel_GlazingBeadArtNo;
+                            pnlModel.Panel_GlazingAdaptorArtNo = panel_GlazingAdaptorArtNo;
+                            pnlModel.Panel_GBSpacerArtNo = panel_GBSpacerArtNo;
+                            pnlModel.Panel_ChkGlazingAdaptor = panel_ChkGlazingAdaptor;
+                            pnlModel.Panel_GlazingBeadWidth = panel_GlazingBeadWidth;
+                            pnlModel.Panel_GlazingBeadWidthDecimal = panel_GlazingBeadWidthDecimal;
+                            pnlModel.Panel_GlazingBeadHeight = panel_GlazingBeadHeight;
+                            pnlModel.Panel_GlazingBeadHeightDecimal = panel_GlazingBeadHeightDecimal;
+                            pnlModel.Panel_GlassWidth = panel_GlassWidth;
+                            pnlModel.Panel_GlassWidthDecimal = panel_GlassWidthDecimal;
+                            pnlModel.Panel_OriginalGlassWidth = panel_OriginalGlassWidth;
+                            pnlModel.Panel_OriginalGlassWidthDecimal = panel_OriginalGlassWidthDecimal;
+                            pnlModel.Panel_GlassHeight = panel_GlassHeight;
+                            pnlModel.Panel_GlassHeightDecimal = panel_GlassHeightDecimal;
+                            pnlModel.Panel_OriginalGlassHeight = panel_OriginalGlassHeight;
+                            pnlModel.Panel_OriginalGlassHeightDecimal = panel_OriginalGlassHeightDecimal;
+                            pnlModel.Panel_GlassPropertyHeight = panel_GlassPropertyHeight;
+                            pnlModel.Panel_GlazingSpacerQty = panel_GlazingSpacerQty;
+                            pnlModel.Panel_GlassFilm = panel_GlassFilm;
+                            pnlModel.Panel_SashPropertyVisibility = panel_SashPropertyVisibility;
+                            pnlModel.Panel_SashProfileArtNo = panel_SashProfileArtNo;
+                            pnlModel.Panel_SashReinfArtNo = panel_SashReinfArtNo;
+                            pnlModel.Panel_SashWidth = panel_SashWidth;
+                            pnlModel.Panel_SashWidthDecimal = panel_SashWidthDecimal;
+                            pnlModel.Panel_SashHeight = panel_SashHeight;
+                            pnlModel.Panel_SashHeightDecimal = panel_SashHeightDecimal;
+                            pnlModel.Panel_OriginalSashWidth = panel_OriginalSashWidth;
+                            pnlModel.Panel_OriginalSashWidthDecimal = panel_OriginalSashWidthDecimal;
+                            pnlModel.Panel_OriginalSashHeight = panel_OriginalSashHeight;
+                            pnlModel.Panel_OriginalSashHeightDecimal = panel_OriginalSashHeightDecimal;
+                            pnlModel.Panel_SashReinfWidth = panel_SashReinfWidth;
+                            pnlModel.Panel_SashReinfWidthDecimal = panel_SashReinfWidthDecimal;
+                            pnlModel.Panel_SashReinfHeight = panel_SashReinfHeight;
+                            pnlModel.Panel_SashReinfHeightDecimal = panel_SashReinfHeightDecimal;
+                            pnlModel.Panel_CoverProfileArtNo = panel_CoverProfileArtNo;
+                            pnlModel.Panel_CoverProfileArtNo2 = panel_CoverProfileArtNo2;
+                            pnlModel.Panel_FrictionStayArtNo = panel_FrictionStayArtNo;
+                            pnlModel.Panel_FSCasementArtNo = panel_FSCasementArtNo;
+                            pnlModel.Panel_SnapInKeepArtNo = panel_SnapInKeepArtNo;
+                            pnlModel.Panel_FixedCamArtNo = panel_FixedCamArtNo;
+                            pnlModel.Panel_30x25CoverArtNo = panel_30x25CoverArtNo;
+                            pnlModel.Panel_MotorizedDividerArtNo = panel_MotorizedDividerArtNo;
+                            pnlModel.Panel_CoverForMotorArtNo = panel_CoverForMotorArtNo;
+                            pnlModel.Panel_2dHingeArtNo = panel_2dHingeArtNo;
+                            pnlModel.Panel_PushButtonSwitchArtNo = panel_PushButtonSwitchArtNo;
+                            pnlModel.Panel_FalsePoleArtNo = panel_FalsePoleArtNo;
+                            pnlModel.Panel_SupportingFrameArtNo = panel_SupportingFrameArtNo;
+                            pnlModel.Panel_PlateArtNo = panel_PlateArtNo;
+                            pnlModel.Panel_HandleType = panel_HandleType;
+                            pnlModel.Panel_RotoswingArtNo = panel_RotoswingArtNo;
+                            pnlModel.Panel_RotaryArtNo = panel_RotaryArtNo;
+                            pnlModel.Panel_RioArtNo = panel_RioArtNo;
+                            pnlModel.Panel_RioArtNo2 = panel_RioArtNo2;
+                            pnlModel.Panel_ProfileKnobCylinderArtNo = panel_ProfileKnobCylinderArtNo;
+                            pnlModel.Panel_CylinderCoverArtNo = panel_CylinderCoverArtNo;
+                            pnlModel.Panel_RotolineArtNo = panel_RotolineArtNo;
+                            pnlModel.Panel_MVDArtNo = panel_MVDArtNo;
+                            pnlModel.Panel_EspagnoletteArtNo = panel_EspagnoletteArtNo;
+                            pnlModel.Panel_EspagnoletteOptionsVisibility = panel_EspagnoletteOptionsVisibility;
+                            pnlModel.Panel_ExtensionTopArtNo = panel_ExtensionTopArtNo;
+                            pnlModel.Panel_ExtensionTop2ArtNo = panel_ExtensionTop2ArtNo;
+                            pnlModel.Panel_ExtensionTop3ArtNo = panel_ExtensionTop3ArtNo;
+                            pnlModel.Panel_ExtensionBotArtNo = panel_ExtensionBotArtNo;
+                            pnlModel.Panel_ExtensionBot2ArtNo = panel_ExtensionBot2ArtNo;
+                            pnlModel.Panel_ExtensionLeftArtNo = panel_ExtensionLeftArtNo;
+                            pnlModel.Panel_ExtensionLeft2ArtNo = panel_ExtensionLeft2ArtNo;
+                            pnlModel.Panel_ExtensionRightArtNo = panel_ExtensionRightArtNo;
+                            pnlModel.Panel_ExtensionRight2ArtNo = panel_ExtensionRight2ArtNo;
+                            pnlModel.Panel_ExtTopChk = panel_ExtTopChk;
+                            pnlModel.Panel_ExtTop2Chk = panel_ExtTop2Chk;
+                            pnlModel.Panel_ExtBotChk = panel_ExtBotChk;
+                            pnlModel.Panel_ExtLeftChk = panel_ExtLeftChk;
+                            pnlModel.Panel_ExtRightChk = panel_ExtRightChk;
+                            pnlModel.Panel_ExtTopQty = panel_ExtTopQty;
+                            pnlModel.Panel_ExtBotQty = panel_ExtBotQty;
+                            pnlModel.Panel_ExtLeftQty = panel_ExtLeftQty;
+                            pnlModel.Panel_ExtRightQty = panel_ExtRightQty;
+                            pnlModel.Panel_ExtTop2Qty = panel_ExtTop2Qty;
+                            pnlModel.Panel_ExtTop3Qty = panel_ExtTop3Qty;
+                            pnlModel.Panel_ExtBot2Qty = panel_ExtBot2Qty;
+                            pnlModel.Panel_ExtLeft2Qty = panel_ExtLeft2Qty;
+                            pnlModel.Panel_ExtRight2Qty = panel_ExtRight2Qty;
+                            pnlModel.Panel_CornerDriveArtNo = panel_CornerDriveArtNo;
+                            pnlModel.Panel_CornerDriveOptionsVisibility = panel_CornerDriveOptionsVisibility;
+                            pnlModel.Panel_ExtensionOptionsVisibility = panel_ExtensionOptionsVisibility;
+                            pnlModel.Panel_RotoswingOptionsHeight = panel_RotoswingOptionsHeight;
+                            pnlModel.Panel_PlasticWedge = panel_PlasticWedge;
+                            pnlModel.Panel_PlasticWedgeQty = panel_PlasticWedgeQty;
+                            pnlModel.Panel_MiddleCloserArtNo = panel_MiddleCloserArtNo;
+                            pnlModel.Panel_LockingKitArtNo = panel_LockingKitArtNo;
+                            pnlModel.Panel_GlassType = panel_GlassType;
+                            pnlModel.Panel_StrikerArtno_A = panel_StrikerArtno_A;
+                            pnlModel.Panel_StrikerQty_A = panel_StrikerQty_A;
+                            pnlModel.Panel_StrikerArtno_C = panel_StrikerArtno_C;
+                            pnlModel.Panel_StrikerQty_C = panel_StrikerQty_C;
+                            pnlModel.Panel_MiddleCloserPairQty = panel_MiddleCloserPairQty;
+                            pnlModel.Panel_MotorizedOptionVisibility = panel_MotorizedOptionVisibility;
+                            pnlModel.Panel_MotorizedMechArtNo = panel_MotorizedMechArtNo;
+                            pnlModel.Panel_MotorizedPropertyHeight = panel_MotorizedPropertyHeight;
+                            pnlModel.Panel_MotorizedMechQty = panel_MotorizedMechQty;
+                            pnlModel.Panel_MotorizedMechSetQty = panel_MotorizedMechSetQty;
+                            pnlModel.Panel_2DHingeQty = panel_2DHingeQty;
+                            pnlModel.Panel_2dHingeArtNo_nonMotorized = panel_2dHingeArtNo_nonMotorized;
+                            pnlModel.Panel_2DHingeQty_nonMotorized = panel_2DHingeQty_nonMotorized;
+                            pnlModel.Panel_2dHingeVisibility_nonMotorized = panel_2dHingeVisibility_nonMotorized;
+                            pnlModel.Panel_3dHingeArtNo = panel_3dHingeArtNo;
+                            pnlModel.Panel_3dHingeQty = panel_3dHingeQty;
+                            pnlModel.Panel_3dHingePropertyVisibility = panel_3dHingePropertyVisibility;
+                            pnlModel.Panel_ButtHingeArtNo = panel_ButtHingeArtNo;
+                            pnlModel.Panel_ButtHingeQty = panel_ButtHingeQty;
+                            pnlModel.Panel_2dHingeVisibility = panel_2dHingeVisibility;
+                            pnlModel.Panel_ButtHingeVisibility = panel_ButtHingeVisibility;
+                            pnlModel.Panel_AdjStrikerArtNo = panel_AdjStrikerArtNo;
+                            pnlModel.Panel_AdjStrikerQty = panel_AdjStrikerQty;
+                            pnlModel.Panel_RestrictorStayArtNo = panel_RestrictorStayArtNo;
+                            pnlModel.Panel_RestrictorStayQty = panel_RestrictorStayQty; ;
+                            pnlModel.Panel_ExtensionPropertyHeight = panel_ExtensionPropertyHeight;
+                            pnlModel.Panel_GeorgianBarArtNo = panel_GeorgianBarArtNo;
+                            pnlModel.Panel_GeorgianBar_VerticalQty = panel_GeorgianBar_VerticalQty;
+                            pnlModel.Panel_GeorgianBar_HorizontalQty = panel_GeorgianBar_HorizontalQty;
+                            pnlModel.Panel_GeorgianBarOptionVisibility = panel_GeorgianBarOptionVisibility; ;
+                            pnlModel.Panel_HingeOptions = panel_HingeOptions;
+                            pnlModel.Panel_HingeOptionsPropertyHeight = panel_HingeOptionsPropertyHeight;
+                            pnlModel.Panel_HingeOptionsVisibility = panel_HingeOptionsVisibility;
+                            pnlModel.Panel_CenterHingeOptions = panel_CenterHingeOptions;
+                            pnlModel.Panel_CenterHingeOptionsVisibility = panel_CenterHingeOptionsVisibility;
+                            pnlModel.Panel_NTCenterHingeArticleNo = panel_NTCenterHingeArticleNo;
+                            pnlModel.Panel_StayBearingKArtNo = panel_StayBearingKArtNo;
+                            pnlModel.Panel_StayBearingPinArtNo = panel_StayBearingPinArtNo;
+                            pnlModel.Panel_StayBearingCoverArtNo = panel_StayBearingCoverArtNo;
+                            pnlModel.Panel_TopCornerHingeArtNo = panel_TopCornerHingeArtNo;
+                            pnlModel.Panel_TopCornerHingeCoverArtNo = panel_TopCornerHingeCoverArtNo;
+                            pnlModel.Panel_TopCornerHingeSpacerArtNo = panel_TopCornerHingeSpacerArtNo;
+                            pnlModel.Panel_CornerHingeKArtNo = panel_CornerHingeKArtNo;
+                            pnlModel.Panel_CornerPivotRestKArtNo = panel_CornerPivotRestKArtNo; ;
+                            pnlModel.Panel_CornerHingeCoverKArtNo = panel_CornerHingeCoverKArtNo;
+                            pnlModel.Panel_CoverForCornerPivotRestVerticalArtNo = panel_CoverForCornerPivotRestVerticalArtNo;
+                            pnlModel.Panel_CoverForCornerPivotRestArtNo = panel_CoverForCornerPivotRestArtNo;
+                            pnlModel.Panel_WeldableCArtNo = panel_WeldableCArtNo;
+                            pnlModel.Panel_LatchDeadboltStrikerArtNo = panel_LatchDeadboltStrikerArtNo;
+                            pnlModel.Panel_CmenuDeleteVisibility = panel_CmenuDeleteVisibility;
+                            pnlModel.Panel_NTCenterHingeVisibility = panel_NTCenterHingeVisibility; ;
+                            pnlModel.Panel_MiddleCloserVisibility = panel_MiddleCloserVisibility;
+                            pnlModel.Panel_MotorizedpnlOptionVisibility = panel_MotorizedpnlOptionVisibility;                             
+                            #endregion
+                            _frameModel.Lst_Panel.Add(pnlModel);
+                            pnlModel.Imager_SetDimensionsToBind_FrameParent();
+                            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
+                            UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
+                            panelPropUC.Dock = DockStyle.Top;
+                            GetFrameProperties(_frameModel.Frame_ID).GetFramePropertiesPNL().Controls.Add(panelPropUC);
+                            if (row_str.Contains("FixedPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                IFixedPanelUCPresenter fixedUCP = _fixedUCP.GetNewInstance(_unityC,
+                                                                                           pnlModel,
+                                                                                           _frameModel,
+                                                                                           this,
+                                                                                           _frameUCPresenter);
+                                IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)fixedUC);
+
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            else if (row_str.Contains("CasementPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                                pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                pnlModel.AdjustPropertyPanelHeight("addSash");
+                                pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                pnlModel.AdjustPropertyPanelHeight("addHandle");
+                                pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                                ICasementPanelUCPresenter casementUCP = _casementUCP.GetNewInstance(_unityC,
+                                                                                                    pnlModel,
+                                                                                                    _frameModel,
+                                                                                                    this,
+                                                                                                    _frameUCPresenter);
+                                ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)casementUC);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            else if (row_str.Contains("AwningPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                                pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                pnlModel.AdjustPropertyPanelHeight("addSash");
+                                pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                pnlModel.AdjustPropertyPanelHeight("addHandle");
+                                pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                                IAwningPanelUCPresenter awningUCP = _awningUCP.GetNewInstance(_unityC,
+                                                                                              pnlModel,
+                                                                                              _frameModel,
+                                                                                              this,
+                                                                                              _frameUCPresenter);
+                                IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)awningUC);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            else if (row_str.Contains("SlidingPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                                pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                pnlModel.AdjustPropertyPanelHeight("addSash");
+                                pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                pnlModel.AdjustPropertyPanelHeight("addHandle");
+                                pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                                ISlidingPanelUCPresenter slidingUCP = _slidingUCP.GetNewInstance(_unityC,
+                                                                                                 pnlModel,
+                                                                                                 _frameModel,
+                                                                                                 this,
+                                                                                                 _frameUCPresenter);
+                                ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)slidingUC);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            else if (row_str.Contains("TiltNTurnPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+                                pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                pnlModel.AdjustPropertyPanelHeight("addSash");
+                                pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                pnlModel.AdjustPropertyPanelHeight("addHandle");
+                                pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                                ITiltNTurnPanelUCPresenter tiltNTurnUCP = _tiltNTurnUCP.GetNewInstance(_unityC,
+                                                                                                       pnlModel,
+                                                                                                       _frameModel,
+                                                                                                       this,
+                                                                                                       _frameUCPresenter);
+                                ITiltNTurnPanelUC tiltnTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)tiltnTurnUC);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            else if (row_str.Contains("LouverPanel"))
+                            {
+                                _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
+                                                                                                        pnlModel,
+                                                                                                        _frameModel,
+                                                                                                        this,
+                                                                                                        _frameUCPresenter);
+                                ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                                _frameModel.Frame_UC.Controls.Add((UserControl)louverPanelUC);
+                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            }
+                            _basePlatformPresenter.InvalidateBasePlatform();
+                            inside_panel = false;
+
+                        }
+
+
+
                     }
 
                     //else if (inside_multi)
@@ -2626,7 +4266,7 @@ namespace PresentationLayer.Presenter
                     break;
             }
         }
-
+        
         string sql_Transaction_result;
         private void Bgw_DoWork(object sender, DoWorkEventArgs e)
         {

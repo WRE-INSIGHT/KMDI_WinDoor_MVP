@@ -41,6 +41,8 @@
             this.pnlSortItem.Name = "pnlSortItem";
             this.pnlSortItem.Size = new System.Drawing.Size(584, 597);
             this.pnlSortItem.TabIndex = 6;
+            this.pnlSortItem.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragDrop);
+            this.pnlSortItem.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragEnter);
             // 
             // SortItemView
             // 
