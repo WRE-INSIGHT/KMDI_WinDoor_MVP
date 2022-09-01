@@ -15,26 +15,44 @@ namespace ModelLayer.Model.Quotation.WinDoor
 {
     public class WindoorModel : IWindoorModel, INotifyPropertyChanged
     {
-        [Required(ErrorMessage = "ID is Required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
-        public int WD_id { get; set; }
-
-        private string _wdName;
-        [Required(ErrorMessage = "Window Name is Required")]
-        [StringLength(15, MinimumLength = 6)]
-        public string WD_name
+        private string _wdProfile;
+        [Required(ErrorMessage = "Window Profile is Required")]
+        public string WD_profile
         {
             get
             {
-                return _wdName;
+                return _wdProfile;
             }
             set
             {
-                _wdName = value;
+                _wdProfile = value;
                 NotifyPropertyChanged();
             }
         }
+        private int _wdHeight;
+        [Required(ErrorMessage = "Window Height is Required")]
+        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Window Height bigger than or equal to {1}")]
+        public int WD_height
+        {
+            get
+            {
+                return _wdHeight;
+            }
+            set
+            {
+                _wdHeight = value;
+                WD_PlasticCover = (decimal)(((value * WD_width) * 2) * 0.00012D) / 1000;
 
+                WD_Dimension = WD_width.ToString() + " x " + value.ToString();
+                WD_height_4basePlatform_forImageRenderer = value + 35;
+                WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
+
+                WD_height_4basePlatform = value + 35; // (int)(value * WD_zoom) + 35;
+                WD_zoom = GetZoom_forRendering();
+                NotifyPropertyChanged();
+            }
+        }
+        public Base_Color WD_BaseColor { get; set; }
         private int _wdWidth;
         [Required(ErrorMessage = "Window Width is Required")]
         [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Window Width bigger than or equal to {1}")]
@@ -58,6 +76,27 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        [Required(ErrorMessage = "ID is Required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
+        public int WD_id { get; set; }
+
+        private string _wdName;
+        [Required(ErrorMessage = "Window Name is Required")]
+        [StringLength(15, MinimumLength = 6)]
+        public string WD_name
+        {
+            get
+            {
+                return _wdName;
+            }
+            set
+            {
+                _wdName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        
 
         private int _wdWidth2;
         public int WD_width_4basePlatform
@@ -88,30 +127,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private int _wdHeight;
-        [Required(ErrorMessage = "Window Height is Required")]
-        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Window Height bigger than or equal to {1}")]
-        public int WD_height
-        {
-            get
-            {
-                return _wdHeight;
-            }
-            set
-            {
-                _wdHeight = value;
-                WD_PlasticCover = (decimal)(((value * WD_width) * 2) * 0.00012D) / 1000;
-
-                WD_Dimension = WD_width.ToString() + " x " + value.ToString();
-                WD_height_4basePlatform_forImageRenderer = value + 35;
-                WD_zoom_forImageRenderer = GetZoom_forRendering(); //1.0f; //GetZoom_forRendering();
-
-                WD_height_4basePlatform = value + 35; // (int)(value * WD_zoom) + 35;
-                WD_zoom = GetZoom_forRendering();
-                NotifyPropertyChanged();
-            }
-        }
-
+        
         private int _wdHeight2;
         public int WD_height_4basePlatform
         {
@@ -276,20 +292,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private string _wdProfile;
-        [Required(ErrorMessage = "Window Profile is Required")]
-        public string WD_profile
-        {
-            get
-            {
-                return _wdProfile;
-            }
-            set
-            {
-                _wdProfile = value;
-                NotifyPropertyChanged();
-            }
-        }
+       
 
         private string _wdDimension;
         public string WD_Dimension
@@ -441,7 +444,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public int PanelGlassID_Counter { get; set; }
 
-        public Base_Color WD_BaseColor { get; set; }
         public Foil_Color WD_InsideColor { get; set; }
         public Foil_Color WD_OutsideColor { get; set; }
 
@@ -774,6 +776,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
             WD_PropertiesScroll = 0;
+         
         }
     }
 }

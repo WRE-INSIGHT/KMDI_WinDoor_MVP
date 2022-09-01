@@ -61,7 +61,7 @@ namespace ServiceLayer.Services.PanelServices
                                   int panelGeorgianBarVerticalQty,
                                   int panelGeorgianBarHorizontalQty,
                                   bool panelGeorgianBarOptionVisibility,
-                                  int panelID = 0,
+                                  int panelID = 1,
                                   int panelGlassID = 0,
                                   float panelImageRendererZoom = 1,
                                   int panelIndexInsideMPanel = 0,

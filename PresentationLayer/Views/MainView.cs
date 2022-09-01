@@ -259,11 +259,7 @@ namespace PresentationLayer.Views
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Properties.Settings.Default.WndrDir;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
-            }
+            EventHelpers.RaiseEvent(this, OpenToolStripButtonClickEventRaised, e);
         }
 
         private void QuotationToolStripMenuItem_Click(object sender, EventArgs e)

@@ -16,6 +16,32 @@ namespace ModelLayer.Model.Quotation.Frame
 {
     public class FrameModel : IFrameModel, INotifyPropertyChanged
     {
+        private int _frameHeight;
+        [Required(ErrorMessage = "Frame_Height is Required")]
+        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Frame Height bigger than or equal {1}")]
+        public int Frame_Height
+        {
+            get { return _frameHeight; }
+            set
+            {
+                _frameHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frameWidth;
+        [Required(ErrorMessage = "Frame_Width is Required")]
+        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Frame Width bigger than or equal {1}")]
+        public int Frame_Width
+        {
+            get { return _frameWidth; }
+            set
+            {
+                _frameWidth = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public enum Frame_Padding
         {
             Window = 26,
@@ -51,19 +77,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _frameName = value; NotifyPropertyChanged(); }
         }
 
-        private int _frameWidth;
-        [Required(ErrorMessage = "Frame_Width is Required")]
-        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Frame Width bigger than or equal {1}")]
-        public int Frame_Width
-        {
-            get { return _frameWidth; }
-            set
-            {
-                _frameWidth = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+       
         private int _frameWidth_toBind;
         public int Frame_WidthToBind
         {
@@ -78,19 +92,7 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private int _frameHeight;
-        [Required(ErrorMessage = "Frame_Height is Required")]
-        [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Frame Height bigger than or equal {1}")]
-        public int Frame_Height
-        {
-            get { return _frameHeight; }
-            set
-            {
-                _frameHeight = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+        
         private int _frameHeight_toBind;
         public int Frame_HeightToBind
         {

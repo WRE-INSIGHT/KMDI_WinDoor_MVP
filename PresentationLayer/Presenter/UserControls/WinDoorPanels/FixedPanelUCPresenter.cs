@@ -958,6 +958,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _fixedPanelUC_deleteToolStripClickedEventRaised(object sender, EventArgs e)
         {
+            
             #region Delete Divider
             if (_multiPanelModel != null &&
                 _multiPanelModel.MPanel_DividerEnabled &&

@@ -124,9 +124,16 @@ namespace PresentationLayer.Presenter.UserControls
 
             //if (pfr.Controls[0] is IMultiPanelUC)
             //{
+            try
+            {
+                _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(false);
+                _frameModel.Frame_BotFrameEnable = false;
+            }
+            catch (Exception)
+            {
 
-            _framePropertiesUCP.SetFrameTypeRadioBtnEnabled(false);
-            _frameModel.Frame_BotFrameEnable = false;
+            }
+          
 
             //}
             //else if (pfr.Controls[0] is IPanelUC)

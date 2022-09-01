@@ -1256,7 +1256,7 @@ namespace PresentationLayer.Presenter
                                         }
                                     }
 
-                                    if (pnl.Panel_ChkText == "dsash")
+                                    if (pnl.Panel_ChkText == "dSash")
                                     {
                                         #region SashPrice 
                                         SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
@@ -1798,7 +1798,7 @@ namespace PresentationLayer.Presenter
 
 
 
-                            if (Singlepnl.Panel_ChkText == "dsash")
+                            if (Singlepnl.Panel_ChkText == "dSash")
                             {
                                 #region SashPrice 
                                 SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
@@ -1896,7 +1896,7 @@ namespace PresentationLayer.Presenter
 
                             #region EspagPrice
 
-                            if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true)
+                            if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
                             {
                                 if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                 {

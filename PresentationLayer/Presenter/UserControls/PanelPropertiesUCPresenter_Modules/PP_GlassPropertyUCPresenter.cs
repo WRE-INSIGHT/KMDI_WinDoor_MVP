@@ -74,8 +74,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised(object sender, EventArgs e)
         {
 
-            _panelModel.Panel_GlassThickness = 6;
-            _panelModel.Panel_GlassThicknessDesc = "6 mm Clear";
+            if(_panelModel.Panel_GlassThickness == 0)
+            {
+                _panelModel.Panel_GlassThickness = 6;
+                _panelModel.Panel_GlassThicknessDesc = "6 mm Clear";
+            }
+            
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
             _initialLoad = false;

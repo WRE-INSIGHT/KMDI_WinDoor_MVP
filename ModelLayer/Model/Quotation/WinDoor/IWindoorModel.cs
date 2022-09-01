@@ -9,11 +9,14 @@ namespace ModelLayer.Model.Quotation.WinDoor
 {
     public interface IWindoorModel
     {
+        string WD_profile { get; set; }
+        int WD_height { get; set; }
+        Base_Color WD_BaseColor { get; set; }
+        int WD_width { get; set; }
+
         float[] Arr_ZoomPercentage { get; }
         string WD_description { get; set; }
-        string WD_profile { get; set; }
         decimal WD_discount { get; set; }
-        int WD_height { get; set; }
         int WD_height_4basePlatform { get; set; }
         int WD_height_4basePlatform_forImageRenderer { get; set; }
         int WD_id { get; set; }
@@ -22,7 +25,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_price { get; set; }
         int WD_quantity { get; set; }
         bool WD_visibility { get; set; }
-        int WD_width { get; set; }
         int WD_width_4basePlatform { get; set; }
         int WD_width_4basePlatform_forImageRenderer { get; set; }
         float WD_zoom { get; set; }
@@ -41,7 +43,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int divIDCounter { get; set; }
         int PanelGlassID_Counter { get; set; }
 
-        Base_Color WD_BaseColor { get; set; }
         Foil_Color WD_InsideColor { get; set; }
         Foil_Color WD_OutsideColor { get; set; }
         decimal WD_PlasticCover { get; set; }

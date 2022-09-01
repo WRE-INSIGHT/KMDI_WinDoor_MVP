@@ -242,6 +242,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_frameModel != null)
                 {
                     _frameModel.Lst_Panel.Remove(_panelModel);
+                    _mainPresenter.frameUC_MainPresenter.GetThis().Controls.Clear();
                 }
                 if (_multiPanelModel != null)
                 {
