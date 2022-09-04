@@ -62,8 +62,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverBladesCount { get; set; }
         Color Panel_BackColor { get; set; }
 
-        SlidingTypes Panel_SlidingTypes { get; set; }
-        bool Panel_SlidingTypeVisibility { get; set; }
         #region Explosion
 
         int PanelGlass_ID { get; set; }
@@ -72,6 +70,8 @@ namespace ModelLayer.Model.Quotation.Panel
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
         GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
+        Spacer_ArticleNo Panel_SpacerArtNo { get; set; }
+
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadWidthDecimal { get; set; }
@@ -229,6 +229,20 @@ namespace ModelLayer.Model.Quotation.Panel
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
 
+        SlidingTypes Panel_SlidingTypes { get; set; }
+        bool Panel_SlidingTypeVisibility { get; set; }
+
+        GuideTrackProfile_ArticleNo Panel_GuideTrackProfile { get; set; }
+        AluminumTrack_ArticleNo Panel_AluminumTrack { get; set; }
+        WeatherBar_ArticleNo Panel_WeatherBar { get; set; }
+        WeatherBarFastener_ArticleNo Panel_WeatherBarFastener { get; set; }
+        EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBar { get; set; }
+        WaterSeepage_ArticleNo Panel_WaterSeepage { get; set; }
+        BrushSeal_ArticleNo Panel_BrushSeal { get; set; }
+        RollersTypes Panel_RollersTypes { get; set; }
+        GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlock { get; set; }
+        Spacer_ArticleNo Panel_Spacer { get; set; }
+        SealingBlock_ArticleNo Panel_SealingBlock { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -249,6 +263,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
+                                           bool mpnlDivEneable,
+                                           int OverLappingPanel_Qty,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
                                            IDividerModel divNxt,
@@ -260,7 +276,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
                                            string panel_placement = "",
                                            string mpanel_placement = "", //1st level
-                                           string mpanelparent_placement = ""); //2nd level
+                                           string mpanelparent_placement = "" //2nd level
+                                           );
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
@@ -301,6 +318,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_Espagnolette_MaterialList(DataTable tbl_explosion);
         void Insert_GlazingBead_MaterialList(DataTable tbl_explosion, string location);
         void Insert_GBSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_Spacer_MaterialList(DataTable tbl_explosion);
+
         void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location);
         void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm);
         void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion);

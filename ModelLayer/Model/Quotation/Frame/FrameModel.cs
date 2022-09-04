@@ -578,6 +578,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._V226;
                 }
+                else if (value == FrameProfile_ArticleNo._6050)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._TV110;
+                }
+
                 NotifyPropertyChanged();
             }
         }
@@ -676,6 +681,10 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
             {
                 reinf_size = 43;
+            }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+            {
+                reinf_size = 20;
             }
 
 

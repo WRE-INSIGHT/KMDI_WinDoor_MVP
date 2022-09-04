@@ -17,6 +17,8 @@ namespace EnumerationTypeLayer
             public static readonly FrameProfile_ArticleNo _7502 = new FrameProfile_ArticleNo(0, "7502");
             public static readonly FrameProfile_ArticleNo _7507 = new FrameProfile_ArticleNo(1, "7507");
             public static readonly FrameProfile_ArticleNo _2060 = new FrameProfile_ArticleNo(2, "2060"); //G58
+            public static readonly FrameProfile_ArticleNo _6050 = new FrameProfile_ArticleNo(3, "6050");
+            public static readonly FrameProfile_ArticleNo _6052 = new FrameProfile_ArticleNo(4, "6052");
 
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -26,6 +28,8 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _R676 = new FrameReinf_ArticleNo(0, "R676");
             public static readonly FrameReinf_ArticleNo _R677 = new FrameReinf_ArticleNo(1, "R677");
             public static readonly FrameReinf_ArticleNo _V226 = new FrameReinf_ArticleNo(2, "V226"); //G58
+            public static readonly FrameReinf_ArticleNo _TV107 = new FrameReinf_ArticleNo(3, "T-V107");
+            public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -35,7 +39,8 @@ namespace EnumerationTypeLayer
             public static readonly Divider_ArticleNo _7536 = new Divider_ArticleNo(0, "7536");
             public static readonly Divider_ArticleNo _7538 = new Divider_ArticleNo(1, "7538");
             public static readonly Divider_ArticleNo _2069 = new Divider_ArticleNo(2, "2069");
-            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(3, "None");
+            public static readonly Divider_ArticleNo _6052 = new Divider_ArticleNo(3, "6052");
+            public static readonly Divider_ArticleNo _None = new Divider_ArticleNo(4, "None");
             private Divider_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -44,7 +49,8 @@ namespace EnumerationTypeLayer
             public static readonly DividerReinf_ArticleNo _R677 = new DividerReinf_ArticleNo(0, "R677");
             public static readonly DividerReinf_ArticleNo _R686 = new DividerReinf_ArticleNo(1, "R686");
             public static readonly DividerReinf_ArticleNo _V226 = new DividerReinf_ArticleNo(2, "V226");//G58
-            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(3, "None");
+            public static readonly DividerReinf_ArticleNo _TV107 = new DividerReinf_ArticleNo(3, "T-V107");
+            public static readonly DividerReinf_ArticleNo _None = new DividerReinf_ArticleNo(4, "None");
             private DividerReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -84,7 +90,13 @@ namespace EnumerationTypeLayer
             public static readonly GlazingBead_ArticleNo _2433 = new GlazingBead_ArticleNo(8, "2433");
             public static readonly GlazingBead_ArticleNo _2432 = new GlazingBead_ArticleNo(9, "2432");
             public static readonly GlazingBead_ArticleNo _2431 = new GlazingBead_ArticleNo(10, "2431");
-            public static readonly GlazingBead_ArticleNo _1681 = new GlazingBead_ArticleNo(10, "1681");//G58 21.5 thickness
+            public static readonly GlazingBead_ArticleNo _1681 = new GlazingBead_ArticleNo(11, "1681");//G58 21.5 thickness
+            public static readonly GlazingBead_ArticleNo _2429 = new GlazingBead_ArticleNo(12, "2429");
+            public static readonly GlazingBead_ArticleNo _2431_9073 = new GlazingBead_ArticleNo(13, "2431 & 9073");
+            public static readonly GlazingBead_ArticleNo _2433_9073 = new GlazingBead_ArticleNo(14, "2433 & 9073");
+            public static readonly GlazingBead_ArticleNo _2429_9044 = new GlazingBead_ArticleNo(15, "2429 & 9044");
+
+
 
             private GlazingBead_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -149,6 +161,8 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
             public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
             public static readonly SashProfile_ArticleNo _2067 = new SashProfile_ArticleNo(5, "2067"); //G58
+            public static readonly SashProfile_ArticleNo _6040 = new SashProfile_ArticleNo(3, "6040");
+            public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(3, "6041");
 
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -160,6 +174,8 @@ namespace EnumerationTypeLayer
             public static readonly SashReinf_ArticleNo _655 = new SashReinf_ArticleNo(2, "655");
             public static readonly SashReinf_ArticleNo _207 = new SashReinf_ArticleNo(3, "207");
             public static readonly SashReinf_ArticleNo _V226 = new SashReinf_ArticleNo(4, "V226");//G58
+            public static readonly SashReinf_ArticleNo _TV104 = new SashReinf_ArticleNo(5, "T-V104");
+
 
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -234,6 +250,12 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _Rio = new Handle_Type(2, "Rio Handle");
             public static readonly Handle_Type _Rotoline = new Handle_Type(3, "Rotoline Handle");
             public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
+            public static readonly Handle_Type _D = new Handle_Type(5, "D Handle");
+            public static readonly Handle_Type _D_IO_Locking = new Handle_Type(6, "D Handle In & Out Locking");
+            public static readonly Handle_Type _Dummy = new Handle_Type(7, "Dummy Handle");
+
+
+
             public static readonly Handle_Type _None = new Handle_Type(5, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
@@ -249,6 +271,15 @@ namespace EnumerationTypeLayer
             private Rotoswing_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class Rotoswing_Sliding_HandleArtNo : Enumeration<Rotoswing_HandleArtNo, int>
+        {
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSC773451 = new Rotoswing_Sliding_HandleArtNo(0, "RSS-632300");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSC773452 = new Rotoswing_Sliding_HandleArtNo(1, "RSS-823073");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSC823048 = new Rotoswing_Sliding_HandleArtNo(2, "RSS-823094");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSC833307 = new Rotoswing_Sliding_HandleArtNo(3, "RSS-632303");
+
+            private Rotoswing_Sliding_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
         public class Rotary_HandleArtNo : Enumeration<Rotary_HandleArtNo, int>
         {
             public static readonly Rotary_HandleArtNo _T511155KMWSS = new Rotary_HandleArtNo(0, "T-51.1155 KM-W-SS");
@@ -269,6 +300,7 @@ namespace EnumerationTypeLayer
         public class ProfileKnobCylinder_ArtNo : Enumeration<ProfileKnobCylinder_ArtNo, int>
         {
             public static readonly ProfileKnobCylinder_ArtNo _45x45 = new ProfileKnobCylinder_ArtNo(0, "45x45");
+            public static readonly ProfileKnobCylinder_ArtNo _35x35 = new ProfileKnobCylinder_ArtNo(1, "35x35");
             //public static readonly ProfileKnobCylinder_ArtNo _50p5x50p5 = new ProfileKnobCylinder_ArtNo(0, "50.5x50.5");
 
             private ProfileKnobCylinder_ArtNo(int value, string displayName) : base(value, displayName) { }
@@ -298,6 +330,58 @@ namespace EnumerationTypeLayer
             private MVD_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class D_HandleArtNo : Enumeration<D_HandleArtNo, int>
+        {
+            public static readonly D_HandleArtNo _046366M = new D_HandleArtNo(0, "DH-605543(out) White");
+            public static readonly D_HandleArtNo _DH613226 = new D_HandleArtNo(1, "DH-613226(in) White");
+            public static readonly D_HandleArtNo _DH613185 = new D_HandleArtNo(2, "DH-613185(out) DB");
+            public static readonly D_HandleArtNo _DH613224 = new D_HandleArtNo(3, "DH-613224(in) DB");
+            public static readonly D_HandleArtNo _DH605551 = new D_HandleArtNo(4, "DH-605551(out) Black");
+            public static readonly D_HandleArtNo _DH613225 = new D_HandleArtNo(5, "DH-613225(in) Black");
+            public static readonly D_HandleArtNo _DH487261 = new D_HandleArtNo(6, "DH-487261(out) Mill Finish");
+            public static readonly D_HandleArtNo _DH613228 = new D_HandleArtNo(7, "DH-613228(in) Mill Finish");
+
+            private D_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class D_Handle_IO_LockingArtNo : Enumeration<D_Handle_IO_LockingArtNo, int>
+        {
+            public static readonly D_Handle_IO_LockingArtNo _046366M = new D_Handle_IO_LockingArtNo(0, "613217(out) White");
+            public static readonly D_Handle_IO_LockingArtNo _DH613243 = new D_Handle_IO_LockingArtNo(1, "DH-613243(in) White");
+            public static readonly D_Handle_IO_LockingArtNo _DH833309_613215 = new D_Handle_IO_LockingArtNo(2, "DH-833309/613215(out) DB");
+            public static readonly D_Handle_IO_LockingArtNo _DH833308_613241 = new D_Handle_IO_LockingArtNo(3, "DH-833308/613241(in) DB");
+            public static readonly D_Handle_IO_LockingArtNo _DH605216 = new D_Handle_IO_LockingArtNo(4, "DH-605216(OUT) BLK");
+            public static readonly D_Handle_IO_LockingArtNo _DH613242 = new D_Handle_IO_LockingArtNo(5, "DH-613242(IN) BLK");
+            public static readonly D_Handle_IO_LockingArtNo _DH613219 = new D_Handle_IO_LockingArtNo(6, "DH-613219(out) Mill Finish");
+            public static readonly D_Handle_IO_LockingArtNo _DH613245 = new D_Handle_IO_LockingArtNo(7, "DH-613245(in) Mill Finish");
+
+            private D_Handle_IO_LockingArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Dummy_HandleArtNo : Enumeration<Dummy_HandleArtNo, int>
+        {
+            public static readonly Dummy_HandleArtNo _046366M = new Dummy_HandleArtNo(0, "DH-613191(out)White");
+            public static readonly Dummy_HandleArtNo _DH613226 = new Dummy_HandleArtNo(1, "DH-613226(in) White");
+            public static readonly Dummy_HandleArtNo _DH613190 = new Dummy_HandleArtNo(2, "DH-613190(out) BL");
+            public static readonly Dummy_HandleArtNo _DH613225 = new Dummy_HandleArtNo(3, "DH-613225(in) Black");
+            public static readonly Dummy_HandleArtNo _DH833310_613189 = new Dummy_HandleArtNo(4, "DH-833310/613189(out) DB");
+            public static readonly Dummy_HandleArtNo _DH613224 = new Dummy_HandleArtNo(5, "DH-613224(in) DB");
+            public static readonly Dummy_HandleArtNo _DH613193 = new Dummy_HandleArtNo(6, "DH-613193(out) Mill Finish");
+            public static readonly Dummy_HandleArtNo _DH613228 = new Dummy_HandleArtNo(7, "DH-613228(in) Mill Finish ");
+
+            private Dummy_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class PopUp_HandleArtNo : Enumeration<PopUp_HandleArtNo, int>
+        {
+            public static readonly PopUp_HandleArtNo _3127668 = new PopUp_HandleArtNo(0, "3127668");
+            public static readonly PopUp_HandleArtNo _323778 = new PopUp_HandleArtNo(1, "323778");
+
+
+            private PopUp_HandleArtNo(int value, string displayName) : base(value, displayName) { }
+        }
         public class Espagnolette_ArticleNo : Enumeration<Espagnolette_ArticleNo, int>
         {
             public static readonly Espagnolette_ArticleNo _628806 = new Espagnolette_ArticleNo(0, "628806");
@@ -315,7 +399,11 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _N110A04206 = new Espagnolette_ArticleNo(12, "N110A04206");
             public static readonly Espagnolette_ArticleNo _N110A05206 = new Espagnolette_ArticleNo(13, "N110A05206");
             public static readonly Espagnolette_ArticleNo _N110A06206 = new Espagnolette_ArticleNo(14, "N110A06206");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(15, "None");
+            public static readonly Espagnolette_ArticleNo _774287_86 = new Espagnolette_ArticleNo(15, "774287/86");
+            public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(16, "731852");
+            public static readonly Espagnolette_ArticleNo _774276 = new Espagnolette_ArticleNo(17, "774276");
+            public static readonly Espagnolette_ArticleNo _10_W0_00061 = new Espagnolette_ArticleNo(18, "10-W0-00061");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(19, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -345,6 +433,12 @@ namespace EnumerationTypeLayer
         {
             public static readonly Striker_ArticleNo _M89ANTA = new Striker_ArticleNo(0, "M89A-NT-A");
             public static readonly Striker_ArticleNo _M89ANTC = new Striker_ArticleNo(1, "M89A-NT-C");
+            public static readonly Striker_ArticleNo _629555 = new Striker_ArticleNo(2, "629555"); //left
+            public static readonly Striker_ArticleNo _629554 = new Striker_ArticleNo(3, "629554"); //right
+            public static readonly Striker_ArticleNo _897019 = new Striker_ArticleNo(4, "897019"); // center profile
+            public static readonly Striker_ArticleNo _M54ANT = new Striker_ArticleNo(5, "M54A-NT"); // left
+            public static readonly Striker_ArticleNo _M55ANT = new Striker_ArticleNo(6, "M55A-NT"); // right
+
             private Striker_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -676,6 +770,7 @@ namespace EnumerationTypeLayer
         {
             //public static readonly GBSpacer_ArticleNo _GBSpacer = new GBSpacer_ArticleNo(0, "GB SPACER");
             public static readonly GBSpacer_ArticleNo _KBC70 = new GBSpacer_ArticleNo(0, "KBC70");
+            public static readonly GBSpacer_ArticleNo _9C54 = new GBSpacer_ArticleNo(0, "9C54");
 
             private GBSpacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -751,6 +846,150 @@ namespace EnumerationTypeLayer
             public static readonly OverlapSash _None = new OverlapSash(3, "None");
 
             private OverlapSash(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RollersTypes : Enumeration<RollersTypes, int>
+        {
+            public static readonly RollersTypes _TandemRoller = new RollersTypes(0, "616040");
+            public static readonly RollersTypes _HDRoller = new RollersTypes(1, "609014");
+            public static readonly RollersTypes _GURoller = new RollersTypes(2, "C901090008");
+
+            private RollersTypes(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ScrewSets : Enumeration<ScrewSets, int>
+        {
+            public static readonly ScrewSets _DH613172 = new ScrewSets(0, "DH-613172");
+            public static readonly ScrewSets _DH613176 = new ScrewSets(1, "DH-613176");
+            public static readonly ScrewSets _DH613180 = new ScrewSets(2, "DH-613180");
+
+            private ScrewSets(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GuideTrackProfile_ArticleNo : Enumeration<GuideTrackProfile_ArticleNo, int>
+        {
+            public static readonly GuideTrackProfile_ArticleNo _6059 = new GuideTrackProfile_ArticleNo(0, "6059");
+
+            private GuideTrackProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AluminumTrack_ArticleNo : Enumeration<AluminumTrack_ArticleNo, int>
+        {
+            public static readonly AluminumTrack_ArticleNo _9C51 = new AluminumTrack_ArticleNo(0, "9C51");
+
+            private AluminumTrack_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class WeatherBar_ArticleNo : Enumeration<WeatherBar_ArticleNo, int>
+        {
+            public static readonly WeatherBar_ArticleNo _1244 = new WeatherBar_ArticleNo(0, "1244");
+
+            private WeatherBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class WaterSeepage_ArticleNo : Enumeration<WaterSeepage_ArticleNo, int>
+        {
+            public static readonly WaterSeepage_ArticleNo _1646 = new WaterSeepage_ArticleNo(0, "1646");
+
+            private WaterSeepage_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ConnectingProfile_ArticleNo : Enumeration<ConnectingProfile_ArticleNo, int>
+        {
+            public static readonly ConnectingProfile_ArticleNo _0373 = new ConnectingProfile_ArticleNo(0, "0373");
+
+            private ConnectingProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Interlock_ArticleNo : Enumeration<Interlock_ArticleNo, int>
+        {
+            public static readonly Interlock_ArticleNo _6061_Milled = new Interlock_ArticleNo(0, "6061 - Milled");
+
+            private Interlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ExtensionForInterlock_ArticleNo : Enumeration<ExtensionForInterlock_ArticleNo, int>
+        {
+            public static readonly ExtensionForInterlock_ArticleNo _9061_Milled = new ExtensionForInterlock_ArticleNo(0, "9061 - Milled");
+
+            private ExtensionForInterlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CenterProfile_ArticleNo : Enumeration<CenterProfile_ArticleNo, int>
+        {
+            public static readonly CenterProfile_ArticleNo _A000 = new CenterProfile_ArticleNo(0, "A000");
+
+            private CenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AluminumPullHandle_ArticleNo : Enumeration<AluminumPullHandle_ArticleNo, int>
+        {
+            public static readonly AluminumPullHandle_ArticleNo _9C58 = new AluminumPullHandle_ArticleNo(0, "9C58");
+
+            private AluminumPullHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class WeatherBarFastener_ArticleNo : Enumeration<WeatherBarFastener_ArticleNo, int>
+        {
+            public static readonly WeatherBarFastener_ArticleNo _9447 = new WeatherBarFastener_ArticleNo(0, "9447");
+
+            private WeatherBarFastener_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndCapForWeatherBar_ArticleNo : Enumeration<EndCapForWeatherBar_ArticleNo, int>
+        {
+            public static readonly EndCapForWeatherBar_ArticleNo _9483 = new EndCapForWeatherBar_ArticleNo(0, "9483");
+
+            private EndCapForWeatherBar_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SealingElement_ArticleNo : Enumeration<SealingElement_ArticleNo, int>
+        {
+            public static readonly SealingElement_ArticleNo _9C97 = new SealingElement_ArticleNo(0, "9C97");
+
+            private SealingElement_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MechnJointForFrame_ArticleNo : Enumeration<MechnJointForFrame_ArticleNo, int>
+        {
+            public static readonly MechnJointForFrame_ArticleNo _9C52 = new MechnJointForFrame_ArticleNo(0, "9C52");
+
+            private MechnJointForFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EndCapFor9C58_ArticleNo : Enumeration<EndCapFor9C58_ArticleNo, int>
+        {
+            public static readonly EndCapFor9C58_ArticleNo _9C68 = new EndCapFor9C58_ArticleNo(0, "9C68");
+
+            private EndCapFor9C58_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BrushSeal_ArticleNo : Enumeration<BrushSeal_ArticleNo, int>
+        {
+            public static readonly BrushSeal_ArticleNo _9091 = new BrushSeal_ArticleNo(0, "9091");
+
+            private BrushSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GlazingRebateBlock_ArticleNo : Enumeration<GlazingRebateBlock_ArticleNo, int>
+        {
+            public static readonly GlazingRebateBlock_ArticleNo _9C56 = new GlazingRebateBlock_ArticleNo(0, "9C56");
+
+            private GlazingRebateBlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Spacer_ArticleNo : Enumeration<Spacer_ArticleNo, int>
+        {
+            public static readonly Spacer_ArticleNo _M063 = new Spacer_ArticleNo(0, "M063");
+
+            private Spacer_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SealingBlock_ArticleNo : Enumeration<SealingBlock_ArticleNo, int>
+        {
+            public static readonly SealingBlock_ArticleNo _9C63 = new SealingBlock_ArticleNo(0, "9C63");
+
+            private SealingBlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
     }
 }
