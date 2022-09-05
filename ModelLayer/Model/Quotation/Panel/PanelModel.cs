@@ -1918,6 +1918,37 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private int _panel_AluminumTrackQty;
+        public int Panel_AluminumTrackQty
+        {
+            get
+            {
+                return _panel_AluminumTrackQty;
+            }
+
+            set
+            {
+                _panel_AluminumTrackQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_AluminumTrackQtyVisibility;
+        public bool Panel_AluminumTrackQtyVisibility
+        {
+            get
+            {
+                return _panel_AluminumTrackQtyVisibility;
+            }
+
+            set
+            {
+                _panel_AluminumTrackQtyVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private WeatherBar_ArticleNo _panel_WeatherBar;
         public WeatherBar_ArticleNo Panel_WeatherBar
         {
@@ -2004,6 +2035,21 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panel_RollersTypes = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_RollersTypesVisibility;
+        public bool Panel_RollersTypesVisibility
+        {
+            get
+            {
+                return _panel_RollersTypesVisibility;
+            }
+
+            set
+            {
+                _panel_RollersTypesVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -3312,6 +3358,22 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusSlidingType")
             {
                 Panel_PropertyHeight -= constants.panel_property_SlidingTypeOptionsheight;
+            }
+            else if (mode == "addRollerType")
+            {
+                Panel_PropertyHeight += constants.panel_property_RollerTypeOptionsheight;
+            }
+            else if (mode == "minusRollerType")
+            {
+                Panel_PropertyHeight -= constants.panel_property_RollerTypeOptionsheight;
+            }
+            else if (mode == "addAluminumTrackQty")
+            {
+                Panel_PropertyHeight += constants.panel_property_AluminumTrackQtyOptionsheight;
+            }
+            else if (mode == "minusAluminumTrackQty")
+            {
+                Panel_PropertyHeight -= constants.panel_property_AluminumTrackQtyOptionsheight;
             }
 
         }

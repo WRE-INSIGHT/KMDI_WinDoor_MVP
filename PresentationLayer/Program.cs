@@ -322,6 +322,13 @@ namespace PresentationLayer
                 .RegisterType<IPrintGlassSummaryView, PrintGlassSummaryView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPrintGlassSummaryPresenter, PrintGlassSummaryPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_RollerPropertyUC, PP_RollerPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RollerPropertyUCPresenter, PP_RollerPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_AliminumTrackPropertyUC, PP_AliminumTrackPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_AliminumTrackPropertyUCPresenter, PP_AliminumTrackPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

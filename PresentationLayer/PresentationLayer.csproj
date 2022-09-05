@@ -156,6 +156,10 @@
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_RollerPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_AliminumTrackPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_RollerPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\WinDoorPanels\ConcreteUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ControlsUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\CustomArrowHeadUCPresenter.cs" />
@@ -557,6 +561,7 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_2dHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_AliminumTrackPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
@@ -570,6 +575,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_NTCenterHingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RollerPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
@@ -586,6 +592,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.Designer.cs">
       <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.Designer.cs">
+      <DependentUpon>PP_AliminumTrackPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -664,6 +676,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.Designer.cs">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.Designer.cs">
+      <DependentUpon>PP_RollerPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1004,6 +1022,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.resx">
       <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.resx">
+      <DependentUpon>PP_AliminumTrackPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1042,6 +1063,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.resx">
+      <DependentUpon>PP_RollerPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>

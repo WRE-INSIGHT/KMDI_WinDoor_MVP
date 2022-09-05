@@ -899,6 +899,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
                 }
+                else if (mode == "addRollerType")
+                {
+                    FrameProp_Height += constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "minusRollerType")
+                {
+                    FrameProp_Height -= constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "addAluminumTrackQty")
+                {
+                    FrameProp_Height += constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
+                else if (mode == "minusAluminumTrackQty")
+                {
+                    FrameProp_Height -= constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

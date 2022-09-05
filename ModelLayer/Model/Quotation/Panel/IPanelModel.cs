@@ -234,12 +234,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
         GuideTrackProfile_ArticleNo Panel_GuideTrackProfile { get; set; }
         AluminumTrack_ArticleNo Panel_AluminumTrack { get; set; }
+        int Panel_AluminumTrackQty { get; set; }
+        bool Panel_AluminumTrackQtyVisibility { get; set; }
         WeatherBar_ArticleNo Panel_WeatherBar { get; set; }
         WeatherBarFastener_ArticleNo Panel_WeatherBarFastener { get; set; }
         EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBar { get; set; }
         WaterSeepage_ArticleNo Panel_WaterSeepage { get; set; }
         BrushSeal_ArticleNo Panel_BrushSeal { get; set; }
         RollersTypes Panel_RollersTypes { get; set; }
+        bool Panel_RollersTypesVisibility { get; set; }
         GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlock { get; set; }
         Spacer_ArticleNo Panel_Spacer { get; set; }
         SealingBlock_ArticleNo Panel_SealingBlock { get; set; }

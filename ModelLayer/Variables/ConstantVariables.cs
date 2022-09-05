@@ -35,6 +35,10 @@
         public int panel_property_espagnoletteOptionsheight_default = 28;
         public int panel_property_3dHingeOptionsheight = 30;
         public int panel_property_SlidingTypeOptionsheight = 28;
+        public int panel_property_RollerTypeOptionsheight = 30;
+        public int panel_property_AluminumTrackQtyOptionsheight = 28;
+
+
 
         #endregion
 

@@ -3346,7 +3346,22 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
                 }
-
+                else if (mode == "addRollerType")
+                {
+                    MPanelProp_Height += constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "minusRollerType")
+                {
+                    MPanelProp_Height -= constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "addAluminumTrackQty")
+                {
+                    MPanelProp_Height += constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
+                else if (mode == "minusAluminumTrackQty")
+                {
+                    MPanelProp_Height -= constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
