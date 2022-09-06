@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
 {
@@ -25,6 +26,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void SubribeToEventSetUp()
         {
             _rollerPropertyUC.PPRollerPropertyUCLoadEventRaised += _rollerPropertyUC_PPRollerPropertyUCLoadEventRaised;
+            _rollerPropertyUC.cmbRollerSelectedValueChangedEventRaised += _rollerPropertyUC_cmbRollerSelectedValueChangedEventRaised;
+        }
+
+        private void _rollerPropertyUC_cmbRollerSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            _panelModel.Panel_RollersTypes = (RollersTypes)cmb.SelectedValue;
         }
 
         private void _rollerPropertyUC_PPRollerPropertyUCLoadEventRaised(object sender, EventArgs e)

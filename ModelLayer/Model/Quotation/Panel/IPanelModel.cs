@@ -246,6 +246,8 @@ namespace ModelLayer.Model.Quotation.Panel
         GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlock { get; set; }
         Spacer_ArticleNo Panel_Spacer { get; set; }
         SealingBlock_ArticleNo Panel_SealingBlock { get; set; }
+        Interlock_ArticleNo Panel_Interlock { get; set; }
+        ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlock { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -335,6 +337,18 @@ namespace ModelLayer.Model.Quotation.Panel
         int Add_FGAwning_screws4fab();
         int Add_Hinges_screws4fab();
         int Add_MotorizedMech_screws4Inst();
+        void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion);
+        void Insert_WeatherBar_MaterialList(DataTable tbl_explosion);
+        void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
+        void Insert_Interlock_MaterialList(DataTable tbl_explosion);
+        void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion);
+        void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion);
+        void Insert_BrushSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_Rollers_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
+
         #endregion
     }
 }

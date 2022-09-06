@@ -26,7 +26,6 @@ using ServiceLayer.Services.WindoorServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -720,7 +719,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-       
+
         private void _mainView_refreshToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -977,9 +976,9 @@ namespace PresentationLayer.Presenter
                     {
                         if (wdm == _windoorModel)
                         {
-                            foreach(IItemInfoUC itemInfo in _pnlItems.Controls)
+                            foreach (IItemInfoUC itemInfo in _pnlItems.Controls)
                             {
-                                if(itemInfo.WD_Selected == true)
+                                if (itemInfo.WD_Selected == true)
                                 {
                                     _pnlItems.Controls.Remove((UserControl)itemInfo);
                                 }
@@ -991,7 +990,7 @@ namespace PresentationLayer.Presenter
                             break;
                         }
                     }
-                    
+
                     _pnlPropertiesBody.Controls.Clear();
                     _pnlMain.Controls.Clear();
                     //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
@@ -1017,7 +1016,7 @@ namespace PresentationLayer.Presenter
 
                 }
             }
-            
+
         }
 
         private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -1402,7 +1401,7 @@ namespace PresentationLayer.Presenter
                         baseColor = Base_Color._DarkBrown;
                     }
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
-                    { 
+                    {
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
@@ -1630,8 +1629,8 @@ namespace PresentationLayer.Presenter
         {
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
 
-           
-          
+
+
             //save frame
             Frame_Save_UserControl();
             Frame_Save_PropertiesUC();
@@ -1645,12 +1644,12 @@ namespace PresentationLayer.Presenter
                              item.WD_profile,
                              false);
             _quotationModel.Select_Current_Windoor(item);
-          
+
             //clear
             _pnlMain.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
             _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-        
+
             //basePlatform
             _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
             AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
@@ -1719,10 +1718,20 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
+                        else if (handletype == Handle_Type._D || handletype == Handle_Type._Dummy || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._PopUp)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._6050 ||
+                                 frame_art == FrameProfile_ArticleNo._6052) &&
+                                 !(sash_art == SashProfile_ArticleNo._6040 ||
+                                 sash_art == SashProfile_ArticleNo._6041))
+                            {
+                                incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                            }
+                        }
 
                         if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
-                            espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
-                            espag_art == Espagnolette_ArticleNo._628809)
+                        espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
+                        espag_art == Espagnolette_ArticleNo._628809)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._7502 && sash_art == SashProfile_ArticleNo._7581) &&
                                 !(frame_art == FrameProfile_ArticleNo._7507 && sash_art == SashProfile_ArticleNo._7581) &&
@@ -1751,6 +1760,17 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Espagnolette : " + espag_art.DisplayName;
                             }
                         }
+                        else if (espag_art == Espagnolette_ArticleNo._774287_86 || espag_art == Espagnolette_ArticleNo._731852 ||
+                                 espag_art == Espagnolette_ArticleNo._774276 || espag_art == Espagnolette_ArticleNo._10_W0_00061)
+                        {
+                            if (!(frame_art == FrameProfile_ArticleNo._6050 || frame_art == FrameProfile_ArticleNo._6052) &&
+                                !(sash_art == SashProfile_ArticleNo._6040 || sash_art == SashProfile_ArticleNo._6041))
+                            {
+                                MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+
+
 
                         List<Extension_ArticleNo> lst_extArt = new List<Extension_ArticleNo>();
                         lst_extArt.Add(pnl.Panel_ExtensionTopArtNo);
@@ -2461,7 +2481,7 @@ namespace PresentationLayer.Presenter
             return col;
         }
 
-       
+
         #endregion
 
     }

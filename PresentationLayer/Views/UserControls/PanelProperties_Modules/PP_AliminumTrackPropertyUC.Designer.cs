@@ -37,10 +37,15 @@
             // 
             this.nud_AluminumTrackQty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nud_AluminumTrackQty.Location = new System.Drawing.Point(82, 2);
+            this.nud_AluminumTrackQty.Location = new System.Drawing.Point(83, 2);
             this.nud_AluminumTrackQty.Name = "nud_AluminumTrackQty";
             this.nud_AluminumTrackQty.Size = new System.Drawing.Size(66, 20);
             this.nud_AluminumTrackQty.TabIndex = 41;
+            this.nud_AluminumTrackQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lbl_AliminumTrack
             // 

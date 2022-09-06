@@ -91,6 +91,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                else if (!(Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                         Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                         !(Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                         Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
+                {
+                    MessageBox.Show("You've selected an incompatible item, be advised", "Handle Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             EventHelpers.RaiseEvent(sender, cmbHandleTypeSelectedValueEventRaised, e);
         }
@@ -144,6 +151,20 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 if (Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
                     (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
                      Panel_SashProfileArtNo == SashProfile_ArticleNo._373))
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (text.Contains("D Handle") || text.Contains("D Handle In & Out Locking") || text.Contains("Dummy Handle") || text.Contains("Pop-up Handle"))
+            {
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                    Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                    (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }

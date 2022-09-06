@@ -161,8 +161,8 @@ namespace EnumerationTypeLayer
             public static readonly SashProfile_ArticleNo _374 = new SashProfile_ArticleNo(3, "374");
             public static readonly SashProfile_ArticleNo _395 = new SashProfile_ArticleNo(4, "395"); //inward
             public static readonly SashProfile_ArticleNo _2067 = new SashProfile_ArticleNo(5, "2067"); //G58
-            public static readonly SashProfile_ArticleNo _6040 = new SashProfile_ArticleNo(3, "6040");
-            public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(3, "6041");
+            public static readonly SashProfile_ArticleNo _6040 = new SashProfile_ArticleNo(6, "6040");
+            public static readonly SashProfile_ArticleNo _6041 = new SashProfile_ArticleNo(7, "6041");
 
             private SashProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -175,6 +175,8 @@ namespace EnumerationTypeLayer
             public static readonly SashReinf_ArticleNo _207 = new SashReinf_ArticleNo(3, "207");
             public static readonly SashReinf_ArticleNo _V226 = new SashReinf_ArticleNo(4, "V226");//G58
             public static readonly SashReinf_ArticleNo _TV104 = new SashReinf_ArticleNo(5, "T-V104");
+            public static readonly SashReinf_ArticleNo _TV106 = new SashReinf_ArticleNo(6, "T-V106");
+
 
 
             private SashReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -253,6 +255,9 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _D = new Handle_Type(5, "D Handle");
             public static readonly Handle_Type _D_IO_Locking = new Handle_Type(6, "D Handle In & Out Locking");
             public static readonly Handle_Type _Dummy = new Handle_Type(7, "Dummy Handle");
+            public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
+
+
 
 
 

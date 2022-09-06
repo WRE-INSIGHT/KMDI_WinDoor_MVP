@@ -2099,6 +2099,37 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+
+        private Interlock_ArticleNo _panel_Interlock;
+        public Interlock_ArticleNo Panel_Interlock
+        {
+            get
+            {
+                return _panel_Interlock;
+            }
+
+            set
+            {
+                _panel_Interlock = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private ExtensionForInterlock_ArticleNo _panel_ExtensionForInterlock;
+        public ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlock
+        {
+            get
+            {
+                return _panel_ExtensionForInterlock;
+            }
+
+            set
+            {
+                _panel_ExtensionForInterlock = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods
@@ -5167,7 +5198,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     handle_deduct = 40;
                 }
-
+                else if (Panel_SashReinfArtNo == SashReinf_ArticleNo._TV104)
+                {
+                    handle_deduct = 50;
+                }
+                else if (Panel_SashReinfArtNo == SashReinf_ArticleNo._TV106)
+                {
+                    handle_deduct = 50;
+                }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
                 {
@@ -5491,7 +5529,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                 {
-
+                    Panel_GuideTrackProfile = GuideTrackProfile_ArticleNo._6059;
+                    Panel_AluminumTrack = AluminumTrack_ArticleNo._9C51;
+                    Panel_WeatherBar = WeatherBar_ArticleNo._1244;
+                    Panel_WaterSeepage = WaterSeepage_ArticleNo._1646;
+                    if (OverLappingPanel_Qty != 0)
+                    {
+                        Panel_Interlock = Interlock_ArticleNo._6061_Milled;
+                        Panel_ExtensionForInterlock = ExtensionForInterlock_ArticleNo._9061_Milled;
+                    }
+                    Panel_WeatherBarFastener = WeatherBarFastener_ArticleNo._9447;
+                    Panel_BrushSeal = BrushSeal_ArticleNo._9091;
+                    Panel_GlazingRebateBlock = GlazingRebateBlock_ArticleNo._9C56;
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -7208,6 +7257,120 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
             return motor_screws;
+        }
+
+
+        public void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Guide Track Profile " + Panel_GuideTrackProfile.DisplayName,
+                                   Panel_AluminumTrackQty, "pc(s)",
+                                   Panel_ParentFrameModel.Frame_Width,
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Aluminum Track " + Panel_AluminumTrack.DisplayName,
+                                   Panel_AluminumTrackQty, "pc(s)",
+                                   Panel_ParentFrameModel.Frame_Width,
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_WeatherBar_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Weather Bar " + Panel_WeatherBar.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_ParentFrameModel.Frame_Width,
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Water Seepage " + Panel_WaterSeepage.DisplayName,
+                                   1, "pc(s)",
+                                   Panel_ParentFrameModel.Frame_Width,
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_Interlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Interlock " + Panel_Interlock.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight - 5,
+                                   "Sash",
+                                   @"|  |");
+        }
+
+        public void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Extensoin for Interlock " + Panel_ExtensionForInterlock.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight - 30,
+                                   "Sash",
+                                   @"|  |");
+        }
+
+        public void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Weather Bar Fastener " + Panel_WeatherBarFastener.DisplayName,
+                                   Panel_ParentFrameModel.Frame_Width / 300, "pc(s)",
+                                   "",
+                                   "Weather Bar",
+                                   "");
+        }
+
+        public void Insert_BrushSeal_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSeal.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight,
+                                   "Weather Bar",
+                                   "");
+        }
+
+        public void Insert_Rollers_MaterialList(DataTable tbl_explosion)
+        {
+            string Roller = "";
+            if (Panel_RollersTypes == RollersTypes._GURoller)
+            {
+                Roller = "GU Roller ";
+            }
+            else if (Panel_RollersTypes == RollersTypes._HDRoller)
+            {
+                Roller = "HD Roller ";
+            }
+            else if (Panel_RollersTypes == RollersTypes._TandemRoller)
+            {
+                Roller = "Tandem Roller ";
+            }
+
+            tbl_explosion.Rows.Add(Roller + Panel_RollersTypes.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
+        }
+
+        public void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Brush Seal " + Panel_GlazingRebateBlock.DisplayName,
+                                   2, "pc(s)",
+                                   Panel_SashHeight,
+                                   "Weather Bar",
+                                   "");
+        }
+
+        public void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Anti Lift Device",
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
         }
         #endregion
 

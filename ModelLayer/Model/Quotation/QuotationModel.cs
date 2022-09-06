@@ -1054,14 +1054,14 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
-                             
+
                             IMultiPanelModel mpnl_Parent_lvl3 = null;
                             string mpanel_placement = "",
                                    mpanelParentlvl2_placement = "",
                                    mpnl_Parent_lvl3_mpanelType = "";
 
                             int obj_count = mpnl.GetVisibleObjects().Count();
-                            for (int i = 0; i < obj_count; i ++)
+                            for (int i = 0; i < obj_count; i++)
                             {
 
                                 mpanel_placement = mpnl.MPanel_Placement;
@@ -1070,10 +1070,10 @@ namespace ModelLayer.Model.Quotation
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
                                 Control nxt_ctrl, prevCtrl;
-                                  
+
                                 IDividerModel div_nxtCtrl = null,
-                                        div_prevCtrl = null; 
-                                 
+                                        div_prevCtrl = null;
+
                                 Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
                                                     divArtNo_prevCtrl = Divider_ArticleNo._None,
                                                     divArtNo_LeftOrTop = Divider_ArticleNo._None,
@@ -1094,7 +1094,7 @@ namespace ModelLayer.Model.Quotation
                                         OverLappingPanel_Qty += 1;
                                     }
                                 }
-                                
+
                                 //if (mpnl_curCtrl != null)
                                 //{
                                 //    if (mpnl_curCtrl.MPanel_Placement == "First")
@@ -1115,7 +1115,7 @@ namespace ModelLayer.Model.Quotation
 
 
                                 if (pnl_curCtrl != null)
-                                { 
+                                {
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                               divArtNo_prevCtrl,
                                                                               DividerModel.DividerType.None,
@@ -1135,7 +1135,7 @@ namespace ModelLayer.Model.Quotation
                                                                               mpanelParentlvl2_placement);
                                 }
                                 else if (mpnl_curCtrl != null)
-                                { 
+                                {
                                     mpnl_curCtrl.SetMPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                                 divArtNo_prevCtrl,
                                                                                 DividerModel.DividerType.None,
@@ -1155,11 +1155,32 @@ namespace ModelLayer.Model.Quotation
                                     int sashPerimeter_screws = pnl_curCtrl.Add_SashPerimeter_screws4fab();
                                     total_screws_fabrication += sashPerimeter_screws;
 
+                                    if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
+                                    {
+                                        pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
+
+                                        if (OverLappingPanel_Qty != 0)
+                                        {
+                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                        }
+
+                                        pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
+                                    }
+
+
                                     pnl_curCtrl.Insert_SashInfo_MaterialList(Material_List);
-   
+
                                     if (pnl_curCtrl.Panel_MotorizedOptionVisibility == false)
                                     {
-                                     
+
 
                                         if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay && pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
                                         {
@@ -1187,22 +1208,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             pnl_curCtrl.Insert_RotoswingHandle_MaterialList(Material_List);
 
-                                            if (pnl_curCtrl.Panel_Type.Contains("Awning"))
-                                            {
-                                                pnl_curCtrl.Insert_StrikerA_MaterialList(Material_List);
-
-                                                if (pnl_curCtrl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957 ||
-                                                        pnl_curCtrl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957 ||
-                                                        pnl_curCtrl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957 ||
-                                                        pnl_curCtrl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
-                                                {
-                                                    pnl_curCtrl.Insert_StrikerC_MaterialList(Material_List);
-                                                }
-
-                                                int strikerAC_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
-                                                add_screws_fab_striker += strikerAC_screws;
-                                            }
-                                            else if (pnl_curCtrl.Panel_Type.Contains("Casement"))
+                                            if (pnl_curCtrl.Panel_Type.Contains("Casement"))
                                             {
                                                 if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
                                                 {
