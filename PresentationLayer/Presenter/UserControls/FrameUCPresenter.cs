@@ -242,7 +242,6 @@ namespace PresentationLayer.Presenter.UserControls
                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                     //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
-
                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
                                                                                                     _multipanelModel,
                                                                                                     _frameModel,

@@ -13,6 +13,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     {
         IMultiPanelPropertiesUCPresenter multiPropUCP2_given { get; }
         IMultiPanelMullionUC GetMultiPanel();
+        FlowLayoutPanel GetflpMullion();
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,

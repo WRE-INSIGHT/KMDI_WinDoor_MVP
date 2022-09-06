@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         void DeletePanel(UserControl obj);
         void frmDimensionResults(int frmDimension_numWd, int frmDimension_numHt);
         IMultiPanelTransomUC GetMultiPanel();
+        FlowLayoutPanel GetflpTransom();
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,

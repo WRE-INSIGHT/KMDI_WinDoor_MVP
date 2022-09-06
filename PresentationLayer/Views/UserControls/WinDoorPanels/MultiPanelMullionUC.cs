@@ -161,5 +161,12 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             Console.WriteLine("Width " + this.Width);
             Console.WriteLine("Location " + this.Location);
         }
+
+       
+
+        public FlowLayoutPanel Getflp()
+        {
+            return flp_MultiMullion;
+        }
     }
 }

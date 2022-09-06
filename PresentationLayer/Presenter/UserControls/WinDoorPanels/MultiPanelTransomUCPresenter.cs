@@ -4019,5 +4019,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             _initialLoad = false;
         }
+
+        public FlowLayoutPanel GetflpTransom()
+        {
+            return _multiPanelTransomUC.Getflp();
+        }
     }
 }

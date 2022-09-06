@@ -166,5 +166,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             Console.WriteLine(this.Parent.Name);
             Console.WriteLine(this.Location);
         }
+
+        public FlowLayoutPanel Getflp()
+        {
+            return flp_MultiTransom;
+        }
     }
 }

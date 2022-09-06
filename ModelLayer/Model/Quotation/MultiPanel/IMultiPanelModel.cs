@@ -50,7 +50,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         int MPanel_DisplayHeight { get; set; }
         int MPanel_DisplayHeightDecimal { get; set; }
         int MPanel_StackNo { get; set; }
-
+        bool MPanel_NumEnable { get; set; }
         int GetNextIndex();
         int GetCount_MPanelLst_Object();
 

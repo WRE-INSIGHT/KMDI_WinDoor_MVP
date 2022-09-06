@@ -50,6 +50,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 597);
             this.Controls.Add(this.pnlSortItem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SortItemView";
             this.Text = "SortItem";
             this.Load += new System.EventHandler(this.SortItemView_Load);

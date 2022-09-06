@@ -1005,7 +1005,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine(_multiPanelModel.MPanel_Height);
+            Console.WriteLine(_multiPanelModel.MPanel_HeightToBind);
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {
@@ -3591,6 +3591,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         public void SetInitialLoadFalse()
         {
             _initialLoad = false;
+        }
+
+        public FlowLayoutPanel GetflpMullion()
+        {
+            return _multiPanelMullionUCP.GetflpMullion();
         }
     }
 }
