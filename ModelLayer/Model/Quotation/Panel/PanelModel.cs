@@ -1888,32 +1888,32 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private GuideTrackProfile_ArticleNo _panel_GuideTrackProfile;
-        public GuideTrackProfile_ArticleNo Panel_GuideTrackProfile
+        private GuideTrackProfile_ArticleNo _panel_GuideTrackProfileArtNo;
+        public GuideTrackProfile_ArticleNo Panel_GuideTrackProfileArtNo
         {
             get
             {
-                return _panel_GuideTrackProfile;
+                return _panel_GuideTrackProfileArtNo;
             }
 
             set
             {
-                _panel_GuideTrackProfile = value;
+                _panel_GuideTrackProfileArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private AluminumTrack_ArticleNo _panel_AluminumTrack;
-        public AluminumTrack_ArticleNo Panel_AluminumTrack
+        private AluminumTrack_ArticleNo _panel_AluminumTrackArtNo;
+        public AluminumTrack_ArticleNo Panel_AluminumTrackArtNo
         {
             get
             {
-                return _panel_AluminumTrack;
+                return _panel_AluminumTrackArtNo;
             }
 
             set
             {
-                _panel_AluminumTrack = value;
+                _panel_AluminumTrackArtNo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1949,77 +1949,77 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        private WeatherBar_ArticleNo _panel_WeatherBar;
-        public WeatherBar_ArticleNo Panel_WeatherBar
+        private WeatherBar_ArticleNo _panel_WeatherBarArtNo;
+        public WeatherBar_ArticleNo Panel_WeatherBarArtNo
         {
             get
             {
-                return _panel_WeatherBar;
+                return _panel_WeatherBarArtNo;
             }
 
             set
             {
-                _panel_WeatherBar = value;
+                _panel_WeatherBarArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private WeatherBarFastener_ArticleNo _panel_WeatherBarFastener;
-        public WeatherBarFastener_ArticleNo Panel_WeatherBarFastener
+        private WeatherBarFastener_ArticleNo _panel_WeatherBarFastenerArtNo;
+        public WeatherBarFastener_ArticleNo Panel_WeatherBarFastenerArtNo
         {
             get
             {
-                return _panel_WeatherBarFastener;
+                return _panel_WeatherBarFastenerArtNo;
             }
 
             set
             {
-                _panel_WeatherBarFastener = value;
+                _panel_WeatherBarFastenerArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private EndCapForWeatherBar_ArticleNo _panel_EndCapForWeatherBar;
-        public EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBar
+        private EndCapForWeatherBar_ArticleNo _panel_EndCapForWeatherBarArtNo;
+        public EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBarArtNo
         {
             get
             {
-                return _panel_EndCapForWeatherBar;
+                return _panel_EndCapForWeatherBarArtNo;
             }
 
             set
             {
-                _panel_EndCapForWeatherBar = value;
+                _panel_EndCapForWeatherBarArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private WaterSeepage_ArticleNo _panel_WaterSeepage;
-        public WaterSeepage_ArticleNo Panel_WaterSeepage
+        private WaterSeepage_ArticleNo _panel_WaterSeepageArtNo;
+        public WaterSeepage_ArticleNo Panel_WaterSeepageArtNo
         {
             get
             {
-                return _panel_WaterSeepage;
+                return _panel_WaterSeepageArtNo;
             }
 
             set
             {
-                _panel_WaterSeepage = value;
+                _panel_WaterSeepageArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private BrushSeal_ArticleNo _panel_BrushSeal;
-        public BrushSeal_ArticleNo Panel_BrushSeal
+        private BrushSeal_ArticleNo _panel_BrushSealArtNo;
+        public BrushSeal_ArticleNo Panel_BrushSealArtNo
         {
             get
             {
-                return _panel_BrushSeal;
+                return _panel_BrushSealArtNo;
             }
 
             set
             {
-                _panel_BrushSeal = value;
+                _panel_BrushSealArtNo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -2054,17 +2054,17 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private GlazingRebateBlock_ArticleNo _panel_GlazingRebateBlock;
-        public GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlock
+        private GlazingRebateBlock_ArticleNo _panel_GlazingRebateBlockArtNo;
+        public GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlockArtNo
         {
             get
             {
-                return _panel_GlazingRebateBlock;
+                return _panel_GlazingRebateBlockArtNo;
             }
 
             set
             {
-                _panel_GlazingRebateBlock = value;
+                _panel_GlazingRebateBlockArtNo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -2084,52 +2084,208 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private SealingBlock_ArticleNo _panel_SealingBlock;
-        public SealingBlock_ArticleNo Panel_SealingBlock
+        private SealingBlock_ArticleNo _panel_SealingBlockArtNo;
+        public SealingBlock_ArticleNo Panel_SealingBlockArtNo
         {
             get
             {
-                return _panel_SealingBlock;
+                return _panel_SealingBlockArtNo;
             }
 
             set
             {
-                _panel_SealingBlock = value;
+                _panel_SealingBlockArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
 
-        private Interlock_ArticleNo _panel_Interlock;
-        public Interlock_ArticleNo Panel_Interlock
+        private Interlock_ArticleNo _panel_InterlockArtNo;
+        public Interlock_ArticleNo Panel_InterlockArtNo
         {
             get
             {
-                return _panel_Interlock;
+                return _panel_InterlockArtNo;
             }
 
             set
             {
-                _panel_Interlock = value;
+                _panel_InterlockArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
 
-        private ExtensionForInterlock_ArticleNo _panel_ExtensionForInterlock;
-        public ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlock
+        private ExtensionForInterlock_ArticleNo _panel_ExtensionForInterlockArtNo;
+        public ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlockArtNo
         {
             get
             {
-                return _panel_ExtensionForInterlock;
+                return _panel_ExtensionForInterlockArtNo;
             }
 
             set
             {
-                _panel_ExtensionForInterlock = value;
+                _panel_ExtensionForInterlockArtNo = value;
                 NotifyPropertyChanged();
             }
         }
+
+
+
+        private D_HandleArtNo _panel_DHandleArtNo;
+        public D_HandleArtNo Panel_DHandleArtNo
+        {
+            get
+            {
+                return _panel_DHandleArtNo;
+            }
+
+            set
+            {
+                _panel_DHandleArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private D_Handle_IO_LockingArtNo _panel_DHandleIOLockingArtNo;
+        public D_Handle_IO_LockingArtNo Panel_DHandleIOLockingArtNo
+        {
+            get
+            {
+                return _panel_DHandleIOLockingArtNo;
+            }
+
+            set
+            {
+                _panel_DHandleIOLockingArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private DummyD_HandleArtNo _panel_DummyDHandleArtNo;
+        public DummyD_HandleArtNo Panel_DummyDHandleArtNo
+        {
+            get
+            {
+                return _panel_DummyDHandleArtNo;
+            }
+
+            set
+            {
+                _panel_DummyDHandleArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private PopUp_HandleArtNo _panel_PopUpHandleArtNo;
+        public PopUp_HandleArtNo Panel_PopUpHandleArtNo
+        {
+            get
+            {
+                return _panel_PopUpHandleArtNo;
+            }
+
+            set
+            {
+                _panel_PopUpHandleArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Rotoswing_Sliding_HandleArtNo _panel_RotoswingForSlidingHandleArtNo;
+        public Rotoswing_Sliding_HandleArtNo Panel_RotoswingForSlidingHandleArtNo
+        {
+            get
+            {
+                return _panel_RotoswingForSlidingHandleArtNo;
+            }
+
+            set
+            {
+                _panel_RotoswingForSlidingHandleArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_DHandleOptionVisibilty;
+        public bool Panel_DHandleOptionVisibilty
+        {
+            get
+            {
+                return _panel_DHandleOptionVisibilty;
+            }
+
+            set
+            {
+                _panel_DHandleOptionVisibilty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_DHandleIOLockingOptionVisibilty;
+        public bool Panel_DHandleIOLockingOptionVisibilty
+        {
+            get
+            {
+                return _panel_DHandleIOLockingOptionVisibilty;
+            }
+
+            set
+            {
+                _panel_DHandleIOLockingOptionVisibilty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_DummyDHandleOptionVisibilty;
+        public bool Panel_DummyDHandleOptionVisibilty
+        {
+            get
+            {
+                return _panel_DummyDHandleOptionVisibilty;
+            }
+
+            set
+            {
+                _panel_DummyDHandleOptionVisibilty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_PopUpHandleOptionVisibilty;
+        public bool Panel_PopUpHandleOptionVisibilty
+        {
+            get
+            {
+                return _panel_PopUpHandleOptionVisibilty;
+            }
+
+            set
+            {
+                _panel_PopUpHandleOptionVisibilty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_RotoswingForSlidingHandleOptionVisibilty;
+        public bool Panel_RotoswingForSlidingHandleOptionVisibilty
+        {
+            get
+            {
+                return _panel_RotoswingForSlidingHandleOptionVisibilty;
+            }
+
+            set
+            {
+                _panel_RotoswingForSlidingHandleOptionVisibilty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -5529,18 +5685,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                 {
-                    Panel_GuideTrackProfile = GuideTrackProfile_ArticleNo._6059;
-                    Panel_AluminumTrack = AluminumTrack_ArticleNo._9C51;
-                    Panel_WeatherBar = WeatherBar_ArticleNo._1244;
-                    Panel_WaterSeepage = WaterSeepage_ArticleNo._1646;
+                    Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
+                    Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
+                    Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
                     if (OverLappingPanel_Qty != 0)
                     {
-                        Panel_Interlock = Interlock_ArticleNo._6061_Milled;
-                        Panel_ExtensionForInterlock = ExtensionForInterlock_ArticleNo._9061_Milled;
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061_Milled;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9061_Milled;
                     }
-                    Panel_WeatherBarFastener = WeatherBarFastener_ArticleNo._9447;
-                    Panel_BrushSeal = BrushSeal_ArticleNo._9091;
-                    Panel_GlazingRebateBlock = GlazingRebateBlock_ArticleNo._9C56;
+                    Panel_WeatherBarFastenerArtNo = WeatherBarFastener_ArticleNo._9447;
+                    Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
+                    Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -7262,7 +7418,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Guide Track Profile " + Panel_GuideTrackProfile.DisplayName,
+            tbl_explosion.Rows.Add("Guide Track Profile " + Panel_GuideTrackProfileArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
                                    Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
@@ -7271,7 +7427,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Aluminum Track " + Panel_AluminumTrack.DisplayName,
+            tbl_explosion.Rows.Add("Aluminum Track " + Panel_AluminumTrackArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
                                    Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
@@ -7280,7 +7436,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_WeatherBar_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Weather Bar " + Panel_WeatherBar.DisplayName,
+            tbl_explosion.Rows.Add("Weather Bar " + Panel_WeatherBarArtNo.DisplayName,
                                    1, "pc(s)",
                                    Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
@@ -7289,7 +7445,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Water Seepage " + Panel_WaterSeepage.DisplayName,
+            tbl_explosion.Rows.Add("Water Seepage " + Panel_WaterSeepageArtNo.DisplayName,
                                    1, "pc(s)",
                                    Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
@@ -7298,7 +7454,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_Interlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Interlock " + Panel_Interlock.DisplayName,
+            tbl_explosion.Rows.Add("Interlock " + Panel_InterlockArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashHeight - 5,
                                    "Sash",
@@ -7307,7 +7463,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Extensoin for Interlock " + Panel_ExtensionForInterlock.DisplayName,
+            tbl_explosion.Rows.Add("Extensoin for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashHeight - 30,
                                    "Sash",
@@ -7316,7 +7472,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Weather Bar Fastener " + Panel_WeatherBarFastener.DisplayName,
+            tbl_explosion.Rows.Add("Weather Bar Fastener " + Panel_WeatherBarFastenerArtNo.DisplayName,
                                    Panel_ParentFrameModel.Frame_Width / 300, "pc(s)",
                                    "",
                                    "Weather Bar",
@@ -7325,7 +7481,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_BrushSeal_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSeal.DisplayName,
+            tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSealArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashHeight,
                                    "Weather Bar",
@@ -7357,7 +7513,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Brush Seal " + Panel_GlazingRebateBlock.DisplayName,
+            tbl_explosion.Rows.Add("Brush Seal " + Panel_GlazingRebateBlockArtNo.DisplayName,
                                    2, "pc(s)",
                                    Panel_SashHeight,
                                    "Weather Bar",

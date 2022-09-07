@@ -232,22 +232,33 @@ namespace ModelLayer.Model.Quotation.Panel
         SlidingTypes Panel_SlidingTypes { get; set; }
         bool Panel_SlidingTypeVisibility { get; set; }
 
-        GuideTrackProfile_ArticleNo Panel_GuideTrackProfile { get; set; }
-        AluminumTrack_ArticleNo Panel_AluminumTrack { get; set; }
+        GuideTrackProfile_ArticleNo Panel_GuideTrackProfileArtNo { get; set; }
+        AluminumTrack_ArticleNo Panel_AluminumTrackArtNo { get; set; }
         int Panel_AluminumTrackQty { get; set; }
         bool Panel_AluminumTrackQtyVisibility { get; set; }
-        WeatherBar_ArticleNo Panel_WeatherBar { get; set; }
-        WeatherBarFastener_ArticleNo Panel_WeatherBarFastener { get; set; }
-        EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBar { get; set; }
-        WaterSeepage_ArticleNo Panel_WaterSeepage { get; set; }
-        BrushSeal_ArticleNo Panel_BrushSeal { get; set; }
+        WeatherBar_ArticleNo Panel_WeatherBarArtNo { get; set; }
+        WeatherBarFastener_ArticleNo Panel_WeatherBarFastenerArtNo { get; set; }
+        EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBarArtNo { get; set; }
+        WaterSeepage_ArticleNo Panel_WaterSeepageArtNo { get; set; }
+        BrushSeal_ArticleNo Panel_BrushSealArtNo { get; set; }
         RollersTypes Panel_RollersTypes { get; set; }
         bool Panel_RollersTypesVisibility { get; set; }
-        GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlock { get; set; }
+        GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlockArtNo { get; set; }
         Spacer_ArticleNo Panel_Spacer { get; set; }
-        SealingBlock_ArticleNo Panel_SealingBlock { get; set; }
-        Interlock_ArticleNo Panel_Interlock { get; set; }
-        ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlock { get; set; }
+        SealingBlock_ArticleNo Panel_SealingBlockArtNo { get; set; }
+        Interlock_ArticleNo Panel_InterlockArtNo { get; set; }
+        ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlockArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleArtNo { get; set; }
+        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingArtNo { get; set; }
+        DummyD_HandleArtNo Panel_DummyDHandleArtNo { get; set; }
+        PopUp_HandleArtNo Panel_PopUpHandleArtNo { get; set; }
+        Rotoswing_Sliding_HandleArtNo Panel_RotoswingForSlidingHandleArtNo { get; set; }
+        bool Panel_DHandleOptionVisibilty { get; set; }
+        bool Panel_DHandleIOLockingOptionVisibilty { get; set; }
+        bool Panel_DummyDHandleOptionVisibilty { get; set; }
+        bool Panel_PopUpHandleOptionVisibilty { get; set; }
+        bool Panel_RotoswingForSlidingHandleOptionVisibilty { get; set; }
+
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();

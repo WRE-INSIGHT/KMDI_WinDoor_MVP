@@ -328,6 +328,15 @@ namespace PresentationLayer
                 .RegisterType<IPP_AliminumTrackPropertyUC, PP_AliminumTrackPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_AliminumTrackPropertyUCPresenter, PP_AliminumTrackPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_DHandlePropertyUC, PP_DHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DHandlePropertyUCPresenter, PP_DHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_DHandle_IOLockingPropertyUC, PP_DHandle_IOLockingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DHandle_IOLockingPropertyUCPresenter, PP_DHandle_IOLockingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_DummyDHandlePropertyUC, PP_DummyDHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DummyDHandlePropertyUCPresenter, PP_DummyDHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
