@@ -611,6 +611,24 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.Designer.cs">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.Designer.cs">
+      <DependentUpon>PP_DHandlePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.Designer.cs">
+      <DependentUpon>PP_DHandle_IOLockingPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.Designer.cs">
+      <DependentUpon>PP_DummyDHandlePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -671,6 +689,12 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.Designer.cs">
       <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.Designer.cs">
+      <DependentUpon>PP_PopUpHandlePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -694,6 +718,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.Designer.cs">
       <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.Designer.cs">
+      <DependentUpon>PP_RotoswingForSlidingPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1031,6 +1061,15 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.resx">
+      <DependentUpon>PP_DHandlePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.resx">
+      <DependentUpon>PP_DHandle_IOLockingPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.resx">
+      <DependentUpon>PP_DummyDHandlePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.resx">
       <DependentUpon>PP_EspagnolettePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1061,6 +1100,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.resx">
       <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.resx">
+      <DependentUpon>PP_PopUpHandlePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1072,6 +1114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.resx">
       <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.resx">
+      <DependentUpon>PP_RotoswingForSlidingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
       <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>

@@ -278,10 +278,10 @@ namespace EnumerationTypeLayer
 
         public class Rotoswing_Sliding_HandleArtNo : Enumeration<Rotoswing_HandleArtNo, int>
         {
-            public static readonly Rotoswing_Sliding_HandleArtNo _RSC773451 = new Rotoswing_Sliding_HandleArtNo(0, "RSS-632300");
-            public static readonly Rotoswing_Sliding_HandleArtNo _RSC773452 = new Rotoswing_Sliding_HandleArtNo(1, "RSS-823073");
-            public static readonly Rotoswing_Sliding_HandleArtNo _RSC823048 = new Rotoswing_Sliding_HandleArtNo(2, "RSS-823094");
-            public static readonly Rotoswing_Sliding_HandleArtNo _RSC833307 = new Rotoswing_Sliding_HandleArtNo(3, "RSS-632303");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSS632300 = new Rotoswing_Sliding_HandleArtNo(0, "RSS-632300");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSS823073 = new Rotoswing_Sliding_HandleArtNo(1, "RSS-823073");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSS823094 = new Rotoswing_Sliding_HandleArtNo(2, "RSS-823094");
+            public static readonly Rotoswing_Sliding_HandleArtNo _RSS632303 = new Rotoswing_Sliding_HandleArtNo(3, "RSS-632303");
 
             private Rotoswing_Sliding_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
