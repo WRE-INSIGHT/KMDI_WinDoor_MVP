@@ -254,8 +254,10 @@ namespace EnumerationTypeLayer
             public static readonly Handle_Type _MVD = new Handle_Type(4, "MVD Handle");
             public static readonly Handle_Type _D = new Handle_Type(5, "D Handle");
             public static readonly Handle_Type _D_IO_Locking = new Handle_Type(6, "D Handle In & Out Locking");
-            public static readonly Handle_Type _Dummy = new Handle_Type(7, "Dummy Handle");
+            public static readonly Handle_Type _DummyD = new Handle_Type(7, "Dummy D Handle");
             public static readonly Handle_Type _PopUp = new Handle_Type(8, "Pop-up Handle");
+            public static readonly Handle_Type _RotoswingForSliding = new Handle_Type(9, "Rotoswing(Sliding) Handle");
+
 
 
 
@@ -915,7 +917,7 @@ namespace EnumerationTypeLayer
 
         public class ExtensionForInterlock_ArticleNo : Enumeration<ExtensionForInterlock_ArticleNo, int>
         {
-            public static readonly ExtensionForInterlock_ArticleNo _9061_Milled = new ExtensionForInterlock_ArticleNo(0, "9061 - Milled");
+            public static readonly ExtensionForInterlock_ArticleNo _9C61_Milled = new ExtensionForInterlock_ArticleNo(0, "9C61 - Milled");
 
             private ExtensionForInterlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }

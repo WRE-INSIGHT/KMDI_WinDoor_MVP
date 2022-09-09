@@ -29,6 +29,7 @@ namespace ModelLayer.Model.Quotation
         public int GlazingSeal_TotalQty { get; set; }
         public int Screws_for_Fabrication { get; set; }
         public int Screws_for_Installation { get; set; }
+        public int Screws_for_6050Frame { get; set; }
         public int Screws_for_Cladding { get; set; }
         public int Expansion_BoltQty_Total { get; set; }
         public int Rebate_Qty { get; set; }
@@ -1055,7 +1056,7 @@ namespace ModelLayer.Model.Quotation
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
-                            IMultiPanelModel mpnl_Parent_lvl3 = null;
+                            //IMultiPanelModel mpnl_Parent_lvl3 = null;
                             string mpanel_placement = "",
                                    mpanelParentlvl2_placement = "",
                                    mpnl_Parent_lvl3_mpanelType = "";
@@ -1069,7 +1070,7 @@ namespace ModelLayer.Model.Quotation
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
-                                Control nxt_ctrl, prevCtrl;
+                                //Control nxt_ctrl, prevCtrl;
 
                                 IDividerModel div_nxtCtrl = null,
                                         div_prevCtrl = null;
@@ -1155,6 +1156,14 @@ namespace ModelLayer.Model.Quotation
                                     int sashPerimeter_screws = pnl_curCtrl.Add_SashPerimeter_screws4fab();
                                     total_screws_fabrication += sashPerimeter_screws;
 
+                                    if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
+                                    {
+                                        pnl_curCtrl.Insert_CoverProfileInfo_MaterialList(Material_List);
+                                    }
+
+                                    pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
+                                    pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
+
                                     if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
                                     {
                                         pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
@@ -1171,8 +1180,18 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                         pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
                                         pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                                         pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
+                                        pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
+
+                                        if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                            pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                        {
+                                            pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
+                                        }
+
+                                        //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
+                                        //add_screws_fab_striker += strikerAC_screws;
+
                                     }
 
 
@@ -1653,6 +1672,7 @@ namespace ModelLayer.Model.Quotation
             Screws_for_Fabrication = fixing_screw + add_screws;
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = (int)(Math.Ceiling((decimal)total_cladding_size / 300));
+            Screws_for_6050Frame = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 300);
 
             Plastic_CoverQty_Total = (frame_width * frame_height) * 2;
             Expansion_BoltQty_Total = exp_bolt;
@@ -1700,6 +1720,8 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
 
+            Material_List.Rows.Add("Screws for 6050 Frame",
+                                  Screws_for_6050Frame, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
             if (Screws_for_Cladding > 0)
             {
                 Material_List.Rows.Add("Screws for Cladding 10 x 38",

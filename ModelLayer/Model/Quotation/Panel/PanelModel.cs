@@ -702,63 +702,118 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelGlassThickness = value;
-                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+
+                if (Panel_Type.Contains("Sliding"))
                 {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._1681;
+                    if (value == 6.0f || value == 7.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
+                    }
+                    else if (value == 8.0f ||
+                             value == 9.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
+                    }
+                    else if (value == 10.0f ||
+                             value == 11.0f ||
+                             value == 12.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
+                    }
+                    else if (value == 13.0f ||
+                             value == 14.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
+                    }
+                    else if (value == 15.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431_9073;
+                    }
+                    else if (value == 16.0f || value == 17.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433;
+                    }
+                    else if (value == 18.0f || value == 19.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433_9073;
+                    }
+                    else if (value == 20.0f ||
+                             value == 21.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
+                    }
+                    else if (value == 22.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2429_9044;
+                    }
+                    else if (value == 23.0f || value == 24.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2429;
+                    }
+
                 }
-                else if (value == 6.0f ||
-                    value == 8.0f)
+                else
                 {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
+                    if (Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._1681;
+                    }
+                    else if (value == 6.0f ||
+                             value == 8.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2452;
+                    }
+                    else if (value == 10.0f ||
+                             value == 11.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
+                    }
+                    else if (value == 12.0f ||
+                             value == 13.0f ||
+                             value == 14.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
+                    }
+                    else if (value == 15.0f ||
+                             value == 16.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
+                    }
+                    else if (value == 18.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
+                    }
+                    else if (value == 20.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
+                    }
+                    else if (value == 22.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
+                    }
+                    else if (value == 23.0f ||
+                             value == 24.0f ||
+                             value == 25.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
+                    }
+                    else if (value == 26.0f ||
+                             value == 27.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433;
+                    }
+                    else if (value == 28.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2432;
+                    }
+                    else if (value == 29.0f ||
+                             value == 30.0f)
+                    {
+                        PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
+                    }
                 }
-                else if (value == 10.0f ||
-                         value == 11.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2451;
-                }
-                else if (value == 12.0f ||
-                         value == 13.0f ||
-                         value == 14.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2453;
-                }
-                else if (value == 15.0f ||
-                         value == 16.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
-                }
-                else if (value == 18.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2438;
-                }
-                else if (value == 20.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2437;
-                }
-                else if (value == 22.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2434;
-                }
-                else if (value == 23.0f ||
-                         value == 24.0f ||
-                         value == 25.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2435;
-                }
-                else if (value == 26.0f ||
-                         value == 27.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2433;
-                }
-                else if (value == 28.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2432;
-                }
-                else if (value == 29.0f ||
-                         value == 30.0f)
-                {
-                    PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2431;
-                }
+
+
 
                 NotifyPropertyChanged();
             }
@@ -2286,6 +2341,9 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        public Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
+        public int Panel_StrikerArtno_SlidingQty { get; set; }
+
         #endregion
 
         #region Methods
@@ -3710,9 +3768,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
-                if (Panel_Type.Contains("Sliding"))
+                if (Panel_Type.Contains("Sliding") || Panel_ChkText == "dSash")
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -4632,6 +4691,26 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
                 }
+                //else if (Panel_HandleType == Handle_Type._D)
+                //{
+
+                //}
+                //else if (Panel_HandleType == Handle_Type._D_IO_Locking)
+                //{
+
+                //}
+                //else if (Panel_HandleType == Handle_Type._DummyD)
+                //{
+
+                //}
+                //else if (Panel_HandleType == Handle_Type._PopUp)
+                //{
+
+                //}
+                //else if (Panel_HandleType == Handle_Type._RotoswingForSliding)
+                //{
+
+                //}
             }
             else if (Panel_SashPropertyVisibility == false)
             {
@@ -5304,9 +5383,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._KBC70;
                 }
 
-                if (Panel_Type.Contains("Sliding"))
+                if (Panel_Type.Contains("Sliding") || Panel_ChkText == "dSash")
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
@@ -5407,7 +5487,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
 
-                if (Panel_Type.Contains("Sliding"))
+                if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                 {
                     Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - (deduction_for_sashWD * OverLappingPanel_Qty) + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
                 }
@@ -5692,11 +5772,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (OverLappingPanel_Qty != 0)
                     {
                         Panel_InterlockArtNo = Interlock_ArticleNo._6061_Milled;
-                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9061_Milled;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61_Milled;
                     }
                     Panel_WeatherBarFastenerArtNo = WeatherBarFastener_ArticleNo._9447;
                     Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
+                    _panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -6996,7 +7077,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_Spacer_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Spacer" + Panel_SpacerArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Spacer " + Panel_SpacerArtNo.DisplayName,
                                    2, "pc(s)",
                                    "",
                                    "Sash",
@@ -7447,7 +7528,7 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             tbl_explosion.Rows.Add("Water Seepage " + Panel_WaterSeepageArtNo.DisplayName,
                                    1, "pc(s)",
-                                   Panel_ParentFrameModel.Frame_Width,
+                                   Panel_ParentFrameModel.Frame_Width / 2,
                                    "Frame",
                                    @"|  |");
         }
@@ -7473,7 +7554,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Weather Bar Fastener " + Panel_WeatherBarFastenerArtNo.DisplayName,
-                                   Panel_ParentFrameModel.Frame_Width / 300, "pc(s)",
+                                   (int)(Math.Ceiling((decimal)(Panel_ParentFrameModel.Frame_Width) / 300)), "pc(s)",
                                    "",
                                    "Weather Bar",
                                    "");
@@ -7513,16 +7594,46 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Brush Seal " + Panel_GlazingRebateBlockArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Glazing Rebate Block " + Panel_GlazingRebateBlockArtNo.DisplayName,
                                    2, "pc(s)",
-                                   Panel_SashHeight,
-                                   "Weather Bar",
+                                   "",
+                                   "Sash",
                                    "");
         }
 
         public void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Anti Lift Device",
+                                   2, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
+        }
+
+        public void Insert_StrikerForSliding_MaterialList(DataTable tbl_explosion)
+        {
+            string orient = "";
+            if (Panel_ChkText == "L")
+            {
+                orient = "Left";
+                Panel_StrikerArtno_Sliding = Striker_ArticleNo._629555;
+            }
+            else if (Panel_ChkText == "R")
+            {
+                orient = "Right";
+                Panel_StrikerArtno_Sliding = Striker_ArticleNo._629554;
+            }
+
+            tbl_explosion.Rows.Add("Striker " + orient + " " + Panel_StrikerArtno_Sliding.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
+        }
+
+        public void Insert_SealingBlock_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sealing Block " + Panel_SealingBlockArtNo.DisplayName,
                                    2, "pc(s)",
                                    "",
                                    "Sash",

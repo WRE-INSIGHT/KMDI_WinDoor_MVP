@@ -258,7 +258,8 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_DummyDHandleOptionVisibilty { get; set; }
         bool Panel_PopUpHandleOptionVisibilty { get; set; }
         bool Panel_RotoswingForSlidingHandleOptionVisibilty { get; set; }
-
+        Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
+        int Panel_StrikerArtno_SlidingQty { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -359,6 +360,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_Rollers_MaterialList(DataTable tbl_explosion);
         void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion);
         void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerForSliding_MaterialList(DataTable tbl_explosion);
+        void Insert_SealingBlock_MaterialList(DataTable tbl_explosion);
 
         #endregion
     }

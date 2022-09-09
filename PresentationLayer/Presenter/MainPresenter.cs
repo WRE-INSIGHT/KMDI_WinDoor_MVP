@@ -1718,7 +1718,7 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
-                        else if (handletype == Handle_Type._D || handletype == Handle_Type._Dummy || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._PopUp)
+                        else if (handletype == Handle_Type._D || handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._PopUp)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6050 ||
                                  frame_art == FrameProfile_ArticleNo._6052) &&
