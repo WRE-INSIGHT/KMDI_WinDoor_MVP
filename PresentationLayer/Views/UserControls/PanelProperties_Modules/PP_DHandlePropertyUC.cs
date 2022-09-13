@@ -35,7 +35,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_DHandleOptionVisibilty"]);
-            cmb_DArtNo.DataBindings.Add(ModelBinding["Panel_DHandleArtNo"]);
+            cmb_DArtNo.DataBindings.Add(ModelBinding["Panel_DHandleOutsideArtNo"]);
         }
     }
 }

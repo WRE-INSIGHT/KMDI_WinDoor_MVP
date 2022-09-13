@@ -9,8 +9,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     {
         IPP_RotoswingForSlidingPropertyUC GetRotoswingForSlidingPropertyUC();
 
-        IPP_RotoswingForSlidingPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                     IPanelModel panelModel,
-                                                                     IMainPresenter mainPresenter);
+        IPP_RotoswingForSlidingPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                     IPanelModel panelModel);
     }
 }

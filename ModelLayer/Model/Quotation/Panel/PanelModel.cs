@@ -2188,53 +2188,144 @@ namespace ModelLayer.Model.Quotation.Panel
 
 
 
-        private D_HandleArtNo _panel_DHandleArtNo;
-        public D_HandleArtNo Panel_DHandleArtNo
+        private D_HandleArtNo _panel_DHandleInsideArtNo;
+        public D_HandleArtNo Panel_DHandleInsideArtNo
         {
             get
             {
-                return _panel_DHandleArtNo;
+                return _panel_DHandleInsideArtNo;
             }
 
             set
             {
-                _panel_DHandleArtNo = value;
+                _panel_DHandleInsideArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
 
-        private D_Handle_IO_LockingArtNo _panel_DHandleIOLockingArtNo;
-        public D_Handle_IO_LockingArtNo Panel_DHandleIOLockingArtNo
+        private D_HandleArtNo _panel_DHandleOutsideArtNo;
+        public D_HandleArtNo Panel_DHandleOutsideArtNo
         {
             get
             {
-                return _panel_DHandleIOLockingArtNo;
+                return _panel_DHandleOutsideArtNo;
             }
 
             set
             {
-                _panel_DHandleIOLockingArtNo = value;
+                _panel_DHandleOutsideArtNo = value;
+                if (value == D_HandleArtNo._DH605543)
+                {
+                    Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
+                }
+                else if (value == D_HandleArtNo._DH613185)
+                {
+                    Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
+                }
+                else if (value == D_HandleArtNo._DH487261)
+                {
+                    Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
+                }
+                else if (value == D_HandleArtNo._DH605551)
+                {
+                    Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
+                }
                 NotifyPropertyChanged();
             }
         }
 
-
-        private DummyD_HandleArtNo _panel_DummyDHandleArtNo;
-        public DummyD_HandleArtNo Panel_DummyDHandleArtNo
+        private D_Handle_IO_LockingArtNo _panel_DHandleIOLockingInsideArtNo;
+        public D_Handle_IO_LockingArtNo Panel_DHandleIOLockingInsideArtNo
         {
             get
             {
-                return _panel_DummyDHandleArtNo;
+                return _panel_DHandleIOLockingInsideArtNo;
             }
 
             set
             {
-                _panel_DummyDHandleArtNo = value;
+                _panel_DHandleIOLockingInsideArtNo = value;
                 NotifyPropertyChanged();
             }
         }
 
+        private D_Handle_IO_LockingArtNo _panel_DHandleIOLockingOutsideArtNo;
+        public D_Handle_IO_LockingArtNo Panel_DHandleIOLockingOutsideArtNo
+        {
+            get
+            {
+                return _panel_DHandleIOLockingOutsideArtNo;
+            }
+
+            set
+            {
+                _panel_DHandleIOLockingOutsideArtNo = value;
+                if (value == D_Handle_IO_LockingArtNo._613217)
+                {
+                    Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613243;
+                }
+                else if (value == D_Handle_IO_LockingArtNo._DH833308_613241)
+                {
+                    Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
+                }
+                else if (value == D_Handle_IO_LockingArtNo._DH613219)
+                {
+                    Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613245;
+                }
+                else if (value == D_Handle_IO_LockingArtNo._DH605216)
+                {
+                    Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613242;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        private DummyD_HandleArtNo _panel_DummyDHandleInsideArtNo;
+        public DummyD_HandleArtNo Panel_DummyDHandleInsideArtNo
+        {
+            get
+            {
+                return _panel_DummyDHandleInsideArtNo;
+            }
+
+            set
+            {
+                _panel_DummyDHandleInsideArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private DummyD_HandleArtNo _panel_DummyDHandleOutsideArtNo;
+        public DummyD_HandleArtNo Panel_DummyDHandleOutsideArtNo
+        {
+            get
+            {
+                return _panel_DummyDHandleOutsideArtNo;
+            }
+
+            set
+            {
+                _panel_DummyDHandleOutsideArtNo = value;
+                if (value == DummyD_HandleArtNo._DH613191)
+                {
+                    Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
+                }
+                else if (value == DummyD_HandleArtNo._DH833310_613189)
+                {
+                    Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
+                }
+                else if (value == DummyD_HandleArtNo._DH613193)
+                {
+                    Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
+                }
+                else if (value == DummyD_HandleArtNo._DH613190)
+                {
+                    Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
+                }
+                NotifyPropertyChanged();
+            }
+        }
 
         private PopUp_HandleArtNo _panel_PopUpHandleArtNo;
         public PopUp_HandleArtNo Panel_PopUpHandleArtNo
@@ -2343,6 +2434,21 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
         public int Panel_StrikerArtno_SlidingQty { get; set; }
+
+        private ScrewSets _panel_ScrewSetsArtNo;
+        public ScrewSets Panel_ScrewSetsArtNo
+        {
+            get
+            {
+                return _panel_ScrewSetsArtNo;
+            }
+
+            set
+            {
+                _panel_ScrewSetsArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -3620,6 +3726,46 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_AluminumTrackQtyOptionsheight;
             }
+            else if (mode == "addDHandle")
+            {
+                Panel_PropertyHeight += constants.panel_property_DHandleOptionsheight;
+            }
+            else if (mode == "minusDHandle")
+            {
+                Panel_PropertyHeight -= constants.panel_property_DHandleOptionsheight;
+            }
+            else if (mode == "addDHandleIOLocking")
+            {
+                Panel_PropertyHeight += constants.panel_property_DhandleIOLockingOptionsheight;
+            }
+            else if (mode == "minusDHandleIOLocking")
+            {
+                Panel_PropertyHeight -= constants.panel_property_DhandleIOLockingOptionsheight;
+            }
+            else if (mode == "addDummyDHandle")
+            {
+                Panel_PropertyHeight += constants.panel_property_DummyDHandleOptionsheight;
+            }
+            else if (mode == "minusDummyDHandle")
+            {
+                Panel_PropertyHeight -= constants.panel_property_DummyDHandleOptionsheight;
+            }
+            else if (mode == "addPopUpHandle")
+            {
+                Panel_PropertyHeight += constants.panel_property_PopUpHandleOptionsheight;
+            }
+            else if (mode == "minusPopUpHandle")
+            {
+                Panel_PropertyHeight -= constants.panel_property_PopUpHandleOptionsheight;
+            }
+            else if (mode == "addRotoswingForSliding")
+            {
+                Panel_PropertyHeight += constants.panel_property_RotoswingForSlidingOptionsheight;
+            }
+            else if (mode == "minusRotoswingForSliding")
+            {
+                Panel_PropertyHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
+            }
 
         }
 
@@ -3708,6 +3854,46 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusEspagnolette")
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_espagnoletteOptionsheight_default;
+            }
+            else if (mode == "addDHandle")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_DHandleOptionsheight;
+            }
+            else if (mode == "minusDHandle")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_DHandleOptionsheight;
+            }
+            else if (mode == "addDHandleIOLocking")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_DhandleIOLockingOptionsheight;
+            }
+            else if (mode == "minusDHandleIOLocking")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_DhandleIOLockingOptionsheight;
+            }
+            else if (mode == "addDummyDHandle")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_DummyDHandleOptionsheight;
+            }
+            else if (mode == "minusDummyDHandle")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_DummyDHandleOptionsheight;
+            }
+            else if (mode == "addPopUpHandle")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_PopUpHandleOptionsheight;
+            }
+            else if (mode == "minusPopUpHandle")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_PopUpHandleOptionsheight;
+            }
+            else if (mode == "addRotoswingForSliding")
+            {
+                Panel_HandleOptionsHeight += constants.panel_property_RotoswingForSlidingOptionsheight;
+            }
+            else if (mode == "minusRotoswingForSliding")
+            {
+                Panel_HandleOptionsHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
             }
         }
 
@@ -3861,7 +4047,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     //Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
                     //Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
-                else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+                else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
                 {
 
                 }
@@ -5778,11 +5964,24 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                     _panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
+
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
-                    // do something
+                    Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
+                    Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
+                    Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
+                    if (OverLappingPanel_Qty != 0)
+                    {
+                        Panel_InterlockArtNo = Interlock_ArticleNo._6061_Milled;
+                        Panel_ExtensionForInterlockArtNo = ExtensionForInterlock_ArticleNo._9C61_Milled;
+                    }
+                    Panel_WeatherBarFastenerArtNo = WeatherBarFastener_ArticleNo._9447;
+                    Panel_BrushSealArtNo = BrushSeal_ArticleNo._9091;
+                    Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
+                    _panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                 }
 
                 if (base_color == Base_Color._DarkBrown)
@@ -6380,6 +6579,163 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
                 }
+                //else if (Panel_HandleType == Handle_Type._D)
+                //{
+                //    Panel_ScrewSetsArtNo = ScrewSets._DH613172;
+
+                //    if (inside_color == Foil_Color._None)
+                //    {
+                //        if (base_color == Base_Color._White)
+                //        {
+                //            Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
+                //            Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605543;
+                //        }
+                //        else if (base_color == Base_Color._DarkBrown)
+                //        {
+                //            Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
+                //            Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
+                //        }
+                //        else if (base_color == Base_Color._Ivory)
+                //        {
+                //            Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
+                //            Panel_DHandleOutsideArtNo = D_HandleArtNo._DH487261;
+                //        }
+                //    }
+                //    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                //             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                //    {
+                //        Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
+                //        Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
+                //    }
+                //    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                //             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                //             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                //             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                //             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                //    {
+                //        Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
+                //        Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605551;
+                //    }
+                //}
+                //else if (Panel_HandleType == Handle_Type._D_IO_Locking)
+                //{
+                //    Panel_ScrewSetsArtNo = ScrewSets._DH613180;
+                //    if (inside_color == Foil_Color._None)
+                //    {
+                //        if (base_color == Base_Color._White)
+                //        {
+                //            Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613243;
+                //            Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._613217;
+                //        }
+                //        else if (base_color == Base_Color._DarkBrown)
+                //        {
+                //            Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
+                //            Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH833308_613241;
+                //        }
+                //        else if (base_color == Base_Color._Ivory)
+                //        {
+                //            Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613245;
+                //            Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH613219;
+                //        }
+                //    }
+                //    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                //            inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                //    {
+                //        Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
+                //        Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH833308_613241;
+                //    }
+                //    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                //             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                //             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                //             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                //             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                //    {
+                //        Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613242;
+                //        Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH605216;
+                //    }
+                //}
+                //else if (Panel_HandleType == Handle_Type._DummyD)
+                //{
+                //    Panel_ScrewSetsArtNo = ScrewSets._DH613176;
+                //    if (inside_color == Foil_Color._None)
+                //    {
+                //        if (base_color == Base_Color._White)
+                //        {
+                //            Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
+                //            Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613191;
+                //        }
+                //        else if (base_color == Base_Color._DarkBrown)
+                //        {
+                //            Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
+                //            Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
+                //        }
+                //        else if (base_color == Base_Color._Ivory)
+                //        {
+                //            Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
+                //            Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613193;
+                //        }
+                //    }
+                //    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                //          inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
+                //    {
+                //        Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
+                //        Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
+                //    }
+                //    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                //             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                //             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                //             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                //             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
+                //    {
+                //        Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
+                //        Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
+                //    }
+                //}
+                //else if (Panel_HandleType == Handle_Type._PopUp)
+                //{
+                //    if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
+                //    {
+                //        Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
+                //    }
+                //    else if (base_color == Base_Color._DarkBrown)
+                //    {
+                //        Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
+                //    }
+                //}
+                //else if (Panel_HandleType == Handle_Type._RotoswingForSliding)
+                //{
+                //    if (inside_color == Foil_Color._None)
+                //    {
+                //        if (base_color == Base_Color._White)
+                //        {
+                //            Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
+
+                //        }
+                //        else if (base_color == Base_Color._DarkBrown)
+                //        {
+                //            Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
+
+                //        }
+                //        else if (base_color == Base_Color._Ivory)
+                //        {
+                //            Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
+                //        }
+                //    }
+                //    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                //        inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                //    {
+                //        Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
+                //    }
+                //    else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                //             inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                //             inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                //             inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                //             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                //    {
+                //        Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
+                //    }
+
+                //}
             }
             else if (Panel_SashPropertyVisibility == false)
             {
@@ -7638,6 +7994,61 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "",
                                    "Sash",
                                    "");
+        }
+
+        public void Insert_DHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("D handle " + Panel_DHandleOutsideArtNo.DisplayName + "and" + Panel_DHandleInsideArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_DHandleIOLocking_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("D handle In & Out Locking " + Panel_DHandleIOLockingOutsideArtNo.DisplayName + "and" + Panel_DHandleIOLockingInsideArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_DummyDHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Dummy D handle " + Panel_DummyDHandleOutsideArtNo.DisplayName + "and" + Panel_DummyDHandleInsideArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_PopUpHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Pop-up handle " + _panel_PopUpHandleArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+        public void Insert_RotoswingForSlidingHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Rotoswing sliding door handle " + Panel_RotoswingForSlidingHandleArtNo.DisplayName,
+                                   1, "pc (s)",
+                                   "",
+                                   "Sash",
+                                   @"");
+        }
+
+
+        public void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Screw Set " + Panel_ScrewSetsArtNo.DisplayName,
+                         1, "Set",
+                         "",
+                         "Handle",
+                         @"");
         }
         #endregion
 

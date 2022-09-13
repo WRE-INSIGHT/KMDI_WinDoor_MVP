@@ -337,6 +337,12 @@ namespace PresentationLayer
                 .RegisterType<IPP_DummyDHandlePropertyUC, PP_DummyDHandlePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_DummyDHandlePropertyUCPresenter, PP_DummyDHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_PopUpHandlePropertyUC, PP_PopUpHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_PopUpHandlePropertyUCPresenter, PP_PopUpHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotoswingForSlidingPropertyUC, PP_RotoswingForSlidingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotoswingForSlidingPropertyUCPresenter, PP_RotoswingForSlidingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

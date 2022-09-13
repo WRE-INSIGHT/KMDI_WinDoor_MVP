@@ -8,8 +8,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     public interface IPP_DHandle_IOLockingPropertyUCPresenter : IPresenterCommon
     {
         IPP_DHandle_IOLockingPropertyUC GetDHandle_IOLockingPropertyUC();
-        IPP_DHandle_IOLockingPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                   IPanelModel panelModel,
-                                                                   IMainPresenter mainPresenter);
+        IPP_DHandle_IOLockingPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                   IPanelModel panelModel);
     }
 }

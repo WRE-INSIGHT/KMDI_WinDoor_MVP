@@ -10,7 +10,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_PopUpHandlePropertyUC GetPopUpHandlePropertyUC();
 
         IPP_PopUpHandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                          IPanelModel panelModel,
-                                                          IMainPresenter mainPresenter);
+                                                          IPanelModel panelModel);
     }
 }

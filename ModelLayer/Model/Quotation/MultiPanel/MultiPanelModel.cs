@@ -3362,6 +3362,46 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_AluminumTrackQtyOptionsheight;
                 }
+                else if (mode == "addDHandle")
+                {
+                    MPanelProp_Height += constants.panel_property_DHandleOptionsheight;
+                }
+                else if (mode == "minusDHandle")
+                {
+                    MPanelProp_Height -= constants.panel_property_DHandleOptionsheight;
+                }
+                else if (mode == "addDHandleIOLocking")
+                {
+                    MPanelProp_Height += constants.panel_property_DhandleIOLockingOptionsheight;
+                }
+                else if (mode == "minusDHandleIOLocking")
+                {
+                    MPanelProp_Height -= constants.panel_property_DhandleIOLockingOptionsheight;
+                }
+                else if (mode == "addDummyDHandle")
+                {
+                    MPanelProp_Height += constants.panel_property_DummyDHandleOptionsheight;
+                }
+                else if (mode == "minusDummyDHandle")
+                {
+                    MPanelProp_Height -= constants.panel_property_DummyDHandleOptionsheight;
+                }
+                else if (mode == "addPopUpHandle")
+                {
+                    MPanelProp_Height += constants.panel_property_PopUpHandleOptionsheight;
+                }
+                else if (mode == "minusPopUpHandle")
+                {
+                    MPanelProp_Height -= constants.panel_property_PopUpHandleOptionsheight;
+                }
+                else if (mode == "addRotoswingForSliding")
+                {
+                    MPanelProp_Height += constants.panel_property_RotoswingForSlidingOptionsheight;
+                }
+                else if (mode == "minusRotoswingForSliding")
+                {
+                    MPanelProp_Height -= constants.panel_property_RotoswingForSlidingOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {

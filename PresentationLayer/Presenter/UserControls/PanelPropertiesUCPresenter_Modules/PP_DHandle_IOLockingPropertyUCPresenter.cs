@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IUnityContainer _unityC;
         private IPanelModel _panelModel;
-        private IMainPresenter _mainPresenter;
 
         public PP_DHandle_IOLockingPropertyUCPresenter(IPP_DHandle_IOLockingPropertyUC pp_DHandle_IOLockingPropertyUC)
         {
@@ -31,7 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_DHandle_IOLockingPropertyUC_cmbD_IOLockingArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_DHandleIOLockingArtNo = (D_Handle_IO_LockingArtNo)((ComboBox)sender).SelectedValue;
+            _panelModel.Panel_DHandleIOLockingOutsideArtNo = (D_Handle_IO_LockingArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _pp_DHandle_IOLockingPropertyUC_PPDHandleIOLockingPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -44,9 +43,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_DHandle_IOLockingPropertyUC;
 
         }
-        public IPP_DHandle_IOLockingPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                          IPanelModel panelModel,
-                                                                          IMainPresenter mainPresenter)
+        public IPP_DHandle_IOLockingPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                          IPanelModel panelModel)
         {
             unityC
                 .RegisterType<IPP_DHandle_IOLockingPropertyUC, PP_DHandle_IOLockingPropertyUC>()
@@ -54,7 +52,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_DHandle_IOLockingPropertyUCPresenter DHandle_IOL = unityC.Resolve<PP_DHandle_IOLockingPropertyUCPresenter>();
             DHandle_IOL._unityC = unityC;
             DHandle_IOL._panelModel = panelModel;
-            DHandle_IOL._mainPresenter = mainPresenter;
 
             return DHandle_IOL;
         }
@@ -63,7 +60,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
-            binding.Add("Panel_DHandleIOLockingArtNo", new Binding("Text", _panelModel, "Panel_DHandleIOLockingArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_DHandleIOLockingOutsideArtNo", new Binding("Text", _panelModel, "Panel_DHandleIOLockingOutsideArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_DHandleIOLockingOptionVisibilty", new Binding("Visible", _panelModel, "Panel_DHandleIOLockingOptionVisibilty", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;

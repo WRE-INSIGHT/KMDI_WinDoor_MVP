@@ -37,6 +37,13 @@
         public int panel_property_SlidingTypeOptionsheight = 28;
         public int panel_property_RollerTypeOptionsheight = 30;
         public int panel_property_AluminumTrackQtyOptionsheight = 28;
+        public int panel_property_DHandleOptionsheight = 28;
+        public int panel_property_DhandleIOLockingOptionsheight = 28;
+        public int panel_property_DummyDHandleOptionsheight = 28;
+        public int panel_property_PopUpHandleOptionsheight = 28;
+        public int panel_property_RotoswingForSlidingOptionsheight = 28;
+
+
 
 
 

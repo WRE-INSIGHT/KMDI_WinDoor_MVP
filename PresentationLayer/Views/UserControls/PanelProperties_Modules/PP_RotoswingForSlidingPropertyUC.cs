@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
@@ -18,6 +19,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void PP_RotoswingForSlidingPropertyUC_Load(object sender, EventArgs e)
         {
+            List<Rotoswing_Sliding_HandleArtNo> rotoswingForSlidingHandle = new List<Rotoswing_Sliding_HandleArtNo>();
+            foreach (Rotoswing_Sliding_HandleArtNo item in Rotoswing_Sliding_HandleArtNo.GetAll())
+            {
+                rotoswingForSlidingHandle.Add(item);
+            }
+            cmb_RotoswingForSlidingNo.DataSource = rotoswingForSlidingHandle;
+
             EventHelpers.RaiseEvent(sender, PPRotoswingForSlidingPropertyUCLoadEventRaised, e);
         }
 

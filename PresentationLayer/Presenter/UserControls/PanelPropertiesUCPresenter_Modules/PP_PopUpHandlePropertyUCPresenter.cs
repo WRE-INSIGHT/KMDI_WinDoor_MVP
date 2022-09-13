@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IUnityContainer _unityC;
         private IPanelModel _panelModel;
-        private IMainPresenter _mainPresenter;
 
         public PP_PopUpHandlePropertyUCPresenter(IPP_PopUpHandlePropertyUC pp_PopUpHandlePropertyUC)
         {
@@ -45,8 +44,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
         public IPP_PopUpHandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                                 IPanelModel panelModel,
-                                                                 IMainPresenter mainPresenter)
+                                                                 IPanelModel panelModel)
         {
             unityC
                     .RegisterType<IPP_PopUpHandlePropertyUC, PP_PopUpHandlePropertyUC>()
@@ -54,7 +52,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_PopUpHandlePropertyUCPresenter PopUp = unityC.Resolve<PP_PopUpHandlePropertyUCPresenter>();
             PopUp._unityC = unityC;
             PopUp._panelModel = panelModel;
-            PopUp._mainPresenter = mainPresenter;
 
             return PopUp;
         }

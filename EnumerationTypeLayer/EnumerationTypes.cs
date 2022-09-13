@@ -263,7 +263,7 @@ namespace EnumerationTypeLayer
 
 
 
-            public static readonly Handle_Type _None = new Handle_Type(5, "None");
+            public static readonly Handle_Type _None = new Handle_Type(10, "None");
 
             private Handle_Type(int value, string displayName) : base(value, displayName) { }
         }
@@ -278,7 +278,7 @@ namespace EnumerationTypeLayer
             private Rotoswing_HandleArtNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Rotoswing_Sliding_HandleArtNo : Enumeration<Rotoswing_HandleArtNo, int>
+        public class Rotoswing_Sliding_HandleArtNo : Enumeration<Rotoswing_Sliding_HandleArtNo, int>
         {
             public static readonly Rotoswing_Sliding_HandleArtNo _RSS632300 = new Rotoswing_Sliding_HandleArtNo(0, "RSS-632300");
             public static readonly Rotoswing_Sliding_HandleArtNo _RSS823073 = new Rotoswing_Sliding_HandleArtNo(1, "RSS-823073");
@@ -339,7 +339,7 @@ namespace EnumerationTypeLayer
 
         public class D_HandleArtNo : Enumeration<D_HandleArtNo, int>
         {
-            public static readonly D_HandleArtNo _046366M = new D_HandleArtNo(0, "DH-605543(out) White");
+            public static readonly D_HandleArtNo _DH605543 = new D_HandleArtNo(0, "DH-605543(out) White");
             public static readonly D_HandleArtNo _DH613226 = new D_HandleArtNo(1, "DH-613226(in) White");
             public static readonly D_HandleArtNo _DH613185 = new D_HandleArtNo(2, "DH-613185(out) DB");
             public static readonly D_HandleArtNo _DH613224 = new D_HandleArtNo(3, "DH-613224(in) DB");
@@ -354,7 +354,7 @@ namespace EnumerationTypeLayer
 
         public class D_Handle_IO_LockingArtNo : Enumeration<D_Handle_IO_LockingArtNo, int>
         {
-            public static readonly D_Handle_IO_LockingArtNo _046366M = new D_Handle_IO_LockingArtNo(0, "613217(out) White");
+            public static readonly D_Handle_IO_LockingArtNo _613217 = new D_Handle_IO_LockingArtNo(0, "613217(out) White");
             public static readonly D_Handle_IO_LockingArtNo _DH613243 = new D_Handle_IO_LockingArtNo(1, "DH-613243(in) White");
             public static readonly D_Handle_IO_LockingArtNo _DH833309_613215 = new D_Handle_IO_LockingArtNo(2, "DH-833309/613215(out) DB");
             public static readonly D_Handle_IO_LockingArtNo _DH833308_613241 = new D_Handle_IO_LockingArtNo(3, "DH-833308/613241(in) DB");
@@ -368,7 +368,7 @@ namespace EnumerationTypeLayer
 
         public class DummyD_HandleArtNo : Enumeration<DummyD_HandleArtNo, int>
         {
-            public static readonly DummyD_HandleArtNo _046366M = new DummyD_HandleArtNo(0, "DH-613191(out)White");
+            public static readonly DummyD_HandleArtNo _DH613191 = new DummyD_HandleArtNo(0, "DH-613191(out)White");
             public static readonly DummyD_HandleArtNo _DH613226 = new DummyD_HandleArtNo(1, "DH-613226(in) White");
             public static readonly DummyD_HandleArtNo _DH613190 = new DummyD_HandleArtNo(2, "DH-613190(out) BL");
             public static readonly DummyD_HandleArtNo _DH613225 = new DummyD_HandleArtNo(3, "DH-613225(in) Black");
@@ -406,11 +406,15 @@ namespace EnumerationTypeLayer
             public static readonly Espagnolette_ArticleNo _N110A04206 = new Espagnolette_ArticleNo(12, "N110A04206");
             public static readonly Espagnolette_ArticleNo _N110A05206 = new Espagnolette_ArticleNo(13, "N110A05206");
             public static readonly Espagnolette_ArticleNo _N110A06206 = new Espagnolette_ArticleNo(14, "N110A06206");
-            public static readonly Espagnolette_ArticleNo _774287_86 = new Espagnolette_ArticleNo(15, "774287/86");
-            public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(16, "731852");
-            public static readonly Espagnolette_ArticleNo _774276 = new Espagnolette_ArticleNo(17, "774276");
-            public static readonly Espagnolette_ArticleNo _10_W0_00061 = new Espagnolette_ArticleNo(18, "10-W0-00061");
-            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(19, "None");
+            public static readonly Espagnolette_ArticleNo _774275 = new Espagnolette_ArticleNo(15, "774275");
+            public static readonly Espagnolette_ArticleNo _774276 = new Espagnolette_ArticleNo(16, "774276");
+            public static readonly Espagnolette_ArticleNo _774277 = new Espagnolette_ArticleNo(17, "774277");
+            public static readonly Espagnolette_ArticleNo _774278 = new Espagnolette_ArticleNo(18, "774278");
+            public static readonly Espagnolette_ArticleNo _774286 = new Espagnolette_ArticleNo(19, "774286");
+            public static readonly Espagnolette_ArticleNo _774287 = new Espagnolette_ArticleNo(20, "774287");
+            public static readonly Espagnolette_ArticleNo _731852 = new Espagnolette_ArticleNo(21, "731852");
+            public static readonly Espagnolette_ArticleNo _6_90137_10_0_1 = new Espagnolette_ArticleNo(22, "6-90137-10-0-1");
+            public static readonly Espagnolette_ArticleNo _None = new Espagnolette_ArticleNo(23, "None");
 
             private Espagnolette_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -857,7 +861,7 @@ namespace EnumerationTypeLayer
 
         public class RollersTypes : Enumeration<RollersTypes, int>
         {
-            public static readonly RollersTypes _TandemRoller = new RollersTypes(0, "616040");
+            public static readonly RollersTypes _TandemRoller = new RollersTypes(0, "615951");
             public static readonly RollersTypes _HDRoller = new RollersTypes(1, "609014");
             public static readonly RollersTypes _GURoller = new RollersTypes(2, "C901090008");
 

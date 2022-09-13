@@ -14,7 +14,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IUnityContainer _unityC;
         private IPanelModel _panelModel;
-        private IMainPresenter _mainPresenter;
 
         public PP_DHandlePropertyUCPresenter(IPP_DHandlePropertyUC pp_DHandlePropertyUC)
         {
@@ -31,7 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_DHandlePropertyUC_cmb_DArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _panelModel.Panel_DHandleArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
+            _panelModel.Panel_DHandleOutsideArtNo = (D_HandleArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _pp_DHandlePropertyUC_PPDHandlePropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -45,9 +44,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
 
-        public IPP_DHandlePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                IPanelModel panelModel,
-                                                                IMainPresenter mainPresenter)
+        public IPP_DHandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                IPanelModel panelModel)
         {
             unityC
                 .RegisterType<IPP_DHandlePropertyUC, PP_DHandlePropertyUC>()
@@ -55,7 +53,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_DHandlePropertyUCPresenter DHandle = unityC.Resolve<PP_DHandlePropertyUCPresenter>();
             DHandle._unityC = unityC;
             DHandle._panelModel = panelModel;
-            DHandle._mainPresenter = mainPresenter;
 
             return DHandle;
         }
@@ -65,7 +62,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
-            binding.Add("Panel_DHandleArtNo", new Binding("Text", _panelModel, "Panel_DHandleArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_DHandleOutsideArtNo", new Binding("Text", _panelModel, "Panel_DHandleOutsideArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_DHandleOptionVisibilty", new Binding("Visible", _panelModel, "Panel_DHandleOptionVisibilty", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
 {
@@ -13,7 +14,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IUnityContainer _unityC;
         private IPanelModel _panelModel;
-        private IMainPresenter _mainPresenter;
 
         public PP_RotoswingForSlidingPropertyUCPresenter(IPP_RotoswingForSlidingPropertyUC pp_RotoswingForSlidingPropertyUC)
         {
@@ -30,12 +30,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_RotoswingForSlidingPropertyUC_cmbRotoswingForSlidingNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _panelModel.Panel_RotoswingForSlidingHandleArtNo = (Rotoswing_Sliding_HandleArtNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _pp_RotoswingForSlidingPropertyUC_PPRotoswingForSlidingPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _pp_RotoswingForSlidingPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
         public IPP_RotoswingForSlidingPropertyUC GetRotoswingForSlidingPropertyUC()
@@ -43,9 +43,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_RotoswingForSlidingPropertyUC;
         }
 
-        public IPP_RotoswingForSlidingPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                            IPanelModel panelModel,
-                                                                            IMainPresenter mainPresenter)
+        public IPP_RotoswingForSlidingPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                                            IPanelModel panelModel)
         {
             unityC
                     .RegisterType<IPP_RotoswingForSlidingPropertyUC, PP_RotoswingForSlidingPropertyUC>()
@@ -53,7 +52,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_RotoswingForSlidingPropertyUCPresenter RotoswingSliding = unityC.Resolve<PP_RotoswingForSlidingPropertyUCPresenter>();
             RotoswingSliding._unityC = unityC;
             RotoswingSliding._panelModel = panelModel;
-            RotoswingSliding._mainPresenter = mainPresenter;
 
             return RotoswingSliding;
         }

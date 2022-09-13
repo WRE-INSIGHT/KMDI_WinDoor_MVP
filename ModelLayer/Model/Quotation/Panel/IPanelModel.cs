@@ -248,9 +248,15 @@ namespace ModelLayer.Model.Quotation.Panel
         SealingBlock_ArticleNo Panel_SealingBlockArtNo { get; set; }
         Interlock_ArticleNo Panel_InterlockArtNo { get; set; }
         ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlockArtNo { get; set; }
-        D_HandleArtNo Panel_DHandleArtNo { get; set; }
-        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingArtNo { get; set; }
-        DummyD_HandleArtNo Panel_DummyDHandleArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleInsideArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleOutsideArtNo { get; set; }
+
+        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingInsideArtNo { get; set; }
+        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingOutsideArtNo { get; set; }
+
+        DummyD_HandleArtNo Panel_DummyDHandleInsideArtNo { get; set; }
+        DummyD_HandleArtNo Panel_DummyDHandleOutsideArtNo { get; set; }
+
         PopUp_HandleArtNo Panel_PopUpHandleArtNo { get; set; }
         Rotoswing_Sliding_HandleArtNo Panel_RotoswingForSlidingHandleArtNo { get; set; }
         bool Panel_DHandleOptionVisibilty { get; set; }
@@ -260,6 +266,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_RotoswingForSlidingHandleOptionVisibilty { get; set; }
         Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
         int Panel_StrikerArtno_SlidingQty { get; set; }
+        ScrewSets Panel_ScrewSetsArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -362,7 +369,12 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
         void Insert_StrikerForSliding_MaterialList(DataTable tbl_explosion);
         void Insert_SealingBlock_MaterialList(DataTable tbl_explosion);
-
+        void Insert_DHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_DHandleIOLocking_MaterialList(DataTable tbl_explosion);
+        void Insert_DummyDHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_PopUpHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_RotoswingForSlidingHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion);
         #endregion
     }
 }

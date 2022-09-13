@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
@@ -22,6 +23,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void PP_DummyDHandlePropertyUC_Load(object sender, EventArgs e)
         {
+            List<DummyD_HandleArtNo> DummyDHandle = new List<DummyD_HandleArtNo>();
+            foreach (DummyD_HandleArtNo item in DummyD_HandleArtNo.GetAll())
+            {
+                DummyDHandle.Add(item);
+            }
+
+            cmb_DummyDArtNo.DataSource = DummyDHandle;
+
             EventHelpers.RaiseEvent(sender, PPDummyDHandlePropertyUCLoadEventRaised, e);
 
         }
@@ -29,7 +38,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_DummyDHandleOptionVisibilty"]);
-            cmb_DummyDArtNo.DataBindings.Add(ModelBinding["Panel_DummyDHandleArtNo"]);
+            cmb_DummyDArtNo.DataBindings.Add(ModelBinding["Panel_DummyDHandleOutsideArtNo"]);
         }
 
 

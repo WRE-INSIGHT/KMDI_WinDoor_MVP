@@ -9,8 +9,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     {
         IPP_DHandlePropertyUC GetDHandlePropertyUC();
 
-        IPP_DHandlePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                         IPanelModel panelModel,
-                                                         IMainPresenter mainPresenter);
+        IPP_DHandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                         IPanelModel panelModel);
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 {
@@ -18,6 +19,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         private void PP_PopUpHandlePropertyUC_Load(object sender, EventArgs e)
         {
+            List<PopUp_HandleArtNo> popUpHandle = new List<PopUp_HandleArtNo>();
+            foreach (PopUp_HandleArtNo item in PopUp_HandleArtNo.GetAll())
+            {
+                popUpHandle.Add(item);
+            }
+            cmb_PopUpArtNo.DataSource = popUpHandle;
+
             EventHelpers.RaiseEvent(sender, PPPopUpHandlePropertyUCLoadEventRaiased, e);
         }
 

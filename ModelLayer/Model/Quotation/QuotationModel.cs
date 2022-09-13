@@ -1269,6 +1269,34 @@ namespace ModelLayer.Model.Quotation
                                             pnl_curCtrl.Insert_CylinderCover_MaterialList(Material_List);
 
                                         }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D)
+                                        {
+                                            pnl_curCtrl.Insert_DHandle_MaterialList(Material_List);
+
+                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                        {
+                                            pnl_curCtrl.Insert_DHandleIOLocking_MaterialList(Material_List);
+
+                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._DummyD)
+                                        {
+                                            pnl_curCtrl.Insert_DummyDHandle_MaterialList(Material_List);
+
+                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._PopUp)
+                                        {
+                                            pnl_curCtrl.Insert_PopUpHandle_MaterialList(Material_List);
+
+                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                        }
+                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                                        {
+                                            pnl_curCtrl.Insert_RotoswingForSlidingHandle_MaterialList(Material_List);
+                                        }
 
                                         if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
                                         {

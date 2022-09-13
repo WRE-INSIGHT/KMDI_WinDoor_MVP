@@ -8,8 +8,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     public interface IPP_DummyDHandlePropertyUCPresenter : IPresenterCommon
     {
         IPP_DummyDHandlePropertyUC GetDummyDHandlePropertyUC();
-        IPP_DummyDHandlePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                              IPanelModel panelModel,
-                                                              IMainPresenter mainPresenter);
+        IPP_DummyDHandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                              IPanelModel panelModel);
     }
 }
