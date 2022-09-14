@@ -62,8 +62,6 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverBladesCount { get; set; }
         Color Panel_BackColor { get; set; }
 
-        SlidingTypes Panel_SlidingTypes { get; set; }
-        bool Panel_SlidingTypeVisibility { get; set; }
         #region Explosion
 
         int PanelGlass_ID { get; set; }
@@ -72,6 +70,8 @@ namespace ModelLayer.Model.Quotation.Panel
         GlazingBead_ArticleNo PanelGlazingBead_ArtNo { get; set; }
         GlazingAdaptor_ArticleNo Panel_GlazingAdaptorArtNo { get; set; }
         GBSpacer_ArticleNo Panel_GBSpacerArtNo { get; set; }
+        Spacer_ArticleNo Panel_SpacerArtNo { get; set; }
+
         bool Panel_ChkGlazingAdaptor { get; set; }
         int Panel_GlazingBeadWidth { get; set; }
         int Panel_GlazingBeadWidthDecimal { get; set; }
@@ -229,6 +229,44 @@ namespace ModelLayer.Model.Quotation.Panel
 
         bool Panel_MotorizedpnlOptionVisibility { get; set; }
 
+        SlidingTypes Panel_SlidingTypes { get; set; }
+        bool Panel_SlidingTypeVisibility { get; set; }
+
+        GuideTrackProfile_ArticleNo Panel_GuideTrackProfileArtNo { get; set; }
+        AluminumTrack_ArticleNo Panel_AluminumTrackArtNo { get; set; }
+        int Panel_AluminumTrackQty { get; set; }
+        bool Panel_AluminumTrackQtyVisibility { get; set; }
+        WeatherBar_ArticleNo Panel_WeatherBarArtNo { get; set; }
+        WeatherBarFastener_ArticleNo Panel_WeatherBarFastenerArtNo { get; set; }
+        EndCapForWeatherBar_ArticleNo Panel_EndCapForWeatherBarArtNo { get; set; }
+        WaterSeepage_ArticleNo Panel_WaterSeepageArtNo { get; set; }
+        BrushSeal_ArticleNo Panel_BrushSealArtNo { get; set; }
+        RollersTypes Panel_RollersTypes { get; set; }
+        bool Panel_RollersTypesVisibility { get; set; }
+        GlazingRebateBlock_ArticleNo Panel_GlazingRebateBlockArtNo { get; set; }
+        Spacer_ArticleNo Panel_Spacer { get; set; }
+        SealingBlock_ArticleNo Panel_SealingBlockArtNo { get; set; }
+        Interlock_ArticleNo Panel_InterlockArtNo { get; set; }
+        ExtensionForInterlock_ArticleNo Panel_ExtensionForInterlockArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleInsideArtNo { get; set; }
+        D_HandleArtNo Panel_DHandleOutsideArtNo { get; set; }
+
+        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingInsideArtNo { get; set; }
+        D_Handle_IO_LockingArtNo Panel_DHandleIOLockingOutsideArtNo { get; set; }
+
+        DummyD_HandleArtNo Panel_DummyDHandleInsideArtNo { get; set; }
+        DummyD_HandleArtNo Panel_DummyDHandleOutsideArtNo { get; set; }
+
+        PopUp_HandleArtNo Panel_PopUpHandleArtNo { get; set; }
+        Rotoswing_Sliding_HandleArtNo Panel_RotoswingForSlidingHandleArtNo { get; set; }
+        bool Panel_DHandleOptionVisibilty { get; set; }
+        bool Panel_DHandleIOLockingOptionVisibilty { get; set; }
+        bool Panel_DummyDHandleOptionVisibilty { get; set; }
+        bool Panel_PopUpHandleOptionVisibilty { get; set; }
+        bool Panel_RotoswingForSlidingHandleOptionVisibilty { get; set; }
+        Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
+        int Panel_StrikerArtno_SlidingQty { get; set; }
+        ScrewSets Panel_ScrewSetsArtNo { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
@@ -249,6 +287,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void SetPanelExplosionValues_Panel(Divider_ArticleNo div_artNo,
                                            Divider_ArticleNo divPrev_artNo,
                                            DividerType div_type,
+                                           bool mpnlDivEneable,
+                                           int OverLappingPanel_Qty,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
                                            IDividerModel divNxt,
@@ -260,7 +300,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                            Divider_ArticleNo divArtNo_RightorBot_lvl3 = null,
                                            string panel_placement = "",
                                            string mpanel_placement = "", //1st level
-                                           string mpanelparent_placement = ""); //2nd level
+                                           string mpanelparent_placement = "" //2nd level
+                                           );
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
@@ -301,6 +342,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_Espagnolette_MaterialList(DataTable tbl_explosion);
         void Insert_GlazingBead_MaterialList(DataTable tbl_explosion, string location);
         void Insert_GBSpacer_MaterialList(DataTable tbl_explosion);
+        void Insert_Spacer_MaterialList(DataTable tbl_explosion);
+
         void Insert_GlazingAdapator_MaterialList(DataTable tbl_explosion, string location);
         void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm);
         void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion);
@@ -313,6 +356,26 @@ namespace ModelLayer.Model.Quotation.Panel
         int Add_FGAwning_screws4fab();
         int Add_Hinges_screws4fab();
         int Add_MotorizedMech_screws4Inst();
+        void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion);
+        void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion);
+        void Insert_WeatherBar_MaterialList(DataTable tbl_explosion);
+        void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
+        void Insert_Interlock_MaterialList(DataTable tbl_explosion);
+        void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion);
+        void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion);
+        void Insert_BrushSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_Rollers_MaterialList(DataTable tbl_explosion);
+        void Insert_GlazingRebateBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_AntiLiftDevice_MaterialList(DataTable tbl_explosion);
+        void Insert_StrikerForSliding_MaterialList(DataTable tbl_explosion);
+        void Insert_SealingBlock_MaterialList(DataTable tbl_explosion);
+        void Insert_DHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_DHandleIOLocking_MaterialList(DataTable tbl_explosion);
+        void Insert_DummyDHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_PopUpHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_RotoswingForSlidingHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion);
+        void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion);
         #endregion
     }
 }

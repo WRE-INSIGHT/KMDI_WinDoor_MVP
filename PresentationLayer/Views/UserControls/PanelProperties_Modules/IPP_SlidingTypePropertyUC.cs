@@ -7,7 +7,5 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler cmbSlidingTypeSelectedValueChangedEventRaised;
         event EventHandler PPSlidingTypePropertyUCLoadEventRaised;
-
-
     }
 }

@@ -30,6 +30,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_2dHingePropertyUCPresenter _pp_2dHingePropertyUCPresenter;
         private IPP_MiddleCloserPropertyUCPresenter _pp_middleCloserPropertyUCP;
         private IPP_SlidingTypePropertyUCPresenter _pp_slidingTypePropertyUCP;
+        private IPP_RollerPropertyUCPresenter _pp_rollerPropertyUCPresenter;
+        private IPP_AliminumTrackPropertyUCPresenter _pp_AliminumTrackPropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -49,7 +51,9 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_3dHingePropertyUCPresenter pp_3dHingePropertyUCPresenter,
                                           IPP_2dHingePropertyUCPresenter pp_2dHingePropertyUCPresenter,
                                           IPP_MiddleCloserPropertyUCPresenter pp_middleCloserPropertyUCP,
-                                          IPP_SlidingTypePropertyUCPresenter pp_slidingTypePropertyUCP)
+                                          IPP_SlidingTypePropertyUCPresenter pp_slidingTypePropertyUCP,
+                                          IPP_RollerPropertyUCPresenter pp_rollerPropertyUCPresenter,
+                                          IPP_AliminumTrackPropertyUCPresenter pp_AliminumTrackPropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -67,6 +71,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_middleCloserPropertyUCP = pp_middleCloserPropertyUCP;
             _pnlPanelSpecs = _panelPropertiesUC.GetPanelSpecsPNL();
             _pp_slidingTypePropertyUCP = pp_slidingTypePropertyUCP;
+            _pp_rollerPropertyUCPresenter = pp_rollerPropertyUCPresenter;
+            _pp_AliminumTrackPropertyUCPresenter = pp_AliminumTrackPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -201,7 +207,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
-               
+
                 _panelPropertiesUC.ThisBinding(CreateBindingDictionary());
 
                 if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) && _panelModel.Panel_Type.Contains("Sliding") == false &&
@@ -345,17 +351,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
 
-                if (_panelModel.Panel_Type.Contains("Sliding"))
-                {
-                    _panelModel.Panel_SlidingTypeVisibility = true;
-                    _panelModel.AdjustPropertyPanelHeight("addSlidingType");
 
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
-                    }
-                }
 
                 if (!_panelModel.Panel_Type.Contains("Sliding"))
                 {
@@ -431,6 +427,43 @@ namespace PresentationLayer.Presenter.UserControls
                     }
 
                 }
+
+
+                if (_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.Panel_SlidingTypeVisibility = true;
+                    _panelModel.Panel_RollersTypesVisibility = true;
+                    _panelModel.Panel_AluminumTrackQtyVisibility = true;
+
+                    _panelModel.AdjustPropertyPanelHeight("addRollerType");
+                    _panelModel.AdjustPropertyPanelHeight("addSlidingType");
+                    _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSlidingType");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
+                    }
+
+                    IPP_RollerPropertyUCPresenter rollerTypePresenter = _pp_rollerPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    UserControl rollerTypeUCPresenter = (UserControl)rollerTypePresenter.GetRollerTypePropertyUC();
+                    _pnlPanelSpecs.Controls.Add(rollerTypeUCPresenter);
+                    rollerTypeUCPresenter.Dock = DockStyle.Top;
+                    rollerTypeUCPresenter.BringToFront();
+
+                    IPP_AliminumTrackPropertyUCPresenter alumTrackQtyPresenter = _pp_AliminumTrackPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                    UserControl alumTrackQtyUCPresenter = (UserControl)alumTrackQtyPresenter.GetAliminumTrackPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(alumTrackQtyUCPresenter);
+                    alumTrackQtyUCPresenter.Dock = DockStyle.Top;
+                    alumTrackQtyUCPresenter.BringToFront();
+
+                }
+
 
                 if (_panelModel.Panel_Type.Contains("Casement"))
                 {

@@ -25,7 +25,8 @@ namespace ModelLayer.Model.Quotation.Divider
         public enum DividerType
         {
             Mullion = 0,
-            Transom = 1
+            Transom = 1,
+            None = 2
         }
 
         private int _divID;

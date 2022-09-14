@@ -328,6 +328,28 @@ namespace PresentationLayer
                 .RegisterType<IPrintGlassSummaryView, PrintGlassSummaryView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPrintGlassSummaryPresenter, PrintGlassSummaryPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IPP_RollerPropertyUC, PP_RollerPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RollerPropertyUCPresenter, PP_RollerPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_AliminumTrackPropertyUC, PP_AliminumTrackPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_AliminumTrackPropertyUCPresenter, PP_AliminumTrackPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_DHandlePropertyUC, PP_DHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DHandlePropertyUCPresenter, PP_DHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_DHandle_IOLockingPropertyUC, PP_DHandle_IOLockingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DHandle_IOLockingPropertyUCPresenter, PP_DHandle_IOLockingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_DummyDHandlePropertyUC, PP_DummyDHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_DummyDHandlePropertyUCPresenter, PP_DummyDHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_PopUpHandlePropertyUC, PP_PopUpHandlePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_PopUpHandlePropertyUCPresenter, PP_PopUpHandlePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_RotoswingForSlidingPropertyUC, PP_RotoswingForSlidingPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_RotoswingForSlidingPropertyUCPresenter, PP_RotoswingForSlidingPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
