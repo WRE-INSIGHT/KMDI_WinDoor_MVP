@@ -27,6 +27,7 @@ namespace PresentationLayer.Views
         event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
         event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
+        event EventHandler existingItemToolStripMenuItemClickEventRaised;
         event EventHandler NewConcreteButtonClickEventRaised;
         event EventHandler refreshToolStripButtonClickEventRaised;
         event EventHandler CostingItemsToolStripMenuItemClickRaiseEvent;
@@ -56,6 +57,7 @@ namespace PresentationLayer.Views
         ToolStripLabel GetLblSelectedDivider();
         ToolStripLabel GetToolStripLabelSync();
         ToolStripLabel GetToolStripLabelLoading();
+        ToolStripButton GetToolStripButtonSave();
         ToolStripMenuItem Glass_Single { get; }
         ToolStripMenuItem Glass_DoubleInsulated { get; }
         ToolStripMenuItem Glass_DoubleLaminated { get; }

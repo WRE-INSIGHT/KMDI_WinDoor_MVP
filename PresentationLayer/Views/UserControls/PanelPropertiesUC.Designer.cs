@@ -50,7 +50,7 @@
             this.lbl_pnlname.AutoSize = true;
             this.lbl_pnlname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_pnlname.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_pnlname.Location = new System.Drawing.Point(7, 24);
+            this.lbl_pnlname.Location = new System.Drawing.Point(8, 24);
             this.lbl_pnlname.Name = "lbl_pnlname";
             this.lbl_pnlname.Size = new System.Drawing.Size(90, 15);
             this.lbl_pnlname.TabIndex = 0;
@@ -60,7 +60,7 @@
             // 
             this.lbl_Type.AutoSize = true;
             this.lbl_Type.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Type.Location = new System.Drawing.Point(7, 45);
+            this.lbl_Type.Location = new System.Drawing.Point(8, 45);
             this.lbl_Type.Name = "lbl_Type";
             this.lbl_Type.Size = new System.Drawing.Size(87, 13);
             this.lbl_Type.TabIndex = 1;
@@ -109,7 +109,7 @@
             // 
             this.lbl_Width.AutoSize = true;
             this.lbl_Width.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Width.Location = new System.Drawing.Point(7, 61);
+            this.lbl_Width.Location = new System.Drawing.Point(8, 61);
             this.lbl_Width.Name = "lbl_Width";
             this.lbl_Width.Size = new System.Drawing.Size(39, 13);
             this.lbl_Width.TabIndex = 4;
@@ -135,7 +135,7 @@
             // 
             this.lbl_Height.AutoSize = true;
             this.lbl_Height.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Height.Location = new System.Drawing.Point(7, 102);
+            this.lbl_Height.Location = new System.Drawing.Point(8, 102);
             this.lbl_Height.Name = "lbl_Height";
             this.lbl_Height.Size = new System.Drawing.Size(42, 13);
             this.lbl_Height.TabIndex = 6;
@@ -146,7 +146,7 @@
             this.lbl_PanelGlassID.AutoSize = true;
             this.lbl_PanelGlassID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_PanelGlassID.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_PanelGlassID.Location = new System.Drawing.Point(7, 2);
+            this.lbl_PanelGlassID.Location = new System.Drawing.Point(8, 2);
             this.lbl_PanelGlassID.Name = "lbl_PanelGlassID";
             this.lbl_PanelGlassID.Size = new System.Drawing.Size(28, 21);
             this.lbl_PanelGlassID.TabIndex = 9;
@@ -156,9 +156,9 @@
             // 
             this.lbl_pnlSpecs.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbl_pnlSpecs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_pnlSpecs.Location = new System.Drawing.Point(0, 0);
+            this.lbl_pnlSpecs.Location = new System.Drawing.Point(1, 0);
             this.lbl_pnlSpecs.Name = "lbl_pnlSpecs";
-            this.lbl_pnlSpecs.Size = new System.Drawing.Size(153, 18);
+            this.lbl_pnlSpecs.Size = new System.Drawing.Size(150, 18);
             this.lbl_pnlSpecs.TabIndex = 8;
             this.lbl_pnlSpecs.Text = "Panel Specification";
             this.lbl_pnlSpecs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -168,11 +168,13 @@
             this.pnl_panelSpecsBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnl_panelSpecsBody.AutoSize = true;
             this.pnl_panelSpecsBody.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_panelSpecsBody.Controls.Add(this.lbl_pnlSpecs);
-            this.pnl_panelSpecsBody.Location = new System.Drawing.Point(2, 144);
+            this.pnl_panelSpecsBody.Location = new System.Drawing.Point(3, 144);
             this.pnl_panelSpecsBody.Name = "pnl_panelSpecsBody";
-            this.pnl_panelSpecsBody.Size = new System.Drawing.Size(155, 161);
+            this.pnl_panelSpecsBody.Padding = new System.Windows.Forms.Padding(1, 0, 1, 5);
+            this.pnl_panelSpecsBody.Size = new System.Drawing.Size(154, 161);
             this.pnl_panelSpecsBody.TabIndex = 10;
             // 
             // Panel_PropertiesUC
@@ -194,7 +196,8 @@
             this.Controls.Add(this.pnl_panelSpecsBody);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Panel_PropertiesUC";
-            this.Size = new System.Drawing.Size(160, 310);
+            this.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.Size = new System.Drawing.Size(161, 310);
             this.Load += new System.EventHandler(this.PanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_BladeCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnum_Width)).EndInit();

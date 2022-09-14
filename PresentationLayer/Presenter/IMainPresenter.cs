@@ -30,6 +30,7 @@ namespace PresentationLayer.Presenter
         string inputted_quotationRefNo { get; set; }
         string inputted_projectName { get; set; }
         string inputted_custRefNo { get; set; }
+        bool isNewProject { get; set; }
         DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
@@ -48,7 +49,7 @@ namespace PresentationLayer.Presenter
         DataTable Glass_Type { get; }
         DataTable Spacer { get; }
         DataTable Color { get; }
-
+        string wndrFileName { get; set; }
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 
@@ -100,5 +101,8 @@ namespace PresentationLayer.Presenter
         void Fit_MyImager_byImagersLocation();
         void Set_pnlPropertiesBody_ScrollView(int addTo_scroll_value);
         void Load_Windoor_Item(IWindoorModel item);
+        void SetChangesMark();
+        void SaveChanges();
+        void SaveAs();
     }
 }

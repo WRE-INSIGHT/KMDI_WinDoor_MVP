@@ -506,6 +506,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                 }
             }
+            _mainPresenter.SetChangesMark();
             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
@@ -531,6 +532,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DeleteFrame();
+                _mainPresenter.SetChangesMark();
                 _mainPresenter.Load_Windoor_Item(_frameModel.Frame_WindoorModel);
 
             }

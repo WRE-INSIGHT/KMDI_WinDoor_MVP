@@ -91,16 +91,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                //Console.WriteLine(_panelModel.Panel_Width);
-                //Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
-                //Console.WriteLine("MPanel Renderer Width " + _multiPanelModel.MPanelImageRenderer_Width);
-                //Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
-                //Console.WriteLine("MPanel Renderer Height " + _multiPanelModel.MPanelImageRenderer_Height);
-                //Console.WriteLine("Sliding Height " + _panelModel.Panel_HeightToBind);
-                //Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_HeightToBind);
-                //Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
-                //Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_WidthToBind);
-                //Console.WriteLine();
+                Console.WriteLine(_panelModel.Panel_Width);
+                Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
+                Console.WriteLine("MPanel Renderer Width " + _multiPanelModel.MPanelImageRenderer_Width);
+                Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
+                Console.WriteLine("MPanel Renderer Height " + _multiPanelModel.MPanelImageRenderer_Height);
+                Console.WriteLine("Placement " + _panelModel.Panel_Placement);
+                Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
+                Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_WidthToBind);
+                Console.WriteLine();
                 slidingUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
@@ -901,7 +901,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
-
+            _mainPresenter.SetChangesMark();
             _frameModel.DeductPropertyPanelHeight(_panelModel.Panel_PropertyHeight);
 
             if (_frameModel != null)

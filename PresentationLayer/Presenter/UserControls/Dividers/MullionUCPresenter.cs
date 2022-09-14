@@ -131,6 +131,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel2MinWd >= 30)
                             {
+                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Width++;
@@ -297,6 +298,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel1MinWd >= 30)
                             {
+                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Width--;
@@ -590,8 +592,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             int ctrl_ndx = _multiPanelModel.MPanelLst_Objects.IndexOf(mul);
             bool prevCtrl_isPanel = false;
-
-                 if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
+            if (!_multiPanelModel.MPanelLst_Objects[ctrl_ndx - 1].Name.Contains("Multi"))
             {
                 prevCtrl_isPanel = true;
             }
@@ -707,6 +708,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     {
                         if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                         {
+                            _mainPresenter.SetChangesMark();
                             mullion_movement = (e.X - _point_of_origin.X);
 
                             if (prev_ctrl is IMultiPanelUC)

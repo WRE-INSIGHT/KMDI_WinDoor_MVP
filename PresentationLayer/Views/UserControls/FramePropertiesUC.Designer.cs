@@ -155,7 +155,7 @@
             this.pnl_specs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_specs.Location = new System.Drawing.Point(0, 81);
             this.pnl_specs.Name = "pnl_specs";
-            this.pnl_specs.Size = new System.Drawing.Size(154, 102);
+            this.pnl_specs.Size = new System.Drawing.Size(157, 102);
             this.pnl_specs.TabIndex = 12;
             // 
             // cmb_FrameReinf
@@ -230,7 +230,7 @@
             this.pnl_frameLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_frameLbl.Location = new System.Drawing.Point(0, 0);
             this.pnl_frameLbl.Name = "pnl_frameLbl";
-            this.pnl_frameLbl.Size = new System.Drawing.Size(154, 21);
+            this.pnl_frameLbl.Size = new System.Drawing.Size(157, 21);
             this.pnl_frameLbl.TabIndex = 13;
             // 
             // pnl_rdBtnWdw
@@ -239,7 +239,7 @@
             this.pnl_rdBtnWdw.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_rdBtnWdw.Location = new System.Drawing.Point(0, 21);
             this.pnl_rdBtnWdw.Name = "pnl_rdBtnWdw";
-            this.pnl_rdBtnWdw.Size = new System.Drawing.Size(154, 26);
+            this.pnl_rdBtnWdw.Size = new System.Drawing.Size(157, 26);
             this.pnl_rdBtnWdw.TabIndex = 14;
             // 
             // rdBtn_Door
@@ -258,7 +258,7 @@
             this.pnl_rdBtnDoor.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_rdBtnDoor.Location = new System.Drawing.Point(0, 47);
             this.pnl_rdBtnDoor.Name = "pnl_rdBtnDoor";
-            this.pnl_rdBtnDoor.Size = new System.Drawing.Size(154, 26);
+            this.pnl_rdBtnDoor.Size = new System.Drawing.Size(157, 26);
             this.pnl_rdBtnDoor.TabIndex = 15;
             // 
             // pnl_Body
@@ -269,7 +269,7 @@
             this.pnl_Body.Location = new System.Drawing.Point(0, 73);
             this.pnl_Body.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_Body.Name = "pnl_Body";
-            this.pnl_Body.Size = new System.Drawing.Size(154, 186);
+            this.pnl_Body.Size = new System.Drawing.Size(157, 186);
             this.pnl_Body.TabIndex = 17;
             // 
             // pnl_Dimensions
@@ -282,22 +282,28 @@
             this.pnl_Dimensions.Location = new System.Drawing.Point(0, 0);
             this.pnl_Dimensions.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_Dimensions.Name = "pnl_Dimensions";
-            this.pnl_Dimensions.Size = new System.Drawing.Size(154, 81);
+            this.pnl_Dimensions.Size = new System.Drawing.Size(157, 81);
             this.pnl_Dimensions.TabIndex = 13;
             // 
             // pnl_frameProperties
             // 
+            this.pnl_frameProperties.AutoSize = true;
+            this.pnl_frameProperties.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_frameProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_frameProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnl_frameProperties.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_frameProperties.Location = new System.Drawing.Point(0, 259);
             this.pnl_frameProperties.Name = "pnl_frameProperties";
-            this.pnl_frameProperties.Size = new System.Drawing.Size(154, 6);
+            this.pnl_frameProperties.Padding = new System.Windows.Forms.Padding(1);
+            this.pnl_frameProperties.Size = new System.Drawing.Size(157, 4);
             this.pnl_frameProperties.TabIndex = 18;
+            this.pnl_frameProperties.Click += new System.EventHandler(this.pnl_frameProperties_Click);
             // 
             // FramePropertiesUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_frameProperties);
             this.Controls.Add(this.pnl_Body);
@@ -305,7 +311,7 @@
             this.Controls.Add(this.pnl_rdBtnWdw);
             this.Controls.Add(this.pnl_frameLbl);
             this.Name = "FramePropertiesUC";
-            this.Size = new System.Drawing.Size(154, 265);
+            this.Size = new System.Drawing.Size(157, 263);
             this.Load += new System.EventHandler(this.FramePropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_fWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_fHeight)).EndInit();
@@ -319,6 +325,7 @@
             this.pnl_Dimensions.ResumeLayout(false);
             this.pnl_Dimensions.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

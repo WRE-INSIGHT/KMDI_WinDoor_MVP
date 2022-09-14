@@ -135,5 +135,15 @@ namespace PresentationLayer.Views.UserControls
         {
             pnl_Body.Height += addht;
         }
+
+        public UserControl GetThis()
+        {
+            return this;
+        }
+
+        private void pnl_frameProperties_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("asdasd");
+        }
     }
 }

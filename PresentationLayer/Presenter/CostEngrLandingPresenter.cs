@@ -73,14 +73,54 @@ namespace PresentationLayer.Presenter
                     DateTime _quoteDate = (DateTime)_dgvQuoteNo.Rows[e.RowIndex].Cells["Date"].Value;
 
                     bool proceed = false;
+                    _mainPresenter.isNewProject = true;
                     if (_mainPresenter.qoutationModel_MainPresenter != null)
                     {
-                        if (MessageBox.Show("Are you sure want to open new Quotation?", "Delete progress",
-                                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        if (_mainPresenter.GetMainView().GetToolStripButtonSave().Enabled == true)
                         {
-                            proceed = true;
-                            _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "","");
+                            if (!string.IsNullOrWhiteSpace(_mainPresenter.wndrFileName))
+                            {
+                                DialogResult dialogResult = MessageBox.Show("Do you want to save changes in " + _mainPresenter.wndrFileName + "?", "Save progress",
+                                                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                                if (dialogResult == DialogResult.Yes ||
+                                    dialogResult == DialogResult.No)
+                                {
+                                    if (dialogResult == DialogResult.Yes)
+                                    {
+                                        _mainPresenter.SaveChanges();
+
+                                    }
+                                    proceed = true;
+                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                }
+                            }
+                            else
+                            {
+                                DialogResult dialogResult = MessageBox.Show("Progress will not save, do you wish to proceed?", "Delete progress",
+                                                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    proceed = true;
+                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                   
+                                }
+                            }
+                            
+                            
                         }
+                        else
+                        {
+                            if (MessageBox.Show("Are you sure want to open new Quotation?", "Delete progress",
+                                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                proceed = true;
+                                _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            }
+                        }
+
+                       
                     }
                     else
                     {

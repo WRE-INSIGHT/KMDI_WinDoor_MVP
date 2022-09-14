@@ -862,6 +862,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
 
                 }
+                _mainPresenter.SetChangesMark();
             }
             catch (Exception ex)
             {
@@ -938,7 +939,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelTransomUCP.DeletePanel((UserControl)_multiPanelTransomUC);
             }
             _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)_multiPanelTransomUC);
-
+            _mainPresenter.SetChangesMark();
             _frameModel.Lst_MultiPanel.Remove(_multiPanelModel);
 
             if (_multiPanelModel.MPanel_ParentModel != null)

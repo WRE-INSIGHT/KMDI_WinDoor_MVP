@@ -253,6 +253,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+            _mainPresenter.SetChangesMark();
 
             if (_frameModel != null)
             {

@@ -132,6 +132,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel2MinHT >= 30)
                             {
+                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Height++;
@@ -286,6 +287,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     case Keys.Up:
                         if (me_indx != 0 && flp.Controls.Count > (me_indx + 1))
                         {
+
                             if (prev_ctrl is IMultiPanelUC)
                             {
                                 expected_Panel1MinHT = prev_mpanel.MPanel_HeightToBind - 1;
@@ -297,6 +299,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel1MinHT >= 30)
                             {
+                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Height--;
@@ -648,6 +651,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     {
                         if (expected_Panel1MinHT >= 30 && expected_Panel2MinHT >= 30)
                         {
+                            _mainPresenter.SetChangesMark();
                             transom_movement = (e.Y - _point_of_origin.Y);
 
                             if (prev_ctrl is IMultiPanelUC)

@@ -218,6 +218,7 @@ namespace PresentationLayer.Views
         public event EventHandler ViewImagerToolStripButtonClickEventRaised;
         public event DragEventHandler ItemsDragEventRaiseEvent;
         public event EventHandler SortItemButtonClickEventRaised;
+        public event EventHandler existingItemToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -471,7 +472,7 @@ namespace PresentationLayer.Views
 
         private void CostingItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
+            
         }
 
         private void slidingTopViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -512,6 +513,26 @@ namespace PresentationLayer.Views
         public Panel GetPanelRight()
         {
             return pnlRight;
+        }
+
+        public ToolStripButton GetToolStripButtonSave()
+        {
+            return saveToolStripButton;
+        }
+
+        private void pnlPropertiesBody_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Body");
+        }
+
+        private void addExistingItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, existingItemToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void itemListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
         }
     }
 }

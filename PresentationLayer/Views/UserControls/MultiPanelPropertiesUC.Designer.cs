@@ -126,11 +126,14 @@
             // 
             // pnl_MultiPanelProperties
             // 
+            this.pnl_MultiPanelProperties.AutoSize = true;
             this.pnl_MultiPanelProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_MultiPanelProperties.Location = new System.Drawing.Point(0, 120);
             this.pnl_MultiPanelProperties.Name = "pnl_MultiPanelProperties";
+            this.pnl_MultiPanelProperties.Padding = new System.Windows.Forms.Padding(1, 5, 1, 1);
             this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 9);
             this.pnl_MultiPanelProperties.TabIndex = 9;
+            this.pnl_MultiPanelProperties.Click += new System.EventHandler(this.pnl_MultiPanelProperties_Click);
             // 
             // cmenu_mpanel
             // 
@@ -150,6 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_MultiPanelProperties);
             this.Controls.Add(this.panel1);
@@ -162,6 +166,7 @@
             this.panel1.PerformLayout();
             this.cmenu_mpanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

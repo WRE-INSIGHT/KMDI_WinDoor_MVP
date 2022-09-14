@@ -497,9 +497,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
 
                         string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
-                        decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+                        //decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+                        //int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
 
+                        int displayWidth = 0;
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            displayWidth += pnl.Panel_DisplayWidth;
+                        }
+                        decimal DisplayWD_dec;
+                        if (displayWidth == 0)
+                        {
+                            DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+                        }
+                        else
+                        {
+                           DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) - displayWidth;
+
+                        }
                         int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+
                         int DisplayWD_singleDecimalPlace = 0;
 
                         string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
@@ -523,14 +540,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         //}
                         //if(expectedWidth == 0)
                         //{
-                            if (_multiPanelModel.MPanel_DividerEnabled)
-                            {
-                                suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                            }
-                            else if (!_multiPanelModel.MPanel_DividerEnabled)
-                            {
-                                suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
-                            }
+                        int panelSize = 0;
+                        foreach(IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        {
+                            panelSize += pnl.Panel_WidthToBind;
+                        }
+                        if (_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                        }
+                        else if (!_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            suggest_Wd = (_multiPanelModel.MPanel_Width - 20) / totalPanelCount;
+                        }
 
                         //}
                         //else
@@ -874,6 +896,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 }
+                _mainPresenter.SetChangesMark();
             }
             catch (Exception ex)
             {
@@ -994,6 +1017,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     ctrl.Invalidate();
                 }
             }
+
+            _mainPresenter.SetChangesMark();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

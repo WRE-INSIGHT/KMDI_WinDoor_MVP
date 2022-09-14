@@ -428,7 +428,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Left)
             {
-                isLeft = false;
+                isLeft = true;
             }
         }
         private bool isLeft = false;
@@ -935,7 +935,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           (fixedpnl.ClientRectangle.Height - (inner_line * 2)) - w));
                 }
             }
-            if (_timer_count != 0 && _timer_count < 8)
+            if (_timer_count != 0 && _timer_count < 8) // INSIDE ARROW NA MAY TIMER
             {
                 if (_HeightChange)
                 {
@@ -1044,9 +1044,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     //_multiPanelTransomImagerUCP);
                 }
             }
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
+            _mainPresenter.SetChangesMark();
 
             if (_frameModel != null)
             {
@@ -1062,8 +1063,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             #endregion
-
             _mainPresenter.DeselectDivider();
         }
 

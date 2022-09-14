@@ -89,5 +89,12 @@ namespace PresentationLayer.Views.UserControls
         {
             Console.WriteLine(pnl_MultiPanelProperties.Height);
         }
+
+    
+        private void pnl_MultiPanelProperties_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.Parent.Parent.Name);
+
+        }
     }
 }
