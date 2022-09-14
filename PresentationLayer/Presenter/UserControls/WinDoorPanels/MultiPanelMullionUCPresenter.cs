@@ -500,10 +500,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         //decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
                         //int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
 
-                        int displayWidth = 0;
+                        decimal displayWidth = 0;
                         foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
-                            displayWidth += pnl.Panel_DisplayWidth;
+                            displayWidth += Convert.ToDecimal(pnl.Panel_DisplayWidth + "." + pnl.Panel_DisplayWidthDecimal);
                         }
                         decimal DisplayWD_dec;
                         if (displayWidth == 0)
@@ -512,7 +512,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else
                         {
-                           DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) - displayWidth;
+                           DisplayWD_dec = (Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - _multiPanelModel.MPanelLst_Panel.Count);
 
                         }
                         int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
@@ -547,7 +547,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         if (_multiPanelModel.MPanel_DividerEnabled)
                         {
-                            suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            ////suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            //if(panelSize == 0)
+                            //{
+                                suggest_Wd = (((_multiPanelModel.MPanel_Width - 20) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            //}
+                            //else
+                            //{
+                            //    suggest_Wd = ((((_multiPanelModel.MPanel_Width - 20) - (panelSize * ( totalPanelCount - _multiPanelModel.MPanelLst_Panel.Count))) - (divSize * (_multiPanelModel.MPanel_Divisions - _multiPanelModel.MPanelLst_Panel.Count))));
+                            //}
                         }
                         else if (!_multiPanelModel.MPanel_DividerEnabled)
                         {
