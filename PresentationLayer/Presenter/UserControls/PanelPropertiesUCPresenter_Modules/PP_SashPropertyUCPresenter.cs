@@ -93,6 +93,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
                                 }
                             }
+                            else if (curr_sash == SashProfile_ArticleNo._6040 || curr_sash == SashProfile_ArticleNo._6041)
+                            {
+                                _panelModel.Panel_SlidingTypeVisibility = false;
+                                _panelModel.Panel_RollersTypesVisibility = false;
+                                _panelModel.Panel_AluminumTrackQtyVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusRollerType");
+                                _panelModel.AdjustPropertyPanelHeight("minusSlidingType");
+                                _panelModel.AdjustPropertyPanelHeight("minusAluminumTrackQty");
+
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+                                }
+                            }
                             else if (curr_sash != SashProfile_ArticleNo._7581 && curr_sash != SashProfile_ArticleNo._2067)
                             {
 
@@ -202,6 +223,27 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                         }
                                     }
                                 }
+                                else if (curr_sash == SashProfile_ArticleNo._6040 || curr_sash == SashProfile_ArticleNo._6041)
+                                {
+                                    _panelModel.Panel_SlidingTypeVisibility = false;
+                                    _panelModel.Panel_RollersTypesVisibility = false;
+                                    _panelModel.Panel_AluminumTrackQtyVisibility = false;
+
+                                    _panelModel.AdjustPropertyPanelHeight("minusRollerType");
+                                    _panelModel.AdjustPropertyPanelHeight("minusSlidingType");
+                                    _panelModel.AdjustPropertyPanelHeight("minusAluminumTrackQty");
+
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+
+                                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                    {
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+                                    }
+                                }
                             }
                             else if (_panelModel.Panel_MotorizedOptionVisibility == true)
                             {
@@ -258,6 +300,28 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minus3dHinge");
                                 }
                             }
+                            else if (curr_sash == SashProfile_ArticleNo._6040 || curr_sash == SashProfile_ArticleNo._6041)
+                            {
+                                _panelModel.Panel_SlidingTypeVisibility = false;
+                                _panelModel.Panel_RollersTypesVisibility = false;
+                                _panelModel.Panel_AluminumTrackQtyVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusRollerType");
+                                _panelModel.AdjustPropertyPanelHeight("minusSlidingType");
+                                _panelModel.AdjustPropertyPanelHeight("minusAluminumTrackQty");
+
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+                                }
+                            }
+
 
                             _panelModel.Panel_CenterHingeOptionsVisibility = true;
                             _panelModel.AdjustPropertyPanelHeight("addCenterHinge");
@@ -353,11 +417,32 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                     }
                                 }
                             }
+                            else if (curr_sash == SashProfile_ArticleNo._6041)
+                            {
+                                _panelModel.Panel_SlidingTypeVisibility = false;
+                                _panelModel.Panel_RollersTypesVisibility = false;
+                                _panelModel.Panel_AluminumTrackQtyVisibility = false;
+
+                                _panelModel.AdjustPropertyPanelHeight("minusRollerType");
+                                _panelModel.AdjustPropertyPanelHeight("minusSlidingType");
+                                _panelModel.AdjustPropertyPanelHeight("minusAluminumTrackQty");
+
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+                                }
+                            }
 
                             _panelModel.Panel_SlidingTypeVisibility = true;
                             _panelModel.Panel_RollersTypesVisibility = true;
                             _panelModel.Panel_AluminumTrackQtyVisibility = true;
-                             
+
                             _panelModel.AdjustPropertyPanelHeight("addRollerType");
                             _panelModel.AdjustPropertyPanelHeight("addSlidingType");
                             _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");
@@ -372,7 +457,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRollerType");
                                 _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addAluminumTrackQty");
                             }
-                             
+
                         }
                         else if (_panelModel.Panel_MotorizedOptionVisibility == true)
                         {
@@ -450,7 +535,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
                             else if (curr_sash == SashProfile_ArticleNo._6040)
                             {
+                                _panelModel.Panel_SlidingTypeVisibility = false;
+                                _panelModel.Panel_RollersTypesVisibility = false;
+                                _panelModel.Panel_AluminumTrackQtyVisibility = false;
 
+                                _panelModel.AdjustPropertyPanelHeight("minusRollerType");
+                                _panelModel.AdjustPropertyPanelHeight("minusSlidingType");
+                                _panelModel.AdjustPropertyPanelHeight("minusAluminumTrackQty");
+
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+
+                                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                                {
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSlidingType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusRollerType");
+                                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusAluminumTrackQty");
+                                }
                             }
 
                             _panelModel.Panel_SlidingTypeVisibility = true;

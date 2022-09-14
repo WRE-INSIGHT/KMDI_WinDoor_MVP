@@ -1039,7 +1039,7 @@ namespace ModelLayer.Model.Quotation
                                         pnl_curCtrl.Insert_GeorgianBar_MaterialList(Material_List);
                                     }
 
-                                    if (pnl_curCtrl.Panel_Type == "Fixed Panel")
+                                    if (pnl_curCtrl.Panel_Type == "Fixed Panel" && pnl_curCtrl.Panel_SashPropertyVisibility == false)
                                     {
                                         glazing_spacer++;
                                     }
@@ -1150,163 +1150,185 @@ namespace ModelLayer.Model.Quotation
                                                                                 mpanelParentlvl2_placement);
                                 }
 
-
-                                if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
+                                if (pnl_curCtrl != null)
                                 {
-                                    int sashPerimeter_screws = pnl_curCtrl.Add_SashPerimeter_screws4fab();
-                                    total_screws_fabrication += sashPerimeter_screws;
 
-                                    if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
+
+                                    if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
                                     {
-                                        pnl_curCtrl.Insert_CoverProfileInfo_MaterialList(Material_List);
-                                    }
+                                        int sashPerimeter_screws = pnl_curCtrl.Add_SashPerimeter_screws4fab();
+                                        total_screws_fabrication += sashPerimeter_screws;
 
-                                    pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
-                                    pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
-
-                                    if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
-                                    {
-                                        pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
-
-                                        if (OverLappingPanel_Qty != 0)
+                                        if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
                                         {
-                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
-                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_CoverProfileInfo_MaterialList(Material_List);
                                         }
 
-                                        pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
-                                        pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
-
-                                        if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                            pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                        if (pnl_curCtrl.Panel_Type.Contains("Fixed") && pnl_curCtrl.Panel_ChkText == "dSash")
                                         {
-                                            pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_SpacerFixedSash_MaterialList(Material_List);
                                         }
 
-                                        //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
-                                        //add_screws_fab_striker += strikerAC_screws;
-
-                                    }
-
-
-                                    pnl_curCtrl.Insert_SashInfo_MaterialList(Material_List);
-
-                                    if (pnl_curCtrl.Panel_MotorizedOptionVisibility == false)
-                                    {
-
-
-                                        if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay && pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
+                                        if (pnl_curCtrl.Panel_Spacer != null)
                                         {
-                                            pnl_curCtrl.Insert_MiddleCloser_MaterialList(Material_List);
-                                            add_screws_fab_mc += (4 * pnl_curCtrl.Panel_MiddleCloserPairQty);
+                                            pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
                                         }
 
-                                        if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary &&
-                                            pnl_curCtrl.Panel_HandleType != Handle_Type._None)
+                                        if (pnl_curCtrl.PanelGlazingBead_ArtNo != null)
                                         {
-                                            pnl_curCtrl.Insert_Extension_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
+                                        }
 
-                                            int extensions_screws = pnl_curCtrl.Add_Extension_screws4fab();
-                                            add_screws_fab_ext += extensions_screws;
-
-                                            if (pnl_curCtrl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
-                                                pnl_curCtrl.Panel_CornerDriveArtNo != null)
+                                        if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
+                                        {
+                                            if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                                                pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-                                                pnl_curCtrl.Insert_CornerDrive_MaterialList(Material_List);
-                                                add_screws_fab_corDrive += (2 * 2); //2 * 2pcs,CornerDrive
-                                            }
-                                        }
 
-                                        if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
-                                        {
-                                            pnl_curCtrl.Insert_RotoswingHandle_MaterialList(Material_List);
 
-                                            if (pnl_curCtrl.Panel_Type.Contains("Casement"))
-                                            {
-                                                if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
+
+                                                if (OverLappingPanel_Qty != 0)
                                                 {
-                                                    pnl_curCtrl.Insert_StrikerC_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                                }
 
-                                                    if (pnl_curCtrl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                                    {
-                                                        pnl_curCtrl.Insert_StrikerA_MaterialList(Material_List);
-                                                    }
+                                                pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
 
-                                                    int strikerAC_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
-                                                    add_screws_fab_striker += strikerAC_screws;
+                                                if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                                    pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                                {
+                                                    pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
+                                                }
+
+                                                //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
+                                                //add_screws_fab_striker += strikerAC_screws;
+                                            }
+
+                                        }
+
+
+                                        pnl_curCtrl.Insert_SashInfo_MaterialList(Material_List);
+
+                                        if (pnl_curCtrl.Panel_MotorizedOptionVisibility == false)
+                                        {
+
+
+                                            if (pnl_curCtrl.Panel_HingeOptions == HingeOption._FrictionStay && pnl_curCtrl.Panel_MiddleCloserPairQty > 0)
+                                            {
+                                                pnl_curCtrl.Insert_MiddleCloser_MaterialList(Material_List);
+                                                add_screws_fab_mc += (4 * pnl_curCtrl.Panel_MiddleCloserPairQty);
+                                            }
+
+                                            if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary &&
+                                                pnl_curCtrl.Panel_HandleType != Handle_Type._None)
+                                            {
+                                                pnl_curCtrl.Insert_Extension_MaterialList(Material_List);
+
+                                                int extensions_screws = pnl_curCtrl.Add_Extension_screws4fab();
+                                                add_screws_fab_ext += extensions_screws;
+
+                                                if (pnl_curCtrl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
+                                                    pnl_curCtrl.Panel_CornerDriveArtNo != null)
+                                                {
+                                                    pnl_curCtrl.Insert_CornerDrive_MaterialList(Material_List);
+                                                    add_screws_fab_corDrive += (2 * 2); //2 * 2pcs,CornerDrive
                                                 }
                                             }
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
-                                        {
-                                            pnl_curCtrl.Insert_RotaryHandle_LockingKit_MaterialList(Material_List);
-                                            add_screws_fab_handle += 9; //RotaryHandle_LockingKit
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rio)
-                                        {
-                                            pnl_curCtrl.Insert_RioHandle_MaterialList(Material_List);
 
-                                            pnl_curCtrl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_CylinderCover_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoline)
-                                        {
-                                            pnl_curCtrl.Insert_RotolineHandle_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._MVD)
-                                        {
-                                            pnl_curCtrl.Insert_MVDHandle_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_CylinderCover_MaterialList(Material_List);
-
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D)
-                                        {
-                                            pnl_curCtrl.Insert_DHandle_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D_IO_Locking)
-                                        {
-                                            pnl_curCtrl.Insert_DHandleIOLocking_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._DummyD)
-                                        {
-                                            pnl_curCtrl.Insert_DummyDHandle_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._PopUp)
-                                        {
-                                            pnl_curCtrl.Insert_PopUpHandle_MaterialList(Material_List);
-
-                                            pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
-                                        }
-                                        else if (pnl_curCtrl.Panel_HandleType == Handle_Type._RotoswingForSliding)
-                                        {
-                                            pnl_curCtrl.Insert_RotoswingForSlidingHandle_MaterialList(Material_List);
-                                        }
-
-                                        if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
-                                        {
-                                            if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                            if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoswing)
                                             {
-                                                pnl_curCtrl.Insert_Espagnolette_MaterialList(Material_List);
+                                                pnl_curCtrl.Insert_RotoswingHandle_MaterialList(Material_List);
+
+                                                if (pnl_curCtrl.Panel_Type.Contains("Casement"))
+                                                {
+                                                    if (pnl_curCtrl.Panel_SashProfileArtNo != SashProfile_ArticleNo._395)
+                                                    {
+                                                        pnl_curCtrl.Insert_StrikerC_MaterialList(Material_List);
+
+                                                        if (pnl_curCtrl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                                        {
+                                                            pnl_curCtrl.Insert_StrikerA_MaterialList(Material_List);
+                                                        }
+
+                                                        int strikerAC_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
+                                                        add_screws_fab_striker += strikerAC_screws;
+                                                    }
+                                                }
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotary)
+                                            {
+                                                pnl_curCtrl.Insert_RotaryHandle_LockingKit_MaterialList(Material_List);
+                                                add_screws_fab_handle += 9; //RotaryHandle_LockingKit
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rio)
+                                            {
+                                                pnl_curCtrl.Insert_RioHandle_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_CylinderCover_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._Rotoline)
+                                            {
+                                                pnl_curCtrl.Insert_RotolineHandle_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._MVD)
+                                            {
+                                                pnl_curCtrl.Insert_MVDHandle_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ProfileKnobCylinder_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_CylinderCover_MaterialList(Material_List);
+
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D)
+                                            {
+                                                pnl_curCtrl.Insert_DHandle_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                            {
+                                                pnl_curCtrl.Insert_DHandleIOLocking_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._DummyD)
+                                            {
+                                                pnl_curCtrl.Insert_DummyDHandle_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._PopUp)
+                                            {
+                                                pnl_curCtrl.Insert_PopUpHandle_MaterialList(Material_List);
+
+                                                pnl_curCtrl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                                            }
+                                            else if (pnl_curCtrl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                                            {
+                                                pnl_curCtrl.Insert_RotoswingForSlidingHandle_MaterialList(Material_List);
                                             }
 
-                                            int espag_screws = pnl_curCtrl.Add_Espagnolette_screws4fab();
-                                            add_screws_fab_espag += espag_screws;
+                                            if (pnl_curCtrl.Panel_HandleType != Handle_Type._Rotary)
+                                            {
+                                                if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                {
+                                                    pnl_curCtrl.Insert_Espagnolette_MaterialList(Material_List);
+                                                }
+
+                                                int espag_screws = pnl_curCtrl.Add_Espagnolette_screws4fab();
+                                                add_screws_fab_espag += espag_screws;
+                                            }
                                         }
                                     }
                                 }
@@ -1348,7 +1370,7 @@ namespace ModelLayer.Model.Quotation
                                     pnl_curCtrl.Insert_GeorgianBar_MaterialList(Material_List);
                                 }
 
-                                if (pnl_curCtrl.Panel_Type == "Fixed Panel")
+                                if (pnl_curCtrl.Panel_Type == "Fixed Panel" && pnl_curCtrl.Panel_SashPropertyVisibility == false)
                                 {
                                     glazing_spacer++;
                                 }
