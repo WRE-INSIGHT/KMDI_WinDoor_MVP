@@ -428,7 +428,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Left)
             {
-                isLeft = true;
+                isLeft = false;
             }
         }
         private bool isLeft = false;
@@ -571,10 +571,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
                                         {
                                             prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }
                                         else
                                         {
                                             prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                            prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                                             {
                                                 mpnl.SetDimensions_childObjs();
@@ -642,11 +644,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
                                         {
                                             pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
+                                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         }
                                         else
                                         {
                                             pres_pnl.SetDimensionToBind_using_BaseDimension();
+                                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                                             {
                                                 mpnl.SetDimensions_childObjs();

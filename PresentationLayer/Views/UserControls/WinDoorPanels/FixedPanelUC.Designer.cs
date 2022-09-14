@@ -106,6 +106,7 @@
             this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.FixedPanelUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseMove);
