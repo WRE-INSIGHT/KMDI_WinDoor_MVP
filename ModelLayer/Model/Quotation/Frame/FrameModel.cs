@@ -580,6 +580,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._V226;
                 }
+                else if (value == FrameProfile_ArticleNo._6050)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._TV110;
+                }
+
                 NotifyPropertyChanged();
             }
         }
@@ -678,6 +683,10 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
             {
                 reinf_size = 43;
+            }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+            {
+                reinf_size = 20;
             }
 
 
@@ -891,6 +900,62 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusSlidingType")
                 {
                     FrameProp_Height -= constants.panel_property_SlidingTypeOptionsheight;
+                }
+                else if (mode == "addRollerType")
+                {
+                    FrameProp_Height += constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "minusRollerType")
+                {
+                    FrameProp_Height -= constants.panel_property_RollerTypeOptionsheight;
+                }
+                else if (mode == "addAluminumTrackQty")
+                {
+                    FrameProp_Height += constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
+                else if (mode == "minusAluminumTrackQty")
+                {
+                    FrameProp_Height -= constants.panel_property_AluminumTrackQtyOptionsheight;
+                }
+                else if (mode == "addDHandle")
+                {
+                    FrameProp_Height += constants.panel_property_DHandleOptionsheight;
+                }
+                else if (mode == "minusDHandle")
+                {
+                    FrameProp_Height -= constants.panel_property_DHandleOptionsheight;
+                }
+                else if (mode == "addDHandleIOLocking")
+                {
+                    FrameProp_Height += constants.panel_property_DhandleIOLockingOptionsheight;
+                }
+                else if (mode == "minusDHandleIOLocking")
+                {
+                    FrameProp_Height -= constants.panel_property_DhandleIOLockingOptionsheight;
+                }
+                else if (mode == "addDummyDHandle")
+                {
+                    FrameProp_Height += constants.panel_property_DummyDHandleOptionsheight;
+                }
+                else if (mode == "minusDummyDHandle")
+                {
+                    FrameProp_Height -= constants.panel_property_DummyDHandleOptionsheight;
+                }
+                else if (mode == "addPopUpHandle")
+                {
+                    FrameProp_Height += constants.panel_property_PopUpHandleOptionsheight;
+                }
+                else if (mode == "minusPopUpHandle")
+                {
+                    FrameProp_Height -= constants.panel_property_PopUpHandleOptionsheight;
+                }
+                else if (mode == "addRotoswingForSliding")
+                {
+                    FrameProp_Height += constants.panel_property_RotoswingForSlidingOptionsheight;
+                }
+                else if (mode == "minusRotoswingForSliding")
+                {
+                    FrameProp_Height -= constants.panel_property_RotoswingForSlidingOptionsheight;
                 }
             }
             else if (objtype == "Div")

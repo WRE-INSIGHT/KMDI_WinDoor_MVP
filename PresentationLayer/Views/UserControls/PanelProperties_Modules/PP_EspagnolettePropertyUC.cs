@@ -100,6 +100,24 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                else if ((espag == Espagnolette_ArticleNo._774275 || espag == Espagnolette_ArticleNo._774276 ||
+                          espag == Espagnolette_ArticleNo._774277 || espag == Espagnolette_ArticleNo._774278))
+                {
+                    if (!((Frame_ArtNo == FrameProfile_ArticleNo._6050 || Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                           Panel_SashProfileArtNo == SashProfile_ArticleNo._6040))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (espag == Espagnolette_ArticleNo._774286 || espag == Espagnolette_ArticleNo._774287 ||
+                         espag == Espagnolette_ArticleNo._731852 || espag == Espagnolette_ArticleNo._6_90137_10_0_1)
+                {
+                    if (!(Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6041))
+                    {
+                        MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
             }
             EventHelpers.RaiseEvent(sender, cmbEspagnoletteSelectedValueEventRaised, e);
         }
@@ -127,7 +145,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             {
                 if ((Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
                     (Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) ||
-                    (Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067))
+                    (Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067) ||
+                    (Frame_ArtNo == FrameProfile_ArticleNo._6050 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6040))
                 {
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
@@ -164,10 +183,37 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                     e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
                 }
             }
+            else if (espag == Espagnolette_ArticleNo._774275 || espag == Espagnolette_ArticleNo._774276 ||
+                     espag == Espagnolette_ArticleNo._774277 || espag == Espagnolette_ArticleNo._774278)
+            {
+                if ((Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                     Frame_ArtNo == FrameProfile_ArticleNo._6052) && 
+                     Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
+            else if (espag == Espagnolette_ArticleNo._774286 || espag == Espagnolette_ArticleNo._774287 ||
+                     espag == Espagnolette_ArticleNo._731852 || espag == Espagnolette_ArticleNo._6_90137_10_0_1)
+            {
+                if (Frame_ArtNo == FrameProfile_ArticleNo._6052 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Firebrick, e.Bounds.X, e.Bounds.Y);
+                }
+            }
             else
             {
                 e.Graphics.DrawString(text, ((Control)sender).Font, Brushes.Black, e.Bounds.X, e.Bounds.Y);
             }
+
         }
     }
 }
