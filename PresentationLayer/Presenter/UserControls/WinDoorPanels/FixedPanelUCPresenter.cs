@@ -428,7 +428,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Left)
             {
-                isLeft = true;
+                isLeft = false;
             }
         }
         private bool isLeft = false;

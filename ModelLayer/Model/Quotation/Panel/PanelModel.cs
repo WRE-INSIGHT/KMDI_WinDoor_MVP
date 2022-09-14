@@ -5570,7 +5570,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
                    // Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
-                   // Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
+                    Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                 }
 
                 if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507 &&
