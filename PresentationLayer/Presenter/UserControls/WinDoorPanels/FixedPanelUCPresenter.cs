@@ -164,6 +164,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
                 {
+                    _mainPresenter.SetChangesMark();
                     int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)fixedUC);
                     //Get Panel from left side of Mullion
                     Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
@@ -232,6 +233,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
                 {
+                    _mainPresenter.SetChangesMark();
                     int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)fixedUC);
                     //Get Panel from left side of Mullion
                     Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
@@ -300,6 +302,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
                 {
+                    _mainPresenter.SetChangesMark();
                     int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)fixedUC);
                     //Get Panel from left side of Mullion
                     Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
@@ -368,6 +371,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
                 {
+                    _mainPresenter.SetChangesMark();
                     int me_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((Control)fixedUC);
                     //Get Panel from left side of Mullion
                     Control pres_ctrl = _multiPanelModel.MPanelLst_Objects[me_indx]; ;
@@ -510,6 +514,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                                 {
+                                    _mainPresenter.SetChangesMark();
                                     mullion_movement = (e.X - _point_of_origin.X);
 
                                     if (prev_ctrl is IMultiPanelUC)
