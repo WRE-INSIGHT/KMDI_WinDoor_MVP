@@ -901,6 +901,13 @@ namespace PresentationLayer.Presenter
                             //updatefile_bgw.RunWorkerAsync();
                             //}
                     MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
+                    SetMainViewTitle(input_qrefno,
+                                     _projectName,
+                                     _custRefNo,
+                                     _windoorModel.WD_name,
+                                     _windoorModel.WD_profile,
+                                     true);
                 }
                 catch (Exception ex)
                 {
@@ -5536,6 +5543,10 @@ namespace PresentationLayer.Presenter
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
+            else
+            {
+                _mainView.GetToolStripButtonSave().Enabled = false;
+            }
         }
         private void SetMainViewTitle(string qrefno, string project_name, string cust_ref_no)
         {
@@ -6924,6 +6935,13 @@ namespace PresentationLayer.Presenter
                     _mainView.GetToolStripLabelSync().Visible = true;
                 }
                 MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
+                SetMainViewTitle(input_qrefno,
+                                     _projectName,
+                                     _custRefNo,
+                                     _windoorModel.WD_name,
+                                     _windoorModel.WD_profile,
+                                     true);
             }
             else
             {
