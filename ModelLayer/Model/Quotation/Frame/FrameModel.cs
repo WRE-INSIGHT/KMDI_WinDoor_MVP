@@ -77,7 +77,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set { _frameName = value; NotifyPropertyChanged(); }
         }
 
-       
+
         private int _frameWidth_toBind;
         public int Frame_WidthToBind
         {
@@ -92,7 +92,7 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        
+
         private int _frameHeight_toBind;
         public int Frame_HeightToBind
         {
@@ -277,6 +277,48 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameBotFrameEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameBotFrameVisible;
+        public bool Frame_BotFrameVisible
+        {
+            get
+            {
+                return _frameBotFrameVisible;
+            }
+            set
+            {
+                _frameBotFrameVisible = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frame_SlidingRailsQty;
+        public int Frame_SlidingRailsQty
+        {
+            get
+            {
+                return _frame_SlidingRailsQty;
+            }
+            set
+            {
+                _frame_SlidingRailsQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frame_SlidingRailsQtyVisibility;
+        public bool Frame_SlidingRailsQtyVisibility
+        {
+            get
+            {
+                return _frame_SlidingRailsQtyVisibility;
+            }
+            set
+            {
+                _frame_SlidingRailsQtyVisibility = value;
                 NotifyPropertyChanged();
             }
         }
@@ -583,7 +625,37 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (value == FrameProfile_ArticleNo._6050)
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._TV110;
+                    Frame_ArtNoForPremi = FrameProfileForPremi_ArticleNo._6055;
                 }
+                else if (value == FrameProfile_ArticleNo._6052)
+                {
+                    Frame_ReinfArtNo = FrameReinf_ArticleNo._TV107;
+                    Frame_ArtNoForPremi = FrameProfileForPremi_ArticleNo._6052_milled;
+                }
+
+                NotifyPropertyChanged();
+            }
+        }
+
+        private FrameProfileForPremi_ArticleNo _frameArtNoForPremi;
+        public FrameProfileForPremi_ArticleNo Frame_ArtNoForPremi
+        {
+            get
+            {
+                return _frameArtNoForPremi;
+            }
+            set
+            {
+                _frameArtNoForPremi = value;
+                if (value == FrameProfileForPremi_ArticleNo._6055)
+                {
+                    Frame_ReinfForPremiArtNo = FrameReinfForPremi_ArticleNo._V115;
+                }
+                else if (value == FrameProfileForPremi_ArticleNo._6052_milled)
+                {
+                    Frame_ReinfForPremiArtNo = FrameReinfForPremi_ArticleNo._TV107;
+                }
+
 
                 NotifyPropertyChanged();
             }
@@ -605,6 +677,19 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private FrameReinfForPremi_ArticleNo _frameReinfForPremiArtNo;
+        public FrameReinfForPremi_ArticleNo Frame_ReinfForPremiArtNo
+        {
+            get
+            {
+                return _frameReinfForPremiArtNo;
+            }
+            set
+            {
+                _frameReinfForPremiArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
         public int Frame_ReinfWidth { get; set; }
         public int Frame_ReinfHeight { get; set; }
 
@@ -1065,6 +1150,33 @@ namespace ModelLayer.Model.Quotation.Frame
                                    @"|  |");
 
             tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ReinfHeight.ToString(),
+                                   "Frame",
+                                   @"|  |");
+        }
+
+        public void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForPremi.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ExplosionWidth.ToString(),
+                                   "Frame",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNoForPremi.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ExplosionHeight,
+                                   "Frame",
+                                   @"\  /");
+
+            tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfForPremiArtNo.ToString(),
+                                   2, "pc(s)",
+                                   Frame_ReinfWidth.ToString(),
+                                   "Frame",
+                                   @"|  |");
+
+            tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfForPremiArtNo.ToString(),
                                    2, "pc(s)",
                                    Frame_ReinfHeight.ToString(),
                                    "Frame",

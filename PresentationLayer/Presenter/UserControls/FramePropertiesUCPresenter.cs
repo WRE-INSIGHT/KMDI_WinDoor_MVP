@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Variables;
+using PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules;
 using PresentationLayer.Views.UserControls;
 using ServiceLayer.Services.FrameServices;
-using Unity;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using CommonComponents;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules;
-using ModelLayer.Variables;
 using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter.UserControls
@@ -21,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls
         IFramePropertiesUC _framePropertiesUC;
 
         IFP_BottomFramePropertyUCPresenter _fp_botFramePropertyUCP;
+        IFP_SlidingRailsPropertyUCPresenter _fp_slidingRailsPropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -32,11 +30,14 @@ namespace PresentationLayer.Presenter.UserControls
 
         public FramePropertiesUCPresenter(IFramePropertiesUC framePropertiesUC,
                                           IFrameServices frameServices,
-                                          IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP)
+                                          IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP,
+                                          IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
             _fp_botFramePropertyUCP = fp_botFramePropertyUCP;
+            _fp_slidingRailsPropertyUCPresenter = fp_slidingRailsPropertyUCPresenter;
+
             SubscribeToEventsSetup();
         }
 
@@ -55,9 +56,42 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_ReinfArtNo = (FrameReinf_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
+        bool RailsDeductHt = false, RailsAdditionalHt = false;
+        string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+             
+            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            { 
+                if (RailsAdditionalHt == true)
+                {
+                    _frameModel.Frame_SlidingRailsQtyVisibility = true;
+                    _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                    RailsAdditionalHt = false;
+                }
+
+
+                RailsDeductHt = true;
+            }
+            else
+            {
+                if (RailsDeductHt == true)
+                {
+                    _frameModel.Frame_SlidingRailsQtyVisibility = false;
+                    _frameModel.FrameProp_Height -= constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                    RailsDeductHt = false;
+                }
+
+                RailsAdditionalHt = true;
+            }
+
+            prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
         }
 
         string curr_rbtnText = "";
@@ -69,6 +103,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
             {
+                _frameModel.Frame_BotFrameVisible = true;
                 if (rbtn.Text == "Door" && rbtn.Checked == true)
                 {
                     _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
@@ -77,7 +112,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (curr_rbtnText == "Door")
             {
-                if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") && 
+                _frameModel.Frame_BotFrameVisible = false;
+                if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") &&
                     rbtn.Checked == true)
                 {
                     _frameModel.FrameProp_Height -= constants.frame_botframeproperty_PanelHeight;
@@ -143,6 +179,7 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
             curr_rbtnText = _frameModel.Frame_Type.ToString();
+            prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
 
             IFP_BottomFramePropertyUCPresenter botFramePropUCP = _fp_botFramePropertyUCP.GetNewInstance(_frameModel, _unityC, _mainPresenter);
             UserControl botFramePropUC = (UserControl)botFramePropUCP.GetFP_BottomFramePropertiesUC();
@@ -150,12 +187,23 @@ namespace PresentationLayer.Presenter.UserControls
             botFramePropUC.Dock = DockStyle.Top;
             botFramePropUC.BringToFront();
 
+            IFP_SlidingRailsPropertyUCPresenter RailsPropUCP = _fp_slidingRailsPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter);
+            UserControl RailsPropUC = (UserControl)RailsPropUCP.GetSlidingRailsPropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(RailsPropUC);
+            RailsPropUC.Dock = DockStyle.Top;
+            RailsPropUC.BringToFront();
+
             if (_frameModel.Frame_Type == Frame_Padding.Door)
             {
                 _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
                 _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
             }
 
+            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 || _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            {
+                _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+            }
             _framePropertiesUC.BringToFrontThis();
         }
 
@@ -164,8 +212,8 @@ namespace PresentationLayer.Presenter.UserControls
             return _framePropertiesUC;
         }
 
-        public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel, 
-                                                          IUnityContainer unityC, 
+        public IFramePropertiesUCPresenter GetNewInstance(IFrameModel frameModel,
+                                                          IUnityContainer unityC,
                                                           //IFrameUC frameUC,
                                                           IMainPresenter mainPresenter)
         {

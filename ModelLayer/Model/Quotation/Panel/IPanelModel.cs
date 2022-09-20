@@ -376,6 +376,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_RotoswingForSlidingHandle_MaterialList(DataTable tbl_explosion);
         void Insert_ScrewSetForDhandlesVariant_MaterialList(DataTable tbl_explosion);
         void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion);
+
+        void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
         #endregion
     }
 }

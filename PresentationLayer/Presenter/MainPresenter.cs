@@ -12,7 +12,6 @@ using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Presenter.UserControls.Dividers;
-using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
@@ -36,7 +35,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
@@ -112,7 +110,7 @@ namespace PresentationLayer.Presenter
         private IMullionUCPresenter _mullionUCP;
         private ITransomUCPresenter _transomUCP;
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
-       
+
         private FrameModel.Frame_Padding frameType;
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
@@ -850,7 +848,7 @@ namespace PresentationLayer.Presenter
         {
             SaveChanges();
         }
-        
+
 
         private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -863,7 +861,7 @@ namespace PresentationLayer.Presenter
             if (wndrfile != _mainView.GetSaveFileDialog().FileName)
             {
                 wndrfile = _mainView.GetSaveFileDialog().FileName;
-                
+
             }
             else
             {
@@ -907,8 +905,8 @@ namespace PresentationLayer.Presenter
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }    
-               
+                }
+
             }
             else
             {
@@ -935,7 +933,7 @@ namespace PresentationLayer.Presenter
                 foreach (var prop in wdm.GetType().GetProperties())
                 {
 
-                    
+
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
                 }
                 foreach (IFrameModel frm in wdm.lst_frame)
@@ -1164,7 +1162,7 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
                 //basePlatform
-              
+
 
                 _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
@@ -2038,13 +2036,13 @@ namespace PresentationLayer.Presenter
                div_Bounded;
         float divImageRenderer_Zoom,
               div_Zoom;
-            bool div_Visible,
-                 div_claddingBracketVisibility,
-                 div_ChkDM,
-                 div_ChkDMVisibility,
-                 div_ArtVisibility,
-                 div_CladdingProfileArtNoVisibility,
-                 div_LeverEspagVisibility;
+        bool div_Visible,
+             div_claddingBracketVisibility,
+             div_ChkDM,
+             div_ChkDMVisibility,
+             div_ArtVisibility,
+             div_CladdingProfileArtNoVisibility,
+             div_LeverEspagVisibility;
         DividerModel.DividerType div_Type;
         Control div_Parent;
         DummyMullion_ArticleNo div_DMArtNo;
@@ -2130,7 +2128,7 @@ namespace PresentationLayer.Presenter
             }
             if (row_str.Contains("QuoteId:"))
             {
-                if(_isOpenProject && !isNewProject)
+                if (_isOpenProject && !isNewProject)
                 {
                     inside_quotation = true;
                 }
@@ -2160,7 +2158,7 @@ namespace PresentationLayer.Presenter
                 }
                 inside_multi = true;
             }
-           
+
             else if (row_str.Contains("|"))
             {
                 inside_divider = true;
@@ -2458,7 +2456,7 @@ namespace PresentationLayer.Presenter
                     {
                         #region Load for Frame Model
 
-                        
+
                         if (row_str.Contains("Frame_Height:"))
                         {
                             frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -2618,7 +2616,7 @@ namespace PresentationLayer.Presenter
                     {
                         #region Load for Panel
 
-                        
+
                         if (row_str.Contains("Panel_ChkText:"))
                         {
                             panel_ChkText = extractedValue_str;
@@ -2682,7 +2680,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Panel_FrameGroup:"))
                         {
                             panel_FrameGroup = _frameModel.Frame_UC;
-                           
+
                         }
                         if (row_str.Contains("Panel_FramePropertiesGroup:"))
                         {
@@ -3155,7 +3153,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                             pnlModel.Imager_SetDimensionsToBind_FrameParent();
-                            
+
                             if (panel_Type.Contains("Fixed Panel"))
                             {
 
@@ -3200,7 +3198,7 @@ namespace PresentationLayer.Presenter
                                         _multiPanelModel.MPanelLst_Objects.Add((UserControl)fixedUC);
                                         fixedUCP.SetInitialLoadFalse();
                                     }
-                                    
+
                                 }
                                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
@@ -3261,7 +3259,7 @@ namespace PresentationLayer.Presenter
                                                                                               _frameModel,
                                                                                               this,
                                                                                               frmUCPresenter);
-                                    IAwningPanelUC awningUC =  awningUCP.GetAwningPanelUC();
+                                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)awningUC);
                                 }
                                 else
@@ -4470,7 +4468,7 @@ namespace PresentationLayer.Presenter
                     {
                         #region Load for Multi Panel
 
-                       
+
                         if (row_str.Contains("MPanel_ID:"))
                         {
                             mPanel_ID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -4610,7 +4608,7 @@ namespace PresentationLayer.Presenter
                                 mPanelImageRenderer_Margin = marginPad;
                             }
                         }
-                        
+
                         else if (row_str.Contains("MPanel_Index_Inside_MPanel:"))
                         {
                             mPanel_Index_Inside_MPanel = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -4649,7 +4647,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("MPanel_ParentModel:"))
                         {
-                            
+
                             //mPanel_ParentModel = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("MPanel_DividerEnabled:"))
@@ -4846,7 +4844,7 @@ namespace PresentationLayer.Presenter
                                 multipanelModel.MPanel_CmenuDeleteVisibility = mPanel_CmenuDeleteVisibility;
                                 multipanelModel.MPanel_GlassBalanced = mPanel_GlassBalanced;
                                 multipanelModel.MPanel_ParentModel = _multiPanelModel;
-                               
+
                                 multipanelModel.Set_DimensionToBind_using_FrameDimensions();
                                 multipanelModel.Imager_Set_DimensionToBind_using_FrameDimensions();
                                 _frameModel.Lst_MultiPanel.Add(multipanelModel);
@@ -4947,7 +4945,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_Type:"))
                         {
-                            if(extractedValue_str == "Mullion")
+                            if (extractedValue_str == "Mullion")
                             {
                                 div_Type = DividerModel.DividerType.Mullion;
                             }
@@ -5172,7 +5170,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_CladdingSizeList:"))
                         {
-                            
+
                             //div_CladdingSizeList = extractedValue_str;
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
@@ -5417,7 +5415,7 @@ namespace PresentationLayer.Presenter
                     switch (mainTodo)
                     {
                         case "Open_WndrFiles":
-                           
+
                             _mainView.GetToolStripLabelLoading().Text = "Finished";
                             ToggleMode(false, true);
                             _mainView.GetToolStripLabelLoading().Visible = true;
@@ -5439,40 +5437,40 @@ namespace PresentationLayer.Presenter
                             break;
 
                         case "GetCloudFiles":
-                            //if (sql_Transaction_result == "Committed")
-                            //{
-                            //    frmQuoteList frm = new frmQuoteList();
-                            //    frm.ds = (DataSet)e.Result;
-                            //    ToggleMode(false, true);
-                            //    frm.info = info;
-                            //    if (frm.ShowDialog() == DialogResult.OK)
-                            //    {
-                            //        Clearing_Operation();
+                        //if (sql_Transaction_result == "Committed")
+                        //{
+                        //    frmQuoteList frm = new frmQuoteList();
+                        //    frm.ds = (DataSet)e.Result;
+                        //    ToggleMode(false, true);
+                        //    frm.info = info;
+                        //    if (frm.ShowDialog() == DialogResult.OK)
+                        //    {
+                        //        Clearing_Operation();
 
 
-                            //        wndrfile = frm.FileName;
+                        //        wndrfile = frm.FileName;
 
-                            //        csfunc.DecryptFile(wndrfile);
+                        //        csfunc.DecryptFile(wndrfile);
 
-                            //        int startFileName1 = wndrfile.LastIndexOf("\\") + 1;
-                            //        string outFile1 = wndrfile.Substring(0, startFileName1) +
-                            //                         wndrfile.Substring(startFileName1, wndrfile.LastIndexOf(".") - startFileName1) + ".txt";
+                        //        int startFileName1 = wndrfile.LastIndexOf("\\") + 1;
+                        //        string outFile1 = wndrfile.Substring(0, startFileName1) +
+                        //                         wndrfile.Substring(startFileName1, wndrfile.LastIndexOf(".") - startFileName1) + ".txt";
 
-                            //        file_lines = File.ReadAllLines(outFile1);
-                            //        File.SetAttributes(outFile1, FileAttributes.Hidden);
-                            //        tsprogress_Loading.Maximum = file_lines.Length;
+                        //        file_lines = File.ReadAllLines(outFile1);
+                        //        File.SetAttributes(outFile1, FileAttributes.Hidden);
+                        //        tsprogress_Loading.Maximum = file_lines.Length;
 
-                            //        autoDescription = false;
-                            //        onload = true;
+                        //        autoDescription = false;
+                        //        onload = true;
 
-                            //        StartWorker("Open_WndrFiles");
-                            //    }
-                            //}
-                            //else
-                            //{
-                            //    ToggleMode(false, true);
-                            //}
-                            //break;
+                        //        StartWorker("Open_WndrFiles");
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    ToggleMode(false, true);
+                        //}
+                        //break;
 
                         default:
                             break;
@@ -5507,7 +5505,7 @@ namespace PresentationLayer.Presenter
             wndrProjectFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
-           
+
         }
 
         private void ItemToolStrip_Enable()
@@ -5654,7 +5652,7 @@ namespace PresentationLayer.Presenter
                     //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_OpenWindoorFile_ClickedOK = true;
-                  
+
                 }
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
@@ -5928,7 +5926,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                
+
             }
         }
 
@@ -6148,7 +6146,7 @@ namespace PresentationLayer.Presenter
                                   espag_art == Espagnolette_ArticleNo._774277 || espag_art == Espagnolette_ArticleNo._774278))
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6050 ||
-                                  frame_art == FrameProfile_ArticleNo._6052) && 
+                                  frame_art == FrameProfile_ArticleNo._6052) &&
                                 !(sash_art == SashProfile_ArticleNo._6040))
                             {
                                 MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -6429,40 +6427,41 @@ namespace PresentationLayer.Presenter
                         SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
                         bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
                         bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
-
-                        if (allWithSash == true && allNoSash == false)
-                        {
-                            gbmode = "withSash";
-                            int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
-                            if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                        if (mpnl.MPanel_DividerEnabled == true)
+                        { 
+                            if (allWithSash == true && allNoSash == false)
                             {
-                                same_sash = true;
-                            }
-                            else
-                            {
-                                same_sash = false;
-                            }
-                        }
-                        else if (allWithSash == false && allNoSash == true)
-                        {
-                            gbmode = "noSash";
-                        }
-                        else if (allWithSash == false && allNoSash == false)
-                        {
-                            gbmode = "";
-                        }
-
-                        if (gbmode != "")
-                        {
-                            if (same_sash == true || gbmode == "noSash")
-                            {
-                                if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                gbmode = "withSash";
+                                int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                                if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
                                 {
-                                    unbalancedGlass_cnt++;
+                                    same_sash = true;
+                                }
+                                else
+                                {
+                                    same_sash = false;
+                                }
+                            }
+                            else if (allWithSash == false && allNoSash == true)
+                            {
+                                gbmode = "noSash";
+                            }
+                            else if (allWithSash == false && allNoSash == false)
+                            {
+                                gbmode = "";
+                            }
+
+                            if (gbmode != "")
+                            {
+                                if (same_sash == true || gbmode == "noSash")
+                                {
+                                    if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                    {
+                                        unbalancedGlass_cnt++;
+                                    }
                                 }
                             }
                         }
-
                     }
                 }
                 catch (Exception ex)

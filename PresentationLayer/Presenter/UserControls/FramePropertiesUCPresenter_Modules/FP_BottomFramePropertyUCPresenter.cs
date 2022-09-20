@@ -3,11 +3,8 @@ using ModelLayer.Model.Quotation.Frame;
 using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
 using System.Windows.Forms;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules
@@ -144,7 +141,8 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             Dictionary<string, Binding> botframePropBinding = new Dictionary<string, Binding>();
             botframePropBinding.Add("Frame_BotFrameArtNo", new Binding("Text", _frameModel, "Frame_BotFrameArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             botframePropBinding.Add("Frame_BotFrameEnable", new Binding("Enabled", _frameModel, "Frame_BotFrameEnable", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+            botframePropBinding.Add("Frame_BotFrameVisible", new Binding("Visible", _frameModel, "Frame_BotFrameVisible", true, DataSourceUpdateMode.OnPropertyChanged));
+
             return botframePropBinding;
         }
     }

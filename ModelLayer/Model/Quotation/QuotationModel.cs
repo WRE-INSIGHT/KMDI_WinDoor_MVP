@@ -31,6 +31,8 @@ namespace ModelLayer.Model.Quotation
         public int Screws_for_Fabrication { get; set; }
         public int Screws_for_Installation { get; set; }
         public int Screws_for_6050Frame { get; set; }
+        public int Screws_for_6055Frame { get; set; }
+        public int ACC_for_6050 { get; set; }
         public int Screws_for_Cladding { get; set; }
         public int Expansion_BoltQty_Total { get; set; }
         public int Rebate_Qty { get; set; }
@@ -89,10 +91,11 @@ namespace ModelLayer.Model.Quotation
             string screws_for_inst_where = "";
 
             bool perFrame = false;
-
+            bool slidingChck = false;
             foreach (IFrameModel frame in item.lst_frame)
             {
                 perFrame = true;
+                slidingChck = false;
 
                 frame.SetExplosionValues_Frame();
 
@@ -109,6 +112,12 @@ namespace ModelLayer.Model.Quotation
                 }
 
                 frame.Insert_frameInfo_MaterialList(Material_List);
+
+                if (frame.Frame_SlidingRailsQty == 3)
+                {
+                    frame.Insert_frameInfoForPremi_MaterialList(Material_List);
+                }
+
                 if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
@@ -1093,28 +1102,9 @@ namespace ModelLayer.Model.Quotation
                                         pnl.Panel_Overlap_Sash == OverlapSash._Right)
                                     {
                                         OverLappingPanel_Qty += 1;
-                                    }
+                                    } 
                                 }
-
-                                //if (mpnl_curCtrl != null)
-                                //{
-                                //    if (mpnl_curCtrl.MPanel_Placement == "First")
-                                //    {
-                                //        nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
-                                //    }
-                                //    else if (mpnl_curCtrl.MPanel_Placement == "Somewhere in Between")
-                                //    {
-                                //        nxt_ctrl = mpnl.GetVisibleObjects().ToList()[i + 1];
-
-                                //        prevCtrl = mpnl.GetVisibleObjects().ToList()[i - 1];
-                                //    }
-                                //    else if (mpnl_curCtrl.MPanel_Placement == "Last")
-                                //    {
-                                //        prevCtrl = mpnl.GetVisibleObjects().ToList()[i - 1];
-                                //    }
-                                //}
-
-
+  
                                 if (pnl_curCtrl != null)
                                 {
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -1152,29 +1142,39 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
-
+                                    if (item.WD_profile == "PremiLine Profile" && pnl_curCtrl.Panel_Type.Contains("Fixed"))
+                                    {
+                                        pnl_curCtrl.Insert_CoverProfileForPremiInfo_MaterialList(Material_List);
+                                    }
 
                                     if (pnl_curCtrl.Panel_SashPropertyVisibility == true)
                                     {
                                         int sashPerimeter_screws = pnl_curCtrl.Add_SashPerimeter_screws4fab();
                                         total_screws_fabrication += sashPerimeter_screws;
 
-                                        if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false)
+                                        if (pnl_curCtrl.Panel_Type.Contains("Fixed") == false &&
+                                            pnl_curCtrl.Panel_Type.Contains("Sliding") == false)
                                         {
-                                            pnl_curCtrl.Insert_CoverProfileInfo_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_CoverProfileInfo_MaterialList(Material_List); // casement & awning
                                         }
+
 
                                         if (pnl_curCtrl.Panel_Type.Contains("Fixed") && pnl_curCtrl.Panel_ChkText == "dSash")
                                         {
                                             pnl_curCtrl.Insert_SpacerFixedSash_MaterialList(Material_List);
                                         }
 
-                                        if (pnl_curCtrl.Panel_Spacer != null)
+                                        if (pnl_curCtrl.Panel_ChkText != "dSash")
                                         {
-                                            pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
                                         }
 
-                                        if (pnl_curCtrl.PanelGlazingBead_ArtNo != null)
+                                        //if (pnl_curCtrl.Panel_Spacer != null || pnl_curCtrl.Panel_ChkText == "dSash")
+                                        //{
+                                        pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
+                                        //}
+
+                                        if (pnl_curCtrl.Panel_GlazingRebateBlockArtNo != null)
                                         {
                                             pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                                         }
@@ -1184,33 +1184,86 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                                 pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                             {
-
-
-                                                pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
-
-                                                if (OverLappingPanel_Qty != 0)
+                                                if (frame.Frame_SlidingRailsQty == 3)
                                                 {
-                                                    pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                                    slidingChck = true;
+                                                    pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
+
+                                                    if (perFrame == true)
+                                                    {
+                                                      
+                                                        pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+                                                        perFrame = false;
+                                                    }
+
+                                                    pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
+
+                                                    if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                    {
+                                                        pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_ChkText != "dSash")
+                                                    {
+                                                        pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
+
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                                        pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                                    {
+                                                        //if (OverLappingPanel_Qty != 0)
+                                                        //{
+                                                        pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                                        // } 
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
+
+                                                    if (perFrame == true)
+                                                    {
+                                                        pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
+
+                                                        perFrame = false;
+                                                    }
+
+
+                                                    pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
+
+                                                    if (pnl_curCtrl.Panel_EspagnoletteArtNo != Espagnolette_ArticleNo._None)
+                                                    {
+                                                        pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_ChkText != "dSash")
+                                                    {
+                                                        pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
+
+                                                    }
+
+                                                    if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                                        pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                                    {
+                                                        //if (OverLappingPanel_Qty != 0)
+                                                        //{
+                                                        pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                                        pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                                        // } 
+                                                    }
                                                 }
 
-                                                pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_Rollers_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
-                                                pnl_curCtrl.Insert_StrikerForSliding_MaterialList(Material_List);
 
-                                                if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                                    pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
-                                                {
-                                                    pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
-                                                }
-
-                                                //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
-                                                //add_screws_fab_striker += strikerAC_screws;
                                             }
 
                                         }
@@ -1329,6 +1382,7 @@ namespace ModelLayer.Model.Quotation
                                                 int espag_screws = pnl_curCtrl.Add_Espagnolette_screws4fab();
                                                 add_screws_fab_espag += espag_screws;
                                             }
+
                                         }
                                     }
                                 }
@@ -1398,6 +1452,21 @@ namespace ModelLayer.Model.Quotation
                         if (pnl.Panel_Type.Contains("Fixed") == false)
                         {
                             pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
+                        }
+
+                        if (pnl.Panel_Type.Contains("Fixed") && pnl.Panel_ChkText == "dSash")
+                        {
+                            pnl.Insert_SpacerFixedSash_MaterialList(Material_List);
+                        }
+
+                        if (pnl.Panel_GlazingRebateBlockArtNo != null)
+                        {
+                            pnl.Insert_GlazingRebateBlock_MaterialList(Material_List);
+                        }
+
+                        if (pnl.Panel_Spacer != null || pnl.Panel_ChkText == "dSash")
+                        {
+                            pnl.Insert_Spacer_MaterialList(Material_List);
                         }
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
@@ -1540,6 +1609,48 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
                             }
+                            if (pnl.Panel_Type.Contains("Sliding"))
+                            {
+                                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                                    pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
+                                    pnl.Insert_AluminumTrack_MaterialList(Material_List);
+
+                                    if (perFrame == true)
+                                    {
+                                        pnl.Insert_WeatherBar_MaterialList(Material_List);
+                                        pnl.Insert_WeatherBarFastener_MaterialList(Material_List);
+                                        pnl.Insert_WaterSeepage_MaterialList(Material_List);
+                                        pnl.Insert_BrushSeal_MaterialList(Material_List);
+
+                                        perFrame = false;
+                                    }
+
+                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                        pnl.Panel_Overlap_Sash == OverlapSash._Right)
+                                    {
+                                        pnl.Insert_SealingBlock_MaterialList(Material_List);
+                                        pnl.Insert_Interlock_MaterialList(Material_List);
+                                        pnl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+
+                                    }
+
+                                    pnl.Insert_Rollers_MaterialList(Material_List);
+                                    pnl.Insert_AntiLiftDevice_MaterialList(Material_List);
+
+
+                                    if (pnl.Panel_HandleType != Handle_Type._None)
+                                    {
+                                        pnl.Insert_StrikerForSliding_MaterialList(Material_List);
+                                    }
+
+
+                                    //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
+                                    //add_screws_fab_striker += strikerAC_screws;
+                                }
+
+                            }
 
                             if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
                             {
@@ -1623,6 +1734,34 @@ namespace ModelLayer.Model.Quotation
 
                                 pnl.Insert_LatchAndDeadboltStriker_MaterialList(Material_List);
                                 add_screws_fab_striker += 2;
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._D)
+                            {
+                                pnl.Insert_DHandle_MaterialList(Material_List);
+
+                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                            {
+                                pnl.Insert_DHandleIOLocking_MaterialList(Material_List);
+
+                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._DummyD)
+                            {
+                                pnl.Insert_DummyDHandle_MaterialList(Material_List);
+
+                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._PopUp)
+                            {
+                                pnl.Insert_PopUpHandle_MaterialList(Material_List);
+
+                                pnl.Insert_ScrewSetForDhandlesVariant_MaterialList(Material_List);
+                            }
+                            else if (pnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                            {
+                                pnl.Insert_RotoswingForSlidingHandle_MaterialList(Material_List);
                             }
 
                             if (pnl.Panel_HandleType != Handle_Type._Rotary)
@@ -1723,6 +1862,8 @@ namespace ModelLayer.Model.Quotation
             Screws_for_Installation = fixing_screw + total_screws_installation;
             Screws_for_Cladding = (int)(Math.Ceiling((decimal)total_cladding_size / 300));
             Screws_for_6050Frame = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 300);
+            Screws_for_6055Frame = (int)Math.Ceiling((decimal)(frame_width - 200) / 200 + 1);
+            ACC_for_6050 = (int)Math.Ceiling((decimal)(frame_width - 200) / 400 + 1);
 
             Plastic_CoverQty_Total = (frame_width * frame_height) * 2;
             Expansion_BoltQty_Total = exp_bolt;
@@ -1769,9 +1910,15 @@ namespace ModelLayer.Model.Quotation
 
             Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
+            if (slidingChck == true)
+            {
+                Material_List.Rows.Add("ACC FOR 6055 9D56",
+                        ACC_for_6050, "pc(s)", "", screws_for_inst_where); // FRAME
 
-            Material_List.Rows.Add("Screws for 6050 Frame",
-                                  Screws_for_6050Frame, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
+                Material_List.Rows.Add("SCREW FOR 6055 S036",
+                     Screws_for_6055Frame, "pc(s)", "", screws_for_inst_where); // FRAME
+            }
+
             if (Screws_for_Cladding > 0)
             {
                 Material_List.Rows.Add("Screws for Cladding 10 x 38",

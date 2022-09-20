@@ -19,6 +19,8 @@ namespace ModelLayer.Model.Quotation
         int Expansion_BoltQty_Total { get; set; }
         int Screws_for_Installation { get; set; }
         int Screws_for_6050Frame { get; set; }
+        int Screws_for_6055Frame { get; set; }
+        int ACC_for_6050 { get; set; }
         int Screws_for_Cladding { get; set; }
         int Rebate_Qty { get; set; }
         int Plastic_CoverQty_Total { get; set; }

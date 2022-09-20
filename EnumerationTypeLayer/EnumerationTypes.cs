@@ -23,6 +23,13 @@ namespace EnumerationTypeLayer
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class FrameProfileForPremi_ArticleNo : Enumeration<FrameProfileForPremi_ArticleNo>
+        {
+            public static readonly FrameProfileForPremi_ArticleNo _6055 = new FrameProfileForPremi_ArticleNo(0, "6055");
+            public static readonly FrameProfileForPremi_ArticleNo _6052_milled = new FrameProfileForPremi_ArticleNo(1, "6052 - Milled");
+
+            private FrameProfileForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
         public class FrameReinf_ArticleNo : Enumeration<FrameReinf_ArticleNo>
         {
             public static readonly FrameReinf_ArticleNo _R676 = new FrameReinf_ArticleNo(0, "R676");
@@ -32,6 +39,14 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrameReinfForPremi_ArticleNo : Enumeration<FrameReinfForPremi_ArticleNo>
+        {
+            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-115");
+            public static readonly FrameReinfForPremi_ArticleNo _TV107 = new FrameReinfForPremi_ArticleNo(1, "T-V107");
+
+            private FrameReinfForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Divider_ArticleNo : Enumeration<Divider_ArticleNo, int>
