@@ -17,8 +17,9 @@ namespace PresentationLayer.Presenter.UserControls
     {
         IFramePropertiesUC _framePropertiesUC;
 
-        IFP_BottomFramePropertyUCPresenter _fp_botFramePropertyUCP;
-        IFP_SlidingRailsPropertyUCPresenter _fp_slidingRailsPropertyUCPresenter;
+        private IFP_BottomFramePropertyUCPresenter _fp_botFramePropertyUCP;
+        private IFP_SlidingRailsPropertyUCPresenter _fp_slidingRailsPropertyUCPresenter;
+        private IFP_FrameConnectionTypePropertyUCPresenter _fp_frameConnectionTypePropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -61,10 +62,10 @@ namespace PresentationLayer.Presenter.UserControls
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-             
+
             if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                 _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            { 
+            {
                 if (RailsAdditionalHt == true)
                 {
                     _frameModel.Frame_SlidingRailsQtyVisibility = true;

@@ -34,8 +34,6 @@ namespace ModelLayer.Model.Quotation.Frame
         BottomFrameTypes Frame_BotFrameArtNo { get; set; }
         bool Frame_BotFrameEnable { get; set; }
         bool Frame_BotFrameVisible { get; set; }
-        int Frame_SlidingRailsQty { get; set; }
-        bool Frame_SlidingRailsQtyVisibility { get; set; }
 
         UserControl Frame_UC { get; set; }
         UserControl Frame_PropertiesUC { get; set; }
@@ -68,6 +66,10 @@ namespace ModelLayer.Model.Quotation.Frame
         MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
+        int Frame_SlidingRailsQty { get; set; }
+        bool Frame_SlidingRailsQtyVisibility { get; set; }
+        FrameConnectionType Frame_ConnectionType { get; set; }
+        bool Frame_ConnectionTypeVisibility { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);

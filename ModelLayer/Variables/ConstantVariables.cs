@@ -7,6 +7,7 @@
         public int frame_propertyHeight_default = 265;
         public int frame_botframeproperty_PanelHeight = 58;
         public int frame_SlidingRailsQtyproperty_PanelHeight = 45;
+        public int frame_ConnectionTypeproperty_PanelHeight = 21;
 
         #endregion
 

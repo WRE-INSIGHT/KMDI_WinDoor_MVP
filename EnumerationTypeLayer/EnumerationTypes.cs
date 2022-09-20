@@ -1017,5 +1017,15 @@ namespace EnumerationTypeLayer
 
             private SealingBlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class FrameConnectionType : Enumeration<FrameConnectionType, int>
+        {
+            public static readonly FrameConnectionType _Weldable = new FrameConnectionType(0, "Weldable");
+            public static readonly FrameConnectionType _MechanicalJoint = new FrameConnectionType(1, "Mechanical Joint");
+
+
+            private FrameConnectionType(int value, string displayName) : base(value, displayName) { }
+        }
+
     }
 }

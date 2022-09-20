@@ -323,6 +323,34 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private FrameConnectionType _frameConnectionType;
+        public FrameConnectionType Frame_ConnectionType
+        {
+            get
+            {
+                return _frameConnectionType;
+            }
+            set
+            {
+                _frameConnectionType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frame_connectionTypeVisibility;
+        public bool Frame_ConnectionTypeVisibility
+        {
+            get
+            {
+                return _frame_connectionTypeVisibility;
+            }
+            set
+            {
+                _frame_connectionTypeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private UserControl _frameUC;
         public UserControl Frame_UC
         {

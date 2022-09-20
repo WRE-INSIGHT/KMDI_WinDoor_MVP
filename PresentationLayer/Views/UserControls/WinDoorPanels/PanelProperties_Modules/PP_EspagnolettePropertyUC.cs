@@ -75,7 +75,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
                 {
                     if (!(Frame_ArtNo == FrameProfile_ArticleNo._7502 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
                         !(Frame_ArtNo == FrameProfile_ArticleNo._7507 && Panel_SashProfileArtNo == SashProfile_ArticleNo._7581) &&
-                        !(Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067))
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._2060 && Panel_SashProfileArtNo == SashProfile_ArticleNo._2067) &&
+                        !(Frame_ArtNo == FrameProfile_ArticleNo._6050 && Panel_SashProfileArtNo == SashProfile_ArticleNo._6040))
                     {
                         MessageBox.Show("You've selected an incompatible item, be advised", "Espagnolette Property", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
