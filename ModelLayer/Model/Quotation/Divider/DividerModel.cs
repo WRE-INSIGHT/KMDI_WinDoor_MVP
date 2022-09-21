@@ -416,18 +416,21 @@ namespace ModelLayer.Model.Quotation.Divider
         {
             int wd = Div_MPanelParent.MPanelImageRenderer_Width,
                 ht = Div_MPanelParent.MPanelImageRenderer_Height,
-                div_overlap = Div_FrameParent.Frame_Deduction;
-
+                div_overlap = Div_FrameParent.Frame_Deduction,
+                divsize = 13;
+            
             if (Div_Type == DividerType.Mullion)
             {
                 if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
                     DivImageRenderer_Height = ht + 10;
+                    DivImageRenderer_Width = divsize;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Height = ht + (div_overlap * 2);
+                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
                 }
             }
             else if (Div_Type == DividerType.Transom)
@@ -436,10 +439,12 @@ namespace ModelLayer.Model.Quotation.Divider
                     DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
                 {
                     DivImageRenderer_Width = wd + 10;
+                    DivImageRenderer_Height = divsize;
                 }
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Width = wd + (div_overlap * 2);
+                    DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height); 
                 }
             }
         }

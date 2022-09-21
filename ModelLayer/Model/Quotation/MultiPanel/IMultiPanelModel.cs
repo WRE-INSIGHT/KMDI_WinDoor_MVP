@@ -119,6 +119,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
         void Fit_My2ndLvlControls_Dimensions();
+        void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl);
+        void Fit_EqualPanel_ToBindDimensions();
+        void Fit_PanelWidth();
 
         #endregion
     }

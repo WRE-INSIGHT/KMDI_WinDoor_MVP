@@ -128,6 +128,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void MullionUC_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            Console.WriteLine(this.Width);
             EventHelpers.RaiseMouseEvent(this, mullionUCMouseDoubleClickedEventRaised, e);
         }
 

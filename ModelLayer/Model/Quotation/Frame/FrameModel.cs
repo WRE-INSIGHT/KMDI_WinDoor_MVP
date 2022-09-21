@@ -322,6 +322,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 mpnl.SetZoomDivider();
                 mpnl.SetZoomMPanels();
                 mpnl.Reload_PanelMargin();
+                mpnl.Fit_EqualPanel_ToBindDimensions();
 
             }
 
