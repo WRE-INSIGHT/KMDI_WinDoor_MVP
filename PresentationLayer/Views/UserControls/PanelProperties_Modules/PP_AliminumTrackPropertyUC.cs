@@ -12,6 +12,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             InitializeComponent();
         }
 
+        public NumericUpDown GetNudAluminumTrackQty()
+        {
+            return nud_AluminumTrackQty;
+        }
+
         public event EventHandler PPAliminumTrackPropertyUCLoadEventRaised;
 
         private void PP_AliminumTrackPropertyUC_Load(object sender, EventArgs e)

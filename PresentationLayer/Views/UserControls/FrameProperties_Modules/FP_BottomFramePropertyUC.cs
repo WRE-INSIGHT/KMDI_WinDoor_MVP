@@ -1,13 +1,7 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
@@ -38,6 +32,7 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             cmb_botFrameProfile.DataBindings.Add(ModelBinding["Frame_BotFrameArtNo"]);
             this.DataBindings.Add(ModelBinding["Frame_BotFrameEnable"]);
+            this.DataBindings.Add(ModelBinding["Frame_BotFrameVisible"]);
         }
 
         private void cmb_botFrameProfile_SelectedValueChanged(object sender, EventArgs e)

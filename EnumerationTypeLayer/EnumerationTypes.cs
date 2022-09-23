@@ -23,6 +23,13 @@ namespace EnumerationTypeLayer
             private FrameProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class FrameProfileForPremi_ArticleNo : Enumeration<FrameProfileForPremi_ArticleNo>
+        {
+            public static readonly FrameProfileForPremi_ArticleNo _6055 = new FrameProfileForPremi_ArticleNo(0, "6055");
+            public static readonly FrameProfileForPremi_ArticleNo _6052_milled = new FrameProfileForPremi_ArticleNo(1, "6052 - Milled");
+
+            private FrameProfileForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
         public class FrameReinf_ArticleNo : Enumeration<FrameReinf_ArticleNo>
         {
             public static readonly FrameReinf_ArticleNo _R676 = new FrameReinf_ArticleNo(0, "R676");
@@ -32,6 +39,14 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrameReinfForPremi_ArticleNo : Enumeration<FrameReinfForPremi_ArticleNo>
+        {
+            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-115");
+            public static readonly FrameReinfForPremi_ArticleNo _TV107 = new FrameReinfForPremi_ArticleNo(1, "T-V107");
+
+            private FrameReinfForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class Divider_ArticleNo : Enumeration<Divider_ArticleNo, int>
@@ -371,7 +386,7 @@ namespace EnumerationTypeLayer
             public static readonly DummyD_HandleArtNo _DH613191 = new DummyD_HandleArtNo(0, "DH-613191(out)White");
             public static readonly DummyD_HandleArtNo _DH613226 = new DummyD_HandleArtNo(1, "DH-613226(in) White");
             public static readonly DummyD_HandleArtNo _DH613190 = new DummyD_HandleArtNo(2, "DH-613190(out) BL");
-            public static readonly DummyD_HandleArtNo _DH613225 = new DummyD_HandleArtNo(3, "DH-613225(in) Black");
+            public static readonly DummyD_HandleArtNo _DH613225 = new DummyD_HandleArtNo(3, "DH-613225(in) BL");
             public static readonly DummyD_HandleArtNo _DH833310_613189 = new DummyD_HandleArtNo(4, "DH-833310/613189(out) DB");
             public static readonly DummyD_HandleArtNo _DH613224 = new DummyD_HandleArtNo(5, "DH-613224(in) DB");
             public static readonly DummyD_HandleArtNo _DH613193 = new DummyD_HandleArtNo(6, "DH-613193(out) Mill Finish");
@@ -1001,6 +1016,29 @@ namespace EnumerationTypeLayer
             public static readonly SealingBlock_ArticleNo _9C63 = new SealingBlock_ArticleNo(0, "9C63");
 
             private SealingBlock_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class FrameConnectionType : Enumeration<FrameConnectionType, int>
+        {
+            public static readonly FrameConnectionType _Weldable = new FrameConnectionType(0, "Weldable");
+            public static readonly FrameConnectionType _MechanicalJoint = new FrameConnectionType(1, "Mechanical Joint");
+
+            private FrameConnectionType(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class ScreenType : Enumeration<ScreenType, int>
+        {
+            public static readonly ScreenType _Insect = new ScreenType(0, "Insect Screen");
+
+            private ScreenType(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MeshType : Enumeration<MeshType, int>
+        {
+            public static readonly MeshType _Security = new MeshType(0, "Security Mesh");
+            public static readonly MeshType _Tuff = new MeshType(1, "Tuff Mesh");
+
+            private MeshType(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

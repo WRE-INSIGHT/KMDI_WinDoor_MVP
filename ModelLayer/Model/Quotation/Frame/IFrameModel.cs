@@ -33,6 +33,8 @@ namespace ModelLayer.Model.Quotation.Frame
         float Frame_Zoom { get; set; }
         BottomFrameTypes Frame_BotFrameArtNo { get; set; }
         bool Frame_BotFrameEnable { get; set; }
+        bool Frame_BotFrameVisible { get; set; }
+
         UserControl Frame_UC { get; set; }
         UserControl Frame_PropertiesUC { get; set; }
         int[] Arr_padding_norm { get; }
@@ -57,14 +59,22 @@ namespace ModelLayer.Model.Quotation.Frame
         int Frame_ReinfHeight { get; set; }
         bool Frame_CmenuDeleteVisibility { get; set; }
 
+        FrameProfileForPremi_ArticleNo Frame_ArtNoForPremi { get; set; }
+        FrameReinfForPremi_ArticleNo Frame_ReinfForPremiArtNo { get; set; }
+
         bool Frame_If_InwardMotorizedCasement { get; set; }
         MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
+        int Frame_SlidingRailsQty { get; set; }
+        bool Frame_SlidingRailsQtyVisibility { get; set; }
+        FrameConnectionType Frame_ConnectionType { get; set; }
+        bool Frame_ConnectionTypeVisibility { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
         void Insert_frameInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
 
