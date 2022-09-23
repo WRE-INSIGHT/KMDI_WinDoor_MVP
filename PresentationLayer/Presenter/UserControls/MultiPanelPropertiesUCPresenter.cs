@@ -175,7 +175,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _multiPanelModel.Fit_MyControls_Dimensions();
                         _multiPanelModel.Fit_MyControls_ToBindDimensions();
                         _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                        _multiPanelModel.Adjust_ControlDisplaySize();
+                        //_multiPanelModel.Adjust_ControlDisplaySize();
 
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();

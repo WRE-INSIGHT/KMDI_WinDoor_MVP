@@ -79,13 +79,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
             int expected_Panel1MinWd = 0,
                 expected_Panel2MinWd = 0;
-
             IMultiPanelModel prev_mpanel = null,
                              nxt_mpnl = null;
-
             IPanelModel prev_pnl = null,
                         nxt_pnl = null;
-
             if (prev_ctrl is IMultiPanelUC)
             {
                 prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
@@ -94,7 +91,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
             }
-
             if (nxt_ctrl is IMultiPanelUC)
             {
                 nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == nxt_ctrl.Name);
@@ -276,9 +272,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                pnl.SetDimensionsToBind_using_ZoomPercentage();
+                                pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                            }
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                         }
                         break;
                     case Keys.Up:
@@ -442,9 +445,16 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                pnl.SetDimensionsToBind_using_ZoomPercentage();
+                                pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                            }
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                         }
                         break;
                 }
@@ -651,8 +661,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 e.Button == MouseButtons.Left)
             {
                 _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                {
+                    pnl.SetDimensionsToBind_using_ZoomPercentage();
+                    pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                }
+                _multiPanelModel.Fit_MyControls_ToBindDimensions();
                 _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
@@ -728,8 +744,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_mpanel.MPanel_Width += mullion_movement;
                                 prev_mpanel.MPanel_DisplayWidth += mullion_movement;
 
-                                if (_multiPanelModel.MPanelImageRenderer_Zoom == 0.26f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    _multiPanelModel.MPanelImageRenderer_Zoom == 0.13f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.10f)
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -778,8 +794,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 prev_pnl.Panel_Width += mullion_movement;
                                 prev_pnl.Panel_DisplayWidth += mullion_movement;
 
-                                if (_multiPanelModel.MPanelImageRenderer_Zoom == 0.26f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    _multiPanelModel.MPanelImageRenderer_Zoom == 0.13f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.10f)
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -800,8 +816,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_mpnl.MPanel_Width -= mullion_movement;
                                 nxt_mpnl.MPanel_DisplayWidth -= mullion_movement;
 
-                                if (_multiPanelModel.MPanelImageRenderer_Zoom == 0.26f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    _multiPanelModel.MPanelImageRenderer_Zoom == 0.13f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.10f)
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
@@ -851,8 +867,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 nxt_pnl.Panel_Width -= mullion_movement;
                                 nxt_pnl.Panel_DisplayWidth -= mullion_movement;
 
-                                if (_multiPanelModel.MPanelImageRenderer_Zoom == 0.26f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    _multiPanelModel.MPanelImageRenderer_Zoom == 0.13f || _multiPanelModel.MPanelImageRenderer_Zoom == 0.10f)
+                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                 {
                                     nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();

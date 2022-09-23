@@ -78,11 +78,7 @@ namespace PresentationLayer.Views.UserControls
         {
             return this;
         }
-
-        private void lbl_item_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(this.Name);
-        }
+       
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);

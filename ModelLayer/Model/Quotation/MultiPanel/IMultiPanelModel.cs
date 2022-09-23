@@ -121,7 +121,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Fit_My2ndLvlControls_Dimensions();
         void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl);
         void Fit_EqualPanel_ToBindDimensions();
-        void Fit_PanelWidth();
+        void Fit_PanelDimensions();
+        bool isDisplaySizeEqual();
 
         #endregion
     }

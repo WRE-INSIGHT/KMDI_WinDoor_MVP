@@ -519,12 +519,6 @@ namespace PresentationLayer.Views
         {
             return saveToolStripButton;
         }
-
-        private void pnlPropertiesBody_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Body");
-        }
-
         private void addExistingItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, existingItemToolStripMenuItemClickEventRaised, e);

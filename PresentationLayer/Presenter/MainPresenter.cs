@@ -2189,6 +2189,7 @@ namespace PresentationLayer.Presenter
                     wdm.WD_name = "Item " + itemCount;
                     itemCount++;
                 }
+                Load_Windoor_Item(_windoorModel);
                 //_framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().SuspendLayout();
                 //_framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().AutoSize = true;
                 //_framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().ResumeLayout(true);
@@ -2840,7 +2841,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("Panel_ParentMultiPanelModel:"))
                         {
-                            panel_ParentMultiPanelModel = _multiPanelModel;
+                            //panel_ParentMultiPanelModel = _multiPanelModel;
                         }
                         if (row_str.Contains("Panel_PropertyHeight:"))
                         {
@@ -2991,6 +2992,7 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
                             pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
                             pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
+
                             #region Explosion
                             pnlModel.PanelGlass_ID = panel_GlassID;
                             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -3140,18 +3142,37 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_MiddleCloserVisibility = panel_MiddleCloserVisibility;
                             pnlModel.Panel_MotorizedpnlOptionVisibility = panel_MotorizedpnlOptionVisibility;
                             #endregion
+
+
+
+
+
                             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                             panelPropUC.Dock = DockStyle.Top;
                             if (panel_Parent.ToString().Contains("Frame"))
                             {
+                                
                                 _frameModel.Lst_Panel.Add(pnlModel);
+                                pnlModel.Imager_SetDimensionsToBind_FrameParent();
                                 GetFrameProperties(_frameModel.Frame_ID).GetFramePropertiesPNL().Controls.Add(panelPropUC);
                             }
                             else
                             {
+                                pnlModel.Panel_ParentMultiPanelModel = _multiPanelModel;
                                 _multiPanelModel.MPanelLst_Panel.Add(pnlModel);
                                 _multiPanelModel.Reload_PanelMargin();
+
+                                if (_prev_divModel != null)
+                                {
+                                    pnlModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
+                                }
+
+                                pnlModel.SetDimensionsToBind_using_ZoomPercentage();
+                                pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                                pnlModel.SetPanelMargin_using_ZoomPercentage();
+                                pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
+
                                 if (panel_Parent.Parent.Name.Contains("MultiMullion"))
                                 {
                                     _multiMullionUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
@@ -3160,9 +3181,12 @@ namespace PresentationLayer.Presenter
                                 {
                                     _multiTransomUCP.multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
                                 }
+
+
                             }
-                            pnlModel.Imager_SetDimensionsToBind_FrameParent();
-                            
+                            panelPropUC.BringToFront();
+                          
+                  
                             if (panel_Type.Contains("Fixed Panel"))
                             {
 
@@ -3209,7 +3233,6 @@ namespace PresentationLayer.Presenter
                                     }
                                     
                                 }
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             else if (panel_Type.Contains("Casement Panel"))
                             {
@@ -3256,7 +3279,6 @@ namespace PresentationLayer.Presenter
                                     }
 
                                 }
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             else if (panel_Type.Contains("Awning Panel"))
                             {
@@ -3304,7 +3326,6 @@ namespace PresentationLayer.Presenter
 
                                 }
 
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             else if (panel_Type.Contains("Sliding Panel"))
                             {
@@ -3352,7 +3373,6 @@ namespace PresentationLayer.Presenter
 
                                 }
 
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             else if (panel_Type.Contains("TiltNTurn Panel"))
                             {
@@ -3400,7 +3420,6 @@ namespace PresentationLayer.Presenter
 
                                 }
 
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             else if (panel_Type.Contains("Louver Panel"))
                             {
@@ -3447,16 +3466,29 @@ namespace PresentationLayer.Presenter
                                 }
 
 
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
-                            panelPropUC.BringToFront();
-                            pnlModel.SetDimensionsToBind_using_ZoomPercentage();
                             if (!panel_Parent.ToString().Contains("Frame"))
                             {
                                 pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                                if (pnlModel.Panel_Placement == "Last" && !panel_Parent.ToString().Contains("Frame"))
+                                {
+
+                                    _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                                    foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                                    {
+                                        if (pnl.Panel_Placement == "Last")
+                                        {
+                                            pnl.SetDimensionsToBind_using_ZoomPercentage();
+                                            pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                                        }
+                                    }
+                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+
+
+                                }
                             }
-                            pnlModel.SetPanelMargin_using_ZoomPercentage();
-                            pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
+                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _basePlatformPresenter.InvalidateBasePlatform();
                             inside_panel = false;
 
@@ -4769,6 +4801,7 @@ namespace PresentationLayer.Presenter
                                 _multiPanelModel.MPanel_OriginalGlassHeightDecimal = mPanel_OriginalGlassHeightDecimal;
                                 _multiPanelModel.MPanel_CmenuDeleteVisibility = mPanel_CmenuDeleteVisibility;
                                 _multiPanelModel.MPanel_GlassBalanced = mPanel_GlassBalanced;
+
                                 _multiPanelModel.Set_DimensionToBind_using_FrameDimensions();
                                 _multiPanelModel.Imager_Set_DimensionToBind_using_FrameDimensions();
                                 _frameModel.Lst_MultiPanel.Add(_multiPanelModel);

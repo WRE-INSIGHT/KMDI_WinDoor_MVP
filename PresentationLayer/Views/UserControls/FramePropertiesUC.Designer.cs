@@ -296,7 +296,6 @@
             this.pnl_frameProperties.Padding = new System.Windows.Forms.Padding(1);
             this.pnl_frameProperties.Size = new System.Drawing.Size(157, 4);
             this.pnl_frameProperties.TabIndex = 18;
-            this.pnl_frameProperties.Click += new System.EventHandler(this.pnl_frameProperties_Click);
             // 
             // FramePropertiesUC
             // 

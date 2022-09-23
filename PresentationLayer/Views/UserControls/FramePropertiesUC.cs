@@ -141,9 +141,6 @@ namespace PresentationLayer.Views.UserControls
             return this;
         }
 
-        private void pnl_frameProperties_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("asdasd");
-        }
+      
     }
 }

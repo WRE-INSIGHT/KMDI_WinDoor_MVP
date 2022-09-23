@@ -131,9 +131,8 @@
             this.pnl_MultiPanelProperties.Location = new System.Drawing.Point(0, 120);
             this.pnl_MultiPanelProperties.Name = "pnl_MultiPanelProperties";
             this.pnl_MultiPanelProperties.Padding = new System.Windows.Forms.Padding(1, 5, 1, 1);
-            this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 9);
+            this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 24);
             this.pnl_MultiPanelProperties.TabIndex = 9;
-            this.pnl_MultiPanelProperties.Click += new System.EventHandler(this.pnl_MultiPanelProperties_Click);
             // 
             // cmenu_mpanel
             // 
@@ -158,7 +157,7 @@
             this.Controls.Add(this.pnl_MultiPanelProperties);
             this.Controls.Add(this.panel1);
             this.Name = "MultiPanelPropertiesUC";
-            this.Size = new System.Drawing.Size(154, 129);
+            this.Size = new System.Drawing.Size(154, 144);
             this.Load += new System.EventHandler(this.MultiPanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_Width)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Height)).EndInit();

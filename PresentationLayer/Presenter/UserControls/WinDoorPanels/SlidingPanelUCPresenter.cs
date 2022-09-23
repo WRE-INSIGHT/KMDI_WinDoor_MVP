@@ -513,8 +513,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Left)
             {
+                if(isLeft == true)
+                {
+                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                    }
+                    else
+                    {
+                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    }
+                    if (_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate)
+                    {
+                        _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                    }
+                }
+               
                 isLeft = false;
                 _mouseDown = false;
+              
+                
+                
             }
         }
         private void _slidingPanelUC_slidingPanelUCMouseDownEventRaised(object sender, MouseEventArgs e)
@@ -754,7 +776,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                                     }
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, pres_pnl);
                                 _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                             }
                             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();

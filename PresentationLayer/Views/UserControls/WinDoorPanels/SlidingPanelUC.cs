@@ -133,12 +133,20 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void SlidingPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+            try
             {
-                cmenu_sliding.Show(new Point(MousePosition.X, MousePosition.Y));
+                if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+                {
+                    cmenu_sliding.Show(new Point(MousePosition.X, MousePosition.Y));
+                }
+                EventHelpers.RaiseMouseEvent(sender, slidingPanelUCMouseClickEventRaised, e);
             }
-            EventHelpers.RaiseMouseEvent(sender, slidingPanelUCMouseClickEventRaised, e);
-            Console.WriteLine(this.Location);
+            catch (Exception)
+            {
+
+                
+            }
+           
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

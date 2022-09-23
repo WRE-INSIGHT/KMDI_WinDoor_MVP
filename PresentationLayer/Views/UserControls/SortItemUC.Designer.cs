@@ -123,7 +123,6 @@
             this.lbl_item.Tag = "";
             this.lbl_item.Text = "lbl_item";
             this.lbl_item.UseMnemonic = false;
-            this.lbl_item.Click += new System.EventHandler(this.lbl_item_Click);
             this.lbl_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDown);
             this.lbl_item.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseMove);
             this.lbl_item.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseUp);

@@ -739,7 +739,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
 
-            int basePlatformImage_Width_minus70 = _windoorModel.WD_width_4basePlatform_forImageRenderer - 70;
+              int basePlatformImage_Width_minus70 = _windoorModel.WD_width_4basePlatform_forImageRenderer - 70;
 
             List<Point> frame_points = OuterFrame_DrawPoints(frame_sizes, basePlatformImage_Width_minus70);
            
@@ -1586,8 +1586,6 @@ namespace PresentationLayer.Presenter.UserControls
                 client_wd = panelModel.PanelImageRenderer_Width;
                 client_ht = panelModel.PanelImageRenderer_Height;
             }
-                
-
 
 
 
