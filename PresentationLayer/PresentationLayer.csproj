@@ -600,193 +600,193 @@
     <Compile Include="Views\UserControls\PanelPropertiesUC.Designer.cs">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_2dHingePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_AliminumTrackPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_DHandlePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_DHandle_IOLockingPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_DummyDHandlePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_ExtensionPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_GeorgianBarPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_NTCenterHingePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_PopUpHandlePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RollerPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RotoswingForSlidingPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\IPP_SlidingTypePropertyUC.cs" />
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_2dHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_3dHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_AliminumTrackPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CenterHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_CornerDrivePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DHandle_IOLockingPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_DummyDHandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_EspagnolettePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_ExtensionPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GeorgianBarPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_NTCenterHingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_PopUpHandlePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RioPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RollerPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotaryPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotolinePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingForSlidingPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SlidingTypePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_2dHingePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.Designer.cs">
       <DependentUpon>PP_2dHingePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_3dHingePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_3dHingePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.Designer.cs">
       <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_AliminumTrackPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_AliminumTrackPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.Designer.cs">
       <DependentUpon>PP_AliminumTrackPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CenterHingePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CenterHingePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.Designer.cs">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CornerDrivePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.Designer.cs">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandlePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandlePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.Designer.cs">
       <DependentUpon>PP_DHandlePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.Designer.cs">
       <DependentUpon>PP_DHandle_IOLockingPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DummyDHandlePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DummyDHandlePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.Designer.cs">
       <DependentUpon>PP_DummyDHandlePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_EspagnolettePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_EspagnolettePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.Designer.cs">
       <DependentUpon>PP_EspagnolettePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_ExtensionPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_ExtensionPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.Designer.cs">
       <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GeorgianBarPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GeorgianBarPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.Designer.cs">
       <DependentUpon>PP_GeorgianBarPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GlassPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GlassPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.Designer.cs">
       <DependentUpon>PP_GlassPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HandlePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HandlePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.Designer.cs">
       <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HingePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MiddleCloserPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.Designer.cs">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MotorizedPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MotorizedPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.Designer.cs">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MVDPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MVDPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.Designer.cs">
       <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_NTCenterHingePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_NTCenterHingePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.Designer.cs">
       <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_PopUpHandlePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_PopUpHandlePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.Designer.cs">
       <DependentUpon>PP_PopUpHandlePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RioPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RioPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.Designer.cs">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RollerPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RollerPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.Designer.cs">
       <DependentUpon>PP_RollerPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotaryPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.Designer.cs">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotolinePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotolinePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.Designer.cs">
       <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.Designer.cs">
       <DependentUpon>PP_RotoswingForSlidingPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.Designer.cs">
       <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SashPropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.Designer.cs">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SlidingTypePropertyUC.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SlidingTypePropertyUC.Designer.cs">
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.Designer.cs">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SortItemUC.cs">
@@ -1107,85 +1107,85 @@
     <EmbeddedResource Include="Views\UserControls\PanelPropertiesUC.resx">
       <DependentUpon>PanelPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_2dHingePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.resx">
       <DependentUpon>PP_2dHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_3dHingePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_3dHingePropertyUC.resx">
       <DependentUpon>PP_3dHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_AliminumTrackPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_AliminumTrackPropertyUC.resx">
       <DependentUpon>PP_AliminumTrackPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CenterHingePropertyUC.resx">
       <DependentUpon>PP_CenterHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_CornerDrivePropertyUC.resx">
       <DependentUpon>PP_CornerDrivePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandlePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DHandlePropertyUC.resx">
       <DependentUpon>PP_DHandlePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DHandle_IOLockingPropertyUC.resx">
       <DependentUpon>PP_DHandle_IOLockingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_DummyDHandlePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_DummyDHandlePropertyUC.resx">
       <DependentUpon>PP_DummyDHandlePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_EspagnolettePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_EspagnolettePropertyUC.resx">
       <DependentUpon>PP_EspagnolettePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_ExtensionPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_ExtensionPropertyUC.resx">
       <DependentUpon>PP_ExtensionPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GeorgianBarPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_GeorgianBarPropertyUC.resx">
       <DependentUpon>PP_GeorgianBarPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_GlassPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_GlassPropertyUC.resx">
       <DependentUpon>PP_GlassPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HandlePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HandlePropertyUC.resx">
       <DependentUpon>PP_HandlePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_HingePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.resx">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MotorizedPropertyUC.resx">
       <DependentUpon>PP_MotorizedPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_MVDPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MVDPropertyUC.resx">
       <DependentUpon>PP_MVDPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_NTCenterHingePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_NTCenterHingePropertyUC.resx">
       <DependentUpon>PP_NTCenterHingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_PopUpHandlePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_PopUpHandlePropertyUC.resx">
       <DependentUpon>PP_PopUpHandlePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RioPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RioPropertyUC.resx">
       <DependentUpon>PP_RioPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RollerPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RollerPropertyUC.resx">
       <DependentUpon>PP_RollerPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotaryPropertyUC.resx">
       <DependentUpon>PP_RotaryPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotolinePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotolinePropertyUC.resx">
       <DependentUpon>PP_RotolinePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingForSlidingPropertyUC.resx">
       <DependentUpon>PP_RotoswingForSlidingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_RotoswingPropertyUC.resx">
       <DependentUpon>PP_RotoswingPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SashPropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SashPropertyUC.resx">
       <DependentUpon>PP_SashPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\WinDoorPanels\PanelProperties_Modules\PP_SlidingTypePropertyUC.resx">
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.resx">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\SortItemUC.resx">

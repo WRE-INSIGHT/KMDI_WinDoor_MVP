@@ -386,7 +386,7 @@ namespace EnumerationTypeLayer
             public static readonly DummyD_HandleArtNo _DH613191 = new DummyD_HandleArtNo(0, "DH-613191(out)White");
             public static readonly DummyD_HandleArtNo _DH613226 = new DummyD_HandleArtNo(1, "DH-613226(in) White");
             public static readonly DummyD_HandleArtNo _DH613190 = new DummyD_HandleArtNo(2, "DH-613190(out) BL");
-            public static readonly DummyD_HandleArtNo _DH613225 = new DummyD_HandleArtNo(3, "DH-613225(in) Black");
+            public static readonly DummyD_HandleArtNo _DH613225 = new DummyD_HandleArtNo(3, "DH-613225(in) BL");
             public static readonly DummyD_HandleArtNo _DH833310_613189 = new DummyD_HandleArtNo(4, "DH-833310/613189(out) DB");
             public static readonly DummyD_HandleArtNo _DH613224 = new DummyD_HandleArtNo(5, "DH-613224(in) DB");
             public static readonly DummyD_HandleArtNo _DH613193 = new DummyD_HandleArtNo(6, "DH-613193(out) Mill Finish");

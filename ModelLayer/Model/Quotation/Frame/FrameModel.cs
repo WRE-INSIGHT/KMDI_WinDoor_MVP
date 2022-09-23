@@ -765,12 +765,19 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
             }
 
-            int botFrameDiff = 14;// 14 = difference of 7502 & 7507 thickness
+            int botFrameDiff = 14,// 14 = difference of 7502 & 7507 thickness
+                MechjointDeduction = 38;
+
             if (Frame_Type == Frame_Padding.Door &&
                 Frame_BotFrameEnable == true &&
                 Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                     Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                Frame_ExplosionHeight = _frameHeight - (MechjointDeduction * 2);
             }
             else
             {
@@ -782,6 +789,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_ExplosionWidth = _frameWidth - 35 + 5;
                 Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
                 Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                     Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                Frame_ExplosionWidth = _frameWidth;
             }
             else
             {
@@ -801,6 +813,10 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 reinf_size = 20;
             }
+            else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
+            {
+                reinf_size = 38;
+            }
 
 
             if (Frame_Type == Frame_Padding.Door &&
@@ -808,6 +824,11 @@ namespace ModelLayer.Model.Quotation.Frame
                Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                Frame_ReinfHeight = Frame_ExplosionHeight - (reinf_size * 2) - (10 * 2);
             }
             else
             {
@@ -819,6 +840,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
                 Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
                 Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            }
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                Frame_ReinfWidth = Frame_ExplosionWidth - 10;
             }
             else
             {
@@ -1159,17 +1185,36 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 FrameQty = 1;
             }
+
+
+            string cutType = "";
+            if (Frame_ConnectionTypeVisibility == true)
+            {
+                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    cutType = @"|  |";
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                {
+                    cutType = @"\  /";
+                }
+            }
+            else
+            {
+                cutType = @"\  /";
+            }
+
             tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNo.ToString(),
-                                   FrameQty, "pc(s)",
-                                   Frame_ExplosionWidth.ToString(),
-                                   "Frame",
-                                   @"\  /");
+                                                  FrameQty, "pc(s)",
+                                                  Frame_ExplosionWidth.ToString(),
+                                                  "Frame",
+                                                  cutType);
 
             tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionHeight,
                                    "Frame",
-                                   @"\  /");
+                                   cutType);
 
             tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfArtNo.ToString(),
                                    2, "pc(s)",
@@ -1182,21 +1227,39 @@ namespace ModelLayer.Model.Quotation.Frame
                                    Frame_ReinfHeight.ToString(),
                                    "Frame",
                                    @"|  |");
+
         }
 
-        public void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion)
+        public void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion) //2nd frame for sliding using 3 rails
         {
+            string cutType = "";
+            if (Frame_ConnectionTypeVisibility == true)
+            {
+                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    cutType = @"|  |";
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                {
+                    cutType = @"\  /";
+                }
+            }
+            else
+            {
+                cutType = @"\  /";
+            }
+
             tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForPremi.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionWidth.ToString(),
                                    "Frame",
-                                   @"\  /");
+                                   cutType);
 
             tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNoForPremi.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionHeight,
                                    "Frame",
-                                   @"\  /");
+                                   cutType);
 
             tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfForPremiArtNo.ToString(),
                                    2, "pc(s)",

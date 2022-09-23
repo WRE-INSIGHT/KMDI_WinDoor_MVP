@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules
 {
@@ -25,6 +26,12 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void SubscribeToEventSetUp()
         {
             _fp_frameConnectionTypePropertyUC.FrameConnectionTypePropertyUCLoadEventRaised += _fp_frameConnectionTypePropertyUC_FrameConnectionTypePropertyUCLoadEventRaised;
+            _fp_frameConnectionTypePropertyUC.cmbConnectionTypeSelectedValueChangedEventRaised += _fp_frameConnectionTypePropertyUC_cmbConnectionTypeSelectedValueChangedEventRaised;
+        }
+
+        private void _fp_frameConnectionTypePropertyUC_cmbConnectionTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _frameModel.Frame_ConnectionType = (FrameConnectionType)((ComboBox)sender).SelectedValue;
         }
 
         private void _fp_frameConnectionTypePropertyUC_FrameConnectionTypePropertyUCLoadEventRaised(object sender, EventArgs e)

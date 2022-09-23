@@ -894,52 +894,67 @@ namespace PresentationLayer.Presenter
             {
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
-                    #region baseOnDimensionAndColorPoints
-                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                    #region baseOnDimensionAndColorPointsif
+                    if (wdm.WD_profile.Contains("C70"))
                     {
-                        if (fr.Frame_Width >= 2000)
+                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                         {
-                            ProfileColorPoints = 16;
-                        }
-                        else if (fr.Frame_Height >= 2000)
-                        {
-                            ProfileColorPoints = 16;
-                        }
-                        else if (fr.Frame_Width >= 3000)
-                        {
-                            ProfileColorPoints = 18;
-                        }
-                        else if (fr.Frame_Height >= 3000)
-                        {
-                            ProfileColorPoints = 18;
-                        }
+                            if (fr.Frame_Width >= 2000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+                            else if (fr.Frame_Height >= 2000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+                            else if (fr.Frame_Width >= 3000)
+                            {
+                                ProfileColorPoints = 18;
+                            }
+                            else if (fr.Frame_Height >= 3000)
+                            {
+                                ProfileColorPoints = 18;
+                            }
 
-                        CostingPoints += ProfileColorPoints * 4;
-                        InstallationPoints += (ProfileColorPoints / 3) * 4;
+                            CostingPoints += ProfileColorPoints * 4;
+                            InstallationPoints += (ProfileColorPoints / 3) * 4;
+                        }
+                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                        {
+                            ProfileColorPoints = 14;
+                            if (fr.Frame_Width >= 2000)
+                            {
+                                ProfileColorPoints = 18;
+                            }
+                            else if (fr.Frame_Height >= 2000)
+                            {
+                                ProfileColorPoints = 18;
+                            }
+                            else if (fr.Frame_Width >= 3000)
+                            {
+                                ProfileColorPoints = 19;
+                            }
+                            else if (fr.Frame_Height >= 3000)
+                            {
+                                ProfileColorPoints = 19;
+                            }
+                        }
                     }
-                    else
+                    else if (wdm.WD_profile.Contains("PremiLine"))
                     {
-                        ProfileColorPoints = 14;
-                        if (fr.Frame_Width >= 2000)
+                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                         {
-                            ProfileColorPoints = 18;
+                            ProfileColorPoints = 28;
                         }
-                        else if (fr.Frame_Height >= 2000)
+                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                         {
-                            ProfileColorPoints = 18;
+                            ProfileColorPoints = 30;
                         }
-                        else if (fr.Frame_Width >= 3000)
-                        {
-                            ProfileColorPoints = 19;
-                        }
-                        else if (fr.Frame_Height >= 3000)
-                        {
-                            ProfileColorPoints = 19;
-                        }
-
-                        CostingPoints += ProfileColorPoints * 4;
-                        InstallationPoints += (ProfileColorPoints / 3) * 4;
                     }
+
+                    CostingPoints += ProfileColorPoints * 4;
+                    InstallationPoints += (ProfileColorPoints / 3) * 4;
+
                     #endregion
 
                     #region FramePrice

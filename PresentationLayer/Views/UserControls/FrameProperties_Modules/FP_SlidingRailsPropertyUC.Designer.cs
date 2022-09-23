@@ -49,7 +49,7 @@
             // 
             this.nud_RailsQty.Location = new System.Drawing.Point(64, 22);
             this.nud_RailsQty.Name = "nud_RailsQty";
-            this.nud_RailsQty.Size = new System.Drawing.Size(72, 20);
+            this.nud_RailsQty.Size = new System.Drawing.Size(85, 20);
             this.nud_RailsQty.TabIndex = 43;
             this.nud_RailsQty.Value = new decimal(new int[] {
             1,
@@ -61,7 +61,7 @@
             // 
             this.lbl_RailsQty.AutoSize = true;
             this.lbl_RailsQty.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_RailsQty.Location = new System.Drawing.Point(7, 25);
+            this.lbl_RailsQty.Location = new System.Drawing.Point(4, 25);
             this.lbl_RailsQty.Name = "lbl_RailsQty";
             this.lbl_RailsQty.Size = new System.Drawing.Size(51, 13);
             this.lbl_RailsQty.TabIndex = 42;

@@ -36,7 +36,7 @@
             // 
             this.lbl_ConnectionType.AutoSize = true;
             this.lbl_ConnectionType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lbl_ConnectionType.Location = new System.Drawing.Point(-2, 5);
+            this.lbl_ConnectionType.Location = new System.Drawing.Point(4, 2);
             this.lbl_ConnectionType.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.lbl_ConnectionType.Name = "lbl_ConnectionType";
             this.lbl_ConnectionType.Size = new System.Drawing.Size(69, 30);
@@ -48,20 +48,22 @@
             // 
             this.cmb_ConnectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_ConnectionType.FormattingEnabled = true;
-            this.cmb_ConnectionType.Location = new System.Drawing.Point(70, 10);
+            this.cmb_ConnectionType.Location = new System.Drawing.Point(76, 8);
             this.cmb_ConnectionType.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
             this.cmb_ConnectionType.Name = "cmb_ConnectionType";
-            this.cmb_ConnectionType.Size = new System.Drawing.Size(82, 21);
+            this.cmb_ConnectionType.Size = new System.Drawing.Size(77, 21);
             this.cmb_ConnectionType.TabIndex = 17;
+            this.cmb_ConnectionType.SelectedValueChanged += new System.EventHandler(this.cmb_ConnectionType_SelectedValueChanged);
             // 
             // FP_FrameConnectionTypePropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lbl_ConnectionType);
             this.Controls.Add(this.cmb_ConnectionType);
             this.Name = "FP_FrameConnectionTypePropertyUC";
-            this.Size = new System.Drawing.Size(156, 39);
+            this.Size = new System.Drawing.Size(159, 37);
             this.Load += new System.EventHandler(this.FP_FrameConnectionTypePropertyUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

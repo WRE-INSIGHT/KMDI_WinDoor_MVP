@@ -20,7 +20,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<D_HandleArtNo> DHandle = new List<D_HandleArtNo>();
             foreach (D_HandleArtNo item in D_HandleArtNo.GetAll())
             {
-                DHandle.Add(item);
+                if (item.DisplayName.Contains("out"))
+                {
+                    DHandle.Add(item);
+                }
             }
             cmb_DArtNo.DataSource = DHandle;
 

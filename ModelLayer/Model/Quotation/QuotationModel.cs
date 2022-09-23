@@ -115,7 +115,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (frame.Frame_SlidingRailsQty == 3)
                 {
-                    frame.Insert_frameInfoForPremi_MaterialList(Material_List);
+                    frame.Insert_frameInfoForPremi_MaterialList(Material_List); // 2nd frame
                 }
 
                 if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)

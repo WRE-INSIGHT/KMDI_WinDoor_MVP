@@ -27,7 +27,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<D_Handle_IO_LockingArtNo> DHandleIOLocing = new List<D_Handle_IO_LockingArtNo>();
             foreach (D_Handle_IO_LockingArtNo item in D_Handle_IO_LockingArtNo.GetAll())
             {
-                DHandleIOLocing.Add(item);
+                if (item.DisplayName.Contains("out"))
+                {
+                    DHandleIOLocing.Add(item);
+                }
             }
             cmb_D_IOLockingArtNo.DataSource = DHandleIOLocing;
 

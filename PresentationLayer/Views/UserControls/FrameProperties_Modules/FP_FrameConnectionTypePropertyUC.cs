@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
 {
@@ -12,8 +13,17 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             InitializeComponent();
         }
         public event EventHandler FrameConnectionTypePropertyUCLoadEventRaised;
+        public event EventHandler cmbConnectionTypeSelectedValueChangedEventRaised;
+
         private void FP_FrameConnectionTypePropertyUC_Load(object sender, EventArgs e)
         {
+            List<FrameConnectionType> connector = new List<FrameConnectionType>();
+            foreach (FrameConnectionType item in FrameConnectionType.GetAll())
+            {
+                connector.Add(item);
+            }
+            cmb_ConnectionType.DataSource = connector;
+
             EventHelpers.RaiseEvent(sender, FrameConnectionTypePropertyUCLoadEventRaised, e);
         }
 
@@ -21,6 +31,11 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             cmb_ConnectionType.DataBindings.Add(ModelBinding["Frame_ConnectionType"]);
             this.DataBindings.Add(ModelBinding["Frame_ConnectionTypeVisibility"]);
+        }
+
+        private void cmb_ConnectionType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbConnectionTypeSelectedValueChangedEventRaised, e);
         }
     }
 }

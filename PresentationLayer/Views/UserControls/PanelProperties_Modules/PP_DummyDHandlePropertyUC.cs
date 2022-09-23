@@ -26,13 +26,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             List<DummyD_HandleArtNo> DummyDHandle = new List<DummyD_HandleArtNo>();
             foreach (DummyD_HandleArtNo item in DummyD_HandleArtNo.GetAll())
             {
-                DummyDHandle.Add(item);
+                if (item.DisplayName.Contains("out"))
+                {
+                    DummyDHandle.Add(item);
+                }
             }
-
             cmb_DummyDArtNo.DataSource = DummyDHandle;
 
             EventHelpers.RaiseEvent(sender, PPDummyDHandlePropertyUCLoadEventRaised, e);
-
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

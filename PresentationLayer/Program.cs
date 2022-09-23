@@ -352,6 +352,9 @@ namespace PresentationLayer
                 .RegisterType<IFP_SlidingRailsPropertyUC, FP_SlidingRailsPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFP_SlidingRailsPropertyUCPresenter, FP_SlidingRailsPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IFP_FrameConnectionTypePropertyUC, FP_FrameConnectionTypePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFP_FrameConnectionTypePropertyUCPresenter, FP_FrameConnectionTypePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                  
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

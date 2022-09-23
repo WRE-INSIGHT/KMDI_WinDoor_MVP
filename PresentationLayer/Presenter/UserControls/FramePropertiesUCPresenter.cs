@@ -32,12 +32,14 @@ namespace PresentationLayer.Presenter.UserControls
         public FramePropertiesUCPresenter(IFramePropertiesUC framePropertiesUC,
                                           IFrameServices frameServices,
                                           IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP,
-                                          IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter)
+                                          IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter,
+                                          IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
             _fp_botFramePropertyUCP = fp_botFramePropertyUCP;
             _fp_slidingRailsPropertyUCPresenter = fp_slidingRailsPropertyUCPresenter;
+            _fp_frameConnectionTypePropertyUCPresenter = fp_frameConnectionTypePropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -74,11 +76,23 @@ namespace PresentationLayer.Presenter.UserControls
 
                     RailsAdditionalHt = false;
                 }
-
+                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    _frameModel.Frame_ConnectionTypeVisibility = true;
+                    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                }
+                else if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                {
+                    _frameModel.Frame_ConnectionTypeVisibility = false;
+                    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                }
 
                 RailsDeductHt = true;
             }
-            else
+            else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                       _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
             {
                 if (RailsDeductHt == true)
                 {
@@ -89,6 +103,12 @@ namespace PresentationLayer.Presenter.UserControls
                     RailsDeductHt = false;
                 }
 
+                if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                {
+                    _frameModel.Frame_ConnectionTypeVisibility = false;
+                    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                }
                 RailsAdditionalHt = true;
             }
 
@@ -194,17 +214,33 @@ namespace PresentationLayer.Presenter.UserControls
             RailsPropUC.Dock = DockStyle.Top;
             RailsPropUC.BringToFront();
 
+            IFP_FrameConnectionTypePropertyUCPresenter connectorUCP = _fp_frameConnectionTypePropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter);
+            UserControl connectorPropUC = (UserControl)connectorUCP.GetFrameConnectionTypePropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(connectorPropUC);
+            connectorPropUC.Dock = DockStyle.Top;
+            connectorPropUC.BringToFront();
+
             if (_frameModel.Frame_Type == Frame_Padding.Door)
             {
                 _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
                 _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
             }
 
-            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 || _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+
+            if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
             {
                 _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
                 _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                }
             }
+
             _framePropertiesUC.BringToFrontThis();
         }
 
