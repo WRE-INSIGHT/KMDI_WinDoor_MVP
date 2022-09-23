@@ -1023,9 +1023,22 @@ namespace EnumerationTypeLayer
             public static readonly FrameConnectionType _Weldable = new FrameConnectionType(0, "Weldable");
             public static readonly FrameConnectionType _MechanicalJoint = new FrameConnectionType(1, "Mechanical Joint");
 
-
             private FrameConnectionType(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class ScreenType : Enumeration<ScreenType, int>
+        {
+            public static readonly ScreenType _Insect = new ScreenType(0, "Insect Screen");
+
+            private ScreenType(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MeshType : Enumeration<MeshType, int>
+        {
+            public static readonly MeshType _Security = new MeshType(0, "Security Mesh");
+            public static readonly MeshType _Tuff = new MeshType(1, "Tuff Mesh");
+
+            private MeshType(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

@@ -59,22 +59,25 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_ReinfArtNo = (FrameReinf_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
-        bool RailsDeductHt = false, RailsAdditionalHt = false;
+        //bool RailsDeductHt = false, RailsAdditionalHt = false;
         string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
-            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
-                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
             {
-                if (RailsAdditionalHt == true)
+                //  if (RailsAdditionalHt == true)
+
+                if (_frameModel.Frame_SlidingRailsQtyVisibility == false)
                 {
                     _frameModel.Frame_SlidingRailsQtyVisibility = true;
                     _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
 
-                    RailsAdditionalHt = false;
+                    //  RailsAdditionalHt = false;
                 }
                 if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                 {
@@ -89,18 +92,19 @@ namespace PresentationLayer.Presenter.UserControls
                     _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
                 }
 
-                RailsDeductHt = true;
+                //RailsDeductHt = true;
             }
             else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                        _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
             {
-                if (RailsDeductHt == true)
+                //  if (RailsDeductHt == true)
+                if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
                 {
                     _frameModel.Frame_SlidingRailsQtyVisibility = false;
                     _frameModel.FrameProp_Height -= constants.frame_SlidingRailsQtyproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(-constants.frame_SlidingRailsQtyproperty_PanelHeight);
 
-                    RailsDeductHt = false;
+                    //   RailsDeductHt = false;
                 }
 
                 if (_frameModel.Frame_ConnectionTypeVisibility == true)
@@ -109,7 +113,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
                 }
-                RailsAdditionalHt = true;
+                //  RailsAdditionalHt = true;
             }
 
             prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
@@ -125,8 +129,10 @@ namespace PresentationLayer.Presenter.UserControls
             if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
             {
                 _frameModel.Frame_BotFrameVisible = true;
+
                 if (rbtn.Text == "Door" && rbtn.Checked == true)
                 {
+
                     _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
                 }
@@ -134,12 +140,26 @@ namespace PresentationLayer.Presenter.UserControls
             else if (curr_rbtnText == "Door")
             {
                 _frameModel.Frame_BotFrameVisible = false;
+
                 if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") &&
                     rbtn.Checked == true)
                 {
+
                     _frameModel.FrameProp_Height -= constants.frame_botframeproperty_PanelHeight;
                     _framePropertiesUC.AddHT_PanelBody(-constants.frame_botframeproperty_PanelHeight);
                 }
+            }
+            else if (curr_rbtnText == "")
+            {
+                if (_frameModel.Frame_Type == Frame_Padding.Window)
+                {
+                    _frameModel.Frame_BotFrameVisible = false;
+                }
+                else if (_frameModel.Frame_Type == Frame_Padding.Door)
+                {
+                    _frameModel.Frame_BotFrameVisible = true;
+                }
+
             }
 
             curr_rbtnText = rbtn.Text;

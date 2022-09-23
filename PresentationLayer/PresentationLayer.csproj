@@ -552,6 +552,18 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.Designer.cs">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_MeshPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_MeshPropertyUC.Designer.cs">
+      <DependentUpon>FP_MeshPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_ScreenPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_ScreenPropertyUC.Designer.cs">
+      <DependentUpon>FP_ScreenPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_SlidingRailsPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1091,6 +1103,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_FrameConnectionTypePropertyUC.resx">
       <DependentUpon>FP_FrameConnectionTypePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_MeshPropertyUC.resx">
+      <DependentUpon>FP_MeshPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_ScreenPropertyUC.resx">
+      <DependentUpon>FP_ScreenPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_SlidingRailsPropertyUC.resx">
       <DependentUpon>FP_SlidingRailsPropertyUC.cs</DependentUpon>
