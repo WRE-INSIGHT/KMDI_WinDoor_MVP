@@ -581,7 +581,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         else
                                         {
                                             prev_pnl.SetDimensionToBind_using_BaseDimension();
-                                            prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
                                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                                             {
                                                 mpnl.SetDimensions_childObjs();
@@ -654,7 +654,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         else
                                         {
                                             pres_pnl.SetDimensionToBind_using_BaseDimension();
-                                            pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            pres_pnl.SetDimensionImagerToBind_using_BaseDimension();
                                             foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
                                             {
                                                 mpnl.SetDimensions_childObjs();

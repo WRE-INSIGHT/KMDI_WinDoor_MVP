@@ -5829,7 +5829,7 @@ namespace PresentationLayer.Presenter
 
                         //clear previous basePlatformUC
                         _pnlMain.Controls.Clear();
-
+                        _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
