@@ -639,6 +639,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameArtNo = value;
+                 
                 if (value == FrameProfile_ArticleNo._7502)
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
