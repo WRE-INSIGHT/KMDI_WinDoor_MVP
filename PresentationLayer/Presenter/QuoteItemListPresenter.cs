@@ -567,9 +567,9 @@ namespace PresentationLayer.Presenter
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
                                       lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
                                       byteToStrForItemImage,
-                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
-                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
-                                      (int)lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                       Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                       i + 1,
                                       byteToStrForTopView);

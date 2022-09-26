@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
@@ -44,7 +45,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             if (!_initialLoad)
             {
-                
+
                 _panelModel.Panel_SashProfileArtNo = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
@@ -588,20 +589,53 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_sashPropertyUC_PPSashPropertyLoadEventRaised(object sender, EventArgs e)
         {
             _pp_sashPropertyUC.ThisBinding(CreateBindingDictionary());
-            if (_panelModel.Panel_Type.Contains("Fixed") == false)
+
+            if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
             {
-                curr_sash = SashProfile_ArticleNo._7581;
-                _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
-                _panelModel.Panel_2dHingeVisibility = true;
-                _panelModel.Panel_ButtHingeVisibility = false;
+                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    curr_sash = SashProfile_ArticleNo._7581;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                }
+                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    curr_sash = SashProfile_ArticleNo._374;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
+                }
+                if (_panelModel.Panel_Type.Contains("Fixed") == false)
+                {
+                    _panelModel.Panel_2dHingeVisibility = true;
+                    _panelModel.Panel_ButtHingeVisibility = false;
+                }
             }
-            else
+            else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
             {
-                curr_sash = SashProfile_ArticleNo._None;
-                _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._None;
-                _panelModel.Panel_2dHingeVisibility = false;
-                _panelModel.Panel_ButtHingeVisibility = false;
+                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                {
+                    curr_sash = SashProfile_ArticleNo._6040;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                }
+                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    curr_sash = SashProfile_ArticleNo._6041;
+                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                }
             }
+
+            //if (_panelModel.Panel_Type.Contains("Fixed") == false)
+            //{
+            //    curr_sash = SashProfile_ArticleNo._7581;
+            //    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+            //    _panelModel.Panel_2dHingeVisibility = true;
+            //    _panelModel.Panel_ButtHingeVisibility = false;
+            //}
+            //else
+            //{
+            //    curr_sash = SashProfile_ArticleNo._None;
+            //    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._None;
+            //    _panelModel.Panel_2dHingeVisibility = false;
+            //    _panelModel.Panel_ButtHingeVisibility = false;
+            //}
 
             _initialLoad = false;
         }

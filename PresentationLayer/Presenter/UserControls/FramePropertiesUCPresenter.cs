@@ -127,8 +127,6 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_Type = (Frame_Padding)Enum.Parse(typeof(Frame_Padding), rbtn.Text, true);
             if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
             {
-
-
                 if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
                     _frameModel.Frame_BotFrameVisible = true;
@@ -164,9 +162,9 @@ namespace PresentationLayer.Presenter.UserControls
                     }
 
                 }
-            }
-            curr_rbtnText = rbtn.Text;
 
+                curr_rbtnText = rbtn.Text;
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }

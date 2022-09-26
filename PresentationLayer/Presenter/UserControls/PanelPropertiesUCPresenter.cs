@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 using PresentationLayer.Views.UserControls;
@@ -129,25 +130,49 @@ namespace PresentationLayer.Presenter.UserControls
                             _panelModel.AdjustPropertyPanelHeight("addSash");
                             _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
 
-                            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                             {
-                                _panelModel.Panel_HingeOptionsVisibility = true;
-                                _panelModel.AdjustPropertyPanelHeight("addHinge");
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-                            }
-                            else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                _panelModel.Panel_CenterHingeOptionsVisibility = true;
-                                _panelModel.AdjustPropertyPanelHeight("addCenterHinge");
-                                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCenterHinge");
-
-                                if (_panelModel.Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                                 {
-                                    _panelModel.Panel_NTCenterHingeVisibility = true;
-                                    _panelModel.AdjustPropertyPanelHeight("addNTCenterHinge");
-                                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                                }
+                                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
                                 }
                             }
+                            else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                            {
+                                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                                {
+                                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                                }
+                                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                                }
+                            }
+
+
+                            //if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            //{
+                            //    _panelModel.Panel_HingeOptionsVisibility = true;
+                            //    _panelModel.AdjustPropertyPanelHeight("addHinge");
+                            //    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                            //}
+                            //else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            //{
+                            //    _panelModel.Panel_CenterHingeOptionsVisibility = true;
+                            //    _panelModel.AdjustPropertyPanelHeight("addCenterHinge");
+                            //    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCenterHinge");
+
+                            //    if (_panelModel.Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                            //    {
+                            //        _panelModel.Panel_NTCenterHingeVisibility = true;
+                            //        _panelModel.AdjustPropertyPanelHeight("addNTCenterHinge");
+                            //        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                            //    }
+                            //}
                         }
                         adjust_bool = false;
                     }
