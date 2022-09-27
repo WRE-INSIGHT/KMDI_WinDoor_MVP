@@ -762,6 +762,7 @@
                               <Value>=Fields!dtPrice.Value</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
+                                <Format>0.00;(0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -820,7 +821,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

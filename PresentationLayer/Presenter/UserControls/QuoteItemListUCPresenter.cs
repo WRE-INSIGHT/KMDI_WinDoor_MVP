@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
+using System;
 using System.Windows.Forms;
 using Unity;
 
@@ -58,7 +59,8 @@ namespace PresentationLayer.Presenter.UserControls
         private void _quoteItemListUC_ComputeNetPriceTextChangeEventRaised(object sender, System.EventArgs e)
         {
             decimal ItemPercentageDeduction = (decimal)(((double)100 - (double)_nudItemDiscount.Value) * (double)0.01);
-            TotalNetPrice = (_nudItemPrice.Value * _nudItemQty.Value) * ItemPercentageDeduction;
+            TotalNetPrice = Math.Round((_nudItemPrice.Value * _nudItemQty.Value) * ItemPercentageDeduction,2);
+           
             _lblNetPrice.Text = TotalNetPrice.ToString();
         }
 
@@ -124,6 +126,10 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_QuoteItemListUCLoadEventRaised(object sender, System.EventArgs e)
         {
+           // _nudItemQty.DecimalPlaces = 2;
+            //_nudItemDiscount.DecimalPlaces = 2;
+            _nudItemPrice.DecimalPlaces = 2; 
+             
             _nudItemQty.Maximum = decimal.MaxValue; ;
             _nudItemDiscount.Maximum = decimal.MaxValue; ;
             _nudItemPrice.Maximum = decimal.MaxValue; ;
