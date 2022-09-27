@@ -135,10 +135,12 @@ namespace PresentationLayer.Presenter.UserControls
                                 if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                                 {
                                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
                                 }
                                 else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                                 {
                                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
+                                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
                                 }
                             }
                             else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
@@ -146,10 +148,12 @@ namespace PresentationLayer.Presenter.UserControls
                                 if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                                 {
                                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
                                 }
                                 else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                                 {
                                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
                                 }
                             }
 
