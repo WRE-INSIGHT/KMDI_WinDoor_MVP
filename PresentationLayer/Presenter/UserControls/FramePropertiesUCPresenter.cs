@@ -125,45 +125,46 @@ namespace PresentationLayer.Presenter.UserControls
             RadioButton rbtn = (RadioButton)sender;
 
             _frameModel.Frame_Type = (Frame_Padding)Enum.Parse(typeof(Frame_Padding), rbtn.Text, true);
-
-            if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
+            if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
             {
-                _frameModel.Frame_BotFrameVisible = true;
-
-                if (rbtn.Text == "Door" && rbtn.Checked == true)
-                {
-
-                    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
-                }
-            }
-            else if (curr_rbtnText == "Door")
-            {
-                _frameModel.Frame_BotFrameVisible = false;
-
-                if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") &&
-                    rbtn.Checked == true)
-                {
-
-                    _frameModel.FrameProp_Height -= constants.frame_botframeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_botframeproperty_PanelHeight);
-                }
-            }
-            else if (curr_rbtnText == "")
-            {
-                if (_frameModel.Frame_Type == Frame_Padding.Window)
-                {
-                    _frameModel.Frame_BotFrameVisible = false;
-                }
-                else if (_frameModel.Frame_Type == Frame_Padding.Door)
+                if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
                     _frameModel.Frame_BotFrameVisible = true;
+
+                    if (rbtn.Text == "Door" && rbtn.Checked == true)
+                    {
+
+                        _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+                    }
+                }
+                else if (curr_rbtnText == "Door")
+                {
+                    _frameModel.Frame_BotFrameVisible = false;
+
+                    if ((rbtn.Text == "Window" || rbtn.Text == "Concrete") &&
+                        rbtn.Checked == true)
+                    {
+
+                        _frameModel.FrameProp_Height -= constants.frame_botframeproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_botframeproperty_PanelHeight);
+                    }
+                }
+                else if (curr_rbtnText == "")
+                {
+                    if (_frameModel.Frame_Type == Frame_Padding.Window)
+                    {
+                        _frameModel.Frame_BotFrameVisible = false;
+                    }
+                    else if (_frameModel.Frame_Type == Frame_Padding.Door)
+                    {
+                        _frameModel.Frame_BotFrameVisible = true;
+                    }
+
                 }
 
+                curr_rbtnText = rbtn.Text;
             }
-
-            curr_rbtnText = rbtn.Text;
-
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatform_MainPresenter.Invalidate_flpMainControls();
         }
@@ -219,6 +220,31 @@ namespace PresentationLayer.Presenter.UserControls
         {
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
+            if (_frameModel.Frame_Type == Frame_Padding.Window)
+            {
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
+                }
+                else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
+                }
+            }
+            else if (_frameModel.Frame_Type == Frame_Padding.Door)
+            {
+                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+                }
+                else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                {
+                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
+                }
+            }
+
+
+
             curr_rbtnText = _frameModel.Frame_Type.ToString();
             prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
 
@@ -240,26 +266,27 @@ namespace PresentationLayer.Presenter.UserControls
             connectorPropUC.Dock = DockStyle.Top;
             connectorPropUC.BringToFront();
 
-            if (_frameModel.Frame_Type == Frame_Padding.Door)
-            {
-                _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
-                _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
-            }
+            //if (_frameModel.Frame_Type == Frame_Padding.Door)
+            //{
+            //    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+            //    _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
+            //}
 
 
-            if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
-                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
-                _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-            {
-                _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
-                _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+            //if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+            //    _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+            //    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine") &&
+            //    _frameModel.Frame_SlidingRailsQtyVisibility == true)
+            //{
+            //    _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+            //    _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
 
-                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-                {
-                    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
-                }
-            }
+            //    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+            //    {
+            //        _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+            //        _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+            //    }
+            //}
 
             _framePropertiesUC.BringToFrontThis();
         }
