@@ -241,7 +241,7 @@ namespace PresentationLayer.Views
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
             this.DataBindings.Add(binding["WD_zoom"]);
             this.DataBindings.Add(binding["WD_customArrowToggle"]);
-            //this.DataBindings.Add(binding["WD_PropertiesScroll"]);
+            this.DataBindings.Add(binding["WD_PropertiesScroll"]);
         }
 
         public void RemoveBinding()
