@@ -1594,14 +1594,14 @@ namespace PresentationLayer.Presenter
                                     SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                     SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
 
-                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                    {
-                                        GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                    }
-                                    else
-                                    {
-                                        GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                    }
+                                    //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    //{
+                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                    //}
+                                    //else
+                                    //{
+                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    //}
 
                                     #endregion
 

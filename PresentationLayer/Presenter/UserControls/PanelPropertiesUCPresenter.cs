@@ -155,6 +155,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
                                     _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
                                 }
+                                _panelModel.PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
                             }
 
 

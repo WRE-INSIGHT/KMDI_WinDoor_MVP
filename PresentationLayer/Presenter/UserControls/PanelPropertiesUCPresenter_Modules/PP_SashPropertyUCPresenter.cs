@@ -614,11 +614,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     curr_sash = SashProfile_ArticleNo._6040;
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104; 
                 }
                 else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     curr_sash = SashProfile_ArticleNo._6041;
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106; 
                 }
             }
 
