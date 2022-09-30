@@ -219,6 +219,7 @@ namespace PresentationLayer.Views
         public event DragEventHandler ItemsDragEventRaiseEvent;
         public event EventHandler SortItemButtonClickEventRaised;
         public event EventHandler existingItemToolStripMenuItemClickEventRaised;
+        public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -527,6 +528,12 @@ namespace PresentationLayer.Views
         private void itemListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
+        }
+
+        private void projectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, addProjectsToolStripMenuItemClickEventRaised, e);
+            
         }
     }
 }

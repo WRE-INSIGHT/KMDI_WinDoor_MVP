@@ -26,6 +26,7 @@ namespace PresentationLayer.Views
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;
         event EventHandler assignProjectsToolStripMenuItemClickEventRaised;
+        event EventHandler addProjectsToolStripMenuItemClickEventRaised;
         event EventHandler selectProjectToolStripMenuItemClickEventRaised;
         event EventHandler existingItemToolStripMenuItemClickEventRaised;
         event EventHandler NewConcreteButtonClickEventRaised;

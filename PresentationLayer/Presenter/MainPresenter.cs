@@ -89,6 +89,7 @@ namespace PresentationLayer.Presenter
         private ICustomArrowHeadPresenter _customArrowHeadPresenter;
         private ICustomArrowHeadUCPresenter _customArrowHeadUCP;
         private IAssignProjectsPresenter _assignProjPresenter;
+        private IAssignAEPresenter _addProjPresenter;
         private ICostEngrLandingPresenter _ceLandingPresenter;
         private IConcreteUCPresenter _concreteUCPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
@@ -556,6 +557,7 @@ namespace PresentationLayer.Presenter
                              ICustomArrowHeadPresenter customArrowHeadPresenter,
                              ICustomArrowHeadUCPresenter customArrowHeadUCP,
                              IAssignProjectsPresenter assignProjPresenter,
+                             IAssignAEPresenter addProjPresenter,
                              ICostEngrLandingPresenter ceLandingPresenter,
                              IConcreteUCPresenter concreteUCPresenter,
                              IQuoteItemListPresenter quoteItemListPresenter,
@@ -623,6 +625,7 @@ namespace PresentationLayer.Presenter
             _casementUCP = casementUCP;
             _awningUCP = awningUCP;
             _slidingUCP = slidingUCP;
+            _addProjPresenter = addProjPresenter;
             _tiltNTurnUCP = tiltNTurnUCP;
             _louverPanelUCP = louverPanelUCP;
             _multiPanelPropertiesUCP = multiPanelPropertiesUCP;
@@ -731,97 +734,10 @@ namespace PresentationLayer.Presenter
             _mainView.ItemsDragEventRaiseEvent += _mainView_ItemsDragEventRaiseEvent;
             _mainView.SortItemButtonClickEventRaised += _mainView_SortItemButtonClickEventRaised;
             _mainView.existingItemToolStripMenuItemClickEventRaised += _mainView_existingItemToolStripMenuItemClickEventRaised;
+            _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
         }
 
-        private void _mainView_existingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
-        {
-            try
-            {
-                if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
-                {
-                    SetChangesMark();
-                    _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
-                    csfunc.DecryptFile(wndrfile);
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-
-                    file_lines = File.ReadAllLines(outFile);
-                    File.SetAttributes(outFile, FileAttributes.Hidden);
-                    onload = true;
-                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Open_WndrFiles");
-                }
-            }
-            catch (Exception ex)
-            {
-                csfunc.LogToFile(ex.Message, ex.StackTrace);
-                MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
-        {
-            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            sortItem.GetSortItemView().showSortItem();
-        }
-        private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
-        {
-            #region ItemsDrag
-            //Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
-            //var item = _mainView.GetPanelItems().GetChildAtPoint(p);
-            //int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
-            //IItemInfoUC lbl = e.Data.GetData("PresentationLayer.Views.UserControls.ItemInfoUC") as IItemInfoUC;
-            //foreach (IItemInfoUC ctrl in _mainView.GetPanelItems().Controls)
-            //{
-            //    if(lbl.WD_Item == ctrl.WD_Item)
-            //    {
-            //        _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)ctrl, index);
-            //        MessageBox.Show(ctrl.WD_Item);
-
-            //    }
-            //}
-            //_mainView.GetPanelItems().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
-            //List<IWindoorModel> lstwndr = new List<IWindoorModel>();
-            //foreach (UserControl uc in _mainView.GetPanelItems().Controls)
-            //{
-            //    for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-            //    {
-            //        IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-            //        if (uc.Name == wdm.WD_name)
-            //        {
-            //            wdm.WD_name = "Item " + itemCount;
-            //            lstwndr.Add(wdm);
-            //        }
-            //    }
-            //}
-            //lstwndr.Reverse();
-            //_quotationModel.Lst_Windoor.Clear();
-            //_quotationModel.Lst_Windoor = lstwndr;
-            //int itemCount = 1;
-            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            //{
-            //    wdm.WD_name = "Item " + itemCount;
-            //    itemCount++;
-            //}
-            //_mainView.GetPanelItems().Invalidate();
-            #endregion
-        }
-        private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            toggle = !toggle;
-            if (toggle == true)
-            {
-                _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            }
-            else if (toggle == false)
-            {
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            }
-        }
-
+        
 
         #region Events
         private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1775,8 +1691,109 @@ namespace PresentationLayer.Presenter
             bgw.ProgressChanged += Bgw_ProgressChanged;
             bgw.DoWork += Bgw_DoWork;
         }
+        private void _mainView_addProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                IAssignAEPresenter addProj = _addProjPresenter.GetNewInstance(_unityC, this);
+                addProj.Set_UserModel(_userModel);
+                addProj.ShowThisView();
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+        }
 
-        #endregion
+        private void _mainView_existingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
+                {
+                    SetChangesMark();
+                    _isOpenProject = false;
+                    wndrfile = _mainView.GetOpenFileDialog().FileName;
+                    csfunc.DecryptFile(wndrfile);
+                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                    string outFile = wndrfile.Substring(0, startFileName) +
+                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+
+                    file_lines = File.ReadAllLines(outFile);
+                    File.SetAttributes(outFile, FileAttributes.Hidden);
+                    onload = true;
+                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
+                    StartWorker("Open_WndrFiles");
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
+        {
+            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+            sortItem.GetSortItemView().showSortItem();
+        }
+        private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
+        {
+            #region ItemsDrag
+            //Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
+            //var item = _mainView.GetPanelItems().GetChildAtPoint(p);
+            //int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
+            //IItemInfoUC lbl = e.Data.GetData("PresentationLayer.Views.UserControls.ItemInfoUC") as IItemInfoUC;
+            //foreach (IItemInfoUC ctrl in _mainView.GetPanelItems().Controls)
+            //{
+            //    if(lbl.WD_Item == ctrl.WD_Item)
+            //    {
+            //        _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)ctrl, index);
+            //        MessageBox.Show(ctrl.WD_Item);
+
+            //    }
+            //}
+            //_mainView.GetPanelItems().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
+            //List<IWindoorModel> lstwndr = new List<IWindoorModel>();
+            //foreach (UserControl uc in _mainView.GetPanelItems().Controls)
+            //{
+            //    for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            //    {
+            //        IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
+            //        if (uc.Name == wdm.WD_name)
+            //        {
+            //            wdm.WD_name = "Item " + itemCount;
+            //            lstwndr.Add(wdm);
+            //        }
+            //    }
+            //}
+            //lstwndr.Reverse();
+            //_quotationModel.Lst_Windoor.Clear();
+            //_quotationModel.Lst_Windoor = lstwndr;
+            //int itemCount = 1;
+            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            //{
+            //    wdm.WD_name = "Item " + itemCount;
+            //    itemCount++;
+            //}
+            //_mainView.GetPanelItems().Invalidate();
+            #endregion
+        }
+        private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            toggle = !toggle;
+            if (toggle == true)
+            {
+                _basePlatformImagerUCPresenter.BringToFront_baseImager();
+            }
+            else if (toggle == false)
+            {
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            }
+        }
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
@@ -1806,325 +1823,150 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message, "Error Occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        bool inside_quotation, inside_item, inside_frame, inside_panel, inside_multi, inside_divider;
-        int frmDimension_numWd = 0,
-            frmDimension_numHt = 0;
-        string frmDimension_profileType = "",
-               frmDimension_baseColor = "";
-        bool ons = false;
-        #region Panel Properties
-        //Panel 
-        string panel_Name,
-               panel_ChkText,
-               panel_Type,
-               panel_Placement;
-        int panel_Height,
-            panel_OriginalHeight,
-            panel_ImageRenderer_Height,
-            panel_HeightToBind,
-            panel_DisplayHeight,
-            panel_DisplayHeightDecimal,
-            panel_OriginalDisplayHeight,
-            panel_OriginalDisplayHeightDecimal,
-            panel_ID,
-            panel_Width,
-            panel_OriginalWidth,
-            panel_ImageRenderer_Width,
-            panel_WidthToBind,
-            panel_DisplayWidth,
-            panel_DisplayWidthDecimal,
-            panel_OriginalDisplayWidth,
-            panel_OriginalDisplayWidthDecimal,
-            panel_Index_Inside_MPanel,
-            panel_Index_Inside_SPanel,
-            panel_PropertyHeight,
-            panel_HandleOptionsHeight,
-            panel_LouverBladesCount;
-        bool panel_Orient,
-             panel_OrientVisibility,
-             panel_Visibility,
-             panel_HandleOptionsVisibility,
-             panel_RotoswingOptionsVisibility,
-             panel_RioOptionsVisibility,
-             panel_RioOptionsVisibility2,
-             panel_RotolineOptionsVisibility,
-             panel_MVDOptionsVisibility,
-             panel_RotaryOptionsVisibility,
-             panel_SlidingTypeVisibility;
-        float panel_ImageRendererZoom,
-              panel_Zoom;
+        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                switch (mainTodo)
+                {
+                    case "Open_WndrFiles":
+                        for (int i = 0; i < file_lines.Length; i++)
+                        {
+                            if (bgw.CancellationPending == true)
+                            {
+                                e.Cancel = true;
+                            }
+                            else
+                            {
+                                bgw.ReportProgress(i);
+                            }
+                        }
+                        //e.Result = e.Argument.ToString();
+                        break;
 
-        DockStyle panel_Dock;
-        Control panel_Parent;
-        UserControl panel_MultiPanelGroup,
-                    panel_FrameGroup,
-                    panel_FramePropertiesGroup;
-        OverlapSash panel_OverlapSash;
-        Padding panel_Margin,
-                panel_MarginToBind,
-                panel_ImageRenderer_Margin;
-        IFrameModel panel_ParentFrameModel;
-        IMultiPanelModel panel_ParentMultiPanelModel;
-        Color panel_BackColor;
-        SlidingTypes panel_SlidingTypes;
+                    //case "GetCloudFiles":
+                    //    var objds = csq.CostingQuery_ReturnDS("GetCloudFiles", "", (int)info[0]);
+                    //    sql_Transaction_result = objds.Item1;
+                    //    e.Result = objds.Item2;
+                    //    break;
 
-        #region Explosion Properties 
-        string panel_GlassThicknessDesc;
-        float panel_GlassThickness;
-        bool panel_ChkGlazingAdaptor,
-             panel_SashPropertyVisibility,
-             panel_EspagnoletteOptionsVisibility,
-             panel_ExtTopChk,
-             panel_ExtTop2Chk,
-             panel_ExtBotChk,
-             panel_ExtLeftChk,
-             panel_ExtRightChk,
-             panel_CornerDriveOptionsVisibility,
-             panel_ExtensionOptionsVisibility,
-             panel_MotorizedOptionVisibility,
-             panel_2dHingeVisibility_nonMotorized,
-             panel_3dHingePropertyVisibility,
-             panel_2dHingeVisibility,
-             panel_ButtHingeVisibility,
-             panel_GeorgianBarOptionVisibility,
-             panel_HingeOptionsVisibility,
-             panel_CenterHingeOptionsVisibility,
-             panel_CmenuDeleteVisibility,
-             panel_NTCenterHingeVisibility,
-             panel_MiddleCloserVisibility,
-             panel_MotorizedpnlOptionVisibility;
-        int panel_GlassID,
-            panel_GlazingBeadWidth,
-            panel_GlazingBeadWidthDecimal,
-            panel_GlazingBeadHeight,
-            panel_GlazingBeadHeightDecimal,
-            panel_GlassWidth,
-            panel_GlassWidthDecimal,
-            panel_OriginalGlassWidth,
-            panel_OriginalGlassWidthDecimal,
-            panel_GlassHeight,
-            panel_GlassHeightDecimal,
-            panel_OriginalGlassHeight,
-            panel_OriginalGlassHeightDecimal,
-            panel_GlassPropertyHeight,
-            panel_GlazingSpacerQty,
-            panel_SashWidth,
-            panel_SashWidthDecimal,
-            panel_SashHeight,
-            panel_SashHeightDecimal,
-            panel_OriginalSashWidth,
-            panel_OriginalSashWidthDecimal,
-            panel_OriginalSashHeight,
-            panel_OriginalSashHeightDecimal,
-            panel_SashReinfWidth,
-            panel_SashReinfWidthDecimal,
-            panel_SashReinfHeight,
-            panel_SashReinfHeightDecimal,
-            panel_ExtTopQty,
-            panel_ExtBotQty,
-            panel_ExtLeftQty,
-            panel_ExtRightQty,
-            panel_ExtTop2Qty,
-            panel_ExtTop3Qty,
-            panel_ExtBot2Qty,
-            panel_ExtLeft2Qty,
-            panel_ExtRight2Qty,
-            panel_RotoswingOptionsHeight,
-            panel_PlasticWedgeQty,
-            panel_StrikerQty_A,
-            panel_StrikerQty_C,
-            panel_MiddleCloserPairQty,
-            panel_MotorizedPropertyHeight,
-            panel_MotorizedMechQty,
-            panel_MotorizedMechSetQty,
-            panel_2DHingeQty,
-            panel_2DHingeQty_nonMotorized,
-            panel_3dHingeQty,
-            panel_ButtHingeQty,
-            panel_AdjStrikerQty,
-            panel_RestrictorStayQty,
-            panel_ExtensionPropertyHeight,
-            panel_GeorgianBar_VerticalQty,
-            panel_GeorgianBar_HorizontalQty,
-            panel_HingeOptionsPropertyHeight;
-        GlazingBead_ArticleNo panel_GlazingBeadArtNo;
-        GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
-        GBSpacer_ArticleNo panel_GBSpacerArtNo;
-        GlassFilm_Types panel_GlassFilm;
-        SashProfile_ArticleNo panel_SashProfileArtNo;
-        SashReinf_ArticleNo panel_SashReinfArtNo;
-        CoverProfile_ArticleNo panel_CoverProfileArtNo,
-                               panel_CoverProfileArtNo2;
-        FrictionStay_ArticleNo panel_FrictionStayArtNo;
-        FrictionStayCasement_ArticleNo panel_FSCasementArtNo;
-        SnapInKeep_ArticleNo panel_SnapInKeepArtNo;
-        FixedCam_ArticleNo panel_FixedCamArtNo;
-        _30x25Cover_ArticleNo panel_30x25CoverArtNo;
-        MotorizedDivider_ArticleNo panel_MotorizedDividerArtNo;
-        CoverForMotor_ArticleNo panel_CoverForMotorArtNo;
-        _2DHinge_ArticleNo panel_2dHingeArtNo;
-        _2DHinge_ArticleNo panel_2dHingeArtNo_nonMotorized;
-        PushButtonSwitch_ArticleNo panel_PushButtonSwitchArtNo;
-        FalsePole_ArticleNo panel_FalsePoleArtNo;
-        SupportingFrame_ArticleNo panel_SupportingFrameArtNo;
-        Plate_ArticleNo panel_PlateArtNo;
-        Handle_Type panel_HandleType;
-        Rotoswing_HandleArtNo panel_RotoswingArtNo;
-        Rotary_HandleArtNo panel_RotaryArtNo;
-        Rio_HandleArtNo panel_RioArtNo;
-        Rio_HandleArtNo panel_RioArtNo2;
-        ProfileKnobCylinder_ArtNo panel_ProfileKnobCylinderArtNo;
-        Cylinder_CoverArtNo panel_CylinderCoverArtNo;
-        Rotoline_HandleArtNo panel_RotolineArtNo;
-        MVD_HandleArtNo panel_MVDArtNo;
-        Espagnolette_ArticleNo panel_EspagnoletteArtNo;
-        Extension_ArticleNo panel_ExtensionTopArtNo,
-                            panel_ExtensionTop2ArtNo,
-                            panel_ExtensionTop3ArtNo,
-                            panel_ExtensionBotArtNo,
-                            panel_ExtensionBot2ArtNo,
-                            panel_ExtensionLeftArtNo,
-                            panel_ExtensionLeft2ArtNo,
-                            panel_ExtensionRightArtNo,
-                            panel_ExtensionRight2ArtNo;
-        CornerDrive_ArticleNo panel_CornerDriveArtNo;
-        PlasticWedge_ArticleNo panel_PlasticWedge;
-        MiddleCloser_ArticleNo panel_MiddleCloserArtNo;
-        LockingKit_ArticleNo panel_LockingKitArtNo;
-        GlassType panel_GlassType;
-        Striker_ArticleNo panel_StrikerArtno_A; //for Awning
-        Striker_ArticleNo panel_StrikerArtno_C; //for Casement
-        MotorizedMech_ArticleNo panel_MotorizedMechArtNo;
-        _3dHinge_ArticleNo panel_3dHingeArtNo;
-        ButtHinge_ArticleNo panel_ButtHingeArtNo;
-        AdjustableStriker_ArticleNo panel_AdjStrikerArtNo;
-        RestrictorStay_ArticleNo panel_RestrictorStayArtNo;
-        GeorgianBar_ArticleNo panel_GeorgianBarArtNo;
-        HingeOption panel_HingeOptions;
-        CenterHingeOption panel_CenterHingeOptions;
-        NTCenterHinge_ArticleNo panel_NTCenterHingeArticleNo;
-        StayBearingK_ArticleNo panel_StayBearingKArtNo;
-        StayBearingPin_ArticleNo panel_StayBearingPinArtNo;
-        StayBearingCover_ArticleNo panel_StayBearingCoverArtNo;
-        TopCornerHinge_ArticleNo panel_TopCornerHingeArtNo;
-        TopCornerHingeCover_ArticleNo panel_TopCornerHingeCoverArtNo;
-        TopCornerHingeSpacer_ArticleNo panel_TopCornerHingeSpacerArtNo;
-        CornerHingeK_ArticleNo panel_CornerHingeKArtNo;
-        CornerPivotRestK_ArticleNo panel_CornerPivotRestKArtNo;
-        CornerHingeCoverK_ArticleNo panel_CornerHingeCoverKArtNo;
-        CoverForCornerPivotRestVertical_ArticleNo panel_CoverForCornerPivotRestVerticalArtNo;
-        CoverForCornerPivotRest_ArticleNo panel_CoverForCornerPivotRestArtNo;
-        WeldableCornerJoint_ArticleNo panel_WeldableCArtNo;
-        LatchDeadboltStriker_ArticleNo panel_LatchDeadboltStrikerArtNo;
-        #endregion
-        #endregion
-        #region Divider Properties
-        int div_ID,
-            div_Width,
-            div_DisplayWidth,
-            div_Height,
-            div_DisplayHeight,
-            divImageRenderer_Height,
-            divImageRenderer_Width,
-            div_WidthToBind,
-            div_HeightToBind,
-            div_CladdingBracketForUPVCQTY,
-            div_CladdingBracketForConcreteQTY,
-            div_ExplosionWidth,
-            div_ExplosionHeight,
-            div_ReinfWidth,
-            div_ReinfHeight,
-            div_CladdingCount,
-            div_PropHeight,
-            div_AlumSpacer50Qty;
+                    default:
+                        break;
+                }
+            }
+            catch (SqlException ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                if (ex.Number == -2)
+                {
+                    MessageBox.Show("Request timed out", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (ex.Number == 1232)
+                {
+                    MessageBox.Show("Please check internet connection", "Network Disconnected?", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Number == 19)
+                {
+                    MessageBox.Show("Server is down", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                ToggleMode(false, true);
+            }
+        }
 
-        string div_Name,
-               div_FrameType,
-               div_Bounded;
-        float divImageRenderer_Zoom,
-              div_Zoom;
-        bool div_Visible,
-             div_claddingBracketVisibility,
-             div_ChkDM,
-             div_ChkDMVisibility,
-             div_ArtVisibility,
-             div_CladdingProfileArtNoVisibility,
-             div_LeverEspagVisibility;
-        DividerModel.DividerType div_Type;
-        Control div_Parent;
-        DummyMullion_ArticleNo div_DMArtNo;
-        EndcapDM_ArticleNo div_EndcapDM;
-        FixedCam_ArticleNo div_FixedCamDM;
-        SnapInKeep_ArticleNo div_SnapNKeepDM;
-        IMultiPanelModel div_MPanelParent;
-        IFrameModel div_FrameParent;
-        IPanelModel div_DMPanel;
-        Divider_ArticleNo div_ArtNo;
-        DividerReinf_ArticleNo div_ReinfArtNo;
-        Divider_MechJointArticleNo div_MechJoinArtNo;
-        CladdingProfile_ArticleNo div_CladdingProfileArtNo;
-        CladdingReinf_ArticleNo div_CladdingReinfArtNo;
-        IDictionary<int, int> div_CladdingSizeList;
-        LeverEspagnolette_ArticleNo div_LeverEspagArtNo;
-        ShootboltStriker_ArticleNo div_ShootboltStrikerArtNo;
-        ShootboltNonReverse_ArticleNo div_ShootboltNonReverseArtNo;
-        ShootboltReverse_ArticleNo div_ShootboltReverseArtNo;
-        DummyMullionStriker_ArticleNo div_DMStrikerArtNo;
-        #endregion
-        #region MPanel Properties
-        int mPanel_ID,
-            mPanel_Width,
-            mPanel_WidthToBind,
-            mPanel_WidthToBindPrev,
-            mPanelImager_WidthToBindPrev,
-            mPanel_DisplayWidth,
-            mPanel_DisplayWidthDecimal,
-            mPanel_Height,
-            mPanel_HeightToBind,
-            mPanel_HeightToBindPrev,
-            mPanelImager_HeightToBindPrev,
-            mPanel_DisplayHeight,
-            mPanel_DisplayHeightDecimal,
-            mPanelImageRenderer_Height,
-            mPanelImageRenderer_Width,
-            mPanel_Divisions,
-            mPanel_Index_Inside_MPanel,
-            mPanelProp_Height,
-            mPanel_StackNo,
-            mPanel_AddPixel,
-            mPanel_OriginalDisplayWidth,
-            mPanel_OriginalDisplayWidthDecimal,
-            mPanel_OriginalDisplayHeight,
-            mPanel_OriginalDisplayHeightDecimal,
-            mPanel_OriginalGlassWidth,
-            mPanel_OriginalGlassWidthDecimal,
-            mPanel_OriginalGlassHeight,
-            mPanel_OriginalGlassHeightDecimal;
-        string mPanel_Name,
-               mPanel_Type,
-               mPanel_Placement;
-        bool mPanel_CmenuDeleteVisibility,
-             mPanel_GlassBalanced,
-             mPanel_NumEnable,
-             mPanel_Visibility,
-             mPanel_DividerEnabled;
-        DockStyle mPanel_Dock;
-        float mPanel_Zoom,
-              mPanelImageRenderer_Zoom;
-        FlowDirection mPanel_FlowDirection;
-        Control mPanel_Parent;
-        UserControl mPanel_FrameGroup;
-        IFrameModel mPanel_FrameModelParent;
-        Padding mPanel_Margin,
-                mPanelImageRenderer_Margin;
-        List<IPanelModel> mPanelLst_Panel;
-        List<IDividerModel> mPanelLst_Divider;
-        List<IMultiPanelModel> mPanelLst_MultiPanel;
-        List<Control> mPanelLst_Objects;
-        List<Control> mPanelLst_Imagers;
-        IMultiPanelModel mPanel_ParentModel;
-        #endregion
-        string mpnllvl = "";
+        private void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Error != null || e.Cancelled == true)
+                {
+                    _mainView.GetToolStripLabelLoading().Text = "Error";
+                    ToggleMode(false, true);
+                    _mainView.GetToolStripLabelLoading().Visible = true;
+                    onload = false;
+                }
+                else
+                {
+                    switch (mainTodo)
+                    {
+                        case "Open_WndrFiles":
+
+                            _mainView.GetToolStripLabelLoading().Text = "Finished";
+                            ToggleMode(false, true);
+                            _mainView.GetToolStripLabelLoading().Visible = true;
+                            //autoDescription = true;
+                            onload = false;
+                            //tmr_fadeOutText.Enabled = true;
+                            //tmr_fadeOutText.Start();
+
+                            int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                            string outFile = wndrfile.Substring(0, startFileName) +
+                                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                            File.Delete(outFile);
+                            SetMainViewTitle(input_qrefno,
+                                             _projectName,
+                                             _custRefNo,
+                                             _windoorModel.WD_name,
+                                             _windoorModel.WD_profile,
+                                             true);
+                            break;
+
+                        case "GetCloudFiles":
+                        //if (sql_Transaction_result == "Committed")
+                        //{
+                        //    frmQuoteList frm = new frmQuoteList();
+                        //    frm.ds = (DataSet)e.Result;
+                        //    ToggleMode(false, true);
+                        //    frm.info = info;
+                        //    if (frm.ShowDialog() == DialogResult.OK)
+                        //    {
+                        //        Clearing_Operation();
+
+
+                        //        wndrfile = frm.FileName;
+
+                        //        csfunc.DecryptFile(wndrfile);
+
+                        //        int startFileName1 = wndrfile.LastIndexOf("\\") + 1;
+                        //        string outFile1 = wndrfile.Substring(0, startFileName1) +
+                        //                         wndrfile.Substring(startFileName1, wndrfile.LastIndexOf(".") - startFileName1) + ".txt";
+
+                        //        file_lines = File.ReadAllLines(outFile1);
+                        //        File.SetAttributes(outFile1, FileAttributes.Hidden);
+                        //        tsprogress_Loading.Maximum = file_lines.Length;
+
+                        //        autoDescription = false;
+                        //        onload = true;
+
+                        //        StartWorker("Open_WndrFiles");
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    ToggleMode(false, true);
+                        //}
+                        //break;
+
+                        default:
+                            break;
+                    }
+                    //sql_Transaction_result = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                csfunc.LogToFile(ex.Message, ex.StackTrace);
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void Opening_dotwndr(int row)
         {
             string row_str = file_lines[row].Replace("\t", "");
@@ -3150,7 +2992,7 @@ namespace PresentationLayer.Presenter
                             panelPropUC.Dock = DockStyle.Top;
                             if (panel_Parent.ToString().Contains("Frame"))
                             {
-                                
+
                                 _frameModel.Lst_Panel.Add(pnlModel);
                                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
                                 GetFrameProperties(_frameModel.Frame_ID).GetFramePropertiesPNL().Controls.Add(panelPropUC);
@@ -3183,8 +3025,8 @@ namespace PresentationLayer.Presenter
 
                             }
                             panelPropUC.BringToFront();
-                          
-                  
+
+
                             if (panel_Type.Contains("Fixed Panel"))
                             {
 
@@ -5379,152 +5221,329 @@ namespace PresentationLayer.Presenter
                     break;
             }
         }
-        string sql_Transaction_result;
-        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                switch (mainTodo)
-                {
-                    case "Open_WndrFiles":
-                        for (int i = 0; i < file_lines.Length; i++)
-                        {
-                            if (bgw.CancellationPending == true)
-                            {
-                                e.Cancel = true;
-                            }
-                            else
-                            {
-                                bgw.ReportProgress(i);
-                            }
-                        }
-                        //e.Result = e.Argument.ToString();
-                        break;
-
-                    //case "GetCloudFiles":
-                    //    var objds = csq.CostingQuery_ReturnDS("GetCloudFiles", "", (int)info[0]);
-                    //    sql_Transaction_result = objds.Item1;
-                    //    e.Result = objds.Item2;
-                    //    break;
-
-                    default:
-                        break;
-                }
-            }
-            catch (SqlException ex)
-            {
-                csfunc.LogToFile(ex.Message, ex.StackTrace);
-                if (ex.Number == -2)
-                {
-                    MessageBox.Show("Request timed out", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                else if (ex.Number == 1232)
-                {
-                    MessageBox.Show("Please check internet connection", "Network Disconnected?", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (ex.Number == 19)
-                {
-                    MessageBox.Show("Server is down", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                csfunc.LogToFile(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message);
-                ToggleMode(false, true);
-            }
-        }
-
-        private void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Error != null || e.Cancelled == true)
-                {
-                    _mainView.GetToolStripLabelLoading().Text = "Error";
-                    ToggleMode(false, true);
-                    _mainView.GetToolStripLabelLoading().Visible = true;
-                    onload = false;
-                }
-                else
-                {
-                    switch (mainTodo)
-                    {
-                        case "Open_WndrFiles":
-
-                            _mainView.GetToolStripLabelLoading().Text = "Finished";
-                            ToggleMode(false, true);
-                            _mainView.GetToolStripLabelLoading().Visible = true;
-                            //autoDescription = true;
-                            onload = false;
-                            //tmr_fadeOutText.Enabled = true;
-                            //tmr_fadeOutText.Start();
-
-                            int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                            string outFile = wndrfile.Substring(0, startFileName) +
-                                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-                            File.Delete(outFile);
-                            SetMainViewTitle(input_qrefno,
-                                             _projectName,
-                                             _custRefNo,
-                                             _windoorModel.WD_name,
-                                             _windoorModel.WD_profile,
-                                             true);
-                            break;
-
-                        case "GetCloudFiles":
-                        //if (sql_Transaction_result == "Committed")
-                        //{
-                        //    frmQuoteList frm = new frmQuoteList();
-                        //    frm.ds = (DataSet)e.Result;
-                        //    ToggleMode(false, true);
-                        //    frm.info = info;
-                        //    if (frm.ShowDialog() == DialogResult.OK)
-                        //    {
-                        //        Clearing_Operation();
 
 
-                        //        wndrfile = frm.FileName;
+        #endregion
 
-                        //        csfunc.DecryptFile(wndrfile);
+        bool inside_quotation, inside_item, inside_frame, inside_panel, inside_multi, inside_divider;
+        int frmDimension_numWd = 0,
+            frmDimension_numHt = 0;
+        string frmDimension_profileType = "",
+               frmDimension_baseColor = "";
+        #region Panel Properties
+        //Panel 
+        string panel_Name,
+               panel_ChkText,
+               panel_Type,
+               panel_Placement;
+        int panel_Height,
+            panel_OriginalHeight,
+            panel_ImageRenderer_Height,
+            panel_HeightToBind,
+            panel_DisplayHeight,
+            panel_DisplayHeightDecimal,
+            panel_OriginalDisplayHeight,
+            panel_OriginalDisplayHeightDecimal,
+            panel_ID,
+            panel_Width,
+            panel_OriginalWidth,
+            panel_ImageRenderer_Width,
+            panel_WidthToBind,
+            panel_DisplayWidth,
+            panel_DisplayWidthDecimal,
+            panel_OriginalDisplayWidth,
+            panel_OriginalDisplayWidthDecimal,
+            panel_Index_Inside_MPanel,
+            panel_Index_Inside_SPanel,
+            panel_PropertyHeight,
+            panel_HandleOptionsHeight,
+            panel_LouverBladesCount;
+        bool panel_Orient,
+             panel_OrientVisibility,
+             panel_Visibility,
+             panel_HandleOptionsVisibility,
+             panel_RotoswingOptionsVisibility,
+             panel_RioOptionsVisibility,
+             panel_RioOptionsVisibility2,
+             panel_RotolineOptionsVisibility,
+             panel_MVDOptionsVisibility,
+             panel_RotaryOptionsVisibility,
+             panel_SlidingTypeVisibility;
+        float panel_ImageRendererZoom,
+              panel_Zoom;
 
-                        //        int startFileName1 = wndrfile.LastIndexOf("\\") + 1;
-                        //        string outFile1 = wndrfile.Substring(0, startFileName1) +
-                        //                         wndrfile.Substring(startFileName1, wndrfile.LastIndexOf(".") - startFileName1) + ".txt";
+        DockStyle panel_Dock;
+        Control panel_Parent;
+        UserControl panel_MultiPanelGroup,
+                    panel_FrameGroup,
+                    panel_FramePropertiesGroup;
+        OverlapSash panel_OverlapSash;
+        Padding panel_Margin,
+                panel_MarginToBind,
+                panel_ImageRenderer_Margin;
+        IFrameModel panel_ParentFrameModel;
+        IMultiPanelModel panel_ParentMultiPanelModel;
+        Color panel_BackColor;
+        SlidingTypes panel_SlidingTypes;
 
-                        //        file_lines = File.ReadAllLines(outFile1);
-                        //        File.SetAttributes(outFile1, FileAttributes.Hidden);
-                        //        tsprogress_Loading.Maximum = file_lines.Length;
+        #region Explosion Properties 
+        string panel_GlassThicknessDesc;
+        float panel_GlassThickness;
+        bool panel_ChkGlazingAdaptor,
+             panel_SashPropertyVisibility,
+             panel_EspagnoletteOptionsVisibility,
+             panel_ExtTopChk,
+             panel_ExtTop2Chk,
+             panel_ExtBotChk,
+             panel_ExtLeftChk,
+             panel_ExtRightChk,
+             panel_CornerDriveOptionsVisibility,
+             panel_ExtensionOptionsVisibility,
+             panel_MotorizedOptionVisibility,
+             panel_2dHingeVisibility_nonMotorized,
+             panel_3dHingePropertyVisibility,
+             panel_2dHingeVisibility,
+             panel_ButtHingeVisibility,
+             panel_GeorgianBarOptionVisibility,
+             panel_HingeOptionsVisibility,
+             panel_CenterHingeOptionsVisibility,
+             panel_CmenuDeleteVisibility,
+             panel_NTCenterHingeVisibility,
+             panel_MiddleCloserVisibility,
+             panel_MotorizedpnlOptionVisibility;
+        int panel_GlassID,
+            panel_GlazingBeadWidth,
+            panel_GlazingBeadWidthDecimal,
+            panel_GlazingBeadHeight,
+            panel_GlazingBeadHeightDecimal,
+            panel_GlassWidth,
+            panel_GlassWidthDecimal,
+            panel_OriginalGlassWidth,
+            panel_OriginalGlassWidthDecimal,
+            panel_GlassHeight,
+            panel_GlassHeightDecimal,
+            panel_OriginalGlassHeight,
+            panel_OriginalGlassHeightDecimal,
+            panel_GlassPropertyHeight,
+            panel_GlazingSpacerQty,
+            panel_SashWidth,
+            panel_SashWidthDecimal,
+            panel_SashHeight,
+            panel_SashHeightDecimal,
+            panel_OriginalSashWidth,
+            panel_OriginalSashWidthDecimal,
+            panel_OriginalSashHeight,
+            panel_OriginalSashHeightDecimal,
+            panel_SashReinfWidth,
+            panel_SashReinfWidthDecimal,
+            panel_SashReinfHeight,
+            panel_SashReinfHeightDecimal,
+            panel_ExtTopQty,
+            panel_ExtBotQty,
+            panel_ExtLeftQty,
+            panel_ExtRightQty,
+            panel_ExtTop2Qty,
+            panel_ExtTop3Qty,
+            panel_ExtBot2Qty,
+            panel_ExtLeft2Qty,
+            panel_ExtRight2Qty,
+            panel_RotoswingOptionsHeight,
+            panel_PlasticWedgeQty,
+            panel_StrikerQty_A,
+            panel_StrikerQty_C,
+            panel_MiddleCloserPairQty,
+            panel_MotorizedPropertyHeight,
+            panel_MotorizedMechQty,
+            panel_MotorizedMechSetQty,
+            panel_2DHingeQty,
+            panel_2DHingeQty_nonMotorized,
+            panel_3dHingeQty,
+            panel_ButtHingeQty,
+            panel_AdjStrikerQty,
+            panel_RestrictorStayQty,
+            panel_ExtensionPropertyHeight,
+            panel_GeorgianBar_VerticalQty,
+            panel_GeorgianBar_HorizontalQty,
+            panel_HingeOptionsPropertyHeight;
+        GlazingBead_ArticleNo panel_GlazingBeadArtNo;
+        GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
+        GBSpacer_ArticleNo panel_GBSpacerArtNo;
+        GlassFilm_Types panel_GlassFilm;
+        SashProfile_ArticleNo panel_SashProfileArtNo;
+        SashReinf_ArticleNo panel_SashReinfArtNo;
+        CoverProfile_ArticleNo panel_CoverProfileArtNo,
+                               panel_CoverProfileArtNo2;
+        FrictionStay_ArticleNo panel_FrictionStayArtNo;
+        FrictionStayCasement_ArticleNo panel_FSCasementArtNo;
+        SnapInKeep_ArticleNo panel_SnapInKeepArtNo;
+        FixedCam_ArticleNo panel_FixedCamArtNo;
+        _30x25Cover_ArticleNo panel_30x25CoverArtNo;
+        MotorizedDivider_ArticleNo panel_MotorizedDividerArtNo;
+        CoverForMotor_ArticleNo panel_CoverForMotorArtNo;
+        _2DHinge_ArticleNo panel_2dHingeArtNo;
+        _2DHinge_ArticleNo panel_2dHingeArtNo_nonMotorized;
+        PushButtonSwitch_ArticleNo panel_PushButtonSwitchArtNo;
+        FalsePole_ArticleNo panel_FalsePoleArtNo;
+        SupportingFrame_ArticleNo panel_SupportingFrameArtNo;
+        Plate_ArticleNo panel_PlateArtNo;
+        Handle_Type panel_HandleType;
+        Rotoswing_HandleArtNo panel_RotoswingArtNo;
+        Rotary_HandleArtNo panel_RotaryArtNo;
+        Rio_HandleArtNo panel_RioArtNo;
+        Rio_HandleArtNo panel_RioArtNo2;
+        ProfileKnobCylinder_ArtNo panel_ProfileKnobCylinderArtNo;
+        Cylinder_CoverArtNo panel_CylinderCoverArtNo;
+        Rotoline_HandleArtNo panel_RotolineArtNo;
+        MVD_HandleArtNo panel_MVDArtNo;
+        Espagnolette_ArticleNo panel_EspagnoletteArtNo;
+        Extension_ArticleNo panel_ExtensionTopArtNo,
+                            panel_ExtensionTop2ArtNo,
+                            panel_ExtensionTop3ArtNo,
+                            panel_ExtensionBotArtNo,
+                            panel_ExtensionBot2ArtNo,
+                            panel_ExtensionLeftArtNo,
+                            panel_ExtensionLeft2ArtNo,
+                            panel_ExtensionRightArtNo,
+                            panel_ExtensionRight2ArtNo;
+        CornerDrive_ArticleNo panel_CornerDriveArtNo;
+        PlasticWedge_ArticleNo panel_PlasticWedge;
+        MiddleCloser_ArticleNo panel_MiddleCloserArtNo;
+        LockingKit_ArticleNo panel_LockingKitArtNo;
+        GlassType panel_GlassType;
+        Striker_ArticleNo panel_StrikerArtno_A; //for Awning
+        Striker_ArticleNo panel_StrikerArtno_C; //for Casement
+        MotorizedMech_ArticleNo panel_MotorizedMechArtNo;
+        _3dHinge_ArticleNo panel_3dHingeArtNo;
+        ButtHinge_ArticleNo panel_ButtHingeArtNo;
+        AdjustableStriker_ArticleNo panel_AdjStrikerArtNo;
+        RestrictorStay_ArticleNo panel_RestrictorStayArtNo;
+        GeorgianBar_ArticleNo panel_GeorgianBarArtNo;
+        HingeOption panel_HingeOptions;
+        CenterHingeOption panel_CenterHingeOptions;
+        NTCenterHinge_ArticleNo panel_NTCenterHingeArticleNo;
+        StayBearingK_ArticleNo panel_StayBearingKArtNo;
+        StayBearingPin_ArticleNo panel_StayBearingPinArtNo;
+        StayBearingCover_ArticleNo panel_StayBearingCoverArtNo;
+        TopCornerHinge_ArticleNo panel_TopCornerHingeArtNo;
+        TopCornerHingeCover_ArticleNo panel_TopCornerHingeCoverArtNo;
+        TopCornerHingeSpacer_ArticleNo panel_TopCornerHingeSpacerArtNo;
+        CornerHingeK_ArticleNo panel_CornerHingeKArtNo;
+        CornerPivotRestK_ArticleNo panel_CornerPivotRestKArtNo;
+        CornerHingeCoverK_ArticleNo panel_CornerHingeCoverKArtNo;
+        CoverForCornerPivotRestVertical_ArticleNo panel_CoverForCornerPivotRestVerticalArtNo;
+        CoverForCornerPivotRest_ArticleNo panel_CoverForCornerPivotRestArtNo;
+        WeldableCornerJoint_ArticleNo panel_WeldableCArtNo;
+        LatchDeadboltStriker_ArticleNo panel_LatchDeadboltStrikerArtNo;
+        #endregion
+        #endregion
+        #region Divider Properties
+        int div_ID,
+            div_Width,
+            div_DisplayWidth,
+            div_Height,
+            div_DisplayHeight,
+            divImageRenderer_Height,
+            divImageRenderer_Width,
+            div_WidthToBind,
+            div_HeightToBind,
+            div_CladdingBracketForUPVCQTY,
+            div_CladdingBracketForConcreteQTY,
+            div_ExplosionWidth,
+            div_ExplosionHeight,
+            div_ReinfWidth,
+            div_ReinfHeight,
+            div_CladdingCount,
+            div_PropHeight,
+            div_AlumSpacer50Qty;
 
-                        //        autoDescription = false;
-                        //        onload = true;
-
-                        //        StartWorker("Open_WndrFiles");
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    ToggleMode(false, true);
-                        //}
-                        //break;
-
-                        default:
-                            break;
-                    }
-                    //sql_Transaction_result = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                csfunc.LogToFile(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+        string div_Name,
+               div_FrameType,
+               div_Bounded;
+        float divImageRenderer_Zoom,
+              div_Zoom;
+        bool div_Visible,
+             div_claddingBracketVisibility,
+             div_ChkDM,
+             div_ChkDMVisibility,
+             div_ArtVisibility,
+             div_CladdingProfileArtNoVisibility,
+             div_LeverEspagVisibility;
+        DividerModel.DividerType div_Type;
+        Control div_Parent;
+        DummyMullion_ArticleNo div_DMArtNo;
+        EndcapDM_ArticleNo div_EndcapDM;
+        FixedCam_ArticleNo div_FixedCamDM;
+        SnapInKeep_ArticleNo div_SnapNKeepDM;
+        IMultiPanelModel div_MPanelParent;
+        IFrameModel div_FrameParent;
+        IPanelModel div_DMPanel;
+        Divider_ArticleNo div_ArtNo;
+        DividerReinf_ArticleNo div_ReinfArtNo;
+        Divider_MechJointArticleNo div_MechJoinArtNo;
+        CladdingProfile_ArticleNo div_CladdingProfileArtNo;
+        CladdingReinf_ArticleNo div_CladdingReinfArtNo;
+        IDictionary<int, int> div_CladdingSizeList;
+        LeverEspagnolette_ArticleNo div_LeverEspagArtNo;
+        ShootboltStriker_ArticleNo div_ShootboltStrikerArtNo;
+        ShootboltNonReverse_ArticleNo div_ShootboltNonReverseArtNo;
+        ShootboltReverse_ArticleNo div_ShootboltReverseArtNo;
+        DummyMullionStriker_ArticleNo div_DMStrikerArtNo;
+        #endregion
+        #region MPanel Properties
+        int mPanel_ID,
+            mPanel_Width,
+            mPanel_WidthToBind,
+            mPanel_WidthToBindPrev,
+            mPanelImager_WidthToBindPrev,
+            mPanel_DisplayWidth,
+            mPanel_DisplayWidthDecimal,
+            mPanel_Height,
+            mPanel_HeightToBind,
+            mPanel_HeightToBindPrev,
+            mPanelImager_HeightToBindPrev,
+            mPanel_DisplayHeight,
+            mPanel_DisplayHeightDecimal,
+            mPanelImageRenderer_Height,
+            mPanelImageRenderer_Width,
+            mPanel_Divisions,
+            mPanel_Index_Inside_MPanel,
+            mPanelProp_Height,
+            mPanel_StackNo,
+            mPanel_AddPixel,
+            mPanel_OriginalDisplayWidth,
+            mPanel_OriginalDisplayWidthDecimal,
+            mPanel_OriginalDisplayHeight,
+            mPanel_OriginalDisplayHeightDecimal,
+            mPanel_OriginalGlassWidth,
+            mPanel_OriginalGlassWidthDecimal,
+            mPanel_OriginalGlassHeight,
+            mPanel_OriginalGlassHeightDecimal;
+        string mPanel_Name,
+               mPanel_Type,
+               mPanel_Placement;
+        bool mPanel_CmenuDeleteVisibility,
+             mPanel_GlassBalanced,
+             mPanel_NumEnable,
+             mPanel_Visibility,
+             mPanel_DividerEnabled;
+        DockStyle mPanel_Dock;
+        float mPanel_Zoom,
+              mPanelImageRenderer_Zoom;
+        FlowDirection mPanel_FlowDirection;
+        Control mPanel_Parent;
+        UserControl mPanel_FrameGroup;
+        IFrameModel mPanel_FrameModelParent;
+        Padding mPanel_Margin,
+                mPanelImageRenderer_Margin;
+        List<IPanelModel> mPanelLst_Panel;
+        List<IDividerModel> mPanelLst_Divider;
+        List<IMultiPanelModel> mPanelLst_MultiPanel;
+        List<Control> mPanelLst_Objects;
+        List<Control> mPanelLst_Imagers;
+        IMultiPanelModel mPanel_ParentModel;
+        #endregion
+        string mpnllvl = "";
+       
         #region ViewUpdate(Controls)
 
         private void Clearing_Operation()
