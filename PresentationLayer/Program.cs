@@ -354,7 +354,10 @@ namespace PresentationLayer
 
                 .RegisterType<IFP_FrameConnectionTypePropertyUC, FP_FrameConnectionTypePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFP_FrameConnectionTypePropertyUCPresenter, FP_FrameConnectionTypePropertyUCPresenter>(new ContainerControlledLifetimeManager())
-                  
+
+                .RegisterType<IPP_TrackRailPropertyUC, PP_TrackRailPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_TrackRailPropertyUCPresenter, PP_TrackRailPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

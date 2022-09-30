@@ -35,6 +35,8 @@ namespace PresentationLayer.Views
         event EventHandler saveToolStripButtonClickEventRaised;
         event EventHandler slidingTopViewToolStripMenuItemClickRaiseEvent;
         event DragEventHandler ItemsDragEventRaiseEvent;
+        event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
+
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }

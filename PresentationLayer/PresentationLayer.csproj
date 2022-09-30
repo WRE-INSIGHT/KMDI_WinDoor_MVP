@@ -167,6 +167,8 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_DHandlePropertyUCPresenter.cs" />
@@ -648,6 +650,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SlidingTypePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_TrackRailPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -809,6 +812,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.Designer.cs">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
+      <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SortItemUC.cs">
       <SubType>UserControl</SubType>
@@ -1217,6 +1226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.resx">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
+      <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\SortItemUC.resx">
       <DependentUpon>SortItemUC.cs</DependentUpon>

@@ -1054,12 +1054,12 @@ namespace EnumerationTypeLayer
             private MeshType(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class ScreenPVCBox : Enumeration<ScreenPVCBox, int>
+        public class ScreenPVCBox_ArticleNo : Enumeration<ScreenPVCBox_ArticleNo, int>
         {
-            public static readonly ScreenPVCBox _0505 = new ScreenPVCBox(0, "0505");
-            public static readonly ScreenPVCBox _1067 = new ScreenPVCBox(1, "1067");
+            public static readonly ScreenPVCBox_ArticleNo _0505 = new ScreenPVCBox_ArticleNo(0, "0505");
+            public static readonly ScreenPVCBox_ArticleNo _1067 = new ScreenPVCBox_ArticleNo(1, "1067");
 
-            private ScreenPVCBox(int value, string displayName) : base(value, displayName) { }
+            private ScreenPVCBox_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class ScreenAddOnsMaterial : Enumeration<ScreenAddOnsMaterial, int>
@@ -1073,13 +1073,104 @@ namespace EnumerationTypeLayer
             private ScreenAddOnsMaterial(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class ScreenReinforcement : Enumeration<ScreenReinforcement, int>
+        public class ScreenReinforcement_ArticleNo : Enumeration<ScreenReinforcement_ArticleNo, int>
         {
-            public static readonly ScreenReinforcement _CenterPark = new ScreenReinforcement(0, "Center Park");
-            public static readonly ScreenReinforcement _DoubleCenterClosure = new ScreenReinforcement(1, "Double Center Closure");
+            public static readonly ScreenReinforcement_ArticleNo _CenterPark = new ScreenReinforcement_ArticleNo(0, "Center Park");
+            public static readonly ScreenReinforcement_ArticleNo _DoubleCenterClosure = new ScreenReinforcement_ArticleNo(1, "Double Center Closure");
 
-            private ScreenReinforcement(int value, string displayName) : base(value, displayName) { }
+            private ScreenReinforcement_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class PVCCenterProfile_ArticleNo : Enumeration<PVCCenterProfile_ArticleNo, int>
+        {
+            public static readonly PVCCenterProfile_ArticleNo _6067 = new PVCCenterProfile_ArticleNo(0, "6067");
+
+            private PVCCenterProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GS100_T_EM_T_HMCOVER_ArticleNo : Enumeration<GS100_T_EM_T_HMCOVER_ArticleNo, int>
+        {
+            public static readonly GS100_T_EM_T_HMCOVER_ArticleNo _L15056103 = new GS100_T_EM_T_HMCOVER_ArticleNo(0, "L-15056-103");
+            public static readonly GS100_T_EM_T_HMCOVER_ArticleNo _L15056103B = new GS100_T_EM_T_HMCOVER_ArticleNo(1, "L-15056-103B");
+
+
+            private GS100_T_EM_T_HMCOVER_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class TrackProfile_ArticleNo : Enumeration<TrackProfile_ArticleNo, int>
+        {
+            public static readonly TrackProfile_ArticleNo _L15056140 = new TrackProfile_ArticleNo(0, "L-15056-140");
+            public static readonly TrackProfile_ArticleNo _L15056141 = new TrackProfile_ArticleNo(1, "L-15056-141");
+            public static readonly TrackProfile_ArticleNo _L15056142 = new TrackProfile_ArticleNo(2, "L-15056-142");
+            public static readonly TrackProfile_ArticleNo _L15056143 = new TrackProfile_ArticleNo(3, "L-15056-143");
+            public static readonly TrackProfile_ArticleNo _L15056144 = new TrackProfile_ArticleNo(4, "L-15056-144");
+            public static readonly TrackProfile_ArticleNo _L15056146 = new TrackProfile_ArticleNo(5, "L-15056-146");
+
+            private TrackProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TrackRail_ArticleNo : Enumeration<TrackRail_ArticleNo, int>
+        {
+            public static readonly TrackRail_ArticleNo _L15056196 = new TrackRail_ArticleNo(0, "L-15056-196");
+
+            private TrackRail_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class MicrocellOneSafetySensor_ArticleNo : Enumeration<MicrocellOneSafetySensor_ArticleNo, int>
+        {
+            public static readonly MicrocellOneSafetySensor_ArticleNo _L15056051 = new MicrocellOneSafetySensor_ArticleNo(0, "L-15056-051");
+
+            private MicrocellOneSafetySensor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class AutodoorBracketForGS100UPVC_ArticleNo : Enumeration<AutodoorBracketForGS100UPVC_ArticleNo, int>
+        {
+            public static readonly AutodoorBracketForGS100UPVC_ArticleNo _L15227001 = new AutodoorBracketForGS100UPVC_ArticleNo(0, "L-15227-001");
+
+            private AutodoorBracketForGS100UPVC_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GS100EndCapScrewM5AndLSupport_ArticleNo : Enumeration<GS100EndCapScrewM5AndLSupport_ArticleNo, int>
+        {
+            public static readonly GS100EndCapScrewM5AndLSupport_ArticleNo _L15227002 = new GS100EndCapScrewM5AndLSupport_ArticleNo(0, "L-15227-002");
+
+            private GS100EndCapScrewM5AndLSupport_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class EuroLeadExitButton_ArticleNo : Enumeration<EuroLeadExitButton_ArticleNo, int>
+        {
+            public static readonly EuroLeadExitButton_ArticleNo _L15224001 = new EuroLeadExitButton_ArticleNo(0, "L-15224-001");
+
+            private EuroLeadExitButton_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class TOOTHBELT_EM_CM_ArticleNo : Enumeration<TOOTHBELT_EM_CM_ArticleNo, int>
+        {
+            public static readonly TOOTHBELT_EM_CM_ArticleNo _A7134370 = new TOOTHBELT_EM_CM_ArticleNo(0, "A-7134370");
+
+            private TOOTHBELT_EM_CM_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GuBeaZenMicrowaveSensor_ArticleNo : Enumeration<GuBeaZenMicrowaveSensor_ArticleNo, int>
+        {
+            public static readonly GuBeaZenMicrowaveSensor_ArticleNo _L15049052 = new GuBeaZenMicrowaveSensor_ArticleNo(0, "L-15049-052");
+
+            private GuBeaZenMicrowaveSensor_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SlidingDoorKitGs100_1_ArticleNo : Enumeration<SlidingDoorKitGs100_1_ArticleNo, int>
+        {
+            public static readonly SlidingDoorKitGs100_1_ArticleNo _A9002180 = new SlidingDoorKitGs100_1_ArticleNo(0, "A-9002180");
+
+            private SlidingDoorKitGs100_1_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GS100CoverKit_ArticleNo : Enumeration<GS100CoverKit_ArticleNo, int>
+        {
+            public static readonly GS100CoverKit_ArticleNo _L15049052 = new GS100CoverKit_ArticleNo(0, "A-8007210");
+
+            private GS100CoverKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

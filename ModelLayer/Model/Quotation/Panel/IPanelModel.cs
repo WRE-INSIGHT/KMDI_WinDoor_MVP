@@ -267,6 +267,21 @@ namespace ModelLayer.Model.Quotation.Panel
         Striker_ArticleNo Panel_StrikerArtno_Sliding { get; set; }
         int Panel_StrikerArtno_SlidingQty { get; set; }
         ScrewSets Panel_ScrewSetsArtNo { get; set; }
+
+        PVCCenterProfile_ArticleNo Panel_PVCCenterProfileArtNo { get; set; }
+        GS100_T_EM_T_HMCOVER_ArticleNo Panel_GS100_T_EM_T_HMCOVER_ArtNo { get; set; }
+        TrackProfile_ArticleNo Panel_TrackProfileArtNo { get; set; }
+        TrackRail_ArticleNo Panel_TrackRailArtNo { get; set; }
+        bool Panel_TrackRailArtNoVisibility { get; set; }
+        MicrocellOneSafetySensor_ArticleNo Panel_MicrocellOneSafetySensorArtNo { get; set; }
+        AutodoorBracketForGS100UPVC_ArticleNo Panel_AutodoorBracketForGS100UPVCArtNo { get; set; }
+        GS100EndCapScrewM5AndLSupport_ArticleNo Panel_GS100EndCapScrewM5AndLSupportArtNo { get; set; }
+        EuroLeadExitButton_ArticleNo Panel_EuroLeadExitButtonArtNo { get; set; }
+        TOOTHBELT_EM_CM_ArticleNo Panel_TOOTHBELT_EM_CMArtNo { get; set; }
+        GuBeaZenMicrowaveSensor_ArticleNo Panel_GuBeaZenMicrowaveSensorArtNo { get; set; }
+        SlidingDoorKitGs100_1_ArticleNo Panel_SlidingDoorKitGs100_1ArtNo { get; set; }
+        GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
+
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();

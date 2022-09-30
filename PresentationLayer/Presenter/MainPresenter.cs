@@ -69,6 +69,7 @@ namespace PresentationLayer.Presenter
         private IPanelServices _panelServices;
         private IDividerServices _divServices;
         private IConcreteServices _concreteServices;
+
         private IFrameUCPresenter _frameUCPresenter;
         private IFrameImagerUCPresenter _frameImagerUCPresenter;
         private IBasePlatformPresenter _basePlatformPresenter;
@@ -97,6 +98,8 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private ISortItemUCPresenter _sortItemUCPresenter;
         private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
+        private IGlassThicknessListPresenter _glassThicknessPresenter;
+
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPropUCP2_given; //Given Instance
@@ -109,6 +112,9 @@ namespace PresentationLayer.Presenter
         private IMultiPanelTransomUC _multiTransomUC;
         private IMullionUCPresenter _mullionUCP;
         private ITransomUCPresenter _transomUCP;
+
+
+
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
 
         private FrameModel.Frame_Padding frameType;
@@ -133,6 +139,7 @@ namespace PresentationLayer.Presenter
         private IDividerModel _divModel_forDMSelection;
         private IPanelModel _prevPanelModel_forDMSelection;
         private IPanelModel _nxtPanelModel_forDMSelection;
+        private IPanelModel _pnlModel_forGlassSelection;
         private IDividerPropertiesUCPresenter _divPropUCP_forDMSelection;
         private IFixedPanelUCPresenter _fixedUCP;
         private ICasementPanelUCPresenter _casementUCP;
@@ -434,6 +441,11 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public IPanelModel PnlModel_forGlassSelection()
+        {
+            return _pnlModel_forGlassSelection;
+        }
+
         public Control ControlRaised_forDMSelection
         {
             get
@@ -580,8 +592,9 @@ namespace PresentationLayer.Presenter
                              IFrameImagerUCPresenter frameImagerUCP,
                              IDividerServices divServices,
                              IMullionUCPresenter mullionUCP,
-                             ITransomUCPresenter transomUCP
-                             )
+                             ITransomUCPresenter transomUCP,
+                             IGlassThicknessListPresenter glassThicknessPresenter)
+
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -634,6 +647,8 @@ namespace PresentationLayer.Presenter
             _divServices = divServices;
             _mullionUCP = mullionUCP;
             _transomUCP = transomUCP;
+            _glassThicknessPresenter = glassThicknessPresenter;
+
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -731,7 +746,10 @@ namespace PresentationLayer.Presenter
             _mainView.ItemsDragEventRaiseEvent += _mainView_ItemsDragEventRaiseEvent;
             _mainView.SortItemButtonClickEventRaised += _mainView_SortItemButtonClickEventRaised;
             _mainView.existingItemToolStripMenuItemClickEventRaised += _mainView_existingItemToolStripMenuItemClickEventRaised;
+            _mainView.SetGlassToolStripMenuItemClickRaiseEvent += _mainView_SetGlassToolStripMenuItemClickRaiseEvent;
         }
+
+
 
         private void _mainView_existingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -823,7 +841,13 @@ namespace PresentationLayer.Presenter
         }
 
 
-        #region Events
+        #region Events 
+        private void _mainView_SetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        {
+            //IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, GlassThicknessDT, );
+            //glassThicknessPresenter.ShowGlassThicknessListView();
+        }
+
         private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
@@ -3150,7 +3174,7 @@ namespace PresentationLayer.Presenter
                             panelPropUC.Dock = DockStyle.Top;
                             if (panel_Parent.ToString().Contains("Frame"))
                             {
-                                
+
                                 _frameModel.Lst_Panel.Add(pnlModel);
                                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
                                 GetFrameProperties(_frameModel.Frame_ID).GetFramePropertiesPNL().Controls.Add(panelPropUC);
@@ -3183,8 +3207,8 @@ namespace PresentationLayer.Presenter
 
                             }
                             panelPropUC.BringToFront();
-                          
-                  
+
+
                             if (panel_Type.Contains("Fixed Panel"))
                             {
 
@@ -6472,7 +6496,7 @@ namespace PresentationLayer.Presenter
                         bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
                         bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
                         if (mpnl.MPanel_DividerEnabled == true)
-                        { 
+                        {
                             if (allWithSash == true && allNoSash == false)
                             {
                                 gbmode = "withSash";
