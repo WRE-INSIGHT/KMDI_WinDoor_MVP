@@ -750,104 +750,9 @@ namespace PresentationLayer.Presenter
             _mainView.SortItemButtonClickEventRaised += _mainView_SortItemButtonClickEventRaised;
             _mainView.existingItemToolStripMenuItemClickEventRaised += _mainView_existingItemToolStripMenuItemClickEventRaised;
             _mainView.SetGlassToolStripMenuItemClickRaiseEvent += _mainView_SetGlassToolStripMenuItemClickRaiseEvent;
-             _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
+            _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
         }
 
-    
-
-
-
-        private void _mainView_existingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
-        {
-            try
-            {
-                if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
-                {
-                    SetChangesMark();
-                    _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
-                    csfunc.DecryptFile(wndrfile);
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-
-                    file_lines = File.ReadAllLines(outFile);
-                    File.SetAttributes(outFile, FileAttributes.Hidden);
-                    onload = true;
-                    _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Open_WndrFiles");
-                }
-            }
-            catch (Exception ex)
-            {
-                csfunc.LogToFile(ex.Message, ex.StackTrace);
-                MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
-        {
-            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            sortItem.GetSortItemView().showSortItem();
-        }
-        private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
-        {
-            #region ItemsDrag
-            //Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
-            //var item = _mainView.GetPanelItems().GetChildAtPoint(p);
-            //int index = _mainView.GetPanelItems().Controls.GetChildIndex(item, false);
-            //IItemInfoUC lbl = e.Data.GetData("PresentationLayer.Views.UserControls.ItemInfoUC") as IItemInfoUC;
-            //foreach (IItemInfoUC ctrl in _mainView.GetPanelItems().Controls)
-            //{
-            //    if(lbl.WD_Item == ctrl.WD_Item)
-            //    {
-            //        _mainView.GetPanelItems().Controls.SetChildIndex((UserControl)ctrl, index);
-            //        MessageBox.Show(ctrl.WD_Item);
-
-            //    }
-            //}
-            //_mainView.GetPanelItems().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
-            //List<IWindoorModel> lstwndr = new List<IWindoorModel>();
-            //foreach (UserControl uc in _mainView.GetPanelItems().Controls)
-            //{
-            //    for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-            //    {
-            //        IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-            //        if (uc.Name == wdm.WD_name)
-            //        {
-            //            wdm.WD_name = "Item " + itemCount;
-            //            lstwndr.Add(wdm);
-            //        }
-            //    }
-            //}
-            //lstwndr.Reverse();
-            //_quotationModel.Lst_Windoor.Clear();
-            //_quotationModel.Lst_Windoor = lstwndr;
-            //int itemCount = 1;
-            //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            //{
-            //    wdm.WD_name = "Item " + itemCount;
-            //    itemCount++;
-            //}
-            //_mainView.GetPanelItems().Invalidate();
-            #endregion
-        }
-        private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
-        {
-            toggle = !toggle;
-            if (toggle == true)
-            {
-                _basePlatformImagerUCPresenter.BringToFront_baseImager();
-            }
-            else if (toggle == false)
-            {
-                _basePlatformImagerUCPresenter.SendToBack_baseImager();
-            }
-        }
-
-           
-        
 
         #region Events 
         private void _mainView_SetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -5661,7 +5566,7 @@ namespace PresentationLayer.Presenter
         IMultiPanelModel mPanel_ParentModel;
         #endregion
         string mpnllvl = "";
-       
+
         #region ViewUpdate(Controls)
 
         private void Clearing_Operation()
