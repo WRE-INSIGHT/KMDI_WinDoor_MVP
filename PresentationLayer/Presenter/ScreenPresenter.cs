@@ -1,4 +1,5 @@
 ﻿using PresentationLayer.Views;
+using System.Windows.Forms;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -39,7 +40,8 @@ namespace PresentationLayer.Presenter
             SubscribeToEventSetup();
         }
 
-
+        int _screen_Width, _screen_Height;
+        decimal _factor;
         private void SubscribeToEventSetup()
         {
             _screenView.nudHeightValueChangedEventRaised += _screenViewnudHeightValueChangedEventRaised;
@@ -47,6 +49,10 @@ namespace PresentationLayer.Presenter
             _screenView.nudFactorValueChangedEventRaised += _screenView_nudFactorValueChangedEventRaised;
             _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised;
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
+
+            _screen_Width = _screenView.screen_width;
+            _screen_Height = _screenView.screen_height;
+            _factor = _screenView.screen_factor;
         }
 
         #region Events
@@ -76,6 +82,11 @@ namespace PresentationLayer.Presenter
 
         }
         #endregion
+
+        public void ComputeScreen()
+        {
+
+        }
 
         public IScreenView GetScreenView()
         {
