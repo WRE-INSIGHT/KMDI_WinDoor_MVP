@@ -416,7 +416,7 @@ namespace ModelLayer.Model.Quotation.Divider
         {
             int wd = Div_MPanelParent.MPanelImageRenderer_Width,
                 ht = Div_MPanelParent.MPanelImageRenderer_Height,
-                div_overlap = Div_FrameParent.Frame_Deduction,
+                div_overlap = (int)(10 * Div_MPanelParent.MPanelImageRenderer_Zoom),
                 divsize = 13;
             
             if (Div_Type == DividerType.Mullion)
@@ -453,7 +453,7 @@ namespace ModelLayer.Model.Quotation.Divider
         {
             int wd = Div_MPanelParent.MPanelImageRenderer_Width,
                 ht = Div_MPanelParent.MPanelImageRenderer_Height,
-                div_overlap = Div_FrameParent.Frame_Deduction,
+                div_overlap = (int)(10 * Div_MPanelParent.MPanelImageRenderer_Zoom),
                 divsize = 0;
 
             if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Window)

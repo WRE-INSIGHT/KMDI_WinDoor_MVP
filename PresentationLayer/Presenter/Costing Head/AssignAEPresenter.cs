@@ -264,6 +264,8 @@ namespace PresentationLayer.Presenter.Costing_Head
             //{
             //    row.HeaderCell.Value = (row.Index + 1).ToString();
             //}
+            _dgvClient.Refresh();
+
 
         }
         public void SetEnableThisView(bool enable)

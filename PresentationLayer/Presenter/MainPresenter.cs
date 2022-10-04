@@ -1399,8 +1399,8 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
 
-                FitControls_InsideMultiPanel();
-                Fit_MyControls_byControlsLocation();
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();
@@ -1417,8 +1417,8 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
 
-                FitControls_InsideMultiPanel();
-                Fit_MyControls_byControlsLocation();
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
             }
             _basePlatformPresenter.InvalidateBasePlatform();
             _basePlatformPresenter.Invalidate_flpMainControls();

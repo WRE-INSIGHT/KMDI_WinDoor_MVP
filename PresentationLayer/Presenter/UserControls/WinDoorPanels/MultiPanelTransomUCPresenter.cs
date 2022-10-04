@@ -823,14 +823,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_panelModel.Panel_Placement == "Last")
                         {
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                            {
-                                if (pnl.Panel_Placement == "Last")
-                                {
-                                    pnl.SetDimensionsToBind_using_ZoomPercentage();
-                                    pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
-                                }
-                            }
+
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
 
@@ -1028,7 +1021,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine(_multiPanelModel.MPanel_Width);
+           
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {
@@ -1069,6 +1062,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
+            Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
+            Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+            Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            Console.WriteLine("");
         }
 
         Color color = Color.Black;

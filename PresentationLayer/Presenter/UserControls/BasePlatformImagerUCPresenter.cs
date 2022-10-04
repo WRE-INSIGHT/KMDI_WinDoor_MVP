@@ -1090,7 +1090,6 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
-
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
 
                         objLocY += panelModel.PanelImageRenderer_Height;

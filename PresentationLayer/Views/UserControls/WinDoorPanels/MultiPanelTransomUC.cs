@@ -112,10 +112,18 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && _mpanelCmenuDeleteVisibility == true)
+            try
             {
-                cmenu_mulltiP.Show(new Point(MousePosition.X, MousePosition.Y));
+                if (e.Button == MouseButtons.Right && _mpanelCmenuDeleteVisibility == true)
+                {
+                    cmenu_mulltiP.Show(new Point(MousePosition.X, MousePosition.Y));
+                }
             }
+            catch (Exception)
+            {
+
+            }
+          
         }
 
         private void divCountToolStripMenuItem_Click(object sender, EventArgs e)

@@ -189,7 +189,6 @@ namespace PresentationLayer.Presenter.Costing_Head
             //    Console.WriteLine(i);       //	1
             //}
             
-            _dgvProj.Columns["Id"].Visible = false;
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
             _dgvProj.Columns["Emp_Id"].Visible = false;

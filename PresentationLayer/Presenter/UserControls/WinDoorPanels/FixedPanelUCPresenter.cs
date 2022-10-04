@@ -664,8 +664,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, pres_pnl);
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, pres_pnl);
                         }
                         _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                         _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();

@@ -856,6 +856,7 @@
             this.pnlMain.Size = new System.Drawing.Size(626, 495);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
+            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
             // openFileDialog1
             // 

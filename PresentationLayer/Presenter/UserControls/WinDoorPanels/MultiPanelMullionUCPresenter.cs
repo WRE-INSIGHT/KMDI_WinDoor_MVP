@@ -317,7 +317,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
 
                             }
-                            DisplayWD_dec += displayWidthDecimal;
+                            //DisplayWD_dec += displayWidthDecimal;
                             int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
 
                             int DisplayWD_singleDecimalPlace = 0;
@@ -328,27 +328,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                             }
-                            int panelSize = 0;
-                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                            {
-                                panelSize += mpnl.MPanel_Width;
-
-                            }
                             int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
                             int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
                           
 
-                            if (DisplayWD_dec_split.Count() > 1)
-                            {
-                                DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
-                            }
-                            int mpanelSize = 0;
-                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                            {
-                                mpanelSize += mpnl.MPanel_Width - 8;
-                            }
-                            suggest_Wd = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions) - mpanelSize) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
+                            //if (DisplayWD_dec_split.Count() > 1)
+                            //{
+                            //    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            //}
+                            //int mpanelSize = 0;
+                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            //{
+                            //    mpanelSize += mpnl.MPanel_Width;
+                            //}
+                            //suggest_Wd = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions) - mpanelSize) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
                             FlowDirection flow = FlowDirection.LeftToRight;
                             if (data.Contains("Transom"))
                             {
@@ -428,10 +422,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     //    _multiPanelModel.Fit_MyControls_Dimensions();
 
                                     //}
-                                    //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                    //_multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                                    _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
@@ -829,14 +822,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_panelModel.Panel_Placement == "Last")
                         {
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                            {
-                                if (pnl.Panel_Placement == "Last")
-                                {
-                                    pnl.SetDimensionsToBind_using_ZoomPercentage();
-                                    pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
-                                }
-                            }
+
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
 
@@ -889,7 +875,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _prev_divModel = divModel;
                             _frameModel.Lst_Divider.Add(divModel);
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
-
+                          
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
@@ -909,6 +895,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)mullionUC);
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                             mullionUCP.SetInitialLoadFalse();
+                            Console.WriteLine("Div Width to bind " + divModel.Div_WidthToBind);
+                            Console.WriteLine("Div ImageRenderer Width to bind " + divModel.DivImageRenderer_Width);
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }

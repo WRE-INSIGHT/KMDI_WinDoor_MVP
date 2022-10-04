@@ -104,26 +104,26 @@
             this.customerRefNoToolStripMenuItem,
             this.clearToolStripMenuItem});
             this.cmenu_dgvProj.Name = "cmenu_dgvProj";
-            this.cmenu_dgvProj.Size = new System.Drawing.Size(181, 92);
+            this.cmenu_dgvProj.Size = new System.Drawing.Size(169, 70);
             // 
             // assignCostEngrToolStripMenuItem
             // 
             this.assignCostEngrToolStripMenuItem.Name = "assignCostEngrToolStripMenuItem";
-            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assignCostEngrToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.assignCostEngrToolStripMenuItem.Text = "Assign Cost Engr";
             this.assignCostEngrToolStripMenuItem.Click += new System.EventHandler(this.assignCostEngrToolStripMenuItem_Click);
             // 
             // customerRefNoToolStripMenuItem
             // 
             this.customerRefNoToolStripMenuItem.Name = "customerRefNoToolStripMenuItem";
-            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customerRefNoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.customerRefNoToolStripMenuItem.Text = "Customer Ref. No";
             this.customerRefNoToolStripMenuItem.Click += new System.EventHandler(this.customerRefNoToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.clearToolStripMenuItem.Text = "Clear Assigned";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 

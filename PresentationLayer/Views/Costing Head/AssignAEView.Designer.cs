@@ -46,13 +46,13 @@
             this.dgv_Client = new System.Windows.Forms.DataGridView();
             this.dgv_AEIC = new System.Windows.Forms.DataGridView();
             this.dgv_Project = new System.Windows.Forms.DataGridView();
+            this.cmenu_dgvProject = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deletetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Save = new System.Windows.Forms.Button();
             this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AEICName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmenu_dgvProject = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deletetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Save = new System.Windows.Forms.Button();
             this.cmenu_dgvClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Client)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AEIC)).BeginInit();
@@ -227,36 +227,6 @@
             this.dgv_Project.TabIndex = 106;
             this.dgv_Project.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Project_RowPostPaint);
             // 
-            // ProjectName
-            // 
-            this.ProjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ProjectName.HeaderText = "Project Name";
-            this.ProjectName.Name = "ProjectName";
-            this.ProjectName.ReadOnly = true;
-            this.ProjectName.Width = 139;
-            // 
-            // AEICName
-            // 
-            this.AEICName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.AEICName.HeaderText = "AEIC";
-            this.AEICName.Name = "AEICName";
-            this.AEICName.ReadOnly = true;
-            this.AEICName.Width = 70;
-            // 
-            // ProjectId
-            // 
-            this.ProjectId.HeaderText = "ProjectId";
-            this.ProjectId.Name = "ProjectId";
-            this.ProjectId.ReadOnly = true;
-            this.ProjectId.Visible = false;
-            // 
-            // EmployeeId
-            // 
-            this.EmployeeId.HeaderText = "AEICId";
-            this.EmployeeId.Name = "EmployeeId";
-            this.EmployeeId.ReadOnly = true;
-            this.EmployeeId.Visible = false;
-            // 
             // cmenu_dgvProject
             // 
             this.cmenu_dgvProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -284,6 +254,34 @@
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // ProjectName
+            // 
+            this.ProjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ProjectName.HeaderText = "Project Name";
+            this.ProjectName.Name = "ProjectName";
+            this.ProjectName.ReadOnly = true;
+            this.ProjectName.Width = 139;
+            // 
+            // AEICName
+            // 
+            this.AEICName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.AEICName.HeaderText = "AEIC";
+            this.AEICName.Name = "AEICName";
+            this.AEICName.ReadOnly = true;
+            this.AEICName.Width = 70;
+            // 
+            // ProjectId
+            // 
+            this.ProjectId.HeaderText = "ProjectId";
+            this.ProjectId.Name = "ProjectId";
+            this.ProjectId.ReadOnly = true;
+            // 
+            // EmployeeId
+            // 
+            this.EmployeeId.HeaderText = "AEICId";
+            this.EmployeeId.Name = "EmployeeId";
+            this.EmployeeId.ReadOnly = true;
             // 
             // AssignAEView
             // 
@@ -331,10 +329,10 @@
         private System.Windows.Forms.DataGridView dgv_Project;
         private System.Windows.Forms.ContextMenuStrip cmenu_dgvProject;
         private System.Windows.Forms.ToolStripMenuItem deletetoolStripMenuItem;
+        private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectName;
         private System.Windows.Forms.DataGridViewTextBoxColumn AEICName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectId;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeId;
-        private System.Windows.Forms.Button btn_Save;
     }
 }
