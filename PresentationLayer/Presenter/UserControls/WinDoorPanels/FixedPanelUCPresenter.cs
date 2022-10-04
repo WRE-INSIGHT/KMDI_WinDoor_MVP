@@ -860,13 +860,20 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             string glassType = "";
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+            if (_panelModel.Panel_GlassThicknessDesc != null)
             {
-                glassType = "Tempered";
-            }
-            else
-            {
-                glassType = "";
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+                {
+                    glassType = "Tempered";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Unglazed"))
+                {
+                    glassType = "Unglazed";
+                }
+                else
+                {
+                    glassType = "";
+                }
             }
 
             Font drawFont = new Font("Times New Roman", font_size);
@@ -879,12 +886,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             (fixedpnl.ClientRectangle.Height / 2) + 15,
                                             fixedpnl.ClientRectangle.Width,
                                             10);
+            if (glassType == "Unglazed")
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
+                                      new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                      new SolidBrush(Color.Black),
+                                      rect,
+                                      drawFormat);
+            }
+            else
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
+                                        new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                        new SolidBrush(Color.Black),
+                                        rect,
+                                        drawFormat);
+            }
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
-                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
-                         new SolidBrush(Color.Black),
-                         rect,
-                         drawFormat);
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                              0,

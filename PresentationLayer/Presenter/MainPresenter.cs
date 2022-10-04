@@ -1750,6 +1750,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Columns.Add(CreateColumn("Laminated", "Laminated", "System.Boolean"));
 
             //single
+            _glassThicknessDT.Rows.Add(0.0f, "Unglazed", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Green", true, false, false, false, false);
@@ -1785,6 +1786,7 @@ namespace PresentationLayer.Presenter
 
             _glassTypeDT.Rows.Add("Annealed");
             _glassTypeDT.Rows.Add("Tempered");
+            _glassTypeDT.Rows.Add("Unglazed");
 
             _spacerDT.Rows.Add("Air");
             _spacerDT.Rows.Add("Argon");

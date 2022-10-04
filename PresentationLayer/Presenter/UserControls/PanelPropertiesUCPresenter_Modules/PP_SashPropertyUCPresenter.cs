@@ -350,7 +350,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             _panelModel.Panel_ButtHingeVisibility = true;
                         }
                     }
-                    else if (sel_sash == SashProfile_ArticleNo._6040)
+                    else if (sel_sash == SashProfile_ArticleNo._6040 && _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
 
@@ -466,7 +466,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             //do something 
                         }
                     }
-                    else if (sel_sash == SashProfile_ArticleNo._6041)
+                    else if (sel_sash == SashProfile_ArticleNo._6041 && _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
 

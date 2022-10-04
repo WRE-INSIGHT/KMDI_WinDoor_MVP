@@ -149,6 +149,7 @@
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\IScreenPresenter.cs" />
     <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\ScreenPresenter.cs" />
     <Compile Include="Presenter\SetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\SortItemPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
@@ -167,7 +169,9 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
@@ -392,6 +396,7 @@
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
+    <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
     <Compile Include="Views\ISortItemView.cs" />
     <Compile Include="Views\LoginView.cs">
@@ -637,6 +642,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverBladesPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
@@ -734,6 +740,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1187,6 +1199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.resx">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.resx">
+      <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>

@@ -639,7 +639,7 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameArtNo = value;
-                 
+
                 if (value == FrameProfile_ArticleNo._7502)
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._R676;
@@ -1097,6 +1097,18 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusRotoswingForSliding")
                 {
                     FrameProp_Height -= constants.panel_property_RotoswingForSlidingOptionsheight;
+                }
+                else if (mode == "minusLouver")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverOptionsheight;
+                }
+                else if (mode == "addLouverBlades")
+                {
+                    FrameProp_Height += constants.panel_property_LouverBladesOptionsheight;
+                }
+                else if (mode == "minusLouverBlades")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverBladesOptionsheight;
                 }
             }
             else if (objtype == "Div")

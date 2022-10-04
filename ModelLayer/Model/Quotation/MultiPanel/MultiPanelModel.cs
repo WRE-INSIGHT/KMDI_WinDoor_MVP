@@ -1036,7 +1036,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         else if (MPanel_Zoom <= 0.26f)
                         {
                             int pnlwdToBind = MPanel_WidthToBind - mpnlWd_deduct;
-                            if(pnl.Panel_Placement == "Somewhere in Between")
+                            if (pnl.Panel_Placement == "Somewhere in Between")
                             {
                                 pnlwdToBind += 2;
                             }
@@ -1320,11 +1320,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {
-                  
+
                     decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
                     decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
                     //wd = Convert.ToInt32(wd_dec);
-                    wd =  (int)(MPanel_Width * MPanel_Zoom);
+                    wd = (int)(MPanel_Width * MPanel_Zoom);
                     //int div_movement = ((MPanel_ParentModel.MPanel_DisplayWidth / totalpanel_inside_parentMpanel) - MPanel_DisplayWidth);
                     //decimal divMove_convert_dec = Convert.ToDecimal(div_movement * MPanel_Zoom);
                     //decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
@@ -2326,7 +2326,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public void Fit_MyControls_ToBindDimensions()
         {
             bool isEqual = isDisplaySizeEqual();
-          
+
             if (MPanelLst_Objects.Count() > 0)
             {
                 if (MPanel_Type == "Transom")
@@ -2395,7 +2395,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     }
 
 
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -2440,7 +2440,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             diff_MPanelWd_VS_MyCtrlsWidth--;
                                         }
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -2474,7 +2474,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             diff_MPanelWd_VS_MyCtrlsWidth++;
                                         }
                                     }
-                                   
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -3551,6 +3551,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_RotoswingForSlidingOptionsheight;
                 }
+                else if (mode == "addLouverBlades")
+                {
+                    MPanelProp_Height += constants.panel_property_LouverBladesOptionsheight;
+                }
+                else if (mode == "minusLouverBlades")
+                {
+                    MPanelProp_Height -= constants.panel_property_LouverBladesOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -3664,19 +3672,19 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl.Panel_HeightToBind++;
                                         diff_MPanelHt_VS_MyCtrlsHeight--;
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                             {
                                 if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                                 {
-                                    if(prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
                                     {
                                         mpnl.MPanel_HeightToBind++;
                                         diff_MPanelHt_VS_MyCtrlsHeight--;
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -3694,7 +3702,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl.Panel_HeightToBind--;
                                         diff_MPanelHt_VS_MyCtrlsHeight++;
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -3706,7 +3714,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanel_HeightToBind--;
                                         diff_MPanelHt_VS_MyCtrlsHeight++;
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -3735,7 +3743,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl.Panel_WidthToBind++;
                                         diff_MPanelWd_VS_MyCtrlsWidth--;
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -3747,7 +3755,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanel_WidthToBind++;
                                         diff_MPanelWd_VS_MyCtrlsWidth--;
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -3765,7 +3773,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl.Panel_WidthToBind--;
                                         diff_MPanelWd_VS_MyCtrlsWidth++;
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -3777,7 +3785,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanel_WidthToBind--;
                                         diff_MPanelWd_VS_MyCtrlsWidth++;
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -3803,7 +3811,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int totalPanelCount = MPanel_Divisions + 1;
                 foreach (IPanelModel pnl in MPanelLst_Panel)
                 {
-                    if(MPanel_Type == "Mullion")
+                    if (MPanel_Type == "Mullion")
                     {
                         string disp_wd_decimal = MPanel_DisplayWidth + "." + MPanel_DisplayWidthDecimal;
                         decimal displayWidthDecimal = 0;
@@ -3828,7 +3836,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             int EqualPanelWD = ((MPanel_Width - 20) / totalPanelCount);
                             pnl.Panel_Width = EqualPanelWD - (EqualDisplayWD - suggest_DisplayWD);
                         }
-                    }else if (MPanel_Type == "Transom")
+                    }
+                    else if (MPanel_Type == "Transom")
                     {
                         string disp_ht_decimal = MPanel_DisplayHeight + "." + MPanel_DisplayHeightDecimal;
                         decimal displayHeightDecimal = 0;
@@ -3916,7 +3925,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
             Fit_PanelDimensions();
-          
+
         }
 
         public void Fit_PanelDimensions()
@@ -3945,7 +3954,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_Height++;
                                         diff_MPanelHt_VS_MyCtrlsHeight--;
-                                    }else
+                                    }
+                                    else
                                     {
                                         if (MPanelLst_Panel.LastOrDefault() == pnl)
                                         {
@@ -3986,7 +3996,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             diff_MPanelHt_VS_MyCtrlsHeight++;
                                         }
                                     }
-                                   
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -4031,7 +4041,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             diff_MPanelWd_VS_MyCtrlsWidth--;
                                         }
                                     }
-                                    
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
@@ -4065,7 +4075,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             diff_MPanelWd_VS_MyCtrlsWidth++;
                                         }
                                     }
-                                   
+
                                 }
                             }
                             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)

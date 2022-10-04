@@ -44,6 +44,11 @@
         public int panel_property_DummyDHandleOptionsheight = 28;
         public int panel_property_PopUpHandleOptionsheight = 28;
         public int panel_property_RotoswingForSlidingOptionsheight = 28;
+        public int panel_property_TrackRailOptionsheight = 30;
+        public int panel_property_LouverOptionsheight = 75;
+        public int panel_property_LouverBladesOptionsheight = 28;
+
+
 
 
 

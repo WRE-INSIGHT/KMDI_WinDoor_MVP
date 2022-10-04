@@ -1852,17 +1852,24 @@ namespace PresentationLayer.Presenter
                                             GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                         }
                                     }
+                                    else if (pnl.Panel_GlassThickness == 0.0f)
+                                    {
+                                        GlassPrice += 0;
+                                    }
 
                                     //sealant for glass
                                     Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) / 6842));
+                                    if (pnl.Panel_GlassThickness != 0.0f)
+                                    {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                    }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                        {
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                        }
+                                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                        {
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                        }
                                     }
                                     #endregion
 
@@ -2561,17 +2568,24 @@ namespace PresentationLayer.Presenter
                                     GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                 }
                             }
+                            else if (Singlepnl.Panel_GlassThickness == 0.0f)
+                            {
+                                GlassPrice += 0;
+                            }
 
                             //sealant for glass
                             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) / 6842));
 
-                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                            if (Singlepnl.Panel_GlassThickness != 0.0f)
                             {
-                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                            }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                            {
-                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                }
+                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                }
                             }
                             #endregion
 

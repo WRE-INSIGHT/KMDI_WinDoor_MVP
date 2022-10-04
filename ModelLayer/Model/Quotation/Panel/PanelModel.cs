@@ -677,6 +677,19 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_LouverBladesCount { get; set; }
 
+        private bool _panel_louverBladesVisibility;
+        public bool Panel_LouverBladesVisibility
+        {
+            get
+            {
+                return _panel_louverBladesVisibility;
+            }
+            set
+            {
+                _panel_louverBladesVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
         #region Explosion
         private int _panelGlassID;
         public int PanelGlass_ID
@@ -1677,7 +1690,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (_panelMotorizedOptionVisibility == true)
                 {
                     if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
-                    { 
+                    {
                         Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
                     }
                     else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
@@ -1706,7 +1719,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
                         }
-                        else if(Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
                         }
@@ -3914,7 +3927,14 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else if (mode == "addGlass")
             {
+                //if (Panel_Type.Contains("Louver"))
+                //{
+                //    Panel_PropertyHeight += constants.panel_property_LouverOptionsheight;
+                //}
+                //else
+                //{
                 Panel_PropertyHeight += constants.panel_property_glassOptionsHeight;
+                //}
             }
             else if (mode == "addHandle")
             {
@@ -4115,6 +4135,18 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (mode == "minusRotoswingForSliding")
             {
                 Panel_PropertyHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
+            }
+            else if (mode == "minusLouver")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverOptionsheight;
+            }
+            else if (mode == "addLouverBlades")
+            {
+                Panel_PropertyHeight += constants.panel_property_LouverBladesOptionsheight;
+            }
+            else if (mode == "minusLouverBlades")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverBladesOptionsheight;
             }
 
         }
@@ -5280,26 +5312,18 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
                 }
-                //else if (Panel_HandleType == Handle_Type._D)
-                //{
-
-                //}
-                //else if (Panel_HandleType == Handle_Type._D_IO_Locking)
-                //{
-
-                //}
-                //else if (Panel_HandleType == Handle_Type._DummyD)
-                //{
-
-                //}
-                //else if (Panel_HandleType == Handle_Type._PopUp)
-                //{
-
-                //}
-                //else if (Panel_HandleType == Handle_Type._RotoswingForSliding)
-                //{
-
-                //}
+                else if (Panel_HandleType == Handle_Type._D)
+                {
+                    Panel_ScrewSetsArtNo = ScrewSets._DH613172;
+                }
+                else if (Panel_HandleType == Handle_Type._D_IO_Locking)
+                {
+                    Panel_ScrewSetsArtNo = ScrewSets._DH613180;
+                }
+                else if (Panel_HandleType == Handle_Type._DummyD)
+                {
+                    Panel_ScrewSetsArtNo = ScrewSets._DH613176;
+                }
             }
             else if (Panel_SashPropertyVisibility == false)
             {

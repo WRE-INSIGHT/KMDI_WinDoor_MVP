@@ -72,7 +72,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.AdjustPropertyPanelHeight("minusMC");
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMC");
                     }
-                }
+                } 
 
                 if (_panelModel.Panel_HandleType == Handle_Type._Rotoswing)
                 {
@@ -99,6 +99,32 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusMVD");
                     _panelModel.AdjustPropertyPanelHeight("minusMVD");
                 }
+                else if (_panelModel.Panel_HandleType == Handle_Type._D)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusDHandle");
+                    _panelModel.AdjustPropertyPanelHeight("minusDHandle");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._D_IO_Locking)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusDHandleIOLocking");
+                    _panelModel.AdjustPropertyPanelHeight("minusDHandleIOLocking");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._DummyD)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusDummyDHandle");
+                    _panelModel.AdjustPropertyPanelHeight("minusDummyDHandle");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._PopUp)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusPopUpHandle");
+                    _panelModel.AdjustPropertyPanelHeight("minusPopUpHandle");
+                }
+                else if (_panelModel.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusRotoswingForSliding");
+                    _panelModel.AdjustPropertyPanelHeight("minusRotoswingForSliding");
+                }
+
 
                 if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
                 {
@@ -126,7 +152,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                         _panelModel.AdjustPropertyPanelHeight("minusCornerDrive");
                     }
-                }
+                } 
                 else
                 {
                     if (_panelModel.Panel_ExtensionOptionsVisibility == true)

@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_SlidingTypePropertyUCPresenter _pp_slidingTypePropertyUCP;
         private IPP_RollerPropertyUCPresenter _pp_rollerPropertyUCPresenter;
         private IPP_AliminumTrackPropertyUCPresenter _pp_AliminumTrackPropertyUCPresenter;
+        private IPP_LouverBladesPropertyUCPresenter _pp_louverBladesPropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -54,7 +55,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_MiddleCloserPropertyUCPresenter pp_middleCloserPropertyUCP,
                                           IPP_SlidingTypePropertyUCPresenter pp_slidingTypePropertyUCP,
                                           IPP_RollerPropertyUCPresenter pp_rollerPropertyUCPresenter,
-                                          IPP_AliminumTrackPropertyUCPresenter pp_AliminumTrackPropertyUCPresenter)
+                                          IPP_AliminumTrackPropertyUCPresenter pp_AliminumTrackPropertyUCPresenter,
+                                          IPP_LouverBladesPropertyUCPresenter pp_louverBladesPropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -74,6 +76,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_slidingTypePropertyUCP = pp_slidingTypePropertyUCP;
             _pp_rollerPropertyUCPresenter = pp_rollerPropertyUCPresenter;
             _pp_AliminumTrackPropertyUCPresenter = pp_AliminumTrackPropertyUCPresenter;
+            _pp_louverBladesPropertyUCPresenter = pp_louverBladesPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -516,15 +519,37 @@ namespace PresentationLayer.Presenter.UserControls
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addExtension");
                     }
                 }
-                if (_panelModel.Panel_Type.Contains("Louver") == false)
-                {
-                    IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
-                    _pnlPanelSpecs.Controls.Add(glassProp);
-                    glassProp.Dock = DockStyle.Top;
-                    glassProp.BringToFront();
 
+
+                if (_panelModel.Panel_Type.Contains("Louver") == true)
+                {
+                    //_panelModel.AdjustPropertyPanelHeight("minusLouver");
+                    //_panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouver");
+                    _panelModel.Panel_LouverBladesVisibility = true;
+
+                    _panelModel.AdjustPropertyPanelHeight("addLouverBlades");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                    }
+                    IPP_LouverBladesPropertyUCPresenter blades = _pp_louverBladesPropertyUCPresenter.CreateNewInstance(_unityC, _panelModel);
+                    UserControl bladesProp = (UserControl)blades.GetIPP_LouverBladesPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(bladesProp);
+                    bladesProp.Dock = DockStyle.Top;
+                    bladesProp.BringToFront();
                 }
+
+                IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
+                UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
+                _pnlPanelSpecs.Controls.Add(glassProp);
+                glassProp.Dock = DockStyle.Top;
+                glassProp.BringToFront();
+                glassProp.Height = 30;
+
+
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
                 UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
                 _pnlPanelSpecs.Controls.Add(gbarProp);

@@ -60,6 +60,7 @@ namespace ModelLayer.Model.Quotation.Panel
         bool Panel_RotaryOptionsVisibility { get; set; }
         int Panel_HandleOptionsHeight { get; set; }
         int Panel_LouverBladesCount { get; set; }
+        bool Panel_LouverBladesVisibility { get; set; }
         Color Panel_BackColor { get; set; }
 
         #region Explosion

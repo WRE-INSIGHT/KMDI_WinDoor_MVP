@@ -975,14 +975,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             string glassType = "";
-            if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+            if (_panelModel.Panel_GlassThicknessDesc != null)
             {
-                glassType = "Tempered";
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+                {
+                    glassType = "Tempered";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Unglazed"))
+                {
+                    glassType = "Unglazed";
+                }
+                else
+                {
+                    glassType = "";
+                }
             }
-            else
-            {
-                glassType = "";
-            }
+
 
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
@@ -1006,11 +1014,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 in_or_out = "Inward";
             }
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
-                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
-                         new SolidBrush(Color.Black),
-                         rect,
-                         drawFormat);
+            if (glassType == "Unglazed")
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
+                                      new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                      new SolidBrush(Color.Black),
+                                      rect,
+                                      drawFormat);
+            }
+            else
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
+                                        new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                        new SolidBrush(Color.Black),
+                                        rect,
+                                        drawFormat);
+            }
+
 
             g.DrawString(in_or_out,
                          new Font("Segoe UI", 8.0f, FontStyle.Bold),
