@@ -119,9 +119,13 @@
     </Compile>
     <Compile Include="Presenter\ChangeItemColorPresenter.cs" />
     <Compile Include="Presenter\CostEngrLandingPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\AddProjectPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\AssignAEPresenter.cs" />
     <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\CostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\Costing Head\CustomerRefNoPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\IAddProjectPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\IAssignAEPresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\ICostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\Costing Head\ICustomerRefNoPresenter.cs" />
@@ -305,6 +309,18 @@
     <Compile Include="Views\CostEngrLandingView.Designer.cs">
       <DependentUpon>CostEngrLandingView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\AddProjectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\AddProjectView.Designer.cs">
+      <DependentUpon>AddProjectView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Costing Head\AssignAEView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\AssignAEView.Designer.cs">
+      <DependentUpon>AssignAEView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Costing Head\AssignProjectsView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +339,8 @@
     <Compile Include="Views\Costing Head\CustomerRefNoView.Designer.cs">
       <DependentUpon>CustomerRefNoView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\IAddProjectView.cs" />
+    <Compile Include="Views\Costing Head\IAssignAEView.cs" />
     <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
     <Compile Include="Views\Costing Head\ICostEngrEmployeeView.cs" />
     <Compile Include="Views\Costing Head\ICustomerRefNoView.cs" />
@@ -1002,6 +1020,12 @@
     <EmbeddedResource Include="Views\CostEngrLandingView.resx">
       <DependentUpon>CostEngrLandingView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\AddProjectView.resx">
+      <DependentUpon>AddProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\AssignAEView.resx">
+      <DependentUpon>AssignAEView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Costing Head\AssignProjectsView.resx">
       <DependentUpon>AssignProjectsView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1417,7 +1441,17 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -123,6 +123,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         void Fit_EqualPanel_ToBindDimensions();
         void Fit_PanelDimensions();
         bool isDisplaySizeEqual();
+        void Fit_MyControls_ImagersToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl);
 
         #endregion
     }

@@ -49,5 +49,10 @@ namespace CommonComponents
         {
             controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
         }
+
+        public static void RaiseDatagridviewRowStateChangedEvent(object objectRaisingEvent, DataGridViewRowStateChangedEventHandler controlEventHandlerRaised, DataGridViewRowStateChangedEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using ModelLayer.Model.Project;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
 {
@@ -21,5 +22,12 @@ namespace ServiceLayer.Services.ProjectQuoteServices
                                            int pq_QuoteId,
                                            DateTime? pq_DateAssigned
                                            );
+        Task<DataTable> Get_AEICByCostEngrID(string searchStr, int user_id, string user_acctType);
+        string CheckProjectAEAssignment(string Project_Id, string Employee_Id);
+        Task<DataTable> Get_AEICByProjectID(string projectId);
+        Task SaveAssignAEIC(string Employee_Id, string Project_Id);
+        Task<DataTable> GetProvince();
+        Task<DataTable> GetCityAreaBy_Province(string province);
+        Task SaveProject(IProjectModel _projectModel);
     }
 }
