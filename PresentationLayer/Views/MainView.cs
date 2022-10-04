@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 namespace PresentationLayer.Views
 {
@@ -219,7 +222,7 @@ namespace PresentationLayer.Views
         public event EventHandler SortItemButtonClickEventRaised;
         public event EventHandler existingItemToolStripMenuItemClickEventRaised;
         public event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
-
+        public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -230,11 +233,20 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-
+        [DllImport("winmm.dll")]
+        public static extern uint mciSendString(
+    string lpstrCommand,
+    StringBuilder lpstrReturnString,
+    int uReturnLength,
+    IntPtr hWndCallback
+);
         private void MainView_Load(object sender, EventArgs e)
         {
             pnlProperties.Size = new Size(185, 629);
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
+            mciSendString(@"close temp_alias", null, 0, IntPtr.Zero);
+            mciSendString(@"open ""C:\Users\KMDI\Downloads\loki.mp3"" alias temp_alias", null, 0, IntPtr.Zero);
+            mciSendString("play temp_alias repeat", null, 0, IntPtr.Zero);
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)
@@ -533,6 +545,17 @@ namespace PresentationLayer.Views
         private void SetGlassToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SetGlassToolStripMenuItemClickRaiseEvent, e);
+        }
+
+        private void projectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, addProjectsToolStripMenuItemClickEventRaised, e);
+            
+        }
+
+        private void pnlMain_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

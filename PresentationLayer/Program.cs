@@ -1,4 +1,6 @@
-﻿using ModelLayer.Model.Quotation.Concrete;
+﻿using ModelLayer.Model.AddProject;
+using ModelLayer.Model.Project;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
@@ -73,6 +75,12 @@ namespace PresentationLayer
                 .RegisterType<IAssignProjectsView, AssignProjectsView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IAssignProjectsPresenter, AssignProjectsPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IAssignAEView, AssignAEView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAssignAEPresenter, AssignAEPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IAddProjectView, AddProjectView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAddProjectPresenter, AddProjectPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<ICostEngrEmployeeView, CostEngrEmployeeView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICostEngrEmployeePresenter, CostEngrEmployeePresenter>(new ContainerControlledLifetimeManager())
 
@@ -105,7 +113,8 @@ namespace PresentationLayer
 
                 .RegisterType<IConcreteServices, ConcreteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteModel, ConcreteModel>(new ContainerControlledLifetimeManager())
-
+                 
+                .RegisterType<IProjectModel, ProjectModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICustomerRefNoServices, CustomerRefNoServices>(new ContainerControlledLifetimeManager())

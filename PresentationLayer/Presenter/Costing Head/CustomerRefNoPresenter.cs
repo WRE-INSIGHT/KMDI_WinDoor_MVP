@@ -44,6 +44,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             SubscribeToEventsSetup();
         }
 
+
         private void SubscribeToEventsSetup()
         {
             _custRefNoView.CustomerRefNoViewLoadEventRaised += _custRefNoView_CustomerRefNoViewLoadEventRaised;
@@ -62,9 +63,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             try
             {
                 ICustomerRefNoModel custRefNoModel = _custRefNoServices.AddCustRefNo(0, _custRefNoView.CustomerReferenceNo);
-
                 int inserted_row = await _custRefNoServices.Insert_CustRefNo(_userModel.UserID, custRefNoModel);
-
                 if (inserted_row > 0)
                 {
                     await Load_ChkListCustRefNo("");
@@ -80,7 +79,6 @@ namespace PresentationLayer.Presenter.Costing_Head
                 MessageBox.Show("Error Message: " + ex.Message);
             }
         }
-
         private async void _custRefNoView_btnAcceptClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -106,7 +104,6 @@ namespace PresentationLayer.Presenter.Costing_Head
                             foreach (DataGridViewRow row in _dgvProjSelectedRows)
                             {
                                 await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
-
                                 foreach (DataRowView chkListVal in _chkListCustRefNo.CheckedItems)
                                 {
                                     int custRefNo_id = Convert.ToInt32(chkListVal["Id"]);
@@ -119,7 +116,6 @@ namespace PresentationLayer.Presenter.Costing_Head
                                                                                              emp_id,
                                                                                              quote_id,
                                                                                              null);
-
                                     await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
                                 }
                             }
@@ -128,7 +124,6 @@ namespace PresentationLayer.Presenter.Costing_Head
                     else if (_dgvProjSelectedRows.Count == 1)
                     {
                         DataGridViewRow row_0 = _dgvProjSelectedRows[0];
-
                         if (row_0.Cells["Emp_Id"].Value.ToString() != "")
                         {
                             //update ProjectQuote
@@ -147,7 +142,6 @@ namespace PresentationLayer.Presenter.Costing_Head
                                                                                              quote_id,
                                                                                              null//DateTime.Now
                                                                                              );
-
                                     await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
                                 }
                             }

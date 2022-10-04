@@ -3,6 +3,7 @@ using ServiceLayer.CommonServices;
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using ModelLayer.Model.Project;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
 {
@@ -95,6 +96,47 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefId, int user_id, string user_role)
         {
             return await _projQuoteRepo.Get_QuoteNo_ByProjectID_ByCUstRefNo(projId, custRefId, user_id, user_role);
+        }
+
+        public async Task<DataTable> Get_AEICByCostEngrID(string searchStr, int user_id, string user_acctType)
+        {
+            return await _projQuoteRepo.Get_AEICByCostEngrID(searchStr, user_id, user_acctType);
+        }
+
+        public string CheckProjectAEAssignment(string Project_Id, string Employee_Id)
+        {
+            return _projQuoteRepo.Check_ProjectAEAssignment(Project_Id, Employee_Id);
+        }
+
+        public async Task<DataTable> Get_AEICByProjectID(string projectId)
+        {
+            return await _projQuoteRepo.Get_AEICByProjectID(projectId);
+        }
+
+        public async Task SaveAssignAEIC(string Employee_Id, string Project_Id)
+        {
+            await _projQuoteRepo.SaveAssignAEIC(Employee_Id, Project_Id);
+        }
+
+        public async Task<DataTable> GetProvince()
+        {
+            return await _projQuoteRepo.GetProvince();
+        }
+
+        public async Task<DataTable> GetCityAreaBy_Province(string province)
+        {
+            return await _projQuoteRepo.GetCityAreaBy_Province(province);
+        }
+
+        public async Task SaveProject(IProjectModel projectModel)
+        {
+            ValidateModel(projectModel);
+            await _projQuoteRepo.SaveProject(projectModel);
+        }
+
+        private void ValidateModel(IProjectModel projectModel)
+        {
+            _modelCheck.ValidateModelDataAnnotations(projectModel);
         }
     }
 }

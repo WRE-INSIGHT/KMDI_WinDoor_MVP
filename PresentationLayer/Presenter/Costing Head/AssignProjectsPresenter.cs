@@ -177,9 +177,18 @@ namespace PresentationLayer.Presenter.Costing_Head
             foreach (DataGridViewColumn col in _dgvProj.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+               
             }
+            //for (int i = 0; i <= 3; i++)  // output:
+            //{                           //	0
+            //    if (_dgvProj.Columns(i).Header.Contains("_") == true)
+            //    {
+            //        _dgvProj.Columns(i).visible = false;
+            //    }
 
-            _dgvProj.Columns["Id"].Visible = false;
+            //    Console.WriteLine(i);       //	1
+            //}
+            
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
             _dgvProj.Columns["Emp_Id"].Visible = false;

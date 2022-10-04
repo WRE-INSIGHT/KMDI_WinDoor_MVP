@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Project\IProjectModel.cs" />
+    <Compile Include="Model\Project\ProjectModel.cs" />
     <Compile Include="Model\CustomerRefNo\CustomerRefNoModel.cs" />
     <Compile Include="Model\CustomerRefNo\ICustomerRefNoModel.cs" />
     <Compile Include="Model\ProjectQuote\IProjectQuoteModel.cs" />
