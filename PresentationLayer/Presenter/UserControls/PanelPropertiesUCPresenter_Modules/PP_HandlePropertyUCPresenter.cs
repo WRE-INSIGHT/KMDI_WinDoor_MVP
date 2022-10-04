@@ -1918,7 +1918,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             }
             else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
             {
-                _panelModel.Panel_HandleType = Handle_Type._Rio;
+                _panelModel.Panel_HandleType = Handle_Type._Rotoline;
             }
 
             Base_Color base_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
@@ -2237,7 +2237,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
                     _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
                 }
-                
+
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -2262,15 +2262,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                 _panelModel.Panel_PopUpHandleOptionVisibilty = true;
                 _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-                
-                    if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
-                    {
-                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
-                    }
-                    else if (base_color == Base_Color._DarkBrown)
-                    {
-                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
-                    }
+
+                if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
+                {
+                    _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
+                }
+                else if (base_color == Base_Color._DarkBrown)
+                {
+                    _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
+                }
 
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
 
@@ -2296,36 +2296,36 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 _panelModel.Panel_DummyDHandleOptionVisibilty = false;
                 _panelModel.Panel_PopUpHandleOptionVisibilty = false;
                 _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = true;
-                 
-                    if (inside_color == Foil_Color._None)
+
+                if (inside_color == Foil_Color._None)
+                {
+                    if (base_color == Base_Color._White)
                     {
-                        if (base_color == Base_Color._White)
-                        {
                         _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
-                        }
-                        else if (base_color == Base_Color._DarkBrown)
-                        {
+                    }
+                    else if (base_color == Base_Color._DarkBrown)
+                    {
                         _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
-                        }
-                        else if (base_color == Base_Color._Ivory)
-                        {
+                    }
+                    else if (base_color == Base_Color._Ivory)
+                    {
                         _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
-                        }
                     }
-                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
-                        inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
-                    {
+                }
+                else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                {
                     _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
-                    }
-                    else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
-                             inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
-                             inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
-                             inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
-                    {
+                }
+                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
+                {
                     _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
-                    }
-                 
+                }
+
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");
 
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
@@ -2337,7 +2337,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustHandlePropertyHeight("addRotoswingForSliding");
             }
-             
+
             _initialLoad = false;
         }
 
