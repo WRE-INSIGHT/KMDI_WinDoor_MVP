@@ -1916,6 +1916,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             {
                 _panelModel.Panel_HandleType = Handle_Type._D;
             }
+            else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+            {
+                _panelModel.Panel_HandleType = Handle_Type._Rio;
+            }
 
             Base_Color base_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
             Foil_Color inside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
