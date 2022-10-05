@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.3</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -153,6 +153,7 @@
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\IScreenPresenter.cs" />
     <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\ScreenPresenter.cs" />
     <Compile Include="Presenter\SetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\SortItemPresenter.cs" />
     <Compile Include="Presenter\UserControls\BasePlatformImagerUCPresenter.cs" />
@@ -171,6 +173,10 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_DHandlePropertyUCPresenter.cs" />
@@ -408,6 +414,7 @@
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
+    <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
     <Compile Include="Views\ISortItemView.cs" />
     <Compile Include="Views\LoginView.cs">
@@ -653,6 +660,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_GlassPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverBladesPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
@@ -666,6 +674,7 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_RotoswingPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SashPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_SlidingTypePropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_TrackRailPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_2dHingePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -750,6 +759,12 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -827,6 +842,12 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.Designer.cs">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
+      <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SortItemUC.cs">
       <SubType>UserControl</SubType>
@@ -1203,6 +1224,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.resx">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.resx">
+      <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1241,6 +1265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_SlidingTypePropertyUC.resx">
       <DependentUpon>PP_SlidingTypePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
+      <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\SortItemUC.resx">
       <DependentUpon>SortItemUC.cs</DependentUpon>

@@ -888,8 +888,9 @@ namespace PresentationLayer.Presenter
         }
 
         public void ItemCostingPoints()
-
         {
+            _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 foreach (IFrameModel fr in wdm.lst_frame)
@@ -1374,10 +1375,10 @@ namespace PresentationLayer.Presenter
                                         }
 
                                         WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
-                                        WeatherBarFastenerPrice += (fr.Frame_Width / 300) * WeatherBarFastenerPrice;
+                                        WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
                                         WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
-                                        GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * pnl.Panel_AluminumTrackQty;
-                                        AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * pnl.Panel_AluminumTrackQty;
+                                        GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                        AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
 
                                         if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
                                             pnl.Panel_Overlap_Sash == OverlapSash._Right)
@@ -1594,14 +1595,14 @@ namespace PresentationLayer.Presenter
                                     SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
                                     SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
 
-                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                    {
-                                        GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                    }
-                                    else
-                                    {
-                                        GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                    }
+                                    //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    //{
+                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                    //}
+                                    //else
+                                    //{
+                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    //}
 
                                     #endregion
 
@@ -1851,17 +1852,24 @@ namespace PresentationLayer.Presenter
                                             GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                         }
                                     }
+                                    else if (pnl.Panel_GlassThickness == 0.0f)
+                                    {
+                                        GlassPrice += 0;
+                                    }
 
                                     //sealant for glass
                                     Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) / 6842));
+                                    if (pnl.Panel_GlassThickness != 0.0f)
+                                    {
 
-                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                    }
-                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                                    {
-                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                        {
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                        }
+                                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                        {
+                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                        }
                                     }
                                     #endregion
 
@@ -2089,7 +2097,7 @@ namespace PresentationLayer.Presenter
                                 }
 
                                 WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
-                                WeatherBarFastenerPrice += (fr.Frame_Width / 300) * WeatherBarFastenerPrice;
+                                WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300) * BarFastenerPricePerPiece;
                                 WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
                                 GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
                                 AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
@@ -2560,17 +2568,24 @@ namespace PresentationLayer.Presenter
                                     GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                 }
                             }
+                            else if (Singlepnl.Panel_GlassThickness == 0.0f)
+                            {
+                                GlassPrice += 0;
+                            }
 
                             //sealant for glass
                             Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) / 6842));
 
-                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                            if (Singlepnl.Panel_GlassThickness != 0.0f)
                             {
-                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                            }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                            {
-                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                }
+                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                {
+                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                }
                             }
                             #endregion
 
@@ -2612,18 +2627,29 @@ namespace PresentationLayer.Presenter
                                          Math.Round(ShootBoltNonReversePrice, 2) +
                                          Math.Round(StrikerPrice, 2) +
                                          Math.Round(LatchDeadboltStrikerPrice, 2) +
-                                         Math.Round(ExtensionPrice, 2);
+                                         Math.Round(ExtensionPrice, 2) +
+                                         Math.Round(RollerPrice, 2) +
+                                         Math.Round(StrikerLRPrice, 2);
 
                 AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                        Math.Round(GbPrice, 2) +
                                        Math.Round(GeorgianBarCost, 2) +
                                        Math.Round(CoverProfileCost, 2) +
-                                       Math.Round(GlazingGasketPrice, 2);
+                                       Math.Round(GlazingGasketPrice, 2) +
+                                       Math.Round(WeatherBarPrice, 2) +
+                                       Math.Round(WeatherBarFastenerPrice, 2) +
+                                       Math.Round(WaterSeepagePrice, 2) +
+                                       Math.Round(GuideTrackPrice, 2) +
+                                       Math.Round(AlumTrackPrice, 2) +
+                                       Math.Round(InterlockPrice, 2) +
+                                       Math.Round(ExtensionForInterlockPrice, 2);
 
                 AccesorriesCost = Math.Round(EndCapPrice, 2) +
                                   Math.Round(MechJointPrice, 2) +
                                   Math.Round(GBSpacerPrice, 2) +
-                                  Math.Round(PlasticWedgePrice, 2);
+                                  Math.Round(PlasticWedgePrice, 2) +
+                                  Math.Round(SealingBlockPrice, 2);
+
 
                 MaterialCost = Math.Round(FramePrice, 2) +
                                Math.Round(FrameReinPrice, 2) +

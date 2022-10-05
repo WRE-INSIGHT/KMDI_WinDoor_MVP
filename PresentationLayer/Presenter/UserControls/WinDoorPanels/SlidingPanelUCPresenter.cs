@@ -513,7 +513,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Left)
             {
-                if(isLeft == true)
+                if (isLeft == true)
                 {
                     int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
                     if (_multiPanelModel.MPanel_DividerEnabled)
@@ -531,12 +531,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                     }
                 }
-               
+
                 isLeft = false;
                 _mouseDown = false;
-              
-                
-                
+
+
+
             }
         }
         private void _slidingPanelUC_slidingPanelUCMouseDownEventRaised(object sender, MouseEventArgs e)
@@ -1380,7 +1380,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
 
-
+            string glassType = "";
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            {
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+                {
+                    glassType = "Tempered";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Unglazed"))
+                {
+                    glassType = "Unglazed";
+                }
+                else
+                {
+                    glassType = "";
+                }
+            }
 
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
@@ -1404,13 +1419,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             sliding.ClientRectangle.Width,
                                             10);
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
-                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
-                         new SolidBrush(Color.Black),
-                         rect,
-                         drawFormat);
-
-
+            if (glassType == "Unglazed")
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
+                                      new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                      new SolidBrush(Color.Black),
+                                      rect,
+                                      drawFormat);
+            }
+            else
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
+                                        new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                        new SolidBrush(Color.Black),
+                                        rect,
+                                        drawFormat);
+            }
 
             if (_timer_count != 0 && _timer_count < 8)
             {

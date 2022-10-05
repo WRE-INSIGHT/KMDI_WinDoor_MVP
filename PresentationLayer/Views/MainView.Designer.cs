@@ -87,6 +87,7 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -491,7 +492,8 @@
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.ViewImagerToolStripButton1});
+            this.ViewImagerToolStripButton1,
+            this.SetGlassToolStripMenuItem});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -665,6 +667,18 @@
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.ViewImagerToolStripButton1.Text = "View Imager";
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
+            // SetGlassToolStripMenuItem
+            // 
+            this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
+            this.SetGlassToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SetGlassToolStripMenuItem.Name = "SetGlassToolStripMenuItem";
+            this.SetGlassToolStripMenuItem.Size = new System.Drawing.Size(24, 29);
+            this.SetGlassToolStripMenuItem.Text = "Set Glass";
+            this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
+            this.SetGlassToolStripMenuItem.Visible = false;
+            this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
             // 
             // pnlRight
             // 
@@ -1078,5 +1092,6 @@
         private System.Windows.Forms.ToolStripMenuItem addExistingItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton SetGlassToolStripMenuItem;
     }
 }

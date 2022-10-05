@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter
         IDividerModel DivModel_forDMSelection { get; }
         IPanelModel PrevPnlModel_forDMSelection { get; }
         IPanelModel NxtPnlModel_forDMSelection { get; }
+        IPanelModel PnlModel_forGlassSelection();
         DataTable GlassThicknessDT { get; set; }
         DataTable GlassTypeDT { get; set; }
         DataTable GlassColorDT { get; set; }

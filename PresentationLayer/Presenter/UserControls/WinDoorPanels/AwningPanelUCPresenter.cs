@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommonComponents;
-using ModelLayer.Model.Quotation.Frame;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
-using ModelLayer.Model.Quotation.Panel;
-using Unity;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using ModelLayer.Model.Quotation.MultiPanel;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Divider;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.CommonMethods;
-using ServiceLayer.Services.DividerServices;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
+using ServiceLayer.Services.DividerServices;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
-using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -247,8 +243,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _panelModel,
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
-                                                        //_multiPanelMullionImagerUCP,
-                                                        //_multiPanelTransomImagerUCP);
+                //_multiPanelMullionImagerUCP,
+                //_multiPanelTransomImagerUCP);
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
@@ -389,6 +385,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             #endregion
 
+            string glassType = "";
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            {
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+                {
+                    glassType = "Tempered";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Unglazed"))
+                {
+                    glassType = "Unglazed";
+                }
+                else
+                {
+                    glassType = "";
+                }
+            }
+
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
@@ -399,11 +412,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             awning.ClientRectangle.Width,
                                             10);
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
-                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
-                         new SolidBrush(Color.Black),
-                         rect,
-                         drawFormat);
+            if (glassType == "Unglazed")
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
+                                      new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                      new SolidBrush(Color.Black),
+                                      rect,
+                                      drawFormat);
+            }
+            else
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
+                                        new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                        new SolidBrush(Color.Black),
+                                        rect,
+                                        drawFormat);
+            }
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
@@ -475,8 +499,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
 
-        public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                      IPanelModel panelModel, 
+        public IAwningPanelUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                      IPanelModel panelModel,
                                                       IFrameModel frameModel,
                                                       IMainPresenter mainPresenter,
                                                       IFrameUCPresenter frameUCP)

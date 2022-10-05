@@ -206,6 +206,11 @@ namespace PresentationLayer.Presenter
                 _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
                 _Glass1Description = _createNewGlassView.GlassThickness1.Value + " mm " + _GlassType1 + " " + _createNewGlassView.Color1().Text + " Low-e";
             }
+            else if (_GlassType1.ToUpper().Contains("UNGLAZED"))
+            {
+                _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
+                _Glass1Description = _GlassType1;
+            }
             else
             {
                 _GlassType1 = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_GlassType1.ToLower());
@@ -396,8 +401,7 @@ namespace PresentationLayer.Presenter
                     _mainPresenter.GlassThicknessDT = _glassThicknessDT;
                     _createNewGlassView.CloseThis();
                 }
-            }
-
+            } 
             else
             {
                 _glassThicknessDT.Rows.Add(CreateNewGlass_Datarow());

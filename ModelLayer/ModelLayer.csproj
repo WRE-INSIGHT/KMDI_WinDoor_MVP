@@ -61,6 +61,8 @@
     <Compile Include="Model\Quotation\Panel\IPanelModel.cs" />
     <Compile Include="Model\Quotation\Panel\PanelModel.cs" />
     <Compile Include="Model\Quotation\QuotationModel.cs" />
+    <Compile Include="Model\Quotation\Screen\IScreenModel.cs" />
+    <Compile Include="Model\Quotation\Screen\ScreenModel.cs" />
     <Compile Include="Model\Quotation\WinDoor\IWindoorModel.cs" />
     <Compile Include="Model\Quotation\WinDoor\WindoorModel.cs" />
     <Compile Include="Model\User\IUserLoginModel.cs" />

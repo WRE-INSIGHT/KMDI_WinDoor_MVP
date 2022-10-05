@@ -280,9 +280,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -328,9 +330,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -376,9 +380,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -423,9 +429,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -471,9 +479,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -519,9 +529,11 @@
                           <Style>Solid</Style>
                         </BottomBorder>
                         <LeftBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </LeftBorder>
                         <RightBorder>
+                          <Color>White</Color>
                           <Style>Solid</Style>
                         </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
@@ -648,6 +660,12 @@
                         <TopBorder>
                           <Style>Solid</Style>
                         </TopBorder>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                       </Style>
                     </Rectangle>
                   </CellContents>
@@ -696,6 +714,12 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                       </Style>
                     </Rectangle>
                   </CellContents>
@@ -746,6 +770,12 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                       </Style>
                     </Rectangle>
                   </CellContents>
@@ -783,6 +813,12 @@
                         <BottomBorder>
                           <Style>Solid</Style>
                         </BottomBorder>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -815,6 +851,12 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1022,6 +1064,12 @@
                         <TopBorder>
                           <Style>Solid</Style>
                         </TopBorder>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
                       </Style>
                     </Rectangle>
                   </CellContents>

@@ -186,7 +186,7 @@ namespace PresentationLayer.Views
                 {
 
                 }
-              
+
             }
         }
 
@@ -221,6 +221,7 @@ namespace PresentationLayer.Views
         public event DragEventHandler ItemsDragEventRaiseEvent;
         public event EventHandler SortItemButtonClickEventRaised;
         public event EventHandler existingItemToolStripMenuItemClickEventRaised;
+        public event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
         public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
 
         public MainView()
@@ -476,7 +477,7 @@ namespace PresentationLayer.Views
 
         private void CostingItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void slidingTopViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -531,6 +532,11 @@ namespace PresentationLayer.Views
         private void itemListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CostingItemsToolStripMenuItemClickRaiseEvent, e);
+        }
+
+        private void SetGlassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, SetGlassToolStripMenuItemClickRaiseEvent, e);
         }
 
         private void projectToolStripMenuItem_Click(object sender, EventArgs e)
