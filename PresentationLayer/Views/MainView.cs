@@ -232,20 +232,12 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-        [DllImport("winmm.dll")]
-        public static extern uint mciSendString(
-    string lpstrCommand,
-    StringBuilder lpstrReturnString,
-    int uReturnLength,
-    IntPtr hWndCallback
-);
+        
         private void MainView_Load(object sender, EventArgs e)
         {
             pnlProperties.Size = new Size(185, 629);
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
-            mciSendString(@"close temp_alias", null, 0, IntPtr.Zero);
-            mciSendString(@"open ""C:\Users\KMDI\Downloads\loki.mp3"" alias temp_alias", null, 0, IntPtr.Zero);
-            mciSendString("play temp_alias repeat", null, 0, IntPtr.Zero);
+          
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)

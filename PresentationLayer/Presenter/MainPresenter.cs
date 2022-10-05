@@ -864,7 +864,8 @@ namespace PresentationLayer.Presenter
                     wndr_content.Add("{");
                     foreach (var prop in frm.GetType().GetProperties())
                     {
-                        wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(frm, null));
+                        //wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(frm, null));
+                        wndr_content.Add("\t" + prop.PropertyType.GetType() + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1).ToLower() + ",");
                     }
                     foreach (IPanelModel pnl in frm.Lst_Panel)
                     {
@@ -5230,6 +5231,53 @@ namespace PresentationLayer.Presenter
             frmDimension_numHt = 0;
         string frmDimension_profileType = "",
                frmDimension_baseColor = "";
+
+        #region WindoorModel Properties
+
+        //string wD_profile,
+        //       wD_name,
+        //       wD_description,
+        //       wD_Dimension;
+        //int wD_height,
+        //    wD_width,
+        //    wD_id,
+        //    wD_width_4basePlatform,
+        //    wD_width_4basePlatform_forImageRenderer,
+        //    wD_height_4basePlatform,
+        //    wD_height_4basePlatform_forImageRenderer,
+        //    wD_PropertiesScroll,
+        //    wD_price,
+        //    wD_quantity,
+        //    frameIDCounter,
+        //    concreteIDCounter,
+        //    panelIDCounter,
+        //    mpanelIDCounter,
+        //    divIDCounter,
+        //    panelGlassID_Counter,
+        //    lbl_ArrowHtCount,
+        //    div_ArrowCount,
+        //    lbl_ArrowWdCount,
+        //    wD_pboxImagerHeight;
+        //Base_Color wD_BaseColor;
+        //bool 
+        //    wD_visibility,
+        //    wD_orientation,
+        //    wD_SlidingTopViewVisibility,
+        //    wD_CmenuDeleteVisibility,
+        //    wD_Selected,
+        //    wD_customArrowToggle;
+        //double wD_zoom,
+        //    wD_zoom_forImageRenderer,
+        //    arr_ZoomPercentage;
+        //decimal wD_discount,
+        //    wD_PlasticCover,
+        //    wD_CostingPoints;
+
+        //IFrameModel lst_frame;
+        //IConcreteModel lst_concrete;
+        //Foil_Color wD_InsideColor,
+        //    wD_OutsideColor;
+        #endregion
         #region Panel Properties
         //Panel 
         string panel_Name,
@@ -7010,9 +7058,6 @@ namespace PresentationLayer.Presenter
 
             }
         }
-
-
-
         #endregion
 
     }
