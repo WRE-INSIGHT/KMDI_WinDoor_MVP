@@ -3693,7 +3693,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else
                         {
-                            pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom);
+                            if (isEqual)
+                            {
+                                pnl_wd = parent_mpanelWd / totalPanelCount;
+                            }
+                            else
+                            {
+                                pnl_wd = (parent_mpanelWd - panelSize) / (totalPanelCount - count);
+                            }
+                            //pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom);
                         }
                         pnl_ht = parent_mpanelHT;
                     }
@@ -3954,6 +3962,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     else
                     {
+                        //if(_panelOverlapSash == OverlapSash._Left || _panelOverlapSash ==  OverlapSash._Right)
+                        //{
+                        //    divMove_int += (int) (Panel_Zoom * 32);
+                        //}
                         pnl_wd = ((parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
                     }
                     pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
