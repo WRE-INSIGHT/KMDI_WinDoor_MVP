@@ -434,7 +434,8 @@ namespace PresentationLayer.Presenter
                     //{
                     //    glass = string.Empty;
                     //}
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_name;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = string.Empty;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
                                                                               + wdm.WD_description
