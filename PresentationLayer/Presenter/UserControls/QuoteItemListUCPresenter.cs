@@ -130,9 +130,9 @@ namespace PresentationLayer.Presenter.UserControls
             //_nudItemDiscount.DecimalPlaces = 2;
             _nudItemPrice.DecimalPlaces = 2; 
              
-            _nudItemQty.Maximum = decimal.MaxValue; ;
-            _nudItemDiscount.Maximum = decimal.MaxValue; ;
-            _nudItemPrice.Maximum = decimal.MaxValue; ;
+            _nudItemQty.Maximum = decimal.MaxValue;
+            _nudItemDiscount.Maximum = decimal.MaxValue;
+            _nudItemPrice.Maximum = decimal.MaxValue;
         }
 
         public IQuoteItemListUC GetiQuoteItemListUC()

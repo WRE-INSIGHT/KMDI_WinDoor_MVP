@@ -28,6 +28,7 @@ namespace PresentationLayer.Views.UserControls
         Label GetLblNetPrice();
 
         string ItemName { get; set; }
+        string ItemNumber { get; set; }
         string itemWindoorNumber { get; set; }
         string itemDesc { get; set; }
 
