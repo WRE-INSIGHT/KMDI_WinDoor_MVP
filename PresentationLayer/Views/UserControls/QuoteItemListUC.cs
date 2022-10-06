@@ -23,6 +23,18 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public string ItemNumber
+        {
+            get
+            {
+                return txt_ItemNumber.Text;
+            }
+            set
+            {
+                txt_ItemNumber.Text = value;
+            }
+        }
+        
         public string itemWindoorNumber
         {
             get

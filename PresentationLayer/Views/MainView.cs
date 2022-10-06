@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -223,6 +222,8 @@ namespace PresentationLayer.Views
         public event EventHandler existingItemToolStripMenuItemClickEventRaised;
         public event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
         public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
+        public event EventHandler screenToolStripMenuItemClickEventRaised;
+
 
         public MainView()
         {
@@ -542,12 +543,17 @@ namespace PresentationLayer.Views
         private void projectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, addProjectsToolStripMenuItemClickEventRaised, e);
-            
+
         }
 
         private void pnlMain_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void screenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
         }
     }
 }

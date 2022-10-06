@@ -100,6 +100,7 @@ namespace PresentationLayer.Presenter
         private ISortItemUCPresenter _sortItemUCPresenter;
         private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
         private IGlassThicknessListPresenter _glassThicknessPresenter;
+        private IScreenPresenter _screenPresenter;
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
@@ -595,7 +596,8 @@ namespace PresentationLayer.Presenter
                              IDividerServices divServices,
                              IMullionUCPresenter mullionUCP,
                              ITransomUCPresenter transomUCP,
-                             IGlassThicknessListPresenter glassThicknessPresenter)
+                             IGlassThicknessListPresenter glassThicknessPresenter,
+                             IScreenPresenter screenPresenter)
 
         {
             _mainView = mainView;
@@ -651,6 +653,7 @@ namespace PresentationLayer.Presenter
             _mullionUCP = mullionUCP;
             _transomUCP = transomUCP;
             _glassThicknessPresenter = glassThicknessPresenter;
+            _screenPresenter = screenPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -751,10 +754,18 @@ namespace PresentationLayer.Presenter
             _mainView.existingItemToolStripMenuItemClickEventRaised += _mainView_existingItemToolStripMenuItemClickEventRaised;
             _mainView.SetGlassToolStripMenuItemClickRaiseEvent += _mainView_SetGlassToolStripMenuItemClickRaiseEvent;
             _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
+            _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
         }
 
 
-        #region Events 
+
+        #region Events  
+        private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);
+            glassThicknessPresenter.GetScreenView().ShowScreemView();
+        }
+
         private void _mainView_SetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             //IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, GlassThicknessDT, );
