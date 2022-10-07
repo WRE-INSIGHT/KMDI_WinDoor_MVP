@@ -223,7 +223,7 @@ namespace PresentationLayer.Views
         public event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
         public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler screenToolStripMenuItemClickEventRaised;
-
+        public event EventHandler factorToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -554,6 +554,11 @@ namespace PresentationLayer.Views
         private void screenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void factorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, factorToolStripMenuItemClickEventRaised, e);
         }
     }
 }

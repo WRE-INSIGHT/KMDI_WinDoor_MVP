@@ -92,6 +92,7 @@ namespace PresentationLayer.Presenter
         private IAssignProjectsPresenter _assignProjPresenter;
         private IAssignAEPresenter _addProjPresenter;
         private ICostEngrLandingPresenter _ceLandingPresenter;
+        private IFactorPresenter _factorPresenter;
         private IConcreteUCPresenter _concreteUCPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private ISortItemPresenter _sortItemPresenter;
@@ -541,6 +542,19 @@ namespace PresentationLayer.Presenter
                 _isOpenProject = value;
             }
         }
+        private decimal _pricingFactor;
+        public decimal pricingFactor
+        {
+            get
+            {
+                return _pricingFactor;
+            }
+
+            set
+            {
+                _pricingFactor = value;
+            }
+        }
 
         #endregion
 
@@ -597,7 +611,8 @@ namespace PresentationLayer.Presenter
                              IMullionUCPresenter mullionUCP,
                              ITransomUCPresenter transomUCP,
                              IGlassThicknessListPresenter glassThicknessPresenter,
-                             IScreenPresenter screenPresenter)
+                             IScreenPresenter screenPresenter,
+                             IFactorPresenter factorPresenter)
 
         {
             _mainView = mainView;
@@ -654,7 +669,7 @@ namespace PresentationLayer.Presenter
             _transomUCP = transomUCP;
             _glassThicknessPresenter = glassThicknessPresenter;
             _screenPresenter = screenPresenter;
-
+            _factorPresenter = factorPresenter;
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -755,11 +770,19 @@ namespace PresentationLayer.Presenter
             _mainView.SetGlassToolStripMenuItemClickRaiseEvent += _mainView_SetGlassToolStripMenuItemClickRaiseEvent;
             _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
             _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
+            _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
         }
 
 
 
+
+
         #region Events  
+        private void _mainView_factorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            IFactorPresenter factor  = _factorPresenter.GetNewInstance(_unityC, this);
+            factor.GetFactorView().ShowThis();
+        }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);
@@ -945,7 +968,26 @@ namespace PresentationLayer.Presenter
                                     {
                                         foreach (var prop in div.GetType().GetProperties())
                                         {
-                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                            if(prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
+                                            {
+                                                
+                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+                                            }
+                                            else if(prop.Name == "Div_CladdingSizeList")
+                                            {
+
+                                                string claddingArray = "";
+                                                foreach (KeyValuePair<int, int> cladList in div.Div_CladdingSizeList)
+                                                {
+                                                    claddingArray += "<" + cladList.Key + "," + cladList.Value + ">; ";
+                                                }
+
+                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + claddingArray);
+                                            }
+                                            else
+                                            {
+                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                            }
                                         }
                                         break;
                                     }
@@ -990,7 +1032,16 @@ namespace PresentationLayer.Presenter
                                                     {
                                                         foreach (var prop in div.GetType().GetProperties())
                                                         {
-                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                            if (prop.Name == "Div_DMPanel")
+                                                            {
+
+                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+
+                                                            }
+                                                            else
+                                                            {
+                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                            }
                                                         }
                                                         break;
                                                     }
@@ -1034,7 +1085,21 @@ namespace PresentationLayer.Presenter
                                                                 {
                                                                     foreach (var prop in div.GetType().GetProperties())
                                                                     {
-                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+
+
+                                                                        if (prop.Name == "Div_DMPanel")
+                                                                        {
+
+                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                                        }
+
+
+                                                                       
                                                                     }
                                                                     break;
                                                                 }
@@ -1372,10 +1437,10 @@ namespace PresentationLayer.Presenter
         private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
 
-            if (_quotationModel != null)
+            if (_quotationModel != null && _windoorModel != null)
             {
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
-                                   MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
@@ -1414,8 +1479,6 @@ namespace PresentationLayer.Presenter
                     {
                         Clearing_Operation();
                     }
-
-
                 }
             }
         }
@@ -5504,6 +5567,14 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
+
+                            foreach(IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                if(pnl.Panel_Name == extractedValue_str)
+                                {
+                                    div_DMPanel = pnl;
+                                }
+                            }
                             //div_DMPanel = _panelMode;
                         }
                         else if (row_str.Contains("Div_ArtNo:"))
@@ -5582,7 +5653,19 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_CladdingSizeList:"))
                         {
+                            string[] words = extractedValue_str.Split(';');
 
+                            div_CladdingSizeList = new Dictionary<int, int>();
+                            foreach (string str in words)
+                            {
+                                if(str.Trim() != string.Empty)
+                                {
+                                    int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                    int value = Convert.ToInt32(str.Split(',', '>')[1]);
+                                    div_CladdingSizeList.Add(key, value);
+                                }
+                               
+                            }
                             //div_CladdingSizeList = extractedValue_str;
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
@@ -5649,26 +5732,26 @@ namespace PresentationLayer.Presenter
                             {
                                 divSize = 33;
                             }
-                            bool divchkdm = false;
+                            //bool divchkdm = false;
 
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                            {
-                                if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                                {
-                                    if (_multiPanelModel.MPanel_ParentModel == null)
-                                    {
-                                        divchkdm = true;
-                                    }
-                                    else if (_multiPanelModel.MPanel_ParentModel != null)
-                                    {
-                                        if (_multiPanelModel.MPanel_Placement == "Last")
-                                        {
-                                            divchkdm = true;
-                                        }
-                                    }
-                                }
-                            }
+                            //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            //{
+                            //    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            //        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            //    {
+                            //        if (_multiPanelModel.MPanel_ParentModel == null)
+                            //        {
+                            //            divchkdm = true;
+                            //        }
+                            //        else if (_multiPanelModel.MPanel_ParentModel != null)
+                            //        {
+                            //            if (_multiPanelModel.MPanel_Placement == "Last")
+                            //            {
+                            //                divchkdm = true;
+                            //            }
+                            //        }
+                            //    }
+                            //}
                             FlowLayoutPanel fpnl;
                             int divHeigth = 0,
                                 divWidth = 0;
@@ -5684,23 +5767,59 @@ namespace PresentationLayer.Presenter
                                 divWidth = _multiPanelModel.MPanel_Width;
                                 divHeigth = divSize;
                             }
-                            IDividerModel divModel = _divServices.AddDividerModel(divWidth,
-                                                                                  divHeigth,
+                            IDividerModel divModel = _divServices.AddDividerModel(div_Width,
+                                                                                  div_Height,
                                                                                   fpnl,
                                                                                   div_Type,
-                                                                                  true,
-                                                                                  _frameModel.Frame_Zoom,
-                                                                                  Divider_ArticleNo._7536,
-                                                                                  _multiPanelModel.MPanel_DisplayWidth,
-                                                                                  _multiPanelModel.MPanel_DisplayHeight,
-                                                                                  _multiPanelModel,
-                                                                                  _frameModel,
+                                                                                  div_Visible,
+                                                                                  div_Zoom,
+                                                                                  div_ArtNo,
+                                                                                  div_DisplayWidth,
+                                                                                  div_DisplayHeight,
+                                                                                  div_MPanelParent,
+                                                                                  div_FrameParent,
                                                                                   GetDividerCount(),
-                                                                                  _frameModel.FrameImageRenderer_Zoom,
+                                                                                  divImageRenderer_Zoom,
                                                                                   _frameModel.Frame_Type.ToString(),
                                                                                   div_Name,
                                                                                   null,
-                                                                                  divchkdm);
+                                                                                  div_ChkDM);
+                            divModel.Div_ID = div_ID;
+                            divModel.DivImageRenderer_Height = divImageRenderer_Height;
+                            divModel.DivImageRenderer_Width = divImageRenderer_Width;
+                            divModel.Div_WidthToBind = div_WidthToBind;
+                            divModel.Div_HeightToBind = div_HeightToBind;
+                            divModel.Div_CladdingBracketForUPVCQTY = div_CladdingBracketForUPVCQTY;
+                            divModel.Div_CladdingBracketForConcreteQTY = div_CladdingBracketForConcreteQTY;
+                            divModel.Div_ExplosionWidth = div_ExplosionWidth;
+                            divModel.Div_ExplosionHeight = div_ExplosionHeight;
+                            divModel.Div_ReinfWidth = div_ReinfWidth;
+                            divModel.Div_ReinfHeight = div_ReinfHeight;
+                            divModel.Div_CladdingCount = div_CladdingCount;
+                            divModel.Div_AlumSpacer50Qty = div_AlumSpacer50Qty;
+                            divModel.Div_FrameType = div_FrameType;
+                            divModel.Div_Bounded = div_Bounded;
+                            divModel.Div_claddingBracketVisibility = div_claddingBracketVisibility;
+                            divModel.Div_ChkDMVisibility = div_ChkDMVisibility;
+                            divModel.Div_ArtVisibility = div_ArtVisibility;
+                            divModel.Div_CladdingProfileArtNoVisibility = div_CladdingProfileArtNoVisibility;
+                            divModel.Div_LeverEspagVisibility = div_LeverEspagVisibility;
+                            divModel.Div_Parent = div_Parent;
+                            divModel.Div_DMArtNo = div_DMArtNo;
+                            divModel.Div_EndcapDM = div_EndcapDM;
+                            divModel.Div_FixedCamDM = div_FixedCamDM;
+                            divModel.Div_SnapNKeepDM = div_SnapNKeepDM;
+                            divModel.Div_DMPanel = div_DMPanel;
+                            divModel.Div_ReinfArtNo = div_ReinfArtNo;
+                            divModel.Div_MechJoinArtNo = div_MechJoinArtNo;
+                            divModel.Div_CladdingProfileArtNo = div_CladdingProfileArtNo;
+                            divModel.Div_CladdingReinfArtNo = div_CladdingReinfArtNo;
+                            divModel.Div_LeverEspagArtNo = div_LeverEspagArtNo;
+                            divModel.Div_ShootboltStrikerArtNo = div_ShootboltStrikerArtNo;
+                            divModel.Div_ShootboltNonReverseArtNo = div_ShootboltNonReverseArtNo;
+                            divModel.Div_ShootboltReverseArtNo = div_ShootboltReverseArtNo;
+                            divModel.Div_DMStrikerArtNo = div_DMStrikerArtNo;
+                            divModel.Div_CladdingSizeList = div_CladdingSizeList;
                             divModel.SetDimensionsToBind_using_DivZoom();
                             divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
                             _prev_divModel = divModel;
@@ -6104,7 +6223,7 @@ namespace PresentationLayer.Presenter
         Divider_MechJointArticleNo div_MechJoinArtNo;
         CladdingProfile_ArticleNo div_CladdingProfileArtNo;
         CladdingReinf_ArticleNo div_CladdingReinfArtNo;
-        IDictionary<int, int> div_CladdingSizeList;
+        Dictionary<int, int> div_CladdingSizeList;
         LeverEspagnolette_ArticleNo div_LeverEspagArtNo;
         ShootboltStriker_ArticleNo div_ShootboltStrikerArtNo;
         ShootboltNonReverse_ArticleNo div_ShootboltNonReverseArtNo;
