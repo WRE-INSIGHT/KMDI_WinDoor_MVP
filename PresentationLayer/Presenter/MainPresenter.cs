@@ -4621,8 +4621,8 @@ namespace PresentationLayer.Presenter
                                 {
                                     pnlModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
                                 }
-                                pnlModel.SetDimensionsToBind_using_ZoomPercentage();
-                                pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                                //pnlModel.SetDimensionsToBind_using_ZoomPercentage();
+                                //pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
                                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
