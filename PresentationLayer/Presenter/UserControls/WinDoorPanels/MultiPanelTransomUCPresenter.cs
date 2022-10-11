@@ -317,6 +317,44 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
                             }
 
+
+
+
+
+
+
+                            //string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                            //decimal displayHeightDecimal = 0;
+                            //decimal displayHeight = 0;
+                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            //{
+                            //    displayHeight += Convert.ToDecimal(mpnl.MPanel_DisplayHeight + "." + mpnl.MPanel_DisplayHeightDecimal);
+                            //    displayHeightDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayHeightDecimal);
+                            //}
+                            //decimal DisplayHT_dec;
+                            //if (displayHeight == 0)
+                            //{
+                            //    DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+                            //}
+                            //else
+                            //{
+                            //    DisplayHT_dec = Math.Floor((Convert.ToDecimal(disp_ht_decimal) - displayHeight) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
+
+                            //}
+                            //DisplayHT_dec += displayHeightDecimal;
+                            //int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+
+                            //int DisplayHT_singleDecimalPlace = 0;
+
+                            //string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            //if (DisplayHT_dec_split.Count() > 1)
+                            //{
+                            //    DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            //}
+                            //int EqualDisplayHT = (int)Math.Truncate(Convert.ToDecimal(disp_ht_decimal) / totalPanelCount);
+                            //int EqualMPanelHT = ((_multiPanelModel.MPanel_Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            //suggest_HT = EqualMPanelHT - (EqualDisplayHT - suggest_DisplayHT);
                             FlowDirection flow = FlowDirection.LeftToRight;
                             if (data.Contains("Transom"))
                             {
@@ -1062,9 +1100,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
+            Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_Height);
             Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
             Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+            Console.WriteLine("MPanel_HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
             Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            Console.WriteLine("MPanelImageRenderer_Height " + _multiPanelModel.MPanelImageRenderer_Height);
+            Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            Console.WriteLine("MPanel_Display_Height " + _multiPanelModel.MPanel_DisplayHeight);
+            Console.WriteLine("MPanel_Display_Width " + _multiPanelModel.MPanel_DisplayWidth);
             Console.WriteLine("");
         }
 

@@ -289,6 +289,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                         }
                         break;
                     case Keys.Up:
@@ -468,7 +469,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                       
+                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+
                         }
                         break;
                 }
@@ -681,7 +683,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 ////}
                 ////_multiPanelModel.Fit_MyControls_ToBindDimensions();
                 ////_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                ////_multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }

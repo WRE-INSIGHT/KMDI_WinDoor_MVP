@@ -317,7 +317,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
 
                             }
-                            //DisplayWD_dec += displayWidthDecimal;
+                            DisplayWD_dec += displayWidthDecimal;
                             int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
 
                             int DisplayWD_singleDecimalPlace = 0;
