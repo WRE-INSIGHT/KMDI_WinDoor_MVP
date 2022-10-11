@@ -300,7 +300,7 @@ namespace PresentationLayer.Presenter
                 PlasticWedgePrice,
                 SealantPrice,
                 PUFoamingPrice,
-                ProfileColorPoints = 13,
+                ProfileColorPoints = 0,
                 CostingPoints = 0,
                 InstallationPoints = 0,
                 LaborCost = 0,
@@ -901,6 +901,8 @@ namespace PresentationLayer.Presenter
                     {
                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                         {
+                            ProfileColorPoints = 13;
+
                             if (fr.Frame_Width >= 2000)
                             {
                                 ProfileColorPoints = 16;
@@ -918,8 +920,8 @@ namespace PresentationLayer.Presenter
                                 ProfileColorPoints = 18;
                             }
 
-                            CostingPoints += ProfileColorPoints * 4;
-                            InstallationPoints += (ProfileColorPoints / 3) * 4;
+                            //CostingPoints += ProfileColorPoints * 4;
+                            //InstallationPoints += (ProfileColorPoints / 3) * 4;
                         }
                         else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                         {
@@ -2630,7 +2632,8 @@ namespace PresentationLayer.Presenter
                                          Math.Round(LatchDeadboltStrikerPrice, 2) +
                                          Math.Round(ExtensionPrice, 2) +
                                          Math.Round(RollerPrice, 2) +
-                                         Math.Round(StrikerLRPrice, 2);
+                                         Math.Round(StrikerLRPrice, 2) +
+                                         Math.Round(BrushSealPrice, 2);
 
                 AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                        Math.Round(GbPrice, 2) +
@@ -2681,11 +2684,11 @@ namespace PresentationLayer.Presenter
 
                 lstTotalPrice.Add(TotaPrice);
 
-                //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
+                costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
 
-                //InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
-                //laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
-                //MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
+                InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
+                laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
+                MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
 
                 //FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
                 //FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
@@ -2694,9 +2697,9 @@ namespace PresentationLayer.Presenter
                 //GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
                 //DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
                 //GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
-                //FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
-                //AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
-                //AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
+                FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
+                AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
+                AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
                 //sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
                 //PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
 
@@ -2744,6 +2747,9 @@ namespace PresentationLayer.Presenter
                 StrikerPrice = 0;
                 LatchDeadboltStrikerPrice = 0;
                 ExtensionPrice = 0;
+                BrushSealPrice = 0;
+                StrikerLRPrice = 0;
+                RollerPrice = 0;
 
                 AncillaryProfileCost = 0;
                 ThresholdPrice = 0;
@@ -2751,12 +2757,22 @@ namespace PresentationLayer.Presenter
                 GeorgianBarCost = 0;
                 CoverProfileCost = 0;
                 GlazingGasketPrice = 0;
+                WeatherBarPrice = 0;
+                WeatherBarFastenerPrice = 0;
+                WaterSeepagePrice = 0;
+                GuideTrackPrice = 0;
+                AlumTrackPrice = 0;
+                InterlockPrice = 0;
+                ExtensionForInterlockPrice = 0;
+
 
                 AccesorriesCost = 0;
                 EndCapPrice = 0;
                 MechJointPrice = 0;
                 GBSpacerPrice = 0;
                 PlasticWedgePrice = 0;
+                SealingBlockPrice = 0;
+
             }
 
         }

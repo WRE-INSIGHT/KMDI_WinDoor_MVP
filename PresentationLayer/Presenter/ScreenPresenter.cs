@@ -13,7 +13,8 @@ namespace PresentationLayer.Presenter
 
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
-        private DataTable _screenDT;
+        private DataTable _screenDT = new DataTable();
+
 
         CommonFunctions commonfunc = new CommonFunctions();
 
@@ -83,6 +84,8 @@ namespace PresentationLayer.Presenter
         }
         ComboBox _baseColor, _screenType;
         NumericUpDown _screen_Width, _screen_Height, _factor;
+        DataGridView _dgvScreen;
+        string _windoorID;
         private void SubscribeToEventSetup()
         {
             _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised1;
@@ -92,14 +95,30 @@ namespace PresentationLayer.Presenter
             _screenView.nudFactorValueChangedEventRaised += _screenView_nudFactorValueChangedEventRaised;
             _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised;
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
+            _screenView.btnAddClickEventRaised += _screenView_btnAddClickEventRaised;
+            _screenView.dgvScreenRowPostPaintEventRaised += _screenView_dgvScreenRowPostPaintEventRaised;
 
             _screen_Width = _screenView.screen_width;
             _screen_Height = _screenView.screen_height;
             _factor = _screenView.screen_factor;
             _baseColor = _screenView.GetCmbBaseColor();
             _screenType = _screenView.GetCmbScreenType();
+            _dgvScreen = _screenView.GetDatagrid();
+            _windoorID = _screenView.screen_windoorID;
         }
+
         #region Events
+
+        private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            commonfunc.rowpostpaint(sender, e);
+        }
+
+        private void _screenView_btnAddClickEventRaised(object sender, EventArgs e)
+        {
+            _screenDT.Rows.Add(CreateNewRow_ScreenDT());
+            _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+        }
 
         private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised1(object sender, EventArgs e)
         {
@@ -113,6 +132,20 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
         {
+            _screenDT.Columns.Add(CreateColumn("Type of Insect Screen", "Type of Insect Screen", "System.String"));
+            _screenDT.Columns.Add(CreateColumn("Dimension (mm) \n per panel", "Dimension (mm) \n per panel", "System.String"));
+            _screenDT.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
+            _screenDT.Columns.Add(CreateColumn("Unit Price", "Unit Price", "System.Decimal"));
+            _screenDT.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
+            _screenDT.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
+
+
+            //_screenDT.Rows.Add("super duper pang harang na screen");
+
+
+            _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+            _screenView.GetDatagrid().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screen_Width.Maximum = decimal.MaxValue;
@@ -145,25 +178,57 @@ namespace PresentationLayer.Presenter
         public DataTable PopulateDgvScreen()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("Screen", Type.GetType("System.String"));
+            dt.Columns.Add("Type of Insect Screen", Type.GetType("System.String"));
+            dt.Columns.Add("Dimension (mm) \n per panel", Type.GetType("System.String"));
+            dt.Columns.Add("Window/Door I.D.", Type.GetType("System.String"));
+            dt.Columns.Add("Unit Price", Type.GetType("System.String"));
+            dt.Columns.Add("Quantity", Type.GetType("System.String"));
+            dt.Columns.Add("Total Amount", Type.GetType("System.String"));
 
-            foreach (DataRow colorDTRow in _screenDT.Rows)
+            foreach (DataRow screenDTRow in _screenDT.Rows)
             {
-                dt.Rows.Add(colorDTRow["Screen"]);
+                dt.Rows.Add(screenDTRow["Type of Insect Screen"]);
+                dt.Rows.Add(screenDTRow["Dimension (mm) \n per panel"]);
+                dt.Rows.Add(screenDTRow["Window/Door I.D."]);
+                dt.Rows.Add(screenDTRow["Unit Price"]);
+                dt.Rows.Add(screenDTRow["Quantity"]);
+                dt.Rows.Add(screenDTRow["Total Amount"]);
             }
 
             return dt;
         }
 
-        //public DataRow CreateNewRow_ColorDT()
-        //{
-        //    _screenView.ShowScreemView.scree = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_createNewGlassColorView.tboxGlassColorView.ToLower());
-        //    DataRow newRow;
-        //    newRow = _colorDT.NewRow();
-        //    newRow["Screen"] = _createNewGlassColorView.tboxGlassColorView;
-        //    return newRow;
-        //}
+        public DataRow CreateNewRow_ScreenDT()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(CreateColumn("Type of Insect Screen", "Type of Insect Screen", "System.String"));
+            dt.Columns.Add(CreateColumn("Dimension (mm) \n per panel", "Dimension (mm) \n per panel", "System.String"));
+            dt.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
+            dt.Columns.Add(CreateColumn("Unit Price", "Unit Price", "System.Decimal"));
+            dt.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
+            dt.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
 
+            // _screenView.screen_windoorID = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_screenView.screen_windoorID.ToLower());
+            DataRow newRow;
+            newRow = _screenDT.NewRow();
+            newRow["Type of Insect Screen"] = _screenType.SelectedValue;
+            newRow["Dimension (mm) \n per panel"] = _screen_Width.Value+ " x " + +_screen_Height.Value;
+            newRow["Window/Door I.D."] = _screenView.screen_windoorID;
+            newRow["Unit Price"] = _screenView.GetNudQuantity().Value;
+            newRow["Quantity"] = _screenView.GetNudQuantity().Value;
+            newRow["Total Amount"] = _screenView.GetNudTotalPrice().Value;
+            //dt.Rows.Add(newRow);
+             return newRow;
+        }
+
+        private DataColumn CreateColumn(string columname, string caption, string type)
+        {
+            DataColumn col = new DataColumn();
+            col.DataType = Type.GetType(type);
+            col.ColumnName = columname;
+            col.Caption = caption;
+            return col;
+        }
         public void ComputeScreenTotalPrice()
         {
             decimal basicFiveMats;
@@ -255,63 +320,65 @@ namespace PresentationLayer.Presenter
 
                 }
 
+
+                basicFiveMats = HeadRailPrice +
+                                       SlidingBarPrice +
+                                       MeshWithTubePrice +
+                                       GuidePrice +
+                                       PilePrice +
+                                       AntiwindBrushPrice;
+
+                WasteCost = basicFiveMats * 0.1m;
+
+                FreightCost = (basicFiveMats +
+                              KitForVerticalOpeningHeadrailPrice +
+                              BrakePrice +
+                              SupportForFixingHeadRailPrice +
+                              SpringLoadedPrice +
+                              WasteCost) * 0.05m;
+
+                DandTCost = (basicFiveMats +
+                            KitForVerticalOpeningHeadrailPrice +
+                            BrakePrice +
+                            SupportForFixingHeadRailPrice +
+                            SpringLoadedPrice +
+                            WasteCost +
+                            FreightCost) * 0.16m;
+
+                SmallShopItemCost = 200;
+                OverheadCost = 0.2m * 6000;
+                ContingenciesCost = (basicFiveMats +
+                                    KitForVerticalOpeningHeadrailPrice +
+                                    BrakePrice +
+                                    SupportForFixingHeadRailPrice +
+                                    SpringLoadedPrice +
+                                    WasteCost +
+                                    FreightCost +
+                                    DandTCost +
+                                    SmallShopItemCost +
+                                    OverheadCost) * 0.05m;
+
+                TotalPrice = basicFiveMats +
+                             KitForVerticalOpeningHeadrailPrice +
+                             BrakePrice +
+                             SupportForFixingHeadRailPrice +
+                             SpringLoadedPrice +
+                             WasteCost +
+                             FreightCost +
+                             DandTCost +
+                             SmallShopItemCost +
+                             OverheadCost +
+                             ContingenciesCost;
+
+
+                _screenView.GetNudTotalPrice().Value = (Math.Ceiling(TotalPrice) * _factor.Value);
+
+
             }
             else
             {
                 _screenView.GetNudTotalPrice().Value = 0;
             }
-
-            basicFiveMats = HeadRailPrice +
-                                   SlidingBarPrice +
-                                   MeshWithTubePrice +
-                                   GuidePrice +
-                                   PilePrice +
-                                   AntiwindBrushPrice;
-
-            WasteCost = basicFiveMats * 0.1m;
-
-            FreightCost = (basicFiveMats +
-                          KitForVerticalOpeningHeadrailPrice +
-                          BrakePrice +
-                          SupportForFixingHeadRailPrice +
-                          SpringLoadedPrice +
-                          WasteCost) * 0.05m;
-
-            DandTCost = (basicFiveMats +
-                        KitForVerticalOpeningHeadrailPrice +
-                        BrakePrice +
-                        SupportForFixingHeadRailPrice +
-                        SpringLoadedPrice +
-                        WasteCost +
-                        FreightCost) * 0.16m;
-
-            SmallShopItemCost = 200;
-            OverheadCost = 0.2m * 6000;
-            ContingenciesCost = (basicFiveMats +
-                                KitForVerticalOpeningHeadrailPrice +
-                                BrakePrice +
-                                SupportForFixingHeadRailPrice +
-                                SpringLoadedPrice +
-                                WasteCost +
-                                FreightCost +
-                                DandTCost +
-                                SmallShopItemCost +
-                                OverheadCost) * 0.05m;
-
-            TotalPrice = basicFiveMats +
-                         KitForVerticalOpeningHeadrailPrice +
-                         BrakePrice +
-                         SupportForFixingHeadRailPrice +
-                         SpringLoadedPrice +
-                         WasteCost +
-                         FreightCost +
-                         DandTCost +
-                         SmallShopItemCost +
-                         OverheadCost +
-                         ContingenciesCost;
-
-
-            _screenView.GetNudTotalPrice().Value = (Math.Ceiling(TotalPrice) * _factor.Value);
         }
 
         public IScreenView GetScreenView()
@@ -320,12 +387,16 @@ namespace PresentationLayer.Presenter
         }
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC)
+        //IMainPresenter mainPresenter)
+        //DataTable screenDT)
         {
             unityC
                     .RegisterType<IScreenView, ScreenView>()
                     .RegisterType<IScreenPresenter, ScreenPresenter>();
             ScreenPresenter screen = unityC.Resolve<ScreenPresenter>();
             screen._unityC = unityC;
+            //screen._mainPresenter = mainPresenter;
+            //screen._screenDT = screenDT;
 
             return screen;
         }

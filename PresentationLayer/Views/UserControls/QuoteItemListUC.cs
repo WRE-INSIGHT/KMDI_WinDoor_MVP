@@ -34,7 +34,7 @@ namespace PresentationLayer.Views.UserControls
                 txt_ItemNumber.Text = value;
             }
         }
-        
+
         public string itemWindoorNumber
         {
             get

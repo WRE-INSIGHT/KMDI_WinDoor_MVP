@@ -1731,9 +1731,10 @@ namespace ModelLayer.Model.Quotation
                                 //pnl.Insert_WeldableCornerJoint_MaterialList(Material_List);
 
                                 //add_screws_fab_weldableCJ += (8 * 2); //Weldable corner joint 
-
-                                pnl.Insert_LatchAndDeadboltStriker_MaterialList(Material_List);
-                                add_screws_fab_striker += 2;
+                             
+                                    pnl.Insert_LatchAndDeadboltStriker_MaterialList(Material_List);
+                                    add_screws_fab_striker += 2; 
+                                
                             }
                             else if (pnl.Panel_HandleType == Handle_Type._D)
                             {

@@ -48,8 +48,18 @@ namespace PresentationLayer.Views
                 nud_Factor.Value = Convert.ToDecimal(value);
             }
         }
-
-
+    
+        public string screen_windoorID
+        {
+            get
+            {
+                return txt_windoorID.Text;
+            }
+            set
+            {
+                txt_windoorID.Text = value;
+            }
+        }
 
         public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         public event EventHandler ScreenViewLoadEventRaised;
@@ -57,7 +67,8 @@ namespace PresentationLayer.Views
         public event EventHandler nudHeightValueChangedEventRaised;
         public event EventHandler nudFactorValueChangedEventRaised;
         public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
-
+        public event EventHandler btnAddClickEventRaised;
+        public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
 
         public void ShowScreemView()
         {
@@ -77,7 +88,7 @@ namespace PresentationLayer.Views
         public NumericUpDown GetNudSet()
         {
             return nud_Sets;
-        } 
+        }
 
         public NumericUpDown GetNudQuantity()
         {
@@ -93,6 +104,8 @@ namespace PresentationLayer.Views
         {
             return dgv_Screen;
         }
+
+     
         private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
@@ -135,7 +148,16 @@ namespace PresentationLayer.Views
         private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
+        }
 
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddClickEventRaised, e);
+        }
+
+        private void dgv_Screen_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, dgvScreenRowPostPaintEventRaised, e);
         }
     }
 }

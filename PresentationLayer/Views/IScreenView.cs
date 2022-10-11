@@ -8,6 +8,7 @@ namespace PresentationLayer.Views
         NumericUpDown screen_factor { get; set; }
         NumericUpDown screen_height { get; set; }
         NumericUpDown screen_width { get; set; }
+        string screen_windoorID { get; set; }
 
         event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         event EventHandler ScreenViewLoadEventRaised;
@@ -15,6 +16,8 @@ namespace PresentationLayer.Views
         event EventHandler nudHeightValueChangedEventRaised;
         event EventHandler nudFactorValueChangedEventRaised;
         event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
+        event EventHandler btnAddClickEventRaised;
+        event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
 
         void ShowScreemView();
 
@@ -24,5 +27,6 @@ namespace PresentationLayer.Views
         NumericUpDown GetNudSet();
         NumericUpDown GetNudQuantity();
         DataGridView GetDatagrid();
+
     }
 }
