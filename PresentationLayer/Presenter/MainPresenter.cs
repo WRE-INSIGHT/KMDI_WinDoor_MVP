@@ -5657,18 +5657,21 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Div_CladdingSizeList:"))
                         {
                             string[] words = extractedValue_str.Split(';');
-
-                            div_CladdingSizeList = new Dictionary<int, int>();
-                            foreach (string str in words)
+                            if (extractedValue_str.Contains("<"))
                             {
-                                if(str.Trim() != string.Empty)
+                                div_CladdingSizeList = new Dictionary<int, int>();
+                                foreach (string str in words)
                                 {
-                                    int key = Convert.ToInt32(str.Split('<', ',')[1]);
-                                    int value = Convert.ToInt32(str.Split(',', '>')[1]);
-                                    div_CladdingSizeList.Add(key, value);
+                                    if (str.Trim() != string.Empty)
+                                    {
+                                        int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);
+                                        div_CladdingSizeList.Add(key, value);
+                                    }
+
                                 }
-                               
                             }
+                            
                             //div_CladdingSizeList = extractedValue_str;
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
