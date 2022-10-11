@@ -89,7 +89,7 @@ namespace PresentationLayer.Views.Costing_Head
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btn_SearchProj.PerformClick();
+                btn_SearchAEIC.PerformClick();
             }
         }
         private void btn_SearchAEIC_Click(object sender, EventArgs e)

@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -124,11 +124,13 @@
     <Compile Include="Presenter\Costing Head\AssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\CostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\Costing Head\CustomerRefNoPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\FactorPresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAddProjectPresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAssignAEPresenter.cs" />
     <Compile Include="Presenter\Costing Head\IAssignProjectsPresenter.cs" />
     <Compile Include="Presenter\Costing Head\ICostEngrEmployeePresenter.cs" />
     <Compile Include="Presenter\Costing Head\ICustomerRefNoPresenter.cs" />
+    <Compile Include="Presenter\Costing Head\IFactorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassColorPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
@@ -345,11 +347,18 @@
     <Compile Include="Views\Costing Head\CustomerRefNoView.Designer.cs">
       <DependentUpon>CustomerRefNoView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Costing Head\FactorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Costing Head\FactorView.Designer.cs">
+      <DependentUpon>FactorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Costing Head\IAddProjectView.cs" />
     <Compile Include="Views\Costing Head\IAssignAEView.cs" />
     <Compile Include="Views\Costing Head\IAssignProjectsView.cs" />
     <Compile Include="Views\Costing Head\ICostEngrEmployeeView.cs" />
     <Compile Include="Views\Costing Head\ICustomerRefNoView.cs" />
+    <Compile Include="Views\Costing Head\IFactorView.cs" />
     <Compile Include="Views\CreateNewGlassColorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1055,6 +1064,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Costing Head\CustomerRefNoView.resx">
       <DependentUpon>CustomerRefNoView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Costing Head\FactorView.resx">
+      <DependentUpon>FactorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateNewGlassColorView.resx">
       <DependentUpon>CreateNewGlassColorView.cs</DependentUpon>

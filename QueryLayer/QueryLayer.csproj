@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Repositories\Specific\Address\AddressRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\BaseSpecificRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Customer_Ref_No\CustomerRefNoRepository.cs" />
     <Compile Include="DataAccess\Repositories\Specific\Employee\EmployeeRepository.cs" />

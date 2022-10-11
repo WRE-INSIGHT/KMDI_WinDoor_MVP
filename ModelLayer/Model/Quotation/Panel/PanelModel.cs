@@ -960,8 +960,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public int Panel_SashWidth { get; set; }
         public int Panel_SashWidthDecimal { get; set; }
-
-        public int Panel_SashHeight { get; set; }
+        public int _panel_SashHeight;
+        public int Panel_SashHeight
+        {
+            get
+            {
+                return _panel_SashHeight;
+            }
+            set
+            {
+                _panel_SashHeight = value;
+            }
+        }
         public int Panel_SashHeightDecimal { get; set; }
 
         public int Panel_OriginalSashWidth { get; set; }
@@ -3074,111 +3084,146 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public void SetDimensionToBind_2ndlvl_using_BaseDimension()
         {
-            if (Panel_Zoom == 0.5 || Panel_Zoom == 1)
+            //if (Panel_Zoom == 0.5 || Panel_Zoom == 1)
+            //{
+            if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
             {
-                if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
-                {
 
 
-                }
-                else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                {
-                    int mpnl_deduct = 0;
-                    if (Panel_Zoom == 0.5)
-                    {
-                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                        {
-
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
-                            {
-                                mpnl_deduct = 9;
-
-                            }
-                            else
-                            {
-                                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                                    mpnl_deduct = 9;
-                                else
-                                    mpnl_deduct = 10;
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
-                            {
-                                mpnl_deduct = 11;
-
-                            }
-                            else
-                            {
-                                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                                    mpnl_deduct = 11;
-                                else
-                                    mpnl_deduct = 11;
-                            }
-                        }
-
-
-                    }
-                    else
-                    {
-                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                        {
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
-                            {
-                                mpnl_deduct = 16; // 8 + 8
-                                                  // left margin is 8
-                                                  // right margin is 8
-                            }
-                            else
-                            {
-                                mpnl_deduct = 18; // 10 + 8
-                                                  //if MPanel_Placement is "First"
-                                                  // left margin is 10
-                                                  // right margin is 8
-
-                                //if MPanel_Placement is "Last"
-                                // left margin is 8
-                                // right margin is 10
-
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
-                            {
-                                mpnl_deduct = 20; // 10 + 10
-                                                  // left margin is 10
-                                                  // right margin is 10
-                            }
-                            else
-                            {
-                                mpnl_deduct = 20; // 13 + 10
-                                                  //if MPanel_Placement is "First"
-                                                  // left margin is 12
-                                                  // right margin is 10
-
-                                //if MPanel_Placement is "Last"
-                                // left margin is 10
-                                // right margin is 12
-
-                            }
-                        }
-
-                    }
-                    if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
-                    {
-                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - mpnl_deduct);
-                        //Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                    }
-                    else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
-                    {
-                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - mpnl_deduct);
-                        //Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                    }
-
-                }
             }
+            else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+            {
+                int mpnl_deduct = 0;
+                if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
+                    Panel_Zoom == 0.13f || Panel_Zoom == 0.10f)
+                {
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 9;
+
+                        }
+                        else
+                        {
+                            if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                                mpnl_deduct = 9;
+                            else
+                                mpnl_deduct = 10;
+                        }
+                    }
+                    else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 9;
+
+                        }
+                        else
+                        {
+                            if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                                mpnl_deduct = 15;
+                            else
+                                mpnl_deduct = 15;
+                        }
+                    }
+                }
+                else if (Panel_Zoom == 0.5f)
+                {
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 9;
+
+                        }
+                        else
+                        {
+                            if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                                mpnl_deduct = 9;
+                            else
+                                mpnl_deduct = 10;
+                        }
+                    }
+                    else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 11;
+
+                        }
+                        else
+                        {
+                            if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                                mpnl_deduct = 11;
+                            else
+                                mpnl_deduct = 11;
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 16; // 8 + 8
+                                              // left margin is 8
+                                              // right margin is 8
+                        }
+                        else
+                        {
+                            mpnl_deduct = 18; // 10 + 8
+                                              //if MPanel_Placement is "First"
+                                              // left margin is 10
+                                              // right margin is 8
+
+                            //if MPanel_Placement is "Last"
+                            // left margin is 8
+                            // right margin is 10
+
+                        }
+                    }
+                    else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                        {
+                            mpnl_deduct = 20; // 10 + 10
+                                              // left margin is 10
+                                              // right margin is 10
+                        }
+                        else
+                        {
+                            mpnl_deduct = 20; // 13 + 10
+                                              //if MPanel_Placement is "First"
+                                              // left margin is 12
+                                              // right margin is 10
+
+                            //if MPanel_Placement is "Last"
+                            // left margin is 10
+                            // right margin is 12
+
+                        }
+                    }
+
+                }
+                if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
+                {
+                    Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - mpnl_deduct);
+                    //Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                }
+                else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
+                {
+                    Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - mpnl_deduct);
+                    //Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                }
+
+            }
+            //}
         }
         int first = 0;
         public void SetDimensionsToBind_using_ZoomPercentage()
@@ -3693,7 +3738,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else
                         {
-                            pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom);
+                            if (isEqual)
+                            {
+                                pnl_wd = parent_mpanelWd / totalPanelCount;
+                            }
+                            else
+                            {
+                                pnl_wd = (parent_mpanelWd - panelSize) / (totalPanelCount - count);
+                            }
+                            //pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom);
                         }
                         pnl_ht = parent_mpanelHT;
                     }
@@ -3954,6 +4007,10 @@ namespace ModelLayer.Model.Quotation.Panel
                         pnl_wd = (((parent_MpanelWidth - mpnlWd_deduct) - (divSize * div_count)) / totalpanel_inside_parentMpanel) - divMove_int;
                     else
                     {
+                        //if(_panelOverlapSash == OverlapSash._Left || _panelOverlapSash ==  OverlapSash._Right)
+                        //{
+                        //    divMove_int += (int) (Panel_Zoom * 32);
+                        //}
                         pnl_wd = ((parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
                     }
                     pnl_ht = parent_MpanelHeight - mpnlHt_deduct;

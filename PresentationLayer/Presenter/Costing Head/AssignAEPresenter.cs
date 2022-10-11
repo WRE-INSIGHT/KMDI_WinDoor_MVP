@@ -257,7 +257,6 @@ namespace PresentationLayer.Presenter.Costing_Head
 
             _dgvClient.Columns["Project_Id"].Visible = false;
             _dgvClient.Columns["File_Label"].Visible = false;
-            _dgvClient.Columns["AEIC"].Visible = false;
             _dgvClient.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
             _dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //foreach (DataGridViewRow row in _dgvClient.Rows)

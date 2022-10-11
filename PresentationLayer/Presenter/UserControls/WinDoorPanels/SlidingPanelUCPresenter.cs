@@ -402,18 +402,60 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
                     {
-
+                        _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
                         if (pres_ctrl is IPanelUC)
                         {
                             pres_pnl.Panel_Width -= 16;
                             pres_pnl.SetDimensionToBind_using_BaseDimension();
                             pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //if (pres_pnl.Panel_Zoom == 0.26f || pres_pnl.Panel_Zoom == 0.17f ||
 
+                            //    pres_pnl.Panel_Zoom == 0.13f || pres_pnl.Panel_Zoom == 0.10f)
+                            //{
+                            //    pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //}
+                            //else
+                            //{
+                            //    pres_pnl.SetDimensionToBind_using_BaseDimension();
+                            //}
+                            //if (pres_pnl.PanelImageRenderer_Zoom == 0.26f || pres_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                            //    pres_pnl.PanelImageRenderer_Zoom == 0.13f || pres_pnl.PanelImageRenderer_Zoom == 0.10f)
+                            //{
+                            //    pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //}
+                            //else
+                            //{
+                            //    pres_pnl.SetDimensionImagerToBind_using_BaseDimension();
+                            //}
                         }
                         foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
+                            //if (pres_pnl != pnl)
+                            //{
+                            
                             pnl.Panel_Width += sashDiv;
+                            pnl.SetDimensionToBind_using_BaseDimension();
                             pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //if (pnl.Panel_Zoom == 0.26f || pnl.Panel_Zoom == 0.17f ||
+
+                            //    pnl.Panel_Zoom == 0.13f || pnl.Panel_Zoom == 0.10f)
+                            //{
+                            //    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //}
+                            //else
+                            //{
+                            //    pnl.SetDimensionToBind_using_BaseDimension();
+                            //}
+                            //if (pnl.PanelImageRenderer_Zoom == 0.26f || pnl.PanelImageRenderer_Zoom == 0.17f ||
+                            //    pnl.PanelImageRenderer_Zoom == 0.13f || pnl.PanelImageRenderer_Zoom == 0.10f)
+                            //{
+                            //    pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            //}
+                            //else
+                            //{
+                            //    pnl.SetDimensionImagerToBind_using_BaseDimension();
+                            //}
+                            //}
                         }
                         _multiPanelModel.SetZoomPanels();
                     }
@@ -423,7 +465,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (pres_ctrl is IPanelUC)
                         {
                             pres_pnl.Panel_Width += 16;
-                            //pres_pnl.SetDimensionToBind_using_BaseDimension();
+                            pres_pnl.SetDimensionToBind_using_BaseDimension();
                             pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
                         }

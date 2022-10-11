@@ -27,12 +27,14 @@ using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
+using QueryLayer.DataAccess.Repositories.Specific.Address;
 using QueryLayer.DataAccess.Repositories.Specific.Customer_Ref_No;
 using QueryLayer.DataAccess.Repositories.Specific.Employee;
 using QueryLayer.DataAccess.Repositories.Specific.Project_Quote;
 using QueryLayer.DataAccess.Repositories.Specific.Quotation;
 using QueryLayer.DataAccess.Repositories.Specific.User;
 using ServiceLayer.CommonServices;
+using ServiceLayer.Services.AddressServices;
 using ServiceLayer.Services.ConcreteServices;
 using ServiceLayer.Services.CustomerRefNoServices;
 using ServiceLayer.Services.DividerServices;
@@ -81,6 +83,9 @@ namespace PresentationLayer
                 .RegisterType<IAddProjectView, AddProjectView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IAddProjectPresenter, AddProjectPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IFactorView, FactorView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFactorPresenter, FactorPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<ICostEngrEmployeeView, CostEngrEmployeeView>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICostEngrEmployeePresenter, CostEngrEmployeePresenter>(new ContainerControlledLifetimeManager())
 
@@ -95,6 +100,7 @@ namespace PresentationLayer
                 .RegisterType<IUserLoginModel, UserLoginModel>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IQuotationServices, QuotationServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAddressServices, AddressServices>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IWindoorServices, WindoorServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IWindoorModel, WindoorModel>(new ContainerControlledLifetimeManager())
@@ -380,6 +386,7 @@ namespace PresentationLayer
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IProjectQuoteRepository, ProjectQuoteRepository>(new InjectionConstructor(_sqlconStr))
+                .RegisterType<IAddressRepository, AddressRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))

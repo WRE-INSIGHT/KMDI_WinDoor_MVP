@@ -394,7 +394,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 mpnl.Reload_PanelMargin();
                 mpnl.Fit_MyControls_ToBindDimensions();
                 mpnl.Fit_EqualPanel_ToBindDimensions();
-
+                mpnl.Fit_My2ndLvlControls_Dimensions();
             }
 
             foreach (IPanelModel pnl in Lst_Panel)
