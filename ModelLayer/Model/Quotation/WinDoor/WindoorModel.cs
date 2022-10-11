@@ -540,9 +540,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public Dictionary<int, int> Div_ArrowWdLengthList { get; set; }
         public int Div_ArrowCount { get; set; }
         public Dictionary<int, decimal> Dictionary_wd_redArrowLines { get; set; }
-
         public Dictionary<int, decimal> Dictionary_ht_redArrowLines { get; set; }
-
         private bool _WD_customArrowToggle;
         public bool WD_customArrowToggle
         {

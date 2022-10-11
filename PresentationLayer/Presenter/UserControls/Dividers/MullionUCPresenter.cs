@@ -218,7 +218,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                         nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                         nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
-                                        prev_mpanel.SetDimensions_childPanelObjs(1);
+                                        nxt_mpnl.SetDimensions_childPanelObjs(1);
 
                                         foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
                                         {
