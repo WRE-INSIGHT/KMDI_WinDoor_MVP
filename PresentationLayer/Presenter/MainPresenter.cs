@@ -1032,9 +1032,9 @@ namespace PresentationLayer.Presenter
                                                     {
                                                         foreach (var prop in div.GetType().GetProperties())
                                                         {
-                                                            if (prop.Name == "Div_DMPanel")
+                                                            if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
                                                             {
-
+                                            
                                                                 wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
 
                                                             }
@@ -1087,7 +1087,7 @@ namespace PresentationLayer.Presenter
                                                                     {
 
 
-                                                                        if (prop.Name == "Div_DMPanel")
+                                                                        if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
                                                                         {
 
                                                                             wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
