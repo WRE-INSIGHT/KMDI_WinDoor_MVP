@@ -63,7 +63,7 @@ namespace PresentationLayer.Presenter.UserControls
         string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            //_frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+            _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
             if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                 _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
