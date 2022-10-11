@@ -785,7 +785,7 @@ namespace PresentationLayer.Presenter
         }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);//, this, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 

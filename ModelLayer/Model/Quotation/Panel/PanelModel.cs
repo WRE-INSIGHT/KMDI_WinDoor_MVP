@@ -8178,11 +8178,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 orient = "Right";
             }
 
+            if (Panel_LatchDeadboltStrikerArtNo != null)
+            { 
             tbl_explosion.Rows.Add("Latch and deadbolt striker, " + orient + " " + Panel_LatchDeadboltStrikerArtNo.DisplayName,
                                    1, "pc(s)",
                                    "",
                                    "Frame",
                                    @"");
+            }
+
         }
 
         public int Add_SashPerimeter_screws4fab()
