@@ -1036,11 +1036,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         else if (MPanel_Zoom <= 0.26f)
                         {
                             int pnlwdToBind = MPanel_WidthToBind - mpnlWd_deduct;
-                            if (pnl.Panel_Placement == "Somewhere in Between")
-                            {
-                                pnlwdToBind += 2;
-                            }
-                            pnl.Panel_WidthToBind = pnlwdToBind + 2;
+                            pnl.Panel_WidthToBind = pnlwdToBind;
                         }
                     }
                 }
@@ -1476,7 +1472,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_ParentModel.MPanel_Type == "Mullion")
                     {
                         div_movement = ((MPanel_ParentModel.MPanel_DisplayWidth / totalpanel_inside_parentMpanel) - MPanel_DisplayWidth);
-
                         decimal divMove_convert_dec = Convert.ToDecimal(div_movement * MPanel_Zoom);
                         decimal divMove_dec = decimal.Round(divMove_convert_dec / 2, 0, MidpointRounding.AwayFromZero);
                         decimal divMove_dec_times2 = divMove_dec * 2;
