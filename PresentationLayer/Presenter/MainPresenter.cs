@@ -973,7 +973,7 @@ namespace PresentationLayer.Presenter
                                                 
                                                 wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
                                             }
-                                            else if(prop.Name == "Div_CladdingSizeList")
+                                            else if(prop.Name == "Div_CladdingSizeList" && div.Div_CladdingSizeList != null)
                                             {
 
                                                 string claddingArray = "";
@@ -4929,7 +4929,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                    Run_GetListOfMaterials_SpecificItem();
+                                    //Run_GetListOfMaterials_SpecificItem();
                                 }
                             }
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
