@@ -1113,21 +1113,25 @@ namespace ModelLayer.Model.Quotation.Divider
 
         public void Insert_CladdingProfile_MaterialList(DataTable tbl_explosion)
         {
-            foreach (int cladding_size in Div_CladdingSizeList.Values)
+            if(Div_CladdingSizeList != null)
             {
-                tbl_explosion.Rows.Add("Cladding Profile " + Div_CladdingProfileArtNo.ToString(),
-                                       1, "pc(s)",
-                                       cladding_size.ToString(),
-                                       Div_Type.ToString(),
-                                       @"|  |");
+                foreach (int cladding_size in Div_CladdingSizeList.Values)
+                {
+                    tbl_explosion.Rows.Add("Cladding Profile " + Div_CladdingProfileArtNo.ToString(),
+                                           1, "pc(s)",
+                                           cladding_size.ToString(),
+                                           Div_Type.ToString(),
+                                           @"|  |");
 
-                int claddingReinSize = cladding_size - 30;
-                tbl_explosion.Rows.Add("Cladding Reinforcement " + Div_CladdingReinfArtNo.ToString(),
-                                       1, "pc(s)",
-                                       claddingReinSize.ToString(),
-                                       "CPL",
-                                       @"|  |");
+                    int claddingReinSize = cladding_size - 30;
+                    tbl_explosion.Rows.Add("Cladding Reinforcement " + Div_CladdingReinfArtNo.ToString(),
+                                           1, "pc(s)",
+                                           claddingReinSize.ToString(),
+                                           "CPL",
+                                           @"|  |");
+                }
             }
+           
         }
 
         public void Insert_CladdingBracket4Concrete_MaterialList(DataTable tbl_explosion)
@@ -1277,11 +1281,16 @@ namespace ModelLayer.Model.Quotation.Divider
         public int Add_TotalCladdingSize_Screws4Cladding()
         {
             int total_clad = 0;
-            foreach (int cladding_size in Div_CladdingSizeList.Values)
-            {
-                total_clad += cladding_size;
-            }
 
+            if (Div_CladdingSizeList != null)
+            {
+                foreach (int cladding_size in Div_CladdingSizeList.Values)
+                {
+                    total_clad += cladding_size;
+                }
+
+                return total_clad;
+            }
             return total_clad;
         }
 

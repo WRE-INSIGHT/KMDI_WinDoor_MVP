@@ -4929,7 +4929,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                    //Run_GetListOfMaterials_SpecificItem();
+                                    Run_GetListOfMaterials_SpecificItem();
                                 }
                             }
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
