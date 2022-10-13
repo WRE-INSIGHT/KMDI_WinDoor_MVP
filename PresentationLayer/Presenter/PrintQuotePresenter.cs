@@ -44,7 +44,9 @@ namespace PresentationLayer.Presenter
 
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
-                _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
+                
+               // _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
+                _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
 
 
                 ReportParameter[] RParam = new ReportParameter[6];
@@ -86,6 +88,20 @@ namespace PresentationLayer.Presenter
             PrintQuotePresenter printQuote = unityC.Resolve<PrintQuotePresenter>();
             printQuote._unityC = unityC;
             printQuote._quoteItemListPresenter = quoteItemListPresenter;
+            printQuote._mainPresenter = mainPresenter;
+
+
+            return printQuote;
+        }
+
+        public IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
+                                                  IMainPresenter mainPresenter)
+        {
+            unityC
+                .RegisterType<IPrintQuoteView, PrintQuoteView>()
+                .RegisterType<IPrintQuotePresenter, PrintQuotePresenter>();
+            PrintQuotePresenter printQuote = unityC.Resolve<PrintQuotePresenter>();
+            printQuote._unityC = unityC; 
             printQuote._mainPresenter = mainPresenter;
 
 

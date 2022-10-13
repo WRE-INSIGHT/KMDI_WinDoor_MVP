@@ -87,18 +87,20 @@
             this.panel4.Controls.Add(this.dgv_Screen);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(219, 27);
+            this.panel4.Location = new System.Drawing.Point(227, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(483, 329);
+            this.panel4.Size = new System.Drawing.Size(475, 329);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
             // 
+            this.dgv_Screen.AllowUserToAddRows = false;
+            this.dgv_Screen.AllowUserToDeleteRows = false;
             this.dgv_Screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
-            this.dgv_Screen.Size = new System.Drawing.Size(483, 292);
+            this.dgv_Screen.Size = new System.Drawing.Size(475, 292);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
@@ -113,7 +115,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(483, 37);
+            this.panel3.Size = new System.Drawing.Size(475, 37);
             this.panel3.TabIndex = 29;
             // 
             // nud_Quantity
@@ -122,6 +124,11 @@
             this.nud_Quantity.Name = "nud_Quantity";
             this.nud_Quantity.Size = new System.Drawing.Size(50, 22);
             this.nud_Quantity.TabIndex = 9;
+            this.nud_Quantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lbl_Quantity
             // 
@@ -154,6 +161,11 @@
             this.nud_Sets.Name = "nud_Sets";
             this.nud_Sets.Size = new System.Drawing.Size(50, 22);
             this.nud_Sets.TabIndex = 7;
+            this.nud_Sets.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lbl_sets
             // 
@@ -185,7 +197,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(219, 329);
+            this.panel1.Size = new System.Drawing.Size(227, 329);
             this.panel1.TabIndex = 31;
             // 
             // btn_add
@@ -212,7 +224,7 @@
             this.cmb_baseColor.FormattingEnabled = true;
             this.cmb_baseColor.Location = new System.Drawing.Point(84, 33);
             this.cmb_baseColor.Name = "cmb_baseColor";
-            this.cmb_baseColor.Size = new System.Drawing.Size(117, 21);
+            this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
             this.cmb_baseColor.TabIndex = 2;
             this.cmb_baseColor.SelectedValueChanged += new System.EventHandler(this.cmb_baseColor_SelectedValueChanged);
             // 
@@ -229,7 +241,7 @@
             // 
             this.nud_Factor.Location = new System.Drawing.Point(86, 133);
             this.nud_Factor.Name = "nud_Factor";
-            this.nud_Factor.Size = new System.Drawing.Size(117, 22);
+            this.nud_Factor.Size = new System.Drawing.Size(130, 22);
             this.nud_Factor.TabIndex = 6;
             this.nud_Factor.ValueChanged += new System.EventHandler(this.nud_Factor_ValueChanged);
             // 
@@ -247,7 +259,7 @@
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 243);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(219, 86);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 86);
             this.pnl_addOns.TabIndex = 28;
             // 
             // nud_TotalPrice
@@ -255,7 +267,7 @@
             this.nud_TotalPrice.Enabled = false;
             this.nud_TotalPrice.Location = new System.Drawing.Point(86, 173);
             this.nud_TotalPrice.Name = "nud_TotalPrice";
-            this.nud_TotalPrice.Size = new System.Drawing.Size(117, 22);
+            this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
             this.nud_TotalPrice.TabIndex = 25;
             // 
             // lbl_whitePrice
@@ -281,14 +293,15 @@
             this.cmb_ScreenType.FormattingEnabled = true;
             this.cmb_ScreenType.Location = new System.Drawing.Point(84, 6);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
-            this.cmb_ScreenType.Size = new System.Drawing.Size(117, 21);
+            this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
             this.cmb_ScreenType.TabIndex = 1;
+            this.cmb_ScreenType.SelectedValueChanged += new System.EventHandler(this.cmb_ScreenType_SelectedValueChanged);
             // 
             // nud_Height
             // 
             this.nud_Height.Location = new System.Drawing.Point(86, 105);
             this.nud_Height.Name = "nud_Height";
-            this.nud_Height.Size = new System.Drawing.Size(117, 22);
+            this.nud_Height.Size = new System.Drawing.Size(130, 22);
             this.nud_Height.TabIndex = 5;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
             // 
@@ -296,7 +309,7 @@
             // 
             this.nud_Width.Location = new System.Drawing.Point(86, 77);
             this.nud_Width.Name = "nud_Width";
-            this.nud_Width.Size = new System.Drawing.Size(117, 22);
+            this.nud_Width.Size = new System.Drawing.Size(130, 22);
             this.nud_Width.TabIndex = 4;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
             // 
@@ -324,9 +337,9 @@
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(1, 150);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(217, 15);
+            this.label4.Size = new System.Drawing.Size(222, 15);
             this.label4.TabIndex = 27;
-            this.label4.Text = "__________________________________________";
+            this.label4.Text = "___________________________________________";
             // 
             // tsScreen
             // 
@@ -345,12 +358,12 @@
             // tsBtnPrintScreen
             // 
             this.tsBtnPrintScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBtnPrintScreen.Enabled = false;
             this.tsBtnPrintScreen.Image = global::PresentationLayer.Properties.Resources.print;
             this.tsBtnPrintScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnPrintScreen.Name = "tsBtnPrintScreen";
             this.tsBtnPrintScreen.Size = new System.Drawing.Size(24, 24);
             this.tsBtnPrintScreen.Text = "Print Screen";
+            this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
             // ScreenView
             // 
@@ -362,6 +375,7 @@
             this.Name = "ScreenView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Screen";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ScreenView_Load);
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);

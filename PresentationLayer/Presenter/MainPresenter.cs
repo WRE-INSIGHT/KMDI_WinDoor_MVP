@@ -780,12 +780,12 @@ namespace PresentationLayer.Presenter
         #region Events  
         private void _mainView_factorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IFactorPresenter factor  = _factorPresenter.GetNewInstance(_unityC, this);
+            IFactorPresenter factor = _factorPresenter.GetNewInstance(_unityC, this);
             factor.GetFactorView().ShowThis();
         }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);//, this, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
@@ -968,12 +968,12 @@ namespace PresentationLayer.Presenter
                                     {
                                         foreach (var prop in div.GetType().GetProperties())
                                         {
-                                            if(prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
+                                            if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
                                             {
-                                                
+
                                                 wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
                                             }
-                                            else if(prop.Name == "Div_CladdingSizeList")
+                                            else if (prop.Name == "Div_CladdingSizeList")
                                             {
 
                                                 string claddingArray = "";
@@ -1099,7 +1099,7 @@ namespace PresentationLayer.Presenter
                                                                         }
 
 
-                                                                       
+
                                                                     }
                                                                     break;
                                                                 }
@@ -2568,7 +2568,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                        
+
                         if (row_str.Contains("Frame_BotFrameArtNo:"))
                         {
                             foreach (BottomFrameTypes artcNo in BottomFrameTypes.GetAll())
@@ -3925,7 +3925,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Panel_GuideTrackProfileArtNo:"))
                         {
-                            
+
                         }
                         else if (row_str.Contains("Panel_AluminumTrackArtNo:"))
                         {
@@ -3936,8 +3936,8 @@ namespace PresentationLayer.Presenter
                                     panel_AluminumTrackArtNo = atan;
                                 }
                             }
-                            
-                            
+
+
                         }
                         else if (row_str.Contains("Panel_AluminumTrackQty:"))
                         {
@@ -4143,19 +4143,19 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Panel_DHandleOptionVisibilty:"))
                         {
-                            panel_DHandleOptionVisibilty  = Convert.ToBoolean(extractedValue_str);
+                            panel_DHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Panel_DHandleIOLockingOptionVisibilty:"))
                         {
-                            panel_DHandleIOLockingOptionVisibilty  = Convert.ToBoolean(extractedValue_str);
+                            panel_DHandleIOLockingOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Panel_DummyDHandleOptionVisibilty:"))
                         {
-                            panel_DummyDHandleOptionVisibilty  = Convert.ToBoolean(extractedValue_str);
+                            panel_DummyDHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Panel_PopUpHandleOptionVisibilty:"))
                         {
-                            panel_PopUpHandleOptionVisibilty  = Convert.ToBoolean(extractedValue_str);
+                            panel_PopUpHandleOptionVisibilty = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Panel_RotoswingForSlidingHandleOptionVisibilty:"))
                         {
@@ -4603,7 +4603,7 @@ namespace PresentationLayer.Presenter
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                             IFramePropertiesUC framePropUC = (FramePropertiesUC)_frameModel.Frame_PropertiesUC;
                             panelPropUC.Dock = DockStyle.Top;
-                               
+
                             if (panel_Parent.Parent.Name.Contains("frame"))
                             {
 
@@ -5571,9 +5571,9 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
 
-                            foreach(IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                             {
-                                if(pnl.Panel_Name == extractedValue_str)
+                                if (pnl.Panel_Name == extractedValue_str)
                                 {
                                     div_DMPanel = pnl;
                                 }
@@ -5661,13 +5661,13 @@ namespace PresentationLayer.Presenter
                             div_CladdingSizeList = new Dictionary<int, int>();
                             foreach (string str in words)
                             {
-                                if(str.Trim() != string.Empty)
+                                if (str.Trim() != string.Empty)
                                 {
                                     int key = Convert.ToInt32(str.Split('<', ',')[1]);
                                     int value = Convert.ToInt32(str.Split(',', '>')[1]);
                                     div_CladdingSizeList.Add(key, value);
                                 }
-                               
+
                             }
                             //div_CladdingSizeList = extractedValue_str;
                         }
@@ -6371,7 +6371,7 @@ namespace PresentationLayer.Presenter
 
         #endregion
 
-        
+
         #region Scenarios
 
         public void Scenario_Quotation(bool QoutationInputBox_OkClicked,
@@ -6530,7 +6530,7 @@ namespace PresentationLayer.Presenter
                         {
                             baseColor = Base_Color._DarkBrown;
                         }
-                        
+
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
@@ -6890,11 +6890,8 @@ namespace PresentationLayer.Presenter
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
 
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                 (sash_art == SashProfile_ArticleNo._374 ||
-                                  sash_art == SashProfile_ArticleNo._373)) ||
-                                !(frame_art == FrameProfile_ArticleNo._6052 &&
-                                  sash_art == SashProfile_ArticleNo._6041))
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
+                                !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041))
                             {
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }

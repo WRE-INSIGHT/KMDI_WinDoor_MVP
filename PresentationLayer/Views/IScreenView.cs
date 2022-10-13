@@ -18,6 +18,7 @@ namespace PresentationLayer.Views
         event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
         event EventHandler btnAddClickEventRaised;
         event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
+        event EventHandler tsBtnPrintScreenClickEventRaised;
 
         void ShowScreemView();
 

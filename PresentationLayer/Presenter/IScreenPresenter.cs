@@ -7,8 +7,8 @@ namespace PresentationLayer.Presenter
     public interface IScreenPresenter
     {
         IScreenView GetScreenView();
-        IScreenPresenter CreateNewInstance(IUnityContainer unityC);
-        //IMainPresenter mainPresenter,
+        IScreenPresenter CreateNewInstance(IUnityContainer unityC,
+                                           IMainPresenter mainPresenter);
         //  DataTable screenDT);
 
         DataTable PopulateDgvScreen();

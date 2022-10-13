@@ -1,4 +1,5 @@
 ﻿using PresentationLayer.CommonMethods;
+using PresentationLayer.DataTables;
 using PresentationLayer.Views;
 using System;
 using System.Data;
@@ -12,6 +13,7 @@ namespace PresentationLayer.Presenter
         IScreenView _screenView;
 
         private IUnityContainer _unityC;
+        private IPrintQuotePresenter _printQuotePresenter;
         private IMainPresenter _mainPresenter;
         private DataTable _screenDT = new DataTable();
 
@@ -76,9 +78,11 @@ namespace PresentationLayer.Presenter
 
         #endregion
 
-        public ScreenPresenter(IScreenView screenView)
+        public ScreenPresenter(IScreenView screenView,
+                               IPrintQuotePresenter printQuotePresenter)
         {
             _screenView = screenView;
+            _printQuotePresenter = printQuotePresenter;
 
             SubscribeToEventSetup();
         }
@@ -97,6 +101,8 @@ namespace PresentationLayer.Presenter
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
             _screenView.btnAddClickEventRaised += _screenView_btnAddClickEventRaised;
             _screenView.dgvScreenRowPostPaintEventRaised += _screenView_dgvScreenRowPostPaintEventRaised;
+            _screenView.tsBtnPrintScreenClickEventRaised += _screenView_tsBtnPrintScreenClickEventRaised;
+
 
             _screen_Width = _screenView.screen_width;
             _screen_Height = _screenView.screen_height;
@@ -106,8 +112,39 @@ namespace PresentationLayer.Presenter
             _dgvScreen = _screenView.GetDatagrid();
             _windoorID = _screenView.screen_windoorID;
         }
-
         #region Events
+
+        private void _screenView_tsBtnPrintScreenClickEventRaised(object sender, EventArgs e)
+        {
+            DSQuotation _dsq = new DSQuotation();
+            /*
+            Type of Insect Screen
+            Dimension(mm) \n per panel
+            Window / Door I.D.
+            Unit Price
+            Quantity
+            Total Amount
+            */
+            if (_screenDT != null)
+            {
+                int item = 1;
+                foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
+                {
+
+                    _dsq.dtScreen.Rows.Add(Datarow.Cells[0].Value ?? string.Empty,
+                                           Datarow.Cells[1].Value ?? string.Empty,
+                                           Datarow.Cells[2].Value ?? string.Empty,
+                                           Datarow.Cells[3].Value ?? 0,
+                                           Datarow.Cells[4].Value ?? 0,
+                                           Datarow.Cells[5].Value ?? 0,
+                                           item++);
+                }
+            }
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+        }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -181,18 +218,18 @@ namespace PresentationLayer.Presenter
             dt.Columns.Add("Type of Insect Screen", Type.GetType("System.String"));
             dt.Columns.Add("Dimension (mm) \n per panel", Type.GetType("System.String"));
             dt.Columns.Add("Window/Door I.D.", Type.GetType("System.String"));
-            dt.Columns.Add("Unit Price", Type.GetType("System.String"));
-            dt.Columns.Add("Quantity", Type.GetType("System.String"));
-            dt.Columns.Add("Total Amount", Type.GetType("System.String"));
+            dt.Columns.Add("Unit Price", Type.GetType("System.Decimal"));
+            dt.Columns.Add("Quantity", Type.GetType("System.Int32"));
+            dt.Columns.Add("Total Amount", Type.GetType("System.Decimal"));
 
             foreach (DataRow screenDTRow in _screenDT.Rows)
             {
-                dt.Rows.Add(screenDTRow["Type of Insect Screen"]);
-                dt.Rows.Add(screenDTRow["Dimension (mm) \n per panel"]);
-                dt.Rows.Add(screenDTRow["Window/Door I.D."]);
-                dt.Rows.Add(screenDTRow["Unit Price"]);
-                dt.Rows.Add(screenDTRow["Quantity"]);
-                dt.Rows.Add(screenDTRow["Total Amount"]);
+                dt.Rows.Add(screenDTRow["Type of Insect Screen"],
+                            screenDTRow["Dimension (mm) \n per panel"],
+                            screenDTRow["Window/Door I.D."],
+                            screenDTRow["Unit Price"],
+                            screenDTRow["Quantity"],
+                            screenDTRow["Total Amount"]);
             }
 
             return dt;
@@ -200,25 +237,16 @@ namespace PresentationLayer.Presenter
 
         public DataRow CreateNewRow_ScreenDT()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add(CreateColumn("Type of Insect Screen", "Type of Insect Screen", "System.String"));
-            dt.Columns.Add(CreateColumn("Dimension (mm) \n per panel", "Dimension (mm) \n per panel", "System.String"));
-            dt.Columns.Add(CreateColumn("Window/Door I.D.", "Window/Door I.D.", "System.String"));
-            dt.Columns.Add(CreateColumn("Unit Price", "Unit Price", "System.Decimal"));
-            dt.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
-            dt.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
-
             // _screenView.screen_windoorID = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_screenView.screen_windoorID.ToLower());
             DataRow newRow;
             newRow = _screenDT.NewRow();
             newRow["Type of Insect Screen"] = _screenType.SelectedValue;
-            newRow["Dimension (mm) \n per panel"] = _screen_Width.Value+ " x " + +_screen_Height.Value;
+            newRow["Dimension (mm) \n per panel"] = _screen_Width.Value + " x " + +_screen_Height.Value;
             newRow["Window/Door I.D."] = _screenView.screen_windoorID;
             newRow["Unit Price"] = _screenView.GetNudQuantity().Value;
             newRow["Quantity"] = _screenView.GetNudQuantity().Value;
             newRow["Total Amount"] = _screenView.GetNudTotalPrice().Value;
-            //dt.Rows.Add(newRow);
-             return newRow;
+            return newRow;
         }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
@@ -386,8 +414,8 @@ namespace PresentationLayer.Presenter
             return _screenView;
         }
 
-        public IScreenPresenter CreateNewInstance(IUnityContainer unityC)
-        //IMainPresenter mainPresenter)
+        public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
+                                                  IMainPresenter mainPresenter)
         //DataTable screenDT)
         {
             unityC
@@ -395,7 +423,7 @@ namespace PresentationLayer.Presenter
                     .RegisterType<IScreenPresenter, ScreenPresenter>();
             ScreenPresenter screen = unityC.Resolve<ScreenPresenter>();
             screen._unityC = unityC;
-            //screen._mainPresenter = mainPresenter;
+            screen._mainPresenter = mainPresenter;
             //screen._screenDT = screenDT;
 
             return screen;

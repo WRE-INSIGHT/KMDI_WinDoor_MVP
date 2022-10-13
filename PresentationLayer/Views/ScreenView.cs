@@ -69,7 +69,7 @@ namespace PresentationLayer.Views
         public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
-
+        public event EventHandler tsBtnPrintScreenClickEventRaised;
         public void ShowScreemView()
         {
             this.Show();
@@ -108,6 +108,7 @@ namespace PresentationLayer.Views
      
         private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
         {
+
             EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
         }
 
@@ -158,6 +159,12 @@ namespace PresentationLayer.Views
         private void dgv_Screen_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, dgvScreenRowPostPaintEventRaised, e);
+        }
+
+        private void tsBtnPrintScreen_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
+
         }
     }
 }
