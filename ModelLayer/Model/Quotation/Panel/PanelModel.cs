@@ -5978,6 +5978,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (mpanel_placement == "First" ||
                     mpanel_placement == "Last" ||
+                    mpanel_placement == "" || 
                     mpanel_placement == "")
                 {
                     if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)

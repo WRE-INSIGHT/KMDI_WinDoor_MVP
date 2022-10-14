@@ -248,6 +248,7 @@ namespace PresentationLayer.Presenter
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
                     _mainPresenter.pricingFactor = Convert.ToDecimal(_dgvAssignedProj.Rows[e.RowIndex].Cells["Factor"].Value);
+                    _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     //_dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
                     _CELandingView.SetText_LblNav(_projName);
 

@@ -58,28 +58,37 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnbasePlatformSizeChangedEventRaised(object sender, EventArgs e)
         {
-            UserControl basePlatform = (UserControl)sender;
-            Panel pnlMain = (Panel)basePlatform.Parent;
-            int cX, cY;
-            cX = (pnlMain.Width - basePlatform.Width) / 2;
-            cY = (pnlMain.Height - basePlatform.Height) / 2;
+            try
+            {
+                UserControl basePlatform = (UserControl)sender;
+                Panel pnlMain = (Panel)basePlatform.Parent;
+                int cX, cY;
+                cX = (pnlMain.Width - basePlatform.Width) / 2;
+                cY = (pnlMain.Height - basePlatform.Height) / 2;
 
-            if (cX <= 30 && cY <= 30)
-            {
-                basePlatform.Location = new Point(60, 60);
+                if (cX <= 30 && cY <= 30)
+                {
+                    basePlatform.Location = new Point(60, 60);
+                }
+                else if (cX <= 30)
+                {
+                    basePlatform.Location = new Point(60, cY);
+                }
+                else if (cY <= 30)
+                {
+                    basePlatform.Location = new Point(cX, 60);
+                }
+                else
+                {
+                    basePlatform.Location = new Point(cX - 17, cY - 35);
+                }
             }
-            else if (cX <= 30)
+            catch (Exception ex)
             {
-                basePlatform.Location = new Point(60, cY);
-            }
-            else if (cY <= 30)
-            {
-                basePlatform.Location = new Point(cX, 60);
-            }
-            else
-            {
-                basePlatform.Location = new Point(cX - 17, cY - 35);
-            }
+
+                MessageBox.Show(ex.Message);
+            }    
+            
         }
 
         private Control FindFrameControl(string frameName, int _frameID)

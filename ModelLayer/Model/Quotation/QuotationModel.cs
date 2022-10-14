@@ -1074,7 +1074,7 @@ namespace ModelLayer.Model.Quotation
                             for (int i = 0; i < obj_count; i++)
                             {
 
-                                mpanel_placement = mpnl.MPanel_Placement;
+                                //mpanel_placement = mpnl.MPanel_Placement;
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
@@ -1093,7 +1093,7 @@ namespace ModelLayer.Model.Quotation
                                 bool divNxt_ifDM = false,
                                      divPrev_ifDM = false;
 
-                                mpanel_placement = mpnl.MPanel_Placement;
+                                //mpanel_placement = mpnl.MPanel_Placement;
 
                                 int OverLappingPanel_Qty = 0;
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
