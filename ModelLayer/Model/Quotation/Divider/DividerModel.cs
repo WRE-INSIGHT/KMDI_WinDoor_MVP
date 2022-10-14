@@ -820,47 +820,61 @@ namespace ModelLayer.Model.Quotation.Divider
                     if (Div_MPanelParent.MPanel_Placement == "First")
                     {
                         Div_Bounded = "Frame&Transom";
-
-                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
-                        div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
-
-                        top_deduction = 0;
-                        if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
+                        try
                         {
-                            bot_deduction = (42 / 2) + frame_deduction;
+                            nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                            div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+
+                            top_deduction = 0;
+                            if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                bot_deduction = (42 / 2) + frame_deduction;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                bot_deduction = (72 / 2) + frame_deduction;
+                            }
                         }
-                        else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                        catch (Exception)
                         {
-                            bot_deduction = (72 / 2) + frame_deduction;
+
                         }
+                       
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
                         Div_Bounded = "Transom";
-
-                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
-                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
-
-                        div_top = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
-                        div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
-
-                        if (div_top.Div_ArtNo == Divider_ArticleNo._7536 || div_top.Div_ArtNo == Divider_ArticleNo._2069)
+                        try
                         {
-                            top_deduction = 42 / 2;
-                        }
-                        else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
-                        {
-                            top_deduction = 72 / 2;
-                        }
+                            nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                            prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
 
-                        if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
-                        {
-                            bot_deduction = 42 / 2;
+                            div_top = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                            div_bot = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+
+                            if (div_top.Div_ArtNo == Divider_ArticleNo._7536 || div_top.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                top_deduction = 42 / 2;
+                            }
+                            else if (div_top.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                top_deduction = 72 / 2;
+                            }
+
+                            if (div_bot.Div_ArtNo == Divider_ArticleNo._7536 || div_bot.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                bot_deduction = 42 / 2;
+                            }
+                            else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                bot_deduction = 72 / 2;
+                            }
                         }
-                        else if (div_bot.Div_ArtNo == Divider_ArticleNo._7538)
+                        catch (Exception)
                         {
-                            bot_deduction = 72 / 2;
+
                         }
+                      
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
@@ -926,47 +940,60 @@ namespace ModelLayer.Model.Quotation.Divider
                     if (Div_MPanelParent.MPanel_Placement == "First")
                     {
                         Div_Bounded = "Frame&Mullion";
-
-                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
-                        div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
-                        left_deduction = 0;
-
-                        if (div_right.Div_ArtNo == Divider_ArticleNo._7536 || div_right.Div_ArtNo == Divider_ArticleNo._2069)
+                        try
                         {
-                            right_deduction = (42 / 2) + frame_deduction;
+                            nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                            div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+                            left_deduction = 0;
+
+                            if (div_right.Div_ArtNo == Divider_ArticleNo._7536 || div_right.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                right_deduction = (42 / 2) + frame_deduction;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                right_deduction = (72 / 2) + frame_deduction;
+                            }
                         }
-                        else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                        catch (Exception)
                         {
-                            right_deduction = (72 / 2) + frame_deduction;
+
                         }
+                      
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Somewhere in Between")
                     {
                         Div_Bounded = "Mullion";
 
-                        nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
-                        div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+                        try
+                        {
+                            nxtctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx + 1].Name;
+                            div_right = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == nxtctrl_name);
+                            prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+                            div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
 
-                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
-                        div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                            if (div_right.Div_ArtNo == Divider_ArticleNo._7536 || div_right.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                right_deduction = 42 / 2;
+                            }
+                            else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                right_deduction = 72 / 2;
+                            }
 
-                        if (div_right.Div_ArtNo == Divider_ArticleNo._7536 || div_right.Div_ArtNo == Divider_ArticleNo._2069)
-                        {
-                            right_deduction = 42 / 2;
+                            if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                left_deduction = 42 / 2;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                left_deduction = 72 / 2;
+                            }
                         }
-                        else if (div_right.Div_ArtNo == Divider_ArticleNo._7538)
+                        catch (Exception)
                         {
-                            right_deduction = 72 / 2;
-                        }
-
-                        if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
-                        {
-                            left_deduction = 42 / 2;
-                        }
-                        else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
-                        {
-                            left_deduction = 72 / 2;
-                        }
+                        }    
+                    
                     }
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {

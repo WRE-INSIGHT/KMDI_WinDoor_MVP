@@ -331,18 +331,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
                             int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
-                          
-
-                            //if (DisplayWD_dec_split.Count() > 1)
-                            //{
-                            //    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
-                            //}
-                            //int mpanelSize = 0;
-                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                            //{
-                            //    mpanelSize += mpnl.MPanel_Width;
-                            //}
-                            //suggest_Wd = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions) - mpanelSize) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
                             FlowDirection flow = FlowDirection.LeftToRight;
                             if (data.Contains("Transom"))
                             {

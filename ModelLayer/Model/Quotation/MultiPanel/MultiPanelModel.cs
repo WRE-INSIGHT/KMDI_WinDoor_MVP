@@ -2162,12 +2162,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                                               bool if_auto_added = false)
         {
             int indx = MPanelLst_Objects.IndexOf(current_control),
-                div_mpnl_deduct = _mpnl_add,
+                div_mpnl_deduct = _mpnl_add,//8
                 div_mpnl_deduct_Tobind = 0;
 
             if (MPanel_Zoom > 0.26f)
             {
-                div_mpnl_deduct_Tobind = (int)(_mpnl_add * MPanel_Zoom);
+                div_mpnl_deduct_Tobind = (int)(_mpnl_add * MPanel_Zoom);//4
             }
             else if (MPanel_Zoom <= 0.26f)
             {
@@ -2198,13 +2198,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (prev_ctrl.Name.Contains("MullionUC"))
                         {
-                            divModel.Div_Width -= div_mpnl_deduct;
-                            divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind;
+                            divModel.Div_Width -= div_mpnl_deduct; // 18 - 8
+                            divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind; // 9 - 4
                             //divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
                             if (indx == MPanel_Divisions * 2) //means LAST OBJECT
                             {
-                                multiModel.MPanel_Width += div_mpnl_deduct;
-                                multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind;
+                                multiModel.MPanel_Width += div_mpnl_deduct; // 471 + 8
+                                multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind; // 235 + 4
                                 //multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
                             }
                         }
@@ -2237,12 +2237,12 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (!if_auto_added)
                             {
-                                multiModel.MPanel_Width += div_mpnl_deduct;
-                                multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind;
+                                multiModel.MPanel_Width += div_mpnl_deduct;//471 + 8
+                                multiModel.MPanel_WidthToBind += div_mpnl_deduct_Tobind;//235 + 4
                                 //multiModel.MPanelImageRenderer_Width += div_mpnl_deduct_Tobind;
                             }
-                            divModel.Div_Width -= div_mpnl_deduct;
-                            divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind;
+                            divModel.Div_Width -= div_mpnl_deduct;//26 - 8
+                            divModel.Div_WidthToBind -= div_mpnl_deduct_Tobind;//13 - 4
                             //divModel.DivImageRenderer_Width -= div_mpnl_deduct_Tobind;
                         }
                     }

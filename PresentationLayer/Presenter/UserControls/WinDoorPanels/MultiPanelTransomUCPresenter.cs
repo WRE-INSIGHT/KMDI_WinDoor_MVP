@@ -316,12 +316,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
                             }
-
-
-
-
-
-
+                            #region MyRegion
 
                             //string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
                             //decimal displayHeightDecimal = 0;
@@ -355,6 +350,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             //int EqualDisplayHT = (int)Math.Truncate(Convert.ToDecimal(disp_ht_decimal) / totalPanelCount);
                             //int EqualMPanelHT = ((_multiPanelModel.MPanel_Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             //suggest_HT = EqualMPanelHT - (EqualDisplayHT - suggest_DisplayHT);
+                            #endregion
+
                             FlowDirection flow = FlowDirection.LeftToRight;
                             if (data.Contains("Transom"))
                             {
@@ -430,15 +427,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                                 if (mPanelModel.MPanel_Placement == "Last")
                                 {
-                                    if (_multiPanelModel.MPanel_Zoom == 0.5 || _multiPanelModel.MPanel_Zoom == 1)
-                                    {
-                                        _multiPanelModel.Fit_MyControls_Dimensions();
-
-                                    }
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-
-                                    _mainPresenter.Fit_MyControls_byControlsLocation();
+                                    _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")

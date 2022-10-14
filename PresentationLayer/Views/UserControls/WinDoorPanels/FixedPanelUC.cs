@@ -133,6 +133,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
+
                 if (this.Parent.Name.Contains("Frame"))
                     overlapSashToolStripMenuItem.Visible = false;
                 else
