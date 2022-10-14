@@ -5,6 +5,7 @@ namespace PresentationLayer.Views
 {
     public interface IScreenView
     {
+        NumericUpDown screen_Quantity { get; set; }
         NumericUpDown screen_factor { get; set; }
         NumericUpDown screen_height { get; set; }
         NumericUpDown screen_width { get; set; }
@@ -19,7 +20,7 @@ namespace PresentationLayer.Views
         event EventHandler btnAddClickEventRaised;
         event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         event EventHandler tsBtnPrintScreenClickEventRaised;
-
+        event EventHandler nudQuantityValueChangedEventRaised;
         void ShowScreemView();
 
         ComboBox GetCmbScreenType();

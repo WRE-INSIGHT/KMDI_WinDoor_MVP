@@ -48,7 +48,19 @@ namespace PresentationLayer.Views
                 nud_Factor.Value = Convert.ToDecimal(value);
             }
         }
-    
+
+        public NumericUpDown screen_Quantity
+        {
+            get
+            {
+                return nud_Quantity;
+            }
+            set
+            {
+                nud_Quantity.Value = Convert.ToDecimal(value);
+            }
+        }
+
         public string screen_windoorID
         {
             get
@@ -70,6 +82,7 @@ namespace PresentationLayer.Views
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         public event EventHandler tsBtnPrintScreenClickEventRaised;
+        public event EventHandler nudQuantityValueChangedEventRaised;
         public void ShowScreemView()
         {
             this.Show();
@@ -105,7 +118,7 @@ namespace PresentationLayer.Views
             return dgv_Screen;
         }
 
-     
+
         private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
         {
 
@@ -165,6 +178,11 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
 
+        }
+
+        private void nud_Quantity_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
         }
     }
 }

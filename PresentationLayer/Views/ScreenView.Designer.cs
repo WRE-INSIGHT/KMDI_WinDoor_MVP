@@ -100,6 +100,7 @@
             this.dgv_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
+            this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.Size = new System.Drawing.Size(475, 292);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
@@ -123,12 +124,13 @@
             this.nud_Quantity.Location = new System.Drawing.Point(391, 7);
             this.nud_Quantity.Name = "nud_Quantity";
             this.nud_Quantity.Size = new System.Drawing.Size(50, 22);
-            this.nud_Quantity.TabIndex = 9;
+            this.nud_Quantity.TabIndex = 8;
             this.nud_Quantity.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.nud_Quantity.ValueChanged += new System.EventHandler(this.nud_Quantity_ValueChanged);
             // 
             // lbl_Quantity
             // 
@@ -144,7 +146,7 @@
             this.txt_windoorID.Location = new System.Drawing.Point(218, 6);
             this.txt_windoorID.Name = "txt_windoorID";
             this.txt_windoorID.Size = new System.Drawing.Size(100, 22);
-            this.txt_windoorID.TabIndex = 8;
+            this.txt_windoorID.TabIndex = 7;
             // 
             // lbl_WindoorID
             // 
@@ -160,7 +162,7 @@
             this.nud_Sets.Location = new System.Drawing.Point(78, 6);
             this.nud_Sets.Name = "nud_Sets";
             this.nud_Sets.Size = new System.Drawing.Size(50, 22);
-            this.nud_Sets.TabIndex = 7;
+            this.nud_Sets.TabIndex = 6;
             this.nud_Sets.Value = new decimal(new int[] {
             1,
             0,
@@ -205,7 +207,7 @@
             this.btn_add.Location = new System.Drawing.Point(56, 214);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(98, 26);
-            this.btn_add.TabIndex = 35;
+            this.btn_add.TabIndex = 66;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -242,7 +244,7 @@
             this.nud_Factor.Location = new System.Drawing.Point(86, 133);
             this.nud_Factor.Name = "nud_Factor";
             this.nud_Factor.Size = new System.Drawing.Size(130, 22);
-            this.nud_Factor.TabIndex = 6;
+            this.nud_Factor.TabIndex = 5;
             this.nud_Factor.ValueChanged += new System.EventHandler(this.nud_Factor_ValueChanged);
             // 
             // lbl_Factor
@@ -302,7 +304,7 @@
             this.nud_Height.Location = new System.Drawing.Point(86, 105);
             this.nud_Height.Name = "nud_Height";
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
-            this.nud_Height.TabIndex = 5;
+            this.nud_Height.TabIndex = 4;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
             // 
             // nud_Width
@@ -310,7 +312,7 @@
             this.nud_Width.Location = new System.Drawing.Point(86, 77);
             this.nud_Width.Name = "nud_Width";
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
-            this.nud_Width.TabIndex = 4;
+            this.nud_Width.TabIndex = 3;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
             // 
             // lbl_ScreenHeight
