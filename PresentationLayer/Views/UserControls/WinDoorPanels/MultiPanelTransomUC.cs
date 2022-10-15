@@ -171,6 +171,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             Console.WriteLine();
             Console.WriteLine("Width " + this.Width);
+            Console.WriteLine(this.Parent.Name);
             Console.WriteLine();
         }
 
