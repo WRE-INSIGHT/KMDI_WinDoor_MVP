@@ -1091,16 +1091,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
-            Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_Height);
-            Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
-            Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-            Console.WriteLine("MPanel_HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
-            Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
-            Console.WriteLine("MPanelImageRenderer_Height " + _multiPanelModel.MPanelImageRenderer_Height);
-            Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
-            Console.WriteLine("MPanel_Display_Height " + _multiPanelModel.MPanel_DisplayHeight);
-            Console.WriteLine("MPanel_Display_Width " + _multiPanelModel.MPanel_DisplayWidth);
-            Console.WriteLine("");
+            //Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_Height);
+            //Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
+            //Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+            //Console.WriteLine("MPanel_HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+            //Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            //Console.WriteLine("MPanelImageRenderer_Height " + _multiPanelModel.MPanelImageRenderer_Height);
+            //Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            //Console.WriteLine("MPanel_Display_Height " + _multiPanelModel.MPanel_DisplayHeight);
+            //Console.WriteLine("MPanel_Display_Width " + _multiPanelModel.MPanel_DisplayWidth);
+            //Console.WriteLine("");
         }
 
         Color color = Color.Black;

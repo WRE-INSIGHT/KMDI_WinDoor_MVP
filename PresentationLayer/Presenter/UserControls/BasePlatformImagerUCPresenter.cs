@@ -887,7 +887,6 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         else if (mpnl.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                         {
-                            Console.WriteLine(mpnl.MPanel_Parent.Name);
                             if(mpnl.MPanel_ParentModel != mpnls && mpnls != null)
                             {
                                 mParentLoc_Y1 = 0;

@@ -998,19 +998,26 @@ namespace ModelLayer.Model.Quotation.Divider
                     else if (Div_MPanelParent.MPanel_Placement == "Last")
                     {
                         Div_Bounded = "Frame&Mullion";
-
-                        prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
-                        div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
-                        right_deduction = 0;
-
-                        if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
+                        try
                         {
-                            left_deduction = (42 / 2) + frame_deduction;
+                            prevctrl_name = parent_mpanelParent.MPanelLst_Objects[parent_ndx - 1].Name;
+                            div_left = parent_mpanelParent.MPanelLst_Divider.Find(div => div.Div_Name == prevctrl_name);
+                            right_deduction = 0;
+
+                            if (div_left.Div_ArtNo == Divider_ArticleNo._7536 || div_left.Div_ArtNo == Divider_ArticleNo._2069)
+                            {
+                                left_deduction = (42 / 2) + frame_deduction;
+                            }
+                            else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
+                            {
+                                left_deduction = (72 / 2) + frame_deduction;
+                            }
                         }
-                        else if (div_left.Div_ArtNo == Divider_ArticleNo._7538)
+                        catch (Exception)
                         {
-                            left_deduction = (72 / 2) + frame_deduction;
+
                         }
+               
                     }
 
                     if (Div_Type == DividerType.Transom)
