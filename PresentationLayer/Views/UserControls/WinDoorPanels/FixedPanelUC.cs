@@ -140,7 +140,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                     overlapSashToolStripMenuItem.Visible = true;
                 cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
             }
-            Console.WriteLine(this.Parent.Name);
             EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseClickEventRaised, e);
 
 

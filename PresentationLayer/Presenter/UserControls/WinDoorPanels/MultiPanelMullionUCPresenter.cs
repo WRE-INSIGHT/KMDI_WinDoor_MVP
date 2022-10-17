@@ -883,8 +883,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)mullionUC);
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                             mullionUCP.SetInitialLoadFalse();
-                            Console.WriteLine("Div Width to bind " + divModel.Div_WidthToBind);
-                            Console.WriteLine("Div ImageRenderer Width to bind " + divModel.DivImageRenderer_Width);
+                        
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
@@ -1036,7 +1035,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine(_multiPanelModel.MPanel_HeightToBind);
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {

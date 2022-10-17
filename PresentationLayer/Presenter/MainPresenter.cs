@@ -1913,7 +1913,8 @@ namespace PresentationLayer.Presenter
                     int startFileName = wndrfile.LastIndexOf("\\") + 1;
                     string outFile = wndrfile.Substring(0, startFileName) +
                                      wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-
+                    Frame_Save_UserControl();
+                    Frame_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
                     File.SetAttributes(outFile, FileAttributes.Hidden);
                     onload = true;
@@ -2218,6 +2219,11 @@ namespace PresentationLayer.Presenter
                     _multiPanelModel3rdLvl = null;
                     mpnllvl = "second level";
                 }
+                else
+                {
+                    _multiPanelModel2ndLvl = null;
+                    mpnllvl = "";
+                }
 
             }
             else if (row_str.Contains("|"))
@@ -2258,6 +2264,7 @@ namespace PresentationLayer.Presenter
             if (row_str == "EndofFile")
             {
                 Load_Windoor_Item(_windoorModel);
+               
             }
             switch (inside_quotation)
             {
@@ -6806,10 +6813,12 @@ namespace PresentationLayer.Presenter
             _frameModel = null;
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
+            _multiPanelModel4thLvl = null;
             _multiMullionUC = null;
             _multiTransomUC = null;
-
-
+            _multiMullionUC3rd = null;
+            _multiTransomUC3rd = null;
+            mpnllvl = string.Empty;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
             _pnlMain.Controls.Clear();
