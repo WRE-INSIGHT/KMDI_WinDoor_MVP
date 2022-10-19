@@ -18,6 +18,34 @@ namespace ModelLayer.Model.Quotation.Screen
 
         public int Screen_id { get; set; }
 
+        private bool _screen_Types_Window;
+        public bool Screen_Types_Window
+        {
+            get
+            {
+                return _screen_Types_Window;
+            }
+            set
+            {
+                _screen_Types_Window = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_Types_Door;
+        public bool Screen_Types_Door
+        {
+            get
+            {
+                return _screen_Types_Door;
+            }
+            set
+            {
+                _screen_Types_Door = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private int _screen_Width;
         public int Screen_Width
@@ -29,7 +57,7 @@ namespace ModelLayer.Model.Quotation.Screen
             set
             {
                 _screen_Width = value;
-                //NotifyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -43,7 +71,7 @@ namespace ModelLayer.Model.Quotation.Screen
             set
             {
                 _screen_Height = value;
-                // NotifyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
 
@@ -77,8 +105,8 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
 
-        private string _screen_BaseColor;
-        public string Screen_BaseColor
+        private Base_Color _screen_BaseColor;
+        public Base_Color Screen_BaseColor
         {
             get
             {
@@ -87,6 +115,20 @@ namespace ModelLayer.Model.Quotation.Screen
             set
             {
                 _screen_BaseColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_Set;
+        public int Screen_Set
+        {
+            get
+            {
+                return _screen_Set;
+            }
+            set
+            {
+                _screen_Set = value;
                 NotifyPropertyChanged();
             }
         }

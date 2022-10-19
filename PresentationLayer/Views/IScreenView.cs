@@ -17,6 +17,15 @@ namespace PresentationLayer.Views
         event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         event EventHandler tsBtnPrintScreenClickEventRaised;
         event EventHandler computeTotalNetPriceEventRaised;
+        event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
+        event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
+        event EventHandler nudWidthValueChangedEventRaised;
+        event EventHandler nudHeightValueChangedEventRaised;
+        event EventHandler nudFactorValueChangedEventRaised;
+        event EventHandler nudQuantityValueChangedEventRaised;
+        event EventHandler nudSetsValueChangedEventRaised;
+        event EventHandler txtwindoorIDTextChangedEventRaised;
+
 
         void ShowScreemView();
 

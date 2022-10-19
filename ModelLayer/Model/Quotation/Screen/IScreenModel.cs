@@ -5,11 +5,14 @@ namespace ModelLayer.Model.Quotation.Screen
     public interface IScreenModel
     {
         int Screen_id { get; set; }
+        bool Screen_Types_Window { get; set; }
+        bool Screen_Types_Door { get; set; }
         int Screen_Width { get; set; }
         int Screen_Height { get; set; }
         decimal Screen_Factor { get; set; }
         ScreenType Screen_Types { get; set; }
-        string Screen_BaseColor { get; set; }
+        Base_Color Screen_BaseColor { get; set; }
+        int Screen_Set { get; set; }
         string Screen_WindoorID { get; set; }//location
         decimal Screen_UnitPrice { get; set; }
         int Screen_Quantity { get; set; }

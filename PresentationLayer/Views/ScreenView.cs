@@ -78,6 +78,14 @@ namespace PresentationLayer.Views
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         public event EventHandler tsBtnPrintScreenClickEventRaised;
         public event EventHandler computeTotalNetPriceEventRaised;
+        public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
+        public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
+        public event EventHandler nudWidthValueChangedEventRaised;
+        public event EventHandler nudHeightValueChangedEventRaised;
+        public event EventHandler nudFactorValueChangedEventRaised;
+        public event EventHandler nudQuantityValueChangedEventRaised;
+        public event EventHandler nudSetsValueChangedEventRaised;
+        public event EventHandler txtwindoorIDTextChangedEventRaised;
 
         public void ShowScreemView()
         {
@@ -160,11 +168,60 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, computeTotalNetPriceEventRaised, e);
         }
 
+        private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
+        }
+
+        private void nud_Width_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWidthValueChangedEventRaised, e);
+        }
+
+        private void nud_Height_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudHeightValueChangedEventRaised, e);
+        }
+
+        private void nud_Factor_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudFactorValueChangedEventRaised, e);
+        }
+
+        private void nud_Quantity_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
+        }
+
+        private void nud_Sets_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudSetsValueChangedEventRaised, e);
+        }
+
+        private void txt_windoorID_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, txtwindoorIDTextChangedEventRaised, e);
+        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
+            rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
+            rdBtn_Door.DataBindings.Add(ModelBinding["Screen_Types_Door"]);
             cmb_baseColor.DataBindings.Add(ModelBinding["Screen_BaseColor"]);
             cmb_ScreenType.DataBindings.Add(ModelBinding["Screen_Types"]);
+            nud_Height.DataBindings.Add(ModelBinding["Screen_Width"]);
+            nud_Width.DataBindings.Add(ModelBinding["Screen_Height"]);
+            nud_Factor.DataBindings.Add(ModelBinding["Screen_Factor"]);
+            nud_Sets.DataBindings.Add(ModelBinding["Screen_Set"]);
+            txt_windoorID.DataBindings.Add(ModelBinding["Screen_WindoorID"]);
+            nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
         }
+
+
     }
 }

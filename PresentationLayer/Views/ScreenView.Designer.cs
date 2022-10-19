@@ -43,9 +43,9 @@
             this.lbl_sets = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_addOns = new System.Windows.Forms.Panel();
-            this.tsScreen = new System.Windows.Forms.ToolStrip();
-            this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.rdBtn_Door = new System.Windows.Forms.RadioButton();
+            this.rdBtn_Window = new System.Windows.Forms.RadioButton();
             this.btn_add = new System.Windows.Forms.Button();
             this.lbl_color = new System.Windows.Forms.Label();
             this.cmb_baseColor = new System.Windows.Forms.ComboBox();
@@ -60,6 +60,8 @@
             this.lbl_ScreenHeight = new System.Windows.Forms.Label();
             this.lbl_ScreenWidth = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.tsScreen = new System.Windows.Forms.ToolStrip();
+            this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -68,12 +70,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Quantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Sets)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tsScreen.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Factor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TotalPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Width)).BeginInit();
+            this.tsScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -150,7 +152,7 @@
             0,
             0,
             0});
-            this.nud_Quantity.ValueChanged += new System.EventHandler(this.computeTotalNetPrice);
+            this.nud_Quantity.ValueChanged += new System.EventHandler(this.nud_Quantity_ValueChanged);
             // 
             // lbl_Quantity
             // 
@@ -167,6 +169,7 @@
             this.txt_windoorID.Name = "txt_windoorID";
             this.txt_windoorID.Size = new System.Drawing.Size(100, 22);
             this.txt_windoorID.TabIndex = 7;
+            this.txt_windoorID.TextChanged += new System.EventHandler(this.txt_windoorID_TextChanged);
             // 
             // lbl_WindoorID
             // 
@@ -188,6 +191,7 @@
             0,
             0,
             0});
+            this.nud_Sets.ValueChanged += new System.EventHandler(this.nud_Sets_ValueChanged);
             // 
             // lbl_sets
             // 
@@ -211,10 +215,180 @@
             // pnl_addOns
             // 
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_addOns.Location = new System.Drawing.Point(0, 249);
+            this.pnl_addOns.Location = new System.Drawing.Point(0, 278);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 80);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 51);
             this.pnl_addOns.TabIndex = 28;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.rdBtn_Door);
+            this.panel5.Controls.Add(this.rdBtn_Window);
+            this.panel5.Controls.Add(this.btn_add);
+            this.panel5.Controls.Add(this.lbl_color);
+            this.panel5.Controls.Add(this.cmb_baseColor);
+            this.panel5.Controls.Add(this.nud_Factor);
+            this.panel5.Controls.Add(this.lbl_Factor);
+            this.panel5.Controls.Add(this.nud_TotalPrice);
+            this.panel5.Controls.Add(this.lbl_whitePrice);
+            this.panel5.Controls.Add(this.lbl_ScreenType);
+            this.panel5.Controls.Add(this.cmb_ScreenType);
+            this.panel5.Controls.Add(this.nud_Height);
+            this.panel5.Controls.Add(this.nud_Width);
+            this.panel5.Controls.Add(this.lbl_ScreenHeight);
+            this.panel5.Controls.Add(this.lbl_ScreenWidth);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(227, 278);
+            this.panel5.TabIndex = 67;
+            // 
+            // rdBtn_Door
+            // 
+            this.rdBtn_Door.AutoSize = true;
+            this.rdBtn_Door.Location = new System.Drawing.Point(122, 4);
+            this.rdBtn_Door.Name = "rdBtn_Door";
+            this.rdBtn_Door.Size = new System.Drawing.Size(51, 17);
+            this.rdBtn_Door.TabIndex = 82;
+            this.rdBtn_Door.TabStop = true;
+            this.rdBtn_Door.Text = "Door";
+            this.rdBtn_Door.UseVisualStyleBackColor = true;
+            // 
+            // rdBtn_Window
+            // 
+            this.rdBtn_Window.AutoSize = true;
+            this.rdBtn_Window.Location = new System.Drawing.Point(12, 3);
+            this.rdBtn_Window.Name = "rdBtn_Window";
+            this.rdBtn_Window.Size = new System.Drawing.Size(69, 17);
+            this.rdBtn_Window.TabIndex = 81;
+            this.rdBtn_Window.TabStop = true;
+            this.rdBtn_Window.Text = "Window";
+            this.rdBtn_Window.UseVisualStyleBackColor = true;
+            // 
+            // btn_add
+            // 
+            this.btn_add.Location = new System.Drawing.Point(57, 243);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(98, 26);
+            this.btn_add.TabIndex = 80;
+            this.btn_add.Text = "Add";
+            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // lbl_color
+            // 
+            this.lbl_color.AutoSize = true;
+            this.lbl_color.Location = new System.Drawing.Point(9, 57);
+            this.lbl_color.Name = "lbl_color";
+            this.lbl_color.Size = new System.Drawing.Size(61, 13);
+            this.lbl_color.TabIndex = 79;
+            this.lbl_color.Text = "Base Color";
+            // 
+            // cmb_baseColor
+            // 
+            this.cmb_baseColor.FormattingEnabled = true;
+            this.cmb_baseColor.Location = new System.Drawing.Point(85, 54);
+            this.cmb_baseColor.Name = "cmb_baseColor";
+            this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
+            this.cmb_baseColor.TabIndex = 68;
+            this.cmb_baseColor.SelectedValueChanged += new System.EventHandler(this.cmb_baseColor_SelectedValueChanged);
+            // 
+            // nud_Factor
+            // 
+            this.nud_Factor.Location = new System.Drawing.Point(87, 162);
+            this.nud_Factor.Name = "nud_Factor";
+            this.nud_Factor.Size = new System.Drawing.Size(130, 22);
+            this.nud_Factor.TabIndex = 71;
+            this.nud_Factor.ValueChanged += new System.EventHandler(this.nud_Factor_ValueChanged);
+            // 
+            // lbl_Factor
+            // 
+            this.lbl_Factor.AutoSize = true;
+            this.lbl_Factor.Location = new System.Drawing.Point(12, 164);
+            this.lbl_Factor.Name = "lbl_Factor";
+            this.lbl_Factor.Size = new System.Drawing.Size(39, 13);
+            this.lbl_Factor.TabIndex = 78;
+            this.lbl_Factor.Text = "Factor";
+            // 
+            // nud_TotalPrice
+            // 
+            this.nud_TotalPrice.Enabled = false;
+            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 202);
+            this.nud_TotalPrice.Name = "nud_TotalPrice";
+            this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
+            this.nud_TotalPrice.TabIndex = 76;
+            // 
+            // lbl_whitePrice
+            // 
+            this.lbl_whitePrice.AutoSize = true;
+            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 204);
+            this.lbl_whitePrice.Name = "lbl_whitePrice";
+            this.lbl_whitePrice.Size = new System.Drawing.Size(32, 13);
+            this.lbl_whitePrice.TabIndex = 75;
+            this.lbl_whitePrice.Text = "Total";
+            // 
+            // lbl_ScreenType
+            // 
+            this.lbl_ScreenType.AutoSize = true;
+            this.lbl_ScreenType.Location = new System.Drawing.Point(9, 30);
+            this.lbl_ScreenType.Name = "lbl_ScreenType";
+            this.lbl_ScreenType.Size = new System.Drawing.Size(67, 13);
+            this.lbl_ScreenType.TabIndex = 74;
+            this.lbl_ScreenType.Text = "Screen Type";
+            // 
+            // cmb_ScreenType
+            // 
+            this.cmb_ScreenType.FormattingEnabled = true;
+            this.cmb_ScreenType.Location = new System.Drawing.Point(85, 27);
+            this.cmb_ScreenType.Name = "cmb_ScreenType";
+            this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
+            this.cmb_ScreenType.TabIndex = 67;
+            this.cmb_ScreenType.SelectedValueChanged += new System.EventHandler(this.cmb_ScreenType_SelectedValueChanged);
+            // 
+            // nud_Height
+            // 
+            this.nud_Height.Location = new System.Drawing.Point(87, 134);
+            this.nud_Height.Name = "nud_Height";
+            this.nud_Height.Size = new System.Drawing.Size(130, 22);
+            this.nud_Height.TabIndex = 70;
+            this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
+            // 
+            // nud_Width
+            // 
+            this.nud_Width.Location = new System.Drawing.Point(87, 106);
+            this.nud_Width.Name = "nud_Width";
+            this.nud_Width.Size = new System.Drawing.Size(130, 22);
+            this.nud_Width.TabIndex = 69;
+            this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
+            // 
+            // lbl_ScreenHeight
+            // 
+            this.lbl_ScreenHeight.AutoSize = true;
+            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 136);
+            this.lbl_ScreenHeight.Name = "lbl_ScreenHeight";
+            this.lbl_ScreenHeight.Size = new System.Drawing.Size(42, 13);
+            this.lbl_ScreenHeight.TabIndex = 73;
+            this.lbl_ScreenHeight.Text = "Height";
+            // 
+            // lbl_ScreenWidth
+            // 
+            this.lbl_ScreenWidth.AutoSize = true;
+            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 108);
+            this.lbl_ScreenWidth.Name = "lbl_ScreenWidth";
+            this.lbl_ScreenWidth.Size = new System.Drawing.Size(39, 13);
+            this.lbl_ScreenWidth.TabIndex = 72;
+            this.lbl_ScreenWidth.Text = "Width";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 179);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(222, 15);
+            this.label4.TabIndex = 77;
+            this.label4.Text = "___________________________________________";
             // 
             // tsScreen
             // 
@@ -240,152 +414,6 @@
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.btn_add);
-            this.panel5.Controls.Add(this.lbl_color);
-            this.panel5.Controls.Add(this.cmb_baseColor);
-            this.panel5.Controls.Add(this.nud_Factor);
-            this.panel5.Controls.Add(this.lbl_Factor);
-            this.panel5.Controls.Add(this.nud_TotalPrice);
-            this.panel5.Controls.Add(this.lbl_whitePrice);
-            this.panel5.Controls.Add(this.lbl_ScreenType);
-            this.panel5.Controls.Add(this.cmb_ScreenType);
-            this.panel5.Controls.Add(this.nud_Height);
-            this.panel5.Controls.Add(this.nud_Width);
-            this.panel5.Controls.Add(this.lbl_ScreenHeight);
-            this.panel5.Controls.Add(this.lbl_ScreenWidth);
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 249);
-            this.panel5.TabIndex = 67;
-            // 
-            // btn_add
-            // 
-            this.btn_add.Location = new System.Drawing.Point(57, 215);
-            this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(98, 26);
-            this.btn_add.TabIndex = 80;
-            this.btn_add.Text = "Add";
-            this.btn_add.UseVisualStyleBackColor = true;
-            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
-            // 
-            // lbl_color
-            // 
-            this.lbl_color.AutoSize = true;
-            this.lbl_color.Location = new System.Drawing.Point(9, 37);
-            this.lbl_color.Name = "lbl_color";
-            this.lbl_color.Size = new System.Drawing.Size(61, 13);
-            this.lbl_color.TabIndex = 79;
-            this.lbl_color.Text = "Base Color";
-            // 
-            // cmb_baseColor
-            // 
-            this.cmb_baseColor.FormattingEnabled = true;
-            this.cmb_baseColor.Location = new System.Drawing.Point(85, 34);
-            this.cmb_baseColor.Name = "cmb_baseColor";
-            this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
-            this.cmb_baseColor.TabIndex = 68;
-            this.cmb_baseColor.SelectedValueChanged += new System.EventHandler(this.computeTotalNetPrice);
-            // 
-            // nud_Factor
-            // 
-            this.nud_Factor.Location = new System.Drawing.Point(87, 134);
-            this.nud_Factor.Name = "nud_Factor";
-            this.nud_Factor.Size = new System.Drawing.Size(130, 22);
-            this.nud_Factor.TabIndex = 71;
-            this.nud_Factor.ValueChanged += new System.EventHandler(this.computeTotalNetPrice);
-            // 
-            // lbl_Factor
-            // 
-            this.lbl_Factor.AutoSize = true;
-            this.lbl_Factor.Location = new System.Drawing.Point(12, 136);
-            this.lbl_Factor.Name = "lbl_Factor";
-            this.lbl_Factor.Size = new System.Drawing.Size(39, 13);
-            this.lbl_Factor.TabIndex = 78;
-            this.lbl_Factor.Text = "Factor";
-            // 
-            // nud_TotalPrice
-            // 
-            this.nud_TotalPrice.Enabled = false;
-            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 174);
-            this.nud_TotalPrice.Name = "nud_TotalPrice";
-            this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
-            this.nud_TotalPrice.TabIndex = 76;
-            // 
-            // lbl_whitePrice
-            // 
-            this.lbl_whitePrice.AutoSize = true;
-            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 176);
-            this.lbl_whitePrice.Name = "lbl_whitePrice";
-            this.lbl_whitePrice.Size = new System.Drawing.Size(32, 13);
-            this.lbl_whitePrice.TabIndex = 75;
-            this.lbl_whitePrice.Text = "Total";
-            // 
-            // lbl_ScreenType
-            // 
-            this.lbl_ScreenType.AutoSize = true;
-            this.lbl_ScreenType.Location = new System.Drawing.Point(9, 10);
-            this.lbl_ScreenType.Name = "lbl_ScreenType";
-            this.lbl_ScreenType.Size = new System.Drawing.Size(67, 13);
-            this.lbl_ScreenType.TabIndex = 74;
-            this.lbl_ScreenType.Text = "Screen Type";
-            // 
-            // cmb_ScreenType
-            // 
-            this.cmb_ScreenType.FormattingEnabled = true;
-            this.cmb_ScreenType.Location = new System.Drawing.Point(85, 7);
-            this.cmb_ScreenType.Name = "cmb_ScreenType";
-            this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
-            this.cmb_ScreenType.TabIndex = 67;
-            this.cmb_ScreenType.SelectedValueChanged += new System.EventHandler(this.computeTotalNetPrice);
-            // 
-            // nud_Height
-            // 
-            this.nud_Height.Location = new System.Drawing.Point(87, 106);
-            this.nud_Height.Name = "nud_Height";
-            this.nud_Height.Size = new System.Drawing.Size(130, 22);
-            this.nud_Height.TabIndex = 70;
-            this.nud_Height.ValueChanged += new System.EventHandler(this.computeTotalNetPrice);
-            // 
-            // nud_Width
-            // 
-            this.nud_Width.Location = new System.Drawing.Point(87, 78);
-            this.nud_Width.Name = "nud_Width";
-            this.nud_Width.Size = new System.Drawing.Size(130, 22);
-            this.nud_Width.TabIndex = 69;
-            this.nud_Width.ValueChanged += new System.EventHandler(this.computeTotalNetPrice);
-            // 
-            // lbl_ScreenHeight
-            // 
-            this.lbl_ScreenHeight.AutoSize = true;
-            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 108);
-            this.lbl_ScreenHeight.Name = "lbl_ScreenHeight";
-            this.lbl_ScreenHeight.Size = new System.Drawing.Size(42, 13);
-            this.lbl_ScreenHeight.TabIndex = 73;
-            this.lbl_ScreenHeight.Text = "Height";
-            // 
-            // lbl_ScreenWidth
-            // 
-            this.lbl_ScreenWidth.AutoSize = true;
-            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 80);
-            this.lbl_ScreenWidth.Name = "lbl_ScreenWidth";
-            this.lbl_ScreenWidth.Size = new System.Drawing.Size(39, 13);
-            this.lbl_ScreenWidth.TabIndex = 72;
-            this.lbl_ScreenWidth.Text = "Width";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(222, 15);
-            this.label4.TabIndex = 77;
-            this.label4.Text = "___________________________________________";
-            // 
             // ScreenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,14 +435,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Quantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Sets)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.tsScreen.ResumeLayout(false);
-            this.tsScreen.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Factor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TotalPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Width)).EndInit();
+            this.tsScreen.ResumeLayout(false);
+            this.tsScreen.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -451,5 +479,7 @@
         private System.Windows.Forms.Label lbl_ScreenHeight;
         private System.Windows.Forms.Label lbl_ScreenWidth;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton rdBtn_Door;
+        private System.Windows.Forms.RadioButton rdBtn_Window;
     }
 }
