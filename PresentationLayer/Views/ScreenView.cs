@@ -73,16 +73,12 @@ namespace PresentationLayer.Views
             }
         }
 
-        public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         public event EventHandler ScreenViewLoadEventRaised;
-        public event EventHandler nudWidthValueChangedEventRaised;
-        public event EventHandler nudHeightValueChangedEventRaised;
-        public event EventHandler nudFactorValueChangedEventRaised;
-        public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         public event EventHandler tsBtnPrintScreenClickEventRaised;
-        public event EventHandler nudQuantityValueChangedEventRaised;
+        public event EventHandler computeTotalNetPriceEventRaised;
+
         public void ShowScreemView()
         {
             this.Show();
@@ -118,11 +114,9 @@ namespace PresentationLayer.Views
             return dgv_Screen;
         }
 
-
-        private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
+        public Panel GetPnlAddOns()
         {
-
-            EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
+            return pnl_addOns;
         }
 
         private void ScreenView_Load(object sender, EventArgs e)
@@ -144,25 +138,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
         }
 
-        private void nud_Width_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudWidthValueChangedEventRaised, e);
-        }
-
-        private void nud_Height_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudHeightValueChangedEventRaised, e);
-        }
-
-        private void nud_Factor_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudFactorValueChangedEventRaised, e);
-        }
-
-        private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
-        }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
@@ -180,9 +155,16 @@ namespace PresentationLayer.Views
 
         }
 
-        private void nud_Quantity_ValueChanged(object sender, EventArgs e)
+        public void computeTotalNetPrice(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, computeTotalNetPriceEventRaised, e);
+        }
+
+
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            cmb_baseColor.DataBindings.Add(ModelBinding["Screen_BaseColor"]);
+            cmb_ScreenType.DataBindings.Add(ModelBinding["Screen_Types"]);
         }
     }
 }

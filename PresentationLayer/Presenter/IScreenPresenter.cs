@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Views;
+﻿using ModelLayer.Model.Quotation.Screen;
+using PresentationLayer.Views;
 using System.Data;
 using Unity;
 
@@ -8,7 +9,8 @@ namespace PresentationLayer.Presenter
     {
         IScreenView GetScreenView();
         IScreenPresenter CreateNewInstance(IUnityContainer unityC,
-                                           IMainPresenter mainPresenter);
+                                           IMainPresenter mainPresenter,
+                                           IScreenModel screenModel);
         //  DataTable screenDT);
 
         DataTable PopulateDgvScreen();

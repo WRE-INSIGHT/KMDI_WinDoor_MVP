@@ -1,10 +1,14 @@
-﻿using PresentationLayer.CommonMethods;
+﻿using ModelLayer.Model.Quotation.Screen;
+using PresentationLayer.CommonMethods;
 using PresentationLayer.DataTables;
+using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -14,11 +18,20 @@ namespace PresentationLayer.Presenter
 
         private IUnityContainer _unityC;
         private IPrintQuotePresenter _printQuotePresenter;
+        private IScreenAddOnPropertiesUCPresenter _screenAddOnPropertiesUCPresenter;
         private IMainPresenter _mainPresenter;
+        private IScreenModel _screenModel;
+
         private DataTable _screenDT = new DataTable();
 
 
         CommonFunctions commonfunc = new CommonFunctions();
+
+        Panel _pnlAddOns;
+        ComboBox _baseColor, _screenType;
+        NumericUpDown _screenWidth, _screenHeight, _factor, _screenQty;
+        DataGridView _dgvScreen;
+        string _windoorID;
 
         #region Variables
         //roll up
@@ -79,31 +92,27 @@ namespace PresentationLayer.Presenter
         #endregion
 
         public ScreenPresenter(IScreenView screenView,
-                               IPrintQuotePresenter printQuotePresenter)
+                               IPrintQuotePresenter printQuotePresenter,
+                               IScreenAddOnPropertiesUCPresenter screenAddOnPropertiesUCPresenter)
         {
             _screenView = screenView;
             _printQuotePresenter = printQuotePresenter;
+            _screenAddOnPropertiesUCPresenter = screenAddOnPropertiesUCPresenter;
 
             SubscribeToEventSetup();
         }
-        ComboBox _baseColor, _screenType;
-        NumericUpDown _screenWidth, _screenHeight, _factor, _screenQty;
-        DataGridView _dgvScreen;
-        string _windoorID;
+
+
+
         private void SubscribeToEventSetup()
         {
-            _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised1;
-            _screenView.cmbbaseColorSelectedValueChangedEventRaised += _screenView_cmbbaseColorSelectedValueChangedEventRaised;
-            _screenView.nudHeightValueChangedEventRaised += _screenViewnudHeightValueChangedEventRaised;
-            _screenView.nudWidthValueChangedEventRaised += _screenView_nudWidthValueChangedEventRaised;
-            _screenView.nudFactorValueChangedEventRaised += _screenView_nudFactorValueChangedEventRaised;
-            _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised;
             _screenView.ScreenViewLoadEventRaised += _screenView_ScreenViewLoadEventRaised;
             _screenView.btnAddClickEventRaised += _screenView_btnAddClickEventRaised;
             _screenView.dgvScreenRowPostPaintEventRaised += _screenView_dgvScreenRowPostPaintEventRaised;
             _screenView.tsBtnPrintScreenClickEventRaised += _screenView_tsBtnPrintScreenClickEventRaised;
-            _screenView.nudQuantityValueChangedEventRaised += _screenView_nudQuantityValueChangedEventRaised;
+            _screenView.computeTotalNetPriceEventRaised += _screenView_computeTotalNetPriceEventRaised;
 
+            _pnlAddOns = _screenView.GetPnlAddOns();
             _screenQty = _screenView.screen_Quantity;
             _screenWidth = _screenView.screen_width;
             _screenHeight = _screenView.screen_height;
@@ -114,8 +123,9 @@ namespace PresentationLayer.Presenter
             _windoorID = _screenView.screen_windoorID;
         }
         #region Events
-        private void _screenView_nudQuantityValueChangedEventRaised(object sender, EventArgs e)
+        private void _screenView_computeTotalNetPriceEventRaised(object sender, EventArgs e)
         {
+
             ComputeScreenTotalPrice();
         }
 
@@ -163,15 +173,6 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
         }
 
-        private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised1(object sender, EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
-
-        private void _screenView_cmbbaseColorSelectedValueChangedEventRaised(object sender, EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
 
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -182,10 +183,6 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
             _screenDT.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
 
-
-            //_screenDT.Rows.Add("super duper pang harang na screen");
-
-
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -195,27 +192,15 @@ namespace PresentationLayer.Presenter
             _screenHeight.Maximum = decimal.MaxValue;
             _factor.DecimalPlaces = 1;
 
+
+
+            IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
+            UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
+            _pnlAddOns.Controls.Add(addOnsProp);
+            addOnsProp.Dock = DockStyle.Top;
+            addOnsProp.BringToFront();
         }
 
-        private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised(object sender, System.EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
-
-        private void _screenView_nudFactorValueChangedEventRaised(object sender, System.EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
-
-        private void _screenView_nudWidthValueChangedEventRaised(object sender, System.EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
-
-        private void _screenViewnudHeightValueChangedEventRaised(object sender, System.EventArgs e)
-        {
-            ComputeScreenTotalPrice();
-        }
         #endregion
 
         public DataTable PopulateDgvScreen()
@@ -274,7 +259,10 @@ namespace PresentationLayer.Presenter
                 if (_baseColor.Text == "White" ||
                     _baseColor.Text == "Ivory")
                 {
+                    if (_screenModel.Screen_Types == ScreenType._RollUp)
+                    {
 
+                    }
                     #region White
 
                     #region Default Roll-Up Mats
@@ -414,13 +402,25 @@ namespace PresentationLayer.Presenter
             }
         }
 
+
+        public Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+
+            binding.Add("Screen_Type", new Binding("Text", _screenModel, "Screen_Type", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Screen_BaseColor", new Binding("Text", _screenModel, "Screen_BaseColor", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return binding;
+        }
+
         public IScreenView GetScreenView()
         {
             return _screenView;
         }
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
-                                                  IMainPresenter mainPresenter)
+                                                  IMainPresenter mainPresenter,
+                                                  IScreenModel screenModel)
         //DataTable screenDT)
         {
             unityC
@@ -429,6 +429,7 @@ namespace PresentationLayer.Presenter
             ScreenPresenter screen = unityC.Resolve<ScreenPresenter>();
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
+            screen._screenModel = screenModel;
             //screen._screenDT = screenDT;
 
             return screen;

@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter;
@@ -15,6 +16,7 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
+using PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPresenter_Module;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views;
@@ -25,6 +27,7 @@ using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.Dividers.Imagers;
 using PresentationLayer.Views.UserControls.FrameProperties_Modules;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
+using PresentationLayer.Views.UserControls.ScreenAddOns_Modules;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using PresentationLayer.Views.UserControls.WinDoorPanels.Imagers;
 using QueryLayer.DataAccess.Repositories.Specific.Address;
@@ -44,6 +47,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.ProjectQuoteServices;
 using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.ScreenServices;
 using ServiceLayer.Services.UserServices;
 using ServiceLayer.Services.WindoorServices;
 using System;
@@ -119,7 +123,7 @@ namespace PresentationLayer
 
                 .RegisterType<IConcreteServices, ConcreteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteModel, ConcreteModel>(new ContainerControlledLifetimeManager())
-                 
+
                 .RegisterType<IProjectModel, ProjectModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectQuoteServices, ProjectQuoteServices>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEmployeeServices, EmployeeServices>(new ContainerControlledLifetimeManager())
@@ -376,9 +380,17 @@ namespace PresentationLayer
                 .RegisterType<IPP_LouverBladesPropertyUC, PP_LouverBladesPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_LouverBladesPropertyUCPresenter, PP_LouverBladesPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IScreenServices, ScreenServices>(new ContainerControlledLifetimeManager())
+                .RegisterType<IScreenModel, ScreenModel>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IScreenView, ScreenView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IScreenPresenter, ScreenPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IScreenAddOnPropertiesUC, ScreenAddOnPropertiesUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IScreenAddOnPropertiesUCPresenter, ScreenAddOnPropertiesUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISP_PVCboxPropertyUC, SP_PVCboxPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_PVCboxPropertyUCPresenter, SP_PVCboxPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

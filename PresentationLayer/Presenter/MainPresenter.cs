@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.CommonMethods;
@@ -26,6 +27,7 @@ using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.ScreenServices;
 using ServiceLayer.Services.WindoorServices;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,7 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel; //currently selected item
         private IFrameModel _frameModel;
+        private IScreenModel _screenModel;
         private IConcreteModel _concreteModel;
 
         private ILoginView _loginView;
@@ -69,6 +72,8 @@ namespace PresentationLayer.Presenter
         private IPanelServices _panelServices;
         private IDividerServices _divServices;
         private IConcreteServices _concreteServices;
+        private IScreenServices _screenServices;
+
 
         private IFrameUCPresenter _frameUCPresenter;
         private IFrameImagerUCPresenter _frameImagerUCPresenter;
@@ -556,6 +561,20 @@ namespace PresentationLayer.Presenter
             }
         }
 
+
+        public IScreenModel screenModel_MainPresenter
+        {
+            get
+            {
+                return _screenModel;
+            }
+
+            set
+            {
+                _screenModel = value;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -612,7 +631,8 @@ namespace PresentationLayer.Presenter
                              ITransomUCPresenter transomUCP,
                              IGlassThicknessListPresenter glassThicknessPresenter,
                              IScreenPresenter screenPresenter,
-                             IFactorPresenter factorPresenter)
+                             IFactorPresenter factorPresenter,
+                             IScreenServices screenServices)
 
         {
             _mainView = mainView;
@@ -670,6 +690,8 @@ namespace PresentationLayer.Presenter
             _glassThicknessPresenter = glassThicknessPresenter;
             _screenPresenter = screenPresenter;
             _factorPresenter = factorPresenter;
+            _screenServices = screenServices;
+
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -785,7 +807,19 @@ namespace PresentationLayer.Presenter
         }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this);//, _screenDT);
+           // int screenID = _screenModel.Screen_id += 1;
+            _screenModel = _screenServices.AddScreenModel(1,
+                                                          0,
+                                                          0,
+                                                          0.0m,
+                                                          null,
+                                                          string.Empty,
+                                                          0.0m,
+                                                          0,
+                                                          0.0m);
+
+            _screenModel.Screen_PVCVisibility = false;
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
@@ -6295,6 +6329,7 @@ namespace PresentationLayer.Presenter
         {
             _quotationModel = null;
             _frameModel = null;
+            _screenModel = null;
             _multiPanelModel = null;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
@@ -7540,6 +7575,7 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_concrete.Remove(concreteModel);
         }
+
 
         public IFramePropertiesUC GetFrameProperties(int frameID)
         {

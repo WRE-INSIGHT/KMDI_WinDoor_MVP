@@ -174,11 +174,15 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_DHandlePropertyUCPresenter.cs" />
@@ -636,6 +640,7 @@
     <Compile Include="Views\UserControls\IMultiPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IPanelPropertiesUC.cs" />
     <Compile Include="Views\UserControls\IQuoteItemListUC.cs" />
+    <Compile Include="Views\UserControls\IScreenAddOnPropertiesUC.cs" />
     <Compile Include="Views\UserControls\ISortItemUC.cs" />
     <Compile Include="Views\UserControls\ItemInfoUC.cs">
       <SubType>UserControl</SubType>
@@ -857,6 +862,19 @@
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.Designer.cs">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.Designer.cs">
+      <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCboxPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCboxPropertyUC.Designer.cs">
+      <DependentUpon>SP_PVCboxPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SortItemUC.cs">
       <SubType>UserControl</SubType>
@@ -1282,6 +1300,12 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_TrackRailPropertyUC.resx">
       <DependentUpon>PP_TrackRailPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOnPropertiesUC.resx">
+      <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCboxPropertyUC.resx">
+      <DependentUpon>SP_PVCboxPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\SortItemUC.resx">
       <DependentUpon>SortItemUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1492,6 +1516,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

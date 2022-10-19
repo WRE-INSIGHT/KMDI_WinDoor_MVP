@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
-    public interface IScreenView
+    public interface IScreenView : IViewCommon
     {
         NumericUpDown screen_Quantity { get; set; }
         NumericUpDown screen_factor { get; set; }
@@ -11,16 +12,12 @@ namespace PresentationLayer.Views
         NumericUpDown screen_width { get; set; }
         string screen_windoorID { get; set; }
 
-        event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         event EventHandler ScreenViewLoadEventRaised;
-        event EventHandler nudWidthValueChangedEventRaised;
-        event EventHandler nudHeightValueChangedEventRaised;
-        event EventHandler nudFactorValueChangedEventRaised;
-        event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
         event EventHandler btnAddClickEventRaised;
         event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         event EventHandler tsBtnPrintScreenClickEventRaised;
-        event EventHandler nudQuantityValueChangedEventRaised;
+        event EventHandler computeTotalNetPriceEventRaised;
+
         void ShowScreemView();
 
         ComboBox GetCmbScreenType();
@@ -29,6 +26,7 @@ namespace PresentationLayer.Views
         NumericUpDown GetNudSet();
         NumericUpDown GetNudQuantity();
         DataGridView GetDatagrid();
+        Panel GetPnlAddOns();
 
     }
 }

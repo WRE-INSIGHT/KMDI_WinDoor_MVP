@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.Presenter.UserControls;
@@ -37,6 +38,7 @@ namespace PresentationLayer.Presenter
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }
+        IScreenModel screenModel_MainPresenter { get; set; }
         IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
         IBasePlatformImagerUCPresenter basePlatformWillRenderImg_MainPresenter { get; set; }
         IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }

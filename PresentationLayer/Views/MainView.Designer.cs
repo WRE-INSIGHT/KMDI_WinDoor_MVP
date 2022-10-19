@@ -59,6 +59,7 @@
             this.itemListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assignProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,6 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -380,6 +380,13 @@
             this.assignProjectsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.assignProjectsToolStripMenuItem.Text = "Assign Projects";
             this.assignProjectsToolStripMenuItem.Click += new System.EventHandler(this.assignProjectsToolStripMenuItem_Click);
+            // 
+            // factorToolStripMenuItem
+            // 
+            this.factorToolStripMenuItem.Name = "factorToolStripMenuItem";
+            this.factorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.factorToolStripMenuItem.Text = "Factor";
+            this.factorToolStripMenuItem.Click += new System.EventHandler(this.factorToolStripMenuItem_Click);
             // 
             // ViewToolStripMenuItem
             // 
@@ -976,13 +983,6 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
-            // 
-            // factorToolStripMenuItem
-            // 
-            this.factorToolStripMenuItem.Name = "factorToolStripMenuItem";
-            this.factorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.factorToolStripMenuItem.Text = "Factor";
-            this.factorToolStripMenuItem.Click += new System.EventHandler(this.factorToolStripMenuItem_Click);
             // 
             // MainView
             // 
