@@ -62,6 +62,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tsScreen = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
+            this.lbl_Plissé = new System.Windows.Forms.Label();
+            this.cmb_PlisséType = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -222,6 +224,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lbl_Plissé);
+            this.panel5.Controls.Add(this.cmb_PlisséType);
             this.panel5.Controls.Add(this.rdBtn_Door);
             this.panel5.Controls.Add(this.rdBtn_Window);
             this.panel5.Controls.Add(this.btn_add);
@@ -279,7 +283,7 @@
             // lbl_color
             // 
             this.lbl_color.AutoSize = true;
-            this.lbl_color.Location = new System.Drawing.Point(9, 57);
+            this.lbl_color.Location = new System.Drawing.Point(11, 30);
             this.lbl_color.Name = "lbl_color";
             this.lbl_color.Size = new System.Drawing.Size(61, 13);
             this.lbl_color.TabIndex = 79;
@@ -288,7 +292,7 @@
             // cmb_baseColor
             // 
             this.cmb_baseColor.FormattingEnabled = true;
-            this.cmb_baseColor.Location = new System.Drawing.Point(85, 54);
+            this.cmb_baseColor.Location = new System.Drawing.Point(87, 27);
             this.cmb_baseColor.Name = "cmb_baseColor";
             this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
             this.cmb_baseColor.TabIndex = 68;
@@ -331,7 +335,7 @@
             // lbl_ScreenType
             // 
             this.lbl_ScreenType.AutoSize = true;
-            this.lbl_ScreenType.Location = new System.Drawing.Point(9, 30);
+            this.lbl_ScreenType.Location = new System.Drawing.Point(11, 55);
             this.lbl_ScreenType.Name = "lbl_ScreenType";
             this.lbl_ScreenType.Size = new System.Drawing.Size(67, 13);
             this.lbl_ScreenType.TabIndex = 74;
@@ -340,7 +344,7 @@
             // cmb_ScreenType
             // 
             this.cmb_ScreenType.FormattingEnabled = true;
-            this.cmb_ScreenType.Location = new System.Drawing.Point(85, 27);
+            this.cmb_ScreenType.Location = new System.Drawing.Point(87, 52);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
             this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
             this.cmb_ScreenType.TabIndex = 67;
@@ -414,6 +418,23 @@
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
+            // lbl_Plissé
+            // 
+            this.lbl_Plissé.AutoSize = true;
+            this.lbl_Plissé.Location = new System.Drawing.Point(11, 82);
+            this.lbl_Plissé.Name = "lbl_Plissé";
+            this.lbl_Plissé.Size = new System.Drawing.Size(61, 13);
+            this.lbl_Plissé.TabIndex = 84;
+            this.lbl_Plissé.Text = "Plissé Type";
+            // 
+            // cmb_PlisséType
+            // 
+            this.cmb_PlisséType.FormattingEnabled = true;
+            this.cmb_PlisséType.Location = new System.Drawing.Point(87, 79);
+            this.cmb_PlisséType.Name = "cmb_PlisséType";
+            this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
+            this.cmb_PlisséType.TabIndex = 83;
+            // 
             // ScreenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,5 +502,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton rdBtn_Door;
         private System.Windows.Forms.RadioButton rdBtn_Window;
+        private System.Windows.Forms.Label lbl_Plissé;
+        private System.Windows.Forms.ComboBox cmb_PlisséType;
     }
 }

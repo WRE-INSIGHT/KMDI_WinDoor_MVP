@@ -16,14 +16,16 @@ namespace PresentationLayer.Presenter.UserControls
         private IScreenModel _screenModel;
 
         private ISP_PVCboxPropertyUCPresenter _sp_pVCboxPropertyUCPresenter;
-
+        private ISP_CenterClosurePropertyUCPresenter _sp_CenterClosurePropertyUCPresenter;
 
         Panel _pnlAddOns;
         public ScreenAddOnPropertiesUCPresenter(IScreenAddOnPropertiesUC sp_screenAddOnPropertiesUC,
-                                                ISP_PVCboxPropertyUCPresenter sp_pVCboxPropertyUCPresenter)
+                                                ISP_PVCboxPropertyUCPresenter sp_pVCboxPropertyUCPresenter,
+                                                ISP_CenterClosurePropertyUCPresenter sp_CenterClosurePropertyUCPresenter)
         {
             _screenAddOnPropertiesUC = sp_screenAddOnPropertiesUC;
             _sp_pVCboxPropertyUCPresenter = sp_pVCboxPropertyUCPresenter;
+            _sp_CenterClosurePropertyUCPresenter = sp_CenterClosurePropertyUCPresenter;
 
             _pnlAddOns = _screenAddOnPropertiesUC.GetPanelAddOns();
             SubcribeToEventSetUp();
@@ -50,6 +52,13 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlAddOns.Controls.Add(pvcBoxProp);
             pvcBoxProp.Dock = DockStyle.Top;
             pvcBoxProp.BringToFront();
+
+            _screenModel.Screen_CenterClosureVisibility = true;
+            ISP_CenterClosurePropertyUCPresenter centerClosurePropUCP = _sp_CenterClosurePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            UserControl centerClosureProp = (UserControl)centerClosurePropUCP.GetISP_CenterClosurePropertyUC();
+            _pnlAddOns.Controls.Add(centerClosureProp);
+            centerClosureProp.Dock = DockStyle.Top;
+            centerClosureProp.BringToFront();
         }
 
         #endregion

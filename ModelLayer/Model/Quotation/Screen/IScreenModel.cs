@@ -30,7 +30,10 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_0505Qty { get; set; }
         int Screen_1067Qty { get; set; }
 
-
+        bool Screen_CenterClosureVisibility { get; set; }
+        bool Screen_CenterClosureVisibilityOption { get; set; }
+        int Screen_LatchKitQty { get; set; }
+        int Screen_IntermediatePartQty { get; set; }
 
     }
 }

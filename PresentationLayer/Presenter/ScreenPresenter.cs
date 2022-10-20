@@ -59,6 +59,14 @@ namespace PresentationLayer.Presenter
         SpringLoadedPricePerPiece_White = 0,
         SpringLoadedPricePerPiece_WoodGrain = 0,
 
+        AddOnsPrice,
+
+        pvc1067PriceLinearMeter,
+        pvc0505PricePerLinearMeter,
+
+        pvc0505Price,
+        pvc1067Price,
+
         HeadRailPrice,
         SlidingBarPrice,
         MeshWithTubePrice,
@@ -306,31 +314,26 @@ namespace PresentationLayer.Presenter
             col.Caption = caption;
             return col;
         }
-        int pvc0505Price, pvc1067Price;
 
         public void ComputeScreenTotalPrice()
         {
             decimal basicFiveMats;
-            if (_screenModel.Screen_Width > 0)
+
+            #region priceBaseOnColor
+
+            if (_screenModel.Screen_BaseColor == Base_Color._White ||
+                        _screenModel.Screen_BaseColor == Base_Color._Ivory)
             {
-                Console.WriteLine("width:" + _screenModel.Screen_Width);
+                pvc1067PriceLinearMeter = 300;
+                pvc0505PricePerLinearMeter = 420;
+            }
+            else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
+            {
+                pvc1067PriceLinearMeter = 495;
+                pvc0505PricePerLinearMeter = 735;
             }
 
-            if (_screenModel.Screen_Height > 0)
-            {
-                Console.WriteLine("ht:" + _screenModel.Screen_Height);
-            }
-
-            if (_screenModel.Screen_Factor > 0)
-            {
-                Console.WriteLine("f:" + _screenModel.Screen_Factor);
-            }
-
-            Console.WriteLine("0505 qty:" + _screenModel.Screen_0505Qty);
-            Console.WriteLine("0505 qty:" + _screenModel.Screen_0505Width);
-            Console.WriteLine("0505 qty:" + _screenModel.Screen_1067Height);
-            Console.WriteLine("0505 qty:" + _screenModel.Screen_1067Qty);
-
+            #endregion
 
 
             if (_screenHeight.Value != 0 &&
@@ -450,8 +453,8 @@ namespace PresentationLayer.Presenter
                     _screenModel.Screen_0505Qty != 0 &&
                     _screenModel.Screen_1067Qty != 0)
                 {
-                    pvc0505Price = (_screenModel.Screen_0505Width / 1000) * _screenModel.Screen_0505Qty * 300;
-                    pvc1067Price = (_screenModel.Screen_1067Height / 1000) * _screenModel.Screen_1067Qty * 420;
+                    pvc0505Price = ((_screenModel.Screen_0505Width * _screenModel.Screen_0505Qty) / 1000m) * pvc0505PricePerLinearMeter * _screenModel.Screen_Factor;
+                    pvc1067Price = ((_screenModel.Screen_1067Height * _screenModel.Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * _screenModel.Screen_Factor;
                 }
 
 
@@ -493,6 +496,9 @@ namespace PresentationLayer.Presenter
                                     SmallShopItemCost +
                                     OverheadCost) * 0.05m;
 
+                AddOnsPrice = pvc0505Price +
+                              pvc1067Price;
+
                 TotalPrice = basicFiveMats +
                              KitForVerticalOpeningHeadrailPrice +
                              BrakePrice +
@@ -504,9 +510,7 @@ namespace PresentationLayer.Presenter
                              SmallShopItemCost +
                              OverheadCost +
                              ContingenciesCost +
-                             //add ons materials
-                             pvc0505Price +
-                             pvc1067Price;
+                             AddOnsPrice;
 
 
 

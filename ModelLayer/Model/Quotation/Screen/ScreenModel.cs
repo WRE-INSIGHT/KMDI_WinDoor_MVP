@@ -8,11 +8,6 @@ namespace ModelLayer.Model.Quotation.Screen
     public class ScreenModel : IScreenModel, INotifyPropertyChanged
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private ConstantVariables constants = new ConstantVariables();
 
@@ -350,6 +345,75 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+
+        private bool _screen_CenterClosureVisibility;
+        public bool Screen_CenterClosureVisibility
+        {
+            get
+            {
+                return _screen_CenterClosureVisibility;
+            }
+            set
+            {
+                _screen_CenterClosureVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_CenterClosureVisibilityOption;
+        public bool Screen_CenterClosureVisibilityOption
+        {
+            get
+            {
+                return _screen_CenterClosureVisibilityOption;
+            }
+            set
+            {
+                _screen_CenterClosureVisibilityOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_LatchKitQty;
+        public int Screen_LatchKitQty
+        {
+            get
+            {
+                return _screen_LatchKitQty;
+            }
+            set
+            {
+                _screen_LatchKitQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_IntermediatePartQty;
+        public int Screen_IntermediatePartQty
+        {
+            get
+            {
+                return _screen_IntermediatePartQty;
+            }
+            set
+            {
+                _screen_IntermediatePartQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
+
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public ScreenModel(int screen_id,
                            int screen_width,

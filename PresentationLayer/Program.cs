@@ -392,6 +392,9 @@ namespace PresentationLayer
                 .RegisterType<ISP_PVCboxPropertyUC, SP_PVCboxPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_PVCboxPropertyUCPresenter, SP_PVCboxPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_CenterClosurePropertyUC, SP_CenterClosurePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_CenterClosurePropertyUCPresenter, SP_CenterClosurePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
