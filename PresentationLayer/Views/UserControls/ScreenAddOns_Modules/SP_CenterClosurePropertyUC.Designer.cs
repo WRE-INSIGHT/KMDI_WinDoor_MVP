@@ -64,11 +64,12 @@
             // 
             // pnl_Body
             // 
+            this.pnl_Body.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_Body.Controls.Add(this.nud_IntermediatePartQty);
             this.pnl_Body.Controls.Add(this.nud_LatchKitQty);
             this.pnl_Body.Controls.Add(this.lbl_IntermediatePart);
             this.pnl_Body.Controls.Add(this.lbl_LatchKit);
-            this.pnl_Body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_Body.Location = new System.Drawing.Point(0, 27);
             this.pnl_Body.Name = "pnl_Body";
             this.pnl_Body.Size = new System.Drawing.Size(227, 61);

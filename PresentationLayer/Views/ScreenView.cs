@@ -127,6 +127,16 @@ namespace PresentationLayer.Views
             return pnl_addOns;
         }
 
+        public Label getLblPlisse()
+        {
+            return lbl_Plissé;
+        }
+
+        public ComboBox getCmbPlisse()
+        {
+            return cmb_PlisséType;
+        }
+
         private void ScreenView_Load(object sender, EventArgs e)
         {
             List<ScreenType> screen = new List<ScreenType>();
@@ -142,6 +152,14 @@ namespace PresentationLayer.Views
                 baseColor.Add(item);
             }
             cmb_baseColor.DataSource = baseColor;
+
+            List<PlisseType> Plisse = new List<PlisseType>();
+            foreach (PlisseType item in PlisseType.GetAll())
+            {
+                Plisse.Add(item);
+            }
+            cmb_PlisséType.DataSource = Plisse;
+
 
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
         }

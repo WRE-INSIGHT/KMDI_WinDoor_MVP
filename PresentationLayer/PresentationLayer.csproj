@@ -181,9 +181,15 @@
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_6040MilledProfileWithReinforcementPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_CenterClosurePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6040MilledProfileWithReinforcementPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_CenterClosurePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
@@ -871,13 +877,34 @@
     <Compile Include="Views\UserControls\ScreenAddOnPropertiesUC.Designer.cs">
       <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_6040MilledProfileWithReinforcementPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_CenterClosurePropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCbox1067WithReinPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_6040MilledProfileWithReinforcementPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_6040MilledProfileWithReinforcementPropertyUC.Designer.cs">
+      <DependentUpon>SP_6040MilledProfileWithReinforcementPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_CenterClosurePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_CenterClosurePropertyUC.Designer.cs">
       <DependentUpon>SP_CenterClosurePropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.Designer.cs">
+      <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.Designer.cs">
+      <DependentUpon>SP_PVCbox1067WithReinPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCboxPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1312,8 +1339,17 @@
     <EmbeddedResource Include="Views\UserControls\ScreenAddOnPropertiesUC.resx">
       <DependentUpon>ScreenAddOnPropertiesUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_6040MilledProfileWithReinforcementPropertyUC.resx">
+      <DependentUpon>SP_6040MilledProfileWithReinforcementPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_CenterClosurePropertyUC.resx">
       <DependentUpon>SP_CenterClosurePropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.resx">
+      <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.resx">
+      <DependentUpon>SP_PVCbox1067WithReinPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCboxPropertyUC.resx">
       <DependentUpon>SP_PVCboxPropertyUC.cs</DependentUpon>

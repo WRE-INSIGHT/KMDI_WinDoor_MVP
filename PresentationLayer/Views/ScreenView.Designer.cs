@@ -44,6 +44,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_addOns = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lbl_Plissé = new System.Windows.Forms.Label();
+            this.cmb_PlisséType = new System.Windows.Forms.ComboBox();
             this.rdBtn_Door = new System.Windows.Forms.RadioButton();
             this.rdBtn_Window = new System.Windows.Forms.RadioButton();
             this.btn_add = new System.Windows.Forms.Button();
@@ -62,8 +64,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tsScreen = new System.Windows.Forms.ToolStrip();
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
-            this.lbl_Plissé = new System.Windows.Forms.Label();
-            this.cmb_PlisséType = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
@@ -88,7 +88,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(702, 356);
+            this.panel2.Size = new System.Drawing.Size(702, 420);
             this.panel2.TabIndex = 29;
             // 
             // panel4
@@ -98,7 +98,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(227, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(475, 329);
+            this.panel4.Size = new System.Drawing.Size(475, 393);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
@@ -112,7 +112,7 @@
             this.dgv_Screen.Name = "dgv_Screen";
             this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Screen.Size = new System.Drawing.Size(475, 292);
+            this.dgv_Screen.Size = new System.Drawing.Size(475, 356);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
@@ -211,15 +211,15 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 329);
+            this.panel1.Size = new System.Drawing.Size(227, 393);
             this.panel1.TabIndex = 31;
             // 
             // pnl_addOns
             // 
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_addOns.Location = new System.Drawing.Point(0, 278);
+            this.pnl_addOns.Location = new System.Drawing.Point(0, 296);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 51);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 97);
             this.pnl_addOns.TabIndex = 28;
             // 
             // panel5
@@ -245,8 +245,25 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 278);
+            this.panel5.Size = new System.Drawing.Size(227, 296);
             this.panel5.TabIndex = 67;
+            // 
+            // lbl_Plissé
+            // 
+            this.lbl_Plissé.AutoSize = true;
+            this.lbl_Plissé.Location = new System.Drawing.Point(11, 82);
+            this.lbl_Plissé.Name = "lbl_Plissé";
+            this.lbl_Plissé.Size = new System.Drawing.Size(61, 13);
+            this.lbl_Plissé.TabIndex = 84;
+            this.lbl_Plissé.Text = "Plissé Type";
+            // 
+            // cmb_PlisséType
+            // 
+            this.cmb_PlisséType.FormattingEnabled = true;
+            this.cmb_PlisséType.Location = new System.Drawing.Point(87, 79);
+            this.cmb_PlisséType.Name = "cmb_PlisséType";
+            this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
+            this.cmb_PlisséType.TabIndex = 83;
             // 
             // rdBtn_Door
             // 
@@ -272,7 +289,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(57, 243);
+            this.btn_add.Location = new System.Drawing.Point(57, 261);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(98, 26);
             this.btn_add.TabIndex = 80;
@@ -300,7 +317,7 @@
             // 
             // nud_Factor
             // 
-            this.nud_Factor.Location = new System.Drawing.Point(87, 162);
+            this.nud_Factor.Location = new System.Drawing.Point(87, 180);
             this.nud_Factor.Name = "nud_Factor";
             this.nud_Factor.Size = new System.Drawing.Size(130, 22);
             this.nud_Factor.TabIndex = 71;
@@ -309,7 +326,7 @@
             // lbl_Factor
             // 
             this.lbl_Factor.AutoSize = true;
-            this.lbl_Factor.Location = new System.Drawing.Point(12, 164);
+            this.lbl_Factor.Location = new System.Drawing.Point(12, 182);
             this.lbl_Factor.Name = "lbl_Factor";
             this.lbl_Factor.Size = new System.Drawing.Size(39, 13);
             this.lbl_Factor.TabIndex = 78;
@@ -318,7 +335,7 @@
             // nud_TotalPrice
             // 
             this.nud_TotalPrice.Enabled = false;
-            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 202);
+            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 220);
             this.nud_TotalPrice.Name = "nud_TotalPrice";
             this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
             this.nud_TotalPrice.TabIndex = 76;
@@ -326,7 +343,7 @@
             // lbl_whitePrice
             // 
             this.lbl_whitePrice.AutoSize = true;
-            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 204);
+            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 222);
             this.lbl_whitePrice.Name = "lbl_whitePrice";
             this.lbl_whitePrice.Size = new System.Drawing.Size(32, 13);
             this.lbl_whitePrice.TabIndex = 75;
@@ -352,7 +369,7 @@
             // 
             // nud_Height
             // 
-            this.nud_Height.Location = new System.Drawing.Point(87, 134);
+            this.nud_Height.Location = new System.Drawing.Point(87, 152);
             this.nud_Height.Name = "nud_Height";
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
             this.nud_Height.TabIndex = 70;
@@ -360,7 +377,7 @@
             // 
             // nud_Width
             // 
-            this.nud_Width.Location = new System.Drawing.Point(87, 106);
+            this.nud_Width.Location = new System.Drawing.Point(87, 124);
             this.nud_Width.Name = "nud_Width";
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
             this.nud_Width.TabIndex = 69;
@@ -369,7 +386,7 @@
             // lbl_ScreenHeight
             // 
             this.lbl_ScreenHeight.AutoSize = true;
-            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 136);
+            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 154);
             this.lbl_ScreenHeight.Name = "lbl_ScreenHeight";
             this.lbl_ScreenHeight.Size = new System.Drawing.Size(42, 13);
             this.lbl_ScreenHeight.TabIndex = 73;
@@ -378,7 +395,7 @@
             // lbl_ScreenWidth
             // 
             this.lbl_ScreenWidth.AutoSize = true;
-            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 108);
+            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 126);
             this.lbl_ScreenWidth.Name = "lbl_ScreenWidth";
             this.lbl_ScreenWidth.Size = new System.Drawing.Size(39, 13);
             this.lbl_ScreenWidth.TabIndex = 72;
@@ -388,7 +405,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 179);
+            this.label4.Location = new System.Drawing.Point(2, 197);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(222, 15);
             this.label4.TabIndex = 77;
@@ -418,28 +435,11 @@
             this.tsBtnPrintScreen.Text = "Print Screen";
             this.tsBtnPrintScreen.Click += new System.EventHandler(this.tsBtnPrintScreen_Click);
             // 
-            // lbl_Plissé
-            // 
-            this.lbl_Plissé.AutoSize = true;
-            this.lbl_Plissé.Location = new System.Drawing.Point(11, 82);
-            this.lbl_Plissé.Name = "lbl_Plissé";
-            this.lbl_Plissé.Size = new System.Drawing.Size(61, 13);
-            this.lbl_Plissé.TabIndex = 84;
-            this.lbl_Plissé.Text = "Plissé Type";
-            // 
-            // cmb_PlisséType
-            // 
-            this.cmb_PlisséType.FormattingEnabled = true;
-            this.cmb_PlisséType.Location = new System.Drawing.Point(87, 79);
-            this.cmb_PlisséType.Name = "cmb_PlisséType";
-            this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
-            this.cmb_PlisséType.TabIndex = 83;
-            // 
             // ScreenView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 356);
+            this.ClientSize = new System.Drawing.Size(702, 420);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ScreenView";

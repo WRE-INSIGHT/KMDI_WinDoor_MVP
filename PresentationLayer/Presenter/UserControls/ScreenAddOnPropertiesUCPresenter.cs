@@ -54,6 +54,7 @@ namespace PresentationLayer.Presenter.UserControls
             pvcBoxProp.BringToFront();
 
             _screenModel.Screen_CenterClosureVisibility = true;
+            _screenModel.Screen_CenterClosureVisibilityOption = true;
             ISP_CenterClosurePropertyUCPresenter centerClosurePropUCP = _sp_CenterClosurePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl centerClosureProp = (UserControl)centerClosurePropUCP.GetISP_CenterClosurePropertyUC();
             _pnlAddOns.Controls.Add(centerClosureProp);

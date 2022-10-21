@@ -180,7 +180,19 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_Types = (ScreenType)((ComboBox)sender).SelectedValue;
+            ScreenType screenType = (ScreenType)((ComboBox)sender).SelectedValue;
+            _screenModel.Screen_Types = screenType;
+
+            if (screenType == ScreenType._Plisse)
+            {
+                _screenView.getLblPlisse().Visible = true;
+                _screenView.getCmbPlisse().Visible = true;
+            }
+            else
+            {
+                _screenView.getLblPlisse().Visible = false;
+                _screenView.getCmbPlisse().Visible = false;
+            }
             ComputeScreenTotalPrice();
         }
 
@@ -345,7 +357,7 @@ namespace PresentationLayer.Presenter
                     if (_screenModel.Screen_BaseColor == Base_Color._White ||
                         _screenModel.Screen_BaseColor == Base_Color._Ivory)
                     {
-                        #region White
+                   
 
                         #region Default Roll-Up Mats
 
@@ -380,11 +392,11 @@ namespace PresentationLayer.Presenter
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
                         }
 
-                        #endregion
+                      
                     }
                     else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
                     {
-                        #region WoodGrain
+             
 
                         #region defaultMats
 
@@ -418,7 +430,7 @@ namespace PresentationLayer.Presenter
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
                         }
 
-                        #endregion
+                   
                     }
 
                 }
@@ -434,7 +446,7 @@ namespace PresentationLayer.Presenter
 
                     }
                 }
-                else if (_screenModel.Screen_Types == ScreenType._PlisseSRSlimLine)
+                else if (_screenModel.Screen_Types == ScreenType._Plisse)
                 {
                     if (_screenModel.Screen_BaseColor == Base_Color._White ||
                         _screenModel.Screen_BaseColor == Base_Color._Ivory)

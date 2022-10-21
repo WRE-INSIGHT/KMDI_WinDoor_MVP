@@ -35,16 +35,18 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
             if (_screenModel.Screen_CenterClosureVisibilityOption == true)
             {
-                _sp_centerClosurePropertyUC.GetPanelBody().Visible = true;
+                _sp_centerClosurePropertyUC.GetPanelBody().Visible = false;
             }
             else
             {
-                _sp_centerClosurePropertyUC.GetPanelBody().Visible = false;
+                _sp_centerClosurePropertyUC.GetPanelBody().Visible = true;
             }
         }
 
         private void _sp_centerClosurePropertyUC_SPCenterClosurePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            _screenModel.Screen_CenterClosureVisibilityOption = false;
+            _sp_centerClosurePropertyUC.GetPanelBody().Visible = false;
             _sp_centerClosurePropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
@@ -58,7 +60,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Screen_CenterClosureVisibility", new Binding("Visible", _screenModel, "Screen_CenterClosureVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Screen_CenterClosureVisibilityOption", new Binding("Visible", _screenModel, "Screen_CenterClosureVisibilityOption", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Screen_CenterClosureVisibilityOption", new Binding("Checked", _screenModel, "Screen_CenterClosureVisibilityOption", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_LatchKitQty", new Binding("Value", _screenModel, "Screen_LatchKitQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_IntermediatePartQty", new Binding("Value", _screenModel, "Screen_IntermediatePartQty", true, DataSourceUpdateMode.OnPropertyChanged));
 

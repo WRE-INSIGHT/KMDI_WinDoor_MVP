@@ -36,6 +36,8 @@ namespace PresentationLayer.Views
         NumericUpDown GetNudQuantity();
         DataGridView GetDatagrid();
         Panel GetPnlAddOns();
+        Label getLblPlisse();
+        ComboBox getCmbPlisse();
 
     }
 }
