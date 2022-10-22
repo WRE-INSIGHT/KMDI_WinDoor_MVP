@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public SP_6040MilledProfileWithReinforcementPropertyUCPresenter(ISP_6040MilledProfileWithReinforcementPropertyUC MilledProfile6040)
         {
-            MilledProfile6040 = _6040MilledProfile;
+            _6040MilledProfile = MilledProfile6040;
 
             SubscribeToEventSetup();
         }
@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         private void _6040MilledProfile_SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            _6040MilledProfile.ThisBinding(CreateBindingDictionary());
         }
 
         public ISP_6040MilledProfileWithReinforcementPropertyUC Get6040MilledProfile()
@@ -37,9 +37,32 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             return _6040MilledProfile;
         }
 
+        public ISP_6040MilledProfileWithReinforcementPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
+                                                                                            IMainPresenter mainPresenter,
+                                                                                            IScreenModel screenModel)
+        {
+            unityC
+                .RegisterType<ISP_6040MilledProfileWithReinforcementPropertyUC, SP_6040MilledProfileWithReinforcementPropertyUC>()
+                .RegisterType<ISP_6040MilledProfileWithReinforcementPropertyUCPresenter, SP_6040MilledProfileWithReinforcementPropertyUCPresenter>();
+            SP_6040MilledProfileWithReinforcementPropertyUCPresenter MilledProfile6040 = unityC.Resolve<SP_6040MilledProfileWithReinforcementPropertyUCPresenter>();
+            MilledProfile6040._unityC = unityC;
+            MilledProfile6040._mainPresenter = mainPresenter;
+            MilledProfile6040._screenModel = screenModel;
+
+
+
+            return MilledProfile6040;
+        }
+
+
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+
+            binding.Add("Screen_6040MilledProfileVisibility", new Binding("Visible", _screenModel, "Screen_6040MilledProfileVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Screen_6040MilledProfile", new Binding("Value", _screenModel, "Screen_6040MilledProfile", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Screen_6040MilledProfileQty", new Binding("Value", _screenModel, "Screen_6040MilledProfileQty", true, DataSourceUpdateMode.OnPropertyChanged));
+
 
             return binding;
         }
