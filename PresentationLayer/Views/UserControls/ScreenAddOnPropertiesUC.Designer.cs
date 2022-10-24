@@ -67,6 +67,7 @@
             // 
             // pnl_addOns
             // 
+            this.pnl_addOns.AutoScroll = true;
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 33);
             this.pnl_addOns.Name = "pnl_addOns";

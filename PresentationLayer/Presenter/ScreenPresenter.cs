@@ -33,71 +33,7 @@ namespace PresentationLayer.Presenter
         DataGridView _dgvScreen;
         string _windoorID;
 
-        #region Variables
-        //roll up
-        decimal
-        ExchangeRate = 64m,
 
-        HeadRailPricePerLinearMeter_White,
-        HeadRailPricePerLinearMeter_WoodGrain,
-        SlidingBarPricePerPiece_White,
-        SlidingBarPricePerPiece_WoodGrain,
-        MeshWithTubePricePerLinearMeter_White,
-        MeshWithTubePricePerLinearMeter_WoodGrain,
-        GuidePricePerLinearMeter_White,
-        GuidePricePerLinearMeter_WoodGrain,
-        PilePricePerLinearMeter_White,
-        PilePricePerLinearMeter_WoodGrain,
-        AntiwindBrushPricePerLinearMeter_White,
-        AntiwindBrushPricePerLinearMeter_WoodGrain,
-        KitForVerticalOpeningHeadrailPricePerLinearMeter_White,
-        KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain,
-        BrakePriceperPiece_White,
-        BrakePriceperPiece_WoodGrain,
-        SupportForFixingHeadRailPricePerLinearMeter_White,
-        SupportForFixingHeadRailPricePerLinearMeter_WoodGrain,
-        SpringLoadedPricePerPiece_White = 0,
-        SpringLoadedPricePerPiece_WoodGrain = 0,
-
-        AddOnsPrice,
-
-        pvc1067PriceLinearMeter,
-        pvc0505PricePerLinearMeter,
-
-        pvc0505Price,
-        pvc1067Price,
-
-        HeadRailPrice,
-        SlidingBarPrice,
-        MeshWithTubePrice,
-        GuidePrice,
-        PilePrice,
-        AntiwindBrushPrice,
-        KitForVerticalOpeningHeadrailPrice,
-        BrakePrice,
-        SupportForFixingHeadRailPrice,
-        SpringLoadedPrice,
-
-        HeadRailQty = 1,
-        SlidingBarQty = 1,
-        MeshWithTubeQty = 1,
-        GuideQty = 2,
-        PileQty = 2,
-        AntiwindBrushQty = 2,
-        KitForVerticalOpeningHeadrailQty = 1,
-        BrakeQty = 1,
-        SupportForFixingHeadRailQty = 2,
-        SpringLoadedQty = 1,
-
-        WasteCost,
-        FreightCost,
-        DandTCost,
-        SmallShopItemCost,
-        OverheadCost,
-        ContingenciesCost,
-        TotalPrice;
-
-        #endregion
 
         public ScreenPresenter(IScreenView screenView,
                                IPrintQuotePresenter printQuotePresenter,
@@ -145,37 +81,44 @@ namespace PresentationLayer.Presenter
         private void _screenView_txtwindoorIDTextChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_WindoorID = (string)((TextBox)sender).Text;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_nudSetsValueChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_Set = (int)((NumericUpDown)sender).Value;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_nudQuantityValueChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_Quantity = (int)((NumericUpDown)sender).Value;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+
         }
 
         private void _screenView_nudFactorValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_Factor = (int)((NumericUpDown)sender).Value;
-            ComputeScreenTotalPrice();
+            _screenModel.Screen_Factor = (decimal)((NumericUpDown)sender).Value;
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_nudHeightValueChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_Height = (int)((NumericUpDown)sender).Value;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_nudWidthValueChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_Width = (int)((NumericUpDown)sender).Value;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -193,18 +136,20 @@ namespace PresentationLayer.Presenter
                 _screenView.getLblPlisse().Visible = false;
                 _screenView.getCmbPlisse().Visible = false;
             }
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
         }
 
         private void _screenView_cmbbaseColorSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_BaseColor = (Base_Color)((ComboBox)sender).SelectedValue;
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_computeTotalNetPriceEventRaised(object sender, EventArgs e)
         {
-            ComputeScreenTotalPrice();
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_tsBtnPrintScreenClickEventRaised(object sender, EventArgs e)
@@ -269,7 +214,7 @@ namespace PresentationLayer.Presenter
             _screenWidth.Maximum = decimal.MaxValue;
             _screenHeight.Maximum = decimal.MaxValue;
             _factor.DecimalPlaces = 1;
-
+            _screenModel.Screen_Quantity = 1;
 
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
@@ -303,18 +248,28 @@ namespace PresentationLayer.Presenter
 
             return dt;
         }
-
+        string setDesc, centerClosureDesc;
         public DataRow CreateNewRow_ScreenDT()
         {
-            // _screenView.screen_windoorID = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(_screenView.screen_windoorID.ToLower());
             DataRow newRow;
             newRow = _screenDT.NewRow();
-            newRow["Type of Insect Screen"] = _screenType.SelectedValue;
-            newRow["Dimension (mm) \n per panel"] = _screenWidth.Value + " x " + +_screenHeight.Value;
-            newRow["Window/Door I.D."] = _screenView.screen_windoorID;
-            newRow["Unit Price"] = _screenView.GetNudTotalPrice().Value;
-            newRow["Quantity"] = _screenView.GetNudQuantity().Value;
-            newRow["Total Amount"] = _screenView.GetNudTotalPrice().Value * _screenView.GetNudQuantity().Value;
+
+            if (_screenModel.Screen_Set > 1)
+            {
+                setDesc = " (Sets of " + _screenModel.Screen_Set.ToString() + ")";
+            }
+            if (_screenModel.Screen_Width > 1500)
+            {
+                centerClosureDesc = " - center closure";
+            }
+
+            newRow["Type of Insect Screen"] = _screenModel.Screen_Types + centerClosureDesc + setDesc;
+            newRow["Dimension (mm) \n per panel"] = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
+            newRow["Window/Door I.D."] = _screenModel.Screen_WindoorID;
+            newRow["Unit Price"] = _screenModel.Screen_TotalAmount;
+            newRow["Quantity"] = _screenModel.Screen_Quantity;
+            newRow["Total Amount"] = _screenModel.Screen_TotalAmount * _screenModel.Screen_Quantity;
+
             return newRow;
         }
 
@@ -327,213 +282,7 @@ namespace PresentationLayer.Presenter
             return col;
         }
 
-        public void ComputeScreenTotalPrice()
-        {
-            decimal basicFiveMats;
 
-            #region priceBaseOnColor
-
-            if (_screenModel.Screen_BaseColor == Base_Color._White ||
-                        _screenModel.Screen_BaseColor == Base_Color._Ivory)
-            {
-                pvc1067PriceLinearMeter = 300;
-                pvc0505PricePerLinearMeter = 420;
-            }
-            else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
-            {
-                pvc1067PriceLinearMeter = 495;
-                pvc0505PricePerLinearMeter = 735;
-            }
-
-            #endregion
-
-
-            if (_screenHeight.Value != 0 &&
-                _screenHeight.Value != 0 &&
-                _factor.Value != 0)
-            {
-                if (_screenModel.Screen_Types == ScreenType._RollUp)
-                {
-                    if (_screenModel.Screen_BaseColor == Base_Color._White ||
-                        _screenModel.Screen_BaseColor == Base_Color._Ivory)
-                    {
-                   
-
-                        #region Default Roll-Up Mats
-
-                        HeadRailPricePerLinearMeter_White = (26.46m / 5.8m) * ExchangeRate * 1.42m;
-                        SlidingBarPricePerPiece_White = (16.92m / 5.8m) * ExchangeRate * 1.42m;
-                        MeshWithTubePricePerLinearMeter_White = 58.45761m / 5.8m * ExchangeRate;
-                        GuidePricePerLinearMeter_White = 14.18m / 5.8m * ExchangeRate * 1.42m;
-                        PilePricePerLinearMeter_White = 0.15396m * ExchangeRate;
-                        AntiwindBrushPricePerLinearMeter_White = 0.38639m * ExchangeRate;
-                        KitForVerticalOpeningHeadrailPricePerLinearMeter_White = 4.2108m * ExchangeRate;
-                        BrakePriceperPiece_White = 2.5m * ExchangeRate;
-                        SupportForFixingHeadRailPricePerLinearMeter_White = 0.4773m * ExchangeRate;
-                        if (_screenWidth.Value >= 1500)
-                        {
-                            SpringLoadedPricePerPiece_White = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
-                        }
-
-                        #endregion
-
-                        HeadRailPrice = (HeadRailPricePerLinearMeter_White * HeadRailQty * _screenWidth.Value) / 1000m;
-                        SlidingBarPrice = (SlidingBarPricePerPiece_White * SlidingBarQty * _screenWidth.Value) / 1000m;
-                        MeshWithTubePrice = (MeshWithTubePricePerLinearMeter_White * MeshWithTubeQty * _screenWidth.Value) / 1000m;
-                        GuidePrice = (GuidePricePerLinearMeter_White * GuideQty * _screenHeight.Value) / 1000m;
-                        PilePrice = ((_screenHeight.Value + _screenWidth.Value) * PilePricePerLinearMeter_White * PileQty) / 1000m;
-                        AntiwindBrushPrice = (AntiwindBrushPricePerLinearMeter_White * AntiwindBrushQty * _screenHeight.Value) / 1000m;
-                        KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_White * KitForVerticalOpeningHeadrailQty;
-                        BrakePrice = 2.5m * ExchangeRate;
-                        SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_White * SupportForFixingHeadRailQty;
-
-                        if (_screenWidth.Value >= 1500)
-                        {
-                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
-                        }
-
-                      
-                    }
-                    else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
-                    {
-             
-
-                        #region defaultMats
-
-                        HeadRailPricePerLinearMeter_WoodGrain = 5.574m * ExchangeRate * 1.4m;
-                        SlidingBarPricePerPiece_WoodGrain = 3.606m * ExchangeRate * 1.4m;
-                        MeshWithTubePricePerLinearMeter_WoodGrain = 58.45761m / 5.8m * ExchangeRate;
-                        GuidePricePerLinearMeter_WoodGrain = 3.398m * ExchangeRate * 1.4m;
-                        PilePricePerLinearMeter_WoodGrain = 0.15396m * ExchangeRate;
-                        AntiwindBrushPricePerLinearMeter_WoodGrain = 0.38639m * ExchangeRate;
-                        KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain = 4.2108m * ExchangeRate;
-                        BrakePriceperPiece_WoodGrain = 2.5m * ExchangeRate;
-                        SupportForFixingHeadRailPricePerLinearMeter_WoodGrain = 0.4773m * ExchangeRate;
-                        if (_screenWidth.Value >= 1500)
-                        {
-                            SpringLoadedPricePerPiece_WoodGrain = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
-                        }
-
-                        #endregion
-
-                        HeadRailPrice = (HeadRailPricePerLinearMeter_WoodGrain * HeadRailQty * _screenWidth.Value) / 1000m;
-                        SlidingBarPrice = (SlidingBarPricePerPiece_WoodGrain * SlidingBarQty * _screenWidth.Value) / 1000m;
-                        MeshWithTubePrice = (MeshWithTubePricePerLinearMeter_WoodGrain * MeshWithTubeQty * _screenWidth.Value) / 1000m;
-                        GuidePrice = (GuidePricePerLinearMeter_WoodGrain * GuideQty * _screenHeight.Value) / 1000m;
-                        PilePrice = ((_screenHeight.Value + _screenWidth.Value) * PilePricePerLinearMeter_WoodGrain * PileQty) / 1000m;
-                        AntiwindBrushPrice = (AntiwindBrushPricePerLinearMeter_WoodGrain * AntiwindBrushQty * _screenHeight.Value) / 1000m;
-                        KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain * KitForVerticalOpeningHeadrailQty;
-                        BrakePrice = 2.5m * ExchangeRate;
-                        SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_WoodGrain * SupportForFixingHeadRailQty;
-                        if (_screenWidth.Value >= 1500)
-                        {
-                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
-                        }
-
-                   
-                    }
-
-                }
-                else if (_screenModel.Screen_Types == ScreenType._Piconet)
-                {
-                    if (_screenModel.Screen_BaseColor == Base_Color._White ||
-                        _screenModel.Screen_BaseColor == Base_Color._Ivory)
-                    {
-
-                    }
-                    else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
-                    {
-
-                    }
-                }
-                else if (_screenModel.Screen_Types == ScreenType._Plisse)
-                {
-                    if (_screenModel.Screen_BaseColor == Base_Color._White ||
-                        _screenModel.Screen_BaseColor == Base_Color._Ivory)
-                    {
-
-                    }
-                    else if (_screenModel.Screen_BaseColor == Base_Color._DarkBrown)
-                    {
-
-                    }
-                }
-
-                if (_screenModel.Screen_PVCVisibility == true &&
-                    _screenModel.Screen_0505Width != 0 &&
-                    _screenModel.Screen_1067Height != 0 &&
-                    _screenModel.Screen_0505Qty != 0 &&
-                    _screenModel.Screen_1067Qty != 0)
-                {
-                    pvc0505Price = ((_screenModel.Screen_0505Width * _screenModel.Screen_0505Qty) / 1000m) * pvc0505PricePerLinearMeter * _screenModel.Screen_Factor;
-                    pvc1067Price = ((_screenModel.Screen_1067Height * _screenModel.Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * _screenModel.Screen_Factor;
-                }
-
-
-
-                basicFiveMats = HeadRailPrice +
-                                       SlidingBarPrice +
-                                       MeshWithTubePrice +
-                                       GuidePrice +
-                                       PilePrice +
-                                       AntiwindBrushPrice;
-
-                WasteCost = basicFiveMats * 0.1m;
-
-                FreightCost = (basicFiveMats +
-                              KitForVerticalOpeningHeadrailPrice +
-                              BrakePrice +
-                              SupportForFixingHeadRailPrice +
-                              SpringLoadedPrice +
-                              WasteCost) * 0.05m;
-
-                DandTCost = (basicFiveMats +
-                            KitForVerticalOpeningHeadrailPrice +
-                            BrakePrice +
-                            SupportForFixingHeadRailPrice +
-                            SpringLoadedPrice +
-                            WasteCost +
-                            FreightCost) * 0.16m;
-
-                SmallShopItemCost = 200;
-                OverheadCost = 0.2m * 6000;
-                ContingenciesCost = (basicFiveMats +
-                                    KitForVerticalOpeningHeadrailPrice +
-                                    BrakePrice +
-                                    SupportForFixingHeadRailPrice +
-                                    SpringLoadedPrice +
-                                    WasteCost +
-                                    FreightCost +
-                                    DandTCost +
-                                    SmallShopItemCost +
-                                    OverheadCost) * 0.05m;
-
-                AddOnsPrice = pvc0505Price +
-                              pvc1067Price;
-
-                TotalPrice = basicFiveMats +
-                             KitForVerticalOpeningHeadrailPrice +
-                             BrakePrice +
-                             SupportForFixingHeadRailPrice +
-                             SpringLoadedPrice +
-                             WasteCost +
-                             FreightCost +
-                             DandTCost +
-                             SmallShopItemCost +
-                             OverheadCost +
-                             ContingenciesCost +
-                             AddOnsPrice;
-
-
-
-                _screenView.GetNudTotalPrice().Value = (Math.Ceiling(TotalPrice) * _factor.Value) * _screenQty.Value;
-
-            }
-            else
-            {
-                _screenView.GetNudTotalPrice().Value = 0;
-            }
-        }
 
 
         public Dictionary<string, Binding> CreateBindingDictionary()

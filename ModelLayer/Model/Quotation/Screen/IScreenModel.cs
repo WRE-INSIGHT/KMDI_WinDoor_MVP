@@ -35,5 +35,9 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_LatchKitQty { get; set; }
         int Screen_IntermediatePartQty { get; set; }
 
+        void ComputeScreenTotalPrice();
+
+
+
     }
 }
