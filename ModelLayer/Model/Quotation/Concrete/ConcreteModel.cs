@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ModelLayer.Model.Quotation.Concrete
 {
@@ -74,7 +75,20 @@ namespace ModelLayer.Model.Quotation.Concrete
                 NotifyPropertyChanged();
             }
         }
+        private UserControl _concreteUC;
+        public UserControl Concrete_UC
+        {
+            get
+            {
+                return _concreteUC;
+            }
 
+            set
+            {
+                _concreteUC = value;
+                NotifyPropertyChanged();
+            }
+        }
         public int Concrete_ImagerWidthToBind { get; set; }
         public int Concrete_ImagerHeightToBind { get; set; }
         public float Concrete_ImagerZoom { get; set; }

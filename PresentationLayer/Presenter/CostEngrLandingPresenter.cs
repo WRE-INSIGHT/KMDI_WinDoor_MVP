@@ -92,7 +92,7 @@ namespace PresentationLayer.Presenter
 
                                     }
                                     proceed = true;
-                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                                 }
                             }
                             else
@@ -103,7 +103,7 @@ namespace PresentationLayer.Presenter
                                 if (dialogResult == DialogResult.Yes)
                                 {
                                     proceed = true;
-                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                                    
                                 }
                             }
@@ -116,7 +116,7 @@ namespace PresentationLayer.Presenter
                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                             {
                                 proceed = true;
-                                _mainPresenter.Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                             }
                         }
 
@@ -134,7 +134,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.inputted_quoteDate = _quoteDate;
                         _mainPresenter.inputted_projectName = _projName;
                         _mainPresenter.inputted_custRefNo = _custRefNo;
-                        _mainPresenter.Scenario_Quotation(true, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                        _mainPresenter.Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _CELandingView.CloseThis();
                     }
                 }

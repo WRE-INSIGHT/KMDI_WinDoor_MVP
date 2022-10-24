@@ -50,6 +50,9 @@ namespace PresentationLayer.Presenter
         Panel pnlPropertiesBody_MainPresenter { get; set; }
         IDividerPropertiesUCPresenter divPropertiesUCP { get; }
         DataTable Glass_Type { get; }
+
+        void DeleteConcrete_OnObjectList_WindoorModel(UserControl _concreteUC);
+
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
@@ -81,6 +84,7 @@ namespace PresentationLayer.Presenter
                                 bool AddedFrame,
                                 bool AddedConcrete,
                                 bool OpenWindoorFile,
+                                bool Duplicate,
                                 frmDimensionPresenter.Show_Purpose purpose,
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,

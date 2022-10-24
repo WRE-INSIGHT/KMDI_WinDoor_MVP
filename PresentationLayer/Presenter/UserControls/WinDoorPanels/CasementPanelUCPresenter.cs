@@ -160,6 +160,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             var flp = (Control)casementUC.Parent; //MultiPanel Container
             if (flp.Name.Contains("MultiMullion"))
             {
+
                 int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
                     actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
                 if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)

@@ -36,7 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _frameModel.Frame_BotFrameArtNo = (BottomFrameTypes)((ComboBox)sender).SelectedValue;
-
+                _mainPresenter.SetChangesMark();
                 BottomFrameTypes botft = (BottomFrameTypes)((ComboBox)sender).SelectedValue;
 
                 Padding fpadding = _frameModel.Frame_Padding_int;

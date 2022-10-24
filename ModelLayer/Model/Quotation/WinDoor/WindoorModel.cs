@@ -370,9 +370,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
 
-        public List<IFrameModel> lst_frame { get; set; }
+        public List<IFrameModel> lst_frame {
+            get;
+            set;
+        }
         public List<IConcreteModel> lst_concrete { get; set; }
-
+        public List<Control> lst_objects { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -746,6 +749,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             string wd_Profile,
                             List<IFrameModel> wdlstframe,
                             List<IConcreteModel> wdlstconcrete,
+                            List<Control> wdlstobjects,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
                             Foil_Color wd_outisdecolor,
@@ -765,6 +769,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_profile = wd_Profile;
             lst_frame = wdlstframe;
             lst_concrete = wdlstconcrete;
+            lst_objects = wdlstobjects;
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;

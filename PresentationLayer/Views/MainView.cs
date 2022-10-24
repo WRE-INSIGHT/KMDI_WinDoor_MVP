@@ -224,6 +224,7 @@ namespace PresentationLayer.Views
         public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler screenToolStripMenuItemClickEventRaised;
         public event EventHandler factorToolStripMenuItemClickEventRaised;
+        public event EventHandler DuplicateToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -559,6 +560,11 @@ namespace PresentationLayer.Views
         private void factorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, factorToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void duplicateItemToolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
         }
     }
 }

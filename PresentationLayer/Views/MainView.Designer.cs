@@ -59,6 +59,7 @@
             this.itemListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assignProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +79,7 @@
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.CloudStoragetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.duplicateItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Undo = new System.Windows.Forms.ToolStripButton();
@@ -112,7 +114,6 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -185,7 +186,6 @@
             this.C70ToolStripMenuItem,
             this.PremiLineToolStripMenuItem,
             this.G58ToolStripMenuItem});
-            this.ItemToolStripMenuItem.Enabled = false;
             this.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem";
             this.ItemToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.ItemToolStripMenuItem.Text = "I&tem";
@@ -381,6 +381,13 @@
             this.assignProjectsToolStripMenuItem.Text = "Assign Projects";
             this.assignProjectsToolStripMenuItem.Click += new System.EventHandler(this.assignProjectsToolStripMenuItem_Click);
             // 
+            // factorToolStripMenuItem
+            // 
+            this.factorToolStripMenuItem.Name = "factorToolStripMenuItem";
+            this.factorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.factorToolStripMenuItem.Text = "Factor";
+            this.factorToolStripMenuItem.Click += new System.EventHandler(this.factorToolStripMenuItem_Click);
+            // 
             // ViewToolStripMenuItem
             // 
             this.ViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -494,6 +501,7 @@
             this.openToolStripButton,
             this.CloudStoragetoolStripButton,
             this.saveToolStripButton,
+            this.duplicateItemToolStripButton1,
             this.refreshToolStripButton,
             this.printToolStripButton,
             this.tsb_Undo,
@@ -576,6 +584,17 @@
             this.saveToolStripButton.Size = new System.Drawing.Size(24, 29);
             this.saveToolStripButton.Text = "&Save";
             this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
+            // 
+            // duplicateItemToolStripButton1
+            // 
+            this.duplicateItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.duplicateItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.icons8_duplicate_60px_1;
+            this.duplicateItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.duplicateItemToolStripButton1.Name = "duplicateItemToolStripButton1";
+            this.duplicateItemToolStripButton1.Size = new System.Drawing.Size(24, 29);
+            this.duplicateItemToolStripButton1.Text = "Duplicate item";
+            this.duplicateItemToolStripButton1.ToolTipText = "Duplicate item";
+            this.duplicateItemToolStripButton1.Click += new System.EventHandler(this.duplicateItemToolStripButton1_Click);
             // 
             // refreshToolStripButton
             // 
@@ -977,13 +996,6 @@
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
             // 
-            // factorToolStripMenuItem
-            // 
-            this.factorToolStripMenuItem.Name = "factorToolStripMenuItem";
-            this.factorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.factorToolStripMenuItem.Text = "Factor";
-            this.factorToolStripMenuItem.Click += new System.EventHandler(this.factorToolStripMenuItem_Click);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1113,5 +1125,6 @@
         private System.Windows.Forms.ToolStripButton SetGlassToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem screenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem factorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton duplicateItemToolStripButton1;
     }
 }

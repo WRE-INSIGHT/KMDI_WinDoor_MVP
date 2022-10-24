@@ -57,6 +57,7 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel; //currently selected item
         private IFrameModel _frameModel;
         private IConcreteModel _concreteModel;
+        private IConcreteUC _concreteUC;
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -802,6 +803,38 @@ namespace PresentationLayer.Presenter
             _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
             _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
             _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
+            _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
+        }
+
+        private void _mainView_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                Scenario_Quotation(false,
+                                       true,
+                                       false,
+                                       false,
+                                       false,
+                                       true,
+                                       frmDimensionPresenter.Show_Purpose.Duplicate,
+                                       _windoorModel.WD_width,
+                                       _windoorModel.WD_height,
+                                       _windoorModel.WD_profile,
+                                       _windoorModel.WD_BaseColor.Value.ToString());
+                int count = 1;
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    wdm.WD_name = "Item " + count;
+                    count++;
+                }
+                Load_Windoor_Item(_windoorModel);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+           
         }
 
 
@@ -1304,7 +1337,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Scenario_Quotation(false, false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
+                Scenario_Quotation(false, false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
             }
             catch (Exception ex)
             {
@@ -1632,15 +1665,15 @@ namespace PresentationLayer.Presenter
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "G58ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
         }
 
@@ -1660,7 +1693,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                    Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                 }
             }
             else
@@ -1673,7 +1706,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                    Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
                 }
             }
         }
@@ -1689,7 +1722,7 @@ namespace PresentationLayer.Presenter
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
-            Scenario_Quotation(false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
         string[] file_lines;
         bool onload = false;
@@ -2295,7 +2328,7 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("Quotation_Date"))
                     {
                         inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                        Scenario_Quotation(false, false, false, false, true, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                        Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
@@ -2371,6 +2404,7 @@ namespace PresentationLayer.Presenter
                                      false,
                                      false,
                                      true,
+                                     false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Item,
                                      frmDimension_numWd,
                                      frmDimension_numHt,
@@ -2553,6 +2587,7 @@ namespace PresentationLayer.Presenter
                                      false,
                                      false,
                                      true,
+                                     false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
                                      frmDimension_numWd,
                                      frmDimension_numHt,
@@ -6902,6 +6937,7 @@ namespace PresentationLayer.Presenter
                                        bool AddedFrame,
                                        bool AddedConcrete,
                                        bool OpenWindoorFile,
+                                       bool Duplicate,
                                        frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
                                        int frmDimension_numHt,
@@ -7039,7 +7075,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -7135,6 +7171,81 @@ namespace PresentationLayer.Presenter
                                          _windoorModel.WD_profile,
                                          true);
 
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                }
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
+                    {
+
+                        Frame_Save_UserControl();
+                        Frame_Save_PropertiesUC();
+
+                        //clear
+                        if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
+                             _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                        {
+                            baseColor = Base_Color._White;
+                        }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._DarkBrown.ToString())
+                        {
+                            baseColor = Base_Color._DarkBrown;
+                        }
+
+
+                        IWindoorModel wndrModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         baseColor,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
+                        foreach (var prop in _windoorModel.GetType().GetProperties())
+                        {
+                            foreach (var sprop in wndrModel.GetType().GetProperties())
+                            {
+                                if (prop.Name == sprop.Name)
+                                {
+                                    try
+                                    {
+                                        sprop.SetValue(wndrModel, prop.GetValue(_windoorModel, null));
+
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                    }
+                                }
+
+
+                            }
+                        }
+                        _pnlMain.Controls.Clear();
+                        wndrModel.SetDimensions_basePlatform();
+                        AddWndrList_QuotationModel(wndrModel);
+                        _mainView.Zoom = wndrModel.WD_zoom;
+                        _mainView.PropertiesScroll = wndrModel.WD_PropertiesScroll;
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
+
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+
+                        AddItemInfoUC(wndrModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
+                                         wndrModel.WD_name,
+                                         wndrModel.WD_profile,
+                                         false);
+                        _pnlPropertiesBody.Controls.Clear();
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.RemoveBinding();
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -7247,11 +7358,13 @@ namespace PresentationLayer.Presenter
                         _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
                         _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
 
-                        AddConcreteList_WindoorModel(_concreteModel);
                         IConcretePropertiesUCPresenter concretePropertiesUCPresenter = AddConcretePropertiesUC(_concreteModel);
                         AddConcreteUC(_concreteModel);
+                        _concreteModel.Concrete_UC = (UserControl)_concreteUC;
+                        AddConcreteList_WindoorModel(_concreteModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -8025,8 +8138,8 @@ namespace PresentationLayer.Presenter
         private void AddConcreteUC(IConcreteModel concreteModel)
         {
             IConcreteUCPresenter concreteUCPresenter = _concreteUCPresenter.GetNewInstance(_unityC, concreteModel, this, _basePlatformPresenter);
-            IConcreteUC concrete = concreteUCPresenter.GetConcreteUC();
-            _basePlatformPresenter.AddConcrete(concrete);
+            _concreteUC = concreteUCPresenter.GetConcreteUC();
+            _basePlatformPresenter.AddConcrete(_concreteUC);
         }
 
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
@@ -8050,11 +8163,13 @@ namespace PresentationLayer.Presenter
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Add(frameModel);
+            _windoorModel.lst_objects.Add((UserControl)frameModel.Frame_UC);
         }
 
         private void AddConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
             _windoorModel.lst_concrete.Add(concreteModel);
+            _windoorModel.lst_objects.Add((UserControl)concreteModel.Concrete_UC);
         }
 
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
@@ -8275,6 +8390,11 @@ namespace PresentationLayer.Presenter
                 }
 
             }
+        }
+
+        public void DeleteConcrete_OnObjectList_WindoorModel(UserControl concreteUC)
+        {
+            _windoorModel.lst_objects.Remove(concreteUC);
         }
         #endregion
 

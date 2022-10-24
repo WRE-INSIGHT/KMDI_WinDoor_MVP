@@ -1418,6 +1418,8 @@
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
+    <None Include="Resources\icons8_duplicate_60px.png" />
+    <None Include="Resources\icons8_duplicate_60px_1.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />

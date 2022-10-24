@@ -31,6 +31,7 @@ namespace ServiceLayer.Services.WindoorServices
                                            string WD_Profile,
                                            List<IFrameModel> lst_frame,
                                            List<IConcreteModel> lst_concrete,
+                                           List<Control> lst_Objects,
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
                                            Foil_Color wd_outisdecolor,
@@ -49,6 +50,7 @@ namespace ServiceLayer.Services.WindoorServices
                                                   WD_Profile,
                                                   lst_frame,
                                                   lst_concrete,
+                                                  lst_Objects,
                                                   wd_basecolor,
                                                   wd_insidecolor,
                                                   wd_outisdecolor,
@@ -75,6 +77,7 @@ namespace ServiceLayer.Services.WindoorServices
                                              decimal WD_discount = 0.0M,
                                              List<IFrameModel> lst_frame = null,
                                              List<IConcreteModel> lst_concrete = null,
+                                             List<Control> lst_Objects = null,
                                              int wd_costingPoints = 0)
         {
             if (WD_name == "")
@@ -93,7 +96,10 @@ namespace ServiceLayer.Services.WindoorServices
             {
                 lst_concrete = new List<IConcreteModel>();
             }
-           
+            if (lst_Objects == null)
+            {
+                lst_Objects = new List<Control>();
+            }
             IWindoorModel _windoorModel = CreateWindoor(WD_ID,
                                                         WD_name,
                                                         WD_description,
@@ -108,6 +114,7 @@ namespace ServiceLayer.Services.WindoorServices
                                                         WD_Profile,
                                                         lst_frame,
                                                         lst_concrete,
+                                                        lst_Objects,
                                                         wd_basecolor,
                                                         wd_insidecolor,
                                                         wd_outisdecolor,

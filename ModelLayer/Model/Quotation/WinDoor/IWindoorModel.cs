@@ -36,6 +36,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_SlidingTopViewVisibility { get; set; }
         List<IFrameModel> lst_frame { get; set; }
         List<IConcreteModel> lst_concrete { get; set; }
+        List<Control> lst_objects { get; set; }
         int frameIDCounter { get; set; }
         int concreteIDCounter { get; set; }
         int panelIDCounter { get; set; }
