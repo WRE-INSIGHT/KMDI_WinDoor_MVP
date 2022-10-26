@@ -136,6 +136,7 @@
     <Compile Include="Presenter\CreateNewGlassSpacerPresenter.cs" />
     <Compile Include="Presenter\CreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\CustomArrowHeadPresenter.cs" />
+    <Compile Include="Presenter\ExchangeRatePresenter.cs" />
     <Compile Include="Presenter\ExplosionPresenter.cs" />
     <Compile Include="Presenter\frmDimensionPresenter.cs" />
     <Compile Include="Presenter\GlassThicknessListPresenter.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Presenter\ICreateNewGlassSpacerPresenter.cs" />
     <Compile Include="Presenter\ICreateNewGlassTypePresenter.cs" />
     <Compile Include="Presenter\ICustomArrowHeadPresenter.cs" />
+    <Compile Include="Presenter\IExchangeRatePresenter.cs" />
     <Compile Include="Presenter\IExplosionPresenter.cs" />
     <Compile Include="Presenter\IfrmDimensionPresenter.cs" />
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
@@ -407,6 +409,12 @@
     <Compile Include="Views\CustomArrowHeadView.Designer.cs">
       <DependentUpon>CustomArrowHeadView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExchangeRateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExchangeRateView.Designer.cs">
+      <DependentUpon>ExchangeRateView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExplosionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,6 +440,7 @@
     <Compile Include="Views\ICreateNewGlassTypeView.cs" />
     <Compile Include="Views\ICreateNewGlassView.cs" />
     <Compile Include="Views\ICustomArrowHeadView.cs" />
+    <Compile Include="Views\IExchangeRateView.cs" />
     <Compile Include="Views\IExplosionView.cs" />
     <Compile Include="Views\IfrmDimensionView.cs" />
     <Compile Include="Views\IGlassThicknessListView.cs" />
@@ -1165,6 +1174,9 @@
     <EmbeddedResource Include="Views\CustomArrowHeadView.resx">
       <DependentUpon>CustomArrowHeadView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExchangeRateView.resx">
+      <DependentUpon>ExchangeRateView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExplosionView.resx">
       <DependentUpon>ExplosionView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1519,6 +1531,7 @@
     <None Include="Resources\enabled_forward_button_104px.png" />
     <None Include="Resources\enabled_back_arrow_104px .png" />
     <None Include="Resources\external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic.png" />
+    <None Include="Resources\exchange.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

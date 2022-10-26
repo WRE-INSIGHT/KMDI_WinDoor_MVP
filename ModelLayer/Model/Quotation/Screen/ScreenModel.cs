@@ -471,6 +471,298 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
 
+        private bool _screen_6040MilledProfileVisibility;
+        public bool Screen_6040MilledProfileVisibility
+        {
+            get
+            {
+                return _screen_6040MilledProfileVisibility;
+            }
+            set
+            {
+                _screen_6040MilledProfileVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_6040MilledProfile;
+        public int Screen_6040MilledProfile
+        {
+            get
+            {
+                return _screen_6040MilledProfile;
+            }
+            set
+            {
+                _screen_6040MilledProfile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_6040MilledProfileQty;
+        public int Screen_6040MilledProfileQty
+        {
+            get
+            {
+                return _screen_6040MilledProfileQty;
+            }
+            set
+            {
+                _screen_6040MilledProfileQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_LandCoverVisibility;
+        public bool Screen_LandCoverVisibility
+        {
+            get
+            {
+                return _screen_LandCoverVisibility;
+            }
+            set
+            {
+                _screen_LandCoverVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_LandCover;
+        public int Screen_LandCover
+        {
+            get
+            {
+                return _screen_LandCover;
+            }
+            set
+            {
+                _screen_LandCover = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_LandCoverQty;
+        public int Screen_LandCoverQty
+        {
+            get
+            {
+                return _screen_LandCoverQty;
+            }
+            set
+            {
+                _screen_LandCoverQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_1067PVCboxVisibility;
+        public bool Screen_1067PVCboxVisibility
+        {
+            get
+            {
+                return _screen_1067PVCboxVisibility;
+            }
+            set
+            {
+                _screen_1067PVCboxVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_1067PVCbox;
+        public int Screen_1067PVCbox
+        {
+            get
+            {
+                return _screen_1067PVCbox;
+            }
+            set
+            {
+                _screen_1067PVCbox = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_1067PVCboxQty;
+        public int Screen_1067PVCboxQty
+        {
+            get
+            {
+                return _screen_1067PVCboxQty;
+            }
+            set
+            {
+                _screen_1067PVCboxQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_1385MilledProfileVisibility;
+        public bool Screen_1385MilledProfileVisibility
+        {
+            get
+            {
+                return _screen_1385MilledProfileVisibility;
+            }
+            set
+            {
+                _screen_1385MilledProfileVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_1385MilledProfile;
+        public int Screen_1385MilledProfile
+        {
+            get
+            {
+                return _screen_1385MilledProfile;
+            }
+            set
+            {
+                _screen_1385MilledProfile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_1385MilledProfileQty;
+        public int Screen_1385MilledProfileQty
+        {
+            get
+            {
+                return _screen_1385MilledProfileQty;
+            }
+            set
+            {
+                _screen_1385MilledProfileQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_373or374MilledProfileVisibility;
+        public bool Screen_373or374MilledProfileVisibility
+        {
+            get
+            {
+                return _screen_373or374MilledProfileVisibility;
+            }
+            set
+            {
+                _screen_373or374MilledProfileVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_373or374MilledProfile;
+        public int Screen_373or374MilledProfile
+        {
+            get
+            {
+                return _screen_373or374MilledProfile;
+            }
+            set
+            {
+                _screen_373or374MilledProfile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_373or374MilledProfileQty;
+        public int Screen_373or374MilledProfileQty
+        {
+            get
+            {
+                return _screen_373or374MilledProfileQty;
+            }
+            set
+            {
+                _screen_373or374MilledProfileQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_6052MilledProfileVisibility;
+        public bool Screen_6052MilledProfileVisibility
+        {
+            get
+            {
+                return _screen_6052MilledProfileVisibility;
+            }
+            set
+            {
+                _screen_6052MilledProfileVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_6052MilledProfile;
+        public int Screen_6052MilledProfile
+        {
+            get
+            {
+                return _screen_6052MilledProfile;
+            }
+            set
+            {
+                _screen_6052MilledProfile = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_6052MilledProfileQty;
+        public int Screen_6052MilledProfileQty
+        {
+            get
+            {
+                return _screen_6052MilledProfileQty;
+            }
+            set
+            {
+                _screen_6052MilledProfileQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private bool _screen_ExchangeRateVisibility;
+        public bool Screen_ExchangeRateVisibility
+        {
+            get
+            {
+                return _screen_ExchangeRateVisibility;
+            }
+            set
+            {
+                _screen_ExchangeRateVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        private int _screen_ExchangeRate;
+        public int Screen_ExchangeRate
+        {
+            get
+            {
+                return _screen_ExchangeRate;
+            }
+            set
+            {
+                _screen_ExchangeRate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+
+
+
         public void ComputeScreenTotalPrice()
         {
             decimal basicFiveMats;

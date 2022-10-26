@@ -17,31 +17,28 @@ namespace PresentationLayer.Presenter
         IScreenView _screenView;
 
         private IUnityContainer _unityC;
-        private IPrintQuotePresenter _printQuotePresenter;
-        private IScreenAddOnPropertiesUCPresenter _screenAddOnPropertiesUCPresenter;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
 
+        private IPrintQuotePresenter _printQuotePresenter;
+        private IScreenAddOnPropertiesUCPresenter _screenAddOnPropertiesUCPresenter;
+        private IExchangeRatePresenter _exchangeRatePresenter;
+
         private DataTable _screenDT = new DataTable();
 
-
         CommonFunctions commonfunc = new CommonFunctions();
-
         Panel _pnlAddOns;
-        ComboBox _baseColor, _screenType;
-        NumericUpDown _screenWidth, _screenHeight, _factor, _screenQty;
-        DataGridView _dgvScreen;
-        string _windoorID;
-
-
+        NumericUpDown _screenWidth, _screenHeight, _factor;
 
         public ScreenPresenter(IScreenView screenView,
                                IPrintQuotePresenter printQuotePresenter,
-                               IScreenAddOnPropertiesUCPresenter screenAddOnPropertiesUCPresenter)
+                               IScreenAddOnPropertiesUCPresenter screenAddOnPropertiesUCPresenter,
+                               IExchangeRatePresenter exchangeRatePresenter)
         {
             _screenView = screenView;
             _printQuotePresenter = printQuotePresenter;
             _screenAddOnPropertiesUCPresenter = screenAddOnPropertiesUCPresenter;
+            _exchangeRatePresenter = exchangeRatePresenter;
 
             SubscribeToEventSetup();
         }
@@ -54,7 +51,6 @@ namespace PresentationLayer.Presenter
             _screenView.btnAddClickEventRaised += _screenView_btnAddClickEventRaised;
             _screenView.dgvScreenRowPostPaintEventRaised += _screenView_dgvScreenRowPostPaintEventRaised;
             _screenView.tsBtnPrintScreenClickEventRaised += _screenView_tsBtnPrintScreenClickEventRaised;
-            _screenView.computeTotalNetPriceEventRaised += _screenView_computeTotalNetPriceEventRaised;
             _screenView.cmbbaseColorSelectedValueChangedEventRaised += _screenView_cmbbaseColorSelectedValueChangedEventRaised;
             _screenView.cmbScreenTypeSelectedValueChangedEventRaised += _screenView_cmbScreenTypeSelectedValueChangedEventRaised;
             _screenView.nudWidthValueChangedEventRaised += _screenView_nudWidthValueChangedEventRaised;
@@ -63,21 +59,20 @@ namespace PresentationLayer.Presenter
             _screenView.nudQuantityValueChangedEventRaised += _screenView_nudQuantityValueChangedEventRaised;
             _screenView.nudSetsValueChangedEventRaised += _screenView_nudSetsValueChangedEventRaised;
             _screenView.txtwindoorIDTextChangedEventRaised += _screenView_txtwindoorIDTextChangedEventRaised;
-
-
-
+            _screenView.tsBtnExchangeRateClickEventRaised += _screenView_tsBtnExchangeRateClickEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
-            _screenQty = _screenView.screen_Quantity;
             _screenWidth = _screenView.screen_width;
             _screenHeight = _screenView.screen_height;
             _factor = _screenView.screen_factor;
-            _baseColor = _screenView.GetCmbBaseColor();
-            _screenType = _screenView.GetCmbScreenType();
-            _dgvScreen = _screenView.GetDatagrid();
-            _windoorID = _screenView.screen_windoorID;
         }
         #region Events
+        private void _screenView_tsBtnExchangeRateClickEventRaised(object sender, EventArgs e)
+        {
+            IExchangeRatePresenter exchangeRate = _exchangeRatePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            exchangeRate.GetExchangeRateView().ShowExchangeRate();
+        }
+
         private void _screenView_txtwindoorIDTextChangedEventRaised(object sender, EventArgs e)
         {
             _screenModel.Screen_WindoorID = (string)((TextBox)sender).Text;
@@ -312,7 +307,6 @@ namespace PresentationLayer.Presenter
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
                                                   IScreenModel screenModel)
-        //DataTable screenDT)
         {
             unityC
                     .RegisterType<IScreenView, ScreenView>()
@@ -321,7 +315,6 @@ namespace PresentationLayer.Presenter
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
-            //screen._screenDT = screenDT;
 
             return screen;
         }

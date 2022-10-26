@@ -395,6 +395,19 @@ namespace PresentationLayer
                 .RegisterType<ISP_CenterClosurePropertyUC, SP_CenterClosurePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_CenterClosurePropertyUCPresenter, SP_CenterClosurePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_1385MilledProfilePropertyUC, SP_1385MilledProfilePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_1385MilledProfilePropertyUCPresenter, SP_1385MilledProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISP_373or374MilledProfilePropertyUC, SP_373or374MilledProfilePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_373or374MilledProfilePropertyUCPresenter, SP_373or374MilledProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISP_6052MilledProfilePropertyUC, SP_6052MilledProfilePropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_6052MilledProfilePropertyUCPresenter, SP_6052MilledProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
+                .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
+
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

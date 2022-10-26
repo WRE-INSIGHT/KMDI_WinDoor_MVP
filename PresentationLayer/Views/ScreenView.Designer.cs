@@ -63,6 +63,7 @@
             this.lbl_ScreenWidth = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tsScreen = new System.Windows.Forms.ToolStrip();
+            this.tsBtnExchangeRate = new System.Windows.Forms.ToolStripButton();
             this.tsBtnPrintScreen = new System.Windows.Forms.ToolStripButton();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -417,6 +418,7 @@
             this.tsScreen.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsScreen.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBtnExchangeRate,
             this.tsBtnPrintScreen});
             this.tsScreen.Location = new System.Drawing.Point(0, 0);
             this.tsScreen.Name = "tsScreen";
@@ -424,6 +426,16 @@
             this.tsScreen.Size = new System.Drawing.Size(702, 27);
             this.tsScreen.TabIndex = 40;
             this.tsScreen.Text = "toolStrip1";
+            // 
+            // tsBtnExchangeRate
+            // 
+            this.tsBtnExchangeRate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBtnExchangeRate.Image = global::PresentationLayer.Properties.Resources.exchange;
+            this.tsBtnExchangeRate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnExchangeRate.Name = "tsBtnExchangeRate";
+            this.tsBtnExchangeRate.Size = new System.Drawing.Size(24, 24);
+            this.tsBtnExchangeRate.Text = "Exchange Rate";
+            this.tsBtnExchangeRate.Click += new System.EventHandler(this.tsBtnExchangeRate_Click);
             // 
             // tsBtnPrintScreen
             // 
@@ -504,5 +516,6 @@
         private System.Windows.Forms.RadioButton rdBtn_Window;
         private System.Windows.Forms.Label lbl_Plissé;
         private System.Windows.Forms.ComboBox cmb_PlisséType;
+        private System.Windows.Forms.ToolStripButton tsBtnExchangeRate;
     }
 }

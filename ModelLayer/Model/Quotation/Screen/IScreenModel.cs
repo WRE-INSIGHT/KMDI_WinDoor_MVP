@@ -35,6 +35,29 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_LatchKitQty { get; set; }
         int Screen_IntermediatePartQty { get; set; }
 
+        bool Screen_6040MilledProfileVisibility { get; set; }
+        int Screen_6040MilledProfile { get; set; }
+        int Screen_6040MilledProfileQty { get; set; }
+
+        bool Screen_LandCoverVisibility { get; set; }
+        int Screen_LandCover { get; set; }
+        int Screen_LandCoverQty { get; set; }
+
+        bool Screen_1385MilledProfileVisibility { get; set; }
+        int Screen_1385MilledProfile { get; set; }
+        int Screen_1385MilledProfileQty { get; set; }
+
+        bool Screen_373or374MilledProfileVisibility { get; set; }
+        int Screen_373or374MilledProfile { get; set; }
+        int Screen_373or374MilledProfileQty { get; set; }
+
+        bool Screen_6052MilledProfileVisibility { get; set; }
+        int Screen_6052MilledProfile { get; set; }
+        int Screen_6052MilledProfileQty { get; set; }
+
+        bool Screen_ExchangeRateVisibility { get; set; }
+        int Screen_ExchangeRate { get; set; }
+
         void ComputeScreenTotalPrice();
 
 

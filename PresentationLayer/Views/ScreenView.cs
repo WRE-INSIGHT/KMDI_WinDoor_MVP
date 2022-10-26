@@ -49,35 +49,10 @@ namespace PresentationLayer.Views
             }
         }
 
-        public NumericUpDown screen_Quantity
-        {
-            get
-            {
-                return nud_Quantity;
-            }
-            set
-            {
-                nud_Quantity.Value = Convert.ToDecimal(value);
-            }
-        }
-
-        public string screen_windoorID
-        {
-            get
-            {
-                return txt_windoorID.Text;
-            }
-            set
-            {
-                txt_windoorID.Text = value;
-            }
-        }
-
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
         public event EventHandler tsBtnPrintScreenClickEventRaised;
-        public event EventHandler computeTotalNetPriceEventRaised;
         public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
         public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         public event EventHandler nudWidthValueChangedEventRaised;
@@ -86,40 +61,16 @@ namespace PresentationLayer.Views
         public event EventHandler nudQuantityValueChangedEventRaised;
         public event EventHandler nudSetsValueChangedEventRaised;
         public event EventHandler txtwindoorIDTextChangedEventRaised;
+        public event EventHandler tsBtnExchangeRateClickEventRaised;
 
         public void ShowScreemView()
         {
             this.Show();
         }
 
-        public ComboBox GetCmbBaseColor()
-        {
-            return cmb_baseColor;
-        }
-
-        public ComboBox GetCmbScreenType()
-        {
-            return cmb_ScreenType;
-        }
-
-        public NumericUpDown GetNudSet()
-        {
-            return nud_Sets;
-        }
-
-        public NumericUpDown GetNudQuantity()
-        {
-            return nud_Quantity;
-        }
-
         public NumericUpDown GetNudTotalPrice()
         {
             return nud_TotalPrice;
-        }
-
-        public DataGridView GetDatagrid()
-        {
-            return dgv_Screen;
         }
 
         public Panel GetPnlAddOns()
@@ -135,6 +86,11 @@ namespace PresentationLayer.Views
         public ComboBox getCmbPlisse()
         {
             return cmb_PlisséType;
+        }
+
+        public DataGridView GetDatagrid()
+        {
+            return dgv_Screen;
         }
 
         private void ScreenView_Load(object sender, EventArgs e)
@@ -178,13 +134,8 @@ namespace PresentationLayer.Views
         private void tsBtnPrintScreen_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
-
         }
 
-        public void computeTotalNetPrice(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, computeTotalNetPriceEventRaised, e);
-        }
 
         private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -225,6 +176,12 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, txtwindoorIDTextChangedEventRaised, e);
         }
+
+        private void tsBtnExchangeRate_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsBtnExchangeRateClickEventRaised, e);
+
+        } 
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
