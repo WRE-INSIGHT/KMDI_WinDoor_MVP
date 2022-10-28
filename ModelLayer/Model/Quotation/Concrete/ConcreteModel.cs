@@ -12,10 +12,6 @@ namespace ModelLayer.Model.Quotation.Concrete
 {
     public class ConcreteModel : IConcreteModel, INotifyPropertyChanged
     {
-        public int Concrete_Id { get; set; }
-        public string Concrete_Name { get; set; }
-
-
         [Required(ErrorMessage = "Concrete_Width is Required")]
         [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Concrete Width bigger than or equal {1}")]
         private int _concreteWd;
@@ -48,6 +44,11 @@ namespace ModelLayer.Model.Quotation.Concrete
             }
         }
 
+        public int Concrete_Id { get; set; }
+        public string Concrete_Name { get; set; }
+
+
+       
         private int _concreteWdToBind;
         public int Concrete_WidthToBind
         {
@@ -89,6 +90,20 @@ namespace ModelLayer.Model.Quotation.Concrete
                 NotifyPropertyChanged();
             }
         }
+        private UserControl _concretePropertiesUC;
+        public UserControl Concrete_PropertiesUC
+        {
+            get
+            {
+                return _concretePropertiesUC;
+            }
+            set
+            {
+                _concretePropertiesUC = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Concrete_ImagerWidthToBind { get; set; }
         public int Concrete_ImagerHeightToBind { get; set; }
         public float Concrete_ImagerZoom { get; set; }

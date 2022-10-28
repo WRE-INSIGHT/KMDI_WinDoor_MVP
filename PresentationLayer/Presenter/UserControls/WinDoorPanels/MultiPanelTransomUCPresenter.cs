@@ -1050,15 +1050,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
-            Console.WriteLine("MPanelImageRenderer_Height " + _multiPanelModel.MPanelImageRenderer_Height);
-            Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
-            Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_Height);
-            Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-            Console.WriteLine("MPanel_HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
-            Console.WriteLine("MPanel_Display_Height " + _multiPanelModel.MPanel_DisplayHeight);
-            Console.WriteLine("MPanel_Display_Width " + _multiPanelModel.MPanel_DisplayWidth);
-            Console.WriteLine("MPanel_ParentWidth " + _multiPanelModel.MPanel_ParentModel.MPanel_WidthToBind);
+            //Console.WriteLine("MPanelImageRenderer_Width " + _multiPanelModel.MPanelImageRenderer_Width);
+            //Console.WriteLine("MPanelImageRenderer_Height " + _multiPanelModel.MPanelImageRenderer_Height);
+            //Console.WriteLine("MPanel_Width " + _multiPanelModel.MPanel_Width);
+            //Console.WriteLine("MPanel_Height " + _multiPanelModel.MPanel_Height);
+            //Console.WriteLine("MPanel_WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+            //Console.WriteLine("MPanel_HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+            //Console.WriteLine("MPanel_Display_Height " + _multiPanelModel.MPanel_DisplayHeight);
+            //Console.WriteLine("MPanel_Display_Width " + _multiPanelModel.MPanel_DisplayWidth);
+            //Console.WriteLine("MPanel_ParentWidth " + _multiPanelModel.MPanel_ParentModel.MPanel_WidthToBind);
             Console.WriteLine("");
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
@@ -1098,6 +1098,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
+            Console.WriteLine("Parent " + _multiPanelModel.MPanel_Name);
+            Console.WriteLine("Parent UC" + ((FlowLayoutPanel)sender).Parent.Parent.Name);
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
           

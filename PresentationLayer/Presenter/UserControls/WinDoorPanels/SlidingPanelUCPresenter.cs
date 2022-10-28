@@ -101,6 +101,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
                 Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
                 Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Parent " + _multiPanelModel.MPanel_Name);
+                Console.WriteLine("Parent UC" + ((UserControl)sender).Parent.Name);
                 Console.WriteLine();
                 slidingUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;

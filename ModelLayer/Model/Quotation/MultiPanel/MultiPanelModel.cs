@@ -4079,38 +4079,43 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         public bool isDisplaySizeEqual()
         {
             bool isEqual = false;
-            if (MPanel_Type == "Mullion")
+            if (MPanelLst_Panel.Count == 0 && MPanelLst_MultiPanel.Count > 0 ||
+               MPanelLst_Panel.Count > 0 && MPanelLst_MultiPanel.Count == 0)
             {
-                if (MPanelLst_Panel.Count > 0)
-                {
-                    if (MPanelLst_Panel.TrueForAll(i => i.Panel_DisplayWidth.Equals(MPanelLst_Panel.FirstOrDefault().Panel_DisplayWidth)))
-                    {
-                        isEqual = true;
-                    }
-                }
 
-                if (MPanelLst_MultiPanel.Count > 0)
+                if (MPanel_Type == "Mullion")
                 {
-                    if (MPanelLst_MultiPanel.TrueForAll(i => i.MPanel_DisplayWidth.Equals(MPanelLst_MultiPanel.FirstOrDefault().MPanel_DisplayWidth)))
+                    if (MPanelLst_Panel.Count > 0)
                     {
-                        isEqual = true;
+                        if (MPanelLst_Panel.TrueForAll(i => i.Panel_DisplayWidth.Equals(MPanelLst_Panel.FirstOrDefault().Panel_DisplayWidth)))
+                        {
+                            isEqual = true;
+                        }
+                    }
+
+                    if (MPanelLst_MultiPanel.Count > 0)
+                    {
+                        if (MPanelLst_MultiPanel.TrueForAll(i => i.MPanel_DisplayWidth.Equals(MPanelLst_MultiPanel.FirstOrDefault().MPanel_DisplayWidth)))
+                        {
+                            isEqual = true;
+                        }
                     }
                 }
-            }
-            else if (MPanel_Type == "Transom")
-            {
-                if (MPanelLst_Panel.Count > 0)
+                else if (MPanel_Type == "Transom")
                 {
-                    if (MPanelLst_Panel.TrueForAll(i => i.Panel_DisplayHeight.Equals(MPanelLst_Panel.FirstOrDefault().Panel_DisplayHeight)))
+                    if (MPanelLst_Panel.Count > 0)
                     {
-                        isEqual = true;
+                        if (MPanelLst_Panel.TrueForAll(i => i.Panel_DisplayHeight.Equals(MPanelLst_Panel.FirstOrDefault().Panel_DisplayHeight)))
+                        {
+                            isEqual = true;
+                        }
                     }
-                }
-                if (MPanelLst_MultiPanel.Count > 0)
-                {
-                    if (MPanelLst_MultiPanel.TrueForAll(i => i.MPanel_DisplayHeight.Equals(MPanelLst_MultiPanel.FirstOrDefault().MPanel_DisplayHeight)))
+                    if (MPanelLst_MultiPanel.Count > 0)
                     {
-                        isEqual = true;
+                        if (MPanelLst_MultiPanel.TrueForAll(i => i.MPanel_DisplayHeight.Equals(MPanelLst_MultiPanel.FirstOrDefault().MPanel_DisplayHeight)))
+                        {
+                            isEqual = true;
+                        }
                     }
                 }
             }

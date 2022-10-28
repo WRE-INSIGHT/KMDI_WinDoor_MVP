@@ -69,6 +69,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                             await _addressServices.UpdateFactor(row.Cells["Id"].Value.ToString(), Convert.ToDecimal(input));
                         }
                         MessageBox.Show("Update Successfully!");
+                        _mainPresenter.SetPricingFactor();
                     }
                     else if (int_input < 0)
                     {

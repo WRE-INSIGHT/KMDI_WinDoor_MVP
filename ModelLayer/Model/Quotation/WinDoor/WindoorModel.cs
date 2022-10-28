@@ -665,6 +665,16 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     fr.SetZoom();
                 }
             }
+
+            if (lst_concrete != null)
+            {
+                foreach (IConcreteModel cr in lst_concrete)
+                {
+                    cr.Concrete_Zoom = WD_zoom;
+                    cr.Set_DimensionsToBind_using_ConcreteZoom();
+                    cr.Set_ImagerDimensions_using_ImagerZoom();
+                }
+            }
         }
 
         public void SetPanelGlassID()

@@ -533,7 +533,6 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 DeleteFrame();
                 _mainPresenter.SetChangesMark();
-                _mainPresenter.Load_Windoor_Item(_frameModel.Frame_WindoorModel);
 
             }
         }

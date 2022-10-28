@@ -57,6 +57,10 @@ namespace PresentationLayer.Views
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
                 tsBtnNConcrete.Enabled = value;
+                //duplicateItemToolStripButton1.Enabled = value;
+                refreshToolStripButton.Enabled = value;
+                ViewImagerToolStripButton1.Enabled = value;
+                deleteItemToolStripButton1.Enabled = value;
             }
         }
 
@@ -565,6 +569,11 @@ namespace PresentationLayer.Views
         private void duplicateItemToolStripButton1_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
+        }
+
+        private void mnsMainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

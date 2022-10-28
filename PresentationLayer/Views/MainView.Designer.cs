@@ -145,6 +145,7 @@
             this.mnsMainMenu.Size = new System.Drawing.Size(1084, 24);
             this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
+            this.mnsMainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnsMainMenu_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -588,6 +589,7 @@
             // duplicateItemToolStripButton1
             // 
             this.duplicateItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.duplicateItemToolStripButton1.Enabled = false;
             this.duplicateItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.icons8_duplicate_60px_1;
             this.duplicateItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.duplicateItemToolStripButton1.Name = "duplicateItemToolStripButton1";
@@ -599,6 +601,7 @@
             // refreshToolStripButton
             // 
             this.refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.refreshToolStripButton.Enabled = false;
             this.refreshToolStripButton.Image = global::PresentationLayer.Properties.Resources.refresh_30px;
             this.refreshToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshToolStripButton.Name = "refreshToolStripButton";
@@ -647,6 +650,7 @@
             // deleteItemToolStripButton1
             // 
             this.deleteItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteItemToolStripButton1.Enabled = false;
             this.deleteItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.delete_file_30px;
             this.deleteItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.deleteItemToolStripButton1.Name = "deleteItemToolStripButton1";
@@ -691,6 +695,7 @@
             // ViewImagerToolStripButton1
             // 
             this.ViewImagerToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ViewImagerToolStripButton1.Enabled = false;
             this.ViewImagerToolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("ViewImagerToolStripButton1.Image")));
             this.ViewImagerToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewImagerToolStripButton1.Name = "ViewImagerToolStripButton1";

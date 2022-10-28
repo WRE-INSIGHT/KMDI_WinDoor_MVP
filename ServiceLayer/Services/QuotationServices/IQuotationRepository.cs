@@ -10,5 +10,6 @@ namespace ServiceLayer.Services.QuotationServices
     public interface IQuotationRepository
     {
         Task<int> Insert_Quotation(IQuotationModel quotationModel, int user_id);
+        Task<decimal> GetFactorByProvince(string province);
     }
 }
