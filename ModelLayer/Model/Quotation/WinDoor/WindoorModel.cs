@@ -651,6 +651,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     }
                 }
             }
+            if (lst_concrete != null)
+            {
+                foreach (IConcreteModel cr in lst_concrete)
+                {
+                    cr.Concrete_ImagerZoom = WD_zoom_forImageRenderer;
+                }
+            }
         }
 
         public void SetZoom()
