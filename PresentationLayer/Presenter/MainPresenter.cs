@@ -660,7 +660,7 @@ namespace PresentationLayer.Presenter
                              IFactorPresenter factorPresenter,
                              IScreenServices screenServices,
                              IMullionImagerUCPresenter mullionImagerUCP,
-                             ITransomImagerUCPresenter transomImagerUCP,
+                             ITransomImagerUCPresenter transomImagerUCP
                              )
 
         {
@@ -6844,7 +6844,6 @@ namespace PresentationLayer.Presenter
             _quotationModel = null;
             _frameModel = null;
             _screenModel = null;
-            _multiPanelModel = null;
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
             _multiPanelModel4thLvl = null;
