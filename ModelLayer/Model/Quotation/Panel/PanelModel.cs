@@ -3886,7 +3886,7 @@ namespace ModelLayer.Model.Quotation.Panel
         }
         public void SetDimensionImagerToBind_using_BaseDimension()
         {
-            PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * PanelImageRenderer_Zoom);
+            PanelImageRenderer_Width = Convert.ToInt32(Panel_Width * PanelImageRenderer_Zoom) - 10;
             PanelImageRenderer_Height = Convert.ToInt32(Panel_Height * PanelImageRenderer_Zoom);
         }
 
@@ -4113,8 +4113,10 @@ namespace ModelLayer.Model.Quotation.Panel
                 int reversed_wd = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Width * Panel_Zoom) - 20, //20px padding
                     reversed_ht = (int)Math.Ceiling(Panel_ParentFrameModel.Frame_Height * Panel_Zoom) - 20; //20px padding
 
-                pnl_wd = (int)(reversed_wd / Panel_Zoom);
-                pnl_ht = (int)(reversed_ht / Panel_Zoom);
+                pnl_wd = (int)(reversed_wd / PanelImageRenderer_Zoom);
+                pnl_ht = (int)(reversed_ht / PanelImageRenderer_Zoom);
+                //pnl_wd = (int)(Panel_Width * Panel_Zoom) - reversed_wd;
+                //pnl_ht = (int)(Panel_Height * Panel_Zoom) - reversed_ht;
             }
 
             PanelImageRenderer_Width = pnl_wd;

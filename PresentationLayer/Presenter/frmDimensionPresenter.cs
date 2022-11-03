@@ -134,7 +134,6 @@ namespace PresentationLayer.Presenter
                 _mainPresenter_OpenWindoorFile_ClickedOK = value;
             }
         }
-
         #endregion
 
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)

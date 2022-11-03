@@ -7604,11 +7604,11 @@ namespace PresentationLayer.Presenter
                 if (uc is IConcreteUC)
                 {
                     IConcreteUC cUC = (IConcreteUC)uc;
-                    foreach (IConcreteModel ccModel in _windoorModel.lst_concrete)
+                    foreach (IConcreteModel crModel in _windoorModel.lst_concrete)
                     {
-                        if (cUC.Concrete_ID == ccModel.Concrete_Id)
+                        if (cUC.Concrete_ID == crModel.Concrete_Id)
                         {
-                            ccModel.Concrete_UC = uc;
+                            crModel.Concrete_UC = uc;
                         }
                     }
                 }
@@ -7648,17 +7648,34 @@ namespace PresentationLayer.Presenter
             _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
             UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
             _mainView.GetThis().Controls.Add(bpUC);
+            foreach(Control wndr_objects in item.lst_objects)
+            {
+                if (wndr_objects.Name.Contains("Frame"))
+                {
+                    foreach (IFrameModel frame in item.lst_frame)
+                    {
+                        if (wndr_objects.Name == frame.Frame_Name)
+                        {
+                            _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                            _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                        }
+                    }
+                }
+                else if (wndr_objects.Name.Contains("Concrete"))
+                {
+                    foreach (IConcreteModel concrete in item.lst_concrete)
+                    {
+                        if (wndr_objects.Name == concrete.Concrete_Name)
+                        {
+                            _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                            _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
+                        }
+                    }
+                }
+            }
             //frames
-            foreach (IFrameModel frame in item.lst_frame)
-            {
-                _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
-            }
-            foreach (IConcreteModel concrete in item.lst_concrete)
-            {
-                _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
-                _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
-            }
+            
+           
             _pnlPropertiesBody.Refresh();
             _mainView.RemoveBinding(_mainView.GetLblSize());
             _mainView.RemoveBinding();
