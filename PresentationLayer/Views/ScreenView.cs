@@ -62,7 +62,7 @@ namespace PresentationLayer.Views
         public event EventHandler nudSetsValueChangedEventRaised;
         public event EventHandler txtwindoorIDTextChangedEventRaised;
         public event EventHandler tsBtnExchangeRateClickEventRaised;
-
+        public event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
         public void ShowScreemView()
         {
             this.Show();
@@ -180,8 +180,11 @@ namespace PresentationLayer.Views
         private void tsBtnExchangeRate_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, tsBtnExchangeRateClickEventRaised, e);
-
-        } 
+        }
+        private void cmb_PlisséType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbPlisséTypeSelectedIndexChangedEventRaised, e);
+        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -189,6 +192,7 @@ namespace PresentationLayer.Views
             rdBtn_Door.DataBindings.Add(ModelBinding["Screen_Types_Door"]);
             cmb_baseColor.DataBindings.Add(ModelBinding["Screen_BaseColor"]);
             cmb_ScreenType.DataBindings.Add(ModelBinding["Screen_Types"]);
+            cmb_PlisséType.DataBindings.Add(ModelBinding["Screen_PlisséType"]);
             nud_Height.DataBindings.Add(ModelBinding["Screen_Width"]);
             nud_Width.DataBindings.Add(ModelBinding["Screen_Height"]);
             nud_Factor.DataBindings.Add(ModelBinding["Screen_Factor"]);

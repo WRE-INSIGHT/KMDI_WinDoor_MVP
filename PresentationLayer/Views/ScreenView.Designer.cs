@@ -265,6 +265,7 @@
             this.cmb_PlisséType.Name = "cmb_PlisséType";
             this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
             this.cmb_PlisséType.TabIndex = 83;
+            this.cmb_PlisséType.SelectedIndexChanged += new System.EventHandler(this.cmb_PlisséType_SelectedIndexChanged);
             // 
             // rdBtn_Door
             // 

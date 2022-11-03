@@ -59,10 +59,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(205, 34);
+            this.ClientSize = new System.Drawing.Size(233, 30);
             this.Controls.Add(this.nud_ExchangeRate);
             this.Controls.Add(this.lblEuro);
             this.Name = "ExchangeRateView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exchange Rate";
             this.Load += new System.EventHandler(this.ExchangeRateView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_ExchangeRate)).EndInit();

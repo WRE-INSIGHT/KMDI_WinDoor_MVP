@@ -13,10 +13,11 @@ namespace ModelLayer.Model.Quotation.Screen
         private ConstantVariables constants = new ConstantVariables();
 
         #region Variables
-        //roll up
-        decimal
-        ExchangeRate = 64m,
 
+        decimal
+        #region RollUpCostingMaterials
+        TotalRollUpCostingMaterials,
+        RollUpCostingMaterials,
         HeadRailPricePerLinearMeter_White,
         HeadRailPricePerLinearMeter_WoodGrain,
         SlidingBarPricePerPiece_White,
@@ -38,13 +39,7 @@ namespace ModelLayer.Model.Quotation.Screen
         SpringLoadedPricePerPiece_White = 0,
         SpringLoadedPricePerPiece_WoodGrain = 0,
 
-        AddOnsPrice,
-
-        pvc1067PriceLinearMeter,
-        pvc0505PricePerLinearMeter,
-
-        pvc0505Price,
-        pvc1067Price,
+        WithWasteCost = 0,
 
         HeadRailPrice,
         SlidingBarPrice,
@@ -57,6 +52,7 @@ namespace ModelLayer.Model.Quotation.Screen
         SupportForFixingHeadRailPrice,
         SpringLoadedPrice,
 
+
         HeadRailQty = 1,
         SlidingBarQty = 1,
         MeshWithTubeQty = 1,
@@ -68,6 +64,110 @@ namespace ModelLayer.Model.Quotation.Screen
         SupportForFixingHeadRailQty = 2,
         SpringLoadedQty = 1,
 
+        #endregion
+
+        #region PlisseCostingMaterials
+        PPPleatingNETHQty,
+        BottomRail2p5mBarsQty,
+        AnchorplatePriceQty,
+        Scorpiontail3Qty,
+        WireCB40051PriceQty,
+        RollOutMagnetQty,
+        WaSbarQty,
+
+        PPPleatingNETHPricePerLinearMeter = 16.2945m,
+        BottomRail2p5mBarsPricePerPiece = 4.7475m,
+        SettingPlate2p6mbarsPricePricePerPiece = 1.9415m,
+        AnchorplatePricePerPiece = 0.36m,
+        Scorpiontail3PricePerPiece = 0.145m,
+        WireEndtailYellowPricePerPiece = 0.3050m,
+        AjustEightTailPricePerPiece = 0.31m,
+        WireGuideCenterPricePerPiece = 0.17m,
+        WireGuideRPricePerPiece = 0.235m,
+        WireGuideLPricePerPiece = 0.235m,
+        WireCB40051PricePerLinearMeter = 0.375m,
+        TappingScrew3X30BHPricePerPiece = 0.0351m,
+        RollOutMagnetPricePerLinearMeter = 0.4302m,
+        //PileForPlissèPricePerLinearMeter = 0.5909m,
+        LatchForResizablePlissèPricePerPiece = 3.71m,
+        ScrewForLatchPricePerPiece = 0.0409m,
+
+        // white/ivory
+        WallBarOxRALStandardPricePerLinearMeter = 7.1969m,
+        SlideBarOxRALStandardPricePerLinearMeter = 7.2654m,
+        TopGuideResizablePlissèMillFinishedPricePerLinearMeter = 5.6634m,
+        UprofileForMagnetMillFinishedPricePerLinearMeter = 3.0586m,
+        PlisseLProfileFrontalFixingMillFinishedPricePerLinearMeter = 3.4612m,
+        PlisseCoverLProfileFrontingFixingMillFinishPricePerLinearMeter = 2.2399m,
+
+        //WoodGrain
+        WallBarWoodFinishedPricePerLinearMeter = 8.2820m,
+        SlideBarWoodFinishedPricePerLinearMeter = 8.3520m,
+        TopGuideResizablePlissèWoodFinishedPricePerLinearMeter = 6.9600m,
+        UprofileForMagnetWoodFinishedPricePerLinearMeter = 4.1630m,
+        PlisseLProfileFrontalFixingWoodFinishedPerLinearMeter = 4.5090m,
+        PlisseCoverLProfileFrontingFixingWoodFinishedPricePerLinearMeter = 3.1200m,
+
+        TotalPlisseCostingMaterials,
+        PlisseCostingMaterials,
+        PPPleatingNETHPrice,
+        BottomRail2p5mBarsPrice,
+        SettingPlate2p6mbarsPrice,
+        FinplateBarsPrice,
+        ScorpionfishLDPrice,
+        ScorpionfishRDPrice,
+        AnchorplatePrice,
+        Scorpiontail3Price,
+        WireEndtailYellowPrice,
+        AjustEightTailPrice,
+        TailEndPrice,
+        TailReversalPrice,
+        WireGuideCenterPrice,
+        WireGuideRPrice,
+        WireGuideLPrice,
+        WireCB40051Price,
+        TappingScrew3X30BHPrice,
+        RollOutPositiveMagnetPrice,
+        RollOutNegativeMagnetPrice,
+
+        LatchForResizablePlissèPrice,
+        ScrewForLatchPrice,
+        SlidingBarEndCapResizablePlissèPrice,
+        WallProfileEndCapResizablePlissèPrice,
+        TopGuideEndCapResizablePlissèPrice,
+        CordCurrierResizablePlissèPrice,
+        TensionerPrice,
+        ScrewForTensionerPrice,
+        HammerNutResizablePlissèPrice,
+        Grub5x20Price,
+
+        WallBarPrice,
+        SlideBarPrice,
+        TopGuideResizablePlissèPrice,
+        UprofileForMagnetPrice,
+        PlisseLProfileFrontalFixingPrice,
+        PlisseCoverLProfileFrontingFixingPrice,
+
+        AluminumBottomGuidePrice,
+        AluminumPlisseHandlePrice,
+        LocalMaterialPrice,
+
+        HandlesPrice = 0,
+        CouplingProfilePrice = 0,
+        PliseeLandCoverPrice = 0,
+        #endregion
+
+
+        AddOnsPrice,
+
+        pvc1067PriceLinearMeter,
+        pvc0505PricePerLinearMeter,
+
+        pvc0505Price,
+        pvc1067Price,
+
+
+        basicMats,
         WasteCost,
         FreightCost,
         DandTCost,
@@ -77,6 +177,8 @@ namespace ModelLayer.Model.Quotation.Screen
         TotalPrice;
 
         #endregion
+
+        #region Properties
 
         public int Screen_id { get; set; }
 
@@ -162,6 +264,19 @@ namespace ModelLayer.Model.Quotation.Screen
             set
             {
                 _screen_Type = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private PlisseType _screen_PlisséType;
+        public PlisseType Screen_PlisséType
+        {
+            get
+            {
+                return _screen_PlisséType;
+            }
+            set
+            {
+                _screen_PlisséType = value;
                 NotifyPropertyChanged();
             }
         }
@@ -761,12 +876,11 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
 
+        #endregion
 
 
         public void ComputeScreenTotalPrice()
         {
-            decimal basicFiveMats;
-
             #region priceBaseOnColor
 
             if (Screen_BaseColor == Base_Color._White ||
@@ -790,23 +904,24 @@ namespace ModelLayer.Model.Quotation.Screen
             {
                 if (Screen_Types == ScreenType._RollUp)
                 {
+                    #region RollUp 
                     if (Screen_BaseColor == Base_Color._White ||
                         Screen_BaseColor == Base_Color._Ivory)
                     {
                         #region Default Roll-Up Mats
 
-                        HeadRailPricePerLinearMeter_White = (26.46m / 5.8m) * ExchangeRate * 1.42m;
-                        SlidingBarPricePerPiece_White = (16.92m / 5.8m) * ExchangeRate * 1.42m;
-                        MeshWithTubePricePerLinearMeter_White = 58.45761m / 5.8m * ExchangeRate;
-                        GuidePricePerLinearMeter_White = 14.18m / 5.8m * ExchangeRate * 1.42m;
-                        PilePricePerLinearMeter_White = 0.15396m * ExchangeRate;
-                        AntiwindBrushPricePerLinearMeter_White = 0.38639m * ExchangeRate;
-                        KitForVerticalOpeningHeadrailPricePerLinearMeter_White = 4.2108m * ExchangeRate;
-                        BrakePriceperPiece_White = 2.5m * ExchangeRate * BrakeQty;
-                        SupportForFixingHeadRailPricePerLinearMeter_White = 0.4773m * ExchangeRate;
+                        HeadRailPricePerLinearMeter_White = (26.46m / 5.8m) * Screen_ExchangeRate * 1.42m;
+                        SlidingBarPricePerPiece_White = (16.92m / 5.8m) * Screen_ExchangeRate * 1.42m;
+                        MeshWithTubePricePerLinearMeter_White = 58.45761m / 5.8m * Screen_ExchangeRate;
+                        GuidePricePerLinearMeter_White = 14.18m / 5.8m * Screen_ExchangeRate * 1.42m;
+                        PilePricePerLinearMeter_White = 0.15396m * Screen_ExchangeRate;
+                        AntiwindBrushPricePerLinearMeter_White = 0.38639m * Screen_ExchangeRate;
+                        KitForVerticalOpeningHeadrailPricePerLinearMeter_White = 4.2108m * Screen_ExchangeRate;
+                        BrakePriceperPiece_White = 2.5m * Screen_ExchangeRate * BrakeQty;
+                        SupportForFixingHeadRailPricePerLinearMeter_White = 0.4773m * Screen_ExchangeRate;
                         if (Screen_Width >= 1500)
                         {
-                            SpringLoadedPricePerPiece_White = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
+                            SpringLoadedPricePerPiece_White = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m;
                         }
 
                         #endregion
@@ -814,16 +929,16 @@ namespace ModelLayer.Model.Quotation.Screen
                         HeadRailPrice = (HeadRailPricePerLinearMeter_White * HeadRailQty * Screen_Width) / 1000m;
                         SlidingBarPrice = (SlidingBarPricePerPiece_White * SlidingBarQty * Screen_Width) / 1000m;
                         MeshWithTubePrice = (MeshWithTubePricePerLinearMeter_White * MeshWithTubeQty * Screen_Width) / 1000m;
-                        GuidePrice = (GuidePricePerLinearMeter_White * GuideQty * Screen_Width) / 1000m;
+                        GuidePrice = (GuidePricePerLinearMeter_White * GuideQty * Screen_Height) / 1000m;
                         PilePrice = ((Screen_Height + Screen_Width) * PilePricePerLinearMeter_White * PileQty) / 1000m;
                         AntiwindBrushPrice = (AntiwindBrushPricePerLinearMeter_White * AntiwindBrushQty * Screen_Height) / 1000m;
                         KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_White * KitForVerticalOpeningHeadrailQty;
-                        BrakePrice = 2.5m * ExchangeRate * BrakeQty;
+                        BrakePrice = 2.5m * Screen_ExchangeRate * BrakeQty;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_White * SupportForFixingHeadRailQty;
 
                         if (Screen_Width >= 1500)
                         {
-                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
+                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }
 
 
@@ -832,18 +947,18 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         #region defaultMats
 
-                        HeadRailPricePerLinearMeter_WoodGrain = 5.574m * ExchangeRate * 1.4m;
-                        SlidingBarPricePerPiece_WoodGrain = 3.606m * ExchangeRate * 1.4m;
-                        MeshWithTubePricePerLinearMeter_WoodGrain = 58.45761m / 5.8m * ExchangeRate;
-                        GuidePricePerLinearMeter_WoodGrain = 3.398m * ExchangeRate * 1.4m;
-                        PilePricePerLinearMeter_WoodGrain = 0.15396m * ExchangeRate;
-                        AntiwindBrushPricePerLinearMeter_WoodGrain = 0.38639m * ExchangeRate;
-                        KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain = 4.2108m * ExchangeRate;
-                        BrakePriceperPiece_WoodGrain = 2.5m * ExchangeRate;
-                        SupportForFixingHeadRailPricePerLinearMeter_WoodGrain = 0.4773m * ExchangeRate;
+                        HeadRailPricePerLinearMeter_WoodGrain = 5.574m * Screen_ExchangeRate * 1.4m;
+                        SlidingBarPricePerPiece_WoodGrain = 3.606m * Screen_ExchangeRate * 1.4m;
+                        MeshWithTubePricePerLinearMeter_WoodGrain = 58.45761m / 5.8m * Screen_ExchangeRate;
+                        GuidePricePerLinearMeter_WoodGrain = 3.398m * Screen_ExchangeRate * 1.4m;
+                        PilePricePerLinearMeter_WoodGrain = 0.15396m * Screen_ExchangeRate;
+                        AntiwindBrushPricePerLinearMeter_WoodGrain = 0.38639m * Screen_ExchangeRate;
+                        KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain = 4.2108m * Screen_ExchangeRate;
+                        BrakePriceperPiece_WoodGrain = 2.5m * Screen_ExchangeRate;
+                        SupportForFixingHeadRailPricePerLinearMeter_WoodGrain = 0.4773m * Screen_ExchangeRate;
                         if (Screen_Width >= 1500)
                         {
-                            SpringLoadedPricePerPiece_WoodGrain = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m;
+                            SpringLoadedPricePerPiece_WoodGrain = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m;
                         }
 
                         #endregion
@@ -855,31 +970,158 @@ namespace ModelLayer.Model.Quotation.Screen
                         PilePrice = ((Screen_Height + Screen_Width) * PilePricePerLinearMeter_WoodGrain * PileQty) / 1000m;
                         AntiwindBrushPrice = (AntiwindBrushPricePerLinearMeter_WoodGrain * AntiwindBrushQty * Screen_Height) / 1000m;
                         KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain * KitForVerticalOpeningHeadrailQty;
-                        BrakePrice = 2.5m * ExchangeRate;
+                        BrakePrice = 2.5m * Screen_ExchangeRate;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_WoodGrain * SupportForFixingHeadRailQty;
                         if (Screen_Width >= 1500)
                         {
-                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
+                            SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }
 
 
                     }
+                    RollUpCostingMaterials = HeadRailPrice +
+                         SlidingBarPrice +
+                         MeshWithTubePrice +
+                         GuidePrice +
+                         PilePrice +
+                         AntiwindBrushPrice;
 
-                }
-                else if (Screen_Types == ScreenType._Piconet)
-                {
-                    if (Screen_BaseColor == Base_Color._White ||
-                        Screen_BaseColor == Base_Color._Ivory)
-                    {
 
-                    }
-                    else if (Screen_BaseColor == Base_Color._DarkBrown)
-                    {
+                    TotalRollUpCostingMaterials = (RollUpCostingMaterials +
+                                                   KitForVerticalOpeningHeadrailPrice +
+                                                   BrakePrice +
+                                                   SupportForFixingHeadRailPrice +
+                                                   SpringLoadedPrice);
 
-                    }
+                    OverheadCost = 0.2m * 6000;
+                    WithWasteCost = 1;
+                    #endregion
                 }
                 else if (Screen_Types == ScreenType._Plisse)
                 {
+                    #region Plisse AD
+                    if (Screen_PlisséType == PlisseType._AD)
+                    {
+                        HandlesPrice = 0.5009m * 2;
+                        CouplingProfilePrice = 0.43m * Screen_Height / 1000;
+
+                        AluminumBottomGuidePrice = 775 * 1.3m * Screen_Width / 1000 / 6;
+                        AluminumPlisseHandlePrice = 300 * 1.3m * Screen_Height / 1000 / 6.4m;
+
+                        LocalMaterialPrice = AluminumBottomGuidePrice +
+                                             AluminumPlisseHandlePrice;
+
+                        PPPleatingNETHQty = (Screen_Width / 1000m) * 1.3736m;
+                        PPPleatingNETHPrice = PPPleatingNETHQty * PPPleatingNETHPricePerLinearMeter;
+                        BottomRail2p5mBarsQty = Screen_Width > 800 ? 0.5m : 0.33m;
+                        BottomRail2p5mBarsPrice = BottomRail2p5mBarsQty * BottomRail2p5mBarsPricePerPiece;
+                        SettingPlate2p6mbarsPrice = 2 * SettingPlate2p6mbarsPricePricePerPiece;
+                        FinplateBarsPrice = Screen_Height < 2300 ? 2.0850m : 2.2391m;
+                        ScorpionfishLDPrice = 1.45m;
+                        ScorpionfishRDPrice = 1.45m;
+                        AnchorplatePriceQty = Screen_Height > 2550 ? 4 : 3;
+                        AnchorplatePrice = AnchorplatePriceQty * AnchorplatePricePerPiece;
+                        Scorpiontail3Qty = Screen_Width * 0.09m / 2;
+                        Scorpiontail3Price = Scorpiontail3Qty * Scorpiontail3PricePerPiece;
+                        WireEndtailYellowPrice = 6 * WireEndtailYellowPricePerPiece;
+                        AjustEightTailPrice = 2 * AjustEightTailPricePerPiece;
+                        TailEndPrice = 0.27m;
+                        TailReversalPrice = 0.25m;
+                        WireGuideCenterPrice = 8 * WireGuideCenterPricePerPiece;
+                        WireGuideRPrice = 2 * WireGuideRPricePerPiece;
+                        WireGuideLPrice = 2 * WireGuideLPricePerPiece;
+                        WireCB40051PriceQty = ((Screen_Width + 5 * (Screen_Height / 5) + 300) + (Screen_Width + 4 * (Screen_Height / 5) + 300) + (Screen_Width + 3 * (Screen_Height / 5) + 300) + (Screen_Width + 2 * (Screen_Height / 5) + 300) + (Screen_Width + 1 * (Screen_Height / 5) + 300) + (Screen_Width + 300) + (Screen_Height)) / 1000m;
+                        WireCB40051Price = WireCB40051PriceQty * WireCB40051PricePerLinearMeter;
+                        TappingScrew3X30BHPrice = 2 * TappingScrew3X30BHPricePerPiece;
+                        RollOutMagnetQty = Screen_Height / 1000m;
+                        RollOutPositiveMagnetPrice = RollOutMagnetQty * RollOutMagnetPricePerLinearMeter;
+                        RollOutNegativeMagnetPrice = RollOutMagnetQty * RollOutMagnetPricePerLinearMeter;
+
+                        LatchForResizablePlissèPrice = LatchForResizablePlissèPricePerPiece;
+                        ScrewForLatchPrice = 2 * ScrewForLatchPricePerPiece;
+                        SlidingBarEndCapResizablePlissèPrice = 1.67m;
+                        WallProfileEndCapResizablePlissèPrice = 1.83m;
+                        TopGuideEndCapResizablePlissèPrice = 1.52m;
+                        CordCurrierResizablePlissèPrice = 1.09m;
+                        TensionerPrice = 0.18m;
+                        ScrewForTensionerPrice = 2 * 0.06m;
+                        HammerNutResizablePlissèPrice = 2.50m;
+                        Grub5x20Price = 0.32m;
+
+                        WaSbarQty = Screen_Height / 1000m;
+
+                        if (Screen_BaseColor == Base_Color._White ||
+                            Screen_BaseColor == Base_Color._Ivory)
+                        {
+                            WallBarPrice = WaSbarQty * WallBarOxRALStandardPricePerLinearMeter;
+                            SlideBarPrice = WaSbarQty * SlideBarOxRALStandardPricePerLinearMeter;
+                            TopGuideResizablePlissèPrice = (Screen_Width / 1000m) * TopGuideResizablePlissèMillFinishedPricePerLinearMeter;
+                            UprofileForMagnetPrice = WaSbarQty * UprofileForMagnetMillFinishedPricePerLinearMeter;
+                            PlisseLProfileFrontalFixingPrice = (WaSbarQty * 2) * PlisseLProfileFrontalFixingMillFinishedPricePerLinearMeter;
+                            PlisseCoverLProfileFrontingFixingPrice = (WaSbarQty * 2) * PlisseCoverLProfileFrontingFixingMillFinishPricePerLinearMeter;
+
+                            PliseeLandCoverPrice = (20.07495m + 12.9915m) / 5.8m * Screen_Width / 1000m;
+                        }
+                        else if (Screen_BaseColor == Base_Color._DarkBrown)
+                        {
+                            WallBarPrice = WaSbarQty * WallBarWoodFinishedPricePerLinearMeter;
+                            SlideBarPrice = WaSbarQty * SlideBarWoodFinishedPricePerLinearMeter;
+                            TopGuideResizablePlissèPrice = (Screen_Width / 1000m) * TopGuideResizablePlissèWoodFinishedPricePerLinearMeter;
+                            UprofileForMagnetPrice = WaSbarQty * UprofileForMagnetWoodFinishedPricePerLinearMeter;
+                            PlisseLProfileFrontalFixingPrice = (WaSbarQty * 2) * PlisseLProfileFrontalFixingWoodFinishedPerLinearMeter;
+                            PlisseCoverLProfileFrontingFixingPrice = (WaSbarQty * 2) * PlisseCoverLProfileFrontingFixingWoodFinishedPricePerLinearMeter;
+
+                            PliseeLandCoverPrice = (4.509m + 3.12m) * Screen_Width / 1000m;
+                        }
+                        PlisseCostingMaterials = Math.Round(PPPleatingNETHPrice, 2) +
+                                                   Math.Round(BottomRail2p5mBarsPrice, 2) +
+                                                   Math.Round(SettingPlate2p6mbarsPrice, 2) +
+                                                   Math.Round(FinplateBarsPrice, 2) +
+                                                   Math.Round(ScorpionfishLDPrice, 2) +
+                                                   Math.Round(ScorpionfishRDPrice, 2) +
+                                                   Math.Round(AnchorplatePrice, 2) +
+                                                   Math.Round(Scorpiontail3Price, 2) +
+                                                   Math.Round(WireEndtailYellowPrice, 2) +
+                                                   Math.Round(AjustEightTailPrice, 2) +
+                                                   Math.Round(TailEndPrice, 2) +
+                                                   Math.Round(TailReversalPrice, 2) +
+                                                   Math.Round(WireGuideCenterPrice, 2) +
+                                                   Math.Round(WireGuideRPrice, 2) +
+                                                   Math.Round(WireGuideLPrice, 2) +
+                                                   Math.Round(WireCB40051Price, 2) +
+                                                   Math.Round(TappingScrew3X30BHPrice, 2) +
+                                                   Math.Round(RollOutPositiveMagnetPrice, 2) +
+                                                   Math.Round(RollOutNegativeMagnetPrice, 2) +
+                                                   Math.Round(LatchForResizablePlissèPrice, 2) +
+                                                   Math.Round(ScrewForLatchPrice, 2) +
+                                                   Math.Round(SlidingBarEndCapResizablePlissèPrice, 2) +
+                                                   Math.Round(WallProfileEndCapResizablePlissèPrice, 2) +
+                                                   Math.Round(TopGuideEndCapResizablePlissèPrice, 2) +
+                                                   Math.Round(CordCurrierResizablePlissèPrice, 2) +
+                                                   Math.Round(TensionerPrice, 2) +
+                                                   Math.Round(ScrewForTensionerPrice, 2) +
+                                                   Math.Round(HammerNutResizablePlissèPrice, 2) +
+                                                   Math.Round(Grub5x20Price, 2) +
+                                                   Math.Round(WallBarPrice, 2) +
+                                                   Math.Round(SlideBarPrice, 2) +
+                                                   Math.Round(TopGuideResizablePlissèPrice, 2) +
+                                                   Math.Round(UprofileForMagnetPrice, 2) +
+                                                   Math.Round(PlisseLProfileFrontalFixingPrice, 2) +
+                                                   Math.Round(PlisseCoverLProfileFrontingFixingPrice, 2);
+
+                        TotalPlisseCostingMaterials = (HandlesPrice +
+                                                      CouplingProfilePrice +
+                                                      PliseeLandCoverPrice +
+                                                      PlisseCostingMaterials) * Screen_ExchangeRate;
+
+                        OverheadCost = 0.3333m * 6000;
+                        WithWasteCost = 0;
+                    }
+                    #endregion
+                }
+                else if (Screen_Types == ScreenType._Magnum)
+                {
+                    #region Mangnum 
                     if (Screen_BaseColor == Base_Color._White ||
                         Screen_BaseColor == Base_Color._Ivory)
                     {
@@ -889,6 +1131,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
 
                     }
+                    #endregion
                 }
 
                 if (Screen_PVCVisibility == true &&
@@ -901,39 +1144,27 @@ namespace ModelLayer.Model.Quotation.Screen
                     pvc1067Price = ((Screen_1067Height * Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * Screen_Factor;
                 }
 
+                decimal RollUpAdditional = TotalRollUpCostingMaterials - RollUpCostingMaterials;
 
+                basicMats = RollUpCostingMaterials +
+                            TotalPlisseCostingMaterials;
 
-                basicFiveMats = HeadRailPrice +
-                                       SlidingBarPrice +
-                                       MeshWithTubePrice +
-                                       GuidePrice +
-                                       PilePrice +
-                                       AntiwindBrushPrice;
+                WasteCost = basicMats * 0.1m;
 
-                WasteCost = basicFiveMats * 0.1m;
+                FreightCost = (TotalRollUpCostingMaterials +
+                               TotalPlisseCostingMaterials +
+                               (WasteCost * WithWasteCost)) * 0.05m;
 
-                FreightCost = (basicFiveMats +
-                              KitForVerticalOpeningHeadrailPrice +
-                              BrakePrice +
-                              SupportForFixingHeadRailPrice +
-                              SpringLoadedPrice +
-                              WasteCost) * 0.05m;
-
-                DandTCost = (basicFiveMats +
-                            KitForVerticalOpeningHeadrailPrice +
-                            BrakePrice +
-                            SupportForFixingHeadRailPrice +
-                            SpringLoadedPrice +
-                            WasteCost +
+                DandTCost = (basicMats +
+                            RollUpAdditional +
+                            (WasteCost * WithWasteCost) +
                             FreightCost) * 0.16m;
 
-                SmallShopItemCost = 200;
-                OverheadCost = 0.2m * 6000;
-                ContingenciesCost = (basicFiveMats +
-                                    KitForVerticalOpeningHeadrailPrice +
-                                    BrakePrice +
-                                    SupportForFixingHeadRailPrice +
-                                    SpringLoadedPrice +
+                SmallShopItemCost = 200 +
+                                    LocalMaterialPrice;
+
+                ContingenciesCost = (basicMats +
+                                    RollUpAdditional +
                                     WasteCost +
                                     FreightCost +
                                     DandTCost +
@@ -943,11 +1174,8 @@ namespace ModelLayer.Model.Quotation.Screen
                 AddOnsPrice = pvc0505Price +
                               pvc1067Price;
 
-                TotalPrice = basicFiveMats +
-                             KitForVerticalOpeningHeadrailPrice +
-                             BrakePrice +
-                             SupportForFixingHeadRailPrice +
-                             SpringLoadedPrice +
+                TotalPrice = TotalRollUpCostingMaterials +
+                             TotalPlisseCostingMaterials +
                              WasteCost +
                              FreightCost +
                              DandTCost +
@@ -958,7 +1186,10 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
 
-                Screen_TotalAmount = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Quantity;
+
+                Screen_TotalAmount = Math.Ceiling(TotalPrice) * Screen_Factor * Screen_Quantity * Screen_Set;
+
+                ClearingOperation();
 
             }
             else
@@ -967,7 +1198,37 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
+        public void ClearingOperation()
+        {
+            #region ClearingOperation
+            TotalRollUpCostingMaterials = 0;
+            TotalPlisseCostingMaterials = 0;
+            RollUpCostingMaterials = 0;
+            PlisseCostingMaterials = 0;
+            basicMats = 0;
+            HeadRailPrice = 0;
+            SlidingBarPrice = 0;
+            MeshWithTubePrice = 0;
+            GuidePrice = 0;
+            PilePrice = 0;
+            AntiwindBrushPrice = 0;
+            WasteCost = 0;
+            FreightCost = 0;
+            KitForVerticalOpeningHeadrailPrice = 0;
+            BrakePrice = 0;
+            SupportForFixingHeadRailPrice = 0;
+            SpringLoadedPrice = 0;
+            DandTCost = 0;
+            SmallShopItemCost = 0;
+            OverheadCost = 0;
+            ContingenciesCost = 0;
+            AddOnsPrice = 0;
+            pvc0505Price = 0;
+            pvc1067Price = 0;
+            TotalPrice = 0;
+            LocalMaterialPrice = 0;
+            #endregion
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

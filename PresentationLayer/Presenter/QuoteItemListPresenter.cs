@@ -1880,6 +1880,10 @@ namespace PresentationLayer.Presenter
                                     CostingPoints += ProfileColorPoints * 4;
                                     InstallationPoints += (ProfileColorPoints / 3) * 4;
                                 }
+                                else
+                                {
+
+                                }
                             }
                         }
                     }

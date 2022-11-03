@@ -49,7 +49,7 @@ namespace PresentationLayer.Presenter
                                                         IScreenModel screenModel)
         {
             unityC
-                    .RegisterType<IExchangeRateView, IExchangeRateView>()
+                    .RegisterType<IExchangeRateView, ExchangeRateView>()
                     .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>();
             ExchangeRatePresenter exchange = unityC.Resolve<ExchangeRatePresenter>();
             exchange._unityC = unityC;

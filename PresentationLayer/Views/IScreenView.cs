@@ -23,6 +23,7 @@ namespace PresentationLayer.Views
         event EventHandler nudSetsValueChangedEventRaised;
         event EventHandler txtwindoorIDTextChangedEventRaised;
         event EventHandler tsBtnExchangeRateClickEventRaised;
+        event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
 
         void ShowScreemView();
 

@@ -7,7 +7,7 @@ namespace PresentationLayer.Views
 {
     public partial class ExchangeRateView : Form, IExchangeRateView
     {
-        public ExchangeRateView()
+        public ExchangeRateView() 
         {
             InitializeComponent();
         }

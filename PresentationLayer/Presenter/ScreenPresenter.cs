@@ -60,6 +60,7 @@ namespace PresentationLayer.Presenter
             _screenView.nudSetsValueChangedEventRaised += _screenView_nudSetsValueChangedEventRaised;
             _screenView.txtwindoorIDTextChangedEventRaised += _screenView_txtwindoorIDTextChangedEventRaised;
             _screenView.tsBtnExchangeRateClickEventRaised += _screenView_tsBtnExchangeRateClickEventRaised;
+            _screenView.cmbPlisséTypeSelectedIndexChangedEventRaised += _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
@@ -67,6 +68,11 @@ namespace PresentationLayer.Presenter
             _factor = _screenView.screen_factor;
         }
         #region Events
+        private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Screen_PlisséType = (PlisseType)((ComboBox)sender).SelectedValue;
+        }
+
         private void _screenView_tsBtnExchangeRateClickEventRaised(object sender, EventArgs e)
         {
             IExchangeRatePresenter exchangeRate = _exchangeRatePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
@@ -201,6 +207,8 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
             _screenDT.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
 
+            
+
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
@@ -210,7 +218,9 @@ namespace PresentationLayer.Presenter
             _screenHeight.Maximum = decimal.MaxValue;
             _factor.DecimalPlaces = 1;
             _screenModel.Screen_Quantity = 1;
-
+            _screenModel.Screen_Set = 1;
+            _screenModel.Screen_ExchangeRate = 64;
+            _screenModel.Screen_Types_Window = true;
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
@@ -288,6 +298,7 @@ namespace PresentationLayer.Presenter
             binding.Add("Screen_Types_Door", new Binding("Checked", _screenModel, "Screen_Types_Door", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_BaseColor", new Binding("Text", _screenModel, "Screen_BaseColor", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_Type", new Binding("Text", _screenModel, "Screen_Type", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Screen_PlisséType", new Binding("Text", _screenModel, "Screen_PlisséType", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_Width", new Binding("Value", _screenModel, "Screen_Width", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_Height", new Binding("Value", _screenModel, "Screen_Height", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_Factor", new Binding("Value", _screenModel, "Screen_Factor", true, DataSourceUpdateMode.OnPropertyChanged));

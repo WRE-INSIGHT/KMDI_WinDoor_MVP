@@ -75,7 +75,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Type of  Insect Screen</Value>
+                              <Value>Type of Insect Screen</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                               </Style>
@@ -656,7 +656,24 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>DISCLAIMER: Retractable Insect Screens or not designed to withstand strong wind pressure especially during typhoones or when there`s storm and is therefore i recommended to disengage during which time.</Value>
+                        <Value>DISCLAIMER: Retractable Insect Screens or not designed to withstand strong wind pressure especially during </Value>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>typhoons </Value>
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>7pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                        </Style>
+                      </TextRun>
+                      <TextRun>
+                        <Value>or when there`s storm and is therefore i recommended to disengage during which time.</Value>
                         <Style>
                           <FontFamily>Segoe UI</FontFamily>
                           <FontSize>7pt</FontSize>
@@ -680,7 +697,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>If ventilation is necessary, we adivise to keep the door or window opening to a minimum.</Value>
+                        <Value>If ventilation is necessary, we advise to keep the door or window opening to a minimum.</Value>
                         <Style>
                           <FontFamily>Segoe UI</FontFamily>
                           <FontSize>7pt</FontSize>
@@ -744,7 +761,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Discounted Price withooVAT</Value>
+                    <Value>Discounted Price without VAT</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                     </Style>
@@ -963,7 +980,7 @@
                   <TextRun>
                     <Value>NOTE: PLEASE MAKE CHECK PAYABLE TO KENNETH &amp; MOCK DESIGNS, INC.
 PRICE VALIDITY:
-        30 DAYS FROM THIS DATE OF quotation
+        30 DAYS FROM THIS DATE OF QUOTATION
 DELIVERY:</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
@@ -988,7 +1005,7 @@ DELIVERY:</Value>
                   <TextRun>
                     <Value>
         Freight/Delivery Charges are to be on Owner`s Account
-        For Out-of-town projects, corresponding Allowances, Board &amp; Lodging of Installation Team shall be accounted to the Buyer.</Value>
+        For Out-of-town projects, corresponding Allowances, Board &amp; Lodging of Installation Team shall be accounted to the Buyer. For any question or clarification, please feel free to call us at our office telephone nos. 715-8777, 912-4333, 913-2524, or 913-2545 or fax no. 912-1892.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                     </Style>
@@ -1435,50 +1452,6 @@ DELIVERY:</Value>
         </Border>
       </Style>
     </PageHeader>
-    <PageFooter>
-      <Height>0.5in</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Textbox Name="Textbox1">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>For any question or clarification, please feel free to call us at our office telephone nos. 715-8777, 912-4333, 913-2524, or 913-2545 or fax no. 912-1892</Value>
-                  <Style>
-                    <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>7pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.06944in</Top>
-          <Left>0.37375in</Left>
-          <Height>0.19917in</Height>
-          <Width>6.20833in</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageFooter>
     <LeftMargin>0.25in</LeftMargin>
     <RightMargin>0.25in</RightMargin>
     <TopMargin>0.25in</TopMargin>
