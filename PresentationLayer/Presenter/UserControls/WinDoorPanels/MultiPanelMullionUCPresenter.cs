@@ -331,18 +331,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
                             int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                             suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
-                          
-
-                            //if (DisplayWD_dec_split.Count() > 1)
-                            //{
-                            //    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
-                            //}
-                            //int mpanelSize = 0;
-                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                            //{
-                            //    mpanelSize += mpnl.MPanel_Width;
-                            //}
-                            //suggest_Wd = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions) - mpanelSize) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
                             FlowDirection flow = FlowDirection.LeftToRight;
                             if (data.Contains("Transom"))
                             {
@@ -895,8 +883,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)mullionUC);
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                             mullionUCP.SetInitialLoadFalse();
-                            Console.WriteLine("Div Width to bind " + divModel.Div_WidthToBind);
-                            Console.WriteLine("Div ImageRenderer Width to bind " + divModel.DivImageRenderer_Width);
+                        
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
@@ -1048,7 +1035,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_divCountClickedEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine(_multiPanelModel.MPanel_HeightToBind);
             string input = Interaction.InputBox("Input no. of division for " + _multiPanelModel.MPanel_Name, "WinDoor Maker", "1");
             if (input != "" && input != "0")
             {

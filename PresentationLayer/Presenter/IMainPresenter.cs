@@ -34,6 +34,7 @@ namespace PresentationLayer.Presenter
         string inputted_custRefNo { get; set; }
         bool isNewProject { get; set; }
         decimal pricingFactor { get; set; }
+        string aeic { get; set; }
         DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }

@@ -98,6 +98,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
                 Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
                 Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
+                FlowLayoutPanel adasd = (FlowLayoutPanel)_panelModel.Panel_Parent;
+                Console.WriteLine("Parent " + adasd.Name);
+                Console.WriteLine("Parent Model " + _panelModel.Panel_ParentMultiPanelModel.MPanel_Name);
                 Console.WriteLine();
                 slidingUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;

@@ -645,7 +645,19 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public IFrameModel Panel_ParentFrameModel { get; set; }
-        public IMultiPanelModel Panel_ParentMultiPanelModel { get; set; }
+
+        private IMultiPanelModel _panel_ParentMultiPanelModel;
+        public IMultiPanelModel Panel_ParentMultiPanelModel
+        {
+            get
+            {
+                return _panel_ParentMultiPanelModel;
+            }
+            set
+            {
+                _panel_ParentMultiPanelModel = value;
+            }
+        }
 
         public int _panelPropertyHeight;
         public int Panel_PropertyHeight
@@ -5978,6 +5990,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (mpanel_placement == "First" ||
                     mpanel_placement == "Last" ||
+                    mpanel_placement == "" || 
                     mpanel_placement == "")
                 {
                     if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
