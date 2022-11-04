@@ -40,6 +40,7 @@ namespace PresentationLayer.Presenter
         IWindoorModel windoorModel_MainPresenter { get; set; }
         IFrameModel frameModel_MainPresenter { get; set; }
         IScreenModel screenModel_MainPresenter { get; set; }
+        string printStatus { get; set; }
         IBasePlatformPresenter basePlatform_MainPresenter { get; set; }
         IBasePlatformImagerUCPresenter basePlatformWillRenderImg_MainPresenter { get; set; }
         IfrmDimensionPresenter frmDimension_MainPresenter { get; set; }

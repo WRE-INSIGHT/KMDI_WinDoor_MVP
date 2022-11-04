@@ -601,6 +601,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public string printStatus { get; set; }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -837,7 +838,7 @@ namespace PresentationLayer.Presenter
         }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-           // int screenID = _screenModel.Screen_id += 1;
+            // int screenID = _screenModel.Screen_id += 1;
             _screenModel = _screenServices.AddScreenModel(1,
                                                           0,
                                                           0,
@@ -1082,7 +1083,7 @@ namespace PresentationLayer.Presenter
                             }
                             else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
                             {
-                               
+
                                 foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
                                 {
                                     if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
@@ -1158,7 +1159,7 @@ namespace PresentationLayer.Presenter
                                             }
                                             foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
                                             {
-                                                
+
                                                 if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
                                                 {
                                                     wndr_content.Add("\t\t\t[");
@@ -1875,7 +1876,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(13.0, "13 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(14.0, "14 mm Clear", true, false, false, false, false);
@@ -2297,7 +2300,7 @@ namespace PresentationLayer.Presenter
             if (row_str == "EndofFile")
             {
                 Load_Windoor_Item(_windoorModel);
-               
+
             }
             switch (inside_quotation)
             {
@@ -2825,7 +2828,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    if(mpnllvl == "third level" || mpnllvl == "fourth level")
+                                    if (mpnllvl == "third level" || mpnllvl == "fourth level")
                                     {
                                         if (extractedValue_str.Contains("MultiMullion"))
                                         {
@@ -2847,7 +2850,7 @@ namespace PresentationLayer.Presenter
                                             panel_Parent = _multiTransomUC.Getflp();
                                         }
                                     }
-                                   
+
 
                                 }
                             }
@@ -4833,7 +4836,7 @@ namespace PresentationLayer.Presenter
                             IMultiPanelMullionUC multiMullionUC;
                             IMultiPanelTransomUC multiTransomUC;
 
-                            if(mpnllvl == "second level")
+                            if (mpnllvl == "second level")
                             {
                                 multiMullionUC = _multiMullionUC;
                                 multiTransomUC = _multiTransomUC;
@@ -5276,7 +5279,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                if(mpnllvl == "fourth level")
+                                if (mpnllvl == "fourth level")
                                 {
                                     if (extractedValue_str.Contains("Mullion"))
                                     {
@@ -5300,7 +5303,7 @@ namespace PresentationLayer.Presenter
                                         mPanel_Parent = _multiTransomUC.Getflp();
                                     }
                                 }
-                               
+
                             }
                         }
                         else if (row_str.Contains("MPanel_FrameGroup:"))
@@ -5839,7 +5842,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_Parent:"))
                         {
-                            if(mpnllvl == "fourth level" || mpnllvl == "third level")
+                            if (mpnllvl == "fourth level" || mpnllvl == "third level")
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -5866,7 +5869,7 @@ namespace PresentationLayer.Presenter
                             //    mpnllvl = "third level";
                             //}
 
-                            else 
+                            else
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -5878,7 +5881,7 @@ namespace PresentationLayer.Presenter
                                     div_Parent = _multiTransomUC.Getflp();
                                 }
                             }
-                          
+
 
                         }
                         else if (row_str.Contains("Div_FrameType:"))
@@ -6321,7 +6324,7 @@ namespace PresentationLayer.Presenter
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                 }
                             }
-                            else if(div_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
+                            else if (div_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
                             {
                                 _multiPanelModel3rdLvl.MPanelLst_Divider.Add(divModel);
                                 if (_multiPanelModel3rdLvl.MPanel_Type == "Mullion")

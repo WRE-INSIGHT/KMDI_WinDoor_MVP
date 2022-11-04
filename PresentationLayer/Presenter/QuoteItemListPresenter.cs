@@ -575,6 +575,7 @@ namespace PresentationLayer.Presenter
                                       i + 1,
                                       byteToStrForTopView);
             }
+            _mainPresenter.printStatus = "WinDoorItems";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
@@ -1067,8 +1068,8 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                             {
-                                CostingPoints -= 2;
-                                InstallationPoints -= 2;
+                                //CostingPoints -= 2 * ProfileColorPoints;
+                                //InstallationPoints -= 2 * ProfileColorPoints;
 
                                 #region Transom/MullionAndMechJointPrice 
                                 if (mpnl.MPanel_DividerEnabled == true)
@@ -1880,9 +1881,11 @@ namespace PresentationLayer.Presenter
                                     CostingPoints += ProfileColorPoints * 4;
                                     InstallationPoints += (ProfileColorPoints / 3) * 4;
                                 }
-                                else
+                                else if (pnl.Panel_Type.Contains("Fixed"))
                                 {
 
+                                    CostingPoints += ProfileColorPoints * 2;
+                                    InstallationPoints += (ProfileColorPoints / 3) * 2;
                                 }
                             }
                         }

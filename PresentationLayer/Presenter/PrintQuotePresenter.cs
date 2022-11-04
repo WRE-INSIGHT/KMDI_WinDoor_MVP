@@ -30,7 +30,7 @@ namespace PresentationLayer.Presenter
 
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
-            // _printQuoteView.GetReportViewer().RefreshReport();
+            _printQuoteView.GetReportViewer().RefreshReport();
             _printQuoteView_btnRefreshClickEventRaised(sender, e);
         }
 
@@ -44,9 +44,15 @@ namespace PresentationLayer.Presenter
 
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
-                
-               // _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
-                _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
+                if (_mainPresenter.printStatus== "WinDoorItems")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
+                }
+                else if (_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
+
+                }
 
 
                 ReportParameter[] RParam = new ReportParameter[6];
@@ -101,7 +107,7 @@ namespace PresentationLayer.Presenter
                 .RegisterType<IPrintQuoteView, PrintQuoteView>()
                 .RegisterType<IPrintQuotePresenter, PrintQuotePresenter>();
             PrintQuotePresenter printQuote = unityC.Resolve<PrintQuotePresenter>();
-            printQuote._unityC = unityC; 
+            printQuote._unityC = unityC;
             printQuote._mainPresenter = mainPresenter;
 
 

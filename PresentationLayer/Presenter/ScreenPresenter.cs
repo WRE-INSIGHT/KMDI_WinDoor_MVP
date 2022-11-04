@@ -180,6 +180,7 @@ namespace PresentationLayer.Presenter
                                            item++);
                 }
             }
+            _mainPresenter.printStatus = "ScreenItem";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
@@ -207,7 +208,7 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
             _screenDT.Columns.Add(CreateColumn("Total Amount", "Total Amount", "System.Decimal"));
 
-            
+
 
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
