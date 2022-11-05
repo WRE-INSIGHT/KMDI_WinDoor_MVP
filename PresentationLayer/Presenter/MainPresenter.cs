@@ -118,8 +118,8 @@ namespace PresentationLayer.Presenter
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IFrameImagerUCPresenter _frameImagerUCP;
-        private IMultiPanelMullionUC _multiMullionUC;
-        private IMultiPanelTransomUC _multiTransomUC;
+        private IMultiPanelMullionUC _multiMullionUC2nd;
+        private IMultiPanelTransomUC _multiTransomUC2nd;
         private IMultiPanelMullionUC _multiMullionUC3rd;
         private IMultiPanelTransomUC _multiTransomUC3rd;
         private IMultiPanelMullionUC _multiMullionUC4th;
@@ -1672,7 +1672,6 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
-
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -2346,7 +2345,8 @@ namespace PresentationLayer.Presenter
                 //_mainView.RemoveBinding(_mainView.GetLblSize());
                 //_mainView.RemoveBinding();
                 //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
             }
             if (row_str == "EndofFile")
             {
@@ -2963,11 +2963,11 @@ namespace PresentationLayer.Presenter
                                     {
                                         if (extractedValue_str.Contains("MultiMullion"))
                                         {
-                                            panel_Parent = _multiMullionUC.Getflp();
+                                            panel_Parent = _multiMullionUC2nd.Getflp();
                                         }
                                         else
                                         {
-                                            panel_Parent = _multiTransomUC.Getflp();
+                                            panel_Parent = _multiTransomUC2nd.Getflp();
                                         }
                                     }
                                    
@@ -2988,11 +2988,11 @@ namespace PresentationLayer.Presenter
 
                                     if (panel_Parent.Name.Contains("MultiMullion"))
                                     {
-                                        panel_MultiPanelGroup = (UserControl)_multiMullionUC;
+                                        panel_MultiPanelGroup = (UserControl)_multiMullionUC2nd;
                                     }
                                     else
                                     {
-                                        panel_MultiPanelGroup = (UserControl)_multiTransomUC;
+                                        panel_MultiPanelGroup = (UserControl)_multiTransomUC2nd;
                                     }
 
                                 }
@@ -4958,8 +4958,8 @@ namespace PresentationLayer.Presenter
 
                             if(mpnllvl == "second level")
                             {
-                                multiMullionUC = _multiMullionUC;
-                                multiTransomUC = _multiTransomUC;
+                                multiMullionUC = _multiMullionUC2nd;
+                                multiTransomUC = _multiTransomUC2nd;
                             }
                             else if (mpnllvl == "third level")
                             {
@@ -5420,12 +5420,12 @@ namespace PresentationLayer.Presenter
                                 {
                                     if (extractedValue_str.Contains("Mullion"))
                                     {
-                                        mPanel_Parent = _multiMullionUC.Getflp();
+                                        mPanel_Parent = _multiMullionUC2nd.Getflp();
 
                                     }
                                     else
                                     {
-                                        mPanel_Parent = _multiTransomUC.Getflp();
+                                        mPanel_Parent = _multiTransomUC2nd.Getflp();
                                     }
                                 }
                                
@@ -5668,8 +5668,8 @@ namespace PresentationLayer.Presenter
                                                                                                       multiMullionImagerUCP);
 
                                     _multiMullionUCP = multiUCP;
-                                    _multiMullionUC = _multiMullionUCP.GetMultiPanel();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiMullionUC);
+                                    _multiMullionUC2nd = _multiMullionUCP.GetMultiPanel();
+                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiMullionUC2nd);
                                     _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _basePlatformImagerUCPresenter.Invalidate_flpMain();
                                 }
@@ -5690,8 +5690,8 @@ namespace PresentationLayer.Presenter
                                                                                                                     _basePlatformImagerUCPresenter,
                                                                                                                     multiTransomImagerUCP);
                                     _multiTransomUCP = multiUCP;
-                                    _multiTransomUC = _multiTransomUCP.GetMultiPanel();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC);
+                                    _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
+                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
                                     _basePlatformPresenter.InvalidateBasePlatform();
                                 }
                             }
@@ -5756,9 +5756,9 @@ namespace PresentationLayer.Presenter
                                                                                                       _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC3rd = _multiMullionUCP.GetMultiPanel();
-                                    _multiTransomUC.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
+                                    _multiTransomUC2nd.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
                                     _multiMullionUCP.SetInitialLoadFalse();
-                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiTransomUC.Getflp();
+                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiTransomUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC3rd, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiMullionUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
@@ -5787,9 +5787,9 @@ namespace PresentationLayer.Presenter
                                                                                                                     _multiMullionImagerUCP);
                                     _multiTransomUCP = multiTransomUCP;
                                     _multiTransomUC3rd = _multiTransomUCP.GetMultiPanel();
-                                    _multiMullionUC.Getflp().Controls.Add((UserControl)_multiTransomUC3rd);
+                                    _multiMullionUC2nd.Getflp().Controls.Add((UserControl)_multiTransomUC3rd);
                                     _multiTransomUCP.SetInitialLoadFalse();
-                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiMullionUC.Getflp();
+                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiMullionUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC3rd, _frameModel.Frame_Type.ToString());
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
@@ -6015,12 +6015,12 @@ namespace PresentationLayer.Presenter
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
-                                    div_Parent = _multiMullionUC.Getflp();
+                                    div_Parent = _multiMullionUC2nd.Getflp();
 
                                 }
                                 else
                                 {
-                                    div_Parent = _multiTransomUC.Getflp();
+                                    div_Parent = _multiTransomUC2nd.Getflp();
                                 }
                             }
                           
@@ -6348,13 +6348,13 @@ namespace PresentationLayer.Presenter
                                 divWidth = 0;
                             if (_multiPanelModel2ndLvl.MPanel_Type == "Mullion")
                             {
-                                //fpnl = _multiMullionUC.Getflp();
+                                //fpnl = _multiMullionUC2nd.Getflp();
                                 divWidth = divSize;
                                 divHeigth = _multiPanelModel2ndLvl.MPanel_Height;
                             }
                             else
                             {
-                                //fpnl = _multiTransomUC.Getflp();
+                                //fpnl = _multiTransomUC2nd.Getflp();
                                 divWidth = _multiPanelModel2ndLvl.MPanel_Width;
                                 divHeigth = divSize;
                             }
@@ -6432,7 +6432,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     IMullionUC mullionUC = mullionUCP.GetMullion();
-                                    _multiMullionUC.Getflp().Controls.Add((UserControl)mullionUC);
+                                    _multiMullionUC2nd.Getflp().Controls.Add((UserControl)mullionUC);
                                     mullionUCP.SetInitialLoadFalse();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
@@ -6461,7 +6461,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     ITransomUC transomUC = transomUCP.GetTransom();
-                                    _multiTransomUC.Getflp().Controls.Add((UserControl)transomUC);
+                                    _multiTransomUC2nd.Getflp().Controls.Add((UserControl)transomUC);
                                     transomUCP.SetInitialLoadFalse();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
@@ -6992,10 +6992,12 @@ namespace PresentationLayer.Presenter
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
             _multiPanelModel4thLvl = null;
-            _multiMullionUC = null;
-            _multiTransomUC = null;
+            _multiMullionUC2nd = null;
+            _multiTransomUC2nd = null;
             _multiMullionUC3rd = null;
             _multiTransomUC3rd = null;
+            _multiMullionUC4th = null;
+            _multiTransomUC4th = null;
             mpnllvl = string.Empty;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
@@ -7676,7 +7678,7 @@ namespace PresentationLayer.Presenter
             //frames
             
            
-            _pnlPropertiesBody.Refresh();
+            //_pnlPropertiesBody.Refresh();
             _mainView.RemoveBinding(_mainView.GetLblSize());
             _mainView.RemoveBinding();
             _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());

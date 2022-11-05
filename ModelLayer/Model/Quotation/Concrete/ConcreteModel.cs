@@ -120,13 +120,15 @@ namespace ModelLayer.Model.Quotation.Concrete
         public void Set_DimensionsToBind_using_ConcreteZoom()
         {
             decimal wd_flt_convert_dec = Convert.ToDecimal(Concrete_Width * Concrete_Zoom);
-            decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-            //Concrete_WidthToBind = Convert.ToInt32(concrete_wd_dec);
-            Concrete_WidthToBind = Convert.ToInt32(wd_flt_convert_dec);
+            //decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec , 0, MidpointRounding.AwayFromZero);
+            Concrete_WidthToBind = Convert.ToInt32(concrete_wd_dec);
+            //Concrete_WidthToBind = Convert.ToInt32(wd_flt_convert_dec);
             decimal ht_flt_convert_dec = Convert.ToDecimal(Concrete_Height * Concrete_Zoom);
-            decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-            //Concrete_HeightToBind = Convert.ToInt32(concrete_ht_dec);
-            Concrete_HeightToBind = Convert.ToInt32(ht_flt_convert_dec);
+            //decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
+            Concrete_HeightToBind = Convert.ToInt32(concrete_ht_dec);
+            //Concrete_HeightToBind = Convert.ToInt32(ht_flt_convert_dec);
         }
 
         public void Set_ImagerDimensions_using_ImagerZoom()

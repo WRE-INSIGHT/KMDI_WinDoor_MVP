@@ -781,8 +781,9 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
+                        count += 1;
+                        Console.WriteLine(count);
                         Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY));
-
                         objLocY += mpnlModel.MPanelImageRenderer_Height;
                     }
                 }
@@ -792,7 +793,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         }
 
-
+        int count;
         private int Find_LocY_Inside_MpanelParent(int mpnl_ndx, IMultiPanelModel mpnl)
         {
             int locY = 0;

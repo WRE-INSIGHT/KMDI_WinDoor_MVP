@@ -175,7 +175,6 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
                
-
                 if (total_panel > 1 || total_mpanel >= 1)
                 {
                     decimal[,] actual_arr_wd_locX = new decimal[total_panel + concrete_count, 2];
@@ -287,7 +286,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                 {
                                                     Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
                                                     string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
-
                                                     string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
 
                                                     decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
