@@ -419,7 +419,10 @@ namespace PresentationLayer.Presenter.UserControls
                                         {
                                             IMultiPanelModel multiPanelModel = mpnl.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
                                             MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
-                                            Draw_MultiPanelParent(multiPanelModel, MPoint, zoom, e);
+                                            if (multiPanelModel.MPanel_Name == mpnl.MPanel_Name)
+                                            {
+                                                Draw_MultiPanelParent(multiPanelModel, MPoint, zoom, e);
+                                            }
                                             mParentLoc_Y += multiPanelModel.MPanelImageRenderer_Height;
                                         }
                                     }
@@ -439,7 +442,10 @@ namespace PresentationLayer.Presenter.UserControls
                                         {
                                             IMultiPanelModel multiPanelModel = mpnl.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == parentMpnl_obj.Name);
                                             MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
-                                            Draw_MultiPanelParent(multiPanelModel, MPoint, zoom, e);
+                                            if (multiPanelModel.MPanel_Name == mpnl.MPanel_Name)
+                                            {
+                                                Draw_MultiPanelParent(multiPanelModel, MPoint, zoom, e);
+                                            }
                                             mParentLoc_X += multiPanelModel.MPanelImageRenderer_Width;
                                         }
                                     }
@@ -559,6 +565,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
 
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y1, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X1);
+                                Console.WriteLine(mpnl.MPanelLst_Objects.Count());
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
                                
                             }
