@@ -990,7 +990,33 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add("(");
                 foreach (var prop in wdm.GetType().GetProperties())
                 {
-                    wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
+                    if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
+                    {
+
+                        string Dictionary_ht_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                        {
+                            Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
+                    }
+                    else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
+                    {
+
+                        string Dictionary_wd_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                        {
+                            Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
+                    }
+                    else
+                    {
+                        wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
+
+                    }
                 }
                 foreach (Control wndrObject in wdm.lst_objects)
                 {
@@ -2616,6 +2642,45 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_CostingPoints:"))
                         {
                             _windoorModel.WD_CostingPoints = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+                        if (row_str.Contains("Dictionary_wd_redArrowLines:"))
+                        {
+                            string[] words = extractedValue_str.Split(';');
+                            if (extractedValue_str.Contains("<"))
+                            {
+                                Dictionary<int, Decimal>  dictionary_wd_redArrowLinesList = new Dictionary<int, Decimal>();
+                                foreach (string str in words)
+                                {
+                                    if (str.Trim() != string.Empty)
+                                    {
+                                        int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                        decimal value = Convert.ToDecimal(str.Split(',', '>')[1]);
+                                        dictionary_wd_redArrowLinesList.Add(key, value);
+                                    }
+
+                                }
+                                _windoorModel.Dictionary_wd_redArrowLines = dictionary_wd_redArrowLinesList;
+                            }
+                        }
+                        if (row_str.Contains("Dictionary_ht_redArrowLines:"))
+                        {
+                            string[] words = extractedValue_str.Split(';');
+                            if (extractedValue_str.Contains("<"))
+                            {
+                                Dictionary<int, Decimal>  dictionary_ht_redArrowLinesList = new Dictionary<int, Decimal>();
+                                foreach (string str in words)
+                                {
+                                    if (str.Trim() != string.Empty)
+                                    {
+                                        int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                        decimal value = Convert.ToDecimal(str.Split(',', '>')[1]);
+                                        dictionary_ht_redArrowLinesList.Add(key, value);
+                                    }
+
+                                }
+                                _windoorModel.Dictionary_ht_redArrowLines = dictionary_ht_redArrowLinesList;
+                            }
                         }
                         if (row_str.Contains("WD_pboxImagerHeight:"))
                         {

@@ -91,19 +91,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
-                Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
-                Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
-                Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-                Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
-                Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
-                Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
-                Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
-                Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
-                Console.WriteLine("Parent " + _multiPanelModel.MPanel_ParentModel.MPanel_Name);
-                Console.WriteLine("Parent UC" + ((UserControl)sender).Parent.Name);
-                Console.WriteLine();
+                //Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
+                //Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
+                //Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
+                //Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
+                //Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
+                //Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
+                //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
+                //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
+                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+                //Console.WriteLine("Parent " + _multiPanelModel.MPanel_ParentModel.MPanel_Name);
+                //Console.WriteLine("Parent UC" + ((UserControl)sender).Parent.Name);
+                //Console.WriteLine();
                 slidingUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;

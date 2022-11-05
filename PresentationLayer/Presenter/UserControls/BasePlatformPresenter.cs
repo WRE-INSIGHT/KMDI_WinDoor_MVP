@@ -162,6 +162,206 @@ namespace PresentationLayer.Presenter.UserControls
                     dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
                     dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
                 }
+                #region old algo for arrow
+
+                //int total_panel = 0, total_mpanel = 0;
+                //foreach (IFrameModel frame in _windoorModel.lst_frame)
+                //{
+                //    total_panel += frame.Lst_Panel.Count();
+                //    total_mpanel += frame.Lst_MultiPanel.Count();
+                //    foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                //    {
+                //        total_panel += mpnl.MPanelLst_Panel.Count();
+                //    }
+                //}
+
+                //if (total_panel > 1 || total_mpanel >= 1)
+                //{
+                //    decimal[,] actual_arr_wd_locX = new decimal[total_panel, 2];
+                //    decimal[,] actual_arr_ht_locY = new decimal[total_panel, 2];
+                //    int ndx = 0;
+
+                //    if (total_panel > 1 && total_mpanel == 0) // single panel
+                //    {
+                //        foreach (IFrameModel frame in _windoorModel.lst_frame)
+                //        {
+                //            foreach (IPanelModel pnl in frame.Lst_Panel)
+                //            {
+                //                Control frame_ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
+                //                string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+                //                string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                //                decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                //                decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                //                actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                //                actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+
+                //                Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
+
+                //                int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
+                //                    ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
+
+                //                actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                ndx++;
+                //            }
+
+                //        }
+                //    }
+                //    else if (total_mpanel >= 1) // multiple panel
+                //    {
+                //        foreach (IFrameModel frame in _windoorModel.lst_frame)
+                //        {
+                //            if (frame.Lst_Panel.Count >= 1 && frame.Lst_MultiPanel.Count == 0)
+                //            {
+                //                foreach (IPanelModel pnl in frame.Lst_Panel)
+                //                {
+                //                    Control frame_ctrl = FindFrameControl(frame.Frame_Name, frame.Frame_ID);
+                //                    string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+                //                    string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                //                    decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                //                    decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                //                    actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                //                    actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+
+                //                    Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
+
+                //                    int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
+                //                        ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
+
+                //                    actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                    actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                    ndx++;
+                //                }
+                //            }
+                //            else if (frame.Lst_Panel.Count == 0 && frame.Lst_MultiPanel.Count >= 1)
+                //            {
+                //                foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
+                //                {
+                //                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                //                    {
+                //                        Control ctrl = mpnl.MPanelLst_Objects.Find(obj => obj.Name == pnl.Panel_Name);
+                //                        string Wd_decimal_str = "0." + pnl.Panel_DisplayWidthDecimal;
+
+                //                        string Ht_decimal_str = "0." + pnl.Panel_DisplayHeightDecimal;
+
+                //                        decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
+                //                        decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
+
+                //                        actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                //                        actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+
+                //                        actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                        actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                //                        ndx++;
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+
+                //    if (_windoorModel.WD_customArrowToggle == false)
+                //    {
+                //        _windoorModel.Dictionary_wd_redArrowLines = WidthList_ToPaint(_windoorModel.WD_width, actual_arr_wd_locX);
+                //        _windoorModel.Dictionary_ht_redArrowLines = HeightList_ToPaint(_windoorModel.WD_height, actual_arr_ht_locY);
+                //    }
+
+                //    float locX = 0;
+                //    foreach (KeyValuePair<int, decimal> wd in _windoorModel.Dictionary_wd_redArrowLines)
+                //    {
+                //        locX = Draw_Arrow_Width(wd.Value, e, locX, dmnsion_font_wd, ctrl_Y);
+                //    }
+
+                //    float locY = 0;
+                //    foreach (KeyValuePair<int, decimal> ht in _windoorModel.Dictionary_ht_redArrowLines)
+                //    {
+                //        locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
+                //    }
+                //}
+                //else if (total_panel == 1 && total_mpanel == 0)
+                //{
+                //    string dmnsion_w = _windoorModel.WD_width.ToString();
+                //    Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
+                //    Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
+
+                //    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
+                //    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+
+                //    //arrow for WIDTH
+                //    Point[] arrwhd_pnts_W1 =
+                //    {
+                //            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                //            dmnsion_w_startP,
+                //            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                //        };
+
+                //    Point[] arrwhd_pnts_W2 =
+                //    {
+                //            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                //            dmnsion_w_endP,
+                //            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                //        };
+
+                //    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                //    {
+                //        g.DrawLines(redP, arrwhd_pnts_W1);
+                //        g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                //        g.DrawLines(redP, arrwhd_pnts_W2);
+                //        TextRenderer.DrawText(g,
+                //                              dmnsion_w,
+                //                              dmnsion_font_wd,
+                //                              new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                //                                            new Size(s.Width, s.Height)),
+                //                              Color.Black,
+                //                              SystemColors.Control,
+                //                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                //    }
+                //    //arrow for WIDTH
+
+
+                //    //arrow for HEIGHT
+                //    string dmnsion_h = _windoorModel.WD_height.ToString();
+                //    Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
+                //    Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
+
+                //    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
+                //    double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+
+                //    Point[] arrwhd_pnts_H1 =
+                //    {
+                //    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                //    dmnsion_h_startP,
+                //    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                //};
+
+                //    Point[] arrwhd_pnts_H2 =
+                //    {
+                //    new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                //    dmnsion_h_endP,
+                //    new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                //};
+
+                //    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                //    {
+                //        g.DrawLines(redP, arrwhd_pnts_H1);
+                //        g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                //        g.DrawLines(redP, arrwhd_pnts_H2);
+                //        TextRenderer.DrawText(g,
+                //                              dmnsion_h,
+                //                              dmnsion_font_ht,
+                //                              new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                //                                            new Size(s2.Width, s2.Height)),
+                //                              Color.Black,
+                //                              SystemColors.Control,
+                //                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                //    }
+                //    //arrow for HEIGHT
+                //}
+                #endregion
+                #region Darwin
 
 
                 int total_panel = 0, total_mpanel = 0, concrete_count = _windoorModel.lst_concrete.Count();
@@ -352,84 +552,84 @@ namespace PresentationLayer.Presenter.UserControls
                         locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                     }
                 }
-                //else if (total_panel == 1 && total_mpanel == 0 && concrete_count == 0)
-                //{
-                //    string dmnsion_w = _windoorModel.WD_width.ToString();
-                //    Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
-                //    Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
+                else if (total_panel == 1 && total_mpanel == 0 && concrete_count == 0)
+                {
+                    string dmnsion_w = _windoorModel.WD_width.ToString();
+                    Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
+                    Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
 
-                //    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
-                //    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
+                    Size s = TextRenderer.MeasureText(dmnsion_w, dmnsion_font_wd);
+                    double mid = (dmnsion_w_startP.X + dmnsion_w_endP.X) / 2;
 
-                //    //arrow for WIDTH
-                //    Point[] arrwhd_pnts_W1 =
-                //    {
-                //            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
-                //            dmnsion_w_startP,
-                //            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-                //        };
+                    //arrow for WIDTH
+                    Point[] arrwhd_pnts_W1 =
+                    {
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+                            dmnsion_w_startP,
+                            new Point(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+                        };
 
-                //    Point[] arrwhd_pnts_W2 =
-                //    {
-                //            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
-                //            dmnsion_w_endP,
-                //            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
-                //        };
+                    Point[] arrwhd_pnts_W2 =
+                    {
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 10),
+                            dmnsion_w_endP,
+                            new Point(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 10)
+                        };
 
-                //    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-                //    {
-                //        g.DrawLines(redP, arrwhd_pnts_W1);
-                //        g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
-                //        g.DrawLines(redP, arrwhd_pnts_W2);
-                //        TextRenderer.DrawText(g,
-                //                              dmnsion_w,
-                //                              dmnsion_font_wd,
-                //                              new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
-                //                                            new Size(s.Width, s.Height)),
-                //                              Color.Black,
-                //                              SystemColors.Control,
-                //                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                //    }
-                //    //arrow for WIDTH
+                    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                    {
+                        g.DrawLines(redP, arrwhd_pnts_W1);
+                        g.DrawLine(redP, dmnsion_w_startP, dmnsion_w_endP);
+                        g.DrawLines(redP, arrwhd_pnts_W2);
+                        TextRenderer.DrawText(g,
+                                              dmnsion_w,
+                                              dmnsion_font_wd,
+                                              new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
+                                                            new Size(s.Width, s.Height)),
+                                              Color.Black,
+                                              SystemColors.Control,
+                                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    }
+                    //arrow for WIDTH
 
 
-                //    //arrow for HEIGHT
-                //    string dmnsion_h = _windoorModel.WD_height.ToString();
-                //    Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
-                //    Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
+                    //arrow for HEIGHT
+                    string dmnsion_h = _windoorModel.WD_height.ToString();
+                    Point dmnsion_h_startP = new Point(70 - 17, _flpMain.Location.Y);
+                    Point dmnsion_h_endP = new Point(70 - 17, _flpMain.Location.Y + (_flpMain.Height - 3));
 
-                //    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
-                //    double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
+                    Size s2 = TextRenderer.MeasureText(dmnsion_h, dmnsion_font_ht);
+                    double mid2 = (dmnsion_h_startP.Y + dmnsion_h_endP.Y) / 2;
 
-                //    Point[] arrwhd_pnts_H1 =
-                //    {
-                //    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
-                //    dmnsion_h_startP,
-                //    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
-                //    };
+                    Point[] arrwhd_pnts_H1 =
+                    {
+                    new Point(dmnsion_h_startP.X - 10,dmnsion_h_startP.Y + 10),
+                    dmnsion_h_startP,
+                    new Point(dmnsion_h_startP.X + 10,dmnsion_h_startP.Y + 10),
+                    };
 
-                //    Point[] arrwhd_pnts_H2 =
-                //    {
-                //        new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
-                //        dmnsion_h_endP,
-                //        new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
-                //    };
-                //    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
-                //    {
-                //        g.DrawLines(redP, arrwhd_pnts_H1);
-                //        g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
-                //        g.DrawLines(redP, arrwhd_pnts_H2);
-                //        TextRenderer.DrawText(g,
-                //                              dmnsion_h,
-                //                              dmnsion_font_ht,
-                //                              new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
-                //                                            new Size(s2.Width, s2.Height)),
-                //                              Color.Black,
-                //                              SystemColors.Control,
-                //                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                //    }
-                //    //arrow for HEIGHT
-                //}
+                    Point[] arrwhd_pnts_H2 =
+                    {
+                        new Point(dmnsion_h_endP.X - 10, dmnsion_h_endP.Y - 10),
+                        dmnsion_h_endP,
+                        new Point(dmnsion_h_endP.X + 10, dmnsion_h_endP.Y - 10)
+                    };
+                    if (_flpMain.Controls.OfType<IFrameUC>().Where(fr => fr.thisVisible == true).Count() > 0)
+                    {
+                        g.DrawLines(redP, arrwhd_pnts_H1);
+                        g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
+                        g.DrawLines(redP, arrwhd_pnts_H2);
+                        TextRenderer.DrawText(g,
+                                              dmnsion_h,
+                                              dmnsion_font_ht,
+                                              new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
+                                                            new Size(s2.Width, s2.Height)),
+                                              Color.Black,
+                                              SystemColors.Control,
+                                              TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                    }
+                    //arrow for HEIGHT
+                }
                 else if (total_panel > 0 || total_mpanel > 0 && concrete_count == 0)
                 {
                     decimal[,] actual_arr_wd_locX = new decimal[total_panel + concrete_count, 2];
@@ -608,6 +808,7 @@ namespace PresentationLayer.Presenter.UserControls
                         locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                     }
                 }
+                #endregion
             }
             catch (Exception ex)
             {
