@@ -934,9 +934,12 @@ namespace PresentationLayer.Presenter
                 {
                     string txtfile = wndrfile.Replace(".wndr", ".txt");
                     File.WriteAllLines(txtfile, Saving_dotwndr());
-                    File.SetAttributes(txtfile, FileAttributes.Hidden);
-                    csfunc.EncryptFile(txtfile);
-                    File.Delete(txtfile);
+                    File.Delete(wndrfile);
+                    FileInfo f = new FileInfo(txtfile);
+                    f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
+                    //File.SetAttributes(txtfile, FileAttributes.Hidden);
+                    //csfunc.EncryptFile(txtfile);
+                    //File.Delete(txtfile);
 
                     //if (online_login && updatefile_bgw.IsBusy != true)
                     //{
@@ -1827,14 +1830,16 @@ namespace PresentationLayer.Presenter
                         isNewProject = false;
                         isOpenProject = true;
                         wndrfile = _mainView.GetOpenFileDialog().FileName;
-                        csfunc.DecryptFile(wndrfile);
+                        //csfunc.DecryptFile(wndrfile);
                         int startFileName = wndrfile.LastIndexOf("\\") + 1;
                         wndrFileName = wndrfile.Substring(startFileName);
+                        FileInfo f = new FileInfo(wndrfile);
+                        f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
                         string outFile = wndrfile.Substring(0, startFileName) +
                                          wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
 
                         file_lines = File.ReadAllLines(outFile);
-                        File.SetAttributes(outFile, FileAttributes.Hidden);
+                        f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                         onload = true;
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -2013,17 +2018,21 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
+
+
                     SetChangesMark();
                     _isOpenProject = false;
                     wndrfile = _mainView.GetOpenFileDialog().FileName;
-                    csfunc.DecryptFile(wndrfile);
+                   
                     int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(wndrfile);
+                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
                     string outFile = wndrfile.Substring(0, startFileName) +
                                      wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    File.SetAttributes(outFile, FileAttributes.Hidden);
+                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                     onload = true;
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -6044,7 +6053,6 @@ namespace PresentationLayer.Presenter
                                 {
                                     div_Parent = _multiTransomUC4th.Getflp();
                                 }
-                                mpnllvl = "third level";
                             }
                             else if ( mpnllvl == "third level")
                             {
@@ -6057,7 +6065,6 @@ namespace PresentationLayer.Presenter
                                 {
                                     div_Parent = _multiTransomUC3rd.Getflp();
                                 }
-                                mpnllvl = "third level";
                             }
 
 
