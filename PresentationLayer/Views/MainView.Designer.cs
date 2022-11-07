@@ -590,6 +590,7 @@
             // 
             this.duplicateItemToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.duplicateItemToolStripButton1.Enabled = false;
+            this.duplicateItemToolStripButton1.Image = global::PresentationLayer.Properties.Resources.duplicate;
             this.duplicateItemToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.duplicateItemToolStripButton1.Name = "duplicateItemToolStripButton1";
             this.duplicateItemToolStripButton1.Size = new System.Drawing.Size(24, 29);

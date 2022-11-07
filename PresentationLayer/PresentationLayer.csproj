@@ -1532,6 +1532,7 @@
     <None Include="Resources\enabled_back_arrow_104px .png" />
     <None Include="Resources\external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic.png" />
     <None Include="Resources\exchange.png" />
+    <None Include="Resources\duplicate.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

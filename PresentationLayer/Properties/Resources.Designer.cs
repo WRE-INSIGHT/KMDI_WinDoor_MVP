@@ -183,6 +183,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap duplicate {
+            get {
+                object obj = ResourceManager.GetObject("duplicate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap enabled_back_arrow_104px {
             get {
                 object obj = ResourceManager.GetObject("enabled_back_arrow_104px", resourceCulture);
