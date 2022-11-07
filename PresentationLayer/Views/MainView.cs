@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 namespace PresentationLayer.Views
 {
@@ -228,6 +226,7 @@ namespace PresentationLayer.Views
         public event EventHandler addProjectsToolStripMenuItemClickEventRaised;
         public event EventHandler screenToolStripMenuItemClickEventRaised;
         public event EventHandler factorToolStripMenuItemClickEventRaised;
+        public event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
 
         public MainView()
@@ -239,12 +238,12 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-        
+
         private void MainView_Load(object sender, EventArgs e)
         {
             pnlProperties.Size = new Size(185, 629);
             EventHelpers.RaiseEvent(this, MainViewLoadEventRaised, e);
-          
+
         }
 
         public void ThisBinding(Dictionary<string, Binding> binding)
@@ -566,6 +565,10 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, factorToolStripMenuItemClickEventRaised, e);
         }
 
+        private void billOfMaterialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, billOfMaterialToolStripMenuItemClickEventRaised, e);
+        }
         private void duplicateItemToolStripButton1_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
