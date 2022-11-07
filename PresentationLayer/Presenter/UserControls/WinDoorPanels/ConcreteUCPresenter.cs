@@ -61,9 +61,11 @@ namespace PresentationLayer.Presenter.UserControls
             _basePlatformUCP.ViewDeleteControl((UserControl)_concreteUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.DeleteConcretePropertiesUC(_concreteModel.Concrete_Id);
             _mainPresenter.DeleteConcrete_OnConcreteList_WindoorModel(_concreteModel);
+            _mainPresenter.DeleteConcrete_OnObjectList_WindoorModel((UserControl)_concreteUC);
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
         }
 
         private void _concreteUC_ConcreteUCPaintEventRaised(object sender, PaintEventArgs e)

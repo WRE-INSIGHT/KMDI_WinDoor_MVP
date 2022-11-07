@@ -57,5 +57,10 @@ namespace ServiceLayer.Services.QuotationServices
         {
             return await _quotationRepo.Insert_Quotation(quotationModel, user_id);
         }
+
+        public async Task<decimal> GetFactorByProvince(string province)
+        {
+            return await _quotationRepo.GetFactorByProvince(province);
+        }
     }
 }

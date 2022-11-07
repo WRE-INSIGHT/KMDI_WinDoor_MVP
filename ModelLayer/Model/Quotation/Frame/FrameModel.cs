@@ -409,6 +409,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     pnl.SetDimensionToBind_using_BaseDimension();
                 }
+               
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
@@ -417,11 +418,12 @@ namespace ModelLayer.Model.Quotation.Frame
         public void Set_DimensionsToBind_using_FrameZoom()
         {
             decimal wd_flt_convert_dec = Convert.ToDecimal(Frame_Width * Frame_Zoom);
-            decimal frame_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal frame_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal frame_wd_dec = decimal.Round(wd_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
             Frame_WidthToBind = Convert.ToInt32(frame_wd_dec);
-
             decimal ht_flt_convert_dec = Convert.ToDecimal(Frame_Height * Frame_Zoom);
-            decimal frame_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal frame_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal frame_ht_dec = decimal.Round(ht_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
             Frame_HeightToBind = Convert.ToInt32(frame_ht_dec);
         }
 
@@ -1338,8 +1340,10 @@ namespace ModelLayer.Model.Quotation.Frame
             return Frame_Width;
         }
 
-        #endregion
 
+        #endregion
+        
+     
         public FrameModel(int frameID,
                           string frameName,
                           int frameWd,

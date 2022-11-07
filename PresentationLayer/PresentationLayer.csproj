@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.8</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.9</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1552,6 +1552,8 @@
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
+    <None Include="Resources\icons8_duplicate_60px.png" />
+    <None Include="Resources\icons8_duplicate_60px_1.png" />
     <Content Include="Resources\K&amp;M_logo_official_2018-1.png" />
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />

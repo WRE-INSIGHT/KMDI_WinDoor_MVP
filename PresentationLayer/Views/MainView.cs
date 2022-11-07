@@ -55,6 +55,10 @@ namespace PresentationLayer.Views
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
                 tsBtnNConcrete.Enabled = value;
+                //duplicateItemToolStripButton1.Enabled = value;
+                refreshToolStripButton.Enabled = value;
+                ViewImagerToolStripButton1.Enabled = value;
+                deleteItemToolStripButton1.Enabled = value;
             }
         }
 
@@ -223,6 +227,7 @@ namespace PresentationLayer.Views
         public event EventHandler screenToolStripMenuItemClickEventRaised;
         public event EventHandler factorToolStripMenuItemClickEventRaised;
         public event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
+        public event EventHandler DuplicateToolStripButtonClickEventRaised;
 
         public MainView()
         {
@@ -563,6 +568,15 @@ namespace PresentationLayer.Views
         private void billOfMaterialToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, billOfMaterialToolStripMenuItemClickEventRaised, e);
+        }
+        private void duplicateItemToolStripButton1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
+        }
+
+        private void mnsMainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

@@ -26,5 +26,7 @@ namespace PresentationLayer.Views.UserControls
         void SetFrameTypeRadioBtnEnabled(bool frameTypeEnabled);
         void AddHT_PanelBody(int addht);
         UserControl GetThis();
+        void BringToFrontFrame();
     }
+
 }

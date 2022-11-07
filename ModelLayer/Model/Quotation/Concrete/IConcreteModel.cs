@@ -1,4 +1,6 @@
-﻿namespace ModelLayer.Model.Quotation.Concrete
+﻿using System.Windows.Forms;
+
+namespace ModelLayer.Model.Quotation.Concrete
 {
     public interface IConcreteModel
     {
@@ -11,8 +13,9 @@
         string Concrete_Name { get; set; }
         int Concrete_Width { get; set; }
         int Concrete_WidthToBind { get; set; }
+        UserControl Concrete_PropertiesUC { get; set; }
         float Concrete_Zoom { get; set; }
-
+        UserControl Concrete_UC { get; set; }
         void Set_DimensionsToBind_using_ConcreteZoom();
         void Set_ImagerDimensions_using_ImagerZoom();
     }

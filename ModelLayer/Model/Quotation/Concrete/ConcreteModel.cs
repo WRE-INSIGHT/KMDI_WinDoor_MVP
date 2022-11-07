@@ -6,15 +6,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ModelLayer.Model.Quotation.Concrete
 {
     public class ConcreteModel : IConcreteModel, INotifyPropertyChanged
     {
-        public int Concrete_Id { get; set; }
-        public string Concrete_Name { get; set; }
-
-
         [Required(ErrorMessage = "Concrete_Width is Required")]
         [Range(400, int.MaxValue, ErrorMessage = "Please enter a value for Concrete Width bigger than or equal {1}")]
         private int _concreteWd;
@@ -47,6 +44,11 @@ namespace ModelLayer.Model.Quotation.Concrete
             }
         }
 
+        public int Concrete_Id { get; set; }
+        public string Concrete_Name { get; set; }
+
+
+       
         private int _concreteWdToBind;
         public int Concrete_WidthToBind
         {
@@ -74,6 +76,33 @@ namespace ModelLayer.Model.Quotation.Concrete
                 NotifyPropertyChanged();
             }
         }
+        private UserControl _concreteUC;
+        public UserControl Concrete_UC
+        {
+            get
+            {
+                return _concreteUC;
+            }
+
+            set
+            {
+                _concreteUC = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private UserControl _concretePropertiesUC;
+        public UserControl Concrete_PropertiesUC
+        {
+            get
+            {
+                return _concretePropertiesUC;
+            }
+            set
+            {
+                _concretePropertiesUC = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int Concrete_ImagerWidthToBind { get; set; }
         public int Concrete_ImagerHeightToBind { get; set; }
@@ -91,12 +120,15 @@ namespace ModelLayer.Model.Quotation.Concrete
         public void Set_DimensionsToBind_using_ConcreteZoom()
         {
             decimal wd_flt_convert_dec = Convert.ToDecimal(Concrete_Width * Concrete_Zoom);
-            decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal concrete_wd_dec = decimal.Round(wd_flt_convert_dec , 0, MidpointRounding.AwayFromZero);
             Concrete_WidthToBind = Convert.ToInt32(concrete_wd_dec);
-
+            //Concrete_WidthToBind = Convert.ToInt32(wd_flt_convert_dec);
             decimal ht_flt_convert_dec = Convert.ToDecimal(Concrete_Height * Concrete_Zoom);
-            decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal concrete_ht_dec = decimal.Round(ht_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
             Concrete_HeightToBind = Convert.ToInt32(concrete_ht_dec);
+            //Concrete_HeightToBind = Convert.ToInt32(ht_flt_convert_dec);
         }
 
         public void Set_ImagerDimensions_using_ImagerZoom()

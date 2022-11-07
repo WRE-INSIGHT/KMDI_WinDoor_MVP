@@ -54,5 +54,7 @@ namespace PresentationLayer.Views.UserControls
             num_cWidth.DataBindings.Add(ModelBinding["Concrete_Width"]);
             num_cHeight.DataBindings.Add(ModelBinding["Concrete_Height"]);
         }
+
+      
     }
 }

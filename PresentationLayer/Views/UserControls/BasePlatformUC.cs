@@ -106,5 +106,7 @@ namespace PresentationLayer.Views.UserControls
         {
             this.DataBindings.Clear();
         }
+
+       
     }
 }

@@ -533,13 +533,14 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 DeleteFrame();
                 _mainPresenter.SetChangesMark();
-                _mainPresenter.Load_Windoor_Item(_frameModel.Frame_WindoorModel);
 
             }
         }
 
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
         {
+            UserControl asdassd = ((UserControl)sender);
+          
             if (e.Button == MouseButtons.Right)
             {
                 color = Color.Blue;

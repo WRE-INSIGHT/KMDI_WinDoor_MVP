@@ -91,11 +91,6 @@
             0,
             0,
             0});
-            this.num_cHeight.Minimum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
             this.num_cHeight.Name = "num_cHeight";
             this.num_cHeight.Size = new System.Drawing.Size(135, 20);
             this.num_cHeight.TabIndex = 7;
@@ -110,11 +105,6 @@
             // 
             this.num_cWidth.Location = new System.Drawing.Point(7, 18);
             this.num_cWidth.Maximum = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.num_cWidth.Minimum = new decimal(new int[] {
             400,
             0,
             0,

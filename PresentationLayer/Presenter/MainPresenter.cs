@@ -60,6 +60,7 @@ namespace PresentationLayer.Presenter
         private IFrameModel _frameModel;
         private IScreenModel _screenModel;
         private IConcreteModel _concreteModel;
+        private IConcreteUC _concreteUC;
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -123,11 +124,12 @@ namespace PresentationLayer.Presenter
         private IMultiPanelMullionUCPresenter _multiMullionUCP;
         private IMultiPanelTransomUCPresenter _multiTransomUCP;
         private IFrameImagerUCPresenter _frameImagerUCP;
-        private IMultiPanelMullionUC _multiMullionUC;
-        private IMultiPanelTransomUC _multiTransomUC;
+        private IMultiPanelMullionUC _multiMullionUC2nd;
+        private IMultiPanelTransomUC _multiTransomUC2nd;
         private IMultiPanelMullionUC _multiMullionUC3rd;
         private IMultiPanelTransomUC _multiTransomUC3rd;
-
+        private IMultiPanelMullionUC _multiMullionUC4th;
+        private IMultiPanelTransomUC _multiTransomUC4th;
 
 
         private IMullionUCPresenter _mullionUCP;
@@ -587,6 +589,19 @@ namespace PresentationLayer.Presenter
                 _aeic = value;
             }
         }
+        private string _projectAddress;
+        public string projectAddress
+        {
+            get
+            {
+                return _projectAddress;
+            }
+
+            set
+            {
+                _projectAddress = value;
+            }
+        }
 
 
         public IScreenModel screenModel_MainPresenter
@@ -827,6 +842,8 @@ namespace PresentationLayer.Presenter
             _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
             _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
             _mainView.billOfMaterialToolStripMenuItemClickEventRaised += _mainView_billOfMaterialToolStripMenuItemClickEventRaised;
+            _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
+
         }
 
         #region Events  
@@ -834,8 +851,38 @@ namespace PresentationLayer.Presenter
         {
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
             PricingPresenter.GetPricingView().ShowPricingList();
-        }
+        } 
 
+        private void _mainView_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                Scenario_Quotation(false,
+                                   false,
+                                   false,
+                                   false,
+                                   false,
+                                   true,
+                                   frmDimensionPresenter.Show_Purpose.Duplicate,
+                                   _windoorModel.WD_width,
+                                   _windoorModel.WD_height,
+                                   _windoorModel.WD_profile,
+                                   _windoorModel.WD_BaseColor.Value.ToString());
+                int count = 1;
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    wdm.WD_name = "Item " + count;
+                    count++;
+                }
+                Load_Windoor_Item(_windoorModel);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+
+        }
         private void _mainView_factorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IFactorPresenter factor = _factorPresenter.GetNewInstance(_unityC, this);
@@ -925,9 +972,12 @@ namespace PresentationLayer.Presenter
                 {
                     string txtfile = wndrfile.Replace(".wndr", ".txt");
                     File.WriteAllLines(txtfile, Saving_dotwndr());
-                    File.SetAttributes(txtfile, FileAttributes.Hidden);
-                    csfunc.EncryptFile(txtfile);
-                    File.Delete(txtfile);
+                    File.Delete(wndrfile);
+                    FileInfo f = new FileInfo(txtfile);
+                    f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
+                    //File.SetAttributes(txtfile, FileAttributes.Hidden);
+                    //csfunc.EncryptFile(txtfile);
+                    //File.Delete(txtfile);
 
                     //if (online_login && updatefile_bgw.IsBusy != true)
                     //{
@@ -964,7 +1014,7 @@ namespace PresentationLayer.Presenter
 
         private List<string> Saving_dotwndr()
         {
-            #region Save
+             #region Save
 
             List<string> wndr_content = new List<string>();
 
@@ -981,288 +1031,348 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add("(");
                 foreach (var prop in wdm.GetType().GetProperties())
                 {
+                    if (prop.Name == "Dictionary_ht_redArrowLines" && wdm.Dictionary_ht_redArrowLines != null)
+                    {
 
+                        string Dictionary_ht_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> ht_redArrowLines in wdm.Dictionary_ht_redArrowLines)
+                        {
+                            Dictionary_ht_redArrowLinesArray += "<" + ht_redArrowLines.Key + "," + ht_redArrowLines.Value + ">; ";
+                        }
 
-                    wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
+                        wndr_content.Add(prop.Name + ": " + Dictionary_ht_redArrowLinesArray);
+                    }
+                    else if (prop.Name == "Dictionary_wd_redArrowLines" && wdm.Dictionary_wd_redArrowLines != null)
+                    {
+
+                        string Dictionary_wd_redArrowLinesArray = "";
+                        foreach (KeyValuePair<int, Decimal> wd_redArrowLines in wdm.Dictionary_wd_redArrowLines)
+                        {
+                            Dictionary_wd_redArrowLinesArray += "<" + wd_redArrowLines.Key + "," + wd_redArrowLines.Value + ">; ";
+                        }
+
+                        wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
+                    }
+                    else
+                    {
+                        wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
+
+                    }
                 }
-                foreach (FrameModel frm in wdm.lst_frame)
+                foreach (Control wndrObject in wdm.lst_objects)
                 {
-                    wndr_content.Add("{");
-                    foreach (var prop in frm.GetType().GetProperties())
+                    if (wndrObject.Name.Contains("Frame"))
                     {
-                        wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(frm, null));
-                    }
-                    foreach (PanelModel pnl in frm.Lst_Panel)
-                    {
-                        wndr_content.Add("\t#");
-                        foreach (var prop in pnl.GetType().GetProperties())
+                        #region FrameModel
+                        foreach (FrameModel frm in wdm.lst_frame)
                         {
-                            wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                        }
-                    }
-                    foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
-                    {
-                        wndr_content.Add("\t[");
-                        foreach (var prop in mpnl.GetType().GetProperties())
-                        {
-
-                            if (prop.Name == "MPanel_Parent")
+                            if (frm.Frame_Name == wndrObject.Name)
                             {
-                                wndr_content.Add("\t\t" + prop.Name + ": " + mpnl.MPanel_Parent.Name);
-                            }
-
-                            else
-                            {
-                                wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(mpnl, null));
-                            }
-                        }
-                        foreach (Control ctrl in mpnl.MPanelLst_Objects)
-                        {
-                            //else if (row_str.Contains("ProjectName"))
-                            //{
-                            //    _projectName = extractedValue_str;
-                            //}
-
-                            if (ctrl.Name.Contains("PanelUC"))
-                            {
-                                wndr_content.Add("\t\t#");
-                                foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
+                                wndr_content.Add("{");
+                                foreach (var prop in frm.GetType().GetProperties())
                                 {
-                                    if (ctrl.Name == pnl.Panel_Name)
+                                    wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(frm, null));
+                                }
+                                #region  Frame Panel
+                                foreach (PanelModel pnl in frm.Lst_Panel)
+                                {
+                                    wndr_content.Add("\t#");
+                                    foreach (var prop in pnl.GetType().GetProperties())
                                     {
-
-                                        foreach (var prop in pnl.GetType().GetProperties())
-                                        {
-
-                                            if (prop.Name == "Panel_Parent")
-                                            {
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
-                                            }
-                                            else
-                                            {
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                            }
-                                        }
-                                        break;
+                                        wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
                                     }
                                 }
-                            }
-                            else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
-                            {
-                                wndr_content.Add("\t\t|");
-                                foreach (DividerModel div in mpnl.MPanelLst_Divider)
+                                #endregion
+                                #region 2nd Level MultiPanel
+                                foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
                                 {
-                                    if (ctrl.Name == div.Div_Name)
+                                    wndr_content.Add("\t[");
+                                    foreach (var prop in mpnl.GetType().GetProperties())
                                     {
-                                        foreach (var prop in div.GetType().GetProperties())
+
+                                        if (prop.Name == "MPanel_Parent")
                                         {
-                                            if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
-                                            {
-
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
-                                            }
-                                            else if (prop.Name == "Div_Parent")
-                                            {
-
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
-                                            }
-                                            else if (prop.Name == "Div_CladdingSizeList" && div.Div_CladdingSizeList != null)
-                                            {
-
-                                                string claddingArray = "";
-                                                foreach (KeyValuePair<int, int> cladList in div.Div_CladdingSizeList)
-                                                {
-                                                    claddingArray += "<" + cladList.Key + "," + cladList.Value + ">; ";
-                                                }
-
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + claddingArray);
-                                            }
-                                            else
-                                            {
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
-                                            }
+                                            wndr_content.Add("\t\t" + prop.Name + ": " + mpnl.MPanel_Parent.Name);
                                         }
-                                        break;
+
+                                        else
+                                        {
+                                            wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(mpnl, null));
+                                        }
                                     }
-                                }
-                            }
-                            else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
-                            {
-
-                                foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
-                                {
-                                    if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
+                                    foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
-                                        wndr_content.Add("\t\t[");
-                                        foreach (var prop in thirdlvlmpnl.GetType().GetProperties())
+                                        //else if (row_str.Contains("ProjectName"))
+                                        //{
+                                        //    _projectName = extractedValue_str;
+                                        //}
+
+                                        if (ctrl.Name.Contains("PanelUC"))
                                         {
-                                            if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
-                                            {
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + thirdlvlmpnl.MPanel_Parent.Name);
-                                            }
-                                            else
-                                            {
-                                                wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(thirdlvlmpnl, null));
-                                            }
+                                            #region 2nd Level MultiPanel Panel
 
-                                        }
-                                        foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
-                                        {
-                                            if (thirdlvlctrl.Name.Contains("PanelUC"))
+                                            wndr_content.Add("\t\t#");
+                                            foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
                                             {
-                                                wndr_content.Add("\t\t\t#");
-                                                foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                                                if (ctrl.Name == pnl.Panel_Name)
                                                 {
-                                                    if (thirdlvlctrl.Name == pnl.Panel_Name)
+
+                                                    foreach (var prop in pnl.GetType().GetProperties())
                                                     {
 
-                                                        foreach (var prop in pnl.GetType().GetProperties())
+                                                        if (prop.Name == "Panel_Parent")
                                                         {
-                                                            if (prop.Name == "Panel_Parent")
-                                                            {
-                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
-                                                            }
-                                                            else
-                                                            {
-                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
-                                                            }
-
-                                                        }
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
-                                            {
-
-                                                wndr_content.Add("\t\t\t|");
-                                                foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
-                                                {
-                                                    if (thirdlvlctrl.Name == div.Div_Name)
-                                                    {
-                                                        foreach (var prop in div.GetType().GetProperties())
-                                                        {
-                                                            if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
-                                                            {
-
-                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
-
-                                                            }
-                                                            else if (prop.Name == "Div_Parent")
-                                                            {
-
-                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
-                                                            }
-                                                            else
-                                                            {
-                                                                wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
-                                                            }
-                                                        }
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
-                                            {
-
-                                                if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
-                                                {
-                                                    wndr_content.Add("\t\t\t[");
-                                                    foreach (var prop in fourthlvlmpnl.GetType().GetProperties())
-                                                    {
-                                                        if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
-                                                        {
-                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + fourthlvlmpnl.MPanel_Parent.Name);
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
                                                         }
                                                         else
                                                         {
-                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(fourthlvlmpnl, null));
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
                                                         }
                                                     }
+                                                    break;
+                                                }
+                                            }
+                                            #endregion
 
-                                                    foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
+                                        }
+                                        else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
+                                        {
+                                            #region 2nd Level MultiPanel Divider
+
+                                            wndr_content.Add("\t\t|");
+                                            foreach (DividerModel div in mpnl.MPanelLst_Divider)
+                                            {
+                                                if (ctrl.Name == div.Div_Name)
+                                                {
+                                                    foreach (var prop in div.GetType().GetProperties())
                                                     {
-
-                                                        if (fourthlvlctrl.Name.Contains("PanelUC"))
+                                                        if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
                                                         {
-                                                            wndr_content.Add("\t\t\t\t#");
-                                                            foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+                                                        }
+                                                        else if (prop.Name == "Div_Parent")
+                                                        {
+
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
+                                                        }
+                                                        else if (prop.Name == "Div_CladdingSizeList" && div.Div_CladdingSizeList != null)
+                                                        {
+
+                                                            string claddingArray = "";
+                                                            foreach (KeyValuePair<int, int> cladList in div.Div_CladdingSizeList)
                                                             {
-                                                                if (fourthlvlctrl.Name == pnl.Panel_Name)
+                                                                claddingArray += "<" + cladList.Key + "," + cladList.Value + ">; ";
+                                                            }
+
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + claddingArray);
+                                                        }
+                                                        else
+                                                        {
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                            #endregion
+
+                                        }
+                                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
+                                        {
+
+                                            #region 2nd Level MultiPanel MultiPanel
+
+                                            foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
+                                            {
+                                                if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
+                                                {
+                                                    wndr_content.Add("\t\t[");
+                                                    foreach (var prop in thirdlvlmpnl.GetType().GetProperties())
+                                                    {
+                                                        if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
+                                                        {
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + thirdlvlmpnl.MPanel_Parent.Name);
+                                                        }
+                                                        else
+                                                        {
+                                                            wndr_content.Add("\t\t\t" + prop.Name + ": " + prop.GetValue(thirdlvlmpnl, null));
+                                                        }
+
+                                                    }
+                                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
+                                                    {
+                                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
+                                                        {
+                                                            wndr_content.Add("\t\t\t#");
+                                                            foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                                                            {
+                                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
                                                                 {
 
                                                                     foreach (var prop in pnl.GetType().GetProperties())
                                                                     {
                                                                         if (prop.Name == "Panel_Parent")
                                                                         {
-                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
+                                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
                                                                         }
                                                                         else
                                                                         {
-                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
+                                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
                                                                         }
+
                                                                     }
                                                                     break;
                                                                 }
                                                             }
                                                         }
-                                                        else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
+                                                        else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
                                                         {
-                                                            foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
+
+                                                            wndr_content.Add("\t\t\t|");
+                                                            foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
                                                             {
-                                                                if (fourthlvlctrl.Name == div.Div_Name)
+                                                                if (thirdlvlctrl.Name == div.Div_Name)
                                                                 {
-                                                                    wndr_content.Add("\t\t\t\t|");
                                                                     foreach (var prop in div.GetType().GetProperties())
                                                                     {
-
-
                                                                         if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
                                                                         {
 
-                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+                                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
 
                                                                         }
                                                                         else if (prop.Name == "Div_Parent")
                                                                         {
 
-                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
+                                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
                                                                         }
                                                                         else
                                                                         {
-                                                                            wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                                            wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
                                                                         }
-
-
-
                                                                     }
                                                                     break;
                                                                 }
                                                             }
                                                         }
-                                                    }
-                                                    wndr_content.Add("\t\t\t]");
+                                                        foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
+                                                        {
 
+                                                            if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
+                                                            {
+                                                                wndr_content.Add("\t\t\t[");
+                                                                foreach (var prop in fourthlvlmpnl.GetType().GetProperties())
+                                                                {
+                                                                    if (prop.Name == "MPanel_Parent" || prop.Name == "MPanel_ParentModel")
+                                                                    {
+                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + fourthlvlmpnl.MPanel_Parent.Name);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(fourthlvlmpnl, null));
+                                                                    }
+                                                                }
+
+                                                                foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
+                                                                {
+
+                                                                    if (fourthlvlctrl.Name.Contains("PanelUC"))
+                                                                    {
+                                                                        wndr_content.Add("\t\t\t\t#");
+                                                                        foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+                                                                        {
+                                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
+                                                                            {
+
+                                                                                foreach (var prop in pnl.GetType().GetProperties())
+                                                                                {
+                                                                                    if (prop.Name == "Panel_Parent")
+                                                                                    {
+                                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
+                                                                                    }
+                                                                                }
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
+                                                                    {
+                                                                        foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
+                                                                        {
+                                                                            if (fourthlvlctrl.Name == div.Div_Name)
+                                                                            {
+                                                                                wndr_content.Add("\t\t\t\t|");
+                                                                                foreach (var prop in div.GetType().GetProperties())
+                                                                                {
+
+
+                                                                                    if (prop.Name == "Div_DMPanel" && div.Div_DMPanel != null)
+                                                                                    {
+
+                                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_DMPanel.Panel_Name);
+
+                                                                                    }
+                                                                                    else if (prop.Name == "Div_Parent")
+                                                                                    {
+
+                                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + div.Div_Parent.Name);
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + prop.GetValue(div, null));
+                                                                                    }
+
+
+
+                                                                                }
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                wndr_content.Add("\t\t\t]");
+
+                                                            }
+                                                        }
+                                                    }
+                                                    wndr_content.Add("\t\t]");
                                                 }
                                             }
+                                            #endregion
                                         }
-                                        wndr_content.Add("\t\t]");
                                     }
+
+                                    wndr_content.Add("\t]");
+                                    break;
                                 }
+                                #endregion
 
                             }
+                            wndr_content.Add("}");
                         }
-
-                        wndr_content.Add("\t]");
-                        break;
+                        #endregion
                     }
-                    wndr_content.Add("}");
-                }
-                foreach (IConcreteModel crm in wdm.lst_concrete)
-                {
-                    foreach (var prop in crm.GetType().GetProperties())
+                    else if (wndrObject.Name.Contains("Concrete"))
                     {
-                        wndr_content.Add(prop.Name + ": " + prop.GetValue(crm, null));
+                        #region Concrete
+
+                        foreach (IConcreteModel crm in wdm.lst_concrete)
+                        {
+                            if (wndrObject.Name == crm.Concrete_Name)
+                            {
+                                wndr_content.Add("/");
+                                foreach (var prop in crm.GetType().GetProperties())
+                                {
+                                    wndr_content.Add("\t" + prop.Name + ": " + prop.GetValue(crm, null));
+                                }
+                            }
+                        }
+                        #endregion
                     }
                 }
                 wndr_content.Add(")");
@@ -1302,8 +1412,8 @@ namespace PresentationLayer.Presenter
 
 
                 //save frame
-                Frame_Save_UserControl();
-                Frame_Save_PropertiesUC();
+                Windoor_Save_UserControl();
+                Windoor_Save_PropertiesUC();
 
                 //set mainview
                 SetMainViewTitle(input_qrefno,
@@ -1343,7 +1453,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                Scenario_Quotation(false, false, false, true, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
+                Scenario_Quotation(false, false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Concrete, 0, 0, "", "");
             }
             catch (Exception ex)
             {
@@ -1629,7 +1739,6 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
-
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -1671,15 +1780,15 @@ namespace PresentationLayer.Presenter
             ToolStripMenuItem tsmItem = (ToolStripMenuItem)sender;
             if (tsmItem.Name == "C70ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "C70 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "PremiLineToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "PremiLine Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
             else if (tsmItem.Name == "G58ToolStripMenuItem")
             {
-                Scenario_Quotation(false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
         }
 
@@ -1699,7 +1808,7 @@ namespace PresentationLayer.Presenter
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     create_new = true;
-                    Scenario_Quotation(false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                    Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                 }
             }
             else
@@ -1712,7 +1821,7 @@ namespace PresentationLayer.Presenter
                 input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
                 if (input_qrefno != "" && input_qrefno != "0")
                 {
-                    Scenario_Quotation(true, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+                    Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
                 }
             }
         }
@@ -1728,7 +1837,7 @@ namespace PresentationLayer.Presenter
             {
                 frameType = FrameModel.Frame_Padding.Door;
             }
-            Scenario_Quotation(false, false, true, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
+            Scenario_Quotation(false, false, true, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Frame, 0, 0, "", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
         }
         string[] file_lines;
         bool onload = false;
@@ -1759,14 +1868,16 @@ namespace PresentationLayer.Presenter
                         isNewProject = false;
                         isOpenProject = true;
                         wndrfile = _mainView.GetOpenFileDialog().FileName;
-                        csfunc.DecryptFile(wndrfile);
+                        //csfunc.DecryptFile(wndrfile);
                         int startFileName = wndrfile.LastIndexOf("\\") + 1;
                         wndrFileName = wndrfile.Substring(startFileName);
+                        FileInfo f = new FileInfo(wndrfile);
+                        f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
                         string outFile = wndrfile.Substring(0, startFileName) +
                                          wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
 
                         file_lines = File.ReadAllLines(outFile);
-                        File.SetAttributes(outFile, FileAttributes.Hidden);
+                        f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                         onload = true;
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -1947,17 +2058,21 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
+
+
                     SetChangesMark();
                     _isOpenProject = false;
                     wndrfile = _mainView.GetOpenFileDialog().FileName;
-                    csfunc.DecryptFile(wndrfile);
+                   
                     int startFileName = wndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(wndrfile);
+                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
                     string outFile = wndrfile.Substring(0, startFileName) +
                                      wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-                    Frame_Save_UserControl();
-                    Frame_Save_PropertiesUC();
+                    Windoor_Save_UserControl();
+                    Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    File.SetAttributes(outFile, FileAttributes.Hidden);
+                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                     onload = true;
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -2227,6 +2342,11 @@ namespace PresentationLayer.Presenter
                 inside_frame = true;
 
             }
+            else if (row_str == "/")
+            {
+                inside_concrete = true;
+            }
+            
             else if (row_str.Contains("#"))
             {
                 inside_panel = true;
@@ -2300,7 +2420,8 @@ namespace PresentationLayer.Presenter
                 //_mainView.RemoveBinding(_mainView.GetLblSize());
                 //_mainView.RemoveBinding();
                 //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-
+                _basePlatformPresenter.InvalidateBasePlatform();
+                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
             }
             if (row_str == "EndofFile")
             {
@@ -2336,7 +2457,7 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("Quotation_Date"))
                     {
                         inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
-                        Scenario_Quotation(false, false, false, false, true, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                        Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
@@ -2408,10 +2529,11 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
-                                     true,
                                      false,
                                      false,
+                                     false,
                                      true,
+                                     false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Item,
                                      frmDimension_numWd,
                                      frmDimension_numHt,
@@ -2570,6 +2692,45 @@ namespace PresentationLayer.Presenter
                         {
                             _windoorModel.WD_CostingPoints = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+
+                        if (row_str.Contains("Dictionary_wd_redArrowLines:"))
+                        {
+                            string[] words = extractedValue_str.Split(';');
+                            if (extractedValue_str.Contains("<"))
+                            {
+                                Dictionary<int, Decimal>  dictionary_wd_redArrowLinesList = new Dictionary<int, Decimal>();
+                                foreach (string str in words)
+                                {
+                                    if (str.Trim() != string.Empty)
+                                    {
+                                        int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                        decimal value = Convert.ToDecimal(str.Split(',', '>')[1]);
+                                        dictionary_wd_redArrowLinesList.Add(key, value);
+                                    }
+
+                                }
+                                _windoorModel.Dictionary_wd_redArrowLines = dictionary_wd_redArrowLinesList;
+                            }
+                        }
+                        if (row_str.Contains("Dictionary_ht_redArrowLines:"))
+                        {
+                            string[] words = extractedValue_str.Split(';');
+                            if (extractedValue_str.Contains("<"))
+                            {
+                                Dictionary<int, Decimal>  dictionary_ht_redArrowLinesList = new Dictionary<int, Decimal>();
+                                foreach (string str in words)
+                                {
+                                    if (str.Trim() != string.Empty)
+                                    {
+                                        int key = Convert.ToInt32(str.Split('<', ',')[1]);
+                                        decimal value = Convert.ToDecimal(str.Split(',', '>')[1]);
+                                        dictionary_ht_redArrowLinesList.Add(key, value);
+                                    }
+
+                                }
+                                _windoorModel.Dictionary_ht_redArrowLines = dictionary_ht_redArrowLinesList;
+                            }
+                        }
                         if (row_str.Contains("WD_pboxImagerHeight:"))
                         {
                             _windoorModel.WD_pboxImagerHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -2590,10 +2751,11 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
-                                     true,
                                      false,
                                      false,
+                                     false,
                                      true,
+                                     false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
                                      frmDimension_numWd,
                                      frmDimension_numHt,
@@ -2802,6 +2964,62 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    if (inside_concrete)
+                    {
+                        #region Load for Concrete Model
+                       
+                        if (row_str.Contains("Concrete_Width:"))
+                        {
+                            frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                           
+                        }
+                        if (row_str.Contains("Concrete_Height:"))
+                        {
+                            frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            Scenario_Quotation(false,
+                                               false,
+                                               false,
+                                               false,
+                                               true,
+                                               false,
+                                               frmDimensionPresenter.Show_Purpose.CreateNew_Concrete,
+                                               frmDimension_numWd,
+                                               frmDimension_numHt,
+                                               frmDimension_profileType,
+                                               frmDimension_baseColor);
+
+                        }
+                        if (row_str.Contains("Concrete_Id:"))
+                        {
+                            _concreteModel.Concrete_Id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_WidthToBind:"))
+                        {
+                            _concreteModel.Concrete_WidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_HeightToBind:"))
+                        {
+                            _concreteModel.Concrete_HeightToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_ImagerWidthToBind:"))
+                        {
+                            _concreteModel.Concrete_ImagerWidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_ImagerHeightToBind:"))
+                        {
+                            _concreteModel.Concrete_ImagerHeightToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_ImagerZoom:"))
+                        {
+                            _concreteModel.Concrete_ImagerZoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Concrete_Zoom:"))
+                        {
+                            _concreteModel.Concrete_Zoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            inside_concrete = false;
+                        }
+                        #endregion
+                    }
                     else if (inside_panel)
                     {
                         #region Load for Panel
@@ -2833,7 +3051,18 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    if (mpnllvl == "third level" || mpnllvl == "fourth level")
+                                    if(mpnllvl == "fourth level")
+                                    {
+                                        if (extractedValue_str.Contains("MultiMullion"))
+                                        {
+                                            panel_Parent = _multiMullionUC4th.Getflp();
+                                        }
+                                        else
+                                        {
+                                            panel_Parent = _multiTransomUC4th.Getflp();
+                                        }
+                                    }
+                                    else if (mpnllvl == "third level")
                                     {
                                         if (extractedValue_str.Contains("MultiMullion"))
                                         {
@@ -2848,14 +3077,14 @@ namespace PresentationLayer.Presenter
                                     {
                                         if (extractedValue_str.Contains("MultiMullion"))
                                         {
-                                            panel_Parent = _multiMullionUC.Getflp();
+                                            panel_Parent = _multiMullionUC2nd.Getflp();
                                         }
                                         else
                                         {
-                                            panel_Parent = _multiTransomUC.Getflp();
+                                            panel_Parent = _multiTransomUC2nd.Getflp();
                                         }
                                     }
-
+                                   
 
                                 }
                             }
@@ -2873,11 +3102,11 @@ namespace PresentationLayer.Presenter
 
                                     if (panel_Parent.Name.Contains("MultiMullion"))
                                     {
-                                        panel_MultiPanelGroup = (UserControl)_multiMullionUC;
+                                        panel_MultiPanelGroup = (UserControl)_multiMullionUC2nd;
                                     }
                                     else
                                     {
-                                        panel_MultiPanelGroup = (UserControl)_multiTransomUC;
+                                        panel_MultiPanelGroup = (UserControl)_multiTransomUC2nd;
                                     }
 
                                 }
@@ -4843,16 +5072,21 @@ namespace PresentationLayer.Presenter
 
                             if (mpnllvl == "second level")
                             {
-                                multiMullionUC = _multiMullionUC;
-                                multiTransomUC = _multiTransomUC;
+                                multiMullionUC = _multiMullionUC2nd;
+                                multiTransomUC = _multiTransomUC2nd;
                             }
-                            else
+                            else if (mpnllvl == "third level")
                             {
                                 multiMullionUC = _multiMullionUC3rd;
                                 multiTransomUC = _multiTransomUC3rd;
 
                             }
+                            else
+                            {
+                                multiMullionUC = _multiMullionUC4th;
+                                multiTransomUC = _multiTransomUC4th;
 
+                            }
                             if (panel_Type.Contains("Fixed Panel"))
                             {
 
@@ -5296,16 +5530,16 @@ namespace PresentationLayer.Presenter
                                         mPanel_Parent = _multiTransomUC3rd.Getflp();
                                     }
                                 }
-                                else
+                                else if (mpnllvl == "third level")
                                 {
                                     if (extractedValue_str.Contains("Mullion"))
                                     {
-                                        mPanel_Parent = _multiMullionUC.Getflp();
+                                        mPanel_Parent = _multiMullionUC2nd.Getflp();
 
                                     }
                                     else
                                     {
-                                        mPanel_Parent = _multiTransomUC.Getflp();
+                                        mPanel_Parent = _multiTransomUC2nd.Getflp();
                                     }
                                 }
 
@@ -5548,8 +5782,8 @@ namespace PresentationLayer.Presenter
                                                                                                       multiMullionImagerUCP);
 
                                     _multiMullionUCP = multiUCP;
-                                    _multiMullionUC = _multiMullionUCP.GetMultiPanel();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiMullionUC);
+                                    _multiMullionUC2nd = _multiMullionUCP.GetMultiPanel();
+                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiMullionUC2nd);
                                     _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _basePlatformImagerUCPresenter.Invalidate_flpMain();
                                 }
@@ -5570,8 +5804,8 @@ namespace PresentationLayer.Presenter
                                                                                                                     _basePlatformImagerUCPresenter,
                                                                                                                     multiTransomImagerUCP);
                                     _multiTransomUCP = multiUCP;
-                                    _multiTransomUC = _multiTransomUCP.GetMultiPanel();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC);
+                                    _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
+                                    _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
                                     _basePlatformPresenter.InvalidateBasePlatform();
                                 }
                             }
@@ -5636,9 +5870,9 @@ namespace PresentationLayer.Presenter
                                                                                                       _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC3rd = _multiMullionUCP.GetMultiPanel();
-                                    _multiTransomUC.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
+                                    _multiTransomUC2nd.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
                                     _multiMullionUCP.SetInitialLoadFalse();
-                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiTransomUC.Getflp();
+                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiTransomUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC3rd, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiMullionUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
@@ -5667,9 +5901,9 @@ namespace PresentationLayer.Presenter
                                                                                                                     _multiMullionImagerUCP);
                                     _multiTransomUCP = multiTransomUCP;
                                     _multiTransomUC3rd = _multiTransomUCP.GetMultiPanel();
-                                    _multiMullionUC.Getflp().Controls.Add((UserControl)_multiTransomUC3rd);
+                                    _multiMullionUC2nd.Getflp().Controls.Add((UserControl)_multiTransomUC3rd);
                                     _multiTransomUCP.SetInitialLoadFalse();
-                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiMullionUC.Getflp();
+                                    _multiPanelModel3rdLvl.MPanel_Parent = _multiMullionUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC3rd, _frameModel.Frame_Type.ToString());
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
@@ -5748,11 +5982,11 @@ namespace PresentationLayer.Presenter
                                                                                                       multiMullionImagerUCP,
                                                                                                       _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
-                                    _multiMullionUC3rd = _multiMullionUCP.GetMultiPanel();
-                                    _multiTransomUC3rd.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
+                                    _multiMullionUC4th = _multiMullionUCP.GetMultiPanel();
+                                    _multiTransomUC3rd.Getflp().Controls.Add((UserControl)_multiMullionUC4th);
                                     _multiMullionUCP.SetInitialLoadFalse();
                                     _multiPanelModel4thLvl.MPanel_Parent = _multiTransomUC3rd.Getflp();
-                                    _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC3rd, _frameModel.Frame_Type.ToString());
+                                    _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC4th, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiMullionUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
                                     _basePlatformImagerUCPresenter.InvalidateBasePlatform();
@@ -5779,11 +6013,11 @@ namespace PresentationLayer.Presenter
                                                                                                                     multiTransomImagerUCP,
                                                                                                                     _multiMullionImagerUCP);
                                     _multiTransomUCP = multiTransomUCP;
-                                    _multiTransomUC3rd = _multiTransomUCP.GetMultiPanel();
-                                    _multiMullionUC3rd.Getflp().Controls.Add((UserControl)_multiTransomUC3rd);
+                                    _multiTransomUC4th = _multiTransomUCP.GetMultiPanel();
+                                    _multiMullionUC3rd.Getflp().Controls.Add((UserControl)_multiTransomUC4th);
                                     _multiTransomUCP.SetInitialLoadFalse();
                                     _multiPanelModel4thLvl.MPanel_Parent = _multiMullionUC3rd.Getflp();
-                                    _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC3rd, _frameModel.Frame_Type.ToString());
+                                    _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC4th, _frameModel.Frame_Type.ToString());
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
                                     _basePlatformPresenter.InvalidateBasePlatform();
                                     _basePlatformImagerUCPresenter.InvalidateBasePlatform();
@@ -5847,7 +6081,19 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_Parent:"))
                         {
-                            if (mpnllvl == "fourth level" || mpnllvl == "third level")
+                           if (mpnllvl == "fourth level")
+                            {
+                                if (extractedValue_str.Contains("Mullion"))
+                                {
+                                    div_Parent = _multiMullionUC4th.Getflp();
+
+                                }
+                                else
+                                {
+                                    div_Parent = _multiTransomUC4th.Getflp();
+                                }
+                            }
+                            else if ( mpnllvl == "third level")
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -5858,8 +6104,10 @@ namespace PresentationLayer.Presenter
                                 {
                                     div_Parent = _multiTransomUC3rd.Getflp();
                                 }
-                                mpnllvl = "third level";
                             }
+
+
+                           
                             //else if (mpnllvl == "third level")
                             //{
                             //    if (extractedValue_str.Contains("Mullion"))
@@ -5874,19 +6122,18 @@ namespace PresentationLayer.Presenter
                             //    mpnllvl = "third level";
                             //}
 
-                            else
+                            else 
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
-                                    div_Parent = _multiMullionUC.Getflp();
+                                    div_Parent = _multiMullionUC2nd.Getflp();
 
                                 }
                                 else
                                 {
-                                    div_Parent = _multiTransomUC.Getflp();
+                                    div_Parent = _multiTransomUC2nd.Getflp();
                                 }
                             }
-
 
                         }
                         else if (row_str.Contains("Div_FrameType:"))
@@ -6210,13 +6457,13 @@ namespace PresentationLayer.Presenter
                                 divWidth = 0;
                             if (_multiPanelModel2ndLvl.MPanel_Type == "Mullion")
                             {
-                                //fpnl = _multiMullionUC.Getflp();
+                                //fpnl = _multiMullionUC2nd.Getflp();
                                 divWidth = divSize;
                                 divHeigth = _multiPanelModel2ndLvl.MPanel_Height;
                             }
                             else
                             {
-                                //fpnl = _multiTransomUC.Getflp();
+                                //fpnl = _multiTransomUC2nd.Getflp();
                                 divWidth = _multiPanelModel2ndLvl.MPanel_Width;
                                 divHeigth = divSize;
                             }
@@ -6294,7 +6541,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     IMullionUC mullionUC = mullionUCP.GetMullion();
-                                    _multiMullionUC.Getflp().Controls.Add((UserControl)mullionUC);
+                                    _multiMullionUC2nd.Getflp().Controls.Add((UserControl)mullionUC);
                                     mullionUCP.SetInitialLoadFalse();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
@@ -6323,7 +6570,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     ITransomUC transomUC = transomUCP.GetTransom();
-                                    _multiTransomUC.Getflp().Controls.Add((UserControl)transomUC);
+                                    _multiTransomUC2nd.Getflp().Controls.Add((UserControl)transomUC);
                                     transomUCP.SetInitialLoadFalse();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
@@ -6389,7 +6636,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     IMullionUC mullionUC = mullionUCP.GetMullion();
-                                    _multiMullionUC3rd.Getflp().Controls.Add((UserControl)mullionUC);
+                                    _multiMullionUC4th.Getflp().Controls.Add((UserControl)mullionUC);
                                     mullionUCP.SetInitialLoadFalse();
                                     _multiPanelModel4thLvl.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
@@ -6415,7 +6662,7 @@ namespace PresentationLayer.Presenter
                                                                                                 _frameModel,
                                                                                                 this);
                                     ITransomUC transomUC = transomUCP.GetTransom();
-                                    _multiTransomUC3rd.Getflp().Controls.Add((UserControl)transomUC);
+                                    _multiTransomUC4th.Getflp().Controls.Add((UserControl)transomUC);
                                     transomUCP.SetInitialLoadFalse();
                                     _multiPanelModel4thLvl.AddControl_MPanelLstObjects((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
@@ -6434,7 +6681,7 @@ namespace PresentationLayer.Presenter
 
         #endregion
 
-        bool inside_quotation, inside_item, inside_frame, inside_panel, inside_multi, inside_divider;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
         int frmDimension_numWd = 0,
             frmDimension_numHt = 0;
         string frmDimension_profileType = "",
@@ -6855,10 +7102,12 @@ namespace PresentationLayer.Presenter
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
             _multiPanelModel4thLvl = null;
-            _multiMullionUC = null;
-            _multiTransomUC = null;
+            _multiMullionUC2nd = null;
+            _multiTransomUC2nd = null;
             _multiMullionUC3rd = null;
             _multiTransomUC3rd = null;
+            _multiMullionUC4th = null;
+            _multiTransomUC4th = null;
             mpnllvl = string.Empty;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
@@ -6943,6 +7192,7 @@ namespace PresentationLayer.Presenter
                                        bool AddedFrame,
                                        bool AddedConcrete,
                                        bool OpenWindoorFile,
+                                       bool Duplicate,
                                        frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
                                        int frmDimension_numHt,
@@ -6951,7 +7201,7 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
-                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     Clearing_Operation();
                 }
@@ -6960,7 +7210,6 @@ namespace PresentationLayer.Presenter
                     SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
                     ItemToolStrip_Enable();
                     _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
-
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
@@ -6972,7 +7221,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
@@ -6985,7 +7234,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -6999,7 +7248,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -7011,7 +7260,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) //from Open Windoor File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) //from Open Windoor File
                 {
                     ItemToolStrip_Enable();
                     _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
@@ -7030,7 +7279,7 @@ namespace PresentationLayer.Presenter
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
-                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -7080,7 +7329,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -7138,7 +7387,28 @@ namespace PresentationLayer.Presenter
 
                         //_frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
-                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
+                    else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
+                    {
+                        int concreteID = _windoorModel.concreteIDCounter += 1;
+                        _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
+                                                                            frmDimension_numHt,
+                                                                            _windoorModel.WD_zoom,
+                                                                            _windoorModel.WD_zoom_forImageRenderer,
+                                                                            concreteID);
+                        _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
+                        _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
+
+                        IConcretePropertiesUCPresenter concretePropertiesUCPresenter = _concretePropertiesUCPresenter.GetNewInstance(_concreteModel, _unityC, this);
+                        AddConcreteUC(_concreteModel);
+                        _concreteModel.Concrete_UC = (UserControl)_concreteUC;
+                        _concreteModel.Concrete_PropertiesUC = (UserControl)concretePropertiesUCPresenter.GetConcretePropertiesUC();
+                        AddConcreteList_WindoorModel(_concreteModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                    else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
@@ -7179,12 +7449,98 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile) //Add new Item
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
+                {
+                    if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
+                    {
+                        Windoor_Save_UserControl();
+                        Windoor_Save_PropertiesUC();
+                        //clear
+                        if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
+                             _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
+                        {
+                            baseColor = Base_Color._White;
+                        }
+                        else if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._DarkBrown.ToString())
+                        {
+                            baseColor = Base_Color._DarkBrown;
+                        }
+                        IWindoorModel wndrModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
+                                                                         frmDimension_numHt,
+                                                                         frmDimension_profileType,
+                                                                         _quotationModel.Lst_Windoor.Count() + 1,
+                                                                         baseColor,
+                                                                         Foil_Color._Walnut,
+                                                                         Foil_Color._Walnut);
+                        foreach (var prop in _windoorModel.GetType().GetProperties())
+                        {
+                            foreach (var sprop in wndrModel.GetType().GetProperties())
+                            {
+                                if (prop.Name == sprop.Name)
+                                {
+                                    try
+                                    {
+                                        if(sprop.Name == "WD_name")
+                                        {
+                                            sprop.SetValue(wndrModel, "Item" + _quotationModel.Lst_Windoor.Count);
+                                        }
+                                        else
+                                        {
+                                            sprop.SetValue(wndrModel, prop.GetValue(_windoorModel, null));
+                                        }
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
+                        AddWndrList_QuotationModel(wndrModel);
+                        //_quotationModel.Select_Current_Windoor(_windoorModel);
+                        wndrModel.SetDimensions_basePlatform();
+
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                        _mainView.GetThis().Controls.Add(bpUC);
+
+
+                       
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                        _pnlMain.Controls.Clear();
+                        AddItemInfoUC(wndrModel); //add item information user control
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        SetMainViewTitle(input_qrefno,
+                                        _projectName,
+                                        _custRefNo,
+                                         wndrModel.WD_name,
+                                         wndrModel.WD_profile,
+                                         true);
+
+                        BotToolStrip_Enable();
+                        CreateNewWindoorBtn_Enable();
+                        //_mainView.RemoveBinding();
+                        //_mainView.RemoveBinding(_mainView.GetLblSize());
+                        //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+
+                        _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
+                        //_basePlatformPresenter.RemoveBindingView();
+                        //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                        _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
+                        _pnlItems.PerformLayout();
+                        _windoorModel = wndrModel;
+
+
+                    }
+                }
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
-                        Frame_Save_UserControl();
-                        Frame_Save_PropertiesUC();
+                        Windoor_Save_UserControl();
+                        Windoor_Save_PropertiesUC();
 
                         //clear previous basePlatformUC
                         _pnlMain.Controls.Clear();
@@ -7233,7 +7589,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile) //add frame
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -7259,10 +7615,11 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
 
-                        AddFrameList_WindoorModel(_frameModel);
                         IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
                         AddFrameUC(_frameModel, framePropUCP);
 
+                        _frameModel.Frame_UC = (UserControl)_frameUC;
+                        AddFrameList_WindoorModel(_frameModel);
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
@@ -7275,7 +7632,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile) //add concrete
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
@@ -7288,11 +7645,13 @@ namespace PresentationLayer.Presenter
                         _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
                         _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
 
-                        AddConcreteList_WindoorModel(_concreteModel);
                         IConcretePropertiesUCPresenter concretePropertiesUCPresenter = AddConcretePropertiesUC(_concreteModel);
                         AddConcreteUC(_concreteModel);
+                        _concreteModel.Concrete_UC = (UserControl)_concreteUC;
+                        AddConcreteList_WindoorModel(_concreteModel);
 
                         _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
@@ -7313,6 +7672,8 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
+                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
             Load_Windoor_Item(_windoorModel);
         }
@@ -7328,7 +7689,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public void Frame_Save_PropertiesUC()
+        public void Windoor_Save_PropertiesUC()
         {
             foreach (UserControl uc in _pnlPropertiesBody.Controls)
             {
@@ -7343,10 +7704,21 @@ namespace PresentationLayer.Presenter
                         }
                     }
                 }
+                if (uc is IConcretePropertiesUC)
+                {
+                    IConcretePropertiesUC cpUC = (IConcretePropertiesUC)uc;
+                    foreach (IConcreteModel ccModel in _windoorModel.lst_concrete)
+                    {
+                        if (cpUC.Concrete_ID == ccModel.Concrete_Id)
+                        {
+                            ccModel.Concrete_PropertiesUC = uc;
+                        }
+                    }
+                }
             }
         }
 
-        public void Frame_Save_UserControl()
+        public void Windoor_Save_UserControl()
         {
             _basePlatformPresenter.RemoveBindingView();
             foreach (UserControl uc in _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls)
@@ -7362,6 +7734,17 @@ namespace PresentationLayer.Presenter
                         }
                     }
                 }
+                if (uc is IConcreteUC)
+                {
+                    IConcreteUC cUC = (IConcreteUC)uc;
+                    foreach (IConcreteModel crModel in _windoorModel.lst_concrete)
+                    {
+                        if (cUC.Concrete_ID == crModel.Concrete_Id)
+                        {
+                            crModel.Concrete_UC = uc;
+                        }
+                    }
+                }
             }
         }
 
@@ -7372,8 +7755,8 @@ namespace PresentationLayer.Presenter
 
 
             //save frame
-            Frame_Save_UserControl();
-            Frame_Save_PropertiesUC();
+            Windoor_Save_UserControl();
+            Windoor_Save_PropertiesUC();
 
             //set mainview
             _windoorModel = item;
@@ -7398,19 +7781,41 @@ namespace PresentationLayer.Presenter
             _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
             UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
             _mainView.GetThis().Controls.Add(bpUC);
-
-            //frames
-            foreach (IFrameModel frame in item.lst_frame)
+            foreach(Control wndr_objects in item.lst_objects)
             {
-                _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                if (wndr_objects.Name.Contains("Frame"))
+                {
+                    foreach (IFrameModel frame in item.lst_frame)
+                    {
+                        if (wndr_objects.Name == frame.Frame_Name)
+                        {
+                            _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                            _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                        }
+                    }
+                }
+                else if (wndr_objects.Name.Contains("Concrete"))
+                {
+                    foreach (IConcreteModel concrete in item.lst_concrete)
+                    {
+                        if (wndr_objects.Name == concrete.Concrete_Name)
+                        {
+                            _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                            _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
+                        }
+                    }
+                }
             }
-
-            _pnlPropertiesBody.Refresh();
+            //frames
+            
+           
+            //_pnlPropertiesBody.Refresh();
             _mainView.RemoveBinding(_mainView.GetLblSize());
             _mainView.RemoveBinding();
             _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+            _windoorModel.SetZoom();
+
         }
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
@@ -8056,15 +8461,14 @@ namespace PresentationLayer.Presenter
             _frameUC = frameUCP.GetFrameUC();
             frmUCPresenter = frameUCP;
             _basePlatformPresenter.AddFrame(_frameUC);
-
-            //_basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
+            
         }
 
         private void AddConcreteUC(IConcreteModel concreteModel)
         {
             IConcreteUCPresenter concreteUCPresenter = _concreteUCPresenter.GetNewInstance(_unityC, concreteModel, this, _basePlatformPresenter);
-            IConcreteUC concrete = concreteUCPresenter.GetConcreteUC();
-            _basePlatformPresenter.AddConcrete(concrete);
+            _concreteUC = concreteUCPresenter.GetConcreteUC();
+            _basePlatformPresenter.AddConcrete(_concreteUC);
         }
 
         public IFramePropertiesUCPresenter AddFramePropertiesUC(IFrameModel frameModel)
@@ -8081,27 +8485,30 @@ namespace PresentationLayer.Presenter
             IConcretePropertiesUCPresenter concretePropertiesUCPresenter = _concretePropertiesUCPresenter.GetNewInstance(concreteModel, _unityC, this);
             IConcretePropertiesUC concretePropertiesUC = concretePropertiesUCPresenter.GetConcretePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)concretePropertiesUC);
-
             return concretePropertiesUCPresenter;
         }
 
         public void AddFrameList_WindoorModel(IFrameModel frameModel)
         {
             _windoorModel.lst_frame.Add(frameModel);
+            _windoorModel.lst_objects.Add((UserControl)frameModel.Frame_UC);
         }
 
         private void AddConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
             _windoorModel.lst_concrete.Add(concreteModel);
+            _windoorModel.lst_objects.Add((UserControl)concreteModel.Concrete_UC);
         }
 
         public void DeleteFrame_OnFrameList_WindoorModel(IFrameModel frameModel)
         {
+            _windoorModel.lst_objects.Remove((UserControl)frameModel.Frame_UC);
             _windoorModel.lst_frame.Remove(frameModel);
         }
 
         public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)
         {
+            _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
         }
 
@@ -8276,11 +8683,16 @@ namespace PresentationLayer.Presenter
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (wndrProjectFileName != "")
             {
+
                 string txtfile = wndrProjectFileName.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.SetAttributes(txtfile, FileAttributes.Hidden);
-                csfunc.EncryptFile(txtfile);
-                File.Delete(txtfile);
+                File.Delete(wndrfile);
+                FileInfo f = new FileInfo(txtfile);
+                f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
+                //File.SetAttributes(txtfile, FileAttributes.Hidden);
+                //csfunc.EncryptFile(txtfile);
+                //File.Delete(txtfile);
+
                 _mainView.GetToolStripButtonSave().Enabled = false;
                 if (online_login != true)
                 {
@@ -8314,6 +8726,17 @@ namespace PresentationLayer.Presenter
                 }
 
             }
+        }
+
+        public void DeleteConcrete_OnObjectList_WindoorModel(UserControl concreteUC)
+        {
+            _windoorModel.lst_objects.Remove(concreteUC);
+        }
+
+        public async void SetPricingFactor()
+        {
+            string[] provinceArea = projectAddress.Split(',').LastOrDefault().Trim().Split(' ');
+            pricingFactor = await _quotationServices.GetFactorByProvince(provinceArea[0]);
         }
         #endregion
 

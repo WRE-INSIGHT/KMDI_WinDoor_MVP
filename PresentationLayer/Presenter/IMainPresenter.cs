@@ -35,6 +35,8 @@ namespace PresentationLayer.Presenter
         bool isNewProject { get; set; }
         decimal pricingFactor { get; set; }
         string aeic { get; set; }
+        string projectAddress { get; set; }
+        void SetPricingFactor();
         DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
         IWindoorModel windoorModel_MainPresenter { get; set; }
@@ -53,6 +55,9 @@ namespace PresentationLayer.Presenter
         Panel pnlPropertiesBody_MainPresenter { get; set; }
         IDividerPropertiesUCPresenter divPropertiesUCP { get; }
         DataTable Glass_Type { get; }
+
+        void DeleteConcrete_OnObjectList_WindoorModel(UserControl _concreteUC);
+
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
@@ -84,6 +89,7 @@ namespace PresentationLayer.Presenter
                                 bool AddedFrame,
                                 bool AddedConcrete,
                                 bool OpenWindoorFile,
+                                bool Duplicate,
                                 frmDimensionPresenter.Show_Purpose purpose,
                                 int frmDimension_numWd,
                                 int frmDimension_numHt,

@@ -26,7 +26,8 @@ namespace PresentationLayer.Presenter
             ChangeBasePlatformSize = 4,
             AddPanelIntoMultiPanel = 5,
             CreateNew_Concrete = 6,
-            OpenWndrFile = 7
+            OpenWndrFile = 7,
+            Duplicate = 8
         }
 
         private Show_Purpose this_purpose;
@@ -133,7 +134,6 @@ namespace PresentationLayer.Presenter
                 _mainPresenter_OpenWindoorFile_ClickedOK = value;
             }
         }
-
         #endregion
 
         public frmDimensionPresenter(IfrmDimensionView frmDimensionView)
@@ -195,6 +195,7 @@ namespace PresentationLayer.Presenter
         private bool _mainPresenter_AddedFrame_ClickedOK;
         private bool _mainPresenter_AddedConcrete_ClickedOK;
         private bool _mainPresenter_OpenWindoorFile_ClickedOK;
+        private bool _mainPresenter_Duplicate_ClickedOK;
         private void OnbtnOKClickedEventRaised(object sender, EventArgs e)
         {
             try
@@ -222,6 +223,7 @@ namespace PresentationLayer.Presenter
                                                       _mainPresenter_AddedFrame_ClickedOK,
                                                       _mainPresenter_AddedConcrete_ClickedOK,
                                                       _mainPresenter_OpenWindoorFile_ClickedOK,
+                                                      _mainPresenter_Duplicate_ClickedOK,
                                                       purpose,
                                                       _frmDimensionView.InumWidth,
                                                       _frmDimensionView.InumHeight,

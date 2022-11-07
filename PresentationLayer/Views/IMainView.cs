@@ -18,6 +18,7 @@ namespace PresentationLayer.Views
         event EventHandler ButtonPlusZoomClickEventRaised;
         event EventHandler ButtonMinusZoomClickEventRaised;
         event EventHandler DeleteToolStripButtonClickEventRaised;
+        event EventHandler DuplicateToolStripButtonClickEventRaised;
         event EventHandler ViewImagerToolStripButtonClickEventRaised;
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         event EventHandler CreateNewGlassClickEventRaised;
