@@ -113,6 +113,7 @@ namespace PresentationLayer.Presenter
         private ISetTopViewSlidingPanellingPresenter _setTopViewSlidingPanellingPresenter;
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IScreenPresenter _screenPresenter;
+        private IPricingPresenter _pricingPresenter;
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
@@ -661,9 +662,8 @@ namespace PresentationLayer.Presenter
                              IFactorPresenter factorPresenter,
                              IScreenServices screenServices,
                              IMullionImagerUCPresenter mullionImagerUCP,
-                             ITransomImagerUCPresenter transomImagerUCP
-                             )
-
+                             ITransomImagerUCPresenter transomImagerUCP,
+                             IPricingPresenter pricingPresenter)
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -723,6 +723,8 @@ namespace PresentationLayer.Presenter
             _screenServices = screenServices;
             _mullionImagerUCP = mullionImagerUCP;
             _transomImagerUCP = transomImagerUCP;
+            _pricingPresenter = pricingPresenter;
+
             SubscribeToEventsSetup();
         }
         public IMainView GetMainView()
@@ -824,13 +826,16 @@ namespace PresentationLayer.Presenter
             _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
             _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
             _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
+            _mainView.billOfMaterialToolStripMenuItemClickEventRaised += _mainView_billOfMaterialToolStripMenuItemClickEventRaised;
         }
 
-
-
-
-
         #region Events  
+        private void _mainView_billOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
+            PricingPresenter.GetPricingView().ShowPricingList();
+        }
+
         private void _mainView_factorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IFactorPresenter factor = _factorPresenter.GetNewInstance(_unityC, this);
@@ -839,7 +844,7 @@ namespace PresentationLayer.Presenter
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            _screenModel = _screenServices.AddScreenModel(1,
+            _screenModel = _screenServices.AddScreenModel(0,
                                                           0,
                                                           0,
                                                           0.0m,

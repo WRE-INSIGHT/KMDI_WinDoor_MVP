@@ -153,6 +153,7 @@
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPricingPresenter.cs" />
     <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PricingPresenter.cs" />
     <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
@@ -446,6 +448,7 @@
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPricingView.cs" />
     <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
@@ -464,6 +467,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PricingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PricingView.Designer.cs">
+      <DependentUpon>PricingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PrintGlassSummaryView.cs">
       <SubType>Form</SubType>
@@ -1191,6 +1200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PricingView.resx">
+      <DependentUpon>PricingView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PrintGlassSummaryView.resx">
       <DependentUpon>PrintGlassSummaryView.cs</DependentUpon>

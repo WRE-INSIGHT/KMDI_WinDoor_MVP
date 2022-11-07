@@ -24,8 +24,12 @@ namespace ModelLayer.Model.Quotation
         int Screws_for_Cladding { get; set; }
         int Rebate_Qty { get; set; }
         int Plastic_CoverQty_Total { get; set; }
+        decimal PricingFactor { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
+        List<decimal> lstTotalPrice { get; set; }
+
         DataTable GetListOfMaterials(IWindoorModel item);
         void Select_Current_Windoor(IWindoorModel item);
+        DataTable ItemCostingPriceAndPoints();
     }
 }

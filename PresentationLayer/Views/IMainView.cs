@@ -39,6 +39,7 @@ namespace PresentationLayer.Views
         event EventHandler SetGlassToolStripMenuItemClickRaiseEvent;
         event EventHandler screenToolStripMenuItemClickEventRaised;
         event EventHandler factorToolStripMenuItemClickEventRaised;
+        event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         string Nickname { set; }
         string mainview_title { get; set; }
         float Zoom { get; set; }
