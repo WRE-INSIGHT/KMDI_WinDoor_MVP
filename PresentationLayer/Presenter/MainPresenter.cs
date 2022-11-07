@@ -832,7 +832,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 Scenario_Quotation(false,
-                                   true,
+                                   false,
                                    false,
                                    false,
                                    false,
@@ -2489,7 +2489,7 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
-                                     true,
+                                     false,
                                      false,
                                      false,
                                      true,
@@ -2711,7 +2711,7 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
-                                     true,
+                                     false,
                                      false,
                                      false,
                                      true,
@@ -2937,16 +2937,16 @@ namespace PresentationLayer.Presenter
                         {
                             frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
-                                   false,
-                                   false,
-                                   true,
-                                   false,
-                                   false,
-                                   frmDimensionPresenter.Show_Purpose.CreateNew_Concrete,
-                                   frmDimension_numWd,
-                                   frmDimension_numHt,
-                                   frmDimension_profileType,
-                                   frmDimension_baseColor);
+                                               false,
+                                               false,
+                                               false,
+                                               true,
+                                               false,
+                                               frmDimensionPresenter.Show_Purpose.CreateNew_Concrete,
+                                               frmDimension_numWd,
+                                               frmDimension_numHt,
+                                               frmDimension_profileType,
+                                               frmDimension_baseColor);
 
                         }
                         if (row_str.Contains("Concrete_Id:"))
@@ -7163,7 +7163,7 @@ namespace PresentationLayer.Presenter
         {
             if (frmDimension_numWd == 0 && frmDimension_numHt == 0) //from Quotation Input box to here
             {
-                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     Clearing_Operation();
                 }
@@ -7183,7 +7183,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.CreateNew_Item;
@@ -7196,7 +7196,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -7210,7 +7210,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile)
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
                     _frmDimensionPresenter.SetPresenters(this);
@@ -7222,7 +7222,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) //from Open Windoor File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) //from Open Windoor File
                 {
                     ItemToolStrip_Enable();
                     _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
@@ -7241,7 +7241,7 @@ namespace PresentationLayer.Presenter
             }
             else if (frmDimension_numWd != 0 && frmDimension_numHt != 0) //from frmDimension to here
             {
-                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
+                if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -7291,7 +7291,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile) // Open File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -7349,7 +7349,28 @@ namespace PresentationLayer.Presenter
 
                         //_frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
-                    if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
+                    else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
+                    {
+                        int concreteID = _windoorModel.concreteIDCounter += 1;
+                        _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
+                                                                            frmDimension_numHt,
+                                                                            _windoorModel.WD_zoom,
+                                                                            _windoorModel.WD_zoom_forImageRenderer,
+                                                                            concreteID);
+                        _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
+                        _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
+
+                        IConcretePropertiesUCPresenter concretePropertiesUCPresenter = _concretePropertiesUCPresenter.GetNewInstance(_concreteModel, _unityC, this);
+                        AddConcreteUC(_concreteModel);
+                        _concreteModel.Concrete_UC = (UserControl)_concreteUC;
+                        _concreteModel.Concrete_PropertiesUC = (UserControl)concretePropertiesUCPresenter.GetConcretePropertiesUC();
+                        AddConcreteList_WindoorModel(_concreteModel);
+
+                        _basePlatformPresenter.InvalidateBasePlatform();
+                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                    }
+                    else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
@@ -7390,7 +7411,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
@@ -7476,7 +7497,7 @@ namespace PresentationLayer.Presenter
 
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile) //Add new Item
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -7530,7 +7551,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile) //add frame
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //add frame
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -7573,7 +7594,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile) //add concrete
+                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
@@ -8405,8 +8426,7 @@ namespace PresentationLayer.Presenter
             _frameUC = frameUCP.GetFrameUC();
             frmUCPresenter = frameUCP;
             _basePlatformPresenter.AddFrame(_frameUC);
-
-            //_basePlatformImagerUCPresenter.AddFrame(frameImagerUCP.GetFrameImagerUC());
+            
         }
 
         private void AddConcreteUC(IConcreteModel concreteModel)
@@ -8430,7 +8450,6 @@ namespace PresentationLayer.Presenter
             IConcretePropertiesUCPresenter concretePropertiesUCPresenter = _concretePropertiesUCPresenter.GetNewInstance(concreteModel, _unityC, this);
             IConcretePropertiesUC concretePropertiesUC = concretePropertiesUCPresenter.GetConcretePropertiesUC();
             _pnlPropertiesBody.Controls.Add((UserControl)concretePropertiesUC);
-
             return concretePropertiesUCPresenter;
         }
 
@@ -8628,11 +8647,16 @@ namespace PresentationLayer.Presenter
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (wndrProjectFileName != "")
             {
+
                 string txtfile = wndrProjectFileName.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.SetAttributes(txtfile, FileAttributes.Hidden);
-                csfunc.EncryptFile(txtfile);
-                File.Delete(txtfile);
+                File.Delete(wndrfile);
+                FileInfo f = new FileInfo(txtfile);
+                f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
+                //File.SetAttributes(txtfile, FileAttributes.Hidden);
+                //csfunc.EncryptFile(txtfile);
+                //File.Delete(txtfile);
+
                 _mainView.GetToolStripButtonSave().Enabled = false;
                 if (online_login != true)
                 {

@@ -540,8 +540,7 @@ namespace PresentationLayer.Presenter.UserControls
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
         {
             UserControl asdassd = ((UserControl)sender);
-            MessageBox.Show(asdassd.Location.X + " : Y" + asdassd.Location.Y);
-            MessageBox.Show(asdassd.Width + "");
+          
             if (e.Button == MouseButtons.Right)
             {
                 color = Color.Blue;

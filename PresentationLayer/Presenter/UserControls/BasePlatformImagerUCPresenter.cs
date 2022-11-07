@@ -1096,7 +1096,7 @@ namespace PresentationLayer.Presenter.UserControls
                                       new Rectangle(new Point((int)(mid - (s.Width / 2)), (ctrl_Y - s.Height) / 2),
                                                     new Size(s.Width, s.Height)),
                                       Color.Black,
-                                      SystemColors.Control,
+                                      Color.White,
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for WIDTH
@@ -1150,7 +1150,7 @@ namespace PresentationLayer.Presenter.UserControls
                                       new Rectangle(new Point((70 - s2.Width) / 2, (int)(mid2 - (s2.Height / 2))),
                                                     new Size(s2.Width, s2.Height)),
                                       Color.Black,
-                                      SystemColors.Control,
+                                      Color.White,
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
             }
             //arrow for HEIGHT

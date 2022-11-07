@@ -1,4 +1,5 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
@@ -99,55 +100,83 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
-
-                foreach (IFrameModel fr in wdm.lst_frame)
+                foreach(Control wndr_objects in wdm.lst_objects)
                 {
-
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                  
+                    if (wndr_objects.Name.Contains("Frame"))
                     {
-
-                        if (mpnl.MPanel_DividerEnabled)
+                        foreach (IFrameModel fr in wdm.lst_frame)
                         {
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            if (wndr_objects.Name == fr.Frame_Name)
                             {
-                                if (pnl.Panel_Name == fixedUC.Name)
+                                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                                 {
-                                    propertyHeight += 382;
-                                    break;
-                                }
-                                else
-                                {
-                                    foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+
+                                    if (mpnl.MPanel_DividerEnabled)
                                     {
-                                        propertyHeight += dvd.Div_PropHeight;
+                                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                        {
+                                            if (pnl.Panel_Name == fixedUC.Name)
+                                            {
+                                                propertyHeight += 382;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                                                {
+                                                    propertyHeight += dvd.Div_PropHeight;
+                                                    break;
+                                                }
+                                                propertyHeight += pnl.Panel_PropertyHeight;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                        {
+                                            if (pnl.Panel_Name == fixedUC.Name)
+                                            {
+                                                propertyHeight += 382;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                propertyHeight += pnl.Panel_PropertyHeight;
+                                            }
+                                        }
+                                    }
+                                }
+                                foreach (IPanelModel pnl in fr.Lst_Panel)
+                                {
+                                    if (pnl.Panel_Name == fixedUC.Name)
+                                    {
+                                        propertyHeight += 382;
                                         break;
                                     }
-                                    propertyHeight += pnl.Panel_PropertyHeight;
                                 }
                             }
                         }
-                        else
+                       
+                    }
+                    else if (wndr_objects.Name.Contains("Concrete"))
+                    {
+                        foreach (IConcreteModel cr in wdm.lst_concrete)
                         {
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                            if(wndr_objects.Name == cr.Concrete_Name)
                             {
-                                if (pnl.Panel_Name == fixedUC.Name)
-                                {
-                                    propertyHeight += 382;
-                                    break;
-                                }
-                                else
-                                {
-                                    propertyHeight += pnl.Panel_PropertyHeight;
-                                }
+                                propertyHeight += 102;
                             }
                         }
                     }
                 }
                 wdm.WD_PropertiesScroll = propertyHeight;
-            }
-            catch (Exception)
-            {
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

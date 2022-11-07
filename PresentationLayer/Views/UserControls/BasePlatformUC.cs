@@ -107,9 +107,6 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Clear();
         }
 
-        private void flp_frameDragDrop_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(flp_frameDragDrop.Width + "");
-        }
+       
     }
 }

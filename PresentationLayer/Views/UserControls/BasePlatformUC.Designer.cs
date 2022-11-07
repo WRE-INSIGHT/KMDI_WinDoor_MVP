@@ -38,7 +38,6 @@
             this.flp_frameDragDrop.Name = "flp_frameDragDrop";
             this.flp_frameDragDrop.Size = new System.Drawing.Size(300, 300);
             this.flp_frameDragDrop.TabIndex = 0;
-            this.flp_frameDragDrop.Click += new System.EventHandler(this.flp_frameDragDrop_Click);
             this.flp_frameDragDrop.Paint += new System.Windows.Forms.PaintEventHandler(this.flp_frameDragDrop_Paint);
             // 
             // BasePlatformUC

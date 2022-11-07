@@ -141,6 +141,9 @@ namespace PresentationLayer.Views.UserControls
             return this;
         }
 
-      
+        public void BringToFrontFrame()
+        {
+            this.BringToFront();
+        }
     }
 }
