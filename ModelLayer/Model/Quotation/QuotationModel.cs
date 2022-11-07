@@ -4079,8 +4079,8 @@ namespace ModelLayer.Model.Quotation
                             Math.Round(MaterialCost, 2) +
                             Math.Round(GlassPrice, 2);
 
-                TotaPrice = (TotaPrice * 1.3m) + TotaPrice; // factor 1.3 
-                // TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+                //TotaPrice = (TotaPrice * 1.3m) + TotaPrice; // factor 1.3 
+                TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
                 lstTotalPrice.Add(TotaPrice);
 
 

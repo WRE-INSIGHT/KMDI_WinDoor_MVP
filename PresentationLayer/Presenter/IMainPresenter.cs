@@ -33,7 +33,6 @@ namespace PresentationLayer.Presenter
         string inputted_projectName { get; set; }
         string inputted_custRefNo { get; set; }
         bool isNewProject { get; set; }
-        decimal pricingFactor { get; set; }
         string aeic { get; set; }
         string projectAddress { get; set; }
         void SetPricingFactor();

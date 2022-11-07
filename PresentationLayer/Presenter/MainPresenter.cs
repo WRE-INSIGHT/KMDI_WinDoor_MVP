@@ -563,19 +563,6 @@ namespace PresentationLayer.Presenter
                 _isOpenProject = value;
             }
         }
-        private decimal _pricingFactor;
-        public decimal pricingFactor
-        {
-            get
-            {
-                return _pricingFactor;
-            }
-
-            set
-            {
-                _pricingFactor = value;
-            }
-        }
         private string _aeic;
         public string aeic
         {
@@ -1021,7 +1008,6 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
-            wndr_content.Add("PricingFactor: " + _pricingFactor);
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
                 wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
@@ -2448,7 +2434,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
-                        _pricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str); ;
+                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str); ;
                     }
                     else if (row_str.Contains("Quotation_ref_no"))
                     {
@@ -7220,6 +7206,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                    SetPricingFactor();
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -7535,7 +7522,7 @@ namespace PresentationLayer.Presenter
 
                     }
                 }
-                else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
+                else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
@@ -8732,11 +8719,11 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove(concreteUC);
         }
-
+        decimal pricingFactor;
         public async void SetPricingFactor()
         {
             string[] provinceArea = projectAddress.Split(',').LastOrDefault().Trim().Split(' ');
-            pricingFactor = await _quotationServices.GetFactorByProvince(provinceArea[0]);
+            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(provinceArea[0]);
         }
         #endregion
 
