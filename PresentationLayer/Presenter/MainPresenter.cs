@@ -8722,8 +8722,8 @@ namespace PresentationLayer.Presenter
         decimal pricingFactor;
         public async void SetPricingFactor()
         {
-            string[] provinceArea = projectAddress.Split(',').LastOrDefault().Trim().Split(' ');
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(provinceArea[0]);
+            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
         #endregion
 
