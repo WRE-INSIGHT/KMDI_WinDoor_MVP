@@ -5,7 +5,12 @@ namespace PresentationLayer.Presenter
 {
     public interface IPrintQuotePresenter
     {
-        IPrintQuotePresenter GetNewInstance(IUnityContainer unityC, IQuoteItemListPresenter quoteItemListPresenter, IMainPresenter mainPresenter); //
+        IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
+                                            IQuoteItemListPresenter quoteItemListPresenter,
+                                            IMainPresenter mainPresenter); //
+        IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
+                                            IMainPresenter mainPresenter);
+
         IPrintQuoteView GetPrintQuoteView();
     }
 }

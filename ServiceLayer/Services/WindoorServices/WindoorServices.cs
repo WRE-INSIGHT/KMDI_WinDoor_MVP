@@ -3,7 +3,6 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.WinDoor;
 using ServiceLayer.CommonServices;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ServiceLayer.Services.WindoorServices
@@ -34,8 +33,9 @@ namespace ServiceLayer.Services.WindoorServices
                                            List<Control> lst_Objects,
                                            Base_Color wd_basecolor,
                                            Foil_Color wd_insidecolor,
-                                           Foil_Color wd_outisdecolor,
-                                           int wd_costingPoints)
+                                           Foil_Color wd_outisdecolor
+                                           //int wd_costingPoints
+                                           )
         {
             IWindoorModel wndr = new WindoorModel(WD_id,
                                                   WD_name,
@@ -53,8 +53,9 @@ namespace ServiceLayer.Services.WindoorServices
                                                   lst_Objects,
                                                   wd_basecolor,
                                                   wd_insidecolor,
-                                                  wd_outisdecolor,
-                                                  wd_costingPoints);
+                                                  wd_outisdecolor
+                                                  //wd_costingPoints
+                                                  );
 
             ValidateModel(wndr);
             return wndr;
@@ -117,8 +118,9 @@ namespace ServiceLayer.Services.WindoorServices
                                                         lst_Objects,
                                                         wd_basecolor,
                                                         wd_insidecolor,
-                                                        wd_outisdecolor,
-                                                        wd_costingPoints);
+                                                        wd_outisdecolor
+                                                        //wd_costingPoints
+                                                        );
 
             return _windoorModel;
         }

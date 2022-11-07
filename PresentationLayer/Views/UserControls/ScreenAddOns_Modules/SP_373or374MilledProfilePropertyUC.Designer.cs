@@ -1,0 +1,99 @@
+﻿namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
+{
+    partial class SP_373or374MilledProfilePropertyUC
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.nud_373or374MilledProfileQty = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nud_373or374MilledProfile = new System.Windows.Forms.NumericUpDown();
+            this.lbl_373or374MilledProfile = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfileQty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfile)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // nud_373or374MilledProfileQty
+            // 
+            this.nud_373or374MilledProfileQty.Location = new System.Drawing.Point(164, 7);
+            this.nud_373or374MilledProfileQty.Name = "nud_373or374MilledProfileQty";
+            this.nud_373or374MilledProfileQty.Size = new System.Drawing.Size(62, 20);
+            this.nud_373or374MilledProfileQty.TabIndex = 45;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(137, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 13);
+            this.label2.TabIndex = 46;
+            this.label2.Text = "Qty";
+            // 
+            // nud_373or374MilledProfile
+            // 
+            this.nud_373or374MilledProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nud_373or374MilledProfile.Location = new System.Drawing.Point(66, 6);
+            this.nud_373or374MilledProfile.Name = "nud_373or374MilledProfile";
+            this.nud_373or374MilledProfile.Size = new System.Drawing.Size(68, 20);
+            this.nud_373or374MilledProfile.TabIndex = 44;
+            // 
+            // lbl_373or374MilledProfile
+            // 
+            this.lbl_373or374MilledProfile.AutoSize = true;
+            this.lbl_373or374MilledProfile.Location = new System.Drawing.Point(1, 4);
+            this.lbl_373or374MilledProfile.Name = "lbl_373or374MilledProfile";
+            this.lbl_373or374MilledProfile.Size = new System.Drawing.Size(66, 26);
+            this.lbl_373or374MilledProfile.TabIndex = 43;
+            this.lbl_373or374MilledProfile.Text = "373 or 374 \r\nMilled Profile";
+            this.lbl_373or374MilledProfile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // SP_373or374MilledProfilePropertyUC
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.nud_373or374MilledProfileQty);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nud_373or374MilledProfile);
+            this.Controls.Add(this.lbl_373or374MilledProfile);
+            this.Name = "SP_373or374MilledProfilePropertyUC";
+            this.Size = new System.Drawing.Size(227, 35);
+            this.Load += new System.EventHandler(this.SP_373or374MilledProfilePropertyUC_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfileQty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfile)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.NumericUpDown nud_373or374MilledProfileQty;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown nud_373or374MilledProfile;
+        private System.Windows.Forms.Label lbl_373or374MilledProfile;
+    }
+}

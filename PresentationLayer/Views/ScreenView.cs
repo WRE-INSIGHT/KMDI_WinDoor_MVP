@@ -48,51 +48,24 @@ namespace PresentationLayer.Views
                 nud_Factor.Value = Convert.ToDecimal(value);
             }
         }
-    
-        public string screen_windoorID
-        {
-            get
-            {
-                return txt_windoorID.Text;
-            }
-            set
-            {
-                txt_windoorID.Text = value;
-            }
-        }
 
-        public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         public event EventHandler ScreenViewLoadEventRaised;
+        public event EventHandler btnAddClickEventRaised;
+        public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
+        public event EventHandler tsBtnPrintScreenClickEventRaised;
+        public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
+        public event EventHandler cmbScreenTypeSelectedValueChangedEventRaised;
         public event EventHandler nudWidthValueChangedEventRaised;
         public event EventHandler nudHeightValueChangedEventRaised;
         public event EventHandler nudFactorValueChangedEventRaised;
-        public event EventHandler cmbbaseColorSelectedValueChangedEventRaised;
-        public event EventHandler btnAddClickEventRaised;
-        public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
-
+        public event EventHandler nudQuantityValueChangedEventRaised;
+        public event EventHandler nudSetsValueChangedEventRaised;
+        public event EventHandler txtwindoorIDTextChangedEventRaised;
+        public event EventHandler tsBtnExchangeRateClickEventRaised;
+        public event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
         public void ShowScreemView()
         {
             this.Show();
-        }
-
-        public ComboBox GetCmbBaseColor()
-        {
-            return cmb_baseColor;
-        }
-
-        public ComboBox GetCmbScreenType()
-        {
-            return cmb_ScreenType;
-        }
-
-        public NumericUpDown GetNudSet()
-        {
-            return nud_Sets;
-        }
-
-        public NumericUpDown GetNudQuantity()
-        {
-            return nud_Quantity;
         }
 
         public NumericUpDown GetNudTotalPrice()
@@ -100,15 +73,24 @@ namespace PresentationLayer.Views
             return nud_TotalPrice;
         }
 
+        public Panel GetPnlAddOns()
+        {
+            return pnl_addOns;
+        }
+
+        public Label getLblPlisse()
+        {
+            return lbl_Plissé;
+        }
+
+        public ComboBox getCmbPlisse()
+        {
+            return cmb_PlisséType;
+        }
+
         public DataGridView GetDatagrid()
         {
             return dgv_Screen;
-        }
-
-     
-        private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
         }
 
         private void ScreenView_Load(object sender, EventArgs e)
@@ -127,7 +109,42 @@ namespace PresentationLayer.Views
             }
             cmb_baseColor.DataSource = baseColor;
 
+            List<PlisseType> Plisse = new List<PlisseType>();
+            foreach (PlisseType item in PlisseType.GetAll())
+            {
+                Plisse.Add(item);
+            }
+            cmb_PlisséType.DataSource = Plisse;
+
+
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
+        }
+
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnAddClickEventRaised, e);
+        }
+
+        private void dgv_Screen_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, dgvScreenRowPostPaintEventRaised, e);
+        }
+
+        private void tsBtnPrintScreen_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
+        }
+
+
+        private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbScreenTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
         }
 
         private void nud_Width_ValueChanged(object sender, EventArgs e)
@@ -145,19 +162,45 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, nudFactorValueChangedEventRaised, e);
         }
 
-        private void cmb_baseColor_SelectedValueChanged(object sender, EventArgs e)
+        private void nud_Quantity_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, cmbbaseColorSelectedValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
+        private void nud_Sets_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, btnAddClickEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nudSetsValueChangedEventRaised, e);
         }
 
-        private void dgv_Screen_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        private void txt_windoorID_TextChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, dgvScreenRowPostPaintEventRaised, e);
+            EventHelpers.RaiseEvent(sender, txtwindoorIDTextChangedEventRaised, e);
         }
+
+        private void tsBtnExchangeRate_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tsBtnExchangeRateClickEventRaised, e);
+        }
+        private void cmb_PlisséType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbPlisséTypeSelectedIndexChangedEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
+            rdBtn_Door.DataBindings.Add(ModelBinding["Screen_Types_Door"]);
+            cmb_baseColor.DataBindings.Add(ModelBinding["Screen_BaseColor"]);
+            cmb_ScreenType.DataBindings.Add(ModelBinding["Screen_Types"]);
+            cmb_PlisséType.DataBindings.Add(ModelBinding["Screen_PlisséType"]);
+            nud_Height.DataBindings.Add(ModelBinding["Screen_Width"]);
+            nud_Width.DataBindings.Add(ModelBinding["Screen_Height"]);
+            nud_Factor.DataBindings.Add(ModelBinding["Screen_Factor"]);
+            nud_Sets.DataBindings.Add(ModelBinding["Screen_Set"]);
+            txt_windoorID.DataBindings.Add(ModelBinding["Screen_WindoorID"]);
+            nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
+        }
+
+
     }
 }

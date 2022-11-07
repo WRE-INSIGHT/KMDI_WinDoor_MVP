@@ -71,6 +71,8 @@
     <Compile Include="Services\QuotationServices\IQuotationRepository.cs" />
     <Compile Include="Services\QuotationServices\IQuotationServices.cs" />
     <Compile Include="Services\QuotationServices\QuotationServices.cs" />
+    <Compile Include="Services\ScreenServices\IScreenServices.cs" />
+    <Compile Include="Services\ScreenServices\ScreenServices.cs" />
     <Compile Include="Services\UserServices\IUserRepository.cs" />
     <Compile Include="Services\UserServices\IUserServices.cs" />
     <Compile Include="Services\UserServices\UserServices.cs" />

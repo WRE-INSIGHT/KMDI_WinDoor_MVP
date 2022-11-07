@@ -575,6 +575,7 @@ namespace PresentationLayer.Presenter
                                       i + 1,
                                       byteToStrForTopView);
             }
+            _mainPresenter.printStatus = "WinDoorItems";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
@@ -1027,7 +1028,7 @@ namespace PresentationLayer.Presenter
                     #region SealantPrice
 
 
-                    Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height)) / 3570);
+                    Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
 
                     if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
                     {
@@ -1067,8 +1068,8 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                             {
-                                CostingPoints -= 2;
-                                InstallationPoints -= 2;
+                                //CostingPoints -= 2 * ProfileColorPoints;
+                                //InstallationPoints -= 2 * ProfileColorPoints;
 
                                 #region Transom/MullionAndMechJointPrice 
                                 if (mpnl.MPanel_DividerEnabled == true)
@@ -1861,7 +1862,7 @@ namespace PresentationLayer.Presenter
                                     }
 
                                     //sealant for glass
-                                    Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) / 6842));
+                                    Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
                                     if (pnl.Panel_GlassThickness != 0.0f)
                                     {
 
@@ -1879,6 +1880,12 @@ namespace PresentationLayer.Presenter
 
                                     CostingPoints += ProfileColorPoints * 4;
                                     InstallationPoints += (ProfileColorPoints / 3) * 4;
+                                }
+                                else if (pnl.Panel_Type.Contains("Fixed"))
+                                {
+
+                                    CostingPoints += ProfileColorPoints * 2;
+                                    InstallationPoints += (ProfileColorPoints / 3) * 2;
                                 }
                             }
                         }
@@ -2577,7 +2584,7 @@ namespace PresentationLayer.Presenter
                             }
 
                             //sealant for glass
-                            Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)(Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) / 6842));
+                            Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
 
                             if (Singlepnl.Panel_GlassThickness != 0.0f)
                             {

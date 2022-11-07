@@ -776,8 +776,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             List<Control> wdlstobjects,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
-                            Foil_Color wd_outisdecolor,
-                            int wd_costingPoints)
+                            Foil_Color wd_outisdecolor
+                            //int wd_costingPoints
+                            )
         {
             WD_id = wd_id;
             WD_name = wd_name;
@@ -797,7 +798,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_BaseColor = wd_basecolor;
             WD_InsideColor = wd_insidecolor;
             WD_OutsideColor = wd_outisdecolor;
-            WD_CostingPoints = wd_costingPoints;
+            //WD_CostingPoints = wd_costingPoints;
             WD_CmenuDeleteVisibility = true;
             WD_customArrowToggle = false;
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();

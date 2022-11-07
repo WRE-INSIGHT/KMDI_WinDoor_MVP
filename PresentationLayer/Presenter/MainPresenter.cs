@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
 using PresentationLayer.CommonMethods;
@@ -28,6 +29,7 @@ using ServiceLayer.Services.FrameServices;
 using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using ServiceLayer.Services.QuotationServices;
+using ServiceLayer.Services.ScreenServices;
 using ServiceLayer.Services.WindoorServices;
 using System;
 using System.Collections.Generic;
@@ -56,6 +58,7 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel; //currently selected item
         private IFrameModel _frameModel;
+        private IScreenModel _screenModel;
         private IConcreteModel _concreteModel;
         private IConcreteUC _concreteUC;
 
@@ -76,6 +79,8 @@ namespace PresentationLayer.Presenter
         private IPanelServices _panelServices;
         private IDividerServices _divServices;
         private IConcreteServices _concreteServices;
+        private IScreenServices _screenServices;
+
 
         private IFrameUCPresenter _frameUCPresenter;
         private IFrameImagerUCPresenter _frameImagerUCPresenter;
@@ -597,6 +602,21 @@ namespace PresentationLayer.Presenter
             }
         }
 
+
+        public IScreenModel screenModel_MainPresenter
+        {
+            get
+            {
+                return _screenModel;
+            }
+
+            set
+            {
+                _screenModel = value;
+            }
+        }
+
+        public string printStatus { get; set; }
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -654,6 +674,7 @@ namespace PresentationLayer.Presenter
                              IGlassThicknessListPresenter glassThicknessPresenter,
                              IScreenPresenter screenPresenter,
                              IFactorPresenter factorPresenter,
+                             IScreenServices screenServices,
                              IMullionImagerUCPresenter mullionImagerUCP,
                              ITransomImagerUCPresenter transomImagerUCP
                              )
@@ -714,6 +735,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessPresenter = glassThicknessPresenter;
             _screenPresenter = screenPresenter;
             _factorPresenter = factorPresenter;
+            _screenServices = screenServices;
             _mullionImagerUCP = mullionImagerUCP;
             _transomImagerUCP = transomImagerUCP;
             SubscribeToEventsSetup();
@@ -864,7 +886,19 @@ namespace PresentationLayer.Presenter
         }
         private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC);//, this, _screenDT);
+            // int screenID = _screenModel.Screen_id += 1;
+            _screenModel = _screenServices.AddScreenModel(1,
+                                                          0,
+                                                          0,
+                                                          0.0m,
+                                                          null,
+                                                          string.Empty,
+                                                          0.0m,
+                                                          0,
+                                                          0.0m);
+
+            _screenModel.Screen_PVCVisibility = false;
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
@@ -976,7 +1010,7 @@ namespace PresentationLayer.Presenter
 
         private List<string> Saving_dotwndr()
         {
-            #region Save
+             #region Save
 
             List<string> wndr_content = new List<string>();
 
@@ -1954,7 +1988,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear with Georgian Bar", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Green", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tinted Blue", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(13.0, "13 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(14.0, "14 mm Clear", true, false, false, false, false);
@@ -2386,7 +2422,7 @@ namespace PresentationLayer.Presenter
             if (row_str == "EndofFile")
             {
                 Load_Windoor_Item(_windoorModel);
-               
+
             }
             switch (inside_quotation)
             {
@@ -5030,7 +5066,7 @@ namespace PresentationLayer.Presenter
                             IMultiPanelMullionUC multiMullionUC;
                             IMultiPanelTransomUC multiTransomUC;
 
-                            if(mpnllvl == "second level")
+                            if (mpnllvl == "second level")
                             {
                                 multiMullionUC = _multiMullionUC2nd;
                                 multiTransomUC = _multiTransomUC2nd;
@@ -5478,7 +5514,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                if(mpnllvl == "fourth level")
+                                if (mpnllvl == "fourth level")
                                 {
                                     if (extractedValue_str.Contains("Mullion"))
                                     {
@@ -5502,7 +5538,7 @@ namespace PresentationLayer.Presenter
                                         mPanel_Parent = _multiTransomUC2nd.Getflp();
                                     }
                                 }
-                               
+
                             }
                         }
                         else if (row_str.Contains("MPanel_FrameGroup:"))
@@ -6041,8 +6077,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_Parent:"))
                         {
-
-                            if (mpnllvl == "fourth level")
+                           if (mpnllvl == "fourth level")
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -6095,7 +6130,6 @@ namespace PresentationLayer.Presenter
                                     div_Parent = _multiTransomUC2nd.Getflp();
                                 }
                             }
-                          
 
                         }
                         else if (row_str.Contains("Div_FrameType:"))
@@ -6227,7 +6261,6 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
-
                             foreach (IPanelModel pnl in _multiPanelModel2ndLvl.MPanelLst_Panel)
                             {
                                 if (pnl.Panel_Name == extractedValue_str)
@@ -6539,7 +6572,7 @@ namespace PresentationLayer.Presenter
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                 }
                             }
-                            else if(div_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
+                            else if (div_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
                             {
                                 _multiPanelModel3rdLvl.MPanelLst_Divider.Add(divModel);
                                 if (_multiPanelModel3rdLvl.MPanel_Type == "Mullion")
@@ -7061,6 +7094,7 @@ namespace PresentationLayer.Presenter
         {
             _quotationModel = null;
             _frameModel = null;
+            _screenModel = null;
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
             _multiPanelModel4thLvl = null;
@@ -7821,11 +7855,8 @@ namespace PresentationLayer.Presenter
                         else if (handletype == Handle_Type._Rio || handletype == Handle_Type._Rotoline || handletype == Handle_Type._MVD)
                         {
 
-                            if (!(frame_art == FrameProfile_ArticleNo._7507 &&
-                                 (sash_art == SashProfile_ArticleNo._374 ||
-                                  sash_art == SashProfile_ArticleNo._373)) ||
-                                !(frame_art == FrameProfile_ArticleNo._6052 &&
-                                  sash_art == SashProfile_ArticleNo._6041))
+                            if (!(frame_art == FrameProfile_ArticleNo._7507 && (sash_art == SashProfile_ArticleNo._374 || sash_art == SashProfile_ArticleNo._373)) &&
+                                !(frame_art == FrameProfile_ArticleNo._6052 && sash_art == SashProfile_ArticleNo._6041))
                             {
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
@@ -8476,6 +8507,7 @@ namespace PresentationLayer.Presenter
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
         }
+
 
         public IFramePropertiesUC GetFrameProperties(int frameID)
         {
