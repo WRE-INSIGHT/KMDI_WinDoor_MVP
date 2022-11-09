@@ -498,7 +498,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                     actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                                     ndx++;
                                                 }
-
                                             }
                                         }
                                     }

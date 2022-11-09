@@ -991,13 +991,24 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                     }
                 }
+                int deduct = 20;
+                if (MPanel_Placement == "Somewhere in Between")
+                {
+                    deduct = 10;
 
+                }
+                else if (MPanel_Placement == "First" ||
+                         MPanel_Placement == "Last")
+                {
+                    deduct = 8;
+                }
                 if (MPanel_Type == "Mullion")
                 {
                     foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Height += divmovement;
-                        pnl.Panel_DisplayHeight += divmovement;
+                        //pnl.Panel_DisplayHeight += divmovement;
+                        pnl.Panel_DisplayHeight = MPanel_DisplayHeight;
                         pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
 
                         if (MPanel_Zoom == 1.0f)
@@ -1006,7 +1017,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanel_Zoom == 0.50f)
                         {
-                            int pnlhtToBind = MPanel_HeightToBind - 8;
+                            int pnlhtToBind = MPanel_HeightToBind - deduct;
                             pnl.Panel_HeightToBind = pnlhtToBind;
                         }
                         else if (MPanel_Zoom <= 0.26f)
@@ -1021,7 +1032,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Width += divmovement;
-                        pnl.Panel_DisplayWidth += divmovement;
+                        //pnl.Panel_DisplayWidth += divmovement;
+                        pnl.Panel_DisplayWidth = MPanel_DisplayWidth;
                         pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
 
                         if (MPanel_Zoom == 1.0f)

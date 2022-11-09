@@ -3829,12 +3829,23 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             if (Panel_ParentMultiPanelModel != null)
             {
+                int deduct = 20;
+                if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
+                {
+                    deduct = 20;
+                  
+                }
+                else if (Panel_ParentMultiPanelModel.MPanel_Placement == "First" ||
+                         Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
+                {
+                    deduct = 16;
+                }
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
 
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
-                        Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (deduct * Panel_Zoom));
                         Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                     else
@@ -3866,14 +3877,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (deduct * Panel_Zoom));
                     }
                     else
                     {
                         int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
                         int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalWidth)));
                         Panel_WidthToBind = pnl_wd;
-                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                        Panel_HeightToBind = Panel_ParentMultiPanelModel.MPanel_HeightToBind;
                     }
                 }
             }

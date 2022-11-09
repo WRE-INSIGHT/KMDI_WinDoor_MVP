@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -645,9 +646,65 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     {
                         pnl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
                     }
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    foreach (IMultiPanelModel mpnl2ndlvl in fr.Lst_MultiPanel)
                     {
-                        mpnl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        mpnl2ndlvl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //if(mpnl2ndlvl.MPanelLst_MultiPanel.Count > 0)
+                        //{
+                        //    foreach (IMultiPanelModel mpnl3rdlvl in mpnl2ndlvl.MPanelLst_MultiPanel)
+                        //    {
+                        //        mpnl3rdlvl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //        if (mpnl3rdlvl.MPanelLst_MultiPanel.Count > 0)
+                        //        {
+                        //            foreach (IMultiPanelModel mpnl4thlvl in mpnl3rdlvl.MPanelLst_MultiPanel)
+                        //            {
+                        //                mpnl4thlvl.MPanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //                if (mpnl4thlvl.MPanelLst_Panel.Count > 0)
+                        //                {
+                        //                    foreach (IPanelModel pnl4thlvl in mpnl4thlvl.MPanelLst_Panel)
+                        //                    {
+                        //                        pnl4thlvl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //                    }
+                        //                }
+                        //                else if (mpnl4thlvl.MPanelLst_Divider.Count > 0)
+                        //                {
+                        //                    foreach (IDividerModel div4thlvl in mpnl4thlvl.MPanelLst_Divider)
+                        //                    {
+                        //                        div4thlvl.DivImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //                    }
+                        //                }
+                        //            }
+                        //        }
+                        //        else if (mpnl3rdlvl.MPanelLst_Panel.Count > 0)
+                        //        {
+                        //            foreach (IPanelModel pnl3rdlvl in mpnl3rdlvl.MPanelLst_Panel)
+                        //            {
+                        //                pnl3rdlvl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //            }
+                        //        }
+                        //        else if (mpnl3rdlvl.MPanelLst_Divider.Count > 0)
+                        //        {
+                        //            foreach (IDividerModel div3rdlvl in mpnl3rdlvl.MPanelLst_Divider)
+                        //            {
+                        //                div3rdlvl.DivImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //            }
+                        //        }
+                        //    }
+                        //}
+                        //else if (mpnl2ndlvl.MPanelLst_Panel.Count > 0)
+                        //{
+                        //    foreach (IPanelModel pnl2ndlvl in mpnl2ndlvl.MPanelLst_Panel)
+                        //    {
+                        //        pnl2ndlvl.PanelImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //    }
+                        //}
+                        //else if (mpnl2ndlvl.MPanelLst_Divider.Count > 0)
+                        //{
+                        //    foreach (IDividerModel div2ndlvl in mpnl2ndlvl.MPanelLst_Divider)
+                        //    {
+                        //        div2ndlvl.DivImageRenderer_Zoom = WD_zoom_forImageRenderer;
+                        //    }
+                        //}
                     }
                 }
             }
