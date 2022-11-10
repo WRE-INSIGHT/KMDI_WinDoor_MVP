@@ -212,6 +212,11 @@ namespace PresentationLayer.Presenter
 
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace ModelLayer.Model.Quotation
 {
@@ -25,6 +26,7 @@ namespace ModelLayer.Model.Quotation
         int Rebate_Qty { get; set; }
         int Plastic_CoverQty_Total { get; set; }
         decimal PricingFactor { get; set; }
+        BillOfMaterialsFilter BOM_Filter { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
 

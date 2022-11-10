@@ -1,13 +1,8 @@
 ﻿using CommonComponents;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views
 {
@@ -20,6 +15,7 @@ namespace PresentationLayer.Views
 
         public event EventHandler PricingViewLoadEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvPriceListRowPostPaintEventRaised;
+        public event EventHandler cmbFilterSelectedValueChangedEventRaised;
 
         public DataGridView GetDgvPrice()
         {
@@ -33,6 +29,13 @@ namespace PresentationLayer.Views
 
         private void PricingView_Load(object sender, EventArgs e)
         {
+            List<BillOfMaterialsFilter> filter = new List<BillOfMaterialsFilter>();
+            foreach (BillOfMaterialsFilter item in BillOfMaterialsFilter.GetAll())
+            {
+                filter.Add(item);
+            }
+            cmb_Filter.DataSource = filter;
+
             EventHelpers.RaiseEvent(sender, PricingViewLoadEventRaised, e);
         }
 
@@ -41,5 +44,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseDatagridviewRowpostpaintEvent(sender, dgvPriceListRowPostPaintEventRaised, e);
         }
 
+        private void cmb_Filter_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbFilterSelectedValueChangedEventRaised, e);
+        }
     }
 }

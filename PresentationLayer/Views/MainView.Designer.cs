@@ -60,6 +60,7 @@
             this.defaultValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assignProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.billOfMaterialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,7 +115,6 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.billOfMaterialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -306,8 +306,9 @@
             // 
             // screenToolStripMenuItem
             // 
+            this.screenToolStripMenuItem.Enabled = false;
             this.screenToolStripMenuItem.Name = "screenToolStripMenuItem";
-            this.screenToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.screenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.screenToolStripMenuItem.Text = "Screen";
             this.screenToolStripMenuItem.Click += new System.EventHandler(this.screenToolStripMenuItem_Click);
             // 
@@ -315,7 +316,7 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -323,13 +324,13 @@
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.selectProjectToolStripMenuItem.Text = "Select Project";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
             // 
@@ -390,6 +391,14 @@
             this.factorToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.factorToolStripMenuItem.Text = "Factor";
             this.factorToolStripMenuItem.Click += new System.EventHandler(this.factorToolStripMenuItem_Click);
+            // 
+            // billOfMaterialToolStripMenuItem
+            // 
+            this.billOfMaterialToolStripMenuItem.Enabled = false;
+            this.billOfMaterialToolStripMenuItem.Name = "billOfMaterialToolStripMenuItem";
+            this.billOfMaterialToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.billOfMaterialToolStripMenuItem.Text = "Bill Of Material";
+            this.billOfMaterialToolStripMenuItem.Click += new System.EventHandler(this.billOfMaterialToolStripMenuItem_Click);
             // 
             // ViewToolStripMenuItem
             // 
@@ -472,6 +481,7 @@
             // glassBalancingToolStripMenuItem
             // 
             this.glassBalancingToolStripMenuItem.CheckOnClick = true;
+            this.glassBalancingToolStripMenuItem.Enabled = false;
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
             this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
@@ -480,6 +490,7 @@
             // 
             // customArrowHeadToolStripMenuItem
             // 
+            this.customArrowHeadToolStripMenuItem.Enabled = false;
             this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
             this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
@@ -487,6 +498,7 @@
             // 
             // slidingTopViewToolStripMenuItem
             // 
+            this.slidingTopViewToolStripMenuItem.Enabled = false;
             this.slidingTopViewToolStripMenuItem.Name = "slidingTopViewToolStripMenuItem";
             this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.slidingTopViewToolStripMenuItem.Text = "Sliding Top View";
@@ -1002,13 +1014,6 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
-            // 
-            // billOfMaterialToolStripMenuItem
-            // 
-            this.billOfMaterialToolStripMenuItem.Name = "billOfMaterialToolStripMenuItem";
-            this.billOfMaterialToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.billOfMaterialToolStripMenuItem.Text = "Bill Of Material";
-            this.billOfMaterialToolStripMenuItem.Click += new System.EventHandler(this.billOfMaterialToolStripMenuItem_Click);
             // 
             // MainView
             // 

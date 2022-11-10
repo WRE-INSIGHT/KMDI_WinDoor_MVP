@@ -7,6 +7,7 @@ namespace PresentationLayer.Views
     {
         event DataGridViewRowPostPaintEventHandler dgvPriceListRowPostPaintEventRaised;
         event EventHandler PricingViewLoadEventRaised;
+        event EventHandler cmbFilterSelectedValueChangedEventRaised;
 
         DataGridView GetDgvPrice();
 

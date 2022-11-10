@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -38,6 +39,9 @@ namespace ModelLayer.Model.Quotation
         public int Rebate_Qty { get; set; }
         public int Plastic_CoverQty_Total { get; set; }
         public decimal PricingFactor { get; set; }
+
+        private BillOfMaterialsFilter _BOM_Filter;
+        public BillOfMaterialsFilter BOM_Filter { get; set; }
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -1998,8 +2002,6 @@ namespace ModelLayer.Model.Quotation
 
         #region VariablesForPricing
 
-
-
         int CostPerPoints = 60,
              GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
@@ -2010,7 +2012,9 @@ namespace ModelLayer.Model.Quotation
              ChckPlasticWedge = false,
              check1stFrame = false;
 
-        string glassFilm,
+        string BOM_divDesc,
+                HandleDesc,
+               glassFilm,
                MaterialCostDesc,
                costingPointsDesc,
                laborCostDesc,
@@ -2066,6 +2070,18 @@ namespace ModelLayer.Model.Quotation
                 SashReinPricePerLinearMeter_395 = 305.14m,
                 SashReinPricePerLinearMeter_6040 = 287.58m,
                 SashReinPricePerLinearMeter_6041 = 655.49m,
+
+                FramePerimeter,
+                FramePrice,
+                FrameReinPrice,
+                FramePricePerLinearMeter,
+                FrameReinPricePerLinearMeter,
+
+                SashPerimeter,
+                SashPrice = 0,
+                SashReinPrice,
+                SashPricePerLinearMeter,
+                SashReinPricePerLinearMeter,
         #endregion 
         #region Mullion/TransomPrice
 
@@ -2078,23 +2094,32 @@ namespace ModelLayer.Model.Quotation
                 claddingPricePerLinearMeter = 907.62m,//profile and reinforcement price
                 claddingPrice,
 
+                DivPrice,
+                DividerPricePerSqrMeter,
+                DividerReinPricePerSqrMeter,
+                DivReinPrice,
         #endregion
         #region DummyMullionPrice
 
-        DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m,
+                DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m,
                 DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m,
                 DummyMullionPricePerLinearMeter_7533_White = 608.75m,
                 DummyMullionPricePerLinearMeter_385_White = 580.72m,
 
+                DMPrice,
+                DummyMullionPricePerLinearMeter,
         #endregion
         #region GlassPrice
 
-                Glass_6mmClr_PricePerSqrMeter = 670.00m,
+        Glass_6mmClr_PricePerSqrMeter = 670.00m,
                 Glass_10mmClr_PricePerSqrMeter = 1662.00m,
                 Glass_12mmClr_PricePerSqrMeter = 1941.00m,
                 Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
                 Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
                 Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
+
+                GlassPrice,
+
         #endregion
         #region FittingAndSupplies
 
@@ -2154,57 +2179,14 @@ namespace ModelLayer.Model.Quotation
 
                 HDRollerPricePerPiece = 566.06m,
                 GURollerPricePerPiece = 1323.08m,
-        #endregion
-        #region Accessories
 
-        EndCapPricePerPiece = 282.96m,
-                MechanicalJoint_AV585PricePerPiece = 87.34m,
-                MechanicalJoint_9U18PricePerPiece = 138.45m,
-                GBSpacerPricePerPiece = 5.01m,
-                PlasticWedgePricePerPiece = 10.09m,
-                BarFastenerPricePerPiece = 4.40m,
-                SealingBlockPricePerPiece = 63.75m,
-                SpacerFixSashPricePerPiece = 21.42m,
-        #endregion
-        #region AncillaryProfile
-        GlazingGasketPricePerLinearMeter = 32.64m,
-            GlazingBeadPricePerLinearMeter = 56.45m,
-            GlazingBead_G58PricePerLinearMeter = 117.72m,
-            GeorgianBar_0724Price = 154.93m,
-            GeorgianBar_0726Price = 307.75m,
-            CoverProfile_0914Price = 20.68m,
-            CoverProfile_0373Price = 105.41m,
-            ThresholdPricePerPiece = 1229.34m,
-            WeatherBarPricePerPiece = 236.75m,
-            GuideTrackPricePerLinearMeter = 157.18m,
-            InterlockPricePerPiece = 333.77m,
-            ExtensionForInterlockPricePerPiece = 789.01m,
-            AluminumTrackPricePerLinearMeter = 251.10m,
-            WaterSeepagePricePerLinearMeter = 153.73m,
 
-        #endregion
-                BrushSealPricePerLinearMeter = 15.80m,
-                SealantPricePerCan_BrownBlack = 430m,
-                SealantPricePerCan_Clear = 170m,
-                PUFoamingPricePerCan = 210m,
-                FramePricePerLinearMeter,
-                FrameReinPricePerLinearMeter,
-                SashPricePerLinearMeter,
-                SashReinPricePerLinearMeter,
-                FramePrice,
-                FrameReinPrice,
-                SashPrice = 0,
-                SashReinPrice,
-                DivPrice,
-                DivReinPrice,
-                MechJointPrice,
-                DMPrice,
-                EndCapPrice,
                 RestrictorStayPrice,
                 SnapInKeepPrice,
                 _3DHingePrice,
                 GbPrice,
                 _35mmBacksetEspagWithCylinderPrice,
+                EspagBasePrice,
                 EspagPrice,
                 LeverEspagPrice,
                 StayBearingPrice,
@@ -2224,32 +2206,81 @@ namespace ModelLayer.Model.Quotation
                 ShootBoltStrikerPrice,
                 ShootBoltReversePrice,
                 ShootBoltNonReversePrice,
-                BrushSealPrice,
                 RollerPrice,
-                WeatherBarPrice,
+                HandlePrice,
+                HandleBasePrice = 0,
+                FSPrice,
+                FSBasePrice,
+                _2DHingePrice,
+                ExtensionPrice,
+                ExtensionBasePrice,
+
+                RollerBasePrice,
+        #endregion
+        #region Accessories
+
+        EndCapPricePerPiece = 282.96m,
+                MechanicalJoint_AV585PricePerPiece = 87.34m,
+                MechanicalJoint_9U18PricePerPiece = 138.45m,
+                GBSpacerPricePerPiece = 5.01m,
+                PlasticWedgePricePerPiece = 10.09m,
+                BarFastenerPricePerPiece = 4.40m,
+                SealingBlockPricePerPiece = 63.75m,
+                SpacerFixSashPricePerPiece = 21.42m,
+
+                EndCapPrice,
+                MechJointPrice,
+                GBSpacerPrice,
+                PlasticWedgePrice,
                 WeatherBarFastenerPrice,
-                GuideTrackPrice,
-                InterlockPrice,
-                ExtensionForInterlockPrice,
-                AlumTrackPrice,
-                WaterSeepagePrice,
                 SealingBlockPrice,
                 SpacerFixSashPrice,
-                HandlePrice,
-                FramePerimeter,
-                SashPerimeter,
-                GlassPrice,
-                FSPrice,
-                _2DHingePrice,
-                GeorgianBarCost,
-                ExtensionPrice,
-                ThresholdPrice,
-                CoverProfileCost,
-                GBSpacerPrice,
-                GlazingGasketPrice,
-                PlasticWedgePrice,
+
+                MechanicalJointPricePerPiece,
+        #endregion
+        #region AncillaryProfile
+        GlazingGasketPricePerLinearMeter = 32.64m,
+            GlazingBeadPricePerLinearMeter = 56.45m,
+            GlazingBead_G58PricePerLinearMeter = 117.72m,
+            GeorgianBar_0724Price = 154.93m,
+            GeorgianBar_0726Price = 307.75m,
+            CoverProfile_0914Price = 20.68m,
+            CoverProfile_0373Price = 105.41m,
+            ThresholdPricePerPiece = 1229.34m,
+            WeatherBarPricePerPiece = 236.75m,
+            GuideTrackPricePerLinearMeter = 157.18m,
+            InterlockPricePerPiece = 333.77m,
+            ExtensionForInterlockPricePerPiece = 789.01m,
+            AluminumTrackPricePerLinearMeter = 251.10m,
+            WaterSeepagePricePerLinearMeter = 153.73m,
+
+            GlazingGasketPrice,
+            GeorgianBarCost,
+            CoverProfileCost,
+            ThresholdPrice,
+            WeatherBarPrice,
+            GuideTrackPrice,
+            InterlockPrice,
+            ExtensionForInterlockPrice,
+            AlumTrackPrice,
+            WaterSeepagePrice,
+
+            GeorgianBarPrice,
+            CoverProfilePrice,
+        #endregion
+
+        BrushSealPricePerLinearMeter = 15.80m,
+                SealantPricePerCan_BrownBlack = 430m,
+                SealantPricePerCan_Clear = 170m,
+                PUFoamingPricePerCan = 210m,
+
+                BrushSealPrice,
+                SealantPricePerCan,
                 SealantPrice,
                 PUFoamingPrice,
+
+                MaterialCostBreakDownBase,
+
                 ProfileColorPoints = 0,
                 CostingPoints = 0,
                 InstallationPoints = 0,
@@ -2268,7 +2299,12 @@ namespace ModelLayer.Model.Quotation
 
             DataTable Price_List = new DataTable();
             Price_List.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-            Price_List.Columns.Add(CreateColumn("Total", "Total", "System.Decimal"));
+            Price_List.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
+            Price_List.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
+            Price_List.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
+            Price_List.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
+            Price_List.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
+
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
@@ -2409,12 +2445,14 @@ namespace ModelLayer.Model.Quotation
 
                     if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
                     {
-                        SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan_Clear;
+                        SealantPricePerCan = SealantPricePerCan_Clear;
                     }
                     else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                     {
-                        SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                        SealantPricePerCan = SealantPricePerCan_BrownBlack;
                     }
+                    SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
+
                     #endregion
 
                     #region ThresholdPrice
@@ -2463,27 +2501,33 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     if (mpnl.MPanel_Type == "Transom")
                                     {
+                                        BOM_divDesc = "Transom";
                                         if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                         {
-                                            DivPrice += ((div.Div_Width) / 1000m) * Divider_7536_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
+                                            DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
+                                            DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
+                                            MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
                                         }
                                         else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                         {
-                                            DivPrice += (div.Div_Width / 1000m) * Divider_7538_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                            MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                            DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
+                                            DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
+                                            MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
                                         }
                                         else if (div.Div_ArtNo == Divider_ArticleNo._2069)
                                         {
-                                            DivPrice += (div.Div_Width / 1000m) * Divider_2069_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                            DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
+                                            DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
+                                            MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
                                         }
+
+                                        DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
+                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
+                                        MechJointPrice += MechanicalJointPricePerPiece * 2;
                                     }
                                     else if (mpnl.MPanel_Type == "Mullion")
                                     {
+                                        BOM_divDesc = "Mullion";
                                         if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                         {
                                             DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
@@ -2515,28 +2559,31 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
-                                            DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter_7533_White;
+                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
                                         }
                                         else
                                         {
-                                            DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
                                         }
                                     }
                                     else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                     {
                                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                         {
-                                            DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter_385_White;
+                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
                                         }
                                         else
                                         {
-                                            DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter_385_WoodGrain;
+                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
                                         }
-
                                         ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
                                         ShootBoltReversePrice += ShootBoltReversePricePerPiece;
                                         ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
                                     }
+
+                                    DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
+
+
                                     ChckDM = true;
                                     EndCapPrice += EndCapPricePerPiece * 2;
                                 }
@@ -2570,7 +2617,16 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                if (pnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
                                             }
 
                                             if (pnl.Panel_ExtensionOptionsVisibility == true &&
@@ -2585,6 +2641,7 @@ namespace ModelLayer.Model.Quotation
                                                     pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
                                                 {
                                                     ExtensionPrice += Extension_639957PricePerPiece;
+                                                    ExtensionBasePrice = Extension_639957PricePerPiece;
                                                 }
                                             }
 
@@ -2593,6 +2650,7 @@ namespace ModelLayer.Model.Quotation
                                                 if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                                                 {
                                                     HandlePrice += RotoswingHanldePricePerPiece;
+                                                    HandleBasePrice = RotoswingHanldePricePerPiece;
                                                 }
                                                 else if (pnl.Panel_HandleType == Handle_Type._Rotary)
                                                 {
@@ -2610,10 +2668,14 @@ namespace ModelLayer.Model.Quotation
                                                         HandlePrice += MVDHandlePricePerPiece;
 
                                                         LatchDeadboltStrikerPrice += LatchDeadboltStrikerPricePerPiece;
+                                                        HandleBasePrice = MVDHandlePricePerPiece;
+
                                                     }
                                                     else if (pnl.Panel_HandleType == Handle_Type._Rio)
                                                     {
                                                         HandlePrice += RioHandlePricePerPiece;
+
+                                                        HandleBasePrice = RioHandlePricePerPiece;
                                                     }
                                                     else if (pnl.Panel_HandleType == Handle_Type._Rotoline)
                                                     {
@@ -2636,6 +2698,7 @@ namespace ModelLayer.Model.Quotation
                                                         pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._630956)
                                                     {
                                                         ExtensionPrice += MVDExtensionPricePerPiece;
+                                                        ExtensionBasePrice = MVDExtensionPricePerPiece;
                                                     }
                                                     else if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
                                                              pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
@@ -2643,6 +2706,7 @@ namespace ModelLayer.Model.Quotation
                                                              pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
                                                     {
                                                         ExtensionPrice += Extension_567639PricePerPiece;
+                                                        ExtensionBasePrice = Extension_567639PricePerPiece;
                                                     }
                                                 }
                                                 #endregion
@@ -2677,6 +2741,8 @@ namespace ModelLayer.Model.Quotation
                                                     if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                                                     {
                                                         HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                        HandleBasePrice = RotoswingHanldePricePerPiece;
                                                     }
                                                 }
 
@@ -2705,11 +2771,13 @@ namespace ModelLayer.Model.Quotation
                                         #region FSPrice
                                         if (pnl.Panel_SashHeight >= 800)
                                         {
-                                            FSPrice += FS_26HD_casementPricePerPiece;
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
                                         }
                                         else
                                         {
-                                            FSPrice += FS_16HD_casementPricePerPiece;
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
                                         }
                                         #endregion
 
@@ -2720,6 +2788,8 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                                             {
                                                 HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                HandleBasePrice = RotoswingHanldePricePerPiece;
                                             }
                                             else if (pnl.Panel_HandleType == Handle_Type._Rotary)
                                             {
@@ -2735,14 +2805,20 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
                                             {
                                                 HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                HandleBasePrice = RotoswingHanldePricePerPiece;
                                             }
                                             else if (pnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
                                             {
                                                 HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
+
+                                                HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
                                             }
                                             else if (pnl.Panel_HandleType == Handle_Type._Rio)
                                             {
                                                 HandlePrice += RioHandlePricePerPiece;
+
+                                                HandleBasePrice = RioHandlePricePerPiece;
                                             }
                                         }
                                         #endregion
@@ -2754,10 +2830,12 @@ namespace ModelLayer.Model.Quotation
                                             pnl.Panel_RollersTypes == RollersTypes._HDRoller)
                                         {
                                             RollerPrice += 2 * HDRollerPricePerPiece;
+                                            RollerBasePrice = HDRollerPricePerPiece;
                                         }
                                         else if (pnl.Panel_RollersTypes == RollersTypes._GURoller)
                                         {
                                             RollerPrice += 2 * GURollerPricePerPiece;
+                                            RollerBasePrice = GURollerPricePerPiece;
                                         }
 
                                         if (pnl.Panel_HandleType != Handle_Type._None)
@@ -3004,38 +3082,47 @@ namespace ModelLayer.Model.Quotation
                                         if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
                                         {
                                             EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
+                                            EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
                                         }
                                         else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
                                         {
                                             EspagPrice += MVDGearPricePerPiece;
+                                            EspagBasePrice = MVDGearPricePerPiece;
                                         }
                                         else
                                         {
                                             EspagPrice += Espag741012_PricePerPiece;
+                                            EspagBasePrice = Espag741012_PricePerPiece;
                                         }
                                     }
                                     #endregion
@@ -3182,6 +3269,8 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                             }
+                                            GeorgianBarPrice = GeorgianBar_0724Price;
+
                                         }
                                         else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                         {
@@ -3193,6 +3282,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                             }
+                                            GeorgianBarPrice = GeorgianBar_0726Price;
                                         }
                                     }
                                     #endregion
@@ -3201,11 +3291,13 @@ namespace ModelLayer.Model.Quotation
                                     if ((pnl.Panel_Type.Contains("Sliding")))
                                     {
                                         CoverProfileCost += ((pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
+                                        CoverProfilePrice = CoverProfile_0914Price;
                                     }
                                     else
                                     {
                                         CoverProfileCost += (pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
                                                             (pnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
+                                        CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
                                     }
                                     #endregion
 
@@ -3267,6 +3359,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     #endregion
 
+                                    HandleDesc = pnl.Panel_HandleType.ToString();
 
                                     CostingPoints += ProfileColorPoints * 4;
                                     InstallationPoints += (ProfileColorPoints / 3) * 4;
@@ -3301,7 +3394,16 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
-                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        {
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        }
+                                        else
+                                        {
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        }
                                     }
 
                                     if (Singlepnl.Panel_ExtensionOptionsVisibility == true &&
@@ -3316,6 +3418,7 @@ namespace ModelLayer.Model.Quotation
                                             Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
                                         {
                                             ExtensionPrice += Extension_639957PricePerPiece;
+                                            ExtensionBasePrice = Extension_639957PricePerPiece;
                                         }
                                     }
 
@@ -3324,6 +3427,8 @@ namespace ModelLayer.Model.Quotation
                                         if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
                                         {
                                             HandlePrice += RotoswingHanldePricePerPiece;
+
+                                            HandleBasePrice = RotoswingHanldePricePerPiece;
                                         }
                                         else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
                                         {
@@ -3342,10 +3447,13 @@ namespace ModelLayer.Model.Quotation
                                                 HandlePrice += MVDHandlePricePerPiece;
 
                                                 LatchDeadboltStrikerPrice += LatchDeadboltStrikerPricePerPiece;
+                                                HandleBasePrice = MVDHandlePricePerPiece;
                                             }
                                             else if (Singlepnl.Panel_HandleType == Handle_Type._Rio)
                                             {
                                                 HandlePrice += RioHandlePricePerPiece;
+
+                                                HandleBasePrice = RioHandlePricePerPiece;
                                             }
                                             else if (Singlepnl.Panel_HandleType == Handle_Type._Rotoline)
                                             {
@@ -3367,6 +3475,7 @@ namespace ModelLayer.Model.Quotation
                                                 Singlepnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._630956)
                                             {
                                                 ExtensionPrice += MVDExtensionPricePerPiece;
+                                                ExtensionBasePrice = MVDExtensionPricePerPiece;
                                             }
                                             else if (Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
                                                      Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
@@ -3374,6 +3483,7 @@ namespace ModelLayer.Model.Quotation
                                                      Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
                                             {
                                                 ExtensionPrice += Extension_567639PricePerPiece;
+                                                ExtensionBasePrice = MVDExtensionPricePerPiece;
                                             }
                                         }
                                         #endregion
@@ -3408,6 +3518,8 @@ namespace ModelLayer.Model.Quotation
                                             if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
                                             {
                                                 HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                HandleBasePrice = RotoswingHanldePricePerPiece;
                                             }
                                         }
 
@@ -3436,11 +3548,13 @@ namespace ModelLayer.Model.Quotation
                                 #region FSPrice
                                 if (Singlepnl.Panel_SashHeight >= 800)
                                 {
-                                    FSPrice += FS_26HD_casementPricePerPiece;
+                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                    FSBasePrice = FS_26HD_casementPricePerPiece;
                                 }
                                 else
                                 {
-                                    FSPrice += FS_16HD_casementPricePerPiece;
+                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                    FSBasePrice = FS_16HD_casementPricePerPiece;
                                 }
                                 #endregion
 
@@ -3449,6 +3563,8 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
                                     {
                                         HandlePrice += RotoswingHanldePricePerPiece;
+
+                                        HandleBasePrice = RotoswingHanldePricePerPiece;
                                     }
                                     else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
                                     {
@@ -3466,14 +3582,20 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
                                     {
                                         HandlePrice += RotoswingHanldePricePerPiece;
+
+                                        HandleBasePrice = RotoswingHanldePricePerPiece;
                                     }
                                     else if (Singlepnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
                                     {
                                         HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
+
+                                        HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
                                     }
                                     else if (Singlepnl.Panel_HandleType == Handle_Type._Rio)
                                     {
                                         HandlePrice += RioHandlePricePerPiece;
+
+                                        HandleBasePrice = RioHandlePricePerPiece;
                                     }
                                 }
                                 #endregion
@@ -3484,10 +3606,12 @@ namespace ModelLayer.Model.Quotation
                                     Singlepnl.Panel_RollersTypes == RollersTypes._HDRoller)
                                 {
                                     RollerPrice += 2 * HDRollerPricePerPiece;
+                                    RollerBasePrice = HDRollerPricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_RollersTypes == RollersTypes._GURoller)
                                 {
                                     RollerPrice += 2 * GURollerPricePerPiece;
+                                    RollerBasePrice = GURollerPricePerPiece;
                                 }
 
                                 if (Singlepnl.Panel_HandleType != Handle_Type._None)
@@ -3728,38 +3852,47 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
                                 {
                                     EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
+                                    EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
                                 }
                                 else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
                                 {
                                     EspagPrice += MVDGearPricePerPiece;
+                                    EspagBasePrice = MVDGearPricePerPiece;
                                 }
                                 else
                                 {
                                     EspagPrice += Espag741012_PricePerPiece;
+                                    EspagBasePrice = Espag741012_PricePerPiece;
                                 }
                             }
                             #endregion
@@ -3905,6 +4038,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                     }
+                                    GeorgianBarPrice = GeorgianBar_0724Price;
                                 }
                                 else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                 {
@@ -3916,6 +4050,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                     }
+                                    GeorgianBarPrice = GeorgianBar_0726Price;
                                 }
                             }
                             #endregion
@@ -3924,11 +4059,13 @@ namespace ModelLayer.Model.Quotation
                             if ((Singlepnl.Panel_Type.Contains("Sliding")))
                             {
                                 CoverProfileCost += ((Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
+                                CoverProfilePrice = CoverProfile_0914Price;
                             }
                             else
                             {
                                 CoverProfileCost += (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
                                                     (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
+                                CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
                             }
                             #endregion
 
@@ -4058,6 +4195,7 @@ namespace ModelLayer.Model.Quotation
                                Math.Round(SashPrice, 2) +
                                Math.Round(SashReinPrice, 2) +
                                Math.Round(DivPrice, 2) +
+                               Math.Round(DivReinPrice, 2) +
                                Math.Round(claddingPrice, 2) +
                                Math.Round(DMPrice, 2) +
                                Math.Round(SealantPrice, 2) +
@@ -4066,7 +4204,7 @@ namespace ModelLayer.Model.Quotation
                                Math.Round(AncillaryProfileCost, 2) +
                                Math.Round(AccesorriesCost, 2);
 
-
+                MaterialCostBreakDownBase = MaterialCost;
 
                 MaterialCost = MaterialCost +
                                (MaterialCost * 0.05m) +
@@ -4079,54 +4217,593 @@ namespace ModelLayer.Model.Quotation
                             Math.Round(MaterialCost, 2) +
                             Math.Round(GlassPrice, 2);
 
-                //TotaPrice = (TotaPrice * 1.3m) + TotaPrice; // factor 1.3 
                 TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
                 lstTotalPrice.Add(TotaPrice);
 
 
-                Price_List.Rows.Add("Material Cost", Math.Round(MaterialCost, 2));
-                Price_List.Rows.Add("Accesorries", Math.Round(AccesorriesCost, 2));
-                Price_List.Rows.Add("Ancillary Profile", Math.Round(AncillaryProfileCost, 2));
-                Price_List.Rows.Add("Fitting and Supplies", Math.Round(FittingAndSuppliesCost, 2));
-                Price_List.Rows.Add("Labor Cost", Math.Round(LaborCost, 2));
-                Price_List.Rows.Add("Installation Cost", Math.Round(InstallationCost, 2));
-                Price_List.Rows.Add("Total", Math.Round(TotaPrice, 2));
+                #region Price Break Down 
+
+                decimal MaterialCostDeduction = 0, MaterialCostPriceBreakDown = 0;
+                MaterialCostDeduction = AccesorriesCost +
+                                        AncillaryProfileCost +
+                                        FittingAndSuppliesCost;
+
+                MaterialCostPriceBreakDown = MaterialCost - MaterialCostDeduction;
+
+                Price_List.Rows.Add("Material Cost",
+                                    "",
+                                    Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(MaterialCostPriceBreakDown * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((MaterialCostPriceBreakDown * PricingFactor) + MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("Accesorries",
+                                    "",
+                                    Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(AccesorriesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((AccesorriesCost * PricingFactor) + AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("Ancillary Profile",
+                                 "",
+                                 Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(AncillaryProfileCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                 Math.Round((AncillaryProfileCost * PricingFactor) + AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                 "Price Break Down");
+
+                Price_List.Rows.Add("Fitting and Supplies",
+                                    "",
+                                    Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(FittingAndSuppliesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((FittingAndSuppliesCost * PricingFactor) + FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("Labor Cost",
+                                    "",
+                                    Math.Round(LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(LaborCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((LaborCost * PricingFactor) + LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("Installation Cost",
+                                    "",
+                                    Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("Glass",
+                                    "",
+                                    Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                    Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                Price_List.Rows.Add("",
+                                    "",
+                                    "",
+                                    "",
+                                    Math.Round(TotaPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "Price Break Down");
+
+                #endregion
+
+                #region Material Cost
+                decimal Wastage,
+                        contingenciesForOverheadCost,
+                        VAT,
+                        DutiesAndTaxes;
+
+                Wastage = (MaterialCostBreakDownBase * 0.05m);
+                contingenciesForOverheadCost = (MaterialCostBreakDownBase * 0.10m);
+                VAT = (MaterialCostBreakDownBase * 0.12m);
+                DutiesAndTaxes = (MaterialCostBreakDownBase * 0.16m);
+
+
+                Price_List.Rows.Add("Frame Price",
+                                    FramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(FramePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add("Frame Reinforcement Price",
+                                    FrameReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(FrameReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add("Sash Price",
+                                    SashPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(SashPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add("Sash Reinforcement Price",
+                                    SashReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(SashReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add(BOM_divDesc + " Price",
+                                    DividerPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(DivPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add(BOM_divDesc + " Reinforcement Price",
+                                   DividerReinPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(DivReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Material Cost");
+
+                Price_List.Rows.Add("Cladding with reinforcement Price",
+                                   claddingPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(claddingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Material Cost");
+
+                Price_List.Rows.Add("Dummy Mullion Price",
+                                   DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Material Cost");
+
+                Price_List.Rows.Add("Sealant Price",
+                                   SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(SealantPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Material Cost");
+
+                Price_List.Rows.Add("PU Foaming Price",
+                                    PUFoamingPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(PUFoamingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add("Wastage",
+                                    "",
+                                    Math.Round(Wastage, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                Price_List.Rows.Add("Contingencies For Over head Cost",
+                          "",
+                          Math.Round(contingenciesForOverheadCost, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Material Cost");
+
+                Price_List.Rows.Add("VAT",
+                          "",
+                          Math.Round(VAT, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Material Cost");
+
+                Price_List.Rows.Add("Duties And Taxes",
+                          "",
+                          Math.Round(DutiesAndTaxes, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Material Cost");
+
+                Price_List.Rows.Add("Total",
+                                    "",
+                                    Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Material Cost");
+
+                #endregion
+
+                #region Accesorries Cost
+
+                Price_List.Rows.Add("End cap Price",
+                                  EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Accesorries");
+
+                Price_List.Rows.Add("Mechanical Joint Price",
+                               MechanicalJointPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(MechJointPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Accesorries");
+
+                Price_List.Rows.Add("Glazing Bead Spacer Price",
+                              GBSpacerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(GBSpacerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Accesorries");
+
+                Price_List.Rows.Add("Plastic Wedge Price",
+                              PlasticWedgePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(PlasticWedgePrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Accesorries");
+
+                Price_List.Rows.Add("Sealing Block Price",
+                              SealingBlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(SealingBlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Accesorries");
+
+                Price_List.Rows.Add("Total",
+                                   "",
+                                   Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Accesorries");
+
+                #endregion
+
+                #region Ancillary Profile Cost
+
+                Price_List.Rows.Add("Threshold Price",
+                                ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Ancillary Profile");
+
+                Price_List.Rows.Add("Glazing Bead Price",
+                           GlazingBeadPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(GbPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Georgian Bar Cost",
+                           GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Cover Profile Cover",
+                           CoverProfilePrice.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(CoverProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Glazing Gasket Price",
+                           GlazingGasketPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(GlazingGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Weather Bar Price",
+                           WeatherBarPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(WeatherBarPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Weather Bar Fastener Price",
+                           BarFastenerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(WeatherBarFastenerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Water Seepage Price",
+                           WaterSeepagePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(WaterSeepagePrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Guide Track Price",
+                           GuideTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(GuideTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Aluminum Track Price",
+                           AluminumTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(AlumTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Interlock Price",
+                           InterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(InterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Extension For Interlock Price",
+                           ExtensionForInterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                           Math.Round(ExtensionForInterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                           "",
+                           "",
+                           "Ancillary Profile");
+
+                Price_List.Rows.Add("Total",
+                                  "",
+                                  Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Ancillary Profile");
+                #endregion
+
+                #region Fitting and Supplies Cost
+
+                Price_List.Rows.Add("Friction Stay Price",
+                                    FSBasePrice.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(FSPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                Price_List.Rows.Add("Restrictor Stay Price",
+                                    RestrictorStayPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(RestrictorStayPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                Price_List.Rows.Add("Corner Drive Price",
+                                    CornerDrivePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(CornerDrivePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                Price_List.Rows.Add("Snap In Keep Price",
+                                    SnapInKeepPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(SnapInKeepPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                Price_List.Rows.Add("35mm Backset Espagnolette With Cylinder Price",
+                                    _35mmBacksetEspagWithCylinder.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                Price_List.Rows.Add("Middle CLoser Price",
+                                  MiddleCLoserPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(MiddleCLoserPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                Price_List.Rows.Add("Stay Bearing Price",
+                                  StayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(StayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                Price_List.Rows.Add("Stay Bearing Pin Price",
+                               StayBearingPinPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(StayBearingPinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Fitting and Supplies");
+
+                Price_List.Rows.Add("Cover Stay Bearing Price",
+                               CoverStayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(CoverStayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Fitting and Supplies");
+
+                Price_List.Rows.Add("Cover Corner Hinge Price",
+                               CoverCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(CoverCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Fitting and Supplies");
+
+                Price_List.Rows.Add("Corner Pivot Rest Price",
+                              CornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(CornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                Price_List.Rows.Add("Top Corner Hinge Price",
+                              TopCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(TopCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                Price_List.Rows.Add("Corver Corner Pivot Rest Price",
+                             CorverCornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                             Math.Round(CorverCornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                             "",
+                             "",
+                             "Fitting and Supplies");
+
+                Price_List.Rows.Add("Corver Corner Pivot Rest Vertical Price",
+                            CorverCornerPivotRestVerticalPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                            Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString("N", new CultureInfo("en-US")),
+                            "",
+                            "",
+                            "Fitting and Supplies");
+
+                Price_List.Rows.Add(HandleDesc + " Price",
+                            HandleBasePrice.ToString("N", new CultureInfo("en-US")),
+                            Math.Round(HandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                            "",
+                            "",
+                            "Fitting and Supplies");
+
+                Price_List.Rows.Add("Espagnolette Price",
+                            EspagBasePrice.ToString("N", new CultureInfo("en-US")),
+                            Math.Round(EspagPrice, 2).ToString("N", new CultureInfo("en-US")),
+                            "",
+                            "",
+                            "Fitting and Supplies");
+
+                Price_List.Rows.Add("2D Hinge Price",
+                            _2DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                            Math.Round(_2DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                            "",
+                            "",
+                            "Fitting and Supplies");
+
+                Price_List.Rows.Add("3D Hinge Price",
+                          _3DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(_3DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("NT Center Hinge Price",
+                          NTCenterHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(NTCenterHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Shoot Bolt Striker Price",
+                          ShootBoltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(ShootBoltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Shoot Bolt Reverse Price",
+                          ShootBoltReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(ShootBoltReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Shoot Bolt Non Reverse Price",
+                          ShootBoltNonReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(ShootBoltNonReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Striker Price",
+                          StrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(StrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                          LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                          Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                          "",
+                          "",
+                          "Fitting and Supplies");
+
+                Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                         LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                         Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                         "",
+                         "",
+                         "Fitting and Supplies");
+
+                Price_List.Rows.Add("Extension Price",
+                         ExtensionBasePrice.ToString("N", new CultureInfo("en-US")),
+                         Math.Round(ExtensionPrice, 2).ToString("N", new CultureInfo("en-US")),
+                         "",
+                         "",
+                         "Fitting and Supplies");
+
+                Price_List.Rows.Add("Roller Price",
+                         RollerBasePrice.ToString("N", new CultureInfo("en-US")),
+                         Math.Round(RollerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                         "",
+                         "",
+                         "Fitting and Supplies");
+
+                Price_List.Rows.Add("Striker Price",
+                         StrikerLRPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                         Math.Round(StrikerLRPrice, 2).ToString("N", new CultureInfo("en-US")),
+                         "",
+                         "",
+                         "Fitting and Supplies");
+
+                Price_List.Rows.Add("Brush Seal Price",
+                        BrushSealPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                        Math.Round(BrushSealPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        "",
+                        "",
+                        "Fitting and Supplies");
+
+                Price_List.Rows.Add("Total",
+                                 "",
+                                 Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                 "",
+                                 "",
+                                 "Fitting and Supplies");
+                #endregion
 
                 var query = from r in Price_List.AsEnumerable()
+                            where r.Field<string>("Nett") != "0.00" &&
+                             r.Field<string>("Filter") == BOM_Filter.ToString()
                             group r by new
                             {
                                 Description = r.Field<string>("Description"),
-                                Unit = r.Field<decimal>("Total")
+                                BasePrice = r.Field<string>("Base Price"),
+                                Nett = r.Field<string>("Nett"),
+                                Markup = r.Field<string>("Mark-up"),
+                                Subtotal = r.Field<string>("Subtotal"),
+                                Filter = r.Field<string>("Filter")
+
                             } into g
                             select new
                             {
                                 Description = g.Key.Description,
-                                Total = g.Sum(r => r.Field<decimal>("Total"))
+                                BasePrice = g.Key.BasePrice,
+                                Nett = g.Key.Nett,
+                                Markup = g.Key.Markup,
+                                Subtotal = g.Key.Subtotal,
+                                Filter = g.Key.Filter
                             };
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-                dt.Columns.Add(CreateColumn("Total", "Total", "System.Decimal"));
+                dt.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
+                dt.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
+                dt.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
+                dt.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
+                dt.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
 
                 foreach (var element in query)
                 {
                     DataRow row = dt.NewRow();
                     row["Description"] = element.Description;
-                    row["Total"] = element.Total;
+                    row["Base Price"] = element.BasePrice;
+                    row["Nett"] = element.Nett;
+                    row["Mark-up"] = element.Markup;
+                    row["Subtotal"] = element.Subtotal;
+                    row["Filter"] = element.Filter;
 
                     dt.Rows.Add(row);
                 }
 
-
-
-                //foreach (DataGridViewRow rows in dgv.Rows)
-                //{
-                //    DataRow row = dt.NewRow();
-                //    row["Description"] = rows.Cells[0].Value;
-                //    row["Total"] = rows.Cells[1].Value;
-
-                //    dt.Rows.Add(row);
-                //}
                 Price_List = dt;
 
                 //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
@@ -4152,6 +4829,7 @@ namespace ModelLayer.Model.Quotation
             }
             return Price_List;
         }
+
 
 
         public void ClearingOperation()

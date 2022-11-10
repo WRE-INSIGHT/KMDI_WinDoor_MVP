@@ -1181,5 +1181,18 @@ namespace EnumerationTypeLayer
 
             private GS100CoverKit_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class BillOfMaterialsFilter : Enumeration<BillOfMaterialsFilter, int>
+        {
+            public static readonly BillOfMaterialsFilter _PriceBreakDown = new BillOfMaterialsFilter(0, "Price Break Down");
+            public static readonly BillOfMaterialsFilter _MaterialCost = new BillOfMaterialsFilter(1, "Material Cost");
+            public static readonly BillOfMaterialsFilter _AccesorriesCost = new BillOfMaterialsFilter(2, "Accesorries");
+            public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
+            public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
+
+
+
+            private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

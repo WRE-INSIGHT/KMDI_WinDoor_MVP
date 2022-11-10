@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmb_Filter = new System.Windows.Forms.ComboBox();
             this.dgv_priceList = new System.Windows.Forms.DataGridView();
@@ -48,20 +50,33 @@
             // 
             this.cmb_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmb_Filter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_Filter.FormattingEnabled = true;
-            this.cmb_Filter.Location = new System.Drawing.Point(884, 4);
+            this.cmb_Filter.Location = new System.Drawing.Point(930, 4);
             this.cmb_Filter.Name = "cmb_Filter";
-            this.cmb_Filter.Size = new System.Drawing.Size(97, 21);
+            this.cmb_Filter.Size = new System.Drawing.Size(51, 21);
             this.cmb_Filter.TabIndex = 0;
+            this.cmb_Filter.SelectedValueChanged += new System.EventHandler(this.cmb_Filter_SelectedValueChanged);
             // 
             // dgv_priceList
             // 
             this.dgv_priceList.AllowUserToAddRows = false;
             this.dgv_priceList.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_priceList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_priceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_priceList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_priceList.Location = new System.Drawing.Point(0, 28);
             this.dgv_priceList.Name = "dgv_priceList";
+            this.dgv_priceList.ReadOnly = true;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgv_priceList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_priceList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_priceList.Size = new System.Drawing.Size(984, 414);
             this.dgv_priceList.TabIndex = 1;
