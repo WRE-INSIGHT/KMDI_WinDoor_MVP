@@ -3829,23 +3829,23 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             if (Panel_ParentMultiPanelModel != null)
             {
-                int deduct = 20;
+                int deduct = 0;
                 if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
                 {
-                    deduct = 20;
+                    deduct = (int)(20 * Panel_Zoom);
                   
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Placement == "First" ||
                          Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
                 {
-                    deduct = 16;
+                    deduct = (int)(16 * Panel_Zoom);
                 }
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
 
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
-                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (deduct * Panel_Zoom));
+                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
                         Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                     else
@@ -3877,7 +3877,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (deduct * Panel_Zoom));
+                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
                     }
                     else
                     {

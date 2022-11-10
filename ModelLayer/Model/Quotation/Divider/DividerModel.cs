@@ -430,7 +430,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Height = ht + (div_overlap * 2);
-                    DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    //DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
                 }
             }
             else if (Div_Type == DividerType.Transom)
@@ -444,7 +444,7 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Width = wd + (div_overlap * 2);
-                    DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height); 
+                    //DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height); 
                 }
             }
         }
