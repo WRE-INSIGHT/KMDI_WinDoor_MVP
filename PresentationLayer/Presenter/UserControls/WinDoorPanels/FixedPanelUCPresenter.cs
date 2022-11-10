@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
@@ -32,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
         private IMultiPanelModel _multiPanelModel;
+        private ConstantVariables constants = new ConstantVariables();
 
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
@@ -100,78 +102,156 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
-                foreach(Control wndr_objects in wdm.lst_objects)
+                int framePropertyHeight = 0;
+                int concretePropertyHeight = 0;
+                int mpnlPropertyHeight = 0;
+                bool isTrue = false;
+                foreach (Control wndr_objects in wdm.lst_objects)
                 {
-                  
-                    if (wndr_objects.Name.Contains("Frame"))
+                    if (isTrue == false)
                     {
-                        foreach (IFrameModel fr in wdm.lst_frame)
+                        if (wndr_objects.Name.Contains("Frame"))
                         {
-                            if (wndr_objects.Name == fr.Frame_Name)
-                            {
-                                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                                {
 
-                                    if (mpnl.MPanel_DividerEnabled)
+                            foreach (IFrameModel fr in wdm.lst_frame)
+                            {
+                                if (wndr_objects.Name == fr.Frame_Name)
+                                {
+                                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel) //1ndlvlMpnlProperties
                                     {
-                                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                        foreach (IMultiPanelModel secondLvlMpnl in mpnl.MPanelLst_MultiPanel) // 2ndlvlMpnlProperties
                                         {
-                                            if (pnl.Panel_Name == fixedUC.Name)
+                                            mpnlPropertyHeight += constants.mpnl_propertyHeight_default - 8;
+                                            if (secondLvlMpnl.MPanel_DividerEnabled)
                                             {
-                                                propertyHeight += 382;
-                                                break;
+                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
+                                                {
+                                                    if (pnl.Panel_Name == fixedUC.Name)
+                                                    {
+                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        isTrue = true;
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (IDividerModel dvd in secondLvlMpnl.MPanelLst_Divider)
+                                                        {
+                                                            propertyHeight += dvd.Div_PropHeight;
+                                                            break;
+                                                        }
+                                                        propertyHeight += pnl.Panel_PropertyHeight;
+                                                    }
+                                                }
                                             }
                                             else
                                             {
-                                                foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
                                                 {
-                                                    propertyHeight += dvd.Div_PropHeight;
+                                                    if (pnl.Panel_Name == fixedUC.Name)
+                                                    {
+                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        isTrue = true;
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        propertyHeight += pnl.Panel_PropertyHeight;
+                                                    }
+                                                }
+                                            }
+                                            if (isTrue == true)
+                                            {
+                                                break;
+                                            }
+                                            mpnlPropertyHeight += 8;
+                                        }
+                                        //pnl in 1stlvl mpnl
+                                        if (mpnl.MPanel_DividerEnabled)
+                                        {
+                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                            {
+                                                if (pnl.Panel_Name == fixedUC.Name)
+                                                {
+
+                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    wdm.WD_PropertiesScroll = propertyHeight;
+                                                    isTrue = true;
                                                     break;
                                                 }
-                                                propertyHeight += pnl.Panel_PropertyHeight;
+                                                else
+                                                {
+                                                    foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                                                    {
+                                                        propertyHeight += dvd.Div_PropHeight;
+                                                        break;
+                                                    }
+                                                    propertyHeight += pnl.Panel_PropertyHeight;
+                                                }
                                             }
                                         }
-                                    }
-                                    else
-                                    {
-                                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                        else
                                         {
-                                            if (pnl.Panel_Name == fixedUC.Name)
+                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                             {
-                                                propertyHeight += 382;
-                                                break;
-                                            }
-                                            else
-                                            {
-                                                propertyHeight += pnl.Panel_PropertyHeight;
+                                                if (pnl.Panel_Name == fixedUC.Name)
+                                                {
+                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    wdm.WD_PropertiesScroll = propertyHeight;
+                                                    isTrue = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    propertyHeight += pnl.Panel_PropertyHeight;
+                                                }
                                             }
                                         }
+                                        if (isTrue == true)
+                                        {
+                                            break;
+                                        }
                                     }
-                                }
-                                foreach (IPanelModel pnl in fr.Lst_Panel)
-                                {
-                                    if (pnl.Panel_Name == fixedUC.Name)
+                                    foreach (IPanelModel pnl in fr.Lst_Panel)
                                     {
-                                        propertyHeight += 382;
-                                        break;
+                                        if (pnl.Panel_Name == fixedUC.Name)
+                                        {
+                                            propertyHeight += constants.frame_propertyHeight_default - 4 + framePropertyHeight + concretePropertyHeight;
+                                            wdm.WD_PropertiesScroll = propertyHeight;
+                                            isTrue = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            propertyHeight += pnl.Panel_PropertyHeight;
+                                        }
                                     }
+
+                                    propertyHeight = 0;
+                                    mpnlPropertyHeight = 0;
+                                    framePropertyHeight += fr.FrameProp_Height;
                                 }
                             }
                         }
-                       
-                    }
-                    else if (wndr_objects.Name.Contains("Concrete"))
-                    {
-                        foreach (IConcreteModel cr in wdm.lst_concrete)
+                        else if (wndr_objects.Name.Contains("Concrete"))
                         {
-                            if(wndr_objects.Name == cr.Concrete_Name)
+                            foreach (IConcreteModel cr in wdm.lst_concrete)
                             {
-                                propertyHeight += 102;
+                                if (wndr_objects.Name == cr.Concrete_Name)
+                                {
+                                    concretePropertyHeight += 113;
+                                }
                             }
+                        }
+                        if (isTrue == true)
+                        {
+                            break;
                         }
                     }
                 }
-                wdm.WD_PropertiesScroll = propertyHeight;
+              
 
             }
             catch (Exception ex)

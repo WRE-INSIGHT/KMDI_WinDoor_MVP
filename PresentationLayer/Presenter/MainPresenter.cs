@@ -7289,7 +7289,7 @@ namespace PresentationLayer.Presenter
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
-                        _mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
+                        //_mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);

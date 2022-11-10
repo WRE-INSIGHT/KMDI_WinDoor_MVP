@@ -121,6 +121,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event PaintEventHandler awningPanelUCPaintEventRaised;
         public event EventHandler extensionToolStripMenuItemClickedEventRaised;
         public event EventHandler awningPanelUCSizeChangedEventRaised;
+        public event EventHandler awningPanelUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -159,6 +160,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             {
                 cmenu_awning.Show(new Point(MousePosition.X, MousePosition.Y));
             }
+            EventHelpers.RaiseEvent(this, awningPanelUCMouseClickEventRaised, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

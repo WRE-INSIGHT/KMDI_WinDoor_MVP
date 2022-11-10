@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
@@ -32,7 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
         private IMultiPanelModel _multiPanelModel;
-
+        private ConstantVariables constants = new ConstantVariables();
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
         private IFrameUCPresenter _frameUCP;

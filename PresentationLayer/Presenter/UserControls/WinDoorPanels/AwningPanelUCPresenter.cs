@@ -1,8 +1,11 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
@@ -29,6 +32,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
         private IMultiPanelModel _multiPanelModel;
+        private ConstantVariables constants = new ConstantVariables();
 
         private IMultiPanelMullionUCPresenter _multiPanelMullionUCP;
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
@@ -46,7 +50,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
         bool _initialLoad;
-
+        private UserControl awningUC;
         public AwningPanelUCPresenter(IAwningPanelUC awningPanelUC,
                                       IDividerServices divServices,
                                       ITransomUCPresenter transomUCP,
@@ -75,7 +79,174 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _awningPanelUC.deleteToolStripClickedEventRaised += _awningPanelUC_deleteToolStripClickedEventRaised;
             _awningPanelUC.extensionToolStripMenuItemClickedEventRaised += _awningPanelUC_extensionToolStripMenuItemClickedEventRaised;
             _awningPanelUC.awningPanelUCSizeChangedEventRaised += _awningPanelUC_awningPanelUCSizeChangedEventRaised;
+            _awningPanelUC.awningPanelUCMouseClickEventRaised += _awningPanelUC_awningPanelUCMouseClickEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+
+        private void _awningPanelUC_awningPanelUCMouseClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                //       Console.WriteLine("**Panel Width*" + _panelModel.Panel_WidthWithDecimal);
+                //Console.WriteLine("**Panel Width To Bind*" + _multiPanelModel.MPanel_WidthToBind);
+                awningUC = (UserControl)sender;
+                IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                int propertyHeight = 0;
+                int framePropertyHeight = 0;
+                int concretePropertyHeight = 0;
+                int mpnlPropertyHeight = 0;
+                bool isTrue = false;
+                foreach (Control wndr_objects in wdm.lst_objects)
+                {
+                    if (isTrue == false)
+                    {
+                        if (wndr_objects.Name.Contains("Frame"))
+                        {
+
+                            foreach (IFrameModel fr in wdm.lst_frame)
+                            {
+                                if (wndr_objects.Name == fr.Frame_Name)
+                                {
+                                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel) //1ndlvlMpnlProperties
+                                    {
+                                        foreach (IMultiPanelModel secondLvlMpnl in mpnl.MPanelLst_MultiPanel) // 2ndlvlMpnlProperties
+                                        {
+                                            mpnlPropertyHeight += constants.mpnl_propertyHeight_default - 8;
+                                            if (secondLvlMpnl.MPanel_DividerEnabled)
+                                            {
+                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
+                                                {
+                                                    if (pnl.Panel_Name == awningUC.Name)
+                                                    {
+                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        isTrue = true;
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (IDividerModel dvd in secondLvlMpnl.MPanelLst_Divider)
+                                                        {
+                                                            propertyHeight += dvd.Div_PropHeight;
+                                                            break;
+                                                        }
+                                                        propertyHeight += pnl.Panel_PropertyHeight;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
+                                                {
+                                                    if (pnl.Panel_Name == awningUC.Name)
+                                                    {
+                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        isTrue = true;
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        propertyHeight += pnl.Panel_PropertyHeight;
+                                                    }
+                                                }
+                                            }
+                                            if (isTrue == true)
+                                            {
+                                                break;
+                                            }
+                                            mpnlPropertyHeight += 8;
+                                        }
+                                        //pnl in 1stlvl mpnl
+                                        if (mpnl.MPanel_DividerEnabled)
+                                        {
+                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                            {
+                                                if (pnl.Panel_Name == awningUC.Name)
+                                                {
+
+                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    wdm.WD_PropertiesScroll = propertyHeight;
+                                                    isTrue = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                                                    {
+                                                        propertyHeight += dvd.Div_PropHeight;
+                                                        break;
+                                                    }
+                                                    propertyHeight += pnl.Panel_PropertyHeight;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                            {
+                                                if (pnl.Panel_Name == awningUC.Name)
+                                                {
+                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    wdm.WD_PropertiesScroll = propertyHeight;
+                                                    isTrue = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    propertyHeight += pnl.Panel_PropertyHeight;
+                                                }
+                                            }
+                                        }
+                                        if (isTrue == true)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    foreach (IPanelModel pnl in fr.Lst_Panel)
+                                    {
+                                        if (pnl.Panel_Name == awningUC.Name)
+                                        {
+                                            propertyHeight += constants.frame_propertyHeight_default - 4 + framePropertyHeight + concretePropertyHeight;
+                                            wdm.WD_PropertiesScroll = propertyHeight;
+                                            isTrue = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            propertyHeight += pnl.Panel_PropertyHeight;
+                                        }
+                                    }
+
+                                    propertyHeight = 0;
+                                    mpnlPropertyHeight = 0;
+                                    framePropertyHeight += fr.FrameProp_Height;
+                                }
+                            }
+                        }
+                        else if (wndr_objects.Name.Contains("Concrete"))
+                        {
+                            foreach (IConcreteModel cr in wdm.lst_concrete)
+                            {
+                                if (wndr_objects.Name == cr.Concrete_Name)
+                                {
+                                    concretePropertyHeight += 113;
+                                }
+                            }
+                        }
+                        if (isTrue == true)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         int prev_Width = 0,
