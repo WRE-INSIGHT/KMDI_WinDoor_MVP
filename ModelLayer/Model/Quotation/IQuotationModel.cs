@@ -27,6 +27,7 @@ namespace ModelLayer.Model.Quotation
         int Plastic_CoverQty_Total { get; set; }
         decimal PricingFactor { get; set; }
         BillOfMaterialsFilter BOM_Filter { get; set; }
+        bool BOM_Status { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
 

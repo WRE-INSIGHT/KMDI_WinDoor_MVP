@@ -40,8 +40,9 @@ namespace ModelLayer.Model.Quotation
         public int Plastic_CoverQty_Total { get; set; }
         public decimal PricingFactor { get; set; }
 
-        private BillOfMaterialsFilter _BOM_Filter;
         public BillOfMaterialsFilter BOM_Filter { get; set; }
+        public bool BOM_Status { get; set; }
+
 
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -2013,26 +2014,7 @@ namespace ModelLayer.Model.Quotation
              check1stFrame = false;
 
         string BOM_divDesc,
-                HandleDesc,
-               glassFilm,
-               MaterialCostDesc,
-               costingPointsDesc,
-               laborCostDesc,
-               FramePriceDesc,
-               FrameReinPriceDesc,
-               SashPriceDesc,
-               SashReinPriceDesc,
-               GlassDesc,
-               DivPriceDesc,
-               GBPriceDesc,
-               CoverProfileCostDesc,
-               GeorgianBarCostDesc,
-               InstallationCostDesc,
-               FittingAndSuppliesDesc,
-               AncillaryProfileCostDesc,
-               AccesorriesCostDesc,
-               sealantDesc,
-               PUFoamingDesc;
+                HandleDesc;
 
         decimal
         #region FrameAndSashPrice
@@ -2360,16 +2342,114 @@ namespace ModelLayer.Model.Quotation
                     }
                     else if (wdm.WD_profile.Contains("PremiLine"))
                     {
+                        if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                ProfileColorPoints = 28;
+
+                                if (fr.Frame_Width >= 5000)
+                                {
+                                    ProfileColorPoints = 31;
+                                }
+                                else if (fr.Frame_Height >= 5000)
+                                {
+                                    ProfileColorPoints = 31;
+                                }
+                            }
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            {
+                                ProfileColorPoints = 30;
+
+                                if (fr.Frame_Width >= 5000)
+                                {
+                                    ProfileColorPoints = 33;
+                                }
+                                else if (fr.Frame_Height >= 5000)
+                                {
+                                    ProfileColorPoints = 33;
+                                }
+                            }
+                        }
+                        else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                ProfileColorPoints = 49;
+
+                                if (fr.Frame_Width >= 5000)
+                                {
+                                    ProfileColorPoints = 52;
+                                }
+                                else if (fr.Frame_Height >= 5000)
+                                {
+                                    ProfileColorPoints = 52;
+                                }
+                            }
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            {
+                                ProfileColorPoints = 51;
+
+                                if (fr.Frame_Width >= 5000)
+                                {
+                                    ProfileColorPoints = 54;
+                                }
+                                else if (fr.Frame_Height >= 5000)
+                                {
+                                    ProfileColorPoints = 54;
+                                }
+                            }
+                        }
+
+
+                    }
+                    else if (wdm.WD_profile.Contains("G58"))
+                    {
                         if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                         {
-                            ProfileColorPoints = 28;
+                            ProfileColorPoints = 11;
+
+                            if (fr.Frame_Width >= 2000)
+                            {
+                                ProfileColorPoints = 14;
+                            }
+                            else if (fr.Frame_Height >= 2000)
+                            {
+                                ProfileColorPoints = 14;
+                            }
+                            else if (fr.Frame_Width >= 3000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+                            else if (fr.Frame_Height >= 3000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+
+                            //CostingPoints += ProfileColorPoints * 4;
+                            //InstallationPoints += (ProfileColorPoints / 3) * 4;
                         }
                         else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                         {
-                            ProfileColorPoints = 30;
+                            ProfileColorPoints = 12;
+                            if (fr.Frame_Width >= 2000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+                            else if (fr.Frame_Height >= 2000)
+                            {
+                                ProfileColorPoints = 16;
+                            }
+                            else if (fr.Frame_Width >= 3000)
+                            {
+                                ProfileColorPoints = 17;
+                            }
+                            else if (fr.Frame_Height >= 3000)
+                            {
+                                ProfileColorPoints = 17;
+                            }
                         }
                     }
-
                     CostingPoints += ProfileColorPoints * 4;
                     InstallationPoints += (ProfileColorPoints / 3) * 4;
 
@@ -4219,612 +4299,594 @@ namespace ModelLayer.Model.Quotation
 
                 TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
                 lstTotalPrice.Add(TotaPrice);
+                if (BOM_Status == true)
+                {
+
+                    #region Price Break Down 
+
+                    decimal MaterialCostDeduction = 0, MaterialCostPriceBreakDown = 0;
+                    MaterialCostDeduction = AccesorriesCost +
+                                            AncillaryProfileCost +
+                                            FittingAndSuppliesCost;
+
+                    MaterialCostPriceBreakDown = MaterialCost - MaterialCostDeduction;
+
+                    Price_List.Rows.Add("Material Cost",
+                                        "",
+                                        Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(MaterialCostPriceBreakDown * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((MaterialCostPriceBreakDown * PricingFactor) + MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("Accesorries",
+                                        "",
+                                        Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(AccesorriesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((AccesorriesCost * PricingFactor) + AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("Ancillary Profile",
+                                     "",
+                                     Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                     Math.Round(AncillaryProfileCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                     Math.Round((AncillaryProfileCost * PricingFactor) + AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                     "Price Break Down");
+
+                    Price_List.Rows.Add("Fitting and Supplies",
+                                        "",
+                                        Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(FittingAndSuppliesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((FittingAndSuppliesCost * PricingFactor) + FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("Labor Cost",
+                                        "",
+                                        Math.Round(LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(LaborCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((LaborCost * PricingFactor) + LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("Installation Cost",
+                                        "",
+                                        Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("Glass",
+                                        "",
+                                        Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    Price_List.Rows.Add("",
+                                        "",
+                                        "",
+                                        "",
+                                        Math.Round(TotaPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
+
+                    #endregion
+
+                    #region Material Cost
+                    decimal Wastage = 0,
+                            contingenciesForOverheadCost = 0,
+                            VAT = 0,
+                            DutiesAndTaxes = 0;
+
+                    Wastage = (MaterialCostBreakDownBase * 0.05m);
+                    contingenciesForOverheadCost = (MaterialCostBreakDownBase * 0.10m);
+                    VAT = (MaterialCostBreakDownBase * 0.12m);
+                    DutiesAndTaxes = (MaterialCostBreakDownBase * 0.16m);
 
 
-                #region Price Break Down 
+                    Price_List.Rows.Add("Frame Price",
+                                        FramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(FramePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                decimal MaterialCostDeduction = 0, MaterialCostPriceBreakDown = 0;
-                MaterialCostDeduction = AccesorriesCost +
-                                        AncillaryProfileCost +
-                                        FittingAndSuppliesCost;
+                    Price_List.Rows.Add("Frame Reinforcement Price",
+                                        FrameReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(FrameReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                MaterialCostPriceBreakDown = MaterialCost - MaterialCostDeduction;
+                    Price_List.Rows.Add("Sash Price",
+                                        SashPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(SashPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                Price_List.Rows.Add("Material Cost",
-                                    "",
-                                    Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(MaterialCostPriceBreakDown * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((MaterialCostPriceBreakDown * PricingFactor) + MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("Sash Reinforcement Price",
+                                        SashReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(SashReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                Price_List.Rows.Add("Accesorries",
-                                    "",
-                                    Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(AccesorriesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((AccesorriesCost * PricingFactor) + AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add(BOM_divDesc + " Price",
+                                        DividerPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(DivPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                Price_List.Rows.Add("Ancillary Profile",
-                                 "",
-                                 Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                                 Math.Round(AncillaryProfileCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                 Math.Round((AncillaryProfileCost * PricingFactor) + AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                                 "Price Break Down");
+                    Price_List.Rows.Add(BOM_divDesc + " Reinforcement Price",
+                                       DividerReinPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(DivReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
 
-                Price_List.Rows.Add("Fitting and Supplies",
-                                    "",
-                                    Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(FittingAndSuppliesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((FittingAndSuppliesCost * PricingFactor) + FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("Cladding with reinforcement Price",
+                                       claddingPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(claddingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
 
-                Price_List.Rows.Add("Labor Cost",
-                                    "",
-                                    Math.Round(LaborCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(LaborCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((LaborCost * PricingFactor) + LaborCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("Dummy Mullion Price",
+                                       DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
 
-                Price_List.Rows.Add("Installation Cost",
-                                    "",
-                                    Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("Sealant Price",
+                                       SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(SealantPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
 
-                Price_List.Rows.Add("Glass",
-                                    "",
-                                    Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                    Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("PU Foaming Price",
+                                        PUFoamingPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(PUFoamingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                Price_List.Rows.Add("",
-                                    "",
-                                    "",
-                                    "",
-                                    Math.Round(TotaPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "Price Break Down");
+                    Price_List.Rows.Add("Wastage",
+                                        "",
+                                        Math.Round(Wastage, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
 
-                #endregion
-
-                #region Material Cost
-                decimal Wastage,
-                        contingenciesForOverheadCost,
-                        VAT,
-                        DutiesAndTaxes;
-
-                Wastage = (MaterialCostBreakDownBase * 0.05m);
-                contingenciesForOverheadCost = (MaterialCostBreakDownBase * 0.10m);
-                VAT = (MaterialCostBreakDownBase * 0.12m);
-                DutiesAndTaxes = (MaterialCostBreakDownBase * 0.16m);
-
-
-                Price_List.Rows.Add("Frame Price",
-                                    FramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(FramePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add("Frame Reinforcement Price",
-                                    FrameReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(FrameReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add("Sash Price",
-                                    SashPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(SashPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add("Sash Reinforcement Price",
-                                    SashReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(SashReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add(BOM_divDesc + " Price",
-                                    DividerPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(DivPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add(BOM_divDesc + " Reinforcement Price",
-                                   DividerReinPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(DivReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Material Cost");
-
-                Price_List.Rows.Add("Cladding with reinforcement Price",
-                                   claddingPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(claddingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Material Cost");
-
-                Price_List.Rows.Add("Dummy Mullion Price",
-                                   DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Material Cost");
-
-                Price_List.Rows.Add("Sealant Price",
-                                   SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(SealantPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Material Cost");
-
-                Price_List.Rows.Add("PU Foaming Price",
-                                    PUFoamingPricePerCan.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(PUFoamingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add("Wastage",
-                                    "",
-                                    Math.Round(Wastage, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                Price_List.Rows.Add("Contingencies For Over head Cost",
-                          "",
-                          Math.Round(contingenciesForOverheadCost, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Material Cost");
-
-                Price_List.Rows.Add("VAT",
-                          "",
-                          Math.Round(VAT, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Material Cost");
-
-                Price_List.Rows.Add("Duties And Taxes",
-                          "",
-                          Math.Round(DutiesAndTaxes, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Material Cost");
-
-                Price_List.Rows.Add("Total",
-                                    "",
-                                    Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Material Cost");
-
-                #endregion
-
-                #region Accesorries Cost
-
-                Price_List.Rows.Add("End cap Price",
-                                  EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                  "",
-                                  "",
-                                  "Accesorries");
-
-                Price_List.Rows.Add("Mechanical Joint Price",
-                               MechanicalJointPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(MechJointPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Accesorries");
-
-                Price_List.Rows.Add("Glazing Bead Spacer Price",
-                              GBSpacerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(GBSpacerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Contingencies For Over head Cost",
+                              "",
+                              Math.Round(contingenciesForOverheadCost, 2).ToString("N", new CultureInfo("en-US")),
                               "",
                               "",
-                              "Accesorries");
+                              "Material Cost");
 
-                Price_List.Rows.Add("Plastic Wedge Price",
-                              PlasticWedgePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(PlasticWedgePrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("VAT",
+                              "",
+                              Math.Round(VAT, 2).ToString("N", new CultureInfo("en-US")),
                               "",
                               "",
-                              "Accesorries");
+                              "Material Cost");
 
-                Price_List.Rows.Add("Sealing Block Price",
-                              SealingBlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(SealingBlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Duties And Taxes",
+                              "",
+                              Math.Round(DutiesAndTaxes, 2).ToString("N", new CultureInfo("en-US")),
                               "",
                               "",
-                              "Accesorries");
+                              "Material Cost");
 
-                Price_List.Rows.Add("Total",
-                                   "",
-                                   Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Total",
+                                        "",
+                                        Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Material Cost");
+
+                    #endregion
+
+                    #region Accesorries Cost
+
+                    Price_List.Rows.Add("End cap Price",
+                                      EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Accesorries");
+
+                    Price_List.Rows.Add("Mechanical Joint Price",
+                                   MechanicalJointPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(MechJointPrice, 2).ToString("N", new CultureInfo("en-US")),
                                    "",
                                    "",
                                    "Accesorries");
 
-                #endregion
-
-                #region Ancillary Profile Cost
-
-                Price_List.Rows.Add("Threshold Price",
-                                ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                "",
-                                "",
-                                "Ancillary Profile");
-
-                Price_List.Rows.Add("Glazing Bead Price",
-                           GlazingBeadPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(GbPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Georgian Bar Cost",
-                           GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Cover Profile Cover",
-                           CoverProfilePrice.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(CoverProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Glazing Gasket Price",
-                           GlazingGasketPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(GlazingGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Weather Bar Price",
-                           WeatherBarPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(WeatherBarPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Weather Bar Fastener Price",
-                           BarFastenerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(WeatherBarFastenerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Water Seepage Price",
-                           WaterSeepagePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(WaterSeepagePrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Guide Track Price",
-                           GuideTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(GuideTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Aluminum Track Price",
-                           AluminumTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(AlumTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Interlock Price",
-                           InterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(InterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Extension For Interlock Price",
-                           ExtensionForInterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                           Math.Round(ExtensionForInterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
-                           "",
-                           "",
-                           "Ancillary Profile");
-
-                Price_List.Rows.Add("Total",
-                                  "",
-                                  Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Glazing Bead Spacer Price",
+                                  GBSpacerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(GBSpacerPrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
-                                  "Ancillary Profile");
-                #endregion
+                                  "Accesorries");
 
-                #region Fitting and Supplies Cost
+                    Price_List.Rows.Add("Plastic Wedge Price",
+                                  PlasticWedgePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(PlasticWedgePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Accesorries");
 
-                Price_List.Rows.Add("Friction Stay Price",
-                                    FSBasePrice.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(FSPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Fitting and Supplies");
+                    Price_List.Rows.Add("Sealing Block Price",
+                                  SealingBlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(SealingBlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Accesorries");
 
-                Price_List.Rows.Add("Restrictor Stay Price",
-                                    RestrictorStayPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(RestrictorStayPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Fitting and Supplies");
+                    Price_List.Rows.Add("Total",
+                                       "",
+                                       Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Accesorries");
 
-                Price_List.Rows.Add("Corner Drive Price",
-                                    CornerDrivePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(CornerDrivePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Fitting and Supplies");
+                    #endregion
 
-                Price_List.Rows.Add("Snap In Keep Price",
-                                    SnapInKeepPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(SnapInKeepPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Fitting and Supplies");
+                    #region Ancillary Profile Cost
 
-                Price_List.Rows.Add("35mm Backset Espagnolette With Cylinder Price",
-                                    _35mmBacksetEspagWithCylinder.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Threshold Price",
+                                    ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
                                     "",
                                     "",
-                                    "Fitting and Supplies");
+                                    "Ancillary Profile");
 
-                Price_List.Rows.Add("Middle CLoser Price",
-                                  MiddleCLoserPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(MiddleCLoserPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Glazing Bead Price",
+                               GlazingBeadPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(GbPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Georgian Bar Cost",
+                               GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Cover Profile Cover",
+                               CoverProfilePrice.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(CoverProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Glazing Gasket Price",
+                               GlazingGasketPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(GlazingGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Weather Bar Price",
+                               WeatherBarPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(WeatherBarPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Weather Bar Fastener Price",
+                               BarFastenerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(WeatherBarFastenerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Water Seepage Price",
+                               WaterSeepagePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(WaterSeepagePrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Guide Track Price",
+                               GuideTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(GuideTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Aluminum Track Price",
+                               AluminumTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(AlumTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Interlock Price",
+                               InterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(InterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Extension For Interlock Price",
+                               ExtensionForInterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(ExtensionForInterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
+                    Price_List.Rows.Add("Total",
+                                      "",
+                                      Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Ancillary Profile");
+                    #endregion
+
+                    #region Fitting and Supplies Cost
+
+                    Price_List.Rows.Add("Friction Stay Price",
+                                        FSBasePrice.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(FSPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Restrictor Stay Price",
+                                        RestrictorStayPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(RestrictorStayPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Corner Drive Price",
+                                        CornerDrivePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(CornerDrivePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Snap In Keep Price",
+                                        SnapInKeepPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(SnapInKeepPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Fitting and Supplies");
+
+                    Price_List.Rows.Add("35mm Backset Espagnolette With Cylinder Price",
+                                        _35mmBacksetEspagWithCylinder.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Middle CLoser Price",
+                                      MiddleCLoserPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(MiddleCLoserPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Stay Bearing Price",
+                                      StayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(StayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Stay Bearing Pin Price",
+                                   StayBearingPinPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(StayBearingPinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Cover Stay Bearing Price",
+                                   CoverStayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(CoverStayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Cover Corner Hinge Price",
+                                   CoverCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(CoverCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Corner Pivot Rest Price",
+                                  CornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(CornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
                                   "Fitting and Supplies");
 
-                Price_List.Rows.Add("Stay Bearing Price",
-                                  StayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(StayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Top Corner Hinge Price",
+                                  TopCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(TopCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
                                   "Fitting and Supplies");
 
-                Price_List.Rows.Add("Stay Bearing Pin Price",
-                               StayBearingPinPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(StayBearingPinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Fitting and Supplies");
+                    Price_List.Rows.Add("Corver Corner Pivot Rest Price",
+                                 CorverCornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(CorverCornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                 "",
+                                 "",
+                                 "Fitting and Supplies");
 
-                Price_List.Rows.Add("Cover Stay Bearing Price",
-                               CoverStayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(CoverStayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Fitting and Supplies");
+                    Price_List.Rows.Add("Corver Corner Pivot Rest Vertical Price",
+                                CorverCornerPivotRestVerticalPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
 
-                Price_List.Rows.Add("Cover Corner Hinge Price",
-                               CoverCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(CoverCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Fitting and Supplies");
+                    Price_List.Rows.Add(HandleDesc + " Price",
+                                HandleBasePrice.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(HandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
 
-                Price_List.Rows.Add("Corner Pivot Rest Price",
-                              CornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(CornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Espagnolette Price",
+                                EspagBasePrice.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(EspagPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
+
+                    Price_List.Rows.Add("2D Hinge Price",
+                                _2DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(_2DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
+
+                    Price_List.Rows.Add("3D Hinge Price",
+                              _3DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(_3DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                               "",
                               "",
                               "Fitting and Supplies");
 
-                Price_List.Rows.Add("Top Corner Hinge Price",
-                              TopCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(TopCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("NT Center Hinge Price",
+                              NTCenterHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(NTCenterHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                               "",
                               "",
                               "Fitting and Supplies");
 
-                Price_List.Rows.Add("Corver Corner Pivot Rest Price",
-                             CorverCornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                             Math.Round(CorverCornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Shoot Bolt Striker Price",
+                              ShootBoltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(ShootBoltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Shoot Bolt Reverse Price",
+                              ShootBoltReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(ShootBoltReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Shoot Bolt Non Reverse Price",
+                              ShootBoltNonReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(ShootBoltNonReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Striker Price",
+                              StrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(StrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                              LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                             LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                             Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
                              "",
                              "",
                              "Fitting and Supplies");
 
-                Price_List.Rows.Add("Corver Corner Pivot Rest Vertical Price",
-                            CorverCornerPivotRestVerticalPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                            Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString("N", new CultureInfo("en-US")),
+                    Price_List.Rows.Add("Extension Price",
+                             ExtensionBasePrice.ToString("N", new CultureInfo("en-US")),
+                             Math.Round(ExtensionPrice, 2).ToString("N", new CultureInfo("en-US")),
+                             "",
+                             "",
+                             "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Roller Price",
+                             RollerBasePrice.ToString("N", new CultureInfo("en-US")),
+                             Math.Round(RollerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                             "",
+                             "",
+                             "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Striker Price",
+                             StrikerLRPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                             Math.Round(StrikerLRPrice, 2).ToString("N", new CultureInfo("en-US")),
+                             "",
+                             "",
+                             "Fitting and Supplies");
+
+                    Price_List.Rows.Add("Brush Seal Price",
+                            BrushSealPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                            Math.Round(BrushSealPrice, 2).ToString("N", new CultureInfo("en-US")),
                             "",
                             "",
                             "Fitting and Supplies");
 
-                Price_List.Rows.Add(HandleDesc + " Price",
-                            HandleBasePrice.ToString("N", new CultureInfo("en-US")),
-                            Math.Round(HandlePrice, 2).ToString("N", new CultureInfo("en-US")),
-                            "",
-                            "",
-                            "Fitting and Supplies");
+                    Price_List.Rows.Add("Total",
+                                     "",
+                                     Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                     "",
+                                     "",
+                                     "Fitting and Supplies");
+                    #endregion
 
-                Price_List.Rows.Add("Espagnolette Price",
-                            EspagBasePrice.ToString("N", new CultureInfo("en-US")),
-                            Math.Round(EspagPrice, 2).ToString("N", new CultureInfo("en-US")),
-                            "",
-                            "",
-                            "Fitting and Supplies");
+                    var query = from r in Price_List.AsEnumerable()
+                                where r.Field<string>("Nett") != "0.00" &&
+                                 r.Field<string>("Filter") == BOM_Filter.ToString()
+                                group r by new
+                                {
+                                    Description = r.Field<string>("Description"),
+                                    BasePrice = r.Field<string>("Base Price"),
+                                    Nett = r.Field<string>("Nett"),
+                                    Markup = r.Field<string>("Mark-up"),
+                                    Subtotal = r.Field<string>("Subtotal"),
+                                    Filter = r.Field<string>("Filter")
 
-                Price_List.Rows.Add("2D Hinge Price",
-                            _2DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                            Math.Round(_2DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                            "",
-                            "",
-                            "Fitting and Supplies");
+                                } into g
+                                select new
+                                {
+                                    Description = g.Key.Description,
+                                    BasePrice = g.Key.BasePrice,
+                                    Nett = g.Key.Nett,
+                                    Markup = g.Key.Markup,
+                                    Subtotal = g.Key.Subtotal,
+                                    Filter = g.Key.Filter
+                                };
 
-                Price_List.Rows.Add("3D Hinge Price",
-                          _3DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(_3DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+                    dt.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
+                    dt.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
+                    dt.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
+                    dt.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
+                    dt.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
 
-                Price_List.Rows.Add("NT Center Hinge Price",
-                          NTCenterHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(NTCenterHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
+                    foreach (var element in query)
+                    {
+                        DataRow row = dt.NewRow();
+                        row["Description"] = element.Description;
+                        row["Base Price"] = element.BasePrice;
+                        row["Nett"] = element.Nett;
+                        row["Mark-up"] = element.Markup;
+                        row["Subtotal"] = element.Subtotal;
+                        row["Filter"] = element.Filter;
 
-                Price_List.Rows.Add("Shoot Bolt Striker Price",
-                          ShootBoltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(ShootBoltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
+                        dt.Rows.Add(row);
+                    }
 
-                Price_List.Rows.Add("Shoot Bolt Reverse Price",
-                          ShootBoltReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(ShootBoltReversePrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
-
-                Price_List.Rows.Add("Shoot Bolt Non Reverse Price",
-                          ShootBoltNonReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(ShootBoltNonReversePrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
-
-                Price_List.Rows.Add("Striker Price",
-                          StrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(StrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
-
-                Price_List.Rows.Add("Latch Deadbolt Striker Price",
-                          LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                          Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                          "",
-                          "",
-                          "Fitting and Supplies");
-
-                Price_List.Rows.Add("Latch Deadbolt Striker Price",
-                         LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                         Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                         "",
-                         "",
-                         "Fitting and Supplies");
-
-                Price_List.Rows.Add("Extension Price",
-                         ExtensionBasePrice.ToString("N", new CultureInfo("en-US")),
-                         Math.Round(ExtensionPrice, 2).ToString("N", new CultureInfo("en-US")),
-                         "",
-                         "",
-                         "Fitting and Supplies");
-
-                Price_List.Rows.Add("Roller Price",
-                         RollerBasePrice.ToString("N", new CultureInfo("en-US")),
-                         Math.Round(RollerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                         "",
-                         "",
-                         "Fitting and Supplies");
-
-                Price_List.Rows.Add("Striker Price",
-                         StrikerLRPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                         Math.Round(StrikerLRPrice, 2).ToString("N", new CultureInfo("en-US")),
-                         "",
-                         "",
-                         "Fitting and Supplies");
-
-                Price_List.Rows.Add("Brush Seal Price",
-                        BrushSealPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                        Math.Round(BrushSealPrice, 2).ToString("N", new CultureInfo("en-US")),
-                        "",
-                        "",
-                        "Fitting and Supplies");
-
-                Price_List.Rows.Add("Total",
-                                 "",
-                                 Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                 "",
-                                 "",
-                                 "Fitting and Supplies");
-                #endregion
-
-                var query = from r in Price_List.AsEnumerable()
-                            where r.Field<string>("Nett") != "0.00" &&
-                             r.Field<string>("Filter") == BOM_Filter.ToString()
-                            group r by new
-                            {
-                                Description = r.Field<string>("Description"),
-                                BasePrice = r.Field<string>("Base Price"),
-                                Nett = r.Field<string>("Nett"),
-                                Markup = r.Field<string>("Mark-up"),
-                                Subtotal = r.Field<string>("Subtotal"),
-                                Filter = r.Field<string>("Filter")
-
-                            } into g
-                            select new
-                            {
-                                Description = g.Key.Description,
-                                BasePrice = g.Key.BasePrice,
-                                Nett = g.Key.Nett,
-                                Markup = g.Key.Markup,
-                                Subtotal = g.Key.Subtotal,
-                                Filter = g.Key.Filter
-                            };
-
-                DataTable dt = new DataTable();
-                dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-                dt.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
-                dt.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
-                dt.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
-                dt.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
-                dt.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
-
-                foreach (var element in query)
-                {
-                    DataRow row = dt.NewRow();
-                    row["Description"] = element.Description;
-                    row["Base Price"] = element.BasePrice;
-                    row["Nett"] = element.Nett;
-                    row["Mark-up"] = element.Markup;
-                    row["Subtotal"] = element.Subtotal;
-                    row["Filter"] = element.Filter;
-
-                    dt.Rows.Add(row);
+                    Price_List = dt;
                 }
-
-                Price_List = dt;
-
-                //costingPointsDesc = "\n\nTotal Points: " + Math.Round(CostingPoints, 2);
-
-                //InstallationCostDesc = "\n\nInstallation Cost: " + Math.Round(InstallationCost, 2);
-                //laborCostDesc = "\n\nLabor Cost: " + Math.Round(LaborCost, 2);
-                //MaterialCostDesc = "\n\nMaterial Cost : " + Math.Round(MaterialCost, 2);
-
-                //FramePriceDesc = "\n\nFrame Price: " + Math.Round(FramePrice, 2);
-                //FrameReinPriceDesc = "\n\nFrame Rein Price: " + Math.Round(FrameReinPrice, 2);
-                //SashPriceDesc = "\n\nSash Price : " + Math.Round(SashPrice, 2);
-                //SashReinPriceDesc = "\n\nSash Rein Price: " + Math.Round(SashReinPrice, 2);
-                //GlassDesc = "\n\nGlass Price: " + Math.Round(GlassPrice, 2);
-                //DivPriceDesc = "\n\nDivider Price: " + Math.Round(DivPrice, 2);
-                //GBPriceDesc = "\n\nGB Price: " + Math.Round(GbPrice, 2);
-                //FittingAndSuppliesDesc = "\n\nFittingAndSupplies Cost: " + Math.Round(FittingAndSuppliesCost, 2);
-                //AncillaryProfileCostDesc = "\n\nAncillaryProfile Cost: " + Math.Round(AncillaryProfileCost, 2);
-                //AccesorriesCostDesc = "\n\nAccesorries Cost: " + Math.Round(AccesorriesCost, 2);
-                //sealantDesc = "\n\nSealant Cost : " + Math.Round(SealantPrice, 2);
-                //PUFoamingDesc = "\n\nPUFoaming Cost : " + Math.Round(PUFoamingPrice, 2);
-
                 ClearingOperation();
             }
             return Price_List;
@@ -4846,6 +4908,7 @@ namespace ModelLayer.Model.Quotation
             SashPrice = 0;
             SashReinPrice = 0;
             DivPrice = 0;
+            DivReinPrice = 0;
             DMPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;

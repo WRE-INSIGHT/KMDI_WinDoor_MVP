@@ -66,6 +66,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
+                _quotationModel.BOM_Status = true;
                 _dgvPricingList.DataSource = _quotationModel.ItemCostingPriceAndPoints();
                 _pricingView.GetDgvPrice().Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 _pricingView.GetDgvPrice().Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
