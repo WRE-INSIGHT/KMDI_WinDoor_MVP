@@ -145,8 +145,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-
-
+                _quotationModel.BOM_Status = false;
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
                     _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
@@ -174,32 +173,13 @@ namespace PresentationLayer.Presenter
                     {
                         glass = lst_glassThicknessPerItem[i];
                     }
-                    //else
-                    //{
-                    //    glass = string.Empty;
-                    //}
+
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = string.Empty;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
                                                                               + wdm.WD_description
-                                                                              + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc
-                                                                              //+ costingPointsDesc
-                                                                              //+ laborCostDesc
-                                                                              //+ InstallationCostDesc
-                                                                              //+ GlassDesc
-                                                                              //+ MaterialCostDesc
-                                                                              //+ FramePriceDesc
-                                                                              //+ FrameReinPriceDesc
-                                                                              //+ SashPriceDesc
-                                                                              //+ SashReinPriceDesc
-                                                                              //+ DivPriceDesc
-                                                                              //+ FittingAndSuppliesDesc
-                                                                              //+ AncillaryProfileCostDesc
-                                                                              //+ AccesorriesCostDesc
-                                                                              //+ sealantDesc
-                                                                              //+ PUFoamingDesc
-                                                                              ;
+                                                                              + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;

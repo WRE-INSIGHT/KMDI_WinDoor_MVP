@@ -33,6 +33,11 @@ namespace PresentationLayer.Views
                     changeItemColorToolStripMenuItem.Enabled = true;
                     saveAsToolStripMenuItem.Enabled = true;
                     CostingItemsToolStripMenuItem.Enabled = true;
+                    billOfMaterialToolStripMenuItem.Enabled = true;
+                    screenToolStripMenuItem.Enabled = true;
+                    glassBalancingToolStripMenuItem.Enabled = true;
+                    customArrowHeadToolStripMenuItem.Enabled = true;
+                    slidingTopViewToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
@@ -40,6 +45,11 @@ namespace PresentationLayer.Views
                     changeItemColorToolStripMenuItem.Enabled = false;
                     saveAsToolStripMenuItem.Enabled = false;
                     CostingItemsToolStripMenuItem.Enabled = false;
+                    billOfMaterialToolStripMenuItem.Enabled = false;
+                    screenToolStripMenuItem.Enabled = false;
+                    glassBalancingToolStripMenuItem.Enabled = false;
+                    customArrowHeadToolStripMenuItem.Enabled = false;
+                    slidingTopViewToolStripMenuItem.Enabled = false;
                 }
             }
         }
