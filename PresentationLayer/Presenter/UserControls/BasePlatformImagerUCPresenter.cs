@@ -565,7 +565,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
 
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y1, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X1);
-                                Console.WriteLine(mpnl.MPanelLst_Objects.Count());
+                               
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
                                
                             }

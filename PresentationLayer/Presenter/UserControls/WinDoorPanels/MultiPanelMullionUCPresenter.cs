@@ -1083,8 +1083,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
-            Console.WriteLine("Parent " + _multiPanelModel.MPanel_Name);
-            Console.WriteLine("Parent UC" + ((FlowLayoutPanel)sender).Parent.Parent.Name);
+         
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }

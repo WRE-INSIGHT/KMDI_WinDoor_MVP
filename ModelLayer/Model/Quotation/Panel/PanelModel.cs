@@ -4081,7 +4081,50 @@ namespace ModelLayer.Model.Quotation.Panel
                 int parent_MpanelWidth = Panel_ParentMultiPanelModel.MPanelImageRenderer_Width,
                     parent_MpanelHeight = Panel_ParentMultiPanelModel.MPanelImageRenderer_Height,
                     div_count = Panel_ParentMultiPanelModel.MPanel_Divisions,
+                    sashDeduction = 0,
                     totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
+
+                int OverlapLeftRight = 0, OverlapBoth = 0;
+
+
+
+                foreach (IPanelModel pnls in Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                {
+                    if (pnls.Panel_Overlap_Sash == OverlapSash._Left ||
+                        pnls.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+                        OverlapLeftRight += 1;
+                    }
+                    else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        OverlapBoth += 1;
+                    }
+                }
+
+
+                foreach (IPanelModel pnls in Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                {
+                    if(pnls.Panel_Name == Panel_Name)
+                    {
+                        
+                        if (pnls.Panel_Overlap_Sash == OverlapSash._Left ||
+                           pnls.Panel_Overlap_Sash == OverlapSash._Right)
+                        {
+                            sashDeduction -= 16;
+                            sashDeduction += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
+                            sashDeduction += (OverlapLeftRight - 1) * 5;
+                        }
+                        else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
+                        {
+                            sashDeduction -= 32;
+                            sashDeduction += ((int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel) *2);
+                        }
+                        else
+                        {
+                            sashDeduction += (5 * OverlapLeftRight) + (10 * OverlapBoth);
+                        }
+                    }
+                }
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
 
@@ -4097,7 +4140,13 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else
                     {
-                        pnl_wd = (parent_MpanelWidth / totalpanel_inside_parentMpanel) - divMove_int;
+                        //int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
+                        //pnl_wd = Convert.ToInt32(Math((decimal)(Panel_ParentMultiPanelModel.MPanelImageRenderer_Width) * ((decimal)Panel_Width / mpnlOriginalWidth)));
+                        ////Panel_WidthToBind = pnl_wd;
+                        ////Panel_HeightToBind = Panel_ParentMultiPanelModel.MPanel_HeightToBind;
+
+
+                        pnl_wd = (parent_MpanelWidth / totalpanel_inside_parentMpanel) - divMove_int + sashDeduction;
                     }
                     //pnl_wd = ((parent_MpanelWidth) / totalpanel_inside_parentMpanel) - divMove_int;
                     pnl_ht = parent_MpanelHeight;
