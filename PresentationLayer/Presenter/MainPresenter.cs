@@ -2491,6 +2491,21 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("Plastic_CoverQty_Total"))
                     {
                         _quotationModel.Plastic_CoverQty_Total = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                    }
+
+                    else if (row_str.Contains("BOM_Filter:"))
+                    {
+                        foreach (BillOfMaterialsFilter bomf in BillOfMaterialsFilter.GetAll())
+                        {
+                            if (bomf.ToString() == extractedValue_str)
+                            {
+                                _quotationModel.BOM_Filter = bomf;
+                            }
+                        }
+                    }
+                    else if (row_str.Contains("BOM_Status:"))
+                    {
+                        _quotationModel.BOM_Status = Convert.ToBoolean(extractedValue_str);
                         inside_quotation = false;
                     }
                     break;
