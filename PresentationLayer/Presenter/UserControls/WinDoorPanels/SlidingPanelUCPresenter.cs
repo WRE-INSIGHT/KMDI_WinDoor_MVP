@@ -309,13 +309,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Left && pnl.Panel_Name != pres_pnl.Panel_Name)
                             {
                                 pnl.Panel_Width -= (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
                             else
                             {
                                 pnl.Panel_Width -= sashDiv;
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
                         }
                         _multiPanelModel.SetZoomPanels();
                     }
@@ -332,14 +333,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Left && pnl.Panel_Name != pres_pnl.Panel_Name)
                             {
                                 pnl.Panel_Width -= (int)Math.Ceiling((decimal)32 / totalpanel_inside_parentMpanel);
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
                             else
                             {
                                 pnl.Panel_Width -= 32 / totalpanel_inside_parentMpanel;
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
 
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
                         }
                         _multiPanelModel.SetZoomPanels();
@@ -401,13 +402,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Right)
                             {
                                 pnl.Panel_Width += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
                             else
                             {
                                 pnl.Panel_Width += sashDiv;
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
 
                         }
                         _multiPanelModel.SetZoomPanels();
@@ -424,13 +426,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Right)
                             {
                                 pnl.Panel_Width -= (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
                             else
                             {
                                 pnl.Panel_Width -= sashDiv;
-                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                            pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                         }
                         _multiPanelModel.SetZoomPanels();
                     }
@@ -489,6 +491,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 pnl.Panel_Width += sashDiv;
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
 
 
@@ -512,6 +515,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 pnl.Panel_Width -= sashDiv;
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                         }
                         _multiPanelModel.SetZoomPanels();
@@ -572,8 +576,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 pnl.Panel_Width += sashDiv;
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
                         }
                         _multiPanelModel.SetZoomPanels();
                     }
@@ -595,8 +599,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 pnl.Panel_Width += sashDiv;
                             }
+                            pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
                         }
                         _multiPanelModel.SetZoomPanels();
                     }

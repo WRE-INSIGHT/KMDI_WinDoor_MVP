@@ -4017,8 +4017,70 @@ namespace ModelLayer.Model.Quotation.Panel
                 int parent_MpanelWidth = Panel_ParentMultiPanelModel.MPanel_WidthToBind,
                     parent_MpanelHeight = Panel_ParentMultiPanelModel.MPanel_HeightToBind,
                     div_count = Panel_ParentMultiPanelModel.MPanel_Divisions,
+                    sashDeduction = 0,
                     totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
 
+                int OverlapLeftRight = 0, OverlapBoth = 0;
+
+
+
+                foreach (IPanelModel pnls in Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                {
+                    if (pnls.Panel_Overlap_Sash == OverlapSash._Left ||
+                        pnls.Panel_Overlap_Sash == OverlapSash._Right)
+                    {
+                        OverlapLeftRight += 1;
+                    }
+                    else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
+                    {
+                        OverlapBoth += 1;
+                    }
+                }
+
+                int inner_line = 0;
+                int ndx_zoomPercentage = Array.IndexOf(Panel_ParentFrameModel.Frame_WindoorModel.Arr_ZoomPercentage, Panel_ParentFrameModel.Frame_Zoom);
+                if (ndx_zoomPercentage >= 3)
+                {
+                    inner_line = 16;
+                }
+                else if (ndx_zoomPercentage == 2)
+                {
+                    inner_line = 8;
+                }
+                else if (ndx_zoomPercentage == 1)
+                {
+                    inner_line = 7;
+                }
+                else if (ndx_zoomPercentage == 0)
+                {
+                    inner_line = 7;
+                }
+                foreach (IPanelModel pnls in Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                {
+                    if (pnls.Panel_Name == Panel_Name)
+                    {
+
+                        if (pnls.Panel_Overlap_Sash == OverlapSash._Left ||
+                           pnls.Panel_Overlap_Sash == OverlapSash._Right)
+                        {
+                            sashDeduction -= inner_line;
+                            sashDeduction += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
+                            sashDeduction += (OverlapLeftRight - 1) * (inner_line / totalpanel_inside_parentMpanel);
+                            sashDeduction += OverlapBoth * ((inner_line / totalpanel_inside_parentMpanel) * 2);
+                        }
+                        else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
+                        {
+                            sashDeduction -= (inner_line * 2);
+                            sashDeduction += ((int)Math.Ceiling((decimal)inner_line / totalpanel_inside_parentMpanel) * 2);
+                            sashDeduction += OverlapLeftRight * (inner_line / totalpanel_inside_parentMpanel);
+                            sashDeduction += (OverlapBoth - 1) * ((inner_line / totalpanel_inside_parentMpanel) * 2);
+                        }
+                        else
+                        {
+                            sashDeduction += ((inner_line / totalpanel_inside_parentMpanel) * OverlapLeftRight) + (((inner_line / totalpanel_inside_parentMpanel) * 2) * OverlapBoth);
+                        }
+                    }
+                }
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
                     div_movement = ((Panel_ParentMultiPanelModel.MPanel_DisplayWidth / totalpanel_inside_parentMpanel) - Panel_DisplayWidth);
@@ -4034,7 +4096,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         //{
                         //    divMove_int += (int) (Panel_Zoom * 32);
                         //}
-                        pnl_wd = ((parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int;
+                        pnl_wd = ((parent_MpanelWidth - mpnlWd_deduct) / totalpanel_inside_parentMpanel) - divMove_int + sashDeduction;
                     }
                     pnl_ht = parent_MpanelHeight - mpnlHt_deduct;
                 }
@@ -4112,19 +4174,19 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             sashDeduction -= 16;
                             sashDeduction += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
-                            sashDeduction += (OverlapLeftRight - 1) * 5;
-                            sashDeduction += OverlapBoth  * 10;
+                            sashDeduction += (OverlapLeftRight - 1) * (16 / totalpanel_inside_parentMpanel);
+                            sashDeduction += OverlapBoth  * ((16 / totalpanel_inside_parentMpanel) * 2);
                         }
                         else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
                         {
                             sashDeduction -= 32;
-                            sashDeduction += ((int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel) *2);
-                            sashDeduction += OverlapLeftRight * 5;
-                            sashDeduction += (OverlapBoth - 1) * 10;
+                            sashDeduction += ((int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel) * 2);
+                            sashDeduction += OverlapLeftRight * (16 / totalpanel_inside_parentMpanel);
+                            sashDeduction += (OverlapBoth - 1) * ((16 / totalpanel_inside_parentMpanel) * 2);
                         }
                         else
                         {
-                            sashDeduction += (5 * OverlapLeftRight) + (10 * OverlapBoth);
+                            sashDeduction += ((16 / totalpanel_inside_parentMpanel) * OverlapLeftRight) + (((16 / totalpanel_inside_parentMpanel) * 2) * OverlapBoth);
                         }
                     }
                 }
