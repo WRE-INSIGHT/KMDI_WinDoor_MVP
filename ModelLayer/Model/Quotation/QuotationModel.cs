@@ -2375,28 +2375,30 @@ namespace ModelLayer.Model.Quotation
                         {
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
-                                ProfileColorPoints = 49;
+                                //ProfileColorPoints = 49;
+                                ProfileColorPoints = 34;
 
                                 if (fr.Frame_Width >= 5000)
                                 {
-                                    ProfileColorPoints = 52;
+                                    ProfileColorPoints = 37;
                                 }
                                 else if (fr.Frame_Height >= 5000)
                                 {
-                                    ProfileColorPoints = 52;
+                                    ProfileColorPoints = 37;
                                 }
                             }
                             else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                             {
-                                ProfileColorPoints = 51;
+                                //ProfileColorPoints = 51;
+                                ProfileColorPoints = 37;
 
                                 if (fr.Frame_Width >= 5000)
                                 {
-                                    ProfileColorPoints = 54;
+                                    ProfileColorPoints = 40;
                                 }
                                 else if (fr.Frame_Height >= 5000)
                                 {
-                                    ProfileColorPoints = 54;
+                                    ProfileColorPoints = 40;
                                 }
                             }
                         }
