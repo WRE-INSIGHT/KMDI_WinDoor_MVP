@@ -3884,7 +3884,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
                         int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalWidth)));
                         Panel_WidthToBind = pnl_wd;
-                        Panel_HeightToBind = Panel_ParentMultiPanelModel.MPanel_HeightToBind;
+                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                 }
             }
@@ -4113,11 +4113,14 @@ namespace ModelLayer.Model.Quotation.Panel
                             sashDeduction -= 16;
                             sashDeduction += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
                             sashDeduction += (OverlapLeftRight - 1) * 5;
+                            sashDeduction += OverlapBoth  * 10;
                         }
                         else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
                         {
                             sashDeduction -= 32;
                             sashDeduction += ((int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel) *2);
+                            sashDeduction += OverlapLeftRight * 5;
+                            sashDeduction += (OverlapBoth - 1) * 10;
                         }
                         else
                         {
