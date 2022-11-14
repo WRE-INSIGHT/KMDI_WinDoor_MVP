@@ -913,7 +913,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
-
+           
             #endregion
         }
 

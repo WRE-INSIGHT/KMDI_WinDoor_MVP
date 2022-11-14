@@ -98,6 +98,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Create";
                         sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = pqModel.PQ_ProjId;
                         sqlcmd.Parameters.Add("@Quote_Id", SqlDbType.Int).Value = pqModel.PQ_QuoteId;
+                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = pqModel.PQ_Id;
                         sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = pqModel.PQ_CustRefId;
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = pqModel.PQ_EmployeeId;
                         sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
@@ -134,6 +135,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Quote_Id", SqlDbType.Int).Value = pqModel.PQ_QuoteId;
                         sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = pqModel.PQ_CustRefId;
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = pqModel.PQ_EmployeeId;
+                        sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();
