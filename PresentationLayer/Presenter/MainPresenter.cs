@@ -8522,6 +8522,32 @@ namespace PresentationLayer.Presenter
 
         public int GetPanelCount()
         {
+            //int pnlCount = 0;
+            //foreach(IFrameModel frm in _windoorModel.lst_frame)
+            //{
+            //    pnlCount += frm.Lst_Panel.Count;
+            //    foreach(IMultiPanelModel mpl2ndlvl in frm.Lst_MultiPanel)
+            //    {
+            //        pnlCount += mpl2ndlvl.MPanelLst_Panel.Count;
+            //        foreach (IMultiPanelModel mpl3rdlvl in mpl2ndlvl.MPanelLst_MultiPanel)
+            //        {
+            //            pnlCount += mpl3rdlvl.MPanelLst_Panel.Count;
+            //            foreach (IMultiPanelModel mpl4thlvl in mpl3rdlvl.MPanelLst_MultiPanel)
+            //            {
+            //                pnlCount += mpl4thlvl.MPanelLst_Panel.Count;
+            //            }
+            //        }
+            //    }
+
+            //}
+            
+
+            //if (pnlCount == 0)
+            //{
+            //    _windoorModel.panelIDCounter = 0;
+            //    _windoorModel.PanelGlassID_Counter = 0;
+            //}
+           
             return _windoorModel.panelIDCounter += 1;
         }
 
@@ -8734,7 +8760,6 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove(concreteUC);
         }
-        decimal pricingFactor;
         public async void SetPricingFactor()
         {
             string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();

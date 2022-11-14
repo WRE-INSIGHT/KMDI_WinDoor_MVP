@@ -6,6 +6,7 @@ using ServiceLayer.Services.ProjectQuoteServices;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -135,8 +136,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             {
                 // Console.WriteLine("customer ref id: " + row.Cells["Customer_Reference_Id"].Value);
 
-
-                if (row.Cells["Customer_Reference_Id"].Value.ToString() == "")
+                if (row.Cells["Customer_Reference_Id"].Value.ToString() == "0")
                 {
                     MessageBox.Show("Please add customer reference before assigning Cost Engineer","Window Maker",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
@@ -174,6 +174,14 @@ namespace PresentationLayer.Presenter.Costing_Head
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
             _dgvProj.DataSource = dt;
 
+
+
+            //var x = (from r in dt.AsEnumerable()
+            //         select r["Project Name"])
+            //         .Select(m => new { m.CategoryId, m.CategoryName })
+            //         .Distinct().ToList();
+
+
             foreach (DataGridViewColumn col in _dgvProj.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -188,12 +196,12 @@ namespace PresentationLayer.Presenter.Costing_Head
 
             //    Console.WriteLine(i);       //	1
             //}
-       
-            //_dgvProj.Columns["Id"].Visible = false;
+
+            _dgvProj.Columns["Id"].Visible = false;
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
             _dgvProj.Columns["Emp_Id"].Visible = false;
-
+            //foreach(Data)
             _dgvProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 

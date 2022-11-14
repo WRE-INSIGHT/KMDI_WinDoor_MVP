@@ -108,7 +108,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                     DataRowView chkVal = _chkCEList.CheckedItems[0] as DataRowView;
 
                     int emp_id = Convert.ToInt32(chkVal["Id"]);
-                    int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                    int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "0") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
                     int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
 
                     IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
