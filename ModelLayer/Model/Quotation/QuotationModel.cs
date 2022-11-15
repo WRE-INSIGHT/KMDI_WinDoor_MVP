@@ -1109,6 +1109,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         OverLappingPanel_Qty += 1;
                                     }
+                                    pnl.Panel_OverLappingPanelQty = OverLappingPanel_Qty;
                                 }
 
                                 if (pnl_curCtrl != null)
@@ -1227,6 +1228,10 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
                                                         pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                         // } 
+                                                    }
+                                                    if (pnl_curCtrl.Panel_SashHeight >= 4000)
+                                                    {
+                                                        pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                     }
                                                 }
                                                 else
@@ -1651,7 +1656,10 @@ namespace ModelLayer.Model.Quotation
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
 
-
+                                    if (pnl.Panel_SashHeight >= 4000)
+                                    {
+                                        pnl.Insert_AluminumPullHandle_MaterialList(Material_List);
+                                    }
                                     //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
                                     //add_screws_fab_striker += strikerAC_screws;
                                 }
@@ -2235,6 +2243,8 @@ namespace ModelLayer.Model.Quotation
             ExtensionForInterlockPricePerPiece = 789.01m,
             AluminumTrackPricePerLinearMeter = 251.10m,
             WaterSeepagePricePerLinearMeter = 153.73m,
+            AluminumPullHandlePricePerLinearMeter = 2480.18m,
+
 
             GlazingGasketPrice,
             GeorgianBarCost,
@@ -2246,6 +2256,7 @@ namespace ModelLayer.Model.Quotation
             ExtensionForInterlockPrice,
             AlumTrackPrice,
             WaterSeepagePrice,
+            AluminumPullHandlePrice,
 
             GeorgianBarPrice,
             CoverProfilePrice,
@@ -2939,6 +2950,10 @@ namespace ModelLayer.Model.Quotation
                                             SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                         }
 
+                                        if (pnl.Panel_SashHeight >= 4000)
+                                        {
+                                            AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
+                                        }
                                     }
 
                                     if (pnl.Panel_ChkText == "dSash" && pnl.Panel_Type.Contains("Fixed"))
@@ -3042,6 +3057,112 @@ namespace ModelLayer.Model.Quotation
                                         MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
                                         SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
                                     }
+                                    else
+                                    {
+                                        #region SashPrice 
+                                        SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
+
+                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                            SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                            GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                        }
+                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                            }
+                                            else
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                            }
+
+                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                        }
+
+
+                                        SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                        SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+
+                                        //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                        //{
+                                        //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                        //}
+                                        //else
+                                        //{
+                                        //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                        //}
+
+                                        #endregion
+                                    }
 
                                     if (pnl.Panel_GlassThickness == 6.0f)
                                     {
@@ -3053,109 +3174,7 @@ namespace ModelLayer.Model.Quotation
                                         PlasticWedgePrice += PlasticWedgePricePerPiece;
                                     }
 
-                                    #region SashPrice 
-                                    SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
 
-                                    if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                        SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                                    }
-                                    else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                        }
-                                        else
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                        }
-
-                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                                    }
-
-
-                                    SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                                    SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-
-                                    //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                    //{
-                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                    //}
-                                    //else
-                                    //{
-                                    //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                    //}
-
-                                    #endregion
 
                                     #region EspagPrice
 
@@ -3714,6 +3733,12 @@ namespace ModelLayer.Model.Quotation
                                     ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
                                     SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                 }
+
+                                if (Singlepnl.Panel_SashHeight >= 4000)
+                                {
+                                    AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
+                                }
+
                             }
 
                             if (Singlepnl.Panel_ChkText == "dSash" && Singlepnl.Panel_Type.Contains("Fixed"))
@@ -3817,6 +3842,101 @@ namespace ModelLayer.Model.Quotation
                                 MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
                                 SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
                             }
+                            else
+                            {
+                                #region SashPrice 
+                                SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+
+                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                    }
+
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                    }
+
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                    }
+
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                    }
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                {
+                                    SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                    SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                    GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                    }
+
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                }
+                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                    }
+                                    else
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                    }
+
+                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                }
+
+                                SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                #endregion
+                            }
 
                             if (Singlepnl.Panel_GlassThickness == 6.0f)
                             {
@@ -3834,98 +3954,7 @@ namespace ModelLayer.Model.Quotation
                             }
 
 
-                            #region SashPrice 
-                            SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
 
-                            if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
-                                }
-
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
-                                }
-
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
-                                }
-
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                }
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                            {
-                                SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                }
-
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                            }
-                            else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                }
-                                else
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                }
-
-                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                            }
-
-                            SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                            SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                            GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                            #endregion
 
                             #region EspagPrice
 
@@ -4263,7 +4292,8 @@ namespace ModelLayer.Model.Quotation
                                        Math.Round(GuideTrackPrice, 2) +
                                        Math.Round(AlumTrackPrice, 2) +
                                        Math.Round(InterlockPrice, 2) +
-                                       Math.Round(ExtensionForInterlockPrice, 2);
+                                       Math.Round(ExtensionForInterlockPrice, 2) +
+                                       Math.Round(AluminumPullHandlePrice, 2);
 
                 AccesorriesCost = Math.Round(EndCapPrice, 2) +
                                   Math.Round(MechJointPrice, 2) +
@@ -4622,6 +4652,13 @@ namespace ModelLayer.Model.Quotation
                                "",
                                "Ancillary Profile");
 
+                    Price_List.Rows.Add("Aluminum Pull Handle Price",
+                               AluminumPullHandlePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                               Math.Round(AluminumPullHandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                               "",
+                               "",
+                               "Ancillary Profile");
+
                     Price_List.Rows.Add("Total",
                                       "",
                                       Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
@@ -4960,6 +4997,7 @@ namespace ModelLayer.Model.Quotation
             AlumTrackPrice = 0;
             InterlockPrice = 0;
             ExtensionForInterlockPrice = 0;
+            AluminumPullHandlePrice = 0;
 
 
             AccesorriesCost = 0;

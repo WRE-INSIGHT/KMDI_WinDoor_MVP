@@ -8,7 +8,11 @@ namespace ModelLayer.Model.Quotation.Screen
 {
     public class ScreenModel : IScreenModel, INotifyPropertyChanged
     {
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         private ConstantVariables constants = new ConstantVariables();
 
@@ -1231,11 +1235,6 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public ScreenModel(int screen_id,
                            int screen_width,

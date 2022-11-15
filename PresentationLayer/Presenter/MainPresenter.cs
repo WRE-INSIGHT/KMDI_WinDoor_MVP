@@ -838,7 +838,7 @@ namespace PresentationLayer.Presenter
         {
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
             PricingPresenter.GetPricingView().ShowPricingList();
-        } 
+        }
 
         private void _mainView_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
@@ -1001,7 +1001,7 @@ namespace PresentationLayer.Presenter
 
         private List<string> Saving_dotwndr()
         {
-             #region Save
+            #region Save
 
             List<string> wndr_content = new List<string>();
 
@@ -1973,6 +1973,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(0.0f, "Unglazed", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Clear", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Green", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Blue", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tinted Bronze", true, false, false, false, false);
@@ -2049,7 +2050,7 @@ namespace PresentationLayer.Presenter
                     SetChangesMark();
                     _isOpenProject = false;
                     wndrfile = _mainView.GetOpenFileDialog().FileName;
-                   
+
                     int startFileName = wndrfile.LastIndexOf("\\") + 1;
                     FileInfo f = new FileInfo(wndrfile);
                     f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
@@ -2332,7 +2333,7 @@ namespace PresentationLayer.Presenter
             {
                 inside_concrete = true;
             }
-            
+
             else if (row_str.Contains("#"))
             {
                 inside_panel = true;
@@ -2699,7 +2700,7 @@ namespace PresentationLayer.Presenter
                             string[] words = extractedValue_str.Split(';');
                             if (extractedValue_str.Contains("<"))
                             {
-                                Dictionary<int, Decimal>  dictionary_wd_redArrowLinesList = new Dictionary<int, Decimal>();
+                                Dictionary<int, Decimal> dictionary_wd_redArrowLinesList = new Dictionary<int, Decimal>();
                                 foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
@@ -2718,7 +2719,7 @@ namespace PresentationLayer.Presenter
                             string[] words = extractedValue_str.Split(';');
                             if (extractedValue_str.Contains("<"))
                             {
-                                Dictionary<int, Decimal>  dictionary_ht_redArrowLinesList = new Dictionary<int, Decimal>();
+                                Dictionary<int, Decimal> dictionary_ht_redArrowLinesList = new Dictionary<int, Decimal>();
                                 foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
@@ -2968,11 +2969,11 @@ namespace PresentationLayer.Presenter
                     if (inside_concrete)
                     {
                         #region Load for Concrete Model
-                       
+
                         if (row_str.Contains("Concrete_Width:"))
                         {
                             frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                           
+
                         }
                         if (row_str.Contains("Concrete_Height:"))
                         {
@@ -3052,7 +3053,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    if(mpnllvl == "fourth level")
+                                    if (mpnllvl == "fourth level")
                                     {
                                         if (extractedValue_str.Contains("MultiMullion"))
                                         {
@@ -3085,7 +3086,7 @@ namespace PresentationLayer.Presenter
                                             panel_Parent = _multiTransomUC2nd.Getflp();
                                         }
                                     }
-                                   
+
 
                                 }
                             }
@@ -6082,7 +6083,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_Parent:"))
                         {
-                           if (mpnllvl == "fourth level")
+                            if (mpnllvl == "fourth level")
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -6094,7 +6095,7 @@ namespace PresentationLayer.Presenter
                                     div_Parent = _multiTransomUC4th.Getflp();
                                 }
                             }
-                            else if ( mpnllvl == "third level")
+                            else if (mpnllvl == "third level")
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -6108,7 +6109,7 @@ namespace PresentationLayer.Presenter
                             }
 
 
-                           
+
                             //else if (mpnllvl == "third level")
                             //{
                             //    if (extractedValue_str.Contains("Mullion"))
@@ -6123,7 +6124,7 @@ namespace PresentationLayer.Presenter
                             //    mpnllvl = "third level";
                             //}
 
-                            else 
+                            else
                             {
                                 if (extractedValue_str.Contains("Mullion"))
                                 {
@@ -7482,7 +7483,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     try
                                     {
-                                        if(sprop.Name == "WD_name")
+                                        if (sprop.Name == "WD_name")
                                         {
                                             sprop.SetValue(wndrModel, "Item" + _quotationModel.Lst_Windoor.Count);
                                         }
@@ -7507,7 +7508,7 @@ namespace PresentationLayer.Presenter
                         _mainView.GetThis().Controls.Add(bpUC);
 
 
-                       
+
                         _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, wndrModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
                         _pnlMain.Controls.Clear();
@@ -7783,7 +7784,7 @@ namespace PresentationLayer.Presenter
             _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
             UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
             _mainView.GetThis().Controls.Add(bpUC);
-            foreach(Control wndr_objects in item.lst_objects)
+            foreach (Control wndr_objects in item.lst_objects)
             {
                 if (wndr_objects.Name.Contains("Frame"))
                 {
@@ -7809,8 +7810,8 @@ namespace PresentationLayer.Presenter
                 }
             }
             //frames
-            
-           
+
+
             //_pnlPropertiesBody.Refresh();
             _mainView.RemoveBinding(_mainView.GetLblSize());
             _mainView.RemoveBinding();
@@ -7852,7 +7853,7 @@ namespace PresentationLayer.Presenter
                                   sash_art == SashProfile_ArticleNo._395) &&
                                   !(frame_art == FrameProfile_ArticleNo._2060 &&
                                   sash_art == SashProfile_ArticleNo._2067) &&
-                                  !(frame_art == FrameProfile_ArticleNo._6050 &&
+                                !((frame_art == FrameProfile_ArticleNo._6050 || frame_art == FrameProfile_ArticleNo._6052) &&
                                   sash_art == SashProfile_ArticleNo._6040))
                             {
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
@@ -7867,7 +7868,7 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
-                        else if (handletype == Handle_Type._RotoswingForSliding || handletype == Handle_Type._PopUp)
+                        else if (handletype == Handle_Type._PopUp)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052 &&
                                   sash_art == SashProfile_ArticleNo._6040))
@@ -7875,7 +7876,7 @@ namespace PresentationLayer.Presenter
                                 incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                             }
                         }
-                        else if (handletype == Handle_Type._D || handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking)
+                        else if (handletype == Handle_Type._D || handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._RotoswingForSliding)
                         {
                             if (!(frame_art == FrameProfile_ArticleNo._6052 &&
                                   sash_art == SashProfile_ArticleNo._6041))
@@ -8024,8 +8025,8 @@ namespace PresentationLayer.Presenter
                                       sash_art == SashProfile_ArticleNo._395) &&
                                       !(frame_art == FrameProfile_ArticleNo._2060 &&
                                       sash_art == SashProfile_ArticleNo._2067) &&
-                                      !(frame_art == FrameProfile_ArticleNo._6050 &&
-                                      sash_art == SashProfile_ArticleNo._6040))
+                                       !((frame_art == FrameProfile_ArticleNo._6050 || frame_art == FrameProfile_ArticleNo._6052) &&
+                                         sash_art == SashProfile_ArticleNo._6040))
                                 {
                                     incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                                 }
@@ -8034,12 +8035,29 @@ namespace PresentationLayer.Presenter
                             {
                                 if (!(frame_art == FrameProfile_ArticleNo._7507 &&
                                       (sash_art == SashProfile_ArticleNo._374 ||
-                                       sash_art == SashProfile_ArticleNo._373)))
+                                       sash_art == SashProfile_ArticleNo._373)) &&
+                                    !(frame_art == FrameProfile_ArticleNo._6052 &&
+                                    sash_art == SashProfile_ArticleNo._6041))
                                 {
                                     incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
                                 }
                             }
-
+                            else if (handletype == Handle_Type._PopUp)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._6052 &&
+                                      sash_art == SashProfile_ArticleNo._6040))
+                                {
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                                }
+                            }
+                            else if (handletype == Handle_Type._D || handletype == Handle_Type._DummyD || handletype == Handle_Type._D_IO_Locking || handletype == Handle_Type._RotoswingForSliding)
+                            {
+                                if (!(frame_art == FrameProfile_ArticleNo._6052 &&
+                                      sash_art == SashProfile_ArticleNo._6041))
+                                {
+                                    incompatibility += "\n\nOn P" + pnl.PanelGlass_ID + "\nFrame Profile : " + frame_art.DisplayName + ", Sash Profile : " + sash_art.DisplayName + ", Handle Type : " + handletype.DisplayName;
+                                }
+                            }
 
                             if (espag_art == Espagnolette_ArticleNo._741012 || espag_art == Espagnolette_ArticleNo._EQ87NT ||
                                 espag_art == Espagnolette_ArticleNo._628806 || espag_art == Espagnolette_ArticleNo._628807 ||
@@ -8463,7 +8481,7 @@ namespace PresentationLayer.Presenter
             _frameUC = frameUCP.GetFrameUC();
             frmUCPresenter = frameUCP;
             _basePlatformPresenter.AddFrame(_frameUC);
-            
+
         }
 
         private void AddConcreteUC(IConcreteModel concreteModel)

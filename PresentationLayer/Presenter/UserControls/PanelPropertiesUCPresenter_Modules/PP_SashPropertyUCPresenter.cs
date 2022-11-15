@@ -353,6 +353,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_sash == SashProfile_ArticleNo._6040 && _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
+                        _panelModel.Panel_HandleType = Handle_Type._Rotoswing;
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
@@ -469,6 +470,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_sash == SashProfile_ArticleNo._6041 && _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
                         _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
+                        _panelModel.Panel_HandleType = Handle_Type._Rio;
 
                         if (_panelModel.Panel_MotorizedOptionVisibility == false)
                         {
