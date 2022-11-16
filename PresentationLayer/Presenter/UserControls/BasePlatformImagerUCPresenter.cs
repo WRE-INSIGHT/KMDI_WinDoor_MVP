@@ -1285,7 +1285,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                    client_ht - w);
 
             g.DrawRectangle(new Pen(Color.Black, w), outer_bounds);
-            g.FillRectangle(Brushes.DarkGray, outer_bounds);
+            g.FillRectangle(Brushes.White, outer_bounds);
 
             if (panelModel.Panel_Type != "Louver Panel")
             {
