@@ -2414,6 +2414,7 @@ namespace PresentationLayer.Presenter
             if (row_str == "EndofFile")
             {
                 Load_Windoor_Item(_windoorModel);
+              
 
             }
             switch (inside_quotation)
@@ -5387,21 +5388,22 @@ namespace PresentationLayer.Presenter
                                     _multiModelParent.Fit_EqualPanel_ToBindDimensions();
                                     _multiModelParent.Fit_MyControls_ToBindDimensions();
                                     _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
+                                    if (div_DMPanelName != "")
+                                    {
+                                        foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                        {
+                                            if (pnl.Panel_Name == div_DMPanelName)
+                                            {
+                                                _prev_divModel.Div_DMPanel = pnl;
+                                            }
+                                        }
+                                    }
                                     //Run_GetListOfMaterials_SpecificItem();
                                 }
                             }
                             _basePlatformPresenter.InvalidateBasePlatform();
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                            if (div_DMPanelName != "")
-                            {
-                                foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
-                                {
-                                    if (pnl.Panel_Name == div_DMPanelName)
-                                    {
-                                        _prev_divModel.Div_DMPanel = pnl;
-                                    }
-                                }
-                            }
+                           
                             inside_panel = false;
                         }
 
@@ -7289,6 +7291,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.OpenWndrFile;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
                     _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
+                   
                     //_frmDimensionPresenter.mainPresenter_qoutationInputBox_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_newItem_ClickedOK = false;
                     //_frmDimensionPresenter.mainPresenter_AddedFrame_ClickedOK = false;
