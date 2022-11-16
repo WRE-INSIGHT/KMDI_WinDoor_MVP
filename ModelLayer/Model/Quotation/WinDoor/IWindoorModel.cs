@@ -70,5 +70,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         bool WD_customArrowToggle { get; set; }
         decimal WD_CostingPoints { get; set; }
         int WD_pboxImagerHeight { get; set; }
+
+        void SetfrmDimentionZoom();
     }
 }

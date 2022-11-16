@@ -187,9 +187,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelHeight = value;
             }
         }
-
         public int Panel_OriginalHeight { get; set; }
-
         [Description("Virtual Height that is dependent on Panel_Height and Panel_Zoom and varies accordingly. (not intended for user to use)")]
         private int _panelHeightToBind;
         public int Panel_HeightToBind
@@ -2828,8 +2826,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Imager_SetDimensionsToBind_FrameParent()
         {
-            if (PanelImageRenderer_Zoom == 1.0f || PanelImageRenderer_Zoom == 0.50f)
-            {
+            //if (PanelImageRenderer_Zoom == 1.0f || PanelImageRenderer_Zoom == 0.50f)
+            //{
                 int padding_top = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Top,
                     padding_bot = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Bottom,
                     padding_left = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Left,
@@ -2837,7 +2835,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding_left + padding_right);
                 PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding_top + padding_bot);
-            }
+            //}
+            //else
+            //{
+            //    int padding_top = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Top,
+            //        padding_bot = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Bottom,
+            //        padding_left = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Left,
+            //        padding_right = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Right;
+            //    PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding_left + padding_right);
+            //    PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding_top + padding_bot);
+            //}
         }
 
         public void SetPanelMargin_using_ZoomPercentage()
@@ -3766,6 +3773,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                         {
+                            //pnl_ht = (int)(Panel_Height * PanelImageRenderer_Zoom) - (5 * div_count);
                             pnl_ht = (int)(Panel_Height * PanelImageRenderer_Zoom) - (5 * div_count);
                         }
                         else
@@ -3857,27 +3865,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_HeightToBind = pnl_ht;
                     }
 
-                    //if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
-                    //{
-                    //    int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
-                    //    int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalWidth)));
-                    //    Panel_WidthToBind = pnl_wd;
-                    //    Panel_HeightToBind = Panel_ParentMultiPanelModel.MPanel_Height;
-                    //}
-                    //else
-                    //{
-                    //    int mpnlOriginalHeight = Panel_ParentMultiPanelModel.MPanel_Height - 20;
-                    //    int pnl_ht = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalHeight)));
-                    //    Panel_HeightToBind = pnl_ht;
-                    //    Panel_WidthToBind = Panel_ParentMultiPanelModel.MPanel_Height;
-                    //}
+                  
                 }
                 else
                 {
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
+                        //Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
+                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                     else
                     {

@@ -1674,6 +1674,7 @@ namespace PresentationLayer.Presenter
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         if (wdm == _windoorModel)
@@ -2247,7 +2248,7 @@ namespace PresentationLayer.Presenter
                             int startFileName = wndrfile.LastIndexOf("\\") + 1;
                             string outFile = wndrfile.Substring(0, startFileName) +
                                              wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-                            File.Delete(outFile);
+                            //File.Delete(outFile);
                             SetMainViewTitle(input_qrefno,
                                              _projectName,
                                              _custRefNo,
@@ -2321,6 +2322,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "(")
             {
+                inside_quotation = false;
                 inside_item = true;
             }
             else if (row_str == "{")
@@ -5390,6 +5392,16 @@ namespace PresentationLayer.Presenter
                             }
                             _basePlatformPresenter.InvalidateBasePlatform();
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            if (div_DMPanelName != "")
+                            {
+                                foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                {
+                                    if (pnl.Panel_Name == div_DMPanelName)
+                                    {
+                                        _prev_divModel.Div_DMPanel = pnl;
+                                    }
+                                }
+                            }
                             inside_panel = false;
                         }
 
@@ -6273,6 +6285,11 @@ namespace PresentationLayer.Presenter
                                     div_DMPanel = pnl;
                                 }
                             }
+                            if(div_DMPanel == null)
+                            {
+                                div_DMPanelName = extractedValue_str;
+                            }
+
                             //div_DMPanel = _panelMode;
                         }
                         else if (row_str.Contains("Div_ArtNo:"))
@@ -7007,7 +7024,8 @@ namespace PresentationLayer.Presenter
 
         string div_Name,
                div_FrameType,
-               div_Bounded;
+               div_Bounded,
+               div_DMPanelName;
         float divImageRenderer_Zoom,
               div_Zoom;
         bool div_Visible,
@@ -7303,6 +7321,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut);
                         _windoorModel.SetDimensions_basePlatform();
                         AddWndrList_QuotationModel(_windoorModel);
+                        _quotationModel.Select_Current_Windoor(_windoorModel);
                         _mainView.Zoom = _windoorModel.WD_zoom;
                         //_mainView.PropertiesScroll = _windoorModel.WD_PropertiesScroll;
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -7670,14 +7689,14 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_width = frmDimension_numWd;
                 _windoorModel.WD_height = frmDimension_numHt;
                 _windoorModel.SetDimensions_basePlatform();
-                _windoorModel.SetZoom();
+                _windoorModel.SetfrmDimentionZoom();
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformPresenter.Invalidate_flpMainControls();
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
-            Load_Windoor_Item(_windoorModel);
+            //Load_Windoor_Item(_windoorModel);
         }
         #endregion
 
@@ -7792,6 +7811,7 @@ namespace PresentationLayer.Presenter
                         if (wndr_objects.Name == frame.Frame_Name)
                         {
                             _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                            frame.Frame_PropertiesUC.BringToFront();
                             _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
                         }
                     }
@@ -7803,6 +7823,7 @@ namespace PresentationLayer.Presenter
                         if (wndr_objects.Name == concrete.Concrete_Name)
                         {
                             _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                            concrete.Concrete_PropertiesUC.BringToFront();
                             _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
                         }
                     }
@@ -8522,42 +8543,69 @@ namespace PresentationLayer.Presenter
 
         public int GetPanelCount()
         {
-            //int pnlCount = 0;
-            //foreach(IFrameModel frm in _windoorModel.lst_frame)
-            //{
-            //    pnlCount += frm.Lst_Panel.Count;
-            //    foreach(IMultiPanelModel mpl2ndlvl in frm.Lst_MultiPanel)
-            //    {
-            //        pnlCount += mpl2ndlvl.MPanelLst_Panel.Count;
-            //        foreach (IMultiPanelModel mpl3rdlvl in mpl2ndlvl.MPanelLst_MultiPanel)
-            //        {
-            //            pnlCount += mpl3rdlvl.MPanelLst_Panel.Count;
-            //            foreach (IMultiPanelModel mpl4thlvl in mpl3rdlvl.MPanelLst_MultiPanel)
-            //            {
-            //                pnlCount += mpl4thlvl.MPanelLst_Panel.Count;
-            //            }
-            //        }
-            //    }
-
-            //}
-            
-
-            //if (pnlCount == 0)
-            //{
-            //    _windoorModel.panelIDCounter = 0;
-            //    _windoorModel.PanelGlassID_Counter = 0;
-            //}
-           
+            int pnlCount = 0;
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                pnlCount += frm.Lst_Panel.Count;
+                foreach (IMultiPanelModel mpl2ndlvl in frm.Lst_MultiPanel)
+                {
+                    pnlCount += mpl2ndlvl.MPanelLst_Panel.Count;
+                    foreach (IMultiPanelModel mpl3rdlvl in mpl2ndlvl.MPanelLst_MultiPanel)
+                    {
+                        pnlCount += mpl3rdlvl.MPanelLst_Panel.Count;
+                        foreach (IMultiPanelModel mpl4thlvl in mpl3rdlvl.MPanelLst_MultiPanel)
+                        {
+                            pnlCount += mpl4thlvl.MPanelLst_Panel.Count;
+                        }
+                    }
+                }
+            }
+            if (pnlCount == 0)
+            {
+                _windoorModel.panelIDCounter = 0;
+                _windoorModel.PanelGlassID_Counter = 0;
+            }
             return _windoorModel.panelIDCounter += 1;
         }
 
         public int GetMultiPanelCount()
         {
+            int mpnlCount = 0;
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                mpnlCount += frm.Lst_MultiPanel.Count;
+                foreach (IMultiPanelModel mpl2ndlvl in frm.Lst_MultiPanel)
+                {
+                    mpnlCount += mpl2ndlvl.MPanelLst_MultiPanel.Count;
+                    foreach (IMultiPanelModel mpl3rdlvl in mpl2ndlvl.MPanelLst_MultiPanel)
+                    {
+                        mpnlCount += mpl3rdlvl.MPanelLst_MultiPanel.Count;
+                        foreach (IMultiPanelModel mpl4thlvl in mpl3rdlvl.MPanelLst_MultiPanel)
+                        {
+                            mpnlCount += mpl4thlvl.MPanelLst_MultiPanel.Count;
+                        }
+                    }
+                }
+            }
+            if (mpnlCount == 0)
+            {
+                _windoorModel.mpanelIDCounter = 0;
+            }
             return _windoorModel.mpanelIDCounter += 1;
         }
 
         public int GetDividerCount()
         {
+            int divCount = 0;
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                divCount += frm.Lst_Divider.Count;
+                
+            }
+            if (divCount == 0)
+            {
+                _windoorModel.divIDCounter = 0;
+            }
             return _windoorModel.divIDCounter += 1;
         }
 

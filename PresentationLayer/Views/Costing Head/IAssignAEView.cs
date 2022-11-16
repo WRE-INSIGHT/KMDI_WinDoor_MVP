@@ -20,6 +20,7 @@ namespace PresentationLayer.Views.Costing_Head
         event EventHandler btnSaveClickEventRaised;
         event EventHandler btnEqualClickEventRaised;
         event EventHandler DeleteToolStripButtonClickEventRaised;
+        event EventHandler DeleteAEICToolStripButtonClickEventRaised;
         event EventHandler AddProjectToolStripButtonClickEventRaised;
         void ShowThis();
     }

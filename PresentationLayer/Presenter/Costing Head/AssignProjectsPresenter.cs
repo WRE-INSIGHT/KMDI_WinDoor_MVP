@@ -201,6 +201,7 @@ namespace PresentationLayer.Presenter.Costing_Head
             _dgvProj.Columns["Project_Id"].Visible = false;
             _dgvProj.Columns["Customer_Reference_Id"].Visible = false;
             _dgvProj.Columns["Emp_Id"].Visible = false;
+
             //foreach(Data)
             _dgvProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }

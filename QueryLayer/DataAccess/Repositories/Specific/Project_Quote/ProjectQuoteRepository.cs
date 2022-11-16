@@ -475,5 +475,35 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                 }
             }
         }
+
+        public async Task DeleteAEIC(string project_Id, string employee_Id)
+        {
+            try
+            {
+                using (SqlConnection Sqlcon = new SqlConnection(_sqlConString))
+                {
+                    await Sqlcon.OpenAsync();
+                    using (SqlCommand sqlcmd = Sqlcon.CreateCommand())
+                    {
+                        using (SqlTransaction sqltrans = await Task.Run(() => Sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                        {
+                            sqlcmd.Connection = Sqlcon;
+                            sqlcmd.Transaction = sqltrans;
+                            sqlcmd.CommandText = "Project_Quote_Stp";
+                            sqlcmd.CommandType = CommandType.StoredProcedure;
+                            sqlcmd.Parameters.AddWithValue("@Command", "DeleteAssignAEIC");
+                            sqlcmd.Parameters.AddWithValue("@Project_Id", project_Id);
+                            sqlcmd.Parameters.AddWithValue("@Emp_id", employee_Id);
+                            sqltrans.Commit();
+                            sqlcmd.ExecuteReader();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
