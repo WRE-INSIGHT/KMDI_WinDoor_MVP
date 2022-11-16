@@ -2752,6 +2752,26 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        public int Panel_OverLappingPanelQty { get; set; }
+
+
+        private AluminumPullHandle_ArticleNo _panel_AluminumPullHandleArtNo;
+        public AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo
+
+        {
+            get
+            {
+                return _panel_AluminumPullHandleArtNo;
+            }
+
+            set
+            {
+                _panel_AluminumPullHandleArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -3429,15 +3449,15 @@ namespace ModelLayer.Model.Quotation.Panel
                         //}
                         if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                         {
-                                if (Panel_ParentMultiPanelModel.isDisplaySizeEqual())
-                                {
-                                    pnl_wd = ((parent_mpanelWd - mpnlWd_deduct) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount ;
-                                }
-                                else
-                                {
-                                    pnl_wd = ((parent_mpanelWd - mpnlWd_deduct) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
-                                }
-                           
+                            if (Panel_ParentMultiPanelModel.isDisplaySizeEqual())
+                            {
+                                pnl_wd = ((parent_mpanelWd - mpnlWd_deduct) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
+                            }
+                            else
+                            {
+                                pnl_wd = ((parent_mpanelWd - mpnlWd_deduct) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
+                            }
+
                             //pnl_wd = Convert.ToInt32((((Math.Floor(Panel_ParentMultiPanelModel.MPanel_Width * Panel_ParentMultiPanelModel.MPanel_Zoom) - 20)  - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1))) );
                             //if (isEqual)
                             //{
@@ -3451,7 +3471,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             if (Panel_ParentMultiPanelModel.isDisplaySizeEqual())
                             {
-                                pnl_wd = ((parent_mpanelWd - mpnlWd_deduct) ) / totalPanelCount;
+                                pnl_wd = ((parent_mpanelWd - mpnlWd_deduct)) / totalPanelCount;
                             }
                             else
                             {
@@ -3488,7 +3508,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 pnl_ht = ((parent_mpanelHT - mpnlHt_deduct) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
                             }
 
-                            
+
                         }
                         else
                         {
@@ -3536,32 +3556,32 @@ namespace ModelLayer.Model.Quotation.Panel
                     //if (PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
                     //    PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.10f)
                     //{
-                        if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+                    {
+                        if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
                         {
-                            if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
-                            {
-                                pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
+                            pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
 
-                            }
-                            else
-                            {
-                                pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
-
-                            }
                         }
                         else
                         {
-                            if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
-                            {
-                                pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) ) / totalPanelCount;
+                            pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
 
-                            }
-                            else
-                            {
-                                pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
-
-                            }
                         }
+                    }
+                    else
+                    {
+                        if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
+                        {
+                            pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom))) / totalPanelCount;
+
+                        }
+                        else
+                        {
+                            pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
+
+                        }
+                    }
 
                     //}
                     //else
@@ -3621,7 +3641,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else
                     {
-                         pnl_ht = (int)(Panel_Height * Panel_Zoom);
+                        pnl_ht = (int)(Panel_Height * Panel_Zoom);
                     }
                     pnl_wd = (int)(Panel_Width * Panel_Zoom);
                 }
@@ -3721,7 +3741,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     parent_mpanelHT = Panel_ParentMultiPanelModel.MPanelImageRenderer_Height;
                     div_count = Panel_ParentMultiPanelModel.MPanel_Divisions;
                     totalpanel_inside_parentMpanel = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
-                   
+
                     foreach (IPanelModel pnl in Panel_ParentMultiPanelModel.MPanelLst_Panel)
                     {
                         if (pnl.Panel_Name != Panel_Name)
@@ -3739,7 +3759,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             if (isEqual)
                             {
-                                pnl_wd = ((parent_mpanelWd) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) ) / totalPanelCount;
+                                pnl_wd = ((parent_mpanelWd) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
                             }
                             else
                             {
@@ -3833,7 +3853,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_ParentMultiPanelModel.MPanel_Placement == "Somewhere in Between")
                 {
                     deduct = (int)(20 * Panel_Zoom);
-                  
+
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Placement == "First" ||
                          Panel_ParentMultiPanelModel.MPanel_Placement == "Last")
@@ -4166,16 +4186,16 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 foreach (IPanelModel pnls in Panel_ParentMultiPanelModel.MPanelLst_Panel)
                 {
-                    if(pnls.Panel_Name == Panel_Name)
+                    if (pnls.Panel_Name == Panel_Name)
                     {
-                        
+
                         if (pnls.Panel_Overlap_Sash == OverlapSash._Left ||
                            pnls.Panel_Overlap_Sash == OverlapSash._Right)
                         {
                             sashDeduction -= 16;
                             sashDeduction += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
                             sashDeduction += (OverlapLeftRight - 1) * (16 / totalpanel_inside_parentMpanel);
-                            sashDeduction += OverlapBoth  * ((16 / totalpanel_inside_parentMpanel) * 2);
+                            sashDeduction += OverlapBoth * ((16 / totalpanel_inside_parentMpanel) * 2);
                         }
                         else if (pnls.Panel_Overlap_Sash == OverlapSash._Both)
                         {
@@ -6117,7 +6137,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (mpanel_placement == "First" ||
                     mpanel_placement == "Last" ||
-                    mpanel_placement == "" || 
+                    mpanel_placement == "" ||
                     mpanel_placement == "")
                 {
                     if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
@@ -6344,6 +6364,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
                     // Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
+                    Panel_AluminumPullHandleArtNo = AluminumPullHandle_ArticleNo._9C58;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                 }
 
@@ -8319,12 +8340,12 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
             if (Panel_LatchDeadboltStrikerArtNo != null)
-            { 
-            tbl_explosion.Rows.Add("Latch and deadbolt striker, " + orient + " " + Panel_LatchDeadboltStrikerArtNo.DisplayName,
-                                   1, "pc(s)",
-                                   "",
-                                   "Frame",
-                                   @"");
+            {
+                tbl_explosion.Rows.Add("Latch and deadbolt striker, " + orient + " " + Panel_LatchDeadboltStrikerArtNo.DisplayName,
+                                       1, "pc(s)",
+                                       "",
+                                       "Frame",
+                                       @"");
             }
 
         }
@@ -8901,6 +8922,15 @@ namespace ModelLayer.Model.Quotation.Panel
                                    2, "pc(s)",
                                    "",
                                    "Sash",
+                                   "");
+        }
+
+        public void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Aluminum Pull Handle " + Panel_AluminumPullHandleArtNo.DisplayName,
+                                   Panel_OverLappingPanelQty, "pc(s)",
+                                   (Panel_SashHeight - 5).ToString(),
+                                   "Ancillary Profile",
                                    "");
         }
         #endregion

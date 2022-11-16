@@ -282,6 +282,9 @@ namespace ModelLayer.Model.Quotation.Panel
         GuBeaZenMicrowaveSensor_ArticleNo Panel_GuBeaZenMicrowaveSensorArtNo { get; set; }
         SlidingDoorKitGs100_1_ArticleNo Panel_SlidingDoorKitGs100_1ArtNo { get; set; }
         GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
+        int Panel_OverLappingPanelQty { get; set; }
+
+        AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo { get; set; }
 
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
@@ -394,6 +397,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion);
 
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
+
+        void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
         #endregion
     }
 }

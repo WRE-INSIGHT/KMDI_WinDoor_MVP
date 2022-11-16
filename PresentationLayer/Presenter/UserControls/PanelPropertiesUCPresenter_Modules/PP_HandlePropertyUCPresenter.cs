@@ -214,8 +214,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     if (sel_handleType == Handle_Type._Rotoswing)
                     {
                         #region Property Height Adjustment - Rotoswing 
+                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
+                        }
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -492,8 +499,15 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     else if (sel_handleType == Handle_Type._Rio)
                     {
                         #region Property Height Adjustment - Rio
-
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                        if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                            _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                        }
+                        else
+                        {
+                            _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                        }
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1700,7 +1714,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     {
                         #region Property Height Adjustment - Rotoswing For Sliding handle
 
-                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774275;
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
                         _panelModel.Panel_ExtensionBotArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionBot2ArtNo = Extension_ArticleNo._None;
                         _panelModel.Panel_ExtensionTopArtNo = Extension_ArticleNo._None;
@@ -1914,7 +1928,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
             {
-                _panelModel.Panel_HandleType = Handle_Type._D;
+                _panelModel.Panel_HandleType = Handle_Type._Rio;
             }
             else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
             {
@@ -1999,6 +2013,16 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             }
             else if (handle == Handle_Type._Rio)
             {
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                    _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                {
+                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                }
+                else
+                {
+                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                }
+
                 _panelModel.Panel_RioOptionsVisibility = true;
                 _panelModel.Panel_RotaryOptionsVisibility = false;
                 _panelModel.Panel_RotoswingOptionsVisibility = false;
@@ -2017,9 +2041,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
                 }
 
-                _panelModel.AdjustPropertyPanelHeight("addRotary");
+                _panelModel.AdjustPropertyPanelHeight("addRio");
 
-                _panelModel.AdjustHandlePropertyHeight("addRotary");
+                _panelModel.AdjustHandlePropertyHeight("addRio");
             }
             else if (handle == Handle_Type._Rotoline)
             {
