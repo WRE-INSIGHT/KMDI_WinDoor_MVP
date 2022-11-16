@@ -1410,7 +1410,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
-                Pen dgrayPen = new Pen(Color.DimGray);
+                Pen dgrayPen = new Pen(Color.Red);
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
@@ -1438,7 +1438,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
-                Pen dgrayPen = new Pen(Color.DimGray);
+                Pen dgrayPen = new Pen(Color.Red);
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
