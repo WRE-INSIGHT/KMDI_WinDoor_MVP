@@ -1783,11 +1783,11 @@ namespace PresentationLayer.Presenter.UserControls
                 client_ht = mpanelModel.MPanelImageRenderer_Height;
 
             Rectangle mpnl_bounds = new Rectangle(Mpoint, new Size(client_wd, client_ht));
-            SolidBrush mpnl_sBrush = new SolidBrush(Color.MistyRose);
+            SolidBrush mpnl_sBrush = new SolidBrush(Color.White);
 
             if (mpanelModel.MPanel_Type == "Mullion")
             {
-                mpnl_sBrush = new SolidBrush(Color.MistyRose);
+                mpnl_sBrush = new SolidBrush(Color.White);
             }
             else if (mpanelModel.MPanel_Type == "Transom")
             {
@@ -1924,15 +1924,15 @@ namespace PresentationLayer.Presenter.UserControls
                                                client_wd - w,
                                                client_ht - w);
 
-            SolidBrush div_sBrush = new SolidBrush(Color.RosyBrown);
+            SolidBrush div_sBrush = new SolidBrush(Color.White);
 
             if (divModel.Div_Type == DividerModel.DividerType.Mullion)
             {
-                div_sBrush = new SolidBrush(Color.RosyBrown);
+                div_sBrush = new SolidBrush(Color.White);
             }
             else if (divModel.Div_Type == DividerModel.DividerType.Transom)
             {
-                div_sBrush = new SolidBrush(Color.PowderBlue);
+                div_sBrush = new SolidBrush(Color.White);
             }
             g.FillRectangle(div_sBrush, div_rect);
             g.DrawRectangle(new Pen(Color.Black, w), div_rect);
