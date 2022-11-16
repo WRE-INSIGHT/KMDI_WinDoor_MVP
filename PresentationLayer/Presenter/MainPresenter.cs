@@ -7373,7 +7373,7 @@ namespace PresentationLayer.Presenter
                                                                          Foil_Color._Walnut,
                                                                          Foil_Color._Walnut);
                         AddWndrList_QuotationModel(_windoorModel);
-                        //_quotationModel.Select_Current_Windoor(_windoorModel);
+                        _quotationModel.Select_Current_Windoor(_windoorModel);
                         _windoorModel.SetDimensions_basePlatform();
 
                         _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
@@ -7787,7 +7787,7 @@ namespace PresentationLayer.Presenter
                              item.WD_name,
                              item.WD_profile,
                              false);
-            _quotationModel.Select_Current_Windoor(item);
+            _quotationModel.Select_Current_Windoor(_windoorModel);
 
             //clear
             _pnlMain.Controls.Clear();
@@ -7795,18 +7795,18 @@ namespace PresentationLayer.Presenter
             _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
             //basePlatform
-            _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
+            _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
             AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
             _basePlatformPresenter.InvalidateBasePlatform();
 
-            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
+            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
             UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
             _mainView.GetThis().Controls.Add(bpUC);
-            foreach(Control wndr_objects in item.lst_objects)
+            foreach(Control wndr_objects in _windoorModel.lst_objects)
             {
                 if (wndr_objects.Name.Contains("Frame"))
                 {
-                    foreach (IFrameModel frame in item.lst_frame)
+                    foreach (IFrameModel frame in _windoorModel.lst_frame)
                     {
                         if (wndr_objects.Name == frame.Frame_Name)
                         {
@@ -8527,6 +8527,7 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)frameModel.Frame_UC);
             _windoorModel.lst_frame.Remove(frameModel);
+            Load_Windoor_Item(_windoorModel);
         }
 
         public void DeleteConcrete_OnConcreteList_WindoorModel(IConcreteModel concreteModel)

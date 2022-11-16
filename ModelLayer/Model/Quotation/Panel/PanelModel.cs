@@ -3870,8 +3870,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
                         }
 
-                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
-                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                       
                     }
                     else
                     {
@@ -3897,7 +3896,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                         {
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
                         }
                         else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                         {
