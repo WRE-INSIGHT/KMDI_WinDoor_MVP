@@ -920,7 +920,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
 
             }
-            
+
         }
 
         int _timer_count;
@@ -1042,6 +1042,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             _mainPresenter.DeselectDivider();
+            _mainPresenter.itemDescription();
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)

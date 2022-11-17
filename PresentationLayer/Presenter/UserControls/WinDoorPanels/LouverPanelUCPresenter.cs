@@ -256,6 +256,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 #endregion
 
                 _mainPresenter.DeselectDivider();
+                _mainPresenter.itemDescription();
             }
             catch (Exception ex)
             {

@@ -42,6 +42,7 @@ namespace ModelLayer.Model.Quotation
 
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
+        public string BOMandItemlistStatus { get; set; }
 
 
         private DataColumn CreateColumn(string columname, string caption, string type)
@@ -2229,8 +2230,8 @@ namespace ModelLayer.Model.Quotation
                 MechanicalJointPricePerPiece,
         #endregion
         #region AncillaryProfile
-        GlazingGasketPricePerLinearMeter = 32.64m,
-            GlazingBeadPricePerLinearMeter = 56.45m,
+            GlazingGasketPricePerLinearMeter = 32.64m,
+            GlazingBeadPricePerLinearMeter = 256.62m,
             GlazingBead_G58PricePerLinearMeter = 117.72m,
             GeorgianBar_0724Price = 154.93m,
             GeorgianBar_0726Price = 307.75m,
@@ -2301,456 +2302,465 @@ namespace ModelLayer.Model.Quotation
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
-                foreach (IFrameModel fr in wdm.lst_frame)
+
+                if (BOMandItemlistStatus == "PriceItemList")
                 {
-                    #region baseOnDimensionAndColorPointsif
-                    if (wdm.WD_profile.Contains("C70"))
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                        {
-                            ProfileColorPoints = 13;
+                    wdm.WD_Selected = true;
+                }
 
-                            if (fr.Frame_Width >= 2000)
-                            {
-                                ProfileColorPoints = 16;
-                            }
-                            else if (fr.Frame_Height >= 2000)
-                            {
-                                ProfileColorPoints = 16;
-                            }
-                            else if (fr.Frame_Width >= 3000)
-                            {
-                                ProfileColorPoints = 18;
-                            }
-                            else if (fr.Frame_Height >= 3000)
-                            {
-                                ProfileColorPoints = 18;
-                            }
+                if (wdm.WD_Selected == true)
+                {
 
-                            //CostingPoints += ProfileColorPoints * 4;
-                            //InstallationPoints += (ProfileColorPoints / 3) * 4;
-                        }
-                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                        {
-                            ProfileColorPoints = 14;
-                            if (fr.Frame_Width >= 2000)
-                            {
-                                ProfileColorPoints = 18;
-                            }
-                            else if (fr.Frame_Height >= 2000)
-                            {
-                                ProfileColorPoints = 18;
-                            }
-                            else if (fr.Frame_Width >= 3000)
-                            {
-                                ProfileColorPoints = 19;
-                            }
-                            else if (fr.Frame_Height >= 3000)
-                            {
-                                ProfileColorPoints = 19;
-                            }
-                        }
-                    }
-                    else if (wdm.WD_profile.Contains("PremiLine"))
+                    foreach (IFrameModel fr in wdm.lst_frame)
                     {
-                        if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                        #region baseOnDimensionAndColorPointsif
+                        if (wdm.WD_profile.Contains("C70"))
                         {
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
-                                ProfileColorPoints = 28;
+                                ProfileColorPoints = 13;
 
-                                if (fr.Frame_Width >= 5000)
+                                if (fr.Frame_Width >= 2000)
                                 {
-                                    ProfileColorPoints = 31;
+                                    ProfileColorPoints = 16;
                                 }
-                                else if (fr.Frame_Height >= 5000)
+                                else if (fr.Frame_Height >= 2000)
                                 {
-                                    ProfileColorPoints = 31;
+                                    ProfileColorPoints = 16;
                                 }
+                                else if (fr.Frame_Width >= 3000)
+                                {
+                                    ProfileColorPoints = 18;
+                                }
+                                else if (fr.Frame_Height >= 3000)
+                                {
+                                    ProfileColorPoints = 18;
+                                }
+
+                                //CostingPoints += ProfileColorPoints * 4;
+                                //InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
                             else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                             {
-                                ProfileColorPoints = 30;
-
-                                if (fr.Frame_Width >= 5000)
+                                ProfileColorPoints = 14;
+                                if (fr.Frame_Width >= 2000)
                                 {
-                                    ProfileColorPoints = 33;
+                                    ProfileColorPoints = 18;
                                 }
-                                else if (fr.Frame_Height >= 5000)
+                                else if (fr.Frame_Height >= 2000)
                                 {
-                                    ProfileColorPoints = 33;
+                                    ProfileColorPoints = 18;
+                                }
+                                else if (fr.Frame_Width >= 3000)
+                                {
+                                    ProfileColorPoints = 19;
+                                }
+                                else if (fr.Frame_Height >= 3000)
+                                {
+                                    ProfileColorPoints = 19;
                                 }
                             }
+                        }
+                        else if (wdm.WD_profile.Contains("PremiLine"))
+                        {
+                            if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                            {
+                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                {
+                                    ProfileColorPoints = 28;
+
+                                    if (fr.Frame_Width >= 5000)
+                                    {
+                                        ProfileColorPoints = 31;
+                                    }
+                                    else if (fr.Frame_Height >= 5000)
+                                    {
+                                        ProfileColorPoints = 31;
+                                    }
+                                }
+                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                {
+                                    ProfileColorPoints = 30;
+
+                                    if (fr.Frame_Width >= 5000)
+                                    {
+                                        ProfileColorPoints = 33;
+                                    }
+                                    else if (fr.Frame_Height >= 5000)
+                                    {
+                                        ProfileColorPoints = 33;
+                                    }
+                                }
+                            }
+                            else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                            {
+                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                {
+                                    //ProfileColorPoints = 49;
+                                    ProfileColorPoints = 34;
+
+                                    if (fr.Frame_Width >= 5000)
+                                    {
+                                        ProfileColorPoints = 37;
+                                    }
+                                    else if (fr.Frame_Height >= 5000)
+                                    {
+                                        ProfileColorPoints = 37;
+                                    }
+                                }
+                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                {
+                                    //ProfileColorPoints = 51;
+                                    ProfileColorPoints = 37;
+
+                                    if (fr.Frame_Width >= 5000)
+                                    {
+                                        ProfileColorPoints = 40;
+                                    }
+                                    else if (fr.Frame_Height >= 5000)
+                                    {
+                                        ProfileColorPoints = 40;
+                                    }
+                                }
+                            }
+
+
+                        }
+                        else if (wdm.WD_profile.Contains("G58"))
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                ProfileColorPoints = 11;
+
+                                if (fr.Frame_Width >= 2000)
+                                {
+                                    ProfileColorPoints = 14;
+                                }
+                                else if (fr.Frame_Height >= 2000)
+                                {
+                                    ProfileColorPoints = 14;
+                                }
+                                else if (fr.Frame_Width >= 3000)
+                                {
+                                    ProfileColorPoints = 16;
+                                }
+                                else if (fr.Frame_Height >= 3000)
+                                {
+                                    ProfileColorPoints = 16;
+                                }
+
+                                //CostingPoints += ProfileColorPoints * 4;
+                                //InstallationPoints += (ProfileColorPoints / 3) * 4;
+                            }
+                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            {
+                                ProfileColorPoints = 12;
+                                if (fr.Frame_Width >= 2000)
+                                {
+                                    ProfileColorPoints = 16;
+                                }
+                                else if (fr.Frame_Height >= 2000)
+                                {
+                                    ProfileColorPoints = 16;
+                                }
+                                else if (fr.Frame_Width >= 3000)
+                                {
+                                    ProfileColorPoints = 17;
+                                }
+                                else if (fr.Frame_Height >= 3000)
+                                {
+                                    ProfileColorPoints = 17;
+                                }
+                            }
+                        }
+                        CostingPoints += ProfileColorPoints * 4;
+                        InstallationPoints += (ProfileColorPoints / 3) * 4;
+
+                        #endregion
+
+                        #region FramePrice
+                        FramePerimeter = (fr.Frame_Height + fr.Frame_Width) * 2;
+
+                        if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+                            }
+                            else
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_7502_WoodGrain;
+                            }
+                            FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7502;
+                        }
+                        else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                            }
+                            else
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_7507_WoodGrain;
+                            }
+                            FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7507;
+                        }
+                        else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                        {
+
+                            FramePricePerLinearMeter = FramePricePerLinearMeter_2060_White;
+                            FrameReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+                            GlazingGasketPrice += (FramePerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                        }
+                        else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
+                            }
+                            else
+                            {
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_6050_WoodGrain;
+                            }
+                            FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6050;
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                         {
                             if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                             {
-                                //ProfileColorPoints = 49;
-                                ProfileColorPoints = 34;
-
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 37;
-                                }
-                                else if (fr.Frame_Height >= 5000)
-                                {
-                                    ProfileColorPoints = 37;
-                                }
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
                             }
-                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                            else
                             {
-                                //ProfileColorPoints = 51;
-                                ProfileColorPoints = 37;
-
-                                if (fr.Frame_Width >= 5000)
-                                {
-                                    ProfileColorPoints = 40;
-                                }
-                                else if (fr.Frame_Height >= 5000)
-                                {
-                                    ProfileColorPoints = 40;
-                                }
+                                FramePricePerLinearMeter = FramePricePerLinearMeter_6052_WoodGrain;
                             }
+                            FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
                         }
 
+                        FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
+                        FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                        #endregion
 
-                    }
-                    else if (wdm.WD_profile.Contains("G58"))
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                        #region SealantPrice
+
+
+                        Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
+
+                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
                         {
-                            ProfileColorPoints = 11;
-
-                            if (fr.Frame_Width >= 2000)
-                            {
-                                ProfileColorPoints = 14;
-                            }
-                            else if (fr.Frame_Height >= 2000)
-                            {
-                                ProfileColorPoints = 14;
-                            }
-                            else if (fr.Frame_Width >= 3000)
-                            {
-                                ProfileColorPoints = 16;
-                            }
-                            else if (fr.Frame_Height >= 3000)
-                            {
-                                ProfileColorPoints = 16;
-                            }
-
-                            //CostingPoints += ProfileColorPoints * 4;
-                            //InstallationPoints += (ProfileColorPoints / 3) * 4;
+                            SealantPricePerCan = SealantPricePerCan_Clear;
                         }
                         else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                         {
-                            ProfileColorPoints = 12;
-                            if (fr.Frame_Width >= 2000)
+                            SealantPricePerCan = SealantPricePerCan_BrownBlack;
+                        }
+                        SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
+
+                        #endregion
+
+                        #region ThresholdPrice
+                        if (fr.Frame_BotFrameEnable == true)
+                        {
+                            if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                             {
-                                ProfileColorPoints = 16;
-                            }
-                            else if (fr.Frame_Height >= 2000)
-                            {
-                                ProfileColorPoints = 16;
-                            }
-                            else if (fr.Frame_Width >= 3000)
-                            {
-                                ProfileColorPoints = 17;
-                            }
-                            else if (fr.Frame_Height >= 3000)
-                            {
-                                ProfileColorPoints = 17;
+                                ThresholdPrice += (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
                             }
                         }
-                    }
-                    CostingPoints += ProfileColorPoints * 4;
-                    InstallationPoints += (ProfileColorPoints / 3) * 4;
+                        #endregion
 
-                    #endregion
-
-                    #region FramePrice
-                    FramePerimeter = (fr.Frame_Height + fr.Frame_Width) * 2;
-
-                    if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                        if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                         {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+                            ChckPlasticWedge = true;
                         }
                         else
                         {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_7502_WoodGrain;
+                            ChckPlasticWedge = false;
                         }
-                        FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7502;
-                    }
-                    else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+
+                        PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
+
+                        #region MultiPnl 
+                        if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                         {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
-                        }
-                        else
-                        {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_7507_WoodGrain;
-                        }
-                        FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7507;
-                    }
-                    else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._2060)
-                    {
-
-                        FramePricePerLinearMeter = FramePricePerLinearMeter_2060_White;
-                        FrameReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-                        GlazingGasketPrice += (FramePerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                    }
-                    else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                        {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
-                        }
-                        else
-                        {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_6050_WoodGrain;
-                        }
-                        FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6050;
-                    }
-                    else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-                    {
-                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                        {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
-                        }
-                        else
-                        {
-                            FramePricePerLinearMeter = FramePricePerLinearMeter_6052_WoodGrain;
-                        }
-                        FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
-                    }
-
-                    FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
-                    FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
-                    #endregion
-
-                    #region SealantPrice
-
-
-                    Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
-
-                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
-                    {
-                        SealantPricePerCan = SealantPricePerCan_Clear;
-                    }
-                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                    {
-                        SealantPricePerCan = SealantPricePerCan_BrownBlack;
-                    }
-                    SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
-
-                    #endregion
-
-                    #region ThresholdPrice
-                    if (fr.Frame_BotFrameEnable == true)
-                    {
-                        if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7789)
-                        {
-                            ThresholdPrice += (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
-                        }
-                    }
-                    #endregion
-
-                    if (fr.Frame_ArtNo == FrameProfile_ArticleNo._7502)
-                    {
-                        ChckPlasticWedge = true;
-                    }
-                    else
-                    {
-                        ChckPlasticWedge = false;
-                    }
-
-                    PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
-
-                    #region MultiPnl 
-                    if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
-                    {
-                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                        {
-                            foreach (IDividerModel div in mpnl.MPanelLst_Divider)
+                            foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                             {
-                                //CostingPoints -= 2 * ProfileColorPoints;
-                                //InstallationPoints -= 2 * ProfileColorPoints;
-
-                                #region Cladding
-                                if (div.Div_CladdingSizeList != null)
+                                foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                                 {
-                                    foreach (int cladding_size in div.Div_CladdingSizeList.Values)
-                                    {
-                                        claddingPrice = (cladding_size / 1000m) * claddingPricePerLinearMeter;
-                                    }
-                                }
-                                #endregion
+                                    //CostingPoints -= 2 * ProfileColorPoints;
+                                    //InstallationPoints -= 2 * ProfileColorPoints;
 
-                                #region Transom/MullionAndMechJointPrice 
-                                if (mpnl.MPanel_DividerEnabled == true)
-                                {
-                                    if (mpnl.MPanel_Type == "Transom")
+                                    #region Cladding
+                                    if (div.Div_CladdingSizeList != null)
                                     {
-                                        BOM_divDesc = "Transom";
-                                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                        foreach (int cladding_size in div.Div_CladdingSizeList.Values)
                                         {
-                                            DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
-                                            DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
-                                            MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
-                                        }
-                                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
-                                        {
-                                            DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
-                                            DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
-                                            MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
-                                        }
-                                        else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                        {
-                                            DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
-                                            DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
-                                            MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
-                                        }
-
-                                        DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
-                                        DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
-                                        MechJointPrice += MechanicalJointPricePerPiece * 2;
-                                    }
-                                    else if (mpnl.MPanel_Type == "Mullion")
-                                    {
-                                        BOM_divDesc = "Mullion";
-                                        if (div.Div_ArtNo == Divider_ArticleNo._7536)
-                                        {
-                                            DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
-                                        }
-
-                                        else if (div.Div_ArtNo == Divider_ArticleNo._7538)
-                                        {
-                                            DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                            MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
-                                        }
-                                        else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                        {
-                                            DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                            MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                            claddingPrice = (cladding_size / 1000m) * claddingPricePerLinearMeter;
                                         }
                                     }
-                                }
+                                    #endregion
 
-                                #endregion
-
-                                #region DM_Endcap_SBoltStriker_Price
-                                if (div.Div_ChkDMVisibility == true)
-                                {
-                                    if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                    #region Transom/MullionAndMechJointPrice 
+                                    if (mpnl.MPanel_DividerEnabled == true)
                                     {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        if (mpnl.MPanel_Type == "Transom")
                                         {
-                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
-                                        }
-                                        else
-                                        {
-                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
-                                        }
-                                    }
-                                    else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
-                                    {
-                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                        {
-                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
-                                        }
-                                        else
-                                        {
-                                            DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
-                                        }
-                                        ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
-                                        ShootBoltReversePrice += ShootBoltReversePricePerPiece;
-                                        ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
-                                    }
-
-                                    DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
-
-
-                                    ChckDM = true;
-                                    EndCapPrice += EndCapPricePerPiece * 2;
-                                }
-                                else
-                                {
-                                    ChckDM = false;
-                                }
-                                #endregion
-
-                                #region LeverEspagPrice
-                                if (div.Div_LeverEspagVisibility == true)
-                                {
-                                    LeverEspagPrice += LeverEspagPricePerPiece;
-                                }
-                                #endregion
-
-                            }
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                            {
-                                if (pnl.Panel_SashPropertyVisibility == true)
-                                {
-                                    if (pnl.Panel_Type.Contains("Casement"))
-                                    {
-                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                        {
-                                            MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
-
-                                            if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                            BOM_divDesc = "Transom";
+                                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                             {
-                                                _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
+                                                DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
                                             }
-                                            else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                             {
-                                                if (pnl.Panel_SashHeight >= 800)
-                                                {
-                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-                                                }
-                                                else
-                                                {
-                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
-                                                }
+                                                DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
+                                            }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                            {
+                                                DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
                                             }
 
-                                            if (pnl.Panel_ExtensionOptionsVisibility == true &&
-                                                pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
-                                                 pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
-                                                 pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
-                                                 pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                                            DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
+                                            MechJointPrice += MechanicalJointPricePerPiece * 2;
+                                        }
+                                        else if (mpnl.MPanel_Type == "Mullion")
+                                        {
+                                            BOM_divDesc = "Mullion";
+                                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                             {
-                                                if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
-                                                    pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
-                                                    pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._630956 ||
-                                                    pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
-                                                {
-                                                    ExtensionPrice += Extension_639957PricePerPiece;
-                                                    ExtensionBasePrice = Extension_639957PricePerPiece;
-                                                }
+                                                DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
+                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
+                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
                                             }
 
-                                            if (pnl.Panel_HandleOptionsVisibility == true)
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                             {
-                                                if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                                DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
+                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
+                                                MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                            }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                            {
+                                                DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
+                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
+                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                            }
+                                        }
+                                    }
+
+                                    #endregion
+
+                                    #region DM_Endcap_SBoltStriker_Price
+                                    if (div.Div_ChkDMVisibility == true)
+                                    {
+                                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
+                                            }
+                                            else
+                                            {
+                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                            }
+                                        }
+                                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                            {
+                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
+                                            }
+                                            else
+                                            {
+                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
+                                            }
+                                            ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
+                                            ShootBoltReversePrice += ShootBoltReversePricePerPiece;
+                                            ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
+                                        }
+
+                                        DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
+
+
+                                        ChckDM = true;
+                                        EndCapPrice += EndCapPricePerPiece * 2;
+                                    }
+                                    else
+                                    {
+                                        ChckDM = false;
+                                    }
+                                    #endregion
+
+                                    #region LeverEspagPrice
+                                    if (div.Div_LeverEspagVisibility == true)
+                                    {
+                                        LeverEspagPrice += LeverEspagPricePerPiece;
+                                    }
+                                    #endregion
+
+                                }
+                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                {
+                                    if (pnl.Panel_SashPropertyVisibility == true)
+                                    {
+                                        if (pnl.Panel_Type.Contains("Casement"))
+                                        {
+                                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                            {
+                                                MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
+
+                                                if (pnl.Panel_HingeOptions == HingeOption._2DHinge)
                                                 {
-                                                    HandlePrice += RotoswingHanldePricePerPiece;
-                                                    HandleBasePrice = RotoswingHanldePricePerPiece;
+                                                    _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                                 }
-                                                else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                                                else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                                 {
-                                                    //wlang price ng rotaty 
+                                                    if (pnl.Panel_SashHeight >= 800)
+                                                    {
+                                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    }
+                                                    else
+                                                    {
+                                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                    }
+                                                }
+
+                                                if (pnl.Panel_ExtensionOptionsVisibility == true &&
+                                                    pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                                     pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                                     pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                                     pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                                                {
+                                                    if (pnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
+                                                        pnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
+                                                        pnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._630956 ||
+                                                        pnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
+                                                    {
+                                                        ExtensionPrice += Extension_639957PricePerPiece;
+                                                        ExtensionBasePrice = Extension_639957PricePerPiece;
+                                                    }
+                                                }
+
+                                                if (pnl.Panel_HandleOptionsVisibility == true)
+                                                {
+                                                    if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                                    {
+                                                        HandlePrice += RotoswingHanldePricePerPiece;
+                                                        HandleBasePrice = RotoswingHanldePricePerPiece;
+                                                    }
+                                                    else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                                                    {
+                                                        //wlang price ng rotaty 
+                                                    }
                                                 }
                                             }
-
                                             else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 || pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                             {
                                                 #region Handle
@@ -2857,688 +2867,747 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                             }
+
                                         }
-                                    }
-                                    else if (pnl.Panel_Type.Contains("Awning"))
-                                    {
-                                        #region FSPrice
-                                        if (pnl.Panel_SashHeight >= 800)
+                                        else if (pnl.Panel_Type.Contains("Awning"))
                                         {
-                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                            #region FSPrice
+                                            if (pnl.Panel_SashHeight >= 800)
+                                            {
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                            }
+                                            else
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                            #endregion
+
+                                            MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
+
+                                            if (pnl.Panel_HandleOptionsVisibility == true)
+                                            {
+                                                if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                                {
+                                                    HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                    HandleBasePrice = RotoswingHanldePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                                                {
+                                                    //wlang price ng rotaty 
+                                                }
+                                            }
+                                        }
+                                        else if (pnl.Panel_Type.Contains("Sliding"))
+                                        {
+                                            #region handle
+                                            if (pnl.Panel_HandleOptionsVisibility == true)
+                                            {
+                                                if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                                {
+                                                    HandlePrice += RotoswingHanldePricePerPiece;
+
+                                                    HandleBasePrice = RotoswingHanldePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                                                {
+                                                    HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
+
+                                                    HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._Rio)
+                                                {
+                                                    HandlePrice += RioHandlePricePerPiece;
+
+                                                    HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                            }
+                                            #endregion
+
+
+                                            BrushSealPrice = ((pnl.Panel_Height / 1000m) * 2 * 2) * BrushSealPricePerLinearMeter; // 2qty 2perimeter
+
+                                            if (pnl.Panel_RollersTypes == RollersTypes._TandemRoller ||
+                                                pnl.Panel_RollersTypes == RollersTypes._HDRoller)
+                                            {
+                                                RollerPrice += 2 * HDRollerPricePerPiece;
+                                                RollerBasePrice = HDRollerPricePerPiece;
+                                            }
+                                            else if (pnl.Panel_RollersTypes == RollersTypes._GURoller)
+                                            {
+                                                RollerPrice += 2 * GURollerPricePerPiece;
+                                                RollerBasePrice = GURollerPricePerPiece;
+                                            }
+
+                                            if (pnl.Panel_HandleType != Handle_Type._None)
+                                            {
+                                                StrikerLRPrice += 1 * StrikerLRPricePerPiece;
+                                            }
+
+                                            WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
+                                            WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
+                                            WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                            GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+                                            AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
+
+                                            if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                                pnl.Panel_Overlap_Sash == OverlapSash._Right)
+                                            {
+                                                InterlockPrice += 2 * InterlockPricePerPiece;
+                                                ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
+                                                SealingBlockPrice += 2 * SealingBlockPricePerPiece;
+                                            }
+
+                                            if (pnl.Panel_SashHeight >= 4000)
+                                            {
+                                                AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
+                                            }
+                                        }
+
+                                        if (pnl.Panel_ChkText == "dSash" && pnl.Panel_Type.Contains("Fixed"))
+                                        {
+                                            #region SashPrice 
+                                            SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
+
+                                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                                SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                                GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                            }
+
+
+
+                                            SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                            SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                            GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                            #endregion
+
+                                            MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
+                                            SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
                                         }
                                         else
                                         {
-                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            #region SashPrice 
+                                            SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
+
+                                            if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                            {
+                                                SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                                SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                                GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                            }
+                                            else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                                }
+                                                else
+                                                {
+                                                    SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                                }
+
+                                                SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                            }
+
+
+                                            SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                            SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+
+                                            //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                            //{
+                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
+                                            //}
+                                            //else
+                                            //{
+                                            //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                            //}
+
+                                            #endregion
+                                        }
+
+                                        if (pnl.Panel_GlassThickness == 6.0f)
+                                        {
+                                            GBSpacerPrice += GBSpacerPricePerPiece * 4;
+                                        }
+
+                                        if (ChckPlasticWedge == true)
+                                        {
+                                            PlasticWedgePrice += PlasticWedgePricePerPiece;
+                                        }
+
+
+
+                                        #region EspagPrice
+
+                                        if (pnl.Panel_EspagnoletteOptionsVisibility == true)
+                                        {
+                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+                                            {
+                                                EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
+                                                EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
+                                            {
+                                                EspagPrice += MVDGearPricePerPiece;
+                                                EspagBasePrice = MVDGearPricePerPiece;
+                                            }
+                                            else
+                                            {
+                                                EspagPrice += Espag741012_PricePerPiece;
+                                                EspagBasePrice = Espag741012_PricePerPiece;
+                                            }
                                         }
                                         #endregion
 
-                                        MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
+                                        #region StrikerPrice
+                                        int Panel_StrikerQty_A = 0,
+                                            Panel_StrikerQty_C = 0;
 
-                                        if (pnl.Panel_HandleOptionsVisibility == true)
+
+                                        if (pnl.Panel_Type.Contains("Awning"))
                                         {
-                                            if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                                                pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                                                pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                            {
+                                                Panel_StrikerQty_A += 2;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                            {
+                                                Panel_StrikerQty_A += 3;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                                            {
+                                                Panel_StrikerQty_A += 4;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                            {
+                                                Panel_StrikerQty_A += 1;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                            {
+                                                Panel_StrikerQty_A += 2;
+                                            }
+
+                                            if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtLeftQty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtLeft2Qty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtRightQty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtRight2Qty);
+                                            }
+
+                                            if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                            {
+                                                Panel_StrikerQty_A += 2;
+                                            }
+                                        }
+                                        else if (pnl.Panel_Type.Contains("Casement"))
+                                        {
+                                            if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                                                pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                                                pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                            {
+                                                Panel_StrikerQty_C += 2;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                            {
+                                                Panel_StrikerQty_C += 3;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                                            {
+                                                Panel_StrikerQty_C += 4;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                            {
+                                                Panel_StrikerQty_C += 1;
+                                            }
+                                            else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                                                     pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                            {
+                                                Panel_StrikerQty_C += 2;
+                                            }
+
+                                            if (pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtTopQty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtTop2Qty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtBotQty);
+                                            }
+
+                                            if (pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                                            {
+                                                Panel_StrikerQty_C += (1 * pnl.Panel_ExtBot2Qty);
+                                            }
+
+                                            if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                            {
+                                                Panel_StrikerQty_C += 1;
+                                            }
+
+                                            if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                            {
+                                                Panel_StrikerQty_A += 1;
+                                            }
+                                        }
+
+                                        if (Panel_StrikerQty_A != 0 ||
+                                            Panel_StrikerQty_C != 0)
+                                        {
+                                            StrikerPrice += (Panel_StrikerQty_A + Panel_StrikerQty_C) * StrikerPricePerPiece;
+                                        }
+                                        #endregion
+
+                                        #region GeorgianBar
+                                        if (pnl.Panel_GeorgianBarOptionVisibility == true)
+                                        {
+                                            GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty;
+                                            GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty;
+
+                                            if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                                            {
+                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                {
+                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                                }
+                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                {
+                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                                }
+                                                GeorgianBarPrice = GeorgianBar_0724Price;
+
+                                            }
+                                            else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                            {
+                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                {
+                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                                }
+                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                {
+                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                                }
+                                                GeorgianBarPrice = GeorgianBar_0726Price;
+                                            }
+                                        }
+                                        #endregion
+
+                                        #region CoverProfilePrice
+                                        if ((pnl.Panel_Type.Contains("Sliding")))
+                                        {
+                                            CoverProfileCost += ((pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
+                                            CoverProfilePrice = CoverProfile_0914Price;
+                                        }
+                                        else
+                                        {
+                                            CoverProfileCost += (pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
+                                                                (pnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
+                                            CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
+                                        }
+                                        #endregion
+
+                                        #region Glass 
+
+                                        if (pnl.Panel_GlassThickness >= 6.0f &&
+                                            pnl.Panel_GlassThickness <= 9.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 10.0f ||
+                                         pnl.Panel_GlassThickness == 11.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness >= 12.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 0.0f)
+                                        {
+                                            GlassPrice += 0;
+                                        }
+
+                                        //sealant for glass
+                                        Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
+                                        if (pnl.Panel_GlassThickness != 0.0f)
+                                        {
+
+                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                            }
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                            }
+                                        }
+                                        #endregion
+
+                                        HandleDesc = pnl.Panel_HandleType.ToString();
+
+                                        CostingPoints += ProfileColorPoints * 4;
+                                        InstallationPoints += (ProfileColorPoints / 3) * 4;
+                                    }
+                                    else if (pnl.Panel_Type.Contains("Fixed"))
+                                    {
+                                        CostingPoints += ProfileColorPoints * 2;
+                                        InstallationPoints += (ProfileColorPoints / 3) * 2;
+
+                                        #region Glass 
+
+                                        if (pnl.Panel_GlassThickness >= 6.0f &&
+                                            pnl.Panel_GlassThickness <= 9.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 10.0f ||
+                                         pnl.Panel_GlassThickness == 11.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness >= 12.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 0.0f)
+                                        {
+                                            GlassPrice += 0;
+                                        }
+
+                                        //sealant for glass
+                                        Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
+                                        if (pnl.Panel_GlassThickness != 0.0f)
+                                        {
+
+                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                            }
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                            }
+                                        }
+                                        #endregion
+
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+
+                        #region SinglePnl
+
+                        else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
+                        {
+                            IPanelModel Singlepnl = fr.Lst_Panel[0];
+
+                            if (Singlepnl.Panel_SashPropertyVisibility == true)
+                            {
+                                if (Singlepnl.Panel_Type.Contains("Casement"))
+                                {
+                                    MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
+
+                                    if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    {
+                                        if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                        {
+                                            _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
+                                        }
+                                        else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
+                                        {
+                                            if (Singlepnl.Panel_SashHeight >= 800)
+                                            {
+                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                            }
+                                            else
+                                            {
+                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                            }
+                                        }
+
+                                        if (Singlepnl.Panel_ExtensionOptionsVisibility == true &&
+                                        Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
+                                        Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
+                                        {
+                                            if (Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
+                                                Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
+                                                Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._630956 ||
+                                                Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
+                                            {
+                                                ExtensionPrice += Extension_639957PricePerPiece;
+                                                ExtensionBasePrice = Extension_639957PricePerPiece;
+                                            }
+                                        }
+
+                                        if (Singlepnl.Panel_HandleOptionsVisibility == true)
+                                        {
+                                            if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
                                             {
                                                 HandlePrice += RotoswingHanldePricePerPiece;
 
                                                 HandleBasePrice = RotoswingHanldePricePerPiece;
                                             }
-                                            else if (pnl.Panel_HandleType == Handle_Type._Rotary)
+                                            else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
                                             {
                                                 //wlang price ng rotaty 
                                             }
                                         }
                                     }
-                                    else if (pnl.Panel_Type.Contains("Sliding"))
-                                    {
-                                        #region handle
-                                        if (pnl.Panel_HandleOptionsVisibility == true)
-                                        {
-                                            if (pnl.Panel_HandleType == Handle_Type._Rotoswing)
-                                            {
-                                                HandlePrice += RotoswingHanldePricePerPiece;
-
-                                                HandleBasePrice = RotoswingHanldePricePerPiece;
-                                            }
-                                            else if (pnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
-                                            {
-                                                HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
-
-                                                HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
-                                            }
-                                            else if (pnl.Panel_HandleType == Handle_Type._Rio)
-                                            {
-                                                HandlePrice += RioHandlePricePerPiece;
-
-                                                HandleBasePrice = RioHandlePricePerPiece;
-                                            }
-                                        }
-                                        #endregion
-
-
-                                        BrushSealPrice = ((pnl.Panel_Height / 1000m) * 2 * 2) * BrushSealPricePerLinearMeter; // 2qty 2perimeter
-
-                                        if (pnl.Panel_RollersTypes == RollersTypes._TandemRoller ||
-                                            pnl.Panel_RollersTypes == RollersTypes._HDRoller)
-                                        {
-                                            RollerPrice += 2 * HDRollerPricePerPiece;
-                                            RollerBasePrice = HDRollerPricePerPiece;
-                                        }
-                                        else if (pnl.Panel_RollersTypes == RollersTypes._GURoller)
-                                        {
-                                            RollerPrice += 2 * GURollerPricePerPiece;
-                                            RollerBasePrice = GURollerPricePerPiece;
-                                        }
-
-                                        if (pnl.Panel_HandleType != Handle_Type._None)
-                                        {
-                                            StrikerLRPrice += 1 * StrikerLRPricePerPiece;
-                                        }
-
-                                        WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
-                                        WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
-                                        WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
-                                        GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
-                                        AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
-
-                                        if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                            pnl.Panel_Overlap_Sash == OverlapSash._Right)
-                                        {
-                                            InterlockPrice += 2 * InterlockPricePerPiece;
-                                            ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
-                                            SealingBlockPrice += 2 * SealingBlockPricePerPiece;
-                                        }
-
-                                        if (pnl.Panel_SashHeight >= 4000)
-                                        {
-                                            AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
-                                        }
-                                    }
-
-                                    if (pnl.Panel_ChkText == "dSash" && pnl.Panel_Type.Contains("Fixed"))
-                                    {
-                                        #region SashPrice 
-                                        SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
-
-                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                            SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                            GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                                        }
-
-
-
-                                        SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                                        SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                        GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                        #endregion
-
-                                        MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
-                                        SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
-                                    }
-                                    else
-                                    {
-                                        #region SashPrice 
-                                        SashPerimeter = (pnl.Panel_SashHeight + pnl.Panel_SashWidth) * 2;
-
-                                        if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                        {
-                                            SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                            SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                            GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                                        }
-                                        else if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                            }
-                                            else
-                                            {
-                                                SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                            }
-
-                                            SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                                        }
-
-
-                                        SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                                        SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-
-                                        //if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                        //{
-                                        //    GbPrice += (SashPerimeter / 1000m) * GlazingBead_G58PricePerLinearMeter;
-                                        //}
-                                        //else
-                                        //{
-                                        //    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
-                                        //}
-
-                                        #endregion
-                                    }
-
-                                    if (pnl.Panel_GlassThickness == 6.0f)
-                                    {
-                                        GBSpacerPrice += GBSpacerPricePerPiece * 4;
-                                    }
-
-                                    if (ChckPlasticWedge == true)
-                                    {
-                                        PlasticWedgePrice += PlasticWedgePricePerPiece;
-                                    }
-
-
-
-                                    #region EspagPrice
-
-                                    if (pnl.Panel_EspagnoletteOptionsVisibility == true)
-                                    {
-                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
-                                        {
-                                            EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
-                                            EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
-                                        {
-                                            EspagPrice += MVDGearPricePerPiece;
-                                            EspagBasePrice = MVDGearPricePerPiece;
-                                        }
-                                        else
-                                        {
-                                            EspagPrice += Espag741012_PricePerPiece;
-                                            EspagBasePrice = Espag741012_PricePerPiece;
-                                        }
-                                    }
-                                    #endregion
-
-                                    #region StrikerPrice
-                                    int Panel_StrikerQty_A = 0,
-                                        Panel_StrikerQty_C = 0;
-
-
-                                    if (pnl.Panel_Type.Contains("Awning"))
-                                    {
-                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                        {
-                                            Panel_StrikerQty_A += 2;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                        {
-                                            Panel_StrikerQty_A += 3;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
-                                        {
-                                            Panel_StrikerQty_A += 4;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                        {
-                                            Panel_StrikerQty_A += 1;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                        {
-                                            Panel_StrikerQty_A += 2;
-                                        }
-
-                                        if (pnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtLeftQty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtLeft2Qty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtRightQty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtRight2Qty);
-                                        }
-
-                                        if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                        {
-                                            Panel_StrikerQty_A += 2;
-                                        }
-                                    }
-                                    else if (pnl.Panel_Type.Contains("Casement"))
-                                    {
-                                        if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                                            pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                        {
-                                            Panel_StrikerQty_C += 2;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                        {
-                                            Panel_StrikerQty_C += 3;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
-                                        {
-                                            Panel_StrikerQty_C += 4;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                        {
-                                            Panel_StrikerQty_C += 1;
-                                        }
-                                        else if (pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                                                 pnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                        {
-                                            Panel_StrikerQty_C += 2;
-                                        }
-
-                                        if (pnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtTopQty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtTop2Qty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtBotQty);
-                                        }
-
-                                        if (pnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
-                                        {
-                                            Panel_StrikerQty_C += (1 * pnl.Panel_ExtBot2Qty);
-                                        }
-
-                                        if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                        {
-                                            Panel_StrikerQty_C += 1;
-                                        }
-
-                                        if (pnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                        {
-                                            Panel_StrikerQty_A += 1;
-                                        }
-                                    }
-
-                                    if (Panel_StrikerQty_A != 0 ||
-                                        Panel_StrikerQty_C != 0)
-                                    {
-                                        StrikerPrice += (Panel_StrikerQty_A + Panel_StrikerQty_C) * StrikerPricePerPiece;
-                                    }
-                                    #endregion
-
-                                    #region GeorgianBar
-                                    if (pnl.Panel_GeorgianBarOptionVisibility == true)
-                                    {
-                                        GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty;
-                                        GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty;
-
-                                        if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-                                        {
-                                            if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
-                                            {
-                                                GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
-                                            }
-                                            if (pnl.Panel_GeorgianBar_VerticalQty != 0)
-                                            {
-                                                GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
-                                            }
-                                            GeorgianBarPrice = GeorgianBar_0724Price;
-
-                                        }
-                                        else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-                                        {
-                                            if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
-                                            {
-                                                GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
-                                            }
-                                            if (pnl.Panel_GeorgianBar_VerticalQty != 0)
-                                            {
-                                                GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
-                                            }
-                                            GeorgianBarPrice = GeorgianBar_0726Price;
-                                        }
-                                    }
-                                    #endregion
-
-                                    #region CoverProfilePrice
-                                    if ((pnl.Panel_Type.Contains("Sliding")))
-                                    {
-                                        CoverProfileCost += ((pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
-                                        CoverProfilePrice = CoverProfile_0914Price;
-                                    }
-                                    else
-                                    {
-                                        CoverProfileCost += (pnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
-                                                            (pnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
-                                        CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
-                                    }
-                                    #endregion
-
-                                    #region Glass 
-
-                                    if (pnl.Panel_GlassThickness >= 6.0f &&
-                                        pnl.Panel_GlassThickness <= 9.0f)
-                                    {
-                                        if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
-                                        }
-                                        else
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
-                                        }
-                                    }
-                                    else if (pnl.Panel_GlassThickness == 10.0f ||
-                                     pnl.Panel_GlassThickness == 11.0f)
-                                    {
-                                        if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
-                                        }
-                                        else
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
-                                        }
-                                    }
-                                    else if (pnl.Panel_GlassThickness >= 12.0f)
-                                    {
-                                        if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
-                                        }
-                                        else
-                                        {
-                                            GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
-                                        }
-                                    }
-                                    else if (pnl.Panel_GlassThickness == 0.0f)
-                                    {
-                                        GlassPrice += 0;
-                                    }
-
-                                    //sealant for glass
-                                    Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
-                                    if (pnl.Panel_GlassThickness != 0.0f)
-                                    {
-
-                                        if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
-                                        {
-                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                        }
-                                        else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                                        {
-                                            SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                        }
-                                    }
-                                    #endregion
-
-                                    HandleDesc = pnl.Panel_HandleType.ToString();
-
-                                    CostingPoints += ProfileColorPoints * 4;
-                                    InstallationPoints += (ProfileColorPoints / 3) * 4;
-                                }
-                                else if (pnl.Panel_Type.Contains("Fixed"))
-                                {
-                                    CostingPoints += ProfileColorPoints * 2;
-                                    InstallationPoints += (ProfileColorPoints / 3) * 2;
-                                }
-                            }
-                        }
-                    }
-                    #endregion 
-
-                    #region SinglePnl
-
-                    else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
-                    {
-                        IPanelModel Singlepnl = fr.Lst_Panel[0];
-
-                        if (Singlepnl.Panel_SashPropertyVisibility == true)
-                        {
-                            if (Singlepnl.Panel_Type.Contains("Casement"))
-                            {
-                                MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
-
-                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                {
-                                    if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
-                                    {
-                                        _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
-                                    }
-                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
-                                    {
-                                        if (Singlepnl.Panel_SashHeight >= 800)
-                                        {
-                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_26HD_casementPricePerPiece;
-                                        }
-                                        else
-                                        {
-                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                            FSBasePrice = FS_16HD_casementPricePerPiece;
-                                        }
-                                    }
-
-                                    if (Singlepnl.Panel_ExtensionOptionsVisibility == true &&
-                                        Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._None ||
-                                        Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._None ||
-                                        Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._None ||
-                                        Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._None)
-                                    {
-                                        if (Singlepnl.Panel_ExtensionLeftArtNo != Extension_ArticleNo._630956 ||
-                                            Singlepnl.Panel_ExtensionLeft2ArtNo != Extension_ArticleNo._630956 ||
-                                            Singlepnl.Panel_ExtensionRightArtNo != Extension_ArticleNo._630956 ||
-                                            Singlepnl.Panel_ExtensionRight2ArtNo != Extension_ArticleNo._630956)
-                                        {
-                                            ExtensionPrice += Extension_639957PricePerPiece;
-                                            ExtensionBasePrice = Extension_639957PricePerPiece;
-                                        }
-                                    }
-
-                                    if (Singlepnl.Panel_HandleOptionsVisibility == true)
-                                    {
-                                        if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
-                                        {
-                                            HandlePrice += RotoswingHanldePricePerPiece;
-
-                                            HandleBasePrice = RotoswingHanldePricePerPiece;
-                                        }
-                                        else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
-                                        {
-                                            //wlang price ng rotaty 
-                                        }
-                                    }
-
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                                             Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                                 Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
                                     {
                                         #region Handle
                                         if (Singlepnl.Panel_HandleOptionsVisibility == true)
@@ -3642,1295 +3711,1361 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                     }
+
                                 }
-                            }
-                            else if (Singlepnl.Panel_Type.Contains("Awning"))
-                            {
-                                #region FSPrice
-                                if (Singlepnl.Panel_SashHeight >= 800)
+                                else if (Singlepnl.Panel_Type.Contains("Awning"))
                                 {
-                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                    #region FSPrice
+                                    if (Singlepnl.Panel_SashHeight >= 800)
+                                    {
+                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                    }
+                                    else
+                                    {
+                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    }
+                                    #endregion
+
+                                    if (Singlepnl.Panel_HandleOptionsVisibility == true)
+                                    {
+                                        if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                        {
+                                            HandlePrice += RotoswingHanldePricePerPiece;
+
+                                            HandleBasePrice = RotoswingHanldePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
+                                        {
+                                            //wlang price ng rotaty 
+                                        }
+                                    }
+
+                                    MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
+                                }
+                                else if (Singlepnl.Panel_Type.Contains("Sliding"))
+                                {
+                                    #region handle
+                                    if (Singlepnl.Panel_HandleOptionsVisibility == true)
+                                    {
+                                        if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
+                                        {
+                                            HandlePrice += RotoswingHanldePricePerPiece;
+
+                                            HandleBasePrice = RotoswingHanldePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                                        {
+                                            HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
+
+                                            HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._Rio)
+                                        {
+                                            HandlePrice += RioHandlePricePerPiece;
+
+                                            HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                    }
+                                    #endregion
+
+                                    BrushSealPrice = ((Singlepnl.Panel_Height / 1000m) * 2 * 2) * BrushSealPricePerLinearMeter; // 2qty 2perimeter
+
+                                    if (Singlepnl.Panel_RollersTypes == RollersTypes._TandemRoller ||
+                                        Singlepnl.Panel_RollersTypes == RollersTypes._HDRoller)
+                                    {
+                                        RollerPrice += 2 * HDRollerPricePerPiece;
+                                        RollerBasePrice = HDRollerPricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_RollersTypes == RollersTypes._GURoller)
+                                    {
+                                        RollerPrice += 2 * GURollerPricePerPiece;
+                                        RollerBasePrice = GURollerPricePerPiece;
+                                    }
+
+                                    if (Singlepnl.Panel_HandleType != Handle_Type._None)
+                                    {
+                                        StrikerLRPrice += 1 * StrikerLRPricePerPiece;
+                                    }
+
+                                    WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
+                                    WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300) * BarFastenerPricePerPiece;
+                                    WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                    GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
+                                    AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
+
+                                    if (Singlepnl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                        Singlepnl.Panel_Overlap_Sash == OverlapSash._Right)
+                                    {
+                                        InterlockPrice += 2 * InterlockPricePerPiece;
+                                        ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
+                                        SealingBlockPrice += 2 * SealingBlockPricePerPiece;
+                                    }
+
+                                    if (Singlepnl.Panel_SashHeight >= 4000)
+                                    {
+                                        AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
+                                    }
+
+                                }
+
+                                if (Singlepnl.Panel_ChkText == "dSash" && Singlepnl.Panel_Type.Contains("Fixed"))
+                                {
+                                    #region SashPrice 
+                                    SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+
+                                    if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                        SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                    }
+
+
+
+                                    SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                    SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    #endregion
+
+                                    MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
+                                    SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
                                 }
                                 else
                                 {
-                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                    #region SashPrice 
+                                    SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+
+                                    if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
+                                        }
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                                    {
+                                        SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
+                                        SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
+
+                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
+                                    }
+                                    else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                                    {
+                                        if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
+                                        }
+                                        else
+                                        {
+                                            SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
+                                        }
+
+                                        SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
+                                    }
+
+                                    SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
+                                    SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
+                                    GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
+                                    #endregion
+                                }
+
+                                if (Singlepnl.Panel_GlassThickness == 6.0f)
+                                {
+                                    GBSpacerPrice += GBSpacerPricePerPiece * 4;
+                                }
+
+                                if (ChckPlasticWedge == true)
+                                {
+                                    PlasticWedgePrice += PlasticWedgePricePerPiece;
+                                }
+
+                                if (Singlepnl.Panel_MotorizedOptionVisibility == true)
+                                {
+                                    //motorize price
+                                }
+
+
+                                HandleDesc = Singlepnl.Panel_HandleType.ToString();
+
+
+                                #region EspagPrice
+
+                                if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
+                                {
+                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
+                                    {
+                                        EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
+                                        EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
+                                    {
+                                        EspagPrice += MVDGearPricePerPiece;
+                                        EspagBasePrice = MVDGearPricePerPiece;
+                                    }
+                                    else
+                                    {
+                                        EspagPrice += Espag741012_PricePerPiece;
+                                        EspagBasePrice = Espag741012_PricePerPiece;
+                                    }
                                 }
                                 #endregion
 
-                                if (Singlepnl.Panel_HandleOptionsVisibility == true)
-                                {
-                                    if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
-                                    {
-                                        HandlePrice += RotoswingHanldePricePerPiece;
+                                #region StrikerPrice
+                                int Panel_StrikerQty_A = 0,
+                                    Panel_StrikerQty_C = 0;
 
-                                        HandleBasePrice = RotoswingHanldePricePerPiece;
-                                    }
-                                    else if (Singlepnl.Panel_HandleType == Handle_Type._Rotary)
+
+                                if (Singlepnl.Panel_Type.Contains("Awning"))
+                                {
+                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                                        Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                                        Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
                                     {
-                                        //wlang price ng rotaty 
+                                        Panel_StrikerQty_A += 2;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                    {
+                                        Panel_StrikerQty_A += 3;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                                    {
+                                        Panel_StrikerQty_A += 4;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                    {
+                                        Panel_StrikerQty_A += 1;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                    {
+                                        Panel_StrikerQty_A += 2;
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtLeftQty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtLeft2Qty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtRightQty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtRight2Qty);
+                                    }
+
+                                    if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                    {
+                                        Panel_StrikerQty_A += 2;
+                                    }
+                                }
+                                else if (Singlepnl.Panel_Type.Contains("Casement"))
+                                {
+                                    if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
+                                        Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
+                                        Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
+                                    {
+                                        Panel_StrikerQty_C += 2;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
+                                    {
+                                        Panel_StrikerQty_C += 3;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
+                                    {
+                                        Panel_StrikerQty_C += 4;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
+                                    {
+                                        Panel_StrikerQty_C += 1;
+                                    }
+                                    else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
+                                             Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
+                                    {
+                                        Panel_StrikerQty_C += 2;
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtTopQty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtTop2Qty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtBotQty);
+                                    }
+
+                                    if (Singlepnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
+                                    {
+                                        Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtBot2Qty);
+                                    }
+
+                                    if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                    {
+                                        Panel_StrikerQty_C += 1;
+                                    }
+
+                                    if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
+                                    {
+                                        Panel_StrikerQty_A += 1;
                                     }
                                 }
 
-                                MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
-                            }
-                            else if (Singlepnl.Panel_Type.Contains("Sliding"))
-                            {
-                                #region handle
-                                if (Singlepnl.Panel_HandleOptionsVisibility == true)
+                                if (Panel_StrikerQty_A != 0 ||
+                                    Panel_StrikerQty_C != 0)
                                 {
-                                    if (Singlepnl.Panel_HandleType == Handle_Type._Rotoswing)
-                                    {
-                                        HandlePrice += RotoswingHanldePricePerPiece;
+                                    StrikerPrice += (Panel_StrikerQty_A + Panel_StrikerQty_C) * StrikerPricePerPiece;
+                                }
+                                #endregion
 
-                                        HandleBasePrice = RotoswingHanldePricePerPiece;
+                                #region GeorgianBar
+                                if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
+                                {
+                                    GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty;
+                                    GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty;
+                                    if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                                    {
+                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        {
+                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                        }
+                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        {
+                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                        }
+                                        GeorgianBarPrice = GeorgianBar_0724Price;
                                     }
-                                    else if (Singlepnl.Panel_HandleType == Handle_Type._RotoswingForSliding)
+                                    else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                     {
-                                        HandlePrice += RotoswingHanldeForSlidingPricePerPiece;
-
-                                        HandleBasePrice = RotoswingHanldeForSlidingPricePerPiece;
-                                    }
-                                    else if (Singlepnl.Panel_HandleType == Handle_Type._Rio)
-                                    {
-                                        HandlePrice += RioHandlePricePerPiece;
-
-                                        HandleBasePrice = RioHandlePricePerPiece;
+                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        {
+                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                        }
+                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        {
+                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                        }
+                                        GeorgianBarPrice = GeorgianBar_0726Price;
                                     }
                                 }
                                 #endregion
 
-                                BrushSealPrice = ((Singlepnl.Panel_Height / 1000m) * 2 * 2) * BrushSealPricePerLinearMeter; // 2qty 2perimeter
-
-                                if (Singlepnl.Panel_RollersTypes == RollersTypes._TandemRoller ||
-                                    Singlepnl.Panel_RollersTypes == RollersTypes._HDRoller)
+                                #region CoverProfilePrice
+                                if ((Singlepnl.Panel_Type.Contains("Sliding")))
                                 {
-                                    RollerPrice += 2 * HDRollerPricePerPiece;
-                                    RollerBasePrice = HDRollerPricePerPiece;
+                                    CoverProfileCost += ((Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
+                                    CoverProfilePrice = CoverProfile_0914Price;
                                 }
-                                else if (Singlepnl.Panel_RollersTypes == RollersTypes._GURoller)
+                                else
                                 {
-                                    RollerPrice += 2 * GURollerPricePerPiece;
-                                    RollerBasePrice = GURollerPricePerPiece;
+                                    CoverProfileCost += (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
+                                                        (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
+                                    CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
                                 }
-
-                                if (Singlepnl.Panel_HandleType != Handle_Type._None)
-                                {
-                                    StrikerLRPrice += 1 * StrikerLRPricePerPiece;
-                                }
-
-                                WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
-                                WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300) * BarFastenerPricePerPiece;
-                                WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
-                                GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
-                                AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
-
-                                if (Singlepnl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                    Singlepnl.Panel_Overlap_Sash == OverlapSash._Right)
-                                {
-                                    InterlockPrice += 2 * InterlockPricePerPiece;
-                                    ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
-                                    SealingBlockPrice += 2 * SealingBlockPricePerPiece;
-                                }
-
-                                if (Singlepnl.Panel_SashHeight >= 4000)
-                                {
-                                    AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
-                                }
-
-                            }
-
-                            if (Singlepnl.Panel_ChkText == "dSash" && Singlepnl.Panel_Type.Contains("Fixed"))
-                            {
-                                #region SashPrice 
-                                SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
-
-                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                                {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                    SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                    GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                                }
-
-
-
-                                SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                                SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
                                 #endregion
 
-                                MiddleCLoserPrice += MiddleCLoserPricePerPiece * Singlepnl.Panel_MiddleCloserPairQty;
-                                SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
+                                #region Glass 
+
+                                if (Singlepnl.Panel_GlassThickness >= 6.0f &&
+                                    Singlepnl.Panel_GlassThickness <= 9.0f)
+                                {
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                    }
+                                }
+                                else if (Singlepnl.Panel_GlassThickness == 10.0f ||
+                                 Singlepnl.Panel_GlassThickness == 11.0f)
+                                {
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                    }
+                                }
+                                else if (Singlepnl.Panel_GlassThickness >= 12.0f)
+                                {
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                    }
+                                    else
+                                    {
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                    }
+                                }
+                                else if (Singlepnl.Panel_GlassThickness == 0.0f)
+                                {
+                                    GlassPrice += 0;
+                                }
+
+                                //sealant for glass
+                                Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
+
+                                if (Singlepnl.Panel_GlassThickness != 0.0f)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    }
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    }
+                                }
+                                #endregion
+
+                                CostingPoints += ProfileColorPoints * 4;
+                                InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
-                            else
+                            else if (Singlepnl.Panel_Type.Contains("Fixed"))
                             {
-                                #region SashPrice 
-                                SashPerimeter = (Singlepnl.Panel_SashHeight + Singlepnl.Panel_SashWidth) * 2;
+                                CostingPoints += ProfileColorPoints * 2;
+                                InstallationPoints += (ProfileColorPoints / 3) * 2;
 
-                                if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+
+                                #region Glass 
+
+                                if (Singlepnl.Panel_GlassThickness >= 6.0f &&
+                                    Singlepnl.Panel_GlassThickness <= 9.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_White;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
                                     }
                                     else
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_7581_WoodGrain;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
                                     }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_7581;
                                 }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                                else if (Singlepnl.Panel_GlassThickness == 10.0f ||
+                                 Singlepnl.Panel_GlassThickness == 11.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_White;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
                                     }
                                     else
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_374_WoodGrain;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
                                     }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
                                 }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                                else if (Singlepnl.Panel_GlassThickness >= 12.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_White;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
                                     }
                                     else
                                     {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_373_WoodGrain;
+                                        GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
                                     }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_373And374;
                                 }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                                else if (Singlepnl.Panel_GlassThickness == 0.0f)
                                 {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_395_WoodGrain;
-                                    }
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_395;
+                                    GlassPrice += 0;
                                 }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+
+                                //sealant for glass
+                                Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
+
+                                if (Singlepnl.Panel_GlassThickness != 0.0f)
                                 {
-                                    SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
-                                    SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-
-                                    GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                    }
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                    {
+                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                    }
                                 }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6040_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6040;
-                                }
-                                else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                                {
-                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_White;
-                                    }
-                                    else
-                                    {
-                                        SashPricePerLinearMeter = SashPricePerLinearMeter_6041_WoodGrain;
-                                    }
-
-                                    SashReinPricePerLinearMeter = SashReinPricePerLinearMeter_6041;
-                                }
-
-                                SashPrice += (SashPerimeter / 1000m) * SashPricePerLinearMeter;
-                                SashReinPrice += (SashPerimeter / 1000m) * SashReinPricePerLinearMeter;
-                                GbPrice += (SashPerimeter / 1000m) * GlazingBeadPricePerLinearMeter;
                                 #endregion
                             }
-
-                            if (Singlepnl.Panel_GlassThickness == 6.0f)
-                            {
-                                GBSpacerPrice += GBSpacerPricePerPiece * 4;
-                            }
-
-                            if (ChckPlasticWedge == true)
-                            {
-                                PlasticWedgePrice += PlasticWedgePricePerPiece;
-                            }
-
-                            if (Singlepnl.Panel_MotorizedOptionVisibility == true)
-                            {
-                                //motorize price
-                            }
-
-
-
-
-                            #region EspagPrice
-
-                            if (Singlepnl.Panel_EspagnoletteOptionsVisibility == true && Singlepnl.Panel_ChkText != "dSash")
-                            {
-                                if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A00006)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A00006PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A00006PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A01006)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A01006PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A01006PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A02206PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A02206PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A03206PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A03206PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A04206PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A04206PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A05206PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A05206PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A06206)
-                                {
-                                    EspagPrice += TiltAndTurnEspag_N110A06206PricePerPiece;
-                                    EspagBasePrice = TiltAndTurnEspag_N110A06206PricePerPiece;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._630963)
-                                {
-                                    EspagPrice += MVDGearPricePerPiece;
-                                    EspagBasePrice = MVDGearPricePerPiece;
-                                }
-                                else
-                                {
-                                    EspagPrice += Espag741012_PricePerPiece;
-                                    EspagBasePrice = Espag741012_PricePerPiece;
-                                }
-                            }
-                            #endregion
-
-                            #region StrikerPrice
-                            int Panel_StrikerQty_A = 0,
-                                Panel_StrikerQty_C = 0;
-
-
-                            if (Singlepnl.Panel_Type.Contains("Awning"))
-                            {
-                                if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                                    Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                                    Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                {
-                                    Panel_StrikerQty_A += 2;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                {
-                                    Panel_StrikerQty_A += 3;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
-                                {
-                                    Panel_StrikerQty_A += 4;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                {
-                                    Panel_StrikerQty_A += 1;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                {
-                                    Panel_StrikerQty_A += 2;
-                                }
-
-                                if (Singlepnl.Panel_ExtensionLeftArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtLeftQty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionLeft2ArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtLeft2Qty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionRightArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtRightQty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionRight2ArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtRight2Qty);
-                                }
-
-                                if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                {
-                                    Panel_StrikerQty_A += 2;
-                                }
-                            }
-                            else if (Singlepnl.Panel_Type.Contains("Casement"))
-                            {
-                                if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628806 ||
-                                    Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628807 ||
-                                    Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._628809)
-                                {
-                                    Panel_StrikerQty_C += 2;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._741012 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._EQ87NT)
-                                {
-                                    Panel_StrikerQty_C += 3;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642105 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._642089)
-                                {
-                                    Panel_StrikerQty_C += 4;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A02206 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A03206)
-                                {
-                                    Panel_StrikerQty_C += 1;
-                                }
-                                else if (Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A04206 ||
-                                         Singlepnl.Panel_EspagnoletteArtNo == Espagnolette_ArticleNo._N110A05206)
-                                {
-                                    Panel_StrikerQty_C += 2;
-                                }
-
-                                if (Singlepnl.Panel_ExtensionTopArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtTopQty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionTop2ArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtTop2Qty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionBotArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtBotQty);
-                                }
-
-                                if (Singlepnl.Panel_ExtensionBot2ArtNo == Extension_ArticleNo._639957)
-                                {
-                                    Panel_StrikerQty_C += (1 * Singlepnl.Panel_ExtBot2Qty);
-                                }
-
-                                if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                {
-                                    Panel_StrikerQty_C += 1;
-                                }
-
-                                if (Singlepnl.Panel_CornerDriveArtNo == CornerDrive_ArticleNo._639958)
-                                {
-                                    Panel_StrikerQty_A += 1;
-                                }
-                            }
-
-                            if (Panel_StrikerQty_A != 0 ||
-                                Panel_StrikerQty_C != 0)
-                            {
-                                StrikerPrice += (Panel_StrikerQty_A + Panel_StrikerQty_C) * StrikerPricePerPiece;
-                            }
-                            #endregion
-
-                            #region GeorgianBar
-                            if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
-                            {
-                                GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty;
-                                GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty;
-                                if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-                                {
-                                    if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
-                                    {
-                                        GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
-                                    }
-                                    if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
-                                    {
-                                        GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
-                                    }
-                                    GeorgianBarPrice = GeorgianBar_0724Price;
-                                }
-                                else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-                                {
-                                    if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
-                                    {
-                                        GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
-                                    }
-                                    if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
-                                    {
-                                        GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
-                                    }
-                                    GeorgianBarPrice = GeorgianBar_0726Price;
-                                }
-                            }
-                            #endregion
-
-                            #region CoverProfilePrice
-                            if ((Singlepnl.Panel_Type.Contains("Sliding")))
-                            {
-                                CoverProfileCost += ((Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price) * 2;
-                                CoverProfilePrice = CoverProfile_0914Price;
-                            }
-                            else
-                            {
-                                CoverProfileCost += (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0914Price +
-                                                    (Singlepnl.Panel_SashWidth / 1000m) * CoverProfile_0373Price;
-                                CoverProfilePrice = CoverProfile_0914Price + CoverProfile_0373Price;
-                            }
-                            #endregion
-
-                            #region Glass 
-
-                            if (Singlepnl.Panel_GlassThickness >= 6.0f &&
-                                Singlepnl.Panel_GlassThickness <= 9.0f)
-                            {
-                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
-                                }
-                                else
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
-                                }
-                            }
-                            else if (Singlepnl.Panel_GlassThickness == 10.0f ||
-                             Singlepnl.Panel_GlassThickness == 11.0f)
-                            {
-                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
-                                }
-                                else
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
-                                }
-                            }
-                            else if (Singlepnl.Panel_GlassThickness >= 12.0f)
-                            {
-                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
-                                }
-                                else
-                                {
-                                    GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
-                                }
-                            }
-                            else if (Singlepnl.Panel_GlassThickness == 0.0f)
-                            {
-                                GlassPrice += 0;
-                            }
-
-                            //sealant for glass
-                            Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((Singlepnl.Panel_GlassWidth + Singlepnl.Panel_GlassHeight) * 2) / 6842));
-
-                            if (Singlepnl.Panel_GlassThickness != 0.0f)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
-                                {
-                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
-                                }
-                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
-                                {
-                                    SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
-                                }
-                            }
-                            #endregion
-
-                            CostingPoints += ProfileColorPoints * 4;
-                            InstallationPoints += (ProfileColorPoints / 3) * 4;
                         }
+
+                        #endregion
+
                     }
 
-                    #endregion
+                    LaborCost = CostingPoints * CostPerPoints;
+                    InstallationCost = InstallationPoints * CostPerPoints;
 
-                }
+                    // Math.Round( , 2) +
 
-                LaborCost = CostingPoints * CostPerPoints;
-                InstallationCost = InstallationPoints * CostPerPoints;
+                    FittingAndSuppliesCost = Math.Round(FSPrice, 2) +
+                                             Math.Round(RestrictorStayPrice, 2) +
+                                             Math.Round(CornerDrivePrice, 2) +
+                                             Math.Round(SnapInKeepPrice, 2) +
+                                             Math.Round(_35mmBacksetEspagWithCylinderPrice, 2) +
+                                             Math.Round(MiddleCLoserPrice, 2) +
+                                             Math.Round(StayBearingPrice, 2) +
+                                             Math.Round(StayBearingPinPrice, 2) +
+                                             Math.Round(CoverStayBearingPrice, 2) +
+                                             Math.Round(CoverCornerHingePrice, 2) +
+                                             Math.Round(CornerPivotRestPrice, 2) +
+                                             Math.Round(TopCornerHingePrice, 2) +
+                                             Math.Round(CorverCornerPivotRestPrice, 2) +
+                                             Math.Round(CorverCornerPivotRestVerticalPrice, 2) +
+                                             Math.Round(HandlePrice, 2) +
+                                             Math.Round(EspagPrice, 2) +
+                                             Math.Round(_2DHingePrice, 2) +
+                                             Math.Round(_3DHingePrice, 2) +
+                                             Math.Round(NTCenterHingePrice, 2) +
+                                             Math.Round(ShootBoltStrikerPrice, 2) +
+                                             Math.Round(ShootBoltReversePrice, 2) +
+                                             Math.Round(ShootBoltNonReversePrice, 2) +
+                                             Math.Round(StrikerPrice, 2) +
+                                             Math.Round(LatchDeadboltStrikerPrice, 2) +
+                                             Math.Round(ExtensionPrice, 2) +
+                                             Math.Round(RollerPrice, 2) +
+                                             Math.Round(StrikerLRPrice, 2) +
+                                             Math.Round(BrushSealPrice, 2);
 
-                // Math.Round( , 2) +
+                    AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
+                                           Math.Round(GbPrice, 2) +
+                                           Math.Round(GeorgianBarCost, 2) +
+                                           Math.Round(CoverProfileCost, 2) +
+                                           Math.Round(GlazingGasketPrice, 2) +
+                                           Math.Round(WeatherBarPrice, 2) +
+                                           Math.Round(WeatherBarFastenerPrice, 2) +
+                                           Math.Round(WaterSeepagePrice, 2) +
+                                           Math.Round(GuideTrackPrice, 2) +
+                                           Math.Round(AlumTrackPrice, 2) +
+                                           Math.Round(InterlockPrice, 2) +
+                                           Math.Round(ExtensionForInterlockPrice, 2) +
+                                           Math.Round(AluminumPullHandlePrice, 2);
 
-                FittingAndSuppliesCost = Math.Round(FSPrice, 2) +
-                                         Math.Round(RestrictorStayPrice, 2) +
-                                         Math.Round(CornerDrivePrice, 2) +
-                                         Math.Round(SnapInKeepPrice, 2) +
-                                         Math.Round(_35mmBacksetEspagWithCylinderPrice, 2) +
-                                         Math.Round(MiddleCLoserPrice, 2) +
-                                         Math.Round(StayBearingPrice, 2) +
-                                         Math.Round(StayBearingPinPrice, 2) +
-                                         Math.Round(CoverStayBearingPrice, 2) +
-                                         Math.Round(CoverCornerHingePrice, 2) +
-                                         Math.Round(CornerPivotRestPrice, 2) +
-                                         Math.Round(TopCornerHingePrice, 2) +
-                                         Math.Round(CorverCornerPivotRestPrice, 2) +
-                                         Math.Round(CorverCornerPivotRestVerticalPrice, 2) +
-                                         Math.Round(HandlePrice, 2) +
-                                         Math.Round(EspagPrice, 2) +
-                                         Math.Round(_2DHingePrice, 2) +
-                                         Math.Round(_3DHingePrice, 2) +
-                                         Math.Round(NTCenterHingePrice, 2) +
-                                         Math.Round(ShootBoltStrikerPrice, 2) +
-                                         Math.Round(ShootBoltReversePrice, 2) +
-                                         Math.Round(ShootBoltNonReversePrice, 2) +
-                                         Math.Round(StrikerPrice, 2) +
-                                         Math.Round(LatchDeadboltStrikerPrice, 2) +
-                                         Math.Round(ExtensionPrice, 2) +
-                                         Math.Round(RollerPrice, 2) +
-                                         Math.Round(StrikerLRPrice, 2) +
-                                         Math.Round(BrushSealPrice, 2);
-
-                AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
-                                       Math.Round(GbPrice, 2) +
-                                       Math.Round(GeorgianBarCost, 2) +
-                                       Math.Round(CoverProfileCost, 2) +
-                                       Math.Round(GlazingGasketPrice, 2) +
-                                       Math.Round(WeatherBarPrice, 2) +
-                                       Math.Round(WeatherBarFastenerPrice, 2) +
-                                       Math.Round(WaterSeepagePrice, 2) +
-                                       Math.Round(GuideTrackPrice, 2) +
-                                       Math.Round(AlumTrackPrice, 2) +
-                                       Math.Round(InterlockPrice, 2) +
-                                       Math.Round(ExtensionForInterlockPrice, 2) +
-                                       Math.Round(AluminumPullHandlePrice, 2);
-
-                AccesorriesCost = Math.Round(EndCapPrice, 2) +
-                                  Math.Round(MechJointPrice, 2) +
-                                  Math.Round(GBSpacerPrice, 2) +
-                                  Math.Round(PlasticWedgePrice, 2) +
-                                  Math.Round(SealingBlockPrice, 2);
+                    AccesorriesCost = Math.Round(EndCapPrice, 2) +
+                                      Math.Round(MechJointPrice, 2) +
+                                      Math.Round(GBSpacerPrice, 2) +
+                                      Math.Round(PlasticWedgePrice, 2) +
+                                      Math.Round(SealingBlockPrice, 2);
 
 
-                MaterialCost = Math.Round(FramePrice, 2) +
-                               Math.Round(FrameReinPrice, 2) +
-                               Math.Round(SashPrice, 2) +
-                               Math.Round(SashReinPrice, 2) +
-                               Math.Round(DivPrice, 2) +
-                               Math.Round(DivReinPrice, 2) +
-                               Math.Round(claddingPrice, 2) +
-                               Math.Round(DMPrice, 2) +
-                               Math.Round(SealantPrice, 2) +
-                               Math.Round(PUFoamingPrice, 2) +
-                               Math.Round(FittingAndSuppliesCost, 2) +
-                               Math.Round(AncillaryProfileCost, 2) +
-                               Math.Round(AccesorriesCost, 2);
+                    MaterialCost = Math.Round(FramePrice, 2) +
+                                   Math.Round(FrameReinPrice, 2) +
+                                   Math.Round(SashPrice, 2) +
+                                   Math.Round(SashReinPrice, 2) +
+                                   Math.Round(DivPrice, 2) +
+                                   Math.Round(DivReinPrice, 2) +
+                                   Math.Round(claddingPrice, 2) +
+                                   Math.Round(DMPrice, 2) +
+                                   Math.Round(SealantPrice, 2) +
+                                   Math.Round(PUFoamingPrice, 2) +
+                                   Math.Round(FittingAndSuppliesCost, 2) +
+                                   Math.Round(AncillaryProfileCost, 2) +
+                                   Math.Round(AccesorriesCost, 2);
 
-                MaterialCostBreakDownBase = MaterialCost;
+                    MaterialCostBreakDownBase = MaterialCost;
 
-                MaterialCost = MaterialCost +
-                               (MaterialCost * 0.05m) +
-                               (MaterialCost * 0.10m) +
-                               (MaterialCost * 0.12m) +
-                               (MaterialCost * 0.16m);
+                    MaterialCost = MaterialCost +
+                                   (MaterialCost * 0.05m) +
+                                   (MaterialCost * 0.10m) +
+                                   (MaterialCost * 0.12m) +
+                                   (MaterialCost * 0.16m);
 
-                TotaPrice = Math.Round(LaborCost, 2) +
-                            Math.Round(InstallationCost, 2) +
-                            Math.Round(MaterialCost, 2) +
-                            Math.Round(GlassPrice, 2);
+                    TotaPrice = Math.Round(LaborCost, 2) +
+                                Math.Round(InstallationCost, 2) +
+                                Math.Round(MaterialCost, 2) +
+                                Math.Round(GlassPrice, 2);
 
-                TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
-                lstTotalPrice.Add(TotaPrice);
-                if (BOM_Status == true)
-                {
+                    TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+                    lstTotalPrice.Add(TotaPrice);
+                    if (BOM_Status == true)
+                    {
 
-                    #region Price Break Down 
+                        #region Price Break Down 
 
-                    decimal MaterialCostDeduction = 0, MaterialCostPriceBreakDown = 0;
-                    MaterialCostDeduction = AccesorriesCost +
-                                            AncillaryProfileCost +
-                                            FittingAndSuppliesCost;
+                        decimal MaterialCostDeduction = 0, MaterialCostPriceBreakDown = 0;
+                        MaterialCostDeduction = AccesorriesCost +
+                                                AncillaryProfileCost +
+                                                FittingAndSuppliesCost;
 
-                    MaterialCostPriceBreakDown = MaterialCost - MaterialCostDeduction;
+                        MaterialCostPriceBreakDown = MaterialCost - MaterialCostDeduction;
 
-                    Price_List.Rows.Add("Material Cost",
-                                        "",
-                                        Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(MaterialCostPriceBreakDown * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((MaterialCostPriceBreakDown * PricingFactor) + MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Material Cost",
+                                            "",
+                                            Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(MaterialCostPriceBreakDown * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((MaterialCostPriceBreakDown * PricingFactor) + MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("Accesorries",
-                                        "",
-                                        Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(AccesorriesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((AccesorriesCost * PricingFactor) + AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Accesorries",
+                                            "",
+                                            Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(AccesorriesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((AccesorriesCost * PricingFactor) + AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("Ancillary Profile",
-                                     "",
-                                     Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                                     Math.Round(AncillaryProfileCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                     Math.Round((AncillaryProfileCost * PricingFactor) + AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                                     "Price Break Down");
+                        Price_List.Rows.Add("Ancillary Profile",
+                                         "",
+                                         Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(AncillaryProfileCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                         Math.Round((AncillaryProfileCost * PricingFactor) + AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                         "Price Break Down");
 
-                    Price_List.Rows.Add("Fitting and Supplies",
-                                        "",
-                                        Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(FittingAndSuppliesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((FittingAndSuppliesCost * PricingFactor) + FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Fitting and Supplies",
+                                            "",
+                                            Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(FittingAndSuppliesCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((FittingAndSuppliesCost * PricingFactor) + FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("Labor Cost",
-                                        "",
-                                        Math.Round(LaborCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(LaborCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((LaborCost * PricingFactor) + LaborCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Labor Cost",
+                                            "",
+                                            Math.Round(LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(LaborCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((LaborCost * PricingFactor) + LaborCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("Installation Cost",
-                                        "",
-                                        Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Installation Cost",
+                                            "",
+                                            Math.Round(InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("Glass",
-                                        "",
-                                        Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                        Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("Glass",
+                                            "",
+                                            Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    Price_List.Rows.Add("",
-                                        "",
-                                        "",
-                                        "",
-                                        Math.Round(TotaPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "Price Break Down");
+                        Price_List.Rows.Add("",
+                                            "",
+                                            "",
+                                            "",
+                                            Math.Round(TotaPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
 
-                    #endregion
+                        #endregion
 
-                    #region Material Cost
-                    decimal Wastage = 0,
-                            contingenciesForOverheadCost = 0,
-                            VAT = 0,
-                            DutiesAndTaxes = 0;
+                        #region Material Cost
+                        decimal Wastage = 0,
+                                contingenciesForOverheadCost = 0,
+                                VAT = 0,
+                                DutiesAndTaxes = 0;
 
-                    Wastage = (MaterialCostBreakDownBase * 0.05m);
-                    contingenciesForOverheadCost = (MaterialCostBreakDownBase * 0.10m);
-                    VAT = (MaterialCostBreakDownBase * 0.12m);
-                    DutiesAndTaxes = (MaterialCostBreakDownBase * 0.16m);
+                        Wastage = (MaterialCostBreakDownBase * 0.05m);
+                        contingenciesForOverheadCost = (MaterialCostBreakDownBase * 0.10m);
+                        VAT = (MaterialCostBreakDownBase * 0.12m);
+                        DutiesAndTaxes = (MaterialCostBreakDownBase * 0.16m);
 
 
-                    Price_List.Rows.Add("Frame Price",
-                                        FramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(FramePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("Frame Price",
+                                            FramePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(FramePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add("Frame Reinforcement Price",
-                                        FrameReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(FrameReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("Frame Reinforcement Price",
+                                            FrameReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(FrameReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add("Sash Price",
-                                        SashPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(SashPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("Sash Price",
+                                            SashPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(SashPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add("Sash Reinforcement Price",
-                                        SashReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(SashReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("Sash Reinforcement Price",
+                                            SashReinPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(SashReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add(BOM_divDesc + " Price",
-                                        DividerPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(DivPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add(BOM_divDesc + " Price",
+                                            DividerPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(DivPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add(BOM_divDesc + " Reinforcement Price",
-                                       DividerReinPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
-                                       Math.Round(DivReinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                       "",
-                                       "",
-                                       "Material Cost");
+                        Price_List.Rows.Add(BOM_divDesc + " Reinforcement Price",
+                                           DividerReinPricePerSqrMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(DivReinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
 
-                    Price_List.Rows.Add("Cladding with reinforcement Price",
-                                       claddingPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                       Math.Round(claddingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                       "",
-                                       "",
-                                       "Material Cost");
+                        Price_List.Rows.Add("Cladding with reinforcement Price",
+                                           claddingPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(claddingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
 
-                    Price_List.Rows.Add("Dummy Mullion Price",
-                                       DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                                       Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                       "",
-                                       "",
-                                       "Material Cost");
+                        Price_List.Rows.Add("Dummy Mullion Price",
+                                           DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
 
-                    Price_List.Rows.Add("Sealant Price",
-                                       SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
-                                       Math.Round(SealantPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                       "",
-                                       "",
-                                       "Material Cost");
+                        Price_List.Rows.Add("Sealant Price",
+                                           SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(SealantPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
 
-                    Price_List.Rows.Add("PU Foaming Price",
-                                        PUFoamingPricePerCan.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(PUFoamingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("PU Foaming Price",
+                                            PUFoamingPricePerCan.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(PUFoamingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add("Wastage",
-                                        "",
-                                        Math.Round(Wastage, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
+                        Price_List.Rows.Add("Wastage",
+                                            "",
+                                            Math.Round(Wastage, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
 
-                    Price_List.Rows.Add("Contingencies For Over head Cost",
-                              "",
-                              Math.Round(contingenciesForOverheadCost, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Material Cost");
-
-                    Price_List.Rows.Add("VAT",
-                              "",
-                              Math.Round(VAT, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Material Cost");
-
-                    Price_List.Rows.Add("Duties And Taxes",
-                              "",
-                              Math.Round(DutiesAndTaxes, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Material Cost");
-
-                    Price_List.Rows.Add("Total",
-                                        "",
-                                        Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Material Cost");
-
-                    #endregion
-
-                    #region Accesorries Cost
-
-                    Price_List.Rows.Add("End cap Price",
-                                      EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                      Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                      "",
-                                      "",
-                                      "Accesorries");
-
-                    Price_List.Rows.Add("Mechanical Joint Price",
-                                   MechanicalJointPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(MechJointPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Accesorries");
-
-                    Price_List.Rows.Add("Glazing Bead Spacer Price",
-                                  GBSpacerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(GBSpacerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Contingencies For Over head Cost",
+                                  "",
+                                  Math.Round(contingenciesForOverheadCost, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
-                                  "Accesorries");
+                                  "Material Cost");
 
-                    Price_List.Rows.Add("Plastic Wedge Price",
-                                  PlasticWedgePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(PlasticWedgePrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("VAT",
+                                  "",
+                                  Math.Round(VAT, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
-                                  "Accesorries");
+                                  "Material Cost");
 
-                    Price_List.Rows.Add("Sealing Block Price",
-                                  SealingBlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(SealingBlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Duties And Taxes",
+                                  "",
+                                  Math.Round(DutiesAndTaxes, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
-                                  "Accesorries");
+                                  "Material Cost");
 
-                    Price_List.Rows.Add("Total",
-                                       "",
-                                       Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Total",
+                                            "",
+                                            Math.Round(MaterialCostPriceBreakDown, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Material Cost");
+
+                        #endregion
+
+                        #region Accesorries Cost
+
+                        Price_List.Rows.Add("End cap Price",
+                                          EndCapPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(EndCapPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Accesorries");
+
+                        Price_List.Rows.Add("Mechanical Joint Price",
+                                       MechanicalJointPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(MechJointPrice, 2).ToString("N", new CultureInfo("en-US")),
                                        "",
                                        "",
                                        "Accesorries");
 
-                    #endregion
-
-                    #region Ancillary Profile Cost
-
-                    Price_List.Rows.Add("Threshold Price",
-                                    ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                    Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                    "",
-                                    "",
-                                    "Ancillary Profile");
-
-                    Price_List.Rows.Add("Glazing Bead Price",
-                               GlazingBeadPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(GbPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Georgian Bar Cost",
-                               GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Cover Profile Cover",
-                               CoverProfilePrice.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(CoverProfileCost, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Glazing Gasket Price",
-                               GlazingGasketPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(GlazingGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Weather Bar Price",
-                               WeatherBarPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(WeatherBarPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Weather Bar Fastener Price",
-                               BarFastenerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(WeatherBarFastenerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Water Seepage Price",
-                               WaterSeepagePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(WaterSeepagePrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Guide Track Price",
-                               GuideTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(GuideTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Aluminum Track Price",
-                               AluminumTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(AlumTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Interlock Price",
-                               InterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(InterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Extension For Interlock Price",
-                               ExtensionForInterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(ExtensionForInterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Aluminum Pull Handle Price",
-                               AluminumPullHandlePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                               Math.Round(AluminumPullHandlePrice, 2).ToString("N", new CultureInfo("en-US")),
-                               "",
-                               "",
-                               "Ancillary Profile");
-
-                    Price_List.Rows.Add("Total",
-                                      "",
-                                      Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Glazing Bead Spacer Price",
+                                      GBSpacerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(GBSpacerPrice, 2).ToString("N", new CultureInfo("en-US")),
                                       "",
                                       "",
-                                      "Ancillary Profile");
-                    #endregion
+                                      "Accesorries");
 
-                    #region Fitting and Supplies Cost
+                        Price_List.Rows.Add("Plastic Wedge Price",
+                                      PlasticWedgePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(PlasticWedgePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Accesorries");
 
-                    Price_List.Rows.Add("Friction Stay Price",
-                                        FSBasePrice.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(FSPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Fitting and Supplies");
+                        Price_List.Rows.Add("Sealing Block Price",
+                                      SealingBlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(SealingBlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      "",
+                                      "",
+                                      "Accesorries");
 
-                    Price_List.Rows.Add("Restrictor Stay Price",
-                                        RestrictorStayPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(RestrictorStayPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Fitting and Supplies");
+                        Price_List.Rows.Add("Total",
+                                           "",
+                                           Math.Round(AccesorriesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Accesorries");
 
-                    Price_List.Rows.Add("Corner Drive Price",
-                                        CornerDrivePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(CornerDrivePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Fitting and Supplies");
+                        #endregion
 
-                    Price_List.Rows.Add("Snap In Keep Price",
-                                        SnapInKeepPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(SnapInKeepPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                        "",
-                                        "",
-                                        "Fitting and Supplies");
+                        #region Ancillary Profile Cost
 
-                    Price_List.Rows.Add("35mm Backset Espagnolette With Cylinder Price",
-                                        _35mmBacksetEspagWithCylinder.ToString("N", new CultureInfo("en-US")),
-                                        Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Threshold Price",
+                                        ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
                                         "",
                                         "",
-                                        "Fitting and Supplies");
+                                        "Ancillary Profile");
 
-                    Price_List.Rows.Add("Middle CLoser Price",
-                                      MiddleCLoserPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                      Math.Round(MiddleCLoserPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Glazing Bead Price",
+                                   GlazingBeadPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GbPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Georgian Bar Cost",
+                                   GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Cover Profile Cover",
+                                   CoverProfilePrice.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(CoverProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Glazing Gasket Price",
+                                   GlazingGasketPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GlazingGasketPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Weather Bar Price",
+                                   WeatherBarPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(WeatherBarPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Weather Bar Fastener Price",
+                                   BarFastenerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(WeatherBarFastenerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Water Seepage Price",
+                                   WaterSeepagePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(WaterSeepagePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Guide Track Price",
+                                   GuideTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GuideTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Aluminum Track Price",
+                                   AluminumTrackPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(AlumTrackPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Interlock Price",
+                                   InterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(InterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Extension For Interlock Price",
+                                   ExtensionForInterlockPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(ExtensionForInterlockPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Aluminum Pull Handle Price",
+                                   AluminumPullHandlePricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(AluminumPullHandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                   "",
+                                   "",
+                                   "Ancillary Profile");
+
+                        Price_List.Rows.Add("Total",
+                                          "",
+                                          Math.Round(AncillaryProfileCost, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Ancillary Profile");
+                        #endregion
+
+                        #region Fitting and Supplies Cost
+
+                        Price_List.Rows.Add("Friction Stay Price",
+                                            FSBasePrice.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(FSPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Restrictor Stay Price",
+                                            RestrictorStayPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(RestrictorStayPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Corner Drive Price",
+                                            CornerDrivePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(CornerDrivePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Snap In Keep Price",
+                                            SnapInKeepPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(SnapInKeepPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Fitting and Supplies");
+
+                        Price_List.Rows.Add("35mm Backset Espagnolette With Cylinder Price",
+                                            _35mmBacksetEspagWithCylinder.ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(_35mmBacksetEspagWithCylinderPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Middle CLoser Price",
+                                          MiddleCLoserPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(MiddleCLoserPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Stay Bearing Price",
+                                          StayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(StayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Stay Bearing Pin Price",
+                                       StayBearingPinPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(StayBearingPinPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Cover Stay Bearing Price",
+                                       CoverStayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(CoverStayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Cover Corner Hinge Price",
+                                       CoverCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(CoverCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Corner Pivot Rest Price",
+                                      CornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(CornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
                                       "",
                                       "",
                                       "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Stay Bearing Price",
-                                      StayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                      Math.Round(StayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Top Corner Hinge Price",
+                                      TopCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                      Math.Round(TopCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                                       "",
                                       "",
                                       "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Stay Bearing Pin Price",
-                                   StayBearingPinPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(StayBearingPinPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Fitting and Supplies");
+                        Price_List.Rows.Add("Corver Corner Pivot Rest Price",
+                                     CorverCornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                     Math.Round(CorverCornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                     "",
+                                     "",
+                                     "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Cover Stay Bearing Price",
-                                   CoverStayBearingPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(CoverStayBearingPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Fitting and Supplies");
+                        Price_List.Rows.Add("Corver Corner Pivot Rest Vertical Price",
+                                    CorverCornerPivotRestVerticalPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Cover Corner Hinge Price",
-                                   CoverCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(CoverCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                   "",
-                                   "",
-                                   "Fitting and Supplies");
+                        Price_List.Rows.Add(HandleDesc + " Price",
+                                    HandleBasePrice.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(HandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Corner Pivot Rest Price",
-                                  CornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(CornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Espagnolette Price",
+                                    EspagBasePrice.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(EspagPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                        Price_List.Rows.Add("2D Hinge Price",
+                                    _2DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                    Math.Round(_2DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                    "",
+                                    "",
+                                    "Fitting and Supplies");
+
+                        Price_List.Rows.Add("3D Hinge Price",
+                                  _3DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(_3DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
                                   "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Top Corner Hinge Price",
-                                  TopCornerHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                  Math.Round(TopCornerHingePrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("NT Center Hinge Price",
+                                  NTCenterHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(NTCenterHingePrice, 2).ToString("N", new CultureInfo("en-US")),
                                   "",
                                   "",
                                   "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Corver Corner Pivot Rest Price",
-                                 CorverCornerPivotRestPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                 Math.Round(CorverCornerPivotRestPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Shoot Bolt Striker Price",
+                                  ShootBoltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(ShootBoltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Shoot Bolt Reverse Price",
+                                  ShootBoltReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(ShootBoltReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Shoot Bolt Non Reverse Price",
+                                  ShootBoltNonReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(ShootBoltNonReversePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Striker Price",
+                                  StrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(StrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                                  LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                  Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                  "",
+                                  "",
+                                  "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Latch Deadbolt Striker Price",
+                                 LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
                                  "",
                                  "",
                                  "Fitting and Supplies");
 
-                    Price_List.Rows.Add("Corver Corner Pivot Rest Vertical Price",
-                                CorverCornerPivotRestVerticalPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                Math.Round(CorverCornerPivotRestVerticalPrice, 2).ToString("N", new CultureInfo("en-US")),
+                        Price_List.Rows.Add("Extension Price",
+                                 ExtensionBasePrice.ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(ExtensionPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                 "",
+                                 "",
+                                 "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Roller Price",
+                                 RollerBasePrice.ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(RollerPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                 "",
+                                 "",
+                                 "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Striker Price",
+                                 StrikerLRPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                 Math.Round(StrikerLRPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                 "",
+                                 "",
+                                 "Fitting and Supplies");
+
+                        Price_List.Rows.Add("Brush Seal Price",
+                                BrushSealPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                Math.Round(BrushSealPrice, 2).ToString("N", new CultureInfo("en-US")),
                                 "",
                                 "",
                                 "Fitting and Supplies");
 
-                    Price_List.Rows.Add(HandleDesc + " Price",
-                                HandleBasePrice.ToString("N", new CultureInfo("en-US")),
-                                Math.Round(HandlePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                "",
-                                "",
-                                "Fitting and Supplies");
+                        Price_List.Rows.Add("Total",
+                                         "",
+                                         Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Fitting and Supplies");
+                        #endregion
 
-                    Price_List.Rows.Add("Espagnolette Price",
-                                EspagBasePrice.ToString("N", new CultureInfo("en-US")),
-                                Math.Round(EspagPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                "",
-                                "",
-                                "Fitting and Supplies");
+                        var query = from r in Price_List.AsEnumerable()
+                                    where r.Field<string>("Nett") != "0.00" &&
+                                     r.Field<string>("Filter") == BOM_Filter.ToString()
+                                    group r by new
+                                    {
+                                        Description = r.Field<string>("Description"),
+                                        BasePrice = r.Field<string>("Base Price"),
+                                        Nett = r.Field<string>("Nett"),
+                                        Markup = r.Field<string>("Mark-up"),
+                                        Subtotal = r.Field<string>("Subtotal"),
+                                        Filter = r.Field<string>("Filter")
 
-                    Price_List.Rows.Add("2D Hinge Price",
-                                _2DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                                Math.Round(_2DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                                "",
-                                "",
-                                "Fitting and Supplies");
+                                    } into g
+                                    select new
+                                    {
+                                        Description = g.Key.Description,
+                                        BasePrice = g.Key.BasePrice,
+                                        Nett = g.Key.Nett,
+                                        Markup = g.Key.Markup,
+                                        Subtotal = g.Key.Subtotal,
+                                        Filter = g.Key.Filter
+                                    };
 
-                    Price_List.Rows.Add("3D Hinge Price",
-                              _3DHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(_3DHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
+                        DataTable dt = new DataTable();
+                        dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+                        dt.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
+                        dt.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
+                        dt.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
+                        dt.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
+                        dt.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
 
-                    Price_List.Rows.Add("NT Center Hinge Price",
-                              NTCenterHingePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(NTCenterHingePrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
+                        foreach (var element in query)
+                        {
+                            DataRow row = dt.NewRow();
+                            row["Description"] = element.Description;
+                            row["Base Price"] = element.BasePrice;
+                            row["Nett"] = element.Nett;
+                            row["Mark-up"] = element.Markup;
+                            row["Subtotal"] = element.Subtotal;
+                            row["Filter"] = element.Filter;
 
-                    Price_List.Rows.Add("Shoot Bolt Striker Price",
-                              ShootBoltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(ShootBoltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
+                            dt.Rows.Add(row);
+                        }
 
-                    Price_List.Rows.Add("Shoot Bolt Reverse Price",
-                              ShootBoltReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(ShootBoltReversePrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Shoot Bolt Non Reverse Price",
-                              ShootBoltNonReversePricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(ShootBoltNonReversePrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Striker Price",
-                              StrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(StrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Latch Deadbolt Striker Price",
-                              LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                              Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                              "",
-                              "",
-                              "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Latch Deadbolt Striker Price",
-                             LatchDeadboltStrikerPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                             Math.Round(LatchDeadboltStrikerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                             "",
-                             "",
-                             "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Extension Price",
-                             ExtensionBasePrice.ToString("N", new CultureInfo("en-US")),
-                             Math.Round(ExtensionPrice, 2).ToString("N", new CultureInfo("en-US")),
-                             "",
-                             "",
-                             "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Roller Price",
-                             RollerBasePrice.ToString("N", new CultureInfo("en-US")),
-                             Math.Round(RollerPrice, 2).ToString("N", new CultureInfo("en-US")),
-                             "",
-                             "",
-                             "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Striker Price",
-                             StrikerLRPricePerPiece.ToString("N", new CultureInfo("en-US")),
-                             Math.Round(StrikerLRPrice, 2).ToString("N", new CultureInfo("en-US")),
-                             "",
-                             "",
-                             "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Brush Seal Price",
-                            BrushSealPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
-                            Math.Round(BrushSealPrice, 2).ToString("N", new CultureInfo("en-US")),
-                            "",
-                            "",
-                            "Fitting and Supplies");
-
-                    Price_List.Rows.Add("Total",
-                                     "",
-                                     Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
-                                     "",
-                                     "",
-                                     "Fitting and Supplies");
-                    #endregion
-
-                    var query = from r in Price_List.AsEnumerable()
-                                where r.Field<string>("Nett") != "0.00" &&
-                                 r.Field<string>("Filter") == BOM_Filter.ToString()
-                                group r by new
-                                {
-                                    Description = r.Field<string>("Description"),
-                                    BasePrice = r.Field<string>("Base Price"),
-                                    Nett = r.Field<string>("Nett"),
-                                    Markup = r.Field<string>("Mark-up"),
-                                    Subtotal = r.Field<string>("Subtotal"),
-                                    Filter = r.Field<string>("Filter")
-
-                                } into g
-                                select new
-                                {
-                                    Description = g.Key.Description,
-                                    BasePrice = g.Key.BasePrice,
-                                    Nett = g.Key.Nett,
-                                    Markup = g.Key.Markup,
-                                    Subtotal = g.Key.Subtotal,
-                                    Filter = g.Key.Filter
-                                };
-
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
-                    dt.Columns.Add(CreateColumn("Base Price", "Base Price", "System.String"));
-                    dt.Columns.Add(CreateColumn("Nett", "Nett", "System.String"));
-                    dt.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
-                    dt.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
-                    dt.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
-
-                    foreach (var element in query)
-                    {
-                        DataRow row = dt.NewRow();
-                        row["Description"] = element.Description;
-                        row["Base Price"] = element.BasePrice;
-                        row["Nett"] = element.Nett;
-                        row["Mark-up"] = element.Markup;
-                        row["Subtotal"] = element.Subtotal;
-                        row["Filter"] = element.Filter;
-
-                        dt.Rows.Add(row);
+                        Price_List = dt;
                     }
-
-                    Price_List = dt;
+                    ClearingOperation();
                 }
-                ClearingOperation();
+
             }
             return Price_List;
         }
-
 
 
         public void ClearingOperation()

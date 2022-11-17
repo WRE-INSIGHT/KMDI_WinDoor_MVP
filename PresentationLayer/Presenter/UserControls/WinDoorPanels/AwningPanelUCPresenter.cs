@@ -439,6 +439,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.SetChangesMark();
 
             _mainPresenter.DeselectDivider();
+            _mainPresenter.itemDescription();
         }
 
         private void _awningPanelUC_awningPanelUCMouseLeaveEventRaised(object sender, EventArgs e)

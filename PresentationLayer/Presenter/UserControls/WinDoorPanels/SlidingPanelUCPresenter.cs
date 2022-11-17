@@ -98,12 +98,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
                 Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
                 Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-               
+
                 //Console.WriteLine("Panel_Display_Width " + _panelModel.Panel_DisplayWidth);
                 //Console.WriteLine("Panel_Display_Height " + _panelModel.Panel_DisplayHeight);
                 //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
                 //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
-               
+
                 Console.WriteLine();
                 slidingUC = (UserControl)sender;
 
@@ -329,7 +329,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
-                           
+
                             if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Left && pnl.Panel_Name != pres_pnl.Panel_Name)
                             {
                                 pnl.Panel_Width -= (int)Math.Ceiling((decimal)32 / totalpanel_inside_parentMpanel);
@@ -483,7 +483,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
-                            if(pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Right)
+                            if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Right)
                             {
                                 pnl.Panel_Width += (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
                             }
@@ -915,6 +915,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
 
             #endregion
+            _mainPresenter.itemDescription();
         }
 
         private void _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised(object sender, EventArgs e)

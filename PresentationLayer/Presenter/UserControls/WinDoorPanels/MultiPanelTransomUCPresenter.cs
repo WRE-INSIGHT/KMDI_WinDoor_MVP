@@ -931,6 +931,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 }
                 _mainPresenter.SetChangesMark();
+                _mainPresenter.itemDescription();
             }
             catch (Exception ex)
             {

@@ -133,7 +133,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
 
             }
-          
+
 
             //}
             //else if (pfr.Controls[0] is IPanelUC)
@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 bot_deduct = 0;
             }
-            
+
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
                 ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
 
@@ -510,6 +510,7 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.itemDescription();
         }
 
         private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)
@@ -533,14 +534,14 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 DeleteFrame();
                 _mainPresenter.SetChangesMark();
-
+                _mainPresenter.itemDescription();
             }
         }
 
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
         {
             UserControl asdassd = ((UserControl)sender);
-          
+
             if (e.Button == MouseButtons.Right)
             {
                 color = Color.Blue;

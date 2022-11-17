@@ -912,6 +912,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 }
                 _mainPresenter.SetChangesMark();
+                _mainPresenter.itemDescription();
+
             }
             catch (Exception ex)
             {

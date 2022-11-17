@@ -15,7 +15,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
-using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace PresentationLayer.Presenter
 {
@@ -34,25 +33,14 @@ namespace PresentationLayer.Presenter
         #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
-        private List<string> lst_glassThickness = new List<string>();
         private List<string> lst_glassThicknessPerItem = new List<string>();
-        private List<string> lst_glassFilm = new List<string>();
-        private List<string> lst_Description = new List<string>();
-        private List<string> lst_DuplicatePnl = new List<string>();
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
 
         string glass,
-               FrameTypeDesc,
-               AllItemDescription,
-               motorizeDesc,
                GeorgianBarHorizontalDesc,
-               GeorgianBarVerticalDesc,
-               NewNoneDuplicatePnlAndCount,
-               lst_DescDist,
-               glassThick;
-
+               GeorgianBarVerticalDesc;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -154,7 +142,7 @@ namespace PresentationLayer.Presenter
                     quoteItem.Dock = DockStyle.Top;
                     quoteItem.BringToFront();
 
-                    itemDescription();
+                    _mainPresenter.itemDescription();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     _quotationModel.ItemCostingPriceAndPoints();
 
@@ -340,277 +328,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        public void itemDescription()
-        {
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            {
-                lst_DuplicatePnl.Clear();
-                lst_Description.Clear();
-                NewNoneDuplicatePnlAndCount = string.Empty;
-                foreach (IFrameModel fr in wdm.lst_frame)
-                {
-                    if (fr.Frame_Type == Frame_Padding.Window)
-                    {
-                        FrameTypeDesc = "Window";
-                    }
-                    else if (fr.Frame_Type == Frame_Padding.Door)
-                    {
-                        FrameTypeDesc = "Door";
-                    }
 
-                    #region MultiPnl
-                    if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
-                    {
-                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                        {
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                            {
-
-                                #region 1stApproach
-                                //if (pnl.Panel_Type.Contains("Fixed"))
-                                //{
-                                //    fixedCount += 1;
-                                //}
-                                //else if (pnl.Panel_Type.Contains("Awning"))
-                                //{
-                                //    AwningCount += 1;
-                                //}
-                                //else if (pnl.Panel_Type.Contains("Casement"))
-                                //{
-                                //    CasementCount += 1;
-                                //}
-
-                                //if (pnl.Panel_GlassThicknessDesc != null)
-                                //{
-                                //    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
-                                //}
-                                //if (pnl.Panel_GlassFilm.ToString() != "None")
-                                //{
-                                //    lst_glassFilm.Add(pnl.Panel_GlassFilm.ToString());
-                                //}
-
-
-
-
-                                //if (pnl.Panel_GeorgianBarOptionVisibility == true)
-                                //{
-                                //    GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
-                                //    GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-
-                                //    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
-                                //    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
-                                //}
-
-
-                                //if (pnl.Panel_MotorizedOptionVisibility == true)
-                                //{
-                                //    motorizeDesc = " Panel Motorized";
-                                //}
-                                //else
-                                //{
-                                //    motorizeDesc = " Panel";
-                                //}
-
-                                //if (fixedCount != 0 && pnl.Panel_Type.Contains("Fixed"))
-                                //{
-                                //    AllItemDescription = AllItemDescription + fixedCount.ToString() + motorizeDesc + " Fixed " + FrameTypeDesc + "\n";
-                                //}
-                                //if (AwningCount != 0 && pnl.Panel_Type.Contains("Awning"))
-                                //{
-                                //    AllItemDescription = AllItemDescription + AwningCount.ToString() + motorizeDesc + " Awning " + FrameTypeDesc + "\n";
-                                //}
-                                //if (CasementCount != 0 && pnl.Panel_Type.Contains("Casement"))
-                                //{
-                                //    AllItemDescription = AllItemDescription + CasementCount.ToString() + motorizeDesc + " Casement " + FrameTypeDesc + "\n";
-                                //}
-
-                                //List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
-                                //List<string> lst_glassFilmDistinct = lst_glassFilm.Distinct().ToList();
-
-                                //foreach (string GT in lst_glassThicknessDistinct)
-                                //{
-                                //    AllItemDescription += GT;
-                                //}
-
-                                //if (lst_glassFilmDistinct != null)
-                                //{
-                                //    foreach (string GF in lst_glassFilmDistinct)
-                                //    {
-                                //        AllItemDescription += "with " + GF + "\n";
-                                //    }
-                                //}
-
-                                //AllItemDescription += GeorgianBarHorizontalDesc;
-                                //AllItemDescription += GeorgianBarVerticalDesc;
-
-                                ////lst_Description.Add(AllItemDescription);
-                                // wdm.WD_description = AllItemDescription;
-                                #endregion
-
-                                //GlassThickness & Glassfilm
-                                if (pnl.Panel_GlassThicknessDesc != null)
-                                {
-                                    if (pnl.Panel_GlassFilm.ToString() != "None")
-                                    {
-                                        lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with" + pnl.Panel_GlassFilm.ToString() + "\n");
-                                    }
-                                    else
-                                    {
-                                        lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + "\n");
-                                    }
-                                }
-                                else
-                                {
-                                    lst_glassThickness.Add(string.Empty);
-                                }
-
-                                //GeorgianBar
-                                if (pnl.Panel_GeorgianBarOptionVisibility == true)
-                                {
-                                    GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
-                                    GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
-                                }
-
-                                //panel name desc
-                                #region panelNameDesc
-                                if (pnl.Panel_MotorizedOptionVisibility == true)
-                                {
-                                    motorizeDesc = "1 Panel Motorized";
-                                }
-                                else
-                                {
-                                    motorizeDesc = "1 Panel";
-                                }
-
-                                AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
-
-                                #endregion
-
-                                lst_Description.Add(AllItemDescription);
-                            }
-
-                        }
-                    }
-                    #endregion
-
-                    #region SinglePnl 
-                    else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
-                    {
-                        IPanelModel Singlepnl = fr.Lst_Panel[0];
-                        if (Singlepnl.Panel_MotorizedOptionVisibility == true)
-                        {
-                            motorizeDesc = "Panel Motorized ";
-                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
-                        }
-                        else
-                        {
-                            motorizeDesc = "";
-                            wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
-                        }
-
-
-                        //GlassThickness & Glassfilm
-                        if (Singlepnl.Panel_GlassThicknessDesc != null)
-                        {
-                            if (Singlepnl.Panel_GlassFilm.ToString() != "None")
-                            {
-                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
-                            }
-                            else
-                            {
-                                lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
-                            }
-                        }
-                        else
-                        {
-                            lst_glassThickness.Add(string.Empty);
-                        }
-
-
-                        //GeorgianBar
-                        if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
-                        {
-                            GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
-                            GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
-
-                        }
-
-                    }
-                    #endregion
-
-                }
-
-                #region DuplicatedItemListStringManipulation
-                //count duplicate in list
-                Dictionary<string, int> freqMap = lst_Description.GroupBy(x => x)
-                                                .Where(g => g.Count() > 1)
-                                                .ToDictionary(x => x.Key, x => x.Count());
-
-                string DuplicatePnlAndCount = String.Join("", freqMap);
-                if (DuplicatePnlAndCount != string.Empty)
-                {
-                    string NewDuplicatePnlAndCount = DuplicatePnlAndCount.Replace("]", string.Empty);
-                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace("[", "\n");
-                    NewDuplicatePnlAndCount = NewDuplicatePnlAndCount.Replace(",", string.Empty);
-                    string[] words = NewDuplicatePnlAndCount.Split('\n');
-
-                    for (int a = 0; a < words.Length; a++)
-                    {
-                        if (a != 0)
-                        {
-                            string split1 = words[a],
-                                   split2 = words[a + 1];
-                            string DuplicatePnl = split1.Replace("1", split2) + "\n";
-
-                            lst_DuplicatePnl.Add(DuplicatePnl);
-                            a++;
-                        }
-                    }
-                }
-                #endregion
-
-                #region NonDuplicatedItemListStringManipulation
-
-
-                //Not Duplicated Item
-                Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
-                                               .Where(b => b.Count() == 1)
-                                               .ToDictionary(a => a.Key, a => a.Count());
-
-                string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
-                NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
-                NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
-                #endregion
-
-                List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
-
-                if (lst_DescriptionDistinct.Count != 0)
-                {
-                    wdm.WD_description = wdm.WD_profile + "\n" + NewNoneDuplicatePnlAndCount;
-                    for (int i = 0; i < lst_DuplicatePnl.Count; i++)
-                    {
-                        lst_DescDist = lst_DuplicatePnl[i];
-                        wdm.WD_description += lst_DescDist;
-                    }
-
-                }
-
-                List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
-
-                if (lst_glassThicknessDistinct.Count != 0)
-                {
-                    for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
-                    {
-                        glassThick += lst_glassThicknessDistinct[i];
-                    }
-                    lst_glassThicknessPerItem.Add(glassThick);
-                }
-                glassThick = string.Empty;
-                lst_glassThickness.Clear();
-            }
-
-
-        }
 
 
         public IQuoteItemListView GetQuoteItemListView()

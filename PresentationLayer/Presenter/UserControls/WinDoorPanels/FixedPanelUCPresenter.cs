@@ -251,7 +251,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
                 }
-              
+
 
             }
             catch (Exception ex)
@@ -1278,6 +1278,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             #endregion
             _mainPresenter.DeselectDivider();
+            _mainPresenter.itemDescription();
         }
 
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,

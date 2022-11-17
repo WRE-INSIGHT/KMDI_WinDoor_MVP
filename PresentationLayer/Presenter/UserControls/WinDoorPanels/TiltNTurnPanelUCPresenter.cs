@@ -14,9 +14,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -212,8 +209,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         _panelModel,
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
-                                                        //_multiPanelMullionImagerUCP,
-                                                        //_multiPanelTransomImagerUCP);
+                //_multiPanelMullionImagerUCP,
+                //_multiPanelTransomImagerUCP);
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
@@ -235,6 +232,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
             _mainPresenter.DeselectDivider();
+            _mainPresenter.itemDescription();
         }
 
         private void _tiltNTurnPanelUC_tiltNturnPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
