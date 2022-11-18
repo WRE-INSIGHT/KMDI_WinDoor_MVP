@@ -25,6 +25,8 @@ namespace ServiceLayer.Services.WindoorServices
                                       float WD_zoom = 1.0f,
                                       int WD_price = 0,
                                       decimal WD_discount = 0.0M,
+                                      string WD_itemName = "",
+                                      string WD_windoorNumber = "",
                                       List<IFrameModel> lst_frame = null,
                                       List<IConcreteModel> lst_concrete = null,
                                       List<Control> lst_Objects = null,

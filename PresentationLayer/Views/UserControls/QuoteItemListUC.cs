@@ -104,6 +104,8 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler NudItemDiscountValueChangedEventRaised;
         public event EventHandler NudItemPriceValueChangedEventRaised;
         public event EventHandler ComputeNetPriceTextChangeEventRaised;
+        public event EventHandler tboxItemNameTextChangedEventRaised;
+        public event EventHandler tboxWindoorNumberTextChangedEventRaised;
         public event KeyEventHandler NudItemPriceKeyDownEventRaised;
         public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
         public event KeyEventHandler NudItemQuantityKeyDownEventRaised;
@@ -192,10 +194,21 @@ namespace PresentationLayer.Views.UserControls
             EventHelpers.RaiseKeyEvent(sender, NudItemDiscountKeyDownEventRaised, e);
         }
 
+        private void tboxWindoorNumber_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tboxWindoorNumberTextChangedEventRaised, e);
+        }
+
+        private void tboxItemName_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, tboxItemNameTextChangedEventRaised, e);
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
-            tboxItemName.DataBindings.Add(ModelBinding[""]);
-            tboxWindoorNumber.DataBindings.Add(ModelBinding[""]);
+            tboxItemName.DataBindings.Add(ModelBinding["WD_itemName"]);
+            tboxWindoorNumber.DataBindings.Add(ModelBinding["WD_WindoorNumber"]);
         }
+
+      
     }
 }

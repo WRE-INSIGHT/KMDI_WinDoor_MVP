@@ -71,6 +71,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         decimal WD_CostingPoints { get; set; }
         int WD_pboxImagerHeight { get; set; }
 
+        string WD_WindoorNumber { get; set; }
+        string WD_itemName { get; set; }
+
         void SetfrmDimentionZoom();
     }
 }

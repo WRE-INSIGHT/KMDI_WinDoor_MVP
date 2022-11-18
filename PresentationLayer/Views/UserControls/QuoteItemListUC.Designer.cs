@@ -85,6 +85,7 @@
             this.tboxWindoorNumber.Name = "tboxWindoorNumber";
             this.tboxWindoorNumber.Size = new System.Drawing.Size(201, 25);
             this.tboxWindoorNumber.TabIndex = 18;
+            this.tboxWindoorNumber.TextChanged += new System.EventHandler(this.tboxWindoorNumber_TextChanged);
             // 
             // lblQuantity
             // 
@@ -178,6 +179,7 @@
             this.tboxItemName.Name = "tboxItemName";
             this.tboxItemName.Size = new System.Drawing.Size(142, 25);
             this.tboxItemName.TabIndex = 21;
+            this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
             // txt_ItemNumber
             // 
