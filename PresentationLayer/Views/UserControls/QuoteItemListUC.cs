@@ -1,6 +1,7 @@
 ﻿using CommonComponents;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -189,6 +190,12 @@ namespace PresentationLayer.Views.UserControls
         private void NudItemDiscount_KeyDown(object sender, KeyEventArgs e)
         {
             EventHelpers.RaiseKeyEvent(sender, NudItemDiscountKeyDownEventRaised, e);
+        }
+
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            tboxItemName.DataBindings.Add(ModelBinding[""]);
+            tboxWindoorNumber.DataBindings.Add(ModelBinding[""]);
         }
     }
 }
