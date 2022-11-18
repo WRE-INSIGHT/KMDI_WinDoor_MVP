@@ -246,5 +246,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             }
             // Draw the text    
         }
+
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine(this.Parent.Name);
+        }
     }
 }

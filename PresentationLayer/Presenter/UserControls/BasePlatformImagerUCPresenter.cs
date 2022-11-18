@@ -940,7 +940,7 @@ namespace PresentationLayer.Presenter.UserControls
             redP.Width = 3.5f;
 
             Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-            Font dmnsion_font_ht = new Font("Segoe UI", 17, FontStyle.Bold);
+            Font dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
 
             int total_frame = _windoorModel.lst_frame.Count();
             int total_panel = 0, total_mpanel = 0;
@@ -1254,7 +1254,8 @@ namespace PresentationLayer.Presenter.UserControls
 
             int font_size = 30,
                 outer_line = 10,
-                inner_line = 15;
+                inner_line = 15,
+                tenPercentAdditional = 0;
             int sashOverlapValue = 0;
             if (panelModel.PanelImageRenderer_Zoom == 0.28f)
             {
@@ -1277,6 +1278,7 @@ namespace PresentationLayer.Presenter.UserControls
                 font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
+                tenPercentAdditional = 8;
             }
 
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
@@ -1285,8 +1287,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                    client_ht - w);
 
             g.DrawRectangle(new Pen(Color.Black, w), outer_bounds);
-            g.FillRectangle(Brushes.DarkGray, outer_bounds);
-
+            //g.FillRectangle(Brushes.DarkGray, outer_bounds);
+            g.FillRectangle(Brushes.White, outer_bounds);
             if (panelModel.Panel_Type != "Louver Panel")
             {
                 //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
@@ -1295,14 +1297,14 @@ namespace PresentationLayer.Presenter.UserControls
                 //                                                   (client_ht - (outer_line * 2)) - w));
                 if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
-
+                    tenPercentAdditional += 1;
                     //outer Line
                     PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction - tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction - tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine5, outerLine6);
@@ -1311,11 +1313,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         //inner Line 
                         PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction - tenPercentAdditional, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine6 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine6 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction - tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
@@ -1326,11 +1328,11 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
                     //outer Line
-                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line);
+                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
@@ -1338,11 +1340,11 @@ namespace PresentationLayer.Presenter.UserControls
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
-                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line);
+                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
                         PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine6 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
@@ -1354,9 +1356,9 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
                     //outer Line
-                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line);
+                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line);
-                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
@@ -1364,9 +1366,9 @@ namespace PresentationLayer.Presenter.UserControls
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line
-                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line);
+                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
                         PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line);
-                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
@@ -1410,7 +1412,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
-                Pen dgrayPen = new Pen(Color.DimGray);
+                //Pen dgrayPen = new Pen(Color.DimGray);
+                Pen dgrayPen = new Pen(Color.FromArgb(219, 80, 80));
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
@@ -1438,7 +1441,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
-                Pen dgrayPen = new Pen(Color.DimGray);
+                //Pen dgrayPen = new Pen(Color.DimGray);
+                Pen dgrayPen = new Pen(Color.FromArgb(219, 80, 80));
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
@@ -1677,7 +1681,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                 Point sashPoint = new Point(Ppoint.X, Ppoint.Y);
 
-                Pen dgrayPen = new Pen(Color.DimGray);
+                //Pen dgrayPen = new Pen(Color.DimGray);
+                Pen dgrayPen = new Pen(Color.FromArgb(219, 80, 80));
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
@@ -1783,11 +1788,12 @@ namespace PresentationLayer.Presenter.UserControls
                 client_ht = mpanelModel.MPanelImageRenderer_Height;
 
             Rectangle mpnl_bounds = new Rectangle(Mpoint, new Size(client_wd, client_ht));
-            SolidBrush mpnl_sBrush = new SolidBrush(Color.MistyRose);
-
+            //SolidBrush mpnl_sBrush = new SolidBrush(Color.MistyRose);
+            SolidBrush mpnl_sBrush = new SolidBrush(Color.White);
             if (mpanelModel.MPanel_Type == "Mullion")
             {
-                mpnl_sBrush = new SolidBrush(Color.MistyRose);
+                mpnl_sBrush = new SolidBrush(Color.White);
+                //mpnl_sBrush = new SolidBrush(Color.MistyRose);
             }
             else if (mpanelModel.MPanel_Type == "Transom")
             {
@@ -1924,15 +1930,17 @@ namespace PresentationLayer.Presenter.UserControls
                                                client_wd - w,
                                                client_ht - w);
 
-            SolidBrush div_sBrush = new SolidBrush(Color.RosyBrown);
-
+            //SolidBrush div_sBrush = new SolidBrush(Color.RosyBrown);
+            SolidBrush div_sBrush = new SolidBrush(Color.White);
             if (divModel.Div_Type == DividerModel.DividerType.Mullion)
             {
-                div_sBrush = new SolidBrush(Color.RosyBrown);
+                //div_sBrush = new SolidBrush(Color.RosyBrown);
+                div_sBrush = new SolidBrush(Color.White);
             }
             else if (divModel.Div_Type == DividerModel.DividerType.Transom)
             {
-                div_sBrush = new SolidBrush(Color.PowderBlue);
+                //div_sBrush = new SolidBrush(Color.PowderBlue);
+                div_sBrush = new SolidBrush(Color.White);
             }
             g.FillRectangle(div_sBrush, div_rect);
             g.DrawRectangle(new Pen(Color.Black, w), div_rect);

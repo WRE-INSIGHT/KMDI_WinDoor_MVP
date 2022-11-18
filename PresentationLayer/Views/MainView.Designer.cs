@@ -103,7 +103,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlProperties = new System.Windows.Forms.Panel();
-            this.chkView = new System.Windows.Forms.CheckBox();
             this.pnlPropertiesBody = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -858,7 +857,6 @@
             // 
             this.pnlProperties.AutoScroll = true;
             this.pnlProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlProperties.Controls.Add(this.chkView);
             this.pnlProperties.Controls.Add(this.pnlPropertiesBody);
             this.pnlProperties.Controls.Add(this.label2);
             this.pnlProperties.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -867,23 +865,6 @@
             this.pnlProperties.Name = "pnlProperties";
             this.pnlProperties.Size = new System.Drawing.Size(149, 495);
             this.pnlProperties.TabIndex = 4;
-            // 
-            // chkView
-            // 
-            this.chkView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkView.AutoSize = true;
-            this.chkView.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.chkView.FlatAppearance.BorderSize = 0;
-            this.chkView.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
-            this.chkView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkView.Location = new System.Drawing.Point(104, 3);
-            this.chkView.Margin = new System.Windows.Forms.Padding(2);
-            this.chkView.Name = "chkView";
-            this.chkView.Size = new System.Drawing.Size(40, 23);
-            this.chkView.TabIndex = 2;
-            this.chkView.Text = "View";
-            this.chkView.UseVisualStyleBackColor = false;
             // 
             // pnlPropertiesBody
             // 
@@ -1050,7 +1031,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.pnlProperties.ResumeLayout(false);
-            this.pnlProperties.PerformLayout();
             this.pnlBot.ResumeLayout(false);
             this.pnlBot.PerformLayout();
             this.ResumeLayout(false);
@@ -1101,7 +1081,6 @@
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel pnlProperties;
-        private System.Windows.Forms.CheckBox chkView;
         private System.Windows.Forms.Panel pnlPropertiesBody;
         internal System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

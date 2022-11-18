@@ -169,10 +169,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_MouseClick(object sender, MouseEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("Width " + this.Width);
-            Console.WriteLine(this.Parent.Name);
-            Console.WriteLine();
+          
         }
 
         public FlowLayoutPanel Getflp()

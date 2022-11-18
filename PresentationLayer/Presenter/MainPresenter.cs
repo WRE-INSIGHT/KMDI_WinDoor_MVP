@@ -4815,7 +4815,7 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
                             pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
                             //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
-                            pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
+                            //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
                             pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
                             pnlModel.Panel_Orient = panel_Orient;
                             pnlModel.Panel_OrientVisibility = panel_OrientVisibility;

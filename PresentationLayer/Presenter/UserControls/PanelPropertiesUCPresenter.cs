@@ -422,7 +422,7 @@ namespace PresentationLayer.Presenter.UserControls
                     motorized.Dock = DockStyle.Top;
                     motorized.BringToFront();
 
-                    IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    IPP_HandlePropertyUCPresenter handlePropUCP = _pp_handlePropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl handle = (UserControl)handlePropUCP.GetPPHandlePropertyUC();
                     _pnlPanelSpecs.Controls.Add(handle);
                     handle.Dock = DockStyle.Top;

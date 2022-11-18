@@ -26,10 +26,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_PopUpHandlePropertyUCPresenter _pp_PopUpHandlePropertyUCPresenter;
         private IPP_RotoswingForSlidingPropertyUCPresenter _pp_RotoswingForSlidingPropertyUCPresenter;
 
-
         private IPP_EspagnolettePropertyUCPresenter _pp_espagnolettePropertyUCPresenter;
 
         private IPanelModel _panelModel;
+        private IMainPresenter _mainPresenter;
         private IUnityContainer _unityC;
 
         Panel _pnlHandleType;
@@ -1926,7 +1926,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
 
             Handle_Type handle = _panelModel.Panel_HandleType;
-
+          
             if (handle != Handle_Type._Rotary && handle != Handle_Type._None)
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
@@ -2346,7 +2346,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_handlePropertyUC;
         }
 
-        public IPP_HandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPP_HandlePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_HandlePropertyUC, PP_HandlePropertyUC>()
@@ -2354,6 +2354,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_HandlePropertyUCPresenter presenter = unityC.Resolve<PP_HandlePropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
+            presenter._mainPresenter = mainPresenter;
             return presenter;
         }
 

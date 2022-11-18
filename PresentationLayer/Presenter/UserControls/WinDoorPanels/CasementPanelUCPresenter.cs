@@ -761,7 +761,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
             }
-
+            //decimal moneyvalue = 1345345345345921.39m;
+            //string moneyValue = String.Format("{0:0,000.00}", moneyvalue);
+            //MessageBox.Show(moneyValue);
             try
             {
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -781,25 +783,73 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 if (wndr_objects.Name == fr.Frame_Name)
                                 {
-                                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel) //1ndlvlMpnlProperties
+                                    foreach (IMultiPanelModel secondLvlMpnl in fr.Lst_MultiPanel) //1ndlvlMpnlProperties
                                     {
-                                        foreach (IMultiPanelModel secondLvlMpnl in mpnl.MPanelLst_MultiPanel) // 2ndlvlMpnlProperties
+                                        foreach (IMultiPanelModel thirdLvlMpnl in secondLvlMpnl.MPanelLst_MultiPanel) // 2ndlvlMpnlProperties
                                         {
-                                            mpnlPropertyHeight += constants.mpnl_propertyHeight_default - 8;
-                                            if (secondLvlMpnl.MPanel_DividerEnabled)
+                                            mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                            foreach (IMultiPanelModel fourthLvlMpnl in thirdLvlMpnl.MPanelLst_MultiPanel) // 2ndlvlMpnlProperties
                                             {
-                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
+                                                mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                                if (fourthLvlMpnl.MPanel_DividerEnabled)
+                                                {
+                                                    foreach (IPanelModel pnl in fourthLvlMpnl.MPanelLst_Panel)
+                                                    {
+                                                        if (pnl.Panel_Name == casementUC.Name)
+                                                        {
+                                                            propertyHeight += constants.mpnl_propertyHeight_default - 8 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                            wdm.WD_PropertiesScroll = propertyHeight;
+                                                            isTrue = true;
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            foreach (IDividerModel dvd in fourthLvlMpnl.MPanelLst_Divider)
+                                                            {
+                                                                propertyHeight += dvd.Div_PropHeight;
+                                                                break;
+                                                            }
+                                                            propertyHeight += pnl.Panel_PropertyHeight;
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    foreach (IPanelModel pnl in fourthLvlMpnl.MPanelLst_Panel)
+                                                    {
+                                                        if (pnl.Panel_Name == casementUC.Name)
+                                                        {
+                                                            propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                            wdm.WD_PropertiesScroll = propertyHeight;
+                                                            isTrue = true;
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            propertyHeight += pnl.Panel_PropertyHeight;
+                                                        }
+                                                    }
+                                                }
+                                                if (isTrue == true)
+                                                {
+                                                    break;
+                                                }
+                                                propertyHeight -= 1;
+                                            }
+                                            if (thirdLvlMpnl.MPanel_DividerEnabled)
+                                            {
+                                                foreach (IPanelModel pnl in thirdLvlMpnl.MPanelLst_Panel)
                                                 {
                                                     if (pnl.Panel_Name == casementUC.Name)
                                                     {
-                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
+                                                        propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
                                                         wdm.WD_PropertiesScroll = propertyHeight;
                                                         isTrue = true;
                                                         break;
                                                     }
                                                     else
                                                     {
-                                                        foreach (IDividerModel dvd in secondLvlMpnl.MPanelLst_Divider)
+                                                        foreach (IDividerModel dvd in thirdLvlMpnl.MPanelLst_Divider)
                                                         {
                                                             propertyHeight += dvd.Div_PropHeight;
                                                             break;
@@ -810,12 +860,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             }
                                             else
                                             {
-                                                foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
+                                                foreach (IPanelModel pnl in thirdLvlMpnl.MPanelLst_Panel)
                                                 {
                                                     if (pnl.Panel_Name == casementUC.Name)
                                                     {
-                                                        propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
-                                                        wdm.WD_PropertiesScroll = propertyHeight;
+                                                        propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
                                                         wdm.WD_PropertiesScroll = propertyHeight;
                                                         isTrue = true;
                                                         break;
@@ -830,24 +879,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             {
                                                 break;
                                             }
-                                            mpnlPropertyHeight += 8;
+                                            propertyHeight -= 4;
                                         }
-                                        //pnl in 1stlvl mpnl
-                                        if (mpnl.MPanel_DividerEnabled)
+                                        if (secondLvlMpnl.MPanel_DividerEnabled)
                                         {
-                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                            foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
                                             {
                                                 if (pnl.Panel_Name == casementUC.Name)
                                                 {
 
-                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
                                                     wdm.WD_PropertiesScroll = propertyHeight;
                                                     isTrue = true;
                                                     break;
                                                 }
                                                 else
                                                 {
-                                                    foreach (IDividerModel dvd in mpnl.MPanelLst_Divider)
+                                                    foreach (IDividerModel dvd in secondLvlMpnl.MPanelLst_Divider)
                                                     {
                                                         propertyHeight += dvd.Div_PropHeight;
                                                         break;
@@ -858,11 +906,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else
                                         {
-                                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                            foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
                                             {
                                                 if (pnl.Panel_Name == casementUC.Name)
                                                 {
-                                                    propertyHeight += constants.mpnl_propertyHeight_default - 12 + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
+                                                    propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
                                                     wdm.WD_PropertiesScroll = propertyHeight;
                                                     isTrue = true;
                                                     break;
@@ -896,6 +944,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     propertyHeight = 0;
                                     mpnlPropertyHeight = 0;
                                     framePropertyHeight += fr.FrameProp_Height;
+                                    framePropertyHeight -= 8;
+                                    break;
                                 }
                             }
                         }
@@ -920,7 +970,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
 
             }
-            
         }
 
         int _timer_count;
