@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -275,12 +276,15 @@ namespace PresentationLayer.Presenter
 
                 _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
+                decimal moneyvalue = Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text);
+                string moneyValue = String.Format("{0:0,000.00}", moneyvalue);
+                moneyValue = moneyValue.Replace("$", string.Empty);
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
                                       lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
                                       byteToStrForItemImage,
                                       lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value,
+                                      lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
                                       lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                       Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                       i + 1,

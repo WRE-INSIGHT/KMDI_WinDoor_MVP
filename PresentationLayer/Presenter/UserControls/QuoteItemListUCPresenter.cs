@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Unity;
 
@@ -61,7 +62,9 @@ namespace PresentationLayer.Presenter.UserControls
             decimal ItemPercentageDeduction = (decimal)(((double)100 - (double)_nudItemDiscount.Value) * (double)0.01);
             TotalNetPrice = Math.Round((_nudItemPrice.Value * _nudItemQty.Value) * ItemPercentageDeduction,2);
            
-            _lblNetPrice.Text = TotalNetPrice.ToString();
+            _lblNetPrice.Text = TotalNetPrice.ToString("N", new CultureInfo("en-US"));
+            _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
+
         }
 
         private void _quoteItemListUC_NudItemQuantityKeyDownEventRaised(object sender, KeyEventArgs e)
@@ -95,7 +98,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_NudItemPriceValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            _lblPrice.Text = _nudItemPrice.Value.ToString();
+            _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
         }
 
         private void _quoteItemListUC_NudItemDiscountValueChangedEventRaised(object sender, System.EventArgs e)

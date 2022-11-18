@@ -198,7 +198,7 @@
                 <Style />
               </TextRun>
               <TextRun>
-                <Value>=Sum(Fields!dtNetPrice.Value, "DataSet1")</Value>
+                <Value>=Format(Sum(Fields!dtNetPrice.Value, "DataSet1"),"N")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -256,9 +256,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Item</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -308,7 +306,6 @@
                               <Value>Specification</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -358,7 +355,6 @@
                               <Value>Illustration</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -406,9 +402,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Unit Price</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -455,9 +449,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Qty</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -497,45 +489,41 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox26">
+                    <Textbox Name="dtDiscount">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
+                              <Value>@ </Value>
                               <Style>
-                                <FontWeight>Bold</FontWeight>
+                                <FontFamily>Arial Narrow</FontFamily>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!dtDiscount.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Narrow</FontFamily>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>% Discount </Value>
+                              <Style>
+                                <FontFamily>Arial Narrow</FontFamily>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox26</rd:DefaultName>
-                      <RepeatWith>Tablix1</RepeatWith>
+                      <rd:DefaultName>dtDiscount</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
-                        <TopBorder>
-                          <Style>Solid</Style>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Style>Solid</Style>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Color>White</Color>
-                          <Style>Solid</Style>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>White</Color>
-                          <Style>Solid</Style>
-                        </RightBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -789,7 +777,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtPrice.Value</Value>
+                              <Value>=Format(Sum(Fields!dtPrice.Value),"N")</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                                 <Format>0.00;(0.00)</Format>
@@ -869,64 +857,6 @@
                   <CellContents>
                     <Rectangle Name="Rectangle6">
                       <ReportItems>
-                        <Textbox Name="dtDiscount">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Less  </Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>=Fields!dtDiscount.Value</Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>% </Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>dtDiscount</rd:DefaultName>
-                          <Top>0.33613in</Top>
-                          <Left>0.35613in</Left>
-                          <Height>0.25in</Height>
-                          <Width>1.02387in</Width>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <Line Name="Line2">
-                          <Top>0.57644in</Top>
-                          <Left>1.38977in</Left>
-                          <Height>0in</Height>
-                          <Width>-1.22329in</Width>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                          </Style>
-                        </Line>
                         <Textbox Name="dtDiscount2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -934,7 +864,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtNetPrice.Value</Value>
+                                  <Value>=Format(Sum(Fields!dtNetPrice.Value),"N")</Value>
                                   <Style>
                                     <FontFamily>Arial Narrow</FontFamily>
                                   </Style>
@@ -952,97 +882,10 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>dtDiscount</rd:DefaultName>
-                          <Top>0.57644in</Top>
-                          <Left>0.51173in</Left>
+                          <Top>0.0452in</Top>
+                          <Left>0.58262in</Left>
                           <Height>0.25in</Height>
                           <Width>0.86827in</Width>
-                          <ZIndex>2</ZIndex>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <Textbox Name="Textbox41">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!dtQuantity.Value*Fields!dtPrice.Value</Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve">  </Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox41</rd:DefaultName>
-                          <Top>0.08687in</Top>
-                          <Left>0.75899in</Left>
-                          <Height>0.20759in</Height>
-                          <Width>0.62101in</Width>
-                          <ZIndex>3</ZIndex>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <Textbox Name="Textbox33">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>_</Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox33</rd:DefaultName>
-                          <Top>0.30007in</Top>
-                          <Left>0.19905in</Left>
-                          <Height>0.25in</Height>
-                          <Width>1in</Width>
-                          <ZIndex>4</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1202,7 +1045,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Tel. No.: +632 912 4333  •  +632 913 2545  •  Fax No.: +632 912 1892
+                      <Value>Tel. No.: +632 912 4333  •  +632 913 2545 
 </Value>
                       <Style>
                         <FontSize>8pt</FontSize>
@@ -1253,7 +1096,7 @@
                     <TextRun>
                       <Value>1G Design Center of Cebu, 356A A.S Fortuna corner P.Remedio Streets
 Banilad, Mandaue City, Cebu, Phils, 6014
-Tel. No.: +6332 346 1112 • Fax No.: +6332 346 1113</Value>
+Tel. No.: +6332 346 1112</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>
