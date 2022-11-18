@@ -49,7 +49,29 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignAEView.DeleteToolStripButtonClickEventRaised += _assignAEView_DeleteToolStripButtonClickEventRaised;
             _assignAEView.btnSaveClickEventRaised += _assignAEView_btnSaveClickEventRaised;
             _assignAEView.AddProjectToolStripButtonClickEventRaised += _assignAEView_AddProjectToolStripButtonClickEventRaised;
+            _assignAEView.DeleteAEICToolStripButtonClickEventRaised += _assignAEView_DeleteAEICToolStripButtonClickEventRaised;
         }
+
+        private async void _assignAEView_DeleteAEICToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (DataGridViewRow rowView in _dgvClient.Rows)
+                {
+                    await _projQuoteServices.DeleteAEIC(rowView.Cells["Project_Id"].Value.ToString(), rowView.Cells["AEIC ID"].Value.ToString());
+                }
+                await Load_DGVClient("");
+                MessageBox.Show("Delete Succesfully!");
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+        }
+
+      
+
         private void _assignAEView_AddProjectToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -73,6 +95,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                     await SaveAEIC(rowView.Cells["EmployeeId"].Value.ToString(), rowView.Cells["ProjectId"].Value.ToString());
                 }
                 _dgvProject.Rows.Clear();
+                await Load_DGVClient("");
                 MessageBox.Show("Save Succesfully!");
             }
             catch (Exception ex)
@@ -257,6 +280,7 @@ namespace PresentationLayer.Presenter.Costing_Head
 
             _dgvClient.Columns["Project_Id"].Visible = false;
             _dgvClient.Columns["File_Label"].Visible = false;
+            _dgvClient.Columns["AEIC ID"].Visible = false;
             _dgvClient.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
             _dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //foreach (DataGridViewRow row in _dgvClient.Rows)

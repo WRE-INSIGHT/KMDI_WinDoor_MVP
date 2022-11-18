@@ -98,6 +98,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "Create";
                         sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = pqModel.PQ_ProjId;
                         sqlcmd.Parameters.Add("@Quote_Id", SqlDbType.Int).Value = pqModel.PQ_QuoteId;
+                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = pqModel.PQ_Id;
                         sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = pqModel.PQ_CustRefId;
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = pqModel.PQ_EmployeeId;
                         sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
@@ -134,6 +135,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Quote_Id", SqlDbType.Int).Value = pqModel.PQ_QuoteId;
                         sqlcmd.Parameters.Add("@Cust_ref_id", SqlDbType.Int).Value = pqModel.PQ_CustRefId;
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = pqModel.PQ_EmployeeId;
+                        sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();
@@ -471,6 +473,36 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.ExecuteReader();
                     }
                 }
+            }
+        }
+
+        public async Task DeleteAEIC(string project_Id, string employee_Id)
+        {
+            try
+            {
+                using (SqlConnection Sqlcon = new SqlConnection(_sqlConString))
+                {
+                    await Sqlcon.OpenAsync();
+                    using (SqlCommand sqlcmd = Sqlcon.CreateCommand())
+                    {
+                        using (SqlTransaction sqltrans = await Task.Run(() => Sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                        {
+                            sqlcmd.Connection = Sqlcon;
+                            sqlcmd.Transaction = sqltrans;
+                            sqlcmd.CommandText = "Project_Quote_Stp";
+                            sqlcmd.CommandType = CommandType.StoredProcedure;
+                            sqlcmd.Parameters.AddWithValue("@Command", "DeleteAssignAEIC");
+                            sqlcmd.Parameters.AddWithValue("@Project_Id", project_Id);
+                            sqlcmd.Parameters.AddWithValue("@Emp_id", employee_Id);
+                            sqltrans.Commit();
+                            sqlcmd.ExecuteReader();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

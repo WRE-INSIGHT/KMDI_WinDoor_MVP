@@ -80,6 +80,7 @@ namespace ModelLayer.Model.Quotation.Frame
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();
+        void SetfrmDimensionZoom();
         #endregion
     }
 }

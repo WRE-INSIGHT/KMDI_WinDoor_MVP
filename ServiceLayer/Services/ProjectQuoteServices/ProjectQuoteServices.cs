@@ -138,5 +138,10 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         {
             _modelCheck.ValidateModelDataAnnotations(projectModel);
         }
+
+        public async Task DeleteAEIC(string Project_Id, string Employee_Id)
+        {
+            await _projQuoteRepo.DeleteAEIC(Project_Id, Employee_Id);
+        }
     }
 }

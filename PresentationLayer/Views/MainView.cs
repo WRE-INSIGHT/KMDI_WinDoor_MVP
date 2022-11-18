@@ -416,7 +416,7 @@ namespace PresentationLayer.Views
 
         private void pnlPropertiesBody_Scroll(object sender, ScrollEventArgs e)
         {
-            //Console.WriteLine("Scroll_val: " + pnlPropertiesBody.VerticalScroll.Value);
+            PropertiesScroll = pnlPropertiesBody.VerticalScroll.Value;
         }
 
         public void FocusOnMainForm()

@@ -716,7 +716,37 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
             }
         }
-
+        public void SetfrmDimentionZoom()
+        {
+            foreach (Control wndr_objects in lst_objects)
+            {
+                if (wndr_objects.Name.Contains("Frame"))
+                {
+                    foreach (IFrameModel fr in lst_frame)
+                    {
+                        if (wndr_objects.Name == fr.Frame_Name)
+                        {
+                            fr.Frame_Zoom = WD_zoom;
+                            fr.Set_DimensionsToBind_using_FrameZoom();
+                            fr.Set_FramePadding();
+                            fr.SetfrmDimensionZoom();
+                        }
+                    }
+                }
+                else if (wndr_objects.Name.Contains("Concrete"))
+                {
+                    foreach (IConcreteModel cr in lst_concrete)
+                    {
+                        if (wndr_objects.Name == cr.Concrete_Name)
+                        {
+                            cr.Concrete_Zoom = WD_zoom;
+                            cr.Set_DimensionsToBind_using_ConcreteZoom();
+                            cr.Set_ImagerDimensions_using_ImagerZoom();
+                        }
+                    }
+                }
+            }
+        }
         public void SetZoom()
         {
             foreach (Control wndr_objects in lst_objects)

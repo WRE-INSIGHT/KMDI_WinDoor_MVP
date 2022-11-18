@@ -124,7 +124,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                     else if (_dgvProjSelectedRows.Count == 1)
                     {
                         DataGridViewRow row_0 = _dgvProjSelectedRows[0];
-                        if (row_0.Cells["Emp_Id"].Value.ToString() != "")
+                        if (row_0.Cells["Emp_Id"].Value.ToString() != "0")
                         {
                             //update ProjectQuote
                             if (_chkListCustRefNo.CheckedItems.Count == 1)
@@ -155,7 +155,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                             //insert project quote
                             foreach (DataGridViewRow row in _dgvProjSelectedRows)
                             {
-                                await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+                                //await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
 
                                 foreach (DataRowView chkListVal in _chkListCustRefNo.CheckedItems)
                                 {

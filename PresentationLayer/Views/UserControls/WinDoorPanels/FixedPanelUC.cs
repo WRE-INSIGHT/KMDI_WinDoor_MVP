@@ -131,16 +131,24 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void FixedPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+            try
+            {
+                if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+                {
+
+                    if (this.Parent.Name.Contains("Frame"))
+                        overlapSashToolStripMenuItem.Visible = false;
+                    else
+                        overlapSashToolStripMenuItem.Visible = true;
+                    cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
+                }
+                EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseClickEventRaised, e);
+            }
+            catch (Exception)
             {
 
-                if (this.Parent.Name.Contains("Frame"))
-                    overlapSashToolStripMenuItem.Visible = false;
-                else
-                    overlapSashToolStripMenuItem.Visible = true;
-                cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
             }
-            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseClickEventRaised, e);
+           
 
 
         }

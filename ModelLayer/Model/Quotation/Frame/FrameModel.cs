@@ -382,6 +382,90 @@ namespace ModelLayer.Model.Quotation.Frame
 
         #region Method
 
+
+        public void SetfrmDimensionZoom()
+        {
+            foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
+            {
+                mpnl.MPanel_Zoom = Frame_Zoom;
+                if(Lst_MultiPanel[0] == mpnl)
+                {
+                    mpnl.Set_DimensionToBind_using_FrameDimensions();
+                    mpnl.Imager_Set_DimensionToBind_using_FrameDimensions();
+                }else
+                {
+                    mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+
+                }
+      
+                mpnl.SetZoomPanels();
+                mpnl.SetZoomDivider();
+                mpnl.SetZoomMPanels();
+                mpnl.Reload_PanelMargin();
+               
+    
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                {
+                    pnl.Panel_Zoom = Frame_Zoom;
+                    pnl.PanelImageRenderer_Zoom = FrameImageRenderer_Zoom;
+                    if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
+                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
+                    {
+                        pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                        pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                    }
+                    else
+                    {
+                        pnl.SetDimensionToBind_using_BaseDimension();
+                        pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                    }
+                }
+                foreach (IDividerModel div in mpnl.MPanelLst_Divider)
+                {
+                    div.Div_Zoom = Frame_Zoom;
+                    div.DivImageRenderer_Zoom = FrameImageRenderer_Zoom;
+                    div.SetDimensionsToBind_using_DivZoom();
+                    div.SetDimensionsToBind_using_DivZoom_Imager();
+                }
+                mpnl.Fit_MyControls_ToBindDimensions();
+                mpnl.Fit_MyControls_ImagersToBindDimensions();
+
+            }
+
+            foreach (IPanelModel pnl in Lst_Panel)
+            {
+                pnl.Panel_Zoom = Frame_Zoom;
+                if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
+                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
+                {
+                    pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                }
+                else
+                {
+                    pnl.SetDimensionToBind_using_BaseDimension();
+                }
+                pnl.Imager_SetDimensionsToBind_FrameParent();
+
+               
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void SetZoom()
         {
             foreach (IMultiPanelModel mpnl in Lst_MultiPanel)

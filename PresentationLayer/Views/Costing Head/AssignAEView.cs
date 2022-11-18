@@ -60,6 +60,7 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler DeleteToolStripButtonClickEventRaised;
         public event EventHandler btnSaveClickEventRaised;
         public event EventHandler AddProjectToolStripButtonClickEventRaised;
+        public event EventHandler DeleteAEICToolStripButtonClickEventRaised;
 
         public void ShowThis()
         {
@@ -120,6 +121,16 @@ namespace PresentationLayer.Views.Costing_Head
         private void assignAEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, AddProjectToolStripButtonClickEventRaised, e);
+        }
+
+        private void cmenu_dgvClient_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DeleteAEICToolStripButtonClickEventRaised, e);
         }
     }
 }
