@@ -194,15 +194,25 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Total: </Value>
+                <Value>Total:</Value>
+                <Style>
+                  <FontFamily>Arial Narrow</FontFamily>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
                 <Style />
               </TextRun>
               <TextRun>
                 <Value>=Format(Sum(Fields!dtNetPrice.Value, "DataSet1"),"N")</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Arial Narrow</FontFamily>
+                </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <Top>2.45349in</Top>
@@ -851,7 +861,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!dtQuantity.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Arial Narrow</FontFamily>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -881,50 +893,25 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Rectangle Name="Rectangle6">
-                      <ReportItems>
-                        <Textbox Name="dtDiscount2">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Format(Sum(Fields!dtNetPrice.Value),"N")</Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontFamily>Arial Narrow</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>dtDiscount</rd:DefaultName>
-                          <Top>0.0452in</Top>
-                          <Left>0.58262in</Left>
-                          <Height>0.25in</Height>
-                          <Width>0.86827in</Width>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </ReportItems>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
-                      <ZIndex>7</ZIndex>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Format(Sum(Fields!dtNetPrice.Value),"N")</Value>
+                              <Style>
+                                <FontFamily>Arial Narrow</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -939,8 +926,13 @@
                         <RightBorder>
                           <Color>White</Color>
                         </RightBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                       </Style>
-                    </Rectangle>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
