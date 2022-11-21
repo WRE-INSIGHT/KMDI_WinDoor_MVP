@@ -90,6 +90,9 @@ namespace PresentationLayer.Views.UserControls
             {
                 EventHelpers.RaiseMouseEvent(sender, frameMouseClickEventRaised, e);
             }
+            //MessageBox.Show(this.Size + "");
+            //MessageBox.Show(this.Location + "");
+            //MessageBox.Show(this.Parent.Size + "");
         }
 
         public ContextMenuStrip GetFrameCmenu()
