@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
-    public interface IQuoteItemListUC
+    public interface IQuoteItemListUC : IViewCommon
     {
         event EventHandler QuoteItemListUCLoadEventRaised;
         event EventHandler lblQuantityDoubleClickEventRaised;
