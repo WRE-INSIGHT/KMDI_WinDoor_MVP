@@ -2337,6 +2337,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "{")
             {
+                inside_item = false;
                 inside_frame = true;
 
             }
@@ -2763,7 +2764,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_WindoorNumber:"))
                         {
                             _windoorModel.WD_WindoorNumber = extractedValue_str;
-                            inside_item = false;
+                          
                         }
                         #endregion
                     }
