@@ -1,6 +1,8 @@
-﻿using ModelLayer.Model.Quotation.WinDoor;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views.UserControls;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using Unity;
@@ -14,6 +16,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IUnityContainer _unityC;
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IWindoorModel _windoorModel;
+        private IQuotationModel _quotationModel;
 
         Label _lblQuantity;
         Label _lblDiscount;
@@ -54,14 +57,45 @@ namespace PresentationLayer.Presenter.UserControls
             _quoteItemListUC.NudItemPriceKeyDownEventRaised += _quoteItemListUC_NudItemPriceKeyDownEventRaised;
             _quoteItemListUC.NudItemQuantityKeyDownEventRaised += _quoteItemListUC_NudItemQuantityKeyDownEventRaised;
             _quoteItemListUC.ComputeNetPriceTextChangeEventRaised += _quoteItemListUC_ComputeNetPriceTextChangeEventRaised;
+            _quoteItemListUC.tboxItemNameTextChangedEventRaised += _quoteItemListUC_tboxItemNameTextChangedEventRaised;
+            _quoteItemListUC.tboxWindoorNumberTextChangedEventRaised += _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised;
+        }
 
+        private void _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised(object sender, EventArgs e)
+        {
+            //for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            //{
+
+            //}
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ",string.Empty);
+                if (wdm.WD_id == Convert.ToInt32(itemNum))
+                {
+                    wdm.WD_WindoorNumber = ((TextBox)sender).Text;
+                }
+            }
+        } 
+
+        private void _quoteItemListUC_tboxItemNameTextChangedEventRaised(object sender, EventArgs e)
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+                if (wdm.WD_id == Convert.ToInt32(itemNum))
+                {
+                    wdm.WD_itemName = ((TextBox)sender).Text;
+                }
+            }
         }
 
         private void _quoteItemListUC_ComputeNetPriceTextChangeEventRaised(object sender, System.EventArgs e)
         {
             decimal ItemPercentageDeduction = (decimal)(((double)100 - (double)_nudItemDiscount.Value) * (double)0.01);
-            TotalNetPrice = Math.Round((_nudItemPrice.Value * _nudItemQty.Value) * ItemPercentageDeduction,2);
-           
+            TotalNetPrice = Math.Round((_nudItemPrice.Value * _nudItemQty.Value) * ItemPercentageDeduction, 2);
+
             _lblNetPrice.Text = TotalNetPrice.ToString("N", new CultureInfo("en-US"));
             _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
 
@@ -129,10 +163,10 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_QuoteItemListUCLoadEventRaised(object sender, System.EventArgs e)
         {
-           // _nudItemQty.DecimalPlaces = 2;
+            // _nudItemQty.DecimalPlaces = 2;
             //_nudItemDiscount.DecimalPlaces = 2;
-            _nudItemPrice.DecimalPlaces = 2; 
-             
+            _nudItemPrice.DecimalPlaces = 2;
+
             _nudItemQty.Maximum = decimal.MaxValue;
             _nudItemDiscount.Maximum = decimal.MaxValue;
             _nudItemPrice.Maximum = decimal.MaxValue;
@@ -146,7 +180,8 @@ namespace PresentationLayer.Presenter.UserControls
 
 
         public IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                        IWindoorModel windoorModel)
+                                                        IWindoorModel windoorModel,
+                                                        IQuotationModel quotationModel)
         {
             unityC
                 .RegisterType<IQuoteItemListUCPresenter, QuoteItemListUCPresenter>()
@@ -154,9 +189,20 @@ namespace PresentationLayer.Presenter.UserControls
             QuoteItemListUCPresenter quoteItem = unityC.Resolve<QuoteItemListUCPresenter>();
             quoteItem._unityC = unityC;
             quoteItem._windoorModel = windoorModel;
+            quoteItem._quotationModel = quotationModel;
             //quoteItem._quoteItemListPresenter = quoteItemListPresenter;
 
             return quoteItem;
+        }
+
+        public Dictionary<string, Binding> CreateBindingDictionary()
+        {
+            Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+
+            binding.Add("WD_itemName", new Binding("Text", _windoorModel, "WD_itemName", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("WD_WindoorNumber", new Binding("Text", _windoorModel, "WD_WindoorNumber", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            return binding;
         }
     }
 }

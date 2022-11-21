@@ -1,5 +1,4 @@
 ﻿using ModelLayer.Model.Quotation.Concrete;
-using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -97,7 +96,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        
+
 
         private int _wdWidth2;
         public int WD_width_4basePlatform
@@ -128,7 +127,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        
+
         private int _wdHeight2;
         public int WD_height_4basePlatform
         {
@@ -293,7 +292,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-       
+
 
         private string _wdDimension;
         public string WD_Dimension
@@ -371,7 +370,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
 
-        public List<IFrameModel> lst_frame {
+        public List<IFrameModel> lst_frame
+        {
             get;
             set;
         }
@@ -588,6 +588,35 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+
+        private string _wd_itemName;
+        public string WD_itemName
+        {
+            get
+            {
+                return _wd_itemName;
+            }
+            set
+            {
+                _wd_itemName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _wd_WindoorNumber;
+        public string WD_WindoorNumber
+        {
+            get
+            {
+                return _wd_WindoorNumber;
+            }
+            set
+            {
+                _wd_WindoorNumber = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #region Methods
 
         public void SetDimensions_basePlatform()
@@ -854,6 +883,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             int wd_price,
                             int wd_quantity,
                             decimal wd_discount,
+                            string wd_itemName,
+                            string wd_windoorNumber,
                             bool wd_visibility,
                             bool wd_orientation,
                             //float wd_zoom,
@@ -875,6 +906,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_price = wd_price;
             WD_quantity = wd_quantity;
             WD_discount = wd_discount;
+            WD_WindoorNumber = wd_windoorNumber;
+            WD_itemName = wd_itemName;
             WD_visibility = wd_visibility;
             WD_orientation = wd_orientation;
             //WD_zoom = wd_zoom;
@@ -891,7 +924,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
             WD_PropertiesScroll = 0;
-         
+
         }
     }
 }

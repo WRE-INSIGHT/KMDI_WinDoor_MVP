@@ -137,7 +137,7 @@ namespace PresentationLayer.Presenter
                 _quotationModel.BOM_Status = false;
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel);
+                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel,_quotationModel);
                     UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
                     _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
                     quoteItem.Dock = DockStyle.Top;
@@ -164,8 +164,8 @@ namespace PresentationLayer.Presenter
                     }
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = string.Empty;
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = "WD-1A"; //location
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n"
                                                                               + wdm.WD_description
                                                                               + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
@@ -177,7 +177,6 @@ namespace PresentationLayer.Presenter
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-
                 }
             }
             catch (Exception ex)
@@ -190,6 +189,9 @@ namespace PresentationLayer.Presenter
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
+            //Console.WriteLine("item" + _windoorModel.WD_itemName);
+            //Console.WriteLine("windoor" +_windoorModel.WD_WindoorNumber);
+
             DSQuotation _dsq = new DSQuotation();
 
             /*
@@ -276,9 +278,6 @@ namespace PresentationLayer.Presenter
 
                 _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
-                decimal moneyvalue = Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text);
-                string moneyValue = String.Format("{0:0,000.00}", moneyvalue);
-                moneyValue = moneyValue.Replace("$", string.Empty);
                 _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                       lstQuoteUC.GetiQuoteItemListUC().itemDesc,
                                       lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
