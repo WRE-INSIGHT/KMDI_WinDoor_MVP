@@ -805,10 +805,10 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
-            _mainView.ButtonMinusZoomClickEventRaised += _mainView_ButtonMinusZoomClickEventRaised;
-            _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
-            _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
-            _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
+            _mainView.ButtonMinusZoomClickEventRaised += new EventHandler(OnButtonMinusZoomClickEventRaised);
+            _mainView.ButtonPlusZoomClickEventRaised += new EventHandler(OnButtonPlusZoomClickEventRaised);
+            _mainView.DeleteToolStripButtonClickEventRaised += new EventHandler(OnDeleteToolStripButtonClickEventRaised);
+            _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += new EventHandler(OnListOfMaterialsToolStripMenuItemClickEventRaised);
             _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
@@ -1012,7 +1012,9 @@ namespace PresentationLayer.Presenter
 
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
+            wndr_content.Add("ProjectAddress: " + _projectAddress);
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
+            wndr_content.Add("AEIC: " + _aeic);
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
                 wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
@@ -1629,7 +1631,7 @@ namespace PresentationLayer.Presenter
             createNewGlassPresenter.ShowCreateNewGlassView();
         }
 
-        private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             string incompatibility_str = Check_Incompatibility();
             int unbalancedGlass_cnt = Check_UnbalancedGlass();
@@ -1673,7 +1675,7 @@ namespace PresentationLayer.Presenter
         }
 
         bool toggle;
-        private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
 
             if (_quotationModel != null && _windoorModel != null)
@@ -1723,7 +1725,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
+        private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
@@ -1740,7 +1742,7 @@ namespace PresentationLayer.Presenter
             _basePlatformPresenter.Invalidate_flpMainControls();
         }
 
-        private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
+        private void OnButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
@@ -2429,8 +2431,6 @@ namespace PresentationLayer.Presenter
             {
                 case true:
                     #region Load for Quotation Model
-
-
                     if (row_str.Contains("QuoteId"))
                     {
                         _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -2439,9 +2439,18 @@ namespace PresentationLayer.Presenter
                     {
                         _projectName = extractedValue_str;
                     }
+                    if (row_str.Contains("ProjectAddress:"))
+                    {
+                        _projectAddress = extractedValue_str;
+                    }
                     else if (row_str.Contains("CustomerRefNo"))
                     {
                         _custRefNo = extractedValue_str;
+                        inputted_custRefNo = extractedValue_str;
+                    }
+                    else if (row_str.Contains("AEIC:"))
+                    {
+                        _aeic = extractedValue_str;
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
@@ -2746,6 +2755,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_pboxImagerHeight:"))
                         {
                             _windoorModel.WD_pboxImagerHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_itemName:"))
+                        {
+                            _windoorModel.WD_itemName = extractedValue_str;
+                        }
+                        if (row_str.Contains("WD_WindoorNumber:"))
+                        {
+                            _windoorModel.WD_WindoorNumber = extractedValue_str;
                             inside_item = false;
                         }
                         #endregion
