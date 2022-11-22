@@ -338,7 +338,7 @@ namespace PresentationLayer.Presenter.UserControls
                             }
                             else if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                             {
-                                #region  darwin old algo 
+                                #region old algo 
 
 
                                 //foreach (IMultiPanelModel mpnlModel in mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
@@ -1797,7 +1797,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (mpanelModel.MPanel_Type == "Transom")
             {
-                mpnl_sBrush = new SolidBrush(SystemColors.ActiveCaption);
+                mpnl_sBrush = new SolidBrush(Color.White);
             }
 
             g.FillRectangle(mpnl_sBrush, mpnl_bounds);

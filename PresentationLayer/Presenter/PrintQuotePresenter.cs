@@ -30,8 +30,29 @@ namespace PresentationLayer.Presenter
 
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
-            _printQuoteView.GetReportViewer().RefreshReport();
-            _printQuoteView_btnRefreshClickEventRaised(sender, e);
+            try
+            {
+                string baseColor = _mainPresenter.windoorModel_MainPresenter.WD_BaseColor.ToString().ToUpper();
+                baseColor = baseColor == "DARK BROWN" ? "WOODGRAIN" : baseColor;
+                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                              + "USING "
+                                              + baseColor
+                                              + " PROFILES\n"
+                                              + "USING "
+                                              + _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Lst_Panel[0].Panel_GlassThicknessDesc.ToString().ToUpper()
+                                              + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                              + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+                _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                    + _mainPresenter.titleLastname
+                                                    + ",";
+                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress;
+                _printQuoteView.GetReportViewer().RefreshReport();
+                _printQuoteView_btnRefreshClickEventRaised(sender, e);
+            }
+            catch (Exception)
+            {
+            }            
+          
         }
 
         private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)

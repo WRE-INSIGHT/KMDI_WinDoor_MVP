@@ -607,6 +607,20 @@ namespace PresentationLayer.Presenter
 
         public string printStatus { get; set; }
 
+        private string _titleLastname;
+        public string titleLastname
+        {
+            get
+            {
+                return _titleLastname;
+            }
+
+            set
+            {
+                _titleLastname = value;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -1012,6 +1026,8 @@ namespace PresentationLayer.Presenter
 
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
+            wndr_content.Add("ClientsName: " +inputted_projectName);
+            wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
             wndr_content.Add("ProjectAddress: " + _projectAddress);
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
             wndr_content.Add("AEIC: " + _aeic);
@@ -2440,7 +2456,15 @@ namespace PresentationLayer.Presenter
                     {
                         _projectName = extractedValue_str;
                     }
-                    if (row_str.Contains("ProjectAddress:"))
+                    else if (row_str.Contains("ClientsName:"))
+                    {
+                        inputted_projectName = extractedValue_str;
+                    }
+                    else if (row_str.Contains("ClientsTitleLastname:"))
+                    {
+                        _titleLastname = extractedValue_str;
+                    }
+                    else if(row_str.Contains("ProjectAddress:"))
                     {
                         _projectAddress = extractedValue_str;
                     }
@@ -8514,7 +8538,7 @@ namespace PresentationLayer.Presenter
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
-            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnValidation));
+            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
             return mainPresenterBinding;
         }
 

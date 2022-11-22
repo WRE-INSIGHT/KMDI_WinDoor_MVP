@@ -249,7 +249,7 @@ namespace PresentationLayer.Presenter
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-                   
+                    _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
                     //_dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
                     _CELandingView.SetText_LblNav(_projName);
 
@@ -292,6 +292,7 @@ namespace PresentationLayer.Presenter
             _dgvAssignedProj.Columns["Project_Id"].Visible = false;
             _dgvAssignedProj.Columns["File_Label"].Visible = false;
             _dgvAssignedProj.Columns["AEIC ID"].Visible = false;
+            _dgvAssignedProj.Columns["Title Lastname"].Visible = false;
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 

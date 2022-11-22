@@ -75,6 +75,7 @@ namespace PresentationLayer.Presenter.Costing_Head
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
             Dictionary<string, Binding> projectBinding = new Dictionary<string, Binding>();
+            projectBinding.Add("Title", new Binding("Text", _projectModel, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Firstname", new Binding("Text", _projectModel, "Firstname", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Lastname", new Binding("Text", _projectModel, "Lastname", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("CompanyName", new Binding("Text", _projectModel, "CompanyName", true, DataSourceUpdateMode.OnPropertyChanged));

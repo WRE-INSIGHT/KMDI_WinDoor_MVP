@@ -454,6 +454,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.AddWithValue("@Command", SqlDbType.VarChar).Value = "SaveProject";
+                        sqlcmd.Parameters.AddWithValue("@Title", SqlDbType.VarChar).Value = projectModel.Title;
                         sqlcmd.Parameters.AddWithValue("@Firstname", SqlDbType.VarChar).Value = projectModel.Firstname;
                         sqlcmd.Parameters.AddWithValue("@Lastname", SqlDbType.VarChar).Value = projectModel.Lastname;
                         sqlcmd.Parameters.AddWithValue("@CompanyName", SqlDbType.VarChar).Value = projectModel.CompanyName;
