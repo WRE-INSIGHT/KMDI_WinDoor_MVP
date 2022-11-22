@@ -293,6 +293,7 @@ namespace PresentationLayer.Presenter
             _dgvAssignedProj.Columns["File_Label"].Visible = false;
             _dgvAssignedProj.Columns["AEIC ID"].Visible = false;
             _dgvAssignedProj.Columns["Title Lastname"].Visible = false;
+            _dgvAssignedProj.Columns["Factor"].Visible = false;
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 
