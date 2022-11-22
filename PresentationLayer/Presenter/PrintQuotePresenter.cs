@@ -1,6 +1,12 @@
 ﻿using Microsoft.Reporting.WinForms;
+using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
@@ -32,25 +38,91 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                string baseColor = _mainPresenter.windoorModel_MainPresenter.WD_BaseColor.ToString().ToUpper();
-                baseColor = baseColor == "DARK BROWN" ? "WOODGRAIN" : baseColor;
+                List<string> Lst_BaseColor = new List<string>();
+                List<string> Lst_Panel = new List<string>();
+                foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
+                {
+                    Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
+                    foreach(IFrameModel frm in wdm.lst_frame)
+                    {
+                        foreach(IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                        {
+                            foreach (IPanelModel pnl in frm.Lst_Panel)
+                            {
+                                Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
+                            }
+                        }
+                        foreach(IPanelModel pnl in frm.Lst_Panel)
+                        {
+                            Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
+                        }
+                    }
+                    
+
+                }
+
+                int GlassCount = 0;
+                string GlassThickness = "";
+                var q = from x in Lst_Panel
+                        group x by x into g
+                        let count = g.Count()
+                        orderby count descending
+                        select new { Value = g.Key, Count = count };
+                foreach (var x in q)
+                {
+                    if(x.Count > GlassCount)
+                    {
+                        GlassCount = x.Count;
+                        GlassThickness = x.Value.ToString();
+                    }
+                }
+
+                var duplicateBaseColor = Lst_BaseColor.Distinct().ToList();
+                string baseColor = "";
+                for (int i = 0; i < duplicateBaseColor.Count(); i++)
+                {
+                    if(i == 0)
+                    {
+                        baseColor += duplicateBaseColor.ToList()[i];
+                    }
+                    else if (i == 1)
+                    {
+                        if (duplicateBaseColor.Count() == 3)
+                        {
+                            baseColor += ", " + duplicateBaseColor.ToList()[i];
+
+                        }
+                        else
+                        {
+                            baseColor += " & " + duplicateBaseColor.ToList()[i];
+
+                        }
+                    }
+                    else if (i == 2)
+                    {
+                        baseColor += " & " + duplicateBaseColor.ToList()[i];
+                    }
+                }
+                
+                baseColor.Replace("DARK BROWN", "WOODGRAIN");
                 _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
                                               + "USING "
-                                              + baseColor
+                                              + baseColor.ToUpper()
                                               + " PROFILES\n"
                                               + "USING "
-                                              + _mainPresenter.windoorModel_MainPresenter.lst_frame[0].Lst_Panel[0].Panel_GlassThicknessDesc.ToString().ToUpper()
+                                              + GlassThickness.ToUpper()
                                               + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
                                               + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
                 _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                     + _mainPresenter.titleLastname
                                                     + ",";
-                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress;
+                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }            
           
         }

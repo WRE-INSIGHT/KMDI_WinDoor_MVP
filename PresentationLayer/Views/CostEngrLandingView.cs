@@ -39,6 +39,19 @@ namespace PresentationLayer.Views
             }
         }
 
+        public string SearchProject
+        {
+            get
+            {
+                return txt_SearchProj.Text;
+            }
+
+            set
+            {
+                txt_SearchProj.Text = value;
+            }
+        }
+
         #endregion
 
         public event EventHandler CostEngrLandingViewLoadEventRaised;
@@ -48,6 +61,7 @@ namespace PresentationLayer.Views
         public event DataGridViewCellMouseEventHandler dgvCustRefNoCellMouseDoubleClickEventRaised;
         public event EventHandler btnAddNewQuoteClickEventRaised;
         public event DataGridViewCellMouseEventHandler dgvQuoteNoCellMouseDoubleClickEventRaised;
+        public event EventHandler btnSearchProjClickClickEventRaised;
 
         public void ShowThis()
         {
@@ -178,5 +192,17 @@ namespace PresentationLayer.Views
             this.Size = new Size(formWidth, formHeight);
         }
 
+        private void txt_SearchProj_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_SearchProj.PerformClick();
+            }
+        }
+
+        private void btn_SearchProj_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnSearchProjClickClickEventRaised, e);
+        }
     }
 }

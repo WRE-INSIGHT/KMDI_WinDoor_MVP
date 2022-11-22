@@ -56,6 +56,9 @@ namespace PresentationLayer.Views
         public event EventHandler PrintQuoteViewLoadEventRaised;
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
+            rtbox_Address.Text = "";
+            rtbox_Salutation.Text = "";
+            rtbox_Body.Text = "";
             EventHelpers.RaiseEvent(sender, PrintQuoteViewLoadEventRaised, e);
         }
 

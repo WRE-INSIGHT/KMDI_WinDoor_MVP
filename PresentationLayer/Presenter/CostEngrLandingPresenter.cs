@@ -60,6 +60,20 @@ namespace PresentationLayer.Presenter
             _CELandingView.dgvCustRefNoCellMouseDoubleClickEventRaised += _CELandingView_dgvCustRefNoCellMouseDoubleClickEventRaised;
             _CELandingView.btnAddNewQuoteClickEventRaised += _CELandingView_btnAddNewQuoteClickEventRaised;
             _CELandingView.dgvQuoteNoCellMouseDoubleClickEventRaised += _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised;
+            _CELandingView.btnSearchProjClickClickEventRaised += _CELandingView_btnSearchProjClickClickEventRaised;
+        }
+
+        private async void _CELandingView_btnSearchProjClickClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                await Load_DGV_AssignedProjects(_CELandingView.SearchProject);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private void _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
