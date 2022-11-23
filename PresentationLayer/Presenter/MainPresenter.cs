@@ -5105,8 +5105,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     pnlModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
                                 }
-                                //pnlModel.SetDimensionsToBind_using_ZoomPercentage();
-                                //pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                              
                                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
@@ -5431,25 +5430,31 @@ namespace PresentationLayer.Presenter
 
 
                             }
+                           
                             if (!panel_Parent.Parent.Name.Contains("frame"))
                             {
                                 if (pnlModel.Panel_Placement == "Last")
                                 {
-                                    _multiModelParent.Fit_EqualPanel_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                    if (div_DMPanelName != "")
+                                    if (_multiModelParent.MPanel_DividerEnabled)
                                     {
-                                        foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                        _multiModelParent.Fit_EqualPanel_ToBindDimensions();
+                                        _multiModelParent.Fit_MyControls_ToBindDimensions();
+                                        _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
+                                        if (div_DMPanelName != "")
                                         {
-                                            if (pnl.Panel_Name == div_DMPanelName)
+                                            foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
                                             {
-                                                _prev_divModel.Div_DMPanel = pnl;
+                                                if (pnl.Panel_Name == div_DMPanelName)
+                                                {
+                                                    _prev_divModel.Div_DMPanel = pnl;
+                                                }
                                             }
                                         }
                                     }
-                                    //Run_GetListOfMaterials_SpecificItem();
+                                   
                                 }
+                               
+
                             }
                             _basePlatformPresenter.InvalidateBasePlatform();
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
