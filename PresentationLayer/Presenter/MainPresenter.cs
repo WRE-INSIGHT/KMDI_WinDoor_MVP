@@ -525,7 +525,18 @@ namespace PresentationLayer.Presenter
                 _custRefNo = value;
             }
         }
-
+        private DateTime _dateAssigned;
+        public DateTime dateAssigned
+        {
+            get
+            {
+                return _dateAssigned;
+            }
+            set
+            {
+                _dateAssigned = value;
+            }
+        }
         public string wndrFileName
         {
             get
@@ -606,6 +617,20 @@ namespace PresentationLayer.Presenter
         }
 
         public string printStatus { get; set; }
+
+        private string _titleLastname;
+        public string titleLastname
+        {
+            get
+            {
+                return _titleLastname;
+            }
+
+            set
+            {
+                _titleLastname = value;
+            }
+        }
 
         #endregion
 
@@ -805,10 +830,10 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainSizeChangedEventRaised += new EventHandler(OnPanelMainSizeChangedEventRaised);
             _mainView.CreateNewItemClickEventRaised += new EventHandler(OnCreateNewItemClickEventRaised);
             _mainView.LabelSizeClickEventRaised += new EventHandler(OnLabelSizeClickEventRaised);
-            _mainView.ButtonMinusZoomClickEventRaised += _mainView_ButtonMinusZoomClickEventRaised;
-            _mainView.ButtonPlusZoomClickEventRaised += _mainView_ButtonPlusZoomClickEventRaised;
-            _mainView.DeleteToolStripButtonClickEventRaised += _mainView_DeleteToolStripButtonClickEventRaised;
-            _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised;
+            _mainView.ButtonMinusZoomClickEventRaised += new EventHandler(OnButtonMinusZoomClickEventRaised);
+            _mainView.ButtonPlusZoomClickEventRaised += new EventHandler(OnButtonPlusZoomClickEventRaised);
+            _mainView.DeleteToolStripButtonClickEventRaised += new EventHandler(OnDeleteToolStripButtonClickEventRaised);
+            _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += new EventHandler(OnListOfMaterialsToolStripMenuItemClickEventRaised);
             _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
             _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
             _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
@@ -832,10 +857,23 @@ namespace PresentationLayer.Presenter
             _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
             _mainView.billOfMaterialToolStripMenuItemClickEventRaised += _mainView_billOfMaterialToolStripMenuItemClickEventRaised;
             _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
+            _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
 
         }
 
+
+
         #region Events  
+        private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.WndrDir = fbd.SelectedPath;
+                Properties.Settings.Default.Save();
+                _mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+            }
+        }
         private void _mainView_billOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
            
@@ -1012,7 +1050,12 @@ namespace PresentationLayer.Presenter
 
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
+            wndr_content.Add("ClientsName: " +inputted_projectName);
+            wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
+            wndr_content.Add("ProjectAddress: " + _projectAddress);
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
+            wndr_content.Add("DateAssigned: " + _dateAssigned);
+            wndr_content.Add("AEIC: " + _aeic);
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
                 wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
@@ -1629,7 +1672,7 @@ namespace PresentationLayer.Presenter
             createNewGlassPresenter.ShowCreateNewGlassView();
         }
 
-        private void _mainView_ListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnListOfMaterialsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             string incompatibility_str = Check_Incompatibility();
             int unbalancedGlass_cnt = Check_UnbalancedGlass();
@@ -1673,11 +1716,13 @@ namespace PresentationLayer.Presenter
         }
 
         bool toggle;
-        private void _mainView_DeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
 
             if (_quotationModel != null && _windoorModel != null)
             {
+                _mainView.CreateNewWindoorBtnEnabled = false;
+
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -1720,10 +1765,11 @@ namespace PresentationLayer.Presenter
                         Clearing_Operation();
                     }
                 }
+                _mainView.CreateNewWindoorBtnEnabled = true;
             }
         }
 
-        private void _mainView_ButtonPlusZoomClickEventRaised(object sender, EventArgs e)
+        private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
@@ -1740,7 +1786,7 @@ namespace PresentationLayer.Presenter
             _basePlatformPresenter.Invalidate_flpMainControls();
         }
 
-        private void _mainView_ButtonMinusZoomClickEventRaised(object sender, EventArgs e)
+        private void OnButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
             int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
@@ -1909,13 +1955,16 @@ namespace PresentationLayer.Presenter
         }
         private void ToggleMode(bool visibility, bool enabled)
         {
-            _mainView.GetToolStripLabelLoading().Visible = visibility;
-            _mainView.GetTsProgressLoading().Visible = visibility;
+            //_mainView.GetToolStripLabelLoading().Visible = visibility;
+            //_mainView.GetTsProgressLoading().Visible = visibility;
 
             _mainView.GetMNSMainMenu().Enabled = enabled;
             _mainView.GetSCMain().Enabled = enabled;
             _mainView.GetPanelRight().Enabled = enabled;
             _mainView.GetTSMain().Enabled = enabled;
+
+            _mainView.GetToolStripLabelLoading().Visible = visibility;
+            _mainView.GetTsProgressLoading().Visible = visibility;
         }
         private void OnMainViewClosingEventRaised(object sender, EventArgs e)
         {
@@ -1935,6 +1984,10 @@ namespace PresentationLayer.Presenter
                                 MessageBoxIcon.Information);
                 Properties.Settings.Default.WndrDir = defDir;
                 Properties.Settings.Default.FirstTym = false;
+            }
+            else
+            {
+                _mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
             }
             _mainView.Nickname = _userModel.Nickname;
             _pnlControlSub.Controls.Add(
@@ -2072,6 +2125,12 @@ namespace PresentationLayer.Presenter
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Open_WndrFiles");
+                    SetMainViewTitle(input_qrefno,
+                                 _projectName,
+                                 _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
                 }
             }
             catch (Exception ex)
@@ -2245,11 +2304,7 @@ namespace PresentationLayer.Presenter
                     {
                         case "Open_WndrFiles":
 
-                            _mainView.GetToolStripLabelLoading().Text = "Finished";
-                            ToggleMode(false, true);
-                            _mainView.GetToolStripLabelLoading().Visible = true;
-                            //autoDescription = true;
-                            onload = false;
+                           
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -2263,6 +2318,17 @@ namespace PresentationLayer.Presenter
                                              _windoorModel.WD_name,
                                              _windoorModel.WD_profile,
                                              true);
+
+                            _mainView.GetToolStripLabelLoading().Text = "Finished";
+
+                            ToggleMode(false, true);
+                            _mainView.GetToolStripLabelLoading().Visible = true;
+                            //autoDescription = true;
+                            onload = false;
+
+
+
+
                             break;
 
                         case "GetCloudFiles":
@@ -2335,6 +2401,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "{")
             {
+                inside_item = false;
                 inside_frame = true;
 
             }
@@ -2404,18 +2471,6 @@ namespace PresentationLayer.Presenter
                     wdm.WD_name = "Item " + itemCount;
                     itemCount++;
                 }
-                //_basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-                //UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-                //_mainView.GetThis().Controls.Add(bpUC);
-                //foreach (IFrameModel frame in _windoorModel.lst_frame)
-                //{
-                //    _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                //    _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
-                //}
-
-                //_mainView.RemoveBinding(_mainView.GetLblSize());
-                //_mainView.RemoveBinding();
-                //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
             }
@@ -2429,8 +2484,6 @@ namespace PresentationLayer.Presenter
             {
                 case true:
                     #region Load for Quotation Model
-
-
                     if (row_str.Contains("QuoteId"))
                     {
                         _quoteId = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -2439,13 +2492,34 @@ namespace PresentationLayer.Presenter
                     {
                         _projectName = extractedValue_str;
                     }
+                    else if (row_str.Contains("ClientsName:"))
+                    {
+                        inputted_projectName = extractedValue_str;
+                    }
+                    else if (row_str.Contains("ClientsTitleLastname:"))
+                    {
+                        _titleLastname = extractedValue_str;
+                    }
+                    else if(row_str.Contains("ProjectAddress:"))
+                    {
+                        _projectAddress = extractedValue_str;
+                    }
                     else if (row_str.Contains("CustomerRefNo"))
                     {
                         _custRefNo = extractedValue_str;
+                        inputted_custRefNo = extractedValue_str;
+                    }
+                    else if (row_str.Contains("DateAssigned"))
+                    {
+                        _dateAssigned = Convert.ToDateTime(extractedValue_str);
+                    }
+                    else if (row_str.Contains("AEIC:"))
+                    {
+                        _aeic = extractedValue_str;
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str); ;
+                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : extractedValue_str);
                     }
                     else if (row_str.Contains("Quotation_ref_no"))
                     {
@@ -2746,7 +2820,15 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_pboxImagerHeight:"))
                         {
                             _windoorModel.WD_pboxImagerHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                            inside_item = false;
+                        }
+                        if (row_str.Contains("WD_itemName:"))
+                        {
+                            _windoorModel.WD_itemName = extractedValue_str;
+                        }
+                        if (row_str.Contains("WD_WindoorNumber:"))
+                        {
+                            _windoorModel.WD_WindoorNumber = extractedValue_str;
+                          
                         }
                         #endregion
                     }
@@ -3362,7 +3444,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Panel_GlassThickness:"))
                         {
-                            panel_GlassThickness = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            panel_GlassThickness = float.Parse(extractedValue_str);
                         }
                         else if (row_str.Contains("PanelGlazingBead_ArtNo:"))
                         {
@@ -5063,8 +5145,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     pnlModel.Panel_CornerDriveOptionsVisibility = _prev_divModel.Div_ChkDM;
                                 }
-                                //pnlModel.SetDimensionsToBind_using_ZoomPercentage();
-                                //pnlModel.Imager_SetDimensionsToBind_using_ZoomPercentage();
+                              
                                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
 
@@ -5132,7 +5213,6 @@ namespace PresentationLayer.Presenter
                                         fixedUCP.SetInitialLoadFalse();
                                         _multiModelParent.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
 
-                                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
 
                                         //_multiMullionUCP.GetflpMullion().Controls.Add((UserControl)fixedUC);
                                         //_multiModelParent.MPanelLst_Objects.Add((UserControl)fixedUC);
@@ -5389,28 +5469,32 @@ namespace PresentationLayer.Presenter
 
 
                             }
+                           
                             if (!panel_Parent.Parent.Name.Contains("frame"))
                             {
                                 if (pnlModel.Panel_Placement == "Last")
                                 {
-                                    _multiModelParent.Fit_EqualPanel_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                    if (div_DMPanelName != "")
+                                    if (_multiModelParent.MPanel_DividerEnabled)
                                     {
-                                        foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                        _multiModelParent.Fit_EqualPanel_ToBindDimensions();
+                                        _multiModelParent.Fit_MyControls_ToBindDimensions();
+                                        _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
+                                        if (div_DMPanelName != "")
                                         {
-                                            if (pnl.Panel_Name == div_DMPanelName)
+                                            foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
                                             {
-                                                _prev_divModel.Div_DMPanel = pnl;
+                                                if (pnl.Panel_Name == div_DMPanelName)
+                                                {
+                                                    _prev_divModel.Div_DMPanel = pnl;
+                                                }
                                             }
                                         }
                                     }
-                                    //Run_GetListOfMaterials_SpecificItem();
+                                   
                                 }
+                               
+
                             }
-                            _basePlatformPresenter.InvalidateBasePlatform();
-                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                            
                             inside_panel = false;
                         }
@@ -5807,7 +5891,6 @@ namespace PresentationLayer.Presenter
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC2nd = _multiMullionUCP.GetMultiPanel();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)_multiMullionUC2nd);
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _basePlatformImagerUCPresenter.Invalidate_flpMain();
                                 }
                                 else if (mPanel_Type.Contains("Transom"))
@@ -5829,7 +5912,6 @@ namespace PresentationLayer.Presenter
                                     _multiTransomUCP = multiUCP;
                                     _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
-                                    _basePlatformPresenter.InvalidateBasePlatform();
                                 }
                             }
                             #region 3rd level
@@ -5878,7 +5960,6 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _multiTransomImagerUCP);
                                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
                                                                                                       _multiPanelModel3rdLvl,
@@ -5898,8 +5979,8 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel3rdLvl.MPanel_Parent = _multiTransomUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC3rd, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiMullionUC, _frameModel.Frame_Type.ToString());
-                                    _basePlatformPresenter.InvalidateBasePlatform();
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                               
+
                                 }
                                 else if (mPanel_Type.Contains("Transom"))
                                 {
@@ -5909,7 +5990,6 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _multiMullionImagerUCP);
                                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
                                                                                                                     _multiPanelModel3rdLvl,
@@ -5929,8 +6009,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel3rdLvl.MPanel_Parent = _multiMullionUC2nd.Getflp();
                                     _multiPanelModel2ndLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC3rd, _frameModel.Frame_Type.ToString());
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
-                                    _basePlatformPresenter.InvalidateBasePlatform();
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                                   
                                 }
                                 if (_multiPanelModel3rdLvl.MPanel_Placement == "Last")
                                 {
@@ -5939,8 +6018,6 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel2ndLvl.Fit_EqualPanel_ToBindDimensions();
                                     //Run_GetListOfMaterials_SpecificItem();
                                 }
-                                _basePlatformPresenter.InvalidateBasePlatform();
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             }
                             #endregion
 
@@ -5991,7 +6068,6 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _multiTransomImagerUCP);
                                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
                                                                                                       _multiPanelModel4thLvl,
@@ -6011,8 +6087,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel4thLvl.MPanel_Parent = _multiTransomUC3rd.Getflp();
                                     _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiMullionUC4th, _frameModel.Frame_Type.ToString());
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiMullionUC, _frameModel.Frame_Type.ToString());
-                                    _basePlatformPresenter.InvalidateBasePlatform();
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                               
                                 }
                                 else if (mPanel_Type.Contains("Transom"))
                                 {
@@ -6022,7 +6097,6 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _multiMullionImagerUCP);
                                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
                                                                                                                     _multiPanelModel4thLvl,
@@ -6042,8 +6116,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel4thLvl.MPanel_Parent = _multiMullionUC3rd.Getflp();
                                     _multiPanelModel3rdLvl.AddControl_MPanelLstObjects((UserControl)_multiTransomUC4th, _frameModel.Frame_Type.ToString());
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
-                                    _basePlatformPresenter.InvalidateBasePlatform();
-                                    _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                              
                                 }
                                 if (_multiPanelModel4thLvl.MPanel_Placement == "Last")
                                 {
@@ -6052,8 +6125,7 @@ namespace PresentationLayer.Presenter
                                     _multiPanelModel3rdLvl.Fit_EqualPanel_ToBindDimensions();
                                     //Run_GetListOfMaterials_SpecificItem();
                                 }
-                                _basePlatformPresenter.InvalidateBasePlatform();
-                                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                          
                             }
                             #endregion
                             inside_multi = false;
@@ -6696,8 +6768,6 @@ namespace PresentationLayer.Presenter
                                     //_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                                 }
                             }
-                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                            _basePlatformImagerUCPresenter.Invalidate_flpMain();
                             inside_divider = false;
                         }
                         #endregion
@@ -7148,7 +7218,6 @@ namespace PresentationLayer.Presenter
             ItemToolStrip_Disable();
             wndrFileName = string.Empty;
             wndrfile = string.Empty;
-            wndrProjectFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
@@ -7178,7 +7247,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-            if (!saved)
+            if (!saved && wndrProjectFileName != "")
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
@@ -7312,6 +7381,8 @@ namespace PresentationLayer.Presenter
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
+                    wndrProjectFileName = "";
+                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
@@ -7395,8 +7466,6 @@ namespace PresentationLayer.Presenter
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
                         _pnlMain.Controls.Clear();
                         AddItemInfoUC(_windoorModel); //add item information user control
-
-                        _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                         _projectName,
                                         _custRefNo,
@@ -7435,9 +7504,6 @@ namespace PresentationLayer.Presenter
                         _concreteModel.Concrete_UC = (UserControl)_concreteUC;
                         _concreteModel.Concrete_PropertiesUC = (UserControl)concretePropertiesUCPresenter.GetConcretePropertiesUC();
                         AddConcreteList_WindoorModel(_concreteModel);
-
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
@@ -7514,8 +7580,16 @@ namespace PresentationLayer.Presenter
                                     {
                                         if (sprop.Name == "WD_name")
                                         {
-                                            sprop.SetValue(wndrModel, "Item" + _quotationModel.Lst_Windoor.Count);
+                                            sprop.SetValue(wndrModel, "Item " + (_quotationModel.Lst_Windoor.Count + 1));
                                         }
+                                        else if (sprop.Name == "WD_id")
+                                        {
+                                            sprop.SetValue(wndrModel, (_quotationModel.Lst_Windoor.Count + 1));
+                                        }
+                                        ////else if(sprop.Name == "lst_frame" || sprop.Name == "lst_objects")
+                                        ////{
+
+                                        ////}
                                         else
                                         {
                                             sprop.SetValue(wndrModel, prop.GetValue(_windoorModel, null));
@@ -7528,41 +7602,55 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                        AddWndrList_QuotationModel(wndrModel);
-                        //_quotationModel.Select_Current_Windoor(_windoorModel);
-                        wndrModel.SetDimensions_basePlatform();
+                        foreach(IFrameModel frm in wndrModel.lst_frame)
+                        {
+                            frm.Frame_WindoorModel = null;
+                        }
 
-                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        foreach (IFrameModel frm in wndrModel.lst_frame)
+                        {
+                            frm.Frame_WindoorModel = wndrModel;
+                        }
+
+
+                        _windoorModel = wndrModel;
+                        AddWndrList_QuotationModel(wndrModel);
+                        _quotationModel.Select_Current_Windoor(wndrModel);
+                   
+
+                       
+                        _windoorModel.SetDimensions_basePlatform();
+
+                        _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                         _mainView.GetThis().Controls.Add(bpUC);
 
 
 
-                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, wndrModel, this);
+                        _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                         AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
                         _pnlMain.Controls.Clear();
-                        AddItemInfoUC(wndrModel); //add item information user control
+                        AddItemInfoUC(_windoorModel); //add item information user control
 
                         _basePlatformPresenter.InvalidateBasePlatform();
                         SetMainViewTitle(input_qrefno,
                                         _projectName,
                                         _custRefNo,
-                                         wndrModel.WD_name,
-                                         wndrModel.WD_profile,
+                                         _windoorModel.WD_name,
+                                         _windoorModel.WD_profile,
                                          true);
 
                         BotToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
-                        //_mainView.RemoveBinding();
-                        //_mainView.RemoveBinding(_mainView.GetLblSize());
-                        //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                        _mainView.RemoveBinding();
+                        _mainView.RemoveBinding(_mainView.GetLblSize());
+                        _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
 
                         _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
-                        //_basePlatformPresenter.RemoveBindingView();
-                        //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
+                        _basePlatformPresenter.RemoveBindingView();
+                        _basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
                         _pnlItems.VerticalScroll.Value = _pnlItems.VerticalScroll.Maximum;
                         _pnlItems.PerformLayout();
-                        _windoorModel = wndrModel;
 
 
                     }
@@ -7782,73 +7870,77 @@ namespace PresentationLayer.Presenter
 
         public void Load_Windoor_Item(IWindoorModel item)
         {
-            _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
-
-
-            //save frame
-            Windoor_Save_UserControl();
-            Windoor_Save_PropertiesUC();
-
-            //set mainview
-            _windoorModel = item;
-            SetMainViewTitle(input_qrefno,
-                             _projectName,
-                             _custRefNo,
-                             item.WD_name,
-                             item.WD_profile,
-                             false);
-            _quotationModel.Select_Current_Windoor(_windoorModel);
-
-            //clear
-            _pnlMain.Controls.Clear();
-            _pnlPropertiesBody.Controls.Clear();
-            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-
-            //basePlatform
-            _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
-            AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-            _basePlatformPresenter.InvalidateBasePlatform();
-
-            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-            UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-            _mainView.GetThis().Controls.Add(bpUC);
-            foreach(Control wndr_objects in _windoorModel.lst_objects)
+            try
             {
-                if (wndr_objects.Name.Contains("Frame"))
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+
+
+
+                //save frame
+                Windoor_Save_UserControl();
+                Windoor_Save_PropertiesUC();
+
+                //set mainview
+                _windoorModel = item;
+                
+                _quotationModel.Select_Current_Windoor(_windoorModel);
+
+                //clear
+                _pnlMain.Controls.Clear();
+                _pnlPropertiesBody.Controls.Clear();
+                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+
+                //basePlatform
+                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                _basePlatformPresenter.InvalidateBasePlatform();
+
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                _mainView.GetThis().Controls.Add(bpUC);
+                foreach (Control wndr_objects in _windoorModel.lst_objects)
                 {
-                    foreach (IFrameModel frame in _windoorModel.lst_frame)
+                    if (wndr_objects.Name.Contains("Frame"))
                     {
-                        if (wndr_objects.Name == frame.Frame_Name)
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
-                            _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                            frame.Frame_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                            if (wndr_objects.Name == frame.Frame_Name)
+                            {
+                                _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                                frame.Frame_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                            }
+                        }
+                    }
+                    else if (wndr_objects.Name.Contains("Concrete"))
+                    {
+                        foreach (IConcreteModel concrete in item.lst_concrete)
+                        {
+                            if (wndr_objects.Name == concrete.Concrete_Name)
+                            {
+                                _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                                concrete.Concrete_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
+                            }
                         }
                     }
                 }
-                else if (wndr_objects.Name.Contains("Concrete"))
-                {
-                    foreach (IConcreteModel concrete in item.lst_concrete)
-                    {
-                        if (wndr_objects.Name == concrete.Concrete_Name)
-                        {
-                            _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
-                            concrete.Concrete_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
-                        }
-                    }
-                }
+                //frames
+
+
+                //_pnlPropertiesBody.Refresh();
+                _mainView.RemoveBinding(_mainView.GetLblSize());
+                _mainView.RemoveBinding();
+                _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _windoorModel.SetZoom();
             }
-            //frames
+            catch (Exception ex)
+            {
 
-
-            //_pnlPropertiesBody.Refresh();
-            _mainView.RemoveBinding(_mainView.GetLblSize());
-            _mainView.RemoveBinding();
-            _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            _windoorModel.SetZoom();
+                MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
+            }    
+            
 
         }
 
@@ -8477,7 +8569,7 @@ namespace PresentationLayer.Presenter
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
-            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnValidation));
+            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
             return mainPresenterBinding;
         }
 
@@ -8809,7 +8901,6 @@ namespace PresentationLayer.Presenter
                     _mainView.GetToolStripLabelSync().Visible = true;
                 }
                 MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
                 SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -8817,20 +8908,20 @@ namespace PresentationLayer.Presenter
                                      _windoorModel.WD_profile,
                                      true);
             }
-            else
-            {
-                _mainView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
-                if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
-                {
-                    if (wndrfile != _mainView.GetSaveFileDialog().FileName)
-                    {
-                        wndrfile = _mainView.GetSaveFileDialog().FileName;
-                        saveToolStripButton_Click();
+            //else
+            //{
+            //    _mainView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+            //    if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+            //    {
+            //        if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            //        {
+            //            wndrfile = _mainView.GetSaveFileDialog().FileName;
+            //            saveToolStripButton_Click();
 
-                    }
-                }
+            //        }
+            //    }
 
-            }
+            //}
         }
 
         public void DeleteConcrete_OnObjectList_WindoorModel(UserControl concreteUC)

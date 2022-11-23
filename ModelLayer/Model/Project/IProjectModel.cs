@@ -8,6 +8,7 @@ namespace ModelLayer.Model.Project
 {
     public interface IProjectModel
     {
+        string Title { get; set; }
         string Firstname { get; set; }
         string Lastname { get; set; }
         string CompanyName { get; set; }

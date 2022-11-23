@@ -33,6 +33,7 @@ namespace PresentationLayer.Views.Costing_Head
         #endregion
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
+            txt_Title.DataBindings.Add(ModelBinding["Title"]);
             txt_FirstnameStr.DataBindings.Add(ModelBinding["Firstname"]);
             txt_LastnameStr.DataBindings.Add(ModelBinding["Lastname"]);
             txt_CompanynameStr.DataBindings.Add(ModelBinding["CompanyName"]);

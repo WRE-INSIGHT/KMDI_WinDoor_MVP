@@ -14,5 +14,6 @@ namespace PresentationLayer.Views
         event DragEventHandler SortItemDragEnterEventRaiseEvent;
         void showSortItem();
         Panel GetPnlSortItem();
+        Form GetSortItem();
     }
 }

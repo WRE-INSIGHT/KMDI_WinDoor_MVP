@@ -35,6 +35,8 @@ namespace PresentationLayer.Presenter
         bool isNewProject { get; set; }
         string aeic { get; set; }
         string projectAddress { get; set; }
+        string titleLastname { get; set; }
+        DateTime dateAssigned { get; set; }
         void SetPricingFactor();
         DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }
@@ -61,6 +63,7 @@ namespace PresentationLayer.Presenter
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
+        
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 

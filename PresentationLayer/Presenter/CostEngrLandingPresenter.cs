@@ -60,6 +60,20 @@ namespace PresentationLayer.Presenter
             _CELandingView.dgvCustRefNoCellMouseDoubleClickEventRaised += _CELandingView_dgvCustRefNoCellMouseDoubleClickEventRaised;
             _CELandingView.btnAddNewQuoteClickEventRaised += _CELandingView_btnAddNewQuoteClickEventRaised;
             _CELandingView.dgvQuoteNoCellMouseDoubleClickEventRaised += _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised;
+            _CELandingView.btnSearchProjClickClickEventRaised += _CELandingView_btnSearchProjClickClickEventRaised;
+        }
+
+        private async void _CELandingView_btnSearchProjClickClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                await Load_DGV_AssignedProjects(_CELandingView.SearchProject);
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private void _CELandingView_dgvQuoteNoCellMouseDoubleClickEventRaised(object sender, DataGridViewCellMouseEventArgs e)
@@ -134,6 +148,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.inputted_quoteDate = _quoteDate;
                         _mainPresenter.inputted_projectName = _projName;
                         _mainPresenter.inputted_custRefNo = _custRefNo;
+                        _mainPresenter.dateAssigned = _dateAssigned;
                         _mainPresenter.Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _CELandingView.CloseThis();
                     }
@@ -188,6 +203,7 @@ namespace PresentationLayer.Presenter
                 {
                     _custRefId = Convert.ToInt32(_dgvCustRefNo.Rows[e.RowIndex].Cells["Customer_Reference_Id"].Value);
                     _custRefNo = _dgvCustRefNo.Rows[e.RowIndex].Cells["Customer Reference"].Value.ToString();
+                    _dateAssigned = Convert.ToDateTime(_dgvCustRefNo.Rows[e.RowIndex].Cells["Date Assigned"].Value.ToString());
                     _CELandingView.SetText_LblNav(_projName + @"\" + _custRefNo);
 
                     int index = _tPageNav_selectedIndex + 1;
@@ -249,8 +265,7 @@ namespace PresentationLayer.Presenter
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-                   
-                    //_dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
+                    _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
                     _CELandingView.SetText_LblNav(_projName);
 
                     int index = _tPageNav_selectedIndex + 1;
@@ -292,6 +307,8 @@ namespace PresentationLayer.Presenter
             _dgvAssignedProj.Columns["Project_Id"].Visible = false;
             _dgvAssignedProj.Columns["File_Label"].Visible = false;
             _dgvAssignedProj.Columns["AEIC ID"].Visible = false;
+            _dgvAssignedProj.Columns["Title Lastname"].Visible = false;
+            _dgvAssignedProj.Columns["Factor"].Visible = false;
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 

@@ -47,5 +47,10 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseDragEvent(sender, SortItemDragDropEventRaiseEvent, e);
         }
+
+        public Form GetSortItem()
+        {
+            return this;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace PresentationLayer.Views
         DataGridView DGV_ASsignedProject { get; }
         DataGridView DGV_CustRefNo { get; }
         DataGridView DGV_QuoteNo { get; }
-
+        string SearchProject { get; set; }
         event EventHandler CostEngrLandingViewLoadEventRaised;
         event DataGridViewCellMouseEventHandler dgvAssignedProjectsCellMouseDoubleClickEventRaised;
         event DataGridViewCellMouseEventHandler dgvCustRefNoCellMouseDoubleClickEventRaised;
@@ -16,7 +16,7 @@ namespace PresentationLayer.Views
         event EventHandler btnbackNavClickEventRaised;
         event EventHandler btnforwardNavClick;
         event EventHandler btnAddNewQuoteClickEventRaised;
-
+        event EventHandler btnSearchProjClickClickEventRaised;
         bool SetSelectedIndex_TabpageNav(int index);
 
         void ShowThis();

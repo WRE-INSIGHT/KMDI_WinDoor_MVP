@@ -49,7 +49,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private CommonFunctions _commonFunctions = new CommonFunctions();
         Timer _tmr = new Timer();
-
+        bool _mouseDown;
         bool _initialLoad;
 
         public CasementPanelUCPresenter(ICasementPanelUC casementUC,
@@ -442,6 +442,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (e.Button == MouseButtons.Left)
             {
                 isLeft = false;
+                _mouseDown = false;
             }
         }
 
@@ -457,10 +458,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         me.Cursor = Cursors.VSplit;
                     }
-                    //else if (((e.Location.X > me.Width - 5) && (e.Location.X < me.Width)) && (_panelModel.Panel_Placement == "First" || _panelModel.Panel_Placement == "Somewhere in Between"))
-                    //{
-                    //    me.Cursor = Cursors.VSplit;
-                    //}
                     else
                     {
                         me.Cursor = Cursors.Hand;
@@ -480,30 +477,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         int expected_Panel1MinWD = 0,
                             expected_Panel2MinWD = 0,
                             mullion_movement = 0;
-
-                        IMultiPanelModel prev_mpanel = null,
-                                         nxt_mpnl = null;
-
                         IPanelModel prev_pnl = null,
                                     pres_pnl = null;
 
-                        if (prev_ctrl is IMultiPanelUC)
-                        {
-                            prev_mpanel = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prev_ctrl.Name);
-                            expected_Panel1MinWD = prev_mpanel.MPanel_WidthToBind + (e.X - _point_of_origin.X);
-                        }
-                        else if (prev_ctrl is IPanelUC)
+                        if (prev_ctrl is IPanelUC)
                         {
                             prev_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == prev_ctrl.Name);
                             expected_Panel1MinWD = prev_pnl.Panel_WidthToBind + (e.X - _point_of_origin.X);
                         }
-
-                        if (pres_ctrl is IMultiPanelUC)
-                        {
-                            nxt_mpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == pres_ctrl.Name);
-                            expected_Panel2MinWD = nxt_mpnl.MPanel_WidthToBind - (e.X - _point_of_origin.X);
-                        }
-                        else if (pres_ctrl is IPanelUC)
+                        if (pres_ctrl is IPanelUC)
                         {
                             pres_pnl = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
                             expected_Panel2MinWD = pres_pnl.Panel_WidthToBind - (e.X - _point_of_origin.X);
@@ -513,7 +495,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         int expected_total_controls_inside_parentMpanel = _multiPanelModel.MPanel_Divisions + 1, // count of object
                             actual_total_controls_inside_parentMpanel = _multiPanelModel.GetCount_MPanelLst_Object();
-                        if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel && e.Button == MouseButtons.Left)
+                        if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel && e.Button == MouseButtons.Left && _mouseDown)
                         {
                             if (me_indx != 0 && flp.Controls.Count > (me_indx))
                             {
@@ -521,58 +503,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     _mainPresenter.SetChangesMark();
                                     mullion_movement = (e.X - _point_of_origin.X);
-
-                                    if (prev_ctrl is IMultiPanelUC)
-                                    {
-                                        prev_mpanel.MPanel_Width += mullion_movement;
-                                        prev_mpanel.MPanel_DisplayWidth += mullion_movement;
-
-                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
-                                        {
-                                            prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                            prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
-                                            prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
-                                            prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
-
-                                            foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
-                                            {
-                                                mpanel.SetDimensions_childObjs(mullion_movement, "prev");
-                                                mpanel.SetDimensions_childPanelObjs(mullion_movement);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                            prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
-
-                                            prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
-                                            prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
-
-                                            foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
-                                            {
-                                                mpanel.MPanel_Width += mullion_movement;
-                                                mpanel.MPanel_DisplayWidth += mullion_movement;
-
-                                                mpanel.SetDimensionsToBind_MullionDivMovement();
-                                                mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
-
-                                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
-                                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
-                                            }
-
-                                            foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
-                                            {
-                                                div.Div_Width += mullion_movement;
-                                                div.Div_DisplayWidth += mullion_movement;
-
-                                                div.SetDimensionsToBind_using_DivZoom();
-                                                div.SetDimensionsToBind_using_DivZoom_Imager();
-                                            }
-                                        }
-                                    }
-                                    else if (prev_ctrl is IPanelUC)
+                                    if (prev_ctrl is IPanelUC)
                                     {
                                         prev_pnl.Panel_Width += mullion_movement;
                                         prev_pnl.Panel_DisplayWidth += mullion_movement;
@@ -585,66 +516,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         else
                                         {
                                             prev_pnl.SetDimensionToBind_using_BaseDimension();
-                                            prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
-                                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                                            {
-                                                mpnl.SetDimensions_childObjs();
-                                            }
                                         }
+                                        prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
-
-                                    if (pres_ctrl is IMultiPanelUC)
-                                    {
-                                        nxt_mpnl.MPanel_Width -= mullion_movement;
-                                        nxt_mpnl.MPanel_DisplayWidth -= mullion_movement;
-
-                                        if (_panelModel.Panel_Zoom == 0.26f || _panelModel.Panel_Zoom == 0.17f ||
-                                            _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
-                                        {
-                                            nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                            nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
-                                            nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
-                                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
-
-                                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
-                                            {
-                                                mpanel.SetDimensions_childObjs(-mullion_movement, "nxt");
-                                                mpanel.SetDimensions_childPanelObjs(-mullion_movement);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                            nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
-
-                                            nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
-                                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
-
-                                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
-                                            {
-                                                mpanel.MPanel_Width -= mullion_movement;
-                                                mpanel.MPanel_DisplayWidth -= mullion_movement;
-
-                                                mpanel.SetDimensionsToBind_MullionDivMovement();
-                                                mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
-
-                                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
-                                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
-                                            }
-
-                                            foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
-                                            {
-                                                div.Div_Width += mullion_movement;
-                                                div.Div_DisplayWidth += mullion_movement;
-
-                                                div.SetDimensionsToBind_using_DivZoom();
-                                                div.SetDimensionsToBind_using_DivZoom_Imager();
-                                            }
-                                        }
-
-                                    }
-                                    else if (pres_ctrl is IPanelUC)
+                                    if (pres_ctrl is IPanelUC)
                                     {
                                         pres_pnl.Panel_Width -= mullion_movement;
                                         pres_pnl.Panel_DisplayWidth -= mullion_movement;
@@ -653,29 +528,26 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             _panelModel.Panel_Zoom == 0.13f || _panelModel.Panel_Zoom == 0.10f)
                                         {
                                             pres_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
                                         }
                                         else
                                         {
                                             pres_pnl.SetDimensionToBind_using_BaseDimension();
-                                            pres_pnl.SetDimensionImagerToBind_using_BaseDimension();
-                                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                                            {
-                                                mpnl.SetDimensions_childObjs();
-                                            }
                                         }
-
+                                        pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                 }
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
+                                if (pnls == null)
+                                {
+                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                    _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                                }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, pres_pnl);
-                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, pres_pnl);
+                            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                         }
-                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                     }
-
-
                 }
             }
             catch (Exception ex)
@@ -697,6 +569,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     isLeft = true;
                 }
+                _mouseDown = true;
                 //if (((e.Location.X > me.Width - 5) && (e.Location.X < me.Width)) && (_panelModel.Panel_Placement == "First" || _panelModel.Panel_Placement == "Somewhere in Between"))
                 //{
                 //    isRight = true;
