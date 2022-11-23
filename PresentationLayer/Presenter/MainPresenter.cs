@@ -857,10 +857,23 @@ namespace PresentationLayer.Presenter
             _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
             _mainView.billOfMaterialToolStripMenuItemClickEventRaised += _mainView_billOfMaterialToolStripMenuItemClickEventRaised;
             _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
+            _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
 
         }
 
+
+
         #region Events  
+        private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.WndrDir = fbd.SelectedPath;
+                Properties.Settings.Default.Save();
+                _mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+            }
+        }
         private void _mainView_billOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
            
@@ -1968,6 +1981,10 @@ namespace PresentationLayer.Presenter
                                 MessageBoxIcon.Information);
                 Properties.Settings.Default.WndrDir = defDir;
                 Properties.Settings.Default.FirstTym = false;
+            }
+            else
+            {
+                _mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
             }
             _mainView.Nickname = _userModel.Nickname;
             _pnlControlSub.Controls.Add(

@@ -23,6 +23,7 @@ namespace PresentationLayer.Views
         event EventHandler ListOfMaterialsToolStripMenuItemClickEventRaised;
         event EventHandler CreateNewGlassClickEventRaised;
         event EventHandler ChangeItemColorClickEventRaised;
+        event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         event EventHandler glassTypeColorSpacerToolStripMenuItemClickEventRaised;
         event EventHandler glassBalancingToolStripMenuItemClickEventRaised;
         event EventHandler customArrowHeadToolStripMenuItemClickEventRaised;

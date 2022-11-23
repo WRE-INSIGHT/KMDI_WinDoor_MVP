@@ -436,7 +436,7 @@
             this.changeSyncDirectoryToolStripMenuItem.Name = "changeSyncDirectoryToolStripMenuItem";
             this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.changeSyncDirectoryToolStripMenuItem.Text = "Change sync directory";
-            this.changeSyncDirectoryToolStripMenuItem.Visible = false;
+            this.changeSyncDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeSyncDirectoryToolStripMenuItem_Click);
             // 
             // syncLocalToCloudToolStripMenuItem
             // 
