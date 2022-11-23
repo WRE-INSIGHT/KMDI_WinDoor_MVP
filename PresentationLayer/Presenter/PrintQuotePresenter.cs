@@ -47,7 +47,7 @@ namespace PresentationLayer.Presenter
                     {
                         foreach(IMultiPanelModel mpnl in frm.Lst_MultiPanel)
                         {
-                            foreach (IPanelModel pnl in frm.Lst_Panel)
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
                                 Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
                             }
@@ -103,8 +103,11 @@ namespace PresentationLayer.Presenter
                         baseColor += " & " + duplicateBaseColor.ToList()[i];
                     }
                 }
-                
-                baseColor.Replace("DARK BROWN", "WOODGRAIN");
+                if(GlassThickness != "Unglazed" && GlassThickness != "")
+                {
+                    GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
+                }
+                baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
                 _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
                                               + "USING "
                                               + baseColor.ToUpper()

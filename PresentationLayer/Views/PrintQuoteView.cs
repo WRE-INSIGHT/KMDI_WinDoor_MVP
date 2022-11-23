@@ -59,6 +59,7 @@ namespace PresentationLayer.Views
             rtbox_Address.Text = "";
             rtbox_Salutation.Text = "";
             rtbox_Body.Text = "";
+            dtp_Date.Value = DateTime.Now;
             EventHelpers.RaiseEvent(sender, PrintQuoteViewLoadEventRaised, e);
         }
 
@@ -88,6 +89,11 @@ namespace PresentationLayer.Views
         }
 
         private void BSQuotation_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtp_Date_ValueChanged(object sender, EventArgs e)
         {
 
         }

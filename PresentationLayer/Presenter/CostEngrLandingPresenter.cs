@@ -148,6 +148,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.inputted_quoteDate = _quoteDate;
                         _mainPresenter.inputted_projectName = _projName;
                         _mainPresenter.inputted_custRefNo = _custRefNo;
+                        _mainPresenter.dateAssigned = _dateAssigned;
                         _mainPresenter.Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _CELandingView.CloseThis();
                     }
@@ -202,6 +203,7 @@ namespace PresentationLayer.Presenter
                 {
                     _custRefId = Convert.ToInt32(_dgvCustRefNo.Rows[e.RowIndex].Cells["Customer_Reference_Id"].Value);
                     _custRefNo = _dgvCustRefNo.Rows[e.RowIndex].Cells["Customer Reference"].Value.ToString();
+                    _dateAssigned = Convert.ToDateTime(_dgvCustRefNo.Rows[e.RowIndex].Cells["Date Assigned"].Value.ToString());
                     _CELandingView.SetText_LblNav(_projName + @"\" + _custRefNo);
 
                     int index = _tPageNav_selectedIndex + 1;
@@ -264,7 +266,6 @@ namespace PresentationLayer.Presenter
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
                     _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
-                    //_dateAssigned = (DateTime)_dgvAssignedProj.Rows[e.RowIndex].Cells["Date Assigned"].Value;
                     _CELandingView.SetText_LblNav(_projName);
 
                     int index = _tPageNav_selectedIndex + 1;

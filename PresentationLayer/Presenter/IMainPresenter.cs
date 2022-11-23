@@ -36,6 +36,7 @@ namespace PresentationLayer.Presenter
         string aeic { get; set; }
         string projectAddress { get; set; }
         string titleLastname { get; set; }
+        DateTime dateAssigned { get; set; }
         void SetPricingFactor();
         DateTime inputted_quoteDate { get; set; }
         IQuotationModel qoutationModel_MainPresenter { get; set; }

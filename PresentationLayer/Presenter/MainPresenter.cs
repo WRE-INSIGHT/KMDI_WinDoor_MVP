@@ -525,7 +525,18 @@ namespace PresentationLayer.Presenter
                 _custRefNo = value;
             }
         }
-
+        private DateTime _dateAssigned;
+        public DateTime dateAssigned
+        {
+            get
+            {
+                return _dateAssigned;
+            }
+            set
+            {
+                _dateAssigned = value;
+            }
+        }
         public string wndrFileName
         {
             get
@@ -1030,6 +1041,7 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("ClientsTitleLastname: " + _titleLastname);
             wndr_content.Add("ProjectAddress: " + _projectAddress);
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
+            wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
@@ -1696,6 +1708,8 @@ namespace PresentationLayer.Presenter
 
             if (_quotationModel != null && _windoorModel != null)
             {
+                _mainView.CreateNewWindoorBtnEnabled = false;
+
                 if (MessageBox.Show("Are you sure want to delete " + _windoorModel.WD_name + "?", "Delete Item",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -1738,6 +1752,7 @@ namespace PresentationLayer.Presenter
                         Clearing_Operation();
                     }
                 }
+                _mainView.CreateNewWindoorBtnEnabled = true;
             }
         }
 
@@ -2090,6 +2105,12 @@ namespace PresentationLayer.Presenter
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Open_WndrFiles");
+                    SetMainViewTitle(input_qrefno,
+                                 _projectName,
+                                 _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
                 }
             }
             catch (Exception ex)
@@ -2473,13 +2494,17 @@ namespace PresentationLayer.Presenter
                         _custRefNo = extractedValue_str;
                         inputted_custRefNo = extractedValue_str;
                     }
+                    else if (row_str.Contains("DateAssigned"))
+                    {
+                        _dateAssigned = Convert.ToDateTime(extractedValue_str);
+                    }
                     else if (row_str.Contains("AEIC:"))
                     {
                         _aeic = extractedValue_str;
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str); ;
+                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : extractedValue_str);
                     }
                     else if (row_str.Contains("Quotation_ref_no"))
                     {
@@ -3404,7 +3429,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Panel_GlassThickness:"))
                         {
-                            panel_GlassThickness = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            panel_GlassThickness = float.Parse(extractedValue_str);
                         }
                         else if (row_str.Contains("PanelGlazingBead_ArtNo:"))
                         {
@@ -7195,7 +7220,6 @@ namespace PresentationLayer.Presenter
             ItemToolStrip_Disable();
             wndrFileName = string.Empty;
             wndrfile = string.Empty;
-            wndrProjectFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
@@ -7225,7 +7249,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-            if (!saved)
+            if (!saved && wndrProjectFileName != "")
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
@@ -7359,6 +7383,8 @@ namespace PresentationLayer.Presenter
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
+                    wndrProjectFileName = "";
+                    _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
                     {
@@ -7848,73 +7874,77 @@ namespace PresentationLayer.Presenter
 
         public void Load_Windoor_Item(IWindoorModel item)
         {
-            _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
-
-
-            //save frame
-            Windoor_Save_UserControl();
-            Windoor_Save_PropertiesUC();
-
-            //set mainview
-            _windoorModel = item;
-            SetMainViewTitle(input_qrefno,
-                             _projectName,
-                             _custRefNo,
-                             item.WD_name,
-                             item.WD_profile,
-                             false);
-            _quotationModel.Select_Current_Windoor(_windoorModel);
-
-            //clear
-            _pnlMain.Controls.Clear();
-            _pnlPropertiesBody.Controls.Clear();
-            _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
-
-            //basePlatform
-            _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
-            AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
-            _basePlatformPresenter.InvalidateBasePlatform();
-
-            _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
-            UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
-            _mainView.GetThis().Controls.Add(bpUC);
-            foreach(Control wndr_objects in _windoorModel.lst_objects)
+            try
             {
-                if (wndr_objects.Name.Contains("Frame"))
+                _basePlatformImagerUCPresenter.SendToBack_baseImager();
+
+
+
+                //save frame
+                Windoor_Save_UserControl();
+                Windoor_Save_PropertiesUC();
+
+                //set mainview
+                _windoorModel = item;
+                
+                _quotationModel.Select_Current_Windoor(_windoorModel);
+
+                //clear
+                _pnlMain.Controls.Clear();
+                _pnlPropertiesBody.Controls.Clear();
+                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+
+                //basePlatform
+                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
+                _basePlatformPresenter.InvalidateBasePlatform();
+
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
+                _mainView.GetThis().Controls.Add(bpUC);
+                foreach (Control wndr_objects in _windoorModel.lst_objects)
                 {
-                    foreach (IFrameModel frame in _windoorModel.lst_frame)
+                    if (wndr_objects.Name.Contains("Frame"))
                     {
-                        if (wndr_objects.Name == frame.Frame_Name)
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
-                            _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
-                            frame.Frame_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                            if (wndr_objects.Name == frame.Frame_Name)
+                            {
+                                _pnlPropertiesBody.Controls.Add((UserControl)frame.Frame_PropertiesUC);
+                                frame.Frame_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddFrame((IFrameUC)frame.Frame_UC);
+                            }
+                        }
+                    }
+                    else if (wndr_objects.Name.Contains("Concrete"))
+                    {
+                        foreach (IConcreteModel concrete in item.lst_concrete)
+                        {
+                            if (wndr_objects.Name == concrete.Concrete_Name)
+                            {
+                                _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
+                                concrete.Concrete_PropertiesUC.BringToFront();
+                                _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
+                            }
                         }
                     }
                 }
-                else if (wndr_objects.Name.Contains("Concrete"))
-                {
-                    foreach (IConcreteModel concrete in item.lst_concrete)
-                    {
-                        if (wndr_objects.Name == concrete.Concrete_Name)
-                        {
-                            _pnlPropertiesBody.Controls.Add((UserControl)concrete.Concrete_PropertiesUC);
-                            concrete.Concrete_PropertiesUC.BringToFront();
-                            _basePlatformPresenter.AddConcrete((IConcreteUC)concrete.Concrete_UC);
-                        }
-                    }
-                }
+                //frames
+
+
+                //_pnlPropertiesBody.Refresh();
+                _mainView.RemoveBinding(_mainView.GetLblSize());
+                _mainView.RemoveBinding();
+                _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
+                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                _windoorModel.SetZoom();
             }
-            //frames
+            catch (Exception ex)
+            {
 
-
-            //_pnlPropertiesBody.Refresh();
-            _mainView.RemoveBinding(_mainView.GetLblSize());
-            _mainView.RemoveBinding();
-            _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-            _windoorModel.SetZoom();
+                MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
+            }    
+            
 
         }
 
@@ -8875,7 +8905,6 @@ namespace PresentationLayer.Presenter
                     _mainView.GetToolStripLabelSync().Visible = true;
                 }
                 MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
                 SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -8883,20 +8912,20 @@ namespace PresentationLayer.Presenter
                                      _windoorModel.WD_profile,
                                      true);
             }
-            else
-            {
-                _mainView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
-                if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
-                {
-                    if (wndrfile != _mainView.GetSaveFileDialog().FileName)
-                    {
-                        wndrfile = _mainView.GetSaveFileDialog().FileName;
-                        saveToolStripButton_Click();
+            //else
+            //{
+            //    _mainView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+            //    if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+            //    {
+            //        if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            //        {
+            //            wndrfile = _mainView.GetSaveFileDialog().FileName;
+            //            saveToolStripButton_Click();
 
-                    }
-                }
+            //        }
+            //    }
 
-            }
+            //}
         }
 
         public void DeleteConcrete_OnObjectList_WindoorModel(UserControl concreteUC)
