@@ -137,15 +137,15 @@ namespace PresentationLayer.Presenter
                 _quotationModel.BOM_Status = false;
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel,_quotationModel);
+                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
                     UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
                     _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
                     quoteItem.Dock = DockStyle.Top;
                     quoteItem.BringToFront();
 
-                    _mainPresenter.itemDescription();
+                    // _mainPresenter.itemDescription();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
-                    _quotationModel.ItemCostingPriceAndPoints();
+                    //_quotationModel.ItemCostingPriceAndPoints();
 
                     if (GeorgianBarHorizontalQty > 0)
                     {
@@ -172,8 +172,27 @@ namespace PresentationLayer.Presenter
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(_quotationModel.lstTotalPrice[i], 2);  //TotaPrice;
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(_quotationModel.lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
+
+                    //_quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(_quotationModel.lstTotalPrice[i], 2);  //TotaPrice;
+                    //_quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(_quotationModel.lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
+
+
+                    if (wdm.WD_price == 0)
+                    {
+                        _quotationModel.ItemCostingPriceAndPoints();
+                        wdm.WD_price = Math.Round(_quotationModel.lstTotalPrice[i], 2);
+                    }
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(wdm.WD_price, 2);  //TotaPrice;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(wdm.WD_price, 2).ToString();  //TotaPrice.ToString();
+
+
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemQuantity.Value = wdm.WD_quantity;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblQuantity().Text = wdm.WD_quantity.ToString();
+
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
+                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
+
+
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);

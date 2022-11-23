@@ -23,7 +23,7 @@ namespace ServiceLayer.Services.WindoorServices
                                       bool WD_visibility = true,
                                       bool WD_orientation = true,
                                       float WD_zoom = 1.0f,
-                                      int WD_price = 0,
+                                      decimal WD_price = 0,
                                       decimal WD_discount = 0.0M,
                                       string WD_itemName = "",
                                       string WD_windoorNumber = "",

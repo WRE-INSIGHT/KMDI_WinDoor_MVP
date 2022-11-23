@@ -2302,7 +2302,7 @@ namespace ModelLayer.Model.Quotation
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
-
+               
                 if (BOMandItemlistStatus == "PriceItemList")
                 {
                     wdm.WD_Selected = true;
@@ -2310,7 +2310,6 @@ namespace ModelLayer.Model.Quotation
 
                 if (wdm.WD_Selected == true)
                 {
-
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
                         #region baseOnDimensionAndColorPointsif
@@ -4464,7 +4463,13 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(GlassPrice, 2);
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+
                     lstTotalPrice.Add(TotaPrice);
+                    if (wdm.WD_price == 0)
+                    {
+                        wdm.WD_price = TotaPrice;
+                    }
+
                     if (BOM_Status == true)
                     {
 

@@ -207,8 +207,10 @@ namespace PresentationLayer.Views.UserControls
         {
             tboxItemName.DataBindings.Add(ModelBinding["WD_itemName"]);
             tboxWindoorNumber.DataBindings.Add(ModelBinding["WD_WindoorNumber"]);
+          //  NudItemQuantity.DataBindings.Add(ModelBinding["WD_quantity"]);
+
         }
 
-      
+
     }
 }

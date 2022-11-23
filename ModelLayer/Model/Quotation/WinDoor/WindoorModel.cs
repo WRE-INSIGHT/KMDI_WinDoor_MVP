@@ -247,9 +247,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
-        private int _wdPrice;
+        private decimal _wdPrice;
         [Required(ErrorMessage = "Window Price is Required")]
-        public int WD_price
+        public decimal WD_price
         {
             get
             {
@@ -880,7 +880,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             string wd_description,
                             int wd_width,
                             int wd_height,
-                            int wd_price,
+                            decimal wd_price,
                             int wd_quantity,
                             decimal wd_discount,
                             string wd_itemName,

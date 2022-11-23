@@ -22,7 +22,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_id { get; set; }
         string WD_name { get; set; }
         bool WD_orientation { get; set; }
-        int WD_price { get; set; }
+        decimal WD_price { get; set; }
         int WD_quantity { get; set; }
         bool WD_visibility { get; set; }
         int WD_width_4basePlatform { get; set; }

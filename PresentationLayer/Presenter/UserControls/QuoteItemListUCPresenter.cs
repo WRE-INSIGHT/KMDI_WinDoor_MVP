@@ -17,6 +17,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IWindoorModel _windoorModel;
         private IQuotationModel _quotationModel;
+        private IMainPresenter _mainPresenter;
 
         Label _lblQuantity;
         Label _lblDiscount;
@@ -63,20 +64,16 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised(object sender, EventArgs e)
         {
-            //for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-            //{
-
-            //}
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 string itemNum = _quoteItemListUC.ItemNumber;
-                itemNum = itemNum.Replace("Item ",string.Empty);
+                itemNum = itemNum.Replace("Item ", string.Empty);
                 if (wdm.WD_id == Convert.ToInt32(itemNum))
                 {
                     wdm.WD_WindoorNumber = ((TextBox)sender).Text;
                 }
             }
-        } 
+        }
 
         private void _quoteItemListUC_tboxItemNameTextChangedEventRaised(object sender, EventArgs e)
         {
@@ -127,17 +124,63 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_NudItemQuantityValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            _lblQuantity.Text = _nudItemQty.Value.ToString();
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            { 
+                string itemNum = _quoteItemListUC.ItemNumber; 
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        wdm.WD_quantity = (int)((NumericUpDown)sender).Value;
+                         
+                        _lblQuantity.Text = wdm.WD_quantity.ToString(); 
+                    } 
+                }
+            } 
         }
 
         private void _quoteItemListUC_NudItemPriceValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
+            //  _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        wdm.WD_price = ((NumericUpDown)sender).Value;
+
+                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                    }
+                }
+            }
         }
 
         private void _quoteItemListUC_NudItemDiscountValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            _lblDiscount.Text = _nudItemDiscount.Value.ToString() + "%";
+            // _lblDiscount.Text = _nudItemDiscount.Value.ToString() + "%";
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        wdm.WD_discount = (int)((NumericUpDown)sender).Value;
+
+                        _lblDiscount.Text = wdm.WD_discount.ToString() + "%";
+                    }
+                }
+            }
         }
 
         private void _quoteItemListUC_lblQuantityDoubleClickEventRaised(object sender, System.EventArgs e)
@@ -162,9 +205,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
         private void _quoteItemListUC_QuoteItemListUCLoadEventRaised(object sender, System.EventArgs e)
-        {
-            // _nudItemQty.DecimalPlaces = 2;
-            //_nudItemDiscount.DecimalPlaces = 2;
+        { 
             _nudItemPrice.DecimalPlaces = 2;
 
             _nudItemQty.Maximum = decimal.MaxValue;
@@ -201,6 +242,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             binding.Add("WD_itemName", new Binding("Text", _windoorModel, "WD_itemName", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("WD_WindoorNumber", new Binding("Text", _windoorModel, "WD_WindoorNumber", true, DataSourceUpdateMode.OnPropertyChanged));
+            // binding.Add("WD_quantity", new Binding("Value", _windoorModel, "WD_quantity", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

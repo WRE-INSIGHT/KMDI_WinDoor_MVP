@@ -15,6 +15,5 @@ namespace PresentationLayer.Presenter
                                                IWindoorModel windoorModel,
                                                IMainPresenter mainPresenter);
 
-
     }
 }

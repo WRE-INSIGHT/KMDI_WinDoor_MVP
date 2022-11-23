@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelLayer.Model.Quotation;
+﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
-using Unity;
-using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
-using PresentationLayer.Views.UserControls;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter
 {
@@ -83,7 +78,7 @@ namespace PresentationLayer.Presenter
                 int itemCount = 1;
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-
+                    wdm.WD_id = itemCount;
                     wdm.WD_name = "Item " + itemCount;
                     itemCount++;
                 }
@@ -125,10 +120,10 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public ISortItemPresenter GetNewInstance(IUnityContainer unityC, 
-                                                IQuotationModel quotationModel, 
-                                                ISortItemUCPresenter sortItemUCPresenter, 
-                                                IWindoorModel windoorModel, 
+        public ISortItemPresenter GetNewInstance(IUnityContainer unityC,
+                                                IQuotationModel quotationModel,
+                                                ISortItemUCPresenter sortItemUCPresenter,
+                                                IWindoorModel windoorModel,
                                                 IMainPresenter mainPresenter)
         {
             unityC
