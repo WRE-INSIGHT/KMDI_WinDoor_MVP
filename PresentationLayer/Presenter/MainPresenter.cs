@@ -2659,7 +2659,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_price:"))
                         {
-                            _windoorModel.WD_price = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            _windoorModel.WD_price = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_quantity:"))
                         {
@@ -2689,6 +2689,18 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_PropertiesScroll:"))
                         {
                             _windoorModel.WD_PropertiesScroll = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_price:"))
+                        {
+                            _windoorModel.WD_price = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_quantity:"))
+                        {
+                            _windoorModel.WD_quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_discount:"))
+                        {
+                            _windoorModel.WD_discount = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_SlidingTopViewVisibility:"))
                         {
