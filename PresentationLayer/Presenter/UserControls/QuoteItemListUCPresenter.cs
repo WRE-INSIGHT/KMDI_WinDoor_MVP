@@ -60,6 +60,26 @@ namespace PresentationLayer.Presenter.UserControls
             _quoteItemListUC.ComputeNetPriceTextChangeEventRaised += _quoteItemListUC_ComputeNetPriceTextChangeEventRaised;
             _quoteItemListUC.tboxItemNameTextChangedEventRaised += _quoteItemListUC_tboxItemNameTextChangedEventRaised;
             _quoteItemListUC.tboxWindoorNumberTextChangedEventRaised += _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised;
+            _quoteItemListUC.suggestedPriceToolStripMenuItemClickEventRaised += _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised;
+        }
+
+        private void _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
+                        _nudItemPrice.Value = wdm.WD_price;
+                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                    }
+                }
+            }
         }
 
         private void _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised(object sender, EventArgs e)
@@ -142,9 +162,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
         private void _quoteItemListUC_NudItemPriceValueChangedEventRaised(object sender, System.EventArgs e)
-        {
-            //  _lblPrice.Text = _nudItemPrice.Value.ToString("N", new CultureInfo("en-US"));
-
+        { 
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 string itemNum = _quoteItemListUC.ItemNumber;

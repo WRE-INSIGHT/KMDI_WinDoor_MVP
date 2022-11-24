@@ -2302,7 +2302,7 @@ namespace ModelLayer.Model.Quotation
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
-               
+
                 if (BOMandItemlistStatus == "PriceItemList")
                 {
                     wdm.WD_Selected = true;
