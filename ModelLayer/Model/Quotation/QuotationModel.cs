@@ -39,13 +39,13 @@ namespace ModelLayer.Model.Quotation
         public int Rebate_Qty { get; set; }
         public int Plastic_CoverQty_Total { get; set; }
         public decimal PricingFactor { get; set; }
-
+        public DateTime Date_Assigned { get; set; }
+        public string Customer_Ref_Number { get; set; }
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
 
-
-        private DataColumn CreateColumn(string columname, string caption, string type)
+    private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
             col.DataType = Type.GetType(type);

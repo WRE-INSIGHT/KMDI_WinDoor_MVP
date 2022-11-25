@@ -523,6 +523,7 @@ namespace PresentationLayer.Presenter
             set
             {
                 _custRefNo = value;
+               
             }
         }
         private DateTime _dateAssigned;
@@ -2530,6 +2531,9 @@ namespace PresentationLayer.Presenter
                         inputted_quoteDate = Convert.ToDateTime(extractedValue_str);
                         Scenario_Quotation(false, false, false, false, true, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                         _quotationModel.Quotation_ref_no = inputted_quotationRefNo;
+                        _quotationModel.Customer_Ref_Number = inputted_custRefNo;
+                        _quotationModel.Date_Assigned = dateAssigned;
+
                     }
                     else if (row_str.Contains("Frame_PUFoamingQty_Total"))
                     {
@@ -2659,7 +2663,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_price:"))
                         {
-                            _windoorModel.WD_price = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            _windoorModel.WD_price = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_quantity:"))
                         {
@@ -2689,6 +2693,18 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_PropertiesScroll:"))
                         {
                             _windoorModel.WD_PropertiesScroll = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_price:"))
+                        {
+                            _windoorModel.WD_price = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_quantity:"))
+                        {
+                            _windoorModel.WD_quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_discount:"))
+                        {
+                            _windoorModel.WD_discount = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_SlidingTopViewVisibility:"))
                         {
@@ -7394,6 +7410,8 @@ namespace PresentationLayer.Presenter
                     }
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {
+                        _quotationModel.Customer_Ref_Number = inputted_custRefNo;
+                        _quotationModel.Date_Assigned = dateAssigned;
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,

@@ -138,6 +138,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
+
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();
                         sqltrans.Commit();
                     }
@@ -505,6 +506,38 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType)
+        {
+            DataTable dt = new DataTable();
+            SqlDataAdapter sqladapter = new SqlDataAdapter();
+
+            using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
+            {
+                await sqlcon.OpenAsync();
+                using (SqlCommand sqlcmd = sqlcon.CreateCommand())
+                {
+                    using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                    {
+
+                        sqlcmd.Connection = sqlcon;
+                        sqlcmd.Transaction = sqltrans;
+                        sqlcmd.CommandText = "Project_Quote_Stp";
+                        sqlcmd.CommandType = CommandType.StoredProcedure;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetProjectAssignAE";
+                        sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = user_id;
+                        sqlcmd.Parameters.Add("@User_Role", SqlDbType.VarChar).Value = user_acctType;
+                        sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
+
+                        sqladapter.SelectCommand = sqlcmd;
+                        sqladapter.Fill(dt);
+                        sqltrans.Commit();
+                    }
+                }
+            }
+
+            return dt;
         }
     }
 }

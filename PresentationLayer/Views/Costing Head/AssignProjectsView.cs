@@ -88,5 +88,10 @@ namespace PresentationLayer.Views.Costing_Head
         {
             EventHelpers.RaiseEvent(sender, clearToolStripMenuItemClickEventRaised, e);
         }
+
+        private void txt_SearchProj_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
