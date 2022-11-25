@@ -270,7 +270,7 @@ namespace PresentationLayer.Presenter.Costing_Head
       
         public async Task Load_DGVClient(string searchStr)
         {
-            DataTable dt = await _projQuoteServices.Get_ProjectByCostEngrID(searchStr, _userModel.EmployeeID, _userModel.AccountType);
+            DataTable dt = await _projQuoteServices.GetProjectAssignAE(searchStr, _userModel.EmployeeID, _userModel.AccountType);
             _dgvClient.DataSource = dt;
 
             foreach (DataGridViewColumn col in _dgvClient.Columns)

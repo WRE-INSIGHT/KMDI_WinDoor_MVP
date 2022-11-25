@@ -143,5 +143,10 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         {
             await _projQuoteRepo.DeleteAEIC(Project_Id, Employee_Id);
         }
+
+        public async Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType)
+        {
+            return await _projQuoteRepo.GetProjectAssignAE(searchStr, user_id, user_acctType);
+        }
     }
 }

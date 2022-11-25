@@ -26,5 +26,6 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<DataTable> GetCityAreaBy_Province(string province);
         Task SaveProject(IProjectModel projectModel);
         Task DeleteAEIC(string project_Id, string employee_Id);
+        Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType);
     }
 }

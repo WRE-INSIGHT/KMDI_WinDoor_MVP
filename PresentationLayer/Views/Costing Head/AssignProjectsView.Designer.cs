@@ -78,6 +78,7 @@
             this.txt_SearchProj.Name = "txt_SearchProj";
             this.txt_SearchProj.Size = new System.Drawing.Size(754, 29);
             this.txt_SearchProj.TabIndex = 0;
+            this.txt_SearchProj.TextChanged += new System.EventHandler(this.txt_SearchProj_TextChanged);
             this.txt_SearchProj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_SearchProj_KeyDown);
             // 
             // dgv_Projects
@@ -93,6 +94,7 @@
             this.dgv_Projects.Location = new System.Drawing.Point(0, 29);
             this.dgv_Projects.Name = "dgv_Projects";
             this.dgv_Projects.ReadOnly = true;
+            this.dgv_Projects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Projects.Size = new System.Drawing.Size(789, 392);
             this.dgv_Projects.TabIndex = 4;
             this.dgv_Projects.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Projects_RowPostPaint);
