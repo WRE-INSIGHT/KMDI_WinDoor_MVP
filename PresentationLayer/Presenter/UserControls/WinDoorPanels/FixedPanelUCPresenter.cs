@@ -1199,6 +1199,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
             _mainPresenter.DeselectDivider();
             _mainPresenter.itemDescription();
+            _mainPresenter.GetCurrentPrice();
         }
 
         public IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC,

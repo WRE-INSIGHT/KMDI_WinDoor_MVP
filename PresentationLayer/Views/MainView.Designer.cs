@@ -109,10 +109,10 @@
             this.pnlMain = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pnlBot = new System.Windows.Forms.Panel();
+            this.Nud_CurrentPrice = new System.Windows.Forms.NumericUpDown();
             this.btnPlusZoom = new System.Windows.Forms.Button();
             this.btnMinusZoom = new System.Windows.Forms.Button();
             this.lblZoom = new System.Windows.Forms.Label();
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.mnsMainMenu.SuspendLayout();
@@ -130,6 +130,7 @@
             this.splitContainer2.SuspendLayout();
             this.pnlProperties.SuspendLayout();
             this.pnlBot.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_CurrentPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // mnsMainMenu
@@ -146,7 +147,6 @@
             this.mnsMainMenu.Size = new System.Drawing.Size(1084, 24);
             this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "msMain";
-            this.mnsMainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnsMainMenu_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -171,7 +171,7 @@
             this.projectToolStripMenuItem,
             this.screenToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -316,7 +316,7 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -324,13 +324,13 @@
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.selectProjectToolStripMenuItem.Text = "Select Project";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
             // 
@@ -355,7 +355,6 @@
             this.CostingItemsToolStripMenuItem.Name = "CostingItemsToolStripMenuItem";
             this.CostingItemsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.CostingItemsToolStripMenuItem.Text = "Items";
-            this.CostingItemsToolStripMenuItem.Click += new System.EventHandler(this.CostingItemsToolStripMenuItem_Click);
             // 
             // addExistingItemToolStripMenuItem
             // 
@@ -460,7 +459,6 @@
             this.invertOrientationToolStripMenuItem.Name = "invertOrientationToolStripMenuItem";
             this.invertOrientationToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.invertOrientationToolStripMenuItem.Text = "Invert Orientation";
-            this.invertOrientationToolStripMenuItem.Click += new System.EventHandler(this.invertOrientationToolStripMenuItem_Click);
             // 
             // listOfMaterialsToolStripMenuItem
             // 
@@ -913,7 +911,6 @@
             this.pnlMain.Size = new System.Drawing.Size(626, 495);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.SizeChanged += new System.EventHandler(this.pnlMain_SizeChanged);
-            this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint);
             // 
             // openFileDialog1
             // 
@@ -921,10 +918,10 @@
             // 
             // pnlBot
             // 
+            this.pnlBot.Controls.Add(this.Nud_CurrentPrice);
             this.pnlBot.Controls.Add(this.btnPlusZoom);
             this.pnlBot.Controls.Add(this.btnMinusZoom);
             this.pnlBot.Controls.Add(this.lblZoom);
-            this.pnlBot.Controls.Add(this.lblWelcome);
             this.pnlBot.Controls.Add(this.lblSize);
             this.pnlBot.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBot.Enabled = false;
@@ -934,6 +931,17 @@
             this.pnlBot.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlBot.Size = new System.Drawing.Size(1084, 25);
             this.pnlBot.TabIndex = 8;
+            // 
+            // Nud_CurrentPrice
+            // 
+            this.Nud_CurrentPrice.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Nud_CurrentPrice.Location = new System.Drawing.Point(916, 1);
+            this.Nud_CurrentPrice.Name = "Nud_CurrentPrice";
+            this.Nud_CurrentPrice.Size = new System.Drawing.Size(165, 25);
+            this.Nud_CurrentPrice.TabIndex = 5;
+            this.Nud_CurrentPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Nud_CurrentPrice.ThousandsSeparator = true;
+            this.Nud_CurrentPrice.ValueChanged += new System.EventHandler(this.Nud_CurrentPrice_ValueChanged);
             // 
             // btnPlusZoom
             // 
@@ -979,17 +987,6 @@
             this.lblZoom.TabIndex = 1;
             this.lblZoom.Text = "0%";
             this.lblZoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblWelcome.Location = new System.Drawing.Point(982, 1);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(99, 19);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = "Welcome, User";
-            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblSize
             // 
@@ -1046,6 +1043,7 @@
             this.pnlProperties.ResumeLayout(false);
             this.pnlBot.ResumeLayout(false);
             this.pnlBot.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Nud_CurrentPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1098,7 +1096,6 @@
         internal System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel pnlBot;
-        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblZoom;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel pnlControlSub;
@@ -1139,5 +1136,6 @@
         private System.Windows.Forms.ToolStripMenuItem billOfMaterialToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton duplicateItemToolStripButton1;
         private System.Windows.Forms.ToolStripButton duplicateSample;
+        private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
     }
 }

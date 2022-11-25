@@ -47,6 +47,7 @@
             this.nudItemPrice = new System.Windows.Forms.NumericUpDown();
             this.CMS_Items = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.suggestedPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setAllDiscountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
@@ -245,6 +246,7 @@
             this.nudItemPrice.Size = new System.Drawing.Size(105, 22);
             this.nudItemPrice.TabIndex = 26;
             this.nudItemPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudItemPrice.ThousandsSeparator = true;
             this.nudItemPrice.Value = new decimal(new int[] {
             1,
             0,
@@ -256,7 +258,8 @@
             // CMS_Items
             // 
             this.CMS_Items.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.suggestedPriceToolStripMenuItem});
+            this.suggestedPriceToolStripMenuItem,
+            this.setAllDiscountToolStripMenuItem});
             this.CMS_Items.Name = "CMS_Items";
             this.CMS_Items.Size = new System.Drawing.Size(159, 48);
             // 
@@ -266,6 +269,13 @@
             this.suggestedPriceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.suggestedPriceToolStripMenuItem.Text = "Suggested Price";
             this.suggestedPriceToolStripMenuItem.Click += new System.EventHandler(this.suggestedPriceToolStripMenuItem_Click);
+            // 
+            // setAllDiscountToolStripMenuItem
+            // 
+            this.setAllDiscountToolStripMenuItem.Name = "setAllDiscountToolStripMenuItem";
+            this.setAllDiscountToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.setAllDiscountToolStripMenuItem.Text = "Set All Discount";
+            this.setAllDiscountToolStripMenuItem.Click += new System.EventHandler(this.setAllDiscountToolStripMenuItem_Click);
             // 
             // QuoteItemListUC
             // 
@@ -320,5 +330,6 @@
         private System.Windows.Forms.TextBox txt_ItemNumber;
         private System.Windows.Forms.ContextMenuStrip CMS_Items;
         private System.Windows.Forms.ToolStripMenuItem suggestedPriceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setAllDiscountToolStripMenuItem;
     }
 }

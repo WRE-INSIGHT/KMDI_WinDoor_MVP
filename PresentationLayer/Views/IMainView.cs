@@ -42,7 +42,8 @@ namespace PresentationLayer.Views
         event EventHandler screenToolStripMenuItemClickEventRaised;
         event EventHandler factorToolStripMenuItemClickEventRaised;
         event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
-        string Nickname { set; }
+        event EventHandler NudCurrentPriceValueChangedEventRaised;
+
         string mainview_title { get; set; }
         float Zoom { get; set; }
         bool ItemToolStripEnabled { get; set; }
@@ -78,6 +79,7 @@ namespace PresentationLayer.Views
         OpenFileDialog GetOpenFileDialog();
         ToolStripProgressBar GetTsProgressLoading();
         SplitContainer GetSCMain();
+        NumericUpDown GetCurrentPrice();
         void FocusOnMainForm();
         void Set_AssignProject_Visibility(bool visibility);
         void SetActiveControl(Control control);

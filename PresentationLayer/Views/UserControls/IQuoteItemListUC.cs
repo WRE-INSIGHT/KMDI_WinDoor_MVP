@@ -17,7 +17,7 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler tboxItemNameTextChangedEventRaised;
         event EventHandler tboxWindoorNumberTextChangedEventRaised;
         event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
-
+        event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
 
         event KeyEventHandler NudItemPriceKeyDownEventRaised;
         event KeyEventHandler NudItemDiscountKeyDownEventRaised;

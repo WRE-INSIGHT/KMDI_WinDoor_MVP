@@ -165,7 +165,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_multiPanelModel.MPanel_DividerEnabled)
             {
                 totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
-            }else
+            }
+            else
             {
                 totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
             }
@@ -277,7 +278,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divSize = 33;
                 }
-               
+
 
                 for (int i = 0; i < iteration; i++)
                 {
@@ -555,7 +556,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else
                         {
-                           DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
+                            DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
 
                         }
                         DisplayWD_dec += displayWidthDecimal;
@@ -570,7 +571,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                         }
                         int panelSize = 0;
-                        foreach(IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                        foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
                             panelSize += pnl.Panel_Width;
 
@@ -873,7 +874,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _prev_divModel = divModel;
                             _frameModel.Lst_Divider.Add(divModel);
                             _multiPanelModel.MPanelLst_Divider.Add(divModel);
-                          
+
                             IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, _mainPresenter);
                             UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
@@ -893,7 +894,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             fpnl.Controls.Add((UserControl)mullionUC);
                             _multiPanelModel.AddControl_MPanelLstObjects((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                             mullionUCP.SetInitialLoadFalse();
-                        
+
                             _basePlatformImagerUCP.InvalidateBasePlatform();
                         }
                     }
@@ -913,7 +914,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 _mainPresenter.SetChangesMark();
                 _mainPresenter.itemDescription();
-
+                _mainPresenter.GetCurrentPrice();
             }
             catch (Exception ex)
             {
@@ -973,7 +974,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _frameModel.SetDeductFramePadding(false);
             }
-            
+
             var child_mpanels = _commonFunctions.GetAll_MPanel(_multiPanelModel);
 
             foreach (IMultiPanelModel mpnl in child_mpanels)
@@ -1018,8 +1019,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         null,
                                                         _multiPanelTransomUCP,
                                                         _multiPanelMullionUCP);
-                                                        //_multiMullionImagerUCP_parent,
-                                                        //_multiPanelTransomImagerUCP_parent);
+                //_multiMullionImagerUCP_parent,
+                //_multiPanelTransomImagerUCP_parent);
             }
 
             if (_frameModel != null)
@@ -1085,7 +1086,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelMullionUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
-         
+
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelMullionUC).InvalidateFlp();
         }
@@ -1133,7 +1134,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                 }
             }
-            else if(zoom >= 0.50f)
+            else if (zoom >= 0.50f)
             {
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -1272,7 +1273,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 else
                 {
                     bounds = new Rectangle(new Point(bPoints, bPoints),
-                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction, 
+                                           new Size(fpnl.ClientRectangle.Width - bSizeDeduction,
                                                     fpnl.ClientRectangle.Height - (bSizeDeduction - botFrameDeduct)));
                 }
             }
@@ -2942,7 +2943,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last in a LAST SUB-PLATFORM (MultiTransom) in a MAIN PLATFORM (MultiMullion)
                 {
-                    
+
                     int locY = fpnl.ClientRectangle.Height,
                         locY2 = pInnerY + pInnerHt;
 

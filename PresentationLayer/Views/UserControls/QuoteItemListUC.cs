@@ -107,6 +107,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler tboxItemNameTextChangedEventRaised;
         public event EventHandler tboxWindoorNumberTextChangedEventRaised;
         public event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
+        public event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
 
         public event KeyEventHandler NudItemPriceKeyDownEventRaised;
         public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
@@ -208,6 +209,11 @@ namespace PresentationLayer.Views.UserControls
         private void suggestedPriceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, suggestedPriceToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void setAllDiscountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, setAllDiscountToolStripMenuItemClickEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {

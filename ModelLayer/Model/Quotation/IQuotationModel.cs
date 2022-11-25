@@ -29,6 +29,7 @@ namespace ModelLayer.Model.Quotation
         BillOfMaterialsFilter BOM_Filter { get; set; }
         bool BOM_Status { get; set; }
         string BOMandItemlistStatus { get; set; }
+        decimal CurrentPrice { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
 
