@@ -3873,57 +3873,35 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
-
-
-                        if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
-                        {
-                            Panel_HeightToBind = (int)(Panel_Width * Panel_Zoom);
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                        {
-                            Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                        {
-
-                            Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
-                        }
-
-                       
+                        Panel_HeightToBind = (int)(Panel_Width * Panel_Zoom);
                     }
                     else
                     {
-                        Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
                         int mpnlOriginalHeight = Panel_ParentMultiPanelModel.MPanel_Height - 20;
 
                         int pnl_ht = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Height / mpnlOriginalHeight)));
                         Panel_HeightToBind = pnl_ht;
                     }
 
-                  
+                    if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+                    {
+                        Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+
+                        Panel_WidthToBind = (int)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - deduct);
+                    }
                 }
                 else
                 {
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
                         Panel_WidthToBind = (int)(Panel_Width * Panel_Zoom);
-
-
-                        if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
-                        {
-                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                        {
-                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
-                        }
-                        else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                        {
-
-                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
-                        }
-                        //Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                     else
                     {
@@ -3931,6 +3909,19 @@ namespace ModelLayer.Model.Quotation.Panel
                         int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalWidth)));
                         Panel_WidthToBind = pnl_wd;
                        
+                    }
+                    if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+                    {
+                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+
+                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
                     }
                 }
             }
