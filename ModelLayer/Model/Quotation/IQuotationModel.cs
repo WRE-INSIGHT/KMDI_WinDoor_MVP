@@ -26,6 +26,8 @@ namespace ModelLayer.Model.Quotation
         int Rebate_Qty { get; set; }
         int Plastic_CoverQty_Total { get; set; }
         decimal PricingFactor { get; set; }
+        DateTime Date_Assigned { get; set; }
+        string Customer_Ref_Number { get; set; }
         BillOfMaterialsFilter BOM_Filter { get; set; }
         bool BOM_Status { get; set; }
         string BOMandItemlistStatus { get; set; }
