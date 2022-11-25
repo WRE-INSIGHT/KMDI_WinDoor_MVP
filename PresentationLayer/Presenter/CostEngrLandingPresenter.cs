@@ -33,7 +33,7 @@ namespace PresentationLayer.Presenter
         private DataGridView _dgvQuoteNo;
 
         private int _tPageNav_selectedIndex;
-        private int _projId, _custRefId;
+        private int _projId, _custRefId, _ceicId;
         private string _projName, _custRefNo;
         private DateTime _dateAssigned;
 
@@ -174,7 +174,7 @@ namespace PresentationLayer.Presenter
 
                     if (inserted_quoteId > 0)
                     {
-                        IProjectQuoteModel projectQuoteModel = _projQuoteServices.AddProjectQuote(0,
+                        IProjectQuoteModel projectQuoteModel = _projQuoteServices.AddProjectQuote(_ceicId,
                                                                                                   _projId,
                                                                                                   _custRefId,
                                                                                                   _userModel.EmployeeID,
@@ -204,6 +204,9 @@ namespace PresentationLayer.Presenter
                     _custRefId = Convert.ToInt32(_dgvCustRefNo.Rows[e.RowIndex].Cells["Customer_Reference_Id"].Value);
                     _custRefNo = _dgvCustRefNo.Rows[e.RowIndex].Cells["Customer Reference"].Value.ToString();
                     _dateAssigned = Convert.ToDateTime(_dgvCustRefNo.Rows[e.RowIndex].Cells["Date Assigned"].Value.ToString());
+                    _ceicId = Convert.ToInt32(_dgvCustRefNo.Rows[e.RowIndex].Cells["Cost Engr In-Charge Id"].Value);
+
+
                     _CELandingView.SetText_LblNav(_projName + @"\" + _custRefNo);
 
                     int index = _tPageNav_selectedIndex + 1;
@@ -263,6 +266,7 @@ namespace PresentationLayer.Presenter
                 {
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
+                    
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
                     _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
@@ -324,12 +328,22 @@ namespace PresentationLayer.Presenter
             }
 
             _dgvCustRefNo.Columns["Customer_Reference_Id"].Visible = false;
+           if(_userModel.AccountType == "Admin" || _userModel.AccountType == "Cost Engr Head")
+            {
+                _dgvCustRefNo.Columns["Cost Engr In-Charge"].Visible = true;
+            }
+            else
+            {
+                _dgvCustRefNo.Columns["Cost Engr In-Charge"].Visible = false;
+            }
+
+
             _dgvCustRefNo.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
         }
 
         private async Task Load_DGV_QuoteNo(int proj_id, int cust_ref_id)
         {
-            DataTable dt = await _projQuoteServices.Get_QuoteNo_ByProjectID_ByCUstRefNo(proj_id, cust_ref_id, _userModel.EmployeeID, _userModel.AccountType);
+            DataTable dt = await _projQuoteServices.Get_QuoteNo_ByProjectID_ByCUstRefNo(_ceicId, proj_id, cust_ref_id, _userModel.EmployeeID, _userModel.AccountType);
             _dgvQuoteNo.DataSource = dt;
 
 
