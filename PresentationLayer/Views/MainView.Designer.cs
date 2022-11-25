@@ -91,7 +91,6 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.duplicateSample = new System.Windows.Forms.ToolStripButton();
             this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -437,7 +436,7 @@
             this.changeSyncDirectoryToolStripMenuItem.Name = "changeSyncDirectoryToolStripMenuItem";
             this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.changeSyncDirectoryToolStripMenuItem.Text = "Change sync directory";
-            this.changeSyncDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeSyncDirectoryToolStripMenuItem_Click);
+            this.changeSyncDirectoryToolStripMenuItem.Visible = false;
             // 
             // syncLocalToCloudToolStripMenuItem
             // 
@@ -527,7 +526,6 @@
             this.tsLbl_Loading,
             this.tsLbl_Status,
             this.ViewImagerToolStripButton1,
-            this.duplicateSample,
             this.SetGlassToolStripMenuItem});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
@@ -717,17 +715,6 @@
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.ViewImagerToolStripButton1.Text = "View Imager";
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
-            // 
-            // duplicateSample
-            // 
-            this.duplicateSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.duplicateSample.Image = global::PresentationLayer.Properties.Resources.icons8_documents;
-            this.duplicateSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.duplicateSample.Name = "duplicateSample";
-            this.duplicateSample.Size = new System.Drawing.Size(24, 29);
-            this.duplicateSample.Text = "Set Glass";
-            this.duplicateSample.ToolTipText = "Set Glass";
-            this.duplicateSample.Visible = false;
             // 
             // SetGlassToolStripMenuItem
             // 
@@ -1138,6 +1125,5 @@
         private System.Windows.Forms.ToolStripMenuItem factorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billOfMaterialToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton duplicateItemToolStripButton1;
-        private System.Windows.Forms.ToolStripButton duplicateSample;
     }
 }

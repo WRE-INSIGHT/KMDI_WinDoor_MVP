@@ -202,7 +202,7 @@ namespace PresentationLayer.Views
         }
 
         #endregion
-
+        public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -238,7 +238,6 @@ namespace PresentationLayer.Views
         public event EventHandler factorToolStripMenuItemClickEventRaised;
         public event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
-        public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
 
         public MainView()
         {
@@ -588,11 +587,6 @@ namespace PresentationLayer.Views
         private void mnsMainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
-        }
-
-        private void changeSyncDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, ChangeSyncDirectoryToolStripMenuItemClickEventRaised, e);
         }
     }
 }
