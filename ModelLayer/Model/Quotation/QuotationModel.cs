@@ -2290,19 +2290,12 @@ namespace ModelLayer.Model.Quotation
 
         #region changePriceBasedonDate
 
-        string cus_ref_date = "12-31-2022";
-        public DateTime cus_Ref_date(string cus_ref_date)
-        {
-            DateTime date = DateTime.ParseExact(cus_ref_date, @"MM-dd-yyyy", CultureInfo.InvariantCulture); ;
-            return date;
-        }
         public void changePriceBasedonDate()
         {
-            var dt1 = cus_Ref_date(cus_ref_date);//12-24-2022
+            var cus_ref_date = Date_Assigned;
+            DateTime inc_price_date = DateTime.Parse("11-15-2050");
 
-            DateTime dt2 = DateTime.Parse("12-30-2022");
-
-             if(dt1 >= dt2)
+             if(cus_ref_date >= inc_price_date)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -2431,7 +2424,7 @@ namespace ModelLayer.Model.Quotation
 
                 Extension_639957PricePerPiece = 99999999m;
                 Extension_567639PricePerPiece = 99999999m;
-                //Extension_N299A01006PricePerPiece = 118.82m;
+                //Extension_N299A01006PricePerPiece = 99999999m;
                 MVDExtensionPricePerPiece = 99999999m;
 
                 HDRollerPricePerPiece = 99999999m;
@@ -2502,7 +2495,9 @@ namespace ModelLayer.Model.Quotation
             Price_List.Columns.Add(CreateColumn("Mark-up", "Mark-up", "System.String"));
             Price_List.Columns.Add(CreateColumn("Subtotal", "Subtotal", "System.String"));
             Price_List.Columns.Add(CreateColumn("Filter", "Filter", "System.String"));
+
             changePriceBasedonDate();
+
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
                
@@ -4518,7 +4513,7 @@ namespace ModelLayer.Model.Quotation
                                 InstallationPoints += (ProfileColorPoints / 3) * 2;
 
 
-                                #region Glass 
+                               #region Glass 
 
                                 if (Singlepnl.Panel_GlassThickness >= 6.0f &&
                                     Singlepnl.Panel_GlassThickness <= 9.0f)
