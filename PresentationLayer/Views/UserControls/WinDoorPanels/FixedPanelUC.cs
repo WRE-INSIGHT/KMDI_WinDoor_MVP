@@ -95,6 +95,22 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             }
         }
 
+        public bool cmenuFxdOverlapSashVisibility
+        {
+            get
+            {
+                return overlapSashToolStripMenuItem.Visible;
+            }
+
+            set
+            {
+                overlapSashToolStripMenuItem.Visible = value;
+            }
+        }
+        public ContextMenuStrip GetcmenuFxd()
+        {
+            return cmenu_fxd;
+        }
         public event EventHandler deleteToolStripClickedEventRaised;
         public event PaintEventHandler fixedPanelUCPaintEventRaised;
         public event EventHandler fixedPanelMouseEnterEventRaised;
@@ -133,15 +149,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             try
             {
-                if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
-                {
-
-                    if (this.Parent.Name.Contains("Frame"))
-                        overlapSashToolStripMenuItem.Visible = false;
-                    else
-                        overlapSashToolStripMenuItem.Visible = true;
-                    cmenu_fxd.Show(new Point(MousePosition.X, MousePosition.Y));
-                }
+               
                 EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseClickEventRaised, e);
             }
             catch (Exception)
@@ -213,6 +221,11 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseDownEventRaised, e);
         }
 
-        
+        private void cmenu_fxd_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+       
     }
 }

@@ -21,5 +21,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler leftToolStripClickedEventRaised;
         event EventHandler bothToolStripClickedEventRaised;
         event EventHandler noneToolStripClickedEventRaised;
+        bool cmenuFxdOverlapSashVisibility { get; set; }
+        ContextMenuStrip GetcmenuFxd();
     }
 }

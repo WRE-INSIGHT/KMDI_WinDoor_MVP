@@ -17,7 +17,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_role);
         Task<DataTable> Get_CustRefNoByProjectID(int projId, int user_id, string user_role);
-        Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefId, int user_id, string user_role);
+        Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int pqId, int projId, int custRefId, int user_id, string user_role);
         Task<DataTable> Get_AEICByCostEngrID(string searchStr, int user_id, string user_acctType);
         string Check_ProjectAEAssignment(string project_Id, string employee_Id);
         Task<DataTable> Get_AEICByProjectID(string projectId);

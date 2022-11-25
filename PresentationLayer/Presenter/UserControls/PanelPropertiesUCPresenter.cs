@@ -3,6 +3,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 using PresentationLayer.Views.UserControls;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -189,6 +190,104 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (chk.Text == "None" && chk.Checked == false)
                         {
+
+
+                            #region Fixed Window
+
+                            if (_panelModel.Panel_Type.Contains("Fixed"))
+                            {
+                                var flp = (Control)_panelModel.Panel_Parent; //MultiPanel Container
+                                Control fixedUC = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name);
+                                if (flp.Name.Contains("MultiMullion"))
+                                {
+                                    int expected_total_controls_inside_parentMpanel = _panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1, // count of object
+                                        actual_total_controls_inside_parentMpanel = _panelModel.Panel_ParentMultiPanelModel.GetCount_MPanelLst_Object(),
+                                        totalpanel_inside_parentMpanel = _panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
+                                    if (expected_total_controls_inside_parentMpanel == actual_total_controls_inside_parentMpanel)
+                                    {
+                                        _mainPresenter.SetChangesMark();
+                                        int me_indx = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.IndexOf((Control)fixedUC);
+                                        //Get Panel from left side of Mullion
+                                        Control pres_ctrl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects[me_indx];
+
+                                        if (_panelModel.Panel_ParentMultiPanelModel.GetCount_MPanelLst_Object() > me_indx)
+                                        {
+                                            //Get Panel from right side of Mullion
+                                            pres_ctrl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects[me_indx];
+                                        }
+                                        IPanelModel pres_pnl = null;
+                                        int sashDiv = 16 / (_panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1);
+                                        //Get the expected Panel w
+                                        if (pres_ctrl is IPanelUC)
+                                        {
+                                            pres_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Name == pres_ctrl.Name);
+                                        }
+                                        if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left || _panelModel.Panel_Overlap_Sash == OverlapSash._Right)
+                                        {
+                                            _panelModel.Panel_Overlap_Sash = OverlapSash._None;
+                                            if (pres_ctrl is IPanelUC)
+                                            {
+                                                pres_pnl.Panel_Width += 16;
+                                                pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                            }
+                                            foreach (IPanelModel pnl in _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                                            {
+                                                if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Left && pnl.Panel_Name != pres_pnl.Panel_Name)
+                                                {
+                                                    pnl.Panel_Width -= (int)Math.Ceiling((decimal)16 / totalpanel_inside_parentMpanel);
+                                                }
+                                                else
+                                                {
+                                                    pnl.Panel_Width -= sashDiv;
+                                                }
+                                                pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                                            }
+                                            _panelModel.Panel_ParentMultiPanelModel.SetZoomPanels();
+                                        }
+                                        else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                                        {
+                                            _panelModel.Panel_Overlap_Sash = OverlapSash._None;
+                                            if (pres_ctrl is IPanelUC)
+                                            {
+                                                pres_pnl.Panel_Width += 32;
+                                            }
+                                            foreach (IPanelModel pnl in _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel)
+                                            {
+
+                                                if (pnl.Panel_Overlap_Sash == OverlapSash._Left || pnl.Panel_Overlap_Sash == OverlapSash._Left && pnl.Panel_Name != pres_pnl.Panel_Name)
+                                                {
+                                                    pnl.Panel_Width -= (int)Math.Ceiling((decimal)32 / totalpanel_inside_parentMpanel);
+                                                }
+                                                else
+                                                {
+                                                    pnl.Panel_Width -= 32 / totalpanel_inside_parentMpanel;
+                                                }
+
+                                                pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                                pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+
+                                            }
+                                            _panelModel.Panel_ParentMultiPanelModel.SetZoomPanels();
+                                        }
+
+                                        pres_pnl = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
+                                        if (pres_pnl == null)
+                                        {
+                                            _panelModel.Panel_ParentMultiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                                        }
+                                        _panelModel.Panel_ParentMultiPanelModel.Fit_MyControls_ToBindDimensions();
+                                        _panelModel.Panel_ParentMultiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                                    }
+                                }
+                                _panelModel.Panel_Overlap_Sash = OverlapSash._None;
+                                ((IPanelUC)fixedUC).InvalidateThis();
+                            }
+                            #endregion
+
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
 
                             if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)

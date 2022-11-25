@@ -449,7 +449,7 @@ namespace PresentationLayer.Views
         {
             assignProjectsToolStripMenuItem.Visible = visibility;
             projectToolStripMenuItem.Visible = visibility;
-            listOfMaterialsToolStripMenuItem.Visible = visibility;
+            //listOfMaterialsToolStripMenuItem.Visible = visibility;
             customArrowHeadToolStripMenuItem.Visible = visibility;
         }
 
