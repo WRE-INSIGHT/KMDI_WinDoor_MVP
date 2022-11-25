@@ -16,6 +16,9 @@ namespace PresentationLayer.Views.UserControls
         event EventHandler ComputeNetPriceTextChangeEventRaised;
         event EventHandler tboxItemNameTextChangedEventRaised;
         event EventHandler tboxWindoorNumberTextChangedEventRaised;
+        event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
+        event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
+
         event KeyEventHandler NudItemPriceKeyDownEventRaised;
         event KeyEventHandler NudItemDiscountKeyDownEventRaised;
         event KeyEventHandler NudItemQuantityKeyDownEventRaised;

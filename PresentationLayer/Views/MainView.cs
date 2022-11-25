@@ -7,15 +7,7 @@ namespace PresentationLayer.Views
 {
     public partial class MainView : Form, IMainView
     {
-        #region GetSet
-
-        public string Nickname
-        {
-            set
-            {
-                lblWelcome.Text = "Welcome, " + value;
-            }
-        }
+        #region GetSet 
 
         public string mainview_title
         {
@@ -238,6 +230,9 @@ namespace PresentationLayer.Views
         public event EventHandler factorToolStripMenuItemClickEventRaised;
         public event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
+        public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
+        public event EventHandler NudCurrentPriceValueChangedEventRaised;
+
 
         public MainView()
         {
@@ -414,6 +409,11 @@ namespace PresentationLayer.Views
             return mnsMainMenu;
         }
 
+        public NumericUpDown GetCurrentPrice()
+        {
+            return Nud_CurrentPrice;
+        }
+
         private void pnlPropertiesBody_Scroll(object sender, ScrollEventArgs e)
         {
             PropertiesScroll = pnlPropertiesBody.VerticalScroll.Value;
@@ -448,18 +448,13 @@ namespace PresentationLayer.Views
         {
             assignProjectsToolStripMenuItem.Visible = visibility;
             projectToolStripMenuItem.Visible = visibility;
-            listOfMaterialsToolStripMenuItem.Visible = visibility;
+            //listOfMaterialsToolStripMenuItem.Visible = visibility;
             customArrowHeadToolStripMenuItem.Visible = visibility;
         }
 
         private void tsBtnNConcrete_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, NewConcreteButtonClickEventRaised, e);
-        }
-
-        private void invertOrientationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void refreshToolStripButton_Click(object sender, EventArgs e)
@@ -493,10 +488,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, saveToolStripButtonClickEventRaised, e);
         }
 
-        private void CostingItemsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void slidingTopViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -563,10 +554,6 @@ namespace PresentationLayer.Views
 
         }
 
-        private void pnlMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void screenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -587,9 +574,15 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
         }
 
-        private void mnsMainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void changeSyncDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            EventHelpers.RaiseEvent(sender, ChangeSyncDirectoryToolStripMenuItemClickEventRaised, e);
         }
+
+        private void Nud_CurrentPrice_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, NudCurrentPriceValueChangedEventRaised, e);
+        }
+
     }
 }

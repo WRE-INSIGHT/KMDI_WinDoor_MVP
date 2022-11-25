@@ -932,6 +932,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 _mainPresenter.SetChangesMark();
                 _mainPresenter.itemDescription();
+                _mainPresenter.GetCurrentPrice();
             }
             catch (Exception ex)
             {
@@ -1030,8 +1031,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         null,
                                                         _multiPanelTransomUCP,
                                                         _multiMullionUCP_given);
-                                                        //_multiMullionImagerUCP_Given,
-                                                        //_multiPanelTransomImagerUCP);
+                //_multiMullionImagerUCP_Given,
+                //_multiPanelTransomImagerUCP);
             }
 
             if (parent_ctrl.Name.Contains("flp_Multi"))
@@ -1099,10 +1100,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _multiPanelTransomUC_flpMultiMouseEnterEventRaised(object sender, EventArgs e)
         {
-           
+
             color = Color.Blue;
             ((IMultiPanelUC)_multiPanelTransomUC).InvalidateFlp();
-          
+
         }
 
         Color color = Color.Black;
@@ -1400,7 +1401,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointY = 5;
                             ht_deduction = 11;
 
-                            if (parent_name.Contains("MultiMullion")) 
+                            if (parent_name.Contains("MultiMullion"))
                             {
                                 if (parent_doxtyle == DockStyle.None &&
                                     lvl2_parent_Type == "Transom") //T-M-T
@@ -1715,7 +1716,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             ht_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None )
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
                                             ht_deduction = 6;
@@ -2883,7 +2884,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "First")
                 #region First Multi-Panel in a MAIN PLATFORM (MultiMullion)
                 {
-                    int loc_X = 0, 
+                    int loc_X = 0,
                         loc_Y = fpnl.ClientRectangle.Height,
                         loc2_Y = pInnerY + pInnerHt;
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
@@ -2937,7 +2938,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          thisObj_placement == "Last")
                 #region Last Multi-Panel in MAIN PLATFORM (MultiMullion)
                 {
-                    
+
                     int upLine_loc_X2 = pInnerX + pInnerWd,
                         botLine_locY = fpnl.ClientRectangle.Height,
                         botLine_locX2 = pInnerX + pInnerWd,

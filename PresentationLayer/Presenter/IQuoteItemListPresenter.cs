@@ -14,6 +14,6 @@ namespace PresentationLayer.Presenter
                                                IQuoteItemListUCPresenter quoteItemListUCPresenter,
                                                IWindoorModel windoorModel,
                                                IMainPresenter mainPresenter);
-
+        void SetAllItemDiscount(int inputedDiscount);
     }
 }

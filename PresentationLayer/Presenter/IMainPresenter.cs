@@ -63,7 +63,7 @@ namespace PresentationLayer.Presenter
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
-        
+
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
 
@@ -120,6 +120,6 @@ namespace PresentationLayer.Presenter
         void SaveChanges();
         void SaveAs();
         void itemDescription();
-
+        void GetCurrentPrice();
     }
 }

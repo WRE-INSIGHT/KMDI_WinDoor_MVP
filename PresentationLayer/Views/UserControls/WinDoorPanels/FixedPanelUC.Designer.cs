@@ -46,12 +46,13 @@
             this.deleteToolStripMenuItem,
             this.overlapSashToolStripMenuItem});
             this.cmenu_fxd.Name = "cmenu_fxd";
-            this.cmenu_fxd.Size = new System.Drawing.Size(143, 48);
+            this.cmenu_fxd.Size = new System.Drawing.Size(153, 70);
+            this.cmenu_fxd.Opening += new System.ComponentModel.CancelEventHandler(this.cmenu_fxd_Opening);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -63,7 +64,7 @@
             this.bothToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
-            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
             // rightToolStripMenuItem

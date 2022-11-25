@@ -205,6 +205,17 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public void SetAllItemDiscount (int inputedDiscount)
+        {
+            _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                wdm.WD_discount = inputedDiscount;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
+                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
+            } 
+        }
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {

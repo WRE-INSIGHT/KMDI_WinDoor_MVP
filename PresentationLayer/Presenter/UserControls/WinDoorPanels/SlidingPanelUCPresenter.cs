@@ -961,9 +961,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
             }
-           
+
             #endregion
             _mainPresenter.itemDescription();
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised(object sender, EventArgs e)

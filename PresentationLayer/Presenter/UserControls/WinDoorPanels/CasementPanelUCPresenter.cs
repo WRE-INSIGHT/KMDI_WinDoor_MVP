@@ -965,6 +965,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.DeselectDivider();
             _mainPresenter.itemDescription();
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)

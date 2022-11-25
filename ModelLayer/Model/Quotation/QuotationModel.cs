@@ -44,8 +44,9 @@ namespace ModelLayer.Model.Quotation
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
+        public decimal CurrentPrice { get; set; }
 
-    private DataColumn CreateColumn(string columname, string caption, string type)
+        private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
             col.DataType = Type.GetType(type);
@@ -2500,7 +2501,7 @@ namespace ModelLayer.Model.Quotation
 
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
-               
+
                 if (BOMandItemlistStatus == "PriceItemList")
                 {
                     wdm.WD_Selected = true;
@@ -4661,11 +4662,14 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
+                    CurrentPrice = TotaPrice;
                     lstTotalPrice.Add(TotaPrice);
+
                     if (wdm.WD_price == 0)
                     {
                         wdm.WD_price = TotaPrice;
                     }
+                    
 
                     if (BOM_Status == true)
                     {

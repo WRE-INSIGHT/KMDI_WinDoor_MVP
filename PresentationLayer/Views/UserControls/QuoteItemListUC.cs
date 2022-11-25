@@ -1,7 +1,7 @@
 ﻿using CommonComponents;
 using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -106,6 +106,9 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ComputeNetPriceTextChangeEventRaised;
         public event EventHandler tboxItemNameTextChangedEventRaised;
         public event EventHandler tboxWindoorNumberTextChangedEventRaised;
+        public event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
+        public event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
+
         public event KeyEventHandler NudItemPriceKeyDownEventRaised;
         public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
         public event KeyEventHandler NudItemQuantityKeyDownEventRaised;
@@ -203,11 +206,20 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, tboxItemNameTextChangedEventRaised, e);
         }
+        private void suggestedPriceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, suggestedPriceToolStripMenuItemClickEventRaised, e);
+        }
+
+        private void setAllDiscountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, setAllDiscountToolStripMenuItemClickEventRaised, e);
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             tboxItemName.DataBindings.Add(ModelBinding["WD_itemName"]);
             tboxWindoorNumber.DataBindings.Add(ModelBinding["WD_WindoorNumber"]);
-          //  NudItemQuantity.DataBindings.Add(ModelBinding["WD_quantity"]);
+            //  NudItemQuantity.DataBindings.Add(ModelBinding["WD_quantity"]);
 
         }
 
