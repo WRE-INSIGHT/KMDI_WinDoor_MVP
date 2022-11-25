@@ -237,8 +237,8 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>2.45349in</Top>
-        <Left>6.36697in</Left>
+        <Top>2.44099in</Top>
+        <Left>6.35447in</Left>
         <Height>0.25in</Height>
         <Width>1.505in</Width>
         <ZIndex>4</ZIndex>
@@ -259,10 +259,10 @@
               <Width>0.94449in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.04898in</Width>
+              <Width>2.38013in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.38013in</Width>
+              <Width>2.04898in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.90784in</Width>
@@ -338,7 +338,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Specification</Value>
+                              <Value>                   Illustration</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -346,7 +346,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -388,7 +388,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>                   Illustration</Value>
+                              <Value>Specification</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -396,7 +396,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -713,6 +713,62 @@
                   <CellContents>
                     <Rectangle Name="Rectangle1">
                       <ReportItems>
+                        <Image Name="Image3">
+                          <Source>Database</Source>
+                          <Value>=Fields!dtImage.Value</Value>
+                          <MIMEType>image/png</MIMEType>
+                          <Sizing>FitProportional</Sizing>
+                          <Top>0.04519in</Top>
+                          <Left>0.02778in</Left>
+                          <Height>1.08959in</Height>
+                          <Width>2.30916in</Width>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>5pt</PaddingLeft>
+                            <PaddingRight>5pt</PaddingRight>
+                          </Style>
+                        </Image>
+                        <Image Name="Image4">
+                          <Source>Database</Source>
+                          <Value>=Fields!dtTopViewImage.Value</Value>
+                          <MIMEType>image/png</MIMEType>
+                          <Sizing>FitProportional</Sizing>
+                          <Top>1.13477in</Top>
+                          <Left>0.02221in</Left>
+                          <Height>0.25278in</Height>
+                          <Width>1.96541in</Width>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>5pt</PaddingLeft>
+                            <PaddingRight>5pt</PaddingRight>
+                          </Style>
+                        </Image>
+                      </ReportItems>
+                      <KeepTogether>true</KeepTogether>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <LeftBorder>
+                          <Color>White</Color>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Color>White</Color>
+                        </RightBorder>
+                      </Style>
+                    </Rectangle>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Rectangle Name="Rectangle2">
+                      <ReportItems>
                         <Textbox Name="dtDescription">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -745,62 +801,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                      </ReportItems>
-                      <KeepTogether>true</KeepTogether>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <LeftBorder>
-                          <Color>White</Color>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>White</Color>
-                        </RightBorder>
-                      </Style>
-                    </Rectangle>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Rectangle Name="Rectangle2">
-                      <ReportItems>
-                        <Image Name="Image3">
-                          <Source>Database</Source>
-                          <Value>=Fields!dtImage.Value</Value>
-                          <MIMEType>image/png</MIMEType>
-                          <Sizing>FitProportional</Sizing>
-                          <Top>0.04519in</Top>
-                          <Left>0.02778in</Left>
-                          <Height>1.08959in</Height>
-                          <Width>2.30916in</Width>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>5pt</PaddingLeft>
-                            <PaddingRight>5pt</PaddingRight>
-                          </Style>
-                        </Image>
-                        <Image Name="Image4">
-                          <Source>Database</Source>
-                          <Value>=Fields!dtTopViewImage.Value</Value>
-                          <MIMEType>image/png</MIMEType>
-                          <Sizing>FitProportional</Sizing>
-                          <Top>1.16255in</Top>
-                          <Left>0.35764in</Left>
-                          <Height>0.25278in</Height>
-                          <Width>1.96541in</Width>
-                          <ZIndex>1</ZIndex>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>5pt</PaddingLeft>
-                            <PaddingRight>5pt</PaddingRight>
-                          </Style>
-                        </Image>
                       </ReportItems>
                       <KeepTogether>true</KeepTogether>
                       <Style>
@@ -1002,7 +1002,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>8in</Width>
+  <Width>7.96323in</Width>
   <Page>
     <PageHeader>
       <Height>1.09452in</Height>
