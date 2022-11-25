@@ -328,7 +328,8 @@ namespace PresentationLayer.Presenter
             }
 
             _dgvCustRefNo.Columns["Customer_Reference_Id"].Visible = false;
-           if(_userModel.AccountType == "Admin" || _userModel.AccountType == "Cost Engr Head")
+            _dgvCustRefNo.Columns["Cost Engr In-Charge Id"].Visible = false;
+            if (_userModel.AccountType == "Admin" || _userModel.AccountType == "Cost Engr Head" || _userModel.AccountType == "Programmer")
             {
                 _dgvCustRefNo.Columns["Cost Engr In-Charge"].Visible = true;
             }
