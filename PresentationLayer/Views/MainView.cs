@@ -446,6 +446,9 @@ namespace PresentationLayer.Views
         public void Set_AssignProject_Visibility(bool visibility)
         {
             assignProjectsToolStripMenuItem.Visible = visibility;
+            projectToolStripMenuItem.Visible = visibility;
+            //listOfMaterialsToolStripMenuItem.Visible = visibility;
+            customArrowHeadToolStripMenuItem.Visible = visibility;
         }
 
         private void tsBtnNConcrete_Click(object sender, EventArgs e)

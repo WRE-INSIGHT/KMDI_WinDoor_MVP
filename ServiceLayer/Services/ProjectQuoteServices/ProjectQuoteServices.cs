@@ -93,9 +93,9 @@ namespace ServiceLayer.Services.ProjectQuoteServices
             return await _projQuoteRepo.Get_CustRefNoByProjectID(projId, user_id, user_role);
         }
 
-        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefId, int user_id, string user_role)
+        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int pqId, int projId, int custRefId, int user_id, string user_role)
         {
-            return await _projQuoteRepo.Get_QuoteNo_ByProjectID_ByCUstRefNo(projId, custRefId, user_id, user_role);
+            return await _projQuoteRepo.Get_QuoteNo_ByProjectID_ByCUstRefNo(pqId, projId, custRefId, user_id, user_role);
         }
 
         public async Task<DataTable> Get_AEICByCostEngrID(string searchStr, int user_id, string user_acctType)
@@ -142,6 +142,11 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         public async Task DeleteAEIC(string Project_Id, string Employee_Id)
         {
             await _projQuoteRepo.DeleteAEIC(Project_Id, Employee_Id);
+        }
+
+        public async Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType)
+        {
+            return await _projQuoteRepo.GetProjectAssignAE(searchStr, user_id, user_acctType);
         }
     }
 }

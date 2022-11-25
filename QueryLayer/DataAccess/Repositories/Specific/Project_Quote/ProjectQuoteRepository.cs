@@ -138,6 +138,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Parameters.Add("@Date_Assigned", SqlDbType.DateTime).Value = DateTime.Now;//pqModel.PQ_DateAssigned;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
+
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();
                         sqltrans.Commit();
                     }
@@ -210,7 +211,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
 
             return dt;
         }
-        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int projId, int custRefId, int user_id, string user_role)
+        public async Task<DataTable> Get_QuoteNo_ByProjectID_ByCUstRefNo(int pqId, int projId, int custRefId, int user_id, string user_role)
         {
             DataTable dt = new DataTable();
             SqlDataAdapter sqladapter = new SqlDataAdapter();
@@ -228,6 +229,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetQuoteNo_ByCustRef";
+                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = pqId;
                         sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = user_id;
                         sqlcmd.Parameters.Add("@User_Role", SqlDbType.VarChar).Value = user_role;
                         sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = projId;
@@ -454,18 +456,18 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.AddWithValue("@Command", SqlDbType.VarChar).Value = "SaveProject";
-                        sqlcmd.Parameters.AddWithValue("@Title", SqlDbType.VarChar).Value = projectModel.Title;
-                        sqlcmd.Parameters.AddWithValue("@Firstname", SqlDbType.VarChar).Value = projectModel.Firstname;
-                        sqlcmd.Parameters.AddWithValue("@Lastname", SqlDbType.VarChar).Value = projectModel.Lastname;
-                        sqlcmd.Parameters.AddWithValue("@CompanyName", SqlDbType.VarChar).Value = projectModel.CompanyName;
-                        sqlcmd.Parameters.AddWithValue("@ContactNo", SqlDbType.VarChar).Value = projectModel.ContactNo;
-                        sqlcmd.Parameters.AddWithValue("@FileLableAs", SqlDbType.VarChar).Value = projectModel.FileLableAs;
-                        sqlcmd.Parameters.AddWithValue("@UnitNo", SqlDbType.VarChar).Value = projectModel.UnitNo;
-                        sqlcmd.Parameters.AddWithValue("@Establishment", SqlDbType.VarChar).Value = projectModel.Establishment;
-                        sqlcmd.Parameters.AddWithValue("@HouseNo", SqlDbType.VarChar).Value = projectModel.HouseNo;
-                        sqlcmd.Parameters.AddWithValue("@Street", SqlDbType.VarChar).Value = projectModel.Street;
-                        sqlcmd.Parameters.AddWithValue("@Village", SqlDbType.VarChar).Value = projectModel.Village;
-                        sqlcmd.Parameters.AddWithValue("@Barangay", SqlDbType.VarChar).Value = projectModel.Barangay;
+                        sqlcmd.Parameters.AddWithValue("@Title", SqlDbType.VarChar).Value = projectModel.Title == null ? "" : projectModel.Title;
+                        sqlcmd.Parameters.AddWithValue("@Firstname", SqlDbType.VarChar).Value = projectModel.Firstname == null ? "" : projectModel.Firstname;
+                        sqlcmd.Parameters.AddWithValue("@Lastname", SqlDbType.VarChar).Value = projectModel.Lastname == null ? "" : projectModel.Lastname;
+                        sqlcmd.Parameters.AddWithValue("@CompanyName", SqlDbType.VarChar).Value = projectModel.CompanyName == null ? "" : projectModel.CompanyName;
+                        sqlcmd.Parameters.AddWithValue("@ContactNo", SqlDbType.VarChar).Value = projectModel.ContactNo == null ? "" : projectModel.ContactNo;
+                        sqlcmd.Parameters.AddWithValue("@FileLableAs", SqlDbType.VarChar).Value = projectModel.FileLableAs == null ? "" : projectModel.FileLableAs;
+                        sqlcmd.Parameters.AddWithValue("@UnitNo", SqlDbType.VarChar).Value = projectModel.UnitNo == null ? "" : projectModel.UnitNo;
+                        sqlcmd.Parameters.AddWithValue("@Establishment", SqlDbType.VarChar).Value = projectModel.Establishment == null ? "" : projectModel.Establishment;
+                        sqlcmd.Parameters.AddWithValue("@HouseNo", SqlDbType.VarChar).Value = projectModel.HouseNo == null ? "" : projectModel.HouseNo;
+                        sqlcmd.Parameters.AddWithValue("@Street", SqlDbType.VarChar).Value = projectModel.Street == null ? "" : projectModel.Street;
+                        sqlcmd.Parameters.AddWithValue("@Village", SqlDbType.VarChar).Value = projectModel.Village == null ? "" : projectModel.Village;
+                        sqlcmd.Parameters.AddWithValue("@Barangay", SqlDbType.VarChar).Value = projectModel.Barangay == null ? "" : projectModel.Barangay;
                         sqlcmd.Parameters.AddWithValue("@City", SqlDbType.VarChar).Value = projectModel.City;
                         sqlcmd.Parameters.AddWithValue("@Province", SqlDbType.VarChar).Value = projectModel.Province;
                         sqlcmd.Parameters.AddWithValue("@Area", SqlDbType.VarChar).Value = projectModel.Area;
@@ -505,6 +507,38 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType)
+        {
+            DataTable dt = new DataTable();
+            SqlDataAdapter sqladapter = new SqlDataAdapter();
+
+            using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
+            {
+                await sqlcon.OpenAsync();
+                using (SqlCommand sqlcmd = sqlcon.CreateCommand())
+                {
+                    using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                    {
+
+                        sqlcmd.Connection = sqlcon;
+                        sqlcmd.Transaction = sqltrans;
+                        sqlcmd.CommandText = "Project_Quote_Stp";
+                        sqlcmd.CommandType = CommandType.StoredProcedure;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "GetProjectAssignAE";
+                        sqlcmd.Parameters.Add("@Emp_id", SqlDbType.Int).Value = user_id;
+                        sqlcmd.Parameters.Add("@User_Role", SqlDbType.VarChar).Value = user_acctType;
+                        sqlcmd.Parameters.Add("@Search", SqlDbType.VarChar).Value = searchStr;
+
+                        sqladapter.SelectCommand = sqlcmd;
+                        sqladapter.Fill(dt);
+                        sqltrans.Commit();
+                    }
+                }
+            }
+
+            return dt;
         }
     }
 }

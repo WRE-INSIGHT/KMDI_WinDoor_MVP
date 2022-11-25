@@ -1289,6 +1289,13 @@ namespace PresentationLayer.Presenter.UserControls
             g.DrawRectangle(new Pen(Color.Black, w), outer_bounds);
             //g.FillRectangle(Brushes.DarkGray, outer_bounds);
             g.FillRectangle(Brushes.White, outer_bounds);
+
+
+            Color outerColor = Color.Black;
+            if (panelModel.Panel_ChkText != "dSash" && panelModel.Panel_Type == "Fixed Panel")
+            {
+                outerColor = Color.White;
+            }
             if (panelModel.Panel_Type != "Louver Panel")
             {
                 //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
@@ -1305,9 +1312,9 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction - tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine5, outerLine6);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
@@ -1334,9 +1341,9 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine5, outerLine6);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
@@ -1360,8 +1367,8 @@ namespace PresentationLayer.Presenter.UserControls
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine1, outerLine2);
-                    e.Graphics.DrawLine(new Pen(Color.Black, 1), outerLine3, outerLine4);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
+                    e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
@@ -1379,7 +1386,7 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
                 {
                     //outer Line
-                    g.DrawRectangle(new Pen(Color.Black, 1), new Rectangle(Ppoint.X + outer_line,
+                    g.DrawRectangle(new Pen(outerColor, 1), new Rectangle(Ppoint.X + outer_line,
                                                                       Ppoint.Y + outer_line,
                                                                       (client_wd - (outer_line * 2)) - w,
                                                                       (client_ht - (outer_line * 2)) - w));
