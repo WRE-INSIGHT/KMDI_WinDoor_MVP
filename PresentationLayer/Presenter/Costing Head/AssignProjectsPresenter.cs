@@ -136,16 +136,20 @@ namespace PresentationLayer.Presenter.Costing_Head
             {
                 // Console.WriteLine("customer ref id: " + row.Cells["Customer_Reference_Id"].Value);
 
-                if (row.Cells["Customer_Reference_Id"].Value.ToString() == "0")
+                
+                if (row.Cells["Customer_Reference_Id"].Value.ToString() == "0" || row.Cells["Cost Engr In-Charge"].Value.ToString() != "")
                 {
                     MessageBox.Show("Please add customer reference before assigning Cost Engineer","Window Maker",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 else if(_dgvProj.SelectedRows.Count > 0)
                 {
                     ICostEngrEmployeePresenter ceEmpPresenter = _ceEmpPresenter.GetNewInstance(_unityC, this);
-                    ceEmpPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
-                    ceEmpPresenter.Set_UserModel(_userModel);
-                    ceEmpPresenter.ShowThisView();
+                            ceEmpPresenter.Set_SelectedRows(_dgvProj.SelectedRows);
+                            ceEmpPresenter.Set_UserModel(_userModel);
+                            ceEmpPresenter.ShowThisView();
+                   
+
+
                 }
                 else
                 {

@@ -148,5 +148,10 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         {
             return await _projQuoteRepo.GetProjectAssignAE(searchStr, user_id, user_acctType);
         }
+
+        public async Task<bool> CheckCustomerRefById(int custRefId, int Employee_Id)
+        {
+            return await _projQuoteRepo.CheckCustomerRefById(custRefId, Employee_Id);
+        }
     }
 }
