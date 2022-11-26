@@ -45,7 +45,7 @@ namespace ModelLayer.Model.Quotation
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public decimal CurrentPrice { get; set; }
-
+        public bool itemSelectStatus { get; set; }
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();

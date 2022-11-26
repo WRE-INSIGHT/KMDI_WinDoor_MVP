@@ -868,6 +868,7 @@ namespace PresentationLayer.Presenter
         private void _mainView_NudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
+            updatePriceFromMainViewToItemList();
         }
 
         private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -9290,9 +9291,39 @@ namespace PresentationLayer.Presenter
         public void GetCurrentPrice()
         {
             //_quotationModel.Select_Current_Windoor(_windoorModel);
-            qoutationModel_MainPresenter.BOMandItemlistStatus = "PriceItemList";
-            qoutationModel_MainPresenter.ItemCostingPriceAndPoints();
+            if (qoutationModel_MainPresenter.itemSelectStatus == true)
+            {
+                _quotationModel.BOMandItemlistStatus = "BOM";
+            }
+            else
+            {
+                _quotationModel.itemSelectStatus = false;
+                _quotationModel.BOMandItemlistStatus = "PriceItemList";
+            }
+            _quotationModel.ItemCostingPriceAndPoints();
             GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
+        }
+
+        public void updatePriceFromMainViewToItemList()
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                if (wdm.WD_Selected == true)
+                { 
+                    wdm.WD_price = _lblCurrentPrice.Value;
+                }
+            }
+        }
+
+        public void updatePriceOfMainView()
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                if (wdm.WD_Selected == true)
+                {
+                    _lblCurrentPrice.Value = wdm.WD_price;
+                }
+            }
         }
         #endregion
 

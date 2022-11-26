@@ -13,6 +13,7 @@ namespace PresentationLayer.Views
         public event EventHandler TSbtnPrintClickEventRaised;
         public event EventHandler TSbtnGlassSummaryClickEventRaised;
         public event EventHandler QuoteItemListViewLoadEventRaised;
+        public event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
         private void TSbtnPrint_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TSbtnPrintClickEventRaised, e);
@@ -32,6 +33,12 @@ namespace PresentationLayer.Views
         private void TSbtnGlassSummary_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TSbtnGlassSummaryClickEventRaised, e);
+        }
+
+        private void QuoteItemListView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EventHelpers.RaiseFormClosedEvent(sender, QuoteItemListViewFormClosedEventRaised, e);
+
         }
     }
 }
