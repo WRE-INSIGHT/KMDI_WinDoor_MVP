@@ -47,7 +47,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                 {
                                     while (rdr.Read())
                                     {
-                                        if (rdr.GetString(3) == "Admin" || rdr.GetString(3) == "Cost Engr" || rdr.GetString(3) == "Cost Engr Head" || rdr.GetString(3) == "Programmer")
+                                        if (rdr.GetString(3) == "User Level 1" || rdr.GetString(3) == "User Level 2" || rdr.GetString(3) == "User Level 3")
                                         {
                                             user.UserID = rdr.GetInt32(0);
                                             user.Fullname = rdr.GetString(1);
