@@ -91,7 +91,6 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.duplicateSample = new System.Windows.Forms.ToolStripButton();
             this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -171,7 +170,7 @@
             this.projectToolStripMenuItem,
             this.screenToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.newToolStripMenuItem.Text = "Ne&w";
             // 
             // QuotationToolStripMenuItem
@@ -316,7 +315,7 @@
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.saveAsToolStripMenuItem.Text = "&Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -324,13 +323,13 @@
             // 
             this.syncToolStripMenuItem.Enabled = false;
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.syncToolStripMenuItem.Text = "Cloud sync";
             // 
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.selectProjectToolStripMenuItem.Text = "Select Project";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
             // 
@@ -525,7 +524,6 @@
             this.tsLbl_Loading,
             this.tsLbl_Status,
             this.ViewImagerToolStripButton1,
-            this.duplicateSample,
             this.SetGlassToolStripMenuItem});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
@@ -715,17 +713,6 @@
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.ViewImagerToolStripButton1.Text = "View Imager";
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
-            // 
-            // duplicateSample
-            // 
-            this.duplicateSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.duplicateSample.Image = global::PresentationLayer.Properties.Resources.icons8_documents;
-            this.duplicateSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.duplicateSample.Name = "duplicateSample";
-            this.duplicateSample.Size = new System.Drawing.Size(24, 29);
-            this.duplicateSample.Text = "Set Glass";
-            this.duplicateSample.ToolTipText = "Set Glass";
-            this.duplicateSample.Visible = false;
             // 
             // SetGlassToolStripMenuItem
             // 
@@ -1135,7 +1122,9 @@
         private System.Windows.Forms.ToolStripMenuItem factorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billOfMaterialToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton duplicateItemToolStripButton1;
+
         private System.Windows.Forms.ToolStripButton duplicateSample;
         private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
+
     }
 }

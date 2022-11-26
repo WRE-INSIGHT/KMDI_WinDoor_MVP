@@ -194,7 +194,6 @@ namespace PresentationLayer.Views
         }
 
         #endregion
-
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -232,6 +231,7 @@ namespace PresentationLayer.Views
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
+
 
         public MainView()
         {
