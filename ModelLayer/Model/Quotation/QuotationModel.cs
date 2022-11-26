@@ -2304,12 +2304,12 @@ namespace ModelLayer.Model.Quotation
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
 
-                if (BOMandItemlistStatus == "PriceItemList")
-                {
-                    wdm.WD_Selected = true;
-                }
+                //if (BOMandItemlistStatus == "PriceItemList")
+                //{
+                //    wdm.WD_Selected = true;
+                //}
 
-                if (wdm.WD_Selected == true)
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
                 {
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {

@@ -158,7 +158,7 @@ namespace PresentationLayer.Presenter
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
 
-        private NumericUpDown _currentPrice;
+        private NumericUpDown _lblCurrentPrice;
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -525,7 +525,7 @@ namespace PresentationLayer.Presenter
             set
             {
                 _custRefNo = value;
-               
+
             }
         }
         private DateTime _dateAssigned;
@@ -756,7 +756,7 @@ namespace PresentationLayer.Presenter
             _mullionImagerUCP = mullionImagerUCP;
             _transomImagerUCP = transomImagerUCP;
             _pricingPresenter = pricingPresenter;
-            _currentPrice = _mainView.GetCurrentPrice();
+            _lblCurrentPrice = _mainView.GetCurrentPrice();
 
             SubscribeToEventsSetup();
         }
@@ -867,7 +867,7 @@ namespace PresentationLayer.Presenter
         #region Events  
         private void _mainView_NudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
-            _currentPrice.Value = ((NumericUpDown)sender).Value;
+            _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
         }
 
         private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -1773,6 +1773,18 @@ namespace PresentationLayer.Presenter
                 }
                 _mainView.CreateNewWindoorBtnEnabled = true;
             }
+
+            if (_quotationModel != null)
+            {
+                if (_quotationModel.Lst_Windoor.Count != 0)
+                {
+                    GetCurrentPrice();
+                }
+            }
+            else
+            {
+                _lblCurrentPrice.Value = 0;
+            }
         }
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -1836,7 +1848,6 @@ namespace PresentationLayer.Presenter
             {
                 Scenario_Quotation(false, true, false, false, false, false, frmDimensionPresenter.Show_Purpose.CreateNew_Item, 0, 0, "G58 Profile", _frmDimensionPresenter.baseColor_frmDimensionPresenter);
             }
-            _quotationModel.CurrentPrice = 0;
         }
 
         private void OnPanelMainSizeChangedEventRaised(object sender, EventArgs e)
@@ -2089,7 +2100,7 @@ namespace PresentationLayer.Presenter
 
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
-
+            _mainView.GetCurrentPrice().DecimalPlaces = 2;
 
             bgw.WorkerReportsProgress = true;
             bgw.WorkerSupportsCancellation = true;
@@ -7359,6 +7370,7 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
+                    _mainView.GetCurrentPrice().Value = 0;
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -9272,6 +9284,7 @@ namespace PresentationLayer.Presenter
 
         public void GetCurrentPrice()
         {
+            //_quotationModel.Select_Current_Windoor(_windoorModel);
             qoutationModel_MainPresenter.BOMandItemlistStatus = "PriceItemList";
             qoutationModel_MainPresenter.ItemCostingPriceAndPoints();
             GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;

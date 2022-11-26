@@ -4730,7 +4730,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_Type.Contains("Sliding") || Panel_ChkText == "dSash")
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
-                    // Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                 }
 
@@ -6389,7 +6389,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 if (Panel_Type.Contains("Sliding") || Panel_ChkText == "dSash")
                 {
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
-                    // Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
+                    Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_AluminumPullHandleArtNo = AluminumPullHandle_ArticleNo._9C58;
                     Panel_GlazingRebateBlockArtNo = GlazingRebateBlock_ArticleNo._9C56;
                 }
