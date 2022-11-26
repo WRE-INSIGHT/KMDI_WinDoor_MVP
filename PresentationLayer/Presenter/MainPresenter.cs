@@ -976,7 +976,12 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            SaveAs();
+            _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+            if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+            {
+                SaveAs();
+            }
+
         }
 
         public void SaveAs()

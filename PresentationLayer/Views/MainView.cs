@@ -194,7 +194,6 @@ namespace PresentationLayer.Views
         }
 
         #endregion
-
         public event EventHandler MainViewLoadEventRaised;
         public event EventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
@@ -232,6 +231,7 @@ namespace PresentationLayer.Views
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
+
 
         public MainView()
         {
@@ -466,10 +466,7 @@ namespace PresentationLayer.Views
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.InitialDirectory = Properties.Settings.Default.WndrDir;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                EventHelpers.RaiseEvent(sender, saveAsToolStripMenuItemClickEventRaised, e);
-            }
+            EventHelpers.RaiseEvent(sender, saveAsToolStripMenuItemClickEventRaised, e);
         }
 
         public SaveFileDialog GetSaveFileDialog()

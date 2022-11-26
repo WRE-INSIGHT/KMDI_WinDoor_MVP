@@ -540,5 +540,48 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
 
             return dt;
         }
+
+        public async Task<bool> CheckCustomerRefById(int custRefId, int employee_Id)
+        {
+            try
+            {
+                bool Combination = false;
+                using (SqlConnection Sqlcon = new SqlConnection(_sqlConString))
+                {
+                    await Sqlcon.OpenAsync();
+                    using (SqlCommand sqlcmd = Sqlcon.CreateCommand())
+                    {
+                        using (SqlTransaction sqltrans = Sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "CheckProjectAEAssignment"))
+                        {
+                            sqlcmd.Connection = Sqlcon;
+                            sqlcmd.Transaction = sqltrans;
+                            sqlcmd.CommandText = "Project_Quote_Stp";
+                            sqlcmd.CommandType = CommandType.StoredProcedure;
+                            sqlcmd.Parameters.AddWithValue("@Command", "CheckCustomerRefById");
+                            sqlcmd.Parameters.AddWithValue("@Emp_id", employee_Id);
+                            sqlcmd.Parameters.AddWithValue("@Cust_ref_id", custRefId);
+                            using (SqlDataReader rdr = sqlcmd.ExecuteReader())
+                            {
+                                if (rdr.HasRows)
+                                {
+                                    while (rdr.Read())
+                                    {
+                                        Combination = rdr.GetBoolean(0);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                return Combination;
+
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
