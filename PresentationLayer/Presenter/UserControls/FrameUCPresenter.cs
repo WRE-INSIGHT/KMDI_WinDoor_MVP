@@ -538,6 +538,7 @@ namespace PresentationLayer.Presenter.UserControls
                 DeleteFrame();
                 _mainPresenter.SetChangesMark();
                 _mainPresenter.itemDescription();
+                _mainPresenter.GetCurrentPrice();
             }
         }
 

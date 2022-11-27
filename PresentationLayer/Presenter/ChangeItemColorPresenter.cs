@@ -3,11 +3,8 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
 using System.Windows.Forms;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
@@ -41,6 +38,7 @@ namespace PresentationLayer.Presenter
             _windoorModel.WD_OutsideColor = outside_color;
             _windoorModel.SetMiddleCloser_onPanel();
             _changeItemColorView.CloseView();
+            _mainPresenter.GetCurrentPrice();
         }
 
         private Base_Color base_color;

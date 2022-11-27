@@ -45,7 +45,7 @@ namespace ModelLayer.Model.Quotation
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public decimal CurrentPrice { get; set; }
-
+        public bool itemSelectStatus { get; set; }
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
@@ -2502,12 +2502,12 @@ namespace ModelLayer.Model.Quotation
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
 
-                if (BOMandItemlistStatus == "PriceItemList")
-                {
-                    wdm.WD_Selected = true;
-                }
+                //if (BOMandItemlistStatus == "PriceItemList")
+                //{
+                //    wdm.WD_Selected = true;
+                //}
 
-                if (wdm.WD_Selected == true)
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
                 {
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
