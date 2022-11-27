@@ -1520,6 +1520,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AddNew_Concrete.png" />
+    <None Include="Resources\43.png" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
