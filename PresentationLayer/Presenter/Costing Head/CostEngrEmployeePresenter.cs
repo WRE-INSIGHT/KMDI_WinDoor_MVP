@@ -53,95 +53,128 @@ namespace PresentationLayer.Presenter.Costing_Head
             try
             {
 
-
-                string trans_mode = "";
-
-                if (_dgvProjSelectedRows.Count == 1)
+                foreach (DataGridViewRow row in _dgvProjSelectedRows)
                 {
-                    string custRefNo = _dgvProjSelectedRows[0].Cells["Customer_Reference_Id"].Value.ToString();
-                    if (_chkCEList.CheckedItems.Count == 1)
-                    {
-                        trans_mode = "Update";
-                    }
-                    else if (_chkCEList.CheckedItems.Count > 1)
-                    {
-                        trans_mode = "Insert";
-                    }
-                }
-                else if (_dgvProjSelectedRows.Count > 1)
-                {
-                    if (_chkCEList.CheckedItems.Count > 0)
-                    {
-                        trans_mode = "Insert";
-                    }
-                    else if (_chkCEList.CheckedItems.Count <= 0)
-                    {
-                        MessageBox.Show("Invalid selection");
-                    }
-                }
 
 
-                if (trans_mode == "Insert")
-                {
-                    foreach (DataGridViewRow row in _dgvProjSelectedRows)
+                    //await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+
+                    foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
                     {
 
-
-                        //await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
-
-                        foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
+                        int emp_id = Convert.ToInt32(chkListVal["Id"]);
+                        int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "0") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                        int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                        bool CostEngineerExistinCustomerRef = await _pqServices.CheckCustomerRefById(custRefNo_id, emp_id);
+                        if (CostEngineerExistinCustomerRef)
                         {
-                            bool CostEngineerExistinCustomerRef = await _pqServices.CheckCustomerRefById(Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value), Convert.ToInt32(chkListVal["Id"]));
-                            if (CostEngineerExistinCustomerRef)
-                            {
-                                MessageBox.Show("Cost Engineer already assigned on this Customer Ref", "Window Maker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else
-                            { 
+                            MessageBox.Show("Cost Engineer already assigned on this Customer Ref", "Window Maker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
 
-                                int emp_id = Convert.ToInt32(chkListVal["Id"]);
-                                int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
-                                int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                            IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
+                                                                                     Convert.ToInt32(row.Cells["Project_Id"].Value),
+                                                                                     custRefNo_id,
+                                                                                     emp_id,
+                                                                                     quote_id,
+                                                                                     DateTime.Now);
 
-                                IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
-                                                                                         Convert.ToInt32(row.Cells["Project_Id"].Value),
-                                                                                         custRefNo_id,
-                                                                                         emp_id,
-                                                                                         quote_id,
-                                                                                         DateTime.Now);
-
-                                await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
-                            }
+                            await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
                         }
                     }
                 }
-                else if (trans_mode == "Update")
-                {
 
-                    DataGridViewRow row = _dgvProjSelectedRows[0];
-                    DataRowView chkVal = _chkCEList.CheckedItems[0] as DataRowView;
 
-                    int emp_id = Convert.ToInt32(chkVal["Id"]);
-                    int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "0") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
-                    int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
-                    bool CostEngineerExistinCustomerRef = await _pqServices.CheckCustomerRefById(custRefNo_id, emp_id);
-                    if (CostEngineerExistinCustomerRef)
-                    {
-                        MessageBox.Show("Cost Engineer already assigned on this Customer Ref", "Window Maker", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
 
-                        IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
-                                                                                 Convert.ToInt32(row.Cells["Project_Id"].Value),
-                                                                                 custRefNo_id,
-                                                                                 emp_id,
-                                                                                 quote_id,
-                                                                                 DateTime.Now);
 
-                        await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
-                    }
-                }
+                //string trans_mode = "";
+
+                //if (_dgvProjSelectedRows.Count == 1)
+                //{
+                //    string custRefNo = _dgvProjSelectedRows[0].Cells["Customer_Reference_Id"].Value.ToString();
+                //    if (_chkCEList.CheckedItems.Count == 1)
+                //    {
+                //        trans_mode = "Update";
+                //    }
+                //    else if (_chkCEList.CheckedItems.Count > 1)
+                //    {
+                //        trans_mode = "Insert";
+                //    }
+                //}
+                //else if (_dgvProjSelectedRows.Count > 1)
+                //{
+                //    if (_chkCEList.CheckedItems.Count > 0)
+                //    {
+                //        trans_mode = "Insert";
+                //    }
+                //    else if (_chkCEList.CheckedItems.Count <= 0)
+                //    {
+                //        MessageBox.Show("Invalid selection");
+                //    }
+                //}
+
+                ////if (trans_mode == "Insert")
+                ////{
+                ////    foreach (DataGridViewRow row in _dgvProjSelectedRows)
+                ////    {
+
+
+                ////        //await _pqServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+
+                ////        foreach (DataRowView chkListVal in _chkCEList.CheckedItems)
+                ////        {
+                ////            bool CostEngineerExistinCustomerRef = await _pqServices.CheckCustomerRefById(Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value), Convert.ToInt32(chkListVal["Id"]));
+                ////            if (CostEngineerExistinCustomerRef)
+                ////            {
+                ////                MessageBox.Show("Cost Engineer already assigned on this Customer Ref", "Window Maker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ////            }
+                ////            else
+                ////            { 
+
+                ////                int emp_id = Convert.ToInt32(chkListVal["Id"]);
+                ////                int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                ////                int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+
+                ////                IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(0,
+                ////                                                                         Convert.ToInt32(row.Cells["Project_Id"].Value),
+                ////                                                                         custRefNo_id,
+                ////                                                                         emp_id,
+                ////                                                                         quote_id,
+                ////                                                                         DateTime.Now);
+
+                ////                await _pqServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                ////            }
+                ////        }
+                ////    }
+                ////}
+                ////else if (trans_mode == "Update")
+                ////{
+
+                ////    DataGridViewRow row = _dgvProjSelectedRows[0];
+                ////    DataRowView chkVal = _chkCEList.CheckedItems[0] as DataRowView;
+
+                ////    int emp_id = Convert.ToInt32(chkVal["Id"]);
+                ////    int custRefNo_id = (row.Cells["Customer_Reference_Id"].Value.ToString() == "0") ? 0 : Convert.ToInt32(row.Cells["Customer_Reference_Id"].Value);
+                ////    int quote_id = 0; //(row.Cells["Quote_Id"].Value.ToString() == "") ? 0 : Convert.ToInt32(row.Cells["Quote_Id"].Value);
+                ////    bool CostEngineerExistinCustomerRef = await _pqServices.CheckCustomerRefById(custRefNo_id, emp_id);
+                ////    if (CostEngineerExistinCustomerRef)
+                ////    {
+                ////        MessageBox.Show("Cost Engineer already assigned on this Customer Ref", "Window Maker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ////    }
+                ////    else
+                ////    {
+
+                ////        IProjectQuoteModel pqModel = _pqServices.AddProjectQuote(Convert.ToInt32(row.Cells["Id"].Value),
+                ////                                                                 Convert.ToInt32(row.Cells["Project_Id"].Value),
+                ////                                                                 custRefNo_id,
+                ////                                                                 emp_id,
+                ////                                                                 quote_id,
+                ////                                                                 DateTime.Now);
+
+                ////        await _pqServices.Update_ProjQuote(pqModel, _userModel.UserID);
+                ////    }
+                ////}
 
                 await _assignProjPresenter.Load_DGVProjects("");
             }

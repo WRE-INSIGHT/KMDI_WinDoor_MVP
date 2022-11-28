@@ -2,6 +2,7 @@
 using PresentationLayer.CommonMethods;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
@@ -204,5 +205,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, btnSearchProjClickClickEventRaised, e);
         }
+
+        
     }
 }

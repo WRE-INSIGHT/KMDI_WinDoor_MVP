@@ -48,7 +48,7 @@ namespace PresentationLayer.Views.Costing_Head
 
         public void ShowThis()
         {
-            this.ShowDialog();
+            this.Show();
         }
 
         public event EventHandler CostEngrEmployeeViewLoadEventRaised;
