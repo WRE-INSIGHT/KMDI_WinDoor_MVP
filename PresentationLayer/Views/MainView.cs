@@ -30,6 +30,7 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = true;
                     customArrowHeadToolStripMenuItem.Enabled = true;
                     slidingTopViewToolStripMenuItem.Enabled = true;
+                    
                 }
                 else
                 {
@@ -42,6 +43,7 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = false;
                     customArrowHeadToolStripMenuItem.Enabled = false;
                     slidingTopViewToolStripMenuItem.Enabled = false;
+                    
                 }
             }
         }
@@ -57,7 +59,9 @@ namespace PresentationLayer.Views
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
                 tsBtnNConcrete.Enabled = value;
-                //duplicateItemToolStripButton1.Enabled = value;
+                newfactorBtn.Enabled = value;
+                duplicateItemToolStripButton1.Enabled = value;
+
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;
                 deleteItemToolStripButton1.Enabled = value;
@@ -231,7 +235,7 @@ namespace PresentationLayer.Views
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
-
+        public event EventHandler setNewFactorEventRaised;
 
         public MainView()
         {
@@ -290,14 +294,6 @@ namespace PresentationLayer.Views
         private void pnlMain_SizeChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, PanelMainSizeChangedEventRaised, e);
-            //if (pnlMain.VerticalScroll.Visible == true || pnlMain.HorizontalScroll.Visible == true)
-            //{
-            //    btnMinusZoom.Enabled = true;
-            //}
-            //else if(pnlMain.VerticalScroll.Visible == false || pnlMain.HorizontalScroll.Visible == false)
-            //{
-            //    btnMinusZoom.Enabled = false;
-            //}
         }
         public Panel GetPanelItems()
         {
@@ -580,5 +576,11 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, NudCurrentPriceValueChangedEventRaised, e);
         }
 
+        private void newfactorBtn_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, setNewFactorEventRaised, e);
+        }
+
+       
     }
 }

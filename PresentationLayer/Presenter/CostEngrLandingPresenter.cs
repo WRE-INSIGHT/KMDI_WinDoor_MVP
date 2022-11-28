@@ -247,7 +247,15 @@ namespace PresentationLayer.Presenter
                 else if (_tPageNav_selectedIndex == 1)
                 {
                     _CELandingView.SetText_LblNav(_projName);
-                    _CELandingView.resizeForm(376, 600);
+
+                    if (_userModel.AccountType == "User Level 3")
+                    {
+                        _CELandingView.resizeForm(376, 600);
+                    }
+                    else
+                    {
+                        _CELandingView.resizeForm(650, 600);
+                    }
                 }
                 else if (_tPageNav_selectedIndex == 2)
                 {
@@ -329,7 +337,7 @@ namespace PresentationLayer.Presenter
 
             _dgvCustRefNo.Columns["Customer_Reference_Id"].Visible = false;
             _dgvCustRefNo.Columns["Cost Engr In-Charge Id"].Visible = false;
-            if (_userModel.AccountType == "Admin" || _userModel.AccountType == "Cost Engr Head" || _userModel.AccountType == "Programmer")
+            if (_userModel.AccountType == "User Level 1" || _userModel.AccountType == "User Level 2")
             {
                 _dgvCustRefNo.Columns["Cost Engr In-Charge"].Visible = true;
             }

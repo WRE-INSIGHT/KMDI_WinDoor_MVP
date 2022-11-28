@@ -63,6 +63,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _43 {
+            get {
+                object obj = ResourceManager.GetObject("43", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AddNew_Concrete {
             get {
                 object obj = ResourceManager.GetObject("AddNew_Concrete", resourceCulture);
@@ -366,6 +376,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap LouverPanel {
             get {
                 object obj = ResourceManager.GetObject("LouverPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap medical {
+            get {
+                object obj = ResourceManager.GetObject("medical", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

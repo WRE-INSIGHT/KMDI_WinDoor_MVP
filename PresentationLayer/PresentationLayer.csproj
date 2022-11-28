@@ -1520,6 +1520,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AddNew_Concrete.png" />
+    <None Include="Resources\43.png" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
@@ -1560,6 +1561,7 @@
     <Content Include="Resources\loading2.gif" />
     <Content Include="Resources\loading_trans.gif" />
     <None Include="Resources\LouverPanel.png" />
+    <None Include="Resources\medical.png" />
     <Content Include="Resources\minus2_104px.png" />
     <Content Include="Resources\minus_104px.png" />
     <Content Include="Resources\Mullion.png" />

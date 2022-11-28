@@ -96,7 +96,8 @@ namespace PresentationLayer.Presenter
             catch (Exception ex)
             {
                 Logger log = new Logger(ex.Message, ex.StackTrace);
-                MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _loginView.pboxVisibility = false;
             }
         }

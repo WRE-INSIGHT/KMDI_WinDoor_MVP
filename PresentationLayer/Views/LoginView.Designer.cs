@@ -161,7 +161,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::PresentationLayer.Properties.Resources.K_M_logo_official_2018_1;
+            this.pictureBox1.Image = global::PresentationLayer.Properties.Resources._43;
             this.pictureBox1.Location = new System.Drawing.Point(15, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(302, 88);
