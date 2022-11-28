@@ -45,7 +45,7 @@ namespace ModelLayer.Model.Quotation
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public decimal CurrentPrice { get; set; }
-
+        public bool itemSelectStatus { get; set; }
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
@@ -2289,51 +2289,53 @@ namespace ModelLayer.Model.Quotation
                 TotaPrice;
         #endregion
 
-        #region changePriceBasedonDate
+        #region changePriceBasedOnDate
 
         public void changePriceBasedonDate()
         {
             var cus_ref_date = Date_Assigned;
-            DateTime inc_price_date = DateTime.Parse("11-15-2050");
-
-             if(cus_ref_date >= inc_price_date)
+            DateTime inc_price_date = DateTime.Parse("10-15-2022");
+            DateTime inc_price_date_2 = DateTime.Parse("11-15-2022");
+            
+             if(cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
 
-                FramePricePerLinearMeter_7502_WoodGrain = 99999999m;
-                FramePricePerLinearMeter_7502_White = 99999999m;
-                FramePricePerLinearMeter_7507_WoodGrain = 99999999m;
-                FramePricePerLinearMeter_7507_White = 99999999m;
-                FramePricePerLinearMeter_2060_White = 99999999m;//G58
-                FramePricePerLinearMeter_6050_WoodGrain = 99999999m;
-                FramePricePerLinearMeter_6050_White = 99999999m;
-                FramePricePerLinearMeter_6052_WoodGrain = 99999999m;
-                FramePricePerLinearMeter_6052_White = 99999999m;
-                FrameReinPricePerLinearMeter_7502 = 99999999m;
-                FrameReinPricePerLinearMeter_7507 = 99999999m;
-                G58ReinPricePerLinearMeter_V226 = 99999999m;//G58 reinforcement for frame; sash and divider
-                FrameReinPricePerLinearMeter_6050 = 99999999m;
-                FrameReinPricePerLinearMeter_6052 = 99999999m;
+                FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
+                FramePricePerLinearMeter_7502_White = 332.57m;
+                FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
+                FramePricePerLinearMeter_7507_White = 354.28m;
+                FramePricePerLinearMeter_2060_White = 271.35m;//G58
+                FramePricePerLinearMeter_6050_WoodGrain = 483.36m;
+                FramePricePerLinearMeter_6050_White = 378.19m;
+                FramePricePerLinearMeter_6052_WoodGrain = 704.60m;
+                FramePricePerLinearMeter_6052_White = 563.48m;
+                FrameReinPricePerLinearMeter_7502 = 123.55m;
+                FrameReinPricePerLinearMeter_7507 = 406.86m;
+                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame, sash and divider
+                FrameReinPricePerLinearMeter_6050 = 114.76m;
+                FrameReinPricePerLinearMeter_6052 = 194.68m;
 
-                SashPricePerLinearMeter_7581_WoodGrain = 99999999m;
-                SashPricePerLinearMeter_7581_White = 99999999m;
-                SashPricePerLinearMeter_373_WoodGrain = 99999999m;
-                SashPricePerLinearMeter_373_White = 99999999m;
-                SashPricePerLinearMeter_374_WoodGrain = 99999999m;
-                SashPricePerLinearMeter_374_White = 99999999m;
-                SashPricePerLinearMeter_395_WoodGrain = 99999999m;
-                SashPricePerLinearMeter_395_White = 99999999m;
-                SashPricePerLinearMeter_2067_White = 99999999m;
-                SashPricePerLinearMeter_6040_WoodGrain = 99999999m;// 550.13m;
-                SashPricePerLinearMeter_6040_White = 99999999m; //373.94m;
-                SashPricePerLinearMeter_6041_WoodGrain = 99999999m;
-                SashPricePerLinearMeter_6041_White = 99999999m;
-                SashReinPricePerLinearMeter_7581 = 99999999m;
-                SashReinPricePerLinearMeter_373And374 = 99999999m;
-                SashReinPricePerLinearMeter_395 = 99999999m;
-                SashReinPricePerLinearMeter_6040 = 99999999m;
-                SashReinPricePerLinearMeter_6041 = 99999999m;
+                SashPricePerLinearMeter_7581_WoodGrain = 550.13m;
+                SashPricePerLinearMeter_7581_White = 375.30m;
+                SashPricePerLinearMeter_373_WoodGrain = 712.66m;
+                SashPricePerLinearMeter_373_White = 511.72m;
+                SashPricePerLinearMeter_374_WoodGrain = 801.83m;
+                SashPricePerLinearMeter_374_White = 511.72m;
+                SashPricePerLinearMeter_395_WoodGrain = 556.57m;
+                SashPricePerLinearMeter_395_White = 412.47m;
+                SashPricePerLinearMeter_2067_White = 303.50m;
+                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m,
+                SashPricePerLinearMeter_6040_White = 325; //373.94m,
+                SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
+                SashPricePerLinearMeter_6041_White = 483.13m;
+                SashReinPricePerLinearMeter_7581 = 89.86m;
+                SashReinPricePerLinearMeter_373And374 = 835.18m;
+                SashReinPricePerLinearMeter_395 = 305.14m;
+                SashReinPricePerLinearMeter_6040 = 287.58m;
+                SashReinPricePerLinearMeter_6041 = 655.49m;
+
 
 
                 SashPrice = 0;
@@ -2341,137 +2343,136 @@ namespace ModelLayer.Model.Quotation
                 #endregion
                 #region Mullion/TransomPrice
 
-                Divider_7536_PricePerSqrMeter = 99999999m;
-                Divider_7538_PricePerSqrMeter = 99999999m;
-                Divider_2069_PricePerSqrMeter = 99999999m; // G58
-                DividerRein_7536_PricePerSqrMeter = 99999999m;
-                DividerRein_7538_PricePerSqrMeter = 99999999m;
+                Divider_7536_PricePerSqrMeter = 663.32m;
+                Divider_7538_PricePerSqrMeter = 817.34m;
+                Divider_2069_PricePerSqrMeter = 284.12m;// G58
+                DividerRein_7536_PricePerSqrMeter = 866.23m;
+                DividerRein_7538_PricePerSqrMeter = 858.52m;
 
-                claddingPricePerLinearMeter = 99999999m;//profile and reinforcement price
+                claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
 
 
                 #endregion
                 #region DummyMullionPrice
 
-                DummyMullionPricePerLinearMeter_7533_WoodGrain = 99999999m;
-                DummyMullionPricePerLinearMeter_385_WoodGrain = 99999999m;
-                DummyMullionPricePerLinearMeter_7533_White = 99999999m;
-                DummyMullionPricePerLinearMeter_385_White = 99999999m;
+                DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
+                DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
+                DummyMullionPricePerLinearMeter_7533_White = 608.75m;
+                DummyMullionPricePerLinearMeter_385_White = 580.72m;
 
 
                 #endregion
                 #region GlassPrice
 
-                Glass_6mmClr_PricePerSqrMeter = 99999999m;
-                Glass_10mmClr_PricePerSqrMeter = 99999999m;
-                Glass_12mmClr_PricePerSqrMeter = 99999999m;
-                Glass_6mmTemp_PricePerSqrMeter = 99999999m;
-                Glass_10mmTemp_PricePerSqrMeter = 99999999m;
-                Glass_12mmTemp_PricePerSqrMeter = 99999999m;
+                Glass_6mmClr_PricePerSqrMeter = 670.00m;
+                Glass_10mmClr_PricePerSqrMeter = 1662.00m;
+                Glass_12mmClr_PricePerSqrMeter = 1941.00m;
+                Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
+                Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
+                Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
 
 
 
                 #endregion
                 #region FittingAndSupplies
 
-                FS_16HD_casementPricePerPiece = 99999999m;
-                FS_26HD_casementPricePerPiece = 99999999m;
+                FS_16HD_casementPricePerPiece = 825.81m;
+                FS_26HD_casementPricePerPiece = 1839.35m;
 
-                RestrictorStayPricePerPiece = 99999999m;
-                CornerDrivePricePerPiece = 99999999m;// standard top= 103.17; bot = 118.82
-                SnapInKeepPricePerPiece = 99999999m;
-                _35mmBacksetEspagWithCylinder = 99999999m;
-                MiddleCLoserPricePerPiece = 99999999m;
+                RestrictorStayPricePerPiece = 161.18m;
+                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17, bot = 118.82
+                SnapInKeepPricePerPiece = 67.79m;
+                _35mmBacksetEspagWithCylinder = 1346.78m;
+                MiddleCLoserPricePerPiece = 18.57m;
 
-                StayBearingPricePerPiece = 99999999m;
-                StayBearingPinPricePerPiece = 99999999m;
-                CoverStayBearingPricePerPiece = 99999999m;
-                CoverCornerHingePricePerPiece = 99999999m;
-                CornerPivotRestPricePerPiece = 99999999m;
-                TopCornerHingePricePerPiece = 99999999m;
-                CorverCornerPivotRestPricePerPiece = 99999999m;
-                CorverCornerPivotRestVerticalPricePerPiece = 99999999m;
+                StayBearingPricePerPiece = 41.44m;
+                StayBearingPinPricePerPiece = 8.03m;
+                CoverStayBearingPricePerPiece = 16.37m;
+                CoverCornerHingePricePerPiece = 8.37m;
+                CornerPivotRestPricePerPiece = 85.25m;
+                TopCornerHingePricePerPiece = 158.48m;
+                CorverCornerPivotRestPricePerPiece = 25.49m;
+                CorverCornerPivotRestVerticalPricePerPiece = 8.87m;
 
-                RotoswingHanldePricePerPiece = 99999999m;
-                RotoswingHanldeForSlidingPricePerPiece = 99999999m;
-                RioHandlePricePerPiece = 99999999m;
+                RotoswingHanldePricePerPiece = 257.93m;
+                RotoswingHanldeForSlidingPricePerPiece = 1123.91m;
+                RioHandlePricePerPiece = 481.49m;
 
-                Espag741012_PricePerPiece = 99999999m;
-                LeverEspagPricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A00006PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A01006PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A02206PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A03206PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A04206PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A05206PricePerPiece = 99999999m;
-                TiltAndTurnEspag_N110A06206PricePerPiece = 99999999m;
+                Espag741012_PricePerPiece = 284.15m;
+                LeverEspagPricePerPiece = 825.81m;
+                TiltAndTurnEspag_N110A00006PricePerPiece = 254.39m;
+                TiltAndTurnEspag_N110A01006PricePerPiece = 465.89m;
+                TiltAndTurnEspag_N110A02206PricePerPiece = 518.40m;
+                TiltAndTurnEspag_N110A03206PricePerPiece = 570.91m;
+                TiltAndTurnEspag_N110A04206PricePerPiece = 623.42m;
+                TiltAndTurnEspag_N110A05206PricePerPiece = 675.18m;
+                TiltAndTurnEspag_N110A06206PricePerPiece = 727.69m;
 
-                _2DHingePricePerPiece = 99999999m;
-                _3DHingePricePerPiece = 99999999m;
-                NTCenterHingePricePerPiece = 99999999m;
+                _2DHingePricePerPiece = 278.94m;
+                _3DHingePricePerPiece = 990.95m;
+                NTCenterHingePricePerPiece = 170.50m;
 
-                ShootBoltStrikerPricePerPiece = 99999999m;
-                ShootBoltReversePricePerPiece = 99999999m;
-                ShootBoltNonReversePricePerPiece = 99999999m;
+                ShootBoltStrikerPricePerPiece = 57.29m;
+                ShootBoltReversePricePerPiece = 368.25m;
+                ShootBoltNonReversePricePerPiece = 242.71m;
 
-                StrikerPricePerPiece = 99999999m;
-                StrikerLRPricePerPiece = 99999999m;//sliding
-                StrikerForDMPricePerPiece = 99999999m;
-                AdjustableStrikerPricePerPiece = 9999999;
-                LatchDeadboltStrikerPricePerPiece = 99999999m;
+                StrikerPricePerPiece = 57.08m;
+                StrikerLRPricePerPiece = 52.01m;//sliding
+                StrikerForDMPricePerPiece = 62.27m;
+                AdjustableStrikerPricePerPiece = 20.72m;
+                LatchDeadboltStrikerPricePerPiece = 446.37m;
 
-                MVDHandlePricePerPiece = 99999999m;
-                MVDGearPricePerPiece = 99999999m;
+                MVDHandlePricePerPiece = 985.01m;
+                MVDGearPricePerPiece = 1585.92m;
 
-                Extension_639957PricePerPiece = 99999999m;
-                Extension_567639PricePerPiece = 99999999m;
-                //Extension_N299A01006PricePerPiece = 99999999m;
-                MVDExtensionPricePerPiece = 99999999m;
+                Extension_639957PricePerPiece = 170.50m;
+                Extension_567639PricePerPiece = 134.04m;
+                //Extension_N299A01006PricePerPiece = 118.82m,
+                MVDExtensionPricePerPiece = 183.80m;
 
-                HDRollerPricePerPiece = 99999999m;
-                GURollerPricePerPiece = 99999999m;
-
+                HDRollerPricePerPiece = 566.06m;
+                GURollerPricePerPiece = 1323.08m;
 
                 HandleBasePrice = 0;
 
                 #endregion
                 #region Accessories
 
-                EndCapPricePerPiece = 99999999m;
-                MechanicalJoint_AV585PricePerPiece = 99999999m;
-                MechanicalJoint_9U18PricePerPiece = 99999999m;
-                GBSpacerPricePerPiece = 99999999m;
-                PlasticWedgePricePerPiece = 99999999m;
-                BarFastenerPricePerPiece = 99999999m;
-                SealingBlockPricePerPiece = 99999999m;
-                SpacerFixSashPricePerPiece = 99999999m;
+                EndCapPricePerPiece = 282.96m;
+                MechanicalJoint_AV585PricePerPiece = 87.34m;
+                MechanicalJoint_9U18PricePerPiece = 138.45m;
+                GBSpacerPricePerPiece = 5.01m;
+                PlasticWedgePricePerPiece = 10.09m;
+                BarFastenerPricePerPiece = 4.40m;
+                SealingBlockPricePerPiece = 63.75m;
+                SpacerFixSashPricePerPiece = 21.42m;
 
 
                 #endregion
                 #region AncillaryProfile
-                GlazingGasketPricePerLinearMeter = 99999999m;
-                GlazingBeadPricePerLinearMeter = 99999999m;
-                GlazingBead_G58PricePerLinearMeter = 99999999m;
-                GeorgianBar_0724Price = 99999999m;
-                GeorgianBar_0726Price = 99999999m;
-                CoverProfile_0914Price = 99999999m;
-                CoverProfile_0373Price = 99999999m;
-                ThresholdPricePerPiece = 99999999m;
-                WeatherBarPricePerPiece = 99999999m;
-                GuideTrackPricePerLinearMeter = 99999999m;
-                InterlockPricePerPiece = 99999999m;
-                ExtensionForInterlockPricePerPiece = 99999999m;
-                AluminumTrackPricePerLinearMeter = 99999999m;
-                WaterSeepagePricePerLinearMeter = 99999999m;
-                AluminumPullHandlePricePerLinearMeter = 99999999m;
+                GlazingGasketPricePerLinearMeter = 32.64m;
+                GlazingBeadPricePerLinearMeter = 256.62m;
+                GlazingBead_G58PricePerLinearMeter = 117.72m;
+                GeorgianBar_0724Price = 154.93m;
+                GeorgianBar_0726Price = 307.75m;
+                CoverProfile_0914Price = 20.68m;
+                CoverProfile_0373Price = 105.41m;
+                ThresholdPricePerPiece = 1229.34m;
+                WeatherBarPricePerPiece = 236.75m;
+                GuideTrackPricePerLinearMeter = 157.18m;
+                InterlockPricePerPiece = 333.77m;
+                ExtensionForInterlockPricePerPiece = 789.01m;
+                AluminumTrackPricePerLinearMeter = 251.10m;
+                WaterSeepagePricePerLinearMeter = 153.73m;
+                AluminumPullHandlePricePerLinearMeter = 2480.18m;
 
 
 
                 #endregion
-                BrushSealPricePerLinearMeter = 99999999m;
-                SealantPricePerCan_BrownBlack = 99999999m;
-                SealantPricePerCan_Clear = 99999999m;
-                PUFoamingPricePerCan = 99999999m;
+                BrushSealPricePerLinearMeter = 15.80m;
+                SealantPricePerCan_BrownBlack = 430m;
+                SealantPricePerCan_Clear = 170m;
+                PUFoamingPricePerCan = 210m;
 
                 ProfileColorPoints = 0;
                 CostingPoints = 0;
@@ -2481,6 +2482,192 @@ namespace ModelLayer.Model.Quotation
                 MaterialCost = 0;
                 #endregion
             }
+            else if (cus_ref_date >= inc_price_date_2)
+            {
+                #region setnewPrice
+                #region FrameAndSashPrice
+
+                FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
+                FramePricePerLinearMeter_7502_White = 332.57m;
+                FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
+                FramePricePerLinearMeter_7507_White = 354.28m;
+                FramePricePerLinearMeter_2060_White = 271.35m;//G58
+                FramePricePerLinearMeter_6050_WoodGrain = 483.36m;
+                FramePricePerLinearMeter_6050_White = 378.19m;
+                FramePricePerLinearMeter_6052_WoodGrain = 704.60m;
+                FramePricePerLinearMeter_6052_White = 563.48m;
+                FrameReinPricePerLinearMeter_7502 = 123.55m;
+                FrameReinPricePerLinearMeter_7507 = 406.86m;
+                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame, sash and divider
+                FrameReinPricePerLinearMeter_6050 = 114.76m;
+                FrameReinPricePerLinearMeter_6052 = 194.68m;
+
+                SashPricePerLinearMeter_7581_WoodGrain = 550.13m;
+                SashPricePerLinearMeter_7581_White = 375.30m;
+                SashPricePerLinearMeter_373_WoodGrain = 712.66m;
+                SashPricePerLinearMeter_373_White = 511.72m;
+                SashPricePerLinearMeter_374_WoodGrain = 801.83m;
+                SashPricePerLinearMeter_374_White = 511.72m;
+                SashPricePerLinearMeter_395_WoodGrain = 556.57m;
+                SashPricePerLinearMeter_395_White = 412.47m;
+                SashPricePerLinearMeter_2067_White = 303.50m;
+                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m,
+                SashPricePerLinearMeter_6040_White = 325; //373.94m,
+                SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
+                SashPricePerLinearMeter_6041_White = 483.13m;
+                SashReinPricePerLinearMeter_7581 = 89.86m;
+                SashReinPricePerLinearMeter_373And374 = 835.18m;
+                SashReinPricePerLinearMeter_395 = 305.14m;
+                SashReinPricePerLinearMeter_6040 = 287.58m;
+                SashReinPricePerLinearMeter_6041 = 655.49m;
+
+
+
+                SashPrice = 0;
+
+                #endregion
+                #region Mullion/TransomPrice
+
+                Divider_7536_PricePerSqrMeter = 663.32m;
+                Divider_7538_PricePerSqrMeter = 817.34m;
+                Divider_2069_PricePerSqrMeter = 284.12m;// G58
+                DividerRein_7536_PricePerSqrMeter = 866.23m;
+                DividerRein_7538_PricePerSqrMeter = 858.52m;
+
+                claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
+
+
+                #endregion
+                #region DummyMullionPrice
+
+                DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
+                DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
+                DummyMullionPricePerLinearMeter_7533_White = 608.75m;
+                DummyMullionPricePerLinearMeter_385_White = 580.72m;
+
+
+                #endregion
+                #region GlassPrice
+
+                Glass_6mmClr_PricePerSqrMeter = 670.00m;
+                Glass_10mmClr_PricePerSqrMeter = 1662.00m;
+                Glass_12mmClr_PricePerSqrMeter = 1941.00m;
+                Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
+                Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
+                Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
+
+
+
+                #endregion
+                #region FittingAndSupplies
+
+                FS_16HD_casementPricePerPiece = 825.81m;
+                FS_26HD_casementPricePerPiece = 1839.35m;
+
+                RestrictorStayPricePerPiece = 161.18m;
+                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17, bot = 118.82
+                SnapInKeepPricePerPiece = 67.79m;
+                _35mmBacksetEspagWithCylinder = 1346.78m;
+                MiddleCLoserPricePerPiece = 18.57m;
+
+                StayBearingPricePerPiece = 41.44m;
+                StayBearingPinPricePerPiece = 8.03m;
+                CoverStayBearingPricePerPiece = 16.37m;
+                CoverCornerHingePricePerPiece = 8.37m;
+                CornerPivotRestPricePerPiece = 85.25m;
+                TopCornerHingePricePerPiece = 158.48m;
+                CorverCornerPivotRestPricePerPiece = 25.49m;
+                CorverCornerPivotRestVerticalPricePerPiece = 8.87m;
+
+                RotoswingHanldePricePerPiece = 257.93m;
+                RotoswingHanldeForSlidingPricePerPiece = 1123.91m;
+                RioHandlePricePerPiece = 481.49m;
+
+                Espag741012_PricePerPiece = 284.15m;
+                LeverEspagPricePerPiece = 825.81m;
+                TiltAndTurnEspag_N110A00006PricePerPiece = 254.39m;
+                TiltAndTurnEspag_N110A01006PricePerPiece = 465.89m;
+                TiltAndTurnEspag_N110A02206PricePerPiece = 518.40m;
+                TiltAndTurnEspag_N110A03206PricePerPiece = 570.91m;
+                TiltAndTurnEspag_N110A04206PricePerPiece = 623.42m;
+                TiltAndTurnEspag_N110A05206PricePerPiece = 675.18m;
+                TiltAndTurnEspag_N110A06206PricePerPiece = 727.69m;
+
+                _2DHingePricePerPiece = 278.94m;
+                _3DHingePricePerPiece = 990.95m;
+                NTCenterHingePricePerPiece = 170.50m;
+
+                ShootBoltStrikerPricePerPiece = 57.29m;
+                ShootBoltReversePricePerPiece = 368.25m;
+                ShootBoltNonReversePricePerPiece = 242.71m;
+
+                StrikerPricePerPiece = 57.08m;
+                StrikerLRPricePerPiece = 52.01m;//sliding
+                StrikerForDMPricePerPiece = 62.27m;
+                AdjustableStrikerPricePerPiece = 20.72m;
+                LatchDeadboltStrikerPricePerPiece = 446.37m;
+
+                MVDHandlePricePerPiece = 985.01m;
+                MVDGearPricePerPiece = 1585.92m;
+
+                Extension_639957PricePerPiece = 170.50m;
+                Extension_567639PricePerPiece = 134.04m;
+                //Extension_N299A01006PricePerPiece = 118.82m,
+                MVDExtensionPricePerPiece = 183.80m;
+
+                HDRollerPricePerPiece = 566.06m;
+                GURollerPricePerPiece = 1323.08m;
+
+                HandleBasePrice = 0;
+
+                #endregion
+                #region Accessories
+
+                EndCapPricePerPiece = 282.96m;
+                MechanicalJoint_AV585PricePerPiece = 87.34m;
+                MechanicalJoint_9U18PricePerPiece = 138.45m;
+                GBSpacerPricePerPiece = 5.01m;
+                PlasticWedgePricePerPiece = 10.09m;
+                BarFastenerPricePerPiece = 4.40m;
+                SealingBlockPricePerPiece = 63.75m;
+                SpacerFixSashPricePerPiece = 21.42m;
+
+
+                #endregion
+                #region AncillaryProfile
+                GlazingGasketPricePerLinearMeter = 32.64m;
+            GlazingBeadPricePerLinearMeter = 256.62m;
+            GlazingBead_G58PricePerLinearMeter = 117.72m;
+            GeorgianBar_0724Price = 154.93m;
+            GeorgianBar_0726Price = 307.75m;
+            CoverProfile_0914Price = 20.68m;
+            CoverProfile_0373Price = 105.41m;
+            ThresholdPricePerPiece = 1229.34m;
+            WeatherBarPricePerPiece = 236.75m;
+            GuideTrackPricePerLinearMeter = 157.18m;
+            InterlockPricePerPiece = 333.77m;
+            ExtensionForInterlockPricePerPiece = 789.01m;
+                AluminumTrackPricePerLinearMeter = 251.10m;
+            WaterSeepagePricePerLinearMeter = 153.73m;
+            AluminumPullHandlePricePerLinearMeter = 2480.18m;
+
+
+
+                #endregion
+                BrushSealPricePerLinearMeter = 15.80m;
+                SealantPricePerCan_BrownBlack = 430m;
+                SealantPricePerCan_Clear = 170m;
+                PUFoamingPricePerCan = 210m;
+
+                ProfileColorPoints = 0;
+                CostingPoints = 0;
+                InstallationPoints = 0;
+                LaborCost = 0;
+                InstallationCost = 0;
+                MaterialCost = 0;
+                #endregion
+            }
+
         }
 
         #endregion
@@ -2502,12 +2689,12 @@ namespace ModelLayer.Model.Quotation
             foreach (IWindoorModel wdm in Lst_Windoor)
             {
 
-                if (BOMandItemlistStatus == "PriceItemList")
-                {
-                    wdm.WD_Selected = true;
-                }
+                //if (BOMandItemlistStatus == "PriceItemList")
+                //{
+                //    wdm.WD_Selected = true;
+                //}
 
-                if (wdm.WD_Selected == true)
+                if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
                 {
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {

@@ -71,6 +71,8 @@ namespace PresentationLayer.Presenter.UserControls
             try
             {
                 _mainPresenter.Load_Windoor_Item(_windoorModel);
+                _mainPresenter.qoutationModel_MainPresenter.itemSelectStatus = true ;
+                _mainPresenter.GetCurrentPrice();
             }
             catch (Exception ex)
             {

@@ -153,6 +153,7 @@
             this.Name = "QuoteItemListView";
             this.ShowIcon = false;
             this.Text = "Item List";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuoteItemListView_FormClosed);
             this.Load += new System.EventHandler(this.QuoteItemListView_Load);
             this.pnlPrintHeader.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);

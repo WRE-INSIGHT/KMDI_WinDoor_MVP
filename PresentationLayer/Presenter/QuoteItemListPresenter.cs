@@ -61,6 +61,13 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TSbtnPrintClickEventRaised += new EventHandler(OnTSbtnPrintClickEventRaised);
             _quoteItemListView.QuoteItemListViewLoadEventRaised += _quoteItemListView_QuoteItemListViewLoadEventRaised;
             _quoteItemListView.TSbtnGlassSummaryClickEventRaised += _quoteItemListView_TSbtnGlassSummaryClickEventRaised;
+            _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
+        }
+
+        private void _quoteItemListView_QuoteItemListViewFormClosedEventRaised(object sender, FormClosedEventArgs e)
+        {
+           // _mainPresenter.GetCurrentPrice();
+            _mainPresenter.updatePriceOfMainView();
         }
 
         private void _quoteItemListView_TSbtnGlassSummaryClickEventRaised(object sender, EventArgs e)

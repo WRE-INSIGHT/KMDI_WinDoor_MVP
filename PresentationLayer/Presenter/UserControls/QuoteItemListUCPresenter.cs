@@ -105,21 +105,28 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            try
             {
-                string itemNum = _quoteItemListUC.ItemNumber;
-                itemNum = itemNum.Replace("Item ", string.Empty);
-
-                if (itemNum != "Item")
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    string itemNum = _quoteItemListUC.ItemNumber;
+                    itemNum = itemNum.Replace("Item ", string.Empty);
+
+                    if (itemNum != "Item")
                     {
-                        _quotationModel.ItemCostingPriceAndPoints();
-                        wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
-                        _nudItemPrice.Value = wdm.WD_price;
-                        _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        if (wdm.WD_id == Convert.ToInt32(itemNum))
+                        {
+                            _quotationModel.ItemCostingPriceAndPoints();
+                            wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
+                            _nudItemPrice.Value = wdm.WD_price;
+                            _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

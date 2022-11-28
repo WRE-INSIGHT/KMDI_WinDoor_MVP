@@ -926,7 +926,7 @@
             this.Nud_CurrentPrice.Name = "Nud_CurrentPrice";
             this.Nud_CurrentPrice.Size = new System.Drawing.Size(165, 25);
             this.Nud_CurrentPrice.TabIndex = 5;
-            this.Nud_CurrentPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Nud_CurrentPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Nud_CurrentPrice.ThousandsSeparator = true;
             this.Nud_CurrentPrice.ValueChanged += new System.EventHandler(this.Nud_CurrentPrice_ValueChanged);
             // 

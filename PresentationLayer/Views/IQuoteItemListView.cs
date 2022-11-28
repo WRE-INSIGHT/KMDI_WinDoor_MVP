@@ -8,6 +8,7 @@ namespace PresentationLayer.Views
         event EventHandler TSbtnPrintClickEventRaised;
         event EventHandler TSbtnGlassSummaryClickEventRaised;
         event EventHandler QuoteItemListViewLoadEventRaised;
+        event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
 
         Panel GetPnlPrintBody();
         void showQuoteItemList();

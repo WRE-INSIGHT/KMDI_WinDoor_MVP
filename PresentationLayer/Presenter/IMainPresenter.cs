@@ -121,5 +121,8 @@ namespace PresentationLayer.Presenter
         void SaveAs();
         void itemDescription();
         void GetCurrentPrice();
+        void updatePriceFromMainViewToItemList();
+        void updatePriceOfMainView();
+
     }
 }
