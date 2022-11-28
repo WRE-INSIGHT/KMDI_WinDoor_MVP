@@ -9208,13 +9208,15 @@ namespace PresentationLayer.Presenter
                             #endregion
                             else
                             {
-                                wdm.WD_description = wdm.WD_profile;
+                                wdm.WD_description = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" +
+                                                     wdm.WD_profile;
                             }
                         }
                     }
                     else
                     {
-                        wdm.WD_description = wdm.WD_profile;
+                        wdm.WD_description = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" +
+                                             wdm.WD_profile;
                     }
                     #region DuplicatedItemListStringManipulation
                     //count duplicate in list
@@ -9268,7 +9270,6 @@ namespace PresentationLayer.Presenter
                             lst_DescDist = lst_DuplicatePnl[i];
                             wdm.WD_description += lst_DescDist;
                         }
-
                     }
 
                     List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
@@ -9309,7 +9310,7 @@ namespace PresentationLayer.Presenter
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 if (wdm.WD_Selected == true)
-                { 
+                {
                     wdm.WD_price = _lblCurrentPrice.Value;
                 }
             }

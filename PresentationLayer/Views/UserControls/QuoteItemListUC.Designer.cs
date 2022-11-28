@@ -81,6 +81,7 @@
             this.rtboxDesc.Size = new System.Drawing.Size(201, 138);
             this.rtboxDesc.TabIndex = 17;
             this.rtboxDesc.Text = "";
+            this.rtboxDesc.TextChanged += new System.EventHandler(this.rtboxDesc_TextChanged);
             // 
             // tboxWindoorNumber
             // 

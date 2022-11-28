@@ -108,7 +108,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler tboxWindoorNumberTextChangedEventRaised;
         public event EventHandler suggestedPriceToolStripMenuItemClickEventRaised;
         public event EventHandler setAllDiscountToolStripMenuItemClickEventRaised;
-
+        public event EventHandler rtboxDescTextChangedEventRaised;
         public event KeyEventHandler NudItemPriceKeyDownEventRaised;
         public event KeyEventHandler NudItemDiscountKeyDownEventRaised;
         public event KeyEventHandler NudItemQuantityKeyDownEventRaised;
@@ -215,11 +215,16 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, setAllDiscountToolStripMenuItemClickEventRaised, e);
         }
+
+        private void rtboxDesc_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rtboxDescTextChangedEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             tboxItemName.DataBindings.Add(ModelBinding["WD_itemName"]);
             tboxWindoorNumber.DataBindings.Add(ModelBinding["WD_WindoorNumber"]);
-            //  NudItemQuantity.DataBindings.Add(ModelBinding["WD_quantity"]);
 
         }
 
