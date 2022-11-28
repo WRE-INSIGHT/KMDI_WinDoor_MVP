@@ -59,6 +59,7 @@ namespace PresentationLayer.Views
                 tsBtnNwin.Enabled = value;
                 tsBtnNdoor.Enabled = value;
                 tsBtnNConcrete.Enabled = value;
+                newfactorBtn.Enabled = value;
                 //duplicateItemToolStripButton1.Enabled = value;
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;

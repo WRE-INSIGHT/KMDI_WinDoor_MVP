@@ -176,6 +176,8 @@ namespace PresentationLayer.Presenter
         private IDividerModel _prev_divModel;
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
+        private int i = 0;
+        private decimal newfactor = 0;
         #endregion
 
         #region GetSet
@@ -863,23 +865,35 @@ namespace PresentationLayer.Presenter
             _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += _mainView_NudCurrentPriceValueChangedEventRaised;
-            
+            _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
+
+
         }
 
         #region Events  
-
 
         #region setnewfactor
         private void OnsetNewFactorEventRaised(object sender, EventArgs e)
         {
             setNewFactor();
         }
-
+       
         public async void setNewFactor()
         {
-            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-            decimal value = await _quotationServices.GetFactorByProvince(province);
+            decimal value;
+            
 
+            if (i <= 0)
+            {
+                string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                value = await _quotationServices.GetFactorByProvince(province);
+            }
+            else 
+            {
+                value = newfactor;
+            }
+            
+                       
             string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
             if (input != "" && input != "0")
             {
@@ -888,10 +902,19 @@ namespace PresentationLayer.Presenter
                     decimal deci_input = Convert.ToDecimal(input);
                     if (deci_input > 0)
                     {
-                        _quotationModel.PricingFactor = deci_input;
-
-                        MessageBox.Show("New Factor Set Successfully");
-
+                        if(deci_input != value)
+                        {
+                            _quotationModel.PricingFactor = deci_input;
+                            MessageBox.Show("New Factor Set Sucessfully");
+                            GetCurrentPrice();
+                            newfactor = deci_input;
+                            i++;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        
                     }
                     else if (deci_input < 0)
                     {
@@ -9358,7 +9381,7 @@ namespace PresentationLayer.Presenter
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 if (wdm.WD_Selected == true)
-                { 
+                {
                     wdm.WD_price = _lblCurrentPrice.Value;
                 }
             }

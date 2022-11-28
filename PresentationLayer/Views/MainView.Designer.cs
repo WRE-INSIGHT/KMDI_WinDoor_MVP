@@ -92,6 +92,7 @@
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
+            this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -114,7 +115,6 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -728,6 +728,18 @@
             this.SetGlassToolStripMenuItem.Visible = false;
             this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
             // 
+            // newfactorBtn
+            // 
+            this.newfactorBtn.BackColor = System.Drawing.Color.Transparent;
+            this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newfactorBtn.Enabled = false;
+            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.medical;
+            this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newfactorBtn.Name = "newfactorBtn";
+            this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
+            this.newfactorBtn.Text = "Set New Factor";
+            this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
+            // 
             // pnlRight
             // 
             this.pnlRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -994,18 +1006,6 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
-            // 
-            // newfactorBtn
-            // 
-            this.newfactorBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newfactorBtn.Enabled = false;
-            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.medical;
-            this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newfactorBtn.Name = "newfactorBtn";
-            this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
-            this.newfactorBtn.Text = "Set New Factor";
-            this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
             // 
             // MainView
             // 
