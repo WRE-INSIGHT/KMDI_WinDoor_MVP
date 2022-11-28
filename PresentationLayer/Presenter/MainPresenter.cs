@@ -905,14 +905,6 @@ namespace PresentationLayer.Presenter
                                    _windoorModel.WD_height,
                                    _windoorModel.WD_profile,
                                    _windoorModel.WD_BaseColor.Value.ToString());
-                int count = 1;
-                _quotationModel.Select_Current_Windoor(_windoorModel);
-                //foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                //{
-                //    wdm.WD_name = "Item " + count;
-                //    count++;
-                //}
-                //Load_Windoor_Item(_windoorModel);
             }
             catch (Exception ex)
             {
@@ -2512,6 +2504,12 @@ namespace PresentationLayer.Presenter
             {
                 Load_Windoor_Item(_windoorModel);
                 GetCurrentPrice();
+                int wndrId = 0;
+                foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
+                {
+                    wndrId += 1;
+                    wndr.WD_id = wndrId;
+                }
 
             }
             switch (inside_quotation)
@@ -4875,6 +4873,21 @@ namespace PresentationLayer.Presenter
                                     panel_GS100CoverKitArtNo = gsckan;
                                 }
                             }
+                        }
+                        else if (row_str.Contains("Panel_OverLappingPanelQty:"))
+                        {
+
+                            panel_OverLappingPanelQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_AluminumPullHandleArtNo:"))
+                        {
+                            foreach (AluminumPullHandle_ArticleNo aphan in AluminumPullHandle_ArticleNo.GetAll())
+                            {
+                                if (aphan.ToString() == extractedValue_str)
+                                {
+                                    panel_AluminumPullHandleArticleNo = aphan;
+                                }
+                            }
                             IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
                                                                                 panel_Height,
                                                                                 (Control)panel_Parent,
@@ -5159,6 +5172,8 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_GuBeaZenMicrowaveSensorArtNo = panel_GuBeaZenMicrowaveSensorArtNo;
                             pnlModel.Panel_SlidingDoorKitGs100_1ArtNo = panel_SlidingDoorKitGs100_1ArtNo;
                             pnlModel.Panel_GS100CoverKitArtNo = panel_GS100CoverKitArtNo;
+                            pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
+                            pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
                             #endregion
                             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
@@ -5346,7 +5361,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    if (panel_Parent.Name.Contains("MultiPanelMullion"))
+                                    if (panel_Parent.Name.Contains("MultiMullion"))
                                     {
                                         awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                                       pnlModel,
@@ -5535,6 +5550,7 @@ namespace PresentationLayer.Presenter
                                                 if (pnl.Panel_Name == div_DMPanelName)
                                                 {
                                                     _prev_divModel.Div_DMPanel = pnl;
+                                                    SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, null, pnl);
                                                 }
                                             }
                                         }
@@ -6581,27 +6597,6 @@ namespace PresentationLayer.Presenter
                             {
                                 divSize = 33;
                             }
-                            //bool divchkdm = false;
-
-                            //if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                            //{
-                            //    if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            //        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                            //    {
-                            //        if (_multiPanelModel2ndLvl.MPanel_ParentModel == null)
-                            //        {
-                            //            divchkdm = true;
-                            //        }
-                            //        else if (_multiPanelModel2ndLvl.MPanel_ParentModel != null)
-                            //        {
-                            //            if (_multiPanelModel2ndLvl.MPanel_Placement == "Last")
-                            //            {
-                            //                divchkdm = true;
-                            //            }
-                            //        }
-                            //    }
-                            //}
-                            //FlowLayoutPanel fpnl;
                             int divHeigth = 0,
                                 divWidth = 0;
                             if (_multiPanelModel2ndLvl.MPanel_Type == "Mullion")
@@ -6673,8 +6668,9 @@ namespace PresentationLayer.Presenter
                             //divModel.SetDimensionsToBind_using_DivZoom_Imager_Initial();
                             _prev_divModel = divModel;
                             _frameModel.Lst_Divider.Add(divModel);
-                            IDividerPropertiesUCPresenter divPropUCP = _divPropertiesUCP.GetNewInstance(_unityC, divModel, this);
-                            UserControl divPropUC = (UserControl)divPropUCP.GetDivProperties();
+                            _divPropUCP_forDMSelection = _divPropertiesUCP.GetNewInstance(_unityC, divModel, this);
+                            _controlRaised_forDMSelection = _divPropUCP_forDMSelection.GetDivProperties().GetBtnSelectDMPanel();
+                            UserControl divPropUC = (UserControl)_divPropUCP_forDMSelection.GetDivProperties();
                             divPropUC.Dock = DockStyle.Top;
                             if (div_Parent.Parent.Parent.Name.Contains("Frame"))
                             {
@@ -7024,7 +7020,8 @@ namespace PresentationLayer.Presenter
             panel_GeorgianBar_HorizontalQty,
             panel_HingeOptionsPropertyHeight,
             panel_AluminumTrackQty,
-            panel_StrikerArtno_SlidingQty;
+            panel_StrikerArtno_SlidingQty,
+            panel_OverLappingPanelQty;
         GlazingBead_ArticleNo panel_GlazingBeadArtNo;
         GlazingAdaptor_ArticleNo panel_GlazingAdaptorArtNo;
         GBSpacer_ArticleNo panel_GBSpacerArtNo;
@@ -7129,6 +7126,7 @@ namespace PresentationLayer.Presenter
         GuBeaZenMicrowaveSensor_ArticleNo panel_GuBeaZenMicrowaveSensorArtNo;
         SlidingDoorKitGs100_1_ArticleNo panel_SlidingDoorKitGs100_1ArtNo;
         GS100CoverKit_ArticleNo panel_GS100CoverKitArtNo;
+        AluminumPullHandle_ArticleNo panel_AluminumPullHandleArticleNo;
         #endregion
         #endregion
         #region Divider Properties
@@ -7354,9 +7352,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
-                    SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
-                    ItemToolStrip_Enable();
-                    _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
+                   
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
@@ -7367,7 +7363,6 @@ namespace PresentationLayer.Presenter
                     _frmDimensionPresenter.mainPresenter_AddedConcrete_ClickedOK = false;
                     _frmDimensionPresenter.SetHeight();
                     _frmDimensionPresenter.GetDimensionView().ShowfrmDimension();
-                    SetPricingFactor();
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
@@ -7444,8 +7439,13 @@ namespace PresentationLayer.Presenter
                     }
                     if (purpose == frmDimensionPresenter.Show_Purpose.Quotation)
                     {
+                        SetMainViewTitle(input_qrefno, _projectName, _custRefNo);
+                        ItemToolStrip_Enable();
+                        _quotationModel = _quotationServices.AddQuotationModel(input_qrefno, _quotationDate, _quoteId);
                         _quotationModel.Customer_Ref_Number = inputted_custRefNo;
                         _quotationModel.Date_Assigned = dateAssigned;
+                        SetPricingFactor();
+
                         _windoorModel = _windoorServices.AddWindoorModel(frmDimension_numWd,
                                                                          frmDimension_numHt,
                                                                          frmDimension_profileType,
@@ -7616,12 +7616,7 @@ namespace PresentationLayer.Presenter
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
-                        //int wndrId = 0;
-                        //foreach(IWindoorModel wndr in _quotationModel.Lst_Windoor)
-                        //{
-                        //    wndrId += 1;
-                        //    wndr.WD_id = wndrId;
-                        //}
+                     
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item

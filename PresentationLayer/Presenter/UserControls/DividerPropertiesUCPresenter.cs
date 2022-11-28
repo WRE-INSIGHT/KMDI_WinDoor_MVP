@@ -416,9 +416,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_PanelPropertiesLoadEventRaised(object sender, EventArgs e)
         {
-            IDP_LeverEspagnolettePropertyUCPresenter leverUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
-            _dp_leverEspagPropertyUCP = leverUCP;
-            UserControl leverProp = (UserControl)leverUCP.GetDPLeverEspagPropertyUC();
+            _dp_leverEspagPropertyUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
+            UserControl leverProp = (UserControl)_dp_leverEspagPropertyUCP.GetDPLeverEspagPropertyUC();
             _divPropertiesBodyPNL.Controls.Add(leverProp);
             leverProp.Dock = DockStyle.Top;
             leverProp.SendToBack();
@@ -486,7 +485,7 @@ namespace PresentationLayer.Presenter.UserControls
             divBinding.Add("Div_DMArtNo", new Binding("Text", _divModel, "Div_DMArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_CladdingProfileArtNo", new Binding("Text", _divModel, "Div_CladdingProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             divBinding.Add("Div_CladdingProfileArtNoVisibility", new Binding("Visible", _divModel, "Div_CladdingProfileArtNoVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            divBinding.Add("Div_SelectedPanel", new Binding("Text", _divModel, "Div_SelectedPanel", true, DataSourceUpdateMode.OnPropertyChanged));
             return divBinding;
         }
 
