@@ -863,8 +863,57 @@ namespace PresentationLayer.Presenter
             _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += _mainView_NudCurrentPriceValueChangedEventRaised;
+            
         }
+
         #region Events  
+
+
+        #region setnewfactor
+        private void OnsetNewFactorEventRaised(object sender, EventArgs e)
+        {
+            setNewFactor();
+        }
+
+        public async void setNewFactor()
+        {
+            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+            decimal value = await _quotationServices.GetFactorByProvince(province);
+
+            string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
+            if (input != "" && input != "0")
+            {
+                try
+                {
+                    decimal deci_input = Convert.ToDecimal(input);
+                    if (deci_input > 0)
+                    {
+                        _quotationModel.PricingFactor = deci_input;
+
+                        MessageBox.Show("New Factor Set Successfully");
+
+                    }
+                    else if (deci_input < 0)
+                    {
+                        MessageBox.Show("Invalid number");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex.HResult == -2146233033)
+                    {
+                        MessageBox.Show("Please input a number.");
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message, ex.HResult.ToString());
+                    }
+                }
+            }
+
+        }
+        #endregion
+
         private void _mainView_NudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;

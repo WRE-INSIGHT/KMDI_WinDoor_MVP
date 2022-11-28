@@ -43,6 +43,7 @@ namespace PresentationLayer.Views
         event EventHandler factorToolStripMenuItemClickEventRaised;
         event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         event EventHandler NudCurrentPriceValueChangedEventRaised;
+        
 
         string mainview_title { get; set; }
         float Zoom { get; set; }
