@@ -114,6 +114,7 @@
             this.lblZoom = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.mnsMainMenu.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.pnlRight.SuspendLayout();
@@ -525,7 +526,8 @@
             this.tsLbl_Loading,
             this.tsLbl_Status,
             this.ViewImagerToolStripButton1,
-            this.SetGlassToolStripMenuItem});
+            this.SetGlassToolStripMenuItem,
+            this.newfactorBtn});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -994,6 +996,18 @@
             // 
             this.saveFileDialog1.Filter = "WNDR files|*.wndr";
             // 
+            // newfactorBtn
+            // 
+            this.newfactorBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newfactorBtn.Enabled = false;
+            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.medical;
+            this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newfactorBtn.Name = "newfactorBtn";
+            this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
+            this.newfactorBtn.Text = "Set New Factor";
+            this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1126,6 +1140,6 @@
 
         private System.Windows.Forms.ToolStripButton duplicateSample;
         private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
-
+        private System.Windows.Forms.ToolStripButton newfactorBtn;
     }
 }
