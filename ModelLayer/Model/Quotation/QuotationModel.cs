@@ -2029,7 +2029,7 @@ namespace ModelLayer.Model.Quotation
 
         decimal
         #region FrameAndSashPrice
-            
+
                 FramePricePerLinearMeter_7502_WoodGrain = 465.13m,
                 FramePricePerLinearMeter_7502_White = 332.57m,
                 FramePricePerLinearMeter_7507_WoodGrain = 507.99m,
@@ -2264,7 +2264,7 @@ namespace ModelLayer.Model.Quotation
             GeorgianBarPrice,
             CoverProfilePrice,
         #endregion
-        
+
                 BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
@@ -2752,7 +2752,7 @@ namespace ModelLayer.Model.Quotation
                             {
                                 if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
                                 {
-                                    ProfileColorPoints = 28;
+                                    ProfileColorPoints = 16;
 
                                     if (fr.Frame_Width >= 5000)
                                     {
@@ -2765,7 +2765,7 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                 {
-                                    ProfileColorPoints = 30;
+                                    ProfileColorPoints = 18;
 
                                     if (fr.Frame_Width >= 5000)
                                     {
@@ -3330,7 +3330,7 @@ namespace ModelLayer.Model.Quotation
                                                 StrikerLRPrice += 1 * StrikerLRPricePerPiece;
                                             }
 
-                                            WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
+                                            WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
                                             WeatherBarFastenerPrice += ((int)(fr.Frame_Width / 300)) * BarFastenerPricePerPiece;
                                             WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
                                             GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
@@ -4173,7 +4173,7 @@ namespace ModelLayer.Model.Quotation
                                         StrikerLRPrice += 1 * StrikerLRPricePerPiece;
                                     }
 
-                                    WeatherBarPrice += ((fr.Frame_Width / 1000m) * 2) * WeatherBarPricePerPiece;
+                                    WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
                                     WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300) * BarFastenerPricePerPiece;
                                     WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
                                     GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
@@ -4701,7 +4701,7 @@ namespace ModelLayer.Model.Quotation
                                 InstallationPoints += (ProfileColorPoints / 3) * 2;
 
 
-                               #region Glass 
+                                #region Glass 
 
                                 if (Singlepnl.Panel_GlassThickness >= 6.0f &&
                                     Singlepnl.Panel_GlassThickness <= 9.0f)
@@ -4856,7 +4856,7 @@ namespace ModelLayer.Model.Quotation
                     {
                         wdm.WD_price = TotaPrice;
                     }
-                    
+
 
                     if (BOM_Status == true)
                     {

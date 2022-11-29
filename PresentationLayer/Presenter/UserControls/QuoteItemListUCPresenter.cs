@@ -64,7 +64,24 @@ namespace PresentationLayer.Presenter.UserControls
             _quoteItemListUC.tboxWindoorNumberTextChangedEventRaised += _quoteItemListUC_tboxWindoorNumberTextChangedEventRaised;
             _quoteItemListUC.suggestedPriceToolStripMenuItemClickEventRaised += _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised;
             _quoteItemListUC.setAllDiscountToolStripMenuItemClickEventRaised += _quoteItemListUC_setAllDiscountToolStripMenuItemClickEventRaised;
+            _quoteItemListUC.rtboxDescTextChangedEventRaised += _quoteItemListUC_rtboxDescTextChangedEventRaised;
+        }
 
+        private void _quoteItemListUC_rtboxDescTextChangedEventRaised(object sender, EventArgs e)
+        {
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
+                {
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
+                    {
+                        wdm.WD_description = ((RichTextBox)sender).Text;
+                    }
+                }
+            }
         }
 
         private void _quoteItemListUC_setAllDiscountToolStripMenuItemClickEventRaised(object sender, EventArgs e)
