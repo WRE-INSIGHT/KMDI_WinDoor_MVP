@@ -881,8 +881,7 @@ namespace PresentationLayer.Presenter
         public async void setNewFactor()
         {
             decimal value;
-            
-
+  
             if (i <= 0)
             {
                 string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
@@ -891,9 +890,7 @@ namespace PresentationLayer.Presenter
             else 
             {
                 value = newfactor;
-            }
-            
-                       
+            }         
             string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
             if (input != "" && input != "0")
             {
@@ -913,8 +910,7 @@ namespace PresentationLayer.Presenter
                         else
                         {
                             MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                        
+                        }     
                     }
                     else if (deci_input < 0)
                     {
@@ -933,7 +929,6 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
-
         }
         #endregion
 

@@ -1552,6 +1552,7 @@
     <None Include="Resources\FixedPanel2.png" />
     <None Include="Resources\forward_button_104px.png" />
     <None Include="Resources\icons8-documents.gif" />
+    <None Include="Resources\icons8-banknotes-48.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
