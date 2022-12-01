@@ -633,7 +633,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
                 }
                 _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
-            }else
+                _mainPresenter.GetCurrentPrice();
+            }
+            else
             {
                 try
                 {

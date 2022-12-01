@@ -334,6 +334,7 @@ namespace PresentationLayer.Presenter.UserControls
                 int new_locY = ((UserControl)_divProperties).Location.Y;
 
                 _mainPresenter.Set_pnlPropertiesBody_ScrollView(orig_locY + (new_locY - orig_locY));
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -587,14 +588,14 @@ namespace PresentationLayer.Presenter.UserControls
             _lst_claddUCP.Remove(claddUCP);
         }
 
-        public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP(IUnityContainer unityC, IDividerModel divModel)
-        {
-            _dp_leverEspagPropertyUCP = _dp_leverEspagPropertyUCP.GetNewInstance(unityC, divModel);
-            UserControl leverProp = (UserControl)_dp_leverEspagPropertyUCP.GetDPLeverEspagPropertyUC();
-            _divPropertiesBodyPNL.Controls.Add(leverProp);
-            leverProp.Dock = DockStyle.Top;
-            leverProp.SendToBack();
-            return _dp_leverEspagPropertyUCP;
-        }
+        //public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP(IUnityContainer unityC, IDividerModel divModel)
+        //{
+        //    _dp_leverEspagPropertyUCP = _dp_leverEspagPropertyUCP.GetNewInstance(unityC, divModel);
+        //    UserControl leverProp = (UserControl)_dp_leverEspagPropertyUCP.GetDPLeverEspagPropertyUC();
+        //    _divPropertiesBodyPNL.Controls.Add(leverProp);
+        //    leverProp.Dock = DockStyle.Top;
+        //    leverProp.SendToBack();
+        //    return _dp_leverEspagPropertyUCP;
+        //}
     }
 }

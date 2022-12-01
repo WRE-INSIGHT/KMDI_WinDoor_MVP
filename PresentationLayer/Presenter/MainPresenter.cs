@@ -810,7 +810,8 @@ namespace PresentationLayer.Presenter
                 divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
                 _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
-                _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
+                _divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
+                //_divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
         }
 
@@ -5629,21 +5630,22 @@ namespace PresentationLayer.Presenter
                                         _multiModelParent.Fit_EqualPanel_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                        if (div_DMPanelName != "")
-                                        {
-                                            foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
-                                            {
-                                                if (pnl.Panel_Name == div_DMPanelName)
-                                                {
-                                                    _prev_divModel.Div_DMPanel = pnl;
-                                                    SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
-                                                }
-                                            }
-                                        }
+                                        
                                     }
 
                                 }
-
+                                if (div_DMPanelName != "" || div_DMPanelName != null)
+                                {
+                                    foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                    {
+                                        if (pnl.Panel_Name == div_DMPanelName)
+                                        {
+                                            _prev_divModel.Div_DMPanel = pnl;
+                                            SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
+                                            div_DMPanelName = "";
+                                        }
+                                    }
+                                }
 
                             }
 
@@ -6511,14 +6513,14 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
-                            foreach (IPanelModel pnl in _multiPanelModel2ndLvl.MPanelLst_Panel)
+                            foreach (IPanelModel pnl in div_MPanelParent.MPanelLst_Panel)
                             {
                                 if (pnl.Panel_Name == extractedValue_str)
                                 {
                                     div_DMPanel = pnl;
                                 }
                             }
-                            if (div_DMPanel == null)
+                            if (div_DMPanel != null)
                             {
                                 div_DMPanelName = extractedValue_str;
                             }
