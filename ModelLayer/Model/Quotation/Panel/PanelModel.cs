@@ -700,7 +700,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-        #region Explosion
+       #region Explosion
         private int _panelGlassID;
         public int PanelGlass_ID
         {

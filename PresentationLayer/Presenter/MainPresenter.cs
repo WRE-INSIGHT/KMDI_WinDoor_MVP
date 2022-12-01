@@ -957,7 +957,7 @@ namespace PresentationLayer.Presenter
         }
         private void _mainView_billOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-
+            Run_GetListOfMaterials_SpecificItem();
             _quotationModel.BOMandItemlistStatus = "BOM";
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
             PricingPresenter.GetPricingView().ShowPricingList();
