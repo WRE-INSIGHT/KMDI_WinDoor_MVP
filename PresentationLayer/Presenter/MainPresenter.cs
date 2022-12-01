@@ -2578,13 +2578,6 @@ namespace PresentationLayer.Presenter
 
             else if (row_str == ")")
             {
-                int itemCount = 1;
-                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                {
-
-                    wdm.WD_name = "Item " + itemCount;
-                    itemCount++;
-                }
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
             }
@@ -2596,6 +2589,7 @@ namespace PresentationLayer.Presenter
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
                     wndrId += 1;
+                    wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
 
@@ -9009,20 +9003,23 @@ namespace PresentationLayer.Presenter
         private List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
         {
             List<IMultiPanelModel> lst_MPanel = new List<IMultiPanelModel>();
-            lst_MPanel.Add(frmModel.Lst_MultiPanel[0]);
-            foreach (IMultiPanelModel mpnl2nd in frmModel.Lst_MultiPanel[0].MPanelLst_MultiPanel)
+            if (frmModel.Lst_MultiPanel.Count > 0)
             {
-                lst_MPanel.Add(mpnl2nd);
-            }
-
-            foreach (IMultiPanelModel mpnl3rd in frmModel.Lst_MultiPanel[0].MPanelLst_MultiPanel)
-            {
-
-                foreach (IMultiPanelModel mpnl4th in mpnl3rd.MPanelLst_MultiPanel)
+                lst_MPanel.Add(frmModel.Lst_MultiPanel[0]);
+                foreach (IMultiPanelModel mpnl2nd in frmModel.Lst_MultiPanel[0].MPanelLst_MultiPanel)
                 {
-                    lst_MPanel.Add(mpnl4th);
+                    lst_MPanel.Add(mpnl2nd);
                 }
 
+                foreach (IMultiPanelModel mpnl3rd in frmModel.Lst_MultiPanel[0].MPanelLst_MultiPanel)
+                {
+
+                    foreach (IMultiPanelModel mpnl4th in mpnl3rd.MPanelLst_MultiPanel)
+                    {
+                        lst_MPanel.Add(mpnl4th);
+                    }
+
+                }
             }
             return lst_MPanel;
         }
