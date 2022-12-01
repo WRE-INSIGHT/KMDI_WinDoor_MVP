@@ -581,6 +581,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, setNewFactorEventRaised, e);
         }
 
-       
+      
     }
 }

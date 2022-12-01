@@ -979,6 +979,7 @@ namespace PresentationLayer.Presenter
                                    _windoorModel.WD_height,
                                    _windoorModel.WD_profile,
                                    _windoorModel.WD_BaseColor.Value.ToString());
+                _quotationModel.Select_Current_Windoor(_windoorModel);
             }
             catch (Exception ex)
             {
@@ -1038,6 +1039,8 @@ namespace PresentationLayer.Presenter
 
         private void _mainView_saveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
+
+            wndr_content = new List<string>();
             SaveChanges();
         }
 
@@ -1047,6 +1050,7 @@ namespace PresentationLayer.Presenter
             _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
             {
+                wndr_content = new List<string>();
                 SaveAs();
             }
 
@@ -1176,6 +1180,12 @@ namespace PresentationLayer.Presenter
                     }
 
                     wndr_content.Add(prop.Name + ": " + Dictionary_wd_redArrowLinesArray);
+                }
+
+                else if (prop.Name == "WD_description")
+                {
+                    string Wd_desu = prop.GetValue(wdm, null).ToString().Replace("\n", @"\m/");
+                    wndr_content.Add(prop.Name + ": " + Wd_desu);
                 }
                 else
                 {
@@ -1865,6 +1875,8 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
+            wndr_content = new List<string>();
+            Saving_dotwndr();
         }
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -2779,6 +2791,10 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_visibility:"))
                         {
                             _windoorModel.WD_visibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("WD_description:"))
+                        {
+                            _windoorModel.WD_description = extractedValue_str.Replace(@"\m/", "\n");
                         }
 
                         if (row_str.Contains("WD_width_4basePlatform:"))
@@ -7603,11 +7619,6 @@ namespace PresentationLayer.Presenter
 
                         BotToolStrip_Enable();
                         CreateNewWindoorBtn_Enable();
-
-                        //_mainView.RemoveBinding();
-                        //_mainView.RemoveBinding(_mainView.GetLblSize());
-                        //_mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
-
                         _pnlPropertiesBody.Controls.Clear(); //Clearing Operation
                         //_basePlatformPresenter.RemoveBindingView();
                         //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
@@ -7681,9 +7692,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.Duplicate)
                     {
+                        wndr_content = new List<string>();
                         SaveWindoorModel(_windoorModel);
-                        //int index = wndr_content.FindIndex(a => a.Contains("WD_id"));
-                        //wndr_content[index].Replace(wndr_content[index], "WD_id: " + _quotationModel.Lst_Windoor.Count + 1);
                         wndr_content.Add("EndofFile");
                         file_lines = wndr_content.ToArray();
                         onload = true;
@@ -7692,7 +7702,8 @@ namespace PresentationLayer.Presenter
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
-                     
+
+
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate) //Add new Item
