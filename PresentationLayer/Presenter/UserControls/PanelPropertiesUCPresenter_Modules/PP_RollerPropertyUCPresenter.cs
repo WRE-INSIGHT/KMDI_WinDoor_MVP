@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             ComboBox cmb = (ComboBox)sender;
             _panelModel.Panel_RollersTypes = (RollersTypes)cmb.SelectedValue;
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _rollerPropertyUC_PPRollerPropertyUCLoadEventRaised(object sender, EventArgs e)

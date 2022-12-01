@@ -8,6 +8,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     public interface IPP_MiddleCloserPropertyUCPresenter : IPresenterCommon
     {
         IPP_MiddleCloserPropertyUC GetMiddleCloserPropertyUC();
-        IPP_MiddleCloserPropertyUCPresenter GetNewInstance(IPanelModel panelModel, IUnityContainer unityC);
+        IPP_MiddleCloserPropertyUCPresenter GetNewInstance(IPanelModel panelModel, IUnityContainer unityC, IMainPresenter mainPresenter);
     }
 }
+ 

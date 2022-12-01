@@ -25,6 +25,12 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void SubscribeToEventSetUp()
         {
             _slidingRailsPropertyUC.FPSlidingRailsPropertyUCLoadEventRaised += _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised;
+            _slidingRailsPropertyUC.nudRailsQtyValueChangedEventRaised += _slidingRailsPropertyUC_nudRailsQtyValueChangedEventRaised;
+        }
+
+        private void _slidingRailsPropertyUC_nudRailsQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -61,8 +67,5 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
             return binding;
         }
-
-
-
     }
 }

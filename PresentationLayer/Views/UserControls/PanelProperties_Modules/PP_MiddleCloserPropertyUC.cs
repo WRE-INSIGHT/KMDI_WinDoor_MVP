@@ -14,6 +14,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
         public event EventHandler CmbMiddleCLoserSelectedValueChangedEventRaised;
         public event EventHandler MiddleCloserPropertyUCLoadEventRaised;
+        public event EventHandler numMCPairQtyValueChangedEventRaised;
         private void cmb_MiddleCLoser_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, CmbMiddleCLoserSelectedValueChangedEventRaised, e);
@@ -32,7 +33,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
             EventHelpers.RaiseEvent(sender, MiddleCloserPropertyUCLoadEventRaised, e);
         }
+        private void num_MCPairQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numMCPairQtyValueChangedEventRaised, e);
 
+        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -40,5 +45,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             cmb_MiddleCLoser.DataBindings.Add(ModelBinding["Panel_MiddleCloserArtNo"]);
             num_MCPairQty.DataBindings.Add(ModelBinding["Panel_MiddleCloserPairQty"]);
         }
+
+      
     }
 }

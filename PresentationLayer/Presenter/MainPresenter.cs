@@ -9279,6 +9279,8 @@ namespace PresentationLayer.Presenter
         public void GetCurrentPrice()
         {
             //_quotationModel.Select_Current_Windoor(_windoorModel);
+            Run_GetListOfMaterials_SpecificItem();
+
             if (qoutationModel_MainPresenter.itemSelectStatus == true)
             {
                 _quotationModel.BOMandItemlistStatus = "BOM";
@@ -9294,11 +9296,14 @@ namespace PresentationLayer.Presenter
 
         public void updatePriceFromMainViewToItemList()
         {
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            if (_quotationModel != null)
             {
-                if (wdm.WD_Selected == true)
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-                    wdm.WD_price = _lblCurrentPrice.Value;
+                    if (wdm.WD_Selected == true)
+                    {
+                        wdm.WD_price = _lblCurrentPrice.Value;
+                    }
                 }
             }
         }

@@ -3,9 +3,6 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -18,6 +15,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
+        private IMainPresenter _mainPresenter;
 
         bool _initialLoad = true;
 
@@ -38,6 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _panelModel.Panel_EspagnoletteArtNo = (Espagnolette_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -52,7 +51,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_espagnolettePropertyUC;
         }
 
-        public IPP_EspagnolettePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPP_EspagnolettePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_EspagnolettePropertyUC, PP_EspagnolettePropertyUC>()
@@ -60,7 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_EspagnolettePropertyUCPresenter presenter = unityC.Resolve<PP_EspagnolettePropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
-
+            presenter._mainPresenter = mainPresenter;
             return presenter;
         }
 

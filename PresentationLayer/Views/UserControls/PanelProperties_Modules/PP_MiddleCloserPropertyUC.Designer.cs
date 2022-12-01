@@ -79,6 +79,7 @@
             this.num_MCPairQty.Name = "num_MCPairQty";
             this.num_MCPairQty.Size = new System.Drawing.Size(75, 22);
             this.num_MCPairQty.TabIndex = 41;
+            this.num_MCPairQty.ValueChanged += new System.EventHandler(this.num_MCPairQty_ValueChanged);
             // 
             // PP_MiddleCloserPropertyUC
             // 

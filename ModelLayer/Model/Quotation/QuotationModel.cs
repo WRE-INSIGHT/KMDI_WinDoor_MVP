@@ -1274,6 +1274,10 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                         // } 
                                                     }
+                                                    if (pnl_curCtrl.Panel_SashHeight >= 4000)
+                                                    {
+                                                        pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
+                                                    }
                                                 }
 
 
@@ -2209,6 +2213,7 @@ namespace ModelLayer.Model.Quotation
                 ExtensionBasePrice,
 
                 RollerBasePrice,
+                MotorizePrice,
         #endregion
         #region Accessories
 
@@ -2296,8 +2301,8 @@ namespace ModelLayer.Model.Quotation
             var cus_ref_date = Date_Assigned;
             DateTime inc_price_date = DateTime.Parse("10-15-2022");
             DateTime inc_price_date_2 = DateTime.Parse("11-15-2022");
-            
-             if(cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
+
+            if (cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
@@ -2636,20 +2641,20 @@ namespace ModelLayer.Model.Quotation
                 #endregion
                 #region AncillaryProfile
                 GlazingGasketPricePerLinearMeter = 32.64m;
-            GlazingBeadPricePerLinearMeter = 256.62m;
-            GlazingBead_G58PricePerLinearMeter = 117.72m;
-            GeorgianBar_0724Price = 154.93m;
-            GeorgianBar_0726Price = 307.75m;
-            CoverProfile_0914Price = 20.68m;
-            CoverProfile_0373Price = 105.41m;
-            ThresholdPricePerPiece = 1229.34m;
-            WeatherBarPricePerPiece = 236.75m;
-            GuideTrackPricePerLinearMeter = 157.18m;
-            InterlockPricePerPiece = 333.77m;
-            ExtensionForInterlockPricePerPiece = 789.01m;
+                GlazingBeadPricePerLinearMeter = 256.62m;
+                GlazingBead_G58PricePerLinearMeter = 117.72m;
+                GeorgianBar_0724Price = 154.93m;
+                GeorgianBar_0726Price = 307.75m;
+                CoverProfile_0914Price = 20.68m;
+                CoverProfile_0373Price = 105.41m;
+                ThresholdPricePerPiece = 1229.34m;
+                WeatherBarPricePerPiece = 236.75m;
+                GuideTrackPricePerLinearMeter = 157.18m;
+                InterlockPricePerPiece = 333.77m;
+                ExtensionForInterlockPricePerPiece = 789.01m;
                 AluminumTrackPricePerLinearMeter = 251.10m;
-            WaterSeepagePricePerLinearMeter = 153.73m;
-            AluminumPullHandlePricePerLinearMeter = 2480.18m;
+                WaterSeepagePricePerLinearMeter = 153.73m;
+                AluminumPullHandlePricePerLinearMeter = 2480.18m;
 
 
 
@@ -2756,11 +2761,11 @@ namespace ModelLayer.Model.Quotation
 
                                     if (fr.Frame_Width >= 5000)
                                     {
-                                        ProfileColorPoints = 31;
+                                        ProfileColorPoints = 19;
                                     }
                                     else if (fr.Frame_Height >= 5000)
                                     {
-                                        ProfileColorPoints = 31;
+                                        ProfileColorPoints = 19;
                                     }
                                 }
                                 else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
@@ -2769,11 +2774,11 @@ namespace ModelLayer.Model.Quotation
 
                                     if (fr.Frame_Width >= 5000)
                                     {
-                                        ProfileColorPoints = 33;
+                                        ProfileColorPoints = 21;
                                     }
                                     else if (fr.Frame_Height >= 5000)
                                     {
-                                        ProfileColorPoints = 33;
+                                        ProfileColorPoints = 21;
                                     }
                                 }
                             }
@@ -3007,6 +3012,18 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
                                                 MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
                                             }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._6052)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                }
+                                                else
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                }
+                                                DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
+                                            }
 
                                             DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
                                             DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
@@ -3017,24 +3034,41 @@ namespace ModelLayer.Model.Quotation
                                             BOM_divDesc = "Mullion";
                                             if (div.Div_ArtNo == Divider_ArticleNo._7536)
                                             {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
+                                                DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
                                             }
 
                                             else if (div.Div_ArtNo == Divider_ArticleNo._7538)
                                             {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                                MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
+                                                DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
                                             }
                                             else if (div.Div_ArtNo == Divider_ArticleNo._2069)
                                             {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
+                                                DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
+                                                DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
+                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
                                             }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._6052)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                }
+                                                else
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                }
+                                                DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
+                                            }
+
+                                            DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
+                                            MechJointPrice += MechanicalJointPricePerPiece * 2;
                                         }
+
                                     }
 
                                     #endregion
@@ -3568,7 +3602,10 @@ namespace ModelLayer.Model.Quotation
                                             PlasticWedgePrice += PlasticWedgePricePerPiece;
                                         }
 
-
+                                        if (pnl.Panel_MotorizedOptionVisibility == true)
+                                        {
+                                            MotorizePrice += 15000 * pnl.Panel_MotorizedMechQty;
+                                        }
 
                                         #region EspagPrice
 
@@ -4403,12 +4440,11 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                                 {
-                                    //motorize price
+                                    MotorizePrice += 15000 * Singlepnl.Panel_MotorizedMechQty;
                                 }
 
 
                                 HandleDesc = Singlepnl.Panel_HandleType.ToString();
-
 
                                 #region EspagPrice
 
@@ -4797,7 +4833,8 @@ namespace ModelLayer.Model.Quotation
                                              Math.Round(ExtensionPrice, 2) +
                                              Math.Round(RollerPrice, 2) +
                                              Math.Round(StrikerLRPrice, 2) +
-                                             Math.Round(BrushSealPrice, 2);
+                                             Math.Round(BrushSealPrice, 2) +
+                                             Math.Round(MotorizePrice, 2);
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
@@ -4850,6 +4887,7 @@ namespace ModelLayer.Model.Quotation
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
                     CurrentPrice = TotaPrice;
+
                     lstTotalPrice.Add(TotaPrice);
 
                     if (wdm.WD_price == 0)
@@ -5399,6 +5437,13 @@ namespace ModelLayer.Model.Quotation
                                 "",
                                 "Fitting and Supplies");
 
+                        Price_List.Rows.Add("Motorize Mechanism",
+                                "15,000",
+                                Math.Round(MotorizePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
+
                         Price_List.Rows.Add("Total",
                                          "",
                                          Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
@@ -5511,6 +5556,7 @@ namespace ModelLayer.Model.Quotation
             BrushSealPrice = 0;
             StrikerLRPrice = 0;
             RollerPrice = 0;
+            MotorizePrice = 0;
 
             AncillaryProfileCost = 0;
             ThresholdPrice = 0;

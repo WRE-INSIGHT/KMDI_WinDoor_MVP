@@ -18,9 +18,15 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         }
 
         public event EventHandler FPSlidingRailsPropertyUCLoadEventRaised;
+        public event EventHandler  nudRailsQtyValueChangedEventRaised;
         private void FP_SlidingRailsPropertyUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, FPSlidingRailsPropertyUCLoadEventRaised, e);
+        }
+
+        private void nud_RailsQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudRailsQtyValueChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
@@ -29,6 +35,6 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             nud_RailsQty.DataBindings.Add(ModelBinding["Frame_SlidingRailsQty"]);
         }
 
-
+       
     }
 }

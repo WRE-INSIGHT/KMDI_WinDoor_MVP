@@ -306,6 +306,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
                 }
+                _mainPresenter.GetCurrentPrice();
             }
             catch (Exception ex)
             {
@@ -407,6 +408,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             _panelModel.Panel_Overlap_Sash = OverlapSash._None;
             ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.GetCurrentPrice();
         }
         private void _slidingPanelUC_RightToolStripClickedEventRaised(object sender, EventArgs e)
         {
@@ -576,6 +578,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             _panelModel.Panel_Overlap_Sash = OverlapSash._Left;
             ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.GetCurrentPrice();
         }
         private void _slidingPanelUC_BothToolStripClickedEventRaised(object sender, EventArgs e)
         {
@@ -660,6 +663,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             _panelModel.Panel_Overlap_Sash = OverlapSash._Both;
             ((IPanelUC)_slidingPanelUC).InvalidateThis();
+            _mainPresenter.GetCurrentPrice();
         }
         private void _slidingPanelUC_slidingPanelUCMouseUpEventRaised(object sender, MouseEventArgs e)
         {

@@ -9,5 +9,6 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         NumericUpDown GetNudRailsQty();
 
         event EventHandler FPSlidingRailsPropertyUCLoadEventRaised;
+        event EventHandler nudRailsQtyValueChangedEventRaised;
     }
 }
