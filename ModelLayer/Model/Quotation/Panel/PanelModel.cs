@@ -3873,7 +3873,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                     {
-                        Panel_HeightToBind = (int)(Panel_Width * Panel_Zoom);
+                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
                     }
                     else
                     {
