@@ -334,6 +334,7 @@ namespace PresentationLayer.Presenter.UserControls
                 int new_locY = ((UserControl)_divProperties).Location.Y;
 
                 _mainPresenter.Set_pnlPropertiesBody_ScrollView(orig_locY + (new_locY - orig_locY));
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -418,85 +419,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
 
 
-            //if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-            //{
-            //    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
-
-            //    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-            //    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
-            //}
-
-            //if (_divModel.Div_ChkDM == true)
-            //{
-            //    _divModel.Div_ArtVisibility = false;
-
-            //    _divModel.Div_ArtNo = Divider_ArticleNo._None;
-            //    _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
-            //}
-            //IDP_CladdingBracketPropertyUCPresenter bracketUCP = _dp_claddingBracketPropertyUCP.GetNewInstance(_unityC, _divModel);
-            //_dp_claddingBracketPropertyUCP = bracketUCP;
-            //UserControl bracketProp = (UserControl)bracketUCP.GetCladdingBracketPropertyUC();
-            //_divPropertiesBodyPNL.Controls.Add(bracketProp);
-            //bracketProp.Dock = DockStyle.Top;
-            //bracketProp.BringToFront();
-            //if (_divModel.Div_CladdingSizeList != null)
-            //{
-
-            //    if (_divModel.Div_CladdingSizeList.Count > 0)
-            //    {
-            //        foreach (var cladding in _divModel.Div_CladdingSizeList)
-            //        {
-
-            //            _divModel.Div_CladdingProfileArtNoVisibility = true;
-            //            _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
-            //            if (cladding_count < 1)
-            //            {
-            //                _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
-            //                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-            //                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-            //            }
-
-            //            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
-            //            IDP_CladdingPropertyUC claddingPropUC = claddingUCP.GetCladdingPropertyUC();
-
-            //            claddingPropUC.Cladding_Size = (int)cladding.Value;
-            //            claddingPropUC.Cladding_ID = cladding.Key;
-            //            claddingPropUC.Divider_Type = _divModel.Div_Type.ToString();
-            //            UserControl claddingUC = (UserControl)claddingPropUC;
-            //            claddingUC.Dock = DockStyle.Top;
-            //            _divPropertiesBodyPNL.Controls.Add(claddingUC);
-
-            //            _divModel.AdjustPropertyPanelHeight("addCladding");
-            //            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
-            //            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
-            //            claddingUC.BringToFront();
-
-            //            _divModel.Div_CladdingCount++;
-            //            Cladding_Count++;
-
-            //            _dp_claddingBracketPropertyUCP.BringToFrontUC();
-
-            //            int locY = ((UserControl)_divProperties).Location.Y;
-
-            //            //_mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
-
-            //            _divProperties.SetBtnSaveBackColor(Color.White);
-            //        }
-            //    }
-            //}
-            //Refresh_LblTotalCladdingLength();
-            //_divProperties.ThisBinding(CreateBindingDictionary());
-            //_initialLoad = false;
-            IDP_LeverEspagnolettePropertyUCPresenter leverUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
-            _dp_leverEspagPropertyUCP = leverUCP;
-            UserControl leverProp = (UserControl)leverUCP.GetDPLeverEspagPropertyUC();
-            _divPropertiesBodyPNL.Controls.Add(leverProp);
-            leverProp.Dock = DockStyle.Top;
-            leverProp.SendToBack();
-
             if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
             {
                 _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+
                 _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
                 _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
             }
@@ -508,16 +434,95 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_ArtNo = Divider_ArticleNo._None;
                 _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
             }
-
             IDP_CladdingBracketPropertyUCPresenter bracketUCP = _dp_claddingBracketPropertyUCP.GetNewInstance(_unityC, _divModel);
             _dp_claddingBracketPropertyUCP = bracketUCP;
             UserControl bracketProp = (UserControl)bracketUCP.GetCladdingBracketPropertyUC();
             _divPropertiesBodyPNL.Controls.Add(bracketProp);
             bracketProp.Dock = DockStyle.Top;
             bracketProp.BringToFront();
+            if (_divModel.Div_CladdingSizeList != null)
+            {
 
+                if (_divModel.Div_CladdingSizeList.Count > 0)
+                {
+                    _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
+
+                    foreach (var cladding in _divModel.Div_CladdingSizeList)
+                    {
+
+                        _divModel.Div_CladdingProfileArtNoVisibility = true;
+                        _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
+                        if (cladding_count < 1)
+                        {
+                            _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+                            
+                        }
+
+                        IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
+                        IDP_CladdingPropertyUC claddingPropUC = claddingUCP.GetCladdingPropertyUC();
+                        _lst_claddUCP.Add(claddingUCP);
+
+                        claddingPropUC.Cladding_Size = (int)cladding.Value;
+                        claddingPropUC.Cladding_ID = cladding.Key;
+                        claddingPropUC.Divider_Type = _divModel.Div_Type.ToString();
+                        UserControl claddingUC = (UserControl)claddingPropUC;
+                        claddingUC.Dock = DockStyle.Top;
+                        _divPropertiesBodyPNL.Controls.Add(claddingUC);
+
+                        _divModel.AdjustPropertyPanelHeight("addCladding");
+                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                        claddingUC.BringToFront();
+
+                        _divModel.Div_CladdingCount++;
+                        Cladding_Count++;
+
+                        _dp_claddingBracketPropertyUCP.BringToFrontUC();
+
+                        int locY = ((UserControl)_divProperties).Location.Y;
+
+                        //_mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
+
+                        _divProperties.SetBtnSaveBackColor(Color.White);
+                    }
+                }
+            }
             _divProperties.ThisBinding(CreateBindingDictionary());
             _initialLoad = false;
+            //IDP_LeverEspagnolettePropertyUCPresenter leverUCP = _dp_leverEspagPropertyUCP.GetNewInstance(_unityC, _divModel);
+            //_dp_leverEspagPropertyUCP = leverUCP;
+            //UserControl leverProp = (UserControl)leverUCP.GetDPLeverEspagPropertyUC();
+            //_divPropertiesBodyPNL.Controls.Add(leverProp);
+            //leverProp.Dock = DockStyle.Top;
+            //leverProp.SendToBack();
+
+            //if (_divModel.Div_DMPanel != null && _divModel.Div_DMPanel.Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+            //{
+            //    _divModel.AdjustPropertyPanelHeight("addLeverEspag");
+            //    _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+            //    _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addLeverEspag");
+            //}
+
+            //if (_divModel.Div_ChkDM == true)
+            //{
+            //    _divModel.Div_ArtVisibility = false;
+
+            //    _divModel.Div_ArtNo = Divider_ArticleNo._None;
+            //    _divModel.Div_ReinfArtNo = DividerReinf_ArticleNo._None;
+            //}
+
+            //IDP_CladdingBracketPropertyUCPresenter bracketUCP = _dp_claddingBracketPropertyUCP.GetNewInstance(_unityC, _divModel);
+            //_dp_claddingBracketPropertyUCP = bracketUCP;
+            //UserControl bracketProp = (UserControl)bracketUCP.GetCladdingBracketPropertyUC();
+            //_divPropertiesBodyPNL.Controls.Add(bracketProp);
+            //bracketProp.Dock = DockStyle.Top;
+            //bracketProp.BringToFront();
+
+            //_divProperties.ThisBinding(CreateBindingDictionary());
+            //_initialLoad = false;
+            Refresh_LblTotalCladdingLength();
         }
 
         public IDividerPropertiesUC GetDivProperties()
@@ -566,11 +571,11 @@ namespace PresentationLayer.Presenter.UserControls
             _divProperties.SetBtnSaveBackColor(color);
         }
 
-        public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP()
-        {
+        //public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP()
+        //{
            
-            return _dp_leverEspagPropertyUCP;
-        }
+        //    return _dp_leverEspagPropertyUCP;
+        //}
 
         public void Refresh_LblTotalCladdingLength()
         {
