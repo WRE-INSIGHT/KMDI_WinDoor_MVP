@@ -7809,7 +7809,7 @@ namespace PresentationLayer.Presenter
                         //    }
                         //}
 
-                        if(frmDimension_numWd >= availableWidth)
+                        //if(frmDimension_numWd >= availableWidth)
                         int frameID = _windoorModel.frameIDCounter += 1;
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
