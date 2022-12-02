@@ -38,6 +38,11 @@
             // 
             this.num_CladdingSize.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num_CladdingSize.Location = new System.Drawing.Point(60, 2);
+            this.num_CladdingSize.Maximum = new decimal(new int[] {
+            1874919424,
+            2328306,
+            0,
+            0});
             this.num_CladdingSize.Name = "num_CladdingSize";
             this.num_CladdingSize.Size = new System.Drawing.Size(64, 23);
             this.num_CladdingSize.TabIndex = 18;

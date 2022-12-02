@@ -626,6 +626,30 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
 
                 }
+                if(_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
+                {
+                    if(_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                    }
+                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                    }
+                        
+                }
+                else
+                {
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
+                    }
+                    else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
+                    }
+                    
+                }
                 _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
                 _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
                 if (_mainPresenter.NxtPnlModel_forDMSelection != null)
@@ -633,7 +657,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _mainPresenter.NxtPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
                 }
                 _mainPresenter.SetLblStatus("DMSelection", false, null, null, _panelModel);
-            }else
+                _mainPresenter.GetCurrentPrice();
+            }
+            else
             {
                 try
                 {
@@ -843,7 +869,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
         }
-
+        
         int _timer_count;
         private void _tmr_Tick(object sender, EventArgs e)
         {

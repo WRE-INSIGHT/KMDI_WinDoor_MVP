@@ -6,7 +6,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 {
     public interface IPP_2dHingePropertyUCPresenter
     {
-        IPP_2dHingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPP_2dHingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
         IPP_2dHingePropertyUC GetPP_2dHingePropertyUC();
     }
 }

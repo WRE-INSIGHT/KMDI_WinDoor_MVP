@@ -13,6 +13,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_MiddleCloserPropertyUC _pp_middleCloserPropertyUC;
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
+        private IMainPresenter _mainPresenter;
 
 
         bool _initialLoad = true;
@@ -26,6 +27,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_middleCloserPropertyUC.MiddleCloserPropertyUCLoadEventRaised += _pp_middleCloserPropertyUC_MiddleCloserPropertyUCLoadEventRaised;
             _pp_middleCloserPropertyUC.CmbMiddleCLoserSelectedValueChangedEventRaised += _pp_middleCloserPropertyUC_CmbMiddleCLoserSelectedValueChangedEventRaised;
+            _pp_middleCloserPropertyUC.numMCPairQtyValueChangedEventRaised += _pp_middleCloserPropertyUC_numMCPairQtyValueChangedEventRaised;
+        }
+
+        private void _pp_middleCloserPropertyUC_numMCPairQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            //_mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_middleCloserPropertyUC_CmbMiddleCLoserSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -39,6 +46,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_MiddleCloserPairQty = 0;
                 }
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -53,7 +61,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_middleCloserPropertyUC;
         }
 
-        public IPP_MiddleCloserPropertyUCPresenter GetNewInstance(IPanelModel panelModel, IUnityContainer unityC)
+        public IPP_MiddleCloserPropertyUCPresenter GetNewInstance(IPanelModel panelModel, IUnityContainer unityC, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_MiddleCloserPropertyUC, PP_MiddleCloserPropertyUC>()
@@ -61,6 +69,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_MiddleCloserPropertyUCPresenter MiddleCloserPropertyUCPresenter = unityC.Resolve<PP_MiddleCloserPropertyUCPresenter>();
             MiddleCloserPropertyUCPresenter._panelModel = panelModel;
             MiddleCloserPropertyUCPresenter._unityC = unityC;
+            MiddleCloserPropertyUCPresenter._mainPresenter = mainPresenter;
+
             return MiddleCloserPropertyUCPresenter;
         }
 

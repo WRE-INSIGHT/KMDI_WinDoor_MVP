@@ -6,7 +6,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 {
     public interface IPP_MotorizedPropertyUCPresenter
     {
-        IPP_MotorizedPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPP_MotorizedPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
         IPP_MotorizedPropertyUC GetPPMotorizedPropertyUC();
     }
 }

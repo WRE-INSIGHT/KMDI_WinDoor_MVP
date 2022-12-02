@@ -6,7 +6,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 {
     public interface IPP_SashPropertyUCPresenter
     {
-        IPP_SashPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPP_SashPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
         IPP_SashPropertyUC GetPPSashPropertyUC();
     }
 }

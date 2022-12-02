@@ -1,13 +1,8 @@
 ﻿using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.CommonMethods;
-using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -18,6 +13,7 @@ namespace PresentationLayer.Presenter
     {
         IGlassThicknessListView _glassThicknessListView;
 
+        private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private DataTable _glassThicknessDT;
 
@@ -76,6 +72,7 @@ namespace PresentationLayer.Presenter
                     }
 
                     _glassThicknessListView.CloseThisDialog();
+                    _mainPresenter.GetCurrentPrice();
                 }
                 else
                 {
@@ -165,7 +162,8 @@ namespace PresentationLayer.Presenter
 
         public IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC,
                                                            DataTable glassThicknessDT,
-                                                           IPanelModel panelModel)
+                                                           IPanelModel panelModel,
+                                                           IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IGlassThicknessListView, GlassThicknessListView>()
@@ -173,7 +171,7 @@ namespace PresentationLayer.Presenter
             GlassThicknessListPresenter presenter = unityC.Resolve<GlassThicknessListPresenter>();
             presenter._glassThicknessDT = glassThicknessDT;
             presenter._panelModel = panelModel;
-
+            presenter._mainPresenter = mainPresenter;
             return presenter;
         }
     }

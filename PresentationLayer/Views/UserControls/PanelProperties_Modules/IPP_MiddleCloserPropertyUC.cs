@@ -7,5 +7,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler MiddleCloserPropertyUCLoadEventRaised;
         event EventHandler CmbMiddleCLoserSelectedValueChangedEventRaised;
+        event EventHandler numMCPairQtyValueChangedEventRaised;
     }
 }

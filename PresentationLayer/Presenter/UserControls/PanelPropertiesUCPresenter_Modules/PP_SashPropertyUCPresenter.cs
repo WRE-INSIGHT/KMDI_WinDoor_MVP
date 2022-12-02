@@ -16,7 +16,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
-
+        private IMainPresenter _mainPresenter;
         bool _initialLoad = true;
 
         public PP_SashPropertyUCPresenter(IPP_SashPropertyUC pp_sashPropertyUC)
@@ -586,6 +586,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     curr_sash = sel_sash;
                 }
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_sashPropertyUC_PPSashPropertyLoadEventRaised(object sender, EventArgs e)
@@ -649,7 +650,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_sashPropertyUC;
         }
 
-        public IPP_SashPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPP_SashPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_SashPropertyUC, PP_SashPropertyUC>()
@@ -657,6 +658,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_SashPropertyUCPresenter presenter = unityC.Resolve<PP_SashPropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
+            presenter._mainPresenter = mainPresenter;
 
             return presenter;
         }

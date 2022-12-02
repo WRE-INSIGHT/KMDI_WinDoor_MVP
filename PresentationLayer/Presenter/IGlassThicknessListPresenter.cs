@@ -1,15 +1,15 @@
-﻿using System.Data;
-using PresentationLayer.Presenter.UserControls;
+﻿using ModelLayer.Model.Quotation.Panel;
+using System.Data;
 using Unity;
-using ModelLayer.Model.Quotation.Panel;
 
 namespace PresentationLayer.Presenter
 {
     public interface IGlassThicknessListPresenter
     {
-        IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC, 
+        IGlassThicknessListPresenter GetNewInstance(IUnityContainer unityC,
                                                     DataTable glassThicknessDT,
-                                                    IPanelModel panelModel);
+                                                    IPanelModel panelModel,
+                                                    IMainPresenter mainPresenter);
         void ShowGlassThicknessListView();
     }
 }

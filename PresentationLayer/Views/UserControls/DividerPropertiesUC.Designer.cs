@@ -85,6 +85,11 @@
             this.num_divHeight.BackColor = System.Drawing.Color.White;
             this.num_divHeight.Enabled = false;
             this.num_divHeight.Location = new System.Drawing.Point(6, 17);
+            this.num_divHeight.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.num_divHeight.Name = "num_divHeight";
             this.num_divHeight.ReadOnly = true;
             this.num_divHeight.Size = new System.Drawing.Size(135, 20);

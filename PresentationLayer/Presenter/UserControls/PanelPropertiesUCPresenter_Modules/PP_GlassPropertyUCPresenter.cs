@@ -3,9 +3,6 @@ using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -42,8 +39,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
         private void _pp_glassPropertyUC_btnSelectGlassThicknessClickedEventRaised(object sender, EventArgs e)
-        { 
-            IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, _mainPresenter.GlassThicknessDT, _panelModel);
+        {
+            IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, _mainPresenter.GlassThicknessDT, _panelModel, _mainPresenter);
             glassThicknessPresenter.ShowGlassThicknessListView();
         }
 
@@ -74,9 +71,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised(object sender, EventArgs e)
         {
 
-            if(_panelModel.Panel_GlassThickness == 0 )
+            if (_panelModel.Panel_GlassThickness == 0)
             {
-                if(_panelModel.Panel_GlassThicknessDesc == "Unglazed")
+                if (_panelModel.Panel_GlassThicknessDesc == "Unglazed")
                 {
                     _panelModel.Panel_GlassThicknessDesc = "Unglazed";
                 }
@@ -85,9 +82,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassThickness = 6;
                     _panelModel.Panel_GlassThicknessDesc = "6 mm Clear";
                 }
-                
+
             }
-            
+
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
             _initialLoad = false;
@@ -120,7 +117,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_GlassPropertyHeight", new Binding("Height", _panelModel, "Panel_GlassPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ChkGlazingAdaptor", new Binding("Checked", _panelModel, "Panel_ChkGlazingAdaptor", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             return binding;
         }
     }

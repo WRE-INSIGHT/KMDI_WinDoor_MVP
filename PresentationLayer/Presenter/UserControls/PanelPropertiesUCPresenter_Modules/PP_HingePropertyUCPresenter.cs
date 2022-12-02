@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_HingePropertyUC _pp_HingePropertyUC;
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
+        private IMainPresenter _mainPresenter;
 
         bool _initialLoad = true;
 
@@ -86,9 +87,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     curr_hinge = sel_hinge;
                 }
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
-        public IPP_HingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPP_HingePropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                  .RegisterType<IPP_HingePropertyUC, PP_HingePropertyUC>()
@@ -96,6 +98,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_HingePropertyUCPresenter HingePropertyUCPresenter = unityC.Resolve<PP_HingePropertyUCPresenter>();
             HingePropertyUCPresenter._panelModel = panelModel;
             HingePropertyUCPresenter._unityC = unityC;
+            HingePropertyUCPresenter._mainPresenter = mainPresenter;
 
             return HingePropertyUCPresenter;
         }

@@ -416,9 +416,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     //    _multiPanelModel.Fit_MyControls_Dimensions();
 
                                     //}
+                                    _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
-                                    _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")

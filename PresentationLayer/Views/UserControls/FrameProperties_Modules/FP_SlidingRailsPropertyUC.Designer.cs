@@ -56,6 +56,7 @@
             0,
             0,
             0});
+            this.nud_RailsQty.ValueChanged += new System.EventHandler(this.nud_RailsQty_ValueChanged);
             // 
             // lbl_RailsQty
             // 

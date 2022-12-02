@@ -1178,8 +1178,9 @@ namespace ModelLayer.Model.Quotation
                                             pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
                                         }
 
-                                        //if (pnl_curCtrl.Panel_Spacer != null || pnl_curCtrl.Panel_ChkText == "dSash")
+                                        //if (pnl_curCtrl.Panel_Spacer != null) //|| pnl_curCtrl.Panel_ChkText == "dSash"
                                         //{
+                                        pnl_curCtrl.Panel_SpacerArtNo = Spacer_ArticleNo._M063;
                                         pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
                                         //}
 
@@ -1273,6 +1274,10 @@ namespace ModelLayer.Model.Quotation
                                                         pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
                                                         pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                         // } 
+                                                    }
+                                                    if (pnl_curCtrl.Panel_SashHeight >= 4000)
+                                                    {
+                                                        pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                     }
                                                 }
 
@@ -2100,6 +2105,7 @@ namespace ModelLayer.Model.Quotation
                 DummyMullionPricePerLinearMeter_385_White = 580.72m,
 
                 DMPrice,
+                DMReinforcementPrice,
                 DummyMullionPricePerLinearMeter,
         #endregion
         #region GlassPrice
@@ -2209,6 +2215,7 @@ namespace ModelLayer.Model.Quotation
                 ExtensionBasePrice,
 
                 RollerBasePrice,
+                MotorizePrice,
         #endregion
         #region Accessories
 
@@ -2296,12 +2303,11 @@ namespace ModelLayer.Model.Quotation
             var cus_ref_date = Date_Assigned;
             DateTime inc_price_date = DateTime.Parse("10-15-2022");
             DateTime inc_price_date_2 = DateTime.Parse("11-15-2022");
-            
-             if(cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
+
+            if (cus_ref_date >= inc_price_date && cus_ref_date < inc_price_date_2)
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
-
                 FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
                 FramePricePerLinearMeter_7502_White = 332.57m;
                 FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
@@ -2313,7 +2319,7 @@ namespace ModelLayer.Model.Quotation
                 FramePricePerLinearMeter_6052_White = 563.48m;
                 FrameReinPricePerLinearMeter_7502 = 123.55m;
                 FrameReinPricePerLinearMeter_7507 = 406.86m;
-                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame, sash and divider
+                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame; sash and divider
                 FrameReinPricePerLinearMeter_6050 = 114.76m;
                 FrameReinPricePerLinearMeter_6052 = 194.68m;
 
@@ -2326,8 +2332,8 @@ namespace ModelLayer.Model.Quotation
                 SashPricePerLinearMeter_395_WoodGrain = 556.57m;
                 SashPricePerLinearMeter_395_White = 412.47m;
                 SashPricePerLinearMeter_2067_White = 303.50m;
-                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m,
-                SashPricePerLinearMeter_6040_White = 325; //373.94m,
+                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m;
+                SashPricePerLinearMeter_6040_White = 325; //373.94m;
                 SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
                 SashPricePerLinearMeter_6041_White = 483.13m;
                 SashReinPricePerLinearMeter_7581 = 89.86m;
@@ -2336,34 +2342,24 @@ namespace ModelLayer.Model.Quotation
                 SashReinPricePerLinearMeter_6040 = 287.58m;
                 SashReinPricePerLinearMeter_6041 = 655.49m;
 
-
-
-                SashPrice = 0;
-
                 #endregion
                 #region Mullion/TransomPrice
-
                 Divider_7536_PricePerSqrMeter = 663.32m;
                 Divider_7538_PricePerSqrMeter = 817.34m;
-                Divider_2069_PricePerSqrMeter = 284.12m;// G58
+                Divider_2069_PricePerSqrMeter = 284.12m; // G58
                 DividerRein_7536_PricePerSqrMeter = 866.23m;
                 DividerRein_7538_PricePerSqrMeter = 858.52m;
 
                 claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
 
-
                 #endregion
                 #region DummyMullionPrice
-
                 DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
                 DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
                 DummyMullionPricePerLinearMeter_7533_White = 608.75m;
                 DummyMullionPricePerLinearMeter_385_White = 580.72m;
-
-
                 #endregion
                 #region GlassPrice
-
                 Glass_6mmClr_PricePerSqrMeter = 670.00m;
                 Glass_10mmClr_PricePerSqrMeter = 1662.00m;
                 Glass_12mmClr_PricePerSqrMeter = 1941.00m;
@@ -2372,15 +2368,13 @@ namespace ModelLayer.Model.Quotation
                 Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
 
 
-
                 #endregion
                 #region FittingAndSupplies
-
                 FS_16HD_casementPricePerPiece = 825.81m;
                 FS_26HD_casementPricePerPiece = 1839.35m;
 
                 RestrictorStayPricePerPiece = 161.18m;
-                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17, bot = 118.82
+                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17; bot = 118.82
                 SnapInKeepPricePerPiece = 67.79m;
                 _35mmBacksetEspagWithCylinder = 1346.78m;
                 MiddleCLoserPricePerPiece = 18.57m;
@@ -2427,17 +2421,14 @@ namespace ModelLayer.Model.Quotation
 
                 Extension_639957PricePerPiece = 170.50m;
                 Extension_567639PricePerPiece = 134.04m;
-                //Extension_N299A01006PricePerPiece = 118.82m,
+                //Extension_N299A01006PricePerPiece = 118.82m;
                 MVDExtensionPricePerPiece = 183.80m;
 
                 HDRollerPricePerPiece = 566.06m;
                 GURollerPricePerPiece = 1323.08m;
 
-                HandleBasePrice = 0;
-
                 #endregion
                 #region Accessories
-
                 EndCapPricePerPiece = 282.96m;
                 MechanicalJoint_AV585PricePerPiece = 87.34m;
                 MechanicalJoint_9U18PricePerPiece = 138.45m;
@@ -2446,7 +2437,6 @@ namespace ModelLayer.Model.Quotation
                 BarFastenerPricePerPiece = 4.40m;
                 SealingBlockPricePerPiece = 63.75m;
                 SpacerFixSashPricePerPiece = 21.42m;
-
 
                 #endregion
                 #region AncillaryProfile
@@ -2466,8 +2456,6 @@ namespace ModelLayer.Model.Quotation
                 WaterSeepagePricePerLinearMeter = 153.73m;
                 AluminumPullHandlePricePerLinearMeter = 2480.18m;
 
-
-
                 #endregion
                 BrushSealPricePerLinearMeter = 15.80m;
                 SealantPricePerCan_BrownBlack = 430m;
@@ -2486,185 +2474,166 @@ namespace ModelLayer.Model.Quotation
             {
                 #region setnewPrice
                 #region FrameAndSashPrice
+                        FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
+                        FramePricePerLinearMeter_7502_White = 332.57m;
+                        FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
+                        FramePricePerLinearMeter_7507_White = 354.28m;
+                        FramePricePerLinearMeter_2060_White = 271.35m;//G58
+                        FramePricePerLinearMeter_6050_WoodGrain = 483.36m;
+                        FramePricePerLinearMeter_6050_White = 378.19m;
+                        FramePricePerLinearMeter_6052_WoodGrain = 704.60m;
+                        FramePricePerLinearMeter_6052_White = 563.48m;
+                        FrameReinPricePerLinearMeter_7502 = 123.55m;
+                        FrameReinPricePerLinearMeter_7507 = 406.86m;
+                        G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame; sash and divider
+                        FrameReinPricePerLinearMeter_6050 = 114.76m;
+                        FrameReinPricePerLinearMeter_6052 = 194.68m;
 
-                FramePricePerLinearMeter_7502_WoodGrain = 465.13m;
-                FramePricePerLinearMeter_7502_White = 332.57m;
-                FramePricePerLinearMeter_7507_WoodGrain = 507.99m;
-                FramePricePerLinearMeter_7507_White = 354.28m;
-                FramePricePerLinearMeter_2060_White = 271.35m;//G58
-                FramePricePerLinearMeter_6050_WoodGrain = 483.36m;
-                FramePricePerLinearMeter_6050_White = 378.19m;
-                FramePricePerLinearMeter_6052_WoodGrain = 704.60m;
-                FramePricePerLinearMeter_6052_White = 563.48m;
-                FrameReinPricePerLinearMeter_7502 = 123.55m;
-                FrameReinPricePerLinearMeter_7507 = 406.86m;
-                G58ReinPricePerLinearMeter_V226 = 140.69m;//G58 reinforcement for frame, sash and divider
-                FrameReinPricePerLinearMeter_6050 = 114.76m;
-                FrameReinPricePerLinearMeter_6052 = 194.68m;
-
-                SashPricePerLinearMeter_7581_WoodGrain = 550.13m;
-                SashPricePerLinearMeter_7581_White = 375.30m;
-                SashPricePerLinearMeter_373_WoodGrain = 712.66m;
-                SashPricePerLinearMeter_373_White = 511.72m;
-                SashPricePerLinearMeter_374_WoodGrain = 801.83m;
-                SashPricePerLinearMeter_374_White = 511.72m;
-                SashPricePerLinearMeter_395_WoodGrain = 556.57m;
-                SashPricePerLinearMeter_395_White = 412.47m;
-                SashPricePerLinearMeter_2067_White = 303.50m;
-                SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m,
-                SashPricePerLinearMeter_6040_White = 325; //373.94m,
-                SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
-                SashPricePerLinearMeter_6041_White = 483.13m;
-                SashReinPricePerLinearMeter_7581 = 89.86m;
-                SashReinPricePerLinearMeter_373And374 = 835.18m;
-                SashReinPricePerLinearMeter_395 = 305.14m;
-                SashReinPricePerLinearMeter_6040 = 287.58m;
-                SashReinPricePerLinearMeter_6041 = 655.49m;
-
-
-
-                SashPrice = 0;
+                        SashPricePerLinearMeter_7581_WoodGrain = 550.13m;
+                        SashPricePerLinearMeter_7581_White = 375.30m;
+                        SashPricePerLinearMeter_373_WoodGrain = 712.66m;
+                        SashPricePerLinearMeter_373_White = 511.72m;
+                        SashPricePerLinearMeter_374_WoodGrain = 801.83m;
+                        SashPricePerLinearMeter_374_White = 511.72m;
+                        SashPricePerLinearMeter_395_WoodGrain = 556.57m;
+                        SashPricePerLinearMeter_395_White = 412.47m;
+                        SashPricePerLinearMeter_2067_White = 303.50m;
+                        SashPricePerLinearMeter_6040_WoodGrain = 500;// 550.13m;
+                        SashPricePerLinearMeter_6040_White = 325; //373.94m;
+                        SashPricePerLinearMeter_6041_WoodGrain = 683.91m;
+                        SashPricePerLinearMeter_6041_White = 483.13m;
+                        SashReinPricePerLinearMeter_7581 = 89.86m;
+                        SashReinPricePerLinearMeter_373And374 = 835.18m;
+                        SashReinPricePerLinearMeter_395 = 305.14m;
+                        SashReinPricePerLinearMeter_6040 = 287.58m;
+                        SashReinPricePerLinearMeter_6041 = 655.49m;
 
                 #endregion
                 #region Mullion/TransomPrice
+                        Divider_7536_PricePerSqrMeter = 663.32m;
+                        Divider_7538_PricePerSqrMeter = 817.34m;
+                        Divider_2069_PricePerSqrMeter = 284.12m; // G58
+                        DividerRein_7536_PricePerSqrMeter = 866.23m;
+                        DividerRein_7538_PricePerSqrMeter = 858.52m;
 
-                Divider_7536_PricePerSqrMeter = 663.32m;
-                Divider_7538_PricePerSqrMeter = 817.34m;
-                Divider_2069_PricePerSqrMeter = 284.12m;// G58
-                DividerRein_7536_PricePerSqrMeter = 866.23m;
-                DividerRein_7538_PricePerSqrMeter = 858.52m;
-
-                claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
-
-
+                        claddingPricePerLinearMeter = 907.62m;//profile and reinforcement price
+                        
                 #endregion
                 #region DummyMullionPrice
-
-                DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
-                DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
-                DummyMullionPricePerLinearMeter_7533_White = 608.75m;
-                DummyMullionPricePerLinearMeter_385_White = 580.72m;
-
-
+                        DummyMullionPricePerLinearMeter_7533_WoodGrain = 608.75m;
+                        DummyMullionPricePerLinearMeter_385_WoodGrain = 580.72m;
+                        DummyMullionPricePerLinearMeter_7533_White = 608.75m;
+                        DummyMullionPricePerLinearMeter_385_White = 580.72m;
                 #endregion
                 #region GlassPrice
-
-                Glass_6mmClr_PricePerSqrMeter = 670.00m;
-                Glass_10mmClr_PricePerSqrMeter = 1662.00m;
-                Glass_12mmClr_PricePerSqrMeter = 1941.00m;
-                Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
-                Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
-                Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
-
+                        Glass_6mmClr_PricePerSqrMeter = 670.00m;
+                        Glass_10mmClr_PricePerSqrMeter = 1662.00m;
+                        Glass_12mmClr_PricePerSqrMeter = 1941.00m;
+                        Glass_6mmTemp_PricePerSqrMeter = 1614.00m;
+                        Glass_10mmTemp_PricePerSqrMeter = 3201.00m;
+                        Glass_12mmTemp_PricePerSqrMeter = 3619.00m;
 
 
                 #endregion
                 #region FittingAndSupplies
+                        FS_16HD_casementPricePerPiece = 825.81m;
+                        FS_26HD_casementPricePerPiece = 1839.35m;
 
-                FS_16HD_casementPricePerPiece = 825.81m;
-                FS_26HD_casementPricePerPiece = 1839.35m;
+                        RestrictorStayPricePerPiece = 161.18m;
+                        CornerDrivePricePerPiece = 150.11m; // standard top= 103.17; bot = 118.82
+                        SnapInKeepPricePerPiece = 67.79m;
+                        _35mmBacksetEspagWithCylinder = 1346.78m;
+                        MiddleCLoserPricePerPiece = 18.57m;
 
-                RestrictorStayPricePerPiece = 161.18m;
-                CornerDrivePricePerPiece = 150.11m; // standard top= 103.17, bot = 118.82
-                SnapInKeepPricePerPiece = 67.79m;
-                _35mmBacksetEspagWithCylinder = 1346.78m;
-                MiddleCLoserPricePerPiece = 18.57m;
+                        StayBearingPricePerPiece = 41.44m;
+                        StayBearingPinPricePerPiece = 8.03m;
+                        CoverStayBearingPricePerPiece = 16.37m;
+                        CoverCornerHingePricePerPiece = 8.37m;
+                        CornerPivotRestPricePerPiece = 85.25m;
+                        TopCornerHingePricePerPiece = 158.48m;
+                        CorverCornerPivotRestPricePerPiece = 25.49m;
+                        CorverCornerPivotRestVerticalPricePerPiece = 8.87m;
 
-                StayBearingPricePerPiece = 41.44m;
-                StayBearingPinPricePerPiece = 8.03m;
-                CoverStayBearingPricePerPiece = 16.37m;
-                CoverCornerHingePricePerPiece = 8.37m;
-                CornerPivotRestPricePerPiece = 85.25m;
-                TopCornerHingePricePerPiece = 158.48m;
-                CorverCornerPivotRestPricePerPiece = 25.49m;
-                CorverCornerPivotRestVerticalPricePerPiece = 8.87m;
+                        RotoswingHanldePricePerPiece = 257.93m;
+                        RotoswingHanldeForSlidingPricePerPiece = 1123.91m;
+                        RioHandlePricePerPiece = 481.49m;
 
-                RotoswingHanldePricePerPiece = 257.93m;
-                RotoswingHanldeForSlidingPricePerPiece = 1123.91m;
-                RioHandlePricePerPiece = 481.49m;
+                        Espag741012_PricePerPiece = 284.15m;
+                        LeverEspagPricePerPiece = 825.81m;
+                        TiltAndTurnEspag_N110A00006PricePerPiece = 254.39m;
+                        TiltAndTurnEspag_N110A01006PricePerPiece = 465.89m;
+                        TiltAndTurnEspag_N110A02206PricePerPiece = 518.40m;
+                        TiltAndTurnEspag_N110A03206PricePerPiece = 570.91m;
+                        TiltAndTurnEspag_N110A04206PricePerPiece = 623.42m;
+                        TiltAndTurnEspag_N110A05206PricePerPiece = 675.18m;
+                        TiltAndTurnEspag_N110A06206PricePerPiece = 727.69m;
 
-                Espag741012_PricePerPiece = 284.15m;
-                LeverEspagPricePerPiece = 825.81m;
-                TiltAndTurnEspag_N110A00006PricePerPiece = 254.39m;
-                TiltAndTurnEspag_N110A01006PricePerPiece = 465.89m;
-                TiltAndTurnEspag_N110A02206PricePerPiece = 518.40m;
-                TiltAndTurnEspag_N110A03206PricePerPiece = 570.91m;
-                TiltAndTurnEspag_N110A04206PricePerPiece = 623.42m;
-                TiltAndTurnEspag_N110A05206PricePerPiece = 675.18m;
-                TiltAndTurnEspag_N110A06206PricePerPiece = 727.69m;
+                        _2DHingePricePerPiece = 278.94m;
+                        _3DHingePricePerPiece = 990.95m;
+                        NTCenterHingePricePerPiece = 170.50m;
 
-                _2DHingePricePerPiece = 278.94m;
-                _3DHingePricePerPiece = 990.95m;
-                NTCenterHingePricePerPiece = 170.50m;
+                        ShootBoltStrikerPricePerPiece = 57.29m;
+                        ShootBoltReversePricePerPiece = 368.25m;
+                        ShootBoltNonReversePricePerPiece = 242.71m;
 
-                ShootBoltStrikerPricePerPiece = 57.29m;
-                ShootBoltReversePricePerPiece = 368.25m;
-                ShootBoltNonReversePricePerPiece = 242.71m;
+                        StrikerPricePerPiece = 57.08m;
+                        StrikerLRPricePerPiece = 52.01m;//sliding
+                        StrikerForDMPricePerPiece = 62.27m;
+                        AdjustableStrikerPricePerPiece = 20.72m;
+                        LatchDeadboltStrikerPricePerPiece = 446.37m;
 
-                StrikerPricePerPiece = 57.08m;
-                StrikerLRPricePerPiece = 52.01m;//sliding
-                StrikerForDMPricePerPiece = 62.27m;
-                AdjustableStrikerPricePerPiece = 20.72m;
-                LatchDeadboltStrikerPricePerPiece = 446.37m;
+                        MVDHandlePricePerPiece = 985.01m;
+                        MVDGearPricePerPiece = 1585.92m;
 
-                MVDHandlePricePerPiece = 985.01m;
-                MVDGearPricePerPiece = 1585.92m;
+                        Extension_639957PricePerPiece = 170.50m;
+                        Extension_567639PricePerPiece = 134.04m;
+                        //Extension_N299A01006PricePerPiece = 118.82m;
+                        MVDExtensionPricePerPiece = 183.80m;
 
-                Extension_639957PricePerPiece = 170.50m;
-                Extension_567639PricePerPiece = 134.04m;
-                //Extension_N299A01006PricePerPiece = 118.82m,
-                MVDExtensionPricePerPiece = 183.80m;
-
-                HDRollerPricePerPiece = 566.06m;
-                GURollerPricePerPiece = 1323.08m;
-
-                HandleBasePrice = 0;
+                        HDRollerPricePerPiece = 566.06m;
+                        GURollerPricePerPiece = 1323.08m;
 
                 #endregion
                 #region Accessories
-
-                EndCapPricePerPiece = 282.96m;
-                MechanicalJoint_AV585PricePerPiece = 87.34m;
-                MechanicalJoint_9U18PricePerPiece = 138.45m;
-                GBSpacerPricePerPiece = 5.01m;
-                PlasticWedgePricePerPiece = 10.09m;
-                BarFastenerPricePerPiece = 4.40m;
-                SealingBlockPricePerPiece = 63.75m;
-                SpacerFixSashPricePerPiece = 21.42m;
-
+                        EndCapPricePerPiece = 282.96m;
+                        MechanicalJoint_AV585PricePerPiece = 87.34m;
+                        MechanicalJoint_9U18PricePerPiece = 138.45m;
+                        GBSpacerPricePerPiece = 5.01m;
+                        PlasticWedgePricePerPiece = 10.09m;
+                        BarFastenerPricePerPiece = 4.40m;
+                        SealingBlockPricePerPiece = 63.75m;
+                        SpacerFixSashPricePerPiece = 21.42m;
 
                 #endregion
                 #region AncillaryProfile
                 GlazingGasketPricePerLinearMeter = 32.64m;
-            GlazingBeadPricePerLinearMeter = 256.62m;
-            GlazingBead_G58PricePerLinearMeter = 117.72m;
-            GeorgianBar_0724Price = 154.93m;
-            GeorgianBar_0726Price = 307.75m;
-            CoverProfile_0914Price = 20.68m;
-            CoverProfile_0373Price = 105.41m;
-            ThresholdPricePerPiece = 1229.34m;
-            WeatherBarPricePerPiece = 236.75m;
-            GuideTrackPricePerLinearMeter = 157.18m;
-            InterlockPricePerPiece = 333.77m;
-            ExtensionForInterlockPricePerPiece = 789.01m;
-                AluminumTrackPricePerLinearMeter = 251.10m;
-            WaterSeepagePricePerLinearMeter = 153.73m;
-            AluminumPullHandlePricePerLinearMeter = 2480.18m;
-
-
+                        GlazingBeadPricePerLinearMeter = 256.62m;
+                        GlazingBead_G58PricePerLinearMeter = 117.72m;
+                        GeorgianBar_0724Price = 154.93m;
+                        GeorgianBar_0726Price = 307.75m;
+                        CoverProfile_0914Price = 20.68m;
+                        CoverProfile_0373Price = 105.41m;
+                        ThresholdPricePerPiece = 1229.34m;
+                        WeatherBarPricePerPiece = 236.75m;
+                        GuideTrackPricePerLinearMeter = 157.18m;
+                        InterlockPricePerPiece = 333.77m;
+                        ExtensionForInterlockPricePerPiece = 789.01m;
+                        AluminumTrackPricePerLinearMeter = 251.10m;
+                        WaterSeepagePricePerLinearMeter = 153.73m;
+                        AluminumPullHandlePricePerLinearMeter = 2480.18m;
 
                 #endregion
-                BrushSealPricePerLinearMeter = 15.80m;
-                SealantPricePerCan_BrownBlack = 430m;
-                SealantPricePerCan_Clear = 170m;
-                PUFoamingPricePerCan = 210m;
+                    BrushSealPricePerLinearMeter = 15.80m;
+                    SealantPricePerCan_BrownBlack = 430m;
+                    SealantPricePerCan_Clear = 170m;
+                    PUFoamingPricePerCan = 210m;
 
-                ProfileColorPoints = 0;
-                CostingPoints = 0;
-                InstallationPoints = 0;
-                LaborCost = 0;
-                InstallationCost = 0;
-                MaterialCost = 0;
+                    ProfileColorPoints = 0;
+                    CostingPoints = 0;
+                    InstallationPoints = 0;
+                    LaborCost = 0;
+                    InstallationCost = 0;
+                    MaterialCost = 0;
                 #endregion
             }
 
@@ -2756,11 +2725,11 @@ namespace ModelLayer.Model.Quotation
 
                                     if (fr.Frame_Width >= 5000)
                                     {
-                                        ProfileColorPoints = 31;
+                                        ProfileColorPoints = 19;
                                     }
                                     else if (fr.Frame_Height >= 5000)
                                     {
-                                        ProfileColorPoints = 31;
+                                        ProfileColorPoints = 19;
                                     }
                                 }
                                 else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
@@ -2769,11 +2738,11 @@ namespace ModelLayer.Model.Quotation
 
                                     if (fr.Frame_Width >= 5000)
                                     {
-                                        ProfileColorPoints = 33;
+                                        ProfileColorPoints = 21;
                                     }
                                     else if (fr.Frame_Height >= 5000)
                                     {
-                                        ProfileColorPoints = 33;
+                                        ProfileColorPoints = 21;
                                     }
                                 }
                             }
@@ -3007,6 +2976,18 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
                                                 MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
                                             }
+                                            else if (div.Div_ArtNo == Divider_ArticleNo._6052)
+                                            {
+                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                }
+                                                else
+                                                {
+                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                }
+                                                DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
+                                            }
 
                                             DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
                                             DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
@@ -3014,71 +2995,94 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (mpnl.MPanel_Type == "Mullion")
                                         {
-                                            BOM_divDesc = "Mullion";
-                                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
-                                            {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_7536_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7536_PricePerSqrMeter;
-                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2;
-                                            }
 
-                                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                            if (div.Div_ChkDM == true)
                                             {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_7538_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerRein_7538_PricePerSqrMeter;
-                                                MechJointPrice += MechanicalJoint_AV585PricePerPiece * 2;
-                                            }
-                                            else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                            {
-                                                DivPrice += (div.Div_Height / 1000m) * Divider_2069_PricePerSqrMeter;
-                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * G58ReinPricePerLinearMeter_V226;
-                                                MechJointPrice += MechanicalJoint_9U18PricePerPiece * 2; // for the meantime
-                                            }
-                                        }
-                                    }
+                                                #region DM_Endcap_SBoltStriker_Price
+                                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
+                                                {
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                                    }
+                                                }
+                                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
+                                                {
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
+                                                    }
+                                                    ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
+                                                    ShootBoltReversePrice += ShootBoltReversePricePerPiece;
+                                                    ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
+                                                }
 
-                                    #endregion
+                                                DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
+                                                DMReinforcementPrice += (div.Div_Height / 1000m) * FrameReinPricePerLinearMeter_7502;
 
-                                    #region DM_Endcap_SBoltStriker_Price
-                                    if (div.Div_ChkDMVisibility == true)
-                                    {
-                                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
+                                                ChckDM = true;
+                                                EndCapPrice += EndCapPricePerPiece * 2;
+                                                #endregion
                                             }
                                             else
                                             {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                                #region Mullion
+
+
+                                                ChckDM = false;
+
+                                                BOM_divDesc = "Mullion";
+                                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
+                                                }
+
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
+                                                }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
+                                                }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._6052)
+                                                {
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                    }
+                                                    DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
+                                                }
+
+                                                DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
+                                                MechJointPrice += MechanicalJointPricePerPiece * 2;
+                                                #endregion
                                             }
                                         }
-                                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
-                                            }
-                                            else
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
-                                            }
-                                            ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
-                                            ShootBoltReversePrice += ShootBoltReversePricePerPiece;
-                                            ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
-                                        }
 
-                                        DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
-
-
-                                        ChckDM = true;
-                                        EndCapPrice += EndCapPricePerPiece * 2;
-                                    }
-                                    else
-                                    {
-                                        ChckDM = false;
                                     }
                                     #endregion
+
+
 
                                     #region LeverEspagPrice
                                     if (div.Div_LeverEspagVisibility == true)
@@ -3568,7 +3572,10 @@ namespace ModelLayer.Model.Quotation
                                             PlasticWedgePrice += PlasticWedgePricePerPiece;
                                         }
 
-
+                                        if (pnl.Panel_MotorizedOptionVisibility == true)
+                                        {
+                                            MotorizePrice += 15000 * pnl.Panel_MotorizedMechQty;
+                                        }
 
                                         #region EspagPrice
 
@@ -4403,12 +4410,11 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                                 {
-                                    //motorize price
+                                    MotorizePrice += 15000 * Singlepnl.Panel_MotorizedMechQty;
                                 }
 
 
                                 HandleDesc = Singlepnl.Panel_HandleType.ToString();
-
 
                                 #region EspagPrice
 
@@ -4797,7 +4803,8 @@ namespace ModelLayer.Model.Quotation
                                              Math.Round(ExtensionPrice, 2) +
                                              Math.Round(RollerPrice, 2) +
                                              Math.Round(StrikerLRPrice, 2) +
-                                             Math.Round(BrushSealPrice, 2);
+                                             Math.Round(BrushSealPrice, 2) +
+                                             Math.Round(MotorizePrice, 2);
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
@@ -4828,6 +4835,7 @@ namespace ModelLayer.Model.Quotation
                                    Math.Round(DivReinPrice, 2) +
                                    Math.Round(claddingPrice, 2) +
                                    Math.Round(DMPrice, 2) +
+                                   Math.Round(DMReinforcementPrice, 2) +
                                    Math.Round(SealantPrice, 2) +
                                    Math.Round(PUFoamingPrice, 2) +
                                    Math.Round(FittingAndSuppliesCost, 2) +
@@ -4850,6 +4858,7 @@ namespace ModelLayer.Model.Quotation
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
                     CurrentPrice = TotaPrice;
+
                     lstTotalPrice.Add(TotaPrice);
 
                     if (wdm.WD_price == 0)
@@ -4992,6 +5001,13 @@ namespace ModelLayer.Model.Quotation
                         Price_List.Rows.Add("Dummy Mullion Price",
                                            DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                        Price_List.Rows.Add("Dummy Mullion Reinforcement Price",
+                                           FrameReinPricePerLinearMeter_7502.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(DMReinforcementPrice, 2).ToString("N", new CultureInfo("en-US")),
                                            "",
                                            "",
                                            "Material Cost");
@@ -5399,6 +5415,13 @@ namespace ModelLayer.Model.Quotation
                                 "",
                                 "Fitting and Supplies");
 
+                        Price_List.Rows.Add("Motorize Mechanism",
+                                "15,000",
+                                Math.Round(MotorizePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                "",
+                                "",
+                                "Fitting and Supplies");
+
                         Price_List.Rows.Add("Total",
                                          "",
                                          Math.Round(FittingAndSuppliesCost, 2).ToString("N", new CultureInfo("en-US")),
@@ -5477,6 +5500,7 @@ namespace ModelLayer.Model.Quotation
             DivPrice = 0;
             DivReinPrice = 0;
             DMPrice = 0;
+            DMReinforcementPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
             SealantPrice = 0;
@@ -5511,6 +5535,7 @@ namespace ModelLayer.Model.Quotation
             BrushSealPrice = 0;
             StrikerLRPrice = 0;
             RollerPrice = 0;
+            MotorizePrice = 0;
 
             AncillaryProfileCost = 0;
             ThresholdPrice = 0;

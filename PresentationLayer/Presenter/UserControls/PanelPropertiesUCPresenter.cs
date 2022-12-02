@@ -333,6 +333,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void OnPanelPropertiesLoadEventRaised(object sender, EventArgs e)
@@ -419,7 +420,7 @@ namespace PresentationLayer.Presenter.UserControls
                     slidingTypeUCPresenter.BringToFront();
                 }
 
-                IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                IPP_SashPropertyUCPresenter sashPropUCP = _pp_sashPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl sashProp = (UserControl)sashPropUCP.GetPPSashPropertyUC();
                 _pnlPanelSpecs.Controls.Add(sashProp);
                 sashProp.Dock = DockStyle.Top;
@@ -487,14 +488,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (!_panelModel.Panel_Type.Contains("Sliding"))
                 {
-                    IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    IPP_HingePropertyUCPresenter hingePropUCP = _pp_hingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl hingeProp = (UserControl)hingePropUCP.GetPP_HingePropertyUC();
                     _pnlPanelSpecs.Controls.Add(hingeProp);
                     hingeProp.Dock = DockStyle.Top;
                     hingeProp.BringToFront();
 
 
-                    IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    IPP_2dHingePropertyUCPresenter _2dHingePropUCP = _pp_2dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl _2dhingeProp = (UserControl)_2dHingePropUCP.GetPP_2dHingePropertyUC();
                     _pnlPanelSpecs.Controls.Add(_2dhingeProp);
                     _2dhingeProp.Dock = DockStyle.Top;
@@ -515,7 +516,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 if (_panelModel.Panel_SashPropertyVisibility == true)
                 {
-                    IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                    IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                     UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
                     _pnlPanelSpecs.Controls.Add(motorized);
                     motorized.Dock = DockStyle.Top;
@@ -529,7 +530,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (!_panelModel.Panel_Type.Contains("Sliding"))
                     {
-                        IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC);
+                        IPP_MiddleCloserPropertyUCPresenter mcUCP = _pp_middleCloserPropertyUCP.GetNewInstance(_panelModel, _unityC, _mainPresenter);
                         UserControl mc = (UserControl)mcUCP.GetMiddleCloserPropertyUC();
                         _pnlPanelSpecs.Controls.Add(mc);
                         mc.Dock = DockStyle.Top;

@@ -1854,6 +1854,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
                 curr_handleType = sel_handleType;
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_handlePropertyUC_PPHandlePropertyLoadEventRaised(object sender, EventArgs e)
@@ -1920,7 +1921,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             rotoswingForSlidingPropUC.Dock = DockStyle.Top;
             rotoswingForSlidingPropUC.BringToFront();
 
-            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+            IPP_EspagnolettePropertyUCPresenter espUCP = _pp_espagnolettePropertyUCPresenter.GetNewInstance(_unityC, _panelModel,_mainPresenter);
             UserControl espPropUC = (UserControl)espUCP.GetPPEspagnolettePropertyUC();
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;
