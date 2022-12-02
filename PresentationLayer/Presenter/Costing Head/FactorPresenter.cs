@@ -55,7 +55,7 @@ namespace PresentationLayer.Presenter.Costing_Head
 
         private async void _factorView_EditToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            string input = Interaction.InputBox("Input factor" , "WinDoor Maker", "1");
+            string input = Interaction.InputBox("Input factor" , "WinDoor Maker", _dgvFactor.SelectedRows[0].Cells["Factor"].Value.ToString());
             if (input != "" && input != "0")
             {
                 

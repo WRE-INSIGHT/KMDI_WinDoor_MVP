@@ -7750,105 +7750,120 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        //int occupiedWidth = 0,
-                        //    occupiedHeight = 0,
-                        //    availableWidth = _windoorModel.WD_width,
-                        //    availableHeight = _windoorModel.WD_height;
+                        int occupiedWidth = 0,
+                            occupiedHeight = 0,
+                            availableWidth = _windoorModel.WD_width,
+                            availableHeight = _windoorModel.WD_height;
+                        bool NewFrameSizeFit = true;
+                        foreach (var wndrObject in _windoorModel.lst_objects)
+                        {
+                            foreach (IFrameModel frm in _windoorModel.lst_frame)
+                            {
+                                if (wndrObject.Name == frm.Frame_Name)
+                                {
+                                    availableWidth -= frm.Frame_Width;
+                                    if (availableWidth >= frmDimension_numWd)
+                                    {
 
-                        //foreach (var wndrObject in _windoorModel.lst_objects)
-                        //{
-                        //    foreach (IFrameModel frm in _windoorModel.lst_frame)
-                        //    {
-                        //        if(wndrObject.Name == frm.Frame_Name)
-                        //        {
-                        //            availableWidth -= frm.Frame_Width;
-                        //            if (availableWidth >= frmDimension_numWd)
-                        //            {
+                                        if (availableHeight >= frmDimension_numHt)
+                                        {
+                                            occupiedWidth += frm.Frame_Width;
+                                            occupiedHeight += frm.Frame_Height;
+                                        }
+                                        else
+                                        {
+                                            NewFrameSizeFit = false;
+                                        }
 
-                        //                if(availableHeight >= frmDimension_numHt)
-                        //                {
-                        //                    occupiedWidth += frm.Frame_Width;
-                        //                    occupiedHeight += frm.Frame_Height;
-                        //                }
-                        //                else
-                        //                {
-                        //                    MessageBox.Show("Size now fit");
-                        //                }
-                                       
-                        //            }
-                        //            else
-                        //            {
-                        //                availableHeight -= frm.Frame_Height;
-                        //                if (availableWidth >= frmDimension_numWd)
-                        //                {
+                                    }
+                                    else
+                                    {
+                                        availableHeight -= frm.Frame_Height;
+                                        availableWidth = _windoorModel.WD_width;
+                                        if (availableWidth >= frmDimension_numWd)
+                                        {
 
-                        //                    if (availableHeight >= frmDimension_numHt)
-                        //                    {
-                        //                        occupiedWidth += frm.Frame_Width;
-                        //                        occupiedHeight += frm.Frame_Height;
-                        //                    }
-                        //                    else
-                        //                    {
-                        //                        MessageBox.Show("Size now fit");
-                        //                    }
+                                            if (availableHeight >= frmDimension_numHt)
+                                            {
+                                                occupiedWidth += frm.Frame_Width;
+                                                occupiedHeight += frm.Frame_Height;
+                                            }
+                                            else
+                                            {
+                                                NewFrameSizeFit = false;
+                                            }
 
-                        //                }
-                        //            }
-                                   
-                        //        }
-                                
-                        //    }
-                        //    foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
-                        //    {
-                        //        if (wndrObject.Name == crtm.Concrete_Name)
-                        //        {
-                        //            occupiedWidth += crtm.Concrete_Width;
-                        //            occupiedHeight += crtm.Concrete_Height;
-                        //        }
-                                
-                        //    }
-                        //}
+                                        }
+                                    }
 
-                        //if(frmDimension_numWd >= availableWidth)
-                        int frameID = _windoorModel.frameIDCounter += 1;
-                        _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
-                                                                   frmDimension_numHt,
-                                                                   frameType,
-                                                                   _windoorModel.WD_zoom_forImageRenderer,
-                                                                   _windoorModel.WD_zoom,
-                                                                   FrameProfile_ArticleNo._7502,
-                                                                   _windoorModel,
-                                                                   null,
-                                                                   frameID,
-                                                                   "",
-                                                                   true,
-                                                                   true,
-                                                                   null,
-                                                                   null,
-                                                                   null,
-                                                                   (UserControl)_frameUC,
-                                                                   (UserControl)_framePropertiesUC);
-                        _frameModel.Set_DimensionsToBind_using_FrameZoom();
-                        _frameModel.Set_ImagerDimensions_using_ImagerZoom();
-                        _frameModel.Set_FramePadding();
+                                }
 
-                        IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
-                        AddFrameUC(_frameModel, framePropUCP);
+                            }
+                            foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
+                            {
+                                if (wndrObject.Name == crtm.Concrete_Name)
+                                {
+                                    occupiedWidth += crtm.Concrete_Width;
+                                    occupiedHeight += crtm.Concrete_Height;
+                                }
 
-                        _frameModel.Frame_UC = (UserControl)_frameUC;
-                        AddFrameList_WindoorModel(_frameModel);
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        SetMainViewTitle(input_qrefno,
-                                        _projectName,
-                                        _custRefNo,
-                                         _windoorModel.WD_name,
-                                         _windoorModel.WD_profile,
-                                         false);
+                            }
+                        }
 
-                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        if (availableWidth >= frmDimension_numWd)
+                        {
 
-                        GetCurrentPrice();
+                        }else
+                        {
+                            NewFrameSizeFit = false;
+                        }
+
+                        if (NewFrameSizeFit)
+                        {
+                            int frameID = _windoorModel.frameIDCounter += 1;
+                            _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
+                                                                       frmDimension_numHt,
+                                                                       frameType,
+                                                                       _windoorModel.WD_zoom_forImageRenderer,
+                                                                       _windoorModel.WD_zoom,
+                                                                       FrameProfile_ArticleNo._7502,
+                                                                       _windoorModel,
+                                                                       null,
+                                                                       frameID,
+                                                                       "",
+                                                                       true,
+                                                                       true,
+                                                                       null,
+                                                                       null,
+                                                                       null,
+                                                                       (UserControl)_frameUC,
+                                                                       (UserControl)_framePropertiesUC);
+                            _frameModel.Set_DimensionsToBind_using_FrameZoom();
+                            _frameModel.Set_ImagerDimensions_using_ImagerZoom();
+                            _frameModel.Set_FramePadding();
+
+                            IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(_frameModel);
+                            AddFrameUC(_frameModel, framePropUCP);
+
+                            _frameModel.Frame_UC = (UserControl)_frameUC;
+                            AddFrameList_WindoorModel(_frameModel);
+                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            _basePlatformPresenter.InvalidateBasePlatform();
+                            SetMainViewTitle(input_qrefno,
+                                            _projectName,
+                                            _custRefNo,
+                                             _windoorModel.WD_name,
+                                             _windoorModel.WD_profile,
+                                             false);
+
+                            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+
+                            GetCurrentPrice();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Size of frame not equal");
+                        }
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && AddedConcrete && !OpenWindoorFile && !Duplicate) //add concrete
