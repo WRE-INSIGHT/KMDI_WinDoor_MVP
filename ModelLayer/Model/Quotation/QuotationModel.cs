@@ -2104,6 +2104,7 @@ namespace ModelLayer.Model.Quotation
                 DummyMullionPricePerLinearMeter_385_White = 580.72m,
 
                 DMPrice,
+                DMReinforcementPrice,
                 DummyMullionPricePerLinearMeter,
         #endregion
         #region GlassPrice
@@ -3031,88 +3032,94 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (mpnl.MPanel_Type == "Mullion")
                                         {
-                                            BOM_divDesc = "Mullion";
-                                            if (div.Div_ArtNo == Divider_ArticleNo._7536)
-                                            {
-                                                DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
-                                                DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
-                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
-                                            }
 
-                                            else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                            if (div.Div_ChkDMVisibility == true)
                                             {
-                                                DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
-                                                DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
-                                                MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
-                                            }
-                                            else if (div.Div_ArtNo == Divider_ArticleNo._2069)
-                                            {
-                                                DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
-                                                DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
-                                                MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
-                                            }
-                                            else if (div.Div_ArtNo == Divider_ArticleNo._6052)
-                                            {
-                                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                #region DM_Endcap_SBoltStriker_Price
+                                                if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
                                                 {
-                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                                    }
                                                 }
-                                                else
+                                                else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
                                                 {
-                                                    DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
+                                                    }
+                                                    ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
+                                                    ShootBoltReversePrice += ShootBoltReversePricePerPiece;
+                                                    ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
                                                 }
-                                                DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
-                                            }
 
-                                            DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
-                                            DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
-                                            MechJointPrice += MechanicalJointPricePerPiece * 2;
-                                        }
+                                                DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
+                                                DMReinforcementPrice += (div.Div_Height / 1000m) * FrameReinPricePerLinearMeter_7502;
 
-                                    }
-
-                                    #endregion
-
-                                    #region DM_Endcap_SBoltStriker_Price
-                                    if (div.Div_ChkDMVisibility == true)
-                                    {
-                                        if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_White;
+                                                ChckDM = true;
+                                                EndCapPrice += EndCapPricePerPiece * 2;
+                                                #endregion
                                             }
                                             else
                                             {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_7533_WoodGrain;
+                                                #region Mullion
+
+
+                                                ChckDM = false;
+
+                                                BOM_divDesc = "Mullion";
+                                                if (div.Div_ArtNo == Divider_ArticleNo._7536)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_7536_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = DividerRein_7536_PricePerSqrMeter;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece;
+                                                }
+
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._7538)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_7538_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = DividerRein_7538_PricePerSqrMeter;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_AV585PricePerPiece;
+                                                }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._2069)
+                                                {
+                                                    DividerPricePerSqrMeter = Divider_2069_PricePerSqrMeter;
+                                                    DividerReinPricePerSqrMeter = G58ReinPricePerLinearMeter_V226;
+                                                    MechanicalJointPricePerPiece = MechanicalJoint_9U18PricePerPiece; // for the meantime
+                                                }
+                                                else if (div.Div_ArtNo == Divider_ArticleNo._6052)
+                                                {
+                                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                                    {
+                                                        DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_White;
+                                                    }
+                                                    else
+                                                    {
+                                                        DividerPricePerSqrMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                                    }
+                                                    DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
+                                                }
+
+                                                DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                                DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
+                                                MechJointPrice += MechanicalJointPricePerPiece * 2;
+                                                #endregion
                                             }
                                         }
-                                        else if (div.Div_DMArtNo == DummyMullion_ArticleNo._385P)
-                                        {
-                                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_White;
-                                            }
-                                            else
-                                            {
-                                                DummyMullionPricePerLinearMeter = DummyMullionPricePerLinearMeter_385_WoodGrain;
-                                            }
-                                            ShootBoltStrikerPrice += ShootBoltStrikerPricePerPiece;
-                                            ShootBoltReversePrice += ShootBoltReversePricePerPiece;
-                                            ShootBoltNonReversePrice += ShootBoltNonReversePricePerPiece * 3;
-                                        }
 
-                                        DMPrice += (div.Div_Height / 1000m) * DummyMullionPricePerLinearMeter;
-
-
-                                        ChckDM = true;
-                                        EndCapPrice += EndCapPricePerPiece * 2;
-                                    }
-                                    else
-                                    {
-                                        ChckDM = false;
                                     }
                                     #endregion
+
+
 
                                     #region LeverEspagPrice
                                     if (div.Div_LeverEspagVisibility == true)
@@ -4865,6 +4872,7 @@ namespace ModelLayer.Model.Quotation
                                    Math.Round(DivReinPrice, 2) +
                                    Math.Round(claddingPrice, 2) +
                                    Math.Round(DMPrice, 2) +
+                                   Math.Round(DMReinforcementPrice, 2) +
                                    Math.Round(SealantPrice, 2) +
                                    Math.Round(PUFoamingPrice, 2) +
                                    Math.Round(FittingAndSuppliesCost, 2) +
@@ -5030,6 +5038,13 @@ namespace ModelLayer.Model.Quotation
                         Price_List.Rows.Add("Dummy Mullion Price",
                                            DummyMullionPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(DMPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                        Price_List.Rows.Add("Dummy Mullion Reinforcement Price",
+                                           FrameReinPricePerLinearMeter_7502.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(DMReinforcementPrice, 2).ToString("N", new CultureInfo("en-US")),
                                            "",
                                            "",
                                            "Material Cost");
