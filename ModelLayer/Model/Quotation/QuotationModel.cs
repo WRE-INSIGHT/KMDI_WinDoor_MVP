@@ -2996,7 +2996,7 @@ namespace ModelLayer.Model.Quotation
                                         else if (mpnl.MPanel_Type == "Mullion")
                                         {
 
-                                            if (div.Div_ChkDMVisibility == true)
+                                            if (div.Div_ChkDM == true)
                                             {
                                                 #region DM_Endcap_SBoltStriker_Price
                                                 if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
