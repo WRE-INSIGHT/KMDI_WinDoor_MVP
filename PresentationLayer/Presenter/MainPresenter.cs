@@ -1876,8 +1876,8 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
-            wndr_content = new List<string>();
-            Saving_dotwndr();
+            //wndr_content = new List<string>();
+            //Saving_dotwndr();
         }
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -7750,6 +7750,66 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        //int occupiedWidth = 0,
+                        //    occupiedHeight = 0,
+                        //    availableWidth = _windoorModel.WD_width,
+                        //    availableHeight = _windoorModel.WD_height;
+
+                        //foreach (var wndrObject in _windoorModel.lst_objects)
+                        //{
+                        //    foreach (IFrameModel frm in _windoorModel.lst_frame)
+                        //    {
+                        //        if(wndrObject.Name == frm.Frame_Name)
+                        //        {
+                        //            availableWidth -= frm.Frame_Width;
+                        //            if (availableWidth >= frmDimension_numWd)
+                        //            {
+
+                        //                if(availableHeight >= frmDimension_numHt)
+                        //                {
+                        //                    occupiedWidth += frm.Frame_Width;
+                        //                    occupiedHeight += frm.Frame_Height;
+                        //                }
+                        //                else
+                        //                {
+                        //                    MessageBox.Show("Size now fit");
+                        //                }
+                                       
+                        //            }
+                        //            else
+                        //            {
+                        //                availableHeight -= frm.Frame_Height;
+                        //                if (availableWidth >= frmDimension_numWd)
+                        //                {
+
+                        //                    if (availableHeight >= frmDimension_numHt)
+                        //                    {
+                        //                        occupiedWidth += frm.Frame_Width;
+                        //                        occupiedHeight += frm.Frame_Height;
+                        //                    }
+                        //                    else
+                        //                    {
+                        //                        MessageBox.Show("Size now fit");
+                        //                    }
+
+                        //                }
+                        //            }
+                                   
+                        //        }
+                                
+                        //    }
+                        //    foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
+                        //    {
+                        //        if (wndrObject.Name == crtm.Concrete_Name)
+                        //        {
+                        //            occupiedWidth += crtm.Concrete_Width;
+                        //            occupiedHeight += crtm.Concrete_Height;
+                        //        }
+                                
+                        //    }
+                        //}
+
+                        if(frmDimension_numWd >= availableWidth)
                         int frameID = _windoorModel.frameIDCounter += 1;
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
