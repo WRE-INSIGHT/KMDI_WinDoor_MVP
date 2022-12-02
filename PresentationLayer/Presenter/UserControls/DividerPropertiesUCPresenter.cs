@@ -296,7 +296,7 @@ namespace PresentationLayer.Presenter.UserControls
                         _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
                         _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingBracket");
                     }
-                    
+
                     for (int i = 0; i < cladding_count; i++)
                     {
                         _divModel.AdjustPropertyPanelHeight("addCladding");
@@ -363,6 +363,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 MessageBox.Show("Cladding length must be added before saving");
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
@@ -375,7 +376,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
                 _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
             }
-            
+
             IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
             _lst_claddUCP.Add(claddingUCP);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();

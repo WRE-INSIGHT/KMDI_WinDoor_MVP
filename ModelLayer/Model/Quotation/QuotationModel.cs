@@ -1178,8 +1178,9 @@ namespace ModelLayer.Model.Quotation
                                             pnl_curCtrl.Insert_AntiLiftDevice_MaterialList(Material_List);
                                         }
 
-                                        //if (pnl_curCtrl.Panel_Spacer != null || pnl_curCtrl.Panel_ChkText == "dSash")
+                                        //if (pnl_curCtrl.Panel_Spacer != null) //|| pnl_curCtrl.Panel_ChkText == "dSash"
                                         //{
+                                        pnl_curCtrl.Panel_SpacerArtNo = Spacer_ArticleNo._M063;
                                         pnl_curCtrl.Insert_Spacer_MaterialList(Material_List);
                                         //}
 
@@ -2995,7 +2996,7 @@ namespace ModelLayer.Model.Quotation
                                         else if (mpnl.MPanel_Type == "Mullion")
                                         {
 
-                                            if (div.Div_ChkDMVisibility == true)
+                                            if (div.Div_ChkDM == true)
                                             {
                                                 #region DM_Endcap_SBoltStriker_Price
                                                 if (div.Div_DMArtNo == DummyMullion_ArticleNo._7533)
@@ -5499,6 +5500,7 @@ namespace ModelLayer.Model.Quotation
             DivPrice = 0;
             DivReinPrice = 0;
             DMPrice = 0;
+            DMReinforcementPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
             SealantPrice = 0;
