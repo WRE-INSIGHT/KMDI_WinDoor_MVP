@@ -13,8 +13,8 @@ namespace PresentationLayer.Presenter.UserControls
         IDividerPropertiesUC GetDivProperties();
         IDividerPropertiesUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IMainPresenter mainPresenter);
 
-        IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP();
-        //IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP(IUnityContainer unityC, IDividerModel divModel);
+        //IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP();
+        IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP(IUnityContainer unityC, IDividerModel divModel);
         void SetSaveBtnColor(Color color);
         void Refresh_LblTotalCladdingLength();
         void Remove_CladdingUCP(IDP_CladdingPropertyUCPresenter claddUCP);

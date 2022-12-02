@@ -810,8 +810,8 @@ namespace PresentationLayer.Presenter
                 divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
                 _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
-                _divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
-                //_divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
+                //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
+                _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
         }
 
@@ -6513,17 +6513,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
-                            foreach (IPanelModel pnl in div_MPanelParent.MPanelLst_Panel)
-                            {
-                                if (pnl.Panel_Name == extractedValue_str)
-                                {
-                                    div_DMPanel = pnl;
-                                }
-                            }
-                            if (div_DMPanel != null)
-                            {
-                                div_DMPanelName = extractedValue_str;
-                            }
+                            div_DMPanelName = extractedValue_str;
 
                             //div_DMPanel = _panelMode;
                         }
@@ -6623,7 +6613,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
                         {
-                            div_CladdingCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            //div_CladdingCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Div_PropHeight:"))
                         {
@@ -6727,7 +6717,7 @@ namespace PresentationLayer.Presenter
                             divModel.Div_ExplosionHeight = div_ExplosionHeight;
                             divModel.Div_ReinfWidth = div_ReinfWidth;
                             divModel.Div_ReinfHeight = div_ReinfHeight;
-                            divModel.Div_CladdingCount = div_CladdingCount;
+                            //divModel.Div_CladdingCount = div_CladdingCount;
                             divModel.Div_AlumSpacer50Qty = div_AlumSpacer50Qty;
                             divModel.Div_FrameType = div_FrameType;
                             divModel.Div_Bounded = div_Bounded;
@@ -7983,6 +7973,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
+                GetCurrentPrice();
             }
             catch (Exception ex)
             {
