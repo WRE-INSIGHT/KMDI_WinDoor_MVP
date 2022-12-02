@@ -810,6 +810,7 @@ namespace PresentationLayer.Presenter
                 divBinding.Add("Panel_SashProfileArtNo", new Binding("Panel_SashProfileArtNo", prev_pnl, "Panel_SashProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
                 _divPropUCP_forDMSelection.GetDivProperties().Bind_DMPanelModel(divBinding);
+                //_divPropUCP_forDMSelection.GetLeverEspagUCP().BindSashProfileArtNo();
                 _divPropUCP_forDMSelection.GetLeverEspagUCP(_unityC, _divModel_forDMSelection).BindSashProfileArtNo();
             }
         }
@@ -1875,8 +1876,8 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
-            wndr_content = new List<string>();
-            Saving_dotwndr();
+            //wndr_content = new List<string>();
+            //Saving_dotwndr();
         }
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
@@ -5629,21 +5630,22 @@ namespace PresentationLayer.Presenter
                                         _multiModelParent.Fit_EqualPanel_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                        if (div_DMPanelName != "")
-                                        {
-                                            foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
-                                            {
-                                                if (pnl.Panel_Name == div_DMPanelName)
-                                                {
-                                                    _prev_divModel.Div_DMPanel = pnl;
-                                                    SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
-                                                }
-                                            }
-                                        }
+                                        
                                     }
 
                                 }
-
+                                if (div_DMPanelName != "" || div_DMPanelName != null)
+                                {
+                                    foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                                    {
+                                        if (pnl.Panel_Name == div_DMPanelName)
+                                        {
+                                            _prev_divModel.Div_DMPanel = pnl;
+                                            SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
+                                            div_DMPanelName = "";
+                                        }
+                                    }
+                                }
 
                             }
 
@@ -6511,17 +6513,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_DMPanel:"))
                         {
-                            foreach (IPanelModel pnl in _multiPanelModel2ndLvl.MPanelLst_Panel)
-                            {
-                                if (pnl.Panel_Name == extractedValue_str)
-                                {
-                                    div_DMPanel = pnl;
-                                }
-                            }
-                            if (div_DMPanel == null)
-                            {
-                                div_DMPanelName = extractedValue_str;
-                            }
+                            div_DMPanelName = extractedValue_str;
 
                             //div_DMPanel = _panelMode;
                         }
@@ -6621,7 +6613,7 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
                         {
-                            div_CladdingCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            //div_CladdingCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Div_PropHeight:"))
                         {
@@ -6725,7 +6717,7 @@ namespace PresentationLayer.Presenter
                             divModel.Div_ExplosionHeight = div_ExplosionHeight;
                             divModel.Div_ReinfWidth = div_ReinfWidth;
                             divModel.Div_ReinfHeight = div_ReinfHeight;
-                            divModel.Div_CladdingCount = div_CladdingCount;
+                            //divModel.Div_CladdingCount = div_CladdingCount;
                             divModel.Div_AlumSpacer50Qty = div_AlumSpacer50Qty;
                             divModel.Div_FrameType = div_FrameType;
                             divModel.Div_Bounded = div_Bounded;
@@ -7758,6 +7750,66 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
+                        //int occupiedWidth = 0,
+                        //    occupiedHeight = 0,
+                        //    availableWidth = _windoorModel.WD_width,
+                        //    availableHeight = _windoorModel.WD_height;
+
+                        //foreach (var wndrObject in _windoorModel.lst_objects)
+                        //{
+                        //    foreach (IFrameModel frm in _windoorModel.lst_frame)
+                        //    {
+                        //        if(wndrObject.Name == frm.Frame_Name)
+                        //        {
+                        //            availableWidth -= frm.Frame_Width;
+                        //            if (availableWidth >= frmDimension_numWd)
+                        //            {
+
+                        //                if(availableHeight >= frmDimension_numHt)
+                        //                {
+                        //                    occupiedWidth += frm.Frame_Width;
+                        //                    occupiedHeight += frm.Frame_Height;
+                        //                }
+                        //                else
+                        //                {
+                        //                    MessageBox.Show("Size now fit");
+                        //                }
+                                       
+                        //            }
+                        //            else
+                        //            {
+                        //                availableHeight -= frm.Frame_Height;
+                        //                if (availableWidth >= frmDimension_numWd)
+                        //                {
+
+                        //                    if (availableHeight >= frmDimension_numHt)
+                        //                    {
+                        //                        occupiedWidth += frm.Frame_Width;
+                        //                        occupiedHeight += frm.Frame_Height;
+                        //                    }
+                        //                    else
+                        //                    {
+                        //                        MessageBox.Show("Size now fit");
+                        //                    }
+
+                        //                }
+                        //            }
+                                   
+                        //        }
+                                
+                        //    }
+                        //    foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
+                        //    {
+                        //        if (wndrObject.Name == crtm.Concrete_Name)
+                        //        {
+                        //            occupiedWidth += crtm.Concrete_Width;
+                        //            occupiedHeight += crtm.Concrete_Height;
+                        //        }
+                                
+                        //    }
+                        //}
+
+                        //if(frmDimension_numWd >= availableWidth)
                         int frameID = _windoorModel.frameIDCounter += 1;
                         _frameModel = _frameServices.AddFrameModel(frmDimension_numWd,
                                                                    frmDimension_numHt,
@@ -7981,6 +8033,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
+                GetCurrentPrice();
             }
             catch (Exception ex)
             {
