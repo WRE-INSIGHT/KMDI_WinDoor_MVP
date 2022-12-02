@@ -97,7 +97,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             return _pp_glassPropertyUC;
         }
-
+      
         public IPP_GlassPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
@@ -107,7 +107,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
             presenter._mainPresenter = mainPresenter;
-
+            
             return presenter;
         }
 

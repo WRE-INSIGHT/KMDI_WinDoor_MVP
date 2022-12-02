@@ -420,6 +420,9 @@ namespace PresentationLayer
                 .RegisterType<IEmployeeRepository, EmployeeRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))
+
+                 .RegisterType<ISetMultipleGlassThicknessPresenter,SetMultipleGlassThicknessPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<ISetMultipleGlassThicknessView,SetMultipleGlassThicknessView>(new ContainerControlledLifetimeManager())
                 ;
 
             Application.EnableVisualStyles();

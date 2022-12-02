@@ -236,6 +236,7 @@ namespace PresentationLayer.Views
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
         public event EventHandler setNewFactorEventRaised;
+       
 
         public MainView()
         {
@@ -457,8 +458,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, refreshToolStripButtonClickEventRaised, e);
         }
 
-
-
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.InitialDirectory = Properties.Settings.Default.WndrDir;
@@ -581,6 +580,6 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, setNewFactorEventRaised, e);
         }
 
-       
+        
     }
 }

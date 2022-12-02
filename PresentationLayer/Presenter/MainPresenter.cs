@@ -116,6 +116,7 @@ namespace PresentationLayer.Presenter
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IScreenPresenter _screenPresenter;
         private IPricingPresenter _pricingPresenter;
+        private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
@@ -131,11 +132,9 @@ namespace PresentationLayer.Presenter
         private IMultiPanelTransomUC _multiTransomUC3rd;
         private IMultiPanelMullionUC _multiMullionUC4th;
         private IMultiPanelTransomUC _multiTransomUC4th;
-
-
+        
         private IMullionUCPresenter _mullionUCP;
         private ITransomUCPresenter _transomUCP;
-
 
 
         Panel _pnlMain, _pnlItems, _pnlPropertiesBody, _pnlControlSub;
@@ -176,6 +175,8 @@ namespace PresentationLayer.Presenter
         private IDividerModel _prev_divModel;
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
+
+     
         private int i = 0;
         private decimal newfactor = 0;
         #endregion
@@ -697,7 +698,10 @@ namespace PresentationLayer.Presenter
                              IScreenServices screenServices,
                              IMullionImagerUCPresenter mullionImagerUCP,
                              ITransomImagerUCPresenter transomImagerUCP,
-                             IPricingPresenter pricingPresenter)
+                             IPricingPresenter pricingPresenter,
+                             ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter
+                             
+                             )
         {
             _mainView = mainView;
             _frameUCPresenter = frameUCPresenter;
@@ -758,7 +762,10 @@ namespace PresentationLayer.Presenter
             _mullionImagerUCP = mullionImagerUCP;
             _transomImagerUCP = transomImagerUCP;
             _pricingPresenter = pricingPresenter;
+            _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
+            
+           
 
             SubscribeToEventsSetup();
         }
@@ -866,9 +873,12 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += _mainView_NudCurrentPriceValueChangedEventRaised;
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
+           
 
 
         }
+
+    
 
         #region Events  
 
@@ -931,6 +941,11 @@ namespace PresentationLayer.Presenter
             }
         }
         #endregion
+
+        private void OnshowGlassProp(object sender, EventArgs e)
+        {
+            
+        }
 
         private void _mainView_NudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -1007,6 +1022,8 @@ namespace PresentationLayer.Presenter
         {
             //IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, GlassThicknessDT, );
             //glassThicknessPresenter.ShowGlassThicknessListView();
+            _setMultipleGlassThicknessPresenter.Get_MltpleGlssThcknView().ShowMultipleThckView();
+            
         }
 
         private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
