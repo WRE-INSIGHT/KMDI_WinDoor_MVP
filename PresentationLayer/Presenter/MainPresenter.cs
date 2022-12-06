@@ -1893,6 +1893,8 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
+
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -1910,6 +1912,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
 
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
@@ -7634,6 +7637,7 @@ namespace PresentationLayer.Presenter
                         _concreteModel.Concrete_PropertiesUC = (UserControl)concretePropertiesUCPresenter.GetConcretePropertiesUC();
                         AddConcreteList_WindoorModel(_concreteModel);
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        _windoorModel.Fit_MyControls_ToBindDimensions();
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -7674,7 +7678,7 @@ namespace PresentationLayer.Presenter
                                          true);
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-
+                        _windoorModel.Fit_MyControls_ToBindDimensions();
                         GetCurrentPrice();
                     }
                 }
@@ -7795,7 +7799,7 @@ namespace PresentationLayer.Presenter
                                              false);
 
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-
+                            _windoorModel.Fit_MyControls_ToBindDimensions();
                             GetCurrentPrice();
                         }
                         else
@@ -7830,6 +7834,7 @@ namespace PresentationLayer.Presenter
                             _basePlatformPresenter.InvalidateBasePlatform();
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                            _windoorModel.Fit_MyControls_ToBindDimensions();
                         }
                         else
                         {
@@ -7859,6 +7864,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
+            _windoorModel.Fit_MyControls_ToBindDimensions();
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
@@ -9371,10 +9377,10 @@ namespace PresentationLayer.Presenter
         private bool CheckDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
         {
             int occupiedWidth = 0,
-                           occupiedHeight = 0,
-                           Maxheight = 0,
-                           availableWidth = _windoorModel.WD_width,
-                           availableHeight = _windoorModel.WD_height;
+                occupiedHeight = 0,
+                Maxheight = 0,
+                availableWidth = _windoorModel.WD_width,
+                availableHeight = _windoorModel.WD_height;
             bool NewBaseFlatformObjectFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
