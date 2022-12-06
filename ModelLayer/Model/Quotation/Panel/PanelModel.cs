@@ -3586,23 +3586,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         else
                         {
                             pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
-
                         }
                     }
-
-                    //}
-                    //else
-                    //{
-                    //    if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
-                    //    {
-                    //    pnl_wd = (int)(Panel_Width * Panel_Zoom);
-
-                    //    }
-                    //    else
-                    //    {
-                    //        pnl_wd = (int)(Panel_Width * Panel_Zoom);
-                    //    }
-                    //}
                     pnl_ht = (int)(Panel_Height * Panel_Zoom);
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")

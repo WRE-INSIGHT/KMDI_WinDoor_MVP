@@ -98,8 +98,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
                 Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
                 Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-                Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
-                Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
+                //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
+                //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
 
 

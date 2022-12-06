@@ -622,11 +622,13 @@ namespace ModelLayer.Model.Quotation.WinDoor
         public void SetDimensions_basePlatform()
         {
             decimal wd_flt_convert_dec = Convert.ToDecimal(WD_width * WD_zoom);
-            decimal base_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal base_wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal base_wd_dec = decimal.Round(wd_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
             WD_width_4basePlatform = Convert.ToInt32(base_wd_dec) + 70;
 
             decimal ht_flt_convert_dec = Convert.ToDecimal(WD_height * WD_zoom);
-            decimal base_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            //decimal base_ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+            decimal base_ht_dec = decimal.Round(ht_flt_convert_dec, 0, MidpointRounding.AwayFromZero);
             WD_height_4basePlatform = Convert.ToInt32(base_ht_dec) + 35;
         }
 
@@ -871,6 +873,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
                     }
                 }
             }
+        }
+
+        public void Fit_MyControls_ToBindDimensions()
+        {
+
+           
         }
 
         #endregion

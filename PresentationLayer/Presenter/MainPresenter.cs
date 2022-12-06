@@ -1857,14 +1857,17 @@ namespace PresentationLayer.Presenter
                         Load_Windoor_Item(wdm);
                         break;
                     }
-                    if (_quotationModel.Lst_Windoor.Count == 0)
-                    {
-                        Clearing_Operation();
-                    }
+                   
                 }
+            }
+            if (_quotationModel.Lst_Windoor.Count == 0)
+            {
+                Clearing_Operation();
+            }
+            else
+            {
                 _mainView.CreateNewWindoorBtnEnabled = true;
             }
-
             if (_quotationModel != null)
             {
                 if (_quotationModel.Lst_Windoor.Count != 0)
@@ -2571,8 +2574,8 @@ namespace PresentationLayer.Presenter
             {
 
                 _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
-                frmDimension_numWd = 0; ;
-                frmDimension_numHt = 0;
+                frmDimension_LoadWd = 0; ;
+                frmDimension_LoadHt = 0;
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
             }
@@ -2723,7 +2726,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_height:"))
                         {
-                            frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_BaseColor:"))
                         {
@@ -2731,7 +2734,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_width:"))
                         {
-                            frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
                                      false,
                                      false,
@@ -2739,8 +2742,8 @@ namespace PresentationLayer.Presenter
                                      true,
                                      false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Item,
-                                     frmDimension_numWd,
-                                     frmDimension_numHt,
+                                     frmDimension_LoadWd,
+                                     frmDimension_LoadHt,
                                      frmDimension_profileType,
                                      frmDimension_baseColor);
                         }
@@ -2973,11 +2976,11 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("Frame_Height:"))
                         {
-                            frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Width:"))
                         {
-                            frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
                                      false,
                                      false,
@@ -2985,8 +2988,8 @@ namespace PresentationLayer.Presenter
                                      true,
                                      false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
-                                     frmDimension_numWd,
-                                     frmDimension_numHt,
+                                     frmDimension_LoadWd,
+                                     frmDimension_LoadHt,
                                      frmDimension_profileType,
                                      frmDimension_baseColor);
                         }
@@ -3198,12 +3201,12 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("Concrete_Width:"))
                         {
-                            frmDimension_numWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
 
                         }
                         if (row_str.Contains("Concrete_Height:"))
                         {
-                            frmDimension_numHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
                                                false,
                                                false,
@@ -3211,8 +3214,8 @@ namespace PresentationLayer.Presenter
                                                true,
                                                false,
                                                frmDimensionPresenter.Show_Purpose.CreateNew_Concrete,
-                                               frmDimension_numWd,
-                                               frmDimension_numHt,
+                                               frmDimension_LoadWd,
+                                               frmDimension_LoadHt,
                                                frmDimension_profileType,
                                                frmDimension_baseColor);
 
@@ -6903,8 +6906,8 @@ namespace PresentationLayer.Presenter
       
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
-        int frmDimension_numWd = 0,
-            frmDimension_numHt = 0;
+        int frmDimension_LoadWd = 0,
+            frmDimension_LoadHt = 0;
         string frmDimension_profileType = "",
                frmDimension_baseColor = "";
 
@@ -7344,6 +7347,7 @@ namespace PresentationLayer.Presenter
             wndrFileName = string.Empty;
             wndrfile = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
+            _mainView.CreateNewWindoorBtnEnabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
 
         }
@@ -7750,74 +7754,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        int occupiedWidth = 0,
-                            occupiedHeight = 0,
-                            availableWidth = _windoorModel.WD_width,
-                            availableHeight = _windoorModel.WD_height;
-                        bool NewFrameSizeFit = true;
-                        foreach (var wndrObject in _windoorModel.lst_objects)
-                        {
-                            foreach (IFrameModel frm in _windoorModel.lst_frame)
-                            {
-                                if (wndrObject.Name == frm.Frame_Name)
-                                {
-                                    availableWidth -= frm.Frame_Width;
-                                    if (availableWidth >= frmDimension_numWd)
-                                    {
-
-                                        if (availableHeight >= frmDimension_numHt)
-                                        {
-                                            occupiedWidth += frm.Frame_Width;
-                                            occupiedHeight += frm.Frame_Height;
-                                        }
-                                        else
-                                        {
-                                            NewFrameSizeFit = false;
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        availableHeight -= frm.Frame_Height;
-                                        availableWidth = _windoorModel.WD_width;
-                                        if (availableWidth >= frmDimension_numWd)
-                                        {
-
-                                            if (availableHeight >= frmDimension_numHt)
-                                            {
-                                                occupiedWidth += frm.Frame_Width;
-                                                occupiedHeight += frm.Frame_Height;
-                                            }
-                                            else
-                                            {
-                                                NewFrameSizeFit = false;
-                                            }
-
-                                        }
-                                    }
-
-                                }
-
-                            }
-                            foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
-                            {
-                                if (wndrObject.Name == crtm.Concrete_Name)
-                                {
-                                    occupiedWidth += crtm.Concrete_Width;
-                                    occupiedHeight += crtm.Concrete_Height;
-                                }
-
-                            }
-                        }
-
-                        if (availableWidth >= frmDimension_numWd)
-                        {
-
-                        }else
-                        {
-                            NewFrameSizeFit = false;
-                        }
-
+                        bool NewFrameSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
+                                                                              frmDimension_numHt);
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -7862,7 +7800,7 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            MessageBox.Show("Size of frame not equal");
+                            MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Frame Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -7870,28 +7808,40 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
-                        int concreteID = _windoorModel.concreteIDCounter += 1;
-                        _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
-                                                                            frmDimension_numHt,
-                                                                            _windoorModel.WD_zoom,
-                                                                            _windoorModel.WD_zoom_forImageRenderer,
-                                                                            concreteID);
-                        _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
-                        _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
 
-                        IConcretePropertiesUCPresenter concretePropertiesUCPresenter = AddConcretePropertiesUC(_concreteModel);
-                        AddConcreteUC(_concreteModel);
-                        _concreteModel.Concrete_UC = (UserControl)_concreteUC;
-                        AddConcreteList_WindoorModel(_concreteModel);
+                        bool NewConcreteSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                 frmDimension_numHt);
+                        if (NewConcreteSizeFit)
+                        {
+                            int concreteID = _windoorModel.concreteIDCounter += 1;
+                            _concreteModel = _concreteServices.AddConcreteModel(frmDimension_numWd,
+                                                                                frmDimension_numHt,
+                                                                                _windoorModel.WD_zoom,
+                                                                                _windoorModel.WD_zoom_forImageRenderer,
+                                                                                concreteID);
+                            _concreteModel.Set_DimensionsToBind_using_ConcreteZoom();
+                            _concreteModel.Set_ImagerDimensions_using_ImagerZoom();
 
-                        _basePlatformPresenter.InvalidateBasePlatform();
-                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                        _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                            IConcretePropertiesUCPresenter concretePropertiesUCPresenter = AddConcretePropertiesUC(_concreteModel);
+                            AddConcreteUC(_concreteModel);
+                            _concreteModel.Concrete_UC = (UserControl)_concreteUC;
+                            AddConcreteList_WindoorModel(_concreteModel);
+
+                            _basePlatformPresenter.InvalidateBasePlatform();
+                            _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                            _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid dimension, You exceed the maximum item dimension!", "Concrete Dimension", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
 
             }
         }
+
+        
 
         public void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
@@ -9417,6 +9367,94 @@ namespace PresentationLayer.Presenter
                     _lblCurrentPrice.Value = wdm.WD_price;
                 }
             }
+        }
+        private bool CheckDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
+        {
+            int occupiedWidth = 0,
+                           occupiedHeight = 0,
+                           Maxheight = 0,
+                           availableWidth = _windoorModel.WD_width,
+                           availableHeight = _windoorModel.WD_height;
+            bool NewBaseFlatformObjectFit = true;
+
+            foreach (var wndrObject in _windoorModel.lst_objects)
+            {
+                foreach (IFrameModel frm in _windoorModel.lst_frame)
+                {
+                    if (wndrObject.Name == frm.Frame_Name)
+                    {
+                        if (availableWidth >= frm.Frame_Width)
+                        {
+
+                            if (availableHeight >= frm.Frame_Height)
+                            {
+                                occupiedWidth += frm.Frame_Width;
+                                if (Maxheight < frm.Frame_Height)
+                                {
+                                    Maxheight = frm.Frame_Height;
+                                }
+                            }
+                            else
+                            {
+                                NewBaseFlatformObjectFit = false;
+                            }
+                        }
+                        if (occupiedWidth >= _windoorModel.WD_width)
+                        {
+                            occupiedHeight += Maxheight;
+                            occupiedWidth = 0;
+                            availableWidth = _windoorModel.WD_width;
+                            availableHeight -= Maxheight;
+                        }
+                        else
+                        {
+                            availableWidth -= frm.Frame_Width;
+                        }
+                    }
+
+                }
+                foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
+                {
+                    if (wndrObject.Name == crtm.Concrete_Name)
+                    {
+                        if (availableWidth >= crtm.Concrete_Width)
+                        {
+
+                            if (availableHeight >= crtm.Concrete_Height)
+                            {
+                                occupiedWidth += crtm.Concrete_Width;
+                                if (Maxheight < crtm.Concrete_Height)
+                                {
+                                    Maxheight = crtm.Concrete_Height;
+                                }
+                            }
+                            else
+                            {
+                                NewBaseFlatformObjectFit = false;
+                            }
+
+                        }
+                        if (occupiedWidth >= _windoorModel.WD_width)
+                        {
+                            occupiedHeight += Maxheight;
+                            occupiedWidth = 0;
+                            availableWidth = _windoorModel.WD_width;
+                            availableHeight -= Maxheight;
+                        }
+                        else
+                        {
+                            availableWidth -= crtm.Concrete_Width;
+                        }
+                    }
+
+                }
+            }
+            if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
+            {
+                NewBaseFlatformObjectFit = false;
+
+            }
+            return NewBaseFlatformObjectFit;
         }
         #endregion
 

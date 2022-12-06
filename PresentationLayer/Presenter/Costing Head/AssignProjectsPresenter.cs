@@ -172,18 +172,58 @@ namespace PresentationLayer.Presenter.Costing_Head
                 MessageBox.Show("Error Message: " + ex.Message);
             }
         }
-
+        private DataColumn CreateColumn(string columname, string caption, string type)
+        {
+            DataColumn col = new DataColumn();
+            col.DataType = Type.GetType(type);
+            col.ColumnName = columname;
+            col.Caption = caption;
+            return col;
+        }
         public async Task Load_DGVProjects(string searchStr)
         {
             DataTable dt = await _projQuoteServices.Get_AssignedProjects(searchStr);
             _dgvProj.DataSource = dt;
 
 
+            var query = from r in dt.AsEnumerable()
+                        group r by new
+                        {
+                            Description = r.Field<string>("Description"),
+                            Unit = r.Field<string>("Unit"),
+                            Size = r.Field<string>("Size"),
+                            Where = r.Field<string>("Where"),
+                            Cut = r.Field<string>("Cut")
+                        } into g
+                        select new
+                        {
+                            Description = g.Key.Description,
+                            Qty = g.Sum(r => r.Field<int>("Qty")),
+                            Unit = g.Key.Unit,
+                            Size = g.Key.Size,
+                            Where = g.Key.Where,
+                            Cut = g.Key.Cut
+                        };
+            DataTable dts = new DataTable();
+            dt.Columns.Add(CreateColumn("Description", "Description", "System.String"));
+            dt.Columns.Add(CreateColumn("Qty", "Qty", "System.String"));
+            dt.Columns.Add(CreateColumn("Unit", "Unit", "System.String"));
+            dt.Columns.Add(CreateColumn("Size", "Size", "System.String"));
+            dt.Columns.Add(CreateColumn("Where", "Where", "System.String"));
+            dt.Columns.Add(CreateColumn("Cut", "Cut", "System.String"));
 
-            //var x = (from r in dt.AsEnumerable()
-            //         select r["Project Name"])
-            //         .Select(m => new { m.CategoryId, m.CategoryName })
-            //         .Distinct().ToList();
+            foreach (var element in query)
+            {
+                DataRow row = dt.NewRow();
+                row["Description"] = element.Description;
+                row["Qty"] = element.Qty;
+                row["Unit"] = element.Unit;
+                row["Size"] = element.Size;
+                row["Where"] = element.Where;
+                row["Cut"] = element.Cut;
+
+                dt.Rows.Add(row);
+            }
 
 
             foreach (DataGridViewColumn col in _dgvProj.Columns)

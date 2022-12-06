@@ -968,7 +968,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
 
-            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
             _mainPresenter.DeletePanelPropertiesUC(_panelModel.Panel_ID);
             _mainPresenter.SetChangesMark();
@@ -985,12 +984,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             _mainPresenter.DeductPanelGlassID();
             _mainPresenter.SetPanelGlassID();
-            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
-
             _mainPresenter.DeselectDivider();
             _mainPresenter.itemDescription();
             _mainPresenter.GetCurrentPrice();
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
         private void OnCasementPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
