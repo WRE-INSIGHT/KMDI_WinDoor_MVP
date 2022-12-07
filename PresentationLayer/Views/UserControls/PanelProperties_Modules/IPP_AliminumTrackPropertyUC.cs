@@ -8,5 +8,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         NumericUpDown GetNudAluminumTrackQty();
         event EventHandler PPAliminumTrackPropertyUCLoadEventRaised;
+        event EventHandler AluminumTrackQtyValueChangedEventRaised;
     }
 }

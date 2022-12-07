@@ -12,7 +12,6 @@ using ModelLayer.Model.User;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
-using PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
@@ -41,7 +40,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -880,23 +878,23 @@ namespace PresentationLayer.Presenter
         {
             setNewFactor();
         }
-       
+
         public async void setNewFactor()
         {
             decimal value;
-            
+
 
             if (i <= 0)
             {
                 string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                 value = await _quotationServices.GetFactorByProvince(province);
             }
-            else 
+            else
             {
                 value = newfactor;
             }
-            
-                       
+
+
             string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
             if (input != "" && input != "0")
             {
@@ -905,7 +903,7 @@ namespace PresentationLayer.Presenter
                     decimal deci_input = Convert.ToDecimal(input);
                     if (deci_input > 0)
                     {
-                        if(deci_input != value)
+                        if (deci_input != value)
                         {
                             _quotationModel.PricingFactor = deci_input;
                             MessageBox.Show("New Factor Set Sucessfully");
@@ -917,7 +915,7 @@ namespace PresentationLayer.Presenter
                         {
                             MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
-                        
+
                     }
                     else if (deci_input < 0)
                     {
@@ -1147,7 +1145,7 @@ namespace PresentationLayer.Presenter
             foreach (WindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 SaveWindoorModel(wdm);
-                
+
             }
             wndr_content.Add("EndofFile");
             #endregion
@@ -5630,7 +5628,7 @@ namespace PresentationLayer.Presenter
                                         _multiModelParent.Fit_EqualPanel_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                        
+
                                     }
 
                                 }
@@ -6900,7 +6898,7 @@ namespace PresentationLayer.Presenter
                     break;
             }
         }
-      
+
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
         int frmDimension_numWd = 0,
@@ -7430,7 +7428,7 @@ namespace PresentationLayer.Presenter
                 }
                 else if (QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile)
                 {
-                   
+
                     _frmDimensionPresenter.SetPresenters(this);
                     _frmDimensionPresenter.purpose = frmDimensionPresenter.Show_Purpose.Quotation;
                     _frmDimensionPresenter.SetProfileType(frmDimension_profileType);
@@ -7774,7 +7772,7 @@ namespace PresentationLayer.Presenter
                         //                {
                         //                    MessageBox.Show("Size now fit");
                         //                }
-                                       
+
                         //            }
                         //            else
                         //            {
@@ -7794,9 +7792,9 @@ namespace PresentationLayer.Presenter
 
                         //                }
                         //            }
-                                   
+
                         //        }
-                                
+
                         //    }
                         //    foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
                         //    {
@@ -7805,7 +7803,7 @@ namespace PresentationLayer.Presenter
                         //            occupiedWidth += crtm.Concrete_Width;
                         //            occupiedHeight += crtm.Concrete_Height;
                         //        }
-                                
+
                         //    }
                         //}
 
@@ -9363,6 +9361,7 @@ namespace PresentationLayer.Presenter
         public void GetCurrentPrice()
         {
             //_quotationModel.Select_Current_Windoor(_windoorModel);
+
             Run_GetListOfMaterials_SpecificItem();
 
             if (qoutationModel_MainPresenter.itemSelectStatus == true)

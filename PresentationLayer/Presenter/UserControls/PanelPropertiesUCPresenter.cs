@@ -537,7 +537,7 @@ namespace PresentationLayer.Presenter.UserControls
                         mc.BringToFront();
 
 
-                        IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel);
+                        IPP_3dHingePropertyUCPresenter _3dPropUCP = _pp_3dHingePropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                         UserControl _3dprop = (UserControl)_3dPropUCP.GetPP_3dHingePropertyUC();
                         _pnlPanelSpecs.Controls.Add(_3dprop);
                         _3dprop.Dock = DockStyle.Top;
