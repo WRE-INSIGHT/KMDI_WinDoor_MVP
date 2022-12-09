@@ -5270,7 +5270,6 @@ namespace PresentationLayer.Presenter
                             #endregion
                             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
-                            IFramePropertiesUC framePropUC = (FramePropertiesUC)_frameModel.Frame_PropertiesUC;
                             panelPropUC.Dock = DockStyle.Top;
 
                             if (panel_Parent.Parent.Name.Contains("frame"))
@@ -5278,7 +5277,7 @@ namespace PresentationLayer.Presenter
 
                                 _frameModel.Lst_Panel.Add(pnlModel);
                                 pnlModel.Imager_SetDimensionsToBind_FrameParent();
-                                framePropUC.GetFramePropertiesPNL().Controls.Add(panelPropUC);
+                                _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(panelPropUC);
                             }
                             else
                             {
@@ -5305,15 +5304,9 @@ namespace PresentationLayer.Presenter
 
                                 pnlModel.SetPanelMargin_using_ZoomPercentage();
                                 pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
+                                _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
 
-                                if (panel_Parent.Name.Contains("MultiMullion"))
-                                {
-                                    _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-                                }
-                                else
-                                {
-                                    _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-                                }
+                               
                             }
                             panelPropUC.BringToFront();
 
@@ -6025,7 +6018,6 @@ namespace PresentationLayer.Presenter
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
                                 _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(multiPropUC);
-                                _multiPropUCP2_given = multiPropUCP;
                                 multiPropUC.BringToFront();
                                 //_multiPanelModel2ndLvl.AdjustPropertyPanelHeight("Mpanel", "add");
                                 //_frameModel.AdjustPropertyPanelHeight("Mpanel", "add");
@@ -6072,6 +6064,8 @@ namespace PresentationLayer.Presenter
                                     _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
                                 }
+                                _multiPropUCP2_given = multiPropUCP;
+
                             }
                             #region 3rd level
                             else if (mpnllvl == "third level") //drawing of 3rd level multipanel objs
@@ -6110,7 +6104,6 @@ namespace PresentationLayer.Presenter
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
                                 _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
-                                _multiPropUCP2_given = multiPropUCP;
                                 multiPropUC.BringToFront();
                                 if (mPanel_Type.Contains("Mullion"))
                                 {
@@ -6171,6 +6164,8 @@ namespace PresentationLayer.Presenter
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
 
                                 }
+                                _multiPropUCP2_given = multiPropUCP;
+
                                 if (_multiPanelModel3rdLvl.MPanel_Placement == "Last")
                                 {
                                     _multiPanelModel2ndLvl.Fit_MyControls_ImagersToBindDimensions();
@@ -6219,7 +6214,7 @@ namespace PresentationLayer.Presenter
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
                                 _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
-                                _multiPropUCP2_given = multiPropUCP;
+                                
                                 multiPropUC.BringToFront();
                                 if (mPanel_Type.Contains("Mullion"))
                                 {
@@ -6279,6 +6274,7 @@ namespace PresentationLayer.Presenter
                                     ////_multiPanelModel2ndLvl.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)_multiTransomUC, _frameModel.Frame_Type.ToString());
 
                                 }
+                                _multiPropUCP2_given = multiPropUCP;
                                 if (_multiPanelModel4thLvl.MPanel_Placement == "Last")
                                 {
                                     _multiPanelModel3rdLvl.Fit_MyControls_ImagersToBindDimensions();
@@ -7330,6 +7326,7 @@ namespace PresentationLayer.Presenter
         {
             _quotationModel = null;
             _frameModel = null;
+            _windoorModel = null;
             _screenModel = null;
             _multiPanelModel2ndLvl = null;
             _multiPanelModel3rdLvl = null;
@@ -7340,6 +7337,7 @@ namespace PresentationLayer.Presenter
             _multiTransomUC3rd = null;
             _multiMullionUC4th = null;
             _multiTransomUC4th = null;
+            _multiModelParent = null;
             mpnllvl = string.Empty;
             _pnlItems.Controls.Clear();
             _pnlPropertiesBody.Controls.Clear();
