@@ -15,7 +15,7 @@ namespace PresentationLayer.Presenter.UserControls
     public class PanelPropertiesUCPresenter : IPanelPropertiesUCPresenter, IPresenterCommon
     {
         IPanelPropertiesUC _panelPropertiesUC;
-
+        
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IPP_MotorizedPropertyUCPresenter _pp_motorizedPropertyUCPresenter;
@@ -641,7 +641,7 @@ namespace PresentationLayer.Presenter.UserControls
                     bladesProp.Dock = DockStyle.Top;
                     bladesProp.BringToFront();
                 }
-
+                
                 IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
                 _pnlPanelSpecs.Controls.Add(glassProp);

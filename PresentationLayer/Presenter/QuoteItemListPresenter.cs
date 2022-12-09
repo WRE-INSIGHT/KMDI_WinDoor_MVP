@@ -30,7 +30,7 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
-
+       
         #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
