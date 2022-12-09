@@ -56,7 +56,7 @@ namespace PresentationLayer.Presenter
         IMainView _mainView;
 
         private IUnityContainer _unityC;
-
+  
         private IUserModel _userModel;
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel; //currently selected item
@@ -64,6 +64,8 @@ namespace PresentationLayer.Presenter
         private IScreenModel _screenModel;
         private IConcreteModel _concreteModel;
         private IConcreteUC _concreteUC;
+        private IPanelModel _panelModel;
+
 
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
@@ -119,6 +121,7 @@ namespace PresentationLayer.Presenter
         private IScreenPresenter _screenPresenter;
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
+        
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
@@ -178,7 +181,7 @@ namespace PresentationLayer.Presenter
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
 
-     
+        
         private int i = 0;
         private decimal newfactor = 0;
         #endregion
@@ -1022,12 +1025,13 @@ namespace PresentationLayer.Presenter
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
+        
         private void _mainView_SetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            //IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, GlassThicknessDT, );
-            //glassThicknessPresenter.ShowGlassThicknessListView();
-            _setMultipleGlassThicknessPresenter.Get_MltpleGlssThcknView().ShowMultipleThckView();
-            
+           
+            ISetMultipleGlassThicknessPresenter multipleGlassThicknessPresenter = _setMultipleGlassThicknessPresenter.GetNewInstance(_unityC, _windoorModel, this);
+            multipleGlassThicknessPresenter.Get_MltpleGlssThcknView().ShowMultipleThckView();
+
         }
 
         private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1588,7 +1592,6 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -9261,7 +9264,7 @@ namespace PresentationLayer.Presenter
                                 }
 
 
-                                //GlassThickness & Glassfilm
+                               //GlassThickness & Glassfilm
                                 if (Singlepnl.Panel_GlassThicknessDesc != null)
                                 {
                                     if (Singlepnl.Panel_GlassFilm.ToString() != "None")
@@ -9277,16 +9280,12 @@ namespace PresentationLayer.Presenter
                                 {
                                     lst_glassThickness.Add(string.Empty);
                                 }
-
-
                                 //GeorgianBar
                                 if (Singlepnl.Panel_GeorgianBarOptionVisibility == true)
                                 {
                                     GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
-
-                                }
-
+                                }                          
                             }
                             #endregion
                             else

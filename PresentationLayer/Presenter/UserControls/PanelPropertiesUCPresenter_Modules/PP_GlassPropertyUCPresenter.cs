@@ -15,7 +15,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IMainPresenter _mainPresenter;
-
+        private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 

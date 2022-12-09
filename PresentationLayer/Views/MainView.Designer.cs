@@ -659,6 +659,7 @@
             // SetGlassToolStripMenuItem
             // 
             this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetGlassToolStripMenuItem.Enabled = false;
             this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
             this.SetGlassToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SetGlassToolStripMenuItem.Name = "SetGlassToolStripMenuItem";
