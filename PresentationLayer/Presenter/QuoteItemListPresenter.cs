@@ -89,7 +89,7 @@ namespace PresentationLayer.Presenter
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
-
+                    
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -225,13 +225,21 @@ namespace PresentationLayer.Presenter
 
         public void SetAllItemDiscount(int inputedDiscount)
         {
-            _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
 
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                wdm.WD_discount = inputedDiscount;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
-                _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
+                wdm.WD_discount = inputedDiscount; 
+            } 
+
+            foreach (IQuoteItemListUCPresenter itemUC in this._lstQuoteItemUC)
+            {
+                //_quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
+                itemUC.GetNewInstance(_unityC, _windoorModel, _quotationModel);
+                itemUC.GetiQuoteItemListUC().itemDiscount.Value = inputedDiscount;
+                itemUC.GetiQuoteItemListUC().GetLblDiscount().Text = inputedDiscount.ToString() + "%";
+                UserControl quoteItem = (UserControl)itemUC.GetiQuoteItemListUC();
+                quoteItem.Refresh();
+                quoteItem.Invalidate();
             }
         }
 

@@ -28,7 +28,7 @@ namespace PresentationLayer.Presenter.UserControls
         NumericUpDown _nudItemDiscount;
         NumericUpDown _nudItemPrice;
 
-        string setDiscount = "";
+
         decimal TotalNetPrice;
 
         public QuoteItemListUCPresenter(IQuoteItemListUC quoteItemListUC,
@@ -86,17 +86,24 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_setAllDiscountToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            setDiscount = "SetAllDiscount";
-            string input = Interaction.InputBox("Set Discount for all items", "WinDoor Maker", "1");
-            if (input != "" && input != "0")
+            string input = Interaction.InputBox("Set Discount for all items", "WinDoor Maker", "30");
+            if (input != "")
             {
                 try
                 {
                     int int_input = Convert.ToInt32(input);
                     if (int_input > 0)
                     {
-                        _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel,_mainPresenter);
+                        //_windoorModel.setDiscount = "SetAllDiscount";
+                        _quoteItemListPresenter = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel, _mainPresenter);
                         _quoteItemListPresenter.SetAllItemDiscount(int_input);
+                        //foreach (IQuoteItemListUCPresenter item in _quoteItemListPresenter._lstQuoteItemUC)
+                        //{ 
+                        //    item.GetiQuoteItemListUC().itemDiscount.Value = int_input;
+                        //    item.GetiQuoteItemListUC().GetLblDiscount().Text= int_input.ToString() + "%";
+                        //}
+                        //_nudItemDiscount.Value = int_input;
+                        //_lblDiscount.Text = int_input.ToString() + "%";
                     }
                     else if (int_input < 0)
                     {
@@ -247,11 +254,12 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _quoteItemListUC_NudItemDiscountValueChangedEventRaised(object sender, System.EventArgs e)
         {
-            //if (setDiscount == "SetAllDiscount")
+            //if (_windoorModel.setDiscount == "SetAllDiscount")
             //{
             //    foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             //    {
-            //        wdm.WD_discount = (int)((NumericUpDown)sender).Value;
+            //        // wdm.WD_discount = (int)((NumericUpDown)sender).Value;
+            //        _nudItemDiscount.Value = wdm.WD_discount;
             //        _lblDiscount.Text = wdm.WD_discount.ToString() + "%";
             //    }
             //}
@@ -266,14 +274,14 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (wdm.WD_id == Convert.ToInt32(itemNum))
                         {
-                             wdm.WD_discount = (int)((NumericUpDown)sender).Value;
+                            wdm.WD_discount = (int)((NumericUpDown)sender).Value;
 
                             _lblDiscount.Text = wdm.WD_discount.ToString() + "%";
                         }
                     }
                 }
             //}
-            //setDiscount = "";
+            //_windoorModel.setDiscount = "";
         }
 
         private void _quoteItemListUC_lblQuantityDoubleClickEventRaised(object sender, System.EventArgs e)

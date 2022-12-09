@@ -11,5 +11,6 @@ namespace PresentationLayer.Presenter.UserControls
         IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, IQuotationModel quotationModel);
         IQuoteItemListUC GetiQuoteItemListUC();
 
+
     }
 }
