@@ -71,56 +71,113 @@ namespace PresentationLayer.Presenter
 
                         foreach (IFrameModel fr in _windoorModel.lst_frame)
                         {
-                            foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                            if (fr.Lst_MultiPanel.Count >= 1 && fr.Lst_Panel.Count == 0)
                             {
-                                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+
+                                #region multipanel
+                                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                                {
+
+                                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                                    {
+                                        for (int i = 0; i < _panelIdList.Count; i++)
+                                        {
+                                            var str_PanelId = _panelIdList[i].Substring(6);
+                                            var int_PanelId = Convert.ToInt32(str_PanelId);
+
+                                            if (pnl.PanelGlass_ID == int_PanelId)
+                                            {
+                                                string prev_thickness = pnl.Panel_GlassThicknessDesc;
+
+                                                pnl.Panel_GlassType = _glassType;
+                                                pnl.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
+                                                pnl.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+
+
+
+                                                if (pnl.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
+                                                {
+                                                    if (prev_thickness == null || !prev_thickness.Contains("Georgian Bar"))
+                                                    {
+                                                        pnl.Panel_GeorgianBarOptionVisibility = true;
+                                                        pnl.AdjustPropertyPanelHeight("addGeorgianBar");
+                                                        pnl.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                                                        if (pnl.Panel_ParentMultiPanelModel != null)
+                                                        {
+                                                            pnl.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (prev_thickness != null && prev_thickness.Contains("Georgian Bar"))
+                                                    {
+
+                                                        pnl.Panel_GeorgianBarOptionVisibility = false;
+                                                        pnl.AdjustPropertyPanelHeight("minusGeorgianBar");
+                                                        pnl.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                                                        if (pnl.Panel_ParentMultiPanelModel != null)
+                                                        {
+                                                            pnl.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                }
+                                #endregion
+                            }else if(fr.Lst_Panel.Count == 1 && fr.Lst_MultiPanel.Count == 0)
+                            {
+                                #region singlePanel 
+                                 foreach(IPanelModel SinglePanel in fr.Lst_Panel)
                                 {
                                     for (int i = 0; i < _panelIdList.Count; i++)
                                     {
                                         var str_PanelId = _panelIdList[i].Substring(6);
-                                        var Conv_int_PanelId = Convert.ToInt32(str_PanelId);
+                                        var int_PanelId = Convert.ToInt32(str_PanelId);
 
-                                        if (pnl.PanelGlass_ID == Conv_int_PanelId)
+                                        if (SinglePanel.PanelGlass_ID == int_PanelId)
                                         {
-                                            string prev_thickness = pnl.Panel_GlassThicknessDesc;
+                                            string prev_thickness = SinglePanel.Panel_GlassThicknessDesc;
 
-                                            pnl.Panel_GlassType = _glassType;
-                                            pnl.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
-                                            pnl.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+                                            SinglePanel.Panel_GlassType = _glassType;
+                                            SinglePanel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
+                                            SinglePanel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
 
-                                           
-
-                                            if (pnl.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
+                                            if (SinglePanel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
                                             {
                                                 if (prev_thickness == null || !prev_thickness.Contains("Georgian Bar"))
                                                 {
-                                                    pnl.Panel_GeorgianBarOptionVisibility = true;
-                                                    pnl.AdjustPropertyPanelHeight("addGeorgianBar");
-                                                    pnl.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
-                                                    if (pnl.Panel_ParentMultiPanelModel != null)
+                                                    SinglePanel.Panel_GeorgianBarOptionVisibility = true;
+                                                    SinglePanel.AdjustPropertyPanelHeight("addGeorgianBar");
+                                                    SinglePanel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                                                    if (SinglePanel.Panel_ParentMultiPanelModel != null)
                                                     {
-                                                        pnl.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                                                        SinglePanel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
                                                     }
-                                                }  
+                                                }
                                             }
                                             else
                                             {
                                                 if (prev_thickness != null && prev_thickness.Contains("Georgian Bar"))
                                                 {
 
-                                                    pnl.Panel_GeorgianBarOptionVisibility = false;
-                                                    pnl.AdjustPropertyPanelHeight("minusGeorgianBar");
-                                                    pnl.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
-                                                    if (pnl.Panel_ParentMultiPanelModel != null)
+                                                    SinglePanel.Panel_GeorgianBarOptionVisibility = false;
+                                                    SinglePanel.AdjustPropertyPanelHeight("minusGeorgianBar");
+                                                    SinglePanel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                                                    if (SinglePanel.Panel_ParentMultiPanelModel != null)
                                                     {
-                                                        pnl.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
+                                                        SinglePanel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusGeorgianBar");
                                                     }
                                                 }
                                             }
-                                            
+
                                         }
                                     }
-                                }
+                              }
+                                #endregion
                             }
                         }
                         _mainPresenter.GetCurrentPrice();

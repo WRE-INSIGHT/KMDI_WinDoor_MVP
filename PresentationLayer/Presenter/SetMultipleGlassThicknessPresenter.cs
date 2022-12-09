@@ -86,20 +86,39 @@ namespace PresentationLayer.Presenter
             {
                 foreach (IFrameModel fr in _windoorModel.lst_frame)
                 {
-                    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                    if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
                     {
-                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+
+                        foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                         {
-                            glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance_MultipleGlassThickness(_unityC, _mainPresenter.GlassThicknessDT, pnl, _mainPresenter, this, _windoorModel);
-                            foreach (GlassType gt in GlassType.GetAll())
+                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
-                                if (gt.ToString() == _setMultipleGlassThicknessView.Glass_Type)
+                                glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance_MultipleGlassThickness(_unityC, _mainPresenter.GlassThicknessDT, pnl, _mainPresenter, this, _windoorModel);
+                                foreach (GlassType gt in GlassType.GetAll())
                                 {
-                                    var str = glassThicknessPresenter.Panel_GlassType = gt;
+                                    if (gt.ToString() == _setMultipleGlassThicknessView.Glass_Type)
+                                    {
+                                        var str = glassThicknessPresenter.Panel_GlassType = gt;
+                                    }
                                 }
                             }
                         }
+
+                    }else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
+                    {
+                        IPanelModel Singlepnl = fr.Lst_Panel[0];
+
+                        glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance_MultipleGlassThickness(_unityC, _mainPresenter.GlassThicknessDT, Singlepnl, _mainPresenter, this, _windoorModel);
+                        foreach (GlassType gt in GlassType.GetAll())
+                        {
+                            if (gt.ToString() == _setMultipleGlassThicknessView.Glass_Type)
+                            {
+                                var str = glassThicknessPresenter.Panel_GlassType = gt;
+                            }
+                        }
+
                     }
+
                 }
                 glassThicknessPresenter.ShowGlassThicknessListView();
 
