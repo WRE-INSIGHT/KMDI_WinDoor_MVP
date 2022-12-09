@@ -843,31 +843,31 @@ namespace PresentationLayer.Presenter
             _mainView.ButtonPlusZoomClickEventRaised += new EventHandler(OnButtonPlusZoomClickEventRaised);
             _mainView.DeleteToolStripButtonClickEventRaised += new EventHandler(OnDeleteToolStripButtonClickEventRaised);
             _mainView.ListOfMaterialsToolStripMenuItemClickEventRaised += new EventHandler(OnListOfMaterialsToolStripMenuItemClickEventRaised);
-            _mainView.CreateNewGlassClickEventRaised += _mainView_CreateNewGlassClickEventRaised;
-            _mainView.ChangeItemColorClickEventRaised += _mainView_ChangeItemColorClickEventRaised;
-            _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised;
-            _mainView.glassBalancingToolStripMenuItemClickEventRaised += _mainView_glassBalancingToolStripMenuItemClickEventRaised;
+            _mainView.CreateNewGlassClickEventRaised += new EventHandler(OnCreateNewGlassClickEventRaised);
+            _mainView.ChangeItemColorClickEventRaised += new EventHandler(OnChangeItemColorClickEventRaised);
+            _mainView.glassTypeColorSpacerToolStripMenuItemClickEventRaised += new EventHandler(OnGlassTypeColorSpacerToolStripMenuItemClickEventRaised);
+            _mainView.glassBalancingToolStripMenuItemClickEventRaised += new EventHandler(OnGlassBalancingToolStripMenuItemClickEventRaised);
             _mainView.customArrowHeadToolStripMenuItemClickEventRaised += new EventHandler(OncustomArrowHeadToolStripMenuItemClickEventRaised);
-            _mainView.assignProjectsToolStripMenuItemClickEventRaised += _mainView_assignProjectsToolStripMenuItemClickEventRaised;
-            _mainView.selectProjectToolStripMenuItemClickEventRaised += _mainView_selectProjectToolStripMenuItemClickEventRaised;
-            _mainView.NewConcreteButtonClickEventRaised += _mainView_NewConcreteButtonClickEventRaised;
-            _mainView.refreshToolStripButtonClickEventRaised += _mainView_refreshToolStripButtonClickEventRaised;
-            _mainView.CostingItemsToolStripMenuItemClickRaiseEvent += new EventHandler(_mainView_CostingItemsToolStripMenuItemClickRaiseEvent);
-            _mainView.saveAsToolStripMenuItemClickEventRaised += _mainView_saveAsToolStripMenuItemClickEventRaised;
-            _mainView.saveToolStripButtonClickEventRaised += _mainView_saveToolStripButtonClickEventRaised;
-            _mainView.slidingTopViewToolStripMenuItemClickRaiseEvent += _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent;
-            _mainView.ViewImagerToolStripButtonClickEventRaised += _mainView_ViewImagerToolStripButtonClickEventRaised;
-            _mainView.ItemsDragEventRaiseEvent += _mainView_ItemsDragEventRaiseEvent;
-            _mainView.SortItemButtonClickEventRaised += _mainView_SortItemButtonClickEventRaised;
-            _mainView.existingItemToolStripMenuItemClickEventRaised += _mainView_existingItemToolStripMenuItemClickEventRaised;
-            _mainView.SetGlassToolStripMenuItemClickRaiseEvent += _mainView_SetGlassToolStripMenuItemClickRaiseEvent;
-            _mainView.addProjectsToolStripMenuItemClickEventRaised += _mainView_addProjectsToolStripMenuItemClickEventRaised;
-            _mainView.screenToolStripMenuItemClickEventRaised += _mainView_screenToolStripMenuItemClickEventRaised;
-            _mainView.factorToolStripMenuItemClickEventRaised += _mainView_factorToolStripMenuItemClickEventRaised;
-            _mainView.billOfMaterialToolStripMenuItemClickEventRaised += _mainView_billOfMaterialToolStripMenuItemClickEventRaised;
-            _mainView.DuplicateToolStripButtonClickEventRaised += _mainView_DuplicateToolStripButtonClickEventRaised;
+            _mainView.assignProjectsToolStripMenuItemClickEventRaised += new EventHandler(OnAssignProjectsToolStripMenuItemClickEventRaised);
+            _mainView.selectProjectToolStripMenuItemClickEventRaised += new EventHandler(OnSelectProjectToolStripMenuItemClickEventRaised);
+            _mainView.NewConcreteButtonClickEventRaised += new EventHandler(OnNewConcreteButtonClickEventRaised);
+            _mainView.refreshToolStripButtonClickEventRaised += new EventHandler(OnRefreshToolStripButtonClickEventRaised);
+            _mainView.CostingItemsToolStripMenuItemClickRaiseEvent += new EventHandler(OnCostingItemsToolStripMenuItemClickRaiseEvent);
+            _mainView.saveAsToolStripMenuItemClickEventRaised += new EventHandler(OnSaveAsToolStripMenuItemClickEventRaised);
+            _mainView.saveToolStripButtonClickEventRaised += new EventHandler(OnSaveToolStripButtonClickEventRaised);
+            _mainView.slidingTopViewToolStripMenuItemClickRaiseEvent += new EventHandler(OnSlidingTopViewToolStripMenuItemClickRaiseEvent);
+            _mainView.ViewImagerToolStripButtonClickEventRaised += new EventHandler(OnViewImagerToolStripButtonClickEventRaised);
+            _mainView.ItemsDragEventRaiseEvent += new DragEventHandler(OnItemsDragEventRaiseEvent);
+            _mainView.SortItemButtonClickEventRaised += new EventHandler(OnSortItemButtonClickEventRaised);
+            _mainView.existingItemToolStripMenuItemClickEventRaised += new EventHandler(OnExistingItemToolStripMenuItemClickEventRaised);
+            _mainView.SetGlassToolStripMenuItemClickRaiseEvent += new EventHandler(OnSetGlassToolStripMenuItemClickRaiseEvent);
+            _mainView.addProjectsToolStripMenuItemClickEventRaised += new EventHandler(OnAddProjectsToolStripMenuItemClickEventRaised);
+            _mainView.screenToolStripMenuItemClickEventRaised += new EventHandler(OnScreenToolStripMenuItemClickEventRaised);
+            _mainView.factorToolStripMenuItemClickEventRaised += new EventHandler(OnFactorToolStripMenuItemClickEventRaised);
+            _mainView.billOfMaterialToolStripMenuItemClickEventRaised += new EventHandler(OnBillOfMaterialToolStripMenuItemClickEventRaised);
+            _mainView.DuplicateToolStripButtonClickEventRaised += new EventHandler(OnDuplicateToolStripButtonClickEventRaised);
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
-            _mainView.NudCurrentPriceValueChangedEventRaised += _mainView_NudCurrentPriceValueChangedEventRaised;
+            _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
 
 
@@ -940,7 +940,7 @@ namespace PresentationLayer.Presenter
         }
         #endregion
 
-        private void _mainView_NudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
+        private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
             updatePriceFromMainViewToItemList();
@@ -956,7 +956,7 @@ namespace PresentationLayer.Presenter
                 _mainView.GetOpenFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
             }
         }
-        private void _mainView_billOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnBillOfMaterialToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             Run_GetListOfMaterials_SpecificItem();
             _quotationModel.BOMandItemlistStatus = "BOM";
@@ -965,7 +965,7 @@ namespace PresentationLayer.Presenter
             _quotationModel.Select_Current_Windoor(_windoorModel);
         }
 
-        private void _mainView_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnDuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -989,12 +989,12 @@ namespace PresentationLayer.Presenter
             }
 
         }
-        private void _mainView_factorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnFactorToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             IFactorPresenter factor = _factorPresenter.GetNewInstance(_unityC, this);
             factor.GetFactorView().ShowThis();
         }
-        private void _mainView_screenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
             _screenModel = _screenServices.AddScreenModel(0,
@@ -1012,13 +1012,13 @@ namespace PresentationLayer.Presenter
             glassThicknessPresenter.GetScreenView().ShowScreemView();
         }
 
-        private void _mainView_SetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             //IGlassThicknessListPresenter glassThicknessPresenter = _glassThicknessPresenter.GetNewInstance(_unityC, GlassThicknessDT, );
             //glassThicknessPresenter.ShowGlassThicknessListView();
         }
 
-        private void _mainView_slidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        private void OnSlidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
@@ -1038,7 +1038,7 @@ namespace PresentationLayer.Presenter
         public bool online_login = true;
         int x = 50;
 
-        private void _mainView_saveToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnSaveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
 
             wndr_content = new List<string>();
@@ -1046,7 +1046,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        private void _mainView_saveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnSaveAsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
             if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
@@ -1513,7 +1513,7 @@ namespace PresentationLayer.Presenter
             wndr_content.Add(")");
         }
 
-        private void _mainView_CostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
+        private void OnCostingItemsToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
             _quotationModel.BOMandItemlistStatus = "PriceItemList";
             IQuoteItemListPresenter quoteItesm = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this);
@@ -1536,7 +1536,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        private void _mainView_refreshToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnRefreshToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -1582,7 +1582,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_NewConcreteButtonClickEventRaised(object sender, EventArgs e)
+        private void OnNewConcreteButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -1595,7 +1595,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_selectProjectToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnSelectProjectToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -1609,7 +1609,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_assignProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnAssignProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -1624,7 +1624,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_glassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnGlassBalancingToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             _quotationModel.GetListOfMaterials(_windoorModel);
 
@@ -1708,7 +1708,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_glassTypeColorSpacerToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnGlassTypeColorSpacerToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
 
@@ -1732,13 +1732,13 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_ChangeItemColorClickEventRaised(object sender, EventArgs e)
+        private void OnChangeItemColorClickEventRaised(object sender, EventArgs e)
         {
             IChangeItemColorPresenter presenter = _changeItemColorPresenter.GetNewInstance(_unityC, this, _windoorModel);
             presenter.ShowView();
         }
 
-        private void _mainView_CreateNewGlassClickEventRaised(object sender, EventArgs e)
+        private void OnCreateNewGlassClickEventRaised(object sender, EventArgs e)
         {
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
             CreateNewGlass_ShowPurpose show_purpose = CreateNewGlass_ShowPurpose._DefaultNone;
@@ -2207,7 +2207,7 @@ namespace PresentationLayer.Presenter
             bgw.ProgressChanged += Bgw_ProgressChanged;
             bgw.DoWork += Bgw_DoWork;
         }
-        private void _mainView_addProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -2222,7 +2222,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_existingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        private void OnExistingItemToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -2264,12 +2264,12 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        private void _mainView_SortItemButtonClickEventRaised(object sender, EventArgs e)
+        private void OnSortItemButtonClickEventRaised(object sender, EventArgs e)
         {
             ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
             sortItem.GetSortItemView().showSortItem();
         }
-        private void _mainView_ItemsDragEventRaiseEvent(object sender, DragEventArgs e)
+        private void OnItemsDragEventRaiseEvent(object sender, DragEventArgs e)
         {
             #region ItemsDrag
             //Point p = _mainView.GetPanelItems().PointToClient(new Point(e.X, e.Y));
@@ -2311,7 +2311,7 @@ namespace PresentationLayer.Presenter
             //_mainView.GetPanelItems().Invalidate();
             #endregion
         }
-        private void _mainView_ViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
+        private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             toggle = !toggle;
             if (toggle == true)
@@ -2590,8 +2590,7 @@ namespace PresentationLayer.Presenter
             }
             if (row_str == "EndofFile")
             {
-                Load_Windoor_Item(_windoorModel);
-                GetCurrentPrice();
+               
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
@@ -2599,7 +2598,8 @@ namespace PresentationLayer.Presenter
                     wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
-
+                Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+                GetCurrentPrice();
             }
             switch (inside_quotation)
             {
@@ -5962,7 +5962,7 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("MPanel_GlassBalanced:"))
                         {
                             mPanel_GlassBalanced = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                            IFramePropertiesUC framePropUC = (FramePropertiesUC)_frameModel.Frame_PropertiesUC;
+                        
                             _frameModel.SetDeductFramePadding(true);
                             IMultiPanelModel multipanelModel = _multipanelServices.AddMultiPanelModel(mPanel_Width,
                                                                                                       mPanel_Height,
@@ -6024,7 +6024,7 @@ namespace PresentationLayer.Presenter
                                 IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPanelPropertiesUCP.GetNewInstance(_unityC, _multiPanelModel2ndLvl, this);
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
-                                framePropUC.GetFramePropertiesPNL().Controls.Add(multiPropUC);
+                                _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(multiPropUC);
                                 _multiPropUCP2_given = multiPropUCP;
                                 multiPropUC.BringToFront();
                                 //_multiPanelModel2ndLvl.AdjustPropertyPanelHeight("Mpanel", "add");
@@ -6110,6 +6110,7 @@ namespace PresentationLayer.Presenter
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
                                 _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
+                                _multiPropUCP2_given = multiPropUCP;
                                 multiPropUC.BringToFront();
                                 if (mPanel_Type.Contains("Mullion"))
                                 {
@@ -6126,7 +6127,7 @@ namespace PresentationLayer.Presenter
                                                                                                       this,
                                                                                                       _frameUCPresenter,
                                                                                                       _multiTransomUCP,
-                                                                                                      _multiPropUCP2_given,
+                                                                                                      multiPropUCP,
                                                                                                       _frameImagerUCP,
                                                                                                       _basePlatformImagerUCPresenter,
                                                                                                       multiMullionImagerUCP,
@@ -6156,7 +6157,7 @@ namespace PresentationLayer.Presenter
                                                                                                                     this,
                                                                                                                     _frameUCPresenter,
                                                                                                                     _multiMullionUCP,
-                                                                                                                    _multiPropUCP2_given,
+                                                                                                                    multiPropUCP,
                                                                                                                     _frameImagerUCP,
                                                                                                                     _basePlatformImagerUCPresenter,
                                                                                                                     multiTransomImagerUCP,
@@ -6218,6 +6219,7 @@ namespace PresentationLayer.Presenter
                                 UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
                                 multiPropUC.Dock = DockStyle.Top;
                                 _multiPropUCP2_given.GetMultiPanelPropertiesPNL().Controls.Add(multiPropUC);
+                                _multiPropUCP2_given = multiPropUCP;
                                 multiPropUC.BringToFront();
                                 if (mPanel_Type.Contains("Mullion"))
                                 {
@@ -6234,7 +6236,7 @@ namespace PresentationLayer.Presenter
                                                                                                       this,
                                                                                                       _frameUCPresenter,
                                                                                                       _multiTransomUCP,
-                                                                                                      _multiPropUCP2_given,
+                                                                                                      multiPropUCP,
                                                                                                       _frameImagerUCP,
                                                                                                       _basePlatformImagerUCPresenter,
                                                                                                       multiMullionImagerUCP,
@@ -6263,7 +6265,7 @@ namespace PresentationLayer.Presenter
                                                                                                                     this,
                                                                                                                     _frameUCPresenter,
                                                                                                                     _multiMullionUCP,
-                                                                                                                    _multiPropUCP2_given,
+                                                                                                                    multiPropUCP,
                                                                                                                     _frameImagerUCP,
                                                                                                                     _basePlatformImagerUCPresenter,
                                                                                                                     multiTransomImagerUCP,
@@ -7662,10 +7664,10 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
 
-                        IFramePropertiesUCPresenter framePropUCP = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
-                        AddFrameUC(_frameModel, framePropUCP);
+                        _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
+                        AddFrameUC(_frameModel, _framePropertiesUCPresenter);
                         _frameModel.Frame_UC = (UserControl)_frameUC;
-                        _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
+                        _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
@@ -7788,6 +7790,7 @@ namespace PresentationLayer.Presenter
                             AddFrameUC(_frameModel, framePropUCP);
 
                             _frameModel.Frame_UC = (UserControl)_frameUC;
+                            _frameModel.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
                             AddFrameList_WindoorModel(_frameModel);
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _basePlatformPresenter.InvalidateBasePlatform();
@@ -7864,7 +7867,8 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
-            _windoorModel.Fit_MyControls_ToBindDimensions();
+            if(_windoorModel.lst_objects.Count > 1)
+                _windoorModel.Fit_MyControls_ToBindDimensions();
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
@@ -7953,26 +7957,27 @@ namespace PresentationLayer.Presenter
                 //set mainview
                 _windoorModel = item;
 
-                _quotationModel.Select_Current_Windoor(_windoorModel);
+                _quotationModel.Select_Current_Windoor(item);
 
                 //clear
+              
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
-                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
+                _frmDimensionPresenter.SetValues(item.WD_width, item.WD_height);
 
                 //basePlatform
-                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
                 AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
                 _basePlatformPresenter.InvalidateBasePlatform();
 
-                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                 _mainView.GetThis().Controls.Add(bpUC);
-                foreach (Control wndr_objects in _windoorModel.lst_objects)
+                foreach (Control wndr_objects in item.lst_objects)
                 {
                     if (wndr_objects.Name.Contains("Frame"))
                     {
-                        foreach (IFrameModel frame in _windoorModel.lst_frame)
+                        foreach (IFrameModel frame in item.lst_frame)
                         {
                             if (wndr_objects.Name == frame.Frame_Name)
                             {
@@ -8003,7 +8008,7 @@ namespace PresentationLayer.Presenter
                 _mainView.RemoveBinding();
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                _windoorModel.SetZoom();
+                item.SetZoom();
                 GetCurrentPrice();
             }
             catch (Exception ex)
@@ -8011,8 +8016,6 @@ namespace PresentationLayer.Presenter
 
                 MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
             }
-
-
         }
 
         public void Set_pnlPropertiesBody_ScrollView(int scroll_value)
@@ -9411,6 +9414,7 @@ namespace PresentationLayer.Presenter
                             occupiedWidth = 0;
                             availableWidth = _windoorModel.WD_width;
                             availableHeight -= Maxheight;
+                            Maxheight = 0;
                         }
                         else
                         {
@@ -9446,6 +9450,7 @@ namespace PresentationLayer.Presenter
                             occupiedWidth = 0;
                             availableWidth = _windoorModel.WD_width;
                             availableHeight -= Maxheight;
+                            Maxheight = 0;
                         }
                         else
                         {

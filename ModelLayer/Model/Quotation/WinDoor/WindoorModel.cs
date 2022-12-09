@@ -882,13 +882,12 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 Maxheight = 0,
                 availableWidth = WD_width,
                 availableHeight = WD_height;
-            var startingObject = lst_objects[0];
-            startingObject = null;
             if (lst_objects.Count > 1)
             {
+                var startingObject = lst_objects[0];
+                startingObject = null;
                 foreach (var wndrObject in lst_objects)
                 {
-
                     foreach (IFrameModel frm in lst_frame)
                     {
                         if (wndrObject.Name == frm.Frame_Name)
@@ -899,7 +898,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                 {
                                     startingObject = wndrObject;
                                 }
-
                                 if (availableHeight >= frm.Frame_Height)
                                 {
                                     occupiedWidth += frm.Frame_Width;
@@ -934,7 +932,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                 availableWidth -= frm.Frame_Width;
                             }
                         }
-
                     }
                     foreach (IConcreteModel crtm in lst_concrete)
                     {
@@ -946,7 +943,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                 {
                                     startingObject = wndrObject;
                                 }
-
                                 if (availableHeight >= crtm.Concrete_Height)
                                 {
                                     occupiedWidth += crtm.Concrete_Width;
@@ -961,6 +957,10 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             }
                             else if (availableWidth == crtm.Concrete_Width)
                             {
+                                if (startingObject == null)
+                                {
+                                    startingObject = wndrObject;
+                                }
                                 Fit_MyObject_ToBindDimensions(startingObject, wndrObject);
                                 occupiedWidth += crtm.Concrete_Width;
                                 if (Maxheight < crtm.Concrete_Height)
@@ -1022,7 +1022,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
 
             int diff_BasePlatform_VS_MyCtrlsWidth = objectWidth - (WD_width_4basePlatform - 70);
-            WD_width_4basePlatform += diff_BasePlatform_VS_MyCtrlsWidth;
+            if(diff_BasePlatform_VS_MyCtrlsWidth > 0)
+                WD_width_4basePlatform += diff_BasePlatform_VS_MyCtrlsWidth;
             //while (diff_BasePlatform_VS_MyCtrlsWidth < 0)
             //{
             //    foreach (var wndrObject in lst_objects)

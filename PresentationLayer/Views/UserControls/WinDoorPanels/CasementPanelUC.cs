@@ -133,15 +133,23 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void CasementPanelUC_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+            try
             {
-                if (this.Parent.Name.Contains("Frame"))
-                    overlapSashToolStripMenuItem.Visible = false;
-                else
-                    overlapSashToolStripMenuItem.Visible = true;
-                cmenu_casement.Show(new Point(MousePosition.X, MousePosition.Y));
+                if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
+                {
+                    if (this.Parent.Name.Contains("Frame"))
+                        overlapSashToolStripMenuItem.Visible = false;
+                    else
+                        overlapSashToolStripMenuItem.Visible = true;
+                    cmenu_casement.Show(new Point(MousePosition.X, MousePosition.Y));
+                }
+                EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
             }
-            EventHelpers.RaiseMouseEvent(sender, casementPanelUCMouseClickEventRaised, e);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

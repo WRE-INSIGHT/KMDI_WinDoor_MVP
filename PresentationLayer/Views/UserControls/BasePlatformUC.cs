@@ -107,6 +107,9 @@ namespace PresentationLayer.Views.UserControls
             this.DataBindings.Clear();
         }
 
-       
+        private void BasePlatformUC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
