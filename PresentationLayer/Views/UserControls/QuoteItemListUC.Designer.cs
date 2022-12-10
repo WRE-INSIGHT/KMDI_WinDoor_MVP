@@ -318,13 +318,11 @@
         private System.Windows.Forms.TextBox tboxWindoorNumber;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.Label lblPrice;
-        private System.Windows.Forms.Label lblDiscount;
         private System.Windows.Forms.Label lblNetPrice;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pboxItemImage;
         private System.Windows.Forms.TextBox tboxItemName;
         private System.Windows.Forms.NumericUpDown NudItemQuantity;
-        private System.Windows.Forms.NumericUpDown NudItemDiscount;
         private System.Windows.Forms.NumericUpDown nudItemPrice;
         private System.Windows.Forms.PictureBox pboxTopView;
         private System.Windows.Forms.Panel panel3;
@@ -332,5 +330,7 @@
         private System.Windows.Forms.ContextMenuStrip CMS_Items;
         private System.Windows.Forms.ToolStripMenuItem suggestedPriceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setAllDiscountToolStripMenuItem;
+        public System.Windows.Forms.Label lblDiscount;
+        public System.Windows.Forms.NumericUpDown NudItemDiscount;
     }
 }

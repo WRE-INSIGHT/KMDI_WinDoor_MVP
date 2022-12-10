@@ -12,5 +12,6 @@ namespace PresentationLayer.Views
 
         Panel GetPnlPrintBody();
         void showQuoteItemList();
+        void closeQuoteItemList();
     }
 }

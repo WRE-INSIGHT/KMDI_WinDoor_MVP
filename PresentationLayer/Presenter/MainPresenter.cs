@@ -9032,25 +9032,7 @@ namespace PresentationLayer.Presenter
             _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
 
-        #region Variables for description
-        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
-        private List<int> _lstItemArea = new List<int>();
-        private List<string> lst_glassThickness = new List<string>();
-        private List<string> lst_glassThicknessPerItem = new List<string>();
-        private List<string> lst_glassFilm = new List<string>();
-        private List<string> lst_Description = new List<string>();
-        private List<string> lst_DuplicatePnl = new List<string>();
 
-        int GeorgianBarVerticalQty = 0,
-            GeorgianBarHorizontalQty = 0;
-
-        string FrameTypeDesc,
-               AllItemDescription,
-               motorizeDesc,
-               NewNoneDuplicatePnlAndCount,
-               lst_DescDist,
-               glassThick;
-        #endregion
         private List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
         {
             List<IMultiPanelModel> lst_MPanel = new List<IMultiPanelModel>();
@@ -9074,6 +9056,28 @@ namespace PresentationLayer.Presenter
             }
             return lst_MPanel;
         }
+
+        #region Variables for description
+        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+        private List<int> _lstItemArea = new List<int>();
+        private List<string> lst_glassThickness = new List<string>();
+        private List<string> lst_glassThicknessPerItem = new List<string>();
+        private List<string> lst_glassFilm = new List<string>();
+        private List<string> lst_Description = new List<string>();
+        private List<string> lst_DuplicatePnl = new List<string>();
+
+        int GeorgianBarVerticalQty = 0,
+            GeorgianBarHorizontalQty = 0;
+        
+        string FrameTypeDesc,
+               AllItemDescription,
+               motorizeDesc,
+               NewNoneDuplicatePnlAndCount,
+               lst_DescDist,
+               glassThick,
+            GeorgianBarHorizontalDesc,
+             GeorgianBarVerticalDesc;
+        #endregion
         public void itemDescription()
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
@@ -9270,7 +9274,6 @@ namespace PresentationLayer.Presenter
                                 {
                                     GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
-
                                 }
 
                             }
@@ -9349,19 +9352,35 @@ namespace PresentationLayer.Presenter
                         {
                             glassThick += lst_glassThicknessDistinct[i];
                         }
-                        lst_glassThicknessPerItem.Add(glassThick);
+                        wdm.WD_description += glassThick;
+                        //lst_glassThicknessPerItem.Add(glassThick);
                     }
-                    glassThick = string.Empty;
+
+                    if (GeorgianBarHorizontalQty > 0)
+                    {
+                        GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                    }
+
+                    if (GeorgianBarVerticalQty > 0)
+                    {
+                        GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                    }
+
+                    wdm.WD_description += GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
+
+                   glassThick = string.Empty;
                     lst_glassThickness.Clear();
                 }
+                GeorgianBarVerticalDesc = "";
+                GeorgianBarHorizontalDesc = "";
+                GeorgianBarHorizontalQty = 0;
+                GeorgianBarVerticalQty = 0;
             }
 
         }
 
         public void GetCurrentPrice()
         {
-            //_quotationModel.Select_Current_Windoor(_windoorModel);
-
             Run_GetListOfMaterials_SpecificItem();
 
             if (qoutationModel_MainPresenter.itemSelectStatus == true)

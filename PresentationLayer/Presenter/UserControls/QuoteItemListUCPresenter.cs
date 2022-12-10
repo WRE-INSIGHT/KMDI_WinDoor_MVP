@@ -95,8 +95,21 @@ namespace PresentationLayer.Presenter.UserControls
                     if (int_input > 0)
                     {
                         //_windoorModel.setDiscount = "SetAllDiscount";
+                        //_quoteItemListPresenter.SetAllItemDiscount(int_input);
+
+                        foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                        {
+                            wdm.WD_discount = int_input;
+                        }
+
+                        // _quoteItemListPresenter .GetQuoteItemListView().closeQuoteItemList();
                         _quoteItemListPresenter = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel, _mainPresenter);
-                        _quoteItemListPresenter.SetAllItemDiscount(int_input);
+                        //   _quoteItemListPresenter.GetQuoteItemListView().showQuoteItemList();
+
+                        //_nudItemPrice.Maximum = decimal.MaxValue;
+
+                        //_quoteItemListPresenter.refreshItemList(sender, e);
+
                         //foreach (IQuoteItemListUCPresenter item in _quoteItemListPresenter._lstQuoteItemUC)
                         //{ 
                         //    item.GetiQuoteItemListUC().itemDiscount.Value = int_input;
@@ -265,21 +278,21 @@ namespace PresentationLayer.Presenter.UserControls
             //}
             //else
             //{
-                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                string itemNum = _quoteItemListUC.ItemNumber;
+                itemNum = itemNum.Replace("Item ", string.Empty);
+
+                if (itemNum != "Item")
                 {
-                    string itemNum = _quoteItemListUC.ItemNumber;
-                    itemNum = itemNum.Replace("Item ", string.Empty);
-
-                    if (itemNum != "Item")
+                    if (wdm.WD_id == Convert.ToInt32(itemNum))
                     {
-                        if (wdm.WD_id == Convert.ToInt32(itemNum))
-                        {
-                            wdm.WD_discount = (int)((NumericUpDown)sender).Value;
+                        wdm.WD_discount = (int)((NumericUpDown)sender).Value;
 
-                            _lblDiscount.Text = wdm.WD_discount.ToString() + "%";
-                        }
+                        _lblDiscount.Text = wdm.WD_discount.ToString() + "%";
                     }
                 }
+            }
             //}
             //_windoorModel.setDiscount = "";
         }
@@ -323,7 +336,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC,
                                                         IWindoorModel windoorModel,
-                                                        IQuotationModel quotationModel)
+                                                        IQuotationModel quotationModel,
+                                                        IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IQuoteItemListUCPresenter, QuoteItemListUCPresenter>()
@@ -332,6 +346,7 @@ namespace PresentationLayer.Presenter.UserControls
             quoteItem._unityC = unityC;
             quoteItem._windoorModel = windoorModel;
             quoteItem._quotationModel = quotationModel;
+            quoteItem._mainPresenter = mainPresenter;
             //quoteItem._quoteItemListPresenter = quoteItemListPresenter;
 
             return quoteItem;

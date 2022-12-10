@@ -650,7 +650,7 @@ namespace PresentationLayer.Presenter.UserControls
                 //glassProp.Height = 30;
 
 
-                IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel);
+                IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl gbarProp = (UserControl)gbarPropUCP.GetPPGeorgianBarPropertyUC();
                 _pnlPanelSpecs.Controls.Add(gbarProp);
                 gbarProp.Dock = DockStyle.Top;

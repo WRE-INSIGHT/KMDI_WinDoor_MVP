@@ -2,7 +2,7 @@
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
-using System.Collections.Generic;
+using System;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -16,6 +16,7 @@ namespace PresentationLayer.Presenter
                                                IWindoorModel windoorModel,
                                                IMainPresenter mainPresenter);
         void SetAllItemDiscount(int inputedDiscount);
+        void refreshItemList(object sender, EventArgs e);
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }
 }

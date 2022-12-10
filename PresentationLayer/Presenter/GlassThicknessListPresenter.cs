@@ -73,6 +73,7 @@ namespace PresentationLayer.Presenter
 
                     _glassThicknessListView.CloseThisDialog();
                     _mainPresenter.GetCurrentPrice();
+                    _mainPresenter.itemDescription();
                 }
                 else
                 {

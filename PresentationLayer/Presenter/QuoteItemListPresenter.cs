@@ -34,13 +34,12 @@ namespace PresentationLayer.Presenter
         #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
-        private List<string> lst_glassThicknessPerItem = new List<string>();
+        //private List<string> lst_glassThicknessPerItem = new List<string>();
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
 
-        string glass,
-               GeorgianBarHorizontalDesc,
+        string GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                DimensionDesc;
         #endregion
@@ -89,7 +88,7 @@ namespace PresentationLayer.Presenter
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
-                    
+
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
@@ -145,31 +144,31 @@ namespace PresentationLayer.Presenter
                 _quotationModel.BOM_Status = false;
                 for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
+                    _quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel, _mainPresenter);
                     UserControl quoteItem = (UserControl)_quoteItemListUCPresenter.GetiQuoteItemListUC();
                     _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
                     quoteItem.Dock = DockStyle.Top;
                     quoteItem.BringToFront();
 
-                    // _mainPresenter.itemDescription();
+                    //_mainPresenter.itemDescription();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     //_quotationModel.ItemCostingPriceAndPoints();
 
-                    if (GeorgianBarHorizontalQty > 0)
-                    {
-                        GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
-                    }
+                    //if (GeorgianBarHorizontalQty > 0)
+                    //{
+                    //    GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                    //}
 
-                    if (GeorgianBarVerticalQty > 0)
-                    {
-                        GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
-                    }
+                    //if (GeorgianBarVerticalQty > 0)
+                    //{
+                    //    GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                    //}
 
                     IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-                    if (lst_glassThicknessPerItem.Count != 0)
-                    {
-                        glass = lst_glassThicknessPerItem[i];
-                    }
+                    //if (_mainPresenter.lst_glassThicknessPerItem.Count != 0)
+                    //{
+                    //    glass = _mainPresenter.lst_glassThicknessPerItem[i];
+                    //}
 
                     DimensionDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n";
                     if (wdm.WD_description.Contains(DimensionDesc))
@@ -186,14 +185,10 @@ namespace PresentationLayer.Presenter
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDesc = DimensionDesc
                                                                               + wdm.WD_description
-                                                                              + glass + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
+                                                                              + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
-
-                    //_quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(_quotationModel.lstTotalPrice[i], 2);  //TotaPrice;
-                    //_quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(_quotationModel.lstTotalPrice[i], 2).ToString();  //TotaPrice.ToString();
-
 
                     if (wdm.WD_price == 0)
                     {
@@ -214,6 +209,8 @@ namespace PresentationLayer.Presenter
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
+
+
                 }
             }
             catch (Exception ex)
@@ -225,29 +222,19 @@ namespace PresentationLayer.Presenter
 
         public void SetAllItemDiscount(int inputedDiscount)
         {
-
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                wdm.WD_discount = inputedDiscount; 
-            } 
-
-            foreach (IQuoteItemListUCPresenter itemUC in this._lstQuoteItemUC)
-            {
-                //_quoteItemListUCPresenter = _quoteItemListUCPresenter.GetNewInstance(_unityC, _windoorModel, _quotationModel);
-                itemUC.GetNewInstance(_unityC, _windoorModel, _quotationModel);
-                itemUC.GetiQuoteItemListUC().itemDiscount.Value = inputedDiscount;
-                itemUC.GetiQuoteItemListUC().GetLblDiscount().Text = inputedDiscount.ToString() + "%";
-                UserControl quoteItem = (UserControl)itemUC.GetiQuoteItemListUC();
-                quoteItem.Refresh();
-                quoteItem.Invalidate();
+                wdm.WD_discount = inputedDiscount;
             }
+        }
+
+        public void refreshItemList(object sender, EventArgs e)
+        {
+            _quoteItemListView_QuoteItemListViewLoadEventRaised(sender, e);
         }
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
         {
-            //Console.WriteLine("item" + _windoorModel.WD_itemName);
-            //Console.WriteLine("windoor" +_windoorModel.WD_WindoorNumber);
-
             DSQuotation _dsq = new DSQuotation();
 
             /*
