@@ -221,10 +221,9 @@ namespace PresentationLayer.Presenter
                             }
                         }
 
-                        _glassThicknessListView.CloseThisDialog();
-                        _mainPresenter.GetCurrentPrice();
-                    }                    
-  #endregion                   
+                    _glassThicknessListView.CloseThisDialog();
+                    _mainPresenter.GetCurrentPrice();
+                    _mainPresenter.itemDescription();
                 }
                 else
                 {

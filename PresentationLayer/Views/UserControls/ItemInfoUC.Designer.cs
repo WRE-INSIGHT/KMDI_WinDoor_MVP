@@ -30,10 +30,10 @@
         {
             this.lbl_item = new System.Windows.Forms.Label();
             this.pnl_itmbot_ = new System.Windows.Forms.Panel();
-            this.lbl_desc = new System.Windows.Forms.Label();
             this.lbl_dimension = new System.Windows.Forms.Label();
             this.pbox_itemImage = new System.Windows.Forms.PictureBox();
             this.pboxSlidingTopView = new System.Windows.Forms.PictureBox();
+            this.lbl_desc = new System.Windows.Forms.RichTextBox();
             this.pnl_itmbot_.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxSlidingTopView)).BeginInit();
@@ -75,19 +75,6 @@
             this.pnl_itmbot_.Size = new System.Drawing.Size(166, 133);
             this.pnl_itmbot_.TabIndex = 5;
             // 
-            // lbl_desc
-            // 
-            this.lbl_desc.AutoEllipsis = true;
-            this.lbl_desc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_desc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_desc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_desc.Location = new System.Drawing.Point(2, 25);
-            this.lbl_desc.Name = "lbl_desc";
-            this.lbl_desc.Size = new System.Drawing.Size(162, 106);
-            this.lbl_desc.TabIndex = 1;
-            this.lbl_desc.Text = "lbldesc_";
-            this.lbl_desc.UseMnemonic = false;
-            // 
             // lbl_dimension
             // 
             this.lbl_dimension.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -120,6 +107,17 @@
             this.pboxSlidingTopView.TabIndex = 10;
             this.pboxSlidingTopView.TabStop = false;
             // 
+            // lbl_desc
+            // 
+            this.lbl_desc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_desc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_desc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_desc.Location = new System.Drawing.Point(2, 25);
+            this.lbl_desc.Name = "lbl_desc";
+            this.lbl_desc.Size = new System.Drawing.Size(162, 106);
+            this.lbl_desc.TabIndex = 1;
+            this.lbl_desc.Text = "";
+            // 
             // ItemInfoUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,9 +141,9 @@
         #endregion
         public System.Windows.Forms.Label lbl_item;
         private System.Windows.Forms.Panel pnl_itmbot_;
-        public System.Windows.Forms.Label lbl_desc;
         public System.Windows.Forms.Label lbl_dimension;
         public System.Windows.Forms.PictureBox pbox_itemImage;
         public System.Windows.Forms.PictureBox pboxSlidingTopView;
+        public System.Windows.Forms.RichTextBox lbl_desc;
     }
 }

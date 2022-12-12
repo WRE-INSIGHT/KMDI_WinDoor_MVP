@@ -22,6 +22,11 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
+
+        public void closeQuoteItemList()
+        {
+            this.Close();
+        }
         private void QuoteItemListView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, QuoteItemListViewLoadEventRaised, e);

@@ -18,6 +18,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
 
         public event EventHandler PPAliminumTrackPropertyUCLoadEventRaised;
+        public event EventHandler AluminumTrackQtyValueChangedEventRaised;
+
 
         private void PP_AliminumTrackPropertyUC_Load(object sender, EventArgs e)
         {
@@ -25,10 +27,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             EventHelpers.RaiseEvent(sender, PPAliminumTrackPropertyUCLoadEventRaised, e);
         }
 
+
+        private void nud_AluminumTrackQty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, AluminumTrackQtyValueChangedEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             nud_AluminumTrackQty.DataBindings.Add(ModelBinding["Panel_AluminumTrackQty"]);
             this.DataBindings.Add(ModelBinding["Panel_AluminumTrackQtyVisibility"]);
         }
+
     }
 }

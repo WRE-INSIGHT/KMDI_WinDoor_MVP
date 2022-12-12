@@ -617,6 +617,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         }
 
+        public string setDiscount { get; set; }
+
         #region Methods
 
         public void SetDimensions_basePlatform()
