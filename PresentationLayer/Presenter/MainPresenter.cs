@@ -2607,8 +2607,7 @@ namespace PresentationLayer.Presenter
                     wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
-                Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
-                GetCurrentPrice();
+                Load_Windoor_Item(_windoorModel);
             }
             switch (inside_quotation)
             {
@@ -7999,27 +7998,27 @@ namespace PresentationLayer.Presenter
                 //set mainview
                 _windoorModel = item;
 
-                _quotationModel.Select_Current_Windoor(item);
+                _quotationModel.Select_Current_Windoor(_windoorModel);
 
                 //clear
               
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
-                _frmDimensionPresenter.SetValues(item.WD_width, item.WD_height);
+                _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
 
                 //basePlatform
-                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, item, this);
+                _basePlatformPresenter = _basePlatformPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 AddBasePlatform(_basePlatformPresenter.getBasePlatformViewUC());
                 _basePlatformPresenter.InvalidateBasePlatform();
 
-                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, item, this);
+                _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                 _mainView.GetThis().Controls.Add(bpUC);
-                foreach (Control wndr_objects in item.lst_objects)
+                foreach (Control wndr_objects in _windoorModel.lst_objects)
                 {
                     if (wndr_objects.Name.Contains("Frame"))
                     {
-                        foreach (IFrameModel frame in item.lst_frame)
+                        foreach (IFrameModel frame in _windoorModel.lst_frame)
                         {
                             if (wndr_objects.Name == frame.Frame_Name)
                             {
@@ -8031,7 +8030,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (wndr_objects.Name.Contains("Concrete"))
                     {
-                        foreach (IConcreteModel concrete in item.lst_concrete)
+                        foreach (IConcreteModel concrete in _windoorModel.lst_concrete)
                         {
                             if (wndr_objects.Name == concrete.Concrete_Name)
                             {
@@ -8050,7 +8049,7 @@ namespace PresentationLayer.Presenter
                 _mainView.RemoveBinding();
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                item.SetZoom();
+                _windoorModel.SetZoom();
                 GetCurrentPrice();
             }
             catch (Exception ex)
