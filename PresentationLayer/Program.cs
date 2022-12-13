@@ -404,6 +404,9 @@ namespace PresentationLayer
                 .RegisterType<ISP_6052MilledProfilePropertyUC, SP_6052MilledProfilePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_6052MilledProfilePropertyUCPresenter, SP_6052MilledProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_SpringLoadedUC,SP_SpringLoadedUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_SpringLoadedUCPresenter,SP_SpringLoadedUCPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 

@@ -77,7 +77,6 @@ namespace PresentationLayer.Views
     
         private void setGlssThckNssDGV_MouseDown(object sender, MouseEventArgs e)
         {
-            
                 if (e.Button == MouseButtons.Right)
                 {
                     ContextMenu m = new ContextMenu();
@@ -85,7 +84,6 @@ namespace PresentationLayer.Views
                     m.Show(setGlssThckNssDGV, new Point(e.X, e.Y));
                     _glasstype = cmb_GlassType.SelectedItem.ToString();                                                    
                 }
-
         }
 
       

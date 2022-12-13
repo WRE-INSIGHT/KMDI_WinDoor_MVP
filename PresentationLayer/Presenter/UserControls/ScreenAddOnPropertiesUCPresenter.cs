@@ -17,15 +17,20 @@ namespace PresentationLayer.Presenter.UserControls
 
         private ISP_PVCboxPropertyUCPresenter _sp_pVCboxPropertyUCPresenter;
         private ISP_CenterClosurePropertyUCPresenter _sp_CenterClosurePropertyUCPresenter;
+        private ISP_SpringLoadedUCPresenter _sp_SpringLoadedPresenter;
 
         Panel _pnlAddOns;
+       
+      
         public ScreenAddOnPropertiesUCPresenter(IScreenAddOnPropertiesUC sp_screenAddOnPropertiesUC,
                                                 ISP_PVCboxPropertyUCPresenter sp_pVCboxPropertyUCPresenter,
-                                                ISP_CenterClosurePropertyUCPresenter sp_CenterClosurePropertyUCPresenter)
+                                                ISP_CenterClosurePropertyUCPresenter sp_CenterClosurePropertyUCPresenter,
+                                                ISP_SpringLoadedUCPresenter sp_springLoadedPresenter)
         {
             _screenAddOnPropertiesUC = sp_screenAddOnPropertiesUC;
             _sp_pVCboxPropertyUCPresenter = sp_pVCboxPropertyUCPresenter;
             _sp_CenterClosurePropertyUCPresenter = sp_CenterClosurePropertyUCPresenter;
+            _sp_SpringLoadedPresenter = sp_springLoadedPresenter;
 
             _pnlAddOns = _screenAddOnPropertiesUC.GetPanelAddOns();
             SubcribeToEventSetUp();
@@ -46,6 +51,12 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _sp_screenAddOnPropertiesUC_ScreenAddOnPropertiesUCLoadEventRaised(object sender, EventArgs e)
         {
+            ISP_SpringLoadedUCPresenter springloadedUCP = _sp_SpringLoadedPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
+            UserControl springloadedUC = (UserControl)springloadedUCP.GetspringloadedUC();
+            _pnlAddOns.Controls.Add(springloadedUC);
+            springloadedUC.Dock = DockStyle.Top;
+            springloadedUC.BringToFront();
+
             _screenModel.Screen_PVCVisibility = true;
             ISP_PVCboxPropertyUCPresenter pvcBoxPropUCP = _sp_pVCboxPropertyUCPresenter.CreatenewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl pvcBoxProp = (UserControl)pvcBoxPropUCP.GetPVCboxPropertyUC();
@@ -60,7 +71,13 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlAddOns.Controls.Add(centerClosureProp);
             centerClosureProp.Dock = DockStyle.Top;
             centerClosureProp.BringToFront();
+
+            
+           
+
+
         }
+
 
         #endregion
 

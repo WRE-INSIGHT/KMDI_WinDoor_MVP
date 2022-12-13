@@ -195,6 +195,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_SpringLoadedUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_1385MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_373or374MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6040MilledProfileWithReinforcementPropertyUCPresenter.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_SpringLoadedUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\SortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_AliminumTrackPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_DHandlePropertyUCPresenter.cs" />
@@ -918,6 +920,7 @@
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCbox1067WithReinPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_SpringLoadedUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_1385MilledProfilePropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -977,6 +980,12 @@
     </Compile>
     <Compile Include="Views\UserControls\QuoteItemListUC.Designer.cs">
       <DependentUpon>QuoteItemListUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_SpringLoadedUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_SpringLoadedUC.Designer.cs">
+      <DependentUpon>SP_SpringLoadedUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\WinDoorPanels\AwningPanelUC.cs">
       <SubType>UserControl</SubType>
@@ -1431,6 +1440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\QuoteItemListUC.resx">
       <DependentUpon>QuoteItemListUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_SpringLoadedUC.resx">
+      <DependentUpon>SP_SpringLoadedUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\WinDoorPanels\AwningPanelUC.resx">
       <DependentUpon>AwningPanelUC.cs</DependentUpon>

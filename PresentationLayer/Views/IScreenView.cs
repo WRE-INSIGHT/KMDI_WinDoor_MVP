@@ -24,6 +24,7 @@ namespace PresentationLayer.Views
         event EventHandler txtwindoorIDTextChangedEventRaised;
         event EventHandler tsBtnExchangeRateClickEventRaised;
         event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
+        event EventHandler deleteToolStripMenuClickEventRaised;
 
         void ShowScreemView();
 
