@@ -70,6 +70,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler multiMullionSizeChangedEventRaised;
         public event EventHandler dividerEnabledCheckedChangedEventRaised;
         public event DragEventHandler flpMultiDragOverEventRaised;
+        public event MouseEventHandler multiMullionUCMouseClickEventRaised;
 
         private void flp_Multi_Paint(object sender, PaintEventArgs e)
         {
@@ -165,7 +166,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         }
         private void flp_MultiMullion_MouseClick(object sender, MouseEventArgs e)
         {
-       
+            EventHelpers.RaiseMouseEvent(sender, multiMullionUCMouseClickEventRaised, e);
         }
 
        
@@ -174,5 +175,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             return flp_MultiMullion;
         }
+
     }
 }

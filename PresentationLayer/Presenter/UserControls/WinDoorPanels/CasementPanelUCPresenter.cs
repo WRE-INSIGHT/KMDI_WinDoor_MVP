@@ -685,7 +685,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         if (pnl.Panel_Name == casementUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
                                             return;
                                         }
                                     }
@@ -705,7 +705,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                     {
                                                         if (pnl.Panel_Name == casementUC.Name)
                                                         {
-                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                             return;
                                                         }
                                                         else
@@ -751,7 +751,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     {
                                                                         if (pnl.Panel_Name == casementUC.Name)
                                                                         {
-                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                             return;
 
                                                                         }
@@ -788,9 +788,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                             {
                                                                                 if (fourthlvlctrl.Name == pnl.Panel_Name)
                                                                                 {
-                                                                                    if(pnl.Panel_Name == casementUC.Name)
+                                                                                    if (pnl.Panel_Name == casementUC.Name)
                                                                                     {
-                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                         return;
 
                                                                                     }
@@ -816,7 +816,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     }
                                                                 }
                                                             }
-                                                            mpnlPropertyHeight -= 1;
+                                                            //mpnlPropertyHeight -= 1;
 
                                                         }
                                                     }
@@ -827,15 +827,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     #endregion
                                     propertyHeight += frm.Frame_PropertiesUC.Height;
-                                    //propertyHeight += frm.FrameProp_Height;
                                     framePropertyHeight = 0;
                                     mpnlPropertyHeight = 0;
                                     pnlPropertyHeight = 0;
                                     divPropertyHeight = 0;
                                 }
-                                
+
                             }
-                            
+
                             #endregion
                         }
                         else
@@ -846,210 +845,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 if (wndrObject.Name == crm.Concrete_Name)
                                 {
-                                    concretePropertyHeight += crm.Concrete_PropertiesUC.Height;
+                                    concretePropertyHeight += constants.concrete_propertyHeight_default;
                                     break;
                                 }
                             }
                             #endregion
                         }
 
-                       
+
                     }
-
-
-                    //foreach (Control wndr_objects in wdm.lst_objects)
-                    //{
-                    //    if (isTrue == false)
-                    //    {
-                    //        if (wndr_objects.Name.Contains("Frame"))
-                    //        {
-
-                    //            foreach (IFrameModel fr in wdm.lst_frame)
-                    //            {
-                    //                if (wndr_objects.Name == fr.Frame_Name)
-                    //                {
-                    //                    foreach (IMultiPanelModel secondLvlMpnl in fr.Lst_MultiPanel) //2ndlvlMpnlProperties
-                    //                    {
-                    //                        foreach (IMultiPanelModel thirdLvlMpnl in secondLvlMpnl.MPanelLst_MultiPanel) // 3rdlvlMpnlProperties
-                    //                        {
-                    //                            mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
-                    //                            foreach (IMultiPanelModel fourthLvlMpnl in thirdLvlMpnl.MPanelLst_MultiPanel) // 4rthlvlMpnlProperties
-                    //                            {
-                    //                                mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
-                    //                                if (fourthLvlMpnl.MPanel_DividerEnabled)
-                    //                                {
-                    //                                    foreach (IPanelModel pnl in fourthLvlMpnl.MPanelLst_Panel)
-                    //                                    {
-                    //                                        if (pnl.Panel_Name == casementUC.Name)
-                    //                                        {
-                    //                                            propertyHeight += constants.mpnl_propertyHeight_default - 8 + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
-                    //                                            wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                            isTrue = true;
-                    //                                            break;
-                    //                                        }
-                    //                                        else
-                    //                                        {
-                    //                                            foreach (IDividerModel dvd in fourthLvlMpnl.MPanelLst_Divider)
-                    //                                            {
-                    //                                                propertyHeight += dvd.Div_PropHeight;
-                    //                                                break;
-                    //                                            }
-                    //                                            propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                        }
-                    //                                    }
-                    //                                }
-                    //                                else
-                    //                                {
-                    //                                    foreach (IPanelModel pnl in fourthLvlMpnl.MPanelLst_Panel)
-                    //                                    {
-                    //                                        if (pnl.Panel_Name == casementUC.Name)
-                    //                                        {
-                    //                                            propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
-                    //                                            wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                            isTrue = true;
-                    //                                            break;
-                    //                                        }
-                    //                                        else
-                    //                                        {
-                    //                                            propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                        }
-                    //                                    }
-                    //                                }
-                    //                                if (isTrue == true)
-                    //                                {
-                    //                                    break;
-                    //                                }
-                    //                                propertyHeight -= 1;
-                    //                            }
-                    //                            if (thirdLvlMpnl.MPanel_DividerEnabled)
-                    //                            {
-                    //                                foreach (IPanelModel pnl in thirdLvlMpnl.MPanelLst_Panel)
-                    //                                {
-                    //                                    if (pnl.Panel_Name == casementUC.Name)
-                    //                                    {
-                    //                                        propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
-                    //                                        wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                        isTrue = true;
-                    //                                        break;
-                    //                                    }
-                    //                                    else
-                    //                                    {
-                    //                                        foreach (IDividerModel dvd in thirdLvlMpnl.MPanelLst_Divider)
-                    //                                        {
-                    //                                            propertyHeight += dvd.Div_PropHeight;
-                    //                                            break;
-                    //                                        }
-                    //                                        propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                    }
-                    //                                }
-                    //                            }
-                    //                            else
-                    //                            {
-                    //                                foreach (IPanelModel pnl in thirdLvlMpnl.MPanelLst_Panel)
-                    //                                {
-                    //                                    if (pnl.Panel_Name == casementUC.Name)
-                    //                                    {
-                    //                                        propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + mpnlPropertyHeight + concretePropertyHeight;
-                    //                                        wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                        isTrue = true;
-                    //                                        break;
-                    //                                    }
-                    //                                    else
-                    //                                    {
-                    //                                        propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                    }
-                    //                                }
-                    //                            }
-                    //                            if (isTrue == true)
-                    //                            {
-                    //                                break;
-                    //                            }
-                    //                            propertyHeight -= 4;
-                    //                        }
-                    //                        if (secondLvlMpnl.MPanel_DividerEnabled)
-                    //                        {
-                    //                            foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
-                    //                            {
-                    //                                if (pnl.Panel_Name == casementUC.Name)
-                    //                                {
-
-                    //                                    propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
-                    //                                    wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                    isTrue = true;
-                    //                                    break;
-                    //                                }
-                    //                                else
-                    //                                {
-                    //                                    foreach (IDividerModel dvd in secondLvlMpnl.MPanelLst_Divider)
-                    //                                    {
-                    //                                        propertyHeight += dvd.Div_PropHeight;
-                    //                                        break;
-                    //                                    }
-                    //                                    propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                        else
-                    //                        {
-                    //                            foreach (IPanelModel pnl in secondLvlMpnl.MPanelLst_Panel)
-                    //                            {
-                    //                                if (pnl.Panel_Name == casementUC.Name)
-                    //                                {
-                    //                                    propertyHeight += constants.mpnl_propertyHeight_default + constants.frame_propertyHeight_default + framePropertyHeight + concretePropertyHeight;
-                    //                                    wdm.WD_PropertiesScroll = propertyHeight;
-                    //                                    isTrue = true;
-                    //                                    break;
-                    //                                }
-                    //                                else
-                    //                                {
-                    //                                    propertyHeight += pnl.Panel_PropertyHeight;
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                        if (isTrue == true)
-                    //                        {
-                    //                            break;
-                    //                        }
-                    //                    }
-                    //                    foreach (IPanelModel pnl in fr.Lst_Panel)
-                    //                    {
-                    //                        if (pnl.Panel_Name == casementUC.Name)
-                    //                        {
-                    //                            propertyHeight += constants.frame_propertyHeight_default - 4 + framePropertyHeight + concretePropertyHeight;
-                    //                            wdm.WD_PropertiesScroll = propertyHeight;
-                    //                            isTrue = true;
-                    //                            break;
-                    //                        }
-                    //                        else
-                    //                        {
-                    //                            propertyHeight += pnl.Panel_PropertyHeight;
-                    //                        }
-                    //                    }
-
-                    //                    propertyHeight = 0;
-                    //                    mpnlPropertyHeight = 0;
-                    //                    framePropertyHeight += fr.FrameProp_Height;
-                    //                    framePropertyHeight -= 8;
-                    //                    break;
-                    //                }
-                    //            }
-                    //        }
-                    //        else if (wndr_objects.Name.Contains("Concrete"))
-                    //        {
-                    //            foreach (IConcreteModel cr in wdm.lst_concrete)
-                    //            {
-                    //                if (wndr_objects.Name == cr.Concrete_Name)
-                    //                {
-                    //                    concretePropertyHeight += 113;
-                    //                }
-                    //            }
-                    //        }
-                    //        if (isTrue == true)
-                    //        {
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
                 catch (Exception)
                 {

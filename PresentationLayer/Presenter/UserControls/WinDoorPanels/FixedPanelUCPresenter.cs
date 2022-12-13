@@ -132,7 +132,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         if (pnl.Panel_Name == fixedUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
                                             return;
                                         }
                                     }
@@ -152,7 +152,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                     {
                                                         if (pnl.Panel_Name == fixedUC.Name)
                                                         {
-                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                             return;
                                                         }
                                                         else
@@ -198,7 +198,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     {
                                                                         if (pnl.Panel_Name == fixedUC.Name)
                                                                         {
-                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                             return;
 
                                                                         }
@@ -237,7 +237,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                 {
                                                                                     if (pnl.Panel_Name == fixedUC.Name)
                                                                                     {
-                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                         return;
 
                                                                                     }
@@ -263,7 +263,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     }
                                                                 }
                                                             }
-                                                            mpnlPropertyHeight -= 1;
+                                                            //mpnlPropertyHeight -= 1;
 
                                                         }
                                                     }
@@ -292,7 +292,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 if (wndrObject.Name == crm.Concrete_Name)
                                 {
-                                    concretePropertyHeight += crm.Concrete_PropertiesUC.Height;
+                                    concretePropertyHeight += constants.concrete_propertyHeight_default;
                                     break;
                                 }
                             }

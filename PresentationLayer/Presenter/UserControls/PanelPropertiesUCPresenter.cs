@@ -91,6 +91,8 @@ namespace PresentationLayer.Presenter.UserControls
         bool chkOrient_state, adjust_bool;
         private void _panelPropertiesUC_ChkOrientationCheckChangedEventRaised(object sender, EventArgs e)
         {
+
+            MessageBox.Show(((UserControl)_panelPropertiesUC).Parent.Name);
             CheckBox chk = (CheckBox)sender;
 
             _panelModel.Panel_Orient = chk.Checked;

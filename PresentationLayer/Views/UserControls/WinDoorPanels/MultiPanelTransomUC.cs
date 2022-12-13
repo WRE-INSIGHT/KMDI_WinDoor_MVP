@@ -72,6 +72,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler multiMullionSizeChangedEventRaised;
         public event EventHandler dividerEnabledCheckedChangedEventRaised;
         public event DragEventHandler flpMultiDragOverEventRaised;
+        public event MouseEventHandler multiTransomUCMouseClickEventRaised;
 
         public void InvalidateFlp()
         {
@@ -169,7 +170,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         private void flp_MultiTransom_MouseClick(object sender, MouseEventArgs e)
         {
-          
+            EventHelpers.RaiseMouseEvent(sender, multiTransomUCMouseClickEventRaised, e);
         }
 
         public FlowLayoutPanel Getflp()

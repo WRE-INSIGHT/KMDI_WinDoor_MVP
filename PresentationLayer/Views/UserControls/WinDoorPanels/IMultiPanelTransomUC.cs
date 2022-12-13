@@ -16,6 +16,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event EventHandler multiMullionSizeChangedEventRaised;
         event EventHandler dividerEnabledCheckedChangedEventRaised;
         event DragEventHandler flpMultiDragOverEventRaised;
+        event MouseEventHandler multiTransomUCMouseClickEventRaised;
         FlowLayoutPanel Getflp();
     }
 }

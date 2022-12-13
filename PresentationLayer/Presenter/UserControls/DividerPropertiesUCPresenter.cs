@@ -404,6 +404,8 @@ namespace PresentationLayer.Presenter.UserControls
         {
             if (!_initialLoad)
             {
+                MessageBox.Show(((UserControl)_divProperties).Parent.Name);
+
                 _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
             }
         }

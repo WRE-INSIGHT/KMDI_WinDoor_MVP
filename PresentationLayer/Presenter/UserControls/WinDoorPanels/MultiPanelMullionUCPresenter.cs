@@ -1,9 +1,12 @@
 ﻿using CommonComponents;
 using Microsoft.VisualBasic;
+using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
@@ -37,7 +40,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelModel _multiPanelModel;
         private IFrameModel _frameModel;
         private IDividerModel _prev_divModel;
-
+        private ConstantVariables constants = new ConstantVariables();
         private IMainPresenter _mainPresenter;
         private IFixedPanelUCPresenter _fixedUCP;
         private IFixedPanelImagerUCPresenter _fixedImagerUCP;
@@ -49,7 +52,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
         private ILouverPanelUCPresenter _louverPanelUCP;
-
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IDividerPropertiesUCPresenter _divPropertiesUCP;
         private IfrmDimensionPresenter _frmDimensionPresenter;
@@ -156,7 +158,148 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _multiPanelMullionUC.multiMullionSizeChangedEventRaised += _multiPanelMullionUC_multiMullionSizeChangedEventRaised;
             _multiPanelMullionUC.dividerEnabledCheckedChangedEventRaised += _multiPanelMullionUC_dividerEnabledCheckedChangedEventRaised;
             _multiPanelMullionUC.flpMultiDragOverEventRaised += _multiPanelMullionUC_flpMultiDragOverEventRaised;
+            _multiPanelMullionUC.multiMullionUCMouseClickEventRaised += _multiPanelMullionUC_multiMullionUCMouseClickEventRaised;
             _tmr.Tick += _tmr_Tick;
+        }
+        private FlowLayoutPanel multiMullionUC;
+        private void _multiPanelMullionUC_multiMullionUCMouseClickEventRaised(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                multiMullionUC = (FlowLayoutPanel)sender;
+                IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                int propertyHeight = 0;
+                int framePropertyHeight = 0;
+                int concretePropertyHeight = 0;
+                int mpnlPropertyHeight = 0;
+                int divPropertyHeight = 0;
+                foreach (Control wndrObject in wdm.lst_objects)
+                {
+                    if (wndrObject.Name.Contains("Frame"))
+                    {
+                        #region FrameModel
+                        foreach (FrameModel frm in wdm.lst_frame)
+                        {
+                            if (frm.Frame_Name == wndrObject.Name)
+                            {
+                                framePropertyHeight += constants.frame_propertyHeight_default;
+                                #region 2nd Level MultiPanel
+                                foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
+                                {
+                                    if (mpnl.MPanel_Name == multiMullionUC.Parent.Name)
+                                    {
+                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 5;
+                                        return;
+
+                                    }
+                                    else
+                                    {
+                                        mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                    }
+                                    foreach (Control ctrl in mpnl.MPanelLst_Objects)
+                                    {
+                                        if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
+                                        {
+                                            #region 2nd Level MultiPanel Divider
+                                            foreach (DividerModel div in mpnl.MPanelLst_Divider)
+                                            {
+                                                if (ctrl.Name == div.Div_Name)
+                                                {
+                                                    divPropertyHeight += div.Div_PropHeight;
+                                                    break;
+                                                }
+                                            }
+                                            #endregion
+
+                                        }
+                                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
+                                        {
+
+                                            #region 2nd Level MultiPanel MultiPanel
+
+                                            foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
+                                            {
+                                                if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
+                                                {
+
+                                                    if (thirdlvlmpnl.MPanel_Name == multiMullionUC.Parent.Name)
+                                                    {
+                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 11;
+                                                        return;
+
+                                                    }
+                                                    else
+                                                    {
+                                                        mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                                    }
+                                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
+                                                    {
+                                                        if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
+                                                        {
+
+                                                            foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
+                                                            {
+                                                                if (thirdlvlctrl.Name == div.Div_Name)
+                                                                {
+                                                                    divPropertyHeight += div.Div_PropHeight;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
+                                                        {
+                                                            if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
+                                                            {
+
+
+                                                                if (fourthlvlmpnl.MPanel_Name == multiMullionUC.Parent.Name)
+                                                                {
+                                                                    wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 19;
+                                                                    return;
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #endregion
+                                        }
+                                    }
+                                }
+                                #endregion
+                                propertyHeight += frm.Frame_PropertiesUC.Height;
+                                framePropertyHeight = 0;
+                                mpnlPropertyHeight = 0;
+                                divPropertyHeight = 0;
+                            }
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Concrete
+
+                        foreach (IConcreteModel crm in wdm.lst_concrete)
+                        {
+                            if (wndrObject.Name == crm.Concrete_Name)
+                            {
+                                concretePropertyHeight += constants.concrete_propertyHeight_default;
+                                break;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void _multiPanelMullionUC_flpMultiDragOverEventRaised(object sender, DragEventArgs e)
