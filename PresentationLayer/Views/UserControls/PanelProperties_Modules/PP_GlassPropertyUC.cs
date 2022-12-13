@@ -80,5 +80,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             chk_GlazingAdaptor.DataBindings.Add(ModelBinding["Panel_ChkGlazingAdaptor"]);
             this.DataBindings.Add(ModelBinding["Panel_GlassPropertyHeight"]);
         }
+
+        
     }
 }

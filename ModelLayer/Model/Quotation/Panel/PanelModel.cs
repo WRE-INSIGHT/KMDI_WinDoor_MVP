@@ -700,7 +700,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
-       #region Explosion
+        #region Explosion
         private int _panelGlassID;
         public int PanelGlass_ID
         {
@@ -2848,13 +2848,13 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             //if (PanelImageRenderer_Zoom == 1.0f || PanelImageRenderer_Zoom == 0.50f)
             //{
-                int padding_top = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Top,
-                    padding_bot = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Bottom,
-                    padding_left = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Left,
-                    padding_right = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Right;
+            int padding_top = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Top,
+                padding_bot = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Bottom,
+                padding_left = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Left,
+                padding_right = Panel_ParentFrameModel.FrameImageRenderer_Padding_int.Right;
 
-                PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding_left + padding_right);
-                PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding_top + padding_bot);
+            PanelImageRenderer_Width = Panel_ParentFrameModel.FrameImageRenderer_Width - (padding_left + padding_right);
+            PanelImageRenderer_Height = Panel_ParentFrameModel.FrameImageRenderer_Height - (padding_top + padding_bot);
             //}
             //else
             //{
@@ -3893,7 +3893,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         int mpnlOriginalWidth = Panel_ParentMultiPanelModel.MPanel_Width - 20;
                         int pnl_wd = Convert.ToInt32(Math.Floor((decimal)(Panel_ParentMultiPanelModel.MPanel_WidthToBind - (20 * Panel_Zoom)) * ((decimal)Panel_Width / mpnlOriginalWidth)));
                         Panel_WidthToBind = pnl_wd;
-                       
+
                     }
                     if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
                     {
@@ -4924,18 +4924,18 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
                     }
 
-                    if (Panel_SashHeight < 2400)
-                    {
-                        Panel_3dHingeQty = 3;
-                    }
-                    else if (Panel_SashHeight > 2399 && Panel_SashHeight < 2700)
-                    {
-                        Panel_3dHingeQty = 4;
-                    }
-                    else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
-                    {
-                        Panel_3dHingeQty = 5;
-                    }
+                    //if (Panel_SashHeight < 2400)
+                    //{
+                    //    Panel_3dHingeQty = 3;
+                    //}
+                    //else if (Panel_SashHeight > 2399 && Panel_SashHeight < 2700)
+                    //{
+                    //    Panel_3dHingeQty = 4;
+                    //}
+                    //else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
+                    //{
+                    //    Panel_3dHingeQty = 5;
+                    //}
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
@@ -5075,119 +5075,119 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
 
-                    if (Panel_SashHeight <= 1499)
-                    {
-                        Panel_2DHingeQty_nonMotorized = 3;
-                    }
-                    else if (Panel_SashHeight >= 1500)
-                    {
-                        Panel_2DHingeQty_nonMotorized = 4;
-                    }
+                    //if (Panel_SashHeight <= 1499)
+                    //{
+                    //    Panel_2DHingeQty_nonMotorized = 3;
+                    //}
+                    //else if (Panel_SashHeight >= 1500)
+                    //{
+                    //    Panel_2DHingeQty_nonMotorized = 4;
+                    //}
                 }
 
-                if (base_color == Base_Color._DarkBrown)
-                {
-                    if (Panel_Type.Contains("Awning"))
-                    {
-                        if (Panel_DisplayHeight < 1551)
-                        {
-                            Panel_MiddleCloserPairQty = 1;
-                        }
-                        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 2;
-                        }
-                        else if (Panel_DisplayHeight > 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 3;
-                        }
-                    }
-                    else if (Panel_Type.Contains("Casement"))
-                    {
-                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                            {
-                                Panel_MiddleCloserPairQty = 0;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                if (Panel_SashHeight < 1201)
-                                {
-                                    Panel_MiddleCloserPairQty = 1;
-                                }
-                                else if (Panel_SashHeight > 1200)
-                                {
-                                    Panel_MiddleCloserPairQty = 0;
-                                }
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                        }
-                    }
-                }
-                else if (base_color == Base_Color._White ||
-                         base_color == Base_Color._Ivory)
-                {
-                    if (Panel_Type.Contains("Awning"))
-                    {
-                        if (Panel_SashHeight < 1551)
-                        {
-                            Panel_MiddleCloserPairQty = 1;
-                        }
-                        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 2;
-                        }
-                        else if (Panel_SashHeight > 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 3;
-                        }
-                    }
-                    else if (Panel_Type.Contains("Casement"))
-                    {
-                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                            {
-                                Panel_MiddleCloserPairQty = 0;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                if (Panel_SashHeight < 1201)
-                                {
-                                    Panel_MiddleCloserPairQty = 1;
-                                }
-                                else if (Panel_SashHeight > 1200)
-                                {
-                                    Panel_MiddleCloserPairQty = 0;
-                                }
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                        }
-                    }
-                }
+                //if (base_color == Base_Color._DarkBrown)
+                //{
+                //    if (Panel_Type.Contains("Awning"))
+                //    {
+                //        if (Panel_DisplayHeight < 1551)
+                //        {
+                //            Panel_MiddleCloserPairQty = 1;
+                //        }
+                //        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 2;
+                //        }
+                //        else if (Panel_DisplayHeight > 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 3;
+                //        }
+                //    }
+                //    else if (Panel_Type.Contains("Casement"))
+                //    {
+                //        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                //                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                //            {
+                //                Panel_MiddleCloserPairQty = 0;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                //            {
+                //                if (Panel_SashHeight < 1201)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 1;
+                //                }
+                //                else if (Panel_SashHeight > 1200)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 0;
+                //                }
+                //            }
+                //        }
+                //        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (base_color == Base_Color._White ||
+                //         base_color == Base_Color._Ivory)
+                //{
+                //    if (Panel_Type.Contains("Awning"))
+                //    {
+                //        if (Panel_SashHeight < 1551)
+                //        {
+                //            Panel_MiddleCloserPairQty = 1;
+                //        }
+                //        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 2;
+                //        }
+                //        else if (Panel_SashHeight > 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 3;
+                //        }
+                //    }
+                //    else if (Panel_Type.Contains("Casement"))
+                //    {
+                //        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                //                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                //            {
+                //                Panel_MiddleCloserPairQty = 0;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                //            {
+                //                if (Panel_SashHeight < 1201)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 1;
+                //                }
+                //                else if (Panel_SashHeight > 1200)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 0;
+                //                }
+                //            }
+                //        }
+                //        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //        }
+                //    }
+                //}
 
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
@@ -6533,14 +6533,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_2dHingeArtNo_nonMotorized = _2DHinge_ArticleNo._614293;
 
-                    if (Panel_SashHeight <= 1499)
-                    {
-                        Panel_2DHingeQty_nonMotorized = 3;
-                    }
-                    else if (Panel_SashHeight >= 1500)
-                    {
-                        Panel_2DHingeQty_nonMotorized = 4;
-                    }
+                    //if (Panel_SashHeight <= 1499)
+                    //{
+                    //    Panel_2DHingeQty_nonMotorized = 3;
+                    //}
+                    //else if (Panel_SashHeight >= 1500)
+                    //{
+                    //    Panel_2DHingeQty_nonMotorized = 4;
+                    //}
                 }
 
 
@@ -6699,18 +6699,18 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_3dHingeArtNo = _3dHinge_ArticleNo._3DHinge_DB;
                     }
 
-                    if (Panel_SashHeight < 2400)
-                    {
-                        Panel_3dHingeQty = 3;
-                    }
-                    else if (Panel_SashHeight > 2399 && Panel_SashHeight < 2700)
-                    {
-                        Panel_3dHingeQty = 4;
-                    }
-                    else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
-                    {
-                        Panel_3dHingeQty = 5;
-                    }
+                    //if (Panel_SashHeight < 2400)
+                    //{
+                    //    Panel_3dHingeQty = 3;
+                    //}
+                    //else if (Panel_SashHeight > 2399 && Panel_SashHeight < 2700)
+                    //{
+                    //    Panel_3dHingeQty = 4;
+                    //}
+                    //else if (Panel_SashHeight > 2699 && Panel_SashHeight < 3200)
+                    //{
+                    //    Panel_3dHingeQty = 5;
+                    //}
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
@@ -6803,109 +6803,109 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
                 }
 
-                if (base_color == Base_Color._DarkBrown)
-                {
-                    if (Panel_Type.Contains("Awning"))
-                    {
-                        if (Panel_DisplayHeight < 1551)
-                        {
-                            Panel_MiddleCloserPairQty = 1;
-                        }
-                        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 2;
-                        }
-                        else if (Panel_DisplayHeight > 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 3;
-                        }
-                    }
-                    else if (Panel_Type.Contains("Casement"))
-                    {
-                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                            {
-                                Panel_MiddleCloserPairQty = 0;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                if (Panel_SashHeight < 1201)
-                                {
-                                    Panel_MiddleCloserPairQty = 1;
-                                }
-                                else if (Panel_SashHeight > 1200)
-                                {
-                                    Panel_MiddleCloserPairQty = 0;
-                                }
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                        }
-                    }
-                }
-                else if (base_color == Base_Color._White ||
-                         base_color == Base_Color._Ivory)
-                {
-                    if (Panel_Type.Contains("Awning"))
-                    {
-                        if (Panel_SashHeight < 1551)
-                        {
-                            Panel_MiddleCloserPairQty = 1;
-                        }
-                        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 2;
-                        }
-                        else if (Panel_SashHeight > 1999)
-                        {
-                            Panel_MiddleCloserPairQty = 3;
-                        }
-                    }
-                    else if (Panel_Type.Contains("Casement"))
-                    {
-                        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
-                                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
-                            {
-                                Panel_MiddleCloserPairQty = 0;
-                            }
-                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
-                            {
-                                if (Panel_SashHeight < 1201)
-                                {
-                                    Panel_MiddleCloserPairQty = 1;
-                                }
-                                else if (Panel_SashHeight > 1200)
-                                {
-                                    Panel_MiddleCloserPairQty = 0;
-                                }
-                            }
-                        }
-                        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
-                        {
-                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
-                            {
-                                Panel_MiddleCloserPairQty = 1;
-                            }
-                        }
-                    }
-                }
+                //if (base_color == Base_Color._DarkBrown)
+                //{
+                //    if (Panel_Type.Contains("Awning"))
+                //    {
+                //        if (Panel_DisplayHeight < 1551)
+                //        {
+                //            Panel_MiddleCloserPairQty = 1;
+                //        }
+                //        else if (Panel_DisplayHeight > 1551 && Panel_DisplayHeight < 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 2;
+                //        }
+                //        else if (Panel_DisplayHeight > 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 3;
+                //        }
+                //    }
+                //    else if (Panel_Type.Contains("Casement"))
+                //    {
+                //        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                //                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                //            {
+                //                Panel_MiddleCloserPairQty = 0;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                //            {
+                //                if (Panel_SashHeight < 1201)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 1;
+                //                }
+                //                else if (Panel_SashHeight > 1200)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 0;
+                //                }
+                //            }
+                //        }
+                //        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (base_color == Base_Color._White ||
+                //         base_color == Base_Color._Ivory)
+                //{
+                //    if (Panel_Type.Contains("Awning"))
+                //    {
+                //        if (Panel_SashHeight < 1551)
+                //        {
+                //            Panel_MiddleCloserPairQty = 1;
+                //        }
+                //        else if (Panel_SashHeight > 1551 && Panel_SashHeight < 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 2;
+                //        }
+                //        else if (Panel_SashHeight > 1999)
+                //        {
+                //            Panel_MiddleCloserPairQty = 3;
+                //        }
+                //    }
+                //    else if (Panel_Type.Contains("Casement"))
+                //    {
+                //        if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._374 ||
+                //                     Panel_SashProfileArtNo == SashProfile_ArticleNo._373)
+                //            {
+                //                Panel_MiddleCloserPairQty = 0;
+                //            }
+                //            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                //            {
+                //                if (Panel_SashHeight < 1201)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 1;
+                //                }
+                //                else if (Panel_SashHeight > 1200)
+                //                {
+                //                    Panel_MiddleCloserPairQty = 0;
+                //                }
+                //            }
+                //        }
+                //        else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
+                //        {
+                //            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581 || Panel_SashProfileArtNo == SashProfile_ArticleNo._2067)
+                //            {
+                //                Panel_MiddleCloserPairQty = 1;
+                //            }
+                //        }
+                //    }
+                //}
 
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;

@@ -15,7 +15,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IGlassThicknessListPresenter _glassThicknessPresenter;
         private IMainPresenter _mainPresenter;
-
+        private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
 
@@ -94,7 +94,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             return _pp_glassPropertyUC;
         }
-
+      
         public IPP_GlassPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
@@ -104,7 +104,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
             presenter._mainPresenter = mainPresenter;
-
+            
             return presenter;
         }
 

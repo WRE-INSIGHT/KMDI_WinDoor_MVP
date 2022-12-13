@@ -8,8 +8,10 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public interface IQuoteItemListUCPresenter : IPresenterCommon
     {
-        IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, IQuotationModel quotationModel);
+
+        IQuoteItemListUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, IQuotationModel quotationModel, IMainPresenter mainPresenter);
         IQuoteItemListUC GetiQuoteItemListUC();
+
 
     }
 }

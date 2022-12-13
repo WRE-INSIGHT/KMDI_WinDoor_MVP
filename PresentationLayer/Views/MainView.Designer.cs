@@ -84,6 +84,8 @@
             this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tsb_Undo = new System.Windows.Forms.ToolStripButton();
+            this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
+            this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.tsb_Redo = new System.Windows.Forms.ToolStripButton();
             this.tsprogress_Loading = new System.Windows.Forms.ToolStripProgressBar();
             this.deleteItemToolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -91,8 +93,6 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.SetGlassToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
-            this.newfactorBtn = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -519,15 +519,15 @@
             this.refreshToolStripButton,
             this.printToolStripButton,
             this.tsb_Undo,
+            this.newfactorBtn,
+            this.SetGlassToolStripMenuItem,
             this.tsb_Redo,
             this.tsprogress_Loading,
             this.deleteItemToolStripButton1,
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.ViewImagerToolStripButton1,
-            this.SetGlassToolStripMenuItem,
-            this.newfactorBtn});
+            this.ViewImagerToolStripButton1});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -644,6 +644,30 @@
             this.tsb_Undo.Text = "Undo";
             this.tsb_Undo.Visible = false;
             // 
+            // newfactorBtn
+            // 
+            this.newfactorBtn.BackColor = System.Drawing.Color.Transparent;
+            this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newfactorBtn.Enabled = false;
+            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.icons8_banknotes_48;
+            this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newfactorBtn.Name = "newfactorBtn";
+            this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
+            this.newfactorBtn.Text = "Set New Factor";
+            this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
+            // 
+            // SetGlassToolStripMenuItem
+            // 
+            this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SetGlassToolStripMenuItem.Enabled = false;
+            this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
+            this.SetGlassToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SetGlassToolStripMenuItem.Name = "SetGlassToolStripMenuItem";
+            this.SetGlassToolStripMenuItem.Size = new System.Drawing.Size(24, 29);
+            this.SetGlassToolStripMenuItem.Text = "Set Glass";
+            this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
+            this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
+            // 
             // tsb_Redo
             // 
             this.tsb_Redo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -716,30 +740,6 @@
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.ViewImagerToolStripButton1.Text = "View Imager";
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
-            // 
-            // SetGlassToolStripMenuItem
-            // 
-            this.SetGlassToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SetGlassToolStripMenuItem.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
-            this.SetGlassToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SetGlassToolStripMenuItem.Name = "SetGlassToolStripMenuItem";
-            this.SetGlassToolStripMenuItem.Size = new System.Drawing.Size(24, 29);
-            this.SetGlassToolStripMenuItem.Text = "Set Glass";
-            this.SetGlassToolStripMenuItem.ToolTipText = "Set Glass";
-            this.SetGlassToolStripMenuItem.Visible = false;
-            this.SetGlassToolStripMenuItem.Click += new System.EventHandler(this.SetGlassToolStripMenuItem_Click);
-            // 
-            // newfactorBtn
-            // 
-            this.newfactorBtn.BackColor = System.Drawing.Color.Transparent;
-            this.newfactorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newfactorBtn.Enabled = false;
-            this.newfactorBtn.Image = global::PresentationLayer.Properties.Resources.medical;
-            this.newfactorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newfactorBtn.Name = "newfactorBtn";
-            this.newfactorBtn.Size = new System.Drawing.Size(24, 29);
-            this.newfactorBtn.Text = "Set New Factor";
-            this.newfactorBtn.Click += new System.EventHandler(this.newfactorBtn_Click);
             // 
             // pnlRight
             // 
