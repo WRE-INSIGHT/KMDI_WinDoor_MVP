@@ -26,6 +26,12 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void SubscribeToEventSetup()
         {
             _aluminumTrackUC.PPAliminumTrackPropertyUCLoadEventRaised += _aluminumTrackUC_PPAliminumTrackPropertyUCLoadEventRaised;
+            _aluminumTrackUC.AluminumTrackQtyValueChangedEventRaised += _aluminumTrackUC_AluminumTrackQtyValueChangedEventRaised;
+        }
+
+        private void _aluminumTrackUC_AluminumTrackQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _aluminumTrackUC_PPAliminumTrackPropertyUCLoadEventRaised(object sender, EventArgs e)

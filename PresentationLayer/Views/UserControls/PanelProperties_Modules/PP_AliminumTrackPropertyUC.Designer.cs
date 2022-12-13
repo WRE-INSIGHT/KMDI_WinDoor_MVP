@@ -46,6 +46,7 @@
             0,
             0,
             0});
+            this.nud_AluminumTrackQty.ValueChanged += new System.EventHandler(this.nud_AluminumTrackQty_ValueChanged);
             // 
             // lbl_AliminumTrack
             // 

@@ -41,6 +41,7 @@
             this.num_3dHingeQty.Name = "num_3dHingeQty";
             this.num_3dHingeQty.Size = new System.Drawing.Size(77, 20);
             this.num_3dHingeQty.TabIndex = 39;
+            this.num_3dHingeQty.ValueChanged += new System.EventHandler(this.num_3dHingeQty_ValueChanged);
             // 
             // label2
             // 

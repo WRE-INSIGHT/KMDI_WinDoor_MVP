@@ -43,6 +43,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event EventHandler transomUCSizeChangedEventRaised;
         public event MouseEventHandler transomUCMouseDoubleClickedEventRaised;
         public event KeyEventHandler transomUCKeyDownEventRaised;
+        public event MouseEventHandler transomUCMouseClickedEventRaised;
 
         public void InvalidateThis()
         {
@@ -94,9 +95,11 @@ namespace PresentationLayer.Views.UserControls.Dividers
             //{
             //    cmenu_transom.Show(new Point(MousePosition.X, MousePosition.Y));
             //}
-            Console.WriteLine(this.Height);
-            Console.WriteLine(this.Location);
-            Console.WriteLine(this.Parent.Name);
+            if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(sender, transomUCMouseClickedEventRaised, e);
+            }
+            
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

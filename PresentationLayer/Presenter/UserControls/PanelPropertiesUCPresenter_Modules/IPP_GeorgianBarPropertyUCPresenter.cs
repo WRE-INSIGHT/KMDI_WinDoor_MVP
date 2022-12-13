@@ -6,7 +6,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 {
     public interface IPP_GeorgianBarPropertyUCPresenter
     {
-        IPP_GeorgianBarPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel);
+        IPP_GeorgianBarPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
         IPP_GeorgianBarPropertyUC GetPPGeorgianBarPropertyUC();
     }
 }

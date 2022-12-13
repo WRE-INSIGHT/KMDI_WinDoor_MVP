@@ -80,78 +80,85 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
+
+
+                if ((_ceicId == _userModel.EmployeeID && _userModel.AccountType != "User Level 1") || _userModel.AccountType == "User Level 1")
                 {
-                    int _quoteId = Convert.ToInt32(_dgvQuoteNo.Rows[e.RowIndex].Cells["Quote_Id"].Value);
-                    string _quoteNo = _dgvQuoteNo.Rows[e.RowIndex].Cells["Quote Number"].Value.ToString();
-                    DateTime _quoteDate = (DateTime)_dgvQuoteNo.Rows[e.RowIndex].Cells["Date"].Value;
-
-                    bool proceed = false;
-                    _mainPresenter.isNewProject = true;
-                    if (_mainPresenter.qoutationModel_MainPresenter != null)
+                    if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                     {
-                        if (_mainPresenter.GetMainView().GetToolStripButtonSave().Enabled == true)
-                        {
-                            if (!string.IsNullOrWhiteSpace(_mainPresenter.wndrFileName))
-                            {
-                                DialogResult dialogResult = MessageBox.Show("Do you want to save changes in " + _mainPresenter.wndrFileName + "?", "Save progress",
-                                                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        int _quoteId = Convert.ToInt32(_dgvQuoteNo.Rows[e.RowIndex].Cells["Quote_Id"].Value);
+                        string _quoteNo = _dgvQuoteNo.Rows[e.RowIndex].Cells["Quote Number"].Value.ToString();
+                        DateTime _quoteDate = (DateTime)_dgvQuoteNo.Rows[e.RowIndex].Cells["Date"].Value;
 
-                                if (dialogResult == DialogResult.Yes ||
-                                    dialogResult == DialogResult.No)
+                        bool proceed = false;
+                        _mainPresenter.isNewProject = true;
+                        if (_mainPresenter.qoutationModel_MainPresenter != null)
+                        {
+                            if (_mainPresenter.GetMainView().GetToolStripButtonSave().Enabled == true)
+                            {
+                                if (!string.IsNullOrWhiteSpace(_mainPresenter.wndrFileName))
                                 {
+                                    DialogResult dialogResult = MessageBox.Show("Do you want to save changes in " + _mainPresenter.wndrFileName + "?", "Save progress",
+                                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                                    if (dialogResult == DialogResult.Yes ||
+                                        dialogResult == DialogResult.No)
+                                    {
+                                        if (dialogResult == DialogResult.Yes)
+                                        {
+                                            _mainPresenter.SaveChanges();
+
+                                        }
+                                        proceed = true;
+                                        _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                                    }
+                                }
+                                else
+                                {
+                                    DialogResult dialogResult = MessageBox.Show("Progress will not save, do you wish to proceed?", "Delete progress",
+                                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
                                     if (dialogResult == DialogResult.Yes)
                                     {
-                                        _mainPresenter.SaveChanges();
+                                        proceed = true;
+                                        _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
 
                                     }
-                                    proceed = true;
-                                    _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                                 }
+
+
                             }
                             else
                             {
-                                DialogResult dialogResult = MessageBox.Show("Progress will not save, do you wish to proceed?", "Delete progress",
-                                                            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-                                if (dialogResult == DialogResult.Yes)
+                                if (MessageBox.Show("Are you sure want to open new Quotation?", "Delete progress",
+                                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                 {
                                     proceed = true;
                                     _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                                   
                                 }
                             }
-                            
-                            
                         }
                         else
                         {
-                            if (MessageBox.Show("Are you sure want to open new Quotation?", "Delete progress",
-                                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                            {
-                                proceed = true;
-                                _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                            }
+                            proceed = true;
                         }
 
-                       
+                        if (proceed)
+                        {
+                            _mainPresenter.inputted_quotationRefNo = _quoteNo;
+                            _mainPresenter.inputted_quoteId = _quoteId;
+                            _mainPresenter.inputted_quoteDate = _quoteDate;
+                            _mainPresenter.inputted_projectName = _projName;
+                            _mainPresenter.inputted_custRefNo = _custRefNo;
+                            _mainPresenter.dateAssigned = _dateAssigned;
+                            _mainPresenter.Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
+                            _CELandingView.CloseThis();
+                        }
                     }
-                    else
-                    {
-                        proceed = true;
-                    }
-
-                    if (proceed)
-                    {
-                        _mainPresenter.inputted_quotationRefNo = _quoteNo;
-                        _mainPresenter.inputted_quoteId = _quoteId;
-                        _mainPresenter.inputted_quoteDate = _quoteDate;
-                        _mainPresenter.inputted_projectName = _projName;
-                        _mainPresenter.inputted_custRefNo = _custRefNo;
-                        _mainPresenter.dateAssigned = _dateAssigned;
-                        _mainPresenter.Scenario_Quotation(true, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
-                        _CELandingView.CloseThis();
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("You are not assigned on this quotation!");
                 }
             }
             catch (Exception ex)
@@ -165,27 +172,34 @@ namespace PresentationLayer.Presenter
         {
             try
             {
-                string input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
-                if (input_qrefno != "" && input_qrefno != "0")
+                if ((_ceicId == _userModel.EmployeeID && _userModel.AccountType != "User Level 1") || _userModel.AccountType == "User Level 1")
                 {
-                    IQuotationModel quotationModel = _quotationServices.AddQuotationModel(input_qrefno, DateTime.Now);
-
-                    int inserted_quoteId = await _quotationServices.Insert_Quotation(quotationModel, _userModel.UserID);
-
-                    if (inserted_quoteId > 0)
+                    string input_qrefno = Interaction.InputBox("Quotation Reference No.", "Windoor Maker", "");
+                    if (input_qrefno != "" && input_qrefno != "0")
                     {
-                        IProjectQuoteModel projectQuoteModel = _projQuoteServices.AddProjectQuote(_ceicId,
-                                                                                                  _projId,
-                                                                                                  _custRefId,
-                                                                                                  _userModel.EmployeeID,
-                                                                                                  inserted_quoteId,
-                                                                                                  _dateAssigned
-                                                                                                  );
+                        IQuotationModel quotationModel = _quotationServices.AddQuotationModel(input_qrefno, DateTime.Now);
 
-                        int affected_rows = await _projQuoteServices.Insert_ProjQuote(projectQuoteModel, _userModel.UserID);
+                        int inserted_quoteId = await _quotationServices.Insert_Quotation(quotationModel, _userModel.UserID);
+
+                        if (inserted_quoteId > 0)
+                        {
+                            IProjectQuoteModel projectQuoteModel = _projQuoteServices.AddProjectQuote(_ceicId,
+                                                                                                      _projId,
+                                                                                                      _custRefId,
+                                                                                                      _userModel.EmployeeID,
+                                                                                                      inserted_quoteId,
+                                                                                                      _dateAssigned
+                                                                                                      );
+
+                            int affected_rows = await _projQuoteServices.Insert_ProjQuote(projectQuoteModel, _userModel.UserID);
+                        }
+
+                        await Load_DGV_QuoteNo(_projId, _custRefId);
                     }
-
-                    await Load_DGV_QuoteNo(_projId, _custRefId);
+                }
+                else
+                {
+                    MessageBox.Show("You are not assigned on this quotation!");
                 }
             }
             catch (Exception ex)

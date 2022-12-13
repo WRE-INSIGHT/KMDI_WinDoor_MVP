@@ -72,8 +72,9 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_pboxImagerHeight { get; set; }
 
         string WD_WindoorNumber { get; set; }
+        string setDiscount { get; set; }
         string WD_itemName { get; set; }
-
+        void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
     }
 }

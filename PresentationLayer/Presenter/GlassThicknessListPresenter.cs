@@ -128,10 +128,11 @@ namespace PresentationLayer.Presenter
                                     }
                                 }
                                 #endregion
-                            }else if(fr.Lst_Panel.Count == 1 && fr.Lst_MultiPanel.Count == 0)
+                            }
+                            else if (fr.Lst_Panel.Count == 1 && fr.Lst_MultiPanel.Count == 0)
                             {
                                 #region singlePanel 
-                                 foreach(IPanelModel SinglePanel in fr.Lst_Panel)
+                                foreach (IPanelModel SinglePanel in fr.Lst_Panel)
                                 {
                                     for (int i = 0; i < _panelIdList.Count; i++)
                                     {
@@ -176,17 +177,17 @@ namespace PresentationLayer.Presenter
 
                                         }
                                     }
-                              }
+                                }
                                 #endregion
                             }
                         }
-                        _mainPresenter.GetCurrentPrice();
-                        _panelIdList.Clear();                      
+                       
+                        _panelIdList.Clear();
                         _glassThicknessListView.CloseThisDialog();
                         _setMultipleGlassThicknessPresenter.GetCurrentGlassthickness();
-                       
-
-                    }
+                        _mainPresenter.GetCurrentPrice();
+                        _mainPresenter.itemDescription();
+                    } 
                     else
                     {
                         string prev_thickness = _panelModel.Panel_GlassThicknessDesc;
@@ -220,18 +221,19 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-
                         _glassThicknessListView.CloseThisDialog();
                         _mainPresenter.GetCurrentPrice();
-                    }                    
-  #endregion                   
+                        _mainPresenter.itemDescription();
+                    }
+                    #endregion
+                   
                 }
                 else
                 {
                     MessageBox.Show("Invalid selection", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-            }         
+            }
 
         }
 
@@ -426,3 +428,5 @@ namespace PresentationLayer.Presenter
         }
     }
 }
+
+

@@ -1,10 +1,10 @@
-﻿using PresentationLayer.Views.UserControls.PanelProperties_Modules;
-using System;
+﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Panel;
-using Unity;
-using CommonComponents;
+using PresentationLayer.Views.UserControls.PanelProperties_Modules;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
@@ -15,6 +15,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
+        private IMainPresenter _mainPresenter;
 
         bool _initialLoad = true;
 
@@ -35,38 +36,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _pp_georgianBarPropertyUC_numHorizontalValueChangedEventRaised(object sender, EventArgs e)
         {
             NumericUpDown numHorizontal = (NumericUpDown)sender;
-
+            _panelModel.Panel_GeorgianBar_HorizontalQty = (int)numHorizontal.Value;
             if (_panelModel.Panel_GlassWidth != 0)
-            {
-                int gbarThickness = 0;
-                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
-                {
-                    gbarThickness = 20;
-                }
-                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
-                {
-                    gbarThickness = 40;
-                }
-
-                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
-
-                if (numHorizontal.Value > maxlimitqty)
-                {
-                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    numHorizontal.Value = maxlimitqty;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                numHorizontal.Value = 0;
-            }
-        }
-
-        private void _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised(object sender, EventArgs e)
-        {
-            NumericUpDown numVertical = (NumericUpDown)sender;
-            if (_panelModel.Panel_GlassHeight != 0)
             {
                 int gbarThickness = 0;
                 if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
@@ -80,11 +51,45 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassHeight / gbarThickness)));
 
+                if (numHorizontal.Value > maxlimitqty)
+                {
+                    MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    numHorizontal.Value = maxlimitqty;
+                }
+                _mainPresenter.itemDescription();
+            }
+            else
+            {
+                MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                numHorizontal.Value = 0;
+            }
+        }
+
+        private void _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised(object sender, EventArgs e)
+        {
+            NumericUpDown numVertical = (NumericUpDown)sender;
+            _panelModel.Panel_GeorgianBar_VerticalQty = (int)numVertical.Value;
+
+            if (_panelModel.Panel_GlassHeight != 0)
+            {
+                int gbarThickness = 0;
+                if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                {
+                    gbarThickness = 20;
+                }
+                else if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                {
+                    gbarThickness = 40;
+                }
+
+                int maxlimitqty = Convert.ToInt32(Math.Ceiling((decimal)(_panelModel.Panel_GlassWidth / gbarThickness)));
+
                 if (numVertical.Value > maxlimitqty)
                 {
                     MessageBox.Show("Maximum quantity reached", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     numVertical.Value = maxlimitqty;
                 }
+                _mainPresenter.itemDescription();
             }
             else
             {
@@ -121,7 +126,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             return _pp_georgianBarPropertyUC;
         }
 
-        public IPP_GeorgianBarPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel)
+        public IPP_GeorgianBarPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
                 .RegisterType<IPP_GeorgianBarPropertyUC, PP_GeorgianBarPropertyUC>()
@@ -129,7 +134,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             PP_GeorgianBarPropertyUCPresenter presenter = unityC.Resolve<PP_GeorgianBarPropertyUCPresenter>();
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
-
+            presenter._mainPresenter = mainPresenter;
             return presenter;
         }
 
