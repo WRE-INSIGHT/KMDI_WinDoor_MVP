@@ -43,6 +43,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         SashProfile_ArticleNo curr_sash;
         private void _pp_sashPropertyUC_cmbSashProfileSelectedValueEventRaised(object sender, EventArgs e)
         {
+            int WD_PropertyHeight = _mainPresenter.PropertiesScroll;
             if (!_initialLoad)
             {
 
@@ -587,6 +588,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
             }
             _mainPresenter.GetCurrentPrice();
+            _mainPresenter.PropertiesScroll = WD_PropertyHeight;
         }
 
         private void _pp_sashPropertyUC_PPSashPropertyLoadEventRaised(object sender, EventArgs e)

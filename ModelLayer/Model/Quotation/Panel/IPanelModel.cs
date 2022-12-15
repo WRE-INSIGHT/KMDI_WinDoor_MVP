@@ -397,7 +397,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion);
 
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
-
+        void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
         #endregion
     }

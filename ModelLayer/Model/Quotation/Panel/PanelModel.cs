@@ -8935,6 +8935,142 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "Ancillary Profile",
                                    "");
         }
+
+        public void Panel_PropertyChange(bool Checked)
+        {
+
+            if (_panelOrient != Checked)
+            {
+                _panelOrient = Checked;
+                if (_panelOrient == true && Panel_Type == "Fixed Panel")
+                {
+                    _panelChkText = "dSash";
+                    Panel_SashPropertyVisibility = true;
+                }
+                else if (_panelOrient == false && Panel_Type == "Fixed Panel")
+                {
+                    _panelChkText = "None";
+                    Panel_SashPropertyVisibility = false;
+                }
+                if (Panel_ParentFrameModel != null)
+                {
+                    if (_panelChkText == "None")
+                    {
+                        Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+                        AdjustPropertyPanelHeight("minusSash");
+
+                        if (Panel_Type != "Fixed Panel")
+                        {
+
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_HingeOptionsVisibility = false;
+                                AdjustPropertyPanelHeight("minusHinge");
+                                Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                Panel_CenterHingeOptionsVisibility = false;
+                                AdjustPropertyPanelHeight("minusCenterHinge");
+                                Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
+
+                                if (Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                                {
+                                    Panel_NTCenterHingeVisibility = false;
+                                    AdjustPropertyPanelHeight("minusNTCenterHinge");
+                                    Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                                }
+                            }
+                        }
+                    }
+                    else if (_panelChkText == "dSash")
+                    {
+                        AdjustPropertyPanelHeight("addSash");
+                        Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+
+                        if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                        {
+                            if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                            {
+                                Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                                Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                            }
+                            else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
+                                Panel_SashReinfArtNo = SashReinf_ArticleNo._207;
+                            }
+                        }
+                        else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                        {
+                            if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                            {
+                                Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                                Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
+                            }
+                            else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            {
+                                Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                                Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
+                            }
+                            PanelGlazingBead_ArtNo = GlazingBead_ArticleNo._2436;
+                        }
+                    }
+                }
+
+                if (Panel_ParentMultiPanelModel != null)
+                {
+                    if (_panelChkText == "None")
+                    {
+                        Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusSash");
+
+                        if (Panel_Type != "Fixed Panel")
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_HingeOptionsVisibility = false;
+                                Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHinge");
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                Panel_CenterHingeOptionsVisibility = false;
+                                Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCenterHinge");
+
+                                if (Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                                {
+                                    Panel_NTCenterHingeVisibility = true;
+                                    Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusNTCenterHinge");
+                                }
+                            }
+                        }
+                    }
+                    else if (_panelChkText == "dSash")
+                    {
+                        Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                        if (Panel_Type != "Fixed Panel")
+                        {
+                            if (Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
+                            {
+                                Panel_HingeOptionsVisibility = true;
+                                Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                            }
+                            else if (Panel_SashProfileArtNo == SashProfile_ArticleNo._395)
+                            {
+                                Panel_CenterHingeOptionsVisibility = true;
+                                Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCenterHinge");
+
+                                if (Panel_CenterHingeOptions == CenterHingeOption._NTCenterHinge)
+                                {
+                                    Panel_NTCenterHingeVisibility = true;
+                                    Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addNTCenterHinge");
+                                }
+                            }
+                        }
+                    }
+                }
+             
+            }
+        }
         #endregion
 
         #endregion

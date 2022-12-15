@@ -586,7 +586,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     {
                                         if (frm.Frame_Name == frameUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight;
+                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight;
                                             return;
 
                                         }

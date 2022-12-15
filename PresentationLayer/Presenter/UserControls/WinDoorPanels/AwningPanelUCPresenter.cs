@@ -112,7 +112,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     if (pnl.Panel_Name == awningUC.Name)
                                     {
-                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
+                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
                                         return;
                                     }
                                 }
@@ -132,7 +132,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 {
                                                     if (pnl.Panel_Name == awningUC.Name)
                                                     {
-                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
+                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                         return;
                                                     }
                                                     else
@@ -178,7 +178,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                 {
                                                                     if (pnl.Panel_Name == awningUC.Name)
                                                                     {
-                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
+                                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                         return;
 
                                                                     }
@@ -217,7 +217,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                             {
                                                                                 if (pnl.Panel_Name == awningUC.Name)
                                                                                 {
-                                                                                    wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
+                                                                                    _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                     return;
 
                                                                                 }
