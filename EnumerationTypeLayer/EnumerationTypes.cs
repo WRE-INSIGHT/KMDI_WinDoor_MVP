@@ -1190,9 +1190,81 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
 
-
-
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
         }
+
+        public class PlantOnWeatherStripHead_ArticleNo : Enumeration<PlantOnWeatherStripHead_ArticleNo, int>
+        {
+            public static readonly PlantOnWeatherStripHead_ArticleNo _AL1313 = new PlantOnWeatherStripHead_ArticleNo(0, "AL-1313");
+
+            private PlantOnWeatherStripHead_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PlantOnWeatherStripSeal_ArticleNo : Enumeration<PlantOnWeatherStripSeal_ArticleNo, int>
+        {
+            public static readonly PlantOnWeatherStripSeal_ArticleNo _AL1314 = new PlantOnWeatherStripSeal_ArticleNo(0, "AL-1314");
+
+            private PlantOnWeatherStripSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverFrameWeatherStripHead_ArticleNo : Enumeration<LouverFrameWeatherStripHead_ArticleNo, int>
+        {
+            public static readonly LouverFrameWeatherStripHead_ArticleNo _AL1307 = new LouverFrameWeatherStripHead_ArticleNo(0, "AL-1307");
+
+            private LouverFrameWeatherStripHead_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverFrameBottomWeatherStrip_ArticleNo : Enumeration<LouverFrameBottomWeatherStrip_ArticleNo, int>
+        {
+            public static readonly LouverFrameBottomWeatherStrip_ArticleNo _AL1309 = new LouverFrameBottomWeatherStrip_ArticleNo(0, "AL-1309");
+
+            private LouverFrameBottomWeatherStrip_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RubberSeal_ArticleNo : Enumeration<RubberSeal_ArticleNo, int>
+        {
+            public static readonly RubberSeal_ArticleNo _ALSC31 = new RubberSeal_ArticleNo(0, "AL-SC31");
+            public static readonly RubberSeal_ArticleNo _SL31 = new RubberSeal_ArticleNo(1, "SL31");
+
+            private RubberSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CasementSeal_ArticleNo : Enumeration<CasementSeal_ArticleNo, int>
+        {
+            public static readonly CasementSeal_ArticleNo _SL31 = new CasementSeal_ArticleNo(0, "SL31");
+
+            private CasementSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SealForHandle_ArticleNo : Enumeration<SealForHandle_ArticleNo, int>
+        {
+            public static readonly SealForHandle_ArticleNo _AL1309 = new SealForHandle_ArticleNo(0, "AL-1309");
+
+            private SealForHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
+        {
+            public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
+
+            private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+
     }
 }

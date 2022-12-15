@@ -1591,7 +1591,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
                             }
-                            if (pnl.Panel_Type.Contains("Sliding"))
+                            else if (pnl.Panel_Type.Contains("Sliding"))
                             {
                                 if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -1638,7 +1638,9 @@ namespace ModelLayer.Model.Quotation
                                     //add_screws_fab_striker += strikerAC_screws;
                                 }
 
-                            }
+                            } 
+
+
 
                             if (pnl.Panel_HingeOptions == HingeOption._FrictionStay && pnl.Panel_MiddleCloserPairQty > 0)
                             {
@@ -1773,7 +1775,23 @@ namespace ModelLayer.Model.Quotation
                         where = "Frame";
                     }
 
-                    pnl.Insert_GlazingBead_MaterialList(Material_List, where);
+                    if (pnl.Panel_Type.Contains("Louver"))
+                    { 
+                        pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
+                        pnl.Insert_PlantOnWeatherStripHead_MaterialList(Material_List);
+                        pnl.Insert_PlantOnWeatherStripSeal_MaterialList(Material_List);
+                        pnl.Insert_LouvreFrameWeatherStripHead_MaterialList(Material_List);
+                        pnl.Insert_LouvreFrameBottomWeatherStrip_MaterialList(Material_List);
+                        pnl.Insert_RubberSeal_MaterialList(Material_List);
+                        pnl.Insert_CasementSeal_MaterialList(Material_List);
+                        pnl.Insert_SealForHandle_MaterialList(Material_List);
+                        pnl.Insert_LouvreGallerySet_MaterialList(Material_List);  
+                    }
+
+                    if (!pnl.Panel_Type.Contains("Louver"))
+                    {
+                        pnl.Insert_GlazingBead_MaterialList(Material_List, where);
+                    }
 
                     if ((pnl.Panel_Type.Contains("Awning") || pnl.Panel_Type.Contains("Casement")) &&
                          pnl.Panel_GlassThickness == 6.0f &&
@@ -1861,26 +1879,29 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("PU Foaming",
                                    Frame_PUFoamingQty_Total, "can", "", "Frame");
 
-            Material_List.Rows.Add("Sealant-WH (Frame)",
-                                   Frame_SealantWHQty_Total, "pc(s)", "", "Frame");
+           
+                Material_List.Rows.Add("Sealant-WH (Frame)",
+                                  Frame_SealantWHQty_Total, "pc(s)", "", "Frame");
 
-            Material_List.Rows.Add("Sealant-WH (Glass)",
-                                   Glass_SealantWHQty_Total,
-                                   "pc(s)",
-                                   "",
-                                   "Frame"); // Frame or Sash
+                Material_List.Rows.Add("Sealant-WH (Glass)",
+                                       Glass_SealantWHQty_Total,
+                                       "pc(s)",
+                                       "",
+                                       "Frame"); // Frame or Sash
 
-            Material_List.Rows.Add("Expansion Bolts FRA003",
-                                   Expansion_BoltQty_Total,
-                                   "pc(s)",
-                                   "",
-                                   "Frame");
+                Material_List.Rows.Add("Expansion Bolts FRA003",
+                                       Expansion_BoltQty_Total,
+                                       "pc(s)",
+                                       "",
+                                       "Frame");
 
-            Material_List.Rows.Add("Rebate",
-                                   Rebate_Qty,
-                                   "pc(s)",
-                                   "",
-                                   "Frame");
+                Material_List.Rows.Add("Rebate",
+                                       Rebate_Qty,
+                                       "pc(s)",
+                                       "",
+                                       "Frame");
+        
+           
 
             if (GlazingSpacer_TotalQty > 0)
             {
