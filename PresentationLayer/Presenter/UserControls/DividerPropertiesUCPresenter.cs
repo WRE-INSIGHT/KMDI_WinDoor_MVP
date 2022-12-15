@@ -18,7 +18,6 @@ namespace PresentationLayer.Presenter.UserControls
     public class DividerPropertiesUCPresenter : IDividerPropertiesUCPresenter, IPresenterCommon
     {
         IDividerPropertiesUC _divProperties;
-
         private IMainPresenter _mainPresenter;
         private IDividerModel _divModel;
         private IUnityContainer _unityC;
@@ -136,6 +135,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_btnSelectDMPanelClickedEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
+
             List<Control> lst_obj = _divModel.Div_MPanelParent.MPanelLst_Objects;
             Control div = lst_obj.Find(obj => obj.Name == _divModel.Div_Name);
             IPanelModel prev_pnl = null, nxt_pnl = null;
@@ -161,18 +162,24 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 MessageBox.Show("Not applicable on fixed panels", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+            _mainPresenter.PropertiesScroll = propertiesScroll;
+
         }
 
         private void _divProperties_cmbDMArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             if (!_initialLoad)
             {
+                int propertiesScroll = _mainPresenter.PropertiesScroll;
                 _divModel.Div_DMArtNo = (DummyMullion_ArticleNo)((ComboBox)sender).SelectedValue;
+
+                _mainPresenter.PropertiesScroll = propertiesScroll;
             }
         }
 
         private void _divProperties_chkDMCheckedChangedEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
             CheckBox chk = (CheckBox)sender;
             if (!_initialLoad)
             {
@@ -245,19 +252,20 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (prev_pnlModel != null)
                     {
-                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == false && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
                             prev_pnlModel.Panel_CornerDriveOptionsVisibility = true;
                             prev_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
                             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
                             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "addCornerDrive");
+                            propertiesScroll += const_var.panel_property_cornerDriveOptionsheight_default;
 
                         }
                     }
 
                     if (nxt_pnlModel != null)
                     {
-                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == false)
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == false && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
                             nxt_pnlModel.Panel_CornerDriveOptionsVisibility = true;
                             nxt_pnlModel.AdjustPropertyPanelHeight("addCornerDrive");
@@ -310,18 +318,19 @@ namespace PresentationLayer.Presenter.UserControls
 
                     if (prev_pnlModel != null)
                     {
-                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        if (prev_pnlModel.Panel_CornerDriveOptionsVisibility == true && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
                             prev_pnlModel.Panel_CornerDriveOptionsVisibility = false;
                             prev_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
                             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
                             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
+                            propertiesScroll -= const_var.panel_property_cornerDriveOptionsheight_default;
                         }
                     }
 
                     if (nxt_pnlModel != null)
                     {
-                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == true)
+                        if (nxt_pnlModel.Panel_CornerDriveOptionsVisibility == true && prev_pnlModel.Panel_Type != "Fixed Panel")
                         {
                             nxt_pnlModel.Panel_CornerDriveOptionsVisibility = false;
                             nxt_pnlModel.AdjustPropertyPanelHeight("minusCornerDrive");
@@ -336,6 +345,8 @@ namespace PresentationLayer.Presenter.UserControls
                 _mainPresenter.Set_pnlPropertiesBody_ScrollView(orig_locY + (new_locY - orig_locY));
                 _mainPresenter.GetCurrentPrice();
             }
+            _mainPresenter.PropertiesScroll = propertiesScroll;
+            
         }
 
         private void _divProperties_btnSaveCladdingClickedEventRaised(object sender, EventArgs e)
@@ -368,6 +379,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _divProperties_btnAddCladdingClickedEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
             _divModel.Div_CladdingProfileArtNoVisibility = true;
             _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
             if (cladding_count < 1)
@@ -377,7 +389,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
             }
 
-            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
+            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, _mainPresenter, this);
             _lst_claddUCP.Add(claddingUCP);
             UserControl claddingUC = (UserControl)claddingUCP.GetCladdingPropertyUC();
             claddingUC.Dock = DockStyle.Top;
@@ -398,13 +410,17 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
 
             _divProperties.SetBtnSaveBackColor(Color.White);
+            _mainPresenter.PropertiesScroll = propertiesScroll;
+            
         }
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
             if (!_initialLoad)
             {
+                int propertiesScroll = _mainPresenter.PropertiesScroll;
                 _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.PropertiesScroll = propertiesScroll;
             }
         }
 
@@ -412,7 +428,10 @@ namespace PresentationLayer.Presenter.UserControls
         {
             if (!_initialLoad)
             {
+                int propertiesScroll = _mainPresenter.PropertiesScroll;
                 _divModel.Div_CladdingProfileArtNo = (CladdingProfile_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.PropertiesScroll = propertiesScroll;
+                
             }
         }
 
@@ -461,7 +480,7 @@ namespace PresentationLayer.Presenter.UserControls
                             
                         }
 
-                        IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, this);
+                        IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, _mainPresenter, this);
                         IDP_CladdingPropertyUC claddingPropUC = claddingUCP.GetCladdingPropertyUC();
                         _lst_claddUCP.Add(claddingUCP);
 

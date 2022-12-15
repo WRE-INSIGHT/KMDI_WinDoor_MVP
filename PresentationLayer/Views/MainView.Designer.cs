@@ -787,6 +787,7 @@
             this.pnlItems.Name = "pnlItems";
             this.pnlItems.Size = new System.Drawing.Size(166, 466);
             this.pnlItems.TabIndex = 1;
+            this.pnlItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlItems_Scroll);
             this.pnlItems.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlItems_DragDrop);
             this.pnlItems.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlItems_DragEnter);
             // 

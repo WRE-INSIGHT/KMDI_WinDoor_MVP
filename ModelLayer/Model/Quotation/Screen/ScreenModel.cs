@@ -471,6 +471,36 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private bool _springload_checked;
+
+        public bool SpringLoad_Checked
+        {
+            get
+            {
+                return _springload_checked;
+            }
+            set
+            {
+                _springload_checked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _springLoad_Visibility;
+
+        public bool SpringLoad_Visibility
+        {
+            get
+            {
+                return _springLoad_Visibility;
+            }
+            set
+            {
+                _springLoad_Visibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private int _screen_0505Width;
         public int Screen_0505Width
@@ -940,7 +970,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         BrakePrice = 2.5m * Screen_ExchangeRate * BrakeQty;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_White * SupportForFixingHeadRailQty;
 
-                        if (Screen_Width >= 1500)
+                        if (Screen_Width >= 1500 && SpringLoad_Checked == true)
                         {
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }
@@ -976,7 +1006,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain * KitForVerticalOpeningHeadrailQty;
                         BrakePrice = 2.5m * Screen_ExchangeRate;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_WoodGrain * SupportForFixingHeadRailQty;
-                        if (Screen_Width >= 1500)
+                        if (Screen_Width >= 1500 && SpringLoad_Checked == true)
                         {
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }

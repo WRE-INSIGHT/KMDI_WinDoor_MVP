@@ -63,6 +63,7 @@ namespace PresentationLayer.Views
         public event EventHandler txtwindoorIDTextChangedEventRaised;
         public event EventHandler tsBtnExchangeRateClickEventRaised;
         public event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
+        public event EventHandler deleteToolStripMenuClickEventRaised;
         public void ShowScreemView()
         {
             this.Show();
@@ -119,7 +120,6 @@ namespace PresentationLayer.Views
 
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
         }
-
 
         private void btn_add_Click(object sender, EventArgs e)
         {
@@ -186,6 +186,11 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, cmbPlisséTypeSelectedIndexChangedEventRaised, e);
         }
 
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteToolStripMenuClickEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
@@ -201,6 +206,6 @@ namespace PresentationLayer.Views
             nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
         }
 
-
+        
     }
 }

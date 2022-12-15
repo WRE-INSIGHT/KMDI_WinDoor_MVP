@@ -24,7 +24,11 @@ namespace ModelLayer.Model.Quotation.Screen
         decimal Screen_DiscountedPriceWithoutVat { get; set; }
         decimal Screen_LaborAndMobilization { get; set; }
         decimal Screen_TotalNetPriceWithoutVat { get; set; }
-        bool Screen_PVCVisibility { get; set; }
+        bool Screen_PVCVisibility { get; set; }      
+        bool SpringLoad_Visibility { get; set; }
+
+        bool SpringLoad_Checked { get; set; }
+
         int Screen_0505Width { get; set; }
         int Screen_1067Height { get; set; }
         int Screen_0505Qty { get; set; }

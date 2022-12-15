@@ -1,7 +1,11 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation.Concrete;
+using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
+using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Variables;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls;
@@ -40,7 +44,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISlidingPanelImagerUCPresenter _slidingImagerUCP;
         private ITiltNTurnPanelUCPresenter _tiltNTurnUCP;
         private ILouverPanelUCPresenter _louverPanelUCP;
-
+        private ConstantVariables constants = new ConstantVariables();
 
         private IMultiPanelMullionUCPresenter _multiUCP;
         private IMultiPanelMullionImagerUCPresenter _multiMullionImagerUCP;
@@ -541,7 +545,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _mainPresenter.GetCurrentPrice();
             }
         }
-
+        private UserControl frameUC;
         private void OnFrameMouseClickEventRaised(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -549,6 +553,198 @@ namespace PresentationLayer.Presenter.UserControls
                 color = Color.Blue;
                 _frameUC.InvalidateThis();
                 _frameCmenu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y));
+            }
+            else
+            {
+
+
+
+
+
+
+
+                try
+                {
+                    frameUC = (UserControl)sender;
+                    IWindoorModel wdm = _frameModel.Frame_WindoorModel;
+                    int propertyHeight = 0;
+                    int framePropertyHeight = 0;
+                    int concretePropertyHeight = 0;
+                    int mpnlPropertyHeight = 0;
+                    int pnlPropertyHeight = 0;
+                    int divPropertyHeight = 0;
+                    foreach (Control wndrObject in wdm.lst_objects)
+                    {
+                        if (wndrObject.Name.Contains("Frame"))
+                        {
+                            #region FrameModel
+                            foreach (FrameModel frm in wdm.lst_frame)
+                            {
+                                if (frm.Frame_Name == wndrObject.Name)
+                                {
+                                    if (frm.Frame_Name == wndrObject.Name)
+                                    {
+                                        if (frm.Frame_Name == frameUC.Name)
+                                        {
+                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight;
+                                            return;
+
+                                        }
+                                        else
+                                        {
+                                            framePropertyHeight += constants.frame_propertyHeight_default;
+                                        }
+                                    }
+                                    #region  Frame Panel
+                                    foreach (PanelModel pnl in frm.Lst_Panel)
+                                    {
+                                        pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                    }
+                                    #endregion
+                                    #region 2nd Level MultiPanel
+                                    foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
+                                    {
+                                        mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                        foreach (Control ctrl in mpnl.MPanelLst_Objects)
+                                        {
+                                            if (ctrl.Name.Contains("PanelUC"))
+                                            {
+                                                #region 2nd Level MultiPanel Panel
+                                                foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
+                                                {
+                                                    if (ctrl.Name == pnl.Panel_Name)
+                                                    {
+                                                        pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                        break;
+                                                    }
+                                                }
+                                                #endregion
+
+                                            }
+                                            else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
+                                            {
+                                                #region 2nd Level MultiPanel Divider
+                                                foreach (DividerModel div in mpnl.MPanelLst_Divider)
+                                                {
+                                                    if (ctrl.Name == div.Div_Name)
+                                                    {
+                                                        divPropertyHeight += div.Div_PropHeight;
+                                                        break;
+                                                    }
+                                                }
+                                                #endregion
+
+                                            }
+                                            else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
+                                            {
+
+                                                #region 2nd Level MultiPanel MultiPanel
+
+                                                foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
+                                                {
+                                                    if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
+                                                    {
+                                                        mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                                        foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
+                                                        {
+                                                            if (thirdlvlctrl.Name.Contains("PanelUC"))
+                                                            {
+                                                                foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                                                                {
+                                                                    if (thirdlvlctrl.Name == pnl.Panel_Name)
+                                                                    {
+                                                                        pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
+                                                            {
+
+                                                                foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
+                                                                {
+                                                                    if (thirdlvlctrl.Name == div.Div_Name)
+                                                                    {
+                                                                        divPropertyHeight += div.Div_PropHeight;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
+                                                            {
+                                                                if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
+                                                                {
+                                                                    mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
+                                                                    foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
+                                                                    {
+
+                                                                        if (fourthlvlctrl.Name.Contains("PanelUC"))
+                                                                        {
+                                                                            foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+                                                                            {
+                                                                                if (fourthlvlctrl.Name == pnl.Panel_Name)
+                                                                                {
+                                                                                    pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                                                    break;
+                                                                                }
+                                                                            }
+
+                                                                        }
+                                                                        else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
+                                                                        {
+                                                                            foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
+                                                                            {
+                                                                                if (fourthlvlctrl.Name == div.Div_Name)
+                                                                                {
+                                                                                    divPropertyHeight += div.Div_PropHeight;
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                #endregion
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                    propertyHeight += frm.Frame_PropertiesUC.Height;
+                                    framePropertyHeight = 0;
+                                    mpnlPropertyHeight = 0;
+                                    pnlPropertyHeight = 0;
+                                    divPropertyHeight = 0;
+                                }
+
+                            }
+
+                            #endregion
+                        }
+                        else
+                        {
+                            #region Concrete
+
+                            foreach (IConcreteModel crm in wdm.lst_concrete)
+                            {
+                                if (wndrObject.Name == crm.Concrete_Name)
+                                {
+                                    concretePropertyHeight += constants.concrete_propertyHeight_default;
+                                    break;
+                                }
+                            }
+                            #endregion
+                        }
+
+
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
 

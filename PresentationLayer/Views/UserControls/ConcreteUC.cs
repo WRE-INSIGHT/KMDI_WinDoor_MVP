@@ -25,6 +25,7 @@ namespace PresentationLayer.Views.UserControls
         public event EventHandler ConcreteUCMouseLeaveEventRaised;
         public event EventHandler deleteToolStripMenuItemClickEventRaised;
         public event PaintEventHandler ConcreteUCPaintEventRaised;
+        public event MouseEventHandler concreteUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -44,6 +45,11 @@ namespace PresentationLayer.Views.UserControls
             if (e.Button == MouseButtons.Right)
             {
                 cmenu_concrete.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+            else
+            {
+                EventHelpers.RaiseMouseEvent(sender, concreteUCMouseClickEventRaised, e);
+                
             }
         }
 

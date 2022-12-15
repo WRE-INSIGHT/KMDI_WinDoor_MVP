@@ -36,7 +36,6 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _slidingRailsPropertyUC.ThisBinding(CreateBindingDictionary());
-            _slidingRailsPropertyUC.GetNudRailsQty().Value = 2;
         }
 
         public IFP_SlidingRailsPropertyUC GetSlidingRailsPropertyUC()

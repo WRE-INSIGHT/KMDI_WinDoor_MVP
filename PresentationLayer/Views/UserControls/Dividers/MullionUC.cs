@@ -44,6 +44,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         public event EventHandler mullionUCMouseLeaveEventRaised;
         public event EventHandler mullionUCSizeChangedEventRaised;
         public event KeyEventHandler mullionUCKeyDownEventRaised;
+        public event MouseEventHandler mullionUCMouseClickEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -81,13 +82,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void MullionUC_MouseClick(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Right)
-            //{
-            //    cmenu_mullion.Show(new Point(MousePosition.X, MousePosition.Y));
-            //}
-            //Console.WriteLine(this.Width);
-            //Console.WriteLine(this.Location);
-            //Console.WriteLine(this.Parent.Name);
+            EventHelpers.RaiseMouseEvent(this, mullionUCMouseClickEventRaised, e);
         }
 
         private void MullionUC_MouseEnter(object sender, EventArgs e)
@@ -128,7 +123,6 @@ namespace PresentationLayer.Views.UserControls.Dividers
 
         private void MullionUC_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(this.Width);
             EventHelpers.RaiseMouseEvent(this, mullionUCMouseDoubleClickedEventRaised, e);
         }
 

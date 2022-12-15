@@ -313,5 +313,7 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, cmbCladdingArtNoSelectedValueChangeEventRiased, e);
         }
+
+       
     }
 }

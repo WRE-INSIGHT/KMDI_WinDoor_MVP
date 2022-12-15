@@ -2,6 +2,7 @@
 using PresentationLayer.CommonMethods;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
+using PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPresenter_Module;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace PresentationLayer.Presenter
 
         private DataTable _screenDT = new DataTable();
 
+        private DataGridView _dgv_Screen;
+
+
         CommonFunctions commonfunc = new CommonFunctions();
         Panel _pnlAddOns;
         NumericUpDown _screenWidth, _screenHeight, _factor;
@@ -39,7 +43,7 @@ namespace PresentationLayer.Presenter
             _printQuotePresenter = printQuotePresenter;
             _screenAddOnPropertiesUCPresenter = screenAddOnPropertiesUCPresenter;
             _exchangeRatePresenter = exchangeRatePresenter;
-
+            _dgv_Screen = _screenView.GetDatagrid();
             SubscribeToEventSetup();
         }
 
@@ -61,12 +65,35 @@ namespace PresentationLayer.Presenter
             _screenView.txtwindoorIDTextChangedEventRaised += _screenView_txtwindoorIDTextChangedEventRaised;
             _screenView.tsBtnExchangeRateClickEventRaised += _screenView_tsBtnExchangeRateClickEventRaised;
             _screenView.cmbPlisséTypeSelectedIndexChangedEventRaised += _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised;
+            _screenView.deleteToolStripMenuClickEventRaised += _screenView_deleteToolStripMenuClickEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
             _screenHeight = _screenView.screen_height;
             _factor = _screenView.screen_factor;
         }
+
+        private void _screenView_deleteToolStripMenuClickEventRaised(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in _dgv_Screen.SelectedRows)
+            {
+                var dgv_indices = r.Cells[0].RowIndex;
+                int i = 0;
+                foreach (DataRow row in _screenDT.Select())
+                {
+                    var swp = row.ItemArray[0];
+                    if (dgv_indices == i)
+                    {
+                        _dgv_Screen.Rows.RemoveAt(dgv_indices);
+                        _screenDT.Rows.RemoveAt(dgv_indices);
+                        break;
+                    }
+                    i++;
+                    
+                }
+            }
+        }
+
         #region Events
         private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
         {
@@ -137,6 +164,15 @@ namespace PresentationLayer.Presenter
                 _screenView.getLblPlisse().Visible = false;
                 _screenView.getCmbPlisse().Visible = false;
             }
+
+            if (screenType == ScreenType._RollUp)
+            {                
+                _screenModel.SpringLoad_Visibility = true;                              
+            }
+            else
+            {
+                _screenModel.SpringLoad_Visibility = false;
+            }
             _screenModel.ComputeScreenTotalPrice();
         }
 
@@ -192,8 +228,15 @@ namespace PresentationLayer.Presenter
             commonfunc.rowpostpaint(sender, e);
         }
 
+        public void GetCurrentAmount()
+        {
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+        }
+
         private void _screenView_btnAddClickEventRaised(object sender, EventArgs e)
         {
+            GetCurrentAmount();
             _screenDT.Rows.Add(CreateNewRow_ScreenDT());
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
         }
@@ -227,12 +270,15 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_Set = 1;
             _screenModel.Screen_ExchangeRate = 64;
             _screenModel.Screen_Types_Window = true;
+          
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
             _pnlAddOns.Controls.Add(addOnsProp);
             addOnsProp.Dock = DockStyle.Top;
             addOnsProp.BringToFront();
+
+
         }
 
         #endregion
@@ -335,6 +381,10 @@ namespace PresentationLayer.Presenter
 
             return screen;
         }
+
+     
+
+        
 
 
     }

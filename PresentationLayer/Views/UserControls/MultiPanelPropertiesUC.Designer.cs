@@ -126,12 +126,10 @@
             // 
             // pnl_MultiPanelProperties
             // 
-            this.pnl_MultiPanelProperties.AutoSize = true;
             this.pnl_MultiPanelProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_MultiPanelProperties.Location = new System.Drawing.Point(0, 120);
             this.pnl_MultiPanelProperties.Name = "pnl_MultiPanelProperties";
-            this.pnl_MultiPanelProperties.Padding = new System.Windows.Forms.Padding(1, 5, 1, 1);
-            this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 24);
+            this.pnl_MultiPanelProperties.Size = new System.Drawing.Size(154, 9);
             this.pnl_MultiPanelProperties.TabIndex = 9;
             // 
             // cmenu_mpanel
@@ -152,12 +150,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnl_MultiPanelProperties);
             this.Controls.Add(this.panel1);
             this.Name = "MultiPanelPropertiesUC";
-            this.Size = new System.Drawing.Size(154, 144);
+            this.Size = new System.Drawing.Size(154, 129);
             this.Load += new System.EventHandler(this.MultiPanelPropertiesUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_Width)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Height)).EndInit();
@@ -165,7 +162,6 @@
             this.panel1.PerformLayout();
             this.cmenu_mpanel.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

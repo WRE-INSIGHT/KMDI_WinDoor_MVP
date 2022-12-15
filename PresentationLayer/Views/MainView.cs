@@ -196,6 +196,21 @@ namespace PresentationLayer.Views
 
             }
         }
+        private int _itemScroll;
+        public int ItemScroll
+        {
+            get
+            {
+                return _itemScroll;
+            }
+
+            set
+            {
+                _itemScroll = value;
+                pnlItems.VerticalScroll.Value = value;
+                pnlItems.ScrollControlIntoView(pnlItems);
+            }
+        }
 
         #endregion
         public event EventHandler MainViewLoadEventRaised;
@@ -241,6 +256,18 @@ namespace PresentationLayer.Views
         public MainView()
         {
             InitializeComponent();
+            pnlItems.MouseWheel += PnlItems_MouseWheel;
+            pnlProperties.MouseWheel += PnlProperties_MouseWheel;
+        }
+
+        private void PnlProperties_MouseWheel(object sender, MouseEventArgs e)
+        {
+            PropertiesScroll = pnlProperties.VerticalScroll.Value;
+        }
+
+        private void PnlItems_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ItemScroll = pnlItems.VerticalScroll.Value;
         }
 
         public void ShowMainView()
@@ -260,7 +287,7 @@ namespace PresentationLayer.Views
             lblSize.DataBindings.Add(binding["WD_Dimension"]);
             this.DataBindings.Add(binding["WD_zoom"]);
             this.DataBindings.Add(binding["WD_customArrowToggle"]);
-            this.DataBindings.Add(binding["WD_PropertiesScroll"]);
+            //this.DataBindings.Add(binding["WD_PropertiesScroll"]);
         }
 
         public void RemoveBinding()
@@ -580,8 +607,9 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, setNewFactorEventRaised, e);
         }
 
-
-      
-
+        private void pnlItems_Scroll(object sender, ScrollEventArgs e)
+        {
+            ItemScroll = pnlItems.VerticalScroll.Value;
+        }
     }
 }

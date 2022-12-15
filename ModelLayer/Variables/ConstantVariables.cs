@@ -10,7 +10,9 @@
         public int frame_ConnectionTypeproperty_PanelHeight = 39;
 
         #endregion
-
+        #region ConcreteModelConstants
+        public int concrete_propertyHeight_default = 102;
+        #endregion
         #region PanelModelConstants
 
         public int panel_propertyHeight_default = 175;

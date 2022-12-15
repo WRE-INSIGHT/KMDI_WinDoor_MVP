@@ -18,7 +18,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
         private IUnityContainer _unityC;
         private IDividerModel _dividerModel;
-
+        private IMainPresenter _mainPresenter;
         private IDividerPropertiesUCPresenter _divPropUCP;
         
         public DP_CladdingPropertyUCPresenter(IDP_CladdingPropertyUC dp_claddingPropertyUC)
@@ -36,6 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
         private void _dp_claddingPropertyUC_btnDeleteCladdingClickedEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
             _dividerModel.Div_CladdingCount--;
 
             _dividerModel.AdjustPropertyPanelHeight("minusCladding");
@@ -58,6 +59,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
 
             Control pnl_parent = ((UserControl)_dp_claddingPropertyUC).Parent;
             pnl_parent.Controls.Remove((UserControl)_dp_claddingPropertyUC);
+            _mainPresenter.PropertiesScroll = propertiesScroll;
+           
         }
 
         private void _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised(object sender, EventArgs e)
@@ -78,7 +81,8 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         }
 
         public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, 
-                                                              IDividerModel divModel, 
+                                                              IDividerModel divModel,
+                                                              IMainPresenter mainPresenter,
                                                               IDividerPropertiesUCPresenter divPropUCP)
         {
             unityC
@@ -88,7 +92,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             presenter._unityC = unityC;
             presenter._dividerModel = divModel;
             presenter._divPropUCP = divPropUCP;
-
+            presenter._mainPresenter = mainPresenter;
             return presenter;
         }
     }

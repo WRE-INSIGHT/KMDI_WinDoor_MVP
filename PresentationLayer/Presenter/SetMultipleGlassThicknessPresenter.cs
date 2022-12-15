@@ -128,7 +128,6 @@ namespace PresentationLayer.Presenter
             }
             _panelIdList.Clear();
           
-
         }
 
         private void OnsetMultipleGlassThicknessLoadEventRaised(object sender, EventArgs e)
@@ -136,8 +135,6 @@ namespace PresentationLayer.Presenter
             _dgvGlassSummary.DataSource = showGlassSummary();
             _initialLoad = false;
         }
-
-
 
         public DataTable showGlassSummary()
         {
