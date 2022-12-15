@@ -70,9 +70,11 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
+                int itemscroll = _mainPresenter.ItemScroll;
                 _mainPresenter.Load_Windoor_Item(_windoorModel);
                 _mainPresenter.qoutationModel_MainPresenter.itemSelectStatus = true;
                 _mainPresenter.GetCurrentPrice();
+                _mainPresenter.ItemScroll = itemscroll;
             }
             catch (Exception ex)
             {

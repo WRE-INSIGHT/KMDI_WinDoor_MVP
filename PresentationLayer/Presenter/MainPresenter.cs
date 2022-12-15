@@ -643,6 +643,32 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        public int PropertiesScroll
+        {
+            get
+            {
+                return _mainView.PropertiesScroll;
+            }
+
+            set
+            {
+                _mainView.PropertiesScroll = value;
+            }
+        }
+
+        public int ItemScroll
+        {
+            get
+            {
+                return _mainView.ItemScroll;
+            }
+
+            set
+            {
+                _mainView.ItemScroll = value;
+            }
+        }
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -2591,7 +2617,6 @@ namespace PresentationLayer.Presenter
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
             }
-
             else if (row_str == ")")
             {
                 _basePlatformPresenter.InvalidateBasePlatform();
@@ -2599,7 +2624,6 @@ namespace PresentationLayer.Presenter
             }
             if (row_str == "EndofFile")
             {
-               
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
@@ -2607,7 +2631,9 @@ namespace PresentationLayer.Presenter
                     wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
-                Load_Windoor_Item(_windoorModel);
+                Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+                ItemScroll = 0;
+                PropertiesScroll = 0;
             }
             switch (inside_quotation)
             {
@@ -2821,10 +2847,6 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_zoom_forImageRenderer:"))
                         {
                             //_windoorModel.WD_zoom_forImageRenderer = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                        }
-                        if (row_str.Contains("WD_PropertiesScroll:"))
-                        {
-                            _windoorModel.WD_PropertiesScroll = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_price:"))
                         {
@@ -5070,7 +5092,7 @@ namespace PresentationLayer.Presenter
                             //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
                             //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
                             pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
-                            pnlModel.Panel_Orient = panel_Orient;
+                            //pnlModel.Panel_Orient = panel_Orient;
                             pnlModel.Panel_OrientVisibility = panel_OrientVisibility;
                             pnlModel.Panel_HandleOptionsVisibility = panel_HandleOptionsVisibility;
                             pnlModel.Panel_RotoswingOptionsVisibility = panel_RotoswingOptionsVisibility;
@@ -5279,7 +5301,7 @@ namespace PresentationLayer.Presenter
                             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                             panelPropUC.Dock = DockStyle.Top;
-
+                           
                             if (panel_Parent.Parent.Name.Contains("frame"))
                             {
 
@@ -5338,10 +5360,13 @@ namespace PresentationLayer.Presenter
 
                             if (panel_Type.Contains("Fixed Panel"))
                             {
-
                                 IFixedPanelUCPresenter fixedUCP;
                                 if (panel_Parent.Parent.Name.Contains("frame"))
                                 {
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                               
                                     fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -5395,6 +5420,17 @@ namespace PresentationLayer.Presenter
                                 ICasementPanelUCPresenter casementUCP;
                                 if (panel_Parent.Parent.Name.Contains("frame"))
                                 {
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                                     casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -5443,6 +5479,18 @@ namespace PresentationLayer.Presenter
                                 IAwningPanelUCPresenter awningUCP;
                                 if (panel_Parent.Parent.Name.Contains("frame"))
                                 {
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                                     awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -5490,6 +5538,18 @@ namespace PresentationLayer.Presenter
                                 ISlidingPanelUCPresenter slidingUCP;
                                 if (panel_Parent.Parent.Name.Contains("frame"))
                                 {
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                                     slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -5537,6 +5597,19 @@ namespace PresentationLayer.Presenter
                                 ITiltNTurnPanelUCPresenter tiltNTurnUCP;
                                 if (panel_Parent.Name.Contains("frame"))
                                 {
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
                                     tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -6619,7 +6692,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
 
-                            //div_CladdingSizeList = extractedValue_str;
+                            //div_CladdingSizeList.Reverse();
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
                         {
@@ -7713,6 +7786,7 @@ namespace PresentationLayer.Presenter
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
+
                         SetMainViewTitle(input_qrefno,
                                          _projectName,
                                          _custRefNo,
@@ -8684,7 +8758,7 @@ namespace PresentationLayer.Presenter
             mainPresenterBinding.Add("WD_Dimension", new Binding("Text", _windoorModel, "WD_Dimension", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_zoom", new Binding("Zoom", _windoorModel, "WD_zoom", true, DataSourceUpdateMode.OnPropertyChanged));
             mainPresenterBinding.Add("WD_customArrowToggle", new Binding("CustomArrowHeadToggle", _windoorModel, "WD_customArrowToggle", true, DataSourceUpdateMode.OnPropertyChanged));
-            mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
+            //mainPresenterBinding.Add("WD_PropertiesScroll", new Binding("PropertiesScroll", _windoorModel, "WD_PropertiesScroll", true, DataSourceUpdateMode.OnPropertyChanged));
             return mainPresenterBinding;
         }
 

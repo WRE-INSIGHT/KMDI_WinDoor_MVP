@@ -95,7 +95,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 //{
                                 //    if (pnl.Panel_Name == casementUC.Name)
                                 //    {
-                                //        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
+                                //        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 8;
                                 //        return;
                                 //    }
                                 //}
@@ -129,7 +129,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                 {
                                                     if (div.Div_Name == transomUC.Name)
                                                     {
-                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
+                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                         return;
                                                     }
                                                     else
@@ -174,7 +174,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                 {
                                                                     if (div.Div_Name == transomUC.Name)
                                                                     {
-                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
+                                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                         return;
                                                                     }
                                                                     else
@@ -212,7 +212,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                             {
                                                                                 if (div.Div_Name == transomUC.Name)
                                                                                 {
-                                                                                    wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
+                                                                                    _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                     return;
                                                                                 }
                                                                                 else

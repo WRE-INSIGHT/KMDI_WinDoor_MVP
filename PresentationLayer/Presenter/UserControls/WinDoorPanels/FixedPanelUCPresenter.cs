@@ -132,7 +132,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         if (pnl.Panel_Name == fixedUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
+                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
                                             return;
                                         }
                                     }
@@ -152,7 +152,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                     {
                                                         if (pnl.Panel_Name == fixedUC.Name)
                                                         {
-                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
+                                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                             return;
                                                         }
                                                         else
@@ -198,7 +198,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     {
                                                                         if (pnl.Panel_Name == fixedUC.Name)
                                                                         {
-                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
+                                                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                             return;
 
                                                                         }
@@ -237,7 +237,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                 {
                                                                                     if (pnl.Panel_Name == fixedUC.Name)
                                                                                     {
-                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
+                                                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                         return;
 
                                                                                     }
@@ -1015,12 +1015,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
             Color col = Color.Black;
             Color outerColor = Color.DarkGray;
-            if(_panelModel.Panel_ChkText == "dSash")
-            {
-                outerColor = col;
-            }
+
             if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
             {
+
+                if (_panelModel.Panel_ChkText == "dSash")
+                {
+                }
                 g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line,
                                                            outer_line,
                                                            (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
@@ -1037,10 +1038,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Left)
             {
-                g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
-                                                          outer_line,
-                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                if (_panelModel.Panel_ChkText == "dSash")
+                {
+                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
+                                                         outer_line,
+                                                         (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                         (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                }
+               
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
@@ -1051,10 +1056,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._Both)
             {
-                g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
+                if (_panelModel.Panel_ChkText == "dSash")
+                {
+                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
                                                          outer_line,
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                }
+                
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
@@ -1065,10 +1074,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             else if (_panelModel.Panel_Overlap_Sash == OverlapSash._None)
             {
-                g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line,
+                if (_panelModel.Panel_ChkText == "dSash")
+                {
+                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line,
                                                          outer_line,
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+                }
+                
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
