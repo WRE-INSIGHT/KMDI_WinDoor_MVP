@@ -1216,6 +1216,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height += constants.div_property_claddingOptionsHeight;
                 }
+                else if (mode == "addCladdingArtNo")
+                {
+                    FrameProp_Height += constants.div_property_claddingArtNoOptionsHeight;
+                }
+                else if (mode == "minusCladdingArtNo")
+                {
+                    FrameProp_Height += constants.div_property_claddingArtNoOptionsHeight;
+                }
                 else if (mode == "minusCladding")
                 {
                     FrameProp_Height -= constants.div_property_claddingOptionsHeight;

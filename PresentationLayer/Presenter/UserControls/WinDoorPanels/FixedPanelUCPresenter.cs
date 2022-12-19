@@ -127,6 +127,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (frm.Frame_Name == wndrObject.Name)
                                 {
                                     framePropertyHeight += constants.frame_propertyHeight_default;
+                                    if (_frameModel.Frame_BotFrameVisible == true)
+                                    {
+                                        framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
+                                    }
+                                    if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                    {
+                                        framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                    }
+                                    if (_frameModel.Frame_ConnectionTypeVisibility == true && _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                                    {
+                                        framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                    }
                                     #region  Frame Panel
                                     foreach (PanelModel pnl in frm.Lst_Panel)
                                     {
@@ -1014,18 +1026,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
             Color col = Color.Black;
-            Color outerColor = Color.DarkGray;
 
             if (_panelModel.Panel_Overlap_Sash == OverlapSash._Right)
             {
 
                 if (_panelModel.Panel_ChkText == "dSash")
                 {
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
+                                                          outer_line,
+                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
+                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                 }
-                g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line,
-                                                           outer_line,
-                                                           (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
-                                                           (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
+               
 
 
                 if (_panelModel.Panel_Orient == true)
@@ -1040,7 +1052,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_panelModel.Panel_ChkText == "dSash")
                 {
-                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
                                                          outer_line,
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
@@ -1058,7 +1070,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_panelModel.Panel_ChkText == "dSash")
                 {
-                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line - sashDeduction,
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line - sashDeduction,
                                                          outer_line,
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
@@ -1076,7 +1088,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_panelModel.Panel_ChkText == "dSash")
                 {
-                    g.DrawRectangle(new Pen(outerColor, w), new Rectangle(outer_line,
+                    g.DrawRectangle(new Pen(col, w), new Rectangle(outer_line,
                                                          outer_line,
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));

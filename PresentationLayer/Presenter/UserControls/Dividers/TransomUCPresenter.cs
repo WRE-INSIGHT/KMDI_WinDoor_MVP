@@ -19,6 +19,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Variables;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Concrete;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -90,6 +91,18 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             if (frm.Frame_Name == wndrObject.Name)
                             {
                                 framePropertyHeight += constants.frame_propertyHeight_default;
+                                if (_frameModel.Frame_BotFrameVisible == true)
+                                {
+                                    framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
+                                }
+                                if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                {
+                                    framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                }
+                                if (_frameModel.Frame_ConnectionTypeVisibility == true && _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                                {
+                                    framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                }
                                 #region  Frame Panel
                                 //foreach (PanelModel pnl in frm.Lst_Panel)
                                 //{

@@ -50,6 +50,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _divModel.AdjustPropertyPanelHeight("minusCladdingBracket");
                     _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
                     _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingBracket");
+
                 }
                 else if (cladding_count > 0)
                 {
@@ -465,7 +466,6 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_divModel.Div_CladdingSizeList.Count > 0)
                 {
-                    _divModel.AdjustPropertyPanelHeight("addCladdingBracket");
 
                     foreach (var cladding in _divModel.Div_CladdingSizeList)
                     {
@@ -477,7 +477,7 @@ namespace PresentationLayer.Presenter.UserControls
                             _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
                             _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
                             _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-                            
+                            _divModel.Div_claddingBracketVisibility = false;
                         }
 
                         IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, _mainPresenter, this);
