@@ -82,18 +82,22 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 }
             }
             IDividerModel divNextModel = null;
-            if ((_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Divider.Count > pnlIndex) && _panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
-                divNext = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects[pnlIndex + 1];
-                divNextModel = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == divNext.Name);
 
-                if (divNextModel.Div_ChkDM == true && divNextModel.Div_DMPanel == _panelModel)
+                if ((_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Divider.Count > pnlIndex) && _panelModel.Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                 {
-                    DMSelected = true;
-                }
-                if (divNextModel.Div_ChkDM == true)
-                {
-                    divChkDM = true;
+                    divNext = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects[pnlIndex + 1];
+                    divNextModel = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == divNext.Name);
+
+                    if (divNextModel.Div_ChkDM == true && divNextModel.Div_DMPanel == _panelModel)
+                    {
+                        DMSelected = true;
+                    }
+                    if (divNextModel.Div_ChkDM == true)
+                    {
+                        divChkDM = true;
+                    }
                 }
             }
             if (chk.Checked == true)
