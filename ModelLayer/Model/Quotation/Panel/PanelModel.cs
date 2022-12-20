@@ -4556,10 +4556,10 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
             }
-            else if (mode == "minusLouver")
-            {
-                Panel_PropertyHeight -= constants.panel_property_LouverOptionsheight;
-            }
+            //else if (mode == "minusLouver")
+            //{
+            //    Panel_PropertyHeight -= constants.panel_property_LouverOptionsheight;
+            //}
             else if (mode == "addLouverBlades")
             {
                 Panel_PropertyHeight += constants.panel_property_LouverBladesOptionsheight;
@@ -8515,21 +8515,34 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm)
         {
-            if (Panel_Type.Contains("louver"))
+            if (Panel_Type.Contains("Louver"))
             {
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                            Panel_LouverBladesCount.ToString(), "pc(s)",
+                            Panel_GlassWidth.ToString(),
+                            location,
+                            @"\  /");
 
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                                       Panel_LouverBladesCount.ToString(), "pc(s)",
+                                       "152",
+                                       location,
+                                       @"\  /");
             }
-            tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + glassFilm,
-                                   1, "pc(s)",
-                                   Panel_GlassWidth.ToString(),
-                                   location,
-                                   @"\  /");
+            else
+            {
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                                            1, "pc(s)",
+                                            Panel_GlassWidth.ToString(),
+                                            location,
+                                            @"\  /");
 
-            tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + glassFilm,
-                                   1, "pc(s)",
-                                   Panel_GlassHeight.ToString(),
-                                   location,
-                                   @"\  /");
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                                       1, "pc(s)",
+                                       Panel_GlassHeight.ToString(),
+                                       location,
+                                       @"\  /");
+            }
         }
 
         public void Insert_GeorgianBar_MaterialList(DataTable tbl_explosion)
@@ -9218,7 +9231,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_LouvreGallerySet_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Louvre Gallery Set " + Panel_LouvreGallerySetArtNo.DisplayName,
+            tbl_explosion.Rows.Add("Louvre Gallery Set ", //+ Panel_LouvreGallerySetArtNo.DisplayName
                                    1, "pc(s)",
                                    Panel_LouvreGallerySetHeight,
                                    "Frame",

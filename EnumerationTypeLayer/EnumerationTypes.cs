@@ -124,8 +124,8 @@ namespace EnumerationTypeLayer
             public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(4, "Black 50");
             public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(5, "Black 35");
             public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(6, "Black 05");
-            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil (Solar Guard)");
-            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil (Upera)");
+            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil Safety Film (Solar Guard)");
+            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil Safety Film (Upera)");
             public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(9, "Frosted Film");
             private GlassFilm_Types(int value, string displayName) : base(value, displayName) { }
         }
@@ -1265,6 +1265,65 @@ namespace EnumerationTypeLayer
             private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
+        public class BladeType_Option : Enumeration<BladeType_Option, int>
+        {
+            public static readonly BladeType_Option _glass = new BladeType_Option(0, "Glass");
+            public static readonly BladeType_Option _Aluminum = new BladeType_Option(1, "Aluminum");
 
+
+            private BladeType_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
+        {
+            public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
+            public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
+            public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
+            public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
+            public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
+            public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
+            public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
+            public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
+            public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
+            public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
+            public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
+
+
+            private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BladeHeight_Option : Enumeration<BladeHeight_Option, int>
+        {
+            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(0, "150");
+            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(1, "152");
+
+
+            private BladeHeight_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GalleryHandle_Option : Enumeration<GalleryHandle_Option, int>
+        {
+            public static readonly GalleryHandle_Option _single = new GalleryHandle_Option(0, "Single");
+            public static readonly GalleryHandle_Option _dual = new GalleryHandle_Option(1, "Dual");
+            public static readonly GalleryHandle_Option _ringPullControl = new GalleryHandle_Option(3, "Ring Pull Control");
+            public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
+            public static readonly GalleryHandle_Option _none = new GalleryHandle_Option(4, "None");
+
+
+
+
+            private GalleryHandle_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GalleryHandleLoc_Option : Enumeration<GalleryHandleLoc_Option, int>
+        {
+            public static readonly GalleryHandleLoc_Option _LH = new GalleryHandleLoc_Option(0, "Left Hand");
+            public static readonly GalleryHandleLoc_Option _RH = new GalleryHandleLoc_Option(1, "Right Hand");
+            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(2, "None");
+
+
+
+            private GalleryHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

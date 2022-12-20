@@ -559,6 +559,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                 }
             }
+            _mainPresenter.itemDescription();
+            _mainPresenter.GetCurrentPrice();
             _mainPresenter.PropertiesScroll = propertiesScroll;
         }
 
