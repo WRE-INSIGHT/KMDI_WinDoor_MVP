@@ -498,7 +498,8 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (data == "Louver Panel")
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,
                                                                                             _frameModel,

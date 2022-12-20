@@ -353,6 +353,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                 }
             }
+            _mainPresenter.itemDescription();
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_motorizedPropertyUC_PPMotorizedPropertyUCLoadEventRaised(object sender, EventArgs e)

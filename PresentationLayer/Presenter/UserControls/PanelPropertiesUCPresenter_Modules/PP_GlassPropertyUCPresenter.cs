@@ -49,6 +49,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _panelModel.Panel_GlassFilm = (GlassFilm_Types)((ComboBox)sender).SelectedValue;
+                _mainPresenter.itemDescription();
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -94,7 +96,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             return _pp_glassPropertyUC;
         }
-      
+
         public IPP_GlassPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter)
         {
             unityC
@@ -104,7 +106,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             presenter._unityC = unityC;
             presenter._panelModel = panelModel;
             presenter._mainPresenter = mainPresenter;
-            
+
             return presenter;
         }
 

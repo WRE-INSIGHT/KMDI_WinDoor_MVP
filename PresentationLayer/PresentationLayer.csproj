@@ -816,11 +816,23 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.Designer.cs">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGalleryPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGalleryPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverGalleryPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.Designer.cs">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1363,8 +1375,14 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_HingePropertyUC.resx">
       <DependentUpon>PP_HingePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGalleryPropertyUC.resx">
+      <DependentUpon>PP_LouverGalleryPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.resx">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.resx">
+      <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>

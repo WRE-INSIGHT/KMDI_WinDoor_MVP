@@ -1638,7 +1638,7 @@ namespace ModelLayer.Model.Quotation
                                     //add_screws_fab_striker += strikerAC_screws;
                                 }
 
-                            } 
+                            }
 
 
 
@@ -1776,7 +1776,7 @@ namespace ModelLayer.Model.Quotation
                     }
 
                     if (pnl.Panel_Type.Contains("Louver"))
-                    { 
+                    {
                         pnl.Insert_CoverProfileInfo_MaterialList(Material_List);
                         pnl.Insert_PlantOnWeatherStripHead_MaterialList(Material_List);
                         pnl.Insert_PlantOnWeatherStripSeal_MaterialList(Material_List);
@@ -1785,7 +1785,7 @@ namespace ModelLayer.Model.Quotation
                         pnl.Insert_RubberSeal_MaterialList(Material_List);
                         pnl.Insert_CasementSeal_MaterialList(Material_List);
                         pnl.Insert_SealForHandle_MaterialList(Material_List);
-                        pnl.Insert_LouvreGallerySet_MaterialList(Material_List);  
+                        pnl.Insert_LouvreGallerySet_MaterialList(Material_List);
                     }
 
                     if (!pnl.Panel_Type.Contains("Louver"))
@@ -1879,29 +1879,29 @@ namespace ModelLayer.Model.Quotation
             Material_List.Rows.Add("PU Foaming",
                                    Frame_PUFoamingQty_Total, "can", "", "Frame");
 
-           
-                Material_List.Rows.Add("Sealant-WH (Frame)",
-                                  Frame_SealantWHQty_Total, "pc(s)", "", "Frame");
 
-                Material_List.Rows.Add("Sealant-WH (Glass)",
-                                       Glass_SealantWHQty_Total,
-                                       "pc(s)",
-                                       "",
-                                       "Frame"); // Frame or Sash
+            Material_List.Rows.Add("Sealant-WH (Frame)",
+                              Frame_SealantWHQty_Total, "pc(s)", "", "Frame");
 
-                Material_List.Rows.Add("Expansion Bolts FRA003",
-                                       Expansion_BoltQty_Total,
-                                       "pc(s)",
-                                       "",
-                                       "Frame");
+            Material_List.Rows.Add("Sealant-WH (Glass)",
+                                   Glass_SealantWHQty_Total,
+                                   "pc(s)",
+                                   "",
+                                   "Frame"); // Frame or Sash
 
-                Material_List.Rows.Add("Rebate",
-                                       Rebate_Qty,
-                                       "pc(s)",
-                                       "",
-                                       "Frame");
-        
-           
+            Material_List.Rows.Add("Expansion Bolts FRA003",
+                                   Expansion_BoltQty_Total,
+                                   "pc(s)",
+                                   "",
+                                   "Frame");
+
+            Material_List.Rows.Add("Rebate",
+                                   Rebate_Qty,
+                                   "pc(s)",
+                                   "",
+                                   "Frame");
+
+
 
             if (GlazingSpacer_TotalQty > 0)
             {
@@ -2099,14 +2099,16 @@ namespace ModelLayer.Model.Quotation
         #region GlassPrice
 
         Glass_6mmClr_PricePerSqrMeter = 670.00m,
-                Glass_10mmClr_PricePerSqrMeter = 1662.00m,
-                Glass_12mmClr_PricePerSqrMeter = 1941.00m,
-                Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
-                Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
-                Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
+        Glass_10mmClr_PricePerSqrMeter = 1662.00m,
+        Glass_12mmClr_PricePerSqrMeter = 1941.00m,
+        Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
+        Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
+        Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
 
-                GlassPrice,
+        _4millFilmPrice_PricePerSqrMeter = 2600m,
 
+        FilmPrice,
+        GlassPrice,
         #endregion
         #region FittingAndSupplies
 
@@ -3241,7 +3243,9 @@ namespace ModelLayer.Model.Quotation
                                                 SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
                                             }
 
-                                            if (pnl.Panel_CornerDriveOptionsVisibility == true)
+                                            if (pnl.Panel_CornerDriveOptionsVisibility == true &&
+                                                pnl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
+                                                pnl.Panel_CornerDriveArtNo != null)
                                             {
                                                 CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                             }
@@ -3850,7 +3854,12 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
                                         #endregion
-
+                                        #region GlassFilm
+                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                        {
+                                            FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
+                                        }
+                                        #endregion
                                         HandleDesc = pnl.Panel_HandleType.ToString();
 
                                         CostingPoints += ProfileColorPoints * 4;
@@ -3918,7 +3927,12 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
                                         #endregion
-
+                                        #region GlassFilm
+                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                        {
+                                            FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
+                                        }
+                                        #endregion
                                     }
                                 }
                             }
@@ -4088,7 +4102,9 @@ namespace ModelLayer.Model.Quotation
                                         SnapInKeepPrice += SnapInKeepPricePerPiece * 2;
                                     }
 
-                                    if (Singlepnl.Panel_CornerDriveOptionsVisibility == true)
+                                    if (Singlepnl.Panel_CornerDriveOptionsVisibility == true &&
+                                        Singlepnl.Panel_CornerDriveArtNo != CornerDrive_ArticleNo._None &&
+                                        Singlepnl.Panel_CornerDriveArtNo != null)
                                     {
                                         CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                     }
@@ -4688,6 +4704,13 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
+                                #region GlassFilm
+                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                {
+                                    FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
+                                }
+                                #endregion
+
                                 CostingPoints += ProfileColorPoints * 4;
                                 InstallationPoints += (ProfileColorPoints / 3) * 4;
                             }
@@ -4752,6 +4775,13 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                     }
+                                }
+                                #endregion
+
+                                #region GlassFilm
+                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                {
+                                    FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                 }
                                 #endregion
                             }
@@ -4842,7 +4872,8 @@ namespace ModelLayer.Model.Quotation
                     TotaPrice = Math.Round(LaborCost, 2) +
                                 Math.Round(InstallationCost, 2) +
                                 Math.Round(MaterialCost, 2) +
-                                Math.Round(GlassPrice, 2);
+                                Math.Round(GlassPrice, 2) +
+                                Math.Round(FilmPrice, 2);
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
@@ -4915,6 +4946,14 @@ namespace ModelLayer.Model.Quotation
                                             Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
                                             Math.Round(GlassPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
                                             Math.Round((GlassPrice * PricingFactor) + GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "Price Break Down");
+
+                        //glass film
+                        Price_List.Rows.Add(GlassFilm_Types._4milSolarGuard.ToString(),
+                                            "",
+                                            Math.Round(FilmPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round(FilmPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                            Math.Round((FilmPrice * PricingFactor) + FilmPrice, 2).ToString("N", new CultureInfo("en-US")),
                                             "Price Break Down");
 
                         Price_List.Rows.Add("",
@@ -5492,6 +5531,7 @@ namespace ModelLayer.Model.Quotation
             DMReinforcementPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
+            FilmPrice = 0;
             SealantPrice = 0;
             PUFoamingPrice = 0;
 

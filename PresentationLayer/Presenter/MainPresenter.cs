@@ -1,4 +1,4 @@
-﻿ using CommonComponents;
+﻿using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
@@ -54,7 +54,7 @@ namespace PresentationLayer.Presenter
         IMainView _mainView;
 
         private IUnityContainer _unityC;
-  
+
         private IUserModel _userModel;
         private IQuotationModel _quotationModel;
         private IWindoorModel _windoorModel; //currently selected item
@@ -119,7 +119,7 @@ namespace PresentationLayer.Presenter
         private IScreenPresenter _screenPresenter;
         private IPricingPresenter _pricingPresenter;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
-        
+
 
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IMultiPanelPropertiesUCPresenter _multiPanelPropertiesUCP;
@@ -137,7 +137,7 @@ namespace PresentationLayer.Presenter
         private IMultiPanelTransomUC _multiTransomUC3rd;
         private IMultiPanelMullionUC _multiMullionUC4th;
         private IMultiPanelTransomUC _multiTransomUC4th;
-        
+
         private IMullionUCPresenter _mullionUCP;
         private ITransomUCPresenter _transomUCP;
 
@@ -181,7 +181,7 @@ namespace PresentationLayer.Presenter
         private IMullionImagerUCPresenter _mullionImagerUCP;
         private ITransomImagerUCPresenter _transomImagerUCP;
 
-        
+
         private int i = 0;
         private decimal newfactor = 0;
         #endregion
@@ -731,7 +731,7 @@ namespace PresentationLayer.Presenter
                              ITransomImagerUCPresenter transomImagerUCP,
                              IPricingPresenter pricingPresenter,
                              ISetMultipleGlassThicknessPresenter setMultipleGlassThicknessPresenter
-                             
+
                              )
         {
             _mainView = mainView;
@@ -795,8 +795,8 @@ namespace PresentationLayer.Presenter
             _pricingPresenter = pricingPresenter;
             _setMultipleGlassThicknessPresenter = setMultipleGlassThicknessPresenter;
             _lblCurrentPrice = _mainView.GetCurrentPrice();
-            
-           
+
+
 
             SubscribeToEventsSetup();
         }
@@ -905,12 +905,12 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
-           
+
 
 
         }
 
-    
+
 
         #region Events  
 
@@ -923,7 +923,7 @@ namespace PresentationLayer.Presenter
         public async void setNewFactor()
         {
             decimal value;
-  
+
             if (i <= 0)
             {
                 string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
@@ -932,7 +932,7 @@ namespace PresentationLayer.Presenter
             else
             {
                 value = newfactor;
-            }         
+            }
             string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
             if (input != "" && input != "0")
             {
@@ -952,7 +952,7 @@ namespace PresentationLayer.Presenter
                         else
                         {
                             MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }     
+                        }
                     }
                     else if (deci_input < 0)
                     {
@@ -1048,7 +1048,7 @@ namespace PresentationLayer.Presenter
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-           
+
             ISetMultipleGlassThicknessPresenter multipleGlassThicknessPresenter = _setMultipleGlassThicknessPresenter.GetNewInstance(_unityC, _windoorModel, this);
             multipleGlassThicknessPresenter.Get_MltpleGlssThcknView().ShowMultipleThckView();
 
@@ -1608,6 +1608,7 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 GetCurrentPrice();
+                itemDescription();
 
             }
             catch (Exception ex)
@@ -1892,7 +1893,7 @@ namespace PresentationLayer.Presenter
                         Load_Windoor_Item(wdm);
                         break;
                     }
-                   
+
                 }
             }
             if (_quotationModel.Lst_Windoor.Count == 0)
@@ -5301,7 +5302,7 @@ namespace PresentationLayer.Presenter
                             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
                             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
                             panelPropUC.Dock = DockStyle.Top;
-                           
+
                             if (panel_Parent.Parent.Name.Contains("frame"))
                             {
 
@@ -5366,7 +5367,7 @@ namespace PresentationLayer.Presenter
                                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
                                     _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                                     pnlModel.AdjustPropertyPanelHeight("addGlass");
-                               
+
                                     fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
                                                                                               pnlModel,
                                                                                               _frameModel,
@@ -6034,7 +6035,7 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("MPanel_GlassBalanced:"))
                         {
                             mPanel_GlassBalanced = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                        
+
                             _frameModel.SetDeductFramePadding(true);
                             IMultiPanelModel multipanelModel = _multipanelServices.AddMultiPanelModel(mPanel_Width,
                                                                                                       mPanel_Height,
@@ -6585,9 +6586,9 @@ namespace PresentationLayer.Presenter
                                 {
                                     div_MPanelParent = _multiPanelModel2ndLvl;
                                 }
-                                
+
                             }
-                           
+
 
                         }
                         else if (row_str.Contains("Div_FrameParent:"))
@@ -7964,7 +7965,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        
+
 
         public void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                        int frmDimension_numWd,
@@ -7982,7 +7983,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
-            if(_windoorModel.lst_objects.Count > 1)
+            if (_windoorModel.lst_objects.Count > 1)
                 _windoorModel.Fit_MyControls_ToBindDimensions();
             //Load_Windoor_Item(_windoorModel);
         }
@@ -8075,7 +8076,7 @@ namespace PresentationLayer.Presenter
                 _quotationModel.Select_Current_Windoor(_windoorModel);
 
                 //clear
-              
+
                 _pnlMain.Controls.Clear();
                 _pnlPropertiesBody.Controls.Clear();
                 _frmDimensionPresenter.SetValues(_windoorModel.WD_width, _windoorModel.WD_height);
@@ -9159,7 +9160,7 @@ namespace PresentationLayer.Presenter
 
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
-        
+
         string FrameTypeDesc,
                AllItemDescription,
                motorizeDesc,
@@ -9285,7 +9286,7 @@ namespace PresentationLayer.Presenter
                                         {
                                             if (pnl.Panel_GlassFilm.ToString() != "None")
                                             {
-                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with" + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
                                             }
                                             else
                                             {
@@ -9342,12 +9343,12 @@ namespace PresentationLayer.Presenter
                                 }
 
 
-                               //GlassThickness & Glassfilm
+                                //GlassThickness & Glassfilm
                                 if (Singlepnl.Panel_GlassThicknessDesc != null)
                                 {
                                     if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with" + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
                                     }
                                     else
                                     {
@@ -9363,7 +9364,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
-                                }                          
+                                }
                             }
                             #endregion
                             else
@@ -9456,7 +9457,7 @@ namespace PresentationLayer.Presenter
 
                     wdm.WD_description += GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
-                   glassThick = string.Empty;
+                    glassThick = string.Empty;
                     lst_glassThickness.Clear();
                 }
                 GeorgianBarVerticalDesc = "";
