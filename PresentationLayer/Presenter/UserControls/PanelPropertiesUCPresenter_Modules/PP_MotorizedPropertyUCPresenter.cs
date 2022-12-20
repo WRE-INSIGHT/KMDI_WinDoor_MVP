@@ -59,7 +59,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             bool DMSelected = false,
                 divChkDM = false;
-            int pnlIndex = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.FindIndex(pnl => pnl.Name == _panelModel.Panel_Name);
+            int pnlIndex = 0;
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            {
+                pnlIndex = _panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.FindIndex(pnl => pnl.Name == _panelModel.Panel_Name);
+            }
             Control divPrev = null;
             Control divNext = null;
             IDividerModel divPrevModel = null;

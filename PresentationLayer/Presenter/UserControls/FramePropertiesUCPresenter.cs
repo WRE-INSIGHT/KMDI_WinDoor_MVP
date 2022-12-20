@@ -63,9 +63,9 @@ namespace PresentationLayer.Presenter.UserControls
         string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (initialized == true)
+            if (initialized == true )
             {
-
+                
                 _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -82,13 +82,13 @@ namespace PresentationLayer.Presenter.UserControls
 
                         //  RailsAdditionalHt = false;
                     }
-                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
                     {
                         _frameModel.Frame_ConnectionTypeVisibility = true;
                         _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
                         _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
                     }
-                    else if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
                     {
                         _frameModel.Frame_ConnectionTypeVisibility = false;
                         _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;

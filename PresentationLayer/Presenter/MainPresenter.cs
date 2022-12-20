@@ -5695,12 +5695,8 @@ namespace PresentationLayer.Presenter
                                         _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
                                         louverPanelUCP.SetInitialLoadFalse();
                                     }
-
                                 }
-
-
                             }
-
                             if (!panel_Parent.Parent.Name.Contains("frame"))
                             {
                                 if (pnlModel.Panel_Placement == "Last")
@@ -5710,9 +5706,7 @@ namespace PresentationLayer.Presenter
                                         _multiModelParent.Fit_EqualPanel_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ToBindDimensions();
                                         _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-
                                     }
-
                                 }
                                 if (div_DMPanelName != "" || div_DMPanelName != null)
                                 {
@@ -5726,16 +5720,11 @@ namespace PresentationLayer.Presenter
                                         }
                                     }
                                 }
-
                             }
-
                             inside_panel = false;
                         }
-
                         #endregion
-
                     }
-
                     else if (inside_multi)
                     {
                         #region Load for Multi Panel
@@ -7833,8 +7822,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
                         //_frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
-                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility== true? false : true;
-                        _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility;
+                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility == true? false : true;
+                        _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility == true ? false : true;
                         _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
                         _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
                         _frameModel.Frame_Padding_int = frm_Padding_int;
