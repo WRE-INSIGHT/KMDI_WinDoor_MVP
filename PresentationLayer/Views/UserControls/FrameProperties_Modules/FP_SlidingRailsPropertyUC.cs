@@ -35,9 +35,6 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             nud_RailsQty.DataBindings.Add(ModelBinding["Frame_SlidingRailsQty"]);
         }
 
-        private void FP_SlidingRailsPropertyUC_MouseClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show(this.Parent.Name);
-        }
+       
     }
 }
