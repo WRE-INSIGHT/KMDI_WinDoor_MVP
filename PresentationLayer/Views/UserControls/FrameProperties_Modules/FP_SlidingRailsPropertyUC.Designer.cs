@@ -78,6 +78,7 @@
             this.Name = "FP_SlidingRailsPropertyUC";
             this.Size = new System.Drawing.Size(152, 45);
             this.Load += new System.EventHandler(this.FP_SlidingRailsPropertyUC_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FP_SlidingRailsPropertyUC_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.nud_RailsQty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
