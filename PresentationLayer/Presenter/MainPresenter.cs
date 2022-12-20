@@ -7833,7 +7833,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
                         //_frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
-                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility;
+                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility== true? false : true;
                         _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility;
                         _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
                         _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
@@ -7848,42 +7848,11 @@ namespace PresentationLayer.Presenter
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
-
                         _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
                         AddFrameUC(_frameModel, _framePropertiesUCPresenter);
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
-
-                        if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
-                        _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
-                        _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-                        {
-                            //  if (RailsAdditionalHt == true)
-
-                            if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
-                            {
-                                _frameModel.Frame_SlidingRailsQtyVisibility = true;
-                                _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
-                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
-
-                                //  RailsAdditionalHt = false;
-                            }
-                            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-                            {
-                                _frameModel.Frame_ConnectionTypeVisibility = true;
-                                _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
-                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
-                            }
-                            else if (_frameModel.Frame_ConnectionTypeVisibility == true)
-                            {
-                                _frameModel.Frame_ConnectionTypeVisibility = false;
-                                _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
-                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
-                            }
-
-                            //RailsDeductHt = true;
-                        }
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
