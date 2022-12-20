@@ -257,12 +257,12 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
             pnlItems.MouseWheel += PnlItems_MouseWheel;
-            pnlProperties.MouseWheel += PnlProperties_MouseWheel;
+            pnlPropertiesBody.MouseWheel += PnlProperties_MouseWheel;
         }
 
         private void PnlProperties_MouseWheel(object sender, MouseEventArgs e)
         {
-            PropertiesScroll = pnlProperties.VerticalScroll.Value;
+            PropertiesScroll = pnlPropertiesBody.VerticalScroll.Value;
         }
 
         private void PnlItems_MouseWheel(object sender, MouseEventArgs e)

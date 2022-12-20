@@ -95,7 +95,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "DP_CladdingBracketPropertyUC";
-            this.Size = new System.Drawing.Size(148, 70);
+            this.Size = new System.Drawing.Size(148, 74);
             this.Load += new System.EventHandler(this.DP_CladdingBracketPropertyUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudBracketForConcrete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBracketForUPVC)).EndInit();

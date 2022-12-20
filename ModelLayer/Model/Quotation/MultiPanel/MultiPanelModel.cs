@@ -3465,6 +3465,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.div_property_claddingOptionsHeight;
                 }
+                else if (mode == "addCladdingArtNo")
+                {
+                    MPanelProp_Height += constants.div_property_claddingArtNoOptionsHeight;
+                }
+                else if (mode == "minusCladdingArtNo")
+                {
+                    MPanelProp_Height -= constants.div_property_claddingArtNoOptionsHeight;
+                }
                 else if (mode == "addPanelAddCladding")
                 {
                     MPanelProp_Height += constants.div_property_pnlAddcladdingOptionsHeight;

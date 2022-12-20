@@ -9,6 +9,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
@@ -64,7 +65,7 @@ namespace PresentationLayer.Presenter
         private IConcreteUC _concreteUC;
         private IPanelModel _panelModel;
 
-
+        ConstantVariables constants = new ConstantVariables();
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
         private IFrameUC _frameUC;
@@ -2613,8 +2614,8 @@ namespace PresentationLayer.Presenter
             {
 
                 _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
-                frmDimension_LoadWd = 0; ;
-                frmDimension_LoadHt = 0;
+                frm_Width = 0; ;
+                frm_Height = 0;
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
             }
@@ -2764,7 +2765,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_height:"))
                         {
-                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("WD_BaseColor:"))
                         {
@@ -2772,7 +2773,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_width:"))
                         {
-                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
                                      false,
                                      false,
@@ -2780,8 +2781,8 @@ namespace PresentationLayer.Presenter
                                      true,
                                      false,
                                      frmDimensionPresenter.Show_Purpose.CreateNew_Item,
-                                     frmDimension_LoadWd,
-                                     frmDimension_LoadHt,
+                                     frm_Width,
+                                     frm_Height,
                                      frmDimension_profileType,
                                      frmDimension_baseColor);
                         }
@@ -3010,109 +3011,99 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("Frame_Height:"))
                         {
-                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Width:"))
                         {
-                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                            Scenario_Quotation(false,
-                                     false,
-                                     false,
-                                     false,
-                                     true,
-                                     false,
-                                     frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
-                                     frmDimension_LoadWd,
-                                     frmDimension_LoadHt,
-                                     frmDimension_profileType,
-                                     frmDimension_baseColor);
+                            frm_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                          
                         }
                         if (row_str.Contains("Frame_BasicDeduction:"))
                         {
                         }
                         if (row_str.Contains("Frame_HeightToBind:"))
                         {
-                            _frameModel.Frame_HeightToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_HeightToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
 
                         }
                         if (row_str.Contains("FrameImageRenderer_Height:"))
                         {
-                            _frameModel.FrameImageRenderer_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmImageRenderer_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ID:"))
                         {
-                            _frameModel.Frame_ID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ID = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Type:"))
                         {
                             if (row_str.Contains("Window"))
                             {
-                                _frameModel.Frame_Type = FrameModel.Frame_Padding.Window;
+                                frameType = FrameModel.Frame_Padding.Window;
                             }
                             else
                             {
-                                _frameModel.Frame_Type = FrameModel.Frame_Padding.Door;
+                                frameType = FrameModel.Frame_Padding.Door;
                             }
                         }
                         if (row_str.Contains("Frame_Name:"))
                         {
-                            _frameModel.Frame_Name = extractedValue_str;
+                            frm_Name = extractedValue_str;
                         }
 
                         if (row_str.Contains("Frame_WidthToBind:"))
                         {
-                            _frameModel.Frame_WidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_WidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("FrameImageRenderer_Width:"))
                         {
-                            _frameModel.FrameImageRenderer_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmImageRenderer_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Visible:"))
                         {
-                            _frameModel.Frame_Visible = Convert.ToBoolean(extractedValue_str);
+                            frm_Visible = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("FrameProp_Height:"))
                         {
-                            _frameModel.FrameProp_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmProp_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
-                        if (row_str.Contains("FrameImageRenderer_Zoom:"))
+                        if (row_str.Contains("frmImageRenderer_Zoom:"))
                         {
-                            _frameModel.FrameImageRenderer_Zoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frmImageRenderer_Zoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Zoom:"))
                         {
-                            _frameModel.Frame_Zoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Zoom = float.Parse(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_BotFrameEnable:"))
                         {
-                            _frameModel.Frame_BotFrameEnable = Convert.ToBoolean(extractedValue_str);
+                            frm_BotfrmEnable = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_Deduction:"))
                         {
                         }
                         if (row_str.Contains("Frame_ExplosionWidth:"))
                         {
-                            _frameModel.Frame_ExplosionWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ExplosionWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ExplosionHeight:"))
                         {
-                            _frameModel.Frame_ExplosionHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ExplosionHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ReinfWidth:"))
                         {
-                            _frameModel.Frame_ReinfWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ReinfWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ReinfHeight:"))
                         {
-                            _frameModel.Frame_ReinfHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ReinfHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_CmenuDeleteVisibility:"))
                         {
-                            _frameModel.Frame_CmenuDeleteVisibility = Convert.ToBoolean(extractedValue_str);
+                            frm_CmenuDeleteVisibility = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_If_InwardMotorizedCasement:"))
                         {
-                            _frameModel.Frame_If_InwardMotorizedCasement = Convert.ToBoolean(extractedValue_str);
+                            frm_If_InwardMotorizedCasement = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_MilledArtNo:"))
                         {
@@ -3120,7 +3111,7 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_MilledArtNo = artcNo;
+                                    frm_MilledArtNo = artcNo;
                                     break;
                                 }
                             }
@@ -3132,13 +3123,24 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_MilledReinfArtNo = artcNo;
+                                    frm_MilledReinfArtNo = artcNo;
                                     break;
                                 }
                             }
+                            Scenario_Quotation(false,
+                                   false,
+                                   false,
+                                   false,
+                                   true,
+                                   false,
+                                   frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                   frm_Width,
+                                   frm_Height,
+                                   frmDimension_profileType,
+                                   frmDimension_baseColor);
+
+                           
                             inside_frame = false;
-
-
                         }
                         if (row_str.Contains("Frame_ArtNo:"))
                         {
@@ -3146,7 +3148,7 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_ArtNo = artcNo;
+                                    frm_ArtNo = artcNo;
                                     break;
                                 }
                             }
@@ -3157,7 +3159,7 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_ReinfArtNo = artcNo;
+                                    frm_ReinfArtNo = artcNo;
                                     break;
                                 }
                             }
@@ -3169,22 +3171,22 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_BotFrameArtNo = artcNo;
+                                    frm_BotfrmArtNo = artcNo;
                                     break;
                                 }
                             }
                         }
                         if (row_str.Contains("Frame_BotFrameVisible:"))
                         {
-                            _frameModel.Frame_BotFrameVisible = Convert.ToBoolean(extractedValue_str);
+                            frm_BotfrmVisible = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_SlidingRailsQty:"))
                         {
-                            _frameModel.Frame_SlidingRailsQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_SlidingRailsQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_SlidingRailsQtyVisibility:"))
                         {
-                            _frameModel.Frame_SlidingRailsQtyVisibility = Convert.ToBoolean(extractedValue_str);
+                            frm_SlidingRailsQtyVisibility = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ConnectionType:"))
                         {
@@ -3192,14 +3194,14 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_ConnectionType = artcNo;
+                                    frm_ConnectionType = artcNo;
                                     break;
                                 }
                             }
                         }
                         if (row_str.Contains("Frame_ConnectionTypeVisibility:"))
                         {
-                            _frameModel.Frame_ConnectionTypeVisibility = Convert.ToBoolean(extractedValue_str);
+                            frm_ConnectionTypeVisibility = Convert.ToBoolean(extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ArtNoForPremi:"))
                         {
@@ -3207,14 +3209,14 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_ArtNoForPremi = artcNo;
+                                    frm_ArtNoForPremi = artcNo;
                                     break;
                                 }
                             }
                         }
                         if (row_str.Contains("Frame_ExplosionWidth:"))
                         {
-                            _frameModel.Frame_ExplosionWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_ExplosionWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Frame_ReinfForPremiArtNo:"))
                         {
@@ -3222,7 +3224,7 @@ namespace PresentationLayer.Presenter
                             {
                                 if (artcNo.ToString() == extractedValue_str)
                                 {
-                                    _frameModel.Frame_ReinfForPremiArtNo = artcNo;
+                                    frm_ReinfForPremiArtNo = artcNo;
                                     break;
                                 }
                             }
@@ -3235,12 +3237,12 @@ namespace PresentationLayer.Presenter
 
                         if (row_str.Contains("Concrete_Width:"))
                         {
-                            frmDimension_LoadWd = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
 
                         }
                         if (row_str.Contains("Concrete_Height:"))
                         {
-                            frmDimension_LoadHt = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            frm_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                             Scenario_Quotation(false,
                                                false,
                                                false,
@@ -3248,8 +3250,8 @@ namespace PresentationLayer.Presenter
                                                true,
                                                false,
                                                frmDimensionPresenter.Show_Purpose.CreateNew_Concrete,
-                                               frmDimension_LoadWd,
-                                               frmDimension_LoadHt,
+                                               frm_Width,
+                                               frm_Height,
                                                frmDimension_profileType,
                                                frmDimension_baseColor);
 
@@ -7024,11 +7026,56 @@ namespace PresentationLayer.Presenter
 
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
-        int frmDimension_LoadWd = 0,
-            frmDimension_LoadHt = 0;
+        #region Frame Properties
+
         string frmDimension_profileType = "",
                frmDimension_baseColor = "";
+        int frm_Height,
+              frm_Width,
+              frm_BasicDeduction,
+              frm_ID,
+              frm_WidthToBind,
+              frm_HeightToBind,
+              frmImageRenderer_Height,
+              frmImageRenderer_Width,
+              frm_SlidingRailsQty,
+              frm_ExplosionWidth,
+              frm_ReinfWidth,
+              frm_Deduction,
+              frm_ReinfHeight,
+              frm_ExplosionHeight,
+              frmProp_Height;
+        int[] Arr_padding_norm,
+                Arr_padding_withmpnl;
 
+        string frm_Name;
+
+        bool frm_Visible,
+             frm_BotfrmEnable,
+             frm_BotfrmVisible,
+             frm_SlidingRailsQtyVisibility,
+             frm_ConnectionTypeVisibility,
+             frm_CmenuDeleteVisibility,
+             frm_If_InwardMotorizedCasement;
+        Padding frm_Padding_int,
+                frmImageRenderer_Padding_int;
+        float frmImageRenderer_Zoom,
+              frm_Zoom;
+        //List`1 Lst_Panel
+        //List`1 Lst_MultiPanel
+        //List`1 Lst_Divider
+        IWindoorModel frm_WindoorModel;
+        BottomFrameTypes frm_BotfrmArtNo;
+        FrameConnectionType frm_ConnectionType;
+        UserControl frm_UC,
+                    frm_PropertiesUC;
+        FrameProfile_ArticleNo frm_ArtNo;
+        FrameProfileForPremi_ArticleNo frm_ArtNoForPremi;
+        FrameReinf_ArticleNo frm_ReinfArtNo;
+        FrameReinfForPremi_ArticleNo frm_ReinfForPremiArtNo;
+        MilledFrame_ArticleNo frm_MilledArtNo;
+        MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
+        #endregion
         #region WindoorModel Properties
 
         //string wD_profile,
@@ -7763,22 +7810,45 @@ namespace PresentationLayer.Presenter
                                                                    frameType,
                                                                    _windoorModel.WD_zoom_forImageRenderer,
                                                                    _windoorModel.WD_zoom,
-                                                                   FrameProfile_ArticleNo._7502,
+                                                                   frm_ArtNo,
                                                                    _windoorModel,
-                                                                   null,
+                                                                   frm_BotfrmArtNo,
                                                                    _windoorModel.frameIDCounter,
-                                                                   "",
-                                                                   true,
-                                                                   true,
+                                                                   frm_Name,
+                                                                   frm_Visible,
+                                                                   frm_BotfrmVisible,
                                                                    null,
                                                                    null,
                                                                    null,
                                                                    (UserControl)_frameUC,
                                                                    (UserControl)_framePropertiesUC);
+                        _frameModel.Frame_ID = frm_ID;
+                        _frameModel.Frame_WidthToBind = frm_WidthToBind;
+                        _frameModel.Frame_HeightToBind = frm_HeightToBind;
+                        _frameModel.FrameImageRenderer_Height = frmImageRenderer_Height;
+                        _frameModel.FrameImageRenderer_Width = frmImageRenderer_Width;
+                        _frameModel.Frame_SlidingRailsQty = frm_SlidingRailsQty;
+                        _frameModel.Frame_ExplosionWidth = frm_ExplosionWidth;
+                        _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
+                        _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
+                        _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
+                        //_frameModel.FrameProp_Height = frmProp_Height;
+                        _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
+                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility== true? false : true;
+                        _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility;
+                        _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
+                        _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
+                        _frameModel.Frame_Padding_int = frm_Padding_int;
+                        _frameModel.FrameImageRenderer_Padding_int = frmImageRenderer_Padding_int;
+                        _frameModel.Frame_ConnectionType = frm_ConnectionType;
+                        _frameModel.Frame_ArtNoForPremi = frm_ArtNoForPremi;
+                        _frameModel.Frame_ReinfArtNo = frm_ReinfArtNo;
+                        _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;
+                        _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
+                        _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
-
                         _framePropertiesUCPresenter = _framePropertiesUCPresenter.GetNewInstance(_frameModel, _unityC, this);
                         AddFrameUC(_frameModel, _framePropertiesUCPresenter);
                         _frameModel.Frame_UC = (UserControl)_frameUC;
