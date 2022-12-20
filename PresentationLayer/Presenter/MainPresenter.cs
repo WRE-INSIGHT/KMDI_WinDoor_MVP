@@ -1,4 +1,4 @@
-﻿ using CommonComponents;
+﻿using CommonComponents;
 using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Concrete;
@@ -9,6 +9,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.User;
+using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.Costing_Head;
 using PresentationLayer.Presenter.UserControls;
@@ -64,7 +65,7 @@ namespace PresentationLayer.Presenter
         private IConcreteUC _concreteUC;
         private IPanelModel _panelModel;
 
-
+        ConstantVariables constants = new ConstantVariables();
         private ILoginView _loginView;
         private IItemInfoUC _itemInfoUC;
         private IFrameUC _frameUC;
@@ -3036,11 +3037,11 @@ namespace PresentationLayer.Presenter
                         {
                             if (row_str.Contains("Window"))
                             {
-                                frm_Type = FrameModel.Frame_Padding.Window;
+                                frameType = FrameModel.Frame_Padding.Window;
                             }
                             else
                             {
-                                frm_Type = FrameModel.Frame_Padding.Door;
+                                frameType = FrameModel.Frame_Padding.Door;
                             }
                         }
                         if (row_str.Contains("Frame_Name:"))
@@ -3137,31 +3138,7 @@ namespace PresentationLayer.Presenter
                                    frmDimension_profileType,
                                    frmDimension_baseColor);
 
-                            _frameModel.Frame_ID = frm_ID;
-                            _frameModel.Frame_WidthToBind = frm_WidthToBind;
-                            _frameModel.Frame_HeightToBind = frm_HeightToBind;
-                            _frameModel.FrameImageRenderer_Height = frmImageRenderer_Height;
-                            _frameModel.FrameImageRenderer_Width = frmImageRenderer_Width;
-                            _frameModel.Frame_SlidingRailsQty = frm_SlidingRailsQty;
-                            _frameModel.Frame_ExplosionWidth = frm_ExplosionWidth;
-                            _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
-                            _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
-                            _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
-                            _frameModel.Frame_Type = frm_Type;
-                            //_frameModel.FrameProp_Height = frmProp_Height;
-                            _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
-                            _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility;
-                            _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility;
-                            _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
-                            _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
-                            _frameModel.Frame_Padding_int = frm_Padding_int;
-                            _frameModel.FrameImageRenderer_Padding_int = frmImageRenderer_Padding_int;
-                            _frameModel.Frame_ConnectionType = frm_ConnectionType;
-                            _frameModel.Frame_ArtNoForPremi = frm_ArtNoForPremi;
-                            _frameModel.Frame_ReinfArtNo = frm_ReinfArtNo;
-                            _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;
-                            _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
-                            _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
+                           
                             inside_frame = false;
                         }
                         if (row_str.Contains("Frame_ArtNo:"))
@@ -7072,7 +7049,6 @@ namespace PresentationLayer.Presenter
 
         string frm_Name;
 
-        Frame_Padding frm_Type;
         bool frm_Visible,
              frm_BotfrmEnable,
              frm_BotfrmVisible,
@@ -7845,6 +7821,30 @@ namespace PresentationLayer.Presenter
                                                                    null,
                                                                    (UserControl)_frameUC,
                                                                    (UserControl)_framePropertiesUC);
+                        _frameModel.Frame_ID = frm_ID;
+                        _frameModel.Frame_WidthToBind = frm_WidthToBind;
+                        _frameModel.Frame_HeightToBind = frm_HeightToBind;
+                        _frameModel.FrameImageRenderer_Height = frmImageRenderer_Height;
+                        _frameModel.FrameImageRenderer_Width = frmImageRenderer_Width;
+                        _frameModel.Frame_SlidingRailsQty = frm_SlidingRailsQty;
+                        _frameModel.Frame_ExplosionWidth = frm_ExplosionWidth;
+                        _frameModel.Frame_ReinfWidth = frm_ReinfWidth;
+                        _frameModel.Frame_ReinfHeight = frm_ReinfHeight;
+                        _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
+                        //_frameModel.FrameProp_Height = frmProp_Height;
+                        _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
+                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility;
+                        _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility;
+                        _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
+                        _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
+                        _frameModel.Frame_Padding_int = frm_Padding_int;
+                        _frameModel.FrameImageRenderer_Padding_int = frmImageRenderer_Padding_int;
+                        _frameModel.Frame_ConnectionType = frm_ConnectionType;
+                        _frameModel.Frame_ArtNoForPremi = frm_ArtNoForPremi;
+                        _frameModel.Frame_ReinfArtNo = frm_ReinfArtNo;
+                        _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;
+                        _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
+                        _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
@@ -7854,6 +7854,36 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_UC = (UserControl)_frameUC;
                         _frameModel.Frame_PropertiesUC = (UserControl)_framePropertiesUCPresenter.GetFramePropertiesUC();
                         AddFrameList_WindoorModel(_frameModel);
+
+                        if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                        _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                        _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                        {
+                            //  if (RailsAdditionalHt == true)
+
+                            if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                            {
+                                _frameModel.Frame_SlidingRailsQtyVisibility = true;
+                                _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                                //  RailsAdditionalHt = false;
+                            }
+                            if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                            {
+                                _frameModel.Frame_ConnectionTypeVisibility = true;
+                                _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                            }
+                            else if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                            {
+                                _frameModel.Frame_ConnectionTypeVisibility = false;
+                                _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                                _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                            }
+
+                            //RailsDeductHt = true;
+                        }
                         _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                         _basePlatformImagerUCPresenter.Invalidate_flpMain();
                         _basePlatformPresenter.InvalidateBasePlatform();
