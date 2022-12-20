@@ -7823,8 +7823,8 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ExplosionHeight = frm_ExplosionHeight;
                         //_frameModel.FrameProp_Height = frmProp_Height;
                         _frameModel.Frame_BotFrameEnable = frm_BotfrmEnable;
-                        _frameModel.Frame_SlidingRailsQtyVisibility = frm_SlidingRailsQtyVisibility == true? false : true;
-                        _frameModel.Frame_ConnectionTypeVisibility = frm_ConnectionTypeVisibility == true ? false : true;
+                        _frameModel.Frame_SlidingRailsQtyVisibility = false;
+                        _frameModel.Frame_ConnectionTypeVisibility = false;
                         _frameModel.Frame_CmenuDeleteVisibility = frm_CmenuDeleteVisibility;
                         _frameModel.Frame_If_InwardMotorizedCasement = frm_If_InwardMotorizedCasement;
                         _frameModel.Frame_Padding_int = frm_Padding_int;
