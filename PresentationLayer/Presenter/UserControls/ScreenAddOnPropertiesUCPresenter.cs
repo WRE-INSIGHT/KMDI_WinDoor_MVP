@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISP_PVCboxPropertyUCPresenter _sp_pVCboxPropertyUCPresenter;
         private ISP_CenterClosurePropertyUCPresenter _sp_CenterClosurePropertyUCPresenter;
         private ISP_SpringLoadedUCPresenter _sp_SpringLoadedPresenter;
+        private ISP_MagnumScreenTypeUCPresenter _sp_magnumScreenTypePresenter;
 
         Panel _pnlAddOns;
        
@@ -25,12 +26,14 @@ namespace PresentationLayer.Presenter.UserControls
         public ScreenAddOnPropertiesUCPresenter(IScreenAddOnPropertiesUC sp_screenAddOnPropertiesUC,
                                                 ISP_PVCboxPropertyUCPresenter sp_pVCboxPropertyUCPresenter,
                                                 ISP_CenterClosurePropertyUCPresenter sp_CenterClosurePropertyUCPresenter,
-                                                ISP_SpringLoadedUCPresenter sp_springLoadedPresenter)
+                                                ISP_SpringLoadedUCPresenter sp_springLoadedPresenter,
+                                                ISP_MagnumScreenTypeUCPresenter sp_magnumScreenTypeUCPresenter)
         {
             _screenAddOnPropertiesUC = sp_screenAddOnPropertiesUC;
             _sp_pVCboxPropertyUCPresenter = sp_pVCboxPropertyUCPresenter;
             _sp_CenterClosurePropertyUCPresenter = sp_CenterClosurePropertyUCPresenter;
             _sp_SpringLoadedPresenter = sp_springLoadedPresenter;
+            _sp_magnumScreenTypePresenter = sp_magnumScreenTypeUCPresenter;
 
             _pnlAddOns = _screenAddOnPropertiesUC.GetPanelAddOns();
             SubcribeToEventSetUp();
@@ -51,6 +54,13 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _sp_screenAddOnPropertiesUC_ScreenAddOnPropertiesUCLoadEventRaised(object sender, EventArgs e)
         {
+
+            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            UserControl magnumScreenType = (UserControl)magnumScreenTypeUCP.GetMagnumScreenTypeView();
+            _pnlAddOns.Controls.Add(magnumScreenType);
+            magnumScreenType.Dock = DockStyle.Top;
+            magnumScreenType.BringToFront();
+
             ISP_SpringLoadedUCPresenter springloadedUCP = _sp_SpringLoadedPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl springloadedUC = (UserControl)springloadedUCP.GetspringloadedUC();
             _pnlAddOns.Controls.Add(springloadedUC);
@@ -72,8 +82,6 @@ namespace PresentationLayer.Presenter.UserControls
             centerClosureProp.Dock = DockStyle.Top;
             centerClosureProp.BringToFront();
 
-            
-           
 
 
         }

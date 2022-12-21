@@ -193,6 +193,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_SpringLoadedUCPresenter.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_SpringLoadedUCPresenter.cs" />
@@ -930,6 +932,7 @@
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_6052MilledProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_CenterClosurePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_MagnumScreenTypeUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCbox1067WithReinPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_SpringLoadedUC.cs" />
@@ -968,6 +971,12 @@
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.Designer.cs">
       <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.Designer.cs">
+      <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1446,6 +1455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.resx">
       <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.resx">
+      <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.resx">
       <DependentUpon>SP_PVCbox1067WithReinPropertyUC.cs</DependentUpon>

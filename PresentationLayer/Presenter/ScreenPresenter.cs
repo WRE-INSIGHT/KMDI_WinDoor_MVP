@@ -66,11 +66,29 @@ namespace PresentationLayer.Presenter
             _screenView.tsBtnExchangeRateClickEventRaised += _screenView_tsBtnExchangeRateClickEventRaised;
             _screenView.cmbPlisséTypeSelectedIndexChangedEventRaised += _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised;
             _screenView.deleteToolStripMenuClickEventRaised += _screenView_deleteToolStripMenuClickEventRaised;
+            _screenView.rdBtnDoorCheckChangeEventRaised += _screenView_rdBtnDoorCheckChangeEventRaised;
+            _screenView.rdBtnWindowCheckChangeEventRaised += _screenView_rdBtnWindowCheckChangeEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
             _screenHeight = _screenView.screen_height;
             _factor = _screenView.screen_factor;
+        }
+
+        private void _screenView_rdBtnWindowCheckChangeEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Screen_Types_Door = false;
+            _screenModel.Screen_Types_Window = true;
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+        }
+
+        private void _screenView_rdBtnDoorCheckChangeEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Screen_Types_Window = false;
+            _screenModel.Screen_Types_Door = true;
+            _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_deleteToolStripMenuClickEventRaised(object sender, EventArgs e)
@@ -173,6 +191,16 @@ namespace PresentationLayer.Presenter
             {
                 _screenModel.SpringLoad_Visibility = false;
             }
+            if(screenType == ScreenType._Magnum)
+            {
+                _screenModel.SP_MagnumScreenType_Visibility = true;
+            }
+            else
+            {
+                _screenModel.SP_MagnumScreenType_Visibility = false;
+            }
+
+
             _screenModel.ComputeScreenTotalPrice();
         }
 
@@ -269,7 +297,7 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_Quantity = 1;
             _screenModel.Screen_Set = 1;
             _screenModel.Screen_ExchangeRate = 64;
-            _screenModel.Screen_Types_Window = true;
+          
           
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
