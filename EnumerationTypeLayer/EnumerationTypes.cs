@@ -1043,6 +1043,20 @@ namespace EnumerationTypeLayer
             private ScreenType(int value, string displayName) : base(value, displayName) { }
         }
 
+
+        public class Magnum_ScreenType : Enumeration<Magnum_ScreenType, int>
+        {
+            public static readonly Magnum_ScreenType _Single_Fixed = new Magnum_ScreenType(0, "Single Horizontal Fixed on One End");
+            public static readonly Magnum_ScreenType _Double_Fixed = new Magnum_ScreenType(1, "Double Horizontal Fixed on Both Ends");
+            public static readonly Magnum_ScreenType _Single_Central = new Magnum_ScreenType(2, "Single Horizontal Central Pack"); 
+
+            public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }          
+           
+        }
+
+
+
+
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");

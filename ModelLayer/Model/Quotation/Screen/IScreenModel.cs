@@ -56,8 +56,12 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_ExchangeRate { get; set; }
 
         void ComputeScreenTotalPrice();
-
-
+        bool Reinforced { get; set; }
+        bool SP_MagnumScreenType_Visibility { get; set; }
+        Magnum_ScreenType Magnum_ScreenType { get; set; }
+   
+     
+        
 
     }
 }

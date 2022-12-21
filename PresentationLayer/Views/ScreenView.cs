@@ -64,6 +64,8 @@ namespace PresentationLayer.Views
         public event EventHandler tsBtnExchangeRateClickEventRaised;
         public event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
         public event EventHandler deleteToolStripMenuClickEventRaised;
+        public event EventHandler rdBtnDoorCheckChangeEventRaised;
+        public event EventHandler rdBtnWindowCheckChangeEventRaised;
         public void ShowScreemView()
         {
             this.Show();
@@ -191,6 +193,14 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, deleteToolStripMenuClickEventRaised, e);
         }
 
+        private void rdBtn_Door_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rdBtnDoorCheckChangeEventRaised, e);
+        }
+        private void rdBtn_Window_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, rdBtnWindowCheckChangeEventRaised, e);
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
