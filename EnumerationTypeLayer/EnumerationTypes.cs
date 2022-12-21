@@ -124,8 +124,8 @@ namespace EnumerationTypeLayer
             public static readonly GlassFilm_Types _Black50 = new GlassFilm_Types(4, "Black 50");
             public static readonly GlassFilm_Types _Black35 = new GlassFilm_Types(5, "Black 35");
             public static readonly GlassFilm_Types _Black05 = new GlassFilm_Types(6, "Black 05");
-            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil (Solar Guard)");
-            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil (Upera)");
+            public static readonly GlassFilm_Types _4milSolarGuard = new GlassFilm_Types(7, "4 mil Safety Film (Solar Guard)");
+            public static readonly GlassFilm_Types _4milUpera = new GlassFilm_Types(8, "4 mil Safety Film (Upera)");
             public static readonly GlassFilm_Types _FrostedFilm = new GlassFilm_Types(9, "Frosted Film");
             private GlassFilm_Types(int value, string displayName) : base(value, displayName) { }
         }
@@ -1204,9 +1204,140 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
 
-
-
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PlantOnWeatherStripHead_ArticleNo : Enumeration<PlantOnWeatherStripHead_ArticleNo, int>
+        {
+            public static readonly PlantOnWeatherStripHead_ArticleNo _AL1313 = new PlantOnWeatherStripHead_ArticleNo(0, "AL-1313");
+
+            private PlantOnWeatherStripHead_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class PlantOnWeatherStripSeal_ArticleNo : Enumeration<PlantOnWeatherStripSeal_ArticleNo, int>
+        {
+            public static readonly PlantOnWeatherStripSeal_ArticleNo _AL1314 = new PlantOnWeatherStripSeal_ArticleNo(0, "AL-1314");
+
+            private PlantOnWeatherStripSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverFrameWeatherStripHead_ArticleNo : Enumeration<LouverFrameWeatherStripHead_ArticleNo, int>
+        {
+            public static readonly LouverFrameWeatherStripHead_ArticleNo _AL1307 = new LouverFrameWeatherStripHead_ArticleNo(0, "AL-1307");
+
+            private LouverFrameWeatherStripHead_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverFrameBottomWeatherStrip_ArticleNo : Enumeration<LouverFrameBottomWeatherStrip_ArticleNo, int>
+        {
+            public static readonly LouverFrameBottomWeatherStrip_ArticleNo _AL1309 = new LouverFrameBottomWeatherStrip_ArticleNo(0, "AL-1309");
+
+            private LouverFrameBottomWeatherStrip_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class RubberSeal_ArticleNo : Enumeration<RubberSeal_ArticleNo, int>
+        {
+            public static readonly RubberSeal_ArticleNo _ALSC31 = new RubberSeal_ArticleNo(0, "AL-SC31");
+            public static readonly RubberSeal_ArticleNo _SL31 = new RubberSeal_ArticleNo(1, "SL31");
+
+            private RubberSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class CasementSeal_ArticleNo : Enumeration<CasementSeal_ArticleNo, int>
+        {
+            public static readonly CasementSeal_ArticleNo _SL31 = new CasementSeal_ArticleNo(0, "SL31");
+
+            private CasementSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class SealForHandle_ArticleNo : Enumeration<SealForHandle_ArticleNo, int>
+        {
+            public static readonly SealForHandle_ArticleNo _AL1309 = new SealForHandle_ArticleNo(0, "AL-1309");
+
+            private SealForHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
+        {
+            public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
+            public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
+
+            private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BladeType_Option : Enumeration<BladeType_Option, int>
+        {
+            public static readonly BladeType_Option _glass = new BladeType_Option(0, "Glass");
+            public static readonly BladeType_Option _Aluminum = new BladeType_Option(1, "Aluminum");
+
+
+            private BladeType_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
+        {
+            public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
+            public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
+            public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
+            public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
+            public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
+            public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
+            public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
+            public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
+            public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
+            public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
+            public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
+
+
+            private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class BladeHeight_Option : Enumeration<BladeHeight_Option, int>
+        {
+            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(0, "150");
+            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(1, "152");
+
+
+            private BladeHeight_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GalleryHandle_Option : Enumeration<GalleryHandle_Option, int>
+        {
+            public static readonly GalleryHandle_Option _single = new GalleryHandle_Option(0, "Single");
+            public static readonly GalleryHandle_Option _dual = new GalleryHandle_Option(1, "Dual");
+            public static readonly GalleryHandle_Option _ringPullControl = new GalleryHandle_Option(3, "Ring Pull Control");
+            public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
+            public static readonly GalleryHandle_Option _none = new GalleryHandle_Option(4, "None");
+
+
+
+
+            private GalleryHandle_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class GalleryHandleLoc_Option : Enumeration<GalleryHandleLoc_Option, int>
+        {
+            public static readonly GalleryHandleLoc_Option _LH = new GalleryHandleLoc_Option(0, "Left Hand");
+            public static readonly GalleryHandleLoc_Option _RH = new GalleryHandleLoc_Option(1, "Right Hand");
+            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(2, "None");
+
+
+
+            private GalleryHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

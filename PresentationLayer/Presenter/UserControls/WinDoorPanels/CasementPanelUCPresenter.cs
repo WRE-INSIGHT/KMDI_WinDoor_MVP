@@ -680,12 +680,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (frm.Frame_Name == wndrObject.Name)
                                 {
                                     framePropertyHeight += constants.frame_propertyHeight_default;
+                                    if (_frameModel.Frame_BotFrameVisible == true)
+                                    {
+                                        framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
+                                    }
+                                    if(_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                    {
+                                        framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                    }
+                                    if (_frameModel.Frame_ConnectionTypeVisibility == true && _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                                    {
+                                        framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                    }
                                     #region  Frame Panel
                                     foreach (PanelModel pnl in frm.Lst_Panel)
                                     {
                                         if (pnl.Panel_Name == casementUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
+                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 3;
                                             return;
                                         }
                                     }
@@ -705,7 +717,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                     {
                                                         if (pnl.Panel_Name == casementUC.Name)
                                                         {
-                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
+                                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 11;
                                                             return;
                                                         }
                                                         else
@@ -751,7 +763,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                     {
                                                                         if (pnl.Panel_Name == casementUC.Name)
                                                                         {
-                                                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
+                                                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 19;
                                                                             return;
 
                                                                         }
@@ -790,7 +802,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                 {
                                                                                     if (pnl.Panel_Name == casementUC.Name)
                                                                                     {
-                                                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
+                                                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight - 27;
                                                                                         return;
 
                                                                                     }

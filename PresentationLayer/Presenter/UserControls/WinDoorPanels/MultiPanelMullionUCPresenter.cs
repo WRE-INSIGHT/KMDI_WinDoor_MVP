@@ -172,6 +172,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int framePropertyHeight = 0;
                 int concretePropertyHeight = 0;
                 int mpnlPropertyHeight = 0;
+                int pnlPropertyHeight = 0;
                 int divPropertyHeight = 0;
                 foreach (Control wndrObject in wdm.lst_objects)
                 {
@@ -183,12 +184,34 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             if (frm.Frame_Name == wndrObject.Name)
                             {
                                 framePropertyHeight += constants.frame_propertyHeight_default;
+                                if (_frameModel.Frame_BotFrameVisible == true)
+                                {
+                                    framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
+                                }
+                                if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                {
+                                    framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                }
+                                if (_frameModel.Frame_ConnectionTypeVisibility == true && _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                                {
+                                    framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                }
+                                #region  Frame Panel
+                                foreach (PanelModel pnl in frm.Lst_Panel)
+                                {
+                                    if (pnl.Panel_Name == wndrObject.Name)
+                                    {
+                                        pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                        break;
+                                    }
+                                }
+                                #endregion
                                 #region 2nd Level MultiPanel
                                 foreach (MultiPanelModel mpnl in frm.Lst_MultiPanel)
                                 {
                                     if (mpnl.MPanel_Name == multiMullionUC.Parent.Name)
                                     {
-                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 5;
+                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight + pnlPropertyHeight - 5;
                                         return;
 
                                     }
@@ -198,7 +221,21 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     foreach (Control ctrl in mpnl.MPanelLst_Objects)
                                     {
-                                        if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
+                                        if (ctrl.Name.Contains("PanelUC"))
+                                        {
+                                            #region 2nd Level MultiPanel Panel
+                                            foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
+                                            {
+                                                if (ctrl.Name == pnl.Panel_Name)
+                                                {
+                                                    pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                    break;
+                                                }
+                                            }
+                                            #endregion
+
+                                        }
+                                        else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
                                         {
                                             #region 2nd Level MultiPanel Divider
                                             foreach (DividerModel div in mpnl.MPanelLst_Divider)
@@ -221,10 +258,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             {
                                                 if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
                                                 {
-
                                                     if (thirdlvlmpnl.MPanel_Name == multiMullionUC.Parent.Name)
                                                     {
-                                                        wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 11;
+                                                        _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight + pnlPropertyHeight - 11;
                                                         return;
 
                                                     }
@@ -234,7 +270,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                     }
                                                     foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
                                                     {
-                                                        if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
+                                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
+                                                        {
+                                                            foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                                                            {
+                                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
+                                                                {
+                                                                    pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
                                                         {
 
                                                             foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
@@ -250,11 +297,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                         {
                                                             if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
                                                             {
-
-
                                                                 if (fourthlvlmpnl.MPanel_Name == multiMullionUC.Parent.Name)
                                                                 {
-                                                                    wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight - 19;
+                                                                    _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight + pnlPropertyHeight - 19;
                                                                     return;
 
                                                                 }
@@ -262,8 +307,37 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                 {
                                                                     mpnlPropertyHeight += constants.mpnl_propertyHeight_default;
                                                                 }
+                                                                foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
+                                                                {
+
+                                                                    if (fourthlvlctrl.Name.Contains("PanelUC"))
+                                                                    {
+                                                                        foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+                                                                        {
+                                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
+                                                                            {
+                                                                                pnlPropertyHeight += pnl.Panel_PropertyHeight;
+                                                                                break;
+                                                                            }
+                                                                        }
+
+                                                                    }
+                                                                    else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
+                                                                    {
+                                                                        foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
+                                                                        {
+                                                                            if (fourthlvlctrl.Name == div.Div_Name)
+                                                                            {
+                                                                                divPropertyHeight += div.Div_PropHeight;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
+                                                        //mpnlPropertyHeight -= 1;
+
                                                     }
                                                 }
                                             }
@@ -275,9 +349,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 propertyHeight += frm.Frame_PropertiesUC.Height;
                                 framePropertyHeight = 0;
                                 mpnlPropertyHeight = 0;
+                                pnlPropertyHeight = 0;
                                 divPropertyHeight = 0;
                             }
+
                         }
+
                         #endregion
                     }
                     else
@@ -294,6 +371,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         #endregion
                     }
+
+
                 }
             }
             catch (Exception)

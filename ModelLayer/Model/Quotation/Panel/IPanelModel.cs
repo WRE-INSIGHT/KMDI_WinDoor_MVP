@@ -283,8 +283,25 @@ namespace ModelLayer.Model.Quotation.Panel
         SlidingDoorKitGs100_1_ArticleNo Panel_SlidingDoorKitGs100_1ArtNo { get; set; }
         GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
         int Panel_OverLappingPanelQty { get; set; }
-
         AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo { get; set; }
+        PlantOnWeatherStripHead_ArticleNo Panel_PlantOnWeatherStripHeadArtNo { get; set; }
+        PlantOnWeatherStripSeal_ArticleNo Panel_PlantOnWeatherStripSealArtNo { get; set; }
+        LouverFrameWeatherStripHead_ArticleNo Panel_LouverFrameWeatherStripHeadArtNo { get; set; }
+        LouverFrameBottomWeatherStrip_ArticleNo Panel_LouverFrameBottomWeatherStripArtNo { get; set; }
+        RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
+        CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
+        SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
+        LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
+
+        int Panel_PlantOnWeatherStripHeadWidth { get; set; }
+        int Panel_PlantOnWeatherStripSealWidth { get; set; }
+        int Panel_LouverFrameWeatherStripHeadWidth { get; set; }
+        int Panel_LouverFrameBottomWeatherStripWidth { get; set; }
+        int Panel_RubberSealWidth { get; set; }
+        int Panel_CasementSealWidth { get; set; }
+        int Panel_SealForHandleQty { get; set; }
+        int Panel_LouvreGallerySetHeight { get; set; }
+
 
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
@@ -397,8 +414,18 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_SpacerFixedSash_MaterialList(DataTable tbl_explosion);
 
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
-
+        void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
+
+        void Insert_PlantOnWeatherStripHead_MaterialList(DataTable tbl_explosion);
+        void Insert_PlantOnWeatherStripSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_LouvreFrameWeatherStripHead_MaterialList(DataTable tbl_explosion);
+        void Insert_LouvreFrameBottomWeatherStrip_MaterialList(DataTable tbl_explosion);
+        void Insert_RubberSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_CasementSeal_MaterialList(DataTable tbl_explosion);
+        void Insert_SealForHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_LouvreGallerySet_MaterialList(DataTable tbl_explosion);
+
         #endregion
     }
 }

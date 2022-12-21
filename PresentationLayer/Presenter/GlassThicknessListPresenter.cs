@@ -181,13 +181,13 @@ namespace PresentationLayer.Presenter
                                 #endregion
                             }
                         }
-                       
+
                         _panelIdList.Clear();
                         _glassThicknessListView.CloseThisDialog();
                         _setMultipleGlassThicknessPresenter.GetCurrentGlassthickness();
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
-                    } 
+                    }
                     else
                     {
                         string prev_thickness = _panelModel.Panel_GlassThicknessDesc;
@@ -226,7 +226,7 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.itemDescription();
                     }
                     #endregion
-                   
+
                 }
                 else
                 {

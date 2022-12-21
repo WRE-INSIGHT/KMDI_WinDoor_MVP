@@ -63,61 +63,66 @@ namespace PresentationLayer.Presenter.UserControls
         string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
-
-            if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
-                _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
-                _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+            if (initialized == true )
             {
-                //  if (RailsAdditionalHt == true)
+                
+                _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
-                if (_frameModel.Frame_SlidingRailsQtyVisibility == false)
+                if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                    _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                    _frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                 {
-                    _frameModel.Frame_SlidingRailsQtyVisibility = true;
-                    _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+                    //  if (RailsAdditionalHt == true)
 
-                    //  RailsAdditionalHt = false;
+                    if (_frameModel.Frame_SlidingRailsQtyVisibility == false)
+                    {
+                        _frameModel.Frame_SlidingRailsQtyVisibility = true;
+                        _frameModel.FrameProp_Height += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                        //  RailsAdditionalHt = false;
+                    }
+                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
+                    {
+                        _frameModel.Frame_ConnectionTypeVisibility = true;
+                        _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                    }
+                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
+                    {
+                        _frameModel.Frame_ConnectionTypeVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                    }
+
+                    //RailsDeductHt = true;
                 }
-                if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
+                           _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
                 {
-                    _frameModel.Frame_ConnectionTypeVisibility = true;
-                    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
-                }
-                else if (_frameModel.Frame_ConnectionTypeVisibility == true)
-                {
-                    _frameModel.Frame_ConnectionTypeVisibility = false;
-                    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                    //  if (RailsDeductHt == true)
+                    if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                    {
+                        _frameModel.Frame_SlidingRailsQtyVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_SlidingRailsQtyproperty_PanelHeight);
+
+                        //   RailsDeductHt = false;
+                    }
+
+                    if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                    {
+                        _frameModel.Frame_ConnectionTypeVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                    }
+                    //  RailsAdditionalHt = true;
                 }
 
-                //RailsDeductHt = true;
+                _mainPresenter.GetCurrentPrice();
+                prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
             }
-            else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
-                       _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
-            {
-                //  if (RailsDeductHt == true)
-                if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
-                {
-                    _frameModel.Frame_SlidingRailsQtyVisibility = false;
-                    _frameModel.FrameProp_Height -= constants.frame_SlidingRailsQtyproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_SlidingRailsQtyproperty_PanelHeight);
 
-                    //   RailsDeductHt = false;
-                }
-
-                if (_frameModel.Frame_ConnectionTypeVisibility == true)
-                {
-                    _frameModel.Frame_ConnectionTypeVisibility = false;
-                    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
-                    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
-                }
-                //  RailsAdditionalHt = true;
-            }
-
-            _mainPresenter.GetCurrentPrice();
-            prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
         }
 
         string curr_rbtnText = "";
@@ -261,7 +266,7 @@ namespace PresentationLayer.Presenter.UserControls
             frameBinding.Add("Frame_ArtNo", new Binding("Text", _frameModel, "Frame_ArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_ReinfArtNo", new Binding("Text", _frameModel, "Frame_ReinfArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
             frameBinding.Add("Frame_Type", new Binding("Frame_Type", _frameModel, "Frame_Type", true, DataSourceUpdateMode.OnPropertyChanged));
-
+            initialized = true;
             return frameBinding;
         }
         private Binding AddRadioCheckedBinding<T>(object dataSource, string dataMember, T trueValue)
@@ -271,9 +276,10 @@ namespace PresentationLayer.Presenter.UserControls
             binding.Format += (s, a) => a.Value = ((T)a.Value).Equals(trueValue);
             return binding;
         }
-
+        bool initialized = false;
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
+           
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
             if (_frameModel.Frame_Type == Frame_Padding.Window)

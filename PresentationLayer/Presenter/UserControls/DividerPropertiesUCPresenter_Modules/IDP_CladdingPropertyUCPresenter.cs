@@ -7,6 +7,6 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
     public interface IDP_CladdingPropertyUCPresenter
     {
         IDP_CladdingPropertyUC GetCladdingPropertyUC();
-        IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IDividerPropertiesUCPresenter divPropUCP);
+        IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IDividerModel divModel, IMainPresenter mainPresenter, IDividerPropertiesUCPresenter divPropUCP);
     }
 }

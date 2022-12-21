@@ -23,7 +23,7 @@
         public int panel_property_rotaryOptionsheight_default = 56;
         public int panel_property_motorizedOptionsheight = 114;
         public int panel_property_motorizedChkOptionsheight = 31;
-        public int panel_property_motorizedCmbOptionsheight = 89;
+        public int panel_property_motorizedCmbOptionsheight = 83; // 89
         public int panel_property_cornerDriveOptionsheight_default = 30;
         public int panel_property_extensionOptionsheight = 81;
         public int panel_property_extensionFieldsheight = 31;
@@ -47,7 +47,7 @@
         public int panel_property_PopUpHandleOptionsheight = 28;
         public int panel_property_RotoswingForSlidingOptionsheight = 28;
         public int panel_property_TrackRailOptionsheight = 30;
-        public int panel_property_LouverOptionsheight = 75;
+        //public int panel_property_LouverOptionsheight = 191;
         public int panel_property_LouverBladesOptionsheight = 28;
 
 
@@ -63,7 +63,7 @@
         public int div_propertyheight_default = 72; //68(base) + 4(allowance) 
         public int div_property_claddingOptionsHeight = 28;
         public int div_property_claddingArtNoOptionsHeight = 34;
-        public int div_property_claddingBracketOptionsHeight = 72;
+        public int div_property_claddingBracketOptionsHeight = 74;
         public int div_property_pnlAddcladdingOptionsHeight = 56;
         public int div_property_divArtOptionsHeight = 90;
         public int div_property_DMArtOptionsHeight = 56;

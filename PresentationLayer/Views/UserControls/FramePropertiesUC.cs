@@ -83,7 +83,7 @@ namespace PresentationLayer.Views.UserControls
             cmb_FrameReinf.DataSource = fReinf;
 
             EventHelpers.RaiseEvent(this, FramePropertiesLoadEventRaised, e);
-        }
+         }
         public void ThisBinding(Dictionary<string, Binding> frameModelBinding)
         {
             this.DataBindings.Add(frameModelBinding["Frame_ID"]);

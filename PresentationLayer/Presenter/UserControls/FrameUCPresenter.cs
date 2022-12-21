@@ -498,7 +498,8 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (data == "Louver Panel")
                 {
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _panelModel.AdjustPropertyPanelHeight("addGlass");
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,
                                                                                             _frameModel,
@@ -586,13 +587,25 @@ namespace PresentationLayer.Presenter.UserControls
                                     {
                                         if (frm.Frame_Name == frameUC.Name)
                                         {
-                                            wdm.WD_PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight;
+                                            _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + pnlPropertyHeight + divPropertyHeight;
                                             return;
 
                                         }
                                         else
                                         {
                                             framePropertyHeight += constants.frame_propertyHeight_default;
+                                            if (_frameModel.Frame_BotFrameVisible == true)
+                                            {
+                                                framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
+                                            }
+                                            if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                            {
+                                                framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
+                                            }
+                                            if (_frameModel.Frame_ConnectionTypeVisibility == true && _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                                            {
+                                                framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
+                                            }
                                         }
                                     }
                                     #region  Frame Panel

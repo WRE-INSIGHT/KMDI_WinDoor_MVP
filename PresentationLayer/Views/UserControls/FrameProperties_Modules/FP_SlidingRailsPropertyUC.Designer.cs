@@ -52,7 +52,7 @@
             this.nud_RailsQty.Size = new System.Drawing.Size(85, 20);
             this.nud_RailsQty.TabIndex = 43;
             this.nud_RailsQty.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});

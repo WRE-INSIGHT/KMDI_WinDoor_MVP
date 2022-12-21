@@ -1189,10 +1189,10 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_RotoswingForSlidingOptionsheight;
                 }
-                else if (mode == "minusLouver")
-                {
-                    FrameProp_Height -= constants.panel_property_LouverOptionsheight;
-                }
+                //else if (mode == "minusLouver")
+                //{
+                //    FrameProp_Height -= constants.panel_property_LouverOptionsheight;
+                //}
                 else if (mode == "addLouverBlades")
                 {
                     FrameProp_Height += constants.panel_property_LouverBladesOptionsheight;
@@ -1215,6 +1215,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "addCladding")
                 {
                     FrameProp_Height += constants.div_property_claddingOptionsHeight;
+                }
+                else if (mode == "addCladdingArtNo")
+                {
+                    FrameProp_Height += constants.div_property_claddingArtNoOptionsHeight;
+                }
+                else if (mode == "minusCladdingArtNo")
+                {
+                    FrameProp_Height += constants.div_property_claddingArtNoOptionsHeight;
                 }
                 else if (mode == "minusCladding")
                 {

@@ -123,6 +123,7 @@ namespace PresentationLayer.Presenter
         void GetCurrentPrice();
         void updatePriceFromMainViewToItemList();
         void updatePriceOfMainView();
-
+        int PropertiesScroll { get; set; }
+        int ItemScroll { get; set; }
     }
 }

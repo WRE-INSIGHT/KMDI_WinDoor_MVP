@@ -1942,7 +1942,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             Handle_Type handle = _panelModel.Panel_HandleType;
           
-            if (handle != Handle_Type._Rotary && handle != Handle_Type._None)
+            if ((handle != Handle_Type._Rotary && handle != Handle_Type._None) && _panelModel.Panel_Type != "Fixed Panel")
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = true;
 
@@ -1960,409 +1960,410 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             {
                 _panelModel.Panel_EspagnoletteOptionsVisibility = false;
             }
-
-            if (handle == Handle_Type._Rotoswing)
+            if (_panelModel.Panel_Type != "Fixed Panel")
             {
-
-                _panelModel.Panel_RotoswingOptionsVisibility = true;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_MVDOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
+                if (handle == Handle_Type._Rotoswing)
                 {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
-                }
 
-                _panelModel.AdjustPropertyPanelHeight("addRotoswing");
-                _panelModel.AdjustHandlePropertyHeight("addRotoswing");
-            }
-            else if (handle == Handle_Type._Rotary)
-            {
-                _panelModel.Panel_RotaryOptionsVisibility = true;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = true;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_MVDOptionsVisibility = false;
 
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._628806;
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
 
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addRotary");
-
-                _panelModel.AdjustHandlePropertyHeight("addRotary");
-            }
-            else if (handle == Handle_Type._Rio)
-            {
-                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
-                    _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                {
-                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
-                }
-                else
-                {
-                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
-                }
-
-                _panelModel.Panel_RioOptionsVisibility = true;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_MVDOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addRio");
-
-                _panelModel.AdjustHandlePropertyHeight("addRio");
-            }
-            else if (handle == Handle_Type._Rotoline)
-            {
-                _panelModel.Panel_RotolineOptionsVisibility = true;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-                _panelModel.Panel_MVDOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addRotoline");
-
-                _panelModel.AdjustHandlePropertyHeight("addRotoline");
-            }
-            else if (handle == Handle_Type._MVD)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = true;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMVD");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMVD");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addMVD");
-
-                _panelModel.AdjustHandlePropertyHeight("addMVD");
-            }
-            else if (handle == Handle_Type._D)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = true;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-                _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
-
-                if (inside_color == Foil_Color._None)
-                {
-                    if (base_color == Base_Color._White)
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
-                        _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605543;
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswing");
                     }
-                    else if (base_color == Base_Color._DarkBrown)
+
+                    _panelModel.AdjustPropertyPanelHeight("addRotoswing");
+                    _panelModel.AdjustHandlePropertyHeight("addRotoswing");
+                }
+                else if (handle == Handle_Type._Rotary)
+                {
+                    _panelModel.Panel_RotaryOptionsVisibility = true;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotary");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addRotary");
+
+                    _panelModel.AdjustHandlePropertyHeight("addRotary");
+                }
+                else if (handle == Handle_Type._Rio)
+                {
+                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
+                        _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                    {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+                    }
+                    else
+                    {
+                        _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._642105;
+                    }
+
+                    _panelModel.Panel_RioOptionsVisibility = true;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRio");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRio");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addRio");
+
+                    _panelModel.AdjustHandlePropertyHeight("addRio");
+                }
+                else if (handle == Handle_Type._Rotoline)
+                {
+                    _panelModel.Panel_RotolineOptionsVisibility = true;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoline");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addRotoline");
+
+                    _panelModel.AdjustHandlePropertyHeight("addRotoline");
+                }
+                else if (handle == Handle_Type._MVD)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = true;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addMVD");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addMVD");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addMVD");
+
+                    _panelModel.AdjustHandlePropertyHeight("addMVD");
+                }
+                else if (handle == Handle_Type._D)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = true;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+                    _panelModel.Panel_EspagnoletteArtNo = Espagnolette_ArticleNo._774286;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613226;
+                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605543;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
+                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
+                            _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH487261;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                             inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
                     {
                         _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
                         _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
                     }
-                    else if (base_color == Base_Color._Ivory)
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                     {
-                        _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613228;
-                        _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH487261;
+                        _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
+                        _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605551;
                     }
-                }
-                else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                         inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
-                {
-                    _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613224;
-                    _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH613185;
-                }
-                else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
-                         inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
-                         inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
-                         inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                         inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
-                {
-                    _panelModel.Panel_DHandleInsideArtNo = D_HandleArtNo._DH613225;
-                    _panelModel.Panel_DHandleOutsideArtNo = D_HandleArtNo._DH605551;
-                }
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
 
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addDHandle");
-
-                _panelModel.AdjustHandlePropertyHeight("addDHandle");
-            }
-            else if (handle == Handle_Type._D_IO_Locking)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = true;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                if (inside_color == Foil_Color._None)
-                {
-                    if (base_color == Base_Color._White)
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613243;
-                        _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._613217;
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandle");
                     }
-                    else if (base_color == Base_Color._DarkBrown)
+
+                    _panelModel.AdjustPropertyPanelHeight("addDHandle");
+
+                    _panelModel.AdjustHandlePropertyHeight("addDHandle");
+                }
+                else if (handle == Handle_Type._D_IO_Locking)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = true;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613243;
+                            _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._613217;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
+                            _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH833308_613241;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613245;
+                            _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH613219;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                            inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
                     {
                         _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
                         _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH833308_613241;
                     }
-                    else if (base_color == Base_Color._Ivory)
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                     {
-                        _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613245;
-                        _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH613219;
+                        _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613242;
+                        _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH605216;
                     }
-                }
-                else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                        inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
-                {
-                    _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH833309_613215;
-                    _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH833308_613241;
-                }
-                else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
-                         inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
-                         inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
-                         inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                         inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
-                {
-                    _panelModel.Panel_DHandleIOLockingInsideArtNo = D_Handle_IO_LockingArtNo._DH613242;
-                    _panelModel.Panel_DHandleIOLockingOutsideArtNo = D_Handle_IO_LockingArtNo._DH605216;
-                }
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDHandleIOLocking");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDHandleIOLocking");
 
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandleIOLocking");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addDHandleIOLocking");
-
-                _panelModel.AdjustHandlePropertyHeight("addDHandleIOLocking");
-            }
-            else if (handle == Handle_Type._DummyD)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = true;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                if (inside_color == Foil_Color._None)
-                {
-                    if (base_color == Base_Color._White)
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
-                        _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613191;
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDHandleIOLocking");
                     }
-                    else if (base_color == Base_Color._DarkBrown)
+
+                    _panelModel.AdjustPropertyPanelHeight("addDHandleIOLocking");
+
+                    _panelModel.AdjustHandlePropertyHeight("addDHandleIOLocking");
+                }
+                else if (handle == Handle_Type._DummyD)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = true;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613226;
+                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613191;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
+                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
+                            _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613193;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
+                          inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
                     {
                         _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
                         _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
                     }
-                    else if (base_color == Base_Color._Ivory)
+                    else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
+                             inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
+                             inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
+                             inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
+                             inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
                     {
-                        _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613228;
-                        _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613193;
+                        _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
+                        _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
                     }
-                }
-                else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Mahogany ||
-                      inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Havana)
-                {
-                    _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613224;
-                    _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH833310_613189;
-                }
-                else if (inside_color == Foil_Color._FossilGray || inside_color == Foil_Color._BeechOak ||
-                         inside_color == Foil_Color._DriftWood || inside_color == Foil_Color._Graphite ||
-                         inside_color == Foil_Color._JetBlack || inside_color == Foil_Color._ChestnutOak ||
-                         inside_color == Foil_Color._WashedOak || inside_color == Foil_Color._GreyOak ||
-                         inside_color == Foil_Color._Cacao || inside_color == Foil_Color._CharcoalGray)
-                {
-                    _panelModel.Panel_DummyDHandleInsideArtNo = DummyD_HandleArtNo._DH613225;
-                    _panelModel.Panel_DummyDHandleOutsideArtNo = DummyD_HandleArtNo._DH613190;
-                }
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
 
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addDummyDHandle");
-
-                _panelModel.AdjustHandlePropertyHeight("addDummyDHandle");
-            }
-            else if (handle == Handle_Type._PopUp)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = true;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
-
-                if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
-                {
-                    _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
-                }
-                else if (base_color == Base_Color._DarkBrown)
-                {
-                    _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
-                }
-
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
-
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
-                }
-
-                _panelModel.AdjustPropertyPanelHeight("addPopUpHandle");
-
-                _panelModel.AdjustHandlePropertyHeight("addPopUpHandle");
-            }
-            else if (handle == Handle_Type._RotoswingForSliding)
-            {
-                _panelModel.Panel_MVDOptionsVisibility = false;
-                _panelModel.Panel_RotolineOptionsVisibility = false;
-                _panelModel.Panel_RioOptionsVisibility = false;
-                _panelModel.Panel_RotaryOptionsVisibility = false;
-                _panelModel.Panel_RotoswingOptionsVisibility = false;
-
-                _panelModel.Panel_DHandleOptionVisibilty = false;
-                _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
-                _panelModel.Panel_DummyDHandleOptionVisibilty = false;
-                _panelModel.Panel_PopUpHandleOptionVisibilty = false;
-                _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = true;
-
-                if (inside_color == Foil_Color._None)
-                {
-                    if (base_color == Base_Color._White)
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addDummyDHandle");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addDummyDHandle");
+
+                    _panelModel.AdjustHandlePropertyHeight("addDummyDHandle");
+                }
+                else if (handle == Handle_Type._PopUp)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = true;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = false;
+
+                    if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
+                    {
+                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._3127668;
                     }
                     else if (base_color == Base_Color._DarkBrown)
                     {
+                        _panelModel.Panel_PopUpHandleArtNo = PopUp_HandleArtNo._323778;
+                    }
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addPopUpHandle");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addPopUpHandle");
+
+                    _panelModel.AdjustHandlePropertyHeight("addPopUpHandle");
+                }
+                else if (handle == Handle_Type._RotoswingForSliding)
+                {
+                    _panelModel.Panel_MVDOptionsVisibility = false;
+                    _panelModel.Panel_RotolineOptionsVisibility = false;
+                    _panelModel.Panel_RioOptionsVisibility = false;
+                    _panelModel.Panel_RotaryOptionsVisibility = false;
+                    _panelModel.Panel_RotoswingOptionsVisibility = false;
+
+                    _panelModel.Panel_DHandleOptionVisibilty = false;
+                    _panelModel.Panel_DHandleIOLockingOptionVisibilty = false;
+                    _panelModel.Panel_DummyDHandleOptionVisibilty = false;
+                    _panelModel.Panel_PopUpHandleOptionVisibilty = false;
+                    _panelModel.Panel_RotoswingForSlidingHandleOptionVisibilty = true;
+
+                    if (inside_color == Foil_Color._None)
+                    {
+                        if (base_color == Base_Color._White)
+                        {
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632303;
+                        }
+                        else if (base_color == Base_Color._DarkBrown)
+                        {
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
+                        }
+                        else if (base_color == Base_Color._Ivory)
+                        {
+                            _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
+                        }
+                    }
+                    else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
+                        inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
+                    {
                         _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
                     }
-                    else if (base_color == Base_Color._Ivory)
+                    else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
+                             inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
+                             inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
+                             inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
+                             inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
                     {
-                        _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823094;
+                        _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
                     }
-                }
-                else if (inside_color == Foil_Color._Walnut || inside_color == Foil_Color._Havana ||
-                    inside_color == Foil_Color._GoldenOak || inside_color == Foil_Color._Mahogany)
-                {
-                    _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS632300;
-                }
-                else if (inside_color == Foil_Color._CharcoalGray || inside_color == Foil_Color._FossilGray ||
-                         inside_color == Foil_Color._BeechOak || inside_color == Foil_Color._DriftWood ||
-                         inside_color == Foil_Color._Graphite || inside_color == Foil_Color._JetBlack ||
-                         inside_color == Foil_Color._ChestnutOak || inside_color == Foil_Color._WashedOak ||
-                         inside_color == Foil_Color._GreyOak || inside_color == Foil_Color._Cacao)
-                {
-                    _panelModel.Panel_RotoswingForSlidingHandleArtNo = Rotoswing_Sliding_HandleArtNo._RSS823073;
-                }
 
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");
 
-                if (_panelModel.Panel_ParentMultiPanelModel != null)
-                {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addRotoswingForSliding");
+                    }
+
+                    _panelModel.AdjustPropertyPanelHeight("addRotoswingForSliding");
+
+                    _panelModel.AdjustHandlePropertyHeight("addRotoswingForSliding");
                 }
-
-                _panelModel.AdjustPropertyPanelHeight("addRotoswingForSliding");
-
-                _panelModel.AdjustHandlePropertyHeight("addRotoswingForSliding");
             }
-
             _initialLoad = false;
         }
 
