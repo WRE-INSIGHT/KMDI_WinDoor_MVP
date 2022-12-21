@@ -89,7 +89,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(702, 420);
+            this.panel2.Size = new System.Drawing.Size(702, 458);
             this.panel2.TabIndex = 29;
             // 
             // panel4
@@ -99,7 +99,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(227, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(475, 393);
+            this.panel4.Size = new System.Drawing.Size(475, 431);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
@@ -113,7 +113,7 @@
             this.dgv_Screen.Name = "dgv_Screen";
             this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Screen.Size = new System.Drawing.Size(475, 356);
+            this.dgv_Screen.Size = new System.Drawing.Size(475, 394);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
@@ -122,12 +122,12 @@
             this.cmsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.cmsScreen.Name = "cmsScreen";
-            this.cmsScreen.Size = new System.Drawing.Size(153, 48);
+            this.cmsScreen.Size = new System.Drawing.Size(107, 26);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -213,7 +213,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 393);
+            this.panel1.Size = new System.Drawing.Size(227, 431);
             this.panel1.TabIndex = 31;
             // 
             // pnl_addOns
@@ -221,7 +221,7 @@
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 296);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 97);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 135);
             this.pnl_addOns.TabIndex = 28;
             // 
             // panel5
@@ -278,6 +278,7 @@
             this.rdBtn_Door.TabStop = true;
             this.rdBtn_Door.Text = "Door";
             this.rdBtn_Door.UseVisualStyleBackColor = true;
+            this.rdBtn_Door.CheckedChanged += new System.EventHandler(this.rdBtn_Door_CheckedChanged);
             // 
             // rdBtn_Window
             // 
@@ -289,6 +290,7 @@
             this.rdBtn_Window.TabStop = true;
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
+            this.rdBtn_Window.CheckedChanged += new System.EventHandler(this.rdBtn_Window_CheckedChanged);
             // 
             // btn_add
             // 
@@ -453,7 +455,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 420);
+            this.ClientSize = new System.Drawing.Size(702, 458);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ScreenView";

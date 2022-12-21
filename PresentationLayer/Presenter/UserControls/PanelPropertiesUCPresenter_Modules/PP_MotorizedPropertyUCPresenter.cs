@@ -276,6 +276,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     if (_panelModel.Panel_ExtensionOptionsVisibility == true)
                     {
+                        _panelModel.Panel_ExtensionOptionsVisibility = false;
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusExtension");
                         _panelModel.AdjustPropertyPanelHeight("minusExtension");
                         if (_panelModel.Panel_ParentMultiPanelModel != null)

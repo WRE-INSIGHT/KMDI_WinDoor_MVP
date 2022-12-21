@@ -407,6 +407,9 @@ namespace PresentationLayer
                 .RegisterType<ISP_SpringLoadedUC,SP_SpringLoadedUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_SpringLoadedUCPresenter,SP_SpringLoadedUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_MagnumScreenTypeUCPresenter,SP_MagnumScreenTypeUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_MagnumScreenTypeUC,SP_MagnumScreenTypeUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 
