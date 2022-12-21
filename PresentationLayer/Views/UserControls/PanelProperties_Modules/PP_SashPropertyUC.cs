@@ -47,7 +47,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             ((HandledMouseEventArgs)e).Handled = true;
         }
-
+       
         private void cmb_SashProfile_SelectedValueChanged(object sender, EventArgs e)
         {
             SashProfile_ArticleNo sel_sash = (SashProfile_ArticleNo)((ComboBox)sender).SelectedValue;
