@@ -162,6 +162,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         Handle_Type curr_handleType;
         private void _pp_handlePropertyUC_cmbHandleTypeSelectedValueEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
             Handle_Type sel_handleType = (Handle_Type)((ComboBox)sender).SelectedValue;
 
             if (curr_handleType != sel_handleType)
@@ -1855,6 +1856,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 curr_handleType = sel_handleType;
             }
             _mainPresenter.GetCurrentPrice();
+            _mainPresenter.PropertiesScroll = propertiesScroll;
         }
 
         private void _pp_handlePropertyUC_PPHandlePropertyLoadEventRaised(object sender, EventArgs e)
