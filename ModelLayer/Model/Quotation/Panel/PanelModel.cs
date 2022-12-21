@@ -1726,7 +1726,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
                     //}
 
-                    if (Panel_DisplayWidth >= 1500)
+                    if (Panel_DisplayWidth >= 1100)
                     {
                         Panel_GlassFilm = GlassFilm_Types._4milUpera;
                     }
@@ -1756,7 +1756,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
 
-                    if (Panel_DisplayWidth >= 1500)
+                    if (Panel_DisplayWidth >= 1100)
                     {
                         Panel_GlassFilm = GlassFilm_Types._None;
                     }
@@ -5381,14 +5381,23 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
-                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
+                if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_DisplayWidth >= 1500)
+                else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                         Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                 {
-                    Panel_MotorizedMechQty = 2;
+                    if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
+                    {
+                        Panel_MotorizedMechQty = 1;
+                    }
+                    else if (Panel_DisplayWidth >= 1100)
+                    {
+                        Panel_MotorizedMechQty = 2;
+                    }
                 }
+
 
                 if (Panel_Type.Contains("Awning"))
                 {
@@ -7123,13 +7132,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
-                if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1499)
+                if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                 {
                     Panel_MotorizedMechQty = 1;
                 }
-                else if (Panel_DisplayWidth >= 1500)
+                else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                         Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                 {
-                    Panel_MotorizedMechQty = 2;
+                    if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
+                    {
+                        Panel_MotorizedMechQty = 1;
+                    }
+                    else if (Panel_DisplayWidth >= 1100)
+                    {
+                        Panel_MotorizedMechQty = 2;
+                    }
                 }
 
                 if (Panel_Type.Contains("Awning"))

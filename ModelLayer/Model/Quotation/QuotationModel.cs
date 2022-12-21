@@ -2206,6 +2206,7 @@ namespace ModelLayer.Model.Quotation
 
                 RollerBasePrice,
                 MotorizePrice,
+                MotorizeMechPricePerPiece,
         #endregion
         #region Accessories
 
@@ -3568,7 +3569,16 @@ namespace ModelLayer.Model.Quotation
 
                                         if (pnl.Panel_MotorizedOptionVisibility == true)
                                         {
-                                            MotorizePrice += 15000 * pnl.Panel_MotorizedMechQty;
+                                            if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                                                pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                                            {
+                                                MotorizeMechPricePerPiece = 15000m;
+                                            }
+                                            else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+                                            {
+                                                MotorizeMechPricePerPiece = 39000m;
+                                            }
+                                            MotorizePrice += MotorizeMechPricePerPiece * pnl.Panel_MotorizedMechQty;
                                         }
 
                                         #region EspagPrice
@@ -3854,8 +3864,10 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
                                         #endregion
+
                                         #region GlassFilm
-                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
+                                            pnl.Panel_GlassFilm == GlassFilm_Types._4milUpera)
                                         {
                                             FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                         }
@@ -3927,8 +3939,10 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
                                         #endregion
+
                                         #region GlassFilm
-                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                        if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
+                                            pnl.Panel_GlassFilm == GlassFilm_Types._4milUpera)
                                         {
                                             FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                         }
@@ -4416,7 +4430,16 @@ namespace ModelLayer.Model.Quotation
 
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                                 {
-                                    MotorizePrice += 15000 * Singlepnl.Panel_MotorizedMechQty;
+                                    if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                                                Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                                    {
+                                        MotorizeMechPricePerPiece = 15000m;
+                                    }
+                                    else if (Singlepnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+                                    {
+                                        MotorizeMechPricePerPiece = 39000m;
+                                    }
+                                    MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
                                 }
 
 
@@ -4705,7 +4728,8 @@ namespace ModelLayer.Model.Quotation
                                 #endregion
 
                                 #region GlassFilm
-                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
+                                    Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milUpera)
                                 {
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                 }
@@ -4779,7 +4803,8 @@ namespace ModelLayer.Model.Quotation
                                 #endregion
 
                                 #region GlassFilm
-                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard)
+                                if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
+                                    Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milUpera)
                                 {
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                 }
@@ -5444,7 +5469,7 @@ namespace ModelLayer.Model.Quotation
                                 "Fitting and Supplies");
 
                         Price_List.Rows.Add("Motorize Mechanism",
-                                "15,000",
+                                MotorizeMechPricePerPiece.ToString("N", new CultureInfo("en-US")),
                                 Math.Round(MotorizePrice, 2).ToString("N", new CultureInfo("en-US")),
                                 "",
                                 "",

@@ -834,6 +834,12 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.Designer.cs">
       <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverTypePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1383,6 +1389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.resx">
       <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.resx">
+      <DependentUpon>PP_LouverTypePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>

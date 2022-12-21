@@ -1308,10 +1308,7 @@ namespace EnumerationTypeLayer
             public static readonly GalleryHandle_Option _ringPullControl = new GalleryHandle_Option(3, "Ring Pull Control");
             public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
             public static readonly GalleryHandle_Option _none = new GalleryHandle_Option(4, "None");
-
-
-
-
+             
             private GalleryHandle_Option(int value, string displayName) : base(value, displayName) { }
         }
 
@@ -1319,11 +1316,19 @@ namespace EnumerationTypeLayer
         {
             public static readonly GalleryHandleLoc_Option _LH = new GalleryHandleLoc_Option(0, "Left Hand");
             public static readonly GalleryHandleLoc_Option _RH = new GalleryHandleLoc_Option(1, "Right Hand");
-            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(2, "None");
-
-
-
+            public static readonly GalleryHandleLoc_Option _H = new GalleryHandleLoc_Option(2, "With Holes");
+            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(3, "None");
+             
             private GalleryHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+
+        public class LouverType_Option : Enumeration<LouverType_Option, int>
+        {
+            public static readonly LouverType_Option _movable = new LouverType_Option(0, "Movable");
+            public static readonly LouverType_Option _fixed = new LouverType_Option(1, "Fixed"); 
+
+            private LouverType_Option(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

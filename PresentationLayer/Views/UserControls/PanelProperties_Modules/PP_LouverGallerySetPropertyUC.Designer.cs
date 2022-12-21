@@ -39,10 +39,15 @@
             this.lbl_BladeHeight = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_LouverBlades = new System.Windows.Forms.Label();
+            this.nud_LouverCombiBlades = new System.Windows.Forms.NumericUpDown();
             this.pnl_HandleLocation.SuspendLayout();
             this.pnl_HandleType.SuspendLayout();
             this.pnl_BladeHeight.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_LouverCombiBlades)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_HandleLocation
@@ -50,7 +55,7 @@
             this.pnl_HandleLocation.Controls.Add(this.cmb_HandleLocation);
             this.pnl_HandleLocation.Controls.Add(this.lbl_HandleLocation);
             this.pnl_HandleLocation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_HandleLocation.Location = new System.Drawing.Point(0, 80);
+            this.pnl_HandleLocation.Location = new System.Drawing.Point(0, 107);
             this.pnl_HandleLocation.Name = "pnl_HandleLocation";
             this.pnl_HandleLocation.Size = new System.Drawing.Size(150, 27);
             this.pnl_HandleLocation.TabIndex = 53;
@@ -81,7 +86,7 @@
             this.pnl_HandleType.Controls.Add(this.cmb_HandleType);
             this.pnl_HandleType.Controls.Add(this.lbl_HandleType);
             this.pnl_HandleType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_HandleType.Location = new System.Drawing.Point(0, 53);
+            this.pnl_HandleType.Location = new System.Drawing.Point(0, 80);
             this.pnl_HandleType.Name = "pnl_HandleType";
             this.pnl_HandleType.Size = new System.Drawing.Size(150, 27);
             this.pnl_HandleType.TabIndex = 52;
@@ -112,7 +117,7 @@
             this.pnl_BladeHeight.Controls.Add(this.cmb_BladeHeight);
             this.pnl_BladeHeight.Controls.Add(this.lbl_BladeHeight);
             this.pnl_BladeHeight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_BladeHeight.Location = new System.Drawing.Point(0, 26);
+            this.pnl_BladeHeight.Location = new System.Drawing.Point(0, 53);
             this.pnl_BladeHeight.Name = "pnl_BladeHeight";
             this.pnl_BladeHeight.Size = new System.Drawing.Size(150, 27);
             this.pnl_BladeHeight.TabIndex = 51;
@@ -157,6 +162,36 @@
             this.label2.TabIndex = 52;
             this.label2.Text = "Gallery Set";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbl_LouverBlades);
+            this.panel1.Controls.Add(this.nud_LouverCombiBlades);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 26);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(150, 27);
+            this.panel1.TabIndex = 56;
+            // 
+            // lbl_LouverBlades
+            // 
+            this.lbl_LouverBlades.AutoSize = true;
+            this.lbl_LouverBlades.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_LouverBlades.Location = new System.Drawing.Point(4, 7);
+            this.lbl_LouverBlades.Name = "lbl_LouverBlades";
+            this.lbl_LouverBlades.Size = new System.Drawing.Size(61, 13);
+            this.lbl_LouverBlades.TabIndex = 40;
+            this.lbl_LouverBlades.Text = "No. Blades";
+            // 
+            // nud_LouverCombiBlades
+            // 
+            this.nud_LouverCombiBlades.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nud_LouverCombiBlades.Enabled = false;
+            this.nud_LouverCombiBlades.Location = new System.Drawing.Point(75, 4);
+            this.nud_LouverCombiBlades.Name = "nud_LouverCombiBlades";
+            this.nud_LouverCombiBlades.Size = new System.Drawing.Size(72, 20);
+            this.nud_LouverCombiBlades.TabIndex = 41;
+            // 
             // PP_LouverGallerySetPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,9 +199,10 @@
             this.Controls.Add(this.pnl_HandleLocation);
             this.Controls.Add(this.pnl_HandleType);
             this.Controls.Add(this.pnl_BladeHeight);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "PP_LouverGallerySetPropertyUC";
-            this.Size = new System.Drawing.Size(150, 109);
+            this.Size = new System.Drawing.Size(150, 135);
             this.Load += new System.EventHandler(this.PP_LouverGallerySetPropertyUC_Load);
             this.pnl_HandleLocation.ResumeLayout(false);
             this.pnl_HandleLocation.PerformLayout();
@@ -176,6 +212,9 @@
             this.pnl_BladeHeight.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_LouverCombiBlades)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -193,5 +232,8 @@
         private System.Windows.Forms.Label lbl_BladeHeight;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lbl_LouverBlades;
+        private System.Windows.Forms.NumericUpDown nud_LouverCombiBlades;
     }
 }

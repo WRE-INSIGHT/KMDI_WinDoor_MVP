@@ -53,7 +53,7 @@
             // 
             // cmb_BladeCombination
             // 
-            this.cmb_BladeCombination.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmb_BladeCombination.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_BladeCombination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_BladeCombination.FormattingEnabled = true;
@@ -84,7 +84,7 @@
             // 
             // cmb_BladeType
             // 
-            this.cmb_BladeType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmb_BladeType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_BladeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_BladeType.FormattingEnabled = true;
@@ -130,7 +130,7 @@
             this.Controls.Add(this.pnl_BladeCombination);
             this.Controls.Add(this.panel2);
             this.Name = "PP_LouverGalleryPropertyUC";
-            this.Size = new System.Drawing.Size(150, 82);
+            this.Size = new System.Drawing.Size(150, 83);
             this.Load += new System.EventHandler(this.PP_LouverBladesCombinationPropertyUC_Load);
             this.pnl_BladeCombination.ResumeLayout(false);
             this.pnl_BladeCombination.PerformLayout();
