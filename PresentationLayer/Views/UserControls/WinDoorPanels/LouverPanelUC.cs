@@ -74,6 +74,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler louverPanelUCMouseLeaveEventRaised;
         public event PaintEventHandler louverPanelUCPaintEventRaised;
         public event EventHandler louverPanelUCSizeChangedEventRaised;
+        public event MouseEventHandler louverPanelUCMouseClickEventRaised;
 
         private void LouverPanelUC_Load(object sender, EventArgs e)
         {
@@ -109,6 +110,10 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             if (e.Button == MouseButtons.Right && _panelCmenuDeleteVisibility == true)
             {
                 cmenu_louver.Show(new Point(MousePosition.X, MousePosition.Y));
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                EventHelpers.RaiseMouseEvent(this, louverPanelUCMouseClickEventRaised, e);
             }
         }
 

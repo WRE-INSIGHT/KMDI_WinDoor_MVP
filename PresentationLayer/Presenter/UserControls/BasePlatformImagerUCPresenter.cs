@@ -1359,14 +1359,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((pInnerY - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point((pInnerX - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
 
-                        new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point(pInnerY+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                        new Point(pInnerX+4, Lvr_NewLocation+(int)Lvr_GlassHt),
 
-                        new Point(pInnerY-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
-                        new Point(pInnerY-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                        new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
                      };
 
                     for (int i = 0; i < LvrSideBlade.Length; i += 2)
@@ -1384,8 +1384,8 @@ namespace PresentationLayer.Presenter.UserControls
                     //blade
                     Point[] blade =
                     {
-                        new Point(pInnerX , Lvr_NewLocation - (int)Lvr_GlassHt),
-                        new Point((int)client_wd + 7, Lvr_NewLocation - (int)Lvr_GlassHt),
+                        new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
+                        new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX, Lvr_NewLocation + (int)Lvr_GlassHt), // - 26 para mag slant yung blade
                         new Point(pInnerX , Lvr_NewLocation + (int)Lvr_GlassHt)
                     };
