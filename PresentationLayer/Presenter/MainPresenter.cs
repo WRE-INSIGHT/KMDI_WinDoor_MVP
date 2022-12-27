@@ -1852,7 +1852,7 @@ namespace PresentationLayer.Presenter
         bool toggle;
         private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
+            int propertiesScroll = PropertiesScroll;
             if (_quotationModel != null && _windoorModel != null)
             {
                 _mainView.CreateNewWindoorBtnEnabled = false;
@@ -1861,6 +1861,7 @@ namespace PresentationLayer.Presenter
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
+                    int wndrId = _windoorModel.WD_id;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         if (wdm == _windoorModel)
@@ -1887,12 +1888,35 @@ namespace PresentationLayer.Presenter
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         wdm.WD_name = "Item " + count;
+                        wdm.WD_id = count;
                         count++;
                     }
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
-                        Load_Windoor_Item(wdm);
-                        break;
+                        if (wndrId < _quotationModel.Lst_Windoor.Count())
+                        {
+                            if(wdm.WD_id == wndrId)
+                            {
+                                Load_Windoor_Item(wdm);
+                                break;
+                            }
+                        }
+
+                        else
+                        {
+                            if (wndrId -1 == _quotationModel.Lst_Windoor.Count())
+                            {
+                                if (wdm.WD_id == wndrId - 1)
+                                {
+                                    Load_Windoor_Item(wdm);
+                                    break;
+                                }
+
+
+                            }
+
+                        }
+                        
                     }
 
                 }
@@ -1916,6 +1940,7 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
+            PropertiesScroll = propertiesScroll;
             //wndr_content = new List<string>();
             //Saving_dotwndr();
         }
@@ -2091,7 +2116,7 @@ namespace PresentationLayer.Presenter
             {
                 mainTodo = todo;
                 bgw.RunWorkerAsync();
-                if (todo == "Open_WndrFiles")
+                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items")
                 {
                     _mainView.GetToolStripLabelLoading().Text = "Initializing";
                     ToggleMode(true, false);
@@ -2285,7 +2310,7 @@ namespace PresentationLayer.Presenter
                     Windoor_Save_PropertiesUC();
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Open_WndrFiles");
+                    StartWorker("Add_Existing_Items");
                     SetMainViewTitle(input_qrefno,
                                  _projectName,
                                  _custRefNo,
@@ -2379,6 +2404,19 @@ namespace PresentationLayer.Presenter
                         }
 
                         break;
+                    case "Add_Existing_Items":
+                        Opening_dotwndr(e.ProgressPercentage);
+                        _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
+                        if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
+                        {
+                            _mainView.GetToolStripLabelLoading().Text += ".";
+                        }
+                        else
+                        {
+                            _mainView.GetToolStripLabelLoading().Text = "Initializing";
+                        }
+
+                        break;
                     default:
                         break;
                 }
@@ -2396,6 +2434,7 @@ namespace PresentationLayer.Presenter
                 switch (mainTodo)
                 {
                     case "Open_WndrFiles":
+                    case "Add_Existing_Items":
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -2409,7 +2448,6 @@ namespace PresentationLayer.Presenter
                         }
                         //e.Result = e.Argument.ToString();
                         break;
-
                     //case "GetCloudFiles":
                     //    var objds = csq.CostingQuery_ReturnDS("GetCloudFiles", "", (int)info[0]);
                     //    sql_Transaction_result = objds.Item1;
@@ -2464,8 +2502,7 @@ namespace PresentationLayer.Presenter
                     switch (mainTodo)
                     {
                         case "Open_WndrFiles":
-
-
+                        case "Add_Existing_Items":
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -2633,7 +2670,16 @@ namespace PresentationLayer.Presenter
                     wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
-                Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+
+                if(mainTodo == "Open_WndrFiles")
+                {
+                    Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+                }
+                else if (mainTodo == "Add_Existing_Items")
+                {
+                    Load_Windoor_Item(_windoorModel);
+                }
+                    
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -8293,7 +8339,6 @@ namespace PresentationLayer.Presenter
                 //                            {
                 //                                if (ctrl.Name == div.Div_Name)
                 //                                {
-                                                 
                 //                                }
                 //                            }
                 //                            #endregion
@@ -8316,7 +8361,6 @@ namespace PresentationLayer.Presenter
                 //                                            {
                 //                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
                 //                                                {
-                                                                    
                 //                                                }
                 //                                            }
                 //                                        }
@@ -8327,7 +8371,6 @@ namespace PresentationLayer.Presenter
                 //                                            {
                 //                                                if (thirdlvlctrl.Name == div.Div_Name)
                 //                                                {
-                                                                   
                 //                                                }
                 //                                            }
                 //                                        }
@@ -8344,7 +8387,6 @@ namespace PresentationLayer.Presenter
                 //                                                        {
                 //                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
                 //                                                            {
-                                                                               
                 //                                                            }
                 //                                                        }
 
@@ -8355,7 +8397,6 @@ namespace PresentationLayer.Presenter
                 //                                                        {
                 //                                                            if (fourthlvlctrl.Name == div.Div_Name)
                 //                                                            {
-                                                                             
                 //                                                            }
                 //                                                        }
                 //                                                    }
@@ -8372,7 +8413,6 @@ namespace PresentationLayer.Presenter
                 //                    }
                 //                }
                 //                #endregion
-                              
                 //            }
 
                 //        }
@@ -8387,7 +8427,6 @@ namespace PresentationLayer.Presenter
                 //        {
                 //            if (wndrObject.Name == crm.Concrete_Name)
                 //            {
-                               
                 //            }
                 //        }
                 //        #endregion
