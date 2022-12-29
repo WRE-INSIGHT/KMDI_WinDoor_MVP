@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -36,7 +37,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         private IMultiPanelTransomUCPresenter _multiPanelTransomUCP;
 
         private IUnityContainer _unityC;
-
+        private IUserModel _userModel;
         private IMultiPanelModel _multiPanelModel;
         private IFrameModel _frameModel;
         private IDividerModel _prev_divModel;
@@ -523,51 +524,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
 
 
-                            string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
-                            decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
-
-                            int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
-                            int DisplayWD_singleDecimalPlace = 0;
-
-                            string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
-
-                            if (DisplayWD_dec_split.Count() > 1)
-                            {
-                                DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
-                            }
-
-
-                            #region MyRegion
                             //string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
-                            //decimal displayWidthDecimal = 0;
-                            //decimal displayWidth = 0;
-                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            //decimal DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+                            //if (_userModel.Department == "Sales & Operations (Costing)")
                             //{
-                            //    displayWidth += Convert.ToDecimal(mpnl.MPanel_DisplayWidth + "." + mpnl.MPanel_DisplayWidthDecimal);
-                            //    displayWidthDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayWidthDecimal);
+                            //    DisplayWD_dec = Convert.ToInt32(DisplayWD_dec);
                             //}
-                            //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                            //{
-                            //    displayWidth += Convert.ToDecimal(pnl.Panel_DisplayWidth + "." + pnl.Panel_DisplayWidthDecimal);
-                            //    displayWidthDecimal = Convert.ToDecimal("0." + pnl.Panel_DisplayWidthDecimal);
-                            //}
-                            //decimal DisplayWD_dec;
-                            //if (displayWidth == 0)
-                            //{
-                            //    DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
-                            //}
-                            //else
-                            //{
-                            //    DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
-
-                            //}
-                            //DisplayWD_dec += displayWidthDecimal;
-
-
-
-
                             //int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
-
                             //int DisplayWD_singleDecimalPlace = 0;
 
                             //string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
@@ -576,9 +539,54 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             //{
                             //    DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                             //}
-                            //int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
-                            //int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                            //suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
+
+
+                            #region MyRegion
+                            string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
+                            decimal displayWidthDecimal = 0;
+                            decimal displayWidth = 0;
+                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            {
+                                displayWidth += Convert.ToDecimal(mpnl.MPanel_DisplayWidth + "." + mpnl.MPanel_DisplayWidthDecimal);
+                                displayWidthDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayWidthDecimal);
+                            }
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                displayWidth += Convert.ToDecimal(pnl.Panel_DisplayWidth + "." + pnl.Panel_DisplayWidthDecimal);
+                                displayWidthDecimal = Convert.ToDecimal("0." + pnl.Panel_DisplayWidthDecimal);
+                            }
+                            decimal DisplayWD_dec;
+                            if (displayWidth == 0)
+                            {
+                                DisplayWD_dec = Convert.ToDecimal(disp_wd_decimal) / totalPanelCount;
+                            }
+                            else
+                            {
+                                DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
+
+                            }
+                            if (_userModel.Department == "Sales & Operations (Costing)")
+                            {
+                                DisplayWD_dec = Convert.ToInt32(DisplayWD_dec);
+                            }
+                            DisplayWD_dec += displayWidthDecimal;
+
+
+
+
+                            int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
+
+                            int DisplayWD_singleDecimalPlace = 0;
+
+                            string[] DisplayWD_dec_split = decimal.Round(DisplayWD_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayWD_dec_split.Count() > 1)
+                            {
+                                DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
+                            }
+                            int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
+                            int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                            suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -613,7 +621,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                             _multiPanelModel.Reload_MultiPanelMargin();
 
-                            mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                            mPanelModel.SetDimensionsToBind_using_ZoomPercentage();
                             mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
 
                             IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
@@ -637,6 +645,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
 
                                 IMultiPanelTransomUCPresenter multiTransom = _multiPanelTransomUCP.GetNewInstance(_unityC,
+                                                                                                                  _userModel,
                                                                                                                   mPanelModel,
                                                                                                                   _frameModel,
                                                                                                                   _mainPresenter,
@@ -662,7 +671,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     //}
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                                    //_multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
@@ -779,7 +788,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 }
                             }
                         }
-
+                       
                         string disp_wd_decimal = _multiPanelModel.MPanel_DisplayWidth + "." + _multiPanelModel.MPanel_DisplayWidthDecimal;
                         decimal displayWidthDecimal = 0;
                         decimal displayWidth = 0;
@@ -802,6 +811,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             DisplayWD_dec = Math.Floor((Convert.ToDecimal(disp_wd_decimal) - displayWidth) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
 
+                        }
+                        if (_userModel.Department == "Sales & Operations (Costing)")
+                        {
+                            DisplayWD_dec = Convert.ToInt32(DisplayWD_dec);
                         }
                         DisplayWD_dec += displayWidthDecimal;
                         int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
@@ -3756,6 +3769,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IUserModel userModel,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
@@ -3772,6 +3786,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>();
             MultiPanelMullionUCPresenter multiMullionUCP = unityC.Resolve<MultiPanelMullionUCPresenter>();
             multiMullionUCP._unityC = unityC;
+            multiMullionUCP._userModel = userModel;
             multiMullionUCP._multiPanelModel = multiPanelModel;
             multiMullionUCP._frameModel = frameModel;
             multiMullionUCP._mainPresenter = mainPresenter;
@@ -3787,6 +3802,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         public IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IUserModel userModel,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
@@ -3802,6 +3818,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>();
             MultiPanelMullionUCPresenter multiMullionUCP = unityC.Resolve<MultiPanelMullionUCPresenter>();
             multiMullionUCP._unityC = unityC;
+            multiMullionUCP._userModel = userModel;
             multiMullionUCP._multiPanelModel = multiPanelModel;
             multiMullionUCP._frameModel = frameModel;
             multiMullionUCP._mainPresenter = mainPresenter;
@@ -3816,6 +3833,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         private IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                             IUserModel userModel,
                                                              IMultiPanelModel multiPanelModel,
                                                              IFrameModel frameModel,
                                                              IMainPresenter mainPresenter,
@@ -3832,6 +3850,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 .RegisterType<IMultiPanelMullionUCPresenter, MultiPanelMullionUCPresenter>();
             MultiPanelMullionUCPresenter multiMullionUCP = unityC.Resolve<MultiPanelMullionUCPresenter>();
             multiMullionUCP._unityC = unityC;
+            multiMullionUCP._userModel = userModel;
             multiMullionUCP._multiPanelModel = multiPanelModel;
             multiMullionUCP._frameModel = frameModel;
             multiMullionUCP._mainPresenter = mainPresenter;

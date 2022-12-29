@@ -72,6 +72,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         {
             try
             {
+                Console.WriteLine(" " + _divModel.Div_WidthToBind);
                 mullionUC = (UserControl)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;

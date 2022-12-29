@@ -6,6 +6,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
@@ -35,7 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IMultiPanelTransomUC _multiPanelTransomUC;
         private IMultiPanelMullionUCPresenter _multiMullionUCP; //Original Instance
         private IMultiPanelMullionUCPresenter _multiMullionUCP_given; //Given Instance
-
+        private IUserModel _userModel;
         private IUnityContainer _unityC;
 
         private IMultiPanelModel _multiPanelModel;
@@ -631,6 +632,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 _multiPanelModel.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
 
                                 IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
+                                                                                                         _userModel,
                                                                                                          mPanelModel,
                                                                                                          _frameModel,
                                                                                                          _mainPresenter,
@@ -4142,6 +4144,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         public IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IUserModel userModel,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
@@ -4156,6 +4159,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>();
             MultiPanelTransomUCPresenter multiTransomUCP = unityC.Resolve<MultiPanelTransomUCPresenter>();
             multiTransomUCP._unityC = unityC;
+            multiTransomUCP._userModel = userModel;
             multiTransomUCP._multiPanelModel = multiPanelModel;
             multiTransomUCP._frameModel = frameModel;
             multiTransomUCP._mainPresenter = mainPresenter;
@@ -4227,6 +4231,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         //}
 
         public IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                            IUserModel userModel,
                                                             IMultiPanelModel multiPanelModel,
                                                             IFrameModel frameModel,
                                                             IMainPresenter mainPresenter,
@@ -4243,6 +4248,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>();
             MultiPanelTransomUCPresenter multiTransomUCP = unityC.Resolve<MultiPanelTransomUCPresenter>();
             multiTransomUCP._unityC = unityC;
+            multiTransomUCP._userModel = userModel;
             multiTransomUCP._multiPanelModel = multiPanelModel;
             multiTransomUCP._frameModel = frameModel;
             multiTransomUCP._mainPresenter = mainPresenter;
@@ -4258,22 +4264,24 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         }
 
         private IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
-                                                            IMultiPanelModel multiPanelModel,
-                                                            IFrameModel frameModel,
-                                                            IMainPresenter mainPresenter,
-                                                            IFrameUCPresenter frameUCP,
-                                                            IMultiPanelTransomUCPresenter multiPanelTransomUCP,
-                                                            IMultiPanelPropertiesUCPresenter multiPropUCP,
-                                                            IFrameImagerUCPresenter frameImagerUCP,
-                                                            IBasePlatformImagerUCPresenter basePlatformImagerUCP,
-                                                            IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP,
-                                                            IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP_parent)
+                                                             IUserModel userModel,
+                                                             IMultiPanelModel multiPanelModel,
+                                                             IFrameModel frameModel,
+                                                             IMainPresenter mainPresenter,
+                                                             IFrameUCPresenter frameUCP,
+                                                             IMultiPanelTransomUCPresenter multiPanelTransomUCP,
+                                                             IMultiPanelPropertiesUCPresenter multiPropUCP,
+                                                             IFrameImagerUCPresenter frameImagerUCP,
+                                                             IBasePlatformImagerUCPresenter basePlatformImagerUCP,
+                                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP,
+                                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP_parent)
         {
             unityC
                 .RegisterType<IMultiPanelTransomUC, MultiPanelTransomUC>()
                 .RegisterType<IMultiPanelTransomUCPresenter, MultiPanelTransomUCPresenter>();
             MultiPanelTransomUCPresenter multiTransomUCP = unityC.Resolve<MultiPanelTransomUCPresenter>();
             multiTransomUCP._unityC = unityC;
+            multiTransomUCP._userModel = userModel;
             multiTransomUCP._multiPanelModel = multiPanelModel;
             multiTransomUCP._frameModel = frameModel;
             multiTransomUCP._mainPresenter = mainPresenter;

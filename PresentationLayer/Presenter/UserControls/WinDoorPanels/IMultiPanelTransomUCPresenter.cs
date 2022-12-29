@@ -5,6 +5,7 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using Unity;
 using System.Drawing;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using ModelLayer.Model.User;
 
 namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
@@ -16,6 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IMultiPanelTransomUC GetMultiPanel();
         FlowLayoutPanel GetflpTransom();
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IUserModel userModel,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
@@ -45,6 +47,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         //                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP,
         //                                             IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP_parent);
         IMultiPanelTransomUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IUserModel userModel,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
