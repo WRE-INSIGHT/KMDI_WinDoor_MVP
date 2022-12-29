@@ -8488,6 +8488,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
+                qoutationModel_MainPresenter.itemSelectStatus = true;
                 GetCurrentPrice();
             }
             catch (Exception ex)
