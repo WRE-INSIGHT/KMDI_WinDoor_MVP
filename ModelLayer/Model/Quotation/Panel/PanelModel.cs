@@ -2778,8 +2778,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
         public CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
         public SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
-        public LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
-
+        //public LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
 
         public int Panel_PlantOnWeatherStripHeadWidth { get; set; }
         public int Panel_PlantOnWeatherStripSealWidth { get; set; }
@@ -2791,6 +2790,157 @@ namespace ModelLayer.Model.Quotation.Panel
         public int Panel_LouvreGallerySetHeight { get; set; }
 
         int Panel_SealForHandleMultiplier;
+
+        private bool _panel_LouverGallerySetVisibility;
+        public bool Panel_LouverGallerySetVisibility
+        {
+            get
+            {
+                return _panel_LouverGallerySetVisibility;
+            }
+
+            set
+            {
+                _panel_LouverGallerySetVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private BladeHeight_Option _panel_LouverBladeHeight;
+        public BladeHeight_Option Panel_LouverBladeHeight
+        {
+            get
+            {
+                return _panel_LouverBladeHeight;
+            }
+
+            set
+            {
+                _panel_LouverBladeHeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _panel_LouverNumberBladesPerSet;
+        public int Panel_LouverNumberBladesPerSet
+        {
+            get
+            {
+                return _panel_LouverNumberBladesPerSet;
+            }
+
+            set
+            {
+                _panel_LouverNumberBladesPerSet = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private LouverHandleType_Option _panel_LouverHandleType;
+        public LouverHandleType_Option Panel_LouverHandleType
+        {
+            get
+            {
+                return _panel_LouverHandleType;
+            }
+
+            set
+            {
+                _panel_LouverHandleType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private LouverHandleLoc_Option _panel_LouverHandleLocation;
+        public LouverHandleLoc_Option Panel_LouverHandleLocation
+        {
+            get
+            {
+                return _panel_LouverHandleLocation;
+            }
+
+            set
+            {
+                _panel_LouverHandleLocation = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private LouverColor_Option _panel_LouverGalleryColor;
+        public LouverColor_Option Panel_LouverGalleryColor
+        {
+            get
+            {
+                return _panel_LouverGalleryColor;
+            }
+
+            set
+            {
+                _panel_LouverGalleryColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_LouverGalleryVisibility;
+        public bool Panel_LouverGalleryVisibility
+        {
+            get
+            {
+                return _panel_LouverGalleryVisibility;
+            }
+
+            set
+            {
+                _panel_LouverGalleryVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private BladeType_Option _panel_LouverBladeTypeOption;
+        public BladeType_Option Panel_LouverBladeTypeOption
+        {
+            get
+            {
+                return _panel_LouverBladeTypeOption;
+            }
+
+            set
+            {
+                _panel_LouverBladeTypeOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_LouverGallerySetOptionVisibility;
+        public bool Panel_LouverGallerySetOptionVisibility
+        {
+            get
+            {
+                return _panel_LouverGallerySetOptionVisibility;
+            }
+
+            set
+            {
+                _panel_LouverGallerySetOptionVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _panel_LouverGallerySetOptionArtNo;
+        public string Panel_LouverGallerySetOptionArtNo
+        {
+            get
+            {
+                return _panel_LouverGallerySetOptionArtNo;
+            }
+
+            set
+            {
+                _panel_LouverGallerySetOptionArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public int Panel_claddingCount { get; set; }
+
         #endregion
 
         #region Methods
@@ -2802,97 +2952,97 @@ namespace ModelLayer.Model.Quotation.Panel
             if (frameHT <= 320)
             {
                 Panel_LouverBladesCount = 2;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15202SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15202SRHBlack;
                 Panel_SealForHandleMultiplier = 1;
             }
             else if (frameHT >= 321 && frameHT <= 460)
             {
                 Panel_LouverBladesCount = 3;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15203SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15203SRHBlack;
                 Panel_SealForHandleMultiplier = 1;
             }
             else if (frameHT >= 461 && frameHT <= 600)
             {
                 Panel_LouverBladesCount = 4;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15204SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15204SRHBlack;
                 Panel_SealForHandleMultiplier = 1;
             }
             else if (frameHT >= 601 && frameHT <= 740)
             {
                 Panel_LouverBladesCount = 5;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15205SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15205SRHBlack;
                 Panel_SealForHandleMultiplier = 1;
             }
             else if (frameHT >= 741 && frameHT <= 880)
             {
                 Panel_LouverBladesCount = 6;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15206SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15206SRHBlack;
                 Panel_SealForHandleMultiplier = 1;
             }
             else if (frameHT >= 881 && frameHT <= 1020)
             {
                 Panel_LouverBladesCount = 7;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15207SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15207SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1021 && frameHT <= 1160)
             {
                 Panel_LouverBladesCount = 8;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15208SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15208SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1161 && frameHT <= 1300)
             {
                 Panel_LouverBladesCount = 9;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15209SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15209SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1301 && frameHT <= 1440)
             {
                 Panel_LouverBladesCount = 10;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15210SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15210SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1401 && frameHT <= 1580)
             {
                 Panel_LouverBladesCount = 11;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15211SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15211SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1581 && frameHT <= 1720)
             {
                 Panel_LouverBladesCount = 12;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15212SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15212SRHBlack;
                 Panel_SealForHandleMultiplier = 2;
             }
             else if (frameHT >= 1721 && frameHT <= 1860)
             {
                 Panel_LouverBladesCount = 13;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15213SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15213SRHBlack;
                 Panel_SealForHandleMultiplier = 3;
             }
             else if (frameHT >= 1861 && frameHT <= 2000)
             {
                 Panel_LouverBladesCount = 14;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15214SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15214SRHBlack;
                 Panel_SealForHandleMultiplier = 3;
             }
             else if (frameHT >= 2001 && frameHT <= 2140)
             {
                 Panel_LouverBladesCount = 15;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15215SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15215SRHBlack;
                 Panel_SealForHandleMultiplier = 3;
             }
             else if (frameHT >= 2141 && frameHT <= 2280)
             {
                 Panel_LouverBladesCount = 16;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15216SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15216SRHBlack;
                 Panel_SealForHandleMultiplier = 3;
             }
             else if (frameHT >= 2281 && frameHT <= 2420)
             {
                 Panel_LouverBladesCount = 17;
-                Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15217SRHBlack;
+                //Panel_LouvreGallerySetArtNo = LouverGallerySet_ArticleNo._LVRG15217SRHBlack;
                 Panel_SealForHandleMultiplier = 3;
             }
         }
@@ -4568,7 +4718,30 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_LouverBladesOptionsheight;
             }
-
+            else if (mode == "addLouverGallery")
+            {
+                Panel_PropertyHeight += constants.panel_property_LouverGalleryOptionsheight;
+            }
+            else if (mode == "minusLouverGallery")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverGalleryOptionsheight;
+            }
+            else if (mode == "addLouverGallerySet")
+            {
+                Panel_PropertyHeight += constants.panel_property_LouverGallerySetOptionsheight;
+            }
+            else if (mode == "minusLouverGallerySet")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverGallerySetOptionsheight;
+            }
+            else if (mode == "addLouverGallerySetArtNo")
+            {
+                Panel_PropertyHeight += constants.panel_property_LouverGallerySetArtNoOptionsheight;
+            }
+            else if (mode == "minusLouverGallerySetArtNo")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
+            }
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)
@@ -5383,18 +5556,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                 {
-                    Panel_MotorizedMechQty = 1;
+                    Panel_MotorizedMechQty += 1;
                 }
                 else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                          Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                 {
                     if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
                     {
-                        Panel_MotorizedMechQty = 1;
+                        Panel_MotorizedMechQty += 1;
                     }
                     else if (Panel_DisplayWidth >= 1100)
                     {
-                        Panel_MotorizedMechQty = 2;
+                        Panel_MotorizedMechQty += 2;
                     }
                 }
 
@@ -7134,18 +7307,18 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
                 {
-                    Panel_MotorizedMechQty = 1;
+                    Panel_MotorizedMechQty += 1;
                 }
                 else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
                          Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
                 {
                     if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
                     {
-                        Panel_MotorizedMechQty = 1;
+                        Panel_MotorizedMechQty += 1;
                     }
                     else if (Panel_DisplayWidth >= 1100)
                     {
-                        Panel_MotorizedMechQty = 2;
+                        Panel_MotorizedMechQty += 2;
                     }
                 }
 

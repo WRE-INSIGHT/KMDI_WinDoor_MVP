@@ -92,6 +92,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _initialLoad = false;
         }
 
+        public void BringToFrontUC()
+        {
+            ((UserControl)_pp_glassPropertyUC).BringToFront();
+        }
+
         public IPP_GlassPropertyUC GetPPGlassPropertyUC()
         {
             return _pp_glassPropertyUC;

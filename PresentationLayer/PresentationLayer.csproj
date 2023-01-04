@@ -183,8 +183,14 @@
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGalleryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetOptionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGalleryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_1385MilledProfilePropertyUCPresenter.cs" />
@@ -720,6 +726,9 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverBladesPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGalleryPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGallerySetOptionPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGallerySetPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
@@ -830,17 +839,17 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.Designer.cs">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverGallerySetOptionPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.Designer.cs">
       <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.Designer.cs">
-      <DependentUpon>PP_LouverTypePropertyUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1396,11 +1405,11 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.resx">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.resx">
+      <DependentUpon>PP_LouverGallerySetOptionPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.resx">
       <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverTypePropertyUC.resx">
-      <DependentUpon>PP_LouverTypePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_MiddleCloserPropertyUC.resx">
       <DependentUpon>PP_MiddleCloserPropertyUC.cs</DependentUpon>

@@ -291,7 +291,7 @@ namespace ModelLayer.Model.Quotation.Panel
         RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
         CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
         SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
-        LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
+        //LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
 
         int Panel_PlantOnWeatherStripHeadWidth { get; set; }
         int Panel_PlantOnWeatherStripSealWidth { get; set; }
@@ -301,7 +301,17 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_CasementSealWidth { get; set; }
         int Panel_SealForHandleQty { get; set; }
         int Panel_LouvreGallerySetHeight { get; set; }
-
+        bool Panel_LouverGallerySetVisibility { get; set; }
+        BladeHeight_Option Panel_LouverBladeHeight { get; set; }
+        int Panel_LouverNumberBladesPerSet { get; set; }
+        LouverHandleType_Option Panel_LouverHandleType { get; set; }
+        LouverHandleLoc_Option Panel_LouverHandleLocation { get; set; }
+        LouverColor_Option Panel_LouverGalleryColor { get; set; }
+        bool Panel_LouverGalleryVisibility { get; set; }
+        BladeType_Option Panel_LouverBladeTypeOption { get; set; }
+        bool Panel_LouverGallerySetOptionVisibility { get; set; }
+        string Panel_LouverGallerySetOptionArtNo { get; set; }
+        int Panel_claddingCount { get; set; }
 
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();

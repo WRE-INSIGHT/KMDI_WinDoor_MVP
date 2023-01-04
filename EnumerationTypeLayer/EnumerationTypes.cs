@@ -1048,10 +1048,10 @@ namespace EnumerationTypeLayer
         {
             public static readonly Magnum_ScreenType _Single_Fixed = new Magnum_ScreenType(0, "Single Horizontal Fixed on One End");
             public static readonly Magnum_ScreenType _Double_Fixed = new Magnum_ScreenType(1, "Double Horizontal Fixed on Both Ends");
-            public static readonly Magnum_ScreenType _Single_Central = new Magnum_ScreenType(2, "Single Horizontal Central Pack"); 
+            public static readonly Magnum_ScreenType _Single_Central = new Magnum_ScreenType(2, "Single Horizontal Central Pack");
 
-            public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }          
-           
+            public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }
+
         }
 
 
@@ -1288,23 +1288,23 @@ namespace EnumerationTypeLayer
             private BladeType_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
-        {
-            public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
-            public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
-            public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
-            public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
-            public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
-            public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
-            public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
-            public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
-            public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
-            public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
-            public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
+        //public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
+        //{
+        //    public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
+        //    public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
+        //    public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
+        //    public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
+        //    public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
+        //    public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
+        //    public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
+        //    public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
+        //    public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
+        //    public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
+        //    public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
 
 
-            private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
-        }
+        //    private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
+        //}
 
         public class BladeHeight_Option : Enumeration<BladeHeight_Option, int>
         {
@@ -1315,34 +1315,33 @@ namespace EnumerationTypeLayer
             private BladeHeight_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class GalleryHandle_Option : Enumeration<GalleryHandle_Option, int>
+        public class LouverHandleType_Option : Enumeration<LouverHandleType_Option, int>
         {
-            public static readonly GalleryHandle_Option _single = new GalleryHandle_Option(0, "Single");
-            public static readonly GalleryHandle_Option _dual = new GalleryHandle_Option(1, "Dual");
-            public static readonly GalleryHandle_Option _ringPullControl = new GalleryHandle_Option(3, "Ring Pull Control");
-            public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
-            public static readonly GalleryHandle_Option _none = new GalleryHandle_Option(4, "None");
-             
-            private GalleryHandle_Option(int value, string displayName) : base(value, displayName) { }
+            public static readonly LouverHandleType_Option _single = new LouverHandleType_Option(0, "Single");
+            public static readonly LouverHandleType_Option _dual = new LouverHandleType_Option(1, "Dual");
+            public static readonly LouverHandleType_Option _ringPullControl = new LouverHandleType_Option(3, "Ring Pull Control");
+            //public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
+            public static readonly LouverHandleType_Option _none = new LouverHandleType_Option(4, "None");
+
+            private LouverHandleType_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class GalleryHandleLoc_Option : Enumeration<GalleryHandleLoc_Option, int>
+        public class LouverHandleLoc_Option : Enumeration<LouverHandleLoc_Option, int>
         {
-            public static readonly GalleryHandleLoc_Option _LH = new GalleryHandleLoc_Option(0, "Left Hand");
-            public static readonly GalleryHandleLoc_Option _RH = new GalleryHandleLoc_Option(1, "Right Hand");
-            public static readonly GalleryHandleLoc_Option _H = new GalleryHandleLoc_Option(2, "With Holes");
-            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(3, "None");
-             
-            private GalleryHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
+            public static readonly LouverHandleLoc_Option _LH = new LouverHandleLoc_Option(0, "Left Hand");
+            public static readonly LouverHandleLoc_Option _RH = new LouverHandleLoc_Option(1, "Right Hand");
+            public static readonly LouverHandleLoc_Option _none = new LouverHandleLoc_Option(2, "None");
+
+            private LouverHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
         }
 
 
-        public class LouverType_Option : Enumeration<LouverType_Option, int>
+        public class LouverColor_Option : Enumeration<LouverColor_Option, int>
         {
-            public static readonly LouverType_Option _movable = new LouverType_Option(0, "Movable");
-            public static readonly LouverType_Option _fixed = new LouverType_Option(1, "Fixed"); 
+            public static readonly LouverColor_Option _white = new LouverColor_Option(0, "White");
+            public static readonly LouverColor_Option _black = new LouverColor_Option(1, "Black");
 
-            private LouverType_Option(int value, string displayName) : base(value, displayName) { }
+            private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

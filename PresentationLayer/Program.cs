@@ -404,17 +404,26 @@ namespace PresentationLayer
                 .RegisterType<ISP_6052MilledProfilePropertyUC, SP_6052MilledProfilePropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_6052MilledProfilePropertyUCPresenter, SP_6052MilledProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<ISP_SpringLoadedUC,SP_SpringLoadedUC>(new ContainerControlledLifetimeManager())
-                .RegisterType<ISP_SpringLoadedUCPresenter,SP_SpringLoadedUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_SpringLoadedUC, SP_SpringLoadedUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_SpringLoadedUCPresenter, SP_SpringLoadedUCPresenter>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<ISP_MagnumScreenTypeUCPresenter,SP_MagnumScreenTypeUCPresenter>(new ContainerControlledLifetimeManager())
-                .RegisterType<ISP_MagnumScreenTypeUC,SP_MagnumScreenTypeUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_MagnumScreenTypeUCPresenter, SP_MagnumScreenTypeUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_MagnumScreenTypeUC, SP_MagnumScreenTypeUC>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IPricingView, PricingView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPricingPresenter, PricingPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_LouverGalleryPropertyUC, PP_LouverGalleryPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_LouverGalleryPropertyUCPresenter, PP_LouverGalleryPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_LouverGallerySetPropertyUC, PP_LouverGallerySetPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_LouverGallerySetPropertyUCPresenter, PP_LouverGallerySetPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<IPP_LouverGallerySetOptionPropertyUC, PP_LouverGallerySetOptionPropertyUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPP_LouverGallerySetOptionPropertyUCPresenter, PP_LouverGallerySetOptionPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
@@ -427,8 +436,8 @@ namespace PresentationLayer
                 .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))
 
-                 .RegisterType<ISetMultipleGlassThicknessPresenter,SetMultipleGlassThicknessPresenter>(new ContainerControlledLifetimeManager())
-                 .RegisterType<ISetMultipleGlassThicknessView,SetMultipleGlassThicknessView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<ISetMultipleGlassThicknessPresenter, SetMultipleGlassThicknessPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<ISetMultipleGlassThicknessView, SetMultipleGlassThicknessView>(new ContainerControlledLifetimeManager())
                 ;
 
             Application.EnableVisualStyles();

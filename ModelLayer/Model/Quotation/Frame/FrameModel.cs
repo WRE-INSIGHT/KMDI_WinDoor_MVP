@@ -388,22 +388,23 @@ namespace ModelLayer.Model.Quotation.Frame
             foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = Frame_Zoom;
-                if(Lst_MultiPanel[0] == mpnl)
+                if (Lst_MultiPanel[0] == mpnl)
                 {
                     mpnl.Set_DimensionToBind_using_FrameDimensions();
                     mpnl.Imager_Set_DimensionToBind_using_FrameDimensions();
-                }else
+                }
+                else
                 {
                     mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
 
                 }
-      
+
                 mpnl.SetZoomPanels();
                 mpnl.SetZoomDivider();
                 mpnl.SetZoomMPanels();
                 mpnl.Reload_PanelMargin();
-               
-    
+
+
                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                 {
                     pnl.Panel_Zoom = Frame_Zoom;
@@ -446,7 +447,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 pnl.Imager_SetDimensionsToBind_FrameParent();
 
-               
+
             }
         }
 
@@ -484,7 +485,7 @@ namespace ModelLayer.Model.Quotation.Frame
             foreach (IPanelModel pnl in Lst_Panel)
             {
                 pnl.Panel_Zoom = Frame_Zoom;
-                if(pnl.Panel_ParentMultiPanelModel != null)
+                if (pnl.Panel_ParentMultiPanelModel != null)
                 {
                     if (Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
                                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f)
@@ -496,8 +497,8 @@ namespace ModelLayer.Model.Quotation.Frame
                         pnl.SetDimensionToBind_using_BaseDimension();
                     }
                 }
-               
-               
+
+
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
@@ -1201,6 +1202,30 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_LouverBladesOptionsheight;
                 }
+                else if (mode == "addLouverGallery")
+                {
+                    FrameProp_Height += constants.panel_property_LouverGalleryOptionsheight;
+                }
+                else if (mode == "minusLouverGallery")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverGalleryOptionsheight;
+                }
+                else if (mode == "addLouverGallerySet")
+                {
+                    FrameProp_Height += constants.panel_property_LouverGallerySetOptionsheight;
+                }
+                else if (mode == "minusLouverGallerySet")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverGallerySetOptionsheight;
+                }
+                else if (mode == "addLouverGallerySetArtNo")
+                {
+                    FrameProp_Height += constants.panel_property_LouverGallerySetArtNoOptionsheight;
+                }
+                else if (mode == "minusLouverGallerySetArtNo")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -1438,8 +1463,8 @@ namespace ModelLayer.Model.Quotation.Frame
 
 
         #endregion
-        
-     
+
+
         public FrameModel(int frameID,
                           string frameName,
                           int frameWd,
