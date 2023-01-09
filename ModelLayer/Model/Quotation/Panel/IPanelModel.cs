@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -311,8 +312,9 @@ namespace ModelLayer.Model.Quotation.Panel
         BladeType_Option Panel_LouverBladeTypeOption { get; set; }
         bool Panel_LouverGallerySetOptionVisibility { get; set; }
         string Panel_LouverGallerySetOptionArtNo { get; set; }
-        int Panel_claddingCount { get; set; }
-
+        int Panel_LouverGallerySetCount { get; set; }
+        List<string> Panel_LstLouverArtNo { get; set; }
+        List<int> Panel_LstSealForHandleMultiplier { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();

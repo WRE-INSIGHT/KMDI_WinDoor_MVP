@@ -15,6 +15,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler LouverGallerySetPropertyUCLoadEventRaised;
         public event EventHandler btnAddLouverClickEventRaised;
+        public event EventHandler cmbBladeHeightSelectedValueChangedEventRaised;
+        public event EventHandler cmbHandleTypeSelectedValueChangedEventRaised;
+        public event EventHandler cmbHandleLocationSelectedValueChangedEventRaised;
+        public event EventHandler cmbGalleryColorSelectedValueChangedEventRaised;
+
         private void PP_LouverGallerySetPropertyUC_Load(object sender, EventArgs e)
         {
             List<BladeHeight_Option> BladeHeight = new List<BladeHeight_Option>();
@@ -53,7 +58,25 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, btnAddLouverClickEventRaised, e);
         }
+        private void cmb_BladeHeight_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbBladeHeightSelectedValueChangedEventRaised, e);
+        }
 
+        private void cmb_HandleType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbHandleTypeSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_HandleLocation_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbHandleLocationSelectedValueChangedEventRaised, e);
+        }
+
+        private void cmb_GalleryColor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbGalleryColorSelectedValueChangedEventRaised, e);
+        }
         private void btn_SaveGallerySet_Click(object sender, EventArgs e)
         {
 
@@ -68,12 +91,13 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverGallerySetVisibility"]);
-            cmb_BladeHeight.DataBindings.Add(ModelBinding["Panel_LouverBladeHeight"]);
+            //cmb_BladeHeight.DataBindings.Add(ModelBinding["Panel_LouverBladeHeight"]);
             nud_NoOfBladePerSet.DataBindings.Add(ModelBinding["Panel_LouverNumberBladesPerSet"]);
-            cmb_HandleType.DataBindings.Add(ModelBinding["Panel_LouverHandleType"]);
-            cmb_HandleLocation.DataBindings.Add(ModelBinding["Panel_LouverHandleLocation"]);
-            cmb_GalleryColor.DataBindings.Add(ModelBinding["Panel_LouverGalleryColor"]);
+            //cmb_HandleType.DataBindings.Add(ModelBinding["Panel_LouverHandleType"]);
+            //cmb_HandleLocation.DataBindings.Add(ModelBinding["Panel_LouverHandleLocation"]);
+            //cmb_GalleryColor.DataBindings.Add(ModelBinding["Panel_LouverGalleryColor"]);
         }
+
 
     }
 }

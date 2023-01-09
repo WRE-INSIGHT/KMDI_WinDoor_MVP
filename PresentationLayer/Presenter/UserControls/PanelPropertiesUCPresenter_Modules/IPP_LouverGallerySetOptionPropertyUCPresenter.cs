@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_LouverGallerySetOptionPropertyUC GetLouverGallerySetOptionPropertyUC();
         IPP_LouverGallerySetOptionPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
                                                                     IMainPresenter mainPresenter,
-                                                                    IPanelModel panelModel);
+                                                                    IPanelModel panelModel,
+                                                                    IPP_LouverGallerySetPropertyUCPresenter louverGallerySetPropertyUCPresenter);
     }
 }

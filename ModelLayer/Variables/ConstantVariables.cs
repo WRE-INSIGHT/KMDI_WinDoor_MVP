@@ -50,7 +50,7 @@
         //public int panel_property_LouverOptionsheight = 191;
         public int panel_property_LouverBladesOptionsheight = 28;
         public int panel_property_LouverGalleryOptionsheight = 55;
-        public int panel_property_LouverGallerySetOptionsheight = 186;
+        public int panel_property_LouverGallerySetOptionsheight = 178;
         public int panel_property_LouverGallerySetArtNoOptionsheight = 29;
 
 

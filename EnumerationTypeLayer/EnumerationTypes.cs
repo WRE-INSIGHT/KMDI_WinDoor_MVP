@@ -1245,39 +1245,39 @@ namespace EnumerationTypeLayer
 
         public class CasementSeal_ArticleNo : Enumeration<CasementSeal_ArticleNo, int>
         {
-            public static readonly CasementSeal_ArticleNo _SL31 = new CasementSeal_ArticleNo(0, "SL31");
+            public static readonly CasementSeal_ArticleNo _9040 = new CasementSeal_ArticleNo(0, "9040");
 
             private CasementSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class SealForHandle_ArticleNo : Enumeration<SealForHandle_ArticleNo, int>
         {
-            public static readonly SealForHandle_ArticleNo _AL1309 = new SealForHandle_ArticleNo(0, "AL-1309");
+            public static readonly SealForHandle_ArticleNo _WDL2 = new SealForHandle_ArticleNo(0, "WDL2");
 
             private SealForHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
-        {
-            public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
+        //public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
+        //{
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
 
-            private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
-        }
+        //    private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        //}
 
         public class BladeType_Option : Enumeration<BladeType_Option, int>
         {
@@ -1308,8 +1308,8 @@ namespace EnumerationTypeLayer
 
         public class BladeHeight_Option : Enumeration<BladeHeight_Option, int>
         {
-            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(0, "150");
-            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(1, "152");
+            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(0, "152");
+            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(1, "150");
 
 
             private BladeHeight_Option(int value, string displayName) : base(value, displayName) { }
@@ -1328,8 +1328,8 @@ namespace EnumerationTypeLayer
 
         public class LouverHandleLoc_Option : Enumeration<LouverHandleLoc_Option, int>
         {
-            public static readonly LouverHandleLoc_Option _LH = new LouverHandleLoc_Option(0, "Left Hand");
-            public static readonly LouverHandleLoc_Option _RH = new LouverHandleLoc_Option(1, "Right Hand");
+            public static readonly LouverHandleLoc_Option _RH = new LouverHandleLoc_Option(0, "Right Hand");
+            public static readonly LouverHandleLoc_Option _LH = new LouverHandleLoc_Option(1, "Left Hand");
             public static readonly LouverHandleLoc_Option _none = new LouverHandleLoc_Option(2, "None");
 
             private LouverHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
@@ -1338,8 +1338,8 @@ namespace EnumerationTypeLayer
 
         public class LouverColor_Option : Enumeration<LouverColor_Option, int>
         {
-            public static readonly LouverColor_Option _white = new LouverColor_Option(0, "White");
-            public static readonly LouverColor_Option _black = new LouverColor_Option(1, "Black");
+            public static readonly LouverColor_Option _black = new LouverColor_Option(0, "Black");
+            public static readonly LouverColor_Option _white = new LouverColor_Option(1, "White");
 
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }

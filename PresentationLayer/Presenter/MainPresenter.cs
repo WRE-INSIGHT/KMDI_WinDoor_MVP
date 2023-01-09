@@ -9498,7 +9498,7 @@ namespace PresentationLayer.Presenter
                     {
                         for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
                         {
-                            glassThick += lst_glassThicknessDistinct[i];
+                            glassThick += "(G" + (i+1).ToString() + ")" + lst_glassThicknessDistinct[i];
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);

@@ -8,6 +8,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler LouverGallerySetPropertyUCLoadEventRaised;
         event EventHandler btnAddLouverClickEventRaised;
+        event EventHandler cmbBladeHeightSelectedValueChangedEventRaised;
+        event EventHandler cmbHandleTypeSelectedValueChangedEventRaised;
+        event EventHandler cmbHandleLocationSelectedValueChangedEventRaised;
+        event EventHandler cmbGalleryColorSelectedValueChangedEventRaised;
         Panel GetPanelBody();
     }
 }

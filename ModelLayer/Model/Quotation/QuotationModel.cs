@@ -2106,6 +2106,7 @@ namespace ModelLayer.Model.Quotation
         Glass_12mmTemp_PricePerSqrMeter = 3619.00m,
 
         _4millFilmPrice_PricePerSqrMeter = 2600m,
+        FrostedFilmPrice_PricePerSqrMeter = 880M,
 
         FilmPrice,
         GlassPrice,
@@ -3871,6 +3872,10 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                         }
+                                        else if (pnl.Panel_GlassFilm == GlassFilm_Types._FrostedFilm)
+                                        {
+                                            FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
+                                        }
                                         #endregion
                                         HandleDesc = pnl.Panel_HandleType.ToString();
 
@@ -3945,6 +3950,10 @@ namespace ModelLayer.Model.Quotation
                                             pnl.Panel_GlassFilm == GlassFilm_Types._4milUpera)
                                         {
                                             FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
+                                        }
+                                        else if (pnl.Panel_GlassFilm == GlassFilm_Types._FrostedFilm)
+                                        {
+                                            FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
                                         }
                                         #endregion
                                     }
@@ -4733,6 +4742,10 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                 }
+                                else if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._FrostedFilm)
+                                {
+                                    FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
+                                }
                                 #endregion
 
                                 CostingPoints += ProfileColorPoints * 4;
@@ -4808,7 +4821,16 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * _4millFilmPrice_PricePerSqrMeter;
                                 }
+                                else if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._FrostedFilm)
+                                {
+                                    FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
+                                }
                                 #endregion
+                            }
+                            else if (Singlepnl.Panel_Type.Contains("Louver"))
+                            {
+                                CostingPoints += ProfileColorPoints * 2;
+                                InstallationPoints += (ProfileColorPoints / 3) * 2;
                             }
                         }
 
