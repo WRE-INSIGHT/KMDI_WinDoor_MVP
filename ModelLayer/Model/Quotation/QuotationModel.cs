@@ -2015,6 +2015,7 @@ namespace ModelLayer.Model.Quotation
 
         bool ChckDM = false,
              ChckPlasticWedge = false,
+             chckAlumPullHandle = false,
              check1stFrame = false;
 
         string BOM_divDesc,
@@ -2949,6 +2950,7 @@ namespace ModelLayer.Model.Quotation
                             ChckPlasticWedge = false;
                         }
 
+
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
@@ -3371,7 +3373,7 @@ namespace ModelLayer.Model.Quotation
                                                 SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                             }
 
-                                            if (pnl.Panel_SashHeight >= 3000)
+                                            if (fr.Frame_Height >= 3000)
                                             {
                                                 AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                             }
@@ -4250,7 +4252,7 @@ namespace ModelLayer.Model.Quotation
                                         SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                     }
 
-                                    if (Singlepnl.Panel_SashHeight >= 3000)
+                                    if (fr.Frame_Height >= 3000)
                                     {
                                         AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                     }
@@ -4858,13 +4860,13 @@ namespace ModelLayer.Model.Quotation
                                 CostingPoints += ProfileColorPoints * 2;
                                 InstallationPoints += (ProfileColorPoints / 3) * 2;
 
-                                LouvreFrameWeatherStripHeadPrice += (Singlepnl.Panel_Width * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                LouvreFrameBottomWeatherStripPrice += (Singlepnl.Panel_Width * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
-                                PlantonWeatherStripHeadPrice += (Singlepnl.Panel_Width * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                PlantonWeatherStripSillPrice += (Singlepnl.Panel_Width * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
+                                LouvreFrameWeatherStripHeadPrice += (Singlepnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                LouvreFrameBottomWeatherStripPrice += (Singlepnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
+                                PlantonWeatherStripHeadPrice += (Singlepnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                PlantonWeatherStripSillPrice += (Singlepnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
 
-                                BubbleSealPrice += ((Singlepnl.Panel_Width * 2) * BubbleSealPricePerMeter * Singlepnl.Panel_LouverBladesCount) / 1000m;
-                                GalleryAdaptorPrice += ((Singlepnl.Panel_Height * 2) * GalleryAdaptorPricePerMeter) / 1000m;
+                                BubbleSealPrice += ((Singlepnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * Singlepnl.Panel_LouverBladesCount) / 1000m;
+                                GalleryAdaptorPrice += ((Singlepnl.Panel_DisplayHeight * 2) * GalleryAdaptorPricePerMeter) / 1000m;
 
 
                                 if (Singlepnl.Panel_LstLouverArtNo != null)
