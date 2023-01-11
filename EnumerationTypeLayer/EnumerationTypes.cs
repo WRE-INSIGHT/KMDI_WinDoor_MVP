@@ -1256,6 +1256,12 @@ namespace EnumerationTypeLayer
 
             private SealForHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+        public class BubbleSeal_ArticleNo : Enumeration<BubbleSeal_ArticleNo, int>
+        {
+            public static readonly BubbleSeal_ArticleNo _SC55 = new BubbleSeal_ArticleNo(0, "SC5-5");
+
+            private BubbleSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        }
 
         //public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
         //{

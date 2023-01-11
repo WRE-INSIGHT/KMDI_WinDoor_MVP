@@ -292,6 +292,7 @@ namespace ModelLayer.Model.Quotation.Panel
         RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
         CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
         SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
+        BubbleSeal_ArticleNo Panel_BubbleSealArtNo { get; set; }
         //LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
 
         int Panel_PlantOnWeatherStripHeadWidth { get; set; }

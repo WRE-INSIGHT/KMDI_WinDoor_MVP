@@ -2224,6 +2224,7 @@ namespace PresentationLayer.Presenter
 
             _glassTypeDT.Rows.Add("Annealed");
             _glassTypeDT.Rows.Add("Tempered");
+            _glassTypeDT.Rows.Add("Acid Etched");
             _glassTypeDT.Rows.Add("Unglazed");
 
             _spacerDT.Rows.Add("Air");
@@ -2233,6 +2234,8 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Tinted Gray");
             _colorDT.Rows.Add("Tinted Bronze");
             _colorDT.Rows.Add("Tinted Green");
+            _colorDT.Rows.Add("Euro Grey");
+
 
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
@@ -3016,7 +3019,7 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Frame_Width:"))
                         {
                             frm_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-                          
+
                         }
                         if (row_str.Contains("Frame_BasicDeduction:"))
                         {
@@ -3139,7 +3142,7 @@ namespace PresentationLayer.Presenter
                                    frmDimension_profileType,
                                    frmDimension_baseColor);
 
-                           
+
                             inside_frame = false;
                         }
                         if (row_str.Contains("Frame_ArtNo:"))
@@ -9498,7 +9501,7 @@ namespace PresentationLayer.Presenter
                     {
                         for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
                         {
-                            glassThick += "(G" + (i+1).ToString() + ")" + lst_glassThicknessDistinct[i];
+                            glassThick += "(G" + (i + 1).ToString() + ")" + lst_glassThicknessDistinct[i];
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);

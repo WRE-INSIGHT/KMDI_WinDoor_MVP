@@ -2779,6 +2779,8 @@ namespace ModelLayer.Model.Quotation.Panel
         public RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
         public CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
         public SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
+        public BubbleSeal_ArticleNo Panel_BubbleSealArtNo { get; set; }
+
         //public LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
 
         public int Panel_PlantOnWeatherStripHeadWidth { get; set; }
@@ -6113,6 +6115,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_CasementSealArtNo = CasementSeal_ArticleNo._9040;
                     Panel_SealForHandleArtNo = SealForHandle_ArticleNo._WDL2;
 
+                    if (Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                    {
+
+                    }
+
                     int lvrgDeduction = 0;
                     if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
                     {
@@ -6129,7 +6136,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_LouverFrameBottomWeatherStripWidth = Panel_PlantOnWeatherStripHeadWidth - 44;
                     Panel_RubberSealWidth = Panel_DisplayWidth;
                     Panel_CasementSealWidth = Panel_DisplayWidth;
-                    Panel_GlassWidth = Panel_DisplayWidth - (33 * 2) - (31 *2);
+                    Panel_GlassWidth = Panel_DisplayWidth - (lvrgDeduction * 2) - (31 * 2);
 
                     if (Panel_LstSealForHandleMultiplier != null)
                     {
