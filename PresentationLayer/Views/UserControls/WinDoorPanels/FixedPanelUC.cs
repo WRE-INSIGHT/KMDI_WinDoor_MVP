@@ -156,11 +156,7 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             {
 
             }
-           
-
-
         }
-
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, deleteToolStripClickedEventRaised, e);

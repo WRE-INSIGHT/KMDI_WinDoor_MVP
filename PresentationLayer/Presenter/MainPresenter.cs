@@ -1852,7 +1852,7 @@ namespace PresentationLayer.Presenter
         bool toggle;
         private void OnDeleteToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
+            int propertiesScroll = PropertiesScroll;
             if (_quotationModel != null && _windoorModel != null)
             {
                 _mainView.CreateNewWindoorBtnEnabled = false;
@@ -1861,6 +1861,7 @@ namespace PresentationLayer.Presenter
                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
+                    int wndrId = _windoorModel.WD_id;
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         if (wdm == _windoorModel)
@@ -1887,12 +1888,35 @@ namespace PresentationLayer.Presenter
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
                         wdm.WD_name = "Item " + count;
+                        wdm.WD_id = count;
                         count++;
                     }
                     foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                     {
-                        Load_Windoor_Item(wdm);
-                        break;
+                        if (wndrId < _quotationModel.Lst_Windoor.Count())
+                        {
+                            if(wdm.WD_id == wndrId)
+                            {
+                                Load_Windoor_Item(wdm);
+                                break;
+                            }
+                        }
+
+                        else
+                        {
+                            if (wndrId -1 == _quotationModel.Lst_Windoor.Count())
+                            {
+                                if (wdm.WD_id == wndrId - 1)
+                                {
+                                    Load_Windoor_Item(wdm);
+                                    break;
+                                }
+
+
+                            }
+
+                        }
+                        
                     }
 
                 }
@@ -1916,6 +1940,7 @@ namespace PresentationLayer.Presenter
             {
                 _lblCurrentPrice.Value = 0;
             }
+            PropertiesScroll = propertiesScroll;
             //wndr_content = new List<string>();
             //Saving_dotwndr();
         }
@@ -2091,7 +2116,7 @@ namespace PresentationLayer.Presenter
             {
                 mainTodo = todo;
                 bgw.RunWorkerAsync();
-                if (todo == "Open_WndrFiles")
+                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items")
                 {
                     _mainView.GetToolStripLabelLoading().Text = "Initializing";
                     ToggleMode(true, false);
@@ -2288,7 +2313,7 @@ namespace PresentationLayer.Presenter
                     Windoor_Save_PropertiesUC();
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                    StartWorker("Open_WndrFiles");
+                    StartWorker("Add_Existing_Items");
                     SetMainViewTitle(input_qrefno,
                                  _projectName,
                                  _custRefNo,
@@ -2382,6 +2407,19 @@ namespace PresentationLayer.Presenter
                         }
 
                         break;
+                    case "Add_Existing_Items":
+                        Opening_dotwndr(e.ProgressPercentage);
+                        _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
+                        if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
+                        {
+                            _mainView.GetToolStripLabelLoading().Text += ".";
+                        }
+                        else
+                        {
+                            _mainView.GetToolStripLabelLoading().Text = "Initializing";
+                        }
+
+                        break;
                     default:
                         break;
                 }
@@ -2399,6 +2437,7 @@ namespace PresentationLayer.Presenter
                 switch (mainTodo)
                 {
                     case "Open_WndrFiles":
+                    case "Add_Existing_Items":
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -2412,7 +2451,6 @@ namespace PresentationLayer.Presenter
                         }
                         //e.Result = e.Argument.ToString();
                         break;
-
                     //case "GetCloudFiles":
                     //    var objds = csq.CostingQuery_ReturnDS("GetCloudFiles", "", (int)info[0]);
                     //    sql_Transaction_result = objds.Item1;
@@ -2467,8 +2505,7 @@ namespace PresentationLayer.Presenter
                     switch (mainTodo)
                     {
                         case "Open_WndrFiles":
-
-
+                        case "Add_Existing_Items":
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -2636,7 +2673,16 @@ namespace PresentationLayer.Presenter
                     wndr.WD_name = "Item " + wndrId;
                     wndr.WD_id = wndrId;
                 }
-                Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+
+                if(mainTodo == "Open_WndrFiles")
+                {
+                    Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+                }
+                else if (mainTodo == "Add_Existing_Items")
+                {
+                    Load_Windoor_Item(_windoorModel);
+                }
+                    
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -7496,6 +7542,19 @@ namespace PresentationLayer.Presenter
             _multiModelParent = null;
             mpnllvl = string.Empty;
             _pnlItems.Controls.Clear();
+
+
+            IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>(); 
+            foreach(Control cons in controls)
+            {
+                cons.Dispose();
+            }
+            IEnumerable<Control> controlss = _pnlPropertiesBody.Controls.Cast<Control>().OfType<Control>();
+            foreach (Control cons in controlss)
+            {
+                cons.Dispose();
+            }
+
             _pnlPropertiesBody.Controls.Clear();
             _pnlMain.Controls.Clear();
             //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
@@ -8125,12 +8184,30 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
-
+                //foreach (IWindoorModel wndrm in _quotationModel.Lst_Windoor)
+                //{
+                //    foreach (IFrameModel frm_Clear in wndrm.lst_frame)
+                //    {
+                //        frm_Clear.Frame_PropertiesUC.Dispose();
+                //        frm_Clear.Frame_UC.Dispose();
+                //        frm_Clear.Frame_PropertiesUC = null;
+                //        frm_Clear.Frame_UC = null;
+                //    }
+                //}
 
                 //save frame
                 Windoor_Save_UserControl();
                 Windoor_Save_PropertiesUC();
+                //IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
+                //foreach (Control cons in controls)
+                //{
+                //    cons.Dispose();
+                //}
+                //IEnumerable<Control> controlss = _pnlPropertiesBody.Controls.Cast<Control>().OfType<Control>();
+                //foreach (Control cons in controlss)
+                //{
+                //    cons.Dispose();
+                //}
 
                 //set mainview
                 _windoorModel = item;
@@ -8151,6 +8228,233 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                 _mainView.GetThis().Controls.Add(bpUC);
+
+                //foreach (Control wndrObject in _windoorModel.lst_objects)
+                //{
+                //    if (wndrObject.Name.Contains("Frame"))
+                //    {
+                //        #region FrameModel
+                //        foreach (IFrameModel frm in _windoorModel.lst_frame)
+                //        {
+                //            if (frm.Frame_Name == wndrObject.Name)
+                //            {
+
+                //                frm.Set_DimensionsToBind_using_FrameZoom();
+                //                frm.Set_ImagerDimensions_using_ImagerZoom();
+                //                frm.Set_FramePadding();
+
+                //                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(frm);
+                //                AddFrameUC(frm, framePropUCP);
+
+                //                frm.Frame_UC = (UserControl)_frameUC;
+                //                frm.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
+                //                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                //                _basePlatformPresenter.InvalidateBasePlatform();
+                //                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
+                //                _windoorModel.Fit_MyControls_ToBindDimensions();
+
+                //                #region  Frame Panel
+                //                foreach (PanelModel pnl in frm.Lst_Panel)
+                //                {
+                //                }
+                //                #endregion
+                //                #region 2nd Level MultiPanel
+                //                foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                //                {
+                //                    FlowDirection flow = FlowDirection.LeftToRight;
+                //                    if (mpnl.MPanel_Name.Contains("Transom"))
+                //                    {
+                //                        flow = FlowDirection.TopDown;
+                //                    }
+
+                //                    frm.SetDeductFramePadding(true);
+                //                    mpnl.Set_DimensionToBind_using_FrameDimensions();
+                //                    mpnl.Imager_Set_DimensionToBind_using_FrameDimensions();
+
+                //                    IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPanelPropertiesUCP.GetNewInstance(_unityC, mpnl, this);
+                //                    UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
+                //                    multiPropUC.Dock = DockStyle.Top;
+                //                    framePropUCP.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(multiPropUC);
+                //                    frm.AdjustPropertyPanelHeight("Mpanel", "add");
+
+                //                    if (mpnl.MPanel_Name.Contains("Mullion"))
+                //                    {
+                //                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
+                //                                                                                                                          mpnl,
+                //                                                                                                                          _frameModel,
+                //                                                                                                                          _frameImagerUCP);
+                //                        IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
+                //                        //_frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
+                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+
+                //                        IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
+                //                                                                                          mpnl,
+                //                                                                                          _frameModel,
+                //                                                                                          this,
+                //                                                                                          _frameUCPresenter,
+                //                                                                                          _multiTransomUCP,
+                //                                                                                          multiPropUCP,
+                //                                                                                          _frameImagerUCP,
+                //                                                                                          _basePlatformImagerUCPresenter,
+                //                                                                                          multiMullionImagerUCP);
+                //                        IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
+                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
+                //                    }
+                //                    else if (mpnl.MPanel_Name.Contains("Transom"))
+                //                    {
+                //                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = _multiTransomImagerUCP.GetNewInstance(_unityC,
+                //                                                                                                                          mpnl,
+                //                                                                                                                          _frameModel,
+                //                                                                                                                          _frameImagerUCP);
+                //                        IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
+                //                        //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
+                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                //                        IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                //                                                                                                        mpnl,
+                //                                                                                                        frm,
+                //                                                                                                        this,
+                //                                                                                                        _frameUCPresenter,
+                //                                                                                                        multiPropUCP,
+                //                                                                                                        _frameImagerUCP,
+                //                                                                                                        _basePlatformImagerUCPresenter,
+                //                                                                                                        multiTransomImagerUCP);
+                //                        IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
+                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
+                //                    }
+                //                    foreach (Control ctrl in mpnl.MPanelLst_Objects)
+                //                    {
+                //                        if (ctrl.Name.Contains("PanelUC"))
+                //                        {
+                //                            #region 2nd Level MultiPanel Panel
+                //                            foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
+                //                            {
+                //                                if (ctrl.Name == pnl.Panel_Name)
+                //                                {
+                //                                }
+                //                            }
+                //                            #endregion
+
+                //                        }
+                //                        else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
+                //                        {
+                //                            #region 2nd Level MultiPanel Divider
+                //                            foreach (DividerModel div in mpnl.MPanelLst_Divider)
+                //                            {
+                //                                if (ctrl.Name == div.Div_Name)
+                //                                {
+
+                //                                }
+                //                            }
+                //                            #endregion
+
+                //                        }
+                //                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
+                //                        {
+
+                //                            #region 2nd Level MultiPanel MultiPanel
+
+                //                            foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
+                //                            {
+                //                                if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
+                //                                {
+                //                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
+                //                                    {
+                //                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
+                //                                        {
+                //                                            foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                //                                            {
+                //                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
+                //                                                {
+
+                //                                                }
+                //                                            }
+                //                                        }
+                //                                        else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
+                //                                        {
+
+                //                                            foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
+                //                                            {
+                //                                                if (thirdlvlctrl.Name == div.Div_Name)
+                //                                                {
+
+                //                                                }
+                //                                            }
+                //                                        }
+                //                                        foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
+                //                                        {
+                //                                            if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
+                //                                            {
+                //                                                foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
+                //                                                {
+
+                //                                                    if (fourthlvlctrl.Name.Contains("PanelUC"))
+                //                                                    {
+                //                                                        foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+                //                                                        {
+                //                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
+                //                                                            {
+
+                //                                                            }
+                //                                                        }
+
+                //                                                    }
+                //                                                    else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
+                //                                                    {
+                //                                                        foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
+                //                                                        {
+                //                                                            if (fourthlvlctrl.Name == div.Div_Name)
+                //                                                            {
+
+                //                                                            }
+                //                                                        }
+                //                                                    }
+                //                                                }
+                //                                            }
+                //                                        }
+                //                                        //mpnlPropertyHeight -= 1;
+
+                //                                    }
+                //                                }
+                //                            }
+                //                            #endregion
+                //                        }
+                //                    }
+                //                }
+                //                #endregion
+
+                //            }
+
+                //        }
+
+                //        #endregion
+                //    }
+                //    else
+                //    {
+                //        #region Concrete
+
+                //        foreach (IConcreteModel crm in _windoorModel.lst_concrete)
+                //        {
+                //            if (wndrObject.Name == crm.Concrete_Name)
+                //            {
+
+                //            }
+                //        }
+                //        #endregion
+                //    }
+
+
+                //}
+
+                //GetCurrentPrice();
+
+
+
+
+
+
+
+
+
                 foreach (Control wndr_objects in _windoorModel.lst_objects)
                 {
                     if (wndr_objects.Name.Contains("Frame"))
@@ -8187,6 +8491,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
+                qoutationModel_MainPresenter.itemSelectStatus = true;
                 GetCurrentPrice();
             }
             catch (Exception ex)
