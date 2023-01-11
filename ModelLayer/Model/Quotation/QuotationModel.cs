@@ -1239,7 +1239,7 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                     // } 
                                                 }
-                                                if (pnl_curCtrl.Panel_SashHeight >= 3000)
+                                                if (frame.Frame_Height >= 3000)
                                                 {
                                                     pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                 }
@@ -1631,7 +1631,7 @@ namespace ModelLayer.Model.Quotation
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
 
-                                    if (pnl.Panel_SashHeight >= 3000)
+                                    if (frame.Frame_Height >= 3000)
                                     {
                                         pnl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                     }
