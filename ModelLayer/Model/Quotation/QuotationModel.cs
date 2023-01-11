@@ -1239,7 +1239,7 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                     // } 
                                                 }
-                                                if (frame.Frame_Height >= 3000)
+                                                if ((frame.Frame_Height - 5) >= 3000)
                                                 {
                                                     pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                 }
@@ -1631,10 +1631,11 @@ namespace ModelLayer.Model.Quotation
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
 
-                                    if (frame.Frame_Height >= 3000)
+                                    if ((frame.Frame_Height - 5) >= 3000)
                                     {
                                         pnl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                     }
+
                                     //int strikerSliding_screws = pnl_curCtrl.Add_StrikerAC_screws4fab();
                                     //add_screws_fab_striker += strikerAC_screws;
                                 }
@@ -3373,7 +3374,7 @@ namespace ModelLayer.Model.Quotation
                                                 SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                             }
 
-                                            if (fr.Frame_Height >= 3000)
+                                            if ((fr.Frame_Height - 5) >= 3000)
                                             {
                                                 AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                             }
@@ -4252,7 +4253,7 @@ namespace ModelLayer.Model.Quotation
                                         SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                     }
 
-                                    if (fr.Frame_Height >= 3000)
+                                    if ((fr.Frame_Height - 5) >= 3000)
                                     {
                                         AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                     }
