@@ -78,7 +78,9 @@ namespace ServiceLayer.Services.PanelServices
                                             bool panelGeorgianBarOptionVisibility,
                                             HingeOption panelHingeOptions,
                                             bool panelSlidingTypeVisibility,
-                                            SlidingTypes panelSlidingTypes)
+                                            SlidingTypes panelSlidingTypes,string glasstype_insu_lumi
+
+                                            )
         {
             IPanelModel pnl = new PanelModel(panelID,
                                              panelName,
@@ -141,7 +143,8 @@ namespace ServiceLayer.Services.PanelServices
                                              panelGeorgianBarOptionVisibility,
                                              panelHingeOptions,
                                              panelSlidingTypeVisibility,
-                                             panelSlidingTypes);
+                                             panelSlidingTypes, glasstype_insu_lumi
+                                             );
 
             ValidateModel(pnl);
             return pnl;
@@ -213,7 +216,8 @@ namespace ServiceLayer.Services.PanelServices
                                          bool panelOrient = false,
                                          HingeOption panelHingeOptions = null,
                                          bool panelSlidingTypeVisibility = false,
-                                         SlidingTypes panelSlidingTypes = null)
+                                         SlidingTypes panelSlidingTypes = null, string glasstype_insu_lumi = null
+                                         )
         {
             if (panelName == "")
             {
@@ -294,7 +298,7 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGeorgianBarOptionVisibility,
                                                        panelHingeOptions,
                                                        panelSlidingTypeVisibility,
-                                                       panelSlidingTypes);
+                                                       panelSlidingTypes, glasstype_insu_lumi);
 
             return _panelModel;
         }
