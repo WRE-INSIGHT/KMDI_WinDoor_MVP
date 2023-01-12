@@ -2116,7 +2116,7 @@ namespace ModelLayer.Model.Quotation
 
         Glass_6mmTempTinted_PricePerSqrMeter = 1929.00m,
 
-        _4millFilmPrice_PricePerSqrMeter = 2600.00m,
+        
         FrostedFilmPrice_PricePerSqrMeter = 880.00m,
 
         Glass_6mmAnnealedTinted_Brnz_Bl_Grn_Gry = 985.00m,
