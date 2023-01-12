@@ -968,6 +968,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private string _glassType_Insu_Lami;
+        public string Panel_GlassType_Insu_Lami
+        {
+            get
+            {
+                return _glassType_Insu_Lami;
+            }
+            set
+            {
+                _glassType_Insu_Lami = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Panel_SashWidth { get; set; }
         public int Panel_SashWidthDecimal { get; set; }
         public int _panel_SashHeight;
@@ -9321,7 +9335,9 @@ namespace ModelLayer.Model.Quotation.Panel
                           bool panelGeorgianBarOptionVisibility,
                           HingeOption panelHingeOptions,
                           bool panelSlidingTypeVisibility,
-                          SlidingTypes panelSlidingTypes)
+                          SlidingTypes panelSlidingTypes,
+                          string glasstype_insu_lumi
+                          )
         {
             Panel_ID = panelID;
             Panel_Name = panelName;
@@ -9400,6 +9416,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_ExtensionPropertyHeight = constants.panel_property_extensionOptionsheight;
             Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
+            Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
         }
     }
 }

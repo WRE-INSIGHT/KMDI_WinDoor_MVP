@@ -63,7 +63,7 @@ namespace PresentationLayer.Presenter
                 if (cell.Value.ToString() != "Insulated" && cell.Value.ToString() != "Laminated")
                 {
 
-                    #region multiplethicknessupdate
+                   #region multiplethicknessupdate
 
                     if (_setMultipleThicknessUpdate == true)
                     {
@@ -73,7 +73,6 @@ namespace PresentationLayer.Presenter
                         {
                             if (fr.Lst_MultiPanel.Count >= 1 && fr.Lst_Panel.Count == 0)
                             {
-
                                 #region multipanel
                                 foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                                 {
@@ -89,11 +88,14 @@ namespace PresentationLayer.Presenter
                                             {
                                                 string prev_thickness = pnl.Panel_GlassThicknessDesc;
 
+                                                var Glass_Type_Insu_Lami = dgv.Rows[e.RowIndex].Cells["GlassType_Insu_Lami"].Value.ToString();
+                                                pnl.Panel_GlassType_Insu_Lami = Glass_Type_Insu_Lami;
+
                                                 pnl.Panel_GlassType = _glassType;
                                                 pnl.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                                                 pnl.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
 
-
+                                                Console.WriteLine(pnl.Panel_GlassType_Insu_Lami);
 
                                                 if (pnl.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
                                                 {
@@ -143,9 +145,13 @@ namespace PresentationLayer.Presenter
                                         {
                                             string prev_thickness = SinglePanel.Panel_GlassThicknessDesc;
 
+                                            var Glass_Type_Insu_Lami = dgv.Rows[e.RowIndex].Cells["GlassType_Insu_Lami"].Value.ToString();
+                                            SinglePanel.Panel_GlassType_Insu_Lami = Glass_Type_Insu_Lami;
+
                                             SinglePanel.Panel_GlassType = _glassType;
                                             SinglePanel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                                             SinglePanel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+
 
                                             if (SinglePanel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
                                             {
@@ -192,8 +198,13 @@ namespace PresentationLayer.Presenter
                     {
                         string prev_thickness = _panelModel.Panel_GlassThicknessDesc;
 
+                        var Glass_Type_Insu_Lami = dgv.Rows[e.RowIndex].Cells["GlassType_Insu_Lami"].Value.ToString();
+                        _panelModel.Panel_GlassType_Insu_Lami = Glass_Type_Insu_Lami;
+
+                      
                         _panelModel.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                         _panelModel.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
+
 
                         if (_panelModel.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
                         {
@@ -225,8 +236,8 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
                     }
-                    #endregion
-
+                   #endregion
+                   
                 }
                 else
                 {
@@ -248,8 +259,6 @@ namespace PresentationLayer.Presenter
             {
                 _glassThicknessListView.Get_DgvGlassThicknessList().DataSource = ConstructFiltered_glassThicknessDT_MultiSelect();
                 _setMultipleThicknessUpdate = true;
-
-
             }
             else
             {
@@ -258,7 +267,7 @@ namespace PresentationLayer.Presenter
 
             _glassThicknessListView.Get_DgvGlassThicknessList().Columns["TotalThickness"].Visible = false;
             _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-
+            _glassThicknessListView.Get_DgvGlassThicknessList().Columns["GlassType_Insu_Lami"].Visible = false;
 
 
         }
@@ -273,26 +282,32 @@ namespace PresentationLayer.Presenter
             DataTable dt = new DataTable();
             dt.Columns.Add("TotalThickness", Type.GetType("System.Decimal"));
             dt.Columns.Add("Description", Type.GetType("System.String"));
-
+            dt.Columns.Add("GlassType_Insu_Lami", Type.GetType("System.String"));
+        
+          
             if (_panelModel.Panel_GlassType == GlassType._Single)
             {
                 foreach (DataRow row in _glassThicknessDT.Rows)
                 {
                     if ((bool)row["Single"] == true)
                     {
-                        dt.Rows.Add(row["TotalThickness"], row["Description"]);
-                    }
+                        dt.Rows.Add(row["TotalThickness"], row["Description"],row["GlassType_Insu_Lami"]);
+                    } 
+                                                      
                 }
+
             }
             else if (_panelModel.Panel_GlassType != GlassType._Single)
             {
                 DataRow insulated_row = dt.NewRow();
                 insulated_row["TotalThickness"] = 0.0f;
                 insulated_row["Description"] = "Insulated";
+                
 
                 DataRow laminated_row = dt.NewRow();
                 laminated_row["TotalThickness"] = 0.0f;
                 laminated_row["Description"] = "Laminated";
+
 
                 dt.Rows.Add(insulated_row);
                 dt.Rows.Add(laminated_row);
@@ -303,6 +318,7 @@ namespace PresentationLayer.Presenter
                     DataRow newrow = dt.NewRow();
                     newrow["TotalThickness"] = row["TotalThickness"];
                     newrow["Description"] = row["Description"];
+                    newrow["GlassType_Insu_Lami"] = row["GlassType_Insu_Lami"];
                     if (_panelModel.Panel_GlassType == GlassType._Double)
                     {
                         col_name = "Double";
@@ -335,6 +351,7 @@ namespace PresentationLayer.Presenter
             DataTable dt = new DataTable();
             dt.Columns.Add("TotalThickness", Type.GetType("System.Decimal"));
             dt.Columns.Add("Description", Type.GetType("System.String"));
+            dt.Columns.Add("GlassType_Insu_Lami", Type.GetType("System.String"));
 
             if (Panel_GlassType == GlassType._Single)
             {
@@ -342,7 +359,7 @@ namespace PresentationLayer.Presenter
                 {
                     if ((bool)row["Single"] == true)
                     {
-                        dt.Rows.Add(row["TotalThickness"], row["Description"]);
+                        dt.Rows.Add(row["TotalThickness"], row["Description"],row["GlassType_Insu_Lami"]);
                     }
                 }
             }
@@ -365,6 +382,7 @@ namespace PresentationLayer.Presenter
                     DataRow newrow = dt.NewRow();
                     newrow["TotalThickness"] = row["TotalThickness"];
                     newrow["Description"] = row["Description"];
+                    newrow["GlassType_Insu_Lami"] = row["GlassType_Insu_Lami"];
                     if (Panel_GlassType == GlassType._Double)
                     {
                         col_name = "Double";

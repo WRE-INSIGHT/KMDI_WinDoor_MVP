@@ -59,9 +59,12 @@ namespace ModelLayer.Model.Quotation.Screen
         bool Reinforced { get; set; }
         bool SP_MagnumScreenType_Visibility { get; set; }
         Magnum_ScreenType Magnum_ScreenType { get; set; }
-   
-     
-        
+        int PlissedRd_Panels { get; set; }
+        string PlisseMagnumType { get; set; }
+
+
+
+
 
     }
 }

@@ -170,6 +170,8 @@ namespace ModelLayer.Model.Quotation.Panel
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
 
+        string Panel_GlassType_Insu_Lami { get; set; }
+
         Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
         int Panel_StrikerQty_A { get; set; }
 
