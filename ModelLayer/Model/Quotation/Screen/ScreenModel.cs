@@ -412,7 +412,120 @@ namespace ModelLayer.Model.Quotation.Screen
             Magnum31mmsideU_MillFinish_Qty,
         #endregion
 
-        #endregion 
+        #endregion
+
+        #region ZeroGravityChain
+
+        #region ItemQuantity
+        
+            roller_case_Qty = 1,
+            sliding_bar_Qty = 1,
+            mesh_w_tube_Qty = 1,
+            guide_70x22_Qty = 2,
+            reinforing_hand_slidingbar_Qty = 1,
+            profiles_supp_tube_ZG_Qty = 1,
+            pile_Qty = 0,
+            anti_wind_brush_Qty = 2,
+            kit_genius_46mm_ZG_Qty = 1,
+            supp_fixing_42mm_headrail_Qty = 0,
+            dowell_4x25_Qty = 0,
+            screw_4x25_Qty = 0,
+
+        #endregion
+        #region itemCost
+            ZG_waste_10per_ = 0,
+            ZG_freight_5per = 0,
+            ZG_importation_Cost = 0,
+            ZG_small_shop_Items = 500m,
+            ZG_overhead_Cost = 3600m,
+            additional_for_Woograin = 0,
+            ZG_Contigencies = 0,
+            ZG_totalMaterial_Cost = 0,
+
+            //PowderCoating
+            rollerCase_php_per_meter = 110.236220472441m,
+            guide_70x22_php_per_meter = 34.1535433070866m,
+            reinforing_hand_slidingbar_php_per_meter = 82.6771653543307m,
+
+            roller_case_Price = 0,
+            sliding_bar_Price = 0,
+            mesh_w_tube_Price = 0,
+            guide_70x22_Price = 0,
+            reinforing_hand_slidingbar_Price = 0,
+            profiles_supp_tube_ZG_Price = 0,
+            pile_Price = 0,
+            anti_wind_brush_Price = 0,
+            kit_genius_46mm_ZG_Price = 0,
+            supp_fixing_42mm_headrail_Price = 0,
+            dowell_4x25_Price = 0,
+            screw_4x25_Price = 0,
+
+
+        #endregion
+
+        #endregion
+
+        #region Maxxy Screen Variables
+
+               PP_Maxy_5mmTube = 0,
+
+                Wire_CB_40051 = 1.61352m,
+                SettingPlate_Rs_l2600 = 0.8586m,
+                Tail_SlideDT = 1.827m,
+                ScorpionTail_8 = 0,
+                Adjust_EighthHolder = 1.4445m,
+                Weight_Bar_Rsz = 0.9826m,
+                Anchor_Plate_s4 = 1.44m,
+                Mohair = 0,
+                Tapping_Screw_3x10_Bh = 0.1575m,
+
+                Maxy_Cassette_EndCap_w_Spring = 8.8875m,
+                Maxy_Bushing = 0.2635m,
+                Maxy_Cassette_Endcap = 0.3953m,
+                Maxy_Sliding_Bottom_EndCap = 1.2047m,
+                Maxy_Sliding_Top_EndCap = 1.3176m,
+                Maxy_ScorpionTail_53pcs = 0,
+                Maxy_White_TailEnd = 0.4518m,
+                Maxy_Cap_SlidingBar_TopEndCap = 0.5082m,
+                Maxy_TopRailCap_CassetteSide = 1.2424m,
+                Maxy_Screw_3x4 = 0.1104m,
+                Plate_w_2hole_M3 = 0.675m,
+                Maxy_Pile = 0,
+                Maxy_ScorpionTail_w_PileCavity = 0.4095m,
+                Bottom_Rail = 0,
+
+                Case_Maxy_MillFinish = 0,
+                SlidingBar_Maxy_MillFinish = 0,
+                TopGuide_Maxy_MillFinish = 0,
+                UProfile_46mm_Maxy_MillFinish = 0,
+
+                Case_Maxy_RalColour = 0,
+                SlidingBar_Maxy_RalColour = 0,
+                TopGuide_Maxy_RalColour = 0,
+                UProfile_46mm_Maxy_RalColour = 0,
+
+                Hook_V_MillFinish_tCost = 0,
+                Hook_V_RalFinish_tCost = 0,
+
+                Maxxy_Screen_tAmount = 0,
+
+                //Hook Version 
+                Cover_ProfileLatch_MillFinish = 0,
+                Cover_ProfileLatch_RalColour = 0,
+                Latch_Rsz = 0,
+                Latch_Hanger_Rsz = 0,
+
+                Maxxy_1248_Coupling_Profile = 0,
+                Maxxy_Total_Mat_Cost = 0,
+                Maxxy_Wastage = 0,
+                Maxxy_Freight = 0,
+                Maxxy_DT = 0,
+
+                Maxxy_KM01 = 0,
+                Maxxy_KM02 = 0,
+                Maxxy_AlumBottomGuide = 0,
+                Maxxy_Contigencies = 0,
+        #endregion
 
         AddOnsPrice,
 
@@ -430,7 +543,39 @@ namespace ModelLayer.Model.Quotation.Screen
         SmallShopItemCost,
         OverheadCost,
         ContingenciesCost,
-        TotalPrice;
+        TotalPrice,
+
+        #region BuiltinSideRoll Variables
+
+         temp,
+         price_base_on_Height = 0,
+         price_base_on_Weight = 0,
+         built_in_SR_tAmount = 0,
+
+         base_Price = 0,
+         height_Base_Price_Inc = 0,
+         width_Base_Price_Inc = 0,
+         height_deci = 0,
+         weight_deci = 0,
+         percentage_multiplier = 0,
+
+         Height_mm_to_meters = 0,
+         Width_mm_to_meters = 0,
+
+         current_deci_index = 0,
+         next_deci_index = 0;
+
+        decimal[] deci_getter = new decimal[22] {1.0m, 1.1m, 1.2m, 1.3m, 1.4m, 1.5m, 1.6m, 1.7m, 1.8m, 1.9m, 2.0m,
+                                                 2.1m, 2.2m,2.3m, 2.4m, 2.5m, 2.6m,2.7m, 2.8m,2.9m ,3.0m,3.1m };
+
+        decimal[] width_Base_Price_List = new decimal[21];
+        decimal[] height_Base_Price_List = new decimal[16];
+        int[] indices_pos = new int[5] { 2, 6, 11, 16, 20 };
+        int holder = 0;
+        int curr_index_pos = 0;
+        #endregion
+
+
 
         #endregion
 
@@ -1203,9 +1348,37 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+   
+        private int _plissedRd_panels;
+        public int PlissedRd_Panels
+        {
+            get
+            {
+                return _plissedRd_panels;
+            }
+            set
+            {
+                _plissedRd_panels = value;
+                NotifyPropertyChanged();
+            }
+        }
 
+        private string _plisseMagnumType;
+        public string PlisseMagnumType
+        {
+            get
+            {
+                return _plisseMagnumType;
+            }
+            set
+            {
+                _plisseMagnumType = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #endregion
+
 
 
         public void ComputeScreenTotalPrice()
@@ -1248,6 +1421,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         KitForVerticalOpeningHeadrailPricePerLinearMeter_White = 4.2108m * Screen_ExchangeRate;
                         BrakePriceperPiece_White = 2.5m * Screen_ExchangeRate * BrakeQty;
                         SupportForFixingHeadRailPricePerLinearMeter_White = 0.4773m * Screen_ExchangeRate;
+
                         if (Screen_Width >= 1500)
                         {
                             SpringLoadedPricePerPiece_White = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m;
@@ -1265,7 +1439,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         BrakePrice = 2.5m * Screen_ExchangeRate * BrakeQty;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_White * SupportForFixingHeadRailQty;
 
-                        if (Screen_Width >= 1500 && SpringLoad_Checked == true)
+                        if (SpringLoad_Checked == true)
                         {
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }
@@ -1301,14 +1475,15 @@ namespace ModelLayer.Model.Quotation.Screen
                         KitForVerticalOpeningHeadrailPrice = KitForVerticalOpeningHeadrailPricePerLinearMeter_WoodGrain * KitForVerticalOpeningHeadrailQty;
                         BrakePrice = 2.5m * Screen_ExchangeRate;
                         SupportForFixingHeadRailPrice = SupportForFixingHeadRailPricePerLinearMeter_WoodGrain * SupportForFixingHeadRailQty;
-                        if (Screen_Width >= 1500 && SpringLoad_Checked == true)
+
+                        if (SpringLoad_Checked == true)
                         {
                             SpringLoadedPrice = (2.1614m * 2 + 0.815m * 2 + 0.6304m + 0.4031m * 2) * Screen_ExchangeRate * 1.05m * 1.15m * SpringLoadedQty;
                         }
 
 
                     }
-                    RollUpCostingMaterials = HeadRailPrice +
+                         RollUpCostingMaterials = HeadRailPrice +
                          SlidingBarPrice +
                          MeshWithTubePrice +
                          GuidePrice +
@@ -1329,7 +1504,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 else if (Screen_Types == ScreenType._Plisse)
                 {
                     #region Plisse AD
-                    if (Screen_PlisséType == PlisseType._AD)
+                    if (Screen_PlisséType == PlisseType._AD || Screen_PlisséType == PlisseType._RD)
                     {
                         HandlesPrice = 0.5009m * 2;
                         CouplingProfilePrice = 0.43m * Screen_Height / 1000;
@@ -1446,13 +1621,1484 @@ namespace ModelLayer.Model.Quotation.Screen
                         OverheadCost = 0.3333m * 6000;
                         WithWasteCost = 0;
                     }
-                    #endregion
+                    #endregion                                 
                 }
                 else if (Screen_Types == ScreenType._Magnum)
                 {
-                    #region Mangnum 
+                    #region Magnum 
 
-                    MagnumItemCalculation();
+
+                    if (Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
+                    {
+                        #region single horizontal one side fixed 
+
+                        #region General Item
+
+                        PleatedMeshSingleFixed_Qty = (1.374m * (Screen_Width / 1000m));
+                        PleatedMeshSingeFixed_tCost = PleatedMeshSingleFixed_Qty * PleatedMeshNera_Price;
+
+                        Wire_Qty = (2 * (2 * Screen_Width / 1000m + 3 * Screen_Height / 1000m + 1.2m) + 2 * (Screen_Width / 1000m + Screen_Height / 1000m + 0.8m)) * 0.66666666666667m;
+                        Wire_tCost = Wire_Qty * Wire_Price;
+
+                        Bushing_tCost = Bushing_SingleOneSideFixed_Qty * Bushing_Price;
+
+                        TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
+
+                        Grubs4x6_tCost = Grubs4x6_Qty * Grubs4x6_Price;
+
+                        CordCurriere3Holes_tCost = CordCurriere3Holes_Qty * CordCurriere3Holes_Price;
+
+                        SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
+
+                        BottomEndCapMagnum31mmHorizontalNoWheel_tCost = BottomEndCapMagnum31mmHorizontalNoWheel_SingleOneSideFixed_Qty * BottomEndCapMagnum31mmForHorizontalNoWHeel_Price;
+
+                        TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_SingleOneSideFixed_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
+
+                        Wheel_tCost = Wheel_SingleOneSideFixed_Qty * Wheel_Price;
+
+                        PinForWheel_tCost = PinForWheel_SingleOneSideFixed_Qty * PinForWheel_Price;
+
+                        AdhesiveTapeAluminumPlate_Qty = (Screen_Height * 2 / 1000m);
+                        AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
+
+                        AdhesiveTapeBottomGuide_Qty = (Screen_Width / 1000m);
+                        AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
+
+                        MinyClips_tCost = MinyClips_SingleOneSideFixed_Qty * MinyClips_Price;
+
+                        MagnetsClicIntoRollinFly_Qty = (Screen_Height / 1000m);
+                        MagnetsClicIntoRollinFly_tCost = MagnetsClicIntoRollinFly_Qty * MagnetToClicIntoRollInFly_Price;
+
+                        NegativeMagntePlisse_Qty = (Screen_Height / 1000m);
+                        NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
+
+
+                        var gen_Item_Total_Price = PleatedMeshSingeFixed_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
+                                                   SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
+                                                   PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
+                                                   NegativeMagntePlisse_tCost;
+                        #endregion
+
+                        #region RAL Color 
+                        AluminumPlateWithTeeth_RALColor_Qty = Screen_Height / 1000m;
+                        AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
+
+                        AluminumPlateNoTeeth_RALColor_Qty = Screen_Height / 1000m;
+                        AluminumPlateNoTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateNoTeeth_RALColor_Price;
+
+                        Magnum31mmSlidingBar_RALColor_Qty = Screen_Height / 1000m;
+                        Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_Price;
+
+                        Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_Price;
+
+                        Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_Price;
+
+                        Magnum31mmTensionersProfile_RALColor_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_Price;
+
+                        Magnum31mmsideU_RALColor_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_Price;
+
+                        var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
+                                                        Magnum31mmSlidingBar_RALColor_tCost + Magnum31mmBottomGuide_RALColor_tCost +
+                                                        Magnum31mmTopGuide_RALColor_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
+                                                        Magnum31mmsideU_RALColor_tCost;
+
+
+                        #endregion
+
+                        #region Mill Finish
+
+                        AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_SingleOneSideFixed_Qty * AluminumPlateWithTeeth_MillFinish_Price;
+
+                        AluminumPlateNoTeeth_MillFinish_tCost = AluminumPlateNoTeeth_MillFinish_SingleOneSideFixed_Qty * AluminumPlateNoTeeth_MillFinish_Price;
+
+                        Magnum31mmSlidingBar_MillFinish_Qty = Screen_Height / 1000m;
+                        Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_Price;
+
+                        Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_Price;
+
+                        Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_Price;
+
+                        Magnum31mmTensionersProfile_MillFinish_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_Price;
+
+                        Magnum31mmsideU_MillFinish_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_Price;
+
+                        var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost + AluminumPlateNoTeeth_MillFinish_tCost +
+                                                          Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
+                                                          Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
+                                                          Magnum31mmsideU_MillFinish_tCost;
+
+                        #endregion
+
+                        #region Foiled
+
+                        Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
+                        Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
+                        Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
+
+                        var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
+                                                      Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
+                                                      Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
+                                                      Magnum31mmsideU_Foiled_tCost;
+
+
+                        #endregion
+
+                        RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
+                        MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
+                        Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
+
+                        _whiteFinish = RALColor_TotalCost;
+                        _woodFinish = Foiled_TotalCost;
+
+                        #endregion
+                    }
+                    else if (Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
+                    {
+                        #region Double Horizontal
+
+                        #region Gen Item
+
+                        PleatedMeshDoubleHori_Qty = (1.374m * (Screen_Width / 1000m));
+                        PleatedMeshDoubleHori_tCost = PleatedMeshDoubleHori_Qty * PleatedMeshNera_Price;
+
+                        Wire_Qty = 2 * (2 * (2 * Screen_Width / 1000m + 3 * Screen_Height / 1000m + 1.2m) + 2 * (Screen_Width / 1000m + Screen_Height / 1000m + 0.8m)) * 0.66666666666667m;
+                        Wire_tCost = Wire_Qty * Wire_Price;
+
+                        if (Screen_Height > 2632m)
+                        {
+                            Bushing_Qty = 32m;
+                        }
+                        else if (Screen_Height > 1631)
+                        {
+                            Bushing_Qty = 24m;
+                        }
+                        else if (Screen_Height <= 1631)
+                        {
+                            Bushing_Qty = 16m;
+                        }
+
+                        Bushing_tCost = Bushing_Qty * Bushing_Price;
+
+                        TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
+
+                        Grubs4x6_tCost = Grubs4x6_Qty * Grubs4x6_Price;
+
+                        CordCurriere3Holes_tCost = CordCurriere3Holes_Qty * CordCurriere3Holes_Price;
+
+                        SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
+
+                        TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
+
+                        Wheel_tCost = Wheel_Qty * Wheel_Price;
+
+                        PinForWheel_tCost = PinForWheel_Qty * PinForWheel_Price;
+
+                        AdhesiveTapeAluminumPlate_Qty = 2 * (Screen_Height * 2 / 1000m);
+                        AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
+
+                        AdhesiveTapeBottomGuide_Qty = (Screen_Width / 1000m);
+                        AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
+
+                        if (Screen_Height > 3200)
+                        {
+                            MinyClips_Qty = 14;
+                        }
+                        else if (Screen_Height > 2900)
+                        {
+                            MinyClips_Qty = 12;
+                        }
+                        else if (Screen_Height > 2600)
+                        {
+                            MinyClips_Qty = 10;
+                        }
+                        else if (Screen_Height > 2300)
+                        {
+                            MinyClips_Qty = 8;
+                        }
+                        else if (Screen_Height <= 2300)
+                        {
+                            MinyClips_Qty = 6;
+                        }
+
+                        MinyClips_tCost = MinyClips_Qty * MinyClips_Price;
+
+                        NegativeMagntePlisse_Qty = (Screen_Height / 1000m);
+                        NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
+
+                        PlissePositivePlisse_Qty = (Screen_Height / 1000m);
+                        PlissePositivePlisse_tCost = PlissePositivePlisse_Qty * PlissePositivePlisse_Price;
+
+                        DoubleCentePart_tCost = DoubleCentePart_Qty * DoubleCentePart_Price;
+
+                        BottomEndCapMagnum31mm_DoubleHori_tCost = BottomEndCapMagnum31mm_DoubleHori_Qty * BottomEndCapMagnum31mm_DoubleHori_Price;
+
+                        var gen_Item_Total_Price = PleatedMeshDoubleHori_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
+                                                   SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
+                                                   PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
+                                                   NegativeMagntePlisse_tCost + PlissePositivePlisse_tCost + DoubleCentePart_tCost + BottomEndCapMagnum31mm_DoubleHori_tCost;
+
+
+
+                        #endregion
+
+                        #region Ral Color
+
+                        AluminumPlateWithTeeth_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
+
+                        AluminumPlateNoTeeth_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateNoTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateNoTeeth_RALColor_Price;
+
+                        Magnum31mmSlidingBar_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_Price;
+
+                        Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_Price;
+
+                        Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_Price;
+
+                        Magnum31mmTensionersProfile_RALColor_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_Price;
+
+                        Magnum31mmsideU_RALColor_Qty = Screen_Height * 2 / 1000m;
+                        Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_Price;
+
+                        var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
+                                                        Magnum31mmSlidingBar_RALColor_tCost + Magnum31mmBottomGuide_RALColor_tCost +
+                                                        Magnum31mmTopGuide_RALColor_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
+                                                        Magnum31mmsideU_RALColor_tCost;
+
+
+
+                        #endregion
+
+                        #region Mill Finish
+
+                        AluminumPlateWithTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateWithTeeth_MillFinish_Price;
+
+                        AluminumPlateNoTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateNoTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateNoTeeth_MillFinish_Price;
+
+                        Magnum31mmSlidingBar_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_Price;
+
+                        Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_Price;
+
+                        Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_Price;
+
+                        Magnum31mmTensionersProfile_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_Price;
+
+
+                        Magnum31mmsideU_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_Price;
+
+                        var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost + AluminumPlateNoTeeth_MillFinish_tCost +
+                                                         Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
+                                                         Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
+                                                         Magnum31mmsideU_MillFinish_tCost;
+
+                        #endregion
+
+                        #region Foiled
+
+                        Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
+                        Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
+                        Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
+
+                        var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
+                                                      Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
+                                                      Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
+                                                      Magnum31mmsideU_Foiled_tCost;
+
+
+
+                        #endregion
+
+
+                        RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
+                        MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
+                        Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
+
+                        _whiteFinish = RALColor_TotalCost;
+                        _woodFinish = Foiled_TotalCost;
+
+
+
+                        #endregion
+
+                    }
+                    else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
+                    {
+                        #region Single Central
+
+                        #region Gen Item
+
+                        PleatedMeshSingleCentral_Qty = (1.374m * (Screen_Width / 1000m));
+                        PleatedMeshSingleCentral_tCost = PleatedMeshSingleCentral_Qty * PleatedMeshNera_Price;
+
+                        if (Screen_Height >= 1900)
+                        {
+                            Wire_Qty = (8 * (Screen_Width / 1000m + Screen_Height / 1000m + 0.8m));
+                        }
+                        else if (Screen_Height < 1900 && Screen_Height > 1300)
+                        {
+                            Wire_Qty = (6 * (Screen_Width / 1000m + Screen_Height / 1000m + 0.8m));
+                        }
+
+                        if (Screen_Height > 2632)
+                        {
+                            Bushing_Qty = 16;
+                        }
+                        else if (Screen_Height > 1631)
+                        {
+                            Bushing_Qty = 12;
+                        }
+                        else if (Screen_Height <= 1631)
+                        {
+                            Bushing_Qty = 8;
+                        }
+
+                        Wire_tCost = Wire_Qty * Wire_Price;
+                        Bushing_tCost = Bushing_Qty * Bushing_Price;
+
+                        TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
+
+                        Grubs4x6_tCost = Grubs4x6_SingleCentralPack_Qty * Grubs4x6_Price;
+
+                        CordCurriere3Holes_tCost = CordCurriere3Holes_SingleCentralPack_Qty * CordCurriere3Holes_Price;
+
+                        SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
+
+                        BottomEndCapMagnum31mmHorizontalNoWheel_tCost = BottomEndCapMagnum31mmHorizontalNoWheel_SingleCentralPack_Qty * BottomEndCapMagnum31mmForHorizontalNoWHeel_Price;
+
+                        TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
+
+                        Wheel_tCost = Wheel_Qty * Wheel_Price;
+
+                        PinForWheel_tCost = PinForWheel_Qty * PinForWheel_Price;
+
+                        AdhesiveTapeAluminumPlate_Qty = (Screen_Height * 2) / 1000m;
+                        AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
+
+                        AdhesiveTapeBottomGuide_Qty = Screen_Width / 1000m;
+                        AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
+
+                        if (Screen_Height > 3200)
+                        {
+                            MinyClips_Qty = 14;
+                        }
+                        else if (Screen_Height > 2900)
+                        {
+                            MinyClips_Qty = 12;
+                        }
+                        else if (Screen_Height > 2600)
+                        {
+                            MinyClips_Qty = 10;
+                        }
+                        else if (Screen_Height > 2300)
+                        {
+                            MinyClips_Qty = 8;
+                        }
+                        else if (Screen_Height <= 2300)
+                        {
+                            MinyClips_Qty = 6;
+                        }
+
+                        MinyClips_tCost = MinyClips_Qty * MinyClips_Price;
+
+                        MagnetsClicIntoRollinFly_Qty = Screen_Height / 1000m;
+                        MagnetsClicIntoRollinFly_tCost = MagnetsClicIntoRollinFly_Qty * MagnetToClicIntoRollInFly_Price;
+
+                        NegativeMagntePlisse_Qty = Screen_Height / 1000m;
+                        NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
+
+                        var gen_Item_Total_Price = PleatedMeshSingleCentral_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
+                                                   SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
+                                                   PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
+                                                   NegativeMagntePlisse_tCost;
+
+
+                        #endregion
+
+                        #region Ral Color
+
+                        AluminumPlateWithTeeth_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
+
+                        Magnum31mmSlidingBar_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_SingeleCentral_Price;
+
+                        Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_SingleCentral_Price;
+
+                        Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_SingleCentral_Price;
+
+                        Magnum31mmTensionersProfile_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_SingleCentral_Price;
+
+                        Magnum31mmsideU_RALColor_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_SingleCentral_Price;
+
+                        var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + Magnum31mmSlidingBar_RALColor_tCost +
+                                                      Magnum31mmBottomGuide_RALColor_tCost + Magnum31mmTopGuide_RALColor_tCost +
+                                                      Magnum31mmTensionersProfile_RALColor_tCost + Magnum31mmsideU_RALColor_tCost;
+
+                        #endregion
+
+                        #region Mill Finish
+
+                        AluminumPlateWithTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateWithTeeth_MillFinish_Price;
+
+                        Magnum31mmSlidingBar_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_SingeleCentral_Price;
+
+                        Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_SingleCentral_Price;
+
+                        Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000m;
+                        Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_SingleCentral_Price;
+
+                        Magnum31mmTensionersProfile_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_SingleCentral_Price;
+
+                        Magnum31mmsideU_MillFinish_Qty = (Screen_Height * 2) / 1000m;
+                        Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_SingleCentral_Price;
+
+                        var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost +
+                                                          Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
+                                                          Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
+                                                          Magnum31mmsideU_MillFinish_tCost;
+
+                        #endregion
+
+                        #region Foiled
+
+                        Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
+                        Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
+                        Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
+
+                        var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost +
+                                                      Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
+                                                      Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
+                                                      Magnum31mmsideU_Foiled_tCost;
+
+
+                        #endregion
+
+                        RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
+                        MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
+                        Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
+
+                        _whiteFinish = RALColor_TotalCost;
+                        _woodFinish = Foiled_TotalCost;
+
+                        #endregion
+
+                    }
+
+                    Black_Alum_base = (2 * (Screen_Height - 1581m) / 1000m) * (23.0817m / 2.8m);
+                    AntiLift_DB_w_CacaoFoil = ((2 * (Screen_Height - 1581m) / 1000m) - 2 * 196m / 1000m) * (165m / 4.9m / 64m);
+                    Milled_Profile_6052 = (11.7987419205323m / 2m) * (Screen_Width / 1000m);
+                    Cover_Profile = 0.23m * (Screen_Width / 1000m);
+
+                    ShootBolt = FinalPart_w_MetalTip + Cap_for_Alum_Base + Black_Alum_base + AntiLift_DB_w_CacaoFoil + Milled_Profile_6052 + Cover_Profile;
+
+                    Extension_for_Bolt = (((Screen_Height - 1800m) / 150m) - 2);
+                    Extension_for_Bolt = (int)Math.Round((decimal)(Extension_for_Bolt));
+
+                    Extension_alumBase_DoubleHori_whiteFinish = (23.0817m / 5.8m) * (Screen_Height / 1000m - 1.5m) * 2;
+                    Extension_alumBase_DoubleHori_woodFinish = Extension_alumBase_DoubleHori_whiteFinish * 1.4m;
+
+                    PlisseL_N_Cover_whiteFinish = (20.07495m + 12.9915m) / 5.8m * Screen_Height / 1000m;
+                    PlisseL_N_Cover_woodFinish = (4.509m + 3.12m) * Screen_Height / 1000m;
+
+                    CouplingProfile_1248 = 0.43m * (Screen_Height / 1000m * 1.3m);
+
+                    KM01_Alum_BottomGuide_BasePrice = 775m * 1.3m * (Screen_Width / 1000m / 6m);
+                    KM02_Alum_PlissHandle_BasePrice = 300m * 1.3m * (Screen_Height / 1000m / 6.4m);
+
+
+                    if (Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
+                    {
+                        #region single Fixed
+                        if (Screen_Types_Door == true)
+                        {
+                            KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
+                            KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
+                        }
+
+                        else if (Screen_Types_Window == true)
+                        {
+                            SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
+                            SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
+                        }
+
+                        if (Reinforced == true)
+                        {
+                            Reinforce_Addon = 53.0355604601368m;
+                            Reinforced_Labor = 600m;
+                        }
+
+                        #region whiteFinish
+
+
+                        Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + PlisseL_N_Cover_whiteFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
+
+                        Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
+
+                        Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
+
+                        DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
+
+                        Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
+                                                        Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
+
+                        Single_Fixed_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
+                                                           DandT_Cost_whiteFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_whiteFinish
+                                                           + Contingencies_whiteFinish) + 0.5m;
+
+                        Single_Fixed_whiteFinish_Total = Math.Round(Single_Fixed_whiteFinish_Total);
+
+                        Single_Fixed_whiteFinish_CurrAmount = Single_Fixed_whiteFinish_Total * Screen_Factor;
+
+
+                        #endregion
+
+                        #region woodFinish
+
+                        Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + PlisseL_N_Cover_woodFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
+
+                        Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
+
+                        Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
+
+                        DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
+
+                        Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
+
+                        Single_Fixed_woodFinish_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
+                                                            DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_woodFinish
+                                                            + Contingencies_woodFinish) + 0.5m;
+
+                        Single_Fixed_woodFinish_Total = Math.Round(Single_Fixed_woodFinish_Total);
+
+                        Single_Fixed_woodFinish_CurrAmount = Single_Fixed_woodFinish_Total * Screen_Factor;
+
+                        #endregion
+
+                        if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Single_Fixed_whiteFinish_Total);
+                        }
+                        else if (Screen_BaseColor == Base_Color._DarkBrown)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Single_Fixed_woodFinish_Total);
+                        }
+
+                        #endregion
+                    }
+
+                    else if (Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
+                    {
+                        #region Double Hori
+                        if (Screen_Types_Door == true)
+                        {
+                            KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
+                            KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
+                        }
+                        else if (Screen_Types_Window == true)
+                        {
+                            SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
+                            SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
+                        }
+
+                        if (Reinforced == true)
+                        {
+                            Reinforce_Addon = 53.0355604601368m;
+                            Reinforced_Labor = 1200m;
+                        }
+
+
+
+                        #region whiteFinish
+
+
+                        Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + DoubleHori_LatchSetlock + Extension_for_Bolt + Extension_alumBase_DoubleHori_whiteFinish + PlisseL_N_Cover_whiteFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon + ShootBolt) * Screen_ExchangeRate;
+
+                        Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
+
+                        Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
+
+                        DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
+
+                        Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
+                                                        Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
+
+                        Double_Horizontal_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
+                                                           DandT_Cost_whiteFinish + Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_whiteFinish
+                                                           + Contingencies_whiteFinish) + 0.5m;
+
+                        Double_Horizontal_whiteFinish_Total = Math.Round(Double_Horizontal_whiteFinish_Total);
+
+                        Double_Horizontal_whiteFinish_CurrAmount = Double_Horizontal_whiteFinish_Total * Screen_Factor;
+
+
+                        #endregion
+
+                        #region woodFinish
+
+                        Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + DoubleHori_LatchSetlock + Extension_for_Bolt + Extension_alumBase_DoubleHori_woodFinish + PlisseL_N_Cover_woodFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon + ShootBolt) * Screen_ExchangeRate;
+
+                        Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
+
+                        Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
+
+                        DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
+
+                        Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish +
+                                                        Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
+
+                        Double_Horizontal_woodFinish_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
+                                                           DandT_Cost_woodFinish + Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_woodFinish
+                                                           + Contingencies_woodFinish) + 0.5m;
+
+                        Double_Horizontal_woodFinish_Total = Math.Round(Double_Horizontal_woodFinish_Total);
+
+                        Double_Horizontal_woodFinish_CurrAmount = Double_Horizontal_woodFinish_Total * Screen_Factor;
+
+                        #endregion
+
+                        if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Double_Horizontal_whiteFinish_Total);
+                        }
+                        else if (Screen_BaseColor == Base_Color._DarkBrown)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Double_Horizontal_woodFinish_Total);
+                        }
+
+                        #endregion
+                    }
+
+                    else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
+                    {
+                        #region Single Central
+                        if (Screen_Types_Door == true)
+                        {
+                            KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
+                            KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
+                        }
+                        else if (Screen_Types_Window == true)
+                        {
+                            SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
+                            SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
+                        }
+
+                        if (Reinforced == true)
+                        {
+                            Reinforce_Addon = 53.0355604601368m;
+                            Reinforced_Labor = 600m;
+                        }
+
+                        #region whiteFinish
+
+
+                        Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + PlisseL_N_Cover_whiteFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
+
+                        Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
+
+                        Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
+
+                        DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
+
+                        Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
+                                                        Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
+
+                        Single_Fixed_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
+                                                           DandT_Cost_whiteFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_whiteFinish
+                                                           + Contingencies_whiteFinish) + 0.5m;
+
+                        Single_Fixed_whiteFinish_Total = Math.Round(Single_Fixed_whiteFinish_Total);
+
+                        Single_Fixed_whiteFinish_CurrAmount = Single_Fixed_whiteFinish_Total * Screen_Factor;
+
+
+                        #endregion
+
+                        #region woodFinish
+
+                        Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + PlisseL_N_Cover_woodFinish +
+                                                           CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
+
+                        Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
+
+                        Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
+
+                        DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
+
+                        Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
+
+                        Single_Fixed_woodFinish_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
+                                                            DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_woodFinish
+                                                            + Contingencies_woodFinish) + 0.5m;
+
+                        Single_Fixed_woodFinish_Total = Math.Round(Single_Fixed_woodFinish_Total);
+
+                        Single_Fixed_woodFinish_CurrAmount = Single_Fixed_woodFinish_Total * Screen_Factor;
+
+                        #endregion
+
+                        if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Single_Fixed_whiteFinish_Total);
+                        }
+                        else if (Screen_BaseColor == Base_Color._DarkBrown)
+                        {
+                            Magnum_Screen_tAmount = Math.Round(Single_Fixed_woodFinish_Total);
+                        }
+
+                        #endregion
+
+                    }
+
+                    #endregion
+                }
+                else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
+                {
+                    #region Zero Gravity Chain
+                    if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
+                    {
+                        #region white finish
+                        roller_case_Price = (roller_case_Qty * Screen_Width * (rollerCase_php_per_meter + ((22.56m / 6 * 1.14m) * Screen_ExchangeRate))) / 1000m;
+                        sliding_bar_Price = (sliding_bar_Qty * Screen_Width * (16.92m / 5.8m) * Screen_ExchangeRate * 1.14m) / 1000m;
+                        mesh_w_tube_Price = (((47.63m / 5.8m) * Screen_ExchangeRate * 1.08m) * Screen_Width * mesh_w_tube_Qty) / 1000m;
+                        guide_70x22_Price = (((22.09m / 6 * 1.14m * Screen_ExchangeRate) + guide_70x22_php_per_meter) * guide_70x22_Qty * Screen_Height) / 1000m;
+                        reinforing_hand_slidingbar_Price = (((8.83m / 5.2m * 1.14m * Screen_ExchangeRate) + reinforing_hand_slidingbar_php_per_meter) * reinforing_hand_slidingbar_Qty * Screen_Width) / 1000m;
+                        profiles_supp_tube_ZG_Price = ((9.53m / 5 * Screen_ExchangeRate * 1.05m) * profiles_supp_tube_ZG_Qty * Screen_Width) / 1000m;
+                        pile_Qty = (Screen_Width * 2m + Screen_Height * 2m) / 1000m;
+                        pile_Price = (0.1398m * Screen_ExchangeRate * 1.05m) * pile_Qty;
+                        anti_wind_brush_Price = ((0.3512m * Screen_ExchangeRate * 1.05m) * Screen_Height * anti_wind_brush_Qty) / 1000m;
+                        kit_genius_46mm_ZG_Price = ((12.53m * Screen_ExchangeRate * 1.05m) * kit_genius_46mm_ZG_Qty);
+
+                        if (Screen_Width > 2400)
+                        {
+                            supp_fixing_42mm_headrail_Qty = Math.Round(3 + ((Screen_Width - 2400m) / 800m));
+
+                        }
+                        else if (Screen_Width <= 2400)
+                        {
+                            supp_fixing_42mm_headrail_Qty = 3;
+                        }
+
+                        supp_fixing_42mm_headrail_Price = (0.2144m * Screen_ExchangeRate * 1.05m) * supp_fixing_42mm_headrail_Qty;
+                        dowell_4x25_Qty = supp_fixing_42mm_headrail_Qty;
+                        screw_4x25_Qty = supp_fixing_42mm_headrail_Qty;
+                        dowell_4x25_Price = (0.48m * 1.05m) * dowell_4x25_Qty;
+                        screw_4x25_Price = (1.3m * 1.05m) * screw_4x25_Qty;
+
+                        ZG_waste_10per_ = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price) * 0.1m
+                                          ;
+
+                        ZG_freight_5per = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_) * 0.05m
+                                          ;
+
+                        ZG_importation_Cost = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_ +
+                                          ZG_freight_5per) * 0.16m
+                                          ;
+
+                        ZG_Contigencies = (sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_ +
+                                          ZG_freight_5per +
+                                          ZG_importation_Cost +
+                                          ZG_small_shop_Items +
+                                          ZG_overhead_Cost +
+                                          additional_for_Woograin) * 0.05m
+                                          ;
+
+                        ZG_totalMaterial_Cost = Math.Round((roller_case_Price +
+                                                sliding_bar_Price +
+                                                mesh_w_tube_Price +
+                                                guide_70x22_Price +
+                                                reinforing_hand_slidingbar_Price +
+                                                profiles_supp_tube_ZG_Price +
+                                                pile_Price +
+                                                anti_wind_brush_Price +
+                                                kit_genius_46mm_ZG_Price +
+                                                supp_fixing_42mm_headrail_Price +
+                                                dowell_4x25_Price +
+                                                screw_4x25_Price +
+                                                ZG_waste_10per_ +
+                                                ZG_freight_5per +
+                                                ZG_importation_Cost +
+                                                ZG_small_shop_Items +
+                                                ZG_overhead_Cost +
+                                                additional_for_Woograin +
+                                                ZG_Contigencies) + 0.5m);
+                        #endregion
+                    }
+                    else if (Screen_BaseColor == Base_Color._DarkBrown)
+                    {
+                        #region wood finish
+                        roller_case_Price = (roller_case_Qty * Screen_Width * (7.758m * Screen_ExchangeRate)) / 1000;
+                        sliding_bar_Price = (sliding_bar_Qty * Screen_Width * (3.606m * Screen_ExchangeRate)) / 1000;
+                        mesh_w_tube_Price = (((47.63m / 5.8m) * Screen_ExchangeRate * 1.08m) * Screen_Width * mesh_w_tube_Qty) / 1000;
+                        guide_70x22_Price = ((7.511m * Screen_ExchangeRate) * guide_70x22_Qty * Screen_Height) / 1000;
+                        reinforing_hand_slidingbar_Price = ((4.841m * Screen_ExchangeRate) * reinforing_hand_slidingbar_Qty * Screen_Width) / 1000;
+                        profiles_supp_tube_ZG_Price = ((9.53m / 5 * Screen_ExchangeRate * 1.05m) * profiles_supp_tube_ZG_Qty * Screen_Width) / 1000;
+                        pile_Qty = (Screen_Width * 2m + Screen_Height * 2m) / 1000m;
+                        pile_Price = (0.1398m * Screen_ExchangeRate * 1.05m) * pile_Qty;
+                        anti_wind_brush_Price = ((0.3512m * Screen_ExchangeRate * 1.05m) * Screen_Height * anti_wind_brush_Qty) / 1000;
+                        kit_genius_46mm_ZG_Price = ((12.53m * Screen_ExchangeRate * 1.05m) * kit_genius_46mm_ZG_Qty);
+
+                        if (Screen_Width > 2400)
+                        {
+                            supp_fixing_42mm_headrail_Qty = Math.Round(3 + ((Screen_Width - 2400m) / 800m));
+                        }
+                        else if (Screen_Width <= 2400)
+                        {
+                            supp_fixing_42mm_headrail_Qty = 3;
+                        }
+
+                        supp_fixing_42mm_headrail_Price = (0.2144m * Screen_ExchangeRate * 1.05m) * supp_fixing_42mm_headrail_Qty;
+                        dowell_4x25_Qty = supp_fixing_42mm_headrail_Qty;
+                        screw_4x25_Qty = supp_fixing_42mm_headrail_Qty;
+                        dowell_4x25_Price = (0.48m * 1.05m) * dowell_4x25_Qty;
+                        screw_4x25_Price = (1.3m * 1.05m) * screw_4x25_Qty;
+
+                        ZG_waste_10per_ = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price) * 0.1m
+                                          ;
+
+                        ZG_freight_5per = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_) * 0.05m
+                                          ;
+
+                        ZG_importation_Cost = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_ +
+                                          ZG_freight_5per) * 0.16m
+                                          ;
+
+                        additional_for_Woograin = (roller_case_Price +
+                                                   sliding_bar_Price +
+                                                   mesh_w_tube_Price +
+                                                   guide_70x22_Price +
+                                                   reinforing_hand_slidingbar_Price +
+                                                   profiles_supp_tube_ZG_Price +
+                                                   pile_Price +
+                                                   anti_wind_brush_Price +
+                                                   kit_genius_46mm_ZG_Price +
+                                                   supp_fixing_42mm_headrail_Price +
+                                                   dowell_4x25_Price +
+                                                   screw_4x25_Price +
+                                                   ZG_waste_10per_ +
+                                                   ZG_freight_5per +
+                                                   ZG_importation_Cost +
+                                                   ZG_small_shop_Items +
+                                                   ZG_overhead_Cost
+                                                   ) * 0.05m
+                                                   ;
+
+
+                        ZG_Contigencies = (roller_case_Price +
+                                          sliding_bar_Price +
+                                          mesh_w_tube_Price +
+                                          guide_70x22_Price +
+                                          reinforing_hand_slidingbar_Price +
+                                          profiles_supp_tube_ZG_Price +
+                                          pile_Price +
+                                          anti_wind_brush_Price +
+                                          kit_genius_46mm_ZG_Price +
+                                          supp_fixing_42mm_headrail_Price +
+                                          dowell_4x25_Price +
+                                          screw_4x25_Price +
+                                          ZG_waste_10per_ +
+                                          ZG_freight_5per +
+                                          ZG_importation_Cost +
+                                          ZG_small_shop_Items +
+                                          ZG_overhead_Cost +
+                                          additional_for_Woograin) * 0.05m
+                                          ;
+
+                        ZG_totalMaterial_Cost = Math.Round((roller_case_Price +
+                                                sliding_bar_Price +
+                                                mesh_w_tube_Price +
+                                                guide_70x22_Price +
+                                                reinforing_hand_slidingbar_Price +
+                                                profiles_supp_tube_ZG_Price +
+                                                pile_Price +
+                                                anti_wind_brush_Price +
+                                                kit_genius_46mm_ZG_Price +
+                                                supp_fixing_42mm_headrail_Price +
+                                                dowell_4x25_Price +
+                                                screw_4x25_Price +
+                                                ZG_waste_10per_ +
+                                                ZG_freight_5per +
+                                                ZG_importation_Cost +
+                                                ZG_small_shop_Items +
+                                                ZG_overhead_Cost +
+                                                additional_for_Woograin +
+                                                ZG_Contigencies) + 0.5m);
+
+
+                        #endregion
+                    }
+                    #endregion
+                }
+                else if (Screen_Types == ScreenType._BuiltInSideroll)
+                {
+                    #region Built in SideRoll
+
+                    Height_mm_to_meters = Screen_Height / 1000m;
+                    Width_mm_to_meters = Screen_Width / 1000m;
+
+
+                    #region Height Price List
+
+                    if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
+                    {
+                        base_Price = 11391.60m;
+
+                        height_Base_Price_Inc = 347.6m;
+                        height_Base_Price_List[0] = base_Price;
+                    }
+                    else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
+                    {
+                        base_Price = 11909.40m;
+                        height_Base_Price_Inc = 363.4m;
+                        height_Base_Price_List[0] = base_Price;
+                    }
+                    else
+                    {
+                        base_Price = 12427.20m;
+                        height_Base_Price_Inc = 379.2m;
+                        height_Base_Price_List[0] = base_Price;
+                    }
+
+
+
+
+                    for (int i = 1; i < 16m; i++)
+                    {
+                        temp = base_Price + height_Base_Price_Inc;
+                        height_Base_Price_List[i] = temp;
+                        base_Price = temp;
+                    }
+
+                    if (Height_mm_to_meters >= 1.5m && Height_mm_to_meters < 1.6m)
+                    {
+                        height_deci = (Height_mm_to_meters - 1.5m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[0] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 1.6m && Height_mm_to_meters < 1.7m)
+                    {
+                        height_deci = (Height_mm_to_meters - 1.6m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[1] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 1.7m && Height_mm_to_meters < 1.8m)
+                    {
+                        height_deci = (Height_mm_to_meters - 1.7m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[2] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 1.8m && Height_mm_to_meters < 1.9m)
+                    {
+                        height_deci = (Height_mm_to_meters - 1.8m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[3] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 1.9m && Height_mm_to_meters < 2.0m)
+                    {
+                        height_deci = (Height_mm_to_meters - 1.9m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[4] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.0m && Height_mm_to_meters < 2.1m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.0m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[5] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.1m && Height_mm_to_meters < 2.2m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.1m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[6] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.2m && Height_mm_to_meters < 2.3m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.2m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[7] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.3m && Height_mm_to_meters < 2.4m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.3m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[8] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.4m && Height_mm_to_meters < 2.5m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.4m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[9] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.5m && Height_mm_to_meters < 2.6m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.5m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[10] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.6m && Height_mm_to_meters < 2.7m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.6m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[11] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.7m && Height_mm_to_meters < 2.8m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.7m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[12] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.8m && Height_mm_to_meters < 2.9m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.8m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[13] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 2.9m && Height_mm_to_meters < 3.0m)
+                    {
+                        height_deci = (Height_mm_to_meters - 2.9m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[14] + percentage_multiplier;
+                    }
+                    else if (Height_mm_to_meters >= 3.0m)
+                    {
+                        height_deci = (Height_mm_to_meters - 3.0m) / 0.1m;
+                        percentage_multiplier = height_Base_Price_Inc * height_deci;
+                        price_base_on_Height = height_Base_Price_List[15] + percentage_multiplier;
+                    }
+
+                    #endregion
+
+                    #region width price list
+
+                    if (Screen_Factor >= 2.2m && Screen_Factor < 2.3m)
+                    {
+                        #region 2.2
+                        width_Base_Price_List[0] = price_base_on_Height;
+
+                        for (int i = 1; i <= 20; i++)
+                        {
+                            holder = indices_pos[curr_index_pos];
+
+                            if (i == holder)
+                            {
+                                width_Base_Price_Inc = 132m;
+                                curr_index_pos++;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 134.2m;
+                            }
+                            temp = price_base_on_Height + width_Base_Price_Inc;
+                            width_Base_Price_List[i] = temp;
+                            price_base_on_Height = temp;
+
+                            current_deci_index = deci_getter[i];
+                            next_deci_index = deci_getter[i + 1];
+
+
+                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                            {
+                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                                {
+                                    width_Base_Price_Inc = 132m;
+                                }
+                                else
+                                {
+                                    width_Base_Price_Inc = 134.2m;
+                                }
+
+                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                                price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
+                                break;
+                            }
+                        }
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.2m) * 2.8m;
+                        #endregion
+                    }
+                    else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
+                    {
+                        #region 2.3
+                        width_Base_Price_List[0] = price_base_on_Height;
+
+                        for (int i = 1; i <= 20; i++)
+                        {
+                            holder = indices_pos[curr_index_pos];
+
+                            if (i == holder)
+                            {
+                                width_Base_Price_Inc = 138m;
+                                curr_index_pos++;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 140.3m;
+                            }
+
+                            temp = price_base_on_Height + width_Base_Price_Inc;
+                            width_Base_Price_List[i] = temp;
+                            price_base_on_Height = temp;
+
+                            current_deci_index = deci_getter[i];
+                            next_deci_index = deci_getter[i + 1];
+
+
+                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                            {
+                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                                {
+                                    width_Base_Price_Inc = 138m;
+                                }
+                                else
+                                {
+                                    width_Base_Price_Inc = 140.3m;
+                                }
+
+                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                                price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
+                                break;
+                            }
+                        }
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.3m) * 2.9m;
+                        #endregion
+                    }
+                    else
+                    {
+                        #region 2.4
+                        width_Base_Price_List[0] = price_base_on_Height;
+
+                        for (int i = 1; i <= 20; i++)
+                        {
+                            holder = indices_pos[curr_index_pos];
+
+                            if (i == holder)
+                            {
+                                width_Base_Price_Inc = 144m;
+                                curr_index_pos++;
+                            }
+                            else
+                            {
+                                width_Base_Price_Inc = 146.4m;
+                            }
+
+                            temp = price_base_on_Height + width_Base_Price_Inc;
+                            width_Base_Price_List[i] = temp;
+                            price_base_on_Height = temp;
+
+                            current_deci_index = deci_getter[i];
+                            next_deci_index = deci_getter[i + 1];
+
+
+                            if (Width_mm_to_meters >= current_deci_index && Width_mm_to_meters < next_deci_index)
+                            {
+                                if (current_deci_index == 1.1m || current_deci_index == 1.5m || current_deci_index == 2.0m || current_deci_index == 2.5m || current_deci_index == 2.9m)
+                                {
+                                    width_Base_Price_Inc = 144m;
+                                }
+                                else
+                                {
+                                    width_Base_Price_Inc = 146.4m;
+                                }
+
+                                weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
+                                percentage_multiplier = width_Base_Price_Inc * weight_deci;
+                                price_base_on_Weight = width_Base_Price_List[i] + percentage_multiplier;
+                                break;
+                            }
+                        }
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.4m) * 3m;
+
+                        #endregion
+                    }
+
+                    #endregion
+
+                    #endregion
+                }
+                else if (Screen_Types == ScreenType._Maxxy)
+                {
+                    #region Maxxy Screen 
+
+                    #region Gen item 
+
+
+                    if (Screen_Width <= 1200m)
+                    {
+                        PP_Maxy_5mmTube = (Screen_Height / 1000m) * 7.02m;
+                    }
+                    else if (Screen_Width >= 1201m && Screen_Width <= 1400m)
+                    {
+
+                        PP_Maxy_5mmTube = (Screen_Height / 1000m) * 7.174m;
+                    }
+                    else if (Screen_Width >= 1400m)
+                    {
+                        PP_Maxy_5mmTube = (Screen_Height / 1000m) * 9.468m;
+                    }
+
+                    //int size = ((((Convert.ToInt32(Screen_Width) - 30) / 22) - 2) ); 1st approach
+                    // ScorpionTail_8 = (size * 0.180862068965517m);
+
+                    ScorpionTail_8 = ((((Convert.ToInt32(Screen_Width) - 30) / 22) - 2) * 0.180862068965517m);
+                    Mohair = ((Screen_Width * 2m) / 1000m) * 0.5625m;
+                    Maxy_ScorpionTail_53pcs = (((Screen_Width / 16.6m) / 53m) * 9.3375m);
+                    Maxy_Pile = ((Screen_Width * 2m / 1000m) * 0.1424m);
+
+                    if (Screen_Width <= 1450m)
+                    {
+                        Bottom_Rail = 4.94m;
+                    }
+                    else if (Screen_Width > 1450m)
+                    {
+                        Bottom_Rail = 10.6m;
+                    }
+
+
+                    var gen_item_total = PP_Maxy_5mmTube +
+                                         Wire_CB_40051 +
+                                         SettingPlate_Rs_l2600 +
+                                         Tail_SlideDT +
+                                         ScorpionTail_8 +
+                                         Adjust_EighthHolder +
+                                         Weight_Bar_Rsz +
+                                         Anchor_Plate_s4 +
+                                         Mohair +
+                                         Tapping_Screw_3x10_Bh +
+                                         Maxy_Cassette_EndCap_w_Spring +
+                                         Maxy_Bushing +
+                                         Maxy_Cassette_Endcap +
+                                         Maxy_Sliding_Bottom_EndCap +
+                                         Maxy_Sliding_Top_EndCap +
+                                         Maxy_ScorpionTail_53pcs +
+                                         Maxy_White_TailEnd +
+                                         Maxy_Cap_SlidingBar_TopEndCap +
+                                         Maxy_TopRailCap_CassetteSide +
+                                         Maxy_Screw_3x4 +
+                                         Plate_w_2hole_M3 +
+                                         Maxy_Pile +
+                                         Maxy_ScorpionTail_w_PileCavity +
+                                         Bottom_Rail
+                                         ;
+
+
+                    #endregion
+
+                    #region Mill Finish
+
+                    Case_Maxy_MillFinish = ((Screen_Height / 1000m) * 3.138m);
+                    SlidingBar_Maxy_MillFinish = ((Screen_Height / 1000m) * 3.86734693877551m);
+                    TopGuide_Maxy_MillFinish = ((Screen_Width / 1000m) * 2.556m);
+                    UProfile_46mm_Maxy_MillFinish = (((Screen_Height / 1000m) * 2m) * 1.758m);
+
+                    var mill_finish_total = Case_Maxy_MillFinish +
+                                            SlidingBar_Maxy_MillFinish +
+                                            TopGuide_Maxy_MillFinish +
+                                            UProfile_46mm_Maxy_MillFinish
+                                            ;
+
+                    #endregion
+
+                    #region Ral Colour
+
+                    Case_Maxy_RalColour = ((Screen_Height / 1000m) * 4.028m);
+                    SlidingBar_Maxy_RalColour = ((Screen_Height / 1000m) * 4.96938775510204m);
+                    TopGuide_Maxy_RalColour = ((Screen_Width / 1000m) * 3.284m);
+                    UProfile_46mm_Maxy_RalColour = (((Screen_Height / 1000m) * 2m) * 2.238m);
+
+                    var Ral_Finish_total = Case_Maxy_RalColour +
+                                         SlidingBar_Maxy_RalColour +
+                                         TopGuide_Maxy_RalColour +
+                                         UProfile_46mm_Maxy_RalColour
+                                         ;
+
+                    #endregion
+
+                    #region Hook Version
+
+                    Cover_ProfileLatch_MillFinish = ((Screen_Height / 1000m) * 0.957142857142857m);
+                    Cover_ProfileLatch_RalColour = ((Screen_Height / 1000m) * 1.23061224489796m);
+                    Latch_Rsz = 2.151m;
+                    Latch_Hanger_Rsz = 1.6875m;
+
+
+                    #endregion
+
+                    Hook_V_RalFinish_tCost = gen_item_total + Ral_Finish_total + Cover_ProfileLatch_RalColour + Latch_Hanger_Rsz + Latch_Rsz;
+                    Hook_V_MillFinish_tCost = gen_item_total + mill_finish_total + Cover_ProfileLatch_MillFinish + Latch_Hanger_Rsz + Latch_Rsz;
+
+                    Maxxy_KM01 = ((775m * 1.3m * Screen_Width) / 1000m) / 6m;
+                    Maxxy_KM02 = ((300m * 1.3m * Screen_Height) / 1000m) / 6.4m;
+
+                    if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
+                    {
+                        #region whiteFinish
+
+
+                        Maxxy_1248_Coupling_Profile = (Screen_Height * 0.43m) / 1000m;
+                        Maxxy_Total_Mat_Cost = (Hook_V_MillFinish_tCost + Maxxy_1248_Coupling_Profile) * Screen_ExchangeRate;
+                        Maxxy_Wastage = Maxxy_Total_Mat_Cost * 0.1m;
+                        Maxxy_Freight = (Maxxy_Total_Mat_Cost + Maxxy_Wastage) * 0.05m;
+                        Maxxy_DT = (Maxxy_Total_Mat_Cost + Maxxy_Wastage + Maxxy_Freight) * 0.12m;
+                        Maxxy_AlumBottomGuide = ((Maxxy_KM01 * Screen_Width) / 1000m) * 1.1m;
+
+                        Maxxy_Contigencies = (Maxxy_Total_Mat_Cost +
+                                               Maxxy_Wastage +
+                                               Maxxy_Freight +
+                                               Maxxy_DT +
+                                               100m +
+                                               Maxxy_AlumBottomGuide +
+                                               1000m) * 0.05m
+                                               ;
+
+                        Maxxy_Screen_tAmount = Math.Round((Maxxy_Total_Mat_Cost +
+                                               Maxxy_Wastage +
+                                               Maxxy_Freight +
+                                               Maxxy_DT +
+                                               100m +
+                                               Maxxy_AlumBottomGuide +
+                                               1000m +
+                                               Maxxy_Contigencies) + 0.5m)
+                                               ;
+
+                        #endregion
+                    }
+                    else if(Screen_BaseColor == Base_Color._DarkBrown)
+                    {
+                        #region woodFinish
+
+                        Maxxy_1248_Coupling_Profile = (Screen_Height * 0.43m) / 1000m;
+                        Maxxy_Total_Mat_Cost = (Hook_V_RalFinish_tCost + Maxxy_1248_Coupling_Profile) * Screen_ExchangeRate;
+                        Maxxy_Wastage = Maxxy_Total_Mat_Cost * 0.1m;
+                        Maxxy_Freight = (Maxxy_Total_Mat_Cost + Maxxy_Wastage) * 0.05m;
+                        Maxxy_DT = (Maxxy_Total_Mat_Cost + Maxxy_Wastage + Maxxy_Freight) * 0.12m;
+                        Maxxy_AlumBottomGuide = (((Maxxy_KM01 * Screen_Width) / 1000m) * 1.1m) * 1.3m;
+
+                        Maxxy_Contigencies = (Maxxy_Total_Mat_Cost +
+                                                       Maxxy_Wastage +
+                                                       Maxxy_Freight +
+                                                       Maxxy_DT +
+                                                       100m +
+                                                       Maxxy_AlumBottomGuide +
+                                                       1500m) * 0.05m
+                                                       ;
+
+                        Maxxy_Screen_tAmount = Math.Round((Maxxy_Total_Mat_Cost +
+                                               Maxxy_Wastage +
+                                               Maxxy_Freight +
+                                               Maxxy_DT +
+                                               100m +
+                                               Maxxy_AlumBottomGuide +
+                                               1500m +
+                                               Maxxy_Contigencies) + 0.5m)
+                                               ;
+
+                        #endregion
+                    }
 
                     #endregion
                 }
@@ -1507,797 +3153,88 @@ namespace ModelLayer.Model.Quotation.Screen
                              ContingenciesCost +
                              AddOnsPrice;
 
+                if(Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
+                {
+                    TotalPrice = (TotalRollUpCostingMaterials +
+                                  TotalPlisseCostingMaterials +
+                                  WasteCost +
+                                  FreightCost +
+                                  DandTCost +
+                                  SmallShopItemCost +
+                                  OverheadCost +
+                                  ContingenciesCost +
+                                  AddOnsPrice)  + (1000m * ((Screen_Height / 1000m ) * PlissedRd_Panels) );
+                }
+
+                #region Screen Unit Price & TotalAmount
 
                 if (Screen_Types == ScreenType._Magnum)
                 {
-                    Screen_TotalAmount = Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
                 }
                 else if (Screen_Types == ScreenType._RollUp || Screen_Types ==  ScreenType._Plisse)
+                {                    
+                    Screen_UnitPrice = Math.Ceiling(TotalPrice) * Screen_Factor;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                }            
+                else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
-                    Screen_TotalAmount = Math.Ceiling(TotalPrice) * Screen_Factor * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                }
+                else if (Screen_Types == ScreenType._BuiltInSideroll)
+                {
+                    Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2);
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                }
+                else if (Screen_Types == ScreenType._Maxxy)
+                {
+                    Screen_UnitPrice = Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
                 }
 
+                #endregion
 
-                   
-                
+                #region Screen Type Description
 
+                if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._AD)
+                {
+                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._AD) +  " ) " ;
+                }
+                else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
+                {
+                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._RD) + " ) ";
+                }
+                else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
+                {
+                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Single_Fixed) + " ) ";
+                }
+                else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
+                {
+                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Double_Fixed) + " ) ";
+                }
+                else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Single_Central)
+                {
+                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Single_Central) + " ) ";
+                }
+                else
+                {
+                    PlisseMagnumType = " ";
+                }
+
+                #endregion
 
                 ClearingOperation();
+          
 
             }
             else
             {
                 Screen_TotalAmount = 0;
             }
+        
         }
-
-
-        #region Magnum Screen Computation
-
-        public void MagnumItemCosting()
-        {
-
-
-            if (Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
-            {
-                #region single horizontal one side fixed 
-
-                #region General Item
-
-                PleatedMeshSingleFixed_Qty = (1.374m * (Screen_Width / 1000));
-                PleatedMeshSingeFixed_tCost = PleatedMeshSingleFixed_Qty * PleatedMeshNera_Price;
-
-                Wire_Qty = (2 * (2 * Screen_Width / 1000 + 3 * Screen_Height / 1000 + 1.2m) + 2 * (Screen_Width / 1000 + Screen_Height / 1000 + 0.8m)) * 0.66666666666667m;
-                Wire_tCost = Wire_Qty * Wire_Price;
-
-                Bushing_tCost = Bushing_SingleOneSideFixed_Qty * Bushing_Price;
-
-                TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
-
-                Grubs4x6_tCost = Grubs4x6_Qty * Grubs4x6_Price;
-
-                CordCurriere3Holes_tCost = CordCurriere3Holes_Qty * CordCurriere3Holes_Price;
-
-                SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
-
-                BottomEndCapMagnum31mmHorizontalNoWheel_tCost = BottomEndCapMagnum31mmHorizontalNoWheel_SingleOneSideFixed_Qty * BottomEndCapMagnum31mmForHorizontalNoWHeel_Price;
-
-                TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_SingleOneSideFixed_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
-
-                Wheel_tCost = Wheel_SingleOneSideFixed_Qty * Wheel_Price;
-
-                PinForWheel_tCost = PinForWheel_SingleOneSideFixed_Qty * PinForWheel_Price;
-
-                AdhesiveTapeAluminumPlate_Qty = (Screen_Height * 2 / 1000m);
-                AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
-
-                AdhesiveTapeBottomGuide_Qty = (Screen_Width / 1000m);
-                AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
-
-                MinyClips_tCost = MinyClips_SingleOneSideFixed_Qty * MinyClips_Price;
-
-                MagnetsClicIntoRollinFly_Qty = (Screen_Height / 1000);
-                MagnetsClicIntoRollinFly_tCost = MagnetsClicIntoRollinFly_Qty * MagnetToClicIntoRollInFly_Price;
-
-                NegativeMagntePlisse_Qty = (Screen_Height / 1000);
-                NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
-
-
-                var gen_Item_Total_Price = PleatedMeshSingeFixed_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
-                                           SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
-                                           PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
-                                           NegativeMagntePlisse_tCost;
-                #endregion
-
-                #region RAL Color 
-                AluminumPlateWithTeeth_RALColor_Qty = Screen_Height / 1000;
-                AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
-
-                AluminumPlateNoTeeth_RALColor_Qty = Screen_Height / 1000;
-                AluminumPlateNoTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateNoTeeth_RALColor_Price;
-
-                Magnum31mmSlidingBar_RALColor_Qty = Screen_Height / 1000;
-                Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_Price;
-
-                Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_Price;
-
-                Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_Price;
-
-                Magnum31mmTensionersProfile_RALColor_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_Price;
-
-                Magnum31mmsideU_RALColor_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_Price;
-
-                var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
-                                                Magnum31mmSlidingBar_RALColor_tCost + Magnum31mmBottomGuide_RALColor_tCost +
-                                                Magnum31mmTopGuide_RALColor_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
-                                                Magnum31mmsideU_RALColor_tCost;
-
-
-                #endregion
-
-                #region Mill Finish
-
-                AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_SingleOneSideFixed_Qty * AluminumPlateWithTeeth_MillFinish_Price;
-
-                AluminumPlateNoTeeth_MillFinish_tCost = AluminumPlateNoTeeth_MillFinish_SingleOneSideFixed_Qty * AluminumPlateNoTeeth_MillFinish_Price;
-
-                Magnum31mmSlidingBar_MillFinish_Qty = Screen_Height / 1000;
-                Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_Price;
-
-                Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_Price;
-
-                Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_Price;
-
-                Magnum31mmTensionersProfile_MillFinish_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_Price;
-
-                Magnum31mmsideU_MillFinish_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_Price;
-
-                var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost + AluminumPlateNoTeeth_MillFinish_tCost +
-                                                  Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
-                                                  Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
-                                                  Magnum31mmsideU_MillFinish_tCost;
-
-                #endregion
-
-                #region Foiled
-
-                Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
-                Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
-                Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
-
-                var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
-                                              Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
-                                              Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
-                                              Magnum31mmsideU_Foiled_tCost;
-
-
-                #endregion
-
-                RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
-                MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
-                Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
-
-                _whiteFinish = RALColor_TotalCost;
-                _woodFinish = Foiled_TotalCost;
-
-                #endregion
-            }
-            else if (Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
-            {
-                #region Double Horizontal
-
-                #region Gen Item
-
-                PleatedMeshDoubleHori_Qty = (1.374m * (Screen_Width / 1000));
-                PleatedMeshDoubleHori_tCost = PleatedMeshDoubleHori_Qty * PleatedMeshNera_Price;
-
-                Wire_Qty = 2 * (2 * (2 * Screen_Width / 1000 + 3 * Screen_Height / 1000 + 1.2m) + 2 * (Screen_Width / 1000 + Screen_Height / 1000 + 0.8m)) * 0.66666666666667m;
-                Wire_tCost = Wire_Qty * Wire_Price;
-
-                if (Screen_Height > 2632m)
-                {
-                    Bushing_Qty = 32m;
-                }
-                else if (Screen_Height > 1631)
-                {
-                    Bushing_Qty = 24m;
-                }
-                else if (Screen_Height <= 1631)
-                {
-                    Bushing_Qty = 16m;
-                }
-
-                Bushing_tCost = Bushing_Qty * Bushing_Price;
-
-                TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
-
-                Grubs4x6_tCost = Grubs4x6_Qty * Grubs4x6_Price;
-
-                CordCurriere3Holes_tCost = CordCurriere3Holes_Qty * CordCurriere3Holes_Price;
-
-                SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
-
-                TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
-
-                Wheel_tCost = Wheel_Qty * Wheel_Price;
-
-                PinForWheel_tCost = PinForWheel_Qty * PinForWheel_Price;
-
-                AdhesiveTapeAluminumPlate_Qty = 2 * (Screen_Height * 2 / 1000m);
-                AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
-
-                AdhesiveTapeBottomGuide_Qty = (Screen_Width / 1000m);
-                AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
-
-                if (Screen_Height > 3200)
-                {
-                    MinyClips_Qty = 14;
-                }
-                else if (Screen_Height > 2900)
-                {
-                    MinyClips_Qty = 12;
-                }
-                else if (Screen_Height > 2600)
-                {
-                    MinyClips_Qty = 10;
-                }
-                else if (Screen_Height > 2300)
-                {
-                    MinyClips_Qty = 8;
-                }
-                else if (Screen_Height <= 2300)
-                {
-                    MinyClips_Qty = 6;
-                }
-
-                MinyClips_tCost = MinyClips_Qty * MinyClips_Price;
-
-                NegativeMagntePlisse_Qty = (Screen_Height / 1000);
-                NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
-
-                PlissePositivePlisse_Qty = (Screen_Height / 1000);
-                PlissePositivePlisse_tCost = PlissePositivePlisse_Qty * PlissePositivePlisse_Price;
-
-                DoubleCentePart_tCost = DoubleCentePart_Qty * DoubleCentePart_Price;
-
-                BottomEndCapMagnum31mm_DoubleHori_tCost = BottomEndCapMagnum31mm_DoubleHori_Qty * BottomEndCapMagnum31mm_DoubleHori_Price;
-
-                var gen_Item_Total_Price = PleatedMeshDoubleHori_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
-                                           SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
-                                           PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
-                                           NegativeMagntePlisse_tCost + PlissePositivePlisse_tCost + DoubleCentePart_tCost + BottomEndCapMagnum31mm_DoubleHori_tCost;
-
-
-
-                #endregion
-
-                #region Ral Color
-
-                AluminumPlateWithTeeth_RALColor_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
-
-                AluminumPlateNoTeeth_RALColor_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateNoTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateNoTeeth_RALColor_Price;
-
-                Magnum31mmSlidingBar_RALColor_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_Price;
-
-                Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_Price;
-
-                Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_Price;
-
-                Magnum31mmTensionersProfile_RALColor_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_Price;
-
-                Magnum31mmsideU_RALColor_Qty = Screen_Height * 2 / 1000;
-                Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_Price;
-
-                var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
-                                                Magnum31mmSlidingBar_RALColor_tCost + Magnum31mmBottomGuide_RALColor_tCost +
-                                                Magnum31mmTopGuide_RALColor_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
-                                                Magnum31mmsideU_RALColor_tCost;
-
-
-
-                #endregion
-
-                #region Mill Finish
-
-                AluminumPlateWithTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateWithTeeth_MillFinish_Price;
-
-                AluminumPlateNoTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateNoTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateNoTeeth_MillFinish_Price;
-
-                Magnum31mmSlidingBar_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_Price;
-
-                Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_Price;
-
-                Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_Price;
-
-                Magnum31mmTensionersProfile_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_Price;
-
-
-                Magnum31mmsideU_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_Price;
-
-                var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost + AluminumPlateNoTeeth_MillFinish_tCost +
-                                                 Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
-                                                 Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
-                                                 Magnum31mmsideU_MillFinish_tCost;
-
-                #endregion
-
-                #region Foiled
-
-                Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
-                Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
-                Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
-
-                var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + AluminumPlateNoTeeth_RALColor_tCost +
-                                              Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
-                                              Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
-                                              Magnum31mmsideU_Foiled_tCost;
-
-
-
-                #endregion
-
-
-                RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
-                MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
-                Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
-
-                _whiteFinish = RALColor_TotalCost;
-                _woodFinish = Foiled_TotalCost;
-
-
-
-                #endregion
-
-            }
-            else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
-            {
-                #region Single Central
-
-                #region Gen Item
-
-                PleatedMeshSingleCentral_Qty = (1.374m * (Screen_Width / 1000));
-                PleatedMeshSingleCentral_tCost = PleatedMeshSingleCentral_Qty * PleatedMeshNera_Price;
-
-                if (Screen_Height >= 1900)
-                {
-                    Wire_Qty = (8 * (Screen_Width / 1000 + Screen_Height / 1000 + 0.8m));
-                }
-                else if (Screen_Height < 1900 && Screen_Height > 1300)
-                {
-                    Wire_Qty = (6 * (Screen_Width / 1000 + Screen_Height / 1000 + 0.8m));
-                }
-
-                if (Screen_Height > 2632)
-                {
-                    Bushing_Qty = 16;
-                }
-                else if (Screen_Height > 1631)
-                {
-                    Bushing_Qty = 12;
-                }
-                else if (Screen_Height <= 1631)
-                {
-                    Bushing_Qty = 8;
-                }
-
-                Wire_tCost = Wire_Qty * Wire_Price;
-                Bushing_tCost = Bushing_Qty * Bushing_Price;
-
-                TensionerNoGrubs_tCost = TensionerNoGrubs_Qty * TensionerNoGrubs_Price;
-
-                Grubs4x6_tCost = Grubs4x6_SingleCentralPack_Qty * Grubs4x6_Price;
-
-                CordCurriere3Holes_tCost = CordCurriere3Holes_SingleCentralPack_Qty * CordCurriere3Holes_Price;
-
-                SpringForTensioner_tCost = SpringForTensioner_Qty * SpringForTensioner_Price;
-
-                BottomEndCapMagnum31mmHorizontalNoWheel_tCost = BottomEndCapMagnum31mmHorizontalNoWheel_SingleCentralPack_Qty * BottomEndCapMagnum31mmForHorizontalNoWHeel_Price;
-
-                TopEndCapMagnum31mmHorizontalNoWheel_tCost = TopEndCapMagnum31mmHorizontalNoWheel_Qty * TopEndCapMagnum31mmForHorizontalNoWheel_Price;
-
-                Wheel_tCost = Wheel_Qty * Wheel_Price;
-
-                PinForWheel_tCost = PinForWheel_Qty * PinForWheel_Price;
-
-                AdhesiveTapeAluminumPlate_Qty = (Screen_Height * 2) / 1000;
-                AdhesiveTapeAluminumPlate_tCost = AdhesiveTapeAluminumPlate_Qty * AdhesiveTapeForAluminum_Price;
-
-                AdhesiveTapeBottomGuide_Qty = Screen_Width / 1000;
-                AdhesiveTapeBottomGuide_tCost = AdhesiveTapeBottomGuide_Qty * AdhesiveTapeForBottomGuide_Price;
-
-                if (Screen_Height > 3200)
-                {
-                    MinyClips_Qty = 14;
-                }
-                else if (Screen_Height > 2900)
-                {
-                    MinyClips_Qty = 12;
-                }
-                else if (Screen_Height > 2600)
-                {
-                    MinyClips_Qty = 10;
-                }
-                else if (Screen_Height > 2300)
-                {
-                    MinyClips_Qty = 8;
-                }
-                else if (Screen_Height <= 2300)
-                {
-                    MinyClips_Qty = 6;
-                }
-
-                MinyClips_tCost = MinyClips_Qty * MinyClips_Price;
-
-                MagnetsClicIntoRollinFly_Qty = Screen_Height / 1000;
-                MagnetsClicIntoRollinFly_tCost = MagnetsClicIntoRollinFly_Qty * MagnetToClicIntoRollInFly_Price;
-
-                NegativeMagntePlisse_Qty = Screen_Height / 1000;
-                NegativeMagntePlisse_tCost = NegativeMagntePlisse_Qty * NegativeMagnetPlisse_Price;
-
-                var gen_Item_Total_Price = PleatedMeshSingleCentral_tCost + Wire_tCost + Bushing_tCost + TensionerNoGrubs_tCost + Grubs4x6_tCost + CordCurriere3Holes_tCost +
-                                           SpringForTensioner_tCost + BottomEndCapMagnum31mmHorizontalNoWheel_tCost + TopEndCapMagnum31mmHorizontalNoWheel_tCost + Wheel_tCost +
-                                           PinForWheel_tCost + AdhesiveTapeAluminumPlate_tCost + AdhesiveTapeBottomGuide_tCost + MinyClips_tCost + MagnetsClicIntoRollinFly_tCost +
-                                           NegativeMagntePlisse_tCost;
-
-
-                #endregion
-
-                #region Ral Color
-
-                AluminumPlateWithTeeth_RALColor_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateWithTeeth_RALColor_tCost = AluminumPlateWithTeeth_RALColor_Qty * AluminumPlateWithTeeth_RALColor_Price;
-
-                Magnum31mmSlidingBar_RALColor_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmSlidingBar_RALColor_tCost = Magnum31mmSlidingBar_RALColor_Qty * Magnum31mmSlidingBar_RALColor_SingeleCentral_Price;
-
-                Magnum31mmBottomGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_RALColor_tCost = Magnum31mmBottomGuide_RALColor_Qty * Magnum31mmBottomGuide_RALColor_SingleCentral_Price;
-
-                Magnum31mmTopGuide_RALColor_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_RALColor_tCost = Magnum31mmTopGuide_RALColor_Qty * Magnum31mmTopGuide_RALColor_SingleCentral_Price;
-
-                Magnum31mmTensionersProfile_RALColor_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmTensionersProfile_RALColor_tCost = Magnum31mmTensionersProfile_RALColor_Qty * Magnum31mmTensionersProfiles_RALColor_SingleCentral_Price;
-
-                Magnum31mmsideU_RALColor_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmsideU_RALColor_tCost = Magnum31mmsideU_RALColor_Qty * Magnum31mmSideU_RALColor_SingleCentral_Price;
-
-                var ralColor_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost + Magnum31mmSlidingBar_RALColor_tCost +
-                                              Magnum31mmBottomGuide_RALColor_tCost + Magnum31mmTopGuide_RALColor_tCost +
-                                              Magnum31mmTensionersProfile_RALColor_tCost + Magnum31mmsideU_RALColor_tCost;
-
-                #endregion
-
-                #region Mill Finish
-
-                AluminumPlateWithTeeth_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                AluminumPlateWithTeeth_MillFinish_tCost = AluminumPlateWithTeeth_MillFinish_Qty * AluminumPlateWithTeeth_MillFinish_Price;
-
-                Magnum31mmSlidingBar_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmSlidingBar_MillFinish_tCost = Magnum31mmSlidingBar_MillFinish_Qty * Magnum31mmSlidingBar_MillFinish_SingeleCentral_Price;
-
-                Magnum31mmBottomGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmBottomGuide_MillFinish_tCost = Magnum31mmBottomGuide_MillFinish_Qty * Magnum31mmBottomGuide_MillFinish_SingleCentral_Price;
-
-                Magnum31mmTopGuide_MillFinish_Qty = Screen_Width / 1000;
-                Magnum31mmTopGuide_MillFinish_tCost = Magnum31mmTopGuide_MillFinish_Qty * Magnum31mmTopGuide_MillFinish_SingleCentral_Price;
-
-                Magnum31mmTensionersProfile_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmTensionersProfile_MillFinish_tCost = Magnum31mmTensionersProfile_MillFinish_Qty * Magnum31mmTensionersProfiles_MillFinish_SingleCentral_Price;
-
-                Magnum31mmsideU_MillFinish_Qty = (Screen_Height * 2) / 1000;
-                Magnum31mmsideU_MillFinish_tCost = Magnum31mmsideU_MillFinish_Qty * Magnum31mmSideU_MillFinish_SingleCentral_Price;
-
-                var millFinish_Item_Total_Price = AluminumPlateWithTeeth_MillFinish_tCost +
-                                                  Magnum31mmSlidingBar_MillFinish_tCost + Magnum31mmBottomGuide_MillFinish_tCost +
-                                                  Magnum31mmTopGuide_MillFinish_tCost + Magnum31mmTensionersProfile_MillFinish_tCost +
-                                                  Magnum31mmsideU_MillFinish_tCost;
-
-                #endregion
-
-                #region Foiled
-
-                Magnum31mmSlidingBar_Foiled_tCost = Magnum31mmSlidingBar_RALColor_tCost * 1.42m;
-                Magnum31mmTopGuide_Foiled_tCost = Magnum31mmTopGuide_RALColor_tCost * 1.42m;
-                Magnum31mmsideU_Foiled_tCost = Magnum31mmsideU_RALColor_tCost * 1.42m;
-
-                var foiled_Item_Total_Price = AluminumPlateWithTeeth_RALColor_tCost +
-                                              Magnum31mmSlidingBar_Foiled_tCost + Magnum31mmBottomGuide_RALColor_tCost +
-                                              Magnum31mmTopGuide_Foiled_tCost + Magnum31mmTensionersProfile_RALColor_tCost +
-                                              Magnum31mmsideU_Foiled_tCost;
-
-
-                #endregion
-
-                RALColor_TotalCost = gen_Item_Total_Price + ralColor_Item_Total_Price;
-                MillFinish_TotalCost = gen_Item_Total_Price + millFinish_Item_Total_Price;
-                Foiled_TotalCost = gen_Item_Total_Price + foiled_Item_Total_Price;
-
-                _whiteFinish = RALColor_TotalCost;
-                _woodFinish = Foiled_TotalCost;
-
-                #endregion
-
-            }
-
-        }
-        public void MagnumItemCalculation()
-        {
-            MagnumItemCosting();
-
-            Black_Alum_base = (2 * (Screen_Height - 1581m) / 1000m) * (23.0817m / 2.8m);
-            AntiLift_DB_w_CacaoFoil = ((2 * (Screen_Height - 1581m) / 1000m) - 2 * 196m / 1000m) * (165m / 4.9m / 64m);
-            Milled_Profile_6052 = (11.7987419205323m / 2m) * (Screen_Width / 1000m);
-            Cover_Profile = 0.23m * (Screen_Width / 1000m);
-
-            ShootBolt = FinalPart_w_MetalTip + Cap_for_Alum_Base + Black_Alum_base + AntiLift_DB_w_CacaoFoil + Milled_Profile_6052 + Cover_Profile;
-
-            Extension_for_Bolt = (((Screen_Height - 1800m) / 150m) - 2);
-            Extension_for_Bolt = (int)Math.Round((decimal)(Extension_for_Bolt));
-
-            Extension_alumBase_DoubleHori_whiteFinish = (23.0817m / 5.8m) * (Screen_Height / 1000m - 1.5m) * 2;
-            Extension_alumBase_DoubleHori_woodFinish = Extension_alumBase_DoubleHori_whiteFinish * 1.4m;
-
-            PlisseL_N_Cover_whiteFinish = (20.07495m + 12.9915m) / 5.8m * Screen_Height / 1000m;
-            PlisseL_N_Cover_woodFinish = (4.509m + 3.12m) * Screen_Height / 1000m;
-
-            CouplingProfile_1248 = 0.43m * (Screen_Height / 1000m * 1.3m);
-
-            KM01_Alum_BottomGuide_BasePrice = 775m * 1.3m * (Screen_Width / 1000m / 6m);
-            KM02_Alum_PlissHandle_BasePrice = 300m * 1.3m * (Screen_Height / 1000m / 6.4m);
-
-
-            if (Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
-            {
-                #region single Fixed
-                if (Screen_Types_Door == true)
-                {
-                    KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
-                    KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
-                }
-
-                else if (Screen_Types_Window == true)
-                {
-                    SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
-                    SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
-                }
-
-                if (Reinforced == true)
-                {
-                    Reinforce_Addon = 53.0355604601368m;
-                    Reinforced_Labor = 600m;
-                }
-
-                #region whiteFinish
-
-
-                Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + PlisseL_N_Cover_whiteFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
-
-                Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
-
-                Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
-
-                DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
-
-                Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
-                                                Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
-
-                Single_Fixed_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
-                                                   DandT_Cost_whiteFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_whiteFinish
-                                                   + Contingencies_whiteFinish) + 0.5m;
-
-
-
-
-                #endregion
-
-                #region woodFinish
-
-                Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + PlisseL_N_Cover_woodFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
-
-                Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
-
-                Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
-
-                DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
-
-                Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
-
-                Single_Fixed_woodFinish_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
-                                                    DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SF + KM01_Alum_BottomGuide_woodFinish
-                                                    + Contingencies_woodFinish) + 0.5m;
-
-
-
-                #endregion
-
-                if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Single_Fixed_whiteFinish_Total);
-                }
-                else if (Screen_BaseColor == Base_Color._DarkBrown)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Single_Fixed_woodFinish_Total);
-                }
-               
-              
-
-                #endregion
-            }
-
-
-            else if (Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
-            {
-                #region Double Hori
-                if (Screen_Types_Door == true)
-                {
-                    KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
-                    KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
-                }
-                else if (Screen_Types_Window == true)
-                {
-                    SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
-                    SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
-                }
-
-                if (Reinforced == true)
-                {
-                    Reinforce_Addon = 53.0355604601368m;
-                    Reinforced_Labor = 1200m;
-                }
-
-
-
-                #region whiteFinish
-
-
-                Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + DoubleHori_LatchSetlock + Extension_for_Bolt + Extension_alumBase_DoubleHori_whiteFinish + PlisseL_N_Cover_whiteFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon + ShootBolt) * Screen_ExchangeRate;
-
-                Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
-
-                Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
-
-                DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
-
-                Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
-                                                Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
-
-                Double_Horizontal_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
-                                                   DandT_Cost_whiteFinish + Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_whiteFinish
-                                                   + Contingencies_whiteFinish) + 0.5m;
-
-
-            
-
-
-                #endregion
-
-                #region woodFinish
-
-                Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + DoubleHori_LatchSetlock + Extension_for_Bolt + Extension_alumBase_DoubleHori_woodFinish + PlisseL_N_Cover_woodFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon + ShootBolt) * Screen_ExchangeRate;
-
-                Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
-
-                Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
-
-                DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
-
-                Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish +
-                                                Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
-
-                Double_Horizontal_woodFinish_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
-                                                   DandT_Cost_woodFinish + Small_shop_Items_DoubleHori + Reinforced_Labor + OverHead_Cost_DH + KM01_Alum_BottomGuide_woodFinish
-                                                   + Contingencies_woodFinish) + 0.5m;
-
-
-               
-
-                #endregion
-
-                if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Double_Horizontal_whiteFinish_Total);
-                }
-                else if (Screen_BaseColor == Base_Color._DarkBrown)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Double_Horizontal_woodFinish_Total);
-                }
-
-                #endregion
-            }
-
-            else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
-            {
-                #region Single Central
-                if (Screen_Types_Door == true)
-                {
-                    KM01_Alum_BottomGuide_whiteFinish = KM01_Alum_BottomGuide_BasePrice * (Screen_Width / 1000m);
-                    KM01_Alum_BottomGuide_woodFinish = KM01_Alum_BottomGuide_whiteFinish * 1.4m;
-                }
-                else if (Screen_Types_Window == true)
-                {
-                    SideU_for_WindowApp_whiteFinish = Magnum31mmSideU_RALColor_Price * (Screen_Width / 1000m);
-                    SideU_for_WindowApp_woodFinish = SideU_for_WindowApp_whiteFinish * 1.42m;
-                }
-
-                if (Reinforced == true)
-                {
-                    Reinforce_Addon = 53.0355604601368m;
-                    Reinforced_Labor = 600m;
-                }
-
-                #region whiteFinish
-
-
-                Total_Material_Cost_whiteFinish = (_whiteFinish + SideU_for_WindowApp_whiteFinish + PlisseL_N_Cover_whiteFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
-
-                Wastage_Cost_whiteFinish = Total_Material_Cost_whiteFinish * 0.1m;
-
-                Freight_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish) * 0.05m;
-
-                DandT_Cost_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish) * 0.16m;
-
-                Contingencies_whiteFinish = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish + DandT_Cost_whiteFinish +
-                                                Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_whiteFinish) * 0.05m;
-
-                Single_Central_whiteFinish_Total = (Total_Material_Cost_whiteFinish + Wastage_Cost_whiteFinish + Freight_Cost_whiteFinish +
-                                                   DandT_Cost_whiteFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_whiteFinish
-                                                   + Contingencies_whiteFinish) + 0.5m;
-
-
-
-
-
-                #endregion
-
-                #region woodFinish
-
-                Total_Material_Cost_woodFinish = (_woodFinish + SideU_for_WindowApp_woodFinish + PlisseL_N_Cover_woodFinish +
-                                                   CouplingProfile_1248 + Reinforce_Addon) * Screen_ExchangeRate;
-
-                Wastage_Cost_woodFinish = Total_Material_Cost_woodFinish * 0.1m;
-
-                Freight_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish) * 0.05m;
-
-                DandT_Cost_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish) * 0.16m;
-
-                Contingencies_woodFinish = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish + DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_woodFinish) * 0.05m;
-
-                Single_Central_woodFinsih_Total = (Total_Material_Cost_woodFinish + Wastage_Cost_woodFinish + Freight_Cost_woodFinish +
-                                                    DandT_Cost_woodFinish + Small_shop_Items + Reinforced_Labor + OverHead_Cost_SC + KM01_Alum_BottomGuide_woodFinish
-                                                    + Contingencies_woodFinish) + 0.5m;
-
-       
-
-              
-
-                #endregion
-
-                if (Screen_BaseColor == Base_Color._White || Screen_BaseColor == Base_Color._Ivory)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Single_Central_whiteFinish_Total);
-                }
-                else if (Screen_BaseColor == Base_Color._DarkBrown)
-                {
-                    Magnum_Screen_tAmount = Math.Round(Single_Central_woodFinsih_Total);
-                }
-
-                #endregion
-
-            }
-
-        }
-
-        #endregion
-
-
-
 
         public void ClearingOperation()
         {
@@ -2390,6 +3327,93 @@ namespace ModelLayer.Model.Quotation.Screen
             RALColor_TotalCost = 0;
             MillFinish_TotalCost = 0;
             Foiled_TotalCost = 0;
+            #endregion
+
+            #region clearing for Zero Gravity
+
+            pile_Qty = 0;
+            supp_fixing_42mm_headrail_Qty = 0;
+            dowell_4x25_Qty = 0;
+            screw_4x25_Qty = 0;
+            ZG_waste_10per_ = 0;
+            ZG_freight_5per = 0;
+            ZG_importation_Cost = 0;
+            additional_for_Woograin = 0;
+            ZG_Contigencies = 0;
+            ZG_totalMaterial_Cost = 0;
+            roller_case_Price = 0;
+            sliding_bar_Price = 0;
+            mesh_w_tube_Price = 0;
+            guide_70x22_Price = 0;
+            reinforing_hand_slidingbar_Price = 0;
+            profiles_supp_tube_ZG_Price = 0;
+            pile_Price = 0;
+            anti_wind_brush_Price = 0;
+            kit_genius_46mm_ZG_Price = 0;
+            supp_fixing_42mm_headrail_Price = 0;
+            dowell_4x25_Price = 0;
+            screw_4x25_Price = 0;
+
+            #endregion
+
+            #region Clearing for Built in SR 
+            price_base_on_Height = 0;
+            price_base_on_Weight = 0;
+            built_in_SR_tAmount = 0;
+
+            base_Price = 0;
+            height_Base_Price_Inc = 0;
+            width_Base_Price_Inc = 0;
+            height_deci = 0;
+            weight_deci = 0;
+            percentage_multiplier = 0;
+
+            Height_mm_to_meters = 0;
+            Width_mm_to_meters = 0;
+
+
+            holder = 0;
+            curr_index_pos = 0;
+
+            current_deci_index = 0;
+            next_deci_index = 0;
+            #endregion
+
+            #region Clearing for Maxxy Screen
+
+            PP_Maxy_5mmTube = 0;
+            ScorpionTail_8 = 0;
+            Mohair = 0;
+            Maxy_ScorpionTail_53pcs = 0;
+            Maxy_Pile = 0;
+            Bottom_Rail = 0;
+            Case_Maxy_MillFinish = 0;
+            SlidingBar_Maxy_MillFinish = 0;
+            TopGuide_Maxy_MillFinish = 0;
+            UProfile_46mm_Maxy_MillFinish = 0;
+            Case_Maxy_RalColour = 0;
+            SlidingBar_Maxy_RalColour = 0;
+            TopGuide_Maxy_RalColour = 0;
+            UProfile_46mm_Maxy_RalColour = 0;
+            Hook_V_MillFinish_tCost = 0;
+            Hook_V_RalFinish_tCost = 0;
+            Maxxy_Screen_tAmount = 0;
+
+            //Hook Version 
+            Cover_ProfileLatch_MillFinish = 0;
+            Cover_ProfileLatch_RalColour = 0;
+            Latch_Rsz = 0;
+            Latch_Hanger_Rsz = 0;
+            Maxxy_1248_Coupling_Profile = 0;
+            Maxxy_Total_Mat_Cost = 0;
+            Maxxy_Wastage = 0;
+            Maxxy_Freight = 0;
+            Maxxy_DT = 0;
+            Maxxy_KM01 = 0;
+            Maxxy_KM02 = 0;
+            Maxxy_AlumBottomGuide = 0;
+            Maxxy_Contigencies = 0;
+
             #endregion
         }
 

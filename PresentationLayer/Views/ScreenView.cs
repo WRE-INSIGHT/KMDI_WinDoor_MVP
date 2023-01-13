@@ -66,6 +66,8 @@ namespace PresentationLayer.Views
         public event EventHandler deleteToolStripMenuClickEventRaised;
         public event EventHandler rdBtnDoorCheckChangeEventRaised;
         public event EventHandler rdBtnWindowCheckChangeEventRaised;
+        public event EventHandler nudPlisseRdValueChangeEventRaise;
+
         public void ShowScreemView()
         {
             this.Show();
@@ -96,13 +98,23 @@ namespace PresentationLayer.Views
             return dgv_Screen;
         }
 
+        public NumericUpDown getNudPlisseRd()
+        {
+            return nud_plissedRd;
+        }
+
+        public Label getLblPlisseRd()
+        {
+            return lbl_plissedRd;
+        }
+
         private void ScreenView_Load(object sender, EventArgs e)
         {
             List<ScreenType> screen = new List<ScreenType>();
             foreach (ScreenType item in ScreenType.GetAll())
             {
                 screen.Add(item);
-            }
+            }            
             cmb_ScreenType.DataSource = screen;
 
             List<Base_Color> baseColor = new List<Base_Color>();
@@ -201,8 +213,16 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, rdBtnWindowCheckChangeEventRaised, e);
         }
+
+        private void nud_plissedRd_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudPlisseRdValueChangeEventRaise, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
+            
+            nud_plissedRd.DataBindings.Add(ModelBinding["PlissedRd_Panels"]);
             rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
             rdBtn_Door.DataBindings.Add(ModelBinding["Screen_Types_Door"]);
             cmb_baseColor.DataBindings.Add(ModelBinding["Screen_BaseColor"]);
@@ -216,6 +236,6 @@ namespace PresentationLayer.Views
             nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
         }
 
-        
+       
     }
 }
