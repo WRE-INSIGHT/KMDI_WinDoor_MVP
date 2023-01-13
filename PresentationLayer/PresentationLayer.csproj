@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.17</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.23</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -183,8 +183,14 @@
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGalleryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetOptionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverBladesPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGalleryPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetOptionPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_LouverGallerySetPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\PP_TrackRailPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_1385MilledProfilePropertyUCPresenter.cs" />
@@ -193,6 +199,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_SpringLoadedUCPresenter.cs" />
@@ -202,6 +209,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_6052MilledProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_MagnumScreenTypeUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_SpringLoadedUCPresenter.cs" />
@@ -718,6 +726,9 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HandlePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_HingePropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverBladesPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGalleryPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGallerySetOptionPropertyUC.cs" />
+    <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_LouverGallerySetPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MiddleCloserPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MotorizedPropertyUC.cs" />
     <Compile Include="Views\UserControls\PanelProperties_Modules\IPP_MVDPropertyUC.cs" />
@@ -828,6 +839,12 @@
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.Designer.cs">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.Designer.cs">
+      <DependentUpon>PP_LouverGallerySetOptionPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -930,6 +947,7 @@
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_6052MilledProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_CenterClosurePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_MagnumScreenTypeUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCbox1067WithReinPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_SpringLoadedUC.cs" />
@@ -968,6 +986,12 @@
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.Designer.cs">
       <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.Designer.cs">
+      <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1381,6 +1405,9 @@
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverBladesPropertyUC.resx">
       <DependentUpon>PP_LouverBladesPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetOptionPropertyUC.resx">
+      <DependentUpon>PP_LouverGallerySetOptionPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\PanelProperties_Modules\PP_LouverGallerySetPropertyUC.resx">
       <DependentUpon>PP_LouverGallerySetPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1446,6 +1473,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_LandCoverPropertyUC.resx">
       <DependentUpon>SP_LandCoverPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.resx">
+      <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.resx">
       <DependentUpon>SP_PVCbox1067WithReinPropertyUC.cs</DependentUpon>

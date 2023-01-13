@@ -1686,7 +1686,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 pnl.SetPanelMargin_using_ZoomPercentage();
                 pnl.SetPanelMarginImager_using_ImageZoomPercentage();
             }
-           
+
 
         }
 
@@ -2727,7 +2727,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 return _mPanel_OriginalDisplayWidth;
             }
-            set {
+            set
+            {
                 _mPanel_OriginalDisplayWidth = value;
             }
         }
@@ -3487,6 +3488,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_LouverBladesOptionsheight;
                 }
+                else if (mode == "addLouverGallery")
+                {
+                    MPanelProp_Height += constants.panel_property_LouverGalleryOptionsheight;
+                }
+                else if (mode == "minusLouverGallery")
+                {
+                    MPanelProp_Height -= constants.panel_property_LouverGalleryOptionsheight;
+                }
+                else if (mode == "addLouverGallerySet")
+                {
+                    MPanelProp_Height += constants.panel_property_LouverGallerySetOptionsheight;
+                }
+                else if (mode == "minusLouverGallerySet")
+                {
+                    MPanelProp_Height -= constants.panel_property_LouverGallerySetOptionsheight;
+                }
+                else if (mode == "addLouverGallerySetArtNo")
+                {
+                    MPanelProp_Height += constants.panel_property_LouverGallerySetArtNoOptionsheight;
+                }
+                else if (mode == "minusLouverGallerySetArtNo")
+                {
+                    MPanelProp_Height -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -3744,7 +3769,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             }
 
 
-          
+
             if (isEqual && (MPanelLst_Objects.Count() >= totalCount_objs_to_accomodate))
             {
                 int divSize = 0;
@@ -4128,7 +4153,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanelImageRenderer_Height++;
                                         diff_MPanelImagerHt_VS_MyImagersHeight--;
                                     }
-                                   
+
                                 }
                             }
                         }
@@ -4146,8 +4171,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl.PanelImageRenderer_Height--;
                                         diff_MPanelImagerHt_VS_MyImagersHeight++;
                                     }
-                                   
-                                   
+
+
 
                                 }
                             }
@@ -4160,7 +4185,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanelImageRenderer_Height--;
                                         diff_MPanelImagerHt_VS_MyImagersHeight++;
                                     }
-                                   
+
                                 }
                             }
                         }
@@ -4196,7 +4221,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         mpnl.MPanelImageRenderer_Width++;
                                         diff_MPanelImagerWd_VS_MyImagersWidth--;
                                     }
-                                    
+
                                 }
                             }
                         }

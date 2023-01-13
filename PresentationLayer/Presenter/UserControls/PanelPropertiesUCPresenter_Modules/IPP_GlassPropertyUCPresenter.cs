@@ -8,5 +8,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
     {
         IPP_GlassPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IPanelModel panelModel, IMainPresenter mainPresenter);
         IPP_GlassPropertyUC GetPPGlassPropertyUC();
+        void BringToFrontUC();
     }
 }

@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _panelModel.Panel_MotorizedMechArtNo = (MotorizedMech_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -76,7 +77,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     DMSelected = true;
                 }
-                if(divPrevModel.Div_ChkDM == true)
+                if (divPrevModel.Div_ChkDM == true)
                 {
                     divChkDM = true;
                 }
@@ -108,7 +109,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 _panelModel.AdjustPropertyPanelHeight("addCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("minusHandle");
-                if(_panelModel.Panel_ParentMultiPanelModel != null)
+                if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCmbMotorized");
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
@@ -222,7 +223,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
                 if (_panelModel.Panel_HandleType != Handle_Type._Rotary)
                 {
-                    if(_panelModel.Panel_EspagnoletteOptionsVisibility == true)
+                    if (_panelModel.Panel_EspagnoletteOptionsVisibility == true)
                     {
                         _panelModel.Panel_EspagnoletteOptionsVisibility = false;
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusEspagnolette");
@@ -292,7 +293,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                             }
                         }
 
-                        if (_panelModel.Panel_CornerDriveOptionsVisibility == true && 
+                        if (_panelModel.Panel_CornerDriveOptionsVisibility == true &&
                             _panelModel.Panel_ParentMultiPanelModel != null)
                         {
                             _panelModel.Panel_CornerDriveOptionsVisibility = false;
@@ -475,7 +476,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
 
                     if (_panelModel.Panel_CornerDriveOptionsVisibility == false &&
-                        _panelModel.Panel_ParentMultiPanelModel != null && 
+                        _panelModel.Panel_ParentMultiPanelModel != null &&
                         (DMSelected == false &&
                          divChkDM == true &&
                         _panelModel.Panel_HandleType != Handle_Type._None))

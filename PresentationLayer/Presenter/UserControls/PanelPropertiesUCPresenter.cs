@@ -1,9 +1,7 @@
 ﻿using CommonComponents;
-using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules;
 using PresentationLayer.Views.UserControls;
-using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,7 +13,7 @@ namespace PresentationLayer.Presenter.UserControls
     public class PanelPropertiesUCPresenter : IPanelPropertiesUCPresenter, IPresenterCommon
     {
         IPanelPropertiesUC _panelPropertiesUC;
-        
+
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IPP_MotorizedPropertyUCPresenter _pp_motorizedPropertyUCPresenter;
@@ -35,6 +33,8 @@ namespace PresentationLayer.Presenter.UserControls
         private IPP_RollerPropertyUCPresenter _pp_rollerPropertyUCPresenter;
         private IPP_AliminumTrackPropertyUCPresenter _pp_AliminumTrackPropertyUCPresenter;
         private IPP_LouverBladesPropertyUCPresenter _pp_louverBladesPropertyUCPresenter;
+        private IPP_LouverGalleryPropertyUCPresenter _pp_louverGalleryPropertyUCPresenter;
+        private IPP_LouverGallerySetPropertyUCPresenter _pp_louverGallerySetPropertyUCPresenter;
 
         private IUnityContainer _unityC;
 
@@ -57,7 +57,9 @@ namespace PresentationLayer.Presenter.UserControls
                                           IPP_SlidingTypePropertyUCPresenter pp_slidingTypePropertyUCP,
                                           IPP_RollerPropertyUCPresenter pp_rollerPropertyUCPresenter,
                                           IPP_AliminumTrackPropertyUCPresenter pp_AliminumTrackPropertyUCPresenter,
-                                          IPP_LouverBladesPropertyUCPresenter pp_louverBladesPropertyUCPresenter)
+                                          IPP_LouverBladesPropertyUCPresenter pp_louverBladesPropertyUCPresenter,
+                                          IPP_LouverGalleryPropertyUCPresenter pp_louverGalleryPropertyUCPresenter,
+                                          IPP_LouverGallerySetPropertyUCPresenter pp_louverGallerySetPropertyUCPresenter)
         {
             _panelPropertiesUC = panelPropertiesUC;
             _pp_motorizedPropertyUCPresenter = pp_motorizedPropertyUCPresenter;
@@ -78,6 +80,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pp_rollerPropertyUCPresenter = pp_rollerPropertyUCPresenter;
             _pp_AliminumTrackPropertyUCPresenter = pp_AliminumTrackPropertyUCPresenter;
             _pp_louverBladesPropertyUCPresenter = pp_louverBladesPropertyUCPresenter;
+            _pp_louverGalleryPropertyUCPresenter = pp_louverGalleryPropertyUCPresenter;
+            _pp_louverGallerySetPropertyUCPresenter = pp_louverGallerySetPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -631,28 +635,49 @@ namespace PresentationLayer.Presenter.UserControls
                     //_panelModel.AdjustPropertyPanelHeight("minusLouver");
                     //_panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouver");
                     _panelModel.Panel_LouverBladesVisibility = true;
+                    _panelModel.Panel_LouverGalleryVisibility = true;
+                    _panelModel.Panel_LouverGallerySetVisibility = true;
 
                     _panelModel.AdjustPropertyPanelHeight("addLouverBlades");
+                    _panelModel.AdjustPropertyPanelHeight("addLouverGallery");
+                    _panelModel.AdjustPropertyPanelHeight("addLouverGallerySet");
 
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
 
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
                     }
+
+
+                    IPP_LouverGalleryPropertyUCPresenter Gallery = _pp_louverGalleryPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
+                    UserControl GalleryProp = (UserControl)Gallery.GetLouverGalleryPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(GalleryProp);
+                    GalleryProp.Dock = DockStyle.Top;
+                    GalleryProp.BringToFront();
+
                     IPP_LouverBladesPropertyUCPresenter blades = _pp_louverBladesPropertyUCPresenter.CreateNewInstance(_unityC, _panelModel);
                     UserControl bladesProp = (UserControl)blades.GetIPP_LouverBladesPropertyUC();
                     _pnlPanelSpecs.Controls.Add(bladesProp);
                     bladesProp.Dock = DockStyle.Top;
                     bladesProp.BringToFront();
+
+                    IPP_LouverGallerySetPropertyUCPresenter GallerySet = _pp_louverGallerySetPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
+                    UserControl GallerySetProp = (UserControl)GallerySet.GetLouverGallerySetPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(GallerySetProp);
+                    GallerySetProp.Dock = DockStyle.Top;
+                    GallerySetProp.BringToFront();
                 }
-                
+
                 IPP_GlassPropertyUCPresenter glassPropUCP = _pp_glassPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
                 UserControl glassProp = (UserControl)glassPropUCP.GetPPGlassPropertyUC();
                 _pnlPanelSpecs.Controls.Add(glassProp);
                 glassProp.Dock = DockStyle.Top;
                 glassProp.BringToFront();
-                //glassProp.Height = 30;
 
 
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);

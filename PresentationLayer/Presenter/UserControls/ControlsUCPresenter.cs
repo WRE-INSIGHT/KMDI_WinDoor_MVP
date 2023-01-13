@@ -118,7 +118,7 @@ namespace PresentationLayer.Presenter.UserControls
                 lst_obj.Add(_controlUC.Iteration);
 
                 ctrl.DoDragDrop(lst_obj, DragDropEffects.Move);
-               // this.Lst_PanelType.Add(_controlUC.CustomText);
+                // this.Lst_PanelType.Add(_controlUC.CustomText);
             }
 
             //for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)

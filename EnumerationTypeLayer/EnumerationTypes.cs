@@ -1028,27 +1028,38 @@ namespace EnumerationTypeLayer
 
         public class ScreenType : Enumeration<ScreenType, int>
         {
-            public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
-            public static readonly ScreenType _Plisse = new ScreenType(1, "Plissé Insect Screen");
-            public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
             public static readonly ScreenType _BuiltInSideroll = new ScreenType(3, "Built-In Sideroll Insect Screen");
-            public static readonly ScreenType _Piconet = new ScreenType(4, "Piconet Insect Screen");
-            public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
             public static readonly ScreenType _ChainDriven = new ScreenType(6, "Chain Driven Screen");
-            public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
+            public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
             public static readonly ScreenType _Magnum = new ScreenType(8, "Magnum Screen");
             public static readonly ScreenType _Maxxy = new ScreenType(9, "Maxxy Screen");
+            public static readonly ScreenType _Piconet = new ScreenType(4, "Piconet Insect Screen");
+            public static readonly ScreenType _Plisse = new ScreenType(1, "Plissé Insect Screen");
+            public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
+            public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
+            public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
         }
 
+
+        public class Magnum_ScreenType : Enumeration<Magnum_ScreenType, int>
+        {
+            public static readonly Magnum_ScreenType _Single_Fixed = new Magnum_ScreenType(0, "Single Horizontal Fixed on One End");
+            public static readonly Magnum_ScreenType _Double_Fixed = new Magnum_ScreenType(1, "Double Horizontal Fixed on Both Ends");
+            public static readonly Magnum_ScreenType _Single_Central = new Magnum_ScreenType(2, "Single Horizontal Central Pack");
+
+            public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }
+
+        }
+        
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");
             public static readonly PlisseType _TR = new PlisseType(1, "Plissé TR Insect Screen");
             public static readonly PlisseType _AD = new PlisseType(2, "Plissé AD Insect Screen");
-            public static readonly PlisseType _RD = new PlisseType(3, "Plissé rd Insect Screen");
+            public static readonly PlisseType _RD = new PlisseType(3, "Plissé RD Insect Screen");
 
 
             private PlisseType(int value, string displayName) : base(value, displayName) { }
@@ -1189,6 +1200,7 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _AccesorriesCost = new BillOfMaterialsFilter(2, "Accesorries");
             public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
+            public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
         }
@@ -1231,39 +1243,45 @@ namespace EnumerationTypeLayer
 
         public class CasementSeal_ArticleNo : Enumeration<CasementSeal_ArticleNo, int>
         {
-            public static readonly CasementSeal_ArticleNo _SL31 = new CasementSeal_ArticleNo(0, "SL31");
+            public static readonly CasementSeal_ArticleNo _9040 = new CasementSeal_ArticleNo(0, "9040");
 
             private CasementSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class SealForHandle_ArticleNo : Enumeration<SealForHandle_ArticleNo, int>
         {
-            public static readonly SealForHandle_ArticleNo _AL1309 = new SealForHandle_ArticleNo(0, "AL-1309");
+            public static readonly SealForHandle_ArticleNo _WDL2 = new SealForHandle_ArticleNo(0, "WDL2");
 
             private SealForHandle_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
-
-        public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
+        public class BubbleSeal_ArticleNo : Enumeration<BubbleSeal_ArticleNo, int>
         {
-            public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
-            public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
+            public static readonly BubbleSeal_ArticleNo _SC55 = new BubbleSeal_ArticleNo(0, "SC5-5");
 
-            private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
+            private BubbleSeal_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
+
+        //public class LouverGallerySet_ArticleNo : Enumeration<LouverGallerySet_ArticleNo, int>
+        //{
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15202SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-02-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15203SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-03-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15204SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-04-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15205SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-05-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15206SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-06-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15207SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-07-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15208SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-08-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15209SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-09-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15210SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-10-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15211SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-11-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15212SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-12-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15213SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-13-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15214SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-14-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15215SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-15-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15216SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-16-S-RH-Black");
+        //    public static readonly LouverGallerySet_ArticleNo _LVRG15217SRHBlack = new LouverGallerySet_ArticleNo(0, "LVRG-152-17-S-RH-Black");
+
+        //    private LouverGallerySet_ArticleNo(int value, string displayName) : base(value, displayName) { }
+        //}
 
         public class BladeType_Option : Enumeration<BladeType_Option, int>
         {
@@ -1274,56 +1292,60 @@ namespace EnumerationTypeLayer
             private BladeType_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
-        {
-            public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
-            public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
-            public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
-            public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
-            public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
-            public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
-            public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
-            public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
-            public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
-            public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
-            public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
+        //public class BladeCombination_Option : Enumeration<BladeCombination_Option, int>
+        //{
+        //    public static readonly BladeCombination_Option _43 = new BladeCombination_Option(0, "4/3");
+        //    public static readonly BladeCombination_Option _44 = new BladeCombination_Option(1, "4/4");
+        //    public static readonly BladeCombination_Option _45 = new BladeCombination_Option(2, "4/5");
+        //    public static readonly BladeCombination_Option _46 = new BladeCombination_Option(3, "4/6");
+        //    public static readonly BladeCombination_Option _56 = new BladeCombination_Option(4, "5/6");
+        //    public static readonly BladeCombination_Option _66 = new BladeCombination_Option(5, "6/6");
+        //    public static readonly BladeCombination_Option _436 = new BladeCombination_Option(6, "4/3/6");
+        //    public static readonly BladeCombination_Option _446 = new BladeCombination_Option(7, "4/4/6");
+        //    public static readonly BladeCombination_Option _456 = new BladeCombination_Option(8, "4/5/6");
+        //    public static readonly BladeCombination_Option _466 = new BladeCombination_Option(9, "4/6/6");
+        //    public static readonly BladeCombination_Option _566 = new BladeCombination_Option(10, "5/6/6");
 
 
-            private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
-        }
+        //    private BladeCombination_Option(int value, string displayName) : base(value, displayName) { }
+        //}
 
         public class BladeHeight_Option : Enumeration<BladeHeight_Option, int>
         {
-            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(0, "150");
-            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(1, "152");
+            public static readonly BladeHeight_Option _152 = new BladeHeight_Option(0, "152");
+            public static readonly BladeHeight_Option _150 = new BladeHeight_Option(1, "150");
 
 
             private BladeHeight_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class GalleryHandle_Option : Enumeration<GalleryHandle_Option, int>
+        public class LouverHandleType_Option : Enumeration<LouverHandleType_Option, int>
         {
-            public static readonly GalleryHandle_Option _single = new GalleryHandle_Option(0, "Single");
-            public static readonly GalleryHandle_Option _dual = new GalleryHandle_Option(1, "Dual");
-            public static readonly GalleryHandle_Option _ringPullControl = new GalleryHandle_Option(3, "Ring Pull Control");
-            public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
-            public static readonly GalleryHandle_Option _none = new GalleryHandle_Option(4, "None");
+            public static readonly LouverHandleType_Option _single = new LouverHandleType_Option(0, "Single");
+            public static readonly LouverHandleType_Option _dual = new LouverHandleType_Option(1, "Dual");
+            public static readonly LouverHandleType_Option _ringPullControl = new LouverHandleType_Option(3, "Ring Pull Control");
+            //public static readonly GalleryHandle_Option _automated = new GalleryHandle_Option(4, "Automated");
+            public static readonly LouverHandleType_Option _none = new LouverHandleType_Option(4, "None");
 
-
-
-
-            private GalleryHandle_Option(int value, string displayName) : base(value, displayName) { }
+            private LouverHandleType_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class GalleryHandleLoc_Option : Enumeration<GalleryHandleLoc_Option, int>
+        public class LouverHandleLoc_Option : Enumeration<LouverHandleLoc_Option, int>
         {
-            public static readonly GalleryHandleLoc_Option _LH = new GalleryHandleLoc_Option(0, "Left Hand");
-            public static readonly GalleryHandleLoc_Option _RH = new GalleryHandleLoc_Option(1, "Right Hand");
-            public static readonly GalleryHandleLoc_Option _none = new GalleryHandleLoc_Option(2, "None");
+            public static readonly LouverHandleLoc_Option _RH = new LouverHandleLoc_Option(0, "Right Hand");
+            public static readonly LouverHandleLoc_Option _LH = new LouverHandleLoc_Option(1, "Left Hand");
+            public static readonly LouverHandleLoc_Option _none = new LouverHandleLoc_Option(2, "None");
+
+            private LouverHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
+        }
 
 
+        public class LouverColor_Option : Enumeration<LouverColor_Option, int>
+        {
+            public static readonly LouverColor_Option _black = new LouverColor_Option(0, "Black");
+            public static readonly LouverColor_Option _white = new LouverColor_Option(1, "White");
 
-            private GalleryHandleLoc_Option(int value, string displayName) : base(value, displayName) { }
+            private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }
     }
 }

@@ -25,7 +25,9 @@ namespace PresentationLayer.Views
         event EventHandler tsBtnExchangeRateClickEventRaised;
         event EventHandler cmbPlisséTypeSelectedIndexChangedEventRaised;
         event EventHandler deleteToolStripMenuClickEventRaised;
-
+        event EventHandler rdBtnDoorCheckChangeEventRaised;
+        event EventHandler rdBtnWindowCheckChangeEventRaised;
+        event EventHandler nudPlisseRdValueChangeEventRaise;
         void ShowScreemView();
 
         NumericUpDown GetNudTotalPrice();
@@ -33,6 +35,8 @@ namespace PresentationLayer.Views
         Panel GetPnlAddOns();
         Label getLblPlisse();
         ComboBox getCmbPlisse();
+        NumericUpDown getNudPlisseRd();
+        Label getLblPlisseRd();
 
     }
 }

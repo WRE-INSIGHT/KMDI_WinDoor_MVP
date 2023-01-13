@@ -44,6 +44,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_addOns = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lbl_plissedRd = new System.Windows.Forms.Label();
+            this.nud_plissedRd = new System.Windows.Forms.NumericUpDown();
             this.lbl_Plissé = new System.Windows.Forms.Label();
             this.cmb_PlisséType = new System.Windows.Forms.ComboBox();
             this.rdBtn_Door = new System.Windows.Forms.RadioButton();
@@ -74,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Sets)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_plissedRd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Factor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TotalPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Height)).BeginInit();
@@ -89,7 +92,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(702, 420);
+            this.panel2.Size = new System.Drawing.Size(824, 488);
             this.panel2.TabIndex = 29;
             // 
             // panel4
@@ -99,7 +102,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(227, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(475, 393);
+            this.panel4.Size = new System.Drawing.Size(597, 461);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
@@ -113,7 +116,7 @@
             this.dgv_Screen.Name = "dgv_Screen";
             this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Screen.Size = new System.Drawing.Size(475, 356);
+            this.dgv_Screen.Size = new System.Drawing.Size(597, 424);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
@@ -122,12 +125,12 @@
             this.cmsScreen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem});
             this.cmsScreen.Name = "cmsScreen";
-            this.cmsScreen.Size = new System.Drawing.Size(153, 48);
+            this.cmsScreen.Size = new System.Drawing.Size(107, 26);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -142,7 +145,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(475, 37);
+            this.panel3.Size = new System.Drawing.Size(597, 37);
             this.panel3.TabIndex = 29;
             // 
             // nud_Quantity
@@ -213,7 +216,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 393);
+            this.panel1.Size = new System.Drawing.Size(227, 461);
             this.panel1.TabIndex = 31;
             // 
             // pnl_addOns
@@ -221,11 +224,13 @@
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 296);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 97);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 165);
             this.pnl_addOns.TabIndex = 28;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.lbl_plissedRd);
+            this.panel5.Controls.Add(this.nud_plissedRd);
             this.panel5.Controls.Add(this.lbl_Plissé);
             this.panel5.Controls.Add(this.cmb_PlisséType);
             this.panel5.Controls.Add(this.rdBtn_Door);
@@ -249,6 +254,28 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(227, 296);
             this.panel5.TabIndex = 67;
+            // 
+            // lbl_plissedRd
+            // 
+            this.lbl_plissedRd.AutoSize = true;
+            this.lbl_plissedRd.Location = new System.Drawing.Point(12, 104);
+            this.lbl_plissedRd.Name = "lbl_plissedRd";
+            this.lbl_plissedRd.Size = new System.Drawing.Size(40, 13);
+            this.lbl_plissedRd.TabIndex = 87;
+            this.lbl_plissedRd.Text = "Panels";
+            // 
+            // nud_plissedRd
+            // 
+            this.nud_plissedRd.Location = new System.Drawing.Point(87, 100);
+            this.nud_plissedRd.Name = "nud_plissedRd";
+            this.nud_plissedRd.Size = new System.Drawing.Size(50, 22);
+            this.nud_plissedRd.TabIndex = 39;
+            this.nud_plissedRd.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_plissedRd.ValueChanged += new System.EventHandler(this.nud_plissedRd_ValueChanged);
             // 
             // lbl_Plissé
             // 
@@ -278,6 +305,7 @@
             this.rdBtn_Door.TabStop = true;
             this.rdBtn_Door.Text = "Door";
             this.rdBtn_Door.UseVisualStyleBackColor = true;
+            this.rdBtn_Door.CheckedChanged += new System.EventHandler(this.rdBtn_Door_CheckedChanged);
             // 
             // rdBtn_Window
             // 
@@ -289,6 +317,7 @@
             this.rdBtn_Window.TabStop = true;
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
+            this.rdBtn_Window.CheckedChanged += new System.EventHandler(this.rdBtn_Window_CheckedChanged);
             // 
             // btn_add
             // 
@@ -425,7 +454,7 @@
             this.tsScreen.Location = new System.Drawing.Point(0, 0);
             this.tsScreen.Name = "tsScreen";
             this.tsScreen.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.tsScreen.Size = new System.Drawing.Size(702, 27);
+            this.tsScreen.Size = new System.Drawing.Size(824, 27);
             this.tsScreen.TabIndex = 40;
             this.tsScreen.Text = "toolStrip1";
             // 
@@ -453,9 +482,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 420);
+            this.ClientSize = new System.Drawing.Size(824, 488);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimumSize = new System.Drawing.Size(840, 527);
             this.Name = "ScreenView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Screen";
@@ -472,6 +503,7 @@
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_plissedRd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Factor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_TotalPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Height)).EndInit();
@@ -519,5 +551,7 @@
         private System.Windows.Forms.Label lbl_Plissé;
         private System.Windows.Forms.ComboBox cmb_PlisséType;
         private System.Windows.Forms.ToolStripButton tsBtnExchangeRate;
+        private System.Windows.Forms.Label lbl_plissedRd;
+        private System.Windows.Forms.NumericUpDown nud_plissedRd;
     }
 }

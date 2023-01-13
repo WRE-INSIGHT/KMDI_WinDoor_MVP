@@ -405,7 +405,7 @@ namespace PresentationLayer.Presenter.UserControls
             Cladding_Count++;
 
             _dp_claddingBracketPropertyUCP.BringToFrontUC();
-
+     
             int locY = ((UserControl)_divProperties).Location.Y;
 
             _mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);

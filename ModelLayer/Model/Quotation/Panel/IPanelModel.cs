@@ -1,6 +1,7 @@
 ﻿using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -170,6 +171,8 @@ namespace ModelLayer.Model.Quotation.Panel
         LockingKit_ArticleNo Panel_LockingKitArtNo { get; set; }
         GlassType Panel_GlassType { get; set; }
 
+        string Panel_GlassType_Insu_Lami { get; set; }
+
         Striker_ArticleNo Panel_StrikerArtno_A { get; set; } //for Awning
         int Panel_StrikerQty_A { get; set; }
 
@@ -291,7 +294,8 @@ namespace ModelLayer.Model.Quotation.Panel
         RubberSeal_ArticleNo Panel_RubberSealArtNo { get; set; }
         CasementSeal_ArticleNo Panel_CasementSealArtNo { get; set; }
         SealForHandle_ArticleNo Panel_SealForHandleArtNo { get; set; }
-        LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
+        BubbleSeal_ArticleNo Panel_BubbleSealArtNo { get; set; }
+        //LouverGallerySet_ArticleNo Panel_LouvreGallerySetArtNo { get; set; }
 
         int Panel_PlantOnWeatherStripHeadWidth { get; set; }
         int Panel_PlantOnWeatherStripSealWidth { get; set; }
@@ -301,8 +305,19 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_CasementSealWidth { get; set; }
         int Panel_SealForHandleQty { get; set; }
         int Panel_LouvreGallerySetHeight { get; set; }
-
-
+        bool Panel_LouverGallerySetVisibility { get; set; }
+        BladeHeight_Option Panel_LouverBladeHeight { get; set; }
+        int Panel_LouverNumberBladesPerSet { get; set; }
+        LouverHandleType_Option Panel_LouverHandleType { get; set; }
+        LouverHandleLoc_Option Panel_LouverHandleLocation { get; set; }
+        LouverColor_Option Panel_LouverGalleryColor { get; set; }
+        bool Panel_LouverGalleryVisibility { get; set; }
+        BladeType_Option Panel_LouverBladeTypeOption { get; set; }
+        bool Panel_LouverGallerySetOptionVisibility { get; set; }
+        string Panel_LouverGallerySetOptionArtNo { get; set; }
+        int Panel_LouverGallerySetCount { get; set; }
+        List<string> Panel_LstLouverArtNo { get; set; }
+        List<int> Panel_LstSealForHandleMultiplier { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();
