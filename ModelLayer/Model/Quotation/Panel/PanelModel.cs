@@ -7016,10 +7016,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string nxt_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel + 1].Name;
                         IDividerModel nxt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name);
-
-                        if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                        if (nxt_divModel.Div_DMPanel != null)
                         {
-                            allow_adjStriker = false;
+                            if (nxt_divModel.Div_DMPanel == nxt_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
                         }
 
                         int nxt_div_indx_after_nxtPnl = Panel_Index_Inside_MPanel + 3;
@@ -7028,10 +7030,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             string nxt_div_name_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[nxt_div_indx_after_nxtPnl].Name;
                             IDividerModel nxt_divModel_after_nxtPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == nxt_div_name_after_nxtPnl);
-
-                            if (nxt_divModel_after_nxtPnl.Div_DMPanel == nxt_pnl)
+                            if (nxt_divModel_after_nxtPnl.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (nxt_divModel_after_nxtPnl.Div_DMPanel == nxt_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
 
@@ -7045,10 +7049,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         string prev_div_name = Panel_ParentMultiPanelModel.MPanelLst_Objects[Panel_Index_Inside_MPanel - 1].Name;
                         IDividerModel prev_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name);
-
-                        if (prev_divModel.Div_DMPanel == prev_pnl)
+                        if (prev_divModel.Div_DMPanel != null)
                         {
-                            allow_adjStriker = false;
+                            if (prev_divModel.Div_DMPanel == prev_pnl)
+                            {
+                                allow_adjStriker = false;
+                            }
                         }
 
                         int prev_div_indx_before_prevPnl = Panel_Index_Inside_MPanel - 3;
@@ -7057,10 +7063,12 @@ namespace ModelLayer.Model.Quotation.Panel
                         {
                             string prev_div_name_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Objects[prev_div_indx_before_prevPnl].Name;
                             IDividerModel prev_divModel_before_prevPnl = Panel_ParentMultiPanelModel.MPanelLst_Divider.Find(div => div.Div_Name == prev_div_name_before_prevPnl);
-
-                            if (prev_divModel_before_prevPnl.Div_DMPanel == prev_pnl)
+                            if (prev_divModel_before_prevPnl.Div_DMPanel != null)
                             {
-                                allow_adjStriker = false;
+                                if (prev_divModel_before_prevPnl.Div_DMPanel == prev_pnl)
+                                {
+                                    allow_adjStriker = false;
+                                }
                             }
                         }
 
