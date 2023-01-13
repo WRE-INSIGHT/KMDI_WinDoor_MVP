@@ -431,6 +431,40 @@ namespace ModelLayer.Model.Quotation.Divider
                 {
                     DivImageRenderer_Height = ht + (div_overlap * 2);
                     //DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                    if (DivImageRenderer_Zoom == 0.5f)
+                    {
+                        if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
+                        {
+                            DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+                            DivImageRenderer_Width = 13;
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+
+
+                        }
+                    }
+                    else
+                    {
+                        if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
+                        {
+                            DivImageRenderer_Width = (int)(DivImageRenderer_Zoom * Div_Width);
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+                            DivImageRenderer_Width = 26;
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+
+
+                        }
+                    }
+
+
                 }
             }
             else if (Div_Type == DividerType.Transom)
@@ -444,7 +478,40 @@ namespace ModelLayer.Model.Quotation.Divider
                 else if (DivImageRenderer_Zoom > 0.26f)
                 {
                     DivImageRenderer_Width = wd + (div_overlap * 2);
-                    //DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height); 
+                    //DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
+
+                    if (DivImageRenderer_Zoom == 0.5f)
+                    {
+                        if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
+                        {
+                            DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+                            DivImageRenderer_Height = 13;
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+
+
+                        }
+                    }
+                    else
+                    {
+                        if (Div_MPanelParent.MPanel_Parent.Name.Contains("Frame"))
+                        {
+                            DivImageRenderer_Height = (int)(DivImageRenderer_Zoom * Div_Height);
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+                            DivImageRenderer_Height = 26;
+                        }
+                        else if (Div_MPanelParent.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                        {
+
+
+                        }
+                    }
                 }
             }
         }

@@ -570,6 +570,7 @@ namespace PresentationLayer.Presenter.UserControls
                 try
                 {
                     frameUC = (UserControl)sender;
+                    Console.WriteLine(frameUC.Size.Width);
                     IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                     int propertyHeight = 0;
                     int framePropertyHeight = 0;

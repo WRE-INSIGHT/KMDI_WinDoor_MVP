@@ -1956,7 +1956,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
-
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -1975,6 +1975,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
 
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
@@ -7856,6 +7857,7 @@ namespace PresentationLayer.Presenter
                         AddConcreteList_WindoorModel(_concreteModel);
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -7921,6 +7923,7 @@ namespace PresentationLayer.Presenter
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         GetCurrentPrice();
                     }
                 }
@@ -8000,8 +8003,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        bool NewFrameSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                              frmDimension_numHt);
+                        bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                       frmDimension_numHt);
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -8043,6 +8046,7 @@ namespace PresentationLayer.Presenter
 
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                             GetCurrentPrice();
                         }
                         else
@@ -8056,8 +8060,8 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
 
-                        bool NewConcreteSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                                 frmDimension_numHt);
+                        bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                          frmDimension_numHt);
                         if (NewConcreteSizeFit)
                         {
                             int concreteID = _windoorModel.concreteIDCounter += 1;
@@ -8078,6 +8082,7 @@ namespace PresentationLayer.Presenter
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         }
                         else
                         {
@@ -8108,7 +8113,10 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
             if (_windoorModel.lst_objects.Count > 1)
+            {
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+            }
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
@@ -9636,14 +9644,14 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-        private bool CheckDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
+        private bool CheckAvailableDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
         {
             int occupiedWidth = 0,
                 occupiedHeight = 0,
                 Maxheight = 0,
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
-            bool NewBaseFlatformObjectFit = true;
+            bool isDimentionFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
@@ -9664,7 +9672,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
                         }
                         if (occupiedWidth >= _windoorModel.WD_width)
@@ -9677,7 +9685,18 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= frm.Frame_Width;
+                            if(availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += frm.Frame_Height;
+                                availableHeight -= frm.Frame_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= frm.Frame_Width;
+                            }
+                            
                         }
                     }
 
@@ -9699,7 +9718,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
 
                         }
@@ -9713,7 +9732,19 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= crtm.Concrete_Width;
+
+
+                            if (availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += crtm.Concrete_Height;
+                                availableHeight -= crtm.Concrete_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= crtm.Concrete_Width;
+                            }
                         }
                     }
 
@@ -9721,10 +9752,10 @@ namespace PresentationLayer.Presenter
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
             {
-                NewBaseFlatformObjectFit = false;
+                isDimentionFit = false;
 
             }
-            return NewBaseFlatformObjectFit;
+            return isDimentionFit;
         }
         #endregion
 

@@ -167,6 +167,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
+                Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
+                Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine();
                 multiMullionUC = (FlowLayoutPanel)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
@@ -584,9 +587,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             {
                                 DisplayWD_singleDecimalPlace = Convert.ToInt32(DisplayWD_dec_split[1]);
                             }
-                            int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
-                            int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                            suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
+
+                            if (_userModel.Department != "Sales & Operations (Costing)")
+                            {
+                                int EqualDisplayWD = (int)Math.Truncate(Convert.ToDecimal(disp_wd_decimal) / totalPanelCount);
+                                int EqualMPanelWD = ((_multiPanelModel.MPanel_Width - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                suggest_Wd = EqualMPanelWD - (EqualDisplayWD - suggest_DisplayWD);
+                            }
+                       
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -814,7 +822,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         if (_userModel.Department == "Sales & Operations (Costing)")
                         {
-                            DisplayWD_dec = Convert.ToInt32(DisplayWD_dec);
+                            DisplayWD_dec = (int)Math.Truncate(DisplayWD_dec);
                         }
                         DisplayWD_dec += displayWidthDecimal;
                         int suggest_DisplayWD = (int)Math.Truncate(DisplayWD_dec);
@@ -1079,7 +1087,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                         if (_panelModel.Panel_Placement == "Last")
                         {
-                            _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+                            //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
 
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();

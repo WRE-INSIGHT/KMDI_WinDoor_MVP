@@ -171,7 +171,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
+                Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
+                Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
                 multiTransomUC = (FlowLayoutPanel)sender;
+                Console.WriteLine();
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
                 int framePropertyHeight = 0;
@@ -527,41 +530,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
                                 mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
 
-                            string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
-                            decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
-
-                            int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
-                            int DisplayHT_singleDecimalPlace = 0;
-
-                            string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
-
-                            if (DisplayHT_dec_split.Count() > 1)
-                            {
-                                DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
-                            }
-                            #region MyRegion
-
                             //string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
-                            //decimal displayHeightDecimal = 0;
-                            //decimal displayHeight = 0;
-                            //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                            //{
-                            //    displayHeight += Convert.ToDecimal(mpnl.MPanel_DisplayHeight + "." + mpnl.MPanel_DisplayHeightDecimal);
-                            //    displayHeightDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayHeightDecimal);
-                            //}
-                            //decimal DisplayHT_dec;
-                            //if (displayHeight == 0)
-                            //{
-                            //    DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
-                            //}
-                            //else
-                            //{
-                            //    DisplayHT_dec = Math.Floor((Convert.ToDecimal(disp_ht_decimal) - displayHeight) / (totalPanelCount - _multiPanelModel.MPanelLst_MultiPanel.Count));
+                            //decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
 
-                            //}
-                            //DisplayHT_dec += displayHeightDecimal;
                             //int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
-
                             //int DisplayHT_singleDecimalPlace = 0;
 
                             //string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
@@ -570,9 +542,53 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             //{
                             //    DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
                             //}
-                            //int EqualDisplayHT = (int)Math.Truncate(Convert.ToDecimal(disp_ht_decimal) / totalPanelCount);
-                            //int EqualMPanelHT = ((_multiPanelModel.MPanel_Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
-                            //suggest_HT = EqualMPanelHT - (EqualDisplayHT - suggest_DisplayHT);
+                            #region MyRegion
+
+                            string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
+                            decimal displayHeightDecimal = 0;
+                            decimal displayHeight = 0;
+                            foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                            {
+                                displayHeight += Convert.ToDecimal(mpnl.MPanel_DisplayHeight + "." + mpnl.MPanel_DisplayHeightDecimal);
+                                displayHeightDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayHeightDecimal);
+                            }
+                            foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
+                            {
+                                displayHeight += Convert.ToDecimal(pnl.Panel_DisplayHeight + "." + pnl.Panel_DisplayHeightDecimal);
+                                displayHeightDecimal = Convert.ToDecimal("0." + pnl.Panel_DisplayHeightDecimal);
+                            }
+                            decimal DisplayHT_dec;
+                            if (displayHeight == 0)
+                            {
+                                DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
+                            }
+                            else
+                            {
+                                DisplayHT_dec = Math.Floor((Convert.ToDecimal(disp_ht_decimal) - displayHeight) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
+
+                            }
+                            if (_userModel.Department == "Sales & Operations (Costing)")
+                            {
+                                DisplayHT_dec = Convert.ToInt32(DisplayHT_dec);
+                            }
+                            DisplayHT_dec += displayHeightDecimal;
+                            int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
+
+                            int DisplayHT_singleDecimalPlace = 0;
+
+                            string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
+
+                            if (DisplayHT_dec_split.Count() > 1)
+                            {
+                                DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
+                            }
+
+                            if (_userModel.Department != "Sales & Operations (Costing)")
+                            {
+                                int EqualDisplayHT = (int)Math.Truncate(Convert.ToDecimal(disp_ht_decimal) / totalPanelCount);
+                                int EqualMPanelHT = ((_multiPanelModel.MPanel_Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
+                                suggest_HT = EqualMPanelHT - (EqualDisplayHT - suggest_DisplayHT);
+                            }
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -587,7 +603,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                                                                   suggest_HT,
                                                                                                   mpanelDisplayWidth,
                                                                                                   mpanelDisplayWidthDecimal,
-                                                                                                  mpanelDisplayHeight,
+                                                                                                  suggest_DisplayHT,
                                                                                                   DisplayHT_singleDecimalPlace,
                                                                                                   fpnl,
                                                                                                   (UserControl)_frameUCP.GetFrameUC(),
@@ -607,7 +623,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             _multiPanelModel.MPanelLst_MultiPanel.Add(mPanelModel);
                             _multiPanelModel.Reload_MultiPanelMargin();
 
-                            mPanelModel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                            mPanelModel.SetDimensionsToBind_using_ZoomPercentage();
                             mPanelModel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel_Initial();
 
                             IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPropUCP_orig.GetNewInstance(_unityC, mPanelModel, _mainPresenter);
@@ -740,6 +756,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         //int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
                         decimal displayHeightDecimal = 0;
                         decimal displayHeight = 0;
+                        foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                        {
+                            displayHeight += Convert.ToDecimal(mpnl.MPanel_DisplayHeight + "." + mpnl.MPanel_DisplayHeightDecimal);
+                            displayHeightDecimal = Convert.ToDecimal("0." + mpnl.MPanel_DisplayHeightDecimal);
+                        }
                         foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
                         {
                             displayHeight += Convert.ToDecimal(pnl.Panel_DisplayHeight + "." + pnl.Panel_DisplayHeightDecimal);
@@ -752,8 +773,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else
                         {
-                            DisplayHt_dec = Math.Floor((Convert.ToDecimal(disp_ht_decimal) - displayHeight) / (totalPanelCount - _multiPanelModel.MPanelLst_Panel.Count));
+                            DisplayHt_dec = Math.Floor((Convert.ToDecimal(disp_ht_decimal) - displayHeight) / (totalPanelCount - (_multiPanelModel.MPanelLst_Panel.Count + _multiPanelModel.MPanelLst_MultiPanel.Count)));
 
+                        }
+                        if (_userModel.Department == "Sales & Operations (Costing)")
+                        {
+                            DisplayHt_dec = Convert.ToInt32(DisplayHt_dec);
                         }
                         DisplayHt_dec += displayHeightDecimal;
                         int suggest_DisplayHT = (int)Math.Truncate(DisplayHt_dec);

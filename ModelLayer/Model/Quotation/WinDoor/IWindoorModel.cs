@@ -75,5 +75,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
         string WD_itemName { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();
+        void Fit_MyControls_ImagersToBindDimensions();
     }
 }

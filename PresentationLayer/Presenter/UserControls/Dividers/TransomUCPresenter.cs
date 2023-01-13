@@ -74,6 +74,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             try
             {
                 transomUC = (UserControl)sender;
+                Console.WriteLine("Div Heigth to bind " + _divModel.Div_HeightToBind);
+                Console.WriteLine();
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
                 int framePropertyHeight = 0;
