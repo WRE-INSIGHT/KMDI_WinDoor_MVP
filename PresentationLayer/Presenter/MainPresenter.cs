@@ -8207,16 +8207,16 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                foreach (IWindoorModel wndrm in _quotationModel.Lst_Windoor)
-                {
-                    foreach (IFrameModel frm_Clear in wndrm.lst_frame)
-                    {
-                        frm_Clear.Frame_PropertiesUC.Dispose();
-                        frm_Clear.Frame_UC.Dispose();
-                        frm_Clear.Frame_PropertiesUC = null;
-                        frm_Clear.Frame_UC = null;
-                    }
-                }
+                //foreach (IWindoorModel wndrm in _quotationModel.Lst_Windoor)
+                //{
+                //    foreach (IFrameModel frm_Clear in wndrm.lst_frame)
+                //    {
+                //        frm_Clear.Frame_PropertiesUC.Dispose();
+                //        frm_Clear.Frame_UC.Dispose();
+                //        frm_Clear.Frame_PropertiesUC = null;
+                //        frm_Clear.Frame_UC = null;
+                //    }
+                //}
 
                 //save frame
                 //Windoor_Save_UserControl();
