@@ -669,6 +669,19 @@ namespace PresentationLayer.Presenter
                 _mainView.ItemScroll = value;
             }
         }
+        private bool fileLoad;
+        public bool isFileLoad
+        {
+            get
+            {
+                return fileLoad;
+            }
+
+            set
+            {
+                fileLoad = value;
+            }
+        }
 
         #endregion
 
@@ -2098,6 +2111,7 @@ namespace PresentationLayer.Presenter
                         file_lines = File.ReadAllLines(outFile);
                         f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                         onload = true;
+                        isFileLoad = true;
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
@@ -2478,7 +2492,7 @@ namespace PresentationLayer.Presenter
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
-
+            isFileLoad = false;
             bgw.WorkerReportsProgress = true;
             bgw.WorkerSupportsCancellation = true;
             bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
@@ -2522,6 +2536,7 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                     onload = true;
+                    isFileLoad = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
@@ -2895,7 +2910,7 @@ namespace PresentationLayer.Presenter
                 {
                     Load_Windoor_Item(_windoorModel);
                 }
-                    
+                isFileLoad = false;
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -3972,6 +3987,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Panel_GlazingSpacerQty:"))
                         {
                             panel_GlazingSpacerQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_GlassType_Insu_Lami:"))
+                        {
+                            panel_GlassType_Insu_Lami = extractedValue_str;
                         }
                         else if (row_str.Contains("Panel_GlassFilm:"))
                         {
@@ -5366,7 +5385,7 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
                             pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
                             pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
-
+                            pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
                             #region Explosion
                             pnlModel.PanelGlass_ID = panel_GlassID;
                             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -7430,7 +7449,8 @@ namespace PresentationLayer.Presenter
         SlidingTypes panel_SlidingTypes;
 
         #region Explosion Properties 
-        string panel_GlassThicknessDesc;
+        string panel_GlassThicknessDesc,
+               panel_GlassType_Insu_Lami;
         float panel_GlassThickness;
         bool panel_ChkGlazingAdaptor,
              panel_SashPropertyVisibility,
