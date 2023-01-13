@@ -1239,13 +1239,12 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
                                                     // } 
                                                 }
-                                                if ((frame.Frame_Height - 5) >= 3000)
+                                                if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                                                    pnl_curCtrl.Panel_DisplayHeight >= 3200)
                                                 {
                                                     pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                 }
-
-
-
 
                                             }
 
@@ -1630,8 +1629,13 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
+                                    if (true)
+                                    {
 
-                                    if ((frame.Frame_Height - 5) >= 3000)
+                                    }
+                                    if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                        frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                                        pnl.Panel_DisplayHeight >= 3200)
                                     {
                                         pnl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                     }
@@ -2017,11 +2021,13 @@ namespace ModelLayer.Model.Quotation
         bool ChckDM = false,
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
+             // ChckColor = false,
              check1stFrame = false;
 
         string BOM_divDesc,
                HandleDesc,
-               lvrgBlades;
+               lvrgBlades,
+               ChckHandleType;
 
 
         decimal
@@ -2275,15 +2281,50 @@ namespace ModelLayer.Model.Quotation
             PlantonWeatherStripHeadPricePerMeter = 153.79m, // 892/5.8
             PlantonWeatherStripSillPricePerMeter = 190.86m, // 1107/5.8
 
-             LouvreFrameWeatherStripHeadPowderCoatingPrice = 39.9504m,// =10.15*3.28*1.2
-             LouvreFrameBottomWeatherStripPowderCoatingPrice = 36.9984m,// =9.4*3.28*1.2
-             PlantonWeatherStripHeadPowderCoatingPrice = 89.1504m,// =22.65*3.28*1.2
-             PlantonWeatherStripSillPowderCoatingPrice = 79.9008m, // =20.3*3.28*1.2
+            LouvreFrameWeatherStripHeadPowderCoatingPrice = 39.9504m,// =10.15*3.28*1.2
+            LouvreFrameBottomWeatherStripPowderCoatingPrice = 36.9984m,// =9.4*3.28*1.2
+            PlantonWeatherStripHeadPowderCoatingPrice = 89.1504m,// =22.65*3.28*1.2
+            PlantonWeatherStripSillPowderCoatingPrice = 79.9008m, // =20.3*3.28*1.2
 
             BubbleSealPricePerMeter = 57.00m,
             GalleryAdaptorPricePerMeter = 63.97m,
 
             forex = 55m,
+
+            GalleryPrice_2blades_usingSingleHandle = 327.00m,
+            GalleryPrice_3blades_usingSingleHandle = 529.00m,
+            GalleryPrice_4blades_usingSingleHandle = 671.00m,
+            GalleryPrice_5blades_usingSingleHandle = 834.00m,
+            GalleryPrice_6blades_usingSingleHandle = 983.00m,
+            GalleryPrice_7blades_usingSingleHandle = 1217.00m,
+            GalleryPrice_8blades_usingSingleHandle = 1360.00m,
+            GalleryPrice_9blades_usingSingleHandle = 1505.00m,
+            GalleryPrice_10blades_usingSingleHandle = 1662.00m,
+            GalleryPrice_11blades_usingSingleHandle = 1820.00m,
+            GalleryPrice_12blades_usingSingleHandle = 1963.00m,
+            GalleryPrice_13blades_usingSingleHandle = 2203.00m,
+            GalleryPrice_14blades_usingSingleHandle = 2349.00m,
+            GalleryPrice_15blades_usingSingleHandle = 2489.00m,
+            GalleryPrice_16blades_usingSingleHandle = 2651.00m,
+            GalleryPrice_17blades_usingSingleHandle = 2810.00m,
+
+            GalleryPrice_2blades_usingDualHandleOrRingpullHandle = 422.00m,
+            GalleryPrice_3blades_usingDualHandleOrRingpullHandle = 579.00m,
+            GalleryPrice_4blades_usingDualHandleOrRingpullHandle = 721.00m,
+            GalleryPrice_5blades_usingDualHandleOrRingpullHandle = 884.00m,
+            GalleryPrice_6blades_usingDualHandleOrRingpullHandle = 1033.00m,
+            GalleryPrice_7blades_usingDualHandleOrRingpullHandle = 1317.00m,
+            GalleryPrice_8blades_usingDualHandleOrRingpullHandle = 1460.00m,
+            GalleryPrice_9blades_usingDualHandleOrRingpullHandle = 1605.00m,
+            GalleryPrice_10blades_usingDualHandleOrRingpullHandle = 1762.00m,
+            GalleryPrice_11blades_usingDualHandleOrRingpullHandle = 1920.00m,
+            GalleryPrice_12blades_usingDualHandleOrRingpullHandle = 2063.00m,
+            GalleryPrice_13blades_usingDualHandleOrRingpullHandle = 2303.00m,
+            GalleryPrice_14blades_usingDualHandleOrRingpullHandle = 2449.00m,
+            GalleryPrice_15blades_usingDualHandleOrRingpullHandle = 2649.00m,
+            GalleryPrice_16blades_usingDualHandleOrRingpullHandle = 2811.00m,
+            GalleryPrice_17blades_usingDualHandleOrRingpullHandle = 2970.00m,
+
 
             LouvreFrameWeatherStripHeadPrice,
             LouvreFrameBottomWeatherStripPrice,
@@ -2291,6 +2332,13 @@ namespace ModelLayer.Model.Quotation
             PlantonWeatherStripSillPrice,
             BubbleSealPrice,
             GalleryAdaptorPrice,
+            GalleryPrice,
+            GlassBladePrice,
+
+            MillFinishCost,
+            PowderCoatedWhiteIvoryCost,
+            TwoSideFoiledWoodGrainCost,
+            OneSidedFoiledCost,
         #endregion
 
                 BrushSealPricePerLinearMeter = 15.80m,
@@ -2302,6 +2350,8 @@ namespace ModelLayer.Model.Quotation
                 SealantPricePerCan,
                 SealantPrice,
                 PUFoamingPrice,
+
+                LouverCost,
 
                 MaterialCostBreakDownBase,
 
@@ -3374,7 +3424,9 @@ namespace ModelLayer.Model.Quotation
                                                 SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                             }
 
-                                            if ((fr.Frame_Height - 5) >= 3000)
+                                            if (fr.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                                fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                                                pnl.Panel_DisplayHeight >= 3000)
                                             {
                                                 AluminumPullHandlePrice = ((pnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                             }
@@ -4253,7 +4305,9 @@ namespace ModelLayer.Model.Quotation
                                         SealingBlockPrice += 2 * SealingBlockPricePerPiece;
                                     }
 
-                                    if ((fr.Frame_Height - 5) >= 3000)
+                                    if (fr.Frame_Type == FrameModel.Frame_Padding.Door &&
+                                        fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                                        Singlepnl.Panel_DisplayHeight >= 3000)
                                     {
                                         AluminumPullHandlePrice = ((Singlepnl.Panel_SashHeight - 5) / 1000m) * AluminumPullHandlePricePerLinearMeter;
                                     }
@@ -4875,42 +4929,220 @@ namespace ModelLayer.Model.Quotation
                                     foreach (string lvrgArtNo in Singlepnl.Panel_LstLouverArtNo)
                                     {
 
+                                        if (lvrgArtNo.Contains("-S-"))
+                                        {
+                                            ChckHandleType = "single";
+                                        }
+                                        else if (lvrgArtNo.Contains("-D-") ||
+                                                 lvrgArtNo.Contains("-R-"))
+                                        {
+                                            ChckHandleType = "dualORringpull";
+                                        }
+
+
+
                                         lvrgBlades = lvrgArtNo.Replace("150", string.Empty);
                                         lvrgBlades = lvrgArtNo.Replace("152", string.Empty);
                                         lvrgBlades = Regex.Match(lvrgBlades, @"\d+").Value;
 
+                                        #region Gallery
+                                        if (ChckHandleType == "single")
+                                        {
+                                            if (Convert.ToInt32(lvrgBlades) == 2)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 3)
+                                            {
+                                                GalleryPrice += GalleryPrice_3blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 4)
+                                            {
+                                                GalleryPrice += GalleryPrice_4blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 5)
+                                            {
+                                                GalleryPrice += GalleryPrice_5blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 6)
+                                            {
+                                                GalleryPrice += GalleryPrice_6blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 7)
+                                            {
+                                                GalleryPrice += GalleryPrice_7blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 8)
+                                            {
+                                                GalleryPrice += GalleryPrice_8blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 9)
+                                            {
+                                                GalleryPrice += GalleryPrice_9blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 10)
+                                            {
+                                                GalleryPrice += GalleryPrice_10blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 11)
+                                            {
+                                                GalleryPrice += GalleryPrice_11blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 12)
+                                            {
+                                                GalleryPrice += GalleryPrice_12blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 13)
+                                            {
+                                                GalleryPrice += GalleryPrice_13blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 14)
+                                            {
+                                                GalleryPrice += GalleryPrice_14blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 15)
+                                            {
+                                                GalleryPrice += GalleryPrice_15blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 16)
+                                            {
+                                                GalleryPrice += GalleryPrice_16blades_usingSingleHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 17)
+                                            {
+                                                GalleryPrice += GalleryPrice_17blades_usingSingleHandle;
+                                            }
+                                        }
+                                        else if (ChckHandleType == "dualORringpull")
+                                        {
+                                            if (Convert.ToInt32(lvrgBlades) == 2)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 3)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 4)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 5)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 6)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 7)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 8)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 9)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 10)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 11)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 12)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 13)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 14)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 15)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 16)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                            else if (Convert.ToInt32(lvrgBlades) == 17)
+                                            {
+                                                GalleryPrice += GalleryPrice_2blades_usingDualHandleOrRingpullHandle;
+                                            }
+                                        }
+
+
+
+
+                                        #endregion
 
                                         #region Glass 
                                         if (Singlepnl.Panel_GlassThickness >= 6.0f)
                                         {
+                                            if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
+                                            {
+
+                                            }
+                                            else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                                            {
+                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                                BladeUsagePerPieceOfAluminum = (Singlepnl.Panel_Width / 1); // 1= # of panels
+
+                                                if (BladeUsagePerPieceOfAluminum < 800)
+                                                {
+                                                    BladeUsagePerPieceOfAluminumCount = 8;
+                                                }
+                                                else if (BladeUsagePerPieceOfAluminum > 800)
+                                                {
+                                                    BladeUsagePerPieceOfAluminumCount = 6;
+                                                }
+
+                                                OneSidedFoiledCost += 698.40m * forex;
+                                                PowderCoatedWhiteIvoryCost += 551.77m * forex;
+                                                TwoSideFoiledWoodGrainCost += 926.47m * forex;
+                                                MillFinishCost += 191.21m * forex;
+                                                //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                            }
+
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                             {
                                                 if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                                 {
-                                                    GlassPrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
                                                 }
                                                 else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tinted"))
                                                 {
-                                                    GlassPrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
                                                 }
                                             }
                                             else
                                             {
                                                 if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                                 {
-                                                    GlassPrice += ((191.21m * forex) / 40) * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += ((191.21m * forex) / 40) * Convert.ToInt32(lvrgBlades);
+
                                                 }
                                                 else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
                                                 {
-                                                    GlassPrice += ((286.81m * forex) / 40) * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += ((286.81m * forex) / 40) * Convert.ToInt32(lvrgBlades);
                                                 }
                                                 else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
                                                 {
-                                                    GlassPrice += ((262.91m * forex) / 40) * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += ((262.91m * forex) / 40) * Convert.ToInt32(lvrgBlades);
                                                 }
                                                 else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                                 {
-                                                    GlassPrice += ((215.11m * forex) / 40) * Convert.ToInt32(lvrgBlades);
+                                                    GlassBladePrice += ((215.11m * forex) / 40) * Convert.ToInt32(lvrgBlades);
                                                 }
                                             }
 
@@ -5061,17 +5293,22 @@ namespace ModelLayer.Model.Quotation
                                    Math.Round(DMReinforcementPrice, 2) +
                                    Math.Round(SealantPrice, 2) +
                                    Math.Round(PUFoamingPrice, 2) +
-                                   Math.Round(LouvreFrameWeatherStripHeadPrice, 2) +
-                                   Math.Round(LouvreFrameBottomWeatherStripPrice, 2) +
-                                   Math.Round(PlantonWeatherStripHeadPrice, 2) +
-                                   Math.Round(PlantonWeatherStripSillPrice, 2) +
-                                   Math.Round(GalleryAdaptorPrice, 2) +
-                                   Math.Round(BubbleSealPrice, 2) +
                                    Math.Round(FittingAndSuppliesCost, 2) +
                                    Math.Round(AncillaryProfileCost, 2) +
                                    Math.Round(AccesorriesCost, 2);
 
                     MaterialCostBreakDownBase = MaterialCost;
+
+                    LouverCost = Math.Round(LouvreFrameWeatherStripHeadPrice, 2) +
+                                 Math.Round(LouvreFrameBottomWeatherStripPrice, 2) +
+                                 Math.Round(PlantonWeatherStripHeadPrice, 2) +
+                                 Math.Round(PlantonWeatherStripSillPrice, 2) +
+                                 Math.Round(GalleryAdaptorPrice, 2) +
+                                 Math.Round(BubbleSealPrice, 2) +
+                                 Math.Round(GlassBladePrice, 2) +
+                                 Math.Round(GalleryPrice, 2);
+
+                    LouverCost = LouverCost * PricingFactor * 1.12m; //1.12vat
 
                     MaterialCost = MaterialCost +
                                    (MaterialCost * 0.05m) +
@@ -5086,6 +5323,8 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(FilmPrice, 2);
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
+
+                    TotaPrice = TotaPrice + LouverCost;
 
                     CurrentPrice = TotaPrice;
 
@@ -5150,6 +5389,13 @@ namespace ModelLayer.Model.Quotation
                                             Math.Round(InstallationCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
                                             Math.Round((InstallationCost * PricingFactor) + InstallationCost, 2).ToString("N", new CultureInfo("en-US")),
                                             "Price Break Down");
+
+                        Price_List.Rows.Add("Louver Material Cost",
+                                        "",
+                                        Math.Round(LouverCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(LouverCost * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                        Math.Round((LouverCost * PricingFactor) + LouverCost, 2).ToString("N", new CultureInfo("en-US")),
+                                        "Price Break Down");
 
                         Price_List.Rows.Add("Glass",
                                             "",
@@ -5249,48 +5495,6 @@ namespace ModelLayer.Model.Quotation
                                            "",
                                            "",
                                            "Material Cost");
-
-                        Price_List.Rows.Add("Louvre Frame Weather Strip Head Price",
-                                         LouvreFrameWeatherStripHeadPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
-
-                        Price_List.Rows.Add("Louvre Frame Bottom Weather Strip Price",
-                                         LouvreFrameBottomWeatherStripPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
-
-                        Price_List.Rows.Add("Plant on Weather Strip Head Price",
-                                         PlantonWeatherStripHeadPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(PlantonWeatherStripHeadPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
-
-                        Price_List.Rows.Add("Plant on Weather Strip Sill Price",
-                                         PlantonWeatherStripSillPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(PlantonWeatherStripSillPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
-
-                        Price_List.Rows.Add("Bubble Seal Price",
-                                         BubbleSealPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(BubbleSealPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
-
-                        Price_List.Rows.Add("Gallery Adaptor Price",
-                                         GalleryAdaptorPricePerMeter.ToString("N", new CultureInfo("en-US")),
-                                         Math.Round(GalleryAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                         "",
-                                         "",
-                                         "Material Cost");
 
                         Price_List.Rows.Add("Sealant Price",
                                            SealantPricePerCan.ToString("N", new CultureInfo("en-US")),
@@ -5708,6 +5912,73 @@ namespace ModelLayer.Model.Quotation
                                          "",
                                          "",
                                          "Fitting and Supplies");
+                        #endregion
+
+                        #region Louver Material Cost
+
+                        Price_List.Rows.Add("Louvre Frame Weather Strip Head Price",
+                                        LouvreFrameWeatherStripHeadPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                        Math.Round(LouvreFrameWeatherStripHeadPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Louver Material Cost");
+
+                        Price_List.Rows.Add("Louvre Frame Bottom Weather Strip Price",
+                                         LouvreFrameBottomWeatherStripPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(LouvreFrameBottomWeatherStripPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Louver Material Cost");
+
+                        Price_List.Rows.Add("Plant on Weather Strip Head Price",
+                                         PlantonWeatherStripHeadPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(PlantonWeatherStripHeadPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Louver Material Cost");
+
+                        Price_List.Rows.Add("Plant on Weather Strip Sill Price",
+                                         PlantonWeatherStripSillPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(PlantonWeatherStripSillPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Louver Material Cost");
+
+                        Price_List.Rows.Add("Bubble Seal Price",
+                                         BubbleSealPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(BubbleSealPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Louver Material Cost");
+
+                        Price_List.Rows.Add("Gallery Adaptor Price",
+                                         GalleryAdaptorPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                                         Math.Round(GalleryAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                         "",
+                                         "",
+                                         "Louver Material Cost");
+
+                        Price_List.Rows.Add("Blade Price",
+                                        "",
+                                        Math.Round(GlassBladePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Louver Material Cost");
+
+                        Price_List.Rows.Add("Gallery Adaptor Price",
+                                        "",
+                                        Math.Round(GalleryPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                        "",
+                                        "",
+                                        "Louver Material Cost");
+
+                        Price_List.Rows.Add("Total Price",
+                                       "",
+                                       Math.Round(LouverCost, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Louver Material Cost");
+
                         #endregion
 
                         var query = from r in Price_List.AsEnumerable()

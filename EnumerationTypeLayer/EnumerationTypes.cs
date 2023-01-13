@@ -1203,6 +1203,7 @@ namespace EnumerationTypeLayer
             public static readonly BillOfMaterialsFilter _AccesorriesCost = new BillOfMaterialsFilter(2, "Accesorries");
             public static readonly BillOfMaterialsFilter _AncillaryProfileCost = new BillOfMaterialsFilter(3, "Ancillary Profile");
             public static readonly BillOfMaterialsFilter _FittingAndSuppliesCost = new BillOfMaterialsFilter(4, "Fitting and Supplies");
+            public static readonly BillOfMaterialsFilter _LouverCost = new BillOfMaterialsFilter(5, "Louver Material Cost");
 
             private BillOfMaterialsFilter(int value, string displayName) : base(value, displayName) { }
         }
