@@ -7466,7 +7466,52 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
                                             {
+                                               
+                                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                                {
+                                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    {
+                                                        GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    }
+                                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tinted"))
+                                                    {
+                                                        GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    decimal BladeUsagePerPieceOfGlass = 0, BladeUsagePerPieceOfGlassCount = 0, BladeGlassMultiplier = 0;
 
+                                                    BladeUsagePerPieceOfGlass = (Singlepnl.Panel_Width / 1);
+
+                                                    if (BladeUsagePerPieceOfGlass < 800)
+                                                    {
+                                                        BladeUsagePerPieceOfGlassCount = 3;
+                                                    }
+                                                    else if (BladeUsagePerPieceOfGlass > 800)
+                                                    {
+                                                        BladeUsagePerPieceOfGlassCount = 2;
+                                                    }
+
+                                                    BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
+
+                                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    {
+                                                        GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
+                                                    {
+                                                        GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
+                                                    {
+                                                        GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
+                                                    {
+                                                        GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                }
                                             }
                                             else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                             {
@@ -7488,39 +7533,6 @@ namespace ModelLayer.Model.Quotation
                                                 MillFinishCost += 191.21m * forex;
                                                 //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
                                             }
-
-                                            if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                            {
-                                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
-                                                {
-                                                    GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
-                                                }
-                                                else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tinted"))
-                                                {
-                                                    GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
-                                                {
-                                                    GlassBladePrice += ((191.21m * forex) / 40) * Convert.ToInt32(lvrgBlades);
-
-                                                }
-                                                else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
-                                                {
-                                                    GlassBladePrice += ((286.81m * forex) / 40) * Convert.ToInt32(lvrgBlades);
-                                                }
-                                                else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
-                                                {
-                                                    GlassBladePrice += ((262.91m * forex) / 40) * Convert.ToInt32(lvrgBlades);
-                                                }
-                                                else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
-                                                {
-                                                    GlassBladePrice += ((215.11m * forex) / 40) * Convert.ToInt32(lvrgBlades);
-                                                }
-                                            }
-
                                         }
                                         else if (Singlepnl.Panel_GlassThickness >= 6.0f &&
                                             Singlepnl.Panel_GlassThickness <= 9.0f)
@@ -8341,7 +8353,7 @@ namespace ModelLayer.Model.Quotation
                                         "",
                                         "Louver Material Cost");
 
-                        Price_List.Rows.Add("Gallery Adaptor Price",
+                        Price_List.Rows.Add("Gallery Price",
                                         "",
                                         Math.Round(GalleryPrice, 2).ToString("N", new CultureInfo("en-US")),
                                         "",

@@ -1,13 +1,7 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CommonComponents;
 using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
@@ -79,8 +73,11 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             lbl_GlassThicknessDesc.DataBindings.Add(ModelBinding["Panel_GlassThicknessDesc"]);
             chk_GlazingAdaptor.DataBindings.Add(ModelBinding["Panel_ChkGlazingAdaptor"]);
             this.DataBindings.Add(ModelBinding["Panel_GlassPropertyHeight"]);
+            pnl_GlazingBeadArtNo.DataBindings.Add(ModelBinding["Panel_GlassPnlGlazingBeadVisibility"]);
+            pnl_GlazingAdaptor.DataBindings.Add(ModelBinding["Panel_GlassPnlGlazingAdaptorVisibility"]);
+
         }
 
-        
+
     }
 }

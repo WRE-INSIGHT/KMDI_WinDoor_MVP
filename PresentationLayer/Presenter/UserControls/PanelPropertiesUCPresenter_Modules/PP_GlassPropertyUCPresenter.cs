@@ -124,6 +124,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             binding.Add("Panel_GlassThicknessDesc", new Binding("Text", _panelModel, "Panel_GlassThicknessDesc", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_GlassPropertyHeight", new Binding("Height", _panelModel, "Panel_GlassPropertyHeight", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_ChkGlazingAdaptor", new Binding("Checked", _panelModel, "Panel_ChkGlazingAdaptor", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_GlassPnlGlazingBeadVisibility", new Binding("Visible", _panelModel, "Panel_GlassPnlGlazingBeadVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_GlassPnlGlazingAdaptorVisibility", new Binding("Visible", _panelModel, "Panel_GlassPnlGlazingAdaptorVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

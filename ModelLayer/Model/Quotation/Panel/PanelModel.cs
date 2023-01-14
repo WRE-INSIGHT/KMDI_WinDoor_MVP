@@ -927,6 +927,34 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private bool _panelGlassPnlGlazingBeadVisibility;
+        public bool Panel_GlassPnlGlazingBeadVisibility
+        {
+            get
+            {
+                return _panelGlassPnlGlazingBeadVisibility;
+            }
+            set
+            {
+                _panelGlassPnlGlazingBeadVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panelGlassPnlGlazingAdaptorVisibility;
+        public bool Panel_GlassPnlGlazingAdaptorVisibility
+        {
+            get
+            {
+                return _panelGlassPnlGlazingAdaptorVisibility;
+            }
+            set
+            {
+                _panelGlassPnlGlazingAdaptorVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private SashProfile_ArticleNo _panelSashProfileArtNo;
         public SashProfile_ArticleNo Panel_SashProfileArtNo
         {
@@ -4776,6 +4804,15 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_PropertyHeight -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
             }
+            else if (mode == "addLouverGlassDeduction")
+            {
+                Panel_PropertyHeight += constants.panel_property_LouverGlassheightDeduction;
+            }
+            else if (mode == "minusLouverGlassDeduction")
+            {
+                Panel_PropertyHeight -= constants.panel_property_LouverGlassheightDeduction;
+            }
+
         }
 
         public void AdjustMotorizedPropertyHeight(string mode)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Modules
 {
@@ -24,10 +25,17 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void SubscribeToEventSetUp()
         {
             _louverGalleryPropertyUC.LouverBladesCombinationPropertyUCLoadEventRaised += _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised;
+            _louverGalleryPropertyUC.cmbBladeTypeSelectedValueChangedEventRaised += _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised;
+        }
+
+        private void _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _panelModel.Panel_LouverBladeTypeOption = (BladeType_Option)((ComboBox)sender).SelectedValue;
         }
 
         private void _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            _panelModel.Panel_LouverBladeTypeOption = BladeType_Option._glass;
             _louverGalleryPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
@@ -57,7 +65,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Panel_LouverGalleryVisibility", new Binding("Visible", _panelModel, "Panel_LouverGalleryVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_LouverBladeTypeOption", new Binding("Text", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverBladeTypeOption", new Binding("TEXT", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

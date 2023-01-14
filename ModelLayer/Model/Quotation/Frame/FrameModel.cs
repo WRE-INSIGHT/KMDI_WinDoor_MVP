@@ -1226,6 +1226,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     FrameProp_Height -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
                 }
+                else if (mode == "addLouverGlassDeduction")
+                {
+                    FrameProp_Height += constants.panel_property_LouverGlassheightDeduction;
+                }
+                else if (mode == "minusLouverGlassDeduction")
+                {
+                    FrameProp_Height -= constants.panel_property_LouverGlassheightDeduction;
+                }
             }
             else if (objtype == "Div")
             {

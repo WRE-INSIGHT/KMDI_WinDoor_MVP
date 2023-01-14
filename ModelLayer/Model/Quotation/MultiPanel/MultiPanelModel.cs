@@ -3471,6 +3471,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_LouverGallerySetArtNoOptionsheight;
                 }
+                else if (mode == "addLouverGlassDeduction")
+                {
+                    MPanelProp_Height += constants.panel_property_LouverGlassheightDeduction;
+                }
+                else if (mode == "minusLouverGlassDeduction")
+                {
+                    MPanelProp_Height -= constants.panel_property_LouverGlassheightDeduction;
+                }
             }
             else if (objtype == "Div")
             {

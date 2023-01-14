@@ -660,6 +660,7 @@ namespace PresentationLayer.Presenter.UserControls
                     GalleryProp.Dock = DockStyle.Top;
                     GalleryProp.BringToFront();
 
+
                     IPP_LouverBladesPropertyUCPresenter blades = _pp_louverBladesPropertyUCPresenter.CreateNewInstance(_unityC, _panelModel);
                     UserControl bladesProp = (UserControl)blades.GetIPP_LouverBladesPropertyUC();
                     _pnlPanelSpecs.Controls.Add(bladesProp);
@@ -678,6 +679,28 @@ namespace PresentationLayer.Presenter.UserControls
                 _pnlPanelSpecs.Controls.Add(glassProp);
                 glassProp.Dock = DockStyle.Top;
                 glassProp.BringToFront();
+
+                if (_panelModel.Panel_Type.Contains("Louver") == true)
+                {
+                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
+                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
+                    // _panelModel.Panel_GlassPropertyHeight = 99;
+
+                    _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+                    }
+                }
+                else
+                {
+                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
+                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
+                    //_panelModel.Panel_GlassPropertyHeight = 153;
+                }
 
 
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);

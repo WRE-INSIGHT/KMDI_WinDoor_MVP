@@ -90,6 +90,8 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_GlassPropertyHeight { get; set; }
         int Panel_GlazingSpacerQty { get; set; }
         GlassFilm_Types Panel_GlassFilm { get; set; }
+        bool Panel_GlassPnlGlazingBeadVisibility { get; set; }
+        bool Panel_GlassPnlGlazingAdaptorVisibility { get; set; }
         bool Panel_SashPropertyVisibility { get; set; }
         SashProfile_ArticleNo Panel_SashProfileArtNo { get; set; }
         SashReinf_ArticleNo Panel_SashReinfArtNo { get; set; }

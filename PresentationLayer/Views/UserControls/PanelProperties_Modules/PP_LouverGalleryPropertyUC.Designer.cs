@@ -57,6 +57,7 @@
             this.cmb_BladeType.Name = "cmb_BladeType";
             this.cmb_BladeType.Size = new System.Drawing.Size(72, 21);
             this.cmb_BladeType.TabIndex = 5;
+            this.cmb_BladeType.SelectedValueChanged += new System.EventHandler(this.cmb_BladeType_SelectedValueChanged);
             // 
             // label1
             // 

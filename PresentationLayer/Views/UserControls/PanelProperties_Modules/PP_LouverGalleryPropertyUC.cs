@@ -14,8 +14,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
 
         public event EventHandler LouverBladesCombinationPropertyUCLoadEventRaised;
-
-
+        public event EventHandler cmbBladeTypeSelectedValueChangedEventRaised;
 
         private void PP_LouverBladesCombinationPropertyUC_Load(object sender, EventArgs e)
         {
@@ -29,10 +28,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
             EventHelpers.RaiseEvent(sender, LouverBladesCombinationPropertyUCLoadEventRaised, e);
         }
 
+        private void cmb_BladeType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cmbBladeTypeSelectedValueChangedEventRaised, e);
+
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverGalleryVisibility"]);
             cmb_BladeType.DataBindings.Add(ModelBinding["Panel_LouverBladeTypeOption"]);
         }
+
+
     }
 }
