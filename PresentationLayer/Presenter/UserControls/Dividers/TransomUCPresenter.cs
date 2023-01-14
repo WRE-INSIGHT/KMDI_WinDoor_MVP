@@ -351,7 +351,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel2MinHT >= 30)
                             {
-                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Height++;
@@ -539,6 +538,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                             _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            _mainPresenter.GetCurrentPrice();
+
                         }
                         break;
                     case Keys.Up:
@@ -556,7 +557,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel1MinHT >= 30)
                             {
-                                _mainPresenter.SetChangesMark();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Height--;
@@ -747,6 +747,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                             _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            _mainPresenter.GetCurrentPrice();
+
                         }
                         break;
                 }
@@ -969,7 +971,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     {
                         if (expected_Panel1MinHT >= 30 && expected_Panel2MinHT >= 30)
                         {
-                            _mainPresenter.SetChangesMark();
                             transom_movement = (e.Y - _point_of_origin.Y);
 
                             if (prev_ctrl is IMultiPanelUC)
@@ -1157,6 +1158,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     }
                     _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                    _mainPresenter.GetCurrentPrice();
+
                 }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
