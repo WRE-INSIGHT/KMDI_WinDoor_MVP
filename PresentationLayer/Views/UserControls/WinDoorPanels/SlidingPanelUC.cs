@@ -96,6 +96,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler bothToolStripClickedEventRaised;
         public event EventHandler noneToolStripClickedEventRaised;
         public event MouseEventHandler slidingPanelUCMouseClickEventRaised;
+        public event MouseEventHandler slidingPanelUCMouseDoubleClickedEventRaised;
+        public event KeyEventHandler slidingPanelUCKeyDownEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -194,6 +196,30 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseMouseEvent(this, slidingPanelUCMouseUpEventRaised, e);
         }
 
-       
+        private void SlidingPanelUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, slidingPanelUCMouseDoubleClickedEventRaised, e);
+        }
+
+        private void SlidingPanelUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, slidingPanelUCKeyDownEventRaised, e);
+        }
+
+        public void FocusOnThis()
+        {
+            this.Focus();
+        }
+
+        private void SlidingPanelUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
     }
 }

@@ -1601,13 +1601,18 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
                 else if (MPanel_Zoom == 0.50f)
                 {
-                    decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
-                    decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                    wd = Convert.ToInt32(wd_dec);
+                    //decimal wd_flt_convert_dec = Convert.ToDecimal(MPanel_Width * MPanel_Zoom);
+                    //decimal wd_dec = decimal.Round(wd_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                    //wd = Convert.ToInt32(wd_dec);
 
-                    decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
-                    decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
-                    ht = Convert.ToInt32(ht_dec);
+                    //decimal ht_flt_convert_dec = Convert.ToDecimal(MPanel_Height * MPanel_Zoom);
+                    //decimal ht_dec = decimal.Round(ht_flt_convert_dec / 2, 0, MidpointRounding.AwayFromZero) * 2;
+                    //ht = Convert.ToInt32(ht_dec);
+
+                    wd = Convert.ToInt32(MPanel_Width * MPanel_Zoom);
+
+                    ht = Convert.ToInt32(MPanel_Height * MPanel_Zoom);
+                  
                 }
                 else if (MPanel_Zoom == 1.0f)
                 {

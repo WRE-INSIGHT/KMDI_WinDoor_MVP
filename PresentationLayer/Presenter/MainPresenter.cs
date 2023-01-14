@@ -1591,7 +1591,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
+                _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
 
                 //save frame
                 Windoor_Save_UserControl();
@@ -9348,8 +9348,87 @@ namespace PresentationLayer.Presenter
             }
 
         }
-
+        ISlidingPanelUCPresenter current_sliding;
+        ICasementPanelUCPresenter current_casement;
+        IFixedPanelUCPresenter current_fixed;
+        public void SetSelectedPanel(IPanelModel panelModel, 
+                                     ISlidingPanelUCPresenter slidingPanelUCPresenter = null,
+                                     ICasementPanelUCPresenter casementPanelUCPresenter = null,
+                                     IFixedPanelUCPresenter fixedPanelUCPresenter = null)
+        {
+            _tsLblStatus.Visible = true;
+            _tsLblStatus.Text = panelModel.Panel_Name + " Selected";
+            if (slidingPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else  if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                slidingPanelUCPresenter.boolKeyDown = true;
+                slidingPanelUCPresenter.FocusOnThisSlidingPanel();
+                current_sliding = slidingPanelUCPresenter;
+            }
+            else if (casementPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                casementPanelUCPresenter.boolKeyDown = true;
+                casementPanelUCPresenter.FocusOnThisCasementPanel();
+                current_casement = casementPanelUCPresenter;
+            }
+            else if (fixedPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                fixedPanelUCPresenter.boolKeyDown = true;
+                fixedPanelUCPresenter.FocusOnThisFixedPanel();
+                current_fixed = fixedPanelUCPresenter;
+            }
+        }
         public void DeselectDivider()
+        {
+            _mainView.GetLblSelectedDivider().Visible = false;
+            _mainView.GetLblSelectedDivider().Text = "";
+            _mainView.SetActiveControl(null);
+        }
+        public void DeselectPanel()
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
@@ -9495,7 +9574,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        private List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
+        public List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
         {
             List<IMultiPanelModel> lst_MPanel = new List<IMultiPanelModel>();
             if (frmModel.Lst_MultiPanel.Count > 0)
@@ -9993,6 +10072,9 @@ namespace PresentationLayer.Presenter
             }
             return isDimentionFit;
         }
+
+       
+
         #endregion
 
     }

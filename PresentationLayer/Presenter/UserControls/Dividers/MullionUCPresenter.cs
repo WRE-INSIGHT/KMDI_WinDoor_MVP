@@ -344,7 +344,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel1MinWd >= 30)
                             {
-                                _mainPresenter.SetChangesMark();
+                                _mainPresenter.GetCurrentPrice();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Width--;
@@ -546,7 +546,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                             if (expected_Panel2MinWd >= 30)
                             {
-                                _mainPresenter.SetChangesMark();
+                                _mainPresenter.GetCurrentPrice();
                                 if (prev_ctrl is IMultiPanelUC)
                                 {
                                     prev_mpanel.MPanel_Width++;
@@ -952,7 +952,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                     {
                         if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                         {
-                            _mainPresenter.SetChangesMark();
+                            _mainPresenter.GetCurrentPrice();
                             mullion_movement = (e.X - _point_of_origin.X);
 
                             if (prev_ctrl is IMultiPanelUC)

@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface ISlidingPanelUCPresenter
     {
         ISlidingPanelUC GetSlidingPanelUC();
+        bool boolKeyDown { set; }
         ISlidingPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                 IPanelModel panelModel,
                                                 IFrameModel frameModel,
@@ -30,5 +31,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 IMultiPanelTransomUCPresenter multiPanelTransomUCP,
                                                 IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
         void SetInitialLoadFalse();
+        void FocusOnThisSlidingPanel();
     }
 }

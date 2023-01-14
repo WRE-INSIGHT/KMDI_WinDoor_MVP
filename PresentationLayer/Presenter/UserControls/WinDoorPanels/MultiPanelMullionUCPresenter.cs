@@ -677,10 +677,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     //    _multiPanelModel.Fit_MyControls_Dimensions();
 
                                     //}
+                                    if (_multiPanelModel.MPanel_ParentModel != null)
+                                    {
+
+                                        if (_multiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame"))
+                                        {
+                                            _frameModel.Lst_MultiPanel = _mainPresenter.Arrange_Frame_MultiPanelModel(_frameModel);
+                                        }
+                                    }
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
+                                   
                                 }
                                 else if (mPanelModel.MPanel_Placement != "Last")
                                 {
@@ -1091,7 +1100,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                             _multiPanelModel.Fit_MyControls_ToBindDimensions();
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-
                             _mainPresenter.Run_GetListOfMaterials_SpecificItem();
 
                         }

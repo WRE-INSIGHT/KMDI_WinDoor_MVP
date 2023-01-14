@@ -11,6 +11,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 {
     public interface IFixedPanelUCPresenter
     {
+        bool boolKeyDown { set; }
         IFixedPanelUCPresenter GetNewInstance(IUnityContainer unityC, 
                                               IPanelModel panelModel, 
                                               IFrameModel frameModel, 
@@ -32,5 +33,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                               IMultiPanelTransomImagerUCPresenter multiPanelTransomImagerUCP);
         IFixedPanelUC GetFixedPanelUC();
         void SetInitialLoadFalse();
+        void FocusOnThisFixedPanel();
     }
 }
