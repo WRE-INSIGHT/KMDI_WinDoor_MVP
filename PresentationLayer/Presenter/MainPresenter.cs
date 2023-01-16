@@ -669,6 +669,19 @@ namespace PresentationLayer.Presenter
                 _mainView.ItemScroll = value;
             }
         }
+        private bool fileLoad;
+        public bool isFileLoad
+        {
+            get
+            {
+                return fileLoad;
+            }
+
+            set
+            {
+                fileLoad = value;
+            }
+        }
 
         #endregion
 
@@ -1578,7 +1591,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
+                _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
 
                 //save frame
                 Windoor_Save_UserControl();
@@ -1956,7 +1969,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
-
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -1975,6 +1988,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
 
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
@@ -2098,6 +2112,7 @@ namespace PresentationLayer.Presenter
                         file_lines = File.ReadAllLines(outFile);
                         f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                         onload = true;
+                        isFileLoad = true;
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
@@ -2478,7 +2493,7 @@ namespace PresentationLayer.Presenter
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
-
+            isFileLoad = false;
             bgw.WorkerReportsProgress = true;
             bgw.WorkerSupportsCancellation = true;
             bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
@@ -2522,6 +2537,7 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                     onload = true;
+                    isFileLoad = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
@@ -2895,7 +2911,7 @@ namespace PresentationLayer.Presenter
                 {
                     Load_Windoor_Item(_windoorModel);
                 }
-                    
+                isFileLoad = false;
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -3972,6 +3988,10 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Panel_GlazingSpacerQty:"))
                         {
                             panel_GlazingSpacerQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_GlassType_Insu_Lami:"))
+                        {
+                            panel_GlassType_Insu_Lami = extractedValue_str;
                         }
                         else if (row_str.Contains("Panel_GlassFilm:"))
                         {
@@ -5366,7 +5386,7 @@ namespace PresentationLayer.Presenter
                             pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
                             pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
                             pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
-
+                            pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
                             #region Explosion
                             pnlModel.PanelGlass_ID = panel_GlassID;
                             pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
@@ -6361,15 +6381,16 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _frameImagerUCP);
                                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel2ndLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel2ndLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           _multiTransomUCP,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiMullionImagerUCP);
 
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC2nd = _multiMullionUCP.GetMultiPanel();
@@ -6384,14 +6405,15 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _frameImagerUCP);
                                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                                     IMultiPanelTransomUCPresenter multiUCP = (MultiPanelTransomUCPresenter)_multiTransomUCP.GetNewInstance(_unityC,
-                                                                                                                    _multiPanelModel2ndLvl,
-                                                                                                                    _frameModel,
-                                                                                                                    this,
-                                                                                                                    _frameUCPresenter,
-                                                                                                                    multiPropUCP,
-                                                                                                                    _frameImagerUCP,
-                                                                                                                    _basePlatformImagerUCPresenter,
-                                                                                                                    multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel2ndLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiTransomImagerUCP);
                                     _multiTransomUCP = multiUCP;
                                     _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
@@ -6449,16 +6471,17 @@ namespace PresentationLayer.Presenter
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel3rdLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP,
-                                                                                                      _multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                            _multiPanelModel3rdLvl,
+                                                                                                                                            _frameModel,
+                                                                                                                                            this,
+                                                                                                                                            _frameUCPresenter,
+                                                                                                                                            _multiTransomUCP,
+                                                                                                                                            multiPropUCP,
+                                                                                                                                            _frameImagerUCP,
+                                                                                                                                            _basePlatformImagerUCPresenter,
+                                                                                                                                            multiMullionImagerUCP,
+                                                                                                                                            _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC3rd = _multiMullionUCP.GetMultiPanel();
                                     _multiTransomUC2nd.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
@@ -6479,6 +6502,7 @@ namespace PresentationLayer.Presenter
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                                    _userModel,
                                                                                                                     _multiPanelModel3rdLvl,
                                                                                                                     _frameModel,
                                                                                                                     this,
@@ -6561,16 +6585,17 @@ namespace PresentationLayer.Presenter
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel4thLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP,
-                                                                                                      _multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel4thLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           _multiTransomUCP,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiMullionImagerUCP,
+                                                                                                                                           _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC4th = _multiMullionUCP.GetMultiPanel();
                                     _multiTransomUC3rd.Getflp().Controls.Add((UserControl)_multiMullionUC4th);
@@ -6590,6 +6615,7 @@ namespace PresentationLayer.Presenter
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                                    _userModel,
                                                                                                                     _multiPanelModel4thLvl,
                                                                                                                     _frameModel,
                                                                                                                     this,
@@ -7430,7 +7456,8 @@ namespace PresentationLayer.Presenter
         SlidingTypes panel_SlidingTypes;
 
         #region Explosion Properties 
-        string panel_GlassThicknessDesc;
+        string panel_GlassThicknessDesc,
+               panel_GlassType_Insu_Lami;
         float panel_GlassThickness;
         bool panel_ChkGlazingAdaptor,
              panel_SashPropertyVisibility,
@@ -8066,6 +8093,7 @@ namespace PresentationLayer.Presenter
                         AddConcreteList_WindoorModel(_concreteModel);
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -8131,6 +8159,7 @@ namespace PresentationLayer.Presenter
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         GetCurrentPrice();
                     }
                 }
@@ -8210,8 +8239,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        bool NewFrameSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                              frmDimension_numHt);
+                        bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                       frmDimension_numHt);
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -8253,6 +8282,7 @@ namespace PresentationLayer.Presenter
 
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                             GetCurrentPrice();
                         }
                         else
@@ -8266,8 +8296,8 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
 
-                        bool NewConcreteSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                                 frmDimension_numHt);
+                        bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                          frmDimension_numHt);
                         if (NewConcreteSizeFit)
                         {
                             int concreteID = _windoorModel.concreteIDCounter += 1;
@@ -8288,6 +8318,7 @@ namespace PresentationLayer.Presenter
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         }
                         else
                         {
@@ -8318,7 +8349,10 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
             if (_windoorModel.lst_objects.Count > 1)
+            {
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+            }
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
@@ -8397,31 +8431,11 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                //foreach (IWindoorModel wndrm in _quotationModel.Lst_Windoor)
-                //{
-                //    foreach (IFrameModel frm_Clear in wndrm.lst_frame)
-                //    {
-                //        frm_Clear.Frame_PropertiesUC.Dispose();
-                //        frm_Clear.Frame_UC.Dispose();
-                //        frm_Clear.Frame_PropertiesUC = null;
-                //        frm_Clear.Frame_UC = null;
-                //    }
-                //}
 
                 //save frame
                 Windoor_Save_UserControl();
                 Windoor_Save_PropertiesUC();
-                //IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
-                //foreach (Control cons in controls)
-                //{
-                //    cons.Dispose();
-                //}
-                //IEnumerable<Control> controlss = _pnlPropertiesBody.Controls.Cast<Control>().OfType<Control>();
-                //foreach (Control cons in controlss)
-                //{
-                //    cons.Dispose();
-                //}
-
+              
                 //set mainview
                 _windoorModel = item;
 
@@ -8441,231 +8455,6 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                 _mainView.GetThis().Controls.Add(bpUC);
-
-                //foreach (Control wndrObject in _windoorModel.lst_objects)
-                //{
-                //    if (wndrObject.Name.Contains("Frame"))
-                //    {
-                //        #region FrameModel
-                //        foreach (IFrameModel frm in _windoorModel.lst_frame)
-                //        {
-                //            if (frm.Frame_Name == wndrObject.Name)
-                //            {
-
-                //                frm.Set_DimensionsToBind_using_FrameZoom();
-                //                frm.Set_ImagerDimensions_using_ImagerZoom();
-                //                frm.Set_FramePadding();
-
-                //                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(frm);
-                //                AddFrameUC(frm, framePropUCP);
-
-                //                frm.Frame_UC = (UserControl)_frameUC;
-                //                frm.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
-                //                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                //                _basePlatformPresenter.InvalidateBasePlatform();
-                //                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                //                _windoorModel.Fit_MyControls_ToBindDimensions();
-
-                //                #region  Frame Panel
-                //                foreach (PanelModel pnl in frm.Lst_Panel)
-                //                {
-                //                }
-                //                #endregion
-                //                #region 2nd Level MultiPanel
-                //                foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
-                //                {
-                //                    FlowDirection flow = FlowDirection.LeftToRight;
-                //                    if (mpnl.MPanel_Name.Contains("Transom"))
-                //                    {
-                //                        flow = FlowDirection.TopDown;
-                //                    }
-
-                //                    frm.SetDeductFramePadding(true);
-                //                    mpnl.Set_DimensionToBind_using_FrameDimensions();
-                //                    mpnl.Imager_Set_DimensionToBind_using_FrameDimensions();
-
-                //                    IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPanelPropertiesUCP.GetNewInstance(_unityC, mpnl, this);
-                //                    UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
-                //                    multiPropUC.Dock = DockStyle.Top;
-                //                    framePropUCP.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(multiPropUC);
-                //                    frm.AdjustPropertyPanelHeight("Mpanel", "add");
-
-                //                    if (mpnl.MPanel_Name.Contains("Mullion"))
-                //                    {
-                //                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
-                //                                                                                                                          mpnl,
-                //                                                                                                                          _frameModel,
-                //                                                                                                                          _frameImagerUCP);
-                //                        IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                //                        //_frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
-                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-
-                //                        IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
-                //                                                                                          mpnl,
-                //                                                                                          _frameModel,
-                //                                                                                          this,
-                //                                                                                          _frameUCPresenter,
-                //                                                                                          _multiTransomUCP,
-                //                                                                                          multiPropUCP,
-                //                                                                                          _frameImagerUCP,
-                //                                                                                          _basePlatformImagerUCPresenter,
-                //                                                                                          multiMullionImagerUCP);
-                //                        IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
-                //                    }
-                //                    else if (mpnl.MPanel_Name.Contains("Transom"))
-                //                    {
-                //                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = _multiTransomImagerUCP.GetNewInstance(_unityC,
-                //                                                                                                                          mpnl,
-                //                                                                                                                          _frameModel,
-                //                                                                                                                          _frameImagerUCP);
-                //                        IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
-                //                        //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
-                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                //                        IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
-                //                                                                                                        mpnl,
-                //                                                                                                        frm,
-                //                                                                                                        this,
-                //                                                                                                        _frameUCPresenter,
-                //                                                                                                        multiPropUCP,
-                //                                                                                                        _frameImagerUCP,
-                //                                                                                                        _basePlatformImagerUCPresenter,
-                //                                                                                                        multiTransomImagerUCP);
-                //                        IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
-                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
-                //                    }
-                //                    foreach (Control ctrl in mpnl.MPanelLst_Objects)
-                //                    {
-                //                        if (ctrl.Name.Contains("PanelUC"))
-                //                        {
-                //                            #region 2nd Level MultiPanel Panel
-                //                            foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
-                //                            {
-                //                                if (ctrl.Name == pnl.Panel_Name)
-                //                                {
-                //                                }
-                //                            }
-                //                            #endregion
-
-                //                        }
-                //                        else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
-                //                        {
-                //                            #region 2nd Level MultiPanel Divider
-                //                            foreach (DividerModel div in mpnl.MPanelLst_Divider)
-                //                            {
-                //                                if (ctrl.Name == div.Div_Name)
-                //                                {
-
-                //                                }
-                //                            }
-                //                            #endregion
-
-                //                        }
-                //                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
-                //                        {
-
-                //                            #region 2nd Level MultiPanel MultiPanel
-
-                //                            foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
-                //                            {
-                //                                if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
-                //                                {
-                //                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
-                //                                    {
-                //                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
-                //                                        {
-                //                                            foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
-                //                                            {
-                //                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
-                //                                                {
-
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
-                //                                        {
-
-                //                                            foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
-                //                                            {
-                //                                                if (thirdlvlctrl.Name == div.Div_Name)
-                //                                                {
-
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
-                //                                        {
-                //                                            if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
-                //                                            {
-                //                                                foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
-                //                                                {
-
-                //                                                    if (fourthlvlctrl.Name.Contains("PanelUC"))
-                //                                                    {
-                //                                                        foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
-                //                                                        {
-                //                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
-                //                                                            {
-
-                //                                                            }
-                //                                                        }
-
-                //                                                    }
-                //                                                    else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
-                //                                                    {
-                //                                                        foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
-                //                                                        {
-                //                                                            if (fourthlvlctrl.Name == div.Div_Name)
-                //                                                            {
-
-                //                                                            }
-                //                                                        }
-                //                                                    }
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        //mpnlPropertyHeight -= 1;
-
-                //                                    }
-                //                                }
-                //                            }
-                //                            #endregion
-                //                        }
-                //                    }
-                //                }
-                //                #endregion
-
-                //            }
-
-                //        }
-
-                //        #endregion
-                //    }
-                //    else
-                //    {
-                //        #region Concrete
-
-                //        foreach (IConcreteModel crm in _windoorModel.lst_concrete)
-                //        {
-                //            if (wndrObject.Name == crm.Concrete_Name)
-                //            {
-
-                //            }
-                //        }
-                //        #endregion
-                //    }
-
-
-                //}
-
-                //GetCurrentPrice();
-
-
-
-
-
-
-
 
 
                 foreach (Control wndr_objects in _windoorModel.lst_objects)
@@ -9365,6 +9154,7 @@ namespace PresentationLayer.Presenter
             IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel, this);
 
             IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC,
+                                                                                            _userModel,
                                                                                             frameModel,
                                                                                             this,
                                                                                             _basePlatformPresenter,
@@ -9558,8 +9348,87 @@ namespace PresentationLayer.Presenter
             }
 
         }
-
+        ISlidingPanelUCPresenter current_sliding;
+        ICasementPanelUCPresenter current_casement;
+        IFixedPanelUCPresenter current_fixed;
+        public void SetSelectedPanel(IPanelModel panelModel, 
+                                     ISlidingPanelUCPresenter slidingPanelUCPresenter = null,
+                                     ICasementPanelUCPresenter casementPanelUCPresenter = null,
+                                     IFixedPanelUCPresenter fixedPanelUCPresenter = null)
+        {
+            _tsLblStatus.Visible = true;
+            _tsLblStatus.Text = panelModel.Panel_Name + " Selected";
+            if (slidingPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else  if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                slidingPanelUCPresenter.boolKeyDown = true;
+                slidingPanelUCPresenter.FocusOnThisSlidingPanel();
+                current_sliding = slidingPanelUCPresenter;
+            }
+            else if (casementPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                casementPanelUCPresenter.boolKeyDown = true;
+                casementPanelUCPresenter.FocusOnThisCasementPanel();
+                current_casement = casementPanelUCPresenter;
+            }
+            else if (fixedPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                fixedPanelUCPresenter.boolKeyDown = true;
+                fixedPanelUCPresenter.FocusOnThisFixedPanel();
+                current_fixed = fixedPanelUCPresenter;
+            }
+        }
         public void DeselectDivider()
+        {
+            _mainView.GetLblSelectedDivider().Visible = false;
+            _mainView.GetLblSelectedDivider().Text = "";
+            _mainView.SetActiveControl(null);
+        }
+        public void DeselectPanel()
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
@@ -9705,7 +9574,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        private List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
+        public List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
         {
             List<IMultiPanelModel> lst_MPanel = new List<IMultiPanelModel>();
             if (frmModel.Lst_MultiPanel.Count > 0)
@@ -10090,14 +9959,14 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-        private bool CheckDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
+        private bool CheckAvailableDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
         {
             int occupiedWidth = 0,
                 occupiedHeight = 0,
                 Maxheight = 0,
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
-            bool NewBaseFlatformObjectFit = true;
+            bool isDimentionFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
@@ -10118,7 +9987,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
                         }
                         if (occupiedWidth >= _windoorModel.WD_width)
@@ -10131,7 +10000,18 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= frm.Frame_Width;
+                            if(availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += frm.Frame_Height;
+                                availableHeight -= frm.Frame_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= frm.Frame_Width;
+                            }
+                            
                         }
                     }
 
@@ -10153,7 +10033,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
 
                         }
@@ -10167,7 +10047,19 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= crtm.Concrete_Width;
+
+
+                            if (availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += crtm.Concrete_Height;
+                                availableHeight -= crtm.Concrete_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= crtm.Concrete_Width;
+                            }
                         }
                     }
 
@@ -10175,11 +10067,14 @@ namespace PresentationLayer.Presenter
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
             {
-                NewBaseFlatformObjectFit = false;
+                isDimentionFit = false;
 
             }
-            return NewBaseFlatformObjectFit;
+            return isDimentionFit;
         }
+
+       
+
         #endregion
 
     }

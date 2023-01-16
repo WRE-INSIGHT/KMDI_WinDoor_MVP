@@ -1928,16 +1928,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _pnlHandleType.Controls.Add(espPropUC);
             espPropUC.Dock = DockStyle.Top;
             espPropUC.BringToFront();
-
-            if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+            if (!_mainPresenter.isFileLoad)
             {
-                _panelModel.Panel_HandleType = Handle_Type._Rio;
-            }
-            else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
-            {
-                _panelModel.Panel_HandleType = Handle_Type._Rotoline;
-            }
 
+                if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                {
+                    _panelModel.Panel_HandleType = Handle_Type._Rio;
+                }
+                else if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._374)
+                {
+                    _panelModel.Panel_HandleType = Handle_Type._Rotoline;
+                }
+            }
             Base_Color base_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
             Foil_Color inside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
             Foil_Color outside_color = _panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;

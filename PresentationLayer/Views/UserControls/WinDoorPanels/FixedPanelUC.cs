@@ -124,6 +124,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler bothToolStripClickedEventRaised;
         public event EventHandler noneToolStripClickedEventRaised;
         public event MouseEventHandler fixedPanelUCMouseClickEventRaised;
+        public event MouseEventHandler fixedPanelUCMouseDoubleClickedEventRaised;
+        public event KeyEventHandler fixedPanelUCKeyDownEventRaised;
 
         private void FixedPanelUC_Paint(object sender, PaintEventArgs e)
         {
@@ -222,6 +224,29 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
 
         }
 
-       
+        private void FixedPanelUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, fixedPanelUCMouseDoubleClickedEventRaised, e);
+        }
+
+        private void FixedPanelUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, fixedPanelUCKeyDownEventRaised, e);
+        }
+
+        private void FixedPanelUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+        public void FocusOnThis()
+        {
+            this.Focus();
+        }
     }
 }

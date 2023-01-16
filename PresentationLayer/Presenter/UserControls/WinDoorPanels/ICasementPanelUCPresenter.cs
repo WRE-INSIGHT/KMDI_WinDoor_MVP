@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
     public interface ICasementPanelUCPresenter
     {
         ICasementPanelUC GetCasementPanelUC();
+        bool boolKeyDown { set; }
         ICasementPanelUCPresenter GetNewInstance(IUnityContainer unityC,
                                                  IPanelModel panelModel,
                                                  IFrameModel frameModel,
@@ -30,5 +31,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                  IMultiPanelTransomUCPresenter multiTransomUCP,
                                                  IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP);
         void SetInitialLoadFalse();
+        void FocusOnThisCasementPanel();
     }
 }

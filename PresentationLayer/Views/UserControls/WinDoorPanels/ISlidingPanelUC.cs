@@ -13,11 +13,15 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         event MouseEventHandler slidingPanelUCMouseDownEventRaised;
         event MouseEventHandler slidingPanelUCMouseUpEventRaised;
         event MouseEventHandler slidingPanelUCMouseClickEventRaised;
+        event MouseEventHandler slidingPanelUCMouseDoubleClickedEventRaised;
         event PaintEventHandler slidingPanelUCPaintEventRaised;
         event EventHandler slidingPanelUCSizeChangedEventRaised;
         event EventHandler rightToolStripClickedEventRaised;
         event EventHandler leftToolStripClickedEventRaised;
         event EventHandler bothToolStripClickedEventRaised;
         event EventHandler noneToolStripClickedEventRaised;
+        event KeyEventHandler slidingPanelUCKeyDownEventRaised;
+
+        void FocusOnThis();
     }
 }

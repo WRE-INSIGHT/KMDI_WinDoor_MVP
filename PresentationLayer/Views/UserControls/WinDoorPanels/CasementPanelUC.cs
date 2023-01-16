@@ -90,6 +90,8 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         public event EventHandler leftToolStripClickedEventRaised;
         public event EventHandler bothToolStripClickedEventRaised;
         public event EventHandler noneToolStripClickedEventRaised;
+        public event MouseEventHandler casementPanelUCMouseDoubleClickedEventRaised;
+        public event KeyEventHandler casementPanelUCKeyDownEventRaised;
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
@@ -192,6 +194,28 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             EventHelpers.RaiseMouseEvent(this, casementPanelUCMouseDownEventRaised, e);
         }
 
-       
+        private void CasementPanelUC_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseKeyEvent(this, casementPanelUCKeyDownEventRaised, e);
+        }
+        public void FocusOnThis()
+        {
+            this.Focus();
+        }
+        private void CasementPanelUC_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                case Keys.Up:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
+
+        private void CasementPanelUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EventHelpers.RaiseMouseEvent(this, casementPanelUCMouseDoubleClickedEventRaised, e);
+        }
     }
 }

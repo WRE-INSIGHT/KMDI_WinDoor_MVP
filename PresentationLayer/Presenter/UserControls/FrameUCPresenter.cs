@@ -5,6 +5,7 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using ModelLayer.Model.User;
 using ModelLayer.Variables;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
@@ -31,7 +32,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFrameModel _frameModel;
         private IPanelModel _panelModel;
         private IMultiPanelModel _multipanelModel;
-
+        private IUserModel _userModel;
         private IMainPresenter _mainPresenter;
         private IPanelPropertiesUCPresenter _panelPropertiesUCP;
         private IFixedPanelUCPresenter _fixedUCP;
@@ -225,6 +226,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _basePlatformImagerUCP.InvalidateBasePlatform();
 
                     IMultiPanelMullionUCPresenter multiUCP = _multiUCP.GetNewInstance(_unityC,
+                                                                                      _userModel,
                                                                                       _multipanelModel,
                                                                                       _frameModel,
                                                                                       _mainPresenter,
@@ -247,6 +249,7 @@ namespace PresentationLayer.Presenter.UserControls
                     //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                     _basePlatformImagerUCP.InvalidateBasePlatform();
                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                    _userModel,
                                                                                                     _multipanelModel,
                                                                                                     _frameModel,
                                                                                                     _mainPresenter,
@@ -567,6 +570,7 @@ namespace PresentationLayer.Presenter.UserControls
                 try
                 {
                     frameUC = (UserControl)sender;
+                    Console.WriteLine(frameUC.Size.Width);
                     IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                     int propertyHeight = 0;
                     int framePropertyHeight = 0;
@@ -854,6 +858,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
         public IFrameUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                IUserModel userModel,
                                                 IFrameModel frameModel,
                                                 IMainPresenter mainPresenter,
                                                 IBasePlatformPresenter basePlatformUCP,
@@ -868,6 +873,7 @@ namespace PresentationLayer.Presenter.UserControls
             framePresenter._frameModel = frameModel;
             framePresenter._mainPresenter = mainPresenter;
             framePresenter._unityC = unityC;
+            framePresenter._userModel = userModel;
             framePresenter._basePlatformUCP = basePlatformUCP;
             framePresenter._frameImagerUCP = frameImagerUCP;
             framePresenter._basePlatformImagerUCP = basePlatformImagerUCP;
