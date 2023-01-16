@@ -85,7 +85,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassThicknessDesc = "6 mm Clear";
                     _panelModel.Panel_GlassType_Insu_Lami = "NA";
                 }
-
+            }
+            else
+            {
+                _panelModel.Panel_GlassType_Insu_Lami = "NA";
             }
 
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
