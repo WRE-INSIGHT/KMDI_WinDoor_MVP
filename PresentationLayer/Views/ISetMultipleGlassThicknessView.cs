@@ -17,5 +17,8 @@ namespace PresentationLayer.Views
         void CloseThisDialog();
         DataGridView Get_DgvGlassList();
         void ShowMultipleThckView();
+
+
+
     }
 }

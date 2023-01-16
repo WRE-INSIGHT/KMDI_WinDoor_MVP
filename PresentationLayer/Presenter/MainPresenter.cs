@@ -2330,38 +2330,38 @@ namespace PresentationLayer.Presenter
 
             #region Insulated
             
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear","DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear","Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated", false, true, false, true, false);
             //Annealed
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "Double Insulated", false, true, false, true, false);
             //Tempered
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
             //Annealed with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             //Tempered with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             //Tempered Heat-Soaked with Low-e
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
 
 
 
@@ -2372,63 +2372,63 @@ namespace PresentationLayer.Presenter
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear","DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear","DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear","Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);        
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);        
                         
-            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);//
+            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);//
 
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e" , "DL", false, true, false, false, true);//Same above but diff price and pos
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear" , "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e" , "Double Laminated", false, true, false, false, true);//Same above but diff price and pos
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear" , "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
 
 
             #endregion
@@ -2439,17 +2439,17 @@ namespace PresentationLayer.Presenter
 
             #region InsuLated
 
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "TI" ,false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "TI", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "TI", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated" ,false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
             //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One)", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "TI", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "Triple Insulated", false, false, true, true, false);
 
             #endregion
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "TL" ,false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated" ,false, false, true, false, true);
             //_glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
 
             #endregion
@@ -7792,7 +7792,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.ItemToolStripEnabled = false;
         }
-
+        
         private void BotToolStrip_Enable()
         {
             _mainView.GetPanelBot().Enabled = true;

@@ -983,6 +983,20 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
+        private decimal _glassPricePerSqrMeter;
+        public decimal Panel_GlassPricePerSqrMeter
+        {
+            get
+            {
+                return _glassPricePerSqrMeter;
+            }
+            set
+            {
+                _glassPricePerSqrMeter = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public int Panel_SashWidth { get; set; }
         public int Panel_SashWidthDecimal { get; set; }
         public int _panel_SashHeight;
@@ -9562,7 +9576,8 @@ namespace ModelLayer.Model.Quotation.Panel
                           HingeOption panelHingeOptions,
                           bool panelSlidingTypeVisibility,
                           SlidingTypes panelSlidingTypes,
-                          string glasstype_insu_lumi
+                          string glasstype_insu_lumi,
+                          decimal glasspricepersqrmeter
                           )
         {
             Panel_ID = panelID;
@@ -9643,6 +9658,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_GlassPropertyHeight = constants.panel_property_glassOptionsHeight;
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
+            Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
         }
     }
 }
