@@ -500,16 +500,28 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Louver Panel")
                 {
-                    //_frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-
-
-                    //_panelModel.AdjustPropertyPanelHeight("addGlass");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
 
 
                     _panelModel.AdjustPropertyPanelHeight("addGlass");
+
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySetArtNo");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
+
+
+
+                    //_panelModel.AdjustPropertyPanelHeight("addGlass");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverBlades");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallerySetArtNo");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallery");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallerySet");
+
+
 
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,

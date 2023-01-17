@@ -4962,6 +4962,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 Panel_HandleOptionsHeight -= constants.panel_property_RotoswingForSlidingOptionsheight;
             }
+
         }
 
         public void AdjustRotoswingPropertyHeight(string mode)

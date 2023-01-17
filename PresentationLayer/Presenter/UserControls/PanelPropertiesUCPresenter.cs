@@ -638,6 +638,13 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_LouverGalleryVisibility = true;
                     _panelModel.Panel_LouverGallerySetVisibility = true;
 
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    { 
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
+                    }
+
                     _panelModel.AdjustPropertyPanelHeight("addLouverBlades");
                     _panelModel.AdjustPropertyPanelHeight("addLouverGallery");
                     _panelModel.AdjustPropertyPanelHeight("addLouverGallerySet");
@@ -646,12 +653,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
 
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
-                    }
+                  
 
 
                     IPP_LouverGalleryPropertyUCPresenter Gallery = _pp_louverGalleryPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
@@ -680,25 +682,25 @@ namespace PresentationLayer.Presenter.UserControls
                 glassProp.Dock = DockStyle.Top;
                 glassProp.BringToFront();
 
-                if (_panelModel.Panel_Type.Contains("Louver") == true)
-                {
-                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
-                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
+                //if (_panelModel.Panel_Type.Contains("Louver") == true)
+                //{
+                //    _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
+                //    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
 
-                    _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
+                //    _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
 
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+                //    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
 
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
-                    }
-                }
-                else
-                {
-                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
-                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
-                }
+                //    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                //    { 
+                //        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+                //    }
+                //}
+                //else
+                //{
+                //    _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
+                //    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
+                //}
 
 
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
