@@ -98,7 +98,7 @@ namespace ModelLayer.Model.Quotation
                 frame_height = 0;
 
             string screws_for_inst_where = "";
-
+            //string add;
             bool perFrame = false;
             bool slidingChck = false;
             foreach (IFrameModel frame in item.lst_frame)
