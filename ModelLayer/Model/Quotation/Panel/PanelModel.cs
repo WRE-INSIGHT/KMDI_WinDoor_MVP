@@ -6191,15 +6191,12 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_LstSealForHandleMultiplier != null)
                     {
+                        Panel_SealForHandleQty = 0;
                         foreach (int multiplier in Panel_LstSealForHandleMultiplier)
                         {
                             Panel_SealForHandleQty += 400 * multiplier;
                         }
                     }
-
-                    //Panel_SealForHandleQty = 400 * Panel_SealForHandleMultiplier;
-
-                    //Panel_LouvreGallerySetHeight = Panel_DisplayHeight - (lvrgDeduction * 2) - 12;
                 }
             }
 
@@ -8097,6 +8094,54 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_OriginalGlassWidth = (Panel_OriginalDisplayWidth - deduction_for_wd) - 6;
                 Panel_OriginalGlassHeight = (Panel_OriginalDisplayHeight - deduction_for_ht) - 6;
+
+
+                if (Panel_Type.Contains("Louver"))
+                {
+                    Set_LouverBladesCount();
+
+                    Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
+                    Panel_CoverProfileArtNo2 = CoverProfile_ArticleNo._1640;
+                    Panel_PlantOnWeatherStripHeadArtNo = PlantOnWeatherStripHead_ArticleNo._AL1313;
+                    Panel_PlantOnWeatherStripSealArtNo = PlantOnWeatherStripSeal_ArticleNo._AL1314;
+                    Panel_LouverFrameWeatherStripHeadArtNo = LouverFrameWeatherStripHead_ArticleNo._AL1307;
+                    Panel_LouverFrameBottomWeatherStripArtNo = LouverFrameBottomWeatherStrip_ArticleNo._AL1309;
+                    Panel_RubberSealArtNo = RubberSeal_ArticleNo._SL31;
+                    Panel_CasementSealArtNo = CasementSeal_ArticleNo._9040;
+                    Panel_SealForHandleArtNo = SealForHandle_ArticleNo._WDL2;
+
+                    if (Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                    {
+
+                    }
+
+                    int lvrgDeduction = 0;
+                    if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502)
+                    {
+                        lvrgDeduction = 33;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7507)
+                    {
+                        lvrgDeduction = 47;
+                    }
+
+                    Panel_PlantOnWeatherStripHeadWidth = Panel_DisplayWidth - (lvrgDeduction * 2) - 2;
+                    Panel_PlantOnWeatherStripSealWidth = Panel_DisplayWidth - (lvrgDeduction * 2) - 2;
+                    Panel_LouverFrameWeatherStripHeadWidth = Panel_PlantOnWeatherStripHeadWidth - 44;
+                    Panel_LouverFrameBottomWeatherStripWidth = Panel_PlantOnWeatherStripHeadWidth - 44;
+                    Panel_RubberSealWidth = Panel_DisplayWidth;
+                    Panel_CasementSealWidth = Panel_DisplayWidth;
+                    Panel_GlassWidth = Panel_DisplayWidth - (lvrgDeduction * 2) - (31 * 2);
+
+                    if (Panel_LstSealForHandleMultiplier != null)
+                    {
+                        Panel_SealForHandleQty = 0;
+                        foreach (int multiplier in Panel_LstSealForHandleMultiplier)
+                        {
+                            Panel_SealForHandleQty += 400 * multiplier;
+                        }
+                    }
+                }
             }
 
             Panel_GlazingSpacerQty = 1;
@@ -8603,11 +8648,15 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_RioHandle_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo.DisplayName,
-                                   1, "pc(s)",
-                                   "",
-                                   "Sash",
-                                   @"");
+            if (Panel_RioArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo.DisplayName,
+                                                 1, "pc(s)",
+                                                 "",
+                                                 "Sash",
+                                                 @"");
+            }
+
             if (Panel_RioOptionsVisibility2 == true)
             {
                 tbl_explosion.Rows.Add("Rio handle " + Panel_RioArtNo2.DisplayName,

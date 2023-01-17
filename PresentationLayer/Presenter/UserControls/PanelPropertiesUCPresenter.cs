@@ -684,7 +684,6 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
                     _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
-                    // _panelModel.Panel_GlassPropertyHeight = 99;
 
                     _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
 
@@ -699,7 +698,6 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
                     _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
-                    //_panelModel.Panel_GlassPropertyHeight = 153;
                 }
 
 
