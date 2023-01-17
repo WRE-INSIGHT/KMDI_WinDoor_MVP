@@ -57,6 +57,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.User
                                             user.Password = rdr.GetString(5);
                                             user.ProfilePath = rdr.GetString(6);
                                             user.EmployeeID = rdr.GetInt32(7);
+                                            user.Department = rdr.GetString(8);
                                         }
                                         else
                                         {

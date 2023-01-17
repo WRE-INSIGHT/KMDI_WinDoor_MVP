@@ -10,5 +10,6 @@
         int UserID { get; set; }
         int EmployeeID { get; set; }
         string Username { get; set; }
+        string Department { get; set; }
     }
 }

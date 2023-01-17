@@ -16,5 +16,6 @@ namespace ModelLayer.Model.User
         public string Nickname { get; set; }
         public string AccountType { get; set; }
         public string ProfilePath { get; set; }
+        public string Department { get; set; }
     }
 }

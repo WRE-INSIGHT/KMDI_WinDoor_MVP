@@ -22,6 +22,7 @@ namespace PresentationLayer.Views
         public event DataGridViewRowPostPaintEventHandler dgvSetMultipleGlassRowPostPaineEventRaised;
         private string _glasstype;
 
+
         List<string> Panel_id = new List<string>();
 
         public List<string> Panel_ID
@@ -45,7 +46,7 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-
+        
         public SetMultipleGlassThicknessView()
         {
             InitializeComponent();
@@ -58,7 +59,6 @@ namespace PresentationLayer.Views
 
         private void SetMultipleGlassThicknessView_Load(object sender, EventArgs e)
         {
-
             List<GlassType> gType = new List<GlassType>();
             foreach (GlassType item in GlassType.GetAll())
             {
@@ -66,9 +66,9 @@ namespace PresentationLayer.Views
             }
             cmb_GlassType.DataSource = gType;
             EventHelpers.RaiseEvent(sender, setMultipleGlassThicknessLoadEventRaised, e);
-        }
-
-       
+           
+            //timer1.Start();//Auto Refresh every 10 seconds 
+        }            
     
         private void setGlssThckNssDGV_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         { 
@@ -85,10 +85,9 @@ namespace PresentationLayer.Views
                     _glasstype = cmb_GlassType.SelectedItem.ToString();                                                    
                 }
         }
-
-      
-
-
-
+        private void timer1_Tick(object sender, EventArgs e)
+        {          
+            EventHelpers.RaiseEvent(sender, cmbSelectGlassTypeEventRaised, e);
+        }
     }
 }

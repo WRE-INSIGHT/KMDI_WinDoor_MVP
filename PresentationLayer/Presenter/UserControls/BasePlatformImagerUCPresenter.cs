@@ -59,34 +59,184 @@ namespace PresentationLayer.Presenter.UserControls
             List<Point> object_points = new List<Point>();
             List<int> curr_LocY = new List<int>();
 
-            int flocX = 0, flocY = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+            int flocX = 0, controlndex = 0, flocY = 0, prev_wd_covered = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+            int occupiedWidth = 0,
+               occupiedHeight = 0,
+               Maxheight = 0,
+               availableWidth = _windoorModel.WD_width,
+               availableHeight = _windoorModel.WD_height;
+            //if (_windoorModel.lst_objects.Count > 1)
+            //{
+            //    var startingObject = _windoorModel.lst_objects[0];
+            //    startingObject = null;
+            //    foreach (var wndrObject in _windoorModel.lst_objects)
+            //    {
+            //        foreach (IFrameModel frm in _windoorModel.lst_frame)
+            //        {
+            //            if (wndrObject.Name == frm.Frame_Name)
+            //            {
+            //                if (availableWidth > frm.Frame_Width)
+            //                {
+            //                    if (startingObject == null)
+            //                    {
+            //                        startingObject = wndrObject;
+            //                    }
+            //                    if (availableHeight >= frm.Frame_Height)
+            //                    {
+            //                        occupiedWidth += frm.Frame_Width;
+            //                        if (Maxheight < frm.Frame_Height)
+            //                        {
+            //                            Maxheight = frm.Frame_Height;
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                    }
+            //                }
+            //                else if (availableWidth == frm.Frame_Width)
+            //                {
+            //                    //Fit_MyImagerObject_ToBindDimensions(startingObject, wndrObject);
+            //                    occupiedWidth += frm.Frame_Width;
+            //                    if (Maxheight < frm.Frame_Height)
+            //                    {
+            //                        Maxheight = frm.Frame_Height;
+            //                    }
+            //                    startingObject = null;
+            //                }
+            //                if (occupiedWidth >= _windoorModel.WD_width)
+            //                {
+            //                    occupiedHeight += Maxheight;
+            //                    occupiedWidth = 0;
+            //                    availableWidth = _windoorModel.WD_width;
+            //                    availableHeight -= Maxheight;
+            //                }
+            //                else
+            //                {
+            //                    availableWidth -= frm.Frame_Width;
+            //                }
+            //            }
+            //        }
+            //        foreach (IConcreteModel crtm in _windoorModel.lst_concrete)
+            //        {
+            //            if (wndrObject.Name == crtm.Concrete_Name)
+            //            {
+            //                if (availableWidth > crtm.Concrete_Width)
+            //                {
+            //                    if (startingObject == null)
+            //                    {
+            //                        startingObject = wndrObject;
+            //                    }
+            //                    if (availableHeight >= crtm.Concrete_Height)
+            //                    {
+            //                        occupiedWidth += crtm.Concrete_Width;
+            //                        if (Maxheight < crtm.Concrete_Height)
+            //                        {
+            //                            Maxheight = crtm.Concrete_Height;
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                    }
+            //                }
+            //                else if (availableWidth == crtm.Concrete_Width)
+            //                {
+            //                    if (startingObject == null)
+            //                    {
+            //                        startingObject = wndrObject;
+            //                    }
+            //                    //Fit_MyImagerObject_ToBindDimensions(startingObject, wndrObject);
+            //                    occupiedWidth += crtm.Concrete_Width;
+            //                    if (Maxheight < crtm.Concrete_Height)
+            //                    {
+            //                        Maxheight = crtm.Concrete_Height;
+            //                    }
+            //                    startingObject = null;
+            //                }
+            //                if (occupiedWidth >= _windoorModel.WD_width)
+            //                {
+            //                    occupiedHeight += Maxheight;
+            //                    occupiedWidth = 0;
+            //                    availableWidth = _windoorModel.WD_width;
+            //                    availableHeight -= Maxheight;
+            //                }
+            //                else
+            //                {
+            //                    availableWidth -= crtm.Concrete_Width;
+            //                }
+            //            }
 
+            //        }
+            //    }
+            //}
             foreach (Size frame_size in frameImager_sizes)
             {
-                object_points.Add(new Point(flocX, flocY));
+                prev_wd_covered = total_wd_covered;
                 total_wd_covered += frame_size.Width;
 
                 if (curr_LocY.Count() == 0)
                 {
                     curr_LocY.Add(0);
                 }
-
                 if (total_wd_covered < basePlatformImage_Width_minus70)
                 {
-                    flocX += frame_size.Width;
+                    flocX = 0 + prev_wd_covered;
                     flocY = curr_LocY[frame_row];
+                    controlndex++;
                 }
                 else if (total_wd_covered >= basePlatformImage_Width_minus70)
                 {
-                    total_ht_covered += frame_size.Height;
+
+                    total_ht_covered += frameImager_sizes[frame_row].Height;
                     curr_LocY.Add(total_ht_covered);
                     frame_row++;
+                    controlndex++;
+                    //if (total_wd_covered == basePlatformImage_Width_minus70)
+                    //{
+                    //    flocX = 0 + prev_wd_covered;
+                    //    flocY = curr_LocY[frame_row - 1];
+                    //}
+                    //else
+                    //{
+                        flocX = 0;
+                        flocY = curr_LocY[frame_row];
+                    //}
 
-                    flocX = 0;
-                    flocY = curr_LocY[frame_row];
+                    if (controlndex == 1)
+                    {
+                        flocY = 0;
+                    }
                     total_wd_covered = 0;
                 }
+                object_points.Add(new Point(flocX, flocY));
+
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             return object_points;
         }

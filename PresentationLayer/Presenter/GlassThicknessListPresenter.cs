@@ -25,7 +25,7 @@ namespace PresentationLayer.Presenter
         private DataTable _glassThicknessDT;
         private List<string> _panelIdList;
         private bool _setMultipleThicknessUpdate;
-        private IUnityContainer unityC;
+        private IUnityContainer _unityC;
         CommonFunctions commonfunc = new CommonFunctions();
 
 
@@ -41,9 +41,10 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public GlassThicknessListPresenter(IGlassThicknessListView glassThicknessListView)
+        public GlassThicknessListPresenter(IGlassThicknessListView glassThicknessListView,IUnityContainer unityC)
         {
             _glassThicknessListView = glassThicknessListView;
+            _unityC = unityC;
             SubscribeToEventsSetup();
         }
 
@@ -94,7 +95,7 @@ namespace PresentationLayer.Presenter
                                                 pnl.Panel_GlassType = _glassType;
                                                 pnl.Panel_GlassThickness = Convert.ToSingle(dgv.Rows[e.RowIndex].Cells["TotalThickness"].Value);
                                                 pnl.Panel_GlassThicknessDesc = dgv.Rows[e.RowIndex].Cells["Description"].Value.ToString();
-
+                                                
                                                 Console.WriteLine(pnl.Panel_GlassType_Insu_Lami);
 
                                                 if (pnl.Panel_GlassThicknessDesc.Contains("Georgian Bar"))
@@ -190,9 +191,13 @@ namespace PresentationLayer.Presenter
 
                         _panelIdList.Clear();
                         _glassThicknessListView.CloseThisDialog();
-                        _setMultipleGlassThicknessPresenter.GetCurrentGlassthickness();
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
+
+                        _setMultipleGlassThicknessPresenter.Get_MltpleGlssThcknView().CloseThisDialog();
+                        ISetMultipleGlassThicknessPresenter multipresenter = _setMultipleGlassThicknessPresenter.GetNewInstance(_unityC, _windoorModel, _mainPresenter);
+                        multipresenter.Get_MltpleGlssThcknView().ShowMultipleThckView();
+
                     }
                     else
                     {
@@ -236,8 +241,8 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
                     }
-                   #endregion
-                   
+                    #endregion
+                    
                 }
                 else
                 {
@@ -247,6 +252,7 @@ namespace PresentationLayer.Presenter
             }
 
         }
+
 
         private void _glassThicknessListView_DgvGlassThicknessListRowpostpaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
         {

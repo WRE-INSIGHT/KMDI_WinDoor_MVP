@@ -2,6 +2,7 @@
 using ModelLayer.Model.Quotation.Concrete;
 using ModelLayer.Model.Quotation.Divider;
 using ModelLayer.Model.Quotation.Frame;
+using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.Screen;
 using ModelLayer.Model.Quotation.WinDoor;
@@ -11,9 +12,11 @@ using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Unity;
+using PresentationLayer.Presenter.UserControls.WinDoorPanels;
 
 namespace PresentationLayer.Presenter
 {
@@ -87,6 +90,7 @@ namespace PresentationLayer.Presenter
         void DeductPanelGlassID();
         void SetPanelGlassID();
         void AddItemInfoUC(IWindoorModel wndr);
+        List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel);
         void Invalidate_pnlMain();
         void Scenario_Quotation(bool QoutationInputBox_OkClicked,
                                 bool NewItem_OkClicked,
@@ -105,6 +109,11 @@ namespace PresentationLayer.Presenter
         void SetSelectedDivider(IDividerModel divModel,
                                 ITransomUCPresenter transomUCP = null,
                                 IMullionUCPresenter mullionUCP = null);
+        void SetSelectedPanel(IPanelModel _panelModel, 
+                              ISlidingPanelUCPresenter slidingPanelUCPresenter,
+                              ICasementPanelUCPresenter casementPanelUCPresenter,
+                              IFixedPanelUCPresenter fixedPanelUCPresenter);
+        void DeselectPanel();
         void DeselectDivider();
         void Run_GetListOfMaterials_SpecificItem();
         void Set_User_View();

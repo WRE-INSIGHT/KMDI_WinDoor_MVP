@@ -78,7 +78,9 @@ namespace ServiceLayer.Services.PanelServices
                                             bool panelGeorgianBarOptionVisibility,
                                             HingeOption panelHingeOptions,
                                             bool panelSlidingTypeVisibility,
-                                            SlidingTypes panelSlidingTypes,string glasstype_insu_lumi
+                                            SlidingTypes panelSlidingTypes,
+                                            string glasstype_insu_lumi,
+                                            decimal glasspricepersqrmeter
 
                                             )
         {
@@ -143,7 +145,9 @@ namespace ServiceLayer.Services.PanelServices
                                              panelGeorgianBarOptionVisibility,
                                              panelHingeOptions,
                                              panelSlidingTypeVisibility,
-                                             panelSlidingTypes, glasstype_insu_lumi
+                                             panelSlidingTypes,
+                                             glasstype_insu_lumi,
+                                             glasspricepersqrmeter
                                              );
 
             ValidateModel(pnl);
@@ -216,7 +220,9 @@ namespace ServiceLayer.Services.PanelServices
                                          bool panelOrient = false,
                                          HingeOption panelHingeOptions = null,
                                          bool panelSlidingTypeVisibility = false,
-                                         SlidingTypes panelSlidingTypes = null, string glasstype_insu_lumi = null
+                                         SlidingTypes panelSlidingTypes = null, 
+                                         string glasstype_insu_lumi = null,
+                                         decimal glasspricepersqrmeter = 0
                                          )
         {
             if (panelName == "")
@@ -298,7 +304,9 @@ namespace ServiceLayer.Services.PanelServices
                                                        panelGeorgianBarOptionVisibility,
                                                        panelHingeOptions,
                                                        panelSlidingTypeVisibility,
-                                                       panelSlidingTypes, glasstype_insu_lumi);
+                                                       panelSlidingTypes, 
+                                                       glasstype_insu_lumi,
+                                                       glasspricepersqrmeter);
 
             return _panelModel;
         }

@@ -1591,7 +1591,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-
+                _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
 
                 //save frame
                 Windoor_Save_UserControl();
@@ -1969,7 +1969,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
-
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
             }
@@ -1988,6 +1988,7 @@ namespace PresentationLayer.Presenter
                 _windoorModel.SetDimensions_basePlatform();
                 _windoorModel.SetZoom();
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
 
                 //FitControls_InsideMultiPanel();
                 //Fit_MyControls_byControlsLocation();
@@ -2344,38 +2345,38 @@ namespace PresentationLayer.Presenter
 
             #region Insulated
             
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear","DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear","Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated", false, true, false, true, false);
             //Annealed
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tinted + 12 + 6 mm Tinted", "Double Insulated", false, true, false, true, false);
             //Tempered
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Clear + 12 + 6 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Tinted", "Double Insulated", false, true, false, true, false);
             //Annealed with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tinted + 10 Argon + 4 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tinted + 12 Argon + 6 mm Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             //Tempered with Low-e
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Clear + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(23.0f, "5 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Clear + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(18.0f, "4 mm Tempered Tinted + 10 Argon + 4 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Tinted + 12 Argon + 6 mm Tempered Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
             //Tempered Heat-Soaked with Low-e
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e", "DI", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Heat-Soaked Clear + 12 Argon + 6 mm Tempered Heat-Soaked Clear with HardCoated Low-e", "Double Insulated", false, true, false, true, false);
 
 
 
@@ -2386,63 +2387,63 @@ namespace PresentationLayer.Presenter
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear","DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear","DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear","Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(25.52f, "12 mm Tempered Clear + 1.52  SG InterLayer + 12 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear with Low-e + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear with Low-e + 1.52  + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(23.04f, "10 mm Tempered Clear with Low-e + 3.04 + 10 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52  + 4 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(10.52f, "4 mm Tempered Clear + 1.52  + 5 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.52f, "4 mm Tempered Clear + 1.52  + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);        
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);        
                         
-            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "DL", false, true, false, false, true);//
+            _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);//
 
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Clear + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 + 4 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(21.04f, "10 mm  Clear + 3.04 + 8 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(7.38f, "4 mm  Clear with Low-e + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear with Low-e + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Clear with Low-e + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(5.76f, "4 mm  Clear with Low-e + 0.76 + 1 mm  Tinted", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.38f, "3 mm  Tinted + 0.38 + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76, "6 mm  Tinted + 0.76 + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76, "6 mm  Tinted + 0.76 + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(6.338f, "3 mm  Clear + 0.38 White PVB  + 3 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Clear + 0.76 White PVB  + 4 mm  Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.76f, "6 mm  Clear + 0.76 White PVB  + 5 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.89f, "6 mm  Clear + 0.89 SG Interlayer  + 6 mm  Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(7.52f, "3 mm Tempered Clear + 1.52 + 3 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.52f, "6 mm Tempered Clear + 1.52 + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Clear + 1.52 + 5 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
 
-            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e" , "DL", false, true, false, false, true);//Same above but diff price and pos
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear" , "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "DL", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "DL", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e" , "Double Laminated", false, true, false, false, true);//Same above but diff price and pos
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear" , "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
 
 
             #endregion
@@ -2453,17 +2454,17 @@ namespace PresentationLayer.Presenter
 
             #region InsuLated
 
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "TI" ,false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "TI", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "TI", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated" ,false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
             //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One)", false, false, true, true, false);
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "TI", false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 Argon + 4 mm  Clear + 6 Argon + 4 mm Tempered Clear with Low-e", "Triple Insulated", false, false, true, true, false);
 
             #endregion
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "TL" ,false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated" ,false, false, true, false, true);
             //_glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
 
             #endregion
@@ -6380,15 +6381,16 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _frameImagerUCP);
                                     IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel2ndLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel2ndLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           _multiTransomUCP,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiMullionImagerUCP);
 
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC2nd = _multiMullionUCP.GetMultiPanel();
@@ -6403,14 +6405,15 @@ namespace PresentationLayer.Presenter
                                                                                                                                       _frameImagerUCP);
                                     IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
                                     IMultiPanelTransomUCPresenter multiUCP = (MultiPanelTransomUCPresenter)_multiTransomUCP.GetNewInstance(_unityC,
-                                                                                                                    _multiPanelModel2ndLvl,
-                                                                                                                    _frameModel,
-                                                                                                                    this,
-                                                                                                                    _frameUCPresenter,
-                                                                                                                    multiPropUCP,
-                                                                                                                    _frameImagerUCP,
-                                                                                                                    _basePlatformImagerUCPresenter,
-                                                                                                                    multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel2ndLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiTransomImagerUCP);
                                     _multiTransomUCP = multiUCP;
                                     _multiTransomUC2nd = _multiTransomUCP.GetMultiPanel();
                                     _frameModel.Frame_UC.Controls.Add((UserControl)_multiTransomUC2nd);
@@ -6468,16 +6471,17 @@ namespace PresentationLayer.Presenter
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel3rdLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP,
-                                                                                                      _multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                            _multiPanelModel3rdLvl,
+                                                                                                                                            _frameModel,
+                                                                                                                                            this,
+                                                                                                                                            _frameUCPresenter,
+                                                                                                                                            _multiTransomUCP,
+                                                                                                                                            multiPropUCP,
+                                                                                                                                            _frameImagerUCP,
+                                                                                                                                            _basePlatformImagerUCPresenter,
+                                                                                                                                            multiMullionImagerUCP,
+                                                                                                                                            _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC3rd = _multiMullionUCP.GetMultiPanel();
                                     _multiTransomUC2nd.Getflp().Controls.Add((UserControl)_multiMullionUC3rd);
@@ -6498,6 +6502,7 @@ namespace PresentationLayer.Presenter
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                                     _multiPanelModel2ndLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                                    _userModel,
                                                                                                                     _multiPanelModel3rdLvl,
                                                                                                                     _frameModel,
                                                                                                                     this,
@@ -6580,16 +6585,17 @@ namespace PresentationLayer.Presenter
                                     _multiTransomImagerUCP.AddControl((UserControl)multiMullionImagerUC);
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiMullionImagerUC);
                                     IMultiPanelMullionUCPresenter multiUCP = (MultiPanelMullionUCPresenter)_multiMullionUCP.GetNewInstance(_unityC,
-                                                                                                      _multiPanelModel4thLvl,
-                                                                                                      _frameModel,
-                                                                                                      this,
-                                                                                                      _frameUCPresenter,
-                                                                                                      _multiTransomUCP,
-                                                                                                      multiPropUCP,
-                                                                                                      _frameImagerUCP,
-                                                                                                      _basePlatformImagerUCPresenter,
-                                                                                                      multiMullionImagerUCP,
-                                                                                                      _multiTransomImagerUCP);
+                                                                                                                                           _userModel,
+                                                                                                                                           _multiPanelModel4thLvl,
+                                                                                                                                           _frameModel,
+                                                                                                                                           this,
+                                                                                                                                           _frameUCPresenter,
+                                                                                                                                           _multiTransomUCP,
+                                                                                                                                           multiPropUCP,
+                                                                                                                                           _frameImagerUCP,
+                                                                                                                                           _basePlatformImagerUCPresenter,
+                                                                                                                                           multiMullionImagerUCP,
+                                                                                                                                           _multiTransomImagerUCP);
                                     _multiMullionUCP = multiUCP;
                                     _multiMullionUC4th = _multiMullionUCP.GetMultiPanel();
                                     _multiTransomUC3rd.Getflp().Controls.Add((UserControl)_multiMullionUC4th);
@@ -6609,6 +6615,7 @@ namespace PresentationLayer.Presenter
                                     _multiMullionImagerUCP.AddControl((UserControl)multiTransomImagerUC);
                                     _multiPanelModel3rdLvl.MPanelLst_Imagers.Add((UserControl)multiTransomImagerUC);
                                     IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
+                                                                                                                    _userModel,
                                                                                                                     _multiPanelModel4thLvl,
                                                                                                                     _frameModel,
                                                                                                                     this,
@@ -7812,7 +7819,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.ItemToolStripEnabled = false;
         }
-
+        
         private void BotToolStrip_Enable()
         {
             _mainView.GetPanelBot().Enabled = true;
@@ -8086,6 +8093,7 @@ namespace PresentationLayer.Presenter
                         AddConcreteList_WindoorModel(_concreteModel);
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                     }
                     else if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
@@ -8151,6 +8159,7 @@ namespace PresentationLayer.Presenter
 
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
+                        _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         GetCurrentPrice();
                     }
                 }
@@ -8230,8 +8239,8 @@ namespace PresentationLayer.Presenter
                 {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Frame)
                     {
-                        bool NewFrameSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                              frmDimension_numHt);
+                        bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                       frmDimension_numHt);
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -8273,6 +8282,7 @@ namespace PresentationLayer.Presenter
 
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                             GetCurrentPrice();
                         }
                         else
@@ -8286,8 +8296,8 @@ namespace PresentationLayer.Presenter
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Concrete)
                     {
 
-                        bool NewConcreteSizeFit = CheckDimensionFromBasePlatform(frmDimension_numWd,
-                                                                                 frmDimension_numHt);
+                        bool NewConcreteSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
+                                                                                          frmDimension_numHt);
                         if (NewConcreteSizeFit)
                         {
                             int concreteID = _windoorModel.concreteIDCounter += 1;
@@ -8308,6 +8318,7 @@ namespace PresentationLayer.Presenter
                             _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                             _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                             _windoorModel.Fit_MyControls_ToBindDimensions();
+                            _windoorModel.Fit_MyControls_ImagersToBindDimensions();
                         }
                         else
                         {
@@ -8338,7 +8349,10 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.Invalidate_flpMain();
             }
             if (_windoorModel.lst_objects.Count > 1)
+            {
                 _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+            }
             //Load_Windoor_Item(_windoorModel);
         }
         #endregion
@@ -8417,31 +8431,11 @@ namespace PresentationLayer.Presenter
             try
             {
                 _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                //foreach (IWindoorModel wndrm in _quotationModel.Lst_Windoor)
-                //{
-                //    foreach (IFrameModel frm_Clear in wndrm.lst_frame)
-                //    {
-                //        frm_Clear.Frame_PropertiesUC.Dispose();
-                //        frm_Clear.Frame_UC.Dispose();
-                //        frm_Clear.Frame_PropertiesUC = null;
-                //        frm_Clear.Frame_UC = null;
-                //    }
-                //}
 
                 //save frame
                 Windoor_Save_UserControl();
                 Windoor_Save_PropertiesUC();
-                //IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
-                //foreach (Control cons in controls)
-                //{
-                //    cons.Dispose();
-                //}
-                //IEnumerable<Control> controlss = _pnlPropertiesBody.Controls.Cast<Control>().OfType<Control>();
-                //foreach (Control cons in controlss)
-                //{
-                //    cons.Dispose();
-                //}
-
+              
                 //set mainview
                 _windoorModel = item;
 
@@ -8461,231 +8455,6 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter = _basePlatformImagerUCPresenter.GetNewInstance(_unityC, _windoorModel, this);
                 UserControl bpUC = (UserControl)_basePlatformImagerUCPresenter.GetBasePlatformImagerUC();
                 _mainView.GetThis().Controls.Add(bpUC);
-
-                //foreach (Control wndrObject in _windoorModel.lst_objects)
-                //{
-                //    if (wndrObject.Name.Contains("Frame"))
-                //    {
-                //        #region FrameModel
-                //        foreach (IFrameModel frm in _windoorModel.lst_frame)
-                //        {
-                //            if (frm.Frame_Name == wndrObject.Name)
-                //            {
-
-                //                frm.Set_DimensionsToBind_using_FrameZoom();
-                //                frm.Set_ImagerDimensions_using_ImagerZoom();
-                //                frm.Set_FramePadding();
-
-                //                IFramePropertiesUCPresenter framePropUCP = AddFramePropertiesUC(frm);
-                //                AddFrameUC(frm, framePropUCP);
-
-                //                frm.Frame_UC = (UserControl)_frameUC;
-                //                frm.Frame_PropertiesUC = (UserControl)framePropUCP.GetFramePropertiesUC();
-                //                _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                //                _basePlatformPresenter.InvalidateBasePlatform();
-                //                _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
-                //                _windoorModel.Fit_MyControls_ToBindDimensions();
-
-                //                #region  Frame Panel
-                //                foreach (PanelModel pnl in frm.Lst_Panel)
-                //                {
-                //                }
-                //                #endregion
-                //                #region 2nd Level MultiPanel
-                //                foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
-                //                {
-                //                    FlowDirection flow = FlowDirection.LeftToRight;
-                //                    if (mpnl.MPanel_Name.Contains("Transom"))
-                //                    {
-                //                        flow = FlowDirection.TopDown;
-                //                    }
-
-                //                    frm.SetDeductFramePadding(true);
-                //                    mpnl.Set_DimensionToBind_using_FrameDimensions();
-                //                    mpnl.Imager_Set_DimensionToBind_using_FrameDimensions();
-
-                //                    IMultiPanelPropertiesUCPresenter multiPropUCP = _multiPanelPropertiesUCP.GetNewInstance(_unityC, mpnl, this);
-                //                    UserControl multiPropUC = (UserControl)multiPropUCP.GetMultiPanelPropertiesUC();
-                //                    multiPropUC.Dock = DockStyle.Top;
-                //                    framePropUCP.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(multiPropUC);
-                //                    frm.AdjustPropertyPanelHeight("Mpanel", "add");
-
-                //                    if (mpnl.MPanel_Name.Contains("Mullion"))
-                //                    {
-                //                        IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = _multiMullionImagerUCP.GetNewInstance(_unityC,
-                //                                                                                                                          mpnl,
-                //                                                                                                                          _frameModel,
-                //                                                                                                                          _frameImagerUCP);
-                //                        IMultiPanelMullionImagerUC multiMullionImagerUC = multiMullionImagerUCP.GetMultiPanelImager();
-                //                        //_frameImagerUCP.AddControl((UserControl)multiMullionImagerUC);
-                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-
-                //                        IMultiPanelMullionUCPresenter multiUCP = _multiMullionUCP.GetNewInstance(_unityC,
-                //                                                                                          mpnl,
-                //                                                                                          _frameModel,
-                //                                                                                          this,
-                //                                                                                          _frameUCPresenter,
-                //                                                                                          _multiTransomUCP,
-                //                                                                                          multiPropUCP,
-                //                                                                                          _frameImagerUCP,
-                //                                                                                          _basePlatformImagerUCPresenter,
-                //                                                                                          multiMullionImagerUCP);
-                //                        IMultiPanelMullionUC multiUC = multiUCP.GetMultiPanel();
-                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
-                //                    }
-                //                    else if (mpnl.MPanel_Name.Contains("Transom"))
-                //                    {
-                //                        IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = _multiTransomImagerUCP.GetNewInstance(_unityC,
-                //                                                                                                                          mpnl,
-                //                                                                                                                          _frameModel,
-                //                                                                                                                          _frameImagerUCP);
-                //                        IMultiPanelTransomImagerUC multiTransomImagerUC = multiTransomImagerUCP.GetMultiPanelImager();
-                //                        //_frameImagerUCP.AddControl((UserControl)multiTransomImagerUC);
-                //                        _basePlatformImagerUCPresenter.InvalidateBasePlatform();
-                //                        IMultiPanelTransomUCPresenter multiTransomUCP = _multiTransomUCP.GetNewInstance(_unityC,
-                //                                                                                                        mpnl,
-                //                                                                                                        frm,
-                //                                                                                                        this,
-                //                                                                                                        _frameUCPresenter,
-                //                                                                                                        multiPropUCP,
-                //                                                                                                        _frameImagerUCP,
-                //                                                                                                        _basePlatformImagerUCPresenter,
-                //                                                                                                        multiTransomImagerUCP);
-                //                        IMultiPanelTransomUC multiUC = multiTransomUCP.GetMultiPanel();
-                //                        frm.Frame_UC.Controls.Add((UserControl)multiUC);
-                //                    }
-                //                    foreach (Control ctrl in mpnl.MPanelLst_Objects)
-                //                    {
-                //                        if (ctrl.Name.Contains("PanelUC"))
-                //                        {
-                //                            #region 2nd Level MultiPanel Panel
-                //                            foreach (PanelModel pnl in mpnl.MPanelLst_Panel)
-                //                            {
-                //                                if (ctrl.Name == pnl.Panel_Name)
-                //                                {
-                //                                }
-                //                            }
-                //                            #endregion
-
-                //                        }
-                //                        else if (ctrl.Name.Contains("MullionUC") || ctrl.Name.Contains("TransomUC"))
-                //                        {
-                //                            #region 2nd Level MultiPanel Divider
-                //                            foreach (DividerModel div in mpnl.MPanelLst_Divider)
-                //                            {
-                //                                if (ctrl.Name == div.Div_Name)
-                //                                {
-
-                //                                }
-                //                            }
-                //                            #endregion
-
-                //                        }
-                //                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
-                //                        {
-
-                //                            #region 2nd Level MultiPanel MultiPanel
-
-                //                            foreach (MultiPanelModel thirdlvlmpnl in mpnl.MPanelLst_MultiPanel)
-                //                            {
-                //                                if (ctrl.Name == thirdlvlmpnl.MPanel_Name)
-                //                                {
-                //                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
-                //                                    {
-                //                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
-                //                                        {
-                //                                            foreach (PanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
-                //                                            {
-                //                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
-                //                                                {
-
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        else if (thirdlvlctrl.Name.Contains("MullionUC") || thirdlvlctrl.Name.Contains("TransomUC"))
-                //                                        {
-
-                //                                            foreach (DividerModel div in thirdlvlmpnl.MPanelLst_Divider)
-                //                                            {
-                //                                                if (thirdlvlctrl.Name == div.Div_Name)
-                //                                                {
-
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        foreach (MultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
-                //                                        {
-                //                                            if (thirdlvlctrl.Name == fourthlvlmpnl.MPanel_Name)
-                //                                            {
-                //                                                foreach (Control fourthlvlctrl in fourthlvlmpnl.MPanelLst_Objects)
-                //                                                {
-
-                //                                                    if (fourthlvlctrl.Name.Contains("PanelUC"))
-                //                                                    {
-                //                                                        foreach (PanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
-                //                                                        {
-                //                                                            if (fourthlvlctrl.Name == pnl.Panel_Name)
-                //                                                            {
-
-                //                                                            }
-                //                                                        }
-
-                //                                                    }
-                //                                                    else if (fourthlvlctrl.Name.Contains("MullionUC") || fourthlvlctrl.Name.Contains("TransomUC"))
-                //                                                    {
-                //                                                        foreach (DividerModel div in fourthlvlmpnl.MPanelLst_Divider)
-                //                                                        {
-                //                                                            if (fourthlvlctrl.Name == div.Div_Name)
-                //                                                            {
-
-                //                                                            }
-                //                                                        }
-                //                                                    }
-                //                                                }
-                //                                            }
-                //                                        }
-                //                                        //mpnlPropertyHeight -= 1;
-
-                //                                    }
-                //                                }
-                //                            }
-                //                            #endregion
-                //                        }
-                //                    }
-                //                }
-                //                #endregion
-
-                //            }
-
-                //        }
-
-                //        #endregion
-                //    }
-                //    else
-                //    {
-                //        #region Concrete
-
-                //        foreach (IConcreteModel crm in _windoorModel.lst_concrete)
-                //        {
-                //            if (wndrObject.Name == crm.Concrete_Name)
-                //            {
-
-                //            }
-                //        }
-                //        #endregion
-                //    }
-
-
-                //}
-
-                //GetCurrentPrice();
-
-
-
-
-
-
-
 
 
                 foreach (Control wndr_objects in _windoorModel.lst_objects)
@@ -9385,6 +9154,7 @@ namespace PresentationLayer.Presenter
             IFrameImagerUCPresenter frameImagerUCP = (FrameImagerUCPresenter)_frameImagerUCPresenter.GetNewInstance(_unityC, frameModel, this);
 
             IFrameUCPresenter frameUCP = (FrameUCPresenter)_frameUCPresenter.GetNewInstance(_unityC,
+                                                                                            _userModel,
                                                                                             frameModel,
                                                                                             this,
                                                                                             _basePlatformPresenter,
@@ -9578,8 +9348,87 @@ namespace PresentationLayer.Presenter
             }
 
         }
-
+        ISlidingPanelUCPresenter current_sliding;
+        ICasementPanelUCPresenter current_casement;
+        IFixedPanelUCPresenter current_fixed;
+        public void SetSelectedPanel(IPanelModel panelModel, 
+                                     ISlidingPanelUCPresenter slidingPanelUCPresenter = null,
+                                     ICasementPanelUCPresenter casementPanelUCPresenter = null,
+                                     IFixedPanelUCPresenter fixedPanelUCPresenter = null)
+        {
+            _tsLblStatus.Visible = true;
+            _tsLblStatus.Text = panelModel.Panel_Name + " Selected";
+            if (slidingPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else  if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                slidingPanelUCPresenter.boolKeyDown = true;
+                slidingPanelUCPresenter.FocusOnThisSlidingPanel();
+                current_sliding = slidingPanelUCPresenter;
+            }
+            else if (casementPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                casementPanelUCPresenter.boolKeyDown = true;
+                casementPanelUCPresenter.FocusOnThisCasementPanel();
+                current_casement = casementPanelUCPresenter;
+            }
+            else if (fixedPanelUCPresenter != null)
+            {
+                if (current_sliding != null)
+                {
+                    current_sliding.boolKeyDown = false;
+                    current_sliding = null;
+                }
+                else if (current_casement != null)
+                {
+                    current_casement.boolKeyDown = false;
+                    current_casement = null;
+                }
+                else if (current_fixed != null)
+                {
+                    current_fixed.boolKeyDown = false;
+                    current_fixed = null;
+                }
+                fixedPanelUCPresenter.boolKeyDown = true;
+                fixedPanelUCPresenter.FocusOnThisFixedPanel();
+                current_fixed = fixedPanelUCPresenter;
+            }
+        }
         public void DeselectDivider()
+        {
+            _mainView.GetLblSelectedDivider().Visible = false;
+            _mainView.GetLblSelectedDivider().Text = "";
+            _mainView.SetActiveControl(null);
+        }
+        public void DeselectPanel()
         {
             _mainView.GetLblSelectedDivider().Visible = false;
             _mainView.GetLblSelectedDivider().Text = "";
@@ -9725,7 +9574,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-        private List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
+        public List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel)
         {
             List<IMultiPanelModel> lst_MPanel = new List<IMultiPanelModel>();
             if (frmModel.Lst_MultiPanel.Count > 0)
@@ -10110,14 +9959,14 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
-        private bool CheckDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
+        private bool CheckAvailableDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
         {
             int occupiedWidth = 0,
                 occupiedHeight = 0,
                 Maxheight = 0,
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
-            bool NewBaseFlatformObjectFit = true;
+            bool isDimentionFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
@@ -10138,7 +9987,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
                         }
                         if (occupiedWidth >= _windoorModel.WD_width)
@@ -10151,7 +10000,18 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= frm.Frame_Width;
+                            if(availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += frm.Frame_Height;
+                                availableHeight -= frm.Frame_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= frm.Frame_Width;
+                            }
+                            
                         }
                     }
 
@@ -10173,7 +10033,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                NewBaseFlatformObjectFit = false;
+                                isDimentionFit = false;
                             }
 
                         }
@@ -10187,7 +10047,19 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            availableWidth -= crtm.Concrete_Width;
+
+
+                            if (availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            {
+                                availableWidth = _windoorModel.WD_width;
+                                occupiedHeight += crtm.Concrete_Height;
+                                availableHeight -= crtm.Concrete_Height;
+                                Maxheight = 0;
+                            }
+                            else
+                            {
+                                availableWidth -= crtm.Concrete_Width;
+                            }
                         }
                     }
 
@@ -10195,11 +10067,14 @@ namespace PresentationLayer.Presenter
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
             {
-                NewBaseFlatformObjectFit = false;
+                isDimentionFit = false;
 
             }
-            return NewBaseFlatformObjectFit;
+            return isDimentionFit;
         }
+
+       
+
         #endregion
 
     }

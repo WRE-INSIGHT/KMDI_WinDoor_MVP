@@ -50,7 +50,7 @@
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -68,28 +68,28 @@
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.RightToolStripMenuItem_Click);
             // 
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.leftToolStripMenuItem.Text = "Left";
             this.leftToolStripMenuItem.Click += new System.EventHandler(this.LeftToolStripMenuItem_Click);
             // 
             // bothToolStripMenuItem
             // 
             this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
-            this.bothToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bothToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.bothToolStripMenuItem.Text = "Both";
             this.bothToolStripMenuItem.Click += new System.EventHandler(this.BothToolStripMenuItem_Click);
             // 
             // noneToolStripMenuItem
             // 
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.noneToolStripMenuItem.Text = "None";
             this.noneToolStripMenuItem.Click += new System.EventHandler(this.NoneToolStripMenuItem_Click);
             // 
@@ -102,12 +102,15 @@
             this.Name = "CasementPanelUC";
             this.SizeChanged += new System.EventHandler(this.CasementPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CasementPanelUC_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CasementPanelUC_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CasementPanelUC_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CasementPanelUC_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CasementPanelUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.CasementPanelUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.CasementPanelUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CasementPanelUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CasementPanelUC_MouseUp);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.CasementPanelUC_PreviewKeyDown);
             this.cmenu_casement.ResumeLayout(false);
             this.ResumeLayout(false);
 

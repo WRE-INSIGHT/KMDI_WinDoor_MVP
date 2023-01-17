@@ -70,6 +70,8 @@ namespace ServiceLayer.Services.PanelServices
                                   bool panelOrient = false,
                                   HingeOption panelHingeOptions = null,
                                   bool panelSlidingTypeVisibility = false,
-                                  SlidingTypes panelSlidingTypes = null,string glasstype_insu_lumi = null);
+                                  SlidingTypes panelSlidingTypes = null,
+                                  string glasstype_insu_lumi = null,
+                                  decimal glasspricepersqrmeter = 0);
     }
 }

@@ -1013,40 +1013,157 @@ namespace ModelLayer.Model.Quotation.WinDoor
             int diff_BasePlatform_VS_MyCtrlsWidth = objectWidth - (WD_width_4basePlatform - 70);
             if(diff_BasePlatform_VS_MyCtrlsWidth > 0)
                 WD_width_4basePlatform += diff_BasePlatform_VS_MyCtrlsWidth;
-            //while (diff_BasePlatform_VS_MyCtrlsWidth < 0)
-            //{
-            //    foreach (var wndrObject in lst_objects)
-            //    {
-            //        if (startingObject == wndrObject)
-            //        {
-            //            foreach (IFrameModel frm in lst_frame)
-            //            {
-            //                if (wndrObject.Name == frm.Frame_Name)
-            //                {
-            //                    //frm.Frame_Width--;
-            //                    frm.Frame_WidthToBind--;
-            //                    diff_BasePlatform_VS_MyCtrlsWidth++;
-            //                }
-            //            }
-            //            foreach (IConcreteModel crtm in lst_concrete)
-            //            {
-            //                if (wndrObject.Name == crtm.Concrete_Name)
-            //                {
-            //                    //crtm.Concrete_Width--;
-            //                    crtm.Concrete_WidthToBind--;
-            //                    diff_BasePlatform_VS_MyCtrlsWidth++;
-            //                }
-            //            }
-            //            if (lastObject == wndrObject)
-            //            {
-            //                break;
-            //            }
-            //        }
-            //    }
-              
-            //}
+        }
 
+        public void Fit_MyControls_ImagersToBindDimensions()
+        {
+            int occupiedWidth = 0,
+                occupiedHeight = 0,
+                Maxheight = 0,
+                availableWidth = WD_width,
+                availableHeight = WD_height;
+            if (lst_objects.Count > 1)
+            {
+                var startingObject = lst_objects[0];
+                startingObject = null;
+                foreach (var wndrObject in lst_objects)
+                {
+                    foreach (IFrameModel frm in lst_frame)
+                    {
+                        if (wndrObject.Name == frm.Frame_Name)
+                        {
+                            if (availableWidth > frm.Frame_Width)
+                            {
+                                if (startingObject == null)
+                                {
+                                    startingObject = wndrObject;
+                                }
+                                if (availableHeight >= frm.Frame_Height)
+                                {
+                                    occupiedWidth += frm.Frame_Width;
+                                    if (Maxheight < frm.Frame_Height)
+                                    {
+                                        Maxheight = frm.Frame_Height;
+                                    }
+                                }
+                                else
+                                {
+                                }
+                            }
+                            else if (availableWidth == frm.Frame_Width)
+                            {
+                                Fit_MyImagerObject_ToBindDimensions(startingObject, wndrObject);
+                                occupiedWidth += frm.Frame_Width;
+                                if (Maxheight < frm.Frame_Height)
+                                {
+                                    Maxheight = frm.Frame_Height;
+                                }
+                                startingObject = null;
+                            }
+                            if (occupiedWidth >= WD_width)
+                            {
+                                occupiedHeight += Maxheight;
+                                occupiedWidth = 0;
+                                availableWidth = WD_width;
+                                availableHeight -= Maxheight;
+                            }
+                            else
+                            {
+                                availableWidth -= frm.Frame_Width;
+                            }
+                        }
+                    }
+                    foreach (IConcreteModel crtm in lst_concrete)
+                    {
+                        if (wndrObject.Name == crtm.Concrete_Name)
+                        {
+                            if (availableWidth > crtm.Concrete_Width)
+                            {
+                                if (startingObject == null)
+                                {
+                                    startingObject = wndrObject;
+                                }
+                                if (availableHeight >= crtm.Concrete_Height)
+                                {
+                                    occupiedWidth += crtm.Concrete_Width;
+                                    if (Maxheight < crtm.Concrete_Height)
+                                    {
+                                        Maxheight = crtm.Concrete_Height;
+                                    }
+                                }
+                                else
+                                {
+                                }
+                            }
+                            else if (availableWidth == crtm.Concrete_Width)
+                            {
+                                if (startingObject == null)
+                                {
+                                    startingObject = wndrObject;
+                                }
+                                Fit_MyImagerObject_ToBindDimensions(startingObject, wndrObject);
+                                occupiedWidth += crtm.Concrete_Width;
+                                if (Maxheight < crtm.Concrete_Height)
+                                {
+                                    Maxheight = crtm.Concrete_Height;
+                                }
+                                startingObject = null;
+                            }
+                            if (occupiedWidth >= WD_width)
+                            {
+                                occupiedHeight += Maxheight;
+                                occupiedWidth = 0;
+                                availableWidth = WD_width;
+                                availableHeight -= Maxheight;
+                            }
+                            else
+                            {
+                                availableWidth -= crtm.Concrete_Width;
+                            }
+                        }
 
+                    }
+                }
+            }
+        }
+
+        private void Fit_MyImagerObject_ToBindDimensions(Control startingObject, Control lastObject)
+        {
+            int objectWidth = 0;
+            bool isLoad = false;
+            foreach (var wndrObject in lst_objects)
+            {
+                if (startingObject == wndrObject)
+                {
+                    isLoad = true;
+                }
+                if (isLoad == true)
+                {
+
+                    foreach (IFrameModel frm in lst_frame)
+                    {
+                        if (wndrObject.Name == frm.Frame_Name)
+                        {
+                            objectWidth += frm.FrameImageRenderer_Width;
+                        }
+                    }
+                    foreach (IConcreteModel crtm in lst_concrete)
+                    {
+                        if (wndrObject.Name == crtm.Concrete_Name)
+                        {
+                            objectWidth += crtm.Concrete_ImagerWidthToBind;
+                        }
+                    }
+                }
+                if (lastObject == wndrObject)
+                {
+                    break;
+                }
+            }
+
+            int diff_BasePlatform_VS_MyCtrlsWidth = objectWidth - (WD_width_4basePlatform_forImageRenderer - 70);
+            if (diff_BasePlatform_VS_MyCtrlsWidth > 0)
+                WD_width_4basePlatform_forImageRenderer += diff_BasePlatform_VS_MyCtrlsWidth;
         }
 
         #endregion

@@ -46,13 +46,13 @@
             this.deleteToolStripMenuItem,
             this.overlapSashToolStripMenuItem});
             this.cmenu_fxd.Name = "cmenu_fxd";
-            this.cmenu_fxd.Size = new System.Drawing.Size(153, 70);
+            this.cmenu_fxd.Size = new System.Drawing.Size(143, 48);
             this.cmenu_fxd.Opening += new System.ComponentModel.CancelEventHandler(this.cmenu_fxd_Opening);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -64,7 +64,7 @@
             this.bothToolStripMenuItem,
             this.noneToolStripMenuItem});
             this.overlapSashToolStripMenuItem.Name = "overlapSashToolStripMenuItem";
-            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.overlapSashToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.overlapSashToolStripMenuItem.Text = "Overlap Sash";
             // 
             // rightToolStripMenuItem
@@ -106,12 +106,15 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.SizeChanged += new System.EventHandler(this.FixedPanelUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FixedPanelUC_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FixedPanelUC_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseDown);
             this.MouseEnter += new System.EventHandler(this.FixedPanelUC_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.FixedPanelUC_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FixedPanelUC_MouseUp);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FixedPanelUC_PreviewKeyDown);
             this.cmenu_fxd.ResumeLayout(false);
             this.ResumeLayout(false);
 

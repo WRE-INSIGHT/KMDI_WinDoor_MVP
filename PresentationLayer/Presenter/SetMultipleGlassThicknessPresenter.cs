@@ -52,18 +52,21 @@ namespace PresentationLayer.Presenter
 
         private void SubscribeToEventsSetup()
         {
-
             _setMultipleGlassThicknessView.setMultipleGlassThicknessLoadEventRaised += new EventHandler(OnsetMultipleGlassThicknessLoadEventRaised);
             _setMultipleGlassThicknessView.mouseClickEventRaised += new EventHandler(OnmouseClickEventRaised);
             _setMultipleGlassThicknessView.dgvSetMultipleGlassRowPostPaineEventRaised += new DataGridViewRowPostPaintEventHandler(OndgvSetMultipleGlassRowPostPaineEventRaised);
+            _setMultipleGlassThicknessView.cmbSelectGlassTypeEventRaised += new EventHandler(OncmbSelectGlassTypeEventRaised);
+        }
 
+        private void OncmbSelectGlassTypeEventRaised(object sender, EventArgs e)
+        {
+            GetCurrentGlassthickness();
         }
 
         public void GetCurrentGlassthickness()
         {
-            _dgvGlassSummary.DataSource = showGlassSummary();
+            _dgvGlassSummary.DataSource = showGlassSummary();           
         }
-
 
         private void OndgvSetMultipleGlassRowPostPaineEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -71,8 +74,7 @@ namespace PresentationLayer.Presenter
         }
 
         private void OnmouseClickEventRaised(object sender, EventArgs e)
-        {
-
+        {           
             foreach (DataGridViewRow r in _dgvGlassSummary.SelectedRows)
             {                
                 _panelIdList.Add(r.Cells[0].Value.ToString());
@@ -127,7 +129,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Select Multiple Panels", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             _panelIdList.Clear();
-          
+            
         }
 
         private void OnsetMultipleGlassThicknessLoadEventRaised(object sender, EventArgs e)
@@ -144,6 +146,7 @@ namespace PresentationLayer.Presenter
             dt.Columns.Add("Glass Description", typeof(string));
             dt.Columns.Add("Panel Dimension", typeof(string));
             dt.Columns.Add("Glass Type", typeof(string));
+            dt.Columns.Add("Glass Price Per SQ.M", typeof(decimal));
 
 
             foreach (IFrameModel fr in _windoorModel.lst_frame)
@@ -160,6 +163,7 @@ namespace PresentationLayer.Presenter
                             dr["Glass Description"] = pnl.Panel_GlassThicknessDesc;
                             dr["Panel Dimension"] = pnl.Panel_GlassWidth + " w x " + pnl.Panel_GlassHeight;
                             dr["Glass Type"] = pnl.Panel_GlassType;
+                            dr["Glass Price Per SQ.M"] = pnl.Panel_GlassPricePerSqrMeter;
                             dt.Rows.Add(dr);
                         }
                     }
@@ -175,6 +179,7 @@ namespace PresentationLayer.Presenter
                     dr["Glass Description"] = Singlepnl.Panel_GlassThicknessDesc;
                     dr["Panel Dimension"] = Singlepnl.Panel_GlassWidth + " w x " + Singlepnl.Panel_GlassHeight;
                     dr["Glass Type"] = Singlepnl.Panel_GlassType;
+                    dr["Glass Price Per SQ.M"] = Singlepnl.Panel_GlassPricePerSqrMeter;
                     dt.Rows.Add(dr);
 
                 }

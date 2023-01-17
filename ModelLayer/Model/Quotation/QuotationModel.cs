@@ -2271,10 +2271,16 @@ namespace ModelLayer.Model.Quotation
 
         FilmPrice,
         GlassPrice,
+        temp = 0,
+        GlassPrice_Count3 = 0,
+        iterator = 1,
+        Curr_Price = 0,
+        Prev_Price = 0,
+        Glass_HeightxWidth_Total,
         #endregion
         #region FittingAndSupplies
 
-                FS_16HD_casementPricePerPiece = 825.81m,
+        FS_16HD_casementPricePerPiece = 825.81m,
                 FS_26HD_casementPricePerPiece = 1839.35m,
 
                 RestrictorStayPricePerPiece = 161.18m,
@@ -2519,7 +2525,7 @@ namespace ModelLayer.Model.Quotation
         #endregion
 
         #region changePriceBasedOnDate
-
+        int cnt = 0;
         public void changePriceBasedonDate()
         {
             var cus_ref_date = Date_Assigned;
@@ -3156,7 +3162,7 @@ namespace ModelLayer.Model.Quotation
         }
 
         #endregion
-
+       
         public DataTable ItemCostingPriceAndPoints()
         {
             lstTotalPrice = new List<decimal>();
@@ -3445,7 +3451,6 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
 
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
@@ -4524,7 +4529,7 @@ namespace ModelLayer.Model.Quotation
                                         else if (pnl.Panel_GlassType == GlassType._Double)
                                         {
 
-                                            if (pnl.Panel_GlassType_Insu_Lami == "DI")
+                                            if (pnl.Panel_GlassType_Insu_Lami == "Double Insulated")
                                             {
                                                 #region Insulated
                                                 if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear"))
@@ -4640,7 +4645,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 #endregion
                                             }
-                                            else if (pnl.Panel_GlassType_Insu_Lami == "DL")
+                                            else if (pnl.Panel_GlassType_Insu_Lami == "Double Laminated")
                                             {
                                                 #region Laminated
 
@@ -4830,7 +4835,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (pnl.Panel_GlassType == GlassType._Triple)
                                         {
-                                            if (pnl.Panel_GlassType_Insu_Lami == "TI")
+                                            if (pnl.Panel_GlassType_Insu_Lami == "Triple Insulated")
                                             {
                                                 #region Insulated
 
@@ -4853,7 +4858,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 #endregion
                                             }
-                                            else if (pnl.Panel_GlassType_Insu_Lami == "TL")
+                                            else if (pnl.Panel_GlassType_Insu_Lami == "Triple Insulated")
                                             {
                                                 #region Laminated
 
@@ -4896,6 +4901,7 @@ namespace ModelLayer.Model.Quotation
                                         CostingPoints += ProfileColorPoints * 4;
                                         InstallationPoints += (ProfileColorPoints / 3) * 4;
                                     }
+                                    
                                     else if (pnl.Panel_Type.Contains("Fixed"))
                                     {
                                         CostingPoints += ProfileColorPoints * 2;
@@ -4904,7 +4910,7 @@ namespace ModelLayer.Model.Quotation
                                         #region Glass 
 
                                         if (pnl.Panel_GlassType == GlassType._Single)
-                                        {
+                                        {                                           
                                             if ((pnl.Panel_GlassType_Insu_Lami == "NA"))
                                             {
                                                 #region Single 
@@ -4958,7 +4964,7 @@ namespace ModelLayer.Model.Quotation
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmAnnealedClr_HrdCtd_LowE;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("6 mm  Tinted w/ HardCoated Low-E Grey"))
-                                                {
+                                                {   
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmAnnealedTinted_HrdCtd_LowE_Brnz_Bl_Grn_Gry;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Bronze") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Blue") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Green") || pnl.Panel_GlassThicknessDesc.Contains("8 mm  Tinted w/ HardCoated Low-E Grey"))
@@ -5049,7 +5055,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear"))
                                                 {
-                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                                    GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;                                                            
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear"))
                                                 {
@@ -5083,14 +5089,55 @@ namespace ModelLayer.Model.Quotation
                                                 {
                                                     GlassPrice += 0;
                                                 }
+                                                                                                
+                                                
+                                                //if (iterator <= 1)
+                                                //{
+                                                //    foreach (IMultiPanelModel multiP in fr.Lst_MultiPanel)
+                                                //    {
+                                                //        foreach (IPanelModel panel in multiP.MPanelLst_Panel)
+                                                //        {
+                                                //            cnt++;
+                                                //        }
+                                                //    }
 
+                                                //}
+                                                //    Glass_HeightxWidth_Total = ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
+                                                //    Prev_Price = temp;
+                                                //    Curr_Price = GlassPrice - Prev_Price;
+                                                //    pnl.Panel_GlassPricePerSqrMeter = Curr_Price / Glass_HeightxWidth_Total;
+                                                //    temp = Curr_Price;
+
+                                                //    if (iterator <= 2)
+                                                //    {
+                                                //        GlassPrice_Count3 = GlassPrice;
+                                                //    }
+
+                                                //    if (iterator >= 3)
+                                                //    {
+                                                //        temp = GlassPrice_Count3;
+                                                //        Curr_Price = GlassPrice - temp;
+                                                //        pnl.Panel_GlassPricePerSqrMeter = Curr_Price / Glass_HeightxWidth_Total;
+                                                //        GlassPrice_Count3 = GlassPrice;
+                                                //    }
+
+                                                //    if (iterator == cnt)
+                                                //    {
+                                                //        temp = 0;
+                                                //        Prev_Price = 0;
+                                                //        iterator = 0;
+                                                //        cnt = 0;
+                                                //    }
+
+                                                //    iterator++;
+                                                        
                                                 #endregion
                                             }
                                         }
                                         else if (pnl.Panel_GlassType == GlassType._Double)
                                         {
 
-                                            if (pnl.Panel_GlassType_Insu_Lami == "DI")
+                                            if (pnl.Panel_GlassType_Insu_Lami == "Double Insulated")
                                             {
                                                 #region Insulated
                                                 if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear"))
@@ -5206,7 +5253,7 @@ namespace ModelLayer.Model.Quotation
 
                                                 #endregion
                                             }
-                                            else if (pnl.Panel_GlassType_Insu_Lami == "DL")
+                                            else if (pnl.Panel_GlassType_Insu_Lami == "Double Laminated")
                                             {
                                                 #region Laminated
 
@@ -5396,7 +5443,7 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         else if (pnl.Panel_GlassType == GlassType._Triple)
                                         {
-                                            if (pnl.Panel_GlassType_Insu_Lami == "TI")
+                                            if (pnl.Panel_GlassType_Insu_Lami == "Triple Insulated")
                                             {
                                                 #region Insulated
 
@@ -5419,15 +5466,13 @@ namespace ModelLayer.Model.Quotation
 
                                                 #endregion
                                             }
-                                            else if (pnl.Panel_GlassType_Insu_Lami == "TL")
+                                            else if (pnl.Panel_GlassType_Insu_Lami == "Triple Laminated")
                                             {
                                                 #region Laminated
 
                                                 #endregion
                                             }
                                         }
-
-
 
                                         //sealant for glass
                                         Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
@@ -5456,6 +5501,7 @@ namespace ModelLayer.Model.Quotation
                                             FilmPrice += ((pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
                                         }
                                         #endregion
+                                       
                                     }
                                 }
                             }
@@ -6363,7 +6409,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "DI")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Double Insulated")
                                 {
                                     #region Insulated
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear"))
@@ -6479,7 +6525,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "DL")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Double Laminated")
                                 {
                                     #region Laminated
 
@@ -6666,7 +6712,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "TI")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Triple Insulated")
                                 {
                                     #region Insulated
 
@@ -6689,7 +6735,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "TL")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Triple Laminated")
                                 {
                                     #region Laminated
 
@@ -6918,7 +6964,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "DI")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Double Insulated")
                                 {
                                     #region Insulated
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear"))
@@ -7034,7 +7080,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "DL")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Double Laminated")
                                 {
                                     #region Laminated
 
@@ -7221,7 +7267,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "TI")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Triple Insulated")
                                 {
                                     #region Insulated
 
@@ -7244,7 +7290,7 @@ namespace ModelLayer.Model.Quotation
 
                                     #endregion
                                 }
-                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "TL")
+                                else if (Singlepnl.Panel_GlassType_Insu_Lami == "Triple Laminated")
                                 {
                                     #region Laminated
 
@@ -7270,8 +7316,6 @@ namespace ModelLayer.Model.Quotation
                                 }
 
                                 #endregion
-
-
 
                                 #region GlassFilm
                                 if (Singlepnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
@@ -8419,7 +8463,7 @@ namespace ModelLayer.Model.Quotation
                 }
 
             }
-            return Price_List;
+            return Price_List;         
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
+using ModelLayer.Model.User;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
 using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
@@ -15,6 +16,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IMultiPanelMullionUC GetMultiPanel();
         FlowLayoutPanel GetflpMullion();
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IUserModel userModel,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
@@ -26,6 +28,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                      IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP,
                                                      IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP_parent);
         IMultiPanelMullionUCPresenter GetNewInstance(IUnityContainer unityC,
+                                                     IUserModel userModel,
                                                      IMultiPanelModel multiPanelModel,
                                                      IFrameModel frameModel,
                                                      IMainPresenter mainPresenter,
