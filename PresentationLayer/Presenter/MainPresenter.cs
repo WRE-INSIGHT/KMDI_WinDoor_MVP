@@ -3686,7 +3686,7 @@ namespace PresentationLayer.Presenter
                         {
                             panel_DisplayHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
-                        if (row_str.Contains("Panel_DisplayHeightDecimal:"))
+                        if (row_str.Contains("Panel_DisplayHeightDecimal:") && _userModel.Department != "Sales & Operations (Costing)")
                         {
                             panel_DisplayHeightDecimal = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
@@ -3738,7 +3738,7 @@ namespace PresentationLayer.Presenter
                         {
                             panel_DisplayWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
-                        if (row_str.Contains("Panel_DisplayWidthDecimal:"))
+                        if (row_str.Contains("Panel_DisplayWidthDecimal:") && _userModel.Department != "Sales & Operations (Costing)")
                         {
                             panel_DisplayWidthDecimal = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
@@ -5984,12 +5984,11 @@ namespace PresentationLayer.Presenter
                             {
                                 if (pnlModel.Panel_Placement == "Last")
                                 {
-                                    if (_multiModelParent.MPanel_DividerEnabled)
-                                    {
-                                        _multiModelParent.Fit_EqualPanel_ToBindDimensions();
-                                        _multiModelParent.Fit_MyControls_ToBindDimensions();
-                                        _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                    }
+
+                                    _multiModelParent.Fit_DisplayDimensions();
+                                    _multiModelParent.Fit_EqualPanel_ToBindDimensions();
+                                    _multiModelParent.Fit_MyControls_ToBindDimensions();
+                                    _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
                                 }
                                 if (div_DMPanelName != "" || div_DMPanelName != null)
                                 {
@@ -7410,7 +7409,7 @@ namespace PresentationLayer.Presenter
             panel_ImageRenderer_Height,
             panel_HeightToBind,
             panel_DisplayHeight,
-            panel_DisplayHeightDecimal,
+            panel_DisplayHeightDecimal = 0,
             panel_OriginalDisplayHeight,
             panel_OriginalDisplayHeightDecimal,
             panel_ID,
@@ -7419,7 +7418,7 @@ namespace PresentationLayer.Presenter
             panel_ImageRenderer_Width,
             panel_WidthToBind,
             panel_DisplayWidth,
-            panel_DisplayWidthDecimal,
+            panel_DisplayWidthDecimal = 0,
             panel_OriginalDisplayWidth,
             panel_OriginalDisplayWidthDecimal,
             panel_Index_Inside_MPanel,

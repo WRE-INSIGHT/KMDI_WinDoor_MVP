@@ -681,7 +681,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                 decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                                 decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
 
-                                                actual_arr_wd_locX[ndxY, 0] = DispWd_dec;
+                                                actual_arr_wd_locX[ndxX, 0] = DispWd_dec;
                                                 actual_arr_ht_locY[ndxY, 0] = DispHt_dec;
 
                                                 Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
@@ -689,7 +689,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                 int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
                                                     ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
 
-                                                actual_arr_wd_locX[ndxY, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                                actual_arr_wd_locX[ndxX, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                                 actual_arr_ht_locY[ndxY, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                                 ndxY++;
                                             }
