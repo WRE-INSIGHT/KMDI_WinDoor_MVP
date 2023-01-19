@@ -1011,6 +1011,8 @@ namespace PresentationLayer.Presenter
             IPricingPresenter PricingPresenter = _pricingPresenter.CreateNewInstance(_unityC, this, _quotationModel);
             PricingPresenter.GetPricingView().ShowPricingList();
             _quotationModel.Select_Current_Windoor(_windoorModel);
+
+
         }
 
         private void OnDuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -1264,8 +1266,39 @@ namespace PresentationLayer.Presenter
                                 wndr_content.Add("\t#");
                                 foreach (var prop in pnl.GetType().GetProperties())
                                 {
-                                    wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
+
+
+                                    if (prop.Name == "Panel_LstLouverArtNo")
+                                    {
+                                        string lstLouverArtNo = "";
+                                        if (pnl.Panel_LstLouverArtNo != null)
+                                        {
+                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
+                                            {
+                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                            }
+                                        }
+                                        wndr_content.Add("\t\t" + prop.Name + ": " + lstLouverArtNo);
+                                    }
+                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
+                                    {
+                                        string lstSealForHandleMultiplier = "";
+                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
+                                        {
+                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
+                                            {
+                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
+                                            }
+                                        }
+                                        wndr_content.Add("\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
+                                    }
+                                    else
+                                    {
+                                        wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
+                                    }
+                                    
                                 }
+
                             }
                             #endregion
                             #region 2nd Level MultiPanel
@@ -1308,6 +1341,31 @@ namespace PresentationLayer.Presenter
                                                     if (prop.Name == "Panel_Parent")
                                                     {
                                                         wndr_content.Add("\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
+                                                    }
+
+                                                    else if (prop.Name == "Panel_LstLouverArtNo")
+                                                    {
+                                                        string lstLouverArtNo = "";
+                                                        if (pnl.Panel_LstLouverArtNo != null)
+                                                        {
+                                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
+                                                            {
+                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                            }
+                                                        }
+                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + lstLouverArtNo);
+                                                    }
+                                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
+                                                    {
+                                                        string lstSealForHandleMultiplier = "";
+                                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
+                                                        {
+                                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
+                                                            {
+                                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
+                                                            }
+                                                        }
+                                                        wndr_content.Add("\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
                                                     }
                                                     else
                                                     {
@@ -1401,6 +1459,30 @@ namespace PresentationLayer.Presenter
                                                                     {
                                                                         wndr_content.Add("\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
                                                                     }
+                                                                    else if (prop.Name == "Panel_LstLouverArtNo")
+                                                                    {
+                                                                        string lstLouverArtNo = "";
+                                                                        if (pnl.Panel_LstLouverArtNo != null)
+                                                                        {
+                                                                            foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
+                                                                            {
+                                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                            }
+                                                                        }
+                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
+                                                                    }
+                                                                    else if (prop.Name == "Panel_LstSealForHandleMultiplier")
+                                                                    {
+                                                                        string lstSealForHandleMultiplier = "";
+                                                                        if (pnl.Panel_LstSealForHandleMultiplier != null)
+                                                                        {
+                                                                            foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
+                                                                            {
+                                                                                lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
+                                                                            }
+                                                                        }
+                                                                        wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
+                                                                    }
                                                                     else
                                                                     {
                                                                         wndr_content.Add("\t\t\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
@@ -1475,6 +1557,30 @@ namespace PresentationLayer.Presenter
                                                                                 if (prop.Name == "Panel_Parent")
                                                                                 {
                                                                                     wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + pnl.Panel_Parent.Name);
+                                                                                }
+                                                                                else if (prop.Name == "Panel_LstLouverArtNo")
+                                                                                {
+                                                                                    string lstLouverArtNo = "";
+                                                                                    if (pnl.Panel_LstLouverArtNo != null)
+                                                                                    {
+                                                                                        foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
+                                                                                        {
+                                                                                            lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                                        }
+                                                                                    }
+                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
+                                                                                }
+                                                                                else if (prop.Name == "Panel_LstSealForHandleMultiplier")
+                                                                                {
+                                                                                    string lstSealForHandleMultiplier = "";
+                                                                                    if (pnl.Panel_LstSealForHandleMultiplier != null)
+                                                                                    {
+                                                                                        foreach (int panel_LstSealForHandle in pnl.Panel_LstSealForHandleMultiplier)
+                                                                                        {
+                                                                                            lstSealForHandleMultiplier = panel_LstSealForHandle + ",";
+                                                                                        }
+                                                                                    }
+                                                                                    wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstSealForHandleMultiplier);
                                                                                 }
                                                                                 else
                                                                                 {
@@ -2837,6 +2943,10 @@ namespace PresentationLayer.Presenter
 
             else if (row_str.Contains("#"))
             {
+                if (inside_panel)
+                {
+                    Panel_Load();
+                }
                 inside_panel = true;
             }
             else if (file_lines[row].Contains("\t["))
@@ -2857,6 +2967,10 @@ namespace PresentationLayer.Presenter
             }
             else if (file_lines[row].Contains("\t]"))
             {
+                if (inside_panel)
+                {
+                    Panel_Load();
+                }
                 if (file_lines[row].ToString() == "\t\t\t]")
                 {
                     _multiPanelModel4thLvl = null;
@@ -2877,16 +2991,24 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str.Contains("|"))
             {
+                if (inside_panel)
+                {
+                    Panel_Load();
+                }
                 inside_divider = true;
             }
             else if (row_str == "}")
             {
-
+                if (inside_panel)
+                {
+                    Panel_Load();
+                }
                 _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
                 frm_Width = 0; ;
                 frm_Height = 0;
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
+              
             }
             else if (row_str == ")")
             {
@@ -3397,6 +3519,10 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("Frame_MilledReinfArtNo:"))
                         {
+                            if(row == Convert.ToInt32(9708))
+                            {
+                                int hi = 1;
+                            }
                             foreach (MilledFrameReinf_ArticleNo artcNo in MilledFrameReinf_ArticleNo.GetAll())
                             {
                                 if (artcNo.ToString() == extractedValue_str)
@@ -4911,6 +5037,244 @@ namespace PresentationLayer.Presenter
 
 
                         }
+
+
+
+                        #region Louvre Panel
+
+                        if (row_str.Contains("Panel_PlantOnWeatherStripHeadWidth:"))
+                        {
+                            panel_PlantOnWeatherStripHeadWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_PlantOnWeatherStripSealWidth:"))
+                        {
+                            panel_PlantOnWeatherStripSealWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverFrameWeatherStripHeadWidth:"))
+                        {
+                            panel_LouverFrameWeatherStripHeadWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverFrameBottomWeatherStripWidth:"))
+                        {
+                            panel_LouverFrameBottomWeatherStripWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_SealForHandleQty:"))
+                        {
+                            panel_SealForHandleQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouvreGallerySetHeight:"))
+                        {
+                            panel_LouvreGallerySetHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverNumberBladesPerSet:"))
+                        {
+                            panel_LouverNumberBladesPerSet = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverGalleryVisibility:"))
+                        {
+                            panel_LouverGalleryVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverGallerySetVisibility:"))
+                        {
+                            panel_LouverGallerySetVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_GlassPnlGlazingBeadVisibility:"))
+                        {
+                            panel_GlassPnlGlazingBeadVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_GlassPnlGlazingAdaptorVisibility:"))
+                        {
+                            panel_GlassPnlGlazingAdaptorVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverBladeTypeOption:"))
+                        {
+                            foreach (BladeType_Option bto in BladeType_Option.GetAll())
+                            {
+                                if (bto.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverBladeTypeOption = bto;
+                                }
+                            }
+                        }
+
+                        else if (row_str.Contains("Panel_LouverBladeHeight:"))
+                        {
+                            foreach (BladeHeight_Option bho in BladeHeight_Option.GetAll())
+                            {
+                                if (bho.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverBladeHeight = bho;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LouverHandleType:"))
+                        {
+                            foreach (LouverHandleType_Option lhto in LouverHandleType_Option.GetAll())
+                            {
+                                if (lhto.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverHandleType = lhto;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LouverHandleLocation:"))
+                        {
+                            foreach (LouverHandleLoc_Option lhlo in LouverHandleLoc_Option.GetAll())
+                            {
+                                if (lhlo.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverHandleLocation = lhlo;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LouverGalleryColor:"))
+                        {
+                            foreach (LouverColor_Option lco in LouverColor_Option.GetAll())
+                            {
+                                if (lco.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverGalleryColor = lco;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_AluminumPullHandleArtNo:"))
+                        {
+                            foreach (AluminumPullHandle_ArticleNo aphan in AluminumPullHandle_ArticleNo.GetAll())
+                            {
+                                if (aphan.ToString() == extractedValue_str)
+                                {
+                                    panel_AluminumPullHandleArtNo = aphan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PlantOnWeatherStripHeadArtNo:"))
+                        {
+                            foreach (PlantOnWeatherStripHead_ArticleNo powsan in PlantOnWeatherStripHead_ArticleNo.GetAll())
+                            {
+                                if (powsan.ToString() == extractedValue_str)
+                                {
+                                    panel_PlantOnWeatherStripHeadArtNo = powsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_PlantOnWeatherStripSealArtNo:"))
+                        {
+                            foreach (PlantOnWeatherStripSeal_ArticleNo powssan in PlantOnWeatherStripSeal_ArticleNo.GetAll())
+                            {
+                                if (powssan.ToString() == extractedValue_str)
+                                {
+                                    panel_PlantOnWeatherStripSealArtNo = powssan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LouverFrameWeatherStripHeadArtNo:"))
+                        {
+                            foreach (LouverFrameWeatherStripHead_ArticleNo lfwsan in LouverFrameWeatherStripHead_ArticleNo.GetAll())
+                            {
+                                if (lfwsan.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverFrameWeatherStripHeadArtNo = lfwsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_LouverFrameBottomWeatherStripArtNo:"))
+                        {
+                            foreach (LouverFrameBottomWeatherStrip_ArticleNo lfbwsan in LouverFrameBottomWeatherStrip_ArticleNo.GetAll())
+                            {
+                                if (lfbwsan.ToString() == extractedValue_str)
+                                {
+                                    panel_LouverFrameBottomWeatherStripArtNo = lfbwsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_RubberSealArtNo:"))
+                        {
+                            foreach (RubberSeal_ArticleNo rsan in RubberSeal_ArticleNo.GetAll())
+                            {
+                                if (rsan.ToString() == extractedValue_str)
+                                {
+                                    panel_RubberSealArtNo = rsan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_CasementSealArtNo:"))
+                        {
+                            foreach (CasementSeal_ArticleNo csan in CasementSeal_ArticleNo.GetAll())
+                            {
+                                if (csan.ToString() == extractedValue_str)
+                                {
+                                    panel_CasementSealArtNo = csan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_SealForHandleArtNo:"))
+                        {
+                            foreach (SealForHandle_ArticleNo sfhan in SealForHandle_ArticleNo.GetAll())
+                            {
+                                if (sfhan.ToString() == extractedValue_str)
+                                {
+                                    panel_SealForHandleArtNo = sfhan;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Panel_BubbleSealArtNo:"))
+                        {
+                            foreach (BubbleSeal_ArticleNo bsan in BubbleSeal_ArticleNo.GetAll())
+                            {
+                                if (bsan.ToString() == extractedValue_str)
+                                {
+                                    panel_BubbleSealArtNo = bsan;
+                                }
+                            }
+                        }
+
+
+                        else if (row_str.Contains("Panel_LstLouverArtNo:"))
+                        {
+                            panel_LstLouverArtNo = new List<string>();
+                            string[] arrLouverArtNo = extractedValue_str.Split(new char[] { ',' }, StringSplitOptions.None);
+                            foreach (string str_louver_artNo in arrLouverArtNo)
+                            {
+                                if (str_louver_artNo != "" && str_louver_artNo != null)
+                                {
+                                    panel_LstLouverArtNo.Add(str_louver_artNo);
+                                }
+                            }
+
+                        }
+                        //    List<int> Panel_LstLouverArtNo
+                        //    int Panel_LouverGallerySetCount
+                        //    string Panel_LouverGallerySetOptionArtNo
+                        //    bool Panel_LouverGallerySetOptionVisibility
+                        //    int Panel_CasementSealWidth
+                        //    int Panel_RubberSealWidth
+                        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         else if (row_str.Contains("Panel_AluminumTrackQty:"))
                         {
                             panel_AluminumTrackQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -5287,8 +5651,12 @@ namespace PresentationLayer.Presenter
 
                             panel_OverLappingPanelQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+
+
+
                         else if (row_str.Contains("Panel_AluminumPullHandleArtNo:"))
                         {
+
                             foreach (AluminumPullHandle_ArticleNo aphan in AluminumPullHandle_ArticleNo.GetAll())
                             {
                                 if (aphan.ToString() == extractedValue_str)
@@ -5296,714 +5664,25 @@ namespace PresentationLayer.Presenter
                                     panel_AluminumPullHandleArticleNo = aphan;
                                 }
                             }
-                            IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
-                                                                                panel_Height,
-                                                                                (Control)panel_Parent,
-                                                                                (UserControl)panel_FrameGroup,
-                                                                                (UserControl)panel_FramePropertiesGroup,
-                                                                                (UserControl)panel_MultiPanelGroup,
-                                                                                panel_Type,
-                                                                                panel_Visibility,
-                                                                                _frameModel.Frame_Zoom,
-                                                                                _frameModel,
-                                                                                null,
-                                                                                panel_DisplayWidth,
-                                                                                panel_DisplayWidthDecimal,
-                                                                                panel_DisplayHeight,
-                                                                                panel_DisplayHeightDecimal,
-                                                                                panel_GlazingBeadArtNo,
-                                                                                panel_GlassFilm,
-                                                                                panel_SashProfileArtNo,
-                                                                                panel_SashReinfArtNo,
-                                                                                panel_GlassType,
-                                                                                panel_EspagnoletteArtNo,
-                                                                                //panel_StrikerArtNo,
-                                                                                Striker_ArticleNo._M89ANTA,
-                                                                                panel_MiddleCloserArtNo,
-                                                                                panel_LockingKitArtNo,
-                                                                                panel_MotorizedMechArtNo,
-                                                                                panel_HandleType,
-                                                                                panel_ExtensionTopArtNo,
-                                                                                panel_ExtensionTop2ArtNo,
-                                                                                panel_ExtensionBotArtNo,
-                                                                                panel_ExtensionBot2ArtNo,
-                                                                                panel_ExtensionLeftArtNo,
-                                                                                panel_ExtensionLeft2ArtNo,
-                                                                                panel_ExtensionRightArtNo,
-                                                                                panel_ExtensionRight2ArtNo,
-                                                                                panel_ExtTopChk,
-                                                                                panel_ExtBotChk,
-                                                                                panel_ExtLeftChk,
-                                                                                panel_ExtRightChk,
-                                                                                panel_ExtTopQty,
-                                                                                panel_ExtBotQty,
-                                                                                panel_ExtLeftQty,
-                                                                                panel_ExtRightQty,
-                                                                                panel_ExtTop2Qty,
-                                                                                panel_ExtBot2Qty,
-                                                                                panel_ExtLeft2Qty,
-                                                                                panel_ExtRight2Qty,
-                                                                                panel_RotoswingArtNo,
-                                                                                panel_GeorgianBarArtNo,
-                                                                                panel_OverlapSash,
-                                                                                panel_GeorgianBar_VerticalQty,
-                                                                                panel_GeorgianBar_HorizontalQty,
-                                                                                panel_GeorgianBarOptionVisibility,
-                                                                                panel_ID,
-                                                                                panel_GlassID,
-                                                                                panel_ImageRendererZoom,
-                                                                                panel_Index_Inside_MPanel,
-                                                                                panel_Dock,
-                                                                                panel_Name,
-                                                                                panel_Orient,
-                                                                                panel_HingeOptions,
-                                                                                panel_SlidingTypeVisibility,
-                                                                                panel_SlidingTypes);
 
-                            pnlModel.Panel_ChkText = panel_ChkText;
-                            pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
-                            pnlModel.Panel_Type = panel_Type;
-                            pnlModel.Panel_Placement = panel_Placement;
-                            pnlModel.Panel_OriginalHeight = panel_OriginalHeight;
-                            pnlModel.PanelImageRenderer_Height = panel_ImageRenderer_Height;
-                            pnlModel.Panel_HeightToBind = panel_HeightToBind;
-                            pnlModel.Panel_OriginalDisplayHeight = panel_OriginalDisplayHeight;
-                            pnlModel.Panel_OriginalDisplayHeightDecimal = panel_OriginalDisplayHeightDecimal;
-                            pnlModel.PanelImageRenderer_Width = panel_ImageRenderer_Width;
-                            pnlModel.Panel_WidthToBind = panel_WidthToBind;
-                            pnlModel.Panel_OriginalDisplayWidth = panel_OriginalDisplayWidth;
-                            pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
-                            pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
-                            //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
-                            //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
-                            pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
-                            //pnlModel.Panel_Orient = panel_Orient;
-                            pnlModel.Panel_OrientVisibility = panel_OrientVisibility;
-                            pnlModel.Panel_HandleOptionsVisibility = panel_HandleOptionsVisibility;
-                            pnlModel.Panel_RotoswingOptionsVisibility = panel_RotoswingOptionsVisibility;
-                            pnlModel.Panel_RioOptionsVisibility = panel_RioOptionsVisibility;
-                            pnlModel.Panel_RioOptionsVisibility2 = panel_RioOptionsVisibility2;
-                            pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
-                            pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
-                            pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
-                            pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
-                            #region Explosion
-                            pnlModel.PanelGlass_ID = panel_GlassID;
-                            pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
-                            pnlModel.Panel_GlassThickness = panel_GlassThickness;
-                            pnlModel.PanelGlazingBead_ArtNo = panel_GlazingBeadArtNo;
-                            pnlModel.Panel_GlazingAdaptorArtNo = panel_GlazingAdaptorArtNo;
-                            pnlModel.Panel_GBSpacerArtNo = panel_GBSpacerArtNo;
-                            pnlModel.Panel_ChkGlazingAdaptor = panel_ChkGlazingAdaptor;
-                            pnlModel.Panel_GlazingBeadWidth = panel_GlazingBeadWidth;
-                            pnlModel.Panel_GlazingBeadWidthDecimal = panel_GlazingBeadWidthDecimal;
-                            pnlModel.Panel_GlazingBeadHeight = panel_GlazingBeadHeight;
-                            pnlModel.Panel_GlazingBeadHeightDecimal = panel_GlazingBeadHeightDecimal;
-                            pnlModel.Panel_GlassWidth = panel_GlassWidth;
-                            pnlModel.Panel_GlassWidthDecimal = panel_GlassWidthDecimal;
-                            pnlModel.Panel_OriginalGlassWidth = panel_OriginalGlassWidth;
-                            pnlModel.Panel_OriginalGlassWidthDecimal = panel_OriginalGlassWidthDecimal;
-                            pnlModel.Panel_GlassHeight = panel_GlassHeight;
-                            pnlModel.Panel_GlassHeightDecimal = panel_GlassHeightDecimal;
-                            pnlModel.Panel_OriginalGlassHeight = panel_OriginalGlassHeight;
-                            pnlModel.Panel_OriginalGlassHeightDecimal = panel_OriginalGlassHeightDecimal;
-                            //pnlModel.Panel_GlassPropertyHeight = panel_GlassPropertyHeight;
-                            pnlModel.Panel_GlazingSpacerQty = panel_GlazingSpacerQty;
-                            pnlModel.Panel_GlassFilm = panel_GlassFilm;
-                            pnlModel.Panel_SashPropertyVisibility = panel_SashPropertyVisibility;
-                            pnlModel.Panel_SashProfileArtNo = panel_SashProfileArtNo;
-                            pnlModel.Panel_SashReinfArtNo = panel_SashReinfArtNo;
-                            pnlModel.Panel_SashWidth = panel_SashWidth;
-                            pnlModel.Panel_SashWidthDecimal = panel_SashWidthDecimal;
-                            pnlModel.Panel_SashHeight = panel_SashHeight;
-                            pnlModel.Panel_SashHeightDecimal = panel_SashHeightDecimal;
-                            pnlModel.Panel_OriginalSashWidth = panel_OriginalSashWidth;
-                            pnlModel.Panel_OriginalSashWidthDecimal = panel_OriginalSashWidthDecimal;
-                            pnlModel.Panel_OriginalSashHeight = panel_OriginalSashHeight;
-                            pnlModel.Panel_OriginalSashHeightDecimal = panel_OriginalSashHeightDecimal;
-                            pnlModel.Panel_SashReinfWidth = panel_SashReinfWidth;
-                            pnlModel.Panel_SashReinfWidthDecimal = panel_SashReinfWidthDecimal;
-                            pnlModel.Panel_SashReinfHeight = panel_SashReinfHeight;
-                            pnlModel.Panel_SashReinfHeightDecimal = panel_SashReinfHeightDecimal;
-                            pnlModel.Panel_CoverProfileArtNo = panel_CoverProfileArtNo;
-                            pnlModel.Panel_CoverProfileArtNo2 = panel_CoverProfileArtNo2;
-                            pnlModel.Panel_FrictionStayArtNo = panel_FrictionStayArtNo;
-                            pnlModel.Panel_FSCasementArtNo = panel_FSCasementArtNo;
-                            pnlModel.Panel_SnapInKeepArtNo = panel_SnapInKeepArtNo;
-                            pnlModel.Panel_FixedCamArtNo = panel_FixedCamArtNo;
-                            pnlModel.Panel_30x25CoverArtNo = panel_30x25CoverArtNo;
-                            pnlModel.Panel_MotorizedDividerArtNo = panel_MotorizedDividerArtNo;
-                            pnlModel.Panel_CoverForMotorArtNo = panel_CoverForMotorArtNo;
-                            pnlModel.Panel_2dHingeArtNo = panel_2dHingeArtNo;
-                            pnlModel.Panel_PushButtonSwitchArtNo = panel_PushButtonSwitchArtNo;
-                            pnlModel.Panel_FalsePoleArtNo = panel_FalsePoleArtNo;
-                            pnlModel.Panel_SupportingFrameArtNo = panel_SupportingFrameArtNo;
-                            pnlModel.Panel_PlateArtNo = panel_PlateArtNo;
-                            pnlModel.Panel_HandleType = panel_HandleType;
-                            pnlModel.Panel_RotoswingArtNo = panel_RotoswingArtNo;
-                            pnlModel.Panel_RotaryArtNo = panel_RotaryArtNo;
-                            pnlModel.Panel_RioArtNo = panel_RioArtNo;
-                            pnlModel.Panel_RioArtNo2 = panel_RioArtNo2;
-                            pnlModel.Panel_ProfileKnobCylinderArtNo = panel_ProfileKnobCylinderArtNo;
-                            pnlModel.Panel_CylinderCoverArtNo = panel_CylinderCoverArtNo;
-                            pnlModel.Panel_RotolineArtNo = panel_RotolineArtNo;
-                            pnlModel.Panel_MVDArtNo = panel_MVDArtNo;
-                            pnlModel.Panel_EspagnoletteArtNo = panel_EspagnoletteArtNo;
-                            pnlModel.Panel_EspagnoletteOptionsVisibility = panel_EspagnoletteOptionsVisibility;
-                            pnlModel.Panel_ExtensionTopArtNo = panel_ExtensionTopArtNo;
-                            pnlModel.Panel_ExtensionTop2ArtNo = panel_ExtensionTop2ArtNo;
-                            pnlModel.Panel_ExtensionTop3ArtNo = panel_ExtensionTop3ArtNo;
-                            pnlModel.Panel_ExtensionBotArtNo = panel_ExtensionBotArtNo;
-                            pnlModel.Panel_ExtensionBot2ArtNo = panel_ExtensionBot2ArtNo;
-                            pnlModel.Panel_ExtensionLeftArtNo = panel_ExtensionLeftArtNo;
-                            pnlModel.Panel_ExtensionLeft2ArtNo = panel_ExtensionLeft2ArtNo;
-                            pnlModel.Panel_ExtensionRightArtNo = panel_ExtensionRightArtNo;
-                            pnlModel.Panel_ExtensionRight2ArtNo = panel_ExtensionRight2ArtNo;
-                            pnlModel.Panel_ExtTopChk = panel_ExtTopChk;
-                            pnlModel.Panel_ExtTop2Chk = panel_ExtTop2Chk;
-                            pnlModel.Panel_ExtBotChk = panel_ExtBotChk;
-                            pnlModel.Panel_ExtLeftChk = panel_ExtLeftChk;
-                            pnlModel.Panel_ExtRightChk = panel_ExtRightChk;
-                            pnlModel.Panel_ExtTopQty = panel_ExtTopQty;
-                            pnlModel.Panel_ExtBotQty = panel_ExtBotQty;
-                            pnlModel.Panel_ExtLeftQty = panel_ExtLeftQty;
-                            pnlModel.Panel_ExtRightQty = panel_ExtRightQty;
-                            pnlModel.Panel_ExtTop2Qty = panel_ExtTop2Qty;
-                            pnlModel.Panel_ExtTop3Qty = panel_ExtTop3Qty;
-                            pnlModel.Panel_ExtBot2Qty = panel_ExtBot2Qty;
-                            pnlModel.Panel_ExtLeft2Qty = panel_ExtLeft2Qty;
-                            pnlModel.Panel_ExtRight2Qty = panel_ExtRight2Qty;
-                            pnlModel.Panel_CornerDriveArtNo = panel_CornerDriveArtNo;
-                            pnlModel.Panel_CornerDriveOptionsVisibility = panel_CornerDriveOptionsVisibility;
-                            pnlModel.Panel_ExtensionOptionsVisibility = panel_ExtensionOptionsVisibility;
-                            pnlModel.Panel_RotoswingOptionsHeight = panel_RotoswingOptionsHeight;
-                            pnlModel.Panel_PlasticWedge = panel_PlasticWedge;
-                            pnlModel.Panel_PlasticWedgeQty = panel_PlasticWedgeQty;
-                            pnlModel.Panel_MiddleCloserArtNo = panel_MiddleCloserArtNo;
-                            pnlModel.Panel_LockingKitArtNo = panel_LockingKitArtNo;
-                            pnlModel.Panel_GlassType = panel_GlassType;
-                            pnlModel.Panel_StrikerArtno_A = panel_StrikerArtno_A;
-                            pnlModel.Panel_StrikerQty_A = panel_StrikerQty_A;
-                            pnlModel.Panel_StrikerArtno_C = panel_StrikerArtno_C;
-                            pnlModel.Panel_StrikerQty_C = panel_StrikerQty_C;
-                            pnlModel.Panel_MiddleCloserPairQty = panel_MiddleCloserPairQty;
-                            pnlModel.Panel_MotorizedOptionVisibility = panel_MotorizedOptionVisibility;
-                            pnlModel.Panel_MotorizedMechArtNo = panel_MotorizedMechArtNo;
-                            //pnlModel.Panel_MotorizedPropertyHeight = panel_MotorizedPropertyHeight;
-                            pnlModel.Panel_MotorizedMechQty = panel_MotorizedMechQty;
-                            pnlModel.Panel_MotorizedMechSetQty = panel_MotorizedMechSetQty;
-                            pnlModel.Panel_2DHingeQty = panel_2DHingeQty;
-                            pnlModel.Panel_2dHingeArtNo_nonMotorized = panel_2dHingeArtNo_nonMotorized;
-                            pnlModel.Panel_2DHingeQty_nonMotorized = panel_2DHingeQty_nonMotorized;
-                            pnlModel.Panel_2dHingeVisibility_nonMotorized = panel_2dHingeVisibility_nonMotorized;
-                            pnlModel.Panel_3dHingeArtNo = panel_3dHingeArtNo;
-                            pnlModel.Panel_3dHingeQty = panel_3dHingeQty;
-                            pnlModel.Panel_3dHingePropertyVisibility = panel_3dHingePropertyVisibility;
-                            pnlModel.Panel_ButtHingeArtNo = panel_ButtHingeArtNo;
-                            pnlModel.Panel_ButtHingeQty = panel_ButtHingeQty;
-                            pnlModel.Panel_2dHingeVisibility = panel_2dHingeVisibility;
-                            pnlModel.Panel_ButtHingeVisibility = panel_ButtHingeVisibility;
-                            pnlModel.Panel_AdjStrikerArtNo = panel_AdjStrikerArtNo;
-                            pnlModel.Panel_AdjStrikerQty = panel_AdjStrikerQty;
-                            pnlModel.Panel_RestrictorStayArtNo = panel_RestrictorStayArtNo;
-                            pnlModel.Panel_RestrictorStayQty = panel_RestrictorStayQty; ;
-                            //pnlModel.Panel_ExtensionPropertyHeight = panel_ExtensionPropertyHeight;
-                            pnlModel.Panel_GeorgianBarArtNo = panel_GeorgianBarArtNo;
-                            pnlModel.Panel_GeorgianBar_VerticalQty = panel_GeorgianBar_VerticalQty;
-                            pnlModel.Panel_GeorgianBar_HorizontalQty = panel_GeorgianBar_HorizontalQty;
-                            pnlModel.Panel_GeorgianBarOptionVisibility = panel_GeorgianBarOptionVisibility; ;
-                            pnlModel.Panel_HingeOptions = panel_HingeOptions;
-                            //pnlModel.Panel_HingeOptionsPropertyHeight = panel_HingeOptionsPropertyHeight;
-                            pnlModel.Panel_HingeOptionsVisibility = panel_HingeOptionsVisibility;
-                            pnlModel.Panel_CenterHingeOptions = panel_CenterHingeOptions;
-                            pnlModel.Panel_CenterHingeOptionsVisibility = panel_CenterHingeOptionsVisibility;
-                            pnlModel.Panel_NTCenterHingeArticleNo = panel_NTCenterHingeArticleNo;
-                            pnlModel.Panel_StayBearingKArtNo = panel_StayBearingKArtNo;
-                            pnlModel.Panel_StayBearingPinArtNo = panel_StayBearingPinArtNo;
-                            pnlModel.Panel_StayBearingCoverArtNo = panel_StayBearingCoverArtNo;
-                            pnlModel.Panel_TopCornerHingeArtNo = panel_TopCornerHingeArtNo;
-                            pnlModel.Panel_TopCornerHingeCoverArtNo = panel_TopCornerHingeCoverArtNo;
-                            pnlModel.Panel_TopCornerHingeSpacerArtNo = panel_TopCornerHingeSpacerArtNo;
-                            pnlModel.Panel_CornerHingeKArtNo = panel_CornerHingeKArtNo;
-                            pnlModel.Panel_CornerPivotRestKArtNo = panel_CornerPivotRestKArtNo; ;
-                            pnlModel.Panel_CornerHingeCoverKArtNo = panel_CornerHingeCoverKArtNo;
-                            pnlModel.Panel_CoverForCornerPivotRestVerticalArtNo = panel_CoverForCornerPivotRestVerticalArtNo;
-                            pnlModel.Panel_CoverForCornerPivotRestArtNo = panel_CoverForCornerPivotRestArtNo;
-                            pnlModel.Panel_WeldableCArtNo = panel_WeldableCArtNo;
-                            pnlModel.Panel_LatchDeadboltStrikerArtNo = panel_LatchDeadboltStrikerArtNo;
-                            pnlModel.Panel_CmenuDeleteVisibility = panel_CmenuDeleteVisibility;
-                            pnlModel.Panel_NTCenterHingeVisibility = panel_NTCenterHingeVisibility; ;
-                            pnlModel.Panel_MiddleCloserVisibility = panel_MiddleCloserVisibility;
-                            pnlModel.Panel_MotorizedpnlOptionVisibility = panel_MotorizedpnlOptionVisibility;
-                            pnlModel.Panel_GuideTrackProfileArtNo = panel_GuideTrackProfileArtNo;
-                            pnlModel.Panel_AluminumTrackArtNo = panel_AluminumTrackArtNo;
-                            pnlModel.Panel_AluminumTrackQty = panel_AluminumTrackQty;
-                            pnlModel.Panel_AluminumTrackQtyVisibility = panel_AluminumTrackQtyVisibility;
-                            pnlModel.Panel_WeatherBarArtNo = panel_WeatherBarArtNo;
-                            pnlModel.Panel_WeatherBarFastenerArtNo = panel_WeatherBarFastenerArtNo;
-                            pnlModel.Panel_EndCapForWeatherBarArtNo = panel_EndCapForWeatherBarArtNo;
-                            pnlModel.Panel_WaterSeepageArtNo = panel_WaterSeepageArtNo;
-                            pnlModel.Panel_BrushSealArtNo = panel_BrushSealArtNo;
-                            pnlModel.Panel_RollersTypes = panel_RollersTypes;
-                            pnlModel.Panel_RollersTypesVisibility = panel_RollersTypesVisibility;
-                            pnlModel.Panel_GlazingRebateBlockArtNo = panel_GlazingRebateBlockArtNo;
-                            pnlModel.Panel_Spacer = panel_Spacer;
-                            pnlModel.Panel_SealingBlockArtNo = panel_SealingBlockArtNo;
-                            pnlModel.Panel_InterlockArtNo = panel_InterlockArtNo;
-                            pnlModel.Panel_ExtensionForInterlockArtNo = panel_ExtensionForInterlockArtNo;
-                            pnlModel.Panel_DHandleInsideArtNo = panel_DHandleInsideArtNo;
-                            pnlModel.Panel_DHandleOutsideArtNo = panel_DHandleOutsideArtNo;
-                            pnlModel.Panel_DHandleIOLockingInsideArtNo = panel_DHandleIOLockingInsideArtNo;
-                            pnlModel.Panel_DHandleIOLockingOutsideArtNo = panel_DHandleIOLockingOutsideArtNo;
-                            pnlModel.Panel_DummyDHandleInsideArtNo = panel_DummyDHandleInsideArtNo;
-                            pnlModel.Panel_DummyDHandleOutsideArtNo = panel_DummyDHandleOutsideArtNo;
-                            pnlModel.Panel_PopUpHandleArtNo = panel_PopUpHandleArtNo;
-                            pnlModel.Panel_RotoswingForSlidingHandleArtNo = panel_RotoswingForSlidingHandleArtNo;
-                            pnlModel.Panel_DHandleOptionVisibilty = panel_DHandleOptionVisibilty;
-                            pnlModel.Panel_DHandleIOLockingOptionVisibilty = panel_DHandleIOLockingOptionVisibilty;
-                            pnlModel.Panel_DummyDHandleOptionVisibilty = panel_DummyDHandleOptionVisibilty;
-                            pnlModel.Panel_PopUpHandleOptionVisibilty = panel_PopUpHandleOptionVisibilty;
-                            pnlModel.Panel_RotoswingForSlidingHandleOptionVisibilty = panel_RotoswingForSlidingHandleOptionVisibilty;
-                            pnlModel.Panel_StrikerArtno_Sliding = panel_StrikerArtno_Sliding;
-                            pnlModel.Panel_StrikerArtno_SlidingQty = panel_StrikerArtno_SlidingQty;
-                            pnlModel.Panel_ScrewSetsArtNo = panel_ScrewSetsArtNo;
-                            pnlModel.Panel_PVCCenterProfileArtNo = panel_PVCCenterProfileArtNo;
-                            pnlModel.Panel_GS100_T_EM_T_HMCOVER_ArtNo = panel_GS100_T_EM_T_HMCOVER_ArtNo;
-                            pnlModel.Panel_TrackProfileArtNo = panel_TrackProfileArtNo;
-                            pnlModel.Panel_TrackRailArtNo = panel_TrackRailArtNo;
-                            pnlModel.Panel_TrackRailArtNoVisibility = panel_TrackRailArtNoVisibility;
-                            pnlModel.Panel_MicrocellOneSafetySensorArtNo = panel_MicrocellOneSafetySensorArtNo;
-                            pnlModel.Panel_AutodoorBracketForGS100UPVCArtNo = panel_AutodoorBracketForGS100UPVCArtNo;
-                            pnlModel.Panel_GS100EndCapScrewM5AndLSupportArtNo = panel_GS100EndCapScrewM5AndLSupportArtNo;
-                            pnlModel.Panel_EuroLeadExitButtonArtNo = panel_EuroLeadExitButtonArtNo;
-                            pnlModel.Panel_TOOTHBELT_EM_CMArtNo = panel_TOOTHBELT_EM_CMArtNo;
-                            pnlModel.Panel_GuBeaZenMicrowaveSensorArtNo = panel_GuBeaZenMicrowaveSensorArtNo;
-                            pnlModel.Panel_SlidingDoorKitGs100_1ArtNo = panel_SlidingDoorKitGs100_1ArtNo;
-                            pnlModel.Panel_GS100CoverKitArtNo = panel_GS100CoverKitArtNo;
-                            pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
-                            pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
-                            #endregion
-                            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
-                            UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
-                            panelPropUC.Dock = DockStyle.Top;
 
-                            if (panel_Parent.Parent.Name.Contains("frame"))
+
+
+
+                        }
+                        //List<int> Panel_LstSealForHandleMultiplier
+                        else if (row_str.Contains("Panel_LstSealForHandleMultiplier:"))
+                        {
+                            panel_LstSealForHandleMultiplier = new List<int>();
+                            string[] arrSealForHandle = extractedValue_str.Split(new char[] { ',' }, StringSplitOptions.None);
+                            foreach (string str_SealForHandle in arrSealForHandle)
                             {
-
-                                _frameModel.Lst_Panel.Add(pnlModel);
-                                pnlModel.Imager_SetDimensionsToBind_FrameParent();
-                                _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(panelPropUC);
-                            }
-                            else
-                            {
-                                if (panel_Parent.Parent.Parent.Name.Contains("Frame"))
+                                if (str_SealForHandle != "" && str_SealForHandle != null)
                                 {
-                                    _multiModelParent = _multiPanelModel2ndLvl;
-                                    _multiPropUC2ndLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
-                                }
-                                else if (panel_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
-                                {
-                                    _multiModelParent = _multiPanelModel3rdLvl;
-                                    _multiPropUC3rdLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
-                                }
-                                else
-                                {
-                                    _multiModelParent = _multiPanelModel4thLvl;
-                                    _multiPropUC4thLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
-
-                                }
-                                pnlModel.Panel_ParentMultiPanelModel = _multiModelParent;
-                                _multiModelParent.MPanelLst_Panel.Add(pnlModel);
-                                _multiModelParent.Reload_PanelMargin();
-                                pnlModel.SetPanelMargin_using_ZoomPercentage();
-                                pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
-                                panelPropUC.BringToFront();
-
-
-                            }
-
-                            IMultiPanelMullionUC multiMullionUC;
-                            IMultiPanelTransomUC multiTransomUC;
-
-                            if (mpnllvl == "second level")
-                            {
-                                multiMullionUC = _multiMullionUC2nd;
-                                multiTransomUC = _multiTransomUC2nd;
-                            }
-                            else if (mpnllvl == "third level")
-                            {
-                                multiMullionUC = _multiMullionUC3rd;
-                                multiTransomUC = _multiTransomUC3rd;
-                            }
-                            else
-                            {
-                                multiMullionUC = _multiMullionUC4th;
-                                multiTransomUC = _multiTransomUC4th;
-                            }
-
-                            if (panel_Type.Contains("Fixed Panel"))
-                            {
-                                IFixedPanelUCPresenter fixedUCP;
-                                if (panel_Parent.Parent.Name.Contains("frame"))
-                                {
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
-
-                                    fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)fixedUC);
-                                }
-                                else
-                                {
-
-
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
-                                                                                      pnlModel,
-                                                                                      _frameModel,
-                                                                                      this,
-                                                                                      _multiModelParent,
-                                                                                      _multiMullionUCP,
-                                                                                      _multiMullionImagerUCP);
-                                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)fixedUC);
-
-                                        fixedUCP.SetInitialLoadFalse();
-                                        _multiModelParent.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
-
-
-                                        //_multiMullionUCP.GetflpMullion().Controls.Add((UserControl)fixedUC);
-                                        //_multiModelParent.MPanelLst_Objects.Add((UserControl)fixedUC);
-                                    }
-                                    else
-                                    {
-                                        fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
-                                                                                       pnlModel,
-                                                                                       _frameModel,
-                                                                                       this,
-                                                                                       _multiModelParent,
-                                                                                       _multiTransomUCP,
-                                                                                       _multiTransomImagerUCP);
-                                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)fixedUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)fixedUC);
-                                        fixedUCP.SetInitialLoadFalse();
-                                    }
-
+                                    panel_LstSealForHandleMultiplier.Add(Convert.ToInt32(str_SealForHandle));
                                 }
                             }
-                            else if (panel_Type.Contains("Casement Panel"))
-                            {
-                                ICasementPanelUCPresenter casementUCP;
-                                if (panel_Parent.Parent.Name.Contains("frame"))
-                                {
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
-                                    pnlModel.AdjustPropertyPanelHeight("addSash");
-                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
-                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
-                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-                                    casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)casementUC);
-                                }
-                                else
-                                {
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
-                                                                                      pnlModel,
-                                                                                      _frameModel,
-                                                                                      this,
-                                                                                      _multiModelParent,
-                                                                                      _multiMullionUCP,
-                                                                                      _multiMullionImagerUCP);
-                                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)casementUC);
-
-                                        //_multiMullionUCP.GetflpMullion().Controls.Add((UserControl)casementUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)casementUC);
-                                        casementUCP.SetInitialLoadFalse();
-                                    }
-                                    else
-                                    {
-                                        casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
-                                                                                       pnlModel,
-                                                                                       _frameModel,
-                                                                                       this,
-                                                                                       _multiModelParent,
-                                                                                       _multiTransomUCP,
-                                                                                       _multiTransomImagerUCP);
-                                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)casementUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)casementUC);
-                                        casementUCP.SetInitialLoadFalse();
-                                    }
-
-                                }
-                            }
-                            else if (panel_Type.Contains("Awning Panel"))
-                            {
-                                IAwningPanelUCPresenter awningUCP;
-                                if (panel_Parent.Parent.Name.Contains("frame"))
-                                {
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
-                                    pnlModel.AdjustPropertyPanelHeight("addSash");
-                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
-                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
-
-                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-                                    awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)awningUC);
-                                }
-                                else
-                                {
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
-                                                                                      pnlModel,
-                                                                                      _frameModel,
-                                                                                      this,
-                                                                                      _multiModelParent,
-                                                                                      _multiMullionUCP,
-                                                                                      _multiMullionImagerUCP);
-                                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)awningUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)awningUC);
-                                        awningUCP.SetInitialLoadFalse();
-                                    }
-                                    else
-                                    {
-                                        awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
-                                                                                       pnlModel,
-                                                                                       _frameModel,
-                                                                                       this,
-                                                                                       _multiModelParent,
-                                                                                       _multiTransomUCP,
-                                                                                       _multiTransomImagerUCP);
-                                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)awningUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)awningUC);
-                                        awningUCP.SetInitialLoadFalse();
-                                    }
-
-                                }
-
-                            }
-                            else if (panel_Type.Contains("Sliding Panel"))
-                            {
-                                ISlidingPanelUCPresenter slidingUCP;
-                                if (panel_Parent.Parent.Name.Contains("frame"))
-                                {
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
-                                    pnlModel.AdjustPropertyPanelHeight("addSash");
-                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
-                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
-
-                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-                                    slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)slidingUC);
-                                }
-                                else
-                                {
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
-                                                                                      pnlModel,
-                                                                                      _frameModel,
-                                                                                      this,
-                                                                                      _multiModelParent,
-                                                                                      _multiMullionUCP,
-                                                                                      _multiMullionImagerUCP);
-                                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)slidingUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)slidingUC);
-                                        slidingUCP.SetInitialLoadFalse();
-                                    }
-                                    else
-                                    {
-                                        slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
-                                                                                       pnlModel,
-                                                                                       _frameModel,
-                                                                                       this,
-                                                                                       _multiModelParent,
-                                                                                       _multiTransomUCP,
-                                                                                       _multiTransomImagerUCP);
-                                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)slidingUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)slidingUC);
-                                        slidingUCP.SetInitialLoadFalse();
-                                    }
-
-                                }
-
-                            }
-                            else if (panel_Type.Contains("TiltNTurn Panel"))
-                            {
-                                ITiltNTurnPanelUCPresenter tiltNTurnUCP;
-                                if (panel_Parent.Name.Contains("frame"))
-                                {
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
-
-                                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
-                                    pnlModel.AdjustPropertyPanelHeight("addSash");
-                                    pnlModel.AdjustPropertyPanelHeight("addGlass");
-                                    pnlModel.AdjustPropertyPanelHeight("addHandle");
-
-                                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
-
-                                    tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)tiltNTurnUC);
-                                }
-                                else
-                                {
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
-                                                                                      pnlModel,
-                                                                                      _frameModel,
-                                                                                      this,
-                                                                                      _multiModelParent,
-                                                                                      _multiMullionUCP,
-                                                                                      _multiMullionImagerUCP);
-                                        ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)tiltNTurnUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)tiltNTurnUC);
-                                        tiltNTurnUCP.SetInitialLoadFalse();
-                                    }
-                                    else
-                                    {
-                                        tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
-                                                                                       pnlModel,
-                                                                                       _frameModel,
-                                                                                       this,
-                                                                                       _multiModelParent,
-                                                                                       _multiTransomUCP,
-                                                                                       _multiTransomImagerUCP);
-                                        ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)tiltNTurnUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)tiltNTurnUC);
-                                        tiltNTurnUCP.SetInitialLoadFalse();
-                                    }
-
-                                }
-
-                            }
-                            else if (panel_Type.Contains("Louver Panel"))
-                            {
-                                ILouverPanelUCPresenter louverPanelUCP;
-                                if (panel_Parent.Name.Contains("frame"))
-                                {
-                                    louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
-                                                                                              pnlModel,
-                                                                                              _frameModel,
-                                                                                              this,
-                                                                                              frmUCPresenter);
-                                    ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
-                                    _frameModel.Frame_UC.Controls.Add((UserControl)louverPanelUC);
-                                }
-                                else
-                                {
-                                    if (panel_Parent.Name.Contains("MultiMullion"))
-                                    {
-                                        louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
-                                                                                                   pnlModel,
-                                                                                                   _frameModel,
-                                                                                                   this,
-                                                                                                   _multiModelParent,
-                                                                                                   _multiMullionUCP);
-                                        ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
-                                        multiMullionUC.Getflp().Controls.Add((UserControl)louverPanelUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
-                                        louverPanelUCP.SetInitialLoadFalse();
-                                    }
-                                    else
-                                    {
-                                        louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
-                                                                                                   pnlModel,
-                                                                                                   _frameModel,
-                                                                                                   this,
-                                                                                                   _multiModelParent,
-                                                                                                   _multiTransomUCP);
-                                        ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
-                                        multiTransomUC.Getflp().Controls.Add((UserControl)louverPanelUC);
-                                        _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
-                                        louverPanelUCP.SetInitialLoadFalse();
-                                    }
-                                }
-                            }
-                            if (!panel_Parent.Parent.Name.Contains("frame"))
-                            {
-                                if (pnlModel.Panel_Placement == "Last")
-                                {
-
-                                    _multiModelParent.Fit_DisplayDimensions();
-                                    _multiModelParent.Fit_EqualPanel_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ToBindDimensions();
-                                    _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
-                                }
-                                if (div_DMPanelName != "" || div_DMPanelName != null)
-                                {
-                                    foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
-                                    {
-                                        if (pnl.Panel_Name == div_DMPanelName)
-                                        {
-                                            _prev_divModel.Div_DMPanel = pnl;
-                                            SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
-                                            div_DMPanelName = "";
-                                        }
-                                    }
-                                }
-                            }
-                            inside_panel = false;
+                           
                         }
                         #endregion
                     }
@@ -7300,6 +6979,780 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        private void Panel_Load()
+        {
+            IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
+                                                                               panel_Height,
+                                                                               (Control)panel_Parent,
+                                                                               (UserControl)panel_FrameGroup,
+                                                                               (UserControl)panel_FramePropertiesGroup,
+                                                                               (UserControl)panel_MultiPanelGroup,
+                                                                               panel_Type,
+                                                                               panel_Visibility,
+                                                                               _frameModel.Frame_Zoom,
+                                                                               _frameModel,
+                                                                               null,
+                                                                               panel_DisplayWidth,
+                                                                               panel_DisplayWidthDecimal,
+                                                                               panel_DisplayHeight,
+                                                                               panel_DisplayHeightDecimal,
+                                                                               panel_GlazingBeadArtNo,
+                                                                               panel_GlassFilm,
+                                                                               panel_SashProfileArtNo,
+                                                                               panel_SashReinfArtNo,
+                                                                               panel_GlassType,
+                                                                               panel_EspagnoletteArtNo,
+                                                                               //panel_StrikerArtNo,
+                                                                               Striker_ArticleNo._M89ANTA,
+                                                                               panel_MiddleCloserArtNo,
+                                                                               panel_LockingKitArtNo,
+                                                                               panel_MotorizedMechArtNo,
+                                                                               panel_HandleType,
+                                                                               panel_ExtensionTopArtNo,
+                                                                               panel_ExtensionTop2ArtNo,
+                                                                               panel_ExtensionBotArtNo,
+                                                                               panel_ExtensionBot2ArtNo,
+                                                                               panel_ExtensionLeftArtNo,
+                                                                               panel_ExtensionLeft2ArtNo,
+                                                                               panel_ExtensionRightArtNo,
+                                                                               panel_ExtensionRight2ArtNo,
+                                                                               panel_ExtTopChk,
+                                                                               panel_ExtBotChk,
+                                                                               panel_ExtLeftChk,
+                                                                               panel_ExtRightChk,
+                                                                               panel_ExtTopQty,
+                                                                               panel_ExtBotQty,
+                                                                               panel_ExtLeftQty,
+                                                                               panel_ExtRightQty,
+                                                                               panel_ExtTop2Qty,
+                                                                               panel_ExtBot2Qty,
+                                                                               panel_ExtLeft2Qty,
+                                                                               panel_ExtRight2Qty,
+                                                                               panel_RotoswingArtNo,
+                                                                               panel_GeorgianBarArtNo,
+                                                                               panel_OverlapSash,
+                                                                               panel_GeorgianBar_VerticalQty,
+                                                                               panel_GeorgianBar_HorizontalQty,
+                                                                               panel_GeorgianBarOptionVisibility,
+                                                                               panel_ID,
+                                                                               panel_GlassID,
+                                                                               panel_ImageRendererZoom,
+                                                                               panel_Index_Inside_MPanel,
+                                                                               panel_Dock,
+                                                                               panel_Name,
+                                                                               panel_Orient,
+                                                                               panel_HingeOptions,
+                                                                               panel_SlidingTypeVisibility,
+                                                                               panel_SlidingTypes);
+
+            pnlModel.Panel_ChkText = panel_ChkText;
+            pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
+            pnlModel.Panel_Type = panel_Type;
+            pnlModel.Panel_Placement = panel_Placement;
+            pnlModel.Panel_OriginalHeight = panel_OriginalHeight;
+            pnlModel.PanelImageRenderer_Height = panel_ImageRenderer_Height;
+            pnlModel.Panel_HeightToBind = panel_HeightToBind;
+            pnlModel.Panel_OriginalDisplayHeight = panel_OriginalDisplayHeight;
+            pnlModel.Panel_OriginalDisplayHeightDecimal = panel_OriginalDisplayHeightDecimal;
+            pnlModel.PanelImageRenderer_Width = panel_ImageRenderer_Width;
+            pnlModel.Panel_WidthToBind = panel_WidthToBind;
+            pnlModel.Panel_OriginalDisplayWidth = panel_OriginalDisplayWidth;
+            pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
+            pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
+            //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
+            //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
+            pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
+            //pnlModel.Panel_Orient = panel_Orient;
+            pnlModel.Panel_OrientVisibility = panel_OrientVisibility;
+            pnlModel.Panel_HandleOptionsVisibility = panel_HandleOptionsVisibility;
+            pnlModel.Panel_RotoswingOptionsVisibility = panel_RotoswingOptionsVisibility;
+            pnlModel.Panel_RioOptionsVisibility = panel_RioOptionsVisibility;
+            pnlModel.Panel_RioOptionsVisibility2 = panel_RioOptionsVisibility2;
+            pnlModel.Panel_RotolineOptionsVisibility = panel_RotolineOptionsVisibility;
+            pnlModel.Panel_MVDOptionsVisibility = panel_MVDOptionsVisibility;
+            pnlModel.Panel_RotaryOptionsVisibility = panel_RotaryOptionsVisibility;
+            pnlModel.Panel_GlassType_Insu_Lami = panel_GlassType_Insu_Lami;
+            #region Explosion
+            pnlModel.PanelGlass_ID = panel_GlassID;
+            pnlModel.Panel_GlassThicknessDesc = panel_GlassThicknessDesc;
+            pnlModel.Panel_GlassThickness = panel_GlassThickness;
+            pnlModel.PanelGlazingBead_ArtNo = panel_GlazingBeadArtNo;
+            pnlModel.Panel_GlazingAdaptorArtNo = panel_GlazingAdaptorArtNo;
+            pnlModel.Panel_GBSpacerArtNo = panel_GBSpacerArtNo;
+            pnlModel.Panel_ChkGlazingAdaptor = panel_ChkGlazingAdaptor;
+            pnlModel.Panel_GlazingBeadWidth = panel_GlazingBeadWidth;
+            pnlModel.Panel_GlazingBeadWidthDecimal = panel_GlazingBeadWidthDecimal;
+            pnlModel.Panel_GlazingBeadHeight = panel_GlazingBeadHeight;
+            pnlModel.Panel_GlazingBeadHeightDecimal = panel_GlazingBeadHeightDecimal;
+            pnlModel.Panel_GlassWidth = panel_GlassWidth;
+            pnlModel.Panel_GlassWidthDecimal = panel_GlassWidthDecimal;
+            pnlModel.Panel_OriginalGlassWidth = panel_OriginalGlassWidth;
+            pnlModel.Panel_OriginalGlassWidthDecimal = panel_OriginalGlassWidthDecimal;
+            pnlModel.Panel_GlassHeight = panel_GlassHeight;
+            pnlModel.Panel_GlassHeightDecimal = panel_GlassHeightDecimal;
+            pnlModel.Panel_OriginalGlassHeight = panel_OriginalGlassHeight;
+            pnlModel.Panel_OriginalGlassHeightDecimal = panel_OriginalGlassHeightDecimal;
+            //pnlModel.Panel_GlassPropertyHeight = panel_GlassPropertyHeight;
+            pnlModel.Panel_GlazingSpacerQty = panel_GlazingSpacerQty;
+            pnlModel.Panel_GlassFilm = panel_GlassFilm;
+            pnlModel.Panel_SashPropertyVisibility = panel_SashPropertyVisibility;
+            pnlModel.Panel_SashProfileArtNo = panel_SashProfileArtNo;
+            pnlModel.Panel_SashReinfArtNo = panel_SashReinfArtNo;
+            pnlModel.Panel_SashWidth = panel_SashWidth;
+            pnlModel.Panel_SashWidthDecimal = panel_SashWidthDecimal;
+            pnlModel.Panel_SashHeight = panel_SashHeight;
+            pnlModel.Panel_SashHeightDecimal = panel_SashHeightDecimal;
+            pnlModel.Panel_OriginalSashWidth = panel_OriginalSashWidth;
+            pnlModel.Panel_OriginalSashWidthDecimal = panel_OriginalSashWidthDecimal;
+            pnlModel.Panel_OriginalSashHeight = panel_OriginalSashHeight;
+            pnlModel.Panel_OriginalSashHeightDecimal = panel_OriginalSashHeightDecimal;
+            pnlModel.Panel_SashReinfWidth = panel_SashReinfWidth;
+            pnlModel.Panel_SashReinfWidthDecimal = panel_SashReinfWidthDecimal;
+            pnlModel.Panel_SashReinfHeight = panel_SashReinfHeight;
+            pnlModel.Panel_SashReinfHeightDecimal = panel_SashReinfHeightDecimal;
+            pnlModel.Panel_CoverProfileArtNo = panel_CoverProfileArtNo;
+            pnlModel.Panel_CoverProfileArtNo2 = panel_CoverProfileArtNo2;
+            pnlModel.Panel_FrictionStayArtNo = panel_FrictionStayArtNo;
+            pnlModel.Panel_FSCasementArtNo = panel_FSCasementArtNo;
+            pnlModel.Panel_SnapInKeepArtNo = panel_SnapInKeepArtNo;
+            pnlModel.Panel_FixedCamArtNo = panel_FixedCamArtNo;
+            pnlModel.Panel_30x25CoverArtNo = panel_30x25CoverArtNo;
+            pnlModel.Panel_MotorizedDividerArtNo = panel_MotorizedDividerArtNo;
+            pnlModel.Panel_CoverForMotorArtNo = panel_CoverForMotorArtNo;
+            pnlModel.Panel_2dHingeArtNo = panel_2dHingeArtNo;
+            pnlModel.Panel_PushButtonSwitchArtNo = panel_PushButtonSwitchArtNo;
+            pnlModel.Panel_FalsePoleArtNo = panel_FalsePoleArtNo;
+            pnlModel.Panel_SupportingFrameArtNo = panel_SupportingFrameArtNo;
+            pnlModel.Panel_PlateArtNo = panel_PlateArtNo;
+            pnlModel.Panel_HandleType = panel_HandleType;
+            pnlModel.Panel_RotoswingArtNo = panel_RotoswingArtNo;
+            pnlModel.Panel_RotaryArtNo = panel_RotaryArtNo;
+            pnlModel.Panel_RioArtNo = panel_RioArtNo;
+            pnlModel.Panel_RioArtNo2 = panel_RioArtNo2;
+            pnlModel.Panel_ProfileKnobCylinderArtNo = panel_ProfileKnobCylinderArtNo;
+            pnlModel.Panel_CylinderCoverArtNo = panel_CylinderCoverArtNo;
+            pnlModel.Panel_RotolineArtNo = panel_RotolineArtNo;
+            pnlModel.Panel_MVDArtNo = panel_MVDArtNo;
+            pnlModel.Panel_EspagnoletteArtNo = panel_EspagnoletteArtNo;
+            pnlModel.Panel_EspagnoletteOptionsVisibility = panel_EspagnoletteOptionsVisibility;
+            pnlModel.Panel_ExtensionTopArtNo = panel_ExtensionTopArtNo;
+            pnlModel.Panel_ExtensionTop2ArtNo = panel_ExtensionTop2ArtNo;
+            pnlModel.Panel_ExtensionTop3ArtNo = panel_ExtensionTop3ArtNo;
+            pnlModel.Panel_ExtensionBotArtNo = panel_ExtensionBotArtNo;
+            pnlModel.Panel_ExtensionBot2ArtNo = panel_ExtensionBot2ArtNo;
+            pnlModel.Panel_ExtensionLeftArtNo = panel_ExtensionLeftArtNo;
+            pnlModel.Panel_ExtensionLeft2ArtNo = panel_ExtensionLeft2ArtNo;
+            pnlModel.Panel_ExtensionRightArtNo = panel_ExtensionRightArtNo;
+            pnlModel.Panel_ExtensionRight2ArtNo = panel_ExtensionRight2ArtNo;
+            pnlModel.Panel_ExtTopChk = panel_ExtTopChk;
+            pnlModel.Panel_ExtTop2Chk = panel_ExtTop2Chk;
+            pnlModel.Panel_ExtBotChk = panel_ExtBotChk;
+            pnlModel.Panel_ExtLeftChk = panel_ExtLeftChk;
+            pnlModel.Panel_ExtRightChk = panel_ExtRightChk;
+            pnlModel.Panel_ExtTopQty = panel_ExtTopQty;
+            pnlModel.Panel_ExtBotQty = panel_ExtBotQty;
+            pnlModel.Panel_ExtLeftQty = panel_ExtLeftQty;
+            pnlModel.Panel_ExtRightQty = panel_ExtRightQty;
+            pnlModel.Panel_ExtTop2Qty = panel_ExtTop2Qty;
+            pnlModel.Panel_ExtTop3Qty = panel_ExtTop3Qty;
+            pnlModel.Panel_ExtBot2Qty = panel_ExtBot2Qty;
+            pnlModel.Panel_ExtLeft2Qty = panel_ExtLeft2Qty;
+            pnlModel.Panel_ExtRight2Qty = panel_ExtRight2Qty;
+            pnlModel.Panel_CornerDriveArtNo = panel_CornerDriveArtNo;
+            pnlModel.Panel_CornerDriveOptionsVisibility = panel_CornerDriveOptionsVisibility;
+            pnlModel.Panel_ExtensionOptionsVisibility = panel_ExtensionOptionsVisibility;
+            pnlModel.Panel_RotoswingOptionsHeight = panel_RotoswingOptionsHeight;
+            pnlModel.Panel_PlasticWedge = panel_PlasticWedge;
+            pnlModel.Panel_PlasticWedgeQty = panel_PlasticWedgeQty;
+            pnlModel.Panel_MiddleCloserArtNo = panel_MiddleCloserArtNo;
+            pnlModel.Panel_LockingKitArtNo = panel_LockingKitArtNo;
+            pnlModel.Panel_GlassType = panel_GlassType;
+            pnlModel.Panel_StrikerArtno_A = panel_StrikerArtno_A;
+            pnlModel.Panel_StrikerQty_A = panel_StrikerQty_A;
+            pnlModel.Panel_StrikerArtno_C = panel_StrikerArtno_C;
+            pnlModel.Panel_StrikerQty_C = panel_StrikerQty_C;
+            pnlModel.Panel_MiddleCloserPairQty = panel_MiddleCloserPairQty;
+            pnlModel.Panel_MotorizedOptionVisibility = panel_MotorizedOptionVisibility;
+            pnlModel.Panel_MotorizedMechArtNo = panel_MotorizedMechArtNo;
+            //pnlModel.Panel_MotorizedPropertyHeight = panel_MotorizedPropertyHeight;
+            pnlModel.Panel_MotorizedMechQty = panel_MotorizedMechQty;
+            pnlModel.Panel_MotorizedMechSetQty = panel_MotorizedMechSetQty;
+            pnlModel.Panel_2DHingeQty = panel_2DHingeQty;
+            pnlModel.Panel_2dHingeArtNo_nonMotorized = panel_2dHingeArtNo_nonMotorized;
+            pnlModel.Panel_2DHingeQty_nonMotorized = panel_2DHingeQty_nonMotorized;
+            pnlModel.Panel_2dHingeVisibility_nonMotorized = panel_2dHingeVisibility_nonMotorized;
+            pnlModel.Panel_3dHingeArtNo = panel_3dHingeArtNo;
+            pnlModel.Panel_3dHingeQty = panel_3dHingeQty;
+            pnlModel.Panel_3dHingePropertyVisibility = panel_3dHingePropertyVisibility;
+            pnlModel.Panel_ButtHingeArtNo = panel_ButtHingeArtNo;
+            pnlModel.Panel_ButtHingeQty = panel_ButtHingeQty;
+            pnlModel.Panel_2dHingeVisibility = panel_2dHingeVisibility;
+            pnlModel.Panel_ButtHingeVisibility = panel_ButtHingeVisibility;
+            pnlModel.Panel_AdjStrikerArtNo = panel_AdjStrikerArtNo;
+            pnlModel.Panel_AdjStrikerQty = panel_AdjStrikerQty;
+            pnlModel.Panel_RestrictorStayArtNo = panel_RestrictorStayArtNo;
+            pnlModel.Panel_RestrictorStayQty = panel_RestrictorStayQty; ;
+            //pnlModel.Panel_ExtensionPropertyHeight = panel_ExtensionPropertyHeight;
+            pnlModel.Panel_GeorgianBarArtNo = panel_GeorgianBarArtNo;
+            pnlModel.Panel_GeorgianBar_VerticalQty = panel_GeorgianBar_VerticalQty;
+            pnlModel.Panel_GeorgianBar_HorizontalQty = panel_GeorgianBar_HorizontalQty;
+            pnlModel.Panel_GeorgianBarOptionVisibility = panel_GeorgianBarOptionVisibility; ;
+            pnlModel.Panel_HingeOptions = panel_HingeOptions;
+            //pnlModel.Panel_HingeOptionsPropertyHeight = panel_HingeOptionsPropertyHeight;
+            pnlModel.Panel_HingeOptionsVisibility = panel_HingeOptionsVisibility;
+            pnlModel.Panel_CenterHingeOptions = panel_CenterHingeOptions;
+            pnlModel.Panel_CenterHingeOptionsVisibility = panel_CenterHingeOptionsVisibility;
+            pnlModel.Panel_NTCenterHingeArticleNo = panel_NTCenterHingeArticleNo;
+            pnlModel.Panel_StayBearingKArtNo = panel_StayBearingKArtNo;
+            pnlModel.Panel_StayBearingPinArtNo = panel_StayBearingPinArtNo;
+            pnlModel.Panel_StayBearingCoverArtNo = panel_StayBearingCoverArtNo;
+            pnlModel.Panel_TopCornerHingeArtNo = panel_TopCornerHingeArtNo;
+            pnlModel.Panel_TopCornerHingeCoverArtNo = panel_TopCornerHingeCoverArtNo;
+            pnlModel.Panel_TopCornerHingeSpacerArtNo = panel_TopCornerHingeSpacerArtNo;
+            pnlModel.Panel_CornerHingeKArtNo = panel_CornerHingeKArtNo;
+            pnlModel.Panel_CornerPivotRestKArtNo = panel_CornerPivotRestKArtNo; ;
+            pnlModel.Panel_CornerHingeCoverKArtNo = panel_CornerHingeCoverKArtNo;
+            pnlModel.Panel_CoverForCornerPivotRestVerticalArtNo = panel_CoverForCornerPivotRestVerticalArtNo;
+            pnlModel.Panel_CoverForCornerPivotRestArtNo = panel_CoverForCornerPivotRestArtNo;
+            pnlModel.Panel_WeldableCArtNo = panel_WeldableCArtNo;
+            pnlModel.Panel_LatchDeadboltStrikerArtNo = panel_LatchDeadboltStrikerArtNo;
+            pnlModel.Panel_CmenuDeleteVisibility = panel_CmenuDeleteVisibility;
+            pnlModel.Panel_NTCenterHingeVisibility = panel_NTCenterHingeVisibility; ;
+            pnlModel.Panel_MiddleCloserVisibility = panel_MiddleCloserVisibility;
+            pnlModel.Panel_MotorizedpnlOptionVisibility = panel_MotorizedpnlOptionVisibility;
+            pnlModel.Panel_GuideTrackProfileArtNo = panel_GuideTrackProfileArtNo;
+            pnlModel.Panel_AluminumTrackArtNo = panel_AluminumTrackArtNo;
+            pnlModel.Panel_AluminumTrackQty = panel_AluminumTrackQty;
+            pnlModel.Panel_AluminumTrackQtyVisibility = panel_AluminumTrackQtyVisibility;
+            pnlModel.Panel_WeatherBarArtNo = panel_WeatherBarArtNo;
+            pnlModel.Panel_WeatherBarFastenerArtNo = panel_WeatherBarFastenerArtNo;
+            pnlModel.Panel_EndCapForWeatherBarArtNo = panel_EndCapForWeatherBarArtNo;
+            pnlModel.Panel_WaterSeepageArtNo = panel_WaterSeepageArtNo;
+            pnlModel.Panel_BrushSealArtNo = panel_BrushSealArtNo;
+            pnlModel.Panel_RollersTypes = panel_RollersTypes;
+            pnlModel.Panel_RollersTypesVisibility = panel_RollersTypesVisibility;
+            pnlModel.Panel_GlazingRebateBlockArtNo = panel_GlazingRebateBlockArtNo;
+            pnlModel.Panel_Spacer = panel_Spacer;
+            pnlModel.Panel_SealingBlockArtNo = panel_SealingBlockArtNo;
+            pnlModel.Panel_InterlockArtNo = panel_InterlockArtNo;
+            pnlModel.Panel_ExtensionForInterlockArtNo = panel_ExtensionForInterlockArtNo;
+            pnlModel.Panel_DHandleInsideArtNo = panel_DHandleInsideArtNo;
+            pnlModel.Panel_DHandleOutsideArtNo = panel_DHandleOutsideArtNo;
+            pnlModel.Panel_DHandleIOLockingInsideArtNo = panel_DHandleIOLockingInsideArtNo;
+            pnlModel.Panel_DHandleIOLockingOutsideArtNo = panel_DHandleIOLockingOutsideArtNo;
+            pnlModel.Panel_DummyDHandleInsideArtNo = panel_DummyDHandleInsideArtNo;
+            pnlModel.Panel_DummyDHandleOutsideArtNo = panel_DummyDHandleOutsideArtNo;
+            pnlModel.Panel_PopUpHandleArtNo = panel_PopUpHandleArtNo;
+            pnlModel.Panel_RotoswingForSlidingHandleArtNo = panel_RotoswingForSlidingHandleArtNo;
+            pnlModel.Panel_DHandleOptionVisibilty = panel_DHandleOptionVisibilty;
+            pnlModel.Panel_DHandleIOLockingOptionVisibilty = panel_DHandleIOLockingOptionVisibilty;
+            pnlModel.Panel_DummyDHandleOptionVisibilty = panel_DummyDHandleOptionVisibilty;
+            pnlModel.Panel_PopUpHandleOptionVisibilty = panel_PopUpHandleOptionVisibilty;
+            pnlModel.Panel_RotoswingForSlidingHandleOptionVisibilty = panel_RotoswingForSlidingHandleOptionVisibilty;
+            pnlModel.Panel_StrikerArtno_Sliding = panel_StrikerArtno_Sliding;
+            pnlModel.Panel_StrikerArtno_SlidingQty = panel_StrikerArtno_SlidingQty;
+            pnlModel.Panel_ScrewSetsArtNo = panel_ScrewSetsArtNo;
+            pnlModel.Panel_PVCCenterProfileArtNo = panel_PVCCenterProfileArtNo;
+            pnlModel.Panel_GS100_T_EM_T_HMCOVER_ArtNo = panel_GS100_T_EM_T_HMCOVER_ArtNo;
+            pnlModel.Panel_TrackProfileArtNo = panel_TrackProfileArtNo;
+            pnlModel.Panel_TrackRailArtNo = panel_TrackRailArtNo;
+            pnlModel.Panel_TrackRailArtNoVisibility = panel_TrackRailArtNoVisibility;
+            pnlModel.Panel_MicrocellOneSafetySensorArtNo = panel_MicrocellOneSafetySensorArtNo;
+            pnlModel.Panel_AutodoorBracketForGS100UPVCArtNo = panel_AutodoorBracketForGS100UPVCArtNo;
+            pnlModel.Panel_GS100EndCapScrewM5AndLSupportArtNo = panel_GS100EndCapScrewM5AndLSupportArtNo;
+            pnlModel.Panel_EuroLeadExitButtonArtNo = panel_EuroLeadExitButtonArtNo;
+            pnlModel.Panel_TOOTHBELT_EM_CMArtNo = panel_TOOTHBELT_EM_CMArtNo;
+            pnlModel.Panel_GuBeaZenMicrowaveSensorArtNo = panel_GuBeaZenMicrowaveSensorArtNo;
+            pnlModel.Panel_SlidingDoorKitGs100_1ArtNo = panel_SlidingDoorKitGs100_1ArtNo;
+            pnlModel.Panel_GS100CoverKitArtNo = panel_GS100CoverKitArtNo;
+            pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
+            pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
+
+
+
+
+            #region louvre 
+
+
+            pnlModel.Panel_PlantOnWeatherStripHeadWidth = panel_PlantOnWeatherStripHeadWidth;
+            pnlModel.Panel_PlantOnWeatherStripSealWidth = panel_PlantOnWeatherStripSealWidth;
+            pnlModel.Panel_LouverFrameWeatherStripHeadWidth = panel_LouverFrameWeatherStripHeadWidth;
+            pnlModel.Panel_LouverFrameBottomWeatherStripWidth = panel_LouverFrameBottomWeatherStripWidth;
+            pnlModel.Panel_SealForHandleQty = panel_SealForHandleQty;
+            pnlModel.Panel_LouvreGallerySetHeight = panel_LouvreGallerySetHeight;
+            pnlModel.Panel_LouverNumberBladesPerSet = panel_LouverNumberBladesPerSet;
+            pnlModel.Panel_LouverGalleryVisibility = panel_LouverGalleryVisibility;
+            pnlModel.Panel_LouverGallerySetVisibility = panel_LouverGallerySetVisibility;
+            pnlModel.Panel_GlassPnlGlazingBeadVisibility = panel_GlassPnlGlazingBeadVisibility;
+            pnlModel.Panel_GlassPnlGlazingAdaptorVisibility = panel_GlassPnlGlazingAdaptorVisibility;
+            pnlModel.Panel_LouverBladeTypeOption = panel_LouverBladeTypeOption;
+
+            pnlModel.Panel_LouverBladeHeight = panel_LouverBladeHeight;
+            pnlModel.Panel_LouverHandleType = panel_LouverHandleType;
+            pnlModel.Panel_LouverHandleLocation = panel_LouverHandleLocation;
+            pnlModel.Panel_LouverGalleryColor = panel_LouverGalleryColor;
+
+            pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArtNo;
+            pnlModel.Panel_PlantOnWeatherStripHeadArtNo = panel_PlantOnWeatherStripHeadArtNo;
+            pnlModel.Panel_PlantOnWeatherStripSealArtNo = panel_PlantOnWeatherStripSealArtNo;
+            pnlModel.Panel_LouverFrameWeatherStripHeadArtNo = panel_LouverFrameWeatherStripHeadArtNo;
+            pnlModel.Panel_LouverFrameBottomWeatherStripArtNo = panel_LouverFrameBottomWeatherStripArtNo;
+            pnlModel.Panel_RubberSealArtNo = panel_RubberSealArtNo;
+            pnlModel.Panel_CasementSealArtNo = panel_CasementSealArtNo;
+            pnlModel.Panel_SealForHandleArtNo = panel_SealForHandleArtNo;
+            pnlModel.Panel_BubbleSealArtNo = panel_BubbleSealArtNo;
+
+
+
+
+
+
+
+
+
+
+            //pnlModel.Panel_LstSealForHandleMultiplier
+            //pnlModel.Panel_LstLouverArtNo
+            //pnlModel.Panel_LouverGallerySetCount
+            //pnlModel.Panel_LouverGallerySetOptionArtNo
+            //pnlModel.Panel_LouverGallerySetOptionVisibility
+            //pnlModel.Panel_CasementSealWidth
+            //pnlModel.Panel_RubberSealWidth
+            #endregion
+
+
+
+
+
+            #endregion
+            IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
+            UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
+            panelPropUC.Dock = DockStyle.Top;
+
+            if (panel_Parent.Parent.Name.Contains("frame"))
+            {
+
+                _frameModel.Lst_Panel.Add(pnlModel);
+                pnlModel.Imager_SetDimensionsToBind_FrameParent();
+                _framePropertiesUCPresenter.GetFramePropertiesUC().GetFramePropertiesPNL().Controls.Add(panelPropUC);
+            }
+            else
+            {
+                if (panel_Parent.Parent.Parent.Name.Contains("Frame"))
+                {
+                    _multiModelParent = _multiPanelModel2ndLvl;
+                    _multiPropUC2ndLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
+
+                }
+                else if (panel_Parent.Parent.Parent.Parent.Parent.Name.Contains("Frame"))
+                {
+                    _multiModelParent = _multiPanelModel3rdLvl;
+                    _multiPropUC3rdLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
+
+                }
+                else
+                {
+                    _multiModelParent = _multiPanelModel4thLvl;
+                    _multiPropUC4thLvl.GetMultiPanelPropertiesPNL().Controls.Add(panelPropUC);
+
+                }
+                pnlModel.Panel_ParentMultiPanelModel = _multiModelParent;
+                _multiModelParent.MPanelLst_Panel.Add(pnlModel);
+                _multiModelParent.Reload_PanelMargin();
+                pnlModel.SetPanelMargin_using_ZoomPercentage();
+                pnlModel.SetPanelMarginImager_using_ImageZoomPercentage();
+                panelPropUC.BringToFront();
+
+
+            }
+
+            IMultiPanelMullionUC multiMullionUC;
+            IMultiPanelTransomUC multiTransomUC;
+
+            if (mpnllvl == "second level")
+            {
+                multiMullionUC = _multiMullionUC2nd;
+                multiTransomUC = _multiTransomUC2nd;
+            }
+            else if (mpnllvl == "third level")
+            {
+                multiMullionUC = _multiMullionUC3rd;
+                multiTransomUC = _multiTransomUC3rd;
+            }
+            else
+            {
+                multiMullionUC = _multiMullionUC4th;
+                multiTransomUC = _multiTransomUC4th;
+            }
+
+            if (panel_Type.Contains("Fixed Panel"))
+            {
+                IFixedPanelUCPresenter fixedUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+
+                    fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)fixedUC);
+                }
+                else
+                {
+
+
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
+                                                                      pnlModel,
+                                                                      _frameModel,
+                                                                      this,
+                                                                      _multiModelParent,
+                                                                      _multiMullionUCP,
+                                                                      _multiMullionImagerUCP);
+                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)fixedUC);
+
+                        fixedUCP.SetInitialLoadFalse();
+                        _multiModelParent.AddControl_MPanelLstObjects((UserControl)fixedUC, _frameModel.Frame_Type.ToString());
+
+
+                        //_multiMullionUCP.GetflpMullion().Controls.Add((UserControl)fixedUC);
+                        //_multiModelParent.MPanelLst_Objects.Add((UserControl)fixedUC);
+                    }
+                    else
+                    {
+                        fixedUCP = (FixedPanelUCPresenter)_fixedUCP.GetNewInstance(_unityC,
+                                                                       pnlModel,
+                                                                       _frameModel,
+                                                                       this,
+                                                                       _multiModelParent,
+                                                                       _multiTransomUCP,
+                                                                       _multiTransomImagerUCP);
+                        IFixedPanelUC fixedUC = fixedUCP.GetFixedPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)fixedUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)fixedUC);
+                        fixedUCP.SetInitialLoadFalse();
+                    }
+
+                }
+            }
+            else if (panel_Type.Contains("Casement Panel"))
+            {
+                ICasementPanelUCPresenter casementUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                    casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)casementUC);
+                }
+                else
+                {
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
+                                                                      pnlModel,
+                                                                      _frameModel,
+                                                                      this,
+                                                                      _multiModelParent,
+                                                                      _multiMullionUCP,
+                                                                      _multiMullionImagerUCP);
+                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)casementUC);
+
+                        //_multiMullionUCP.GetflpMullion().Controls.Add((UserControl)casementUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)casementUC);
+                        casementUCP.SetInitialLoadFalse();
+                    }
+                    else
+                    {
+                        casementUCP = (CasementPanelUCPresenter)_casementUCP.GetNewInstance(_unityC,
+                                                                       pnlModel,
+                                                                       _frameModel,
+                                                                       this,
+                                                                       _multiModelParent,
+                                                                       _multiTransomUCP,
+                                                                       _multiTransomImagerUCP);
+                        ICasementPanelUC casementUC = casementUCP.GetCasementPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)casementUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)casementUC);
+                        casementUCP.SetInitialLoadFalse();
+                    }
+
+                }
+            }
+            else if (panel_Type.Contains("Awning Panel"))
+            {
+                IAwningPanelUCPresenter awningUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                    awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)awningUC);
+                }
+                else
+                {
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
+                                                                      pnlModel,
+                                                                      _frameModel,
+                                                                      this,
+                                                                      _multiModelParent,
+                                                                      _multiMullionUCP,
+                                                                      _multiMullionImagerUCP);
+                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)awningUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)awningUC);
+                        awningUCP.SetInitialLoadFalse();
+                    }
+                    else
+                    {
+                        awningUCP = (AwningPanelUCPresenter)_awningUCP.GetNewInstance(_unityC,
+                                                                       pnlModel,
+                                                                       _frameModel,
+                                                                       this,
+                                                                       _multiModelParent,
+                                                                       _multiTransomUCP,
+                                                                       _multiTransomImagerUCP);
+                        IAwningPanelUC awningUC = awningUCP.GetAwningPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)awningUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)awningUC);
+                        awningUCP.SetInitialLoadFalse();
+                    }
+
+                }
+
+            }
+            else if (panel_Type.Contains("Sliding Panel"))
+            {
+                ISlidingPanelUCPresenter slidingUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+                    slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)slidingUC);
+                }
+                else
+                {
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
+                                                                      pnlModel,
+                                                                      _frameModel,
+                                                                      this,
+                                                                      _multiModelParent,
+                                                                      _multiMullionUCP,
+                                                                      _multiMullionImagerUCP);
+                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)slidingUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)slidingUC);
+                        slidingUCP.SetInitialLoadFalse();
+                    }
+                    else
+                    {
+                        slidingUCP = (SlidingPanelUCPresenter)_slidingUCP.GetNewInstance(_unityC,
+                                                                       pnlModel,
+                                                                       _frameModel,
+                                                                       this,
+                                                                       _multiModelParent,
+                                                                       _multiTransomUCP,
+                                                                       _multiTransomImagerUCP);
+                        ISlidingPanelUC slidingUC = slidingUCP.GetSlidingPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)slidingUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)slidingUC);
+                        slidingUCP.SetInitialLoadFalse();
+                    }
+
+                }
+
+            }
+            else if (panel_Type.Contains("TiltNTurn Panel"))
+            {
+                ITiltNTurnPanelUCPresenter tiltNTurnUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
+
+                    pnlModel.AdjustPropertyPanelHeight("addChkMotorized");
+                    pnlModel.AdjustPropertyPanelHeight("addSash");
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                    pnlModel.AdjustPropertyPanelHeight("addHandle");
+
+                    pnlModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
+
+                    tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)tiltNTurnUC);
+                }
+                else
+                {
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
+                                                                      pnlModel,
+                                                                      _frameModel,
+                                                                      this,
+                                                                      _multiModelParent,
+                                                                      _multiMullionUCP,
+                                                                      _multiMullionImagerUCP);
+                        ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)tiltNTurnUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)tiltNTurnUC);
+                        tiltNTurnUCP.SetInitialLoadFalse();
+                    }
+                    else
+                    {
+                        tiltNTurnUCP = (TiltNTurnPanelUCPresenter)_tiltNTurnUCP.GetNewInstance(_unityC,
+                                                                       pnlModel,
+                                                                       _frameModel,
+                                                                       this,
+                                                                       _multiModelParent,
+                                                                       _multiTransomUCP,
+                                                                       _multiTransomImagerUCP);
+                        ITiltNTurnPanelUC tiltNTurnUC = tiltNTurnUCP.GetTiltNTurnPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)tiltNTurnUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)tiltNTurnUC);
+                        tiltNTurnUCP.SetInitialLoadFalse();
+                    }
+
+                }
+
+            }
+            else if (panel_Type.Contains("Louver Panel"))
+            {
+                ILouverPanelUCPresenter louverPanelUCP;
+                if (panel_Parent.Parent.Name.Contains("frame"))
+                {
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+
+
+                    pnlModel.AdjustPropertyPanelHeight("addGlass");
+                    louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
+                                                                              pnlModel,
+                                                                              _frameModel,
+                                                                              this,
+                                                                              frmUCPresenter);
+                    ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                    _frameModel.Frame_UC.Controls.Add((UserControl)louverPanelUC);
+                }
+                else
+                {
+                    if (panel_Parent.Name.Contains("MultiMullion"))
+                    {
+                        louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
+                                                                                   pnlModel,
+                                                                                   _frameModel,
+                                                                                   this,
+                                                                                   _multiModelParent,
+                                                                                   _multiMullionUCP);
+                        ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                        multiMullionUC.Getflp().Controls.Add((UserControl)louverPanelUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
+                        louverPanelUCP.SetInitialLoadFalse();
+                    }
+                    else
+                    {
+                        louverPanelUCP = (LouverPanelUCPresenter)_louverPanelUCP.GetNewInstance(_unityC,
+                                                                                   pnlModel,
+                                                                                   _frameModel,
+                                                                                   this,
+                                                                                   _multiModelParent,
+                                                                                   _multiTransomUCP);
+                        ILouverPanelUC louverPanelUC = louverPanelUCP.GetLouverPanelUC();
+                        multiTransomUC.Getflp().Controls.Add((UserControl)louverPanelUC);
+                        _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
+                        louverPanelUCP.SetInitialLoadFalse();
+                    }
+                }
+            }
+            if (!panel_Parent.Parent.Name.Contains("frame"))
+            {
+                if (pnlModel.Panel_Placement == "Last")
+                {
+
+                    _multiModelParent.Fit_DisplayDimensions();
+                    _multiModelParent.Fit_EqualPanel_ToBindDimensions();
+                    _multiModelParent.Fit_MyControls_ToBindDimensions();
+                    _multiModelParent.Fit_MyControls_ImagersToBindDimensions();
+                }
+                if (div_DMPanelName != "" || div_DMPanelName != null)
+                {
+                    foreach (IPanelModel pnl in _multiModelParent.MPanelLst_Panel)
+                    {
+                        if (pnl.Panel_Name == div_DMPanelName)
+                        {
+                            _prev_divModel.Div_DMPanel = pnl;
+                            SetLblStatus("DMSelection", false, _controlRaised_forDMSelection, _prev_divModel, pnl);
+                            div_DMPanelName = "";
+                        }
+                    }
+                }
+            }
+            inside_panel = false;
+        }
+
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
         #region Frame Properties
@@ -7453,6 +7906,45 @@ namespace PresentationLayer.Presenter
         IMultiPanelModel panel_ParentMultiPanelModel;
         Color panel_BackColor;
         SlidingTypes panel_SlidingTypes;
+
+        #region Louvre
+      
+
+        int panel_PlantOnWeatherStripHeadWidth,
+            panel_PlantOnWeatherStripSealWidth,
+            panel_LouverFrameWeatherStripHeadWidth,
+            panel_LouverFrameBottomWeatherStripWidth,
+            panel_SealForHandleQty,
+            panel_LouvreGallerySetHeight,
+            panel_CasementSealWidth,
+            panel_RubberSealWidth,
+            panel_LouverGallerySetCount,
+            panel_LouverNumberBladesPerSet;
+        bool panel_LouverGalleryVisibility,
+            panel_LouverGallerySetOptionVisibility,
+            panel_LouverGallerySetVisibility,
+            panel_GlassPnlGlazingBeadVisibility,
+            panel_GlassPnlGlazingAdaptorVisibility;
+        string panel_LouverGallerySetOptionArtNo;
+        List<int> panel_LstSealForHandleMultiplier;
+        List<string> panel_LstLouverArtNo;
+        BladeType_Option panel_LouverBladeTypeOption;
+
+        BladeHeight_Option panel_LouverBladeHeight;
+        LouverHandleType_Option panel_LouverHandleType;
+        LouverHandleLoc_Option panel_LouverHandleLocation;
+        LouverColor_Option panel_LouverGalleryColor;
+
+        AluminumPullHandle_ArticleNo panel_AluminumPullHandleArtNo;
+        PlantOnWeatherStripHead_ArticleNo panel_PlantOnWeatherStripHeadArtNo;
+        PlantOnWeatherStripSeal_ArticleNo panel_PlantOnWeatherStripSealArtNo;
+        LouverFrameWeatherStripHead_ArticleNo panel_LouverFrameWeatherStripHeadArtNo;
+        LouverFrameBottomWeatherStrip_ArticleNo panel_LouverFrameBottomWeatherStripArtNo;
+        RubberSeal_ArticleNo panel_RubberSealArtNo;
+        CasementSeal_ArticleNo panel_CasementSealArtNo;
+        SealForHandle_ArticleNo panel_SealForHandleArtNo;
+        BubbleSeal_ArticleNo panel_BubbleSealArtNo;
+        #endregion
 
         #region Explosion Properties 
         string panel_GlassThicknessDesc,
@@ -8159,7 +8651,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                        GetCurrentPrice();
+                       
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
