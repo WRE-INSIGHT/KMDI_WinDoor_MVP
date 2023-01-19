@@ -920,8 +920,6 @@ namespace PresentationLayer.Presenter
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
 
-
-
         }
 
 
@@ -2305,6 +2303,7 @@ namespace PresentationLayer.Presenter
             //Single Tempered Heat-Soaked
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Heat-Soaked Clear with Georgian Bar", "NA", true, false, false, false, false);
             //Single Tempered Heat-Soaked with Low-E
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Heat-Soaked Clear w/ HardCoated Low-E", "NA", true, false, false, false, false);
@@ -2488,7 +2487,6 @@ namespace PresentationLayer.Presenter
             _colorDT.Rows.Add("Tinted Bronze");
             _colorDT.Rows.Add("Tinted Green");
             _colorDT.Rows.Add("Euro Grey");
-
 
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;

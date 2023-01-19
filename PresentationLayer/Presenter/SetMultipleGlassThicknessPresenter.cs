@@ -106,7 +106,8 @@ namespace PresentationLayer.Presenter
                             }
                         }
 
-                    }else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
+                    }
+                    else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
                     {
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
 
