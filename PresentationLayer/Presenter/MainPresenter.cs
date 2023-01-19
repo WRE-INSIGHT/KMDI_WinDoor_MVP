@@ -4592,6 +4592,19 @@ namespace PresentationLayer.Presenter
                         {
                             panel_ExtRight2Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
+
+                        else if (row_str.Contains("Panel_LouverGallerySetCount:"))
+                        {
+                            panel_LouverGallerySetCount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_CasementSealWidth:"))
+                        {
+                            panel_CasementSealWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_RubberSealWidth:"))
+                        {
+                            panel_RubberSealWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
                         else if (row_str.Contains("Panel_CornerDriveArtNo:"))
                         {
                             foreach (CornerDrive_ArticleNo cdan in CornerDrive_ArticleNo.GetAll())
@@ -5037,9 +5050,6 @@ namespace PresentationLayer.Presenter
 
 
                         }
-
-
-
                         #region Louvre Panel
 
                         if (row_str.Contains("Panel_PlantOnWeatherStripHeadWidth:"))
@@ -5085,6 +5095,14 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Panel_GlassPnlGlazingAdaptorVisibility:"))
                         {
                             panel_GlassPnlGlazingAdaptorVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverGallerySetOptionVisibility:"))
+                        {
+                            panel_LouverGallerySetOptionVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Panel_LouverGallerySetOptionArtNo:"))
+                        {
+                            panel_LouverGallerySetOptionArtNo = extractedValue_str;
                         }
                         else if (row_str.Contains("Panel_LouverBladeTypeOption:"))
                         {
@@ -5242,39 +5260,8 @@ namespace PresentationLayer.Presenter
                             }
 
                         }
-                        //    List<int> Panel_LstLouverArtNo
-                        //    int Panel_LouverGallerySetCount
-                        //    string Panel_LouverGallerySetOptionArtNo
-                        //    bool Panel_LouverGallerySetOptionVisibility
-                        //    int Panel_CasementSealWidth
-                        //    int Panel_RubberSealWidth
+                      
                         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         else if (row_str.Contains("Panel_AluminumTrackQty:"))
                         {
                             panel_AluminumTrackQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -7301,23 +7288,13 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_CasementSealArtNo = panel_CasementSealArtNo;
             pnlModel.Panel_SealForHandleArtNo = panel_SealForHandleArtNo;
             pnlModel.Panel_BubbleSealArtNo = panel_BubbleSealArtNo;
-
-
-
-
-
-
-
-
-
-
-            //pnlModel.Panel_LstSealForHandleMultiplier
-            //pnlModel.Panel_LstLouverArtNo
-            //pnlModel.Panel_LouverGallerySetCount
-            //pnlModel.Panel_LouverGallerySetOptionArtNo
-            //pnlModel.Panel_LouverGallerySetOptionVisibility
-            //pnlModel.Panel_CasementSealWidth
-            //pnlModel.Panel_RubberSealWidth
+            pnlModel.Panel_LstSealForHandleMultiplier = panel_LstSealForHandleMultiplier;
+            pnlModel.Panel_LstLouverArtNo = panel_LstLouverArtNo;
+            pnlModel.Panel_LouverGallerySetCount = panel_LouverGallerySetCount;
+            pnlModel.Panel_LouverGallerySetOptionArtNo = panel_LouverGallerySetOptionArtNo;
+            pnlModel.Panel_LouverGallerySetOptionVisibility = panel_LouverGallerySetOptionVisibility;
+            pnlModel.Panel_CasementSealWidth = panel_CasementSealWidth;
+            pnlModel.Panel_RubberSealWidth = panel_RubberSealWidth;
             #endregion
 
 
