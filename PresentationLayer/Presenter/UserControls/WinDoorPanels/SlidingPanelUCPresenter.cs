@@ -248,10 +248,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _slidingPanelUC_slidingPanelUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
         {
-            int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_slidingPanelUC);
-            if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+            if (_multiPanelModel != null)
             {
-                _mainPresenter.SetSelectedPanel(_panelModel, this, null, null);
+                if (!_multiPanelModel.MPanel_DividerEnabled)
+                {
+
+                    int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_slidingPanelUC);
+                    if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+                    {
+                        _mainPresenter.SetSelectedPanel(_panelModel, this, null, null);
+                    }
+                }
             }
         }
 
