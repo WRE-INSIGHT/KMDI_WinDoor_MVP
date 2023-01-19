@@ -249,11 +249,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _fixedPanelUC_fixedPanelUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
         {
-            int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_fixedPanelUC);
-            if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+            if (_multiPanelModel != null)
             {
-                _mainPresenter.SetSelectedPanel(_panelModel, null, null, this);
+                if (!_multiPanelModel.MPanel_DividerEnabled)
+                {
+
+                    int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_fixedPanelUC);
+                    if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+                    {
+                        _mainPresenter.SetSelectedPanel(_panelModel, null, null, this);
+                    }
+                }
             }
+
         }
 
         private void _fixedPanelUC_fixedPanelUCMouseClickEventRaised(object sender, MouseEventArgs e)
