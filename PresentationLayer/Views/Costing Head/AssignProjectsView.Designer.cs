@@ -39,6 +39,7 @@
             this.assignCostEngrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customerRefNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Projects)).BeginInit();
             this.cmenu_dgvProj.SuspendLayout();
@@ -104,9 +105,10 @@
             this.cmenu_dgvProj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.assignCostEngrToolStripMenuItem,
             this.customerRefNoToolStripMenuItem,
-            this.clearToolStripMenuItem});
+            this.clearToolStripMenuItem,
+            this.deleteProjectToolStripMenuItem});
             this.cmenu_dgvProj.Name = "cmenu_dgvProj";
-            this.cmenu_dgvProj.Size = new System.Drawing.Size(169, 70);
+            this.cmenu_dgvProj.Size = new System.Drawing.Size(169, 114);
             // 
             // assignCostEngrToolStripMenuItem
             // 
@@ -128,6 +130,13 @@
             this.clearToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.clearToolStripMenuItem.Text = "Clear Assigned";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // deleteProjectToolStripMenuItem
+            // 
+            this.deleteProjectToolStripMenuItem.Name = "deleteProjectToolStripMenuItem";
+            this.deleteProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.deleteProjectToolStripMenuItem.Text = "Delete Project";
+            this.deleteProjectToolStripMenuItem.Click += new System.EventHandler(this.deleteProjectToolStripMenuItem_Click);
             // 
             // AssignProjectsView
             // 
@@ -164,5 +173,6 @@
         private System.Windows.Forms.ToolStripMenuItem assignCostEngrToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customerRefNoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteProjectToolStripMenuItem;
     }
 }

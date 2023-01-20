@@ -1423,6 +1423,19 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+        private bool _panelFileLoad;
+        public bool Panel_fileLoad
+        {
+            get
+            {
+                return _panelFileLoad;
+            }
+            set
+            {
+                _panelFileLoad = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Extension_ArticleNo _panelExtensionTopArtNo;
         public Extension_ArticleNo Panel_ExtensionTopArtNo
@@ -9682,6 +9695,7 @@ namespace ModelLayer.Model.Quotation.Panel
                           )
         {
             Panel_ID = panelID;
+            Panel_fileLoad = false;
             Panel_Name = panelName;
             Panel_ParentMultiPanelModel = panelMultiPanelParent;
             PanelImageRenderer_Zoom = panelImageRendererZoom;
@@ -9760,6 +9774,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_HingeOptionsPropertyHeight = constants.panel_property_HingeOptionsheight;
             Panel_GlassType_Insu_Lami = glasstype_insu_lumi;
             Panel_GlassPricePerSqrMeter = glasspricepersqrmeter;
+
         }
     }
 }
