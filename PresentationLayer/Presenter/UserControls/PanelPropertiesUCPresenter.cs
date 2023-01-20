@@ -371,12 +371,12 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "add");
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add");
 
-                    if (_panelModel.Panel_Type.Contains("Louver") == false)
-                    {
+                    //if (_panelModel.Panel_Type.Contains("Louver") == false)
+                    //{
                         _panelModel.AdjustPropertyPanelHeight("addGlass");
                         _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGlass");
-                    }
+                    //}
                 }
 
                 if ((_panelModel.Panel_Type.Contains("Fixed") == false && _panelModel.Panel_Type.Contains("Louver") == false) ||
@@ -682,25 +682,25 @@ namespace PresentationLayer.Presenter.UserControls
                 glassProp.Dock = DockStyle.Top;
                 glassProp.BringToFront();
 
-                //if (_panelModel.Panel_Type.Contains("Louver") == true)
-                //{
-                //    _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
-                //    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
+                if (_panelModel.Panel_Type.Contains("Louver") == true)
+                {
+                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = false;
+                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = false;
 
-                //    _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
+                    _panelModel.AdjustPropertyPanelHeight("minusLouverGlassDeduction");
 
-                //    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
 
-                //    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                //    { 
-                //        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
-                //    }
-                //}
-                //else
-                //{
-                //    _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
-                //    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
-                //}
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusLouverGlassDeduction");
+                    }
+                }
+                else
+                {
+                    _panelModel.Panel_GlassPnlGlazingBeadVisibility = true;
+                    _panelModel.Panel_GlassPnlGlazingAdaptorVisibility = true;
+                }
 
 
                 IPP_GeorgianBarPropertyUCPresenter gbarPropUCP = _pp_georgianBarPropertUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
