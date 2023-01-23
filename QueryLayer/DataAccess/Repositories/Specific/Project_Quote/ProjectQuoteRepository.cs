@@ -50,7 +50,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             return dt;
         }
 
-        public async Task<int> Delete_ProjQuote(int proj_id, int user_id)
+        public async Task<int> Delete_ProjQuote(int proj_quote_id, int user_id)
         {
             int affected_row = 0;
 
@@ -66,8 +66,8 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.Transaction = sqltrans;
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
-                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "DeleteProject";
-                        sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = proj_id;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "DeleteProjectQuote";
+                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = proj_quote_id;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = user_id;
 
                         affected_row = await sqlcmd.ExecuteNonQueryAsync();
@@ -581,6 +581,28 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task Delete_Project(int project_Id, int userID)
+        {
+            using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
+            {
+                await sqlcon.OpenAsync();
+                using (SqlCommand sqlcmd = sqlcon.CreateCommand())
+                {
+                    using (SqlTransaction sqltrans = await Task.Run(() => sqlcon.BeginTransaction(IsolationLevel.RepeatableRead, "Project_Quote_Stp")))
+                    {
+                        sqlcmd.Connection = sqlcon;
+                        sqlcmd.Transaction = sqltrans;
+                        sqlcmd.CommandText = "Project_Quote_Stp";
+                        sqlcmd.CommandType = CommandType.StoredProcedure;
+                        sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "DeleteProject";
+                        sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = project_Id;
+                        sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = userID;
+                        sqltrans.Commit();
+                    }
+                }
             }
         }
     }

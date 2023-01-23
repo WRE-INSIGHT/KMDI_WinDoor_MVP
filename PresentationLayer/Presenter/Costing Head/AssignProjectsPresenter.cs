@@ -46,6 +46,37 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignProjView.btnSearchProjClickEventRaised += _assignProjView_btnSearchProjClickEventRaised;
             _assignProjView.customerRefNoToolStripMenuItemClickEventRaised += _assignProjView_customerRefNoToolStripMenuItemClickEventRaised;
             _assignProjView.clearToolStripMenuItemClickEventRaised += _assignProjView_clearToolStripMenuItemClickEventRaised;
+            _assignProjView.deleteProjectToolStripMenuItemClickEventRaised += _assignProjView_deleteProjectToolStripMenuItemClickEventRaised;
+        }
+
+        private async void _assignProjView_deleteProjectToolStripMenuItemClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DialogResult.Yes == MessageBox.Show("Are you sure?", "Delete Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    foreach (DataGridViewRow row in _dgvProj.SelectedRows)
+                    {
+                        await _projQuoteServices.Delete_Project(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+
+                        //IProjectQuoteModel pqModel = _projQuoteServices.AddProjectQuote(0,
+                        //                                                                Convert.ToInt32(row.Cells["Project_Id"].Value),
+                        //                                                                null,
+                        //                                                                null,
+                        //                                                                Convert.ToInt32(row.Cells["Quote_Id"].Value),
+                        //                                                                null);
+
+                        //await _projQuoteServices.Insert_ProjQuote(pqModel, _userModel.UserID);
+                    }
+
+                    await Load_DGVProjects("");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private async void _assignProjView_clearToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -56,7 +87,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                 {
                     foreach (DataGridViewRow row in _dgvProj.SelectedRows)
                     {
-                        await _projQuoteServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+                        await _projQuoteServices.Delete_ProjQuote(Convert.ToInt32(row.Cells["Id"].Value), _userModel.UserID);
 
                         IProjectQuoteModel pqModel = _projQuoteServices.AddProjectQuote(0,
                                                                                         Convert.ToInt32(row.Cells["Project_Id"].Value),

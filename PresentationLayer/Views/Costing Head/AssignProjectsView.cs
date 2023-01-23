@@ -43,6 +43,7 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler btnSearchProjClickEventRaised;
         public event EventHandler customerRefNoToolStripMenuItemClickEventRaised;
         public event EventHandler clearToolStripMenuItemClickEventRaised;
+        public event EventHandler deleteProjectToolStripMenuItemClickEventRaised;
 
         CommonMethods.CommonFunctions common_func = new CommonMethods.CommonFunctions();
 
@@ -92,6 +93,11 @@ namespace PresentationLayer.Views.Costing_Head
         private void txt_SearchProj_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void deleteProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, deleteProjectToolStripMenuItemClickEventRaised, e);
         }
     }
 }

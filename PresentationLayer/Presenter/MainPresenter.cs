@@ -669,20 +669,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ItemScroll = value;
             }
         }
-        private bool fileLoad;
-        public bool isFileLoad
-        {
-            get
-            {
-                return fileLoad;
-            }
-
-            set
-            {
-                fileLoad = value;
-            }
-        }
-
+      
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -2216,7 +2203,6 @@ namespace PresentationLayer.Presenter
                         file_lines = File.ReadAllLines(outFile);
                         f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                         onload = true;
-                        isFileLoad = true;
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
@@ -2825,7 +2811,6 @@ namespace PresentationLayer.Presenter
 
             _mainView.GetCurrentPrice().Maximum = decimal.MaxValue;
             _mainView.GetCurrentPrice().DecimalPlaces = 2;
-            isFileLoad = false;
             bgw.WorkerReportsProgress = true;
             bgw.WorkerSupportsCancellation = true;
             bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
@@ -2869,7 +2854,6 @@ namespace PresentationLayer.Presenter
                     file_lines = File.ReadAllLines(outFile);
                     f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
                     onload = true;
-                    isFileLoad = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
@@ -3259,7 +3243,6 @@ namespace PresentationLayer.Presenter
                 {
                     Load_Windoor_Item(_windoorModel);
                 }
-                isFileLoad = false;
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -7257,6 +7240,7 @@ namespace PresentationLayer.Presenter
                                                                                panel_HingeOptions,
                                                                                panel_SlidingTypeVisibility,
                                                                                panel_SlidingTypes);
+            pnlModel.Panel_fileLoad = true;
 
             pnlModel.Panel_ChkText = panel_ChkText;
             pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
