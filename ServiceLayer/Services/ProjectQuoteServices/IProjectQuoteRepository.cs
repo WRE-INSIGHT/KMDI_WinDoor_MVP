@@ -12,7 +12,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
     public interface IProjectQuoteRepository
     {
         Task<DataTable> Get_AssignedProjects(string searchStr);
-        Task<int> Delete_ProjQuote(int proj_id, int user_id);
+        Task<int> Delete_ProjQuote(int proj_quote_id, int user_id);
         Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<int> Update_ProjQuote(IProjectQuoteModel pqModel, int user_id);
         Task<DataTable> Get_ProjectByCostEngrID(string searchStr, int user_id, string user_role);
@@ -28,5 +28,6 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task DeleteAEIC(string project_Id, string employee_Id);
         Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType);
         Task<bool> CheckCustomerRefById(int custRefId, int employee_Id);
+        Task Delete_Project(int project_Id, int userID);
     }
 }

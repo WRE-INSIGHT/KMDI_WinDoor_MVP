@@ -23,9 +23,9 @@ namespace ServiceLayer.Services.ProjectQuoteServices
             return await _projQuoteRepo.Get_AssignedProjects(searchStr);
         }
 
-        public async Task<int> Delete_ProjQuote(int proj_id, int user_id)
+        public async Task<int> Delete_ProjQuote(int proj_quote_id, int user_id)
         {
-            return await _projQuoteRepo.Delete_ProjQuote(proj_id, user_id);
+            return await _projQuoteRepo.Delete_ProjQuote(proj_quote_id, user_id);
         }
 
         public async Task<int> Insert_ProjQuote(IProjectQuoteModel pqModel, int user_id)
@@ -152,6 +152,11 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         public async Task<bool> CheckCustomerRefById(int custRefId, int Employee_Id)
         {
             return await _projQuoteRepo.CheckCustomerRefById(custRefId, Employee_Id);
+        }
+
+        public async Task Delete_Project(int Project_Id, int userID)
+        {
+            await _projQuoteRepo.Delete_Project(Project_Id, userID);
         }
     }
 }

@@ -31,10 +31,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void SubscribeToEventsSetup()
         {
-            _pp_glassPropertyUC.PPGlassPropertyLoadEventRaised += _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised;
+            _pp_glassPropertyUC.PPGlassPropertyLoadEventRaised += _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised;                   
             _pp_glassPropertyUC.cmbGlazingArtNoSelectedValueEventRaised += _pp_glassPropertyUC_cmbGlazingArtNoSelectedValueEventRaised;
             _pp_glassPropertyUC.cmbGlassTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbGlassTypeSelectedValueEventRaised;
-            _pp_glassPropertyUC.cmbFilmTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised;
+            _pp_glassPropertyUC.cmbFilmTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised;             
             _pp_glassPropertyUC.btnSelectGlassThicknessClickedEventRaised += _pp_glassPropertyUC_btnSelectGlassThicknessClickedEventRaised;
         }
 
@@ -86,14 +86,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassType_Insu_Lami = "NA";
                 }
             }
-            else
-            {
-                _panelModel.Panel_GlassType_Insu_Lami = "NA";
-            }
+            
 
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;
-           
+
             _initialLoad = false;
         }
 

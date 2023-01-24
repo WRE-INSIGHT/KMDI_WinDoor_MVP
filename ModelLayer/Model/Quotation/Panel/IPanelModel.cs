@@ -30,6 +30,7 @@ namespace ModelLayer.Model.Quotation.Panel
         string Panel_Name { get; set; }
         bool Panel_Orient { get; set; }
         bool Panel_OrientVisibility { get; set; }
+        bool Panel_fileLoad { get; set; }
         string Panel_Type { get; set; }
         int Panel_Width { get; set; }
         int Panel_OriginalWidth { get; set; }

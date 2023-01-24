@@ -172,6 +172,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         } //visibility of Window/Door
 
+       
         private bool _wdOrientation;
         public bool WD_orientation
         {

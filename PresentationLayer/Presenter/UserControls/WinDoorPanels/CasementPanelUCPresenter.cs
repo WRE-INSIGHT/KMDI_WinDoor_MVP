@@ -246,10 +246,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
         private void _casementUC_casementPanelUCMouseDoubleClickedEventRaised(object sender, MouseEventArgs e)
         {
-            int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_casementUC);
-            if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+            if (_multiPanelModel != null)
             {
-                _mainPresenter.SetSelectedPanel(_panelModel, null, this, null);
+                if (!_multiPanelModel.MPanel_DividerEnabled)
+                {
+
+                    int thisIndx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_casementUC);
+                    if (thisIndx != _multiPanelModel.MPanelLst_Objects.Count - 1)
+                    {
+                        _mainPresenter.SetSelectedPanel(_panelModel, null, this, null);
+                    }
+                }
             }
         }
 
