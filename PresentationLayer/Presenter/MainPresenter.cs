@@ -10344,6 +10344,9 @@ namespace PresentationLayer.Presenter
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);
+                    } else if (lst_glassThicknessDistinct.Count == 1)
+                    {
+                        wdm.WD_description += lst_glassThicknessDistinct[0];
                     }
 
                     if (GeorgianBarHorizontalQty > 0)

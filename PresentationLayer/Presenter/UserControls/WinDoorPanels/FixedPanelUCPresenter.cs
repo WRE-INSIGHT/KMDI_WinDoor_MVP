@@ -29,7 +29,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IFixedPanelUC _fixedPanelUC;
 
         private IUnityContainer _unityC;
-        private IDictionary<int,string> lst_glassThickness = new Dictionary<int,string>();
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
@@ -1203,7 +1202,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             int pnl_ID = 0;
             string pnl_ThicknessDesc = "";
-            lst_glassThickness = new Dictionary<int, string>();
+            IDictionary<int, string> lst_glassThickness = new Dictionary<int, string>();
             foreach (IMultiPanelModel mpnl in _frameModel.Lst_MultiPanel)
             {
                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -1256,10 +1255,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if(pnl_ThicknessDesc == entry.Value)
                 {
                     Font gdrawFont = new Font("Times New Roman", gfont_size);
-                    g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                                     0,
-                                                                     fixedpnl.ClientRectangle.Width - w,
-                                                                     fixedpnl.ClientRectangle.Height - w));
                     RectangleF glassrect = new RectangleF(0,
                                                     (fixedpnl.ClientRectangle.Height / 2) + 30,
                                                     fixedpnl.ClientRectangle.Width,
@@ -1273,9 +1268,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 }
             }
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
+                                                            0,
+                                                            fixedpnl.ClientRectangle.Width - w,
+                                                            fixedpnl.ClientRectangle.Height - w));
 
-
-           
 
 
             Color col = Color.Black;

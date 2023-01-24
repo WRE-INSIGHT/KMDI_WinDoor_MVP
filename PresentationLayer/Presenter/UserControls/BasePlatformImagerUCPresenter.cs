@@ -1359,32 +1359,50 @@ namespace PresentationLayer.Presenter.UserControls
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             int font_size = 30,
+                 gfont_size = 40,
                 outer_line = 10,
                 inner_line = 15,
                 tenPercentAdditional = 0;
             int sashOverlapValue = 0;
-            if (panelModel.PanelImageRenderer_Zoom == 0.28f)
+
+
+
+
+
+
+
+
+            if (_windoorModel.WD_zoom_forImageRenderer == 0.50f)
             {
-                font_size = 25;
+                font_size = 37;
+                gfont_size = 47;
             }
-            else if (panelModel.PanelImageRenderer_Zoom == 0.19f)
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.26f)
             {
-                font_size = 15;
+                font_size = 37;
+                gfont_size = 47;
+            }
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.17f)
+            {
+                font_size = 35;
                 outer_line = 5;
                 inner_line = 8;
+                gfont_size = 45;
             }
-            else if (panelModel.PanelImageRenderer_Zoom == 0.14f)
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.13f)
             {
-                font_size = 13;
+                font_size = 34;
                 outer_line = 3;
                 inner_line = 7;
+                gfont_size = 44;
             }
-            else if (panelModel.PanelImageRenderer_Zoom == 0.10f)
+            else if (_windoorModel.WD_zoom_forImageRenderer == 0.10f)
             {
-                font_size = 8;
+                font_size = 33;
                 outer_line = 3;
                 inner_line = 7;
                 tenPercentAdditional = 8;
+                gfont_size = 43;
             }
 
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
@@ -1507,17 +1525,20 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-
+            StringFormat drawFormat = new StringFormat();
 
             if (panelModel.Panel_Type == "Fixed Panel")
             {
 
 
                 Font drawFont = new Font("Times New Roman", font_size);// * zoom);
-                StringFormat drawFormat = new StringFormat();
+                
                 drawFormat.Alignment = StringAlignment.Center;
                 drawFormat.LineAlignment = StringAlignment.Center;
                 g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
+
+
+                
             }
             else if (panelModel.Panel_Type == "Casement Panel")
             {
@@ -1885,7 +1906,75 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
+            int pnl_ID = 0;
+            string pnl_ThicknessDesc = "";
+            IDictionary<int, string> lst_glassThickness = new Dictionary<int, string>();
+            foreach (IMultiPanelModel mpnl in panelModel.Panel_ParentFrameModel.Lst_MultiPanel)
+            {
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                {
+                    if (panelModel.Panel_GlassThicknessDesc != null)
+                    {
+                        if (pnl.Panel_GlassFilm.ToString() != "None")
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString();
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                        else
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc;
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                    }
+                }
+            }
+            List<string> lst_glassThicknessDistinct = new List<string>();
+            foreach (var value in lst_glassThickness.Values)
+            {
+                lst_glassThicknessDistinct.Add(value);
+            }
+            IDictionary<string, string> GlassNumberList = new Dictionary<string, string>();
+            lst_glassThicknessDistinct = lst_glassThicknessDistinct.Distinct().ToList();
+            if (lst_glassThicknessDistinct.Count > 1)
+            {
+                for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
+                {
+                    GlassNumberList.Add("G" + (i + 1).ToString(), lst_glassThicknessDistinct[i]);
+                }
 
+                //lst_glassThicknessPerItem.Add(glassThick);
+            }
+
+            foreach (KeyValuePair<string, string> entry in GlassNumberList)
+            {
+                if (pnl_ThicknessDesc == entry.Value)
+                {
+                    Brush the_brush = new SolidBrush(Color.FromArgb(219, 80, 80));
+   
+                       Font gdrawFont = new Font("Times New Roman", gfont_size);
+                    RectangleF glassrect = new RectangleF(Ppoint.X,
+                                                         (client_ht / 2) + ((client_ht / 2) / 2),
+                                                         client_wd,
+                                                         gfont_size);
+                    g.DrawString(entry.Key,
+                                 gdrawFont,
+                                 the_brush,
+                                 glassrect,
+                                 drawFormat);
+                    break;
+
+                }
+            }
 
 
         }

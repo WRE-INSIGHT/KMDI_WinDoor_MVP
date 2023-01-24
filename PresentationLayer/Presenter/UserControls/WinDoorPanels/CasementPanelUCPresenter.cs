@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -1201,6 +1202,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             int font_size = 30,
+                gfont_size = 60,
                 outer_line = 10,
                 inner_line = 15;
 
@@ -1209,24 +1211,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (ndx_zoomPercentage == 3)
             {
                 font_size = 25;
+                gfont_size = 35;
             }
             else if (ndx_zoomPercentage == 2)
             {
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                gfont_size = 20;
             }
             else if (ndx_zoomPercentage == 1)
             {
                 font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
+                gfont_size = 19;
             }
             else if (ndx_zoomPercentage == 0)
             {
                 font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
+                gfont_size = 8;
             }
 
             #region Georgian Bar
@@ -1355,6 +1361,74 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          new SolidBrush(Color.Black),
                          inwardStr_rect,
                          drawFormat);
+            int pnl_ID = 0;
+            string pnl_ThicknessDesc = "";
+            IDictionary<int, string> lst_glassThickness = new Dictionary<int, string>();
+            foreach (IMultiPanelModel mpnl in _frameModel.Lst_MultiPanel)
+            {
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                {
+                    if (_panelModel.Panel_GlassThicknessDesc != null)
+                    {
+                        if (pnl.Panel_GlassFilm.ToString() != "None")
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString();
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == _panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                        else
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc;
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == _panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                    }
+                }
+            }
+            List<string> lst_glassThicknessDistinct = new List<string>();
+            foreach (var value in lst_glassThickness.Values)
+            {
+                lst_glassThicknessDistinct.Add(value);
+            }
+            IDictionary<string, string> GlassNumberList = new Dictionary<string, string>();
+            lst_glassThicknessDistinct = lst_glassThicknessDistinct.Distinct().ToList();
+            if (lst_glassThicknessDistinct.Count > 1)
+            {
+                for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
+                {
+                    GlassNumberList.Add("G" + (i + 1).ToString(), lst_glassThicknessDistinct[i]);
+                }
+
+                //lst_glassThicknessPerItem.Add(glassThick);
+            }
+
+
+            foreach (KeyValuePair<string, string> entry in GlassNumberList)
+            {
+                if (pnl_ThicknessDesc == entry.Value)
+                {
+                    Font gdrawFont = new Font("Times New Roman", gfont_size);
+                    RectangleF glassrect = new RectangleF(0,
+                                                         (casement.ClientRectangle.Height / 2) + 23,
+                                                          casement.ClientRectangle.Width,
+                                                          gfont_size + 5);
+                    g.DrawString(entry.Key,
+                                 gdrawFont,
+                                 new SolidBrush(Color.Black),
+                                 glassrect,
+                                 drawFormat);
+                    break;
+
+                }
+            }
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
