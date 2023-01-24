@@ -105,6 +105,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
 
             _louverGallerySetPropertyUCPresenter.SortGallerySetOrderNumber();
+            _mainPresenter.GetCurrentPrice();
+            _mainPresenter.itemDescription();
         }
 
         private void _pp_LouverGallerySetOptionPropertyUC_LouverGallerySetOptionPropertyUCLoadEventRaised(object sender, EventArgs e)

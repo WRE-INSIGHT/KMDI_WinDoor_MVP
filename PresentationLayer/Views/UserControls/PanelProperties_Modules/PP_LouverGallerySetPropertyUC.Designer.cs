@@ -43,6 +43,7 @@
             this.cmb_BladeHeight = new System.Windows.Forms.ComboBox();
             this.lbl_BladeHeight = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pnl_body.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.btn_addLouver);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 149);
@@ -71,14 +73,13 @@
             // 
             // btn_addLouver
             // 
-            this.btn_addLouver.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btn_addLouver.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addLouver.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_addLouver.Location = new System.Drawing.Point(0, 0);
+            this.btn_addLouver.Location = new System.Drawing.Point(95, 0);
             this.btn_addLouver.Name = "btn_addLouver";
-            this.btn_addLouver.Size = new System.Drawing.Size(148, 27);
+            this.btn_addLouver.Size = new System.Drawing.Size(38, 27);
             this.btn_addLouver.TabIndex = 63;
-            this.btn_addLouver.Text = "➕ Add Gallery Set";
+            this.btn_addLouver.Text = "➕";
             this.btn_addLouver.UseVisualStyleBackColor = true;
             this.btn_addLouver.Click += new System.EventHandler(this.btn_addLouver_Click);
             // 
@@ -216,6 +217,16 @@
             this.label2.TabIndex = 52;
             this.label2.Text = "Gallery Set";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "Add Gallery Set";
+            // 
             // PP_LouverGallerySetPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,6 +237,7 @@
             this.Load += new System.EventHandler(this.PP_LouverGallerySetPropertyUC_Load);
             this.pnl_body.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_NoOfBladePerSet)).EndInit();
@@ -250,5 +262,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_BladeHeight;
         private System.Windows.Forms.Label lbl_BladeHeight;
+        private System.Windows.Forms.Label label4;
     }
 }

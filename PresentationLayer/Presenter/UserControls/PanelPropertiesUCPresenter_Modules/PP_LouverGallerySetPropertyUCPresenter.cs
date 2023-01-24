@@ -21,7 +21,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_GlassPropertyUCPresenter _pp_GlassPropertyUCPresenter;
 
         public List<IPP_LouverGallerySetOptionPropertyUCPresenter> _lst_gallerySetOptionUCP { get; set; }
-          
+
         private Panel _pnlLouverBody;
         private ConstantVariables constants = new ConstantVariables();
         string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc;
@@ -127,7 +127,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 GallerySetOptionUC.BringToFront();
                 ((UserControl)_LouverGallerySetPropertyUC).Height += constants.panel_property_LouverGallerySetArtNoOptionsheight;
 
-              
+
                 if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._single)
                 {
                     handleTypeDesc = "-S";
@@ -197,7 +197,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_LstSealForHandleMultiplier.Add(3);
                 }
-                
+                _mainPresenter.GetCurrentPrice();
+                _mainPresenter.itemDescription();
+
             }
             else
             {
@@ -216,7 +218,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             foreach (IPP_LouverGallerySetOptionPropertyUCPresenter LouverGallerySet in _lst_gallerySetOptionUCP)
             {
                 LouverGallerySet.GetLouverGallerySetOptionPropertyUC().lblGallerySetArtNo = "Set " + GallerySet;
-                    GallerySet++;
+                GallerySet++;
             }
         }
         private void _LouverGallerySetPropertyUC_LouverGallerySetPropertyUCLoadEventRaised(object sender, EventArgs e)
