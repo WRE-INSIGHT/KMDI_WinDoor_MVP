@@ -10336,7 +10336,7 @@ namespace PresentationLayer.Presenter
 
                     List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
-                    if (lst_glassThicknessDistinct.Count != 0)
+                    if (lst_glassThicknessDistinct.Count > 1)
                     {
                         for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
                         {
