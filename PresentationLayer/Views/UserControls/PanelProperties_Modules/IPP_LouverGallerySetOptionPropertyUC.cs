@@ -8,6 +8,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
     {
         event EventHandler LouverGallerySetOptionPropertyUCLoadEventRaised;
         event EventHandler btnDeleteGallerySetClickEventRaised;
+        event EventHandler changeArtNoToolStripMenuItemClickEventRaised;
+
         string lblGallerySetArtNo { get; set; }
         TextBox GetCmbLouverGalleryArtNo();
     }

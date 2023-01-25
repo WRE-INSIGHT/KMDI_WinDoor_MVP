@@ -12,5 +12,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         IPP_LouverGallerySetPropertyUCPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, IPanelModel panelModel);
         int GallerySet_Count { get; set; }
         List<IPP_LouverGallerySetOptionPropertyUCPresenter> _lst_gallerySetOptionUCP { get; set; }
+
+        void Remove_GallerySet(IPP_LouverGallerySetOptionPropertyUCPresenter GallerySetOptionUCP);
+        void SortGallerySetOrderNumber();
     }
 }
