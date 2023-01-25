@@ -10249,11 +10249,11 @@ namespace PresentationLayer.Presenter
                                 {
                                     if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
                                     }
                                     else
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
                                 else

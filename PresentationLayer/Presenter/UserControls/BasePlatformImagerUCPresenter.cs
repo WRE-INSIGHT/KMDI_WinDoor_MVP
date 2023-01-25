@@ -1431,11 +1431,11 @@ namespace PresentationLayer.Presenter.UserControls
                     tenPercentAdditional += 1;
                     //outer Line
                     PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction - tenPercentAdditional, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine6 = new PointF(Ppoint.X + outer_line + (client_wd - (outer_line * 2)) - w + innerLineDeduction - tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
@@ -1444,11 +1444,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         //inner Line 
                         PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction - tenPercentAdditional, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine6 = new PointF(Ppoint.X + inner_line + (client_wd - (inner_line * 2)) - w + outerLineDeduction - tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine6 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
@@ -1459,11 +1459,13 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
                     //outer Line
-                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line); 
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    //PointF outerLine5 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine5 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine6 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
@@ -1471,11 +1473,13 @@ namespace PresentationLayer.Presenter.UserControls
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line 
-                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                        //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                        PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
                         PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        //PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine6 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + outerLineDeduction, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
@@ -1487,20 +1491,22 @@ namespace PresentationLayer.Presenter.UserControls
                 else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
                     //outer Line
-                    PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line);
-                    PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + (innerLineDeduction * 2), Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
+                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line);
+                    PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
 
                     if (panelModel.Panel_Type != "Fixed Panel" || (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == true))
                     {
                         //inner Line
-                        PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line);
-                        PointF innerLine4 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + inner_line - outerLineDeduction + (client_wd - (inner_line * 2)) - w + (outerLineDeduction * 2), Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
+                        PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line);
+                        PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
                     }
@@ -1526,7 +1532,116 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
             StringFormat drawFormat = new StringFormat();
+            int pnl_ID = 0;
+            string pnl_ThicknessDesc = "";
+            IDictionary<int, string> lst_glassThickness = new Dictionary<int, string>();
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                {
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        if (panelModel.Panel_GlassThicknessDesc != null)
+                        {
+                            if (pnl.Panel_GlassFilm.ToString() != "None")
+                            {
+                                string glassDesc = pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString();
+                                lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                                if (pnl == panelModel)
+                                {
+                                    pnl_ID = pnl.Panel_ID;
+                                    pnl_ThicknessDesc = glassDesc;
+                                }
+                            }
+                            else
+                            {
+                                string glassDesc = pnl.Panel_GlassThicknessDesc;
+                                lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                                if (pnl == panelModel)
+                                {
+                                    pnl_ID = pnl.Panel_ID;
+                                    pnl_ThicknessDesc = glassDesc;
+                                }
+                            }
+                        }
+                    }
+                }
+                foreach (IPanelModel pnl in frm.Lst_Panel)
+                {
+                    if (panelModel.Panel_GlassThicknessDesc != null)
+                    {
+                        if (pnl.Panel_GlassFilm.ToString() != "None")
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString();
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                        else
+                        {
+                            string glassDesc = pnl.Panel_GlassThicknessDesc;
+                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
+                            if (pnl == panelModel)
+                            {
+                                pnl_ID = pnl.Panel_ID;
+                                pnl_ThicknessDesc = glassDesc;
+                            }
+                        }
+                    }
+                }
+            }
+            List<string> lst_glassThicknessDistinct = new List<string>();
+            foreach (var value in lst_glassThickness.Values)
+            {
+                lst_glassThicknessDistinct.Add(value);
+            }
+            IDictionary<string, string> GlassNumberList = new Dictionary<string, string>();
+            lst_glassThicknessDistinct = lst_glassThicknessDistinct.Distinct().ToList();
+            if (lst_glassThicknessDistinct.Count > 1)
+            {
+                for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
+                {
+                    GlassNumberList.Add("G" + (i + 1).ToString(), lst_glassThicknessDistinct[i]);
+                }
 
+                //lst_glassThicknessPerItem.Add(glassThick);
+            }
+
+            foreach (KeyValuePair<string, string> entry in GlassNumberList)
+            {
+                if (pnl_ThicknessDesc == entry.Value)
+                {
+                    Brush the_brush = new SolidBrush(Color.FromArgb(219, 80, 80));
+                    int LocY = Ppoint.Y;
+                    if(font_size + 10 < client_ht)
+                    {
+                        if(panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        {
+                            LocY = Ppoint.Y + (client_ht / 2) - font_size + 10;
+                        }
+                        else
+                        {
+                            LocY = Ppoint.Y + (client_ht / 2) + (int)(client_ht * 0.1) - 15;
+
+                        }
+                    }
+                    Font gdrawFont = new Font("Times New Roman", font_size);
+                    RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size,
+                                                         LocY,
+                                                         client_wd,
+                                                         font_size + 10);
+                    g.DrawString(entry.Key,
+                                 gdrawFont,
+                                 the_brush,
+                                 glassrect,
+                                 drawFormat);
+                    break;
+
+                }
+            }
             if (panelModel.Panel_Type == "Fixed Panel")
             {
 
@@ -1906,75 +2021,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-            int pnl_ID = 0;
-            string pnl_ThicknessDesc = "";
-            IDictionary<int, string> lst_glassThickness = new Dictionary<int, string>();
-            foreach (IMultiPanelModel mpnl in panelModel.Panel_ParentFrameModel.Lst_MultiPanel)
-            {
-                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                {
-                    if (panelModel.Panel_GlassThicknessDesc != null)
-                    {
-                        if (pnl.Panel_GlassFilm.ToString() != "None")
-                        {
-                            string glassDesc = pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString();
-                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
-                            if (pnl == panelModel)
-                            {
-                                pnl_ID = pnl.Panel_ID;
-                                pnl_ThicknessDesc = glassDesc;
-                            }
-                        }
-                        else
-                        {
-                            string glassDesc = pnl.Panel_GlassThicknessDesc;
-                            lst_glassThickness.Add(pnl.Panel_ID, glassDesc);
-                            if (pnl == panelModel)
-                            {
-                                pnl_ID = pnl.Panel_ID;
-                                pnl_ThicknessDesc = glassDesc;
-                            }
-                        }
-                    }
-                }
-            }
-            List<string> lst_glassThicknessDistinct = new List<string>();
-            foreach (var value in lst_glassThickness.Values)
-            {
-                lst_glassThicknessDistinct.Add(value);
-            }
-            IDictionary<string, string> GlassNumberList = new Dictionary<string, string>();
-            lst_glassThicknessDistinct = lst_glassThicknessDistinct.Distinct().ToList();
-            if (lst_glassThicknessDistinct.Count > 1)
-            {
-                for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
-                {
-                    GlassNumberList.Add("G" + (i + 1).ToString(), lst_glassThicknessDistinct[i]);
-                }
-
-                //lst_glassThicknessPerItem.Add(glassThick);
-            }
-
-            foreach (KeyValuePair<string, string> entry in GlassNumberList)
-            {
-                if (pnl_ThicknessDesc == entry.Value)
-                {
-                    Brush the_brush = new SolidBrush(Color.FromArgb(219, 80, 80));
-   
-                       Font gdrawFont = new Font("Times New Roman", gfont_size);
-                    RectangleF glassrect = new RectangleF(Ppoint.X,
-                                                         (client_ht / 2) + ((client_ht / 2) / 2),
-                                                         client_wd,
-                                                         gfont_size);
-                    g.DrawString(entry.Key,
-                                 gdrawFont,
-                                 the_brush,
-                                 glassrect,
-                                 drawFormat);
-                    break;
-
-                }
-            }
+           
 
 
         }
