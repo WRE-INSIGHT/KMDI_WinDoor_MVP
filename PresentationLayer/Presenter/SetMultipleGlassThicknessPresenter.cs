@@ -84,8 +84,8 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show("No Panel Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (_panelIdList.Count > 1)
-            {
+            else if (_panelIdList.Count >= 1)
+            { 
                 foreach (IFrameModel fr in _windoorModel.lst_frame)
                 {
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
@@ -125,7 +125,8 @@ namespace PresentationLayer.Presenter
                 }
                 glassThicknessPresenter.ShowGlassThicknessListView();
 
-            }else
+            }
+            else
             {
                 MessageBox.Show("Select Multiple Panels", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
