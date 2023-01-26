@@ -1631,7 +1631,7 @@ namespace PresentationLayer.Presenter.UserControls
                     Font gdrawFont = new Font("Times New Roman", font_size);
                     RectangleF glassrect = new RectangleF(Ppoint.X + (client_wd / 2) - font_size,
                                                          LocY,
-                                                         client_wd,
+                                                         client_wd + 100,
                                                          font_size + 10);
                     g.DrawString(entry.Key,
                                  gdrawFont,

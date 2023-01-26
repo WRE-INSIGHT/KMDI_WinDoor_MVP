@@ -240,20 +240,20 @@ namespace PresentationLayer.Presenter
                             }
                         }
                         ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnlObject => pnlObject.Name == _panelModel.Panel_Name)).InvalidateThis();
-                        _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                        _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                       
                         _glassThicknessListView.CloseThisDialog();
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
                     }
                     #endregion
-                    
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 }
                 else
                 {
                     MessageBox.Show("Invalid selection", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
+              
             }
           
         }

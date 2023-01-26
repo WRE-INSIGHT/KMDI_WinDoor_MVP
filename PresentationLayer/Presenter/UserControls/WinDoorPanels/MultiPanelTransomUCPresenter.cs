@@ -1187,6 +1187,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
 
                 }
+                _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
                 _mainPresenter.SetChangesMark();
                 _mainPresenter.itemDescription();
                 _mainPresenter.GetCurrentPrice();

@@ -854,26 +854,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (isLeft == true)
                 {
-                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
-                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    if (_multiPanelModel != null)
                     {
-                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                        int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                        if (_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                        }
+                        else
+                        {
+                            totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                        }
+                        if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
+                            !_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                        }
                     }
-                    else
-                    {
-                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
-                    }
-                    if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
-                        !_multiPanelModel.MPanel_DividerEnabled)
-                    {
-                        //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                        //_mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                        //_mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-                    }
+                    isLeft = false;
+                    _mouseDown = false;
                 }
 
-                isLeft = false;
-                _mouseDown = false;
+                
 
 
 

@@ -9171,6 +9171,7 @@ namespace PresentationLayer.Presenter
                 //_pnlPropertiesBody.Refresh();
                 _mainView.RemoveBinding(_mainView.GetLblSize());
                 _mainView.RemoveBinding();
+                _windoorModel.SetPanelGlassID();
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();

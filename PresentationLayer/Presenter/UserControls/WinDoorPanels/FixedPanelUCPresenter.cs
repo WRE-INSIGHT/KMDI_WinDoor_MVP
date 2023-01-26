@@ -849,6 +849,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 isLeft = false;
                 _mouseDown = false;
+                if (_multiPanelModel != null)
+                {
+                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                    }
+                    else
+                    {
+                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    }
+                    if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
+                        !_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                    }
+                }
             }
         }
         private bool isLeft = false;
