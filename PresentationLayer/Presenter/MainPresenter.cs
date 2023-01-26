@@ -2323,6 +2323,9 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Clear", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Euro Grey", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Clear", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(6.0f, "6 mm Acid Etched Euro Grey", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm  Tinted Bronze", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm  Tinted Bronze", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm  Tinted Bronze", "NA", true, false, false, false, false);
@@ -9168,6 +9171,7 @@ namespace PresentationLayer.Presenter
                 //_pnlPropertiesBody.Refresh();
                 _mainView.RemoveBinding(_mainView.GetLblSize());
                 _mainView.RemoveBinding();
+                _windoorModel.SetPanelGlassID();
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
@@ -10285,6 +10289,8 @@ namespace PresentationLayer.Presenter
         private List<string> lst_Description = new List<string>();
         private List<string> lst_DuplicatePnl = new List<string>();
 
+        bool pnl_LouverChk = false;
+
         int GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
 
@@ -10294,8 +10300,8 @@ namespace PresentationLayer.Presenter
                NewNoneDuplicatePnlAndCount,
                lst_DescDist,
                glassThick,
-            GeorgianBarHorizontalDesc,
-             GeorgianBarVerticalDesc;
+               GeorgianBarHorizontalDesc,
+               GeorgianBarVerticalDesc;
         #endregion
         public void itemDescription()
         {
@@ -10459,9 +10465,22 @@ namespace PresentationLayer.Presenter
                             {
                                 IPanelModel Singlepnl = fr.Lst_Panel[0];
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
-                                {
+                                {   
                                     motorizeDesc = "Panel Motorized ";
                                     wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
+                                }
+                                else if (Singlepnl.Panel_Type.Contains("Louver"))
+                                {
+                                    pnl_LouverChk = true;
+                                    if (Singlepnl.Panel_MotorizedOptionVisibility == true)
+                                    {
+                                        motorizeDesc = "Panel Motorized ";
+                                    }
+                                    else
+                                    {
+                                        motorizeDesc = "";
+                                    }
+                                    wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + "Panel LVRG-152-"+ Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
                                 }
                                 else
                                 {
@@ -10475,11 +10494,22 @@ namespace PresentationLayer.Presenter
                                 {
                                     if (Singlepnl.Panel_GlassFilm.ToString() != "None")
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        if (Singlepnl.Panel_Type.Contains("Louver"))
+                                        {
+                                            lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        }
+                                        else
+                                        {
+                                            lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " with " + Singlepnl.Panel_GlassFilm.ToString() + "\n");
+                                        }
+                                    }
+                                    else if (Singlepnl.Panel_Type.Contains("Louver"))
+                                    {
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                     }
                                     else
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
                                 else
@@ -10526,7 +10556,7 @@ namespace PresentationLayer.Presenter
                             {
                                 string split1 = words[a],
                                        split2 = words[a + 1];
-                                string DuplicatePnl = split1.Replace("1", split2) + "\n";
+                                string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "\n";
 
                                 lst_DuplicatePnl.Add(DuplicatePnl);
                                 a++;
@@ -10562,7 +10592,7 @@ namespace PresentationLayer.Presenter
 
                     List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
-                    if (lst_glassThicknessDistinct.Count != 0)
+                    if (lst_glassThicknessDistinct.Count > 1)
                     {
                         for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
                         {
@@ -10570,6 +10600,9 @@ namespace PresentationLayer.Presenter
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);
+                    } else if (lst_glassThicknessDistinct.Count == 1)
+                    {
+                        wdm.WD_description += lst_glassThicknessDistinct[0];
                     }
 
                     if (GeorgianBarHorizontalQty > 0)
@@ -10584,8 +10617,14 @@ namespace PresentationLayer.Presenter
 
                     wdm.WD_description += GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
+                    if (pnl_LouverChk == true)
+                    {
+                        wdm.WD_description += "Min. wall thickness is 225mm";
+                    }
+
                     glassThick = string.Empty;
                     lst_glassThickness.Clear();
+                    pnl_LouverChk = false;
                 }
                 GeorgianBarVerticalDesc = "";
                 GeorgianBarHorizontalDesc = "";

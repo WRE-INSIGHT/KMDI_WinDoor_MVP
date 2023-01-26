@@ -13,7 +13,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
         public event EventHandler LouverGallerySetOptionPropertyUCLoadEventRaised;
         public event EventHandler btnDeleteGallerySetClickEventRaised;
-
+        public event EventHandler changeArtNoToolStripMenuItemClickEventRaised;
         public TextBox GetCmbLouverGalleryArtNo()
         {
             return tbox_GallerySetArtNo;
@@ -40,6 +40,14 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, btnDeleteGallerySetClickEventRaised, e);
         }
+
+        private void changeArtNoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, changeArtNoToolStripMenuItemClickEventRaised, e);
+
+        }
+
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverGallerySetOptionVisibility"]);

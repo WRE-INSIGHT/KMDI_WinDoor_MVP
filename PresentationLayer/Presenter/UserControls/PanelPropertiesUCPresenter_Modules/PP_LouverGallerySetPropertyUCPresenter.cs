@@ -21,7 +21,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPP_GlassPropertyUCPresenter _pp_GlassPropertyUCPresenter;
 
         public List<IPP_LouverGallerySetOptionPropertyUCPresenter> _lst_gallerySetOptionUCP { get; set; }
-          
+
         private Panel _pnlLouverBody;
         private ConstantVariables constants = new ConstantVariables();
         string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc;
@@ -101,7 +101,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_LstSealForHandleMultiplier = new List<int>();
                 }
 
-                _lst_gallerySetOptionUCP = new List<IPP_LouverGallerySetOptionPropertyUCPresenter>();
+                if (_lst_gallerySetOptionUCP == null)
+                {
+                    _lst_gallerySetOptionUCP = new List<IPP_LouverGallerySetOptionPropertyUCPresenter>();
+                }
+
                 IPP_LouverGallerySetOptionPropertyUCPresenter GallerySetOption = _pp_LouverGallerySetOptionPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel, this);
                 _lst_gallerySetOptionUCP.Add(GallerySetOption);
                 UserControl GallerySetOptionUC = (UserControl)GallerySetOption.GetLouverGallerySetOptionPropertyUC();
@@ -123,7 +127,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 GallerySetOptionUC.BringToFront();
                 ((UserControl)_LouverGallerySetPropertyUC).Height += constants.panel_property_LouverGallerySetArtNoOptionsheight;
 
-              
+
                 if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._single)
                 {
                     handleTypeDesc = "-S";
@@ -193,8 +197,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_LstSealForHandleMultiplier.Add(3);
                 }
+                _mainPresenter.GetCurrentPrice();
+                _mainPresenter.itemDescription();
 
-                // _panelModel.Panel_LouverGallerySetOptionArtNo = lvrDesc;
             }
             else
             {
@@ -202,8 +207,20 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             }
         }
 
+        public void Remove_GallerySet(IPP_LouverGallerySetOptionPropertyUCPresenter GallerySetOptionUCP)
+        {
+            _lst_gallerySetOptionUCP.Remove(GallerySetOptionUCP);
+        }
 
-
+        public void SortGallerySetOrderNumber()
+        {
+            int GallerySet = 1;
+            foreach (IPP_LouverGallerySetOptionPropertyUCPresenter LouverGallerySet in _lst_gallerySetOptionUCP)
+            {
+                LouverGallerySet.GetLouverGallerySetOptionPropertyUC().lblGallerySetArtNo = "Set " + GallerySet;
+                GallerySet++;
+            }
+        }
         private void _LouverGallerySetPropertyUC_LouverGallerySetPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             //_panelModel.Panel_LouverBladeHeight = BladeHeight_Option._152;

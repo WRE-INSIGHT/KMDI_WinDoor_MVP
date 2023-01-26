@@ -260,6 +260,11 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.DeleteConcrete_OnConcreteList_WindoorModel(_concreteModel);
             _mainPresenter.DeleteConcrete_OnObjectList_WindoorModel((UserControl)_concreteUC);
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+            if (_mainPresenter.windoorModel_MainPresenter.lst_concrete.Count == 0)
+            {
+                _mainPresenter.windoorModel_MainPresenter.concreteIDCounter = 0;
+
+            }
 
         }
 

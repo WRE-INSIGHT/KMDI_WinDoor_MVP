@@ -500,16 +500,28 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (data == "Louver Panel")
                 {
-                    //_frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
-
-
-                    //_panelModel.AdjustPropertyPanelHeight("addGlass");
                     _frameModel.AdjustPropertyPanelHeight("Panel", "add");
-                    _frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    _frameModel.AdjustPropertyPanelHeight("Panel", "addSash");
 
 
                     _panelModel.AdjustPropertyPanelHeight("addGlass");
+
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "add");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addGlass");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySetArtNo");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
+                    //_frameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
+
+
+
+                    //_panelModel.AdjustPropertyPanelHeight("addGlass");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverBlades");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallerySetArtNo");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallery");
+                    //_panelModel.AdjustPropertyPanelHeight("addLouverGallerySet");
+
+
 
                     ILouverPanelUCPresenter louverPanelUCP = _louverPanelUCP.GetNewInstance(_unityC,
                                                                                             _panelModel,
@@ -904,7 +916,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _mainPresenter.DeductPanelGlassID();
                 }
             }
-
+            
             _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
@@ -914,6 +926,11 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.DeselectDivider();
+            if(_mainPresenter.windoorModel_MainPresenter.lst_frame.Count == 0)
+            {
+                _mainPresenter.windoorModel_MainPresenter.frameIDCounter = 0;
+
+            }
         }
 
         public void ViewDeleteControl(UserControl control)

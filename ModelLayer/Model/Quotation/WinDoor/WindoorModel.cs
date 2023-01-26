@@ -156,7 +156,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
-       
+
 
         private bool _wdVisibility;
         public bool WD_visibility
@@ -172,7 +172,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
         } //visibility of Window/Door
 
-       
+
         private bool _wdOrientation;
         public bool WD_orientation
         {
@@ -801,38 +801,109 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
         public void SetPanelGlassID()
         {
-            int i = 0;
-            foreach (IFrameModel fr in lst_frame)
+            int i = 1;
+            //foreach (IFrameModel fr in lst_frame)
+            //{
+            //    foreach (var wndrObject in fr.Lst_MultiPanel[0].ls)
+
+            //        foreach (IPanelModel pnl in fr.Lst_Panel)
+            //        {
+            //            pnl.PanelGlass_ID = i;
+            //            i++;
+            //            //if (i == PanelGlassID_Counter)
+            //            //{
+            //            //    break;
+            //            //}
+            //        }
+            //    foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+            //    {
+            //        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+            //        {
+
+            //            pnl.PanelGlass_ID = i;
+            //            i++;
+            //            //if (i == PanelGlassID_Counter)
+            //            //{
+            //            //    break;
+            //            //}
+            //        }
+            //        //if (i == PanelGlassID_Counter)
+            //        //{
+            //        //    break;
+            //        //}
+            //    }
+            //    //if (i == PanelGlassID_Counter)
+            //    //{
+            //    //    break;
+            //    //}
+            //}
+
+
+            foreach (IFrameModel frm in lst_frame)
             {
-                foreach (IPanelModel pnl in fr.Lst_Panel)
+                #region  Frame Panel
+                foreach (IPanelModel pnl in frm.Lst_Panel)
                 {
                     pnl.PanelGlass_ID = i;
                     i++;
-                    if (i == PanelGlassID_Counter)
-                    {
-                        break;
-                    }
                 }
-                foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
+                if (frm.Lst_MultiPanel.Count > 0)
                 {
-                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+
+                    foreach (Control ctrl in frm.Lst_MultiPanel[0].MPanelLst_Objects)
                     {
-                        i++;
-                        pnl.PanelGlass_ID = i;
-                        if (i == PanelGlassID_Counter)
+                        if (ctrl.Name.Contains("PanelUC"))
                         {
-                            break;
+                            foreach (IPanelModel pnl in frm.Lst_MultiPanel[0].MPanelLst_Panel)
+                            {
+                                if (ctrl.Name == pnl.Panel_Name)
+                                {
+                                    pnl.PanelGlass_ID = i;
+                                    i++;
+                                }
+                            }
+                           
+                        }
+                        else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
+                        {
+
+                            foreach (IMultiPanelModel thirdlvlmpnl in frm.Lst_MultiPanel[0].MPanelLst_MultiPanel)
+                            {
+                                if (thirdlvlmpnl.MPanel_Name == ctrl.Name)
+                                {
+                                    foreach (Control thirdlvlctrl in thirdlvlmpnl.MPanelLst_Objects)
+                                    {
+                                        if (thirdlvlctrl.Name.Contains("PanelUC"))
+                                        {
+                                            foreach (IPanelModel pnl in thirdlvlmpnl.MPanelLst_Panel)
+                                            {
+                                                if (thirdlvlctrl.Name == pnl.Panel_Name)
+                                                {
+                                                    pnl.PanelGlass_ID = i;
+                                                    i++;
+
+                                                }
+                                            }
+                                        }
+                                        else if (thirdlvlctrl.Name.Contains("MultiTransom") || thirdlvlctrl.Name.Contains("MultiMullion"))
+                                        {
+                                            foreach (IMultiPanelModel fourthlvlmpnl in thirdlvlmpnl.MPanelLst_MultiPanel)
+                                            {
+                                                foreach (IPanelModel pnl in fourthlvlmpnl.MPanelLst_Panel)
+                                                {
+                                                    pnl.PanelGlass_ID = i;
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
-                    if (i == PanelGlassID_Counter)
-                    {
-                        break;
-                    }
                 }
-                if (i == PanelGlassID_Counter)
-                {
-                    break;
-                }
+                #endregion
             }
         }
 

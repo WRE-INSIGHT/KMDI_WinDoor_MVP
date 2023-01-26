@@ -31,7 +31,6 @@
             this.pnl_body = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btn_addLouver = new System.Windows.Forms.Button();
-            this.btn_SaveGallerySet = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmb_GalleryColor = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +43,7 @@
             this.cmb_BladeHeight = new System.Windows.Forms.ComboBox();
             this.lbl_BladeHeight = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pnl_body.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -63,8 +63,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.btn_addLouver);
-            this.panel4.Controls.Add(this.btn_SaveGallerySet);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 149);
             this.panel4.Name = "panel4";
@@ -73,28 +73,15 @@
             // 
             // btn_addLouver
             // 
-            this.btn_addLouver.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addLouver.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addLouver.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_addLouver.Location = new System.Drawing.Point(5, 3);
+            this.btn_addLouver.Location = new System.Drawing.Point(95, 0);
             this.btn_addLouver.Name = "btn_addLouver";
-            this.btn_addLouver.Size = new System.Drawing.Size(62, 23);
+            this.btn_addLouver.Size = new System.Drawing.Size(38, 27);
             this.btn_addLouver.TabIndex = 63;
-            this.btn_addLouver.Text = "Add Set";
+            this.btn_addLouver.Text = "➕";
             this.btn_addLouver.UseVisualStyleBackColor = true;
             this.btn_addLouver.Click += new System.EventHandler(this.btn_addLouver_Click);
-            // 
-            // btn_SaveGallerySet
-            // 
-            this.btn_SaveGallerySet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_SaveGallerySet.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SaveGallerySet.Location = new System.Drawing.Point(84, 3);
-            this.btn_SaveGallerySet.Name = "btn_SaveGallerySet";
-            this.btn_SaveGallerySet.Size = new System.Drawing.Size(63, 21);
-            this.btn_SaveGallerySet.TabIndex = 61;
-            this.btn_SaveGallerySet.Text = "Save";
-            this.btn_SaveGallerySet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_SaveGallerySet.UseVisualStyleBackColor = true;
-            this.btn_SaveGallerySet.Click += new System.EventHandler(this.btn_SaveGallerySet_Click);
             // 
             // panel2
             // 
@@ -230,6 +217,16 @@
             this.label2.TabIndex = 52;
             this.label2.Text = "Gallery Set";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "Add Gallery Set";
+            // 
             // PP_LouverGallerySetPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,6 +237,7 @@
             this.Load += new System.EventHandler(this.PP_LouverGallerySetPropertyUC_Load);
             this.pnl_body.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_NoOfBladePerSet)).EndInit();
@@ -252,7 +250,6 @@
         private System.Windows.Forms.Panel pnl_body;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btn_addLouver;
-        private System.Windows.Forms.Button btn_SaveGallerySet;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmb_GalleryColor;
@@ -265,5 +262,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmb_BladeHeight;
         private System.Windows.Forms.Label lbl_BladeHeight;
+        private System.Windows.Forms.Label label4;
     }
 }
