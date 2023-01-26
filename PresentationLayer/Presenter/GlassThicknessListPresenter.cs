@@ -239,8 +239,11 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                        ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnlObject => pnlObject.Name == _panelModel.Panel_Name)).InvalidateThis();
-                       
+                        if(_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnlObject => pnlObject.Name == _panelModel.Panel_Name)).InvalidateThis();
+                        }
+                      
                         _glassThicknessListView.CloseThisDialog();
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
