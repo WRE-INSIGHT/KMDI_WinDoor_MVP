@@ -21,7 +21,7 @@
               <Width>0.83607in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.45242in</Width>
+              <Width>0.46703in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.40155in</Width>
@@ -566,7 +566,7 @@
         <Top>1.07639in</Top>
         <Left>0.1641in</Left>
         <Height>0.63541in</Height>
-        <Width>7.51877in</Width>
+        <Width>7.53338in</Width>
         <Style>
           <Border>
             <Style>Double</Style>
@@ -592,9 +592,7 @@
             <TextRuns>
               <TextRun>
                 <Value />
-                <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -632,7 +630,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Left>0.1495in</Left>
+        <Top>0.00839in</Top>
+        <Left>0.16411in</Left>
         <Height>0.91319in</Height>
         <Width>7.53337in</Width>
         <ZIndex>1</ZIndex>
@@ -723,8 +722,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.02256in</Top>
-            <Left>0.00903in</Left>
+            <Top>0.00868in</Top>
             <Height>0.99132in</Height>
             <Width>2.87507in</Width>
             <Style>
@@ -734,2441 +732,448 @@
               </Border>
             </Style>
           </Rectangle>
-          <Rectangle Name="summaryContractPrice">
-            <ReportItems>
-              <Textbox Name="Textbox34">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value> I. SUMMARY / CONTRACT PRICE :                                                                </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>No. of Sets</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">      </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox34</rd:DefaultName>
-                <Top>0.01389in</Top>
-                <Height>0.23215in</Height>
-                <Width>7.50974in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Rectangle Name="windoorPriceRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox21">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total List Price of Windows and Doors</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.187in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox24">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>0</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.17973in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox25">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.17973in</Height>
-                    <Width>1.38219in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line13">
-                    <Top>0.187in</Top>
-                    <Left>2.95458in</Left>
-                    <Height>0in</Height>
-                    <Width>1.00301in</Width>
-                    <ZIndex>3</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.27381in</Top>
-                <Left>1.73974in</Left>
-                <Height>0.20751in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="insectScreenRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox22">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total List Price of Insect Screens</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Left>0.00301in</Left>
-                    <Height>0.18491in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox26">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>0</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00662in</Top>
-                    <Left>2.9606in</Left>
-                    <Height>0.18491in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox27">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.18267in</Height>
-                    <Width>1.38219in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line15">
-                    <Top>0.19153in</Top>
-                    <Left>2.96361in</Left>
-                    <Height>0in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>3</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.50248in</Top>
-                <Left>1.73974in</Left>
-                <Height>0.20363in</Height>
-                <Width>5.81283in</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="totalListRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox23">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>TOTAL LIST PRICES</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Top>0.00715in</Top>
-                    <Height>0.18551in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox28">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>0</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.19266in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox29">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00715in</Top>
-                    <Left>4.43064in</Left>
-                    <Height>0.18551in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.73568in</Top>
-                <Left>1.74275in</Left>
-                <Height>0.19266in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>3</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="lessDiscountRctngl">
-                <ReportItems>
-                  <Textbox Name="Textbox30">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Less Discount</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.18979in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox31">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>30%</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox32">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.94223in</Top>
-                <Left>1.74275in</Left>
-                <Height>0.20075in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>4</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="totalDiscountedPriceWOVatRctngl">
-                <ReportItems>
-                  <Textbox Name="Textbox33">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total Discounted Price without VAT*</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                              <FontWeight>Bold</FontWeight>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.19904in</Height>
-                    <Width>2.54534in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox36">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>9999999999</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00494in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0.19409in</Height>
-                    <Width>1.37617in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line8">
-                    <Top>0.20398in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>1.1598in</Top>
-                <Left>1.73112in</Left>
-                <Height>0.21872in</Height>
-                <Width>5.82145in</Width>
-                <ZIndex>5</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Line Name="Line2">
-                <Top>0.48208in</Top>
-                <Left>4.69733in</Left>
-                <Height>0in</Height>
-                <Width>1.00301in</Width>
-                <ZIndex>6</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line3">
-                <Top>0.71582in</Top>
-                <Left>6.17169in</Left>
-                <Height>0in</Height>
-                <Width>1.38088in</Width>
-                <ZIndex>7</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line4">
-                <Top>0.71948in</Top>
-                <Left>4.70822in</Left>
-                <Height>0in</Height>
-                <Width>0.99814in</Width>
-                <ZIndex>8</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line7">
-                <Top>1.15161in</Top>
-                <Left>6.1764in</Left>
-                <Height>0in</Height>
-                <Width>1.37918in</Width>
-                <ZIndex>9</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line10">
-                <Top>1.38859in</Top>
-                <Left>6.1764in</Left>
-                <Height>0in</Height>
-                <Width>1.37918in</Width>
-                <ZIndex>10</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Rectangle Name="discountedPriceWOVat">
-                <ReportItems>
-                  <Textbox Name="Textbox35">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Discounted Price Without VAT</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.19266in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox37">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>0</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96662in</Left>
-                    <Height>0.19266in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox38">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00715in</Top>
-                    <Left>4.43064in</Left>
-                    <Height>0.18551in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>1.39241in</Top>
-                <Left>1.73974in</Left>
-                <Height>0.19266in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>11</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="additionalDiscount">
-                <ReportItems>
-                  <Textbox Name="Textbox39">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Additional Discount</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.18979in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox40">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>0%</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox41">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>1.59895in</Top>
-                <Left>1.73974in</Left>
-                <Height>0.20075in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>12</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="totalDiscountedPriceWOVatRctngl2">
-                <ReportItems>
-                  <Textbox Name="Textbox42">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total Discounted Price without VAT*</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                              <FontWeight>Normal</FontWeight>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Top>0.00494in</Top>
-                    <Height>0.19904in</Height>
-                    <Width>2.54534in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox43">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>9999999999</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00494in</Top>
-                    <Left>4.43064in</Left>
-                    <Height>0.19409in</Height>
-                    <Width>1.37316in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>1.82748in</Top>
-                <Left>1.74275in</Left>
-                <Height>0.20398in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>13</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Line Name="Line14">
-                <Top>1.80786in</Top>
-                <Left>6.17622in</Left>
-                <Height>0in</Height>
-                <Width>1.37334in</Width>
-                <ZIndex>14</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Rectangle Name="plusVat">
-                <ReportItems>
-                  <Textbox Name="Textbox44">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Plus VAT </Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.18979in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox45">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>12%</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox46">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>-</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.43365in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1.37617in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>2.05429in</Top>
-                <Left>1.73974in</Left>
-                <Height>0.20075in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>15</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Line Name="Line16">
-                <Top>2.26359in</Top>
-                <Left>6.17622in</Left>
-                <Height>0in</Height>
-                <Width>1.37334in</Width>
-                <ZIndex>16</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Rectangle Name="totalDiscountedPriceWOVatRctngl3">
-                <ReportItems>
-                  <Textbox Name="Textbox47">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total Discounted Price without VAT*</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                              <FontWeight>Bold</FontWeight>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.19904in</Height>
-                    <Width>2.54534in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox48">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>9999999999</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00494in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0.19409in</Height>
-                    <Width>1.37617in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line9">
-                    <Top>0.20398in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>2.26893in</Top>
-                <Left>1.73112in</Left>
-                <Height>0.21872in</Height>
-                <Width>5.82145in</Width>
-                <ZIndex>17</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Line Name="Line18">
-                <Top>2.50154in</Top>
-                <Left>6.1764in</Left>
-                <Height>0in</Height>
-                <Width>1.37316in</Width>
-                <ZIndex>18</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-            </ReportItems>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
-            <Top>1.06944in</Top>
-            <Left>0.00903in</Left>
-            <Height>2.51778in</Height>
-            <Width>7.57364in</Width>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Insect Screens</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Less 10% Discount</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Discounted Price without VAT</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Labor &amp; Mobilization</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>4pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Net Price Without VAT</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>0.00868in</Top>
+            <Left>3.52342in</Left>
+            <Height>0.99132in</Height>
+            <Width>1.9234in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <TopBorder>
-                <Style>Solid</Style>
-              </TopBorder>
-              <BottomBorder>
-                <Style>None</Style>
-              </BottomBorder>
-              <LeftBorder>
-                <Style>Solid</Style>
-              </LeftBorder>
-              <RightBorder>
-                <Style>Solid</Style>
-              </RightBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle10">
-            <ReportItems>
-              <Textbox Name="Textbox50">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value> II. TERMS OF PAYMENT: </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>50% of the total contract price; upon signing of this quotation/agreement</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>40% of the corresponding total amount of items delivered; before installation</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>10% of the corresponding total amount of items installed and turned over,</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>       payment of this should not exceed two weeks after turn-over.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value xml:space="preserve">    </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>NOTE: PLEASE MAKE CHECK PAYABLE TO KENNETH &amp; MOCK DESIGNS, INC.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">          </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value> III. INTEREST CHARGES </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Unpaid fess shall be charged </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>two (2%) interest per month</Value>
-                        <Style>
-                          <FontStyle>Normal</FontStyle>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value> starting thirty (30) days</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>after your receipt of the first billing reminder,</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve"> </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">        </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value> IV. PRICE VALIDITY                 </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>30 DAYS FROM THIS DATE OF QUOTATION</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>     A.   </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Prices are valid based on a mutually agreed completion timetable</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value xml:space="preserve"> </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>and any delay caused by the client shall be billed accordingly.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>     B.   </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>PHP 50,000.00 - </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Out-of-town expenses of both Project Engineer &amp; Installation team</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>          'This includes three (3) Technical visits: initial/final measurement, installation checkup, inspection prior to turn-over; and two (2) trips</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>            of Installation team: (1) Installation of windows/doors; (2) One-time Cleaning and Installation of handles &amp; insect screens</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value xml:space="preserve">     </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>NOTE: ANY TRIP/VISIT REQUESTED OUTSIDE OF THE ALLOTMENT SHALL BE CHARGE TO THE OWNER ACCORDINGLY.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value> V. ESTIMATED DELIVERY </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>____________________________________________</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>     Undefined Delivery and Installation lead times as a result of the transitioning from lockdown to the New  Normal until the pandemic abates and efficiency reaches its full potential.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style>
-                      <TextAlign>Center</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJSUTMENT BASEDON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>12pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style>
-                      <TextAlign>Center</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox50</rd:DefaultName>
-                <Height>0.50527in</Height>
-                <Width>7.57493in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-            </ReportItems>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
-            <Top>3.65666in</Top>
-            <Left>0.00903in</Left>
-            <Height>0.50528in</Height>
-            <Width>7.57493in</Width>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Left>5.83758in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.40257in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Style>Solid</Style>
+                <Style>Double</Style>
               </BottomBorder>
-              <LeftBorder>
-                <Style>Solid</Style>
-              </LeftBorder>
-              <RightBorder>
-                <Style>Solid</Style>
-              </RightBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle11">
-            <ReportItems>
-              <Textbox Name="Textbox51">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>INCLUSIONS : </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>EXTRUSION/ORIGIN </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>                 Extruded and Certified "GreenLine" (Lead - Free) from Pirmasens, Germany </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>PROFILE PROTECTION              </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Origin German protective foil is kept intact plus plastics coverings for each installed windows for extra </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>                                                    until final Cleaning to reduce risks of damage to frames &amp; dirt accumulation.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>PROFILE WARRANTY               </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>10 Years Warranty against Discoloration, Warping, Cracking and Corrosion (for PVC-u Profiles Only);</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>WEATHER STRIPPING               </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Made of non-migratory EPDM (ethylene propylene diene monomer) gasket and beads;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Security                                      </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Lockable handles and Multi-point locking Espagnolette System by Röto Frank AG with Special Security</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>                                                    Mushroom cam which conforms to BS 7950, BS 6375 &amp; BS 7412.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>GLASS PROTECTION                 </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>All glass deliveries are protected with protective foil with a note that only authorized KMDI personnel</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>                                                    shall be allowed to remove these during cleaning;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>SPECIAL SEALANT                   </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Using PU-foam and/or Neutral paintable/hybrid silicone for extra sealing action; </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>INSTALLATION                         </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Done by highly-trained installation team to ensure quality installation;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>ANCHORAGE                            </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Using  only German stainless steel anchor bolts with nylon screws and cover caps;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>TECHNICAL SUPPORT              </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Individually-assigned Civil Engineers take care of all technical aspects of the contract;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>SHOPDRAWINGS                      </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Individual Shop drawings for Architects' and Owners' approval prior to fabrication.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>CLEANING                                 </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>A one-time final cleaning is implemented prior to turn-over when site is deemed ready;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>TURNOVER &amp; ACCEPTANCE    </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Keys, and a bottle of KöRACLEAN (specially formulated cleaning solution for Kömmerling PVC-u  - for </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>                                                    white &amp; ivory profiles only) are endorsed upon turn-over and acceptance of works;</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>CERTIFICATION                         </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Completion and Acceptance Certificate and Warranty Certificates are issued upon/after turn-over; </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>AFTER SALES                             </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>A KMDI representative will be at your doorstep within 48 hours of your call (within Metro Manila);</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>FREE LIFETIME SERVICE            </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>Free check-up, oiling and adjustments. Any charge to be incurred for replaceable parts (not covered</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListStyle>Bulleted</ListStyle>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>                                                     by warranty) shall be per your approval.</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox51</rd:DefaultName>
-                <Height>0.50262in</Height>
-                <Width>7.55558in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-            </ReportItems>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
-            <Top>4.23139in</Top>
-            <Left>0.00903in</Left>
-            <Height>0.50262in</Height>
-            <Width>7.55558in</Width>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Left>6.70968in</Left>
+            <Height>0.20833in</Height>
+            <Width>0.74334in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle2">
-            <ReportItems>
-              <Textbox Name="Textbox1">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>At your Service :                                                                Verfied by:                                                                Notedby:</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value />
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>WHALLY B. BARRO</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">                                                    </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>KEVIN CHARLES S. LAO</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">                                   </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>GENALYN C. GARCIA</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                          <FontWeight>Bold</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>In-House Account Executive                                             Head,Sales &amp; Operation                                          Vice-President/General Manager, KMDI</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox1</rd:DefaultName>
-                <Top>0.01389in</Top>
-                <Height>0.44745in</Height>
-                <Width>7.54655in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-            </ReportItems>
-            <KeepTogether>true</KeepTogether>
-            <Top>4.76179in</Top>
-            <Left>0.00903in</Left>
-            <Height>0.46134in</Height>
-            <Width>7.55558in</Width>
+          </Textbox>
+          <Line Name="Line1">
+            <Top>0.41319in</Top>
+            <Left>6.13182in</Left>
+            <Height>0in</Height>
+            <Width>1.3212in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
             </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle4">
-            <ReportItems>
-              <Textbox Name="Textbox2">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>CONFORME : </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve">                                                                      </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value> DATE :</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>9pt</FontSize>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value xml:space="preserve"> </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value xml:space="preserve">                     </Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>sign above printed name and on all pages</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.01389in</Top>
-                <Left>0.01935in</Left>
-                <Height>0.50786in</Height>
-                <Width>7.50499in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Line Name="Line6">
-                <Top>0.38575in</Top>
-                <Left>2.71374in</Left>
-                <Height>0in</Height>
-                <Width>-2.6635in</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line11">
-                <Top>0.38575in</Top>
-                <Left>5.82555in</Left>
-                <Height>0in</Height>
-                <Width>-2.18934in</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-            </ReportItems>
-            <KeepTogether>true</KeepTogether>
-            <Top>5.2509in</Top>
-            <Left>0.00903in</Left>
-            <Height>0.55663in</Height>
-            <Width>7.55558in</Width>
+          </Line>
+          <Line Name="Line2">
+            <Top>0.70486in</Top>
+            <Left>6.13677in</Left>
+            <Height>0in</Height>
+            <Width>1.31625in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
             </Style>
-          </Rectangle>
+          </Line>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.76736in</Top>
+        <Top>1.78124in</Top>
         <Left>0.1641in</Left>
-        <Height>5.89104in</Height>
-        <Width>7.58396in</Width>
+        <Height>1in</Height>
+        <Width>7.53337in</Width>
         <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="termsOfPayment">
+        <ReportItems>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SUBJECT TO CHANGES AND ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENTS AND QUANTITIES.</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>4.27027in</Top>
+            <Left>0.02363in</Left>
+            <Height>0.26042in</Height>
+            <Width>7.50974in</Width>
+            <Style>
+              <Border>
+                <Style>Double</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TERMS OF PAYMENT:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+        100% of the total Contract Price upon signing of the quotation.
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>NOTE: PLEASE MAKE CHECK PAYABLE TO KENNETH &amp; MOCK DESIGNS, INC.
+PRICE VALIDITY:
+        30 DAYS FROM THIS DATE OF QUOTATION
+DELIVERY:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+        Undefined Delivery and Installation lead time as a result of the transitioning from lockdown to the New Normal until the pandemic abates and efficiency reaches its full potential.
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>GENERAL NOTES:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+        Freight/Delivery Charges are to be on Owner`s Account
+        For Out-of-town projects, corresponding Allowances, Board &amp; Lodging of Installation Team shall be accounted to the Buyer. For any question or clarification, please feel free to call us at our office telephone nos. 715-8777, 912-4333, 913-2524, or 913-2545 or fax no. 912-1892.</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>At your Service:                                                   Verified by:                                                   Noted by:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AMANDA D. AQUINO                                        KEVIN CHARLES S. LAO                                MS.GENALYN C. GARCIA</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Afersales Personnel                                                                Head, Sales &amp; Operation                                                KMDI, VP-General Manager</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CONFORME:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>_____________________________________</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>sign above printed name and on all pages </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox34</rd:DefaultName>
+            <Top>0.03416in</Top>
+            <Left>0.00498in</Left>
+            <Height>4.16666in</Height>
+            <Width>7.53336in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>2.91542in</Top>
+        <Left>0.1641in</Left>
+        <Height>4.55499in</Height>
+        <Width>7.53834in</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3201,7 +1206,7 @@
         <Left>5.80661in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>4</ZIndex>
         <RepeatWith>Tablix1</RepeatWith>
         <Style>
           <Border>
@@ -3239,7 +1244,7 @@
         <Left>5.80661in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>5</ZIndex>
         <RepeatWith>Tablix1</RepeatWith>
         <Style>
           <Border>
@@ -3277,7 +1282,7 @@
         <Left>5.80661in</Left>
         <Height>0.23107in</Height>
         <Width>1.89583in</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>6</ZIndex>
         <RepeatWith>Tablix1</RepeatWith>
         <Style>
           <Border>
@@ -3290,10 +1295,10 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>8.1379in</Height>
+    <Height>7.47041in</Height>
     <Style />
   </Body>
-  <Width>7.92075in</Width>
+  <Width>8in</Width>
   <Page>
     <PageHeader>
       <Height>0.5in</Height>
