@@ -85,7 +85,7 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("No Panel Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (_panelIdList.Count >= 1)
-            {
+            { 
                 foreach (IFrameModel fr in _windoorModel.lst_frame)
                 {
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)
