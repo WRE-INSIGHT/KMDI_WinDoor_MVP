@@ -134,5 +134,6 @@ namespace PresentationLayer.Presenter
         void updatePriceOfMainView();
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
+        bool ItemLoad { get; set; }
     }
 }

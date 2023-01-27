@@ -525,6 +525,18 @@ namespace PresentationLayer.Presenter
                 _projectName = value;
             }
         }
+        private bool _itemLoad;
+        public bool ItemLoad
+        {
+            get
+            {
+                return _itemLoad;
+            }
+            set
+            {
+                _itemLoad = value;
+            }
+        }
         public string inputted_custRefNo
         {
             get
@@ -925,8 +937,8 @@ namespace PresentationLayer.Presenter
 
             if (i <= 0)
             {
-                string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                value = await _quotationServices.GetFactorByProvince(province);
+                string[] province = projectAddress.Split(',');
+                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
             }
             else
             {
@@ -976,7 +988,15 @@ namespace PresentationLayer.Presenter
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
-            updatePriceFromMainViewToItemList();
+            if (_itemLoad)
+            {
+                updatePriceOfMainView();
+            }
+            else
+            {
+                updatePriceFromMainViewToItemList();
+
+            }
         }
 
         private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -3133,6 +3153,7 @@ namespace PresentationLayer.Presenter
             }
             if (row_str.Contains("QuoteId:"))
             {
+                _itemLoad = true;
                 if (_isOpenProject && !isNewProject)
                 {
                     inside_quotation = true;
@@ -3241,11 +3262,15 @@ namespace PresentationLayer.Presenter
                 if(mainTodo == "Open_WndrFiles")
                 {
                     Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+
+                    updatePriceOfMainView();
                 }
                 else if (mainTodo == "Add_Existing_Items")
                 {
                     Load_Windoor_Item(_windoorModel);
+                    _lblCurrentPrice.Value = _windoorModel.WD_price;
                 }
+              
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -3397,6 +3422,7 @@ namespace PresentationLayer.Presenter
                                      frm_Height,
                                      frmDimension_profileType,
                                      frmDimension_baseColor);
+                            _windoorModel.WD_fileLoad = true;
                         }
                         if (row_str.Contains("WD_name:"))
                         {
@@ -9176,7 +9202,9 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
                 qoutationModel_MainPresenter.itemSelectStatus = true;
-                GetCurrentPrice();
+                //GetCurrentPrice();
+                _itemLoad = false;
+
             }
             catch (Exception ex)
             {
@@ -10251,8 +10279,8 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
-            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
+            string[] province = projectAddress.Split(',');
+            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
         }
 
 

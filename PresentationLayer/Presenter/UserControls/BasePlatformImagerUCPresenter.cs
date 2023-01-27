@@ -1404,7 +1404,7 @@ namespace PresentationLayer.Presenter.UserControls
                 tenPercentAdditional = 8;
                 gfont_size = 43;
             }
-
+          
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
                                                    client_wd - w,
@@ -1531,6 +1531,68 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
+            #region Georgian Bar
+
+            int GBpointResultX, GBpointResultY,
+                penThickness = 0, penThicknessResult = 0,
+
+                verticalQty = panelModel.Panel_GeorgianBar_VerticalQty,
+                horizontalQty = panelModel.Panel_GeorgianBar_HorizontalQty,
+                GeorgianBar_GapX = 0,
+                GeorgianBar_GapY = 0,
+                pGbarInnerX = 0,
+                pGbarInnerY = 0;
+
+            if (panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                penThickness = (int)(10 * _windoorModel.WD_zoom_forImageRenderer);
+                penThicknessResult = penThickness + 10;
+            }
+            else if (panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+            {
+                penThickness = (int)(20 * _windoorModel.WD_zoom_forImageRenderer);
+                penThicknessResult = penThickness - 10;
+            }
+
+            Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
+
+            //vertical
+            for (int ii = 0; ii < verticalQty; ii++)
+            {
+                GBpointResultX = ((pGbarInnerX + client_wd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (client_wd + (pGbarInnerX)) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = new[]
+              {
+
+                  new Point(GBpointResultX + Ppoint.X,pGbarInnerX+1 + Ppoint.Y),
+                  new Point(GBpointResultX + Ppoint.X,pGbarInnerX + client_ht-1 + Ppoint.Y),
+             };
+                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
+                }
+            }
+
+            //Horizontal
+
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pGbarInnerY + client_ht) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (client_ht + (pGbarInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = new[]
+              {
+
+                  new Point(pGbarInnerY+1 + Ppoint.X,GBpointResultY + Ppoint.Y),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X,GBpointResultY + Ppoint.Y),
+             };
+                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
+                }
+            }
+
+            #endregion
+
             StringFormat drawFormat = new StringFormat();
             int pnl_ID = 0;
             string pnl_ThicknessDesc = "";

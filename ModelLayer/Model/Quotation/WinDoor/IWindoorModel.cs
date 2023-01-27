@@ -28,6 +28,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
         int WD_width_4basePlatform { get; set; }
         int WD_width_4basePlatform_forImageRenderer { get; set; }
         float WD_zoom { get; set; }
+        bool WD_fileLoad { get; set; }
         float WD_zoom_forImageRenderer { get; }
         Image WD_image { get; set; }
         Image WD_flpImage { get; set; }
