@@ -576,7 +576,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        private decimal _wdcurrentPrice;
+        public decimal WD_currentPrice
+        {
+            get
+            {
+                return _wdcurrentPrice;
+            }
 
+            set
+            {
+                _wdcurrentPrice = value;
+            }
+        }
 
         private int _wdpboxImagerHeight;
         public int WD_pboxImagerHeight
@@ -621,6 +633,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         public string setDiscount { get; set; }
+
+      
 
         #region Methods
 

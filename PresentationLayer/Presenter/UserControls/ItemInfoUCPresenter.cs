@@ -80,7 +80,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else
                 {
-                    _mainPresenter.GetCurrentPrice();
+                    _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
                 }
                 _mainPresenter.ItemScroll = itemscroll;
                 _mainPresenter.ItemLoad = false;

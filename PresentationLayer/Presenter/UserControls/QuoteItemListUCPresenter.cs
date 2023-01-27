@@ -153,8 +153,10 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (wdm.WD_id == Convert.ToInt32(itemNum))
                         {
+                            _quotationModel.BOMandItemlistStatus = "BOM";
                             _quotationModel.ItemCostingPriceAndPoints();
-                            wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
+                            //wdm.WD_price = _quotationModel.lstTotalPrice[wdm.WD_id - 1];
+                            wdm.WD_price = _quotationModel.lstTotalPrice[0];
                             _nudItemPrice.Value = wdm.WD_price;
                             _lblPrice.Text = wdm.WD_price.ToString("N", new CultureInfo("en-US"));
                         }

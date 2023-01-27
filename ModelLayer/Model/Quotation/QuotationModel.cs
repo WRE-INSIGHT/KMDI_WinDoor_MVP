@@ -8825,7 +8825,7 @@ namespace ModelLayer.Model.Quotation
                     TotaPrice = TotaPrice + LouverCost;
 
                     CurrentPrice = TotaPrice;
-
+                    wdm.WD_currentPrice = TotaPrice;
                     lstTotalPrice.Add(TotaPrice);
 
                     if (wdm.WD_price == 0)

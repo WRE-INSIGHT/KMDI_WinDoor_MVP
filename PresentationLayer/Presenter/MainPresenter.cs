@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
 
-        private NumericUpDown _lblCurrentPrice;
+        
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -210,6 +210,19 @@ namespace PresentationLayer.Presenter
             set
             {
                 _glassTypeDT = value;
+            }
+        }
+
+        private NumericUpDown _lblCurrentPrice;
+        public NumericUpDown LblCurrentPrice
+        {
+            get
+            {
+                return _lblCurrentPrice;
+            }
+            set
+            {
+                _lblCurrentPrice = value;
             }
         }
 
@@ -937,8 +950,10 @@ namespace PresentationLayer.Presenter
 
             if (i <= 0)
             {
-                string[] province = projectAddress.Split(',');
-                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                //string[] province = projectAddress.Split(',');
+                //value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                value = await _quotationServices.GetFactorByProvince(province);
             }
             else
             {
@@ -995,7 +1010,8 @@ namespace PresentationLayer.Presenter
             else
             {
                 updatePriceFromMainViewToItemList();
-
+                _windoorModel.WD_fileLoad = false;
+                _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
             }
         }
 
@@ -1732,7 +1748,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
-                GetCurrentPrice();
+                //GetCurrentPrice();
                 itemDescription();
 
             }
@@ -10279,8 +10295,10 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
-            string[] province = projectAddress.Split(',');
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            ////string[] province = projectAddress.Split(',');
+            ////_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
 
 
@@ -10675,8 +10693,12 @@ namespace PresentationLayer.Presenter
                 _quotationModel.itemSelectStatus = false;
                 _quotationModel.BOMandItemlistStatus = "PriceItemList";
             }
-            _quotationModel.ItemCostingPriceAndPoints();
-            GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
+            if(ItemLoad == false)
+            {
+                _quotationModel.ItemCostingPriceAndPoints();
+            }
+            //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
+            GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
             SetChangesMark();
         }
 
