@@ -4,6 +4,7 @@ using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Views;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -128,6 +129,7 @@ namespace PresentationLayer.Presenter
 
                                             }
                                         }
+                                        ((IPanelUC)mpnl.MPanelLst_Objects.Find(pnlObject => pnlObject.Name == pnl.Panel_Name)).InvalidateThis();
                                     }
                                 }
                                 #endregion
@@ -237,20 +239,26 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        if(_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnlObject => pnlObject.Name == _panelModel.Panel_Name)).InvalidateThis();
+                        }
+                      
                         _glassThicknessListView.CloseThisDialog();
                         _mainPresenter.GetCurrentPrice();
                         _mainPresenter.itemDescription();
                     }
                     #endregion
-                    
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 }
                 else
                 {
                     MessageBox.Show("Invalid selection", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
+              
             }
-
+          
         }
 
 

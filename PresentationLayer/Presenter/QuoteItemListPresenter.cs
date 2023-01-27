@@ -248,90 +248,97 @@ namespace PresentationLayer.Presenter
           dtDiscount
           dtNetPrice
            */
-
-            for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            try
             {
-                #region ScalingItemSizePicture
-                //int max = this._lstItemArea[0],
-                //    ItemNewWidth,
-                //    ItemNewHeight,
-                //    maxHeight = 190,
-                //    maxWidth = 190,
-                //    wdAndHtDiff;
-                //decimal itemSizePercentage;
-
-                //int currentItem = this._lstItemArea[i],
-                //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
-                //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
-
-                //decimal ProportionItemSizePercentage;
-
-                //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
-                //{
-                //    max = Math.Max(max, this._lstItemArea[ii]);
-                //}
-
-                //itemSizePercentage = (decimal)currentItem / (decimal)max;
-                ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
-                //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
-                //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
-
-
-                //if (itemWidth > itemHeight)
-                //{
-                //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
-                //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
-                //}
-                //else if (itemWidth < itemHeight)
-                //{
-                //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
-                //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
-                //}
-                //else
-                //{
-
-                //}
-
-                //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
-
-
-                //resizedImg.Save(mstream, ImageFormat.Png);
-                #endregion
-
-                MemoryStream mstream = new MemoryStream();
-                MemoryStream mstream2 = new MemoryStream();
-                Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
-                      topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
-
-                itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-
-                if (topView != null)
+                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
                 {
-                    topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                    #region ScalingItemSizePicture
+                    //int max = this._lstItemArea[0],
+                    //    ItemNewWidth,
+                    //    ItemNewHeight,
+                    //    maxHeight = 190,
+                    //    maxWidth = 190,
+                    //    wdAndHtDiff;
+                    //decimal itemSizePercentage;
+
+                    //int currentItem = this._lstItemArea[i],
+                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+
+                    //decimal ProportionItemSizePercentage;
+
+                    //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                    //{
+                    //    max = Math.Max(max, this._lstItemArea[ii]);
+                    //}
+
+                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
+                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                    //if (itemWidth > itemHeight)
+                    //{
+                    //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
+                    //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    //}
+                    //else if (itemWidth < itemHeight)
+                    //{
+                    //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    //}
+                    //else
+                    //{
+
+                    //}
+
+                    //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
+
+
+                    //resizedImg.Save(mstream, ImageFormat.Png);
+                    #endregion
+
+                    MemoryStream mstream = new MemoryStream();
+                    MemoryStream mstream2 = new MemoryStream();
+                    Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                          topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+
+                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+                    if (topView != null)
+                    {
+                        topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+
+                    byte[] arrimageForItemImage = mstream.ToArray();
+                    byte[] arrimageForTopView = mstream2.ToArray();
+
+                    string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                    string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+
+
+                    IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+
+                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
+
+                    _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDesc,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                          byteToStrForItemImage,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                          Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
+                                          i + 1,
+                                          byteToStrForTopView);
                 }
-
-                byte[] arrimageForItemImage = mstream.ToArray();
-                byte[] arrimageForTopView = mstream2.ToArray();
-
-                string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
-                string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
-
-
-                IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
-
-                _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
-
-                _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemDesc,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                      byteToStrForItemImage,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
-                                      lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
-                                      lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
-                                      Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
-                                      i + 1,
-                                      byteToStrForTopView);
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
+            } 
             _mainPresenter.printStatus = "WinDoorItems";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);

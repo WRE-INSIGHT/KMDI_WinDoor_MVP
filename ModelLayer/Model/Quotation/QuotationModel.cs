@@ -2294,7 +2294,7 @@ namespace ModelLayer.Model.Quotation
         _4millFilmPrice_PricePerSqrMeter = 2600m,
 
         FilmPrice,
-        GlassPrice,       
+        GlassPrice,
         Glass_HeightxWidth_Total,
         #endregion
         #region FittingAndSupplies
@@ -3184,9 +3184,9 @@ namespace ModelLayer.Model.Quotation
 
         ////////////////////////////////////////////////////////////////
         List<int> glassidholder = new List<int>();
-        List<decimal> glasspriceholder = new List<decimal>();
-        List<string> str_glasspriceholder = new List<string>();
 
+        decimal[] mp_arr1 = new decimal[20];
+        decimal[] mp_arr2 = new decimal[20];
         decimal[] mp_arr3 = new decimal[20];
         decimal[] mp_arr4 = new decimal[20];
         decimal[] mp_arr5 = new decimal[20];
@@ -3194,16 +3194,9 @@ namespace ModelLayer.Model.Quotation
         decimal[] mp_arr7 = new decimal[20];
 
         decimal
-        temp = 0,
-        GlassPrice_Count3 = 0,
-        iterator = 1,
-        Curr_Price = 0,
-        Prev_Price = 0,
-        GP_Holder = 0,
-        _glassprice = 0;
-
+        iterator = 1;
         int indexer = 0;
-        int prev_mpanelID = 0, curr_mpaneID = 0;
+        int curr_mpaneID = 0;
         ////////////////////////////////////////////////////////////////  
         public DataTable ItemCostingPriceAndPoints()
         {
@@ -4398,7 +4391,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
                                             {
-                                                pnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder.Replace("with Georgian Bar", "").Replace(" ", " ");
+                                                pnl.Panel_GlassThicknessDesc = pnl.Panel_GlassThicknessDesc.Replace("with Georgian Bar", "").Replace(" ", " ");
                                             }
                                         }
 
@@ -5058,7 +5051,13 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
 
-
+                                        if (GlassThcknessDesc_Holder != null)
+                                        {
+                                            if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
+                                            {
+                                                pnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder;
+                                            }
+                                        }
 
                                         //sealant for glass
                                         Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
@@ -5101,11 +5100,12 @@ namespace ModelLayer.Model.Quotation
                                         #region Glass 
 
                                         var GlassThcknessDesc_Holder = pnl.Panel_GlassThicknessDesc;
+                                                                             
                                         if (GlassThcknessDesc_Holder != null)
                                         {
                                             if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
                                             {
-                                                pnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder.Replace("with Georgian Bar", "").Replace(" ", " ");
+                                                pnl.Panel_GlassThicknessDesc = pnl.Panel_GlassThicknessDesc.Replace("with Georgian Bar", "").Replace(" ", " ");
                                             }
                                         }
 
@@ -5290,22 +5290,22 @@ namespace ModelLayer.Model.Quotation
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
-                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_6mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_6mmClr_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmClr_PricePerSqrMeter;
-                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_8mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmClr_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
-                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_10mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_10mmClr_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("12 mm Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
-                                                     pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("6 mm Tempered Clear"))
                                                 {
@@ -5315,7 +5315,7 @@ namespace ModelLayer.Model.Quotation
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("8 mm Tempered Clear"))
                                                 {
                                                     GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_8mmTemp_PricePerSqrMeter;
-                                                      pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTemp_PricePerSqrMeter;
+                                                    pnl.Panel_GlassPricePerSqrMeter = Glass_8mmTemp_PricePerSqrMeter;
                                                 }
                                                 else if (pnl.Panel_GlassThicknessDesc.Contains("10 mm Tempered Clear"))
                                                 {
@@ -5765,6 +5765,13 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
 
+                                        if (GlassThcknessDesc_Holder != null)
+                                        {
+                                            if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
+                                            {
+                                                pnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder;
+                                            }
+                                        }
 
                                         //sealant for glass
                                         Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
@@ -6155,6 +6162,8 @@ namespace ModelLayer.Model.Quotation
                                         #endregion
                                     }
 
+                                    #region Glass Based Price
+
                                     //if (pnl.Panel_GlassThicknessDesc != null)
                                     //{
                                     //    Glass_HeightxWidth_Total = ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m));
@@ -6166,12 +6175,43 @@ namespace ModelLayer.Model.Quotation
                                     //            glassidholder.Add(pnl.PanelGlass_ID);
                                     //            curr_mpaneID = mpnl.MPanel_ID;
 
-                                    //            //var str_PanelGlassID = Convert.ToString(pnl.PanelGlass_ID);
-                                    //            //var str_GlassPrice = Convert.ToString(GlassPrice);
-                                    //            //var str_Glass_PriceID = str_PanelGlassID + " " + str_GlassPrice;
-                                    //            //str_glasspriceholder.Add(str_Glass_PriceID);                             
+                                    //            if (curr_mpaneID == 1)
+                                    //            {
+                                    //                if (pnl.PanelGlass_ID == 1)
+                                    //                {
+                                    //                    mp_arr1[pnl.PanelGlass_ID] = GlassPrice;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr1[pnl.PanelGlass_ID] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    var sum = mp_arr1.Aggregate((element1, element2) => element1 + element2);
 
-                                    //            if (curr_mpaneID == 3)
+                                    //                    mp_arr1[pnl.PanelGlass_ID] = GlassPrice - sum;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr1[pnl.PanelGlass_ID] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //            }
+                                    //            else if (curr_mpaneID == 2)
+                                    //            {
+                                    //                if (pnl.PanelGlass_ID == 1)
+                                    //                {
+                                    //                    mp_arr2[pnl.PanelGlass_ID] = GlassPrice;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr2[pnl.PanelGlass_ID] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    var arr1_total = mp_arr1.Aggregate((element1, element2) => element1 + element2);
+                                    //                    var sum = mp_arr2.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    mp_arr2[pnl.PanelGlass_ID] = GlassPrice - (sum + arr1_total);
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr2[pnl.PanelGlass_ID] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+
+                                    //            }
+                                    //            else if (curr_mpaneID == 3)
                                     //            {
                                     //                if (pnl.PanelGlass_ID == 1)
                                     //                {
@@ -6181,38 +6221,83 @@ namespace ModelLayer.Model.Quotation
                                     //                }
                                     //                else
                                     //                {
-                                    //                    if (indexer >= 2)
-                                    //                    {
-                                    //                        foreach(var r in mp_arr3)
-                                    //                        {
-                                    //                            Prev_Price = Prev_Price + r;
-                                    //                        }
+                                    //                    var prev_GlassPrice = mp_arr1.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr2.Aggregate((element1, element2) => element1 + element2);
 
-                                    //                        mp_arr3[indexer] = GlassPrice - Prev_Price;
-                                    //                        pnl.Panel_GlassPricePerSqrMeter = mp_arr3[indexer] / Glass_HeightxWidth_Total;
-                                    //                        indexer++;
+                                    //                    var sum = mp_arr3.Aggregate((element1, element2) => element1 + element2);
 
-                                    //                        Prev_Price = 0;
-                                    //                    }
-                                    //                    else
-                                    //                    {
-                                    //                        mp_arr3[indexer] = GlassPrice - mp_arr3[indexer - 1];
-                                    //                        pnl.Panel_GlassPricePerSqrMeter = mp_arr3[indexer] / Glass_HeightxWidth_Total;
-                                    //                        indexer++;
-                                    //                    }                                                                                                                                                                                                                     
+                                    //                    mp_arr3[indexer] = GlassPrice - (prev_GlassPrice + sum);
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr3[indexer] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
                                     //                }
                                     //            }
-                                    //            else if(curr_mpaneID == 4)
+                                    //            else if (curr_mpaneID == 4)
                                     //            {
+                                    //                if (pnl.PanelGlass_ID == 1)
+                                    //                {
+                                    //                    mp_arr4[0] = GlassPrice;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr4[0] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    var prev_glassprice = mp_arr1.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr2.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr3.Aggregate((element1, element2) => element1 + element2);
 
+                                    //                    var sum = mp_arr4.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    mp_arr4[indexer] = GlassPrice - (prev_glassprice + sum);
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr4[indexer] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
                                     //            }
                                     //            else if (curr_mpaneID == 5)
                                     //            {
+                                    //                if (pnl.PanelGlass_ID == 1)
+                                    //                {
+                                    //                    mp_arr5[0] = GlassPrice;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr5[0] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    var prev_glassprice = mp_arr1.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr2.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr3.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr4.Aggregate((element1, element2) => element1 + element2);
 
+                                    //                    var sum = mp_arr5.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    mp_arr5[indexer] = GlassPrice - (prev_glassprice + sum);
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr5[indexer] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
                                     //            }
                                     //            else if (curr_mpaneID == 6)
                                     //            {
+                                    //                if (pnl.PanelGlass_ID == 1)
+                                    //                {
+                                    //                    mp_arr6[0] = GlassPrice;
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr6[0] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
+                                    //                else
+                                    //                {
+                                    //                    var prev_glassprice = mp_arr1.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr2.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr3.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr4.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr5.Aggregate((element1, element2) => element1 + element2);
 
+                                    //                    mp_arr6.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    var sum = mp_arr6.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    mp_arr6[indexer] = GlassPrice - (prev_glassprice + sum);
+                                    //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr6[indexer] / Glass_HeightxWidth_Total;
+                                    //                    indexer++;
+                                    //                }
                                     //            }
                                     //            else if (curr_mpaneID == 7)
                                     //            {
@@ -6223,19 +6308,27 @@ namespace ModelLayer.Model.Quotation
                                     //                    indexer++;
                                     //                }
                                     //                else
-                                    //                {
-                                    //                    mp_arr7[indexer] = GlassPrice - mp_arr7[indexer - 1];
+                                    //                {                                                      
+                                    //                    var prev_GlassPrice = mp_arr1.Aggregate((element1, element2) => element1 + element2) + 
+                                    //                                          mp_arr2.Aggregate((element1, element2) => element1 + element2) + 
+                                    //                                          mp_arr3.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr4.Aggregate((element1, element2) => element1 + element2) + 
+                                    //                                          mp_arr5.Aggregate((element1, element2) => element1 + element2) +
+                                    //                                          mp_arr6.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    var sum = mp_arr7.Aggregate((element1, element2) => element1 + element2);
+
+                                    //                    mp_arr7[indexer] = GlassPrice - (sum + prev_GlassPrice);
                                     //                    pnl.Panel_GlassPricePerSqrMeter = mp_arr7[indexer] / Glass_HeightxWidth_Total;
                                     //                    indexer++;
                                     //                }
                                     //            }
 
-
-
-                                    //       }
+                                    //        }
                                     //    }
                                     //}
 
+                                    #endregion
 
                                 }
                             }
@@ -7625,7 +7718,13 @@ namespace ModelLayer.Model.Quotation
                                     #endregion
                                 }
 
-
+                                if (GlassThcknessDesc_Holder != null)
+                                {
+                                    if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
+                                    {
+                                        Singlepnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder;
+                                    }
+                                }
 
 
                                 //sealant for glass
@@ -8324,7 +8423,13 @@ namespace ModelLayer.Model.Quotation
                                     #endregion
                                 }
 
-
+                                if (GlassThcknessDesc_Holder != null)
+                                {
+                                    if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
+                                    {
+                                        Singlepnl.Panel_GlassThicknessDesc = GlassThcknessDesc_Holder;
+                                    }
+                                }
 
 
                                 //sealant for glass
@@ -8716,11 +8821,6 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                     }
-
-
-                    
-
-                    
 
 
                     LaborCost = CostingPoints * CostPerPoints;
@@ -9621,8 +9721,6 @@ namespace ModelLayer.Model.Quotation
             GalleryPrice = 0;
             LouverPrice = 0;
 
-            glassidholder.Clear();
-            glasspriceholder.Clear();
         }
     }
 }

@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -853,26 +854,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (isLeft == true)
                 {
-                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
-                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    if (_multiPanelModel != null)
                     {
-                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                        int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                        if (_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                        }
+                        else
+                        {
+                            totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                        }
+                        if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
+                            !_multiPanelModel.MPanel_DividerEnabled)
+                        {
+                            _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                        }
                     }
-                    else
-                    {
-                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
-                    }
-                    if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
-                        !_multiPanelModel.MPanel_DividerEnabled)
-                    {
-                        //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                        //_mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                        //_mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-                    }
+                    isLeft = false;
+                    _mouseDown = false;
                 }
 
-                isLeft = false;
-                _mouseDown = false;
+                
 
 
 
@@ -1244,6 +1247,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             int w2 = Convert.ToInt32(Math.Floor(w / (double)2));
 
             int font_size = 30,
+                gfont_size = 60,
                 outer_line = 10,
                 inner_line = 15;
             float ArrowExpectedWidth = 0
@@ -1255,24 +1259,28 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (ndx_zoomPercentage == 3)
             {
                 font_size = 25;
+                gfont_size = 35;
             }
             else if (ndx_zoomPercentage == 2)
             {
                 font_size = 15;
                 outer_line = 5;
                 inner_line = 8;
+                gfont_size = 20;
             }
             else if (ndx_zoomPercentage == 1)
             {
                 font_size = 13;
                 outer_line = 3;
                 inner_line = 7;
+                gfont_size = 19;
             }
             else if (ndx_zoomPercentage == 0)
             {
                 font_size = 8;
                 outer_line = 3;
                 inner_line = 7;
+                gfont_size = 8;
             }
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
@@ -1628,7 +1636,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             //ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2);
 
             RectangleF rect = new RectangleF(0,
-                                            (ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2)), //sliding.ClientRectangle.Height / 2) + 33,
+                                            (ArrowExpectedHeight + arrowStartingY - (float)(ArrowExpectedHeight * 0.2)) + 15, //sliding.ClientRectangle.Height / 2) + 33,
                                             sliding.ClientRectangle.Width,
                                             10);
 
@@ -1648,6 +1656,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         rect,
                                         drawFormat);
             }
+            g.DrawRectangle(new Pen(color, w), new Rectangle(0,
+                                                          0,
+                                                          sliding.ClientRectangle.Width - w,
+                                                          sliding.ClientRectangle.Height - w));
 
             if (_timer_count != 0 && _timer_count < 8)
             {

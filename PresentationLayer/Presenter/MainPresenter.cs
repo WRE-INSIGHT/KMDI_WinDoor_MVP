@@ -9171,6 +9171,7 @@ namespace PresentationLayer.Presenter
                 //_pnlPropertiesBody.Refresh();
                 _mainView.RemoveBinding(_mainView.GetLblSize());
                 _mainView.RemoveBinding();
+                _windoorModel.SetPanelGlassID();
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
@@ -10618,7 +10619,7 @@ namespace PresentationLayer.Presenter
 
                     List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
-                    if (lst_glassThicknessDistinct.Count != 0)
+                    if (lst_glassThicknessDistinct.Count > 1)
                     {
                         for (int i = 0; i < lst_glassThicknessDistinct.Count; i++)
                         {
@@ -10626,6 +10627,9 @@ namespace PresentationLayer.Presenter
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);
+                    } else if (lst_glassThicknessDistinct.Count == 1)
+                    {
+                        wdm.WD_description += lst_glassThicknessDistinct[0];
                     }
 
                     if (GeorgianBarHorizontalQty > 0)

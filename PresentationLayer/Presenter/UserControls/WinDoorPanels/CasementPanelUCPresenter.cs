@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -618,6 +619,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 isLeft = false;
                 _mouseDown = false;
+                if (_multiPanelModel != null)
+                {
+                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                    }
+                    else
+                    {
+                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    }
+                    if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
+                        !_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                    }
+                }
             }
         }
 
@@ -1355,7 +1373,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                          new SolidBrush(Color.Black),
                          inwardStr_rect,
                          drawFormat);
-
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,
                                                            casement.ClientRectangle.Width - w,

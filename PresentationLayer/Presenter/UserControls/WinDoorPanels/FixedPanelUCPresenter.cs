@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -28,7 +29,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         IFixedPanelUC _fixedPanelUC;
 
         private IUnityContainer _unityC;
-
         private IMainPresenter _mainPresenter;
         private IPanelModel _panelModel;
         private IFrameModel _frameModel;
@@ -849,6 +849,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 isLeft = false;
                 _mouseDown = false;
+                if (_multiPanelModel != null)
+                {
+                    int totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    if (_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        totalCount_objs_to_accomodate = (_multiPanelModel.MPanel_Divisions * 2) + 1;
+                    }
+                    else
+                    {
+                        totalCount_objs_to_accomodate = _multiPanelModel.MPanel_Divisions + 1;
+                    }
+                    if ((_multiPanelModel.MPanelLst_Objects.Count >= totalCount_objs_to_accomodate) &&
+                        !_multiPanelModel.MPanel_DividerEnabled)
+                    {
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
+                    }
+                }
             }
         }
         private bool isLeft = false;
@@ -1195,12 +1212,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         rect,
                                         drawFormat);
             }
-
-
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
-                                                             0,
-                                                             fixedpnl.ClientRectangle.Width - w,
-                                                             fixedpnl.ClientRectangle.Height - w));
+                                                            0,
+                                                            fixedpnl.ClientRectangle.Width - w,
+                                                            fixedpnl.ClientRectangle.Height - w));
 
 
 

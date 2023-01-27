@@ -1187,6 +1187,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     }
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                 }
+                _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
                 _mainPresenter.SetChangesMark();
                 _mainPresenter.itemDescription();
                 _mainPresenter.GetCurrentPrice();
