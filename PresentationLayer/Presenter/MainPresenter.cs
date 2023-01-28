@@ -7616,7 +7616,7 @@ namespace PresentationLayer.Presenter
                 multiMullionUC = _multiMullionUC4th;
                 multiTransomUC = _multiTransomUC4th;
             }
-
+         
             if (panel_Type.Contains("Fixed Panel"))
             {
                 IFixedPanelUCPresenter fixedUCP;
@@ -7957,6 +7957,15 @@ namespace PresentationLayer.Presenter
                         _multiModelParent.MPanelLst_Objects.Add((UserControl)louverPanelUC);
                         louverPanelUCP.SetInitialLoadFalse();
                     }
+                }
+            }
+            if (pnlModel.Panel_GeorgianBarOptionVisibility == true)
+            {
+                pnlModel.AdjustPropertyPanelHeight("addGeorgianBar");
+                pnlModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                if (pnlModel.Panel_ParentMultiPanelModel != null)
+                {
+                    pnlModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
                 }
             }
             if (!panel_Parent.Parent.Name.Contains("frame"))
