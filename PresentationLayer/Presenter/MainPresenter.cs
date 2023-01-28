@@ -10733,7 +10733,7 @@ namespace PresentationLayer.Presenter
                 Maxheight = 0,
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
-            bool isDimentionFit = true;
+            bool isDimensionFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
@@ -10754,7 +10754,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                isDimentionFit = false;
+                                isDimensionFit = false;
                             }
                         }
                         if (occupiedWidth >= _windoorModel.WD_width)
@@ -10767,7 +10767,9 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            if(availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            if(availableHeight > frmDimension_numHt && 
+                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd && 
+                               _windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += frm.Frame_Height;
@@ -10800,7 +10802,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                isDimentionFit = false;
+                                isDimensionFit = false;
                             }
 
                         }
@@ -10816,7 +10818,9 @@ namespace PresentationLayer.Presenter
                         {
 
 
-                            if (availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            if (availableHeight > frmDimension_numHt && 
+                                (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
+                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name) 
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += crtm.Concrete_Height;
@@ -10834,10 +10838,10 @@ namespace PresentationLayer.Presenter
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
             {
-                isDimentionFit = false;
+                isDimensionFit = false;
 
             }
-            return isDimentionFit;
+            return isDimensionFit;
         }
 
        

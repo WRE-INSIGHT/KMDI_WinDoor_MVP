@@ -45,7 +45,6 @@ namespace ModelLayer.Model.Quotation
         public BillOfMaterialsFilter BOM_Filter { get; set; }
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
-        public decimal CurrentPrice { get; set; }
         public bool itemSelectStatus { get; set; }
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
@@ -8924,7 +8923,6 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = TotaPrice + LouverCost;
 
-                    CurrentPrice = TotaPrice;
                     wdm.WD_currentPrice = TotaPrice;
                     lstTotalPrice.Add(TotaPrice);
 
