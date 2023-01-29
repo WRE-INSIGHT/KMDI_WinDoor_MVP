@@ -559,7 +559,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 GeorgianBar_GapX = 0,
                 GeorgianBar_GapY = 0,
                 pInnerX = 0,
-                pInnerY = 0;
+                pInnerY = 0,
+                sashD = inner_line;
 
             if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
             {
@@ -582,8 +583,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Point[] GeorgianBar_PointsX = new[]
               {
 
-                  new Point(GBpointResultX,pInnerX+1),
-                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
+                  new Point(GBpointResultX,pInnerX+1+ sashD),
+                  new Point(GBpointResultX,pInnerX + pInnerHt-1 - sashD),
              };
                 for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
                 {
@@ -600,8 +601,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Point[] GeorgianBar_PointsY = new[]
               {
 
-                  new Point(pInnerY+1,GBpointResultY ),
-                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
+                  new Point(pInnerY+1 + sashD,GBpointResultY),
+                  new Point(pInnerY-1 + pInnerWd - sashD,GBpointResultY),
              };
                 for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
                 {
