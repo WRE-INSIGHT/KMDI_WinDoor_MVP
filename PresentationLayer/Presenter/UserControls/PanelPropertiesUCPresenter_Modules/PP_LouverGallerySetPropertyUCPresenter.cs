@@ -24,7 +24,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private Panel _pnlLouverBody;
         private ConstantVariables constants = new ConstantVariables();
-        string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc;
+        string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc, additionalZero;
 
 
         int gallerySet_count = 0;
@@ -168,9 +168,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     ColorDesc = "-WHT";
                 }
 
+                if (_panelModel.Panel_LouverNumberBladesPerSet >= 2 &&
+                    _panelModel.Panel_LouverNumberBladesPerSet <= 9)
+                {
+                    additionalZero = "-0";
+                }
+                else
+                {
+                    additionalZero = "-";
+                }
                 lvrDesc = "LVRG-" +
                       _panelModel.Panel_LouverBladeHeight +
-                      "-" + _panelModel.Panel_LouverNumberBladesPerSet.ToString() +
+                      additionalZero + _panelModel.Panel_LouverNumberBladesPerSet.ToString() +
                       handleTypeDesc +
                       handleLocDesc +
                       ColorDesc;
