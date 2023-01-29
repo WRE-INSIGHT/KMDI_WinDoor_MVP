@@ -10420,7 +10420,18 @@ namespace PresentationLayer.Presenter
                                         {
                                             if (pnl.Panel_GlassFilm.ToString() != "None")
                                             {
-                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                if (pnl.Panel_Type.Contains("Louver"))
+                                                {
+                                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                }
+                                                else
+                                                {
+                                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                }
+                                            }
+                                            else if (pnl.Panel_Type.Contains("Louver"))
+                                            {
+                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                             }
                                             else
                                             {
@@ -10450,7 +10461,49 @@ namespace PresentationLayer.Presenter
                                             motorizeDesc = "1 Panel";
                                         }
 
-                                        AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                        if (pnl.Panel_Type.Contains("Louver"))
+                                        {
+                                            pnl_LouverChk = true;
+
+                                            List<string> lst_LouverArtNoDistinct = new List<string>();
+                                            if (pnl.Panel_LstLouverArtNo != null)
+                                            {
+
+                                                if (pnl.Panel_LouverBladesCount >= 2 &&
+                                                    pnl.Panel_LouverBladesCount <= 9)
+                                                {
+                                                    additionalZero = "0";
+                                                }
+                                                else
+                                                {
+                                                    additionalZero = "";
+                                                }
+                                                foreach (string artNo in pnl.Panel_LstLouverArtNo)
+                                                {
+                                                    string extracted = artNo.Remove(9, 2).Insert(9, additionalZero + pnl.Panel_LouverBladesCount.ToString());
+                                                    lst_LouverArtNoDistinct.Add(extracted);
+                                                }
+                                            }
+
+                                            List<string> lst_LouverArtNoDistinctCheck = lst_LouverArtNoDistinct.Distinct().ToList();
+
+                                            if (lst_LouverArtNoDistinctCheck.Count == 0)
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                            }
+                                            else if (lst_LouverArtNoDistinctCheck.Count == 1)
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + lst_LouverArtNoDistinctCheck[0] + "\n";
+                                            }
+                                            else
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + "LVRG-152-" + additionalZero + pnl.Panel_LouverBladesCount + "-S-RH-BLK" + "\n";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                        }
 
                                         #endregion
 
@@ -10481,32 +10534,39 @@ namespace PresentationLayer.Presenter
                                     //{
                                     //    motorizeDesc = "";
                                     //}
-                                   
+
                                     List<string> lst_LouverArtNoDistinct = new List<string>();
                                     if (Singlepnl.Panel_LstLouverArtNo != null)
                                     {
-                                       
                                         if (Singlepnl.Panel_LouverBladesCount >= 2 &&
                                             Singlepnl.Panel_LouverBladesCount <= 9)
                                         {
                                             additionalZero = "0";
                                         }
+                                        else
+                                        {
+                                            additionalZero = "";
+                                        }
+
                                         foreach (string artNo in Singlepnl.Panel_LstLouverArtNo)
                                         {
-                                            string bb = artNo.Remove(9, 2).Insert(9, additionalZero + Singlepnl.Panel_LouverBladesCount.ToString());
-                                            lst_LouverArtNoDistinct.Add(bb);
+                                            string extracted = artNo.Remove(9, 2).Insert(9, additionalZero + Singlepnl.Panel_LouverBladesCount.ToString());
+                                            lst_LouverArtNoDistinct.Add(extracted);
                                         }
                                     }
 
                                     List<string> lst_LouverArtNoDistinctCheck = lst_LouverArtNoDistinct.Distinct().ToList();
-
-                                    if (lst_LouverArtNoDistinctCheck.Count == 1)
+                                    if (lst_LouverArtNoDistinctCheck.Count == 0)
                                     {
-                                        wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + "Panel " + lst_LouverArtNoDistinctCheck[0] +"\n1 ";
+                                        wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                    }
+                                    else if (lst_LouverArtNoDistinctCheck.Count == 1)
+                                    {
+                                        wdm.WD_description = wdm.WD_profile + "\n" + lst_LouverArtNoDistinctCheck[0];
                                     }
                                     else
                                     {
-                                        wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + "Panel LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK" + "\n1 ";
+                                        wdm.WD_description = wdm.WD_profile + "\n" + "LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
                                     }
                                 }
                                 else
@@ -10514,7 +10574,6 @@ namespace PresentationLayer.Presenter
                                     motorizeDesc = "";
                                     wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
                                 }
-
 
                                 //GlassThickness & Glassfilm
                                 if (Singlepnl.Panel_GlassThicknessDesc != null)
@@ -10532,11 +10591,11 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (Singlepnl.Panel_Type.Contains("Louver"))
                                     {
-                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                     }
                                     else
                                     {
-                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
                                 else
@@ -10585,7 +10644,24 @@ namespace PresentationLayer.Presenter
                                        split2 = words[a + 1];
                                 string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "\n";
 
-                                lst_DuplicatePnl.Add(DuplicatePnl);
+                                int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
+
+                                if (DuplicatePnl.Contains("LVRG") &&
+                                    (pnlCount >= 2 && pnlCount <= 9))
+                                {
+                                    string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
+                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                }
+                                else if (DuplicatePnl.Contains("LVRG") &&
+                                     pnlCount >= 10)
+                                {
+                                    string DuplicateLouverPnl = DuplicatePnl.Remove(14, 1).Insert(14, "1");
+                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                }
+                                else
+                                {
+                                    lst_DuplicatePnl.Add(DuplicatePnl);
+                                }
                                 a++;
                             }
                         }
@@ -10627,7 +10703,8 @@ namespace PresentationLayer.Presenter
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);
-                    } else if (lst_glassThicknessDistinct.Count == 1)
+                    }
+                    else if (lst_glassThicknessDistinct.Count == 1)
                     {
                         wdm.WD_description += lst_glassThicknessDistinct[0];
                     }

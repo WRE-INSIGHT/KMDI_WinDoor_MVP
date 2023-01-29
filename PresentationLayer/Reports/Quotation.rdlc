@@ -9,28 +9,6 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
                 <Value>=Parameters!Address.Value</Value>
                 <Style>
                   <FontFamily>Arial Narrow</FontFamily>
@@ -1002,7 +980,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>10.69974in</Width>
+  <Width>7.96323in</Width>
   <Page>
     <PageHeader>
       <Height>1.1254in</Height>
@@ -1116,7 +1094,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.74471in</Top>
-              <Left>7.13849in</Left>
+              <Left>4.38849in</Left>
               <Height>0.38069in</Height>
               <Width>3.54167in</Width>
               <ZIndex>2</ZIndex>
@@ -1231,7 +1209,7 @@ Banilad, Mandaue City, Cebu, Phils. 6014
           <KeepTogether>true</KeepTogether>
           <Left>0.01958in</Left>
           <Height>1.1254in</Height>
-          <Width>10.68016in</Width>
+          <Width>7.94365in</Width>
           <Visibility>
             <Hidden>=IIF(Globals!PageNumber = 1,FALSE,TRUE)</Hidden>
           </Visibility>
