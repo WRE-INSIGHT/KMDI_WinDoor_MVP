@@ -1064,10 +1064,9 @@ namespace ModelLayer.Model.Quotation
                                         glassFilm = pnl_curCtrl.Panel_GlassFilm.DisplayName;
                                     }
 
-                                    if (!pnl_curCtrl.Panel_Type.Contains("Louver"))
-                                    {
-                                        pnl_curCtrl.Insert_GlassInfo_MaterialList(Material_List, where, glassFilm);
-                                    }
+
+                                    pnl_curCtrl.Insert_GlassInfo_MaterialList(Material_List, where, glassFilm);
+
 
                                     if (pnl_curCtrl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                                     {
@@ -1837,10 +1836,9 @@ namespace ModelLayer.Model.Quotation
                         glassFilm = pnl.Panel_GlassFilm.DisplayName;
                     }
 
-                    if (pnl.Panel_Type.Contains("Louver") == false)
-                    {
-                        pnl.Insert_GlassInfo_MaterialList(Material_List, where, glassFilm);
-                    }
+
+                    pnl.Insert_GlassInfo_MaterialList(Material_List, where, glassFilm);
+
 
                     if (pnl.Panel_GeorgianBarArtNo != GeorgianBar_ArticleNo._None)
                     {
@@ -2050,7 +2048,8 @@ namespace ModelLayer.Model.Quotation
         string BOM_divDesc,
                HandleDesc,
                lvrgBlades,
-               ChckHandleType;
+               ChckHandleType,
+               bladeType;
 
 
         decimal
@@ -5099,7 +5098,7 @@ namespace ModelLayer.Model.Quotation
                                         #region Glass 
 
                                         var GlassThcknessDesc_Holder = pnl.Panel_GlassThicknessDesc;
-                                                                             
+
                                         if (GlassThcknessDesc_Holder != null)
                                         {
                                             if (GlassThcknessDesc_Holder.Contains("with Georgian Bar"))
@@ -5798,11 +5797,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
                                                 }
                                                 if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                                 }
                                                 GeorgianBarPrice = GeorgianBar_0724Price;
 
@@ -5811,11 +5810,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
                                                 }
                                                 if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                                 }
                                                 GeorgianBarPrice = GeorgianBar_0726Price;
                                             }
@@ -8456,11 +8455,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
                                         }
                                         if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                         }
                                         GeorgianBarPrice = GeorgianBar_0724Price;
                                     }
@@ -8468,11 +8467,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
                                         }
                                         if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                         }
                                         GeorgianBarPrice = GeorgianBar_0726Price;
                                     }
@@ -8510,7 +8509,6 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     foreach (string lvrgArtNo in Singlepnl.Panel_LstLouverArtNo)
                                     {
-
                                         if (lvrgArtNo.Contains("-S-"))
                                         {
                                             ChckHandleType = "single";
@@ -8520,8 +8518,6 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             ChckHandleType = "dualORringpull";
                                         }
-
-
 
                                         lvrgBlades = lvrgArtNo.Replace("150", string.Empty);
                                         lvrgBlades = lvrgArtNo.Replace("152", string.Empty);
@@ -8673,7 +8669,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
                                             {
-
+                                                bladeType = "Glass";
                                                 if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                                 {
                                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
@@ -8722,6 +8718,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                             {
+                                                bladeType = "Aluminum";
                                                 decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
                                                 BladeUsagePerPieceOfAluminum = (Singlepnl.Panel_Width / 1); // 1= # of panels
 
@@ -8734,11 +8731,21 @@ namespace ModelLayer.Model.Quotation
                                                     BladeUsagePerPieceOfAluminumCount = 6;
                                                 }
 
-                                                OneSidedFoiledCost += 698.40m * forex;
-                                                PowderCoatedWhiteIvoryCost += 551.77m * forex;
-                                                TwoSideFoiledWoodGrainCost += 926.47m * forex;
-                                                MillFinishCost += 191.21m * forex;
-                                                //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                                //OneSidedFoiledCost += 698.40m * forex;
+                                                //PowderCoatedWhiteIvoryCost += 551.77m * forex;
+                                                //TwoSideFoiledWoodGrainCost += 926.47m * forex;
+                                                //MillFinishCost += 191.21m * forex;
+
+                                                if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                                    wdm.WD_BaseColor == Base_Color._White)
+                                                {
+                                                    GlassBladePrice = 35.63m * forex;
+                                                }
+                                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                                {
+                                                    GlassBladePrice = 926.47m * 5.8m;
+                                                }
+
                                             }
                                         }
                                         else if (Singlepnl.Panel_GlassThickness >= 6.0f &&
@@ -8795,9 +8802,7 @@ namespace ModelLayer.Model.Quotation
                                                 SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
                                             }
                                         }
-                                        #endregion
-
-
+                                        #endregion 
                                     }
                                 }
 
@@ -9554,7 +9559,7 @@ namespace ModelLayer.Model.Quotation
                                          "",
                                          "Louver Material Cost");
 
-                        Price_List.Rows.Add("Blade Price",
+                        Price_List.Rows.Add(bladeType + " Blade Price",
                                         "",
                                         Math.Round(GlassBladePrice, 2).ToString("N", new CultureInfo("en-US")),
                                         "",

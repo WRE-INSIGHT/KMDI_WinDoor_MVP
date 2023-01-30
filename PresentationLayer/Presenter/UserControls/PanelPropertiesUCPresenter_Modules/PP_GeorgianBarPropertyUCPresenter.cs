@@ -58,6 +58,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     numHorizontal.Value = maxlimitqty;
                 }
                 _mainPresenter.itemDescription();
+                _mainPresenter.GetCurrentPrice();
             }
             else
             {
@@ -65,7 +66,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 numHorizontal.Value = 0;
             }
 
-            if(_panelModel.Panel_ParentMultiPanelModel != null)
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
             {
                 ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name)).InvalidateThis();
             }
@@ -97,6 +98,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     numVertical.Value = maxlimitqty;
                 }
                 _mainPresenter.itemDescription();
+                _mainPresenter.GetCurrentPrice();
             }
             else
             {
