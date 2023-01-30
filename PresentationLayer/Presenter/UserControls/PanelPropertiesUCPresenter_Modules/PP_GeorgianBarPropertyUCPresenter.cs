@@ -1,6 +1,7 @@
 ﻿using CommonComponents;
 using ModelLayer.Model.Quotation.Panel;
 using PresentationLayer.Views.UserControls.PanelProperties_Modules;
+using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -63,6 +64,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 numHorizontal.Value = 0;
             }
+
+            if(_panelModel.Panel_ParentMultiPanelModel != null)
+            {
+                ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name)).InvalidateThis();
+            }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
@@ -96,6 +102,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             {
                 MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 numVertical.Value = 0;
+            }
+            if (_panelModel.Panel_ParentMultiPanelModel != null)
+            {
+                ((IPanelUC)_panelModel.Panel_ParentMultiPanelModel.MPanelLst_Objects.Find(pnl => pnl.Name == _panelModel.Panel_Name)).InvalidateThis();
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
