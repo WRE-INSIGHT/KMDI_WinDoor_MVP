@@ -63,6 +63,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 numHorizontal.Value = 0;
             }
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _pp_georgianBarPropertyUC_numVerticalValueChangedEventRaised(object sender, EventArgs e)
@@ -96,6 +97,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 MessageBox.Show("Please complete the design first", "Cant compute for glass", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 numVertical.Value = 0;
             }
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _pp_georgianBarPropertyUC_cmbGBArtNumSelectedValueChangedEventRaised(object sender, EventArgs e)
