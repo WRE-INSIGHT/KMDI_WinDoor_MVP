@@ -5797,11 +5797,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
                                                 }
                                                 if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                                 }
                                                 GeorgianBarPrice = GeorgianBar_0724Price;
 
@@ -5810,11 +5810,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
                                                 }
                                                 if (pnl.Panel_GeorgianBar_VerticalQty != 0)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                                 }
                                                 GeorgianBarPrice = GeorgianBar_0726Price;
                                             }
@@ -8455,11 +8455,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
                                         }
                                         if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
                                         }
                                         GeorgianBarPrice = GeorgianBar_0724Price;
                                     }
@@ -8467,11 +8467,11 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
                                         }
                                         if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
                                         }
                                         GeorgianBarPrice = GeorgianBar_0726Price;
                                     }
@@ -8508,7 +8508,7 @@ namespace ModelLayer.Model.Quotation
                                 if (Singlepnl.Panel_LstLouverArtNo != null)
                                 {
                                     foreach (string lvrgArtNo in Singlepnl.Panel_LstLouverArtNo)
-                                    { 
+                                    {
                                         if (lvrgArtNo.Contains("-S-"))
                                         {
                                             ChckHandleType = "single";
@@ -8518,7 +8518,7 @@ namespace ModelLayer.Model.Quotation
                                         {
                                             ChckHandleType = "dualORringpull";
                                         }
-                                         
+
                                         lvrgBlades = lvrgArtNo.Replace("150", string.Empty);
                                         lvrgBlades = lvrgArtNo.Replace("152", string.Empty);
                                         lvrgBlades = Regex.Match(lvrgBlades, @"\d+").Value;
