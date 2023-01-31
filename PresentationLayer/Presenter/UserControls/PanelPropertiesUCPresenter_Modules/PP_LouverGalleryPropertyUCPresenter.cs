@@ -26,6 +26,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _louverGalleryPropertyUC.LouverBladesCombinationPropertyUCLoadEventRaised += _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised;
             _louverGalleryPropertyUC.cmbBladeTypeSelectedValueChangedEventRaised += _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised;
+            _louverGalleryPropertyUC.chkSecurityGrillCheckedChangedEventRaised += _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised;
+        }
+
+        private void _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+
+            if (chk.Checked == false)
+            {
+                chk.Text = "No";
+                _panelModel.Panel_LouverSecurityGrillCheck = false;
+            }
+            else if (chk.Checked == true)
+            {
+                chk.Text = "Yes";
+                _panelModel.Panel_LouverSecurityGrillCheck = true;
+            }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -65,7 +83,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Panel_LouverGalleryVisibility", new Binding("Visible", _panelModel, "Panel_LouverGalleryVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Panel_LouverBladeTypeOption", new Binding("TEXT", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverBladeTypeOption", new Binding("Text", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }
