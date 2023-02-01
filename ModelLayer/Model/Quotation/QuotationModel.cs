@@ -6050,138 +6050,208 @@ namespace ModelLayer.Model.Quotation
 
                                                 #endregion
 
-                                                #region Glass 
-                                                if (pnl.Panel_GlassThickness >= 6.0f)
+                                                #region SecurityKitCost 
+                                                if (pnl.Panel_LouverSecurityGrillCheck == true)
                                                 {
-                                                    if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
+                                                    if (Convert.ToInt32(lvrgBlades) == 2)
                                                     {
-
-                                                        if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
-                                                        {
-                                                            if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
-                                                            {
-                                                                GlassBladePrice += (pnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
-                                                            }
-                                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Tinted"))
-                                                            {
-                                                                GlassBladePrice += (pnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            decimal BladeUsagePerPieceOfGlass = 0, BladeUsagePerPieceOfGlassCount = 0, BladeGlassMultiplier = 0;
-
-                                                            BladeUsagePerPieceOfGlass = (pnl.Panel_Width / 1);
-
-                                                            if (BladeUsagePerPieceOfGlass < 800)
-                                                            {
-                                                                BladeUsagePerPieceOfGlassCount = 3;
-                                                            }
-                                                            else if (BladeUsagePerPieceOfGlass > 800)
-                                                            {
-                                                                BladeUsagePerPieceOfGlassCount = 2;
-                                                            }
-
-                                                            BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
-
-                                                            if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
-                                                            {
-                                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
-                                                            }
-                                                            else if (pnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
-                                                            {
-                                                                GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
-                                                            }
-                                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
-                                                            {
-                                                                GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
-                                                            }
-                                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
-                                                            {
-                                                                GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
-                                                            }
-                                                        }
+                                                        SecurityKitCost += SecurityKit_2blades * 1.20m;
                                                     }
-                                                    else if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                                                    else if (Convert.ToInt32(lvrgBlades) == 3)
                                                     {
-                                                        decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
-                                                        BladeUsagePerPieceOfAluminum = (pnl.Panel_Width / 1); // 1= # of panels
-
-                                                        if (BladeUsagePerPieceOfAluminum < 800)
-                                                        {
-                                                            BladeUsagePerPieceOfAluminumCount = 8;
-                                                        }
-                                                        else if (BladeUsagePerPieceOfAluminum > 800)
-                                                        {
-                                                            BladeUsagePerPieceOfAluminumCount = 6;
-                                                        }
-
-                                                        OneSidedFoiledCost += 698.40m * forex;
-                                                        PowderCoatedWhiteIvoryCost += 551.77m * forex;
-                                                        TwoSideFoiledWoodGrainCost += 926.47m * forex;
-                                                        MillFinishCost += 191.21m * forex;
-                                                        //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                                        SecurityKitCost += SecurityKit_3blades * 1.20m;
                                                     }
-                                                }
-                                                else if (pnl.Panel_GlassThickness >= 6.0f &&
-                                                         pnl.Panel_GlassThickness <= 9.0f)
-                                                {
-                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                                    else if (Convert.ToInt32(lvrgBlades) == 4)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_4blades * 1.20m;
                                                     }
-                                                    else
+                                                    else if (Convert.ToInt32(lvrgBlades) == 5)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_5blades * 1.20m;
                                                     }
-                                                }
-                                                else if (pnl.Panel_GlassThickness == 10.0f ||
-                                                 pnl.Panel_GlassThickness == 11.0f)
-                                                {
-                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                                    else if (Convert.ToInt32(lvrgBlades) == 6)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_6blades * 1.20m;
                                                     }
-                                                    else
+                                                    else if (Convert.ToInt32(lvrgBlades) == 7)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_7blades * 1.20m;
                                                     }
-                                                }
-                                                else if (pnl.Panel_GlassThickness >= 12.0f)
-                                                {
-                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                                    else if (Convert.ToInt32(lvrgBlades) == 8)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_8blades * 1.20m;
                                                     }
-                                                    else
+                                                    else if (Convert.ToInt32(lvrgBlades) == 9)
                                                     {
-                                                        GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                                        SecurityKitCost += SecurityKit_9blades * 1.20m;
                                                     }
-                                                }
-                                                else if (pnl.Panel_GlassThickness == 0.0f)
-                                                {
-                                                    GlassPrice += 0;
-                                                }
-
-                                                //sealant for glass
-                                                Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
-
-                                                if (pnl.Panel_GlassThickness != 0.0f)
-                                                {
-                                                    if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                                    else if (Convert.ToInt32(lvrgBlades) == 10)
                                                     {
-                                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                                        SecurityKitCost += SecurityKit_10blades * 1.20m;
                                                     }
-                                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                                    else if (Convert.ToInt32(lvrgBlades) == 11)
                                                     {
-                                                        SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                                        SecurityKitCost += SecurityKit_11blades * 1.20m;
                                                     }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 12)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_12blades * 1.20m;
+                                                    }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 13)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_13blades * 1.20m;
+                                                    }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 14)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_14blades * 1.20m;
+                                                    }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 15)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_15blades * 1.20m;
+                                                    }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 16)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_16blades * 1.20m;
+                                                    }
+                                                    else if (Convert.ToInt32(lvrgBlades) == 17)
+                                                    {
+                                                        SecurityKitCost += SecurityKit_17blades * 1.20m;
+                                                    }
+                                                    SecurityKitPrice += SecurityKitCost + (pnl.Panel_DisplayHeight / 1000m) * 685 * 2; // =(285+400)
                                                 }
                                                 #endregion
 
-
                                             }
                                         }
+
+                                        #region Glass 
+                                        if (pnl.Panel_GlassThickness >= 6.0f)
+                                        {
+                                            if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
+                                            {
+
+                                                if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                                {
+                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    {
+                                                        GlassBladePrice += (pnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    }
+                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Tinted"))
+                                                    {
+                                                        GlassBladePrice += (pnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    decimal BladeUsagePerPieceOfGlass = 0, BladeUsagePerPieceOfGlassCount = 0, BladeGlassMultiplier = 0;
+
+                                                    BladeUsagePerPieceOfGlass = (pnl.Panel_Width / 1);
+
+                                                    if (BladeUsagePerPieceOfGlass < 800)
+                                                    {
+                                                        BladeUsagePerPieceOfGlassCount = 3;
+                                                    }
+                                                    else if (BladeUsagePerPieceOfGlass > 800)
+                                                    {
+                                                        BladeUsagePerPieceOfGlassCount = 2;
+                                                    }
+
+                                                    BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
+
+                                                    if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
+                                                    {
+                                                        GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (pnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
+                                                    {
+                                                        GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
+                                                    {
+                                                        GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                    else if (pnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
+                                                    {
+                                                        GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                    }
+                                                }
+                                            }
+                                            else if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
+                                            {
+                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                                BladeUsagePerPieceOfAluminum = (pnl.Panel_Width / 1); // 1= # of panels
+
+                                                if (BladeUsagePerPieceOfAluminum < 800)
+                                                {
+                                                    BladeUsagePerPieceOfAluminumCount = 8;
+                                                }
+                                                else if (BladeUsagePerPieceOfAluminum > 800)
+                                                {
+                                                    BladeUsagePerPieceOfAluminumCount = 6;
+                                                }
+
+                                                OneSidedFoiledCost += 698.40m * forex;
+                                                PowderCoatedWhiteIvoryCost += 551.77m * forex;
+                                                TwoSideFoiledWoodGrainCost += 926.47m * forex;
+                                                MillFinishCost += 191.21m * forex;
+                                                //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness >= 6.0f &&
+                                                 pnl.Panel_GlassThickness <= 9.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 10.0f ||
+                                         pnl.Panel_GlassThickness == 11.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness >= 12.0f)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                            }
+                                            else
+                                            {
+                                                GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                            }
+                                        }
+                                        else if (pnl.Panel_GlassThickness == 0.0f)
+                                        {
+                                            GlassPrice += 0;
+                                        }
+
+                                        //sealant for glass
+                                        Glass_SealantWHQty_Total = (int)(Math.Ceiling((decimal)((pnl.Panel_GlassWidth + pnl.Panel_GlassHeight) * 2) / 6842));
+
+                                        if (pnl.Panel_GlassThickness != 0.0f)
+                                        {
+                                            if (wdm.WD_BaseColor == Base_Color._Ivory || wdm.WD_BaseColor == Base_Color._White)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_Clear;
+                                            }
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                            {
+                                                SealantPrice += Glass_SealantWHQty_Total * SealantPricePerCan_BrownBlack;
+                                            }
+                                        }
+                                        #endregion
 
                                         #region GlassFilm
                                         if (pnl.Panel_GlassFilm == GlassFilm_Types._4milSolarGuard ||
@@ -8834,7 +8904,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 SecurityKitCost += SecurityKit_17blades * 1.20m;
                                             }
-                                            SecurityKitPrice = SecurityKitCost + (Singlepnl.Panel_DisplayHeight/ 1000m) * 685 * 2; // =(285+400)
+                                            SecurityKitPrice += SecurityKitCost + (Singlepnl.Panel_DisplayHeight / 1000m) * 685 * 2; // =(285+400)
                                         }
                                         #endregion
                                     }
@@ -9038,7 +9108,7 @@ namespace ModelLayer.Model.Quotation
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
-                                           Math.Round(GeorgianBarCost, 2) +
+                                           Math.Round((GeorgianBarCost * 3), 2) + // 3 = costing factor for Georgian bar
                                            Math.Round(CoverProfileCost, 2) +
                                            Math.Round(GlazingGasketPrice, 2) +
                                            Math.Round(WeatherBarPrice, 2) +
@@ -9388,7 +9458,7 @@ namespace ModelLayer.Model.Quotation
 
                         Price_List.Rows.Add("Georgian Bar Cost",
                                    GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(GeorgianBarCost, 2).ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GeorgianBarCost *3, 2).ToString("N", new CultureInfo("en-US")),
                                    "",
                                    "",
                                    "Ancillary Profile");
