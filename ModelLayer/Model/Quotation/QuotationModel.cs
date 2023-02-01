@@ -2418,8 +2418,10 @@ namespace ModelLayer.Model.Quotation
             GlazingGasketPricePerLinearMeter = 32.64m,
             GlazingBeadPricePerLinearMeter = 256.62m,
             GlazingBead_G58PricePerLinearMeter = 117.72m,
-            GeorgianBar_0724Price = 154.93m,
-            GeorgianBar_0726Price = 307.75m,
+            GeorgianBar_0724Price_White = 264.89m,
+            GeorgianBar_0724Price_Woodgrain = 312.36m,
+            GeorgianBar_0726Price_White = 403.05m,
+            GeorgianBar_0726Price_Woodgrain = 467.22m,
             CoverProfile_0914Price = 20.68m,
             CoverProfile_0373Price = 105.41m,
             ThresholdPricePerPiece = 1229.34m,
@@ -2872,8 +2874,10 @@ namespace ModelLayer.Model.Quotation
                 GlazingGasketPricePerLinearMeter = 32.64m;
                 GlazingBeadPricePerLinearMeter = 256.62m;
                 GlazingBead_G58PricePerLinearMeter = 117.72m;
-                GeorgianBar_0724Price = 154.93m;
-                GeorgianBar_0726Price = 307.75m;
+                GeorgianBar_0724Price_White = 264.89m;
+                GeorgianBar_0724Price_Woodgrain = 312.36m;
+                GeorgianBar_0726Price_White = 403.05m;
+                GeorgianBar_0726Price_Woodgrain = 467.22m;
                 CoverProfile_0914Price = 20.68m;
                 CoverProfile_0373Price = 105.41m;
                 ThresholdPricePerPiece = 1229.34m;
@@ -3186,8 +3190,10 @@ namespace ModelLayer.Model.Quotation
                 GlazingGasketPricePerLinearMeter = 32.64m;
                 GlazingBeadPricePerLinearMeter = 256.62m;
                 GlazingBead_G58PricePerLinearMeter = 117.72m;
-                GeorgianBar_0724Price = 154.93m;
-                GeorgianBar_0726Price = 307.75m;
+                GeorgianBar_0724Price_White = 264.89m;
+                GeorgianBar_0724Price_Woodgrain = 312.36m;
+                GeorgianBar_0726Price_White = 403.05m;
+                GeorgianBar_0726Price_Woodgrain = 467.22m;
                 CoverProfile_0914Price = 20.68m;
                 CoverProfile_0373Price = 105.41m;
                 ThresholdPricePerPiece = 1229.34m;
@@ -4378,31 +4384,64 @@ namespace ModelLayer.Model.Quotation
                                             GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty;
                                             GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty;
 
-                                            if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                                            if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                                wdm.WD_BaseColor == Base_Color._White)
                                             {
-                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
-                                                }
-                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
-                                                {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
-                                                }
-                                                GeorgianBarPrice = GeorgianBar_0724Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_White;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0724Price_White;
 
+                                                }
+                                                else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                                {
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_White;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_White;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0726Price_White;
+                                                }
                                             }
-                                            else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                             {
-                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_Woodgrain;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_Woodgrain;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0724Price_Woodgrain;
+
                                                 }
-                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_Woodgrain;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_Woodgrain;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0726Price_Woodgrain;
                                                 }
-                                                GeorgianBarPrice = GeorgianBar_0726Price;
                                             }
+
                                         }
                                         #endregion
 
@@ -5831,31 +5870,64 @@ namespace ModelLayer.Model.Quotation
                                             GeorgianBarHorizontalQty = pnl.Panel_GeorgianBar_HorizontalQty;
                                             GeorgianBarVerticalQty = pnl.Panel_GeorgianBar_VerticalQty;
 
-                                            if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+                                            if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                                wdm.WD_BaseColor == Base_Color._White)
                                             {
-                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
-                                                }
-                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
-                                                {
-                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
-                                                }
-                                                GeorgianBarPrice = GeorgianBar_0724Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_White;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0724Price_White;
 
+                                                }
+                                                else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                                {
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_White;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_White;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0726Price_White;
+                                                }
                                             }
-                                            else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                            else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                             {
-                                                if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_Woodgrain;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_Woodgrain;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0724Price_Woodgrain;
+
                                                 }
-                                                if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                else if (pnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                                 {
-                                                    GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                                    if (pnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_Woodgrain;
+                                                    }
+                                                    if (pnl.Panel_GeorgianBar_VerticalQty != 0)
+                                                    {
+                                                        GeorgianBarCost += ((pnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_Woodgrain;
+                                                    }
+                                                    GeorgianBarPrice = GeorgianBar_0726Price_Woodgrain;
                                                 }
-                                                GeorgianBarPrice = GeorgianBar_0726Price;
                                             }
+
                                         }
                                         #endregion
 
@@ -7125,30 +7197,65 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty;
-                                    if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+
+                                    if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                        wdm.WD_BaseColor == Base_Color._White)
                                     {
-                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_White;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0724Price_White;
+
                                         }
-                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_White;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_White;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0726Price_White;
                                         }
-                                        GeorgianBarPrice = GeorgianBar_0724Price;
                                     }
-                                    else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                     {
-                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_Woodgrain;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_Woodgrain;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0724Price_Woodgrain;
+
                                         }
-                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashWidth / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_Woodgrain;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_SashHeight / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_Woodgrain;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0726Price_Woodgrain;
                                         }
-                                        GeorgianBarPrice = GeorgianBar_0726Price;
                                     }
+
                                 }
                                 #endregion
 
@@ -8559,30 +8666,65 @@ namespace ModelLayer.Model.Quotation
                                 {
                                     GeorgianBarHorizontalQty = Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty = Singlepnl.Panel_GeorgianBar_VerticalQty;
-                                    if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+
+                                    if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                        wdm.WD_BaseColor == Base_Color._White)
                                     {
-                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_White;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_White;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0724Price_White;
+
                                         }
-                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_White;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_White;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0726Price_White;
                                         }
-                                        GeorgianBarPrice = GeorgianBar_0724Price;
                                     }
-                                    else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+                                    else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                     {
-                                        if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                        if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0724Price_Woodgrain;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0724Price_Woodgrain;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0724Price_Woodgrain;
+
                                         }
-                                        if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                        else if (Singlepnl.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
                                         {
-                                            GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price;
+                                            if (Singlepnl.Panel_GeorgianBar_HorizontalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Width / 1000m) * GeorgianBarHorizontalQty) * GeorgianBar_0726Price_Woodgrain;
+                                            }
+                                            if (Singlepnl.Panel_GeorgianBar_VerticalQty != 0)
+                                            {
+                                                GeorgianBarCost += ((Singlepnl.Panel_Height / 1000m) * GeorgianBarVerticalQty) * GeorgianBar_0726Price_Woodgrain;
+                                            }
+                                            GeorgianBarPrice = GeorgianBar_0726Price_Woodgrain;
                                         }
-                                        GeorgianBarPrice = GeorgianBar_0726Price;
                                     }
+
                                 }
                                 #endregion
 
@@ -9458,7 +9600,7 @@ namespace ModelLayer.Model.Quotation
 
                         Price_List.Rows.Add("Georgian Bar Cost",
                                    GeorgianBarPrice.ToString("N", new CultureInfo("en-US")),
-                                   Math.Round(GeorgianBarCost *3, 2).ToString("N", new CultureInfo("en-US")),
+                                   Math.Round(GeorgianBarCost * 3, 2).ToString("N", new CultureInfo("en-US")),
                                    "",
                                    "",
                                    "Ancillary Profile");
