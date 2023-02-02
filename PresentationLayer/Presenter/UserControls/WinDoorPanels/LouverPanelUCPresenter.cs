@@ -8,6 +8,7 @@ using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Variables;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
+using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using System;
@@ -385,7 +386,46 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _panelModel.Panel_Placement != "Last")
                 {
                     int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_louverPanelUC);
+                    Control nextCtrl = null;
+                    if (_multiPanelModel.MPanelLst_Objects.Count > (this_indx + 2))
+                    {
+                        nextCtrl = _multiPanelModel.MPanelLst_Objects[this_indx + 2];
+                        if (!nextCtrl.Name.Contains("Multi"))
+                        {
+                            nextCtrl = null;
+                        }
+                    }
+                    if (this_indx > 1 && _multiPanelModel.MPanel_DividerEnabled && nextCtrl != null)
+                    {
+                        Control prevmPanel = _multiPanelModel.MPanelLst_Objects[this_indx - 2];
+                        Control divCtrl = _multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                        IMultiPanelModel leftMpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prevmPanel.Name);
 
+                        int div_mpnl_deduct_Tobind = 8;
+                        if (_multiPanelModel.MPanel_Zoom > 0.26f)
+                        {
+                            div_mpnl_deduct_Tobind = (int)(div_mpnl_deduct_Tobind * _multiPanelModel.MPanel_Zoom);//4
+                        }
+                        else if (_multiPanelModel.MPanel_Zoom <= 0.26f)
+                        {
+                            div_mpnl_deduct_Tobind = 2; //13 - 2 = 11 - 2 = 9px default on div obj for 2-stack multipanel
+                        }
+
+                        if (divCtrl.Name.Contains("Mullion"))
+                        {
+                            IMullionUC mullionUC = (MullionUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                            _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
+                            mullionUC.InvalidateThis();
+                            leftMpnl.MPanel_WidthToBind -= div_mpnl_deduct_Tobind;
+                        }
+                        else if (divCtrl.Name.Contains("Transom"))
+                        {
+                            ITransomUC transomUC = (TransomUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                            _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+                            transomUC.InvalidateThis();
+                            leftMpnl.MPanel_HeightToBind -= div_mpnl_deduct_Tobind;
+                        }
+                    }
                     Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
                     _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
 

@@ -1428,10 +1428,16 @@ namespace PresentationLayer.Presenter.UserControls
                 pGbarInnerY = 0,
                 leftdeduction = 4,
                 rightAddition = 4,
+                sashDeduction = 0,
                 sashD = inner_line;
             if (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == false)
             {
+                sashDeduction = -sashD;
                 sashD = 0;
+            }
+            else
+            {
+                sashDeduction = sashD;
             }
             if (panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
             {
@@ -1446,16 +1452,22 @@ namespace PresentationLayer.Presenter.UserControls
             Pen pInnerLine = new Pen(Color.FromArgb(245, 245, 220), penThickness);
             Pen pOuterLine = new Pen(Color.Black, 1);
 
+
+
+
+
+            int addY = ((client_ht - (((int)(client_ht - sashDeduction + pGbarInnerY) / (horizontalQty + 1)) * horizontalQty)) - ((client_ht + pGbarInnerY) / (horizontalQty + 1))) / 2;
+
             //Horizontal
             int GeorgianBar_GapYs = GeorgianBar_GapY;
             for (int ii = 0; ii < horizontalQty; ii++)
             {
-                GBpointResultY = ((pGbarInnerY + client_ht) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
-                GeorgianBar_GapY += (client_ht + (pGbarInnerY)) / (horizontalQty + 1);
+                GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
                 Point[] GeorgianBarLeft_PointsY = new[]
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction),
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
                 };
                 for (int i = 0; i < GeorgianBarLeft_PointsY.Length - 1; i += 2)
                 {
@@ -1463,23 +1475,28 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 Point[] GeorgianBarRight_PointsY = new[]
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition),
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
                 };
                 for (int i = 0; i < GeorgianBarRight_PointsY.Length - 1; i += 2)
                 {
                     g.DrawLine(pOuterLine, GeorgianBarRight_PointsY[i], GeorgianBarRight_PointsY[i + 1]);
                 }
             }
+
+
+
+            int addX = ((client_wd - (((int)(client_wd   - sashDeduction+ pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
+
             //vertical
             for (int ii = 0; ii < verticalQty; ii++)
             {
-                GBpointResultX = ((pGbarInnerX + client_wd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
-                GeorgianBar_GapX += (client_wd + (pGbarInnerX)) / (verticalQty + 1);
+                GBpointResultX = ((pGbarInnerX + client_wd - sashDeduction) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (client_wd - sashDeduction + (pGbarInnerX)) / (verticalQty + 1);
                 Point[] GeorgianBar_PointsX = new[]
                 {
-                  new Point(GBpointResultX + Ppoint.X,pGbarInnerX+1 + Ppoint.Y + sashD),
-                  new Point(GBpointResultX + Ppoint.X,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                  new Point(GBpointResultX + Ppoint.X + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                  new Point(GBpointResultX + Ppoint.X + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
                 };
                 for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
                 {
@@ -1488,8 +1505,8 @@ namespace PresentationLayer.Presenter.UserControls
                 Point[] GeorgianBarBoderLeft_PointsX = new[]
                 {
 
-                     new Point(GBpointResultX + Ppoint.X-leftdeduction,pGbarInnerX+1 + Ppoint.Y + sashD),
-                     new Point(GBpointResultX + Ppoint.X-leftdeduction,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                     new Point(GBpointResultX + Ppoint.X-leftdeduction + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                     new Point(GBpointResultX + Ppoint.X-leftdeduction + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
                 };
                 for (int i = 0; i < GeorgianBarBoderLeft_PointsX.Length - 1; i += 2)
                 {
@@ -1499,8 +1516,8 @@ namespace PresentationLayer.Presenter.UserControls
                 Point[] GeorgianBarBoderRight_PointsX = new[]
                 {
 
-                     new Point(GBpointResultX + Ppoint.X + rightAddition,pGbarInnerX+1 + Ppoint.Y + sashD),
-                     new Point(GBpointResultX + Ppoint.X + rightAddition,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                     new Point(GBpointResultX + Ppoint.X + rightAddition + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                     new Point(GBpointResultX + Ppoint.X + rightAddition + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
                 };
                 for (int i = 0; i < GeorgianBarBoderRight_PointsX.Length - 1; i += 2)
                 {
@@ -1512,12 +1529,12 @@ namespace PresentationLayer.Presenter.UserControls
 
             for (int ii = 0; ii < horizontalQty; ii++)
             {
-                GBpointResultY = ((pGbarInnerY + client_ht) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapYs)));
-                GeorgianBar_GapYs += (client_ht + (pGbarInnerY)) / (horizontalQty + 1);
+                GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapYs)));
+                GeorgianBar_GapYs += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
                 Point[] GeorgianBar_PointsY = new[]
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y),
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
                 };
                 for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
                 {

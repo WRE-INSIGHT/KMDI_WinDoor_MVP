@@ -1009,9 +1009,16 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                updatePriceFromMainViewToItemList();
-                _windoorModel.WD_fileLoad = false;
-                _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                if (_quotationModel != null)
+                {
+                    updatePriceFromMainViewToItemList();
+                    _windoorModel.WD_fileLoad = false;
+                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                }
+                else
+                {
+                    _lblCurrentPrice.Value = 0;
+                }
             }
         }
 
