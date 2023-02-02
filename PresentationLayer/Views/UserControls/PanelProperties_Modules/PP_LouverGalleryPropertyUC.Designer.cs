@@ -33,8 +33,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pnl_chkMotorizedOptions = new System.Windows.Forms.Panel();
+            this.lbl_motorized = new System.Windows.Forms.Label();
+            this.chk_SecurityGrill = new System.Windows.Forms.CheckBox();
             this.pnl_BladeType.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.pnl_chkMotorizedOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_BladeType
@@ -88,19 +92,58 @@
             this.panel2.Size = new System.Drawing.Size(150, 26);
             this.panel2.TabIndex = 54;
             // 
+            // pnl_chkMotorizedOptions
+            // 
+            this.pnl_chkMotorizedOptions.Controls.Add(this.lbl_motorized);
+            this.pnl_chkMotorizedOptions.Controls.Add(this.chk_SecurityGrill);
+            this.pnl_chkMotorizedOptions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_chkMotorizedOptions.Location = new System.Drawing.Point(0, 53);
+            this.pnl_chkMotorizedOptions.Name = "pnl_chkMotorizedOptions";
+            this.pnl_chkMotorizedOptions.Size = new System.Drawing.Size(150, 31);
+            this.pnl_chkMotorizedOptions.TabIndex = 73;
+            // 
+            // lbl_motorized
+            // 
+            this.lbl_motorized.Location = new System.Drawing.Point(3, 3);
+            this.lbl_motorized.Name = "lbl_motorized";
+            this.lbl_motorized.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lbl_motorized.Size = new System.Drawing.Size(91, 24);
+            this.lbl_motorized.TabIndex = 34;
+            this.lbl_motorized.Text = "Security Grill";
+            this.lbl_motorized.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chk_SecurityGrill
+            // 
+            this.chk_SecurityGrill.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_SecurityGrill.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_SecurityGrill.FlatAppearance.BorderSize = 0;
+            this.chk_SecurityGrill.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_SecurityGrill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_SecurityGrill.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_SecurityGrill.Location = new System.Drawing.Point(98, 6);
+            this.chk_SecurityGrill.Name = "chk_SecurityGrill";
+            this.chk_SecurityGrill.Size = new System.Drawing.Size(50, 21);
+            this.chk_SecurityGrill.TabIndex = 35;
+            this.chk_SecurityGrill.Text = "No";
+            this.chk_SecurityGrill.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_SecurityGrill.UseVisualStyleBackColor = false;
+            this.chk_SecurityGrill.CheckedChanged += new System.EventHandler(this.chk_SecurityGrill_CheckedChanged);
+            // 
             // PP_LouverGalleryPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnl_chkMotorizedOptions);
             this.Controls.Add(this.pnl_BladeType);
             this.Controls.Add(this.panel2);
             this.Name = "PP_LouverGalleryPropertyUC";
-            this.Size = new System.Drawing.Size(150, 55);
+            this.Size = new System.Drawing.Size(150, 86);
             this.Load += new System.EventHandler(this.PP_LouverBladesCombinationPropertyUC_Load);
             this.pnl_BladeType.ResumeLayout(false);
             this.pnl_BladeType.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.pnl_chkMotorizedOptions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -111,5 +154,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnl_chkMotorizedOptions;
+        private System.Windows.Forms.Label lbl_motorized;
+        private System.Windows.Forms.CheckBox chk_SecurityGrill;
     }
 }

@@ -3017,6 +3017,35 @@ namespace ModelLayer.Model.Quotation.Panel
         public List<string> Panel_LstLouverArtNo { get; set; }
         public List<int> Panel_LstSealForHandleMultiplier { get; set; }
 
+        private bool _panel_LouverMotorizeCheck;
+        public bool Panel_LouverMotorizeCheck
+        {
+            get
+            {
+                return _panel_LouverMotorizeCheck;
+            }
+
+            set
+            {
+                _panel_LouverMotorizeCheck = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_LouverSecurityGrillCheck;
+        public bool Panel_LouverSecurityGrillCheck
+        {
+            get
+            {
+                return _panel_LouverSecurityGrillCheck;
+            }
+
+            set
+            {
+                _panel_LouverSecurityGrillCheck = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods
@@ -8958,7 +8987,7 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (Panel_LstLouverArtNo != null)
                 {
-                    int count152 = 0, count150 = 0; 
+                    int count152 = 0, count150 = 0;
                     foreach (string lvrCheckArtNo in Panel_LstLouverArtNo)
                     {
                         if (lvrCheckArtNo.Contains("152"))
@@ -8978,7 +9007,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         lvrGlassHt = "150";
                     }
-                } 
+                }
 
                 tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + Panel_LouverBladeTypeOption + " Blades " + glassFilm,
                             Panel_LouverBladesCount.ToString(), "pc(s)",

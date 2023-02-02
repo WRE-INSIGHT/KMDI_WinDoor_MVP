@@ -632,39 +632,24 @@ namespace PresentationLayer.Presenter.UserControls
 
                 if (_panelModel.Panel_Type.Contains("Louver") == true)
                 {
-                    //_panelModel.AdjustPropertyPanelHeight("minusLouver");
-                    //_panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusLouver");
                     _panelModel.Panel_LouverBladesVisibility = true;
                     _panelModel.Panel_LouverGalleryVisibility = true;
                     _panelModel.Panel_LouverGallerySetVisibility = true;
-
-
-                    _panelModel.AdjustPropertyPanelHeight("addChkMotorized");
-                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
 
                     _panelModel.AdjustPropertyPanelHeight("addLouverBlades");
                     _panelModel.AdjustPropertyPanelHeight("addLouverGallery");
                     _panelModel.AdjustPropertyPanelHeight("addLouverGallerySet");
 
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
                     _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
 
                     if (_panelModel.Panel_ParentMultiPanelModel != null)
                     {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addChkMotorized");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverBlades");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallery");
                         _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySet");
                     }
-
-
-                    IPP_LouverGalleryPropertyUCPresenter Gallery = _pp_louverGalleryPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
-                    UserControl GalleryProp = (UserControl)Gallery.GetLouverGalleryPropertyUC();
-                    _pnlPanelSpecs.Controls.Add(GalleryProp);
-                    GalleryProp.Dock = DockStyle.Top;
-                    GalleryProp.BringToFront();
 
                     IPP_LouverBladesPropertyUCPresenter blades = _pp_louverBladesPropertyUCPresenter.CreateNewInstance(_unityC, _panelModel);
                     UserControl bladesProp = (UserControl)blades.GetIPP_LouverBladesPropertyUC();
@@ -672,11 +657,11 @@ namespace PresentationLayer.Presenter.UserControls
                     bladesProp.Dock = DockStyle.Top;
                     bladesProp.BringToFront();
 
-                    IPP_MotorizedPropertyUCPresenter motorizedPropUCP = _pp_motorizedPropertyUCPresenter.GetNewInstance(_unityC, _panelModel, _mainPresenter);
-                    UserControl motorized = (UserControl)motorizedPropUCP.GetPPMotorizedPropertyUC();
-                    _pnlPanelSpecs.Controls.Add(motorized);
-                    motorized.Dock = DockStyle.Top;
-                    motorized.BringToFront();
+                    IPP_LouverGalleryPropertyUCPresenter Gallery = _pp_louverGalleryPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
+                    UserControl GalleryProp = (UserControl)Gallery.GetLouverGalleryPropertyUC();
+                    _pnlPanelSpecs.Controls.Add(GalleryProp);
+                    GalleryProp.Dock = DockStyle.Top;
+                    GalleryProp.BringToFront();
 
                     IPP_LouverGallerySetPropertyUCPresenter GallerySet = _pp_louverGallerySetPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel);
                     UserControl GallerySetProp = (UserControl)GallerySet.GetLouverGallerySetPropertyUC();
