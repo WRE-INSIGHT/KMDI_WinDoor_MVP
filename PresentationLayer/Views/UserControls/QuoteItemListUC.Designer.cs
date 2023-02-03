@@ -262,7 +262,7 @@
             this.suggestedPriceToolStripMenuItem,
             this.setAllDiscountToolStripMenuItem});
             this.CMS_Items.Name = "CMS_Items";
-            this.CMS_Items.Size = new System.Drawing.Size(159, 70);
+            this.CMS_Items.Size = new System.Drawing.Size(159, 48);
             // 
             // suggestedPriceToolStripMenuItem
             // 

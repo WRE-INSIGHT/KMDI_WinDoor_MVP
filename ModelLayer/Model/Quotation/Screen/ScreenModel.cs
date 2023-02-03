@@ -1,6 +1,8 @@
 ﻿using ModelLayer.Variables;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using static EnumerationTypeLayer.EnumerationTypes;
 
@@ -544,6 +546,8 @@ namespace ModelLayer.Model.Quotation.Screen
         OverheadCost,
         ContingenciesCost,
         TotalPrice,
+        Discount,
+     
 
         #region BuiltinSideRoll Variables
 
@@ -784,8 +788,8 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
 
-        private decimal _screen_Discount;
-        public decimal Screen_Discount
+        private int _screen_Discount;
+        public int Screen_Discount
         {
             get
             {
@@ -1377,9 +1381,73 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private decimal _discountPercentage;
+
+        public decimal DiscountPercentage
+        {
+            get
+            {
+                return _discountPercentage;
+            }
+            set
+            {
+                _discountPercentage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private decimal _screenItemNumber;
+        
+        public decimal Screen_ItemNumber
+        {
+            get
+            {
+                return _screenItemNumber;
+            }
+            set
+            {
+                _screenItemNumber = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private decimal _nxtscreenItemNumber;
+        public decimal Screen_NextItemNumber
+        {
+            get
+            {
+                return _nxtscreenItemNumber;
+            }
+            set
+            {
+                _nxtscreenItemNumber = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
+        List<decimal> ItemList = new List<decimal>();
+        public void ItemNumberList()
+        {           
+            var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
+            Screen_NextItemNumber = _strippedItemNum + 1;
 
+            try
+            {
+                decimal result = ItemList.First(j => j == Screen_ItemNumber);
+                Screen_ItemNumber = 0;
+            }
+            catch
+            {
+                Screen_ItemNumber = Screen_ItemNumber;
+                ItemList.Add(Screen_ItemNumber);
+            }                                   
+        }
+        public void DeleteItemNumber(decimal x)
+        {       
+            //var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
+            //Screen_NextItemNumber = _strippedItemNum - 1;                     
+            ItemList.Remove(x);
+        }
 
         public void ComputeScreenTotalPrice()
         {
@@ -3172,27 +3240,44 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_UnitPrice = Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor;
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity,2);                                      
                 }
                 else if (Screen_Types == ScreenType._RollUp || Screen_Types ==  ScreenType._Plisse)
                 {                    
                     Screen_UnitPrice = Math.Ceiling(TotalPrice) * Screen_Factor;
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
                 }            
                 else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
                     Screen_UnitPrice = Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor;
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
                 }
                 else if (Screen_Types == ScreenType._BuiltInSideroll)
                 {
                     Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2);
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
                 }
                 else if (Screen_Types == ScreenType._Maxxy)
                 {
                     Screen_UnitPrice = Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor;
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
                 }
+
+                Screen_Discount = (int)Decimal.Truncate(100 * DiscountPercentage);
 
                 #endregion
 
@@ -3224,9 +3309,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
 
                 #endregion
-
+                
                 ClearingOperation();
-          
+                
 
             }
             else

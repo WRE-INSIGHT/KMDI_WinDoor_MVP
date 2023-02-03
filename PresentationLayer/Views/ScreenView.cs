@@ -49,6 +49,30 @@ namespace PresentationLayer.Views
             }
         }
 
+        public NumericUpDown screen_discountpercentage
+        {
+            get
+            {
+                return nud_Discount;
+            }
+            set
+            {
+                nud_Discount.Value = Convert.ToDecimal(value);
+            }
+        }
+
+        public TextBox screen_itemnumber
+        {
+            get
+            {
+                return txt_ItemNum;
+            }
+            set
+            {
+                txt_ItemNum = value;
+            }
+        }
+  
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
@@ -67,6 +91,8 @@ namespace PresentationLayer.Views
         public event EventHandler rdBtnDoorCheckChangeEventRaised;
         public event EventHandler rdBtnWindowCheckChangeEventRaised;
         public event EventHandler nudPlisseRdValueChangeEventRaise;
+        public event EventHandler nudDiscountValueChangeEventRaised;
+        public event EventHandler txtItemNumTextChangeEventRaised;
 
         public void ShowScreemView()
         {
@@ -106,6 +132,11 @@ namespace PresentationLayer.Views
         public Label getLblPlisseRd()
         {
             return lbl_plissedRd;
+        }
+
+        public TextBox getTxtitemListNumber()
+        {
+            return txt_ItemNum;
         }
 
         private void ScreenView_Load(object sender, EventArgs e)
@@ -219,6 +250,16 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, nudPlisseRdValueChangeEventRaise, e);
         }
 
+        private void nud_Discount_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudDiscountValueChangeEventRaised, e);
+        }
+
+        private void txt_ItemNum_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, txtItemNumTextChangeEventRaised, e);
+        }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             
@@ -234,8 +275,24 @@ namespace PresentationLayer.Views
             nud_Sets.DataBindings.Add(ModelBinding["Screen_Set"]);
             txt_windoorID.DataBindings.Add(ModelBinding["Screen_WindoorID"]);
             nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
+            nud_Discount.DataBindings.Add(ModelBinding["DiscountPercentage"]);
+            txt_windoorID.DataBindings.Add(ModelBinding["Screen_ItemNumber"]);
+
         }
 
-       
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_Quantity_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
