@@ -395,7 +395,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _panelModel.Panel_Placement != "Last")
             {
                 int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_awningPanelUC);
-                Control nextCtrl = null;
+                Control nextCtrl = null,
+                       prevCtrl = null;
                 if (_multiPanelModel.MPanelLst_Objects.Count > (this_indx + 2))
                 {
                     nextCtrl = _multiPanelModel.MPanelLst_Objects[this_indx + 2];
@@ -403,6 +404,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         nextCtrl = null;
                     }
+                    if (this_indx > 1)
+                    {
+                        prevCtrl = _multiPanelModel.MPanelLst_Objects[this_indx - 2];
+                        if (!prevCtrl.Name.Contains("Multi"))
+                        {
+                            prevCtrl = null;
+                        }
+                    }
+
                 }
                 if (this_indx > 1 && _multiPanelModel.MPanel_DividerEnabled && nextCtrl != null)
                 {
@@ -423,16 +433,37 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (divCtrl.Name.Contains("Mullion"))
                     {
                         IMullionUC mullionUC = (MullionUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+
+
+                        if (prevCtrl == null)
+                        {
+                            IDividerModel leftDiv = _multiPanelModel.MPanelLst_Divider.Find(divs => divs.Div_Name == ((UserControl)mullionUC).Name);
+                            leftDiv.Div_WidthToBind -= div_mpnl_deduct_Tobind;
+                            leftDiv.Div_Width -= 8;
+                        }
+
                         _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                         mullionUC.InvalidateThis();
-                        leftMpnl.MPanel_WidthToBind -= div_mpnl_deduct_Tobind;
+                        if (leftMpnl != null)
+                        {
+                            leftMpnl.MPanel_WidthToBind -= div_mpnl_deduct_Tobind;
+                        }
                     }
                     else if (divCtrl.Name.Contains("Transom"))
                     {
                         ITransomUC transomUC = (TransomUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                        if (prevCtrl == null)
+                        {
+                            IDividerModel leftDiv = _multiPanelModel.MPanelLst_Divider.Find(divs => divs.Div_Name == ((UserControl)transomUC).Name);
+                            leftDiv.Div_HeightToBind -= div_mpnl_deduct_Tobind;
+                            leftDiv.Div_Height -= 8;
+                        }
                         _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
                         transomUC.InvalidateThis();
-                        leftMpnl.MPanel_HeightToBind -= div_mpnl_deduct_Tobind;
+                        if (leftMpnl != null)
+                        {
+                            leftMpnl.MPanel_HeightToBind -= div_mpnl_deduct_Tobind;
+                        }
                     }
                 }
                 Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];

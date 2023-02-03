@@ -1205,7 +1205,46 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _multiPanelModel.MPanel_Placement != "Last")
             {
                 int this_indx = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.IndexOf((UserControl)_multiPanelTransomUC);
+                Control nextCtrl = null;
+                if (_multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Count > (this_indx + 2))
+                {
+                    nextCtrl = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 2];
+                    if (!nextCtrl.Name.Contains("Panel"))
+                    {
+                        nextCtrl = null;
+                    }
+                }
+                if (this_indx > 1 && _multiPanelModel.MPanel_ParentModel.MPanel_DividerEnabled && nextCtrl != null)
+                {
+                    Control prevmPanel = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx - 2];
+                    Control divCtrl = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx - 1];
+                    IMultiPanelModel leftMpnl = _multiPanelModel.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prevmPanel.Name);
 
+                    int div_mpnl_deduct_Tobind = 8;
+                    if (_multiPanelModel.MPanel_ParentModel.MPanel_Zoom > 0.26f)
+                    {
+                        div_mpnl_deduct_Tobind = (int)(div_mpnl_deduct_Tobind * _multiPanelModel.MPanel_ParentModel.MPanel_Zoom);//4
+                    }
+                    else if (_multiPanelModel.MPanel_Zoom <= 0.26f)
+                    {
+                        div_mpnl_deduct_Tobind = 2; //13 - 2 = 11 - 2 = 9px default on div obj for 2-stack multipanel
+                    }
+
+                    if (divCtrl.Name.Contains("Mullion"))
+                    {
+                        Control mullionC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx - 1];
+                        IDividerModel leftDiv = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divs => divs.Div_Name == mullionC.Name);
+                        leftDiv.Div_WidthToBind += div_mpnl_deduct_Tobind;
+                        leftDiv.Div_Width += 8;
+                    }
+                    else if (divCtrl.Name.Contains("Transom"))
+                    {
+                        Control transomC = (TransomUC)_multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx - 1];
+                        IDividerModel leftDiv = _multiPanelModel.MPanel_ParentModel.MPanelLst_Divider.Find(divs => divs.Div_Name == transomC.Name);
+                        leftDiv.Div_HeightToBind += div_mpnl_deduct_Tobind;
+                        leftDiv.Div_Height += 8;
+                    }
+                }
                 Control divUC = _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects[this_indx + 1];
                 _multiPanelModel.MPanel_ParentModel.MPanelLst_Objects.Remove((UserControl)divUC);
                 _multiPanelModel.MPanel_Parent.Controls.Remove((UserControl)divUC);
