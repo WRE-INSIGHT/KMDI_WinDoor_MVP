@@ -19,7 +19,7 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_Quantity { get; set; }
         decimal Screen_TotalAmount { get; set; }
         decimal Screen_NetPrice { get; set; }
-        decimal Screen_Discount { get; set; }
+        int Screen_Discount { get; set; }
         decimal Screen_DiscountedPrice { get; set; }
         decimal Screen_DiscountedPriceWithoutVat { get; set; }
         decimal Screen_LaborAndMobilization { get; set; }
@@ -54,15 +54,17 @@ namespace ModelLayer.Model.Quotation.Screen
         int Screen_6052MilledProfileQty { get; set; }
         bool Screen_ExchangeRateVisibility { get; set; }
         int Screen_ExchangeRate { get; set; }
-
+        void ItemNumberList();
+        void DeleteItemNumber(decimal x);
         void ComputeScreenTotalPrice();
         bool Reinforced { get; set; }
         bool SP_MagnumScreenType_Visibility { get; set; }
         Magnum_ScreenType Magnum_ScreenType { get; set; }
         int PlissedRd_Panels { get; set; }
         string PlisseMagnumType { get; set; }
-
-
+        decimal DiscountPercentage { get; set; }
+        decimal Screen_ItemNumber { get; set; }
+        decimal Screen_NextItemNumber { get; set; }
 
 
 

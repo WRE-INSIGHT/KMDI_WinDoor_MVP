@@ -15,7 +15,7 @@
               <Width>0.94794in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.53699in</Width>
+              <Width>1.04417in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.83607in</Width>
@@ -24,7 +24,10 @@
               <Width>0.46703in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.40155in</Width>
+              <Width>1in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.89934in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -238,6 +241,41 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Discount</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -504,14 +542,49 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="dtPrice">
+                    <Textbox Name="dtDiscountPercentage">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtPrice.Value</Value>
+                              <Value>=Fields!dtDiscountPercentage.Value</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dtDiscountPercentage</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dtDiscountedPrice">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dtDiscountedPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                               </Style>
@@ -522,7 +595,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>dtPrice</rd:DefaultName>
+                      <rd:DefaultName>dtDiscountedPrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -550,6 +623,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -566,7 +640,7 @@
         <Top>1.07639in</Top>
         <Left>0.1641in</Left>
         <Height>0.63541in</Height>
-        <Width>7.53338in</Width>
+        <Width>7.53835in</Width>
         <Style>
           <Border>
             <Style>Double</Style>
@@ -631,7 +705,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
         <Top>0.00839in</Top>
-        <Left>0.16411in</Left>
+        <Left>0.16908in</Left>
         <Height>0.91319in</Height>
         <Width>7.53337in</Width>
         <ZIndex>1</ZIndex>
@@ -708,6 +782,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox19</rd:DefaultName>
+                <Left>0.00498in</Left>
                 <Height>0.99132in</Height>
                 <Width>2.87507in</Width>
                 <Style>
@@ -724,7 +799,7 @@
             <KeepTogether>true</KeepTogether>
             <Top>0.00868in</Top>
             <Height>0.99132in</Height>
-            <Width>2.87507in</Width>
+            <Width>2.88005in</Width>
             <Style>
               <Border>
                 <Color>Turquoise</Color>
@@ -911,7 +986,7 @@
         <Top>1.78124in</Top>
         <Left>0.1641in</Left>
         <Height>1in</Height>
-        <Width>7.53337in</Width>
+        <Width>7.53834in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -944,7 +1019,7 @@
             <Top>4.27027in</Top>
             <Left>0.02363in</Left>
             <Height>0.26042in</Height>
-            <Width>7.50974in</Width>
+            <Width>7.51471in</Width>
             <Style>
               <Border>
                 <Style>Double</Style>
@@ -1060,7 +1135,7 @@ DELIVERY:</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>AMANDA D. AQUINO                                        KEVIN CHARLES S. LAO                                MS.GENALYN C. GARCIA</Value>
+                    <Value>AMANDA D. AQUINO                               KEVIN CHARLES S. LAO                                MS.GENALYN C. GARCIA</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1298,7 +1373,7 @@ DELIVERY:</Value>
     <Height>7.47041in</Height>
     <Style />
   </Body>
-  <Width>8in</Width>
+  <Width>7.97327in</Width>
   <Page>
     <PageHeader>
       <Height>0.5in</Height>
@@ -1489,7 +1564,7 @@ DELIVERY:</Value>
         </Field>
         <Field Name="dtUnitPrice">
           <DataField>dtUnitPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="dtQuantity">
           <DataField>dtQuantity</DataField>
@@ -1505,7 +1580,7 @@ DELIVERY:</Value>
         </Field>
         <Field Name="dtDiscountedPrice">
           <DataField>dtDiscountedPrice</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="dtLaborAndMobilization">
           <DataField>dtLaborAndMobilization</DataField>
@@ -1515,10 +1590,18 @@ DELIVERY:</Value>
           <DataField>dtNetPriceWithOutVat</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="dtDiscountPercentage">
+          <DataField>dtDiscountPercentage</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtItemNumber">
+          <DataField>dtItemNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DSQuotation</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\KMDI\Documents\GitHub\KMDI_WinDoor_MVP\PresentationLayer\DataTables\DSQuotation.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\J.B\Documents\GitHub\KMDI_WinDoor_MVP\PresentationLayer\DataTables\DSQuotation.xsd</rd:SchemaPath>
         <rd:TableName>dtScreen</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

@@ -6,22 +6,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.41891in</Width>
+              <Width>1.31474in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.36234in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.4859in</Width>
+              <Width>0.92167in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84018in</Width>
+              <Width>0.8506in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.34055in</Width>
+              <Width>2.20686in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -230,6 +233,42 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value> Description</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -455,12 +494,46 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dtDescription">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dtDescription.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dtDescription</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -484,7 +557,7 @@
         <Top>0.15499in</Top>
         <Left>0.13542in</Left>
         <Height>0.5in</Height>
-        <Width>7.44788in</Width>
+        <Width>7.65621in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -528,7 +601,7 @@
     <Height>1.69792in</Height>
     <Style />
   </Body>
-  <Width>8in</Width>
+  <Width>7.79163in</Width>
   <Page>
     <PageHeader>
       <Height>1.78126in</Height>
@@ -883,10 +956,14 @@
           <DataField>dtLocation</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="dtDescription">
+          <DataField>dtDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DSQuotation</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\KMDI\Documents\GitHub\KMDI_WinDoor_MVP\PresentationLayer\DataTables\DSQuotation.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\J.B\Documents\GitHub\KMDI_WinDoor_MVP\PresentationLayer\DataTables\DSQuotation.xsd</rd:SchemaPath>
         <rd:TableName>dtGlassSummary</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

@@ -27,14 +27,26 @@ namespace PresentationLayer.Views
 
         public List<string> Panel_ID
         {
-            get { return Panel_id; }
-            set { Panel_id = value; }
+            get
+            {
+                return Panel_id;
+            }
+            set
+            {
+                Panel_id = value;
+            }
         }
 
         public string Glass_Type
         {
-            get { return _glasstype; }
-            set { _glasstype = value; }
+            get
+            {
+                return _glasstype;
+            }
+            set
+            {
+                _glasstype = value;
+            }
         }
 
         public void CloseThisDialog()
