@@ -6339,7 +6339,7 @@ namespace ModelLayer.Model.Quotation
 
                                         #endregion
                                     }
-
+                                   
                                     #region Glass Based Price
 
                                     //if (pnl.Panel_GlassThicknessDesc != null)

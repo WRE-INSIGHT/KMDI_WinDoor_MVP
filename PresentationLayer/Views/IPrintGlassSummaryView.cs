@@ -10,8 +10,11 @@ namespace PresentationLayer.Views
         event EventHandler btnRefreshClickEventRaised;
 
         BindingSource GetBindingSource();
+        BindingSource GetBindingSourceNP();
         DateTimePicker GetDateTimePicker();
         ReportViewer GetReportViewer();
+        CheckBox ShowPrice();
         void ShowGlassSummaryView();
+        bool CheckedShowPrice { get; set; }
     }
 }

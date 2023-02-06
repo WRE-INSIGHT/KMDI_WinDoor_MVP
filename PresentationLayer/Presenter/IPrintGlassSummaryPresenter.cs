@@ -1,4 +1,6 @@
-﻿using PresentationLayer.Views;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.Views;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -8,6 +10,8 @@ namespace PresentationLayer.Presenter
         IPrintGlassSummaryView GetPrintGlassSummaryView();
         IPrintGlassSummaryPresenter GetNewInstance(IUnityContainer unityC,
                                                    IQuoteItemListPresenter quoteItemListPresenter,
-                                                   IMainPresenter mainPresenter);
+                                                   IMainPresenter mainPresenter,
+                                                   IWindoorModel windoorModel,
+                                                   IQuotationModel quotationModel);
     }
 }

@@ -30,6 +30,8 @@ namespace PresentationLayer.DataTables {
         
         private dtScreenDataTable tabledtScreen;
         
+        private dtGlassSummaryNoPriceDataTable tabledtGlassSummaryNoPrice;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace PresentationLayer.DataTables {
                 }
                 if ((ds.Tables["dtScreen"] != null)) {
                     base.Tables.Add(new dtScreenDataTable(ds.Tables["dtScreen"]));
+                }
+                if ((ds.Tables["dtGlassSummaryNoPrice"] != null)) {
+                    base.Tables.Add(new dtGlassSummaryNoPriceDataTable(ds.Tables["dtGlassSummaryNoPrice"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace PresentationLayer.DataTables {
         public dtScreenDataTable dtScreen {
             get {
                 return this.tabledtScreen;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtGlassSummaryNoPriceDataTable dtGlassSummaryNoPrice {
+            get {
+                return this.tabledtGlassSummaryNoPrice;
             }
         }
         
@@ -191,6 +206,9 @@ namespace PresentationLayer.DataTables {
                 if ((ds.Tables["dtScreen"] != null)) {
                     base.Tables.Add(new dtScreenDataTable(ds.Tables["dtScreen"]));
                 }
+                if ((ds.Tables["dtGlassSummaryNoPrice"] != null)) {
+                    base.Tables.Add(new dtGlassSummaryNoPriceDataTable(ds.Tables["dtGlassSummaryNoPrice"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace PresentationLayer.DataTables {
                     this.tabledtScreen.InitVars();
                 }
             }
+            this.tabledtGlassSummaryNoPrice = ((dtGlassSummaryNoPriceDataTable)(base.Tables["dtGlassSummaryNoPrice"]));
+            if ((initTable == true)) {
+                if ((this.tabledtGlassSummaryNoPrice != null)) {
+                    this.tabledtGlassSummaryNoPrice.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace PresentationLayer.DataTables {
             base.Tables.Add(this.tabledtGlassSummary);
             this.tabledtScreen = new dtScreenDataTable();
             base.Tables.Add(this.tabledtScreen);
+            this.tabledtGlassSummaryNoPrice = new dtGlassSummaryNoPriceDataTable();
+            base.Tables.Add(this.tabledtGlassSummaryNoPrice);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace PresentationLayer.DataTables {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializedtScreen() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializedtGlassSummaryNoPrice() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace PresentationLayer.DataTables {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void dtScreenRowChangeEventHandler(object sender, dtScreenRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void dtGlassSummaryNoPriceRowChangeEventHandler(object sender, dtGlassSummaryNoPriceRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -736,6 +771,8 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtDescription;
             
+            private global::System.Data.DataColumn columndtPrice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtGlassSummaryDataTable() {
@@ -827,6 +864,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtPriceColumn {
+                get {
+                    return this.columndtPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -862,7 +907,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtGlassSummaryRow AdddtGlassSummaryRow(int dtItemNo, int dtQuantity, string dtSize, decimal dtArea, string dtReference, string dtLocation, string dtDescription) {
+            public dtGlassSummaryRow AdddtGlassSummaryRow(int dtItemNo, int dtQuantity, string dtSize, decimal dtArea, string dtReference, string dtLocation, string dtDescription, decimal dtPrice) {
                 dtGlassSummaryRow rowdtGlassSummaryRow = ((dtGlassSummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtItemNo,
@@ -871,7 +916,8 @@ namespace PresentationLayer.DataTables {
                         dtArea,
                         dtReference,
                         dtLocation,
-                        dtDescription};
+                        dtDescription,
+                        dtPrice};
                 rowdtGlassSummaryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtGlassSummaryRow);
                 return rowdtGlassSummaryRow;
@@ -901,6 +947,7 @@ namespace PresentationLayer.DataTables {
                 this.columndtReference = base.Columns["dtReference"];
                 this.columndtLocation = base.Columns["dtLocation"];
                 this.columndtDescription = base.Columns["dtDescription"];
+                this.columndtPrice = base.Columns["dtPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -920,6 +967,8 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtLocation);
                 this.columndtDescription = new global::System.Data.DataColumn("dtDescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtDescription);
+                this.columndtPrice = new global::System.Data.DataColumn("dtPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtPrice);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1448,6 +1497,337 @@ namespace PresentationLayer.DataTables {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtGlassSummaryNoPriceDataTable : global::System.Data.TypedTableBase<dtGlassSummaryNoPriceRow> {
+            
+            private global::System.Data.DataColumn columndtItemNo;
+            
+            private global::System.Data.DataColumn columndtQuantity;
+            
+            private global::System.Data.DataColumn columndtSize;
+            
+            private global::System.Data.DataColumn columndtArea;
+            
+            private global::System.Data.DataColumn columndtReference;
+            
+            private global::System.Data.DataColumn columndtLocation;
+            
+            private global::System.Data.DataColumn columndtDescription;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceDataTable() {
+                this.TableName = "dtGlassSummaryNoPrice";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal dtGlassSummaryNoPriceDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected dtGlassSummaryNoPriceDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtItemNoColumn {
+                get {
+                    return this.columndtItemNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtQuantityColumn {
+                get {
+                    return this.columndtQuantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtSizeColumn {
+                get {
+                    return this.columndtSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtAreaColumn {
+                get {
+                    return this.columndtArea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtReferenceColumn {
+                get {
+                    return this.columndtReference;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtLocationColumn {
+                get {
+                    return this.columndtLocation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtDescriptionColumn {
+                get {
+                    return this.columndtDescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceRow this[int index] {
+                get {
+                    return ((dtGlassSummaryNoPriceRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassSummaryNoPriceRowChangeEventHandler dtGlassSummaryNoPriceRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassSummaryNoPriceRowChangeEventHandler dtGlassSummaryNoPriceRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassSummaryNoPriceRowChangeEventHandler dtGlassSummaryNoPriceRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event dtGlassSummaryNoPriceRowChangeEventHandler dtGlassSummaryNoPriceRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AdddtGlassSummaryNoPriceRow(dtGlassSummaryNoPriceRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceRow AdddtGlassSummaryNoPriceRow(int dtItemNo, int dtQuantity, string dtSize, decimal dtArea, string dtReference, string dtLocation, string dtDescription) {
+                dtGlassSummaryNoPriceRow rowdtGlassSummaryNoPriceRow = ((dtGlassSummaryNoPriceRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        dtItemNo,
+                        dtQuantity,
+                        dtSize,
+                        dtArea,
+                        dtReference,
+                        dtLocation,
+                        dtDescription};
+                rowdtGlassSummaryNoPriceRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtGlassSummaryNoPriceRow);
+                return rowdtGlassSummaryNoPriceRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtGlassSummaryNoPriceDataTable cln = ((dtGlassSummaryNoPriceDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtGlassSummaryNoPriceDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columndtItemNo = base.Columns["dtItemNo"];
+                this.columndtQuantity = base.Columns["dtQuantity"];
+                this.columndtSize = base.Columns["dtSize"];
+                this.columndtArea = base.Columns["dtArea"];
+                this.columndtReference = base.Columns["dtReference"];
+                this.columndtLocation = base.Columns["dtLocation"];
+                this.columndtDescription = base.Columns["dtDescription"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columndtItemNo = new global::System.Data.DataColumn("dtItemNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtItemNo);
+                this.columndtQuantity = new global::System.Data.DataColumn("dtQuantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtQuantity);
+                this.columndtSize = new global::System.Data.DataColumn("dtSize", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtSize);
+                this.columndtArea = new global::System.Data.DataColumn("dtArea", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtArea);
+                this.columndtReference = new global::System.Data.DataColumn("dtReference", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtReference);
+                this.columndtLocation = new global::System.Data.DataColumn("dtLocation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtLocation);
+                this.columndtDescription = new global::System.Data.DataColumn("dtDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtDescription);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceRow NewdtGlassSummaryNoPriceRow() {
+                return ((dtGlassSummaryNoPriceRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtGlassSummaryNoPriceRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtGlassSummaryNoPriceRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtGlassSummaryNoPriceRowChanged != null)) {
+                    this.dtGlassSummaryNoPriceRowChanged(this, new dtGlassSummaryNoPriceRowChangeEvent(((dtGlassSummaryNoPriceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtGlassSummaryNoPriceRowChanging != null)) {
+                    this.dtGlassSummaryNoPriceRowChanging(this, new dtGlassSummaryNoPriceRowChangeEvent(((dtGlassSummaryNoPriceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtGlassSummaryNoPriceRowDeleted != null)) {
+                    this.dtGlassSummaryNoPriceRowDeleted(this, new dtGlassSummaryNoPriceRowChangeEvent(((dtGlassSummaryNoPriceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtGlassSummaryNoPriceRowDeleting != null)) {
+                    this.dtGlassSummaryNoPriceRowDeleting(this, new dtGlassSummaryNoPriceRowChangeEvent(((dtGlassSummaryNoPriceRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemovedtGlassSummaryNoPriceRow(dtGlassSummaryNoPriceRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DSQuotation ds = new DSQuotation();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtGlassSummaryNoPriceDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtQuoteRow : global::System.Data.DataRow {
@@ -1870,6 +2250,22 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal dtPrice {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtGlassSummary.dtPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtPrice\' in table \'dtGlassSummary\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummary.dtPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsdtItemNoNull() {
                 return this.IsNull(this.tabledtGlassSummary.dtItemNoColumn);
             }
@@ -1950,6 +2346,18 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdtDescriptionNull() {
                 this[this.tabledtGlassSummary.dtDescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtPriceNull() {
+                return this.IsNull(this.tabledtGlassSummary.dtPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtPriceNull() {
+                this[this.tabledtGlassSummary.dtPriceColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2305,6 +2713,217 @@ namespace PresentationLayer.DataTables {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtGlassSummaryNoPriceRow : global::System.Data.DataRow {
+            
+            private dtGlassSummaryNoPriceDataTable tabledtGlassSummaryNoPrice;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal dtGlassSummaryNoPriceRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtGlassSummaryNoPrice = ((dtGlassSummaryNoPriceDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int dtItemNo {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtGlassSummaryNoPrice.dtItemNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtItemNo\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtItemNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int dtQuantity {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtGlassSummaryNoPrice.dtQuantityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtQuantity\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtQuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtSize {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassSummaryNoPrice.dtSizeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtSize\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal dtArea {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtGlassSummaryNoPrice.dtAreaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtArea\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtAreaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtReference {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassSummaryNoPrice.dtReferenceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtReference\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtReferenceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtLocation {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassSummaryNoPrice.dtLocationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtLocation\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtLocationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtDescription {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtGlassSummaryNoPrice.dtDescriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtDescription\' in table \'dtGlassSummaryNoPrice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtGlassSummaryNoPrice.dtDescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtItemNoNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtItemNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtItemNoNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtItemNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtQuantityNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtQuantityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtQuantityNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtSizeNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtSizeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtSizeNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtSizeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtAreaNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtAreaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtAreaNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtAreaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtReferenceNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtReferenceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtReferenceNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtReferenceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtLocationNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtLocationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtLocationNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtLocationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtDescriptionNull() {
+                return this.IsNull(this.tabledtGlassSummaryNoPrice.dtDescriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtDescriptionNull() {
+                this[this.tabledtGlassSummaryNoPrice.dtDescriptionColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2392,6 +3011,40 @@ namespace PresentationLayer.DataTables {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtScreenRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class dtGlassSummaryNoPriceRowChangeEvent : global::System.EventArgs {
+            
+            private dtGlassSummaryNoPriceRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceRowChangeEvent(dtGlassSummaryNoPriceRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public dtGlassSummaryNoPriceRow Row {
                 get {
                     return this.eventRow;
                 }
