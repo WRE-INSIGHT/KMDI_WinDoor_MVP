@@ -35,6 +35,10 @@
             this.cmsScreen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txt_ItemNum = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nud_Discount = new System.Windows.Forms.NumericUpDown();
             this.nud_Quantity = new System.Windows.Forms.NumericUpDown();
             this.lbl_Quantity = new System.Windows.Forms.Label();
             this.txt_windoorID = new System.Windows.Forms.TextBox();
@@ -72,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Screen)).BeginInit();
             this.cmsScreen.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Discount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Quantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Sets)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,7 +97,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(824, 488);
+            this.panel2.Size = new System.Drawing.Size(1033, 574);
             this.panel2.TabIndex = 29;
             // 
             // panel4
@@ -102,7 +107,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(227, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(597, 461);
+            this.panel4.Size = new System.Drawing.Size(806, 547);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
@@ -116,7 +121,7 @@
             this.dgv_Screen.Name = "dgv_Screen";
             this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Screen.Size = new System.Drawing.Size(597, 424);
+            this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
@@ -136,6 +141,10 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.txt_ItemNum);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.nud_Discount);
             this.panel3.Controls.Add(this.nud_Quantity);
             this.panel3.Controls.Add(this.lbl_Quantity);
             this.panel3.Controls.Add(this.txt_windoorID);
@@ -145,12 +154,48 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(597, 37);
+            this.panel3.Size = new System.Drawing.Size(806, 37);
             this.panel3.TabIndex = 29;
+            // 
+            // txt_ItemNum
+            // 
+            this.txt_ItemNum.Location = new System.Drawing.Point(425, 6);
+            this.txt_ItemNum.Name = "txt_ItemNum";
+            this.txt_ItemNum.Size = new System.Drawing.Size(100, 22);
+            this.txt_ItemNum.TabIndex = 42;
+            this.txt_ItemNum.TextChanged += new System.EventHandler(this.txt_ItemNum_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(346, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 41;
+            this.label2.Text = "Item Number";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(664, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Discount %";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // nud_Discount
+            // 
+            this.nud_Discount.Location = new System.Drawing.Point(735, 6);
+            this.nud_Discount.Name = "nud_Discount";
+            this.nud_Discount.Size = new System.Drawing.Size(59, 22);
+            this.nud_Discount.TabIndex = 39;
+            this.nud_Discount.ValueChanged += new System.EventHandler(this.nud_Discount_ValueChanged);
             // 
             // nud_Quantity
             // 
-            this.nud_Quantity.Location = new System.Drawing.Point(391, 7);
+            this.nud_Quantity.Location = new System.Drawing.Point(600, 6);
             this.nud_Quantity.Name = "nud_Quantity";
             this.nud_Quantity.Size = new System.Drawing.Size(50, 22);
             this.nud_Quantity.TabIndex = 8;
@@ -164,15 +209,16 @@
             // lbl_Quantity
             // 
             this.lbl_Quantity.AutoSize = true;
-            this.lbl_Quantity.Location = new System.Drawing.Point(334, 12);
+            this.lbl_Quantity.Location = new System.Drawing.Point(543, 11);
             this.lbl_Quantity.Name = "lbl_Quantity";
             this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
             this.lbl_Quantity.TabIndex = 38;
             this.lbl_Quantity.Text = "Quantity";
+            this.lbl_Quantity.Click += new System.EventHandler(this.lbl_Quantity_Click);
             // 
             // txt_windoorID
             // 
-            this.txt_windoorID.Location = new System.Drawing.Point(218, 6);
+            this.txt_windoorID.Location = new System.Drawing.Point(240, 6);
             this.txt_windoorID.Name = "txt_windoorID";
             this.txt_windoorID.Size = new System.Drawing.Size(100, 22);
             this.txt_windoorID.TabIndex = 7;
@@ -183,9 +229,9 @@
             this.lbl_WindoorID.AutoSize = true;
             this.lbl_WindoorID.Location = new System.Drawing.Point(145, 11);
             this.lbl_WindoorID.Name = "lbl_WindoorID";
-            this.lbl_WindoorID.Size = new System.Drawing.Size(67, 13);
+            this.lbl_WindoorID.Size = new System.Drawing.Size(95, 13);
             this.lbl_WindoorID.TabIndex = 35;
-            this.lbl_WindoorID.Text = "Windoor ID";
+            this.lbl_WindoorID.Text = "Window/Door ID";
             // 
             // nud_Sets
             // 
@@ -216,15 +262,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 461);
+            this.panel1.Size = new System.Drawing.Size(227, 547);
             this.panel1.TabIndex = 31;
             // 
             // pnl_addOns
             // 
-            this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_addOns.Location = new System.Drawing.Point(0, 296);
+            this.pnl_addOns.Location = new System.Drawing.Point(0, 315);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 165);
+            this.pnl_addOns.Size = new System.Drawing.Size(227, 232);
             this.pnl_addOns.TabIndex = 28;
             // 
             // panel5
@@ -249,16 +294,15 @@
             this.panel5.Controls.Add(this.lbl_ScreenHeight);
             this.panel5.Controls.Add(this.lbl_ScreenWidth);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 296);
+            this.panel5.Size = new System.Drawing.Size(227, 316);
             this.panel5.TabIndex = 67;
             // 
             // lbl_plissedRd
             // 
             this.lbl_plissedRd.AutoSize = true;
-            this.lbl_plissedRd.Location = new System.Drawing.Point(12, 104);
+            this.lbl_plissedRd.Location = new System.Drawing.Point(12, 114);
             this.lbl_plissedRd.Name = "lbl_plissedRd";
             this.lbl_plissedRd.Size = new System.Drawing.Size(40, 13);
             this.lbl_plissedRd.TabIndex = 87;
@@ -266,7 +310,7 @@
             // 
             // nud_plissedRd
             // 
-            this.nud_plissedRd.Location = new System.Drawing.Point(87, 100);
+            this.nud_plissedRd.Location = new System.Drawing.Point(87, 110);
             this.nud_plissedRd.Name = "nud_plissedRd";
             this.nud_plissedRd.Size = new System.Drawing.Size(50, 22);
             this.nud_plissedRd.TabIndex = 39;
@@ -280,7 +324,7 @@
             // lbl_Plissé
             // 
             this.lbl_Plissé.AutoSize = true;
-            this.lbl_Plissé.Location = new System.Drawing.Point(11, 82);
+            this.lbl_Plissé.Location = new System.Drawing.Point(11, 92);
             this.lbl_Plissé.Name = "lbl_Plissé";
             this.lbl_Plissé.Size = new System.Drawing.Size(61, 13);
             this.lbl_Plissé.TabIndex = 84;
@@ -289,7 +333,7 @@
             // cmb_PlisséType
             // 
             this.cmb_PlisséType.FormattingEnabled = true;
-            this.cmb_PlisséType.Location = new System.Drawing.Point(87, 79);
+            this.cmb_PlisséType.Location = new System.Drawing.Point(87, 89);
             this.cmb_PlisséType.Name = "cmb_PlisséType";
             this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
             this.cmb_PlisséType.TabIndex = 83;
@@ -298,7 +342,7 @@
             // rdBtn_Door
             // 
             this.rdBtn_Door.AutoSize = true;
-            this.rdBtn_Door.Location = new System.Drawing.Point(122, 4);
+            this.rdBtn_Door.Location = new System.Drawing.Point(136, 11);
             this.rdBtn_Door.Name = "rdBtn_Door";
             this.rdBtn_Door.Size = new System.Drawing.Size(51, 17);
             this.rdBtn_Door.TabIndex = 82;
@@ -310,7 +354,7 @@
             // rdBtn_Window
             // 
             this.rdBtn_Window.AutoSize = true;
-            this.rdBtn_Window.Location = new System.Drawing.Point(12, 3);
+            this.rdBtn_Window.Location = new System.Drawing.Point(26, 10);
             this.rdBtn_Window.Name = "rdBtn_Window";
             this.rdBtn_Window.Size = new System.Drawing.Size(69, 17);
             this.rdBtn_Window.TabIndex = 81;
@@ -321,7 +365,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(57, 261);
+            this.btn_add.Location = new System.Drawing.Point(57, 271);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(98, 26);
             this.btn_add.TabIndex = 80;
@@ -332,7 +376,7 @@
             // lbl_color
             // 
             this.lbl_color.AutoSize = true;
-            this.lbl_color.Location = new System.Drawing.Point(11, 30);
+            this.lbl_color.Location = new System.Drawing.Point(11, 40);
             this.lbl_color.Name = "lbl_color";
             this.lbl_color.Size = new System.Drawing.Size(61, 13);
             this.lbl_color.TabIndex = 79;
@@ -341,7 +385,7 @@
             // cmb_baseColor
             // 
             this.cmb_baseColor.FormattingEnabled = true;
-            this.cmb_baseColor.Location = new System.Drawing.Point(87, 27);
+            this.cmb_baseColor.Location = new System.Drawing.Point(87, 37);
             this.cmb_baseColor.Name = "cmb_baseColor";
             this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
             this.cmb_baseColor.TabIndex = 68;
@@ -349,7 +393,7 @@
             // 
             // nud_Factor
             // 
-            this.nud_Factor.Location = new System.Drawing.Point(87, 180);
+            this.nud_Factor.Location = new System.Drawing.Point(87, 190);
             this.nud_Factor.Name = "nud_Factor";
             this.nud_Factor.Size = new System.Drawing.Size(130, 22);
             this.nud_Factor.TabIndex = 71;
@@ -358,7 +402,7 @@
             // lbl_Factor
             // 
             this.lbl_Factor.AutoSize = true;
-            this.lbl_Factor.Location = new System.Drawing.Point(12, 182);
+            this.lbl_Factor.Location = new System.Drawing.Point(12, 192);
             this.lbl_Factor.Name = "lbl_Factor";
             this.lbl_Factor.Size = new System.Drawing.Size(39, 13);
             this.lbl_Factor.TabIndex = 78;
@@ -367,7 +411,7 @@
             // nud_TotalPrice
             // 
             this.nud_TotalPrice.Enabled = false;
-            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 220);
+            this.nud_TotalPrice.Location = new System.Drawing.Point(87, 230);
             this.nud_TotalPrice.Name = "nud_TotalPrice";
             this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
             this.nud_TotalPrice.TabIndex = 76;
@@ -375,7 +419,7 @@
             // lbl_whitePrice
             // 
             this.lbl_whitePrice.AutoSize = true;
-            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 222);
+            this.lbl_whitePrice.Location = new System.Drawing.Point(12, 232);
             this.lbl_whitePrice.Name = "lbl_whitePrice";
             this.lbl_whitePrice.Size = new System.Drawing.Size(32, 13);
             this.lbl_whitePrice.TabIndex = 75;
@@ -384,7 +428,7 @@
             // lbl_ScreenType
             // 
             this.lbl_ScreenType.AutoSize = true;
-            this.lbl_ScreenType.Location = new System.Drawing.Point(11, 55);
+            this.lbl_ScreenType.Location = new System.Drawing.Point(11, 65);
             this.lbl_ScreenType.Name = "lbl_ScreenType";
             this.lbl_ScreenType.Size = new System.Drawing.Size(67, 13);
             this.lbl_ScreenType.TabIndex = 74;
@@ -393,7 +437,7 @@
             // cmb_ScreenType
             // 
             this.cmb_ScreenType.FormattingEnabled = true;
-            this.cmb_ScreenType.Location = new System.Drawing.Point(87, 52);
+            this.cmb_ScreenType.Location = new System.Drawing.Point(87, 62);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
             this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
             this.cmb_ScreenType.TabIndex = 67;
@@ -401,7 +445,7 @@
             // 
             // nud_Height
             // 
-            this.nud_Height.Location = new System.Drawing.Point(87, 152);
+            this.nud_Height.Location = new System.Drawing.Point(87, 162);
             this.nud_Height.Name = "nud_Height";
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
             this.nud_Height.TabIndex = 70;
@@ -409,7 +453,7 @@
             // 
             // nud_Width
             // 
-            this.nud_Width.Location = new System.Drawing.Point(87, 124);
+            this.nud_Width.Location = new System.Drawing.Point(87, 134);
             this.nud_Width.Name = "nud_Width";
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
             this.nud_Width.TabIndex = 69;
@@ -418,7 +462,7 @@
             // lbl_ScreenHeight
             // 
             this.lbl_ScreenHeight.AutoSize = true;
-            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 154);
+            this.lbl_ScreenHeight.Location = new System.Drawing.Point(12, 164);
             this.lbl_ScreenHeight.Name = "lbl_ScreenHeight";
             this.lbl_ScreenHeight.Size = new System.Drawing.Size(42, 13);
             this.lbl_ScreenHeight.TabIndex = 73;
@@ -427,7 +471,7 @@
             // lbl_ScreenWidth
             // 
             this.lbl_ScreenWidth.AutoSize = true;
-            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 126);
+            this.lbl_ScreenWidth.Location = new System.Drawing.Point(12, 136);
             this.lbl_ScreenWidth.Name = "lbl_ScreenWidth";
             this.lbl_ScreenWidth.Size = new System.Drawing.Size(39, 13);
             this.lbl_ScreenWidth.TabIndex = 72;
@@ -437,7 +481,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 197);
+            this.label4.Location = new System.Drawing.Point(2, 207);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(222, 15);
             this.label4.TabIndex = 77;
@@ -454,7 +498,7 @@
             this.tsScreen.Location = new System.Drawing.Point(0, 0);
             this.tsScreen.Name = "tsScreen";
             this.tsScreen.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.tsScreen.Size = new System.Drawing.Size(824, 27);
+            this.tsScreen.Size = new System.Drawing.Size(1033, 27);
             this.tsScreen.TabIndex = 40;
             this.tsScreen.Text = "toolStrip1";
             // 
@@ -482,7 +526,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 488);
+            this.ClientSize = new System.Drawing.Size(1033, 574);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -498,6 +542,7 @@
             this.cmsScreen.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Discount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Quantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Sets)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -553,5 +598,9 @@
         private System.Windows.Forms.ToolStripButton tsBtnExchangeRate;
         private System.Windows.Forms.Label lbl_plissedRd;
         private System.Windows.Forms.NumericUpDown nud_plissedRd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nud_Discount;
+        private System.Windows.Forms.TextBox txt_ItemNum;
+        private System.Windows.Forms.Label label2;
     }
 }

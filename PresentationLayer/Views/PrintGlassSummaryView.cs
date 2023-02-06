@@ -29,10 +29,32 @@ namespace PresentationLayer.Views
             return BSGlassSummary;
         }
 
+        public BindingSource GetBindingSourceNP()
+        {
+            return bindingSource1;
+        }
+
+        private bool _checkedshowprice;
+        public bool CheckedShowPrice
+        {
+            get
+            {
+                return _checkedshowprice;
+            }
+            set
+            {
+                _checkedshowprice = value;
+            }
+        }
+      
+        public CheckBox ShowPrice()
+        {
+            return chkbx_ShowPrice;
+        }
 
         public event EventHandler PringGlassSummaryViewLoadEventRaised;
         public event EventHandler btnRefreshClickEventRaised;
-        private void PringGlassSummaryView_Load(object sender, EventArgs e)
+        private void PrintGlassSummaryView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, PringGlassSummaryViewLoadEventRaised, e);
         }
@@ -41,5 +63,6 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, btnRefreshClickEventRaised, e);
         }
+
     }
 }

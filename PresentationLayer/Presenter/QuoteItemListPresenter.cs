@@ -33,7 +33,21 @@ namespace PresentationLayer.Presenter
        
         #region Variables
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+        public List<IQuoteItemListUCPresenter> ListQuoteItem
+        {
+            get
+            {
+                return _lstQuoteItemUC;
+            }
+            set
+            {
+                _lstQuoteItemUC = value;
+            }
+        }
+
         private List<int> _lstItemArea = new List<int>();
+
+        //private List<Books> _lt = new List<Books>();          
         //private List<string> lst_glassThicknessPerItem = new List<string>();
 
         int GeorgianBarVerticalQty = 0,
@@ -42,6 +56,15 @@ namespace PresentationLayer.Presenter
         string GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                DimensionDesc;
+
+        int prev_GlassItemNo, prev_GlassQty;
+        string prev_GlassSize, prev_GlassRef, prev_GlassLoc,prev_GlassDesc;
+        decimal prev_GlassArea,prev_GlassPrice;
+
+        int curr_GlassItemNo, curr_GlassQty;
+        string curr_GlassSize, curr_GlassRef, curr_GlassLoc,curr_GlassDesc;
+        decimal curr_GlassArea,curr_GlassPrice;
+        bool existing = false;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -55,7 +78,7 @@ namespace PresentationLayer.Presenter
             SubscribeToEventSetup();
         }
 
-
+        
         private void SubscribeToEventSetup()
         {
             _quoteItemListView.TSbtnPrintClickEventRaised += new EventHandler(OnTSbtnPrintClickEventRaised);
@@ -81,9 +104,9 @@ namespace PresentationLayer.Presenter
             dtReference
             dtLocation
             */
+            int i = 0;
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                int i = 0;
 
                 foreach (IFrameModel fr in wdm.lst_frame)
                 {
@@ -98,14 +121,99 @@ namespace PresentationLayer.Presenter
                                 if (pnl.Panel_GlassThicknessDesc != null)
                                 {
                                     decimal pnlGlassArea = (pnl.Panel_GlassWidth / 1000m) * (pnl.Panel_GlassHeight / 1000m);
+                                    //_quotationModel.ItemCostingPriceAndPoints();
+                                    curr_GlassItemNo = wdm.WD_id;
+                                    curr_GlassSize = pnl.Panel_GlassWidth + "w x " + pnl.Panel_GlassHeight + "h";
+                                    curr_GlassQty = 1;
+                                    curr_GlassArea = Math.Round(pnlGlassArea, 3);
+                                    curr_GlassRef = lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber;
+                                    curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
+                                    curr_GlassDesc = pnl.Panel_GlassThicknessDesc;
+                                    curr_GlassPrice = Math.Round((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
 
-                                    _dsq.dtGlassSummary.Rows.Add(i,
-                                                                 1,
-                                                                 pnl.Panel_GlassWidth + "w x " + pnl.Panel_GlassHeight + "h",
-                                                                 Math.Round(pnlGlassArea, 3),
-                                                                 lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                                                 lstQuoteUC.GetiQuoteItemListUC().ItemName
-                                                                 );
+
+                                    if (prev_GlassItemNo != 0)
+                                    {
+                                        if (prev_GlassItemNo == curr_GlassItemNo)
+                                        {
+                                            if (prev_GlassArea == curr_GlassArea && prev_GlassDesc == curr_GlassDesc)
+                                            {
+                                                prev_GlassQty = prev_GlassQty + 1;
+                                                prev_GlassPrice = prev_GlassQty * prev_GlassPrice;                                               
+                                            }
+                                            else
+                                            {
+                                                _dsq.dtGlassSummary.Rows.Add(prev_GlassItemNo,
+                                                                             prev_GlassQty,
+                                                                             prev_GlassSize,
+                                                                             prev_GlassArea,
+                                                                             prev_GlassRef,
+                                                                             prev_GlassLoc,
+                                                                             prev_GlassDesc,
+                                                                             prev_GlassPrice
+                                                                             );
+
+                                                prev_GlassItemNo = curr_GlassItemNo;
+                                                prev_GlassSize = curr_GlassSize;
+                                                prev_GlassQty = curr_GlassQty;
+                                                prev_GlassArea = curr_GlassArea;
+                                                prev_GlassRef = curr_GlassRef;
+                                                prev_GlassLoc = curr_GlassLoc;
+                                                prev_GlassDesc = curr_GlassDesc;
+                                                prev_GlassPrice = curr_GlassPrice;
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                            foreach (var item in _dsq.dtGlassSummary.ToArray())
+                                            {
+                                                if (item.dtArea == prev_GlassArea && item.dtDescription == prev_GlassDesc && item.dtItemNo == prev_GlassItemNo)
+                                                {
+                                                    item.dtQuantity = prev_GlassQty + 1;
+                                                    item.dtPrice = item.dtQuantity * prev_GlassPrice;
+                                                    //prev_GlassQty = prev_GlassQty + 1;
+                                                    existing = true;
+                                                }
+
+                                            }
+                                            if (existing == false)
+                                            {
+                                                _dsq.dtGlassSummary.Rows.Add(prev_GlassItemNo,
+                                                                         prev_GlassQty,
+                                                                         prev_GlassSize,
+                                                                         prev_GlassArea,
+                                                                         prev_GlassRef,
+                                                                         prev_GlassLoc,
+                                                                         prev_GlassDesc,
+                                                                         prev_GlassPrice
+                                                                         );
+                                            }
+                                            existing = false;
+
+                                            prev_GlassItemNo = curr_GlassItemNo;
+                                            prev_GlassSize = curr_GlassSize;
+                                            prev_GlassQty = curr_GlassQty;
+                                            prev_GlassArea = curr_GlassArea;
+                                            prev_GlassRef = curr_GlassRef;
+                                            prev_GlassLoc = curr_GlassLoc;
+                                            prev_GlassDesc = curr_GlassDesc;
+                                            prev_GlassPrice = curr_GlassPrice;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        prev_GlassItemNo = curr_GlassItemNo;
+                                        prev_GlassSize = curr_GlassSize;
+                                        prev_GlassQty = curr_GlassQty;
+                                        prev_GlassArea = curr_GlassArea;
+                                        prev_GlassRef = curr_GlassRef;
+                                        prev_GlassLoc = curr_GlassLoc;
+                                        prev_GlassDesc = curr_GlassDesc;
+                                        prev_GlassPrice = curr_GlassPrice;
+                                    }
+
                                 }
                             }
                         }
@@ -118,7 +226,7 @@ namespace PresentationLayer.Presenter
                         {
                             decimal pnlGlassArea = (Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m);
 
-                            _dsq.dtGlassSummary.Rows.Add(i,
+                            _dsq.dtGlassSummary.Rows.Add(wdm.WD_id,
                                                          1,
                                                          Singlepnl.Panel_GlassWidth + "w x " + Singlepnl.Panel_GlassHeight + "h",
                                                          Math.Round(pnlGlassArea, 3),
@@ -131,10 +239,38 @@ namespace PresentationLayer.Presenter
                 i++;
             }
 
-            IPrintGlassSummaryPresenter printGlass = _printGlassSummaryPresenter.GetNewInstance(_unityC, this, _mainPresenter);
+
+            foreach (var item in _dsq.dtGlassSummary.ToArray())
+            {
+                if (item.dtArea == curr_GlassArea && item.dtDescription == curr_GlassDesc && item.dtItemNo == curr_GlassItemNo)
+                {
+                    item.dtQuantity = prev_GlassQty + 1;
+                    item.dtPrice = item.dtQuantity * prev_GlassPrice;
+                    //prev_GlassQty = prev_GlassQty + 1;
+                    existing = true;
+                }
+
+            }
+            if (existing == false)
+            {
+                _dsq.dtGlassSummary.Rows.Add(prev_GlassItemNo,
+                                         prev_GlassQty,
+                                         prev_GlassSize,
+                                         prev_GlassArea,
+                                         prev_GlassRef,
+                                         prev_GlassLoc,
+                                         prev_GlassDesc,
+                                         prev_GlassPrice
+                                          );
+            }
+            existing = false;
+
+            IPrintGlassSummaryPresenter printGlass = _printGlassSummaryPresenter.GetNewInstance(_unityC, this, _mainPresenter, _windoorModel, _quotationModel);
             printGlass.GetPrintGlassSummaryView().GetBindingSource().DataSource = _dsq.dtGlassSummary.DefaultView;
             printGlass.GetPrintGlassSummaryView().ShowGlassSummaryView();
         }
+
+
 
         int TotalItemArea = 0;
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
@@ -336,7 +472,6 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
             } 
             _mainPresenter.printStatus = "WinDoorItems";
@@ -381,7 +516,7 @@ namespace PresentationLayer.Presenter
         }
 
 
-
+        
 
 
         public IQuoteItemListView GetQuoteItemListView()
@@ -405,11 +540,51 @@ namespace PresentationLayer.Presenter
             quoteItemList._windoorModel = windoorModel;
             quoteItemList._mainPresenter = mainPresenter;
 
-
-
             //quoteItemList._printQuotePresenter = printQuotePresenter;
 
             return quoteItemList;
         }
+
+
+
+       
     }
+
+    //public class Books
+    //{
+    //    private string _name;
+    //    private string _note;
+    //    public string name
+    //    {
+    //        get
+    //        {
+    //            return _name;
+    //        }set
+    //        {
+    //            _name = value;
+    //        }
+    //    }
+    //    public string note
+    //    {
+    //        get
+    //        {
+    //            return _note;
+    //        }
+    //        set
+    //        {
+    //            _note= value;
+    //        }
+    //    }   
+
+    //    public Books(string Name,string Note)
+    //    {
+    //        name = Name;
+    //        note = Note;
+    //    }
+
+    //    public Books()
+    //    {
+    //    }
+    //}
+
 }

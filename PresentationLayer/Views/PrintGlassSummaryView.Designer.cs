@@ -30,18 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkbx_ShowPrice = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dtp_Date = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSGlassSummary = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSGlassSummary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.dtp_Date);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -50,10 +55,20 @@
             this.panel1.Size = new System.Drawing.Size(750, 40);
             this.panel1.TabIndex = 0;
             // 
+            // chkbx_ShowPrice
+            // 
+            this.chkbx_ShowPrice.AutoSize = true;
+            this.chkbx_ShowPrice.Location = new System.Drawing.Point(28, 12);
+            this.chkbx_ShowPrice.Name = "chkbx_ShowPrice";
+            this.chkbx_ShowPrice.Size = new System.Drawing.Size(80, 17);
+            this.chkbx_ShowPrice.TabIndex = 12;
+            this.chkbx_ShowPrice.Text = "Show Price";
+            this.chkbx_ShowPrice.UseVisualStyleBackColor = true;
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(672, 7);
+            this.btnRefresh.Location = new System.Drawing.Point(109, 7);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 25);
             this.btnRefresh.TabIndex = 11;
@@ -89,6 +104,16 @@
             this.reportViewer1.TabIndex = 4;
             this.reportViewer1.ZoomPercent = 75;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chkbx_ShowPrice);
+            this.panel2.Controls.Add(this.btnRefresh);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(554, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(196, 40);
+            this.panel2.TabIndex = 13;
+            // 
             // PrintGlassSummaryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,9 +123,13 @@
             this.Controls.Add(this.panel1);
             this.Name = "PrintGlassSummaryView";
             this.Text = "PrintGlassSummaryView";
+            this.Load += new System.EventHandler(this.PrintGlassSummaryView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSGlassSummary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -113,5 +142,8 @@
         private System.Windows.Forms.Label label4;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         public System.Windows.Forms.BindingSource BSGlassSummary;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.CheckBox chkbx_ShowPrice;
+        private System.Windows.Forms.Panel panel2;
     }
 }

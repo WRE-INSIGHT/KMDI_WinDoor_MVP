@@ -9,6 +9,9 @@ namespace PresentationLayer.Views
         NumericUpDown screen_factor { get; set; }
         NumericUpDown screen_height { get; set; }
         NumericUpDown screen_width { get; set; }
+        TextBox screen_itemnumber { get; set; }
+
+        NumericUpDown screen_discountpercentage { get; set; }
 
         event EventHandler ScreenViewLoadEventRaised;
         event EventHandler btnAddClickEventRaised;
@@ -28,6 +31,9 @@ namespace PresentationLayer.Views
         event EventHandler rdBtnDoorCheckChangeEventRaised;
         event EventHandler rdBtnWindowCheckChangeEventRaised;
         event EventHandler nudPlisseRdValueChangeEventRaise;
+        event EventHandler nudDiscountValueChangeEventRaised;
+        event EventHandler txtItemNumTextChangeEventRaised;
+
         void ShowScreemView();
 
         NumericUpDown GetNudTotalPrice();
@@ -37,6 +43,7 @@ namespace PresentationLayer.Views
         ComboBox getCmbPlisse();
         NumericUpDown getNudPlisseRd();
         Label getLblPlisseRd();
+        TextBox getTxtitemListNumber();
 
     }
 }
