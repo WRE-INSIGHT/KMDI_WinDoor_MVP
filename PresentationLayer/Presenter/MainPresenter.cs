@@ -2055,7 +2055,10 @@ namespace PresentationLayer.Presenter
                                 break;
                             }
                         }
-
+                        else if (wndrId == _quotationModel.Lst_Windoor.Count())
+                        {
+                            Load_Windoor_Item(wdm);
+                        }
                         else
                         {
                             if (wndrId - 1 == _quotationModel.Lst_Windoor.Count())
@@ -2271,7 +2274,7 @@ namespace PresentationLayer.Presenter
             {
                 mainTodo = todo;
                 bgw.RunWorkerAsync();
-                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items")
+                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items" || todo == "Duplicate_Item")
                 {
                     _mainView.GetToolStripLabelLoading().Text = "Initializing";
                     ToggleMode(true, false);
@@ -2993,6 +2996,8 @@ namespace PresentationLayer.Presenter
                 switch (mainTodo)
                 {
                     case "Open_WndrFiles":
+                    case "Add_Existing_Items":
+                    case "Duplicate_Item":
                         Opening_dotwndr(e.ProgressPercentage);
                         _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
                         if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
@@ -3005,17 +3010,7 @@ namespace PresentationLayer.Presenter
                         }
 
                         break;
-                    case "Add_Existing_Items":
-                        Opening_dotwndr(e.ProgressPercentage);
-                        _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
-                        if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
-                        {
-                            _mainView.GetToolStripLabelLoading().Text += ".";
-                        }
-                        else
-                        {
-                            _mainView.GetToolStripLabelLoading().Text = "Initializing";
-                        }
+                    
 
                         break;
                     default:
@@ -3036,6 +3031,7 @@ namespace PresentationLayer.Presenter
                 {
                     case "Open_WndrFiles":
                     case "Add_Existing_Items":
+                    case "Duplicate_Item":
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -3104,6 +3100,7 @@ namespace PresentationLayer.Presenter
                     {
                         case "Open_WndrFiles":
                         case "Add_Existing_Items":
+                        case "Duplicate_Item":
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -3295,7 +3292,7 @@ namespace PresentationLayer.Presenter
 
                     updatePriceOfMainView();
                 }
-                else if (mainTodo == "Add_Existing_Items")
+                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
@@ -8922,7 +8919,7 @@ namespace PresentationLayer.Presenter
                         Windoor_Save_PropertiesUC();
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                        StartWorker("Open_WndrFiles");
+                        StartWorker("Duplicate_Item");
 
 
                     }

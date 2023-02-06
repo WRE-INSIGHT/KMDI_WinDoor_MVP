@@ -74,6 +74,7 @@ namespace PresentationLayer.Presenter.UserControls
                 int itemscroll = _mainPresenter.ItemScroll;
                 _mainPresenter.Load_Windoor_Item(_windoorModel);
                 _mainPresenter.qoutationModel_MainPresenter.itemSelectStatus = true;
+                _itemInfoUC.WD_Selected = true;
                 if (_windoorModel.WD_fileLoad)
                 {
                     _mainPresenter.updatePriceOfMainView();
