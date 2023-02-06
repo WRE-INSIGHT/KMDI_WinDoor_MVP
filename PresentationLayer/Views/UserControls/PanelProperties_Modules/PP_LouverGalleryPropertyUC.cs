@@ -15,7 +15,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         public event EventHandler LouverBladesCombinationPropertyUCLoadEventRaised;
         public event EventHandler cmbBladeTypeSelectedValueChangedEventRaised;
-
+        public event EventHandler chkSecurityGrillCheckedChangedEventRaised;
         private void PP_LouverBladesCombinationPropertyUC_Load(object sender, EventArgs e)
         {
             List<BladeType_Option> BladeType = new List<BladeType_Option>();
@@ -31,8 +31,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         private void cmb_BladeType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbBladeTypeSelectedValueChangedEventRaised, e);
-
         }
+
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverGalleryVisibility"]);
@@ -40,5 +40,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         }
 
 
+
+        private void chk_SecurityGrill_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkSecurityGrillCheckedChangedEventRaised, e);
+        }
     }
 }

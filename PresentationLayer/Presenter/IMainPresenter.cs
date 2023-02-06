@@ -66,6 +66,7 @@ namespace PresentationLayer.Presenter
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
+        NumericUpDown LblCurrentPrice { get; set; }
 
         IMainView GetMainView();
         IFramePropertiesUC GetFrameProperties(int frameID);
@@ -88,6 +89,7 @@ namespace PresentationLayer.Presenter
         int GetPanelGlassID();
         void DeductPanelGlassID();
         void SetPanelGlassID();
+
         void AddItemInfoUC(IWindoorModel wndr);
         List<IMultiPanelModel> Arrange_Frame_MultiPanelModel(IFrameModel frmModel);
         void Invalidate_pnlMain();
@@ -134,5 +136,6 @@ namespace PresentationLayer.Presenter
         void updatePriceOfMainView();
         int PropertiesScroll { get; set; }
         int ItemScroll { get; set; }
+        bool ItemLoad { get; set; }
     }
 }

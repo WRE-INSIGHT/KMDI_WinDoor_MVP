@@ -138,7 +138,9 @@ namespace PresentationLayer.Presenter
                         }
                         break;
                     }
+
                     i++;               
+
                 }
             }
             

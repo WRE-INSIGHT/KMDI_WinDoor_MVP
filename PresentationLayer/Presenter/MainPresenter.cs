@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
 
-        private NumericUpDown _lblCurrentPrice;
+        
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -210,6 +210,19 @@ namespace PresentationLayer.Presenter
             set
             {
                 _glassTypeDT = value;
+            }
+        }
+
+        private NumericUpDown _lblCurrentPrice;
+        public NumericUpDown LblCurrentPrice
+        {
+            get
+            {
+                return _lblCurrentPrice;
+            }
+            set
+            {
+                _lblCurrentPrice = value;
             }
         }
 
@@ -525,6 +538,18 @@ namespace PresentationLayer.Presenter
                 _projectName = value;
             }
         }
+        private bool _itemLoad;
+        public bool ItemLoad
+        {
+            get
+            {
+                return _itemLoad;
+            }
+            set
+            {
+                _itemLoad = value;
+            }
+        }
         public string inputted_custRefNo
         {
             get
@@ -669,7 +694,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ItemScroll = value;
             }
         }
-      
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -925,6 +950,8 @@ namespace PresentationLayer.Presenter
 
             if (i <= 0)
             {
+                //string[] province = projectAddress.Split(',');
+                //value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
                 string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                 value = await _quotationServices.GetFactorByProvince(province);
             }
@@ -976,7 +1003,23 @@ namespace PresentationLayer.Presenter
         private void OnNudCurrentPriceValueChangedEventRaised(object sender, EventArgs e)
         {
             _lblCurrentPrice.Value = ((NumericUpDown)sender).Value;
-            updatePriceFromMainViewToItemList();
+            if (_itemLoad)
+            {
+                updatePriceOfMainView();
+            }
+            else
+            {
+                if (_quotationModel != null)
+                {
+                    updatePriceFromMainViewToItemList();
+                    _windoorModel.WD_fileLoad = false;
+                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                }
+                else
+                {
+                    _lblCurrentPrice.Value = 0;
+                }
+            }
         }
 
         private void OnChangeSyncDirectoryToolStripMenuItemClickEventRaised(object sender, EventArgs e)
@@ -1281,7 +1324,7 @@ namespace PresentationLayer.Presenter
                                     {
                                         wndr_content.Add("\t\t" + prop.Name + ": " + prop.GetValue(pnl, null));
                                     }
-                                    
+
                                 }
 
                             }
@@ -1712,7 +1755,7 @@ namespace PresentationLayer.Presenter
                 _mainView.ThisBinding(CreateBindingDictionary_MainPresenter());
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
-                GetCurrentPrice();
+                //GetCurrentPrice();
                 itemDescription();
 
             }
@@ -1999,7 +2042,7 @@ namespace PresentationLayer.Presenter
                     {
                         if (wndrId < _quotationModel.Lst_Windoor.Count())
                         {
-                            if(wdm.WD_id == wndrId)
+                            if (wdm.WD_id == wndrId)
                             {
                                 Load_Windoor_Item(wdm);
                                 break;
@@ -2008,7 +2051,7 @@ namespace PresentationLayer.Presenter
 
                         else
                         {
-                            if (wndrId -1 == _quotationModel.Lst_Windoor.Count())
+                            if (wndrId - 1 == _quotationModel.Lst_Windoor.Count())
                             {
                                 if (wdm.WD_id == wndrId - 1)
                                 {
@@ -2020,7 +2063,7 @@ namespace PresentationLayer.Presenter
                             }
 
                         }
-                        
+
                     }
 
                 }
@@ -2317,8 +2360,8 @@ namespace PresentationLayer.Presenter
 
             #region Single
             //single Annealed
-            _glassThicknessDT.Rows.Add(0.0f, "Unglazed","NA", true, false, false, false, false);
-            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear","NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Clear", "NA", true, false, false, false, false);
@@ -2558,7 +2601,7 @@ namespace PresentationLayer.Presenter
 
             #region Insulated
 
-            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear","Double Insulated", false, true, false, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "6 mm Tempered Solarban Clear with Low-e + 12 Argon + 6 mm Tempered Clear", "Double Insulated", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(20.0f, "4 mm Self-Cleaning Tempered Clear + 12 Argon + 4 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "6 mm Self-Cleaning Tempered Clear + 12 Argon + 6 mm Tempered Clear with Low-e", "Double Insulated", false, true, false, true, false);
             _glassThicknessDT.Rows.Add(24.38f, "6 mm  Bronze + 12 Argon + (3 mm Clear + 0.38 PVB + 3 Clear )", "Double Insulated", false, true, false, true, false);
@@ -2641,7 +2684,7 @@ namespace PresentationLayer.Presenter
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear","Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(11.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 5 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(12.89f, "6 mm Tempered Clear + 0.89  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52  SG InterLayer + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(21.52f, "10 mm Tempered Clear + 1.52  SG InterLayer + 10 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
@@ -2658,8 +2701,8 @@ namespace PresentationLayer.Presenter
 
             _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Tinted + 1.52 + 4 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted + 1.52  + 5 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);        
-                        
+            _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Tinted + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);
+
             _glassThicknessDT.Rows.Add(12.52f, "5 mm Tempered Clear with Low-e + 1.52 + 6 mm Tempered Tinted", "Double Laminated", false, true, false, false, true);//
 
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Heat-Soaked Clear + 1.52 + 6 mm Tempered Heat-Soaked Clear w/ HardCoated Low-e", "Double Laminated", false, true, false, false, true);
@@ -2693,8 +2736,8 @@ namespace PresentationLayer.Presenter
 
             _glassThicknessDT.Rows.Add(12.76f, "6 mm  Tinted + 0.76 + 6 mm  Tinted", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(8.76f, "4 mm  Tinted + 0.76 + 4 mm  with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
-            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e" , "Double Laminated", false, true, false, false, true);//Same above but diff price and pos
-            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear" , "Double Laminated", false, true, false, false, true);
+            _glassThicknessDT.Rows.Add(12.52f, "6 mm Tempered Tinted  + 1.52 + 5 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);//Same above but diff price and pos
+            _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(9.52f, "4 mm Tempered Clear + 1.52 White PVB + 4 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
             _glassThicknessDT.Rows.Add(13.52f, "6 mm Tempered Clear + 1.52 White PVB + 6 mm Tempered Clear with HardCoated Low-e", "Double Laminated", false, true, false, false, true);
@@ -2767,7 +2810,7 @@ namespace PresentationLayer.Presenter
 
             #region InsuLated
 
-            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated" ,false, false, true, true, false);
+            _glassThicknessDT.Rows.Add(24.0f, "4 mm  Clear + 6 + 4 mm  Clear + 6 + 4 mm  Clear", "Triple Insulated", false, false, true, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm  Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
             _glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear", "Triple Insulated", false, false, true, true, false);
             //_glassThicknessDT.Rows.Add(24.0f, "4 mm Tempered Clear + 6 + 4 mm Tempered Clear + 6 + 4 mm Tempered Clear (Type One)", false, false, true, true, false);
@@ -2783,7 +2826,7 @@ namespace PresentationLayer.Presenter
 
             #region Laminated
 
-            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated" ,false, false, true, false, true);
+            _glassThicknessDT.Rows.Add(19.04f, "6 mm Clear + 1.52 + 4 mm Clear + 1.52 + 6 mm Clear", "Triple Laminated", false, false, true, false, true);
             //_glassThicknessDT.Rows.Add(23.04f, "8 mm Tempered Tinted Green + 1.52 + 4 mm Tempered Clear + 1.52 + 8 mm Tempered Tinted Green", false, false, true, false, true);
 
             //w Georgian Bar 
@@ -3133,6 +3176,7 @@ namespace PresentationLayer.Presenter
             }
             if (row_str.Contains("QuoteId:"))
             {
+                _itemLoad = true;
                 if (_isOpenProject && !isNewProject)
                 {
                     inside_quotation = true;
@@ -3221,7 +3265,7 @@ namespace PresentationLayer.Presenter
                 frm_Height = 0;
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
-              
+
             }
             else if (row_str == ")")
             {
@@ -3238,14 +3282,18 @@ namespace PresentationLayer.Presenter
                     wndr.WD_id = wndrId;
                 }
 
-                if(mainTodo == "Open_WndrFiles")
+                if (mainTodo == "Open_WndrFiles")
                 {
                     Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+
+                    updatePriceOfMainView();
                 }
                 else if (mainTodo == "Add_Existing_Items")
                 {
                     Load_Windoor_Item(_windoorModel);
+                    _lblCurrentPrice.Value = _windoorModel.WD_price;
                 }
+              
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -3397,6 +3445,7 @@ namespace PresentationLayer.Presenter
                                      frm_Height,
                                      frmDimension_profileType,
                                      frmDimension_baseColor);
+                            _windoorModel.WD_fileLoad = true;
                         }
                         if (row_str.Contains("WD_name:"))
                         {
@@ -3731,7 +3780,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("Frame_MilledReinfArtNo:"))
                         {
-                            if(row == Convert.ToInt32(9708))
+                            if (row == Convert.ToInt32(9708))
                             {
                                 int hi = 1;
                             }
@@ -5472,7 +5521,7 @@ namespace PresentationLayer.Presenter
                             }
 
                         }
-                      
+
                         #endregion
                         else if (row_str.Contains("Panel_AluminumTrackQty:"))
                         {
@@ -5881,7 +5930,7 @@ namespace PresentationLayer.Presenter
                                     panel_LstSealForHandleMultiplier.Add(Convert.ToInt32(str_SealForHandle));
                                 }
                             }
-                           
+
                         }
                         #endregion
                     }
@@ -7574,7 +7623,7 @@ namespace PresentationLayer.Presenter
                 multiMullionUC = _multiMullionUC4th;
                 multiTransomUC = _multiTransomUC4th;
             }
-
+         
             if (panel_Type.Contains("Fixed Panel"))
             {
                 IFixedPanelUCPresenter fixedUCP;
@@ -7917,6 +7966,15 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
+            if (pnlModel.Panel_GeorgianBarOptionVisibility == true)
+            {
+                pnlModel.AdjustPropertyPanelHeight("addGeorgianBar");
+                pnlModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                if (pnlModel.Panel_ParentMultiPanelModel != null)
+                {
+                    pnlModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addGeorgianBar");
+                }
+            }
             if (!panel_Parent.Parent.Name.Contains("frame"))
             {
                 if (pnlModel.Panel_Placement == "Last")
@@ -8098,7 +8156,7 @@ namespace PresentationLayer.Presenter
         SlidingTypes panel_SlidingTypes;
 
         #region Louvre
-      
+
 
         int panel_PlantOnWeatherStripHeadWidth,
             panel_PlantOnWeatherStripSealWidth,
@@ -8465,8 +8523,8 @@ namespace PresentationLayer.Presenter
             _pnlItems.Controls.Clear();
 
 
-            IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>(); 
-            foreach(Control cons in controls)
+            IEnumerable<Control> controls = _pnlMain.Controls.Cast<Control>().OfType<Control>();
+            foreach (Control cons in controls)
             {
                 cons.Dispose();
             }
@@ -8500,7 +8558,7 @@ namespace PresentationLayer.Presenter
         {
             _mainView.ItemToolStripEnabled = false;
         }
-        
+
         private void BotToolStrip_Enable()
         {
             _mainView.GetPanelBot().Enabled = true;
@@ -8841,7 +8899,7 @@ namespace PresentationLayer.Presenter
                         _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                         _windoorModel.Fit_MyControls_ToBindDimensions();
                         _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                       
+
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && Duplicate) // Open File
@@ -9116,7 +9174,7 @@ namespace PresentationLayer.Presenter
                 //save frame
                 Windoor_Save_UserControl();
                 Windoor_Save_PropertiesUC();
-              
+
                 //set mainview
                 _windoorModel = item;
 
@@ -9176,7 +9234,9 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _windoorModel.SetZoom();
                 qoutationModel_MainPresenter.itemSelectStatus = true;
-                GetCurrentPrice();
+                //GetCurrentPrice();
+                _itemLoad = false;
+
             }
             catch (Exception ex)
             {
@@ -10033,7 +10093,7 @@ namespace PresentationLayer.Presenter
         ISlidingPanelUCPresenter current_sliding;
         ICasementPanelUCPresenter current_casement;
         IFixedPanelUCPresenter current_fixed;
-        public void SetSelectedPanel(IPanelModel panelModel, 
+        public void SetSelectedPanel(IPanelModel panelModel,
                                      ISlidingPanelUCPresenter slidingPanelUCPresenter = null,
                                      ICasementPanelUCPresenter casementPanelUCPresenter = null,
                                      IFixedPanelUCPresenter fixedPanelUCPresenter = null)
@@ -10052,7 +10112,7 @@ namespace PresentationLayer.Presenter
                     current_casement.boolKeyDown = false;
                     current_casement = null;
                 }
-                else  if (current_fixed != null)
+                else if (current_fixed != null)
                 {
                     current_fixed.boolKeyDown = false;
                     current_fixed = null;
@@ -10251,6 +10311,8 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
+            ////string[] province = projectAddress.Split(',');
+            ////_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
             string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
             _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
@@ -10301,7 +10363,8 @@ namespace PresentationLayer.Presenter
                lst_DescDist,
                glassThick,
                GeorgianBarHorizontalDesc,
-               GeorgianBarVerticalDesc;
+               GeorgianBarVerticalDesc,
+               additionalZero;
         #endregion
         public void itemDescription()
         {
@@ -10419,7 +10482,18 @@ namespace PresentationLayer.Presenter
                                         {
                                             if (pnl.Panel_GlassFilm.ToString() != "None")
                                             {
-                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                if (pnl.Panel_Type.Contains("Louver"))
+                                                {
+                                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                }
+                                                else
+                                                {
+                                                    lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " with " + pnl.Panel_GlassFilm.ToString() + "\n");
+                                                }
+                                            }
+                                            else if (pnl.Panel_Type.Contains("Louver"))
+                                            {
+                                                lst_glassThickness.Add(pnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                             }
                                             else
                                             {
@@ -10449,7 +10523,49 @@ namespace PresentationLayer.Presenter
                                             motorizeDesc = "1 Panel";
                                         }
 
-                                        AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                        if (pnl.Panel_Type.Contains("Louver"))
+                                        {
+                                            pnl_LouverChk = true;
+
+                                            List<string> lst_LouverArtNoDistinct = new List<string>();
+                                            if (pnl.Panel_LstLouverArtNo != null)
+                                            {
+
+                                                if (pnl.Panel_LouverBladesCount >= 2 &&
+                                                    pnl.Panel_LouverBladesCount <= 9)
+                                                {
+                                                    additionalZero = "0";
+                                                }
+                                                else
+                                                {
+                                                    additionalZero = "";
+                                                }
+                                                foreach (string artNo in pnl.Panel_LstLouverArtNo)
+                                                {
+                                                    string extracted = artNo.Remove(9, 2).Insert(9, additionalZero + pnl.Panel_LouverBladesCount.ToString());
+                                                    lst_LouverArtNoDistinct.Add(extracted);
+                                                }
+                                            }
+
+                                            List<string> lst_LouverArtNoDistinctCheck = lst_LouverArtNoDistinct.Distinct().ToList();
+
+                                            if (lst_LouverArtNoDistinctCheck.Count == 0)
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                            }
+                                            else if (lst_LouverArtNoDistinctCheck.Count == 1)
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + lst_LouverArtNoDistinctCheck[0] + "\n";
+                                            }
+                                            else
+                                            {
+                                                AllItemDescription = motorizeDesc + " " + "LVRG-152-" + additionalZero + pnl.Panel_LouverBladesCount + "-S-RH-BLK" + "\n";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            AllItemDescription = motorizeDesc + " " + pnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n";
+                                        }
 
                                         #endregion
 
@@ -10465,29 +10581,61 @@ namespace PresentationLayer.Presenter
                             {
                                 IPanelModel Singlepnl = fr.Lst_Panel[0];
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
-                                {   
+                                {
                                     motorizeDesc = "Panel Motorized ";
                                     wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
                                 }
                                 else if (Singlepnl.Panel_Type.Contains("Louver"))
                                 {
                                     pnl_LouverChk = true;
-                                    if (Singlepnl.Panel_MotorizedOptionVisibility == true)
+                                    //if (Singlepnl.Panel_MotorizedOptionVisibility == true)
+                                    //{
+                                    //    motorizeDesc = "Panel Motorized ";
+                                    //}
+                                    //else
+                                    //{
+                                    //    motorizeDesc = "";
+                                    //}
+
+                                    List<string> lst_LouverArtNoDistinct = new List<string>();
+                                    if (Singlepnl.Panel_LstLouverArtNo != null)
                                     {
-                                        motorizeDesc = "Panel Motorized ";
+                                        if (Singlepnl.Panel_LouverBladesCount >= 2 &&
+                                            Singlepnl.Panel_LouverBladesCount <= 9)
+                                        {
+                                            additionalZero = "0";
+                                        }
+                                        else
+                                        {
+                                            additionalZero = "";
+                                        }
+
+                                        foreach (string artNo in Singlepnl.Panel_LstLouverArtNo)
+                                        {
+                                            string extracted = artNo.Remove(9, 2).Insert(9, additionalZero + Singlepnl.Panel_LouverBladesCount.ToString());
+                                            lst_LouverArtNoDistinct.Add(extracted);
+                                        }
+                                    }
+
+                                    List<string> lst_LouverArtNoDistinctCheck = lst_LouverArtNoDistinct.Distinct().ToList();
+                                    if (lst_LouverArtNoDistinctCheck.Count == 0)
+                                    {
+                                        wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                    }
+                                    else if (lst_LouverArtNoDistinctCheck.Count == 1)
+                                    {
+                                        wdm.WD_description = wdm.WD_profile + "\n" + lst_LouverArtNoDistinctCheck[0];
                                     }
                                     else
                                     {
-                                        motorizeDesc = "";
+                                        wdm.WD_description = wdm.WD_profile + "\n" + "LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
                                     }
-                                    wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + "Panel LVRG-152-"+ Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
                                 }
                                 else
                                 {
                                     motorizeDesc = "";
                                     wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
                                 }
-
 
                                 //GlassThickness & Glassfilm
                                 if (Singlepnl.Panel_GlassThicknessDesc != null)
@@ -10505,11 +10653,11 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (Singlepnl.Panel_Type.Contains("Louver"))
                                     {
-                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                     }
                                     else
                                     {
-                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
                                 else
@@ -10558,7 +10706,24 @@ namespace PresentationLayer.Presenter
                                        split2 = words[a + 1];
                                 string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "\n";
 
-                                lst_DuplicatePnl.Add(DuplicatePnl);
+                                int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
+
+                                if (DuplicatePnl.Contains("LVRG") &&
+                                    (pnlCount >= 2 && pnlCount <= 9))
+                                {
+                                    string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
+                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                }
+                                else if (DuplicatePnl.Contains("LVRG") &&
+                                     pnlCount >= 10)
+                                {
+                                    string DuplicateLouverPnl = DuplicatePnl.Remove(14, 1).Insert(14, "1");
+                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                }
+                                else
+                                {
+                                    lst_DuplicatePnl.Add(DuplicatePnl);
+                                }
                                 a++;
                             }
                         }
@@ -10600,7 +10765,8 @@ namespace PresentationLayer.Presenter
                         }
                         wdm.WD_description += glassThick;
                         //lst_glassThicknessPerItem.Add(glassThick);
-                    } else if (lst_glassThicknessDistinct.Count == 1)
+                    }
+                    else if (lst_glassThicknessDistinct.Count == 1)
                     {
                         wdm.WD_description += lst_glassThicknessDistinct[0];
                     }
@@ -10647,8 +10813,12 @@ namespace PresentationLayer.Presenter
                 _quotationModel.itemSelectStatus = false;
                 _quotationModel.BOMandItemlistStatus = "PriceItemList";
             }
-            _quotationModel.ItemCostingPriceAndPoints();
-            GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
+            if(ItemLoad == false)
+            {
+                _quotationModel.ItemCostingPriceAndPoints();
+            }
+            //GetMainView().GetCurrentPrice().Value = _quotationModel.CurrentPrice;
+            GetMainView().GetCurrentPrice().Value = _windoorModel.WD_currentPrice;
             SetChangesMark();
         }
 
@@ -10683,7 +10853,7 @@ namespace PresentationLayer.Presenter
                 Maxheight = 0,
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
-            bool isDimentionFit = true;
+            bool isDimensionFit = true;
 
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
@@ -10704,7 +10874,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                isDimentionFit = false;
+                                isDimensionFit = false;
                             }
                         }
                         if (occupiedWidth >= _windoorModel.WD_width)
@@ -10717,7 +10887,9 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            if(availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            if(availableHeight > frmDimension_numHt && 
+                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd && 
+                               _windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += frm.Frame_Height;
@@ -10728,7 +10900,7 @@ namespace PresentationLayer.Presenter
                             {
                                 availableWidth -= frm.Frame_Width;
                             }
-                            
+
                         }
                     }
 
@@ -10750,7 +10922,7 @@ namespace PresentationLayer.Presenter
                             }
                             else
                             {
-                                isDimentionFit = false;
+                                isDimensionFit = false;
                             }
 
                         }
@@ -10766,7 +10938,9 @@ namespace PresentationLayer.Presenter
                         {
 
 
-                            if (availableHeight > frmDimension_numHt && (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd)
+                            if (availableHeight > frmDimension_numHt && 
+                                (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
+                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name) 
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += crtm.Concrete_Height;
@@ -10784,13 +10958,13 @@ namespace PresentationLayer.Presenter
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
             {
-                isDimentionFit = false;
+                isDimensionFit = false;
 
             }
-            return isDimentionFit;
+            return isDimensionFit;
         }
 
-       
+
 
         #endregion
 
