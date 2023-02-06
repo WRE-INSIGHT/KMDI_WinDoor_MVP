@@ -2057,7 +2057,8 @@ namespace PresentationLayer.Presenter
                         }
                         else if (wndrId == _quotationModel.Lst_Windoor.Count())
                         {
-                            Load_Windoor_Item(wdm);
+                            Load_Windoor_Item(_quotationModel.Lst_Windoor[wndrId - 1]);
+                            break;
                         }
                         else
                         {
