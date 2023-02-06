@@ -320,6 +320,8 @@ namespace ModelLayer.Model.Quotation.Panel
         int Panel_LouverGallerySetCount { get; set; }
         List<string> Panel_LstLouverArtNo { get; set; }
         List<int> Panel_LstSealForHandleMultiplier { get; set; }
+        bool Panel_LouverMotorizeCheck { get; set; }
+        bool Panel_LouverSecurityGrillCheck { get; set; }
         void Set_LouverBladesCount();
         void Imager_SetDimensionsToBind_FrameParent();
         void SetPanelMargin_using_ZoomPercentage();

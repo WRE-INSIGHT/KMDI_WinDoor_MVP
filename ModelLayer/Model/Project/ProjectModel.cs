@@ -246,7 +246,7 @@ namespace ModelLayer.Model.AddProject
                 }
                 if (!string.IsNullOrWhiteSpace(Province))
                 {
-                    Complete_Address += Province + " ";
+                    Complete_Address += Province + ", ";
                 }
                 if (!string.IsNullOrWhiteSpace(Area))
                 {

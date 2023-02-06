@@ -19,6 +19,17 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler cmbHandleTypeSelectedValueChangedEventRaised;
         public event EventHandler cmbHandleLocationSelectedValueChangedEventRaised;
         public event EventHandler cmbGalleryColorSelectedValueChangedEventRaised;
+        public event EventHandler chkMotorizedCheckedChangedEventRaised;
+
+        public ComboBox GetHandleLoc()
+        {
+            return cmb_HandleLocation;
+        }
+
+        public ComboBox GetHandleType()
+        {
+            return cmb_HandleType;
+        }
 
         private void PP_LouverGallerySetPropertyUC_Load(object sender, EventArgs e)
         {
@@ -77,16 +88,15 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, cmbGalleryColorSelectedValueChangedEventRaised, e);
         }
-        private void btn_SaveGallerySet_Click(object sender, EventArgs e)
-        {
-
-        }
 
         public Panel GetPanelBody()
         {
             return pnl_body;
         }
-
+        private void chk_Motorized_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkMotorizedCheckedChangedEventRaised, e);
+        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {

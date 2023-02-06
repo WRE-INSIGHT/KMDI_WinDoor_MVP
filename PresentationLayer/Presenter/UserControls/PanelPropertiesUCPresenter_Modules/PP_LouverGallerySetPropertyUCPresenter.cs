@@ -24,7 +24,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private Panel _pnlLouverBody;
         private ConstantVariables constants = new ConstantVariables();
-        string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc;
+        string lvrDesc, handleLocDesc, handleTypeDesc, ColorDesc, additionalZero;
 
 
         int gallerySet_count = 0;
@@ -60,6 +60,31 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _LouverGallerySetPropertyUC.cmbHandleTypeSelectedValueChangedEventRaised += _LouverGallerySetPropertyUC_cmbHandleTypeSelectedValueChangedEventRaised;
             _LouverGallerySetPropertyUC.cmbHandleLocationSelectedValueChangedEventRaised += _LouverGallerySetPropertyUC_cmbHandleLocationSelectedValueChangedEventRaised;
             _LouverGallerySetPropertyUC.cmbGalleryColorSelectedValueChangedEventRaised += _LouverGallerySetPropertyUC_cmbGalleryColorSelectedValueChangedEventRaised;
+            _LouverGallerySetPropertyUC.chkMotorizedCheckedChangedEventRaised += _LouverGallerySetPropertyUC_chkMotorizedCheckedChangedEventRaised;
+        }
+
+        private void _LouverGallerySetPropertyUC_chkMotorizedCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+
+            if (chk.Checked == false)
+            {
+                chk.Text = "No";
+                _panelModel.Panel_LouverMotorizeCheck = false;
+                _panelModel.Panel_LouverHandleType = LouverHandleType_Option._single;
+                _panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._RH;
+                _LouverGallerySetPropertyUC.GetHandleType().Text = LouverHandleType_Option._single.ToString();
+                _LouverGallerySetPropertyUC.GetHandleLoc().Text = LouverHandleLoc_Option._RH.ToString();
+            }
+            else if (chk.Checked == true)
+            {
+                chk.Text = "Yes";
+                _panelModel.Panel_LouverMotorizeCheck = true;
+                _panelModel.Panel_LouverHandleType = LouverHandleType_Option._none;
+                _panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._none;
+                _LouverGallerySetPropertyUC.GetHandleType().Text = LouverHandleType_Option._none.ToString();
+                _LouverGallerySetPropertyUC.GetHandleLoc().Text = LouverHandleLoc_Option._none.ToString();
+            }
         }
 
         private void _LouverGallerySetPropertyUC_cmbBladeHeightSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -141,6 +166,11 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     handleTypeDesc = "-R";
                 }
+                else if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._none &&
+                         _panelModel.Panel_LouverMotorizeCheck == true)
+                {
+                    handleTypeDesc = "-A";
+                }
                 else if (_panelModel.Panel_LouverHandleType == LouverHandleType_Option._none)
                 {
                     handleTypeDesc = "";
@@ -168,9 +198,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     ColorDesc = "-WHT";
                 }
 
+                if (_panelModel.Panel_LouverNumberBladesPerSet >= 2 &&
+                    _panelModel.Panel_LouverNumberBladesPerSet <= 9)
+                {
+                    additionalZero = "-0";
+                }
+                else
+                {
+                    additionalZero = "-";
+                }
                 lvrDesc = "LVRG-" +
                       _panelModel.Panel_LouverBladeHeight +
-                      "-" + _panelModel.Panel_LouverNumberBladesPerSet.ToString() +
+                      additionalZero + _panelModel.Panel_LouverNumberBladesPerSet.ToString() +
                       handleTypeDesc +
                       handleLocDesc +
                       ColorDesc;

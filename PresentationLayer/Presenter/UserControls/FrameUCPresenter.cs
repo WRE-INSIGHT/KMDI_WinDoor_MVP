@@ -539,9 +539,10 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             _mainPresenter.itemDescription();
-            _mainPresenter.qoutationModel_MainPresenter.BOMandItemlistStatus = "PriceItemList";
+            _mainPresenter.qoutationModel_MainPresenter.BOMandItemlistStatus = "BOM";
             _mainPresenter.qoutationModel_MainPresenter.ItemCostingPriceAndPoints();
-            _mainPresenter.GetMainView().GetCurrentPrice().Value = _mainPresenter.qoutationModel_MainPresenter.CurrentPrice;
+            //_mainPresenter.GetMainView().GetCurrentPrice().Value = _mainPresenter.qoutationModel_MainPresenter.CurrentPrice;
+            _mainPresenter.GetMainView().GetCurrentPrice().Value = _mainPresenter.windoorModel_MainPresenter.WD_currentPrice;
         }
 
         private void OnFrameMouseLeaveEventRaised(object sender, EventArgs e)

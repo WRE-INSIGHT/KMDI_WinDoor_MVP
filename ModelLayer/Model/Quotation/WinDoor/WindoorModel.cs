@@ -186,6 +186,21 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        private bool _wdfileLoad;
+        public bool WD_fileLoad
+        {
+            get
+            {
+                return _wdfileLoad;
+            }
+            set
+            {
+                _wdfileLoad = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
@@ -561,7 +576,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        private decimal _wdcurrentPrice;
+        public decimal WD_currentPrice
+        {
+            get
+            {
+                return _wdcurrentPrice;
+            }
 
+            set
+            {
+                _wdcurrentPrice = value;
+            }
+        }
 
         private int _wdpboxImagerHeight;
         public int WD_pboxImagerHeight
@@ -606,6 +633,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
         }
 
         public string setDiscount { get; set; }
+
+      
 
         #region Methods
 
@@ -1286,6 +1315,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             //WD_CostingPoints = wd_costingPoints;
             WD_CmenuDeleteVisibility = true;
             WD_customArrowToggle = false;
+            WD_fileLoad = false;
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
 

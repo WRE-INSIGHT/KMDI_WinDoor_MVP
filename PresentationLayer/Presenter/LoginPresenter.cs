@@ -116,6 +116,7 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.Password = Encrypt("");
                 Properties.Settings.Default.RememberMe = _loginView.chkRememberMe;
             }
+            Properties.Settings.Default.Save();
         }
     }
 }

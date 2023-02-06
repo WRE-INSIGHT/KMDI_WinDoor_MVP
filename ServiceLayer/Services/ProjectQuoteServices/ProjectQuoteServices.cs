@@ -4,6 +4,8 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 using ModelLayer.Model.Project;
+using System.Collections.Generic;
+using ModelLayer.Model.User;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
 {
@@ -157,6 +159,17 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         public async Task Delete_Project(int Project_Id, int userID)
         {
             await _projQuoteRepo.Delete_Project(Project_Id, userID);
+        }
+
+        public async Task EditProject(int projectId, IProjectModel _projectModel)
+        {
+            await _projQuoteRepo.EditProject(projectId, _projectModel);
+        }
+
+        public async Task UpdateProject(int projectId, IProjectModel projectModel, IUserModel userModel)
+        {
+            ValidateModel(projectModel);
+            await _projQuoteRepo.UpdateProject(projectId, projectModel, userModel);
         }
     }
 }

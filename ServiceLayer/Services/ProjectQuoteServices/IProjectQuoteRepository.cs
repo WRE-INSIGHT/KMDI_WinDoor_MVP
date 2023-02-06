@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ModelLayer.Model.Project;
+using ModelLayer.Model.User;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
 {
@@ -29,5 +30,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType);
         Task<bool> CheckCustomerRefById(int custRefId, int employee_Id);
         Task Delete_Project(int project_Id, int userID);
+        Task EditProject(int projectId, IProjectModel _projectModel);
+        Task UpdateProject(int projectId, IProjectModel projectModel, IUserModel userModel);
     }
 }

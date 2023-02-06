@@ -3017,6 +3017,35 @@ namespace ModelLayer.Model.Quotation.Panel
         public List<string> Panel_LstLouverArtNo { get; set; }
         public List<int> Panel_LstSealForHandleMultiplier { get; set; }
 
+        private bool _panel_LouverMotorizeCheck;
+        public bool Panel_LouverMotorizeCheck
+        {
+            get
+            {
+                return _panel_LouverMotorizeCheck;
+            }
+
+            set
+            {
+                _panel_LouverMotorizeCheck = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _panel_LouverSecurityGrillCheck;
+        public bool Panel_LouverSecurityGrillCheck
+        {
+            get
+            {
+                return _panel_LouverSecurityGrillCheck;
+            }
+
+            set
+            {
+                _panel_LouverSecurityGrillCheck = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods
@@ -8951,20 +8980,44 @@ namespace ModelLayer.Model.Quotation.Panel
                                    location,
                                    @"\  /");
         }
-
+        string lvrGlassHt = "152";
         public void Insert_GlassInfo_MaterialList(DataTable tbl_explosion, string location, string glassFilm)
         {
             if (Panel_Type.Contains("Louver"))
             {
-                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                if (Panel_LstLouverArtNo != null)
+                {
+                    int count152 = 0, count150 = 0;
+                    foreach (string lvrCheckArtNo in Panel_LstLouverArtNo)
+                    {
+                        if (lvrCheckArtNo.Contains("152"))
+                        {
+                            count152++;
+                        }
+                        else if (lvrCheckArtNo.Contains("150"))
+                        {
+                            count150++;
+                        }
+                    }
+                    if (count152 >= count150)
+                    {
+                        lvrGlassHt = "152";
+                    }
+                    else if (count152 < count150)
+                    {
+                        lvrGlassHt = "150";
+                    }
+                }
+
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Width - " + Panel_GlassThicknessDesc + " " + Panel_LouverBladeTypeOption + " Blades " + glassFilm,
                             Panel_LouverBladesCount.ToString(), "pc(s)",
                             Panel_GlassWidth.ToString(),
                             location,
                             @"\  /");
 
-                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + glassFilm,
+                tbl_explosion.Rows.Add("Glass (P" + PanelGlass_ID + ") Height - " + Panel_GlassThicknessDesc + " " + Panel_LouverBladeTypeOption + " Blades " + glassFilm,
                                        Panel_LouverBladesCount.ToString(), "pc(s)",
-                                       "152",
+                                       lvrGlassHt,
                                        location,
                                        @"\  /");
             }

@@ -1359,22 +1359,16 @@ namespace PresentationLayer.Presenter.UserControls
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             int font_size = 30,
-                 gfont_size = 40,
+                gfont_size = 40,
                 outer_line = 10,
                 inner_line = 15,
-                tenPercentAdditional = 0;
-            int sashOverlapValue = 0;
-
-
-
-
-
-
-
+                tenPercentAdditional = 0,
+                sashOverlapValue = 0;
 
             if (_windoorModel.WD_zoom_forImageRenderer == 0.50f)
             {
                 font_size = 37;
+
                 gfont_size = 47;
             }
             else if (_windoorModel.WD_zoom_forImageRenderer == 0.26f)
@@ -1404,7 +1398,7 @@ namespace PresentationLayer.Presenter.UserControls
                 tenPercentAdditional = 8;
                 gfont_size = 43;
             }
-
+          
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
                                                    client_wd - w,
@@ -1418,8 +1412,136 @@ namespace PresentationLayer.Presenter.UserControls
             Color outerColor = Color.Black;
             if (panelModel.Panel_ChkText != "dSash" && panelModel.Panel_Type == "Fixed Panel")
             {
-                outerColor = Color.White;
+                outerColor = Color.Transparent;
             }
+
+            #region Georgian Bar
+
+            int GBpointResultX, GBpointResultY,
+                penThickness = 0, penThicknessResult = 0,
+
+                verticalQty = panelModel.Panel_GeorgianBar_VerticalQty,
+                horizontalQty = panelModel.Panel_GeorgianBar_HorizontalQty,
+                GeorgianBar_GapX = 0,
+                GeorgianBar_GapY = 0,
+                pGbarInnerX = 0,
+                pGbarInnerY = 0,
+                leftdeduction = 4,
+                rightAddition = 4,
+                sashDeduction = 0,
+                sashD = inner_line;
+            if (panelModel.Panel_Type == "Fixed Panel" && panelModel.Panel_Orient == false)
+            {
+                sashDeduction = -sashD;
+                sashD = 0;
+            }
+            else
+            {
+                sashDeduction = sashD;
+            }
+            if (panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
+            {
+                penThickness = 8;
+            }
+            else if (panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0726)
+            {
+                penThickness = 8;
+            }
+
+            //Pen pInnerLine = new Pen(Color.Red, penThickness);
+            Pen pInnerLine = new Pen(Color.FromArgb(245, 245, 220), penThickness);
+            Pen pOuterLine = new Pen(Color.Black, 1);
+
+
+
+
+
+            int addY = ((client_ht - (((int)(client_ht - sashDeduction + pGbarInnerY) / (horizontalQty + 1)) * horizontalQty)) - ((client_ht + pGbarInnerY) / (horizontalQty + 1))) / 2;
+
+            //Horizontal
+            int GeorgianBar_GapYs = GeorgianBar_GapY;
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBarLeft_PointsY = new[]
+                {
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                };
+                for (int i = 0; i < GeorgianBarLeft_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarLeft_PointsY[i], GeorgianBarLeft_PointsY[i + 1]);
+                }
+                Point[] GeorgianBarRight_PointsY = new[]
+                {
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                };
+                for (int i = 0; i < GeorgianBarRight_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarRight_PointsY[i], GeorgianBarRight_PointsY[i + 1]);
+                }
+            }
+
+
+
+            int addX = ((client_wd - (((int)(client_wd   - sashDeduction+ pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
+
+            //vertical
+            for (int ii = 0; ii < verticalQty; ii++)
+            {
+                GBpointResultX = ((pGbarInnerX + client_wd - sashDeduction) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (client_wd - sashDeduction + (pGbarInnerX)) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = new[]
+                {
+                  new Point(GBpointResultX + Ppoint.X + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                  new Point(GBpointResultX + Ppoint.X + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                };
+                for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pInnerLine, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
+                }
+                Point[] GeorgianBarBoderLeft_PointsX = new[]
+                {
+
+                     new Point(GBpointResultX + Ppoint.X-leftdeduction + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                     new Point(GBpointResultX + Ppoint.X-leftdeduction + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                };
+                for (int i = 0; i < GeorgianBarBoderLeft_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarBoderLeft_PointsX[i], GeorgianBarBoderLeft_PointsX[i + 1]);
+
+                }
+                Point[] GeorgianBarBoderRight_PointsX = new[]
+                {
+
+                     new Point(GBpointResultX + Ppoint.X + rightAddition + addX,pGbarInnerX+1 + Ppoint.Y + sashD),
+                     new Point(GBpointResultX + Ppoint.X + rightAddition + addX,pGbarInnerX + client_ht-1 + Ppoint.Y - sashD),
+                };
+                for (int i = 0; i < GeorgianBarBoderRight_PointsX.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarBoderRight_PointsX[i], GeorgianBarBoderRight_PointsX[i + 1]);
+                }
+
+            }
+            //Horizontal
+
+            for (int ii = 0; ii < horizontalQty; ii++)
+            {
+                GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapYs)));
+                GeorgianBar_GapYs += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = new[]
+                {
+                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
+                };
+                for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pInnerLine, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
+                }
+            }
+            #endregion
             if (panelModel.Panel_Type != "Louver Panel")
             {
                 //g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(Ppoint.X + outer_line,
@@ -1431,11 +1553,11 @@ namespace PresentationLayer.Presenter.UserControls
                     tenPercentAdditional += 1;
                     //outer Line
                     PointF outerLine1 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     PointF outerLine5 = new PointF(Ppoint.X + outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine5, outerLine6);
@@ -1444,11 +1566,11 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         //inner Line 
                         PointF innerLine1 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                         PointF innerLine3 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         PointF innerLine5 = new PointF(Ppoint.X + inner_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine6 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine6 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine3, innerLine4);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine5, innerLine6);
@@ -1493,9 +1615,9 @@ namespace PresentationLayer.Presenter.UserControls
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
                     PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
-                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line);
+                    PointF outerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
-                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
+                    PointF outerLine4 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine1, outerLine2);
                     e.Graphics.DrawLine(new Pen(outerColor, 1), outerLine3, outerLine4);
 
@@ -1504,9 +1626,9 @@ namespace PresentationLayer.Presenter.UserControls
                         //inner Line
                         //PointF innerLine1 = new PointF(Ppoint.X + inner_line - outerLineDeduction + w + tenPercentAdditional, Ppoint.Y + inner_line);
                         PointF innerLine1 = new PointF(Ppoint.X, Ppoint.Y + inner_line);
-                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line);
+                        PointF innerLine2 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line);
                         PointF innerLine4 = new PointF(Ppoint.X, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
-                        PointF innerLine5 = new PointF(Ppoint.X + client_wd - outer_line, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
+                        PointF innerLine5 = new PointF(Ppoint.X + client_wd - w, Ppoint.Y + inner_line + (client_ht - (inner_line * 2)) - w);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine1, innerLine2);
                         e.Graphics.DrawLine(new Pen(Color.Black, 3), innerLine4, innerLine5);
                     }
@@ -1531,6 +1653,8 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
+           
+
             StringFormat drawFormat = new StringFormat();
             int pnl_ID = 0;
             string pnl_ThicknessDesc = "";

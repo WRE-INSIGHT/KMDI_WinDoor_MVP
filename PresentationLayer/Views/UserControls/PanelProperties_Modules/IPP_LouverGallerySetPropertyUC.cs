@@ -12,6 +12,10 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbHandleTypeSelectedValueChangedEventRaised;
         event EventHandler cmbHandleLocationSelectedValueChangedEventRaised;
         event EventHandler cmbGalleryColorSelectedValueChangedEventRaised;
+        event EventHandler chkMotorizedCheckedChangedEventRaised;
+
         Panel GetPanelBody();
+        ComboBox GetHandleLoc();
+        ComboBox GetHandleType();
     }
 }
