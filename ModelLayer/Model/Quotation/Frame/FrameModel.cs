@@ -903,6 +903,21 @@ namespace ModelLayer.Model.Quotation.Frame
         public MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         public MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
+        private Frame_MechJointArticleNo _frameMechJointArticleNo;
+        public Frame_MechJointArticleNo Frame_MechJointArticleNo
+        {
+            get
+            {
+                return _frameMechJointArticleNo;
+            }
+
+            set
+            {
+                _frameMechJointArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1528,6 +1543,19 @@ namespace ModelLayer.Model.Quotation.Frame
                                  @"|  |");
             }
         }
+        public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)
+        {
+            if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                tbl_explosion.Rows.Add("Mechanical Joint Corner Connector " + Frame_MechJointArticleNo.DisplayName,
+                                                       4, "pc(s)",
+                                                       "",
+                                                       "Sash",
+                                                       "");
+            }
+        }
+
+
         public int Add_framePerimeter_screws4fab()
         {
             return (Frame_Width * 2) + (Frame_Height * 2);

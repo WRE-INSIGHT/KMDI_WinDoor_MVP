@@ -1222,6 +1222,12 @@ namespace ModelLayer.Model.Quotation
                                                     slidingChck = false;
                                                 }
 
+                                                if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                                {
+                                                    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SealingElement_MaterialList(Material_List);
+                                                }
+
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
 
@@ -1615,6 +1621,13 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                 {
+
+                                    if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                    {
+                                        frame.Insert_ConnectorType_MaterialList(Material_List);
+                                        pnl.Insert_SealingElement_MaterialList(Material_List);
+                                    }
+
                                     pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                     pnl.Insert_AluminumTrack_MaterialList(Material_List);
 
@@ -1947,7 +1960,14 @@ namespace ModelLayer.Model.Quotation
 
             Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
-            if (slidingChck == true)
+
+            if (item.WD_profile == "PremiLine Profile")
+            {
+                Material_List.Rows.Add("Screws for 6050 Frame",
+                                  Screws_for_6050Frame, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
+            }
+
+            if (slidingChck == true && item.WD_profile == "PremiLine Profile")
             {
                 Material_List.Rows.Add("ACC FOR 6055 9D56",
                         ACC_for_6050, "pc(s)", "", screws_for_inst_where); // FRAME
@@ -7012,7 +7032,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
                                 }
-                                #endregion 
+                                #endregion
 
                                 #region EspagPrice
 

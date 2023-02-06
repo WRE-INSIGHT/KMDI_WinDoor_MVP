@@ -70,6 +70,7 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_SlidingRailsQtyVisibility { get; set; }
         FrameConnectionType Frame_ConnectionType { get; set; }
         bool Frame_ConnectionTypeVisibility { get; set; }
+        Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
@@ -77,6 +78,7 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
+        void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();

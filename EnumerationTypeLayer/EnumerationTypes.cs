@@ -1053,7 +1053,7 @@ namespace EnumerationTypeLayer
             public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }
 
         }
-        
+
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");
@@ -1346,6 +1346,15 @@ namespace EnumerationTypeLayer
             public static readonly LouverColor_Option _white = new LouverColor_Option(1, "White");
 
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
+        {
+            public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+
+            private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
+
+
         }
     }
 }

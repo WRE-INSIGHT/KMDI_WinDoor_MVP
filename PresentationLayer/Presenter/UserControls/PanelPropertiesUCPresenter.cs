@@ -435,18 +435,22 @@ namespace PresentationLayer.Presenter.UserControls
                 sashProp.Dock = DockStyle.Top;
                 sashProp.BringToFront();
 
-                if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("Awning") || _panelModel.Panel_Type.Contains("TiltNTurn"))
+                if (_panelModel.Panel_Type.Contains("Casement")|| _panelModel.Panel_Type.Contains("TiltNTurn"))
                 {
-                    _panelModel.Panel_HingeOptionsVisibility = true;
-
-
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
-                    _panelModel.AdjustPropertyPanelHeight("addHinge");
-
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                     {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        _panelModel.Panel_HingeOptionsVisibility = true;
+
+
+                        _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        _panelModel.AdjustPropertyPanelHeight("addHinge");
+
+                        if (_panelModel.Panel_ParentMultiPanelModel != null)
+                        {
+                            _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
+                        }
                     }
+                   
 
                     if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                     {
