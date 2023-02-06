@@ -8,7 +8,6 @@ namespace PresentationLayer.Views.UserControls
     {
         bool WD_Selected { get; set; }
         int PboxItemImagerHeight { get; set; }
-        string WD_Item { get; set; }
         event EventHandler ItemInfoUCLoadEventRaised;
         event MouseEventHandler lblItemMouseDoubleClickEventRaised;
         event MouseEventHandler lblItemMouseMoveEventRaised;

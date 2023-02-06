@@ -3291,14 +3291,15 @@ namespace PresentationLayer.Presenter
                     Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
 
                     updatePriceOfMainView();
+                    ItemScroll = 0;
                 }
                 else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
+                    ItemScroll = _mainView.GetPanelItems().VerticalScroll.Maximum;
+
                 }
-              
-                ItemScroll = 0;
                 PropertiesScroll = 0;
             }
             switch (inside_quotation)
