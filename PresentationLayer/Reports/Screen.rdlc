@@ -882,7 +882,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
             <Top>0.00868in</Top>
-            <Left>3.52342in</Left>
+            <Left>3.24858in</Left>
             <Height>0.99132in</Height>
             <Width>1.9234in</Width>
             <ZIndex>1</ZIndex>
@@ -903,17 +903,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>=Sum(Fields!dtQuantity.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Left>5.83758in</Left>
+            <Top>0.00868in</Top>
+            <Left>5.18587in</Left>
             <Height>0.20833in</Height>
-            <Width>0.40257in</Width>
+            <Width>0.45314in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -935,17 +938,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>=Sum(Fields!dtDiscountedPrice.Value, "DataSet1")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Left>6.70968in</Left>
+            <Left>6.34586in</Left>
             <Height>0.20833in</Height>
-            <Width>0.74334in</Width>
+            <Width>1.18751in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -961,7 +966,7 @@
             <Top>0.41319in</Top>
             <Left>6.13182in</Left>
             <Height>0in</Height>
-            <Width>1.3212in</Width>
+            <Width>1.3822in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -981,12 +986,46 @@
               </Border>
             </Style>
           </Line>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=(Sum(Fields!dtDiscountedPrice.Value, "DataSet1")) * .10</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>0.20833in</Top>
+            <Left>6.34586in</Left>
+            <Height>0.20486in</Height>
+            <Width>1.16816in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>1.78124in</Top>
         <Left>0.1641in</Left>
         <Height>1in</Height>
-        <Width>7.53834in</Width>
+        <Width>7.53835in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>

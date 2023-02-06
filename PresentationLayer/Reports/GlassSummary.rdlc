@@ -295,7 +295,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Price</Value>
+                              <Value>   Price</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -305,7 +305,9 @@
                               <Value>=Parameters!GlassPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>1pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>

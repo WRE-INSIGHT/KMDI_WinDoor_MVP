@@ -139,6 +139,7 @@ namespace PresentationLayer.Presenter
                                             if (prev_GlassArea == curr_GlassArea && prev_GlassDesc == curr_GlassDesc)
                                             {
                                                 prev_GlassQty = prev_GlassQty + 1;
+                                                prev_GlassPrice = prev_GlassQty * prev_GlassPrice;                                               
                                             }
                                             else
                                             {
@@ -170,6 +171,7 @@ namespace PresentationLayer.Presenter
                                                 if (item.dtArea == prev_GlassArea && item.dtDescription == prev_GlassDesc && item.dtItemNo == prev_GlassItemNo)
                                                 {
                                                     item.dtQuantity = prev_GlassQty + 1;
+                                                    item.dtPrice = item.dtQuantity * prev_GlassPrice;
                                                     //prev_GlassQty = prev_GlassQty + 1;
                                                     existing = true;
                                                 }
@@ -243,6 +245,7 @@ namespace PresentationLayer.Presenter
                 if (item.dtArea == curr_GlassArea && item.dtDescription == curr_GlassDesc && item.dtItemNo == curr_GlassItemNo)
                 {
                     item.dtQuantity = prev_GlassQty + 1;
+                    item.dtPrice = item.dtQuantity * prev_GlassPrice;
                     //prev_GlassQty = prev_GlassQty + 1;
                     existing = true;
                 }

@@ -303,7 +303,7 @@ namespace PresentationLayer.Presenter
                                            Datarow.Cells[5].Value ?? 0,
                                            "", 
                                            Datarow.Cells[0].Value ?? 0,
-                                           Datarow.Cells[7].Value ?? "" ,
+                                           Datarow.Cells[7].Value ?? 0,
                                            1,
                                            "",
                                            Datarow.Cells[6].Value ?? ""
