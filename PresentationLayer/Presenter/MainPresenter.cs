@@ -947,55 +947,62 @@ namespace PresentationLayer.Presenter
         public async void setNewFactor()
         {
             decimal value;
-
-            if (i <= 0)
+            try
             {
-                //string[] province = projectAddress.Split(',');
-                //value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                value = await _quotationServices.GetFactorByProvince(province);
-            }
-            else
-            {
-                value = newfactor;
-            }
-            string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
-            if (input != "" && input != "0")
-            {
-                try
+                if (i <= 0)
                 {
-                    decimal deci_input = Convert.ToDecimal(input);
-                    if (deci_input > 0)
+                    string[] province = projectAddress.Split(',');
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                    //value = await _quotationServices.GetFactorByProvince(province);
+                }
+                else
+                {
+                    value = newfactor;
+                }
+                string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
+                if (input != "" && input != "0")
+                {
+                    try
                     {
-                        if (deci_input != value)
+                        decimal deci_input = Convert.ToDecimal(input);
+                        if (deci_input > 0)
                         {
-                            _quotationModel.PricingFactor = deci_input;
-                            MessageBox.Show("New Factor Set Sucessfully");
-                            GetCurrentPrice();
-                            newfactor = deci_input;
-                            i++;
+                            if (deci_input != value)
+                            {
+                                _quotationModel.PricingFactor = deci_input;
+                                MessageBox.Show("New Factor Set Sucessfully");
+                                GetCurrentPrice();
+                                newfactor = deci_input;
+                                i++;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else if (deci_input < 0)
+                        {
+                            MessageBox.Show("Invalid number");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.HResult == -2146233033)
+                        {
+                            MessageBox.Show("Please input a number.");
                         }
                         else
                         {
-                            MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(ex.Message, ex.HResult.ToString());
                         }
                     }
-                    else if (deci_input < 0)
-                    {
-                        MessageBox.Show("Invalid number");
-                    }
                 }
-                catch (Exception ex)
-                {
-                    if (ex.HResult == -2146233033)
-                    {
-                        MessageBox.Show("Please input a number.");
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message, ex.HResult.ToString());
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
@@ -10311,10 +10318,18 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
-            ////string[] province = projectAddress.Split(',');
-            ////_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
+            try
+            {
+                string[] province = projectAddress.Split(',');
+                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+            //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+            //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
 
 
