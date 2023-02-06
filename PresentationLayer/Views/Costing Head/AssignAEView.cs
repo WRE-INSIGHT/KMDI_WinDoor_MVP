@@ -61,6 +61,7 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler btnSaveClickEventRaised;
         public event EventHandler AddProjectToolStripButtonClickEventRaised;
         public event EventHandler DeleteAEICToolStripButtonClickEventRaised;
+        public event EventHandler EditProjectToolStripButtonClickEventRaised;
 
         public void ShowThis()
         {
@@ -131,6 +132,11 @@ namespace PresentationLayer.Views.Costing_Head
         private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DeleteAEICToolStripButtonClickEventRaised, e);
+        }
+
+        private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, EditProjectToolStripButtonClickEventRaised, e);
         }
     }
 }

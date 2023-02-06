@@ -13,10 +13,12 @@ namespace PresentationLayer.Views.Costing_Head
         event EventHandler cmbProvinceSelectedItemChange;
         event EventHandler AddProjectViewLoadEventRaised;
         event EventHandler btnSaveClickEventRaised;
+        event FormClosedEventHandler AddProjectViewFormClosedEventRaised;
         ComboBox cmbCity();
         ComboBox cmbProvince();
         ComboBox cmbArea();
         void ShowThisView();
         void CloseThisView();
+        void ClearBinding();
     }
 }

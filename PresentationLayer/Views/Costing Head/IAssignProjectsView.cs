@@ -14,6 +14,7 @@ namespace PresentationLayer.Views.Costing_Head
         event EventHandler customerRefNoToolStripMenuItemClickEventRaised;
         event EventHandler clearToolStripMenuItemClickEventRaised;
         event EventHandler deleteProjectToolStripMenuItemClickEventRaised;
+
         void ShowThis();
         void SetEnableThis(bool enabled);
     }

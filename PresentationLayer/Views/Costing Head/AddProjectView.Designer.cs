@@ -411,7 +411,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_FirstnameStr);
             this.Name = "AddProjectView";
-            this.Text = "AddProjectView";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddProjectView_FormClosed);
             this.Load += new System.EventHandler(this.AddProjectView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

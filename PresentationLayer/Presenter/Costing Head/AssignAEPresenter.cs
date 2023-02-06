@@ -19,7 +19,6 @@ namespace PresentationLayer.Presenter.Costing_Head
         IAssignAEView _assignAEView;
 
         private IUnityContainer _unityC;
-
         private IUserModel _userModel;
         private IProjectQuoteServices _projQuoteServices;
         private IAddProjectPresenter _addProjectPresenter;
@@ -50,13 +49,38 @@ namespace PresentationLayer.Presenter.Costing_Head
             _assignAEView.btnSaveClickEventRaised += _assignAEView_btnSaveClickEventRaised;
             _assignAEView.AddProjectToolStripButtonClickEventRaised += _assignAEView_AddProjectToolStripButtonClickEventRaised;
             _assignAEView.DeleteAEICToolStripButtonClickEventRaised += _assignAEView_DeleteAEICToolStripButtonClickEventRaised;
+            _assignAEView.EditProjectToolStripButtonClickEventRaised += _assignAEView_EditProjectToolStripButtonClickEventRaised;
+        }
+
+        private void _assignAEView_EditProjectToolStripButtonClickEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if(_dgvClient.SelectedRows.Count == 1)
+                {
+                    int projectId = Convert.ToInt32(_dgvClient.SelectedRows[0].Cells["Project_Id"].Value.ToString());
+
+                    IAddProjectPresenter addProj = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, projectId, _userModel);
+                    addProj.ShowThisView();
+                }
+                else
+                {
+                    MessageBox.Show("Please select 1 Project only","", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Logger log = new Logger(ex.Message, ex.StackTrace);
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
         }
 
         private async void _assignAEView_DeleteAEICToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                foreach (DataGridViewRow rowView in _dgvClient.Rows)
+                foreach (DataGridViewRow rowView in _dgvClient.SelectedRows)
                 {
                     await _projQuoteServices.DeleteAEIC(rowView.Cells["Project_Id"].Value.ToString(), rowView.Cells["AEIC ID"].Value.ToString());
                 }
@@ -76,7 +100,7 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             try
             {
-                IAddProjectPresenter addProj = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter);
+                IAddProjectPresenter addProj = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, 0, _userModel);
                 addProj.ShowThisView();
             }
             catch (Exception ex)

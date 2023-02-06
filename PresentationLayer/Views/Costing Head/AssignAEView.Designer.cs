@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmenu_dgvClient = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.assignAEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lListofAE = new System.Windows.Forms.Label();
             this.btnEqual = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,14 +47,14 @@
             this.dgv_Client = new System.Windows.Forms.DataGridView();
             this.dgv_AEIC = new System.Windows.Forms.DataGridView();
             this.dgv_Project = new System.Windows.Forms.DataGridView();
-            this.cmenu_dgvProject = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deletetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_Save = new System.Windows.Forms.Button();
-            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AEICName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmenu_dgvProject = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deletetoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.editProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenu_dgvClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Client)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_AEIC)).BeginInit();
@@ -65,9 +66,10 @@
             // 
             this.cmenu_dgvClient.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.assignAEToolStripMenuItem,
+            this.editProjectToolStripMenuItem,
             this.deleteToolStripMenuItem1});
             this.cmenu_dgvClient.Name = "contextMenuStrip1";
-            this.cmenu_dgvClient.Size = new System.Drawing.Size(153, 70);
+            this.cmenu_dgvClient.Size = new System.Drawing.Size(153, 92);
             this.cmenu_dgvClient.Opening += new System.ComponentModel.CancelEventHandler(this.cmenu_dgvClient_Opening);
             // 
             // assignAEToolStripMenuItem
@@ -76,6 +78,13 @@
             this.assignAEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.assignAEToolStripMenuItem.Text = "Add Project";
             this.assignAEToolStripMenuItem.Click += new System.EventHandler(this.assignAEToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem1
+            // 
+            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem1.Text = "Delete";
+            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // lListofAE
             // 
@@ -230,41 +239,6 @@
             this.dgv_Project.TabIndex = 106;
             this.dgv_Project.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Project_RowPostPaint);
             // 
-            // cmenu_dgvProject
-            // 
-            this.cmenu_dgvProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deletetoolStripMenuItem});
-            this.cmenu_dgvProject.Name = "contextMenuStrip1";
-            this.cmenu_dgvProject.Size = new System.Drawing.Size(108, 26);
-            // 
-            // deletetoolStripMenuItem
-            // 
-            this.deletetoolStripMenuItem.Name = "deletetoolStripMenuItem";
-            this.deletetoolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.deletetoolStripMenuItem.Text = "Delete";
-            this.deletetoolStripMenuItem.Click += new System.EventHandler(this.deletetoolStripMenuItem_Click);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Save.FlatAppearance.BorderSize = 0;
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Save.Location = new System.Drawing.Point(958, 427);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(75, 38);
-            this.btn_Save.TabIndex = 107;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = false;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            // 
-            // deleteToolStripMenuItem1
-            // 
-            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.deleteToolStripMenuItem1.Text = "Delete";
-            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
-            // 
             // ProjectName
             // 
             this.ProjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -294,6 +268,41 @@
             this.EmployeeId.Name = "EmployeeId";
             this.EmployeeId.ReadOnly = true;
             this.EmployeeId.Visible = false;
+            // 
+            // cmenu_dgvProject
+            // 
+            this.cmenu_dgvProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deletetoolStripMenuItem});
+            this.cmenu_dgvProject.Name = "contextMenuStrip1";
+            this.cmenu_dgvProject.Size = new System.Drawing.Size(108, 26);
+            // 
+            // deletetoolStripMenuItem
+            // 
+            this.deletetoolStripMenuItem.Name = "deletetoolStripMenuItem";
+            this.deletetoolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deletetoolStripMenuItem.Text = "Delete";
+            this.deletetoolStripMenuItem.Click += new System.EventHandler(this.deletetoolStripMenuItem_Click);
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Save.FlatAppearance.BorderSize = 0;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Save.Location = new System.Drawing.Point(958, 427);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(75, 38);
+            this.btn_Save.TabIndex = 107;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // editProjectToolStripMenuItem
+            // 
+            this.editProjectToolStripMenuItem.Name = "editProjectToolStripMenuItem";
+            this.editProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editProjectToolStripMenuItem.Text = "Edit Project";
+            this.editProjectToolStripMenuItem.Click += new System.EventHandler(this.editProjectToolStripMenuItem_Click);
             // 
             // AssignAEView
             // 
@@ -347,5 +356,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AEICName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProjectId;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeId;
+        private System.Windows.Forms.ToolStripMenuItem editProjectToolStripMenuItem;
     }
 }

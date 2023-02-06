@@ -52,6 +52,8 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler AddProjectViewLoadEventRaised;
         public event EventHandler cmbProvinceSelectedItemChange;
         public event EventHandler btnSaveClickEventRaised;
+        public event FormClosedEventHandler AddProjectViewFormClosedEventRaised;
+
         private void AddProjectView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, AddProjectViewLoadEventRaised, e);
@@ -72,6 +74,30 @@ namespace PresentationLayer.Views.Costing_Head
         public void CloseThisView()
         {
             this.Close();
+            this.Dispose();
+        }
+        private void AddProjectView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EventHelpers.RaiseFormClosedEvent(sender, AddProjectViewFormClosedEventRaised, e);
+        }
+
+        public void ClearBinding()
+        {
+            txt_Title.DataBindings.Clear();
+            txt_FirstnameStr.DataBindings.Clear();
+            txt_LastnameStr.DataBindings.Clear();
+            txt_CompanynameStr.DataBindings.Clear();
+            txt_ContactnoStr.DataBindings.Clear();
+            cmb_FilelableasStr.DataBindings.Clear();
+            txt_UnitStr.DataBindings.Clear();
+            txt_EstablishmentStr.DataBindings.Clear();
+            txt_HousenoStr.DataBindings.Clear();
+            txt_StreetStr.DataBindings.Clear();
+            txt_VillageStr.DataBindings.Clear();
+            txt_BarangayStr.DataBindings.Clear();
+            cmb_CityStr.DataBindings.Clear();
+            cmb_ProvinceStr.DataBindings.Clear();
+            cmb_AreaStr.DataBindings.Clear();
             this.Dispose();
         }
     }
