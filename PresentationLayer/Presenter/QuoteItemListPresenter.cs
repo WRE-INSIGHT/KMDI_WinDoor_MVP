@@ -408,7 +408,7 @@ namespace PresentationLayer.Presenter
                     _quoteItemListView.GetPnlPrintBody().Controls.Add(quoteItem);
                     quoteItem.Dock = DockStyle.Top;
                     quoteItem.BringToFront();
-
+                    _quoteItemListView.GetPnlPrintBody().AutoScroll = true;
                     //_mainPresenter.itemDescription();
                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                     //_quotationModel.ItemCostingPriceAndPoints();

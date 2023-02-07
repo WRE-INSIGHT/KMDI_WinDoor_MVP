@@ -3,6 +3,8 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 using ModelLayer.Model.Project;
+using System.Collections.Generic;
+using ModelLayer.Model.User;
 
 namespace ServiceLayer.Services.ProjectQuoteServices
 {
@@ -28,10 +30,12 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task SaveAssignAEIC(string Employee_Id, string Project_Id);
         Task<DataTable> GetProvince();
         Task<DataTable> GetCityAreaBy_Province(string province);
-        Task SaveProject(IProjectModel _projectModel);
+        Task SaveProject(IProjectModel projectModel);
         Task DeleteAEIC(string Project_Id, string Employee_Id);
         Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType);
         Task<bool> CheckCustomerRefById(int custRefId, int Employee_Id);
         Task Delete_Project(int Project_Id, int userID);
+        Task EditProject(int projectId, IProjectModel projectModel);
+        Task UpdateProject(int projectId, IProjectModel projectModel, IUserModel userModel);
     }
 }

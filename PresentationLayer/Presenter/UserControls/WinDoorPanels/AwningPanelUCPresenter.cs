@@ -10,6 +10,7 @@ using PresentationLayer.CommonMethods;
 using PresentationLayer.Presenter.UserControls.Dividers;
 using PresentationLayer.Presenter.UserControls.Dividers.Imagers;
 using PresentationLayer.Presenter.UserControls.WinDoorPanels.Imagers;
+using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using System;
@@ -394,7 +395,77 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _panelModel.Panel_Placement != "Last")
             {
                 int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_awningPanelUC);
+                Control nextCtrl = null,
+                       prevCtrl = null;
+                if (_multiPanelModel.MPanelLst_Objects.Count > (this_indx + 2))
+                {
+                    nextCtrl = _multiPanelModel.MPanelLst_Objects[this_indx + 2];
+                    if (!nextCtrl.Name.Contains("Multi"))
+                    {
+                        nextCtrl = null;
+                    }
+                    if (this_indx > 1)
+                    {
+                        prevCtrl = _multiPanelModel.MPanelLst_Objects[this_indx - 2];
+                        if (!prevCtrl.Name.Contains("Multi"))
+                        {
+                            prevCtrl = null;
+                        }
+                    }
 
+                }
+                if (this_indx > 1 && _multiPanelModel.MPanel_DividerEnabled && nextCtrl != null)
+                {
+                    Control prevmPanel = _multiPanelModel.MPanelLst_Objects[this_indx - 2];
+                    Control divCtrl = _multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                    IMultiPanelModel leftMpnl = _multiPanelModel.MPanelLst_MultiPanel.Find(mpnl => mpnl.MPanel_Name == prevmPanel.Name);
+
+                    int div_mpnl_deduct_Tobind = 8;
+                    if (_multiPanelModel.MPanel_Zoom > 0.26f)
+                    {
+                        div_mpnl_deduct_Tobind = (int)(div_mpnl_deduct_Tobind * _multiPanelModel.MPanel_Zoom);//4
+                    }
+                    else if (_multiPanelModel.MPanel_Zoom <= 0.26f)
+                    {
+                        div_mpnl_deduct_Tobind = 2; //13 - 2 = 11 - 2 = 9px default on div obj for 2-stack multipanel
+                    }
+
+                    if (divCtrl.Name.Contains("Mullion"))
+                    {
+                        IMullionUC mullionUC = (MullionUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+
+
+                        if (prevCtrl == null)
+                        {
+                            IDividerModel leftDiv = _multiPanelModel.MPanelLst_Divider.Find(divs => divs.Div_Name == ((UserControl)mullionUC).Name);
+                            leftDiv.Div_WidthToBind -= div_mpnl_deduct_Tobind;
+                            leftDiv.Div_Width -= 8;
+                        }
+
+                        _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
+                        mullionUC.InvalidateThis();
+                        if (leftMpnl != null)
+                        {
+                            leftMpnl.MPanel_WidthToBind -= div_mpnl_deduct_Tobind;
+                        }
+                    }
+                    else if (divCtrl.Name.Contains("Transom"))
+                    {
+                        ITransomUC transomUC = (TransomUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
+                        if (prevCtrl == null)
+                        {
+                            IDividerModel leftDiv = _multiPanelModel.MPanelLst_Divider.Find(divs => divs.Div_Name == ((UserControl)transomUC).Name);
+                            leftDiv.Div_HeightToBind -= div_mpnl_deduct_Tobind;
+                            leftDiv.Div_Height -= 8;
+                        }
+                        _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC, _frameModel.Frame_Type.ToString());
+                        transomUC.InvalidateThis();
+                        if (leftMpnl != null)
+                        {
+                            leftMpnl.MPanel_HeightToBind -= div_mpnl_deduct_Tobind;
+                        }
+                    }
+                }
                 Control divUC = _multiPanelModel.MPanelLst_Objects[this_indx + 1];
                 _multiPanelModel.MPanelLst_Objects.Remove((UserControl)divUC);
 
@@ -549,7 +620,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 inner_line = 7;
             }
             #region Georgian Bar
-
             int GBpointResultX, GBpointResultY,
                 penThickness = 0, penThicknessResult = 0,
                 pInnerWd = awning.ClientRectangle.Width,
@@ -559,8 +629,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 GeorgianBar_GapX = 0,
                 GeorgianBar_GapY = 0,
                 pInnerX = 0,
-                pInnerY = 0;
-
+                pInnerY = 0,
+                sashDeduction = 0,
+                sashD = inner_line;
+            if (_panelModel.Panel_Type == "Fixed Panel" && _panelModel.Panel_Orient == false)
+            {
+                sashDeduction = -sashD;
+                sashD = 0;
+            }
+            else
+            {
+                sashDeduction = sashD;
+            }
             if (_panelModel.Panel_GeorgianBarArtNo == GeorgianBar_ArticleNo._0724)
             {
                 penThickness = 10;
@@ -571,45 +651,43 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 penThickness = 20;
                 penThicknessResult = penThickness - 10;
             }
-
             Pen pCadetBlue = new Pen(Color.CadetBlue, penThickness);
-
+            int addX = ((pInnerWd - (((int)(pInnerWd + pInnerX - sashDeduction) / (verticalQty + 1)) * verticalQty)) - ((pInnerWd + pInnerX) / (verticalQty + 1))) / 2;
             //vertical
             for (int ii = 0; ii < verticalQty; ii++)
             {
-                GBpointResultX = ((pInnerX + pInnerWd) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
-                GeorgianBar_GapX += (pInnerWd + (pInnerX)) / (verticalQty + 1);
-                Point[] GeorgianBar_PointsX = new[]
-              {
-
-                  new Point(GBpointResultX,pInnerX+1),
-                  new Point(GBpointResultX,pInnerX + pInnerHt-1),
-             };
+                GBpointResultX = ((pInnerX + pInnerWd - sashDeduction) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
+                GeorgianBar_GapX += (pInnerWd + pInnerX - sashDeduction) / (verticalQty + 1);
+                Point[] GeorgianBar_PointsX = null;
+                GeorgianBar_PointsX = new[]
+                {
+                    new Point(GBpointResultX + addX,pInnerX+1 + sashD),
+                    new Point(GBpointResultX + addX,pInnerX + pInnerHt-1 - sashD),
+                };
                 for (int i = 0; i < GeorgianBar_PointsX.Length - 1; i += 2)
                 {
                     g.DrawLine(pCadetBlue, GeorgianBar_PointsX[i], GeorgianBar_PointsX[i + 1]);
                 }
             }
-
+            int addY = ((pInnerHt - (((int)(pInnerHt - sashDeduction + pInnerY) / (horizontalQty + 1)) * horizontalQty)) - ((pInnerHt + pInnerY) / (horizontalQty + 1))) / 2;
             //Horizontal
-
             for (int ii = 0; ii < horizontalQty; ii++)
             {
-                GBpointResultY = ((pInnerY + pInnerHt) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
-                GeorgianBar_GapY += (pInnerHt + (pInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBar_PointsY = new[]
-              {
-
-                  new Point(pInnerY+1,GBpointResultY ),
-                  new Point(pInnerY-1 + pInnerWd,GBpointResultY),
-             };
+                GBpointResultY = ((pInnerY + pInnerHt - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
+                GeorgianBar_GapY += (pInnerHt - sashDeduction + (pInnerY)) / (horizontalQty + 1);
+                Point[] GeorgianBar_PointsY = null;
+                GeorgianBar_PointsY = new[]
+                {
+                    new Point(pInnerY+1 + sashD,GBpointResultY + addX),
+                    new Point(pInnerY-1 + pInnerWd - sashD,GBpointResultY + addX),
+                };
                 for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
                 {
                     g.DrawLine(pCadetBlue, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
                 }
             }
-
             #endregion
+
 
             string glassType = "";
             if (_panelModel.Panel_GlassThicknessDesc != null)

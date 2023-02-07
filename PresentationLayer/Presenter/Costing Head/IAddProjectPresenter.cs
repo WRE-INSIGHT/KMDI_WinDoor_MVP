@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelLayer.Model.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace PresentationLayer.Presenter.Costing_Head
 {
     public interface IAddProjectPresenter
     {
-        IAddProjectPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter);
+        IAddProjectPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, int projectId, IUserModel userModel);
         void ShowThisView();
     }
 }

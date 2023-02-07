@@ -379,12 +379,18 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             foreach (var mpnlObject in mpnl.MPanelLst_Objects)
                             {
-                                if ((mpnlObject.Location.Y > 0 && mpnlObject.Location.Y <= 10) && mpnlObject.Parent.Parent.Location.Y <= 16 && frame.Frame_UC.Location.Y == 0)
+                                if ((mpnlObject.Location.Y > 0 && 
+                                    mpnlObject.Location.Y <= 10) && 
+                                    mpnlObject.Parent.Parent.Location.Y <= 23 && 
+                                    frame.Frame_UC.Location.Y == 0)
                                 {
                                     total_panelWD += 1;
                                     total_panel += 1;
                                 }
-                                if ((mpnlObject.Location.X > 0 && mpnlObject.Location.X <= 10) && mpnlObject.Parent.Parent.Location.X <= 16 && frame.Frame_UC.Location.X == 0)
+                                if ((mpnlObject.Location.X > 0 && 
+                                    mpnlObject.Location.X <= 10) && 
+                                    mpnlObject.Parent.Parent.Location.X <= 23 && 
+                                    frame.Frame_UC.Location.X == 0)
                                 {
                                     total_panelHT += 1;
                                     total_panel += 1;
@@ -395,12 +401,18 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             foreach (var mpnlObject in mpnl.MPanelLst_Objects)
                             {
-                                if ((mpnlObject.Location.Y > 0 && mpnlObject.Location.Y <= 10) && mpnlObject.Parent.Parent.Location.Y <= 16 && frame.Frame_UC.Location.Y == 0)
+                                if ((mpnlObject.Location.Y > 0 && 
+                                    mpnlObject.Location.Y <= 10) && 
+                                    mpnlObject.Parent.Parent.Location.Y <= 23 && 
+                                    frame.Frame_UC.Location.Y == 0)
                                 {
                                     total_panelWD += 1;
                                     total_panel += 1;
                                 }
-                                if ((mpnlObject.Location.X > 0 && mpnlObject.Location.X <= 10) && mpnlObject.Parent.Parent.Location.X <= 16 && frame.Frame_UC.Location.X == 0)
+                                if ((mpnlObject.Location.X > 0 && 
+                                    mpnlObject.Location.X <= 10) && 
+                                    mpnlObject.Parent.Parent.Location.X <= 23 && 
+                                    frame.Frame_UC.Location.X == 0)
                                 {
                                     total_panelHT += 1;
                                     total_panel += 1;
@@ -411,12 +423,20 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             foreach (var mpnlObject in mpnl.MPanelLst_Objects)
                             {
-                                if ((mpnlObject.Location.Y > 0 && mpnlObject.Location.Y <= 10) && mpnlObject.Parent.Parent.Parent.Parent.Location.Y <= 16 && mpnlObject.Parent.Parent.Location.Y <= 16 && frame.Frame_UC.Location.Y == 0)
+                                if ((mpnlObject.Location.Y > 0 && 
+                                    mpnlObject.Location.Y <= 10) && 
+                                    mpnlObject.Parent.Parent.Parent.Parent.Location.Y <= 23 && 
+                                    mpnlObject.Parent.Parent.Location.Y <= 23 && 
+                                    frame.Frame_UC.Location.Y == 0)
                                 {
                                     total_panelWD += 1;
                                     total_panel += 1;
                                 }
-                                if ((mpnlObject.Location.X > 0 && mpnlObject.Location.X <= 10) && mpnlObject.Parent.Parent.Parent.Parent.Location.X <= 16 && mpnlObject.Parent.Parent.Location.X <= 16 && frame.Frame_UC.Location.X == 0)
+                                if ((mpnlObject.Location.X > 0 && 
+                                    mpnlObject.Location.X <= 10) && 
+                                    mpnlObject.Parent.Parent.Parent.Parent.Location.X <= 23 && 
+                                    mpnlObject.Parent.Parent.Location.X <= 23 && 
+                                    frame.Frame_UC.Location.X == 0)
                                 {
                                     total_panelHT += 1;
                                     total_panel += 1;

@@ -70,11 +70,21 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
+                _mainPresenter.ItemLoad = true;
                 int itemscroll = _mainPresenter.ItemScroll;
                 _mainPresenter.Load_Windoor_Item(_windoorModel);
                 _mainPresenter.qoutationModel_MainPresenter.itemSelectStatus = true;
-                _mainPresenter.GetCurrentPrice();
+                _itemInfoUC.WD_Selected = true;
+                if (_windoorModel.WD_fileLoad)
+                {
+                    _mainPresenter.updatePriceOfMainView();
+                }
+                else
+                {
+                    _mainPresenter.LblCurrentPrice.Value = _windoorModel.WD_currentPrice;
+                }
                 _mainPresenter.ItemScroll = itemscroll;
+                _mainPresenter.ItemLoad = false;
             }
             catch (Exception ex)
             {

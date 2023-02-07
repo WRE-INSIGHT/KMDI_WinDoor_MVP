@@ -30,6 +30,7 @@
         {
             this.pnl_body = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.btn_addLouver = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmb_GalleryColor = new System.Windows.Forms.ComboBox();
@@ -43,11 +44,14 @@
             this.cmb_BladeHeight = new System.Windows.Forms.ComboBox();
             this.lbl_BladeHeight = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.pnl_chkMotorizedOptions = new System.Windows.Forms.Panel();
+            this.lbl_motorized = new System.Windows.Forms.Label();
+            this.chk_Motorized = new System.Windows.Forms.CheckBox();
             this.pnl_body.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_NoOfBladePerSet)).BeginInit();
+            this.pnl_chkMotorizedOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_body
@@ -55,10 +59,11 @@
             this.pnl_body.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_body.Controls.Add(this.panel4);
             this.pnl_body.Controls.Add(this.panel2);
+            this.pnl_body.Controls.Add(this.pnl_chkMotorizedOptions);
             this.pnl_body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_body.Location = new System.Drawing.Point(0, 0);
             this.pnl_body.Name = "pnl_body";
-            this.pnl_body.Size = new System.Drawing.Size(150, 178);
+            this.pnl_body.Size = new System.Drawing.Size(150, 210);
             this.pnl_body.TabIndex = 65;
             // 
             // panel4
@@ -66,10 +71,20 @@
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.btn_addLouver);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 149);
+            this.panel4.Location = new System.Drawing.Point(0, 180);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(148, 27);
             this.panel4.TabIndex = 71;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(2, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "Add Gallery Set";
             // 
             // btn_addLouver
             // 
@@ -97,7 +112,7 @@
             this.panel2.Controls.Add(this.lbl_BladeHeight);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(0, 31);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(148, 149);
             this.panel2.TabIndex = 68;
@@ -217,15 +232,42 @@
             this.label2.TabIndex = 52;
             this.label2.Text = "Gallery Set";
             // 
-            // label4
+            // pnl_chkMotorizedOptions
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(2, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
-            this.label4.TabIndex = 64;
-            this.label4.Text = "Add Gallery Set";
+            this.pnl_chkMotorizedOptions.Controls.Add(this.lbl_motorized);
+            this.pnl_chkMotorizedOptions.Controls.Add(this.chk_Motorized);
+            this.pnl_chkMotorizedOptions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_chkMotorizedOptions.Location = new System.Drawing.Point(0, 0);
+            this.pnl_chkMotorizedOptions.Name = "pnl_chkMotorizedOptions";
+            this.pnl_chkMotorizedOptions.Size = new System.Drawing.Size(148, 31);
+            this.pnl_chkMotorizedOptions.TabIndex = 72;
+            // 
+            // lbl_motorized
+            // 
+            this.lbl_motorized.Location = new System.Drawing.Point(3, 3);
+            this.lbl_motorized.Name = "lbl_motorized";
+            this.lbl_motorized.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lbl_motorized.Size = new System.Drawing.Size(91, 24);
+            this.lbl_motorized.TabIndex = 34;
+            this.lbl_motorized.Text = "Motorized";
+            this.lbl_motorized.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chk_Motorized
+            // 
+            this.chk_Motorized.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_Motorized.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_Motorized.FlatAppearance.BorderSize = 0;
+            this.chk_Motorized.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_Motorized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_Motorized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_Motorized.Location = new System.Drawing.Point(98, 6);
+            this.chk_Motorized.Name = "chk_Motorized";
+            this.chk_Motorized.Size = new System.Drawing.Size(50, 21);
+            this.chk_Motorized.TabIndex = 35;
+            this.chk_Motorized.Text = "No";
+            this.chk_Motorized.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_Motorized.UseVisualStyleBackColor = false;
+            this.chk_Motorized.CheckedChanged += new System.EventHandler(this.chk_Motorized_CheckedChanged);
             // 
             // PP_LouverGallerySetPropertyUC
             // 
@@ -233,7 +275,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl_body);
             this.Name = "PP_LouverGallerySetPropertyUC";
-            this.Size = new System.Drawing.Size(150, 178);
+            this.Size = new System.Drawing.Size(150, 210);
             this.Load += new System.EventHandler(this.PP_LouverGallerySetPropertyUC_Load);
             this.pnl_body.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -241,6 +283,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_NoOfBladePerSet)).EndInit();
+            this.pnl_chkMotorizedOptions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -263,5 +306,8 @@
         private System.Windows.Forms.ComboBox cmb_BladeHeight;
         private System.Windows.Forms.Label lbl_BladeHeight;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnl_chkMotorizedOptions;
+        private System.Windows.Forms.Label lbl_motorized;
+        private System.Windows.Forms.CheckBox chk_Motorized;
     }
 }
