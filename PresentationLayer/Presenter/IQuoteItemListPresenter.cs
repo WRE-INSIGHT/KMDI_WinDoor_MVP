@@ -18,7 +18,6 @@ namespace PresentationLayer.Presenter
                                                IMainPresenter mainPresenter);
         void SetAllItemDiscount(int inputedDiscount);
         void refreshItemList(object sender, EventArgs e);
-        List<IQuoteItemListUCPresenter> ListQuoteItem { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }
