@@ -30,8 +30,9 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
-       
+
         #region Variables
+        GlassRDLC glass = new GlassRDLC();
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         public List<IQuoteItemListUCPresenter> ListQuoteItem
         {
@@ -44,9 +45,8 @@ namespace PresentationLayer.Presenter
                 _lstQuoteItemUC = value;
             }
         }
-        private List<int> _lstItemArea = new List<int>();
-
-        //private List<Books> _lt = new List<Books>();          
+        private List<int> _lstItemArea = new List<int>(); 
+        private List<GlassRDLC> lst_GlassSummary = new List<GlassRDLC>();      
         //private List<string> lst_glassThicknessPerItem = new List<string>();
 
         int prev_GlassItemNo,
@@ -122,6 +122,7 @@ namespace PresentationLayer.Presenter
 
                     if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
                     {
+                        #region multipanel
                         foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -224,9 +225,11 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+                        #endregion 
                     }
                     else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)
                     {
+                        #region single panel
                         IPanelModel Singlepnl = fr.Lst_Panel[0];
 
                         if (Singlepnl.Panel_GlassThicknessDesc != null)
@@ -326,6 +329,7 @@ namespace PresentationLayer.Presenter
 
 
                         }
+                        #endregion
                     }
                 }
                 i++;
@@ -355,7 +359,34 @@ namespace PresentationLayer.Presenter
                                          prev_GlassPrice
                                           );
             }
+
             existing = false;
+
+                    
+            //glass.GlassItemNo = prev_GlassItemNo;
+            //glass.GlassQuantity = prev_GlassQty;
+            //glass.GlassSize = prev_GlassSize;
+            //glass.GlassArea = prev_GlassArea;
+            //glass.GlassReference = prev_GlassRef;
+            //glass.GlassLocation = prev_GlassLoc;
+            //glass.GlassDescription = prev_GlassDesc;
+            //glass.GlassPrice = prev_GlassPrice;
+
+            //this.lst_GlassSummary.Add(glass);
+
+            //#region print glassrdlclist
+            //foreach (var item in lst_GlassSummary.ToArray())
+            //{
+            //    Console.WriteLine("item No" + item.GlassItemNo);
+            //    Console.WriteLine("Quantity" + item.GlassQuantity);
+            //    Console.WriteLine("Size " + item.GlassSize);
+            //    Console.WriteLine(item.GlassArea);
+            //    Console.WriteLine(item.GlassReference);
+            //    Console.WriteLine(item.GlassLocation);
+            //    Console.WriteLine(item.GlassDescription);
+            //    Console.WriteLine("Price" + item.GlassPrice);
+            //}
+            //#endregion
 
             IPrintGlassSummaryPresenter printGlass = _printGlassSummaryPresenter.GetNewInstance(_unityC, this, _mainPresenter, _windoorModel, _quotationModel);
             printGlass.GetPrintGlassSummaryView().GetBindingSource().DataSource = _dsq.dtGlassSummary.DefaultView;
@@ -642,23 +673,125 @@ namespace PresentationLayer.Presenter
        
     }
 
-    //public class Books
-    //{
-    //    private string _screenType,
-    //                   _screenDimension,
-    //                   _screenWinDoorID,
-    //                   _screenUnitPrice,
-    //                   _;
-       
+    public class GlassRDLC
+    {
+        private string _glassSize,                    
+                       _glassReference,
+                       _glassLocation,
+                       _glassDesc;
 
-    //    public Books(string Name, string Note)
-    //    {
-            
-    //    }
+        private decimal _glassArea,
+                        _glassPrice;
 
-    //    public Books()
-    //    {
-    //    }
-    //}
+        private int _glassItemNo,
+                    _glassQuantity;
+
+        public string GlassSize
+        {
+            get
+            {
+                return _glassSize;
+            }
+            set
+            {
+                _glassSize = value;
+            }
+        }
+        public string GlassReference
+        {
+            get
+            {
+                return _glassReference;
+            }
+            set
+            {
+                _glassReference = value;
+            }
+        }
+        public string GlassLocation
+        {
+            get
+            {
+                return _glassLocation;
+            }
+            set
+            {
+                _glassLocation = value;
+            }
+        }
+        public string GlassDescription
+        {
+            get
+            {
+                return _glassDesc;
+            }
+            set
+            {
+                _glassDesc = value;
+            }
+        }
+        public decimal GlassArea
+        {
+            get
+            {
+                return _glassArea;
+            }
+            set
+            {
+                _glassArea = value;
+            }
+        }
+        public decimal GlassPrice
+        {
+            get
+            {
+                return _glassPrice;
+            }
+            set
+            {
+                _glassPrice = value;
+            }
+        }
+        public int GlassItemNo
+        {
+            get
+            {
+                return _glassItemNo;
+            }
+            set
+            {
+                _glassItemNo = value;
+            }
+        }
+        public int GlassQuantity
+        {
+            get
+            {
+                return _glassQuantity;
+            }
+            set
+            {
+                _glassQuantity = value;
+            }
+        }
+
+        public GlassRDLC(string glasssize,string glassref,string glassloc,string glassdesc,
+                        decimal glassarea,decimal glassprice,int glassitemno,int glassqty )
+        {
+            GlassSize = glasssize;
+            GlassReference = glassref;
+            GlassLocation = glassloc;
+            GlassDescription = glassdesc;
+            GlassArea = glassarea;
+            GlassPrice = glassprice;
+            GlassItemNo = glassitemno;
+            GlassQuantity = glassqty;
+
+        }
+
+        public GlassRDLC()
+        {
+        }
+    }
 
 }
