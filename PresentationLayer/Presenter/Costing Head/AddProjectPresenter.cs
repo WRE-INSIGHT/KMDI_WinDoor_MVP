@@ -135,6 +135,9 @@ namespace PresentationLayer.Presenter.Costing_Head
                 if(_projectId != 0)
                 {
                     await _projQuoteServices.EditProject(_projectId, _projectModel);
+                }else
+                {
+                    
                 }
                 _addProjectView.ThisBinding(CreateBindingDictionary());
 
@@ -178,6 +181,30 @@ namespace PresentationLayer.Presenter.Costing_Head
         {
             _addProjectView.ShowThisView();
         }
-       
+
+        public void ClearBinding()
+        {
+            _addProjectView.ClearBinding();
+        }
+
+        public void ClearProjectModel()
+        {
+            _projectModel.Title = "";
+            _projectModel.Firstname = "";
+            _projectModel.Lastname = "";
+            _projectModel.CompanyName = "";
+            _projectModel.ContactNo = "";
+            _projectModel.FileLableAs = "";
+            _projectModel.UnitNo = "";
+            _projectModel.Establishment = "";
+            _projectModel.HouseNo = "";
+            _projectModel.Street = "";
+            _projectModel.Village = "";
+            _projectModel.Barangay = "";
+            _projectModel.City = "";
+            _projectModel.Province = "";
+            _projectModel.Area = "";
+            _projectModel.CompleteAddress = "";
+        }
     }
 }

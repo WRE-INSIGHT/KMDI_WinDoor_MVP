@@ -12,5 +12,7 @@ namespace PresentationLayer.Presenter.Costing_Head
     {
         IAddProjectPresenter GetNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, int projectId, IUserModel userModel);
         void ShowThisView();
+        void ClearBinding();
+        void ClearProjectModel();
     }
 }

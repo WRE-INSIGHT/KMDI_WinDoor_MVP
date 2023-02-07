@@ -59,9 +59,9 @@ namespace PresentationLayer.Presenter.Costing_Head
                 if(_dgvClient.SelectedRows.Count == 1)
                 {
                     int projectId = Convert.ToInt32(_dgvClient.SelectedRows[0].Cells["Project_Id"].Value.ToString());
-
-                    IAddProjectPresenter addProj = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, projectId, _userModel);
-                    addProj.ShowThisView();
+                    _addProjectPresenter.ClearBinding();
+                    _addProjectPresenter = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, projectId, _userModel);
+                    _addProjectPresenter.ShowThisView();
                 }
                 else
                 {
@@ -93,15 +93,14 @@ namespace PresentationLayer.Presenter.Costing_Head
                 MessageBox.Show("Error Message: " + ex.Message);
             }
         }
-
-      
-
         private void _assignAEView_AddProjectToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                IAddProjectPresenter addProj = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, 0, _userModel);
-                addProj.ShowThisView();
+                _addProjectPresenter.ClearBinding();
+                _addProjectPresenter.ClearProjectModel();
+                _addProjectPresenter = _addProjectPresenter.GetNewInstance(_unityC, _mainPresenter, 0, _userModel);
+                _addProjectPresenter.ShowThisView();
             }
             catch (Exception ex)
             {

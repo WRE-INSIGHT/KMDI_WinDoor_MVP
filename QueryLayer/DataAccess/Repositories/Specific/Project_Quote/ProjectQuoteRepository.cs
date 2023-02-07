@@ -587,7 +587,7 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
             }
         }
 
-        public async Task Delete_Project(int project_Id, int userID)
+        public async Task Delete_Project(int Project_Quote_Id, int userID)
         {
             using (SqlConnection sqlcon = new SqlConnection(_sqlConString))
             {
@@ -601,9 +601,10 @@ namespace QueryLayer.DataAccess.Repositories.Specific.Project_Quote
                         sqlcmd.CommandText = "Project_Quote_Stp";
                         sqlcmd.CommandType = CommandType.StoredProcedure;
                         sqlcmd.Parameters.Add("@Command", SqlDbType.VarChar).Value = "DeleteProject";
-                        sqlcmd.Parameters.Add("@Project_Id", SqlDbType.Int).Value = project_Id;
+                        sqlcmd.Parameters.Add("@Id", SqlDbType.Int).Value = Project_Quote_Id;
                         sqlcmd.Parameters.Add("@User_Id", SqlDbType.Int).Value = userID;
                         sqltrans.Commit();
+                        sqlcmd.ExecuteReader();
                     }
                 }
             }

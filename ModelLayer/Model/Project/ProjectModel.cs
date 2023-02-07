@@ -142,6 +142,34 @@ namespace ModelLayer.Model.AddProject
                 _village = value;
             }
         }
+        //private int _projectId;
+        //public int ProjectId
+        //{
+        //    get
+        //    {
+        //        return _projectId;
+        //    }
+
+        //    set
+        //    {
+        //        _projectId = value;
+        //    }
+        //}
+
+
+        private string _title;
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+
+            set
+            {
+                _title = value;
+            }
+        }
         private string _firstname;
         public string Firstname
         {
@@ -209,7 +237,7 @@ namespace ModelLayer.Model.AddProject
                 _fileLableAs = value;
             }
         }
-
+        private string _completeAddress;
         public string CompleteAddress
         {
             get
@@ -252,23 +280,18 @@ namespace ModelLayer.Model.AddProject
                 {
                     Complete_Address += Area;
                 }
+                _completeAddress = Complete_Address;
                 return Complete_Address;
             }
-
-           
-        }
-        private string _title;
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-
             set
             {
-                _title = value;
+                _completeAddress = value;
             }
+           
+        }
+        public ProjectModel()
+        {
+
         }
     }
 }

@@ -88,7 +88,27 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
             this.DataBindings.Add(ModelBinding["MPanel_Placement"]);
             this.DataBindings.Add(ModelBinding["MPanel_CmenuDeleteVisibility"]);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
 
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+            cmenu_mulltiP.Dispose();
+            divCountToolStripMenuItem.Dispose();
+            dividerEnabledToolStripMenuItem.Dispose();
+            flp_MultiMullion.Dispose();
+            deleteToolStripMenuItem.Dispose();
+            this.Dispose();
+
+        }
         private void flp_MultiMullion_MouseEnter(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, flpMultiMouseEnterEventRaised, e);

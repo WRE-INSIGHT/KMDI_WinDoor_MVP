@@ -107,6 +107,32 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
                 overlapSashToolStripMenuItem.Visible = value;
             }
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+            cmenu_fxd.Dispose();
+            deleteToolStripMenuItem.Dispose();
+            overlapSashToolStripMenuItem.Dispose();
+            rightToolStripMenuItem.Dispose();
+            noneToolStripMenuItem.Dispose();
+            leftToolStripMenuItem.Dispose();
+            bothToolStripMenuItem.Dispose();
+            this.Dispose();
+
+
+        }
+
         public ContextMenuStrip GetcmenuFxd()
         {
             return cmenu_fxd;

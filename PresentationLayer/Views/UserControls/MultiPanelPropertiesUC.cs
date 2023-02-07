@@ -37,6 +37,35 @@ namespace PresentationLayer.Views.UserControls
             num_Width.DataBindings.Add(ModelBinding["MPanel_Width"]);
             num_Height.DataBindings.Add(ModelBinding["MPanel_Height"]);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+            lbl_MultiPanelName.DataBindings.Clear();
+            num_Width.DataBindings.Clear();
+            num_Height.DataBindings.Clear();
+
+
+            this.Dispose();
+            lbl_MultiPanelName.Dispose();
+            num_Width.Dispose();
+            num_Height.Dispose();
+            lbl_Height.Dispose();
+            lbl_Width.Dispose();
+            pnl_MultiPanelProperties.Dispose();
+            cmenu_mpanel.Dispose();
+            panel1.Dispose();
+            glassBalancingToolStripMenuItem.Dispose();
+        }
 
         public MultiPanelPropertiesUC()
         {

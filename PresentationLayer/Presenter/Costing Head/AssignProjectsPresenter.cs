@@ -57,7 +57,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                 {
                     foreach (DataGridViewRow row in _dgvProj.SelectedRows)
                     {
-                        await _projQuoteServices.Delete_Project(Convert.ToInt32(row.Cells["Project_Id"].Value), _userModel.UserID);
+                        await _projQuoteServices.Delete_Project(Convert.ToInt32(row.Cells["Id"].Value), _userModel.UserID);
 
                         //IProjectQuoteModel pqModel = _projQuoteServices.AddProjectQuote(0,
                         //                                                                Convert.ToInt32(row.Cells["Project_Id"].Value),
