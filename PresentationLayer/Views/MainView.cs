@@ -61,6 +61,7 @@ namespace PresentationLayer.Views
                 tsBtnNConcrete.Enabled = value;
                 newfactorBtn.Enabled = value;
                 SetGlassToolStripMenuItem.Enabled = value;
+                ScreentoolStripButton.Enabled = value;
                 duplicateItemToolStripButton1.Enabled = value;
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;
@@ -572,7 +573,10 @@ namespace PresentationLayer.Views
 
         }
 
-
+        private void ScreentoolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
+        }
         private void screenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
@@ -611,5 +615,7 @@ namespace PresentationLayer.Views
         {
             ItemScroll = pnlItems.VerticalScroll.Value;
         }
+
+        
     }
 }
