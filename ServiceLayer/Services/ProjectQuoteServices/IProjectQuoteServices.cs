@@ -34,7 +34,7 @@ namespace ServiceLayer.Services.ProjectQuoteServices
         Task DeleteAEIC(string Project_Id, string Employee_Id);
         Task<DataTable> GetProjectAssignAE(string searchStr, int user_id, string user_acctType);
         Task<bool> CheckCustomerRefById(int custRefId, int Employee_Id);
-        Task Delete_Project(int Project_Id, int userID);
+        Task Delete_Project(int Project_Quote_Id, int userID);
         Task EditProject(int projectId, IProjectModel projectModel);
         Task UpdateProject(int projectId, IProjectModel projectModel, IUserModel userModel);
     }

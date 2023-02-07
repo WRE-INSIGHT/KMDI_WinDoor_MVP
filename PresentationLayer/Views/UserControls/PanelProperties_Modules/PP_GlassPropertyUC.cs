@@ -64,6 +64,44 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             EventHelpers.RaiseEvent(sender, btnSelectGlassThicknessClickedEventRaised, e);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+
+        private void RemoveDataBinding()
+        {
+            cmb_FilmType.DataBindings.Clear();
+            cmb_GlazingArtNo.DataBindings.Clear();
+            cmb_GlassType.DataBindings.Clear();
+            lbl_GlassThicknessDesc.DataBindings.Clear();
+            chk_GlazingAdaptor.DataBindings.Clear();
+            this.DataBindings.Clear();
+            pnl_GlazingBeadArtNo.DataBindings.Clear();
+            pnl_GlazingAdaptor.DataBindings.Clear();
+
+            cmb_FilmType.Dispose();
+            cmb_GlazingArtNo.Dispose();
+            cmb_GlassType.Dispose();
+            lbl_GlassThicknessDesc.Dispose();
+            chk_GlazingAdaptor.Dispose();
+            this.Dispose();
+            pnl_GlazingBeadArtNo.Dispose();
+            pnl_GlazingAdaptor.Dispose();
+
+            lbl_glassthick.Dispose();
+            label1.Dispose();
+            label2.Dispose();
+            label5.Dispose();
+            pnl_FilmType.Dispose();
+            pnl_GlassType.Dispose();
+        }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
