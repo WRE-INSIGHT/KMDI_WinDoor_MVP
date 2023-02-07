@@ -139,7 +139,67 @@ namespace PresentationLayer.Views.UserControls
         {
             EventHelpers.RaiseEvent(sender, btnSaveCladdingClickedEventRaised, e);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
 
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+            num_divWidth.DataBindings.Clear();
+            num_divHeight.DataBindings.Clear();
+            lbl_divname.DataBindings.Clear();
+            cmb_divArtNo.DataBindings.Clear();
+            cmb_divReinf.DataBindings.Clear();
+            chk_DM.DataBindings.Clear();
+            chk_DM.DataBindings.Clear();
+            pnl_DMArtNo.DataBindings.Clear();
+            pnl_divArtNo.DataBindings.Clear();
+            cmb_DMArtNo.DataBindings.Clear();
+            cmb_CladdingArtNo.DataBindings.Clear();
+            pnl_divCladdingArtNo.DataBindings.Clear();
+
+
+            num_divWidth.Dispose();
+            num_divHeight.Dispose();
+            lbl_divname.Dispose();
+            cmb_divArtNo.Dispose();
+            cmb_divReinf.Dispose();
+            chk_DM.Dispose();
+            pnl_DMArtNo.Dispose();
+            pnl_divArtNo.Dispose();
+            cmb_DMArtNo.Dispose();
+            cmb_CladdingArtNo.Dispose();
+            pnl_divCladdingArtNo.Dispose();
+            lbl_divArtNo.Dispose();
+            lbl_divReinf.Dispose();
+            lbl_divSpecs.Dispose();
+            lbl_Height.Dispose();
+            lbl_totalCladdingLength.Dispose();
+            lbl_Width.Dispose();
+            btn_Save.Dispose();
+            btn_SelectDMPanel.Dispose();
+            btn_AddCladding.Dispose();
+            label1.Dispose();
+            label2.Dispose();
+            label3.Dispose();
+            label4.Dispose();
+            pnl_AddCladding.Dispose();
+            pnl_divCladdingArtNo.Dispose();
+            pnl_divHt.Dispose();
+            pnl_dividerBody.Dispose();
+            pnl_divName.Dispose();
+            pnl_divWd.Dispose();
+            this.Dispose();
+
+
+        }
         private void chk_DM_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_DM.Checked == true)

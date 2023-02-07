@@ -156,9 +156,9 @@ namespace ServiceLayer.Services.ProjectQuoteServices
             return await _projQuoteRepo.CheckCustomerRefById(custRefId, Employee_Id);
         }
 
-        public async Task Delete_Project(int Project_Id, int userID)
+        public async Task Delete_Project(int Project_Quote_Id, int userID)
         {
-            await _projQuoteRepo.Delete_Project(Project_Id, userID);
+            await _projQuoteRepo.Delete_Project(Project_Quote_Id, userID);
         }
 
         public async Task EditProject(int projectId, IProjectModel _projectModel)

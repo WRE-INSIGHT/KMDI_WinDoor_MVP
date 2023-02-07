@@ -8,6 +8,7 @@ namespace ModelLayer.Model.Project
 {
     public interface IProjectModel
     {
+        //int ProjectId { get; set; }
         string Title { get; set; }
         string Firstname { get; set; }
         string Lastname { get; set; }
@@ -23,6 +24,6 @@ namespace ModelLayer.Model.Project
         string City { get; set; }
         string Province { get; set; }
         string Area { get; set; }
-        string CompleteAddress { get;}
+        string CompleteAddress { get; set; }
     }
 }

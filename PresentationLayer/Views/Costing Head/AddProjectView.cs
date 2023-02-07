@@ -98,6 +98,43 @@ namespace PresentationLayer.Views.Costing_Head
             cmb_CityStr.DataBindings.Clear();
             cmb_ProvinceStr.DataBindings.Clear();
             cmb_AreaStr.DataBindings.Clear();
+
+
+            txt_Title.Dispose();
+            txt_FirstnameStr.Dispose();
+            txt_LastnameStr.Dispose();
+            txt_CompanynameStr.Dispose();
+            txt_ContactnoStr.Dispose();
+            cmb_FilelableasStr.Dispose();
+            txt_UnitStr.Dispose();
+            txt_EstablishmentStr.Dispose();
+            txt_HousenoStr.Dispose();
+            txt_StreetStr.Dispose();
+            txt_VillageStr.Dispose();
+            txt_BarangayStr.Dispose();
+            cmb_CityStr.Dispose();
+            cmb_ProvinceStr.Dispose();
+            cmb_AreaStr.Dispose();
+
+            label1.Dispose();
+            label2.Dispose();
+            label3.Dispose();
+            label4.Dispose();
+            label5.Dispose();
+            label6.Dispose();
+            label7.Dispose();
+            label8.Dispose();
+            label9.Dispose();
+            label10.Dispose();
+
+            label11.Dispose();
+            label12.Dispose();
+            label13.Dispose();
+            label14.Dispose();
+            label15.Dispose();
+
+            btn_Save.Dispose();
+
             this.Dispose();
         }
     }
