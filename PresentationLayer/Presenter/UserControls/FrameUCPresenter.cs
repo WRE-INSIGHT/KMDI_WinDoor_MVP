@@ -559,7 +559,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void OnDeleteCmenuEventRaised(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to DELETE?",
+            if (MessageBox.Show("Are you sure you want to DELETE " + _frameModel.Frame_Name + "?",
                                 "Deletion",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Question) == DialogResult.Yes)

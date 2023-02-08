@@ -236,7 +236,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to DELETE?",
+                if (MessageBox.Show("Are you sure you want to DELETE " + _concreteModel.Concrete_Name + "?",
                                 "Deletion",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Question) == DialogResult.Yes)

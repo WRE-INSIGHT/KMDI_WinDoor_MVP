@@ -9947,6 +9947,7 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
+            Load_Windoor_Item(_windoorModel);
         }
 
 
