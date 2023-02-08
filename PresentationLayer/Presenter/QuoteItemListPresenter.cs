@@ -32,10 +32,9 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
 
         #region Variables
-        //GlassRDLC glass = new GlassRDLC();
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<int> _lstItemArea = new List<int>();
-        private List<GlassRDLC> lst_GlassSummary = new List<GlassRDLC>();
+        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
 
         int prev_GlassItemNo,
             prev_GlassQty,
@@ -87,7 +86,7 @@ namespace PresentationLayer.Presenter
 
         private void _quoteItemListView_QuoteItemListViewFormClosedEventRaised(object sender, FormClosedEventArgs e)
         {
-            // _mainPresenter.GetCurrentPrice();
+            //_mainPresenter.GetCurrentPrice();
             _mainPresenter.updatePriceOfMainView();
         }
 
@@ -143,7 +142,7 @@ namespace PresentationLayer.Presenter
                                             }
                                             else
                                             {
-                                                this.lst_GlassSummary.Add(new GlassRDLC
+                                                this._lstGlassSummary.Add(new GlassRDLC
                                                 {
                                                     GlassItemNo = prev_GlassItemNo,
                                                     GlassQuantity = prev_GlassQty,
@@ -171,7 +170,7 @@ namespace PresentationLayer.Presenter
                                         else
                                         {
 
-                                            foreach (var item in lst_GlassSummary.ToArray())
+                                            foreach (var item in _lstGlassSummary.ToArray())
                                             {
                                                 if (item.GlassArea == prev_GlassArea && item.GlassDescription == prev_GlassDesc && item.GlassItemNo == prev_GlassItemNo)
                                                 {
@@ -184,7 +183,7 @@ namespace PresentationLayer.Presenter
                                             }
                                             if (existing == false)
                                             {
-                                                this.lst_GlassSummary.Add(new GlassRDLC
+                                                this._lstGlassSummary.Add(new GlassRDLC
                                                 {
                                                     GlassItemNo = prev_GlassItemNo,
                                                     GlassQuantity = prev_GlassQty,
@@ -194,8 +193,7 @@ namespace PresentationLayer.Presenter
                                                     GlassLocation = prev_GlassLoc,
                                                     GlassDescription = prev_GlassDesc,
                                                     GlassPrice = prev_GlassPrice,
-                                                    IntDesc = prev_IntDescription
-                                                    
+                                                    IntDesc = prev_IntDescription                                                   
 
                                                 });
                                             }
@@ -261,7 +259,7 @@ namespace PresentationLayer.Presenter
                                     }
                                     else
                                     {
-                                        this.lst_GlassSummary.Add(new GlassRDLC
+                                        this._lstGlassSummary.Add(new GlassRDLC
                                         {
                                             GlassItemNo = prev_GlassItemNo,
                                             GlassQuantity = prev_GlassQty,
@@ -289,7 +287,7 @@ namespace PresentationLayer.Presenter
                                 else
                                 {
 
-                                    foreach (var item in lst_GlassSummary.ToArray())
+                                    foreach (var item in _lstGlassSummary.ToArray())
                                     {
                                         if (item.GlassArea == prev_GlassArea && item.GlassDescription == prev_GlassDesc && item.GlassItemNo == prev_GlassItemNo)
                                         {
@@ -302,7 +300,7 @@ namespace PresentationLayer.Presenter
                                     }
                                     if (existing == false)
                                     {
-                                        this.lst_GlassSummary.Add(new GlassRDLC
+                                        this._lstGlassSummary.Add(new GlassRDLC
                                         {
                                             GlassItemNo = prev_GlassItemNo,
                                             GlassQuantity = prev_GlassQty,
@@ -352,7 +350,7 @@ namespace PresentationLayer.Presenter
             }
 
             #region Last Item 
-            foreach (var item in lst_GlassSummary.ToArray())
+            foreach (var item in _lstGlassSummary.ToArray())
             {
                 if (item.GlassArea == curr_GlassArea && item.GlassDescription == curr_GlassDesc && item.GlassItemNo == curr_GlassItemNo)
                 {
@@ -364,7 +362,7 @@ namespace PresentationLayer.Presenter
             }
             if (existing == false)
             {
-                this.lst_GlassSummary.Add(new GlassRDLC
+                this._lstGlassSummary.Add(new GlassRDLC
                 {
                     GlassItemNo = prev_GlassItemNo,
                     GlassQuantity = prev_GlassQty,
@@ -375,7 +373,6 @@ namespace PresentationLayer.Presenter
                     GlassDescription = prev_GlassDesc,
                     GlassPrice = prev_GlassPrice,
                     IntDesc = prev_IntDescription
-
                 });
             }
 
@@ -383,23 +380,13 @@ namespace PresentationLayer.Presenter
             #endregion
 
             #region print glassrdlclist        
-
-
-            List<GlassRDLC> sorted = lst_GlassSummary.OrderBy(x => x.IntDesc)
-                                                      .ThenBy(x => x.GlassItemNo)                                                     
-                                                      .ToList();
+            
+            List<GlassRDLC> sorted = _lstGlassSummary.OrderBy(x => x.IntDesc)
+                                                     .ThenBy(x => x.GlassItemNo)                                                                                                           
+                                                     .ToList();
             foreach (var item in sorted)
             {
-                //Console.WriteLine("item No" + item.GlassItemNo);
-                //Console.WriteLine("Quantity" + item.GlassQuantity);
-                //Console.WriteLine("Size " + item.GlassSize);
-                //Console.WriteLine(item.GlassArea);
-                //Console.WriteLine(item.GlassReference);
-                //Console.WriteLine(item.GlassLocation);
-                //Console.WriteLine(item.GlassDescription);
-                //Console.WriteLine("Price" + item.GlassPrice);
                 Console.WriteLine(item.IntDesc);
-
                 _dsq.dtGlassSummary.Rows.Add(item.GlassItemNo,
                                              item.GlassQuantity,
                                              item.GlassSize,
