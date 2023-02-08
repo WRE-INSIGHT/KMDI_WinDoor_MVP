@@ -4159,11 +4159,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Panel_Index_Inside_SPanel:"))
                         {
                             panel_Index_Inside_SPanel = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
                         }
                         if (row_str.Contains("Panel_Placement:"))
                         {
                             panel_Placement = extractedValue_str;
+                        }
+                        if (row_str.Contains("Panel_GlassPricePerSqrMeter:"))
+                        {
+                            panel_GlassPricePerSqrMeter = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Panel_Overlap_Sash:"))
                         {
@@ -7297,9 +7300,9 @@ namespace PresentationLayer.Presenter
                                                                                panel_Orient,
                                                                                panel_HingeOptions,
                                                                                panel_SlidingTypeVisibility,
-                                                                               panel_SlidingTypes);
+                                                                               panel_SlidingTypes
+                                                                               );
             pnlModel.Panel_fileLoad = true;
-
             pnlModel.Panel_ChkText = panel_ChkText;
             pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
             pnlModel.Panel_Type = panel_Type;
@@ -7314,6 +7317,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_OriginalDisplayWidth = panel_OriginalDisplayWidth;
             pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
             pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
+            pnlModel.Panel_GlassPricePerSqrMeter = panel_GlassPricePerSqrMeter;
             //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
             //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
             pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
@@ -8133,6 +8137,7 @@ namespace PresentationLayer.Presenter
             panel_PropertyHeight,
             panel_HandleOptionsHeight,
             panel_LouverBladesCount;
+     decimal panel_GlassPricePerSqrMeter;
         bool panel_Orient,
              panel_OrientVisibility,
              panel_Visibility,

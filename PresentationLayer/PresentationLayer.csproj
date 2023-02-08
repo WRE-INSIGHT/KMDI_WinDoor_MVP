@@ -1198,6 +1198,7 @@
     <EmbeddedResource Include="Reports\GlassSummary.rdlc" />
     <EmbeddedResource Include="Reports\Quotation.rdlc" />
     <EmbeddedResource Include="Reports\Screen.rdlc" />
+    <EmbeddedResource Include="Reports\SummaryOfContract.rdlc" />
     <EmbeddedResource Include="Views\ChangeItemColorView.resx">
       <DependentUpon>ChangeItemColorView.cs</DependentUpon>
     </EmbeddedResource>
