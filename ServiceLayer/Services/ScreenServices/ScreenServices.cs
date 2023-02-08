@@ -14,50 +14,62 @@ namespace ServiceLayer.Services.ScreenServices
             _modelCheck = modelCheck;
         }
 
-        private IScreenModel CreateScreen(int screen_id, 
-                                          int screen_width,
-                                          int screen_height,
-                                          decimal screen_factor,
-                                          ScreenType screen_types,
-                                          string screen_windoorID, // location
-                                          decimal screen_unitPrice,
-                                          int screen_quantity,
-                                          decimal screen_totalAmount)
+             private IScreenModel CreateScreen(decimal screen_itemnumber,
+                                               int screen_width,
+                                               int screen_height,
+                                               ScreenType screen_types,
+                                               string screen_windoorID,
+                                               decimal screen_unitPrice,
+                                               int screen_quantity,
+                                               int screen_set,
+                                               int discount,
+                                               decimal screen_netPrice,
+                                               decimal screen_totalAmount,
+                                               string plissemagnumType)
         {
-            IScreenModel scrn = new ScreenModel(screen_id,
+             IScreenModel scrn = new ScreenModel(screen_itemnumber,
                                                 screen_width,
                                                 screen_height,
-                                                screen_factor,
                                                 screen_types,
                                                 screen_windoorID, //location
                                                 screen_unitPrice,
                                                 screen_quantity,
-                                                screen_totalAmount);
+                                                screen_set,
+                                                discount,
+                                                screen_netPrice,
+                                                screen_totalAmount,
+                                                plissemagnumType);
 
             ValidateModel(scrn);
             return scrn;
         }
 
-        public IScreenModel AddScreenModel(int screen_id,
-                                          int screen_width,
-                                          int screen_height,
-                                          decimal screen_factor,
-                                          ScreenType screen_types,
-                                          string screen_windoorID, // location
-                                          decimal screen_unitPrice,
-                                          int screen_quantity,
-                                          decimal screen_totalAmount)
+              public IScreenModel AddScreenModel(decimal screen_itemnumber,
+                                                int screen_width,
+                                                int screen_height,
+                                                ScreenType screen_types,
+                                                string screen_windoorID,
+                                                decimal screen_unitPrice,
+                                                int screen_quantity,
+                                                int screen_set,
+                                                int discount,
+                                                decimal screen_netPrice,
+                                                decimal screen_totalAmount,
+                                                string plissemagnumType)
         {
 
-            IScreenModel _screenModel = CreateScreen(screen_id,
-                                                      screen_width,
-                                                      screen_height,
-                                                      screen_factor,
-                                                      screen_types,
-                                                      screen_windoorID, //location
-                                                      screen_unitPrice,
-                                                      screen_quantity,
-                                                      screen_totalAmount);
+               IScreenModel _screenModel = CreateScreen(screen_itemnumber,
+                                                        screen_width,
+                                                        screen_height,
+                                                        screen_types,
+                                                        screen_windoorID, //location
+                                                        screen_unitPrice,
+                                                        screen_quantity,
+                                                        screen_set,
+                                                        discount,
+                                                        screen_netPrice,
+                                                        screen_totalAmount,
+                                                        plissemagnumType);
 
             return _screenModel;
         }

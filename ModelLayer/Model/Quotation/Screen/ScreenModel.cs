@@ -3309,7 +3309,8 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
 
                 #endregion
-                
+          
+
                 ClearingOperation();
                 
 
@@ -3504,25 +3505,32 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
 
-        public ScreenModel(int screen_id,
-                           int screen_width,
-                           int screen_height,
-                           decimal screen_factor,
-                           ScreenType screen_types,
-                           string screen_windoorID,
-                           decimal screen_unitPrice,
-                           int screen_quantity,
-                           decimal screen_totalAmount)
+             public ScreenModel(decimal screen_itemnumber,
+                                int screen_width,
+                                int screen_height,
+                                ScreenType screen_types,
+                                string screen_windoorID,
+                                decimal screen_unitPrice,
+                                int screen_quantity,
+                                int screen_set,
+                                int discount,
+                                decimal screen_netPrice,
+                                decimal screen_totalAmount,
+                                string plissemagnumType
+                                )
         {
-            Screen_id = screen_id;
+            Screen_ItemNumber = screen_itemnumber;
             Screen_Width = screen_width;
             Screen_Height = screen_height;
-            Screen_Factor = screen_factor;
             Screen_Types = screen_types;
             Screen_WindoorID = screen_windoorID;
             Screen_UnitPrice = screen_unitPrice;
             Screen_Quantity = screen_quantity;
+            Screen_Set = screen_set;
+            Screen_Discount = discount;
+            Screen_NetPrice = screen_netPrice;
             Screen_TotalAmount = screen_totalAmount;
+            PlisseMagnumType = plissemagnumType;
         }
     }
 }

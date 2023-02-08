@@ -173,8 +173,7 @@
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 41;
             this.label2.Text = "Item Number";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
+           // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -183,7 +182,6 @@
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 40;
             this.label1.Text = "Discount %";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // nud_Discount
             // 
@@ -214,8 +212,7 @@
             this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
             this.lbl_Quantity.TabIndex = 38;
             this.lbl_Quantity.Text = "Quantity";
-            this.lbl_Quantity.Click += new System.EventHandler(this.lbl_Quantity_Click);
-            // 
+             // 
             // txt_windoorID
             // 
             this.txt_windoorID.Location = new System.Drawing.Point(240, 6);

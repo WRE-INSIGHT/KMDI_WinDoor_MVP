@@ -185,9 +185,17 @@ namespace PresentationLayer.Presenter
 
         private int i = 0;
         private decimal newfactor = 0;
+
         #endregion
 
         #region GetSet
+
+        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        public List<IScreenModel> Screen_List
+        {
+            get { return _screenList; }
+            set { _screenList = value; }
+        }
 
         public DataTable GlassThicknessDT
         {
@@ -1082,15 +1090,18 @@ namespace PresentationLayer.Presenter
         private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            _screenModel = _screenServices.AddScreenModel(0,
+            _screenModel = _screenServices.AddScreenModel(0.0m,
                                                           0,
                                                           0,
-                                                          0.0m,
-                                                          null,
+                                                          null,                                                        
                                                           string.Empty,
                                                           0.0m,
                                                           0,
-                                                          0.0m);
+                                                          0,
+                                                          0,
+                                                          0.0m,
+                                                          0.0m,
+                                                          string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
