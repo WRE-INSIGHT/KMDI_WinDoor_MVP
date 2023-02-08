@@ -780,7 +780,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl_curCtrl.Panel_Type == "Awning Panel")
                                                 {
-                                                    pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List, pnl_curCtrl.MotorizeMechQty());
 
                                                     int hinge_screws = pnl_curCtrl.Add_Hinges_screws4fab();
                                                     add_screws_fab_hinges += hinge_screws;
@@ -1478,7 +1478,7 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            pnl.Insert_MotorizedInfo_MaterialList(Material_List);
+                            pnl.Insert_MotorizedInfo_MaterialList(Material_List, 0);
 
                             int hinge_screws = pnl.Add_Hinges_screws4fab();
                             add_screws_fab_hinges += hinge_screws;

@@ -7540,25 +7540,25 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
-                if (Panel_MotorizedOptionVisibility == true)
-                {
-                    if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
-                    {
-                        Panel_MotorizedMechQty = 1;
-                    }
-                    else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
-                             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
-                    {
-                        if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
-                        {
-                            Panel_MotorizedMechQty = 1;
-                        }
-                        else if (Panel_DisplayWidth >= 1100)
-                        {
-                            Panel_MotorizedMechQty = 2;
-                        }
-                    }
-                }
+                //if (Panel_MotorizedOptionVisibility == true)
+                //{
+                //    if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+                //    {
+                //        Panel_MotorizedMechQty += 1;
+                //    }
+                //    else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                //             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                //    {
+                //        if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
+                //        {
+                //            Panel_MotorizedMechQty += 1;
+                //        }
+                //        else if (Panel_DisplayWidth >= 1100)
+                //        {
+                //            Panel_MotorizedMechQty += 2;
+                //        }
+                //    }
+                //}
 
                 if (Panel_Type.Contains("Awning"))
                 {
@@ -8306,6 +8306,37 @@ namespace ModelLayer.Model.Quotation.Panel
 
             Panel_GlazingSpacerQty = 1;
         }
+        public int MotorizeMechQty()
+        {
+            int motor = 0, resetChk = 0;
+            foreach (IMultiPanelModel mpnl in Panel_ParentFrameModel.Lst_MultiPanel)
+            {
+                foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                {
+                    resetChk++;
+                    if (pnl.Panel_MotorizedOptionVisibility == true)
+                    {
+                        if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+                        {
+                            motor += 1;
+                        }
+                        else if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                                 pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                        {
+                            if (pnl.Panel_DisplayWidth > 0 && pnl.Panel_DisplayWidth <= 1099)
+                            {
+                                motor += 1;
+                            }
+                            else if (pnl.Panel_DisplayWidth >= 1100)
+                            {
+                                motor += 2;
+                            }
+                        }
+                    }
+                }
+            }
+            return motor;
+        }
 
         #region Material_List
 
@@ -8360,7 +8391,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                              @"|  |");
         }
 
-        public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion)
+        public void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount)
         {
             if (Panel_Type == "Awning Panel")
             {
@@ -8428,7 +8459,7 @@ namespace ModelLayer.Model.Quotation.Panel
             }
 
             tbl_explosion.Rows.Add("Motorized Mechanism " + Panel_MotorizedMechArtNo.DisplayName,
-                                   Panel_MotorizedMechQty, "pc(s)",
+                                   motorCount, "pc(s)",
                                    "",
                                    "Sash",
                                    @"");

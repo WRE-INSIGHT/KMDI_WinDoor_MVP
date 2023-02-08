@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
 
-        
+
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -3286,7 +3286,7 @@ namespace PresentationLayer.Presenter
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
                 }
-              
+
                 ItemScroll = 0;
                 PropertiesScroll = 0;
             }
@@ -7616,7 +7616,7 @@ namespace PresentationLayer.Presenter
                 multiMullionUC = _multiMullionUC4th;
                 multiTransomUC = _multiTransomUC4th;
             }
-         
+
             if (panel_Type.Contains("Fixed Panel"))
             {
                 IFixedPanelUCPresenter fixedUCP;
@@ -10304,10 +10304,10 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
-            ////string[] province = projectAddress.Split(',');
-            ////_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-            string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
+            string[] province = projectAddress.Split(',');
+            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+            //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
 
 
@@ -10806,7 +10806,7 @@ namespace PresentationLayer.Presenter
                 _quotationModel.itemSelectStatus = false;
                 _quotationModel.BOMandItemlistStatus = "PriceItemList";
             }
-            if(ItemLoad == false)
+            if (ItemLoad == false)
             {
                 _quotationModel.ItemCostingPriceAndPoints();
             }
@@ -10880,8 +10880,8 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-                            if(availableHeight > frmDimension_numHt && 
-                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd && 
+                            if (availableHeight > frmDimension_numHt &&
+                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
                                _windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
@@ -10931,9 +10931,9 @@ namespace PresentationLayer.Presenter
                         {
 
 
-                            if (availableHeight > frmDimension_numHt && 
+                            if (availableHeight > frmDimension_numHt &&
                                 (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
-                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name) 
+                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += crtm.Concrete_Height;

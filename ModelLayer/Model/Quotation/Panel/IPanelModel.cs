@@ -361,7 +361,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
-        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
@@ -448,5 +448,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_LouvreGallerySet_MaterialList(DataTable tbl_explosion);
 
         #endregion
+
+        int MotorizeMechQty();
     }
 }
