@@ -1039,6 +1039,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
             this.Load += new System.EventHandler(this.MainView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyUp);
             this.mnsMainMenu.ResumeLayout(false);
             this.mnsMainMenu.PerformLayout();
             this.tsMain.ResumeLayout(false);

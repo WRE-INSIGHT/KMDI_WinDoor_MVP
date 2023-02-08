@@ -931,13 +931,22 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
+            _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
         }
-
-
-
         #region Events  
-
+        private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
+        {
+            int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 120;
+            if (numberOfTextLinesToMove > 0)
+            {
+                ZoomIn();
+            }
+            else
+            {
+                ZoomOut();
+            }
+        }
         #region setnewfactor
         private void OnsetNewFactorEventRaised(object sender, EventArgs e)
         {
@@ -1310,7 +1319,7 @@ namespace PresentationLayer.Presenter
                                         {
                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                             {
-                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                             }
                                         }
                                         wndr_content.Add("\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1385,7 +1394,7 @@ namespace PresentationLayer.Presenter
                                                         {
                                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                             {
-                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                             }
                                                         }
                                                         wndr_content.Add("\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1501,7 +1510,7 @@ namespace PresentationLayer.Presenter
                                                                         {
                                                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                                             {
-                                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                                             }
                                                                         }
                                                                         wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1600,7 +1609,7 @@ namespace PresentationLayer.Presenter
                                                                                     {
                                                                                         foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                                                         {
-                                                                                            lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                                            lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                                                         }
                                                                                     }
                                                                                     wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -2105,41 +2114,12 @@ namespace PresentationLayer.Presenter
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
-
-            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
-            {
-                ndx_zoomPercentage++;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                _windoorModel.SetDimensions_basePlatform();
-                _windoorModel.SetZoom();
-                _windoorModel.Fit_MyControls_ToBindDimensions();
-                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                //FitControls_InsideMultiPanel();
-                //Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
+            ZoomIn();
         }
 
         private void OnButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
-
-            if (ndx_zoomPercentage > 0)
-            {
-                ndx_zoomPercentage--;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                _windoorModel.SetDimensions_basePlatform();
-                _windoorModel.SetZoom();
-                _windoorModel.Fit_MyControls_ToBindDimensions();
-                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-
-                //FitControls_InsideMultiPanel();
-                //Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
+            ZoomOut();
         }
 
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
@@ -10818,7 +10798,43 @@ namespace PresentationLayer.Presenter
             }
 
         }
+        public void ZoomIn()
+        {
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
+            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
+            {
+                ndx_zoomPercentage++;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
+        public void ZoomOut()
+        {
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage > 0)
+            {
+                ndx_zoomPercentage--;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
         public void GetCurrentPrice()
         {
             Run_GetListOfMaterials_SpecificItem();

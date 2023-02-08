@@ -73,6 +73,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_LouverGallerySetOptionPropertyUC_btnDeleteGallerySetClickEventRaised(object sender, EventArgs e)
         {
+            int propertiesScroll = _mainPresenter.PropertiesScroll;
             Control LouverGallerySetOptionUC = ((UserControl)_pp_LouverGallerySetOptionPropertyUC).Parent;
             LouverGallerySetOptionUC.Controls.Remove((UserControl)_pp_LouverGallerySetOptionPropertyUC);
 
@@ -107,6 +108,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _louverGallerySetPropertyUCPresenter.SortGallerySetOrderNumber();
             _mainPresenter.GetCurrentPrice();
             _mainPresenter.itemDescription();
+            _mainPresenter.PropertiesScroll = propertiesScroll;
         }
 
         private void _pp_LouverGallerySetOptionPropertyUC_LouverGallerySetOptionPropertyUCLoadEventRaised(object sender, EventArgs e)
