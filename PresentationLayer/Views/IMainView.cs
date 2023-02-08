@@ -44,7 +44,7 @@ namespace PresentationLayer.Views
         event EventHandler billOfMaterialToolStripMenuItemClickEventRaised;
         event EventHandler NudCurrentPriceValueChangedEventRaised;
         event EventHandler setNewFactorEventRaised;
-        
+        event MouseEventHandler PanelMainMouseWheelRaiseEvent;
 
 
         string mainview_title { get; set; }

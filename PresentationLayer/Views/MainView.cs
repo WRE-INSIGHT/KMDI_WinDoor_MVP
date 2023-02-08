@@ -252,13 +252,22 @@ namespace PresentationLayer.Views
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
         public event EventHandler setNewFactorEventRaised;
-       
+        public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
 
         public MainView()
         {
             InitializeComponent();
             pnlItems.MouseWheel += PnlItems_MouseWheel;
+            pnlMain.MouseWheel += PnlMain_MouseWheel;
             pnlPropertiesBody.MouseWheel += PnlProperties_MouseWheel;
+        }
+
+        private void PnlMain_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (CrtlPress)
+            {
+                EventHelpers.RaiseMouseEvent(sender, PanelMainMouseWheelRaiseEvent, e);
+            }
         }
 
         private void PnlProperties_MouseWheel(object sender, MouseEventArgs e)
@@ -615,7 +624,18 @@ namespace PresentationLayer.Views
         {
             ItemScroll = pnlItems.VerticalScroll.Value;
         }
+        bool CrtlPress = false;
+        private void MainView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((ModifierKeys & Keys.Control) == Keys.Control)
+            {
+                CrtlPress = true;
+            }
+        }
 
-        
+        private void MainView_KeyUp(object sender, KeyEventArgs e)
+        {
+            CrtlPress = false;
+        }
     }
 }
