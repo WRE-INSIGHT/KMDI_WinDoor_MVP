@@ -145,7 +145,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_HandleLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_HandleLocation.FormattingEnabled = true;
-            this.cmb_HandleLocation.Location = new System.Drawing.Point(75, 98);
+            this.cmb_HandleLocation.Location = new System.Drawing.Point(75, 97);
             this.cmb_HandleLocation.Name = "cmb_HandleLocation";
             this.cmb_HandleLocation.Size = new System.Drawing.Size(70, 21);
             this.cmb_HandleLocation.TabIndex = 60;
@@ -155,7 +155,7 @@
             // 
             this.lbl_HandleLocation.AutoSize = true;
             this.lbl_HandleLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_HandleLocation.Location = new System.Drawing.Point(3, 102);
+            this.lbl_HandleLocation.Location = new System.Drawing.Point(3, 101);
             this.lbl_HandleLocation.Name = "lbl_HandleLocation";
             this.lbl_HandleLocation.Size = new System.Drawing.Size(64, 13);
             this.lbl_HandleLocation.TabIndex = 59;
@@ -167,7 +167,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_HandleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_HandleType.FormattingEnabled = true;
-            this.cmb_HandleType.Location = new System.Drawing.Point(75, 72);
+            this.cmb_HandleType.Location = new System.Drawing.Point(75, 70);
             this.cmb_HandleType.Name = "cmb_HandleType";
             this.cmb_HandleType.Size = new System.Drawing.Size(70, 21);
             this.cmb_HandleType.TabIndex = 58;
@@ -177,7 +177,7 @@
             // 
             this.lbl_HandleType.AutoSize = true;
             this.lbl_HandleType.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_HandleType.Location = new System.Drawing.Point(3, 76);
+            this.lbl_HandleType.Location = new System.Drawing.Point(3, 73);
             this.lbl_HandleType.Name = "lbl_HandleType";
             this.lbl_HandleType.Size = new System.Drawing.Size(70, 13);
             this.lbl_HandleType.TabIndex = 57;
@@ -185,7 +185,7 @@
             // 
             // nud_NoOfBladePerSet
             // 
-            this.nud_NoOfBladePerSet.Location = new System.Drawing.Point(75, 47);
+            this.nud_NoOfBladePerSet.Location = new System.Drawing.Point(75, 44);
             this.nud_NoOfBladePerSet.Name = "nud_NoOfBladePerSet";
             this.nud_NoOfBladePerSet.Size = new System.Drawing.Size(72, 20);
             this.nud_NoOfBladePerSet.TabIndex = 56;
@@ -194,7 +194,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 50);
+            this.label3.Location = new System.Drawing.Point(3, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 55;
@@ -206,7 +206,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_BladeHeight.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_BladeHeight.FormattingEnabled = true;
-            this.cmb_BladeHeight.Location = new System.Drawing.Point(75, 21);
+            this.cmb_BladeHeight.Location = new System.Drawing.Point(75, 17);
             this.cmb_BladeHeight.Name = "cmb_BladeHeight";
             this.cmb_BladeHeight.Size = new System.Drawing.Size(70, 21);
             this.cmb_BladeHeight.TabIndex = 54;
@@ -216,7 +216,7 @@
             // 
             this.lbl_BladeHeight.AutoSize = true;
             this.lbl_BladeHeight.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_BladeHeight.Location = new System.Drawing.Point(4, 24);
+            this.lbl_BladeHeight.Location = new System.Drawing.Point(4, 20);
             this.lbl_BladeHeight.Name = "lbl_BladeHeight";
             this.lbl_BladeHeight.Size = new System.Drawing.Size(73, 13);
             this.lbl_BladeHeight.TabIndex = 53;
@@ -226,7 +226,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 7);
+            this.label2.Location = new System.Drawing.Point(4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 52;

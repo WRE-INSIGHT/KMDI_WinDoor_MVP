@@ -5205,6 +5205,7 @@ namespace ModelLayer.Model.Quotation.Panel
             Panel_StrikerQty_C = 0;
             Panel_AdjStrikerQty = 0;
 
+
             Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
             Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
             Foil_Color outside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_OutsideColor;
@@ -6912,6 +6913,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
             Panel_StrikerQty_A = 0;
             Panel_StrikerQty_C = 0;
+            Panel_StrikerArtno_SlidingQty = 0;
 
             Base_Color base_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_BaseColor;
             Foil_Color inside_color = Panel_ParentFrameModel.Frame_WindoorModel.WD_InsideColor;
@@ -7540,25 +7542,25 @@ namespace ModelLayer.Model.Quotation.Panel
                 Panel_StrikerArtno_A = Striker_ArticleNo._M89ANTA;
                 Panel_StrikerArtno_C = Striker_ArticleNo._M89ANTC;
 
-                //if (Panel_MotorizedOptionVisibility == true)
-                //{
-                //    if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
-                //    {
-                //        Panel_MotorizedMechQty += 1;
-                //    }
-                //    else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
-                //             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
-                //    {
-                //        if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
-                //        {
-                //            Panel_MotorizedMechQty += 1;
-                //        }
-                //        else if (Panel_DisplayWidth >= 1100)
-                //        {
-                //            Panel_MotorizedMechQty += 2;
-                //        }
-                //    }
-                //}
+                if (Panel_MotorizedOptionVisibility == true)
+                {
+                    if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
+                    {
+                        Panel_MotorizedMechQty += 1;
+                    }
+                    else if (Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41555B ||
+                             Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._41556C)
+                    {
+                        if (Panel_DisplayWidth > 0 && Panel_DisplayWidth <= 1099)
+                        {
+                            Panel_MotorizedMechQty += 1;
+                        }
+                        else if (Panel_DisplayWidth >= 1100)
+                        {
+                            Panel_MotorizedMechQty += 2;
+                        }
+                    }
+                }
 
                 if (Panel_Type.Contains("Awning"))
                 {
@@ -9144,9 +9146,11 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion)
         {
+            int roundoff = (Panel_DisplayWidthDecimal >= 5) ? 1 : 0;
+            
             tbl_explosion.Rows.Add("Guide Track Profile " + Panel_GuideTrackProfileArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
-                                   Panel_ParentFrameModel.Frame_Width,
+                                   Panel_DisplayWidth * 2,//Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
                                    @"|  |");
         }
@@ -9155,7 +9159,7 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             tbl_explosion.Rows.Add("Aluminum Track " + Panel_AluminumTrackArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
-                                   Panel_ParentFrameModel.Frame_Width,
+                                   Panel_DisplayWidth * 2,//Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
                                    @"|  |");
         }
