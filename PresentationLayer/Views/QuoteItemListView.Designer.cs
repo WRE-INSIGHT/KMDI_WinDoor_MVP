@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuoteItemListView));
             this.pnlPrintBody = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.TSbtnPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.TSbtnGlassSummary = new System.Windows.Forms.ToolStripButton();
+            this.TSbtnContractSummary = new System.Windows.Forms.ToolStripButton();
             this.pnlPrintHeader.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +125,8 @@
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSbtnPrint,
-            this.TSbtnGlassSummary});
+            this.TSbtnGlassSummary,
+            this.TSbtnContractSummary});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(868, 25);
@@ -133,12 +136,21 @@
             // TSbtnGlassSummary
             // 
             this.TSbtnGlassSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSbtnGlassSummary.Image = global::PresentationLayer.Properties.Resources.external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic;
+            this.TSbtnGlassSummary.Image = global::PresentationLayer.Properties.Resources.glass__1_;
             this.TSbtnGlassSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnGlassSummary.Name = "TSbtnGlassSummary";
             this.TSbtnGlassSummary.Size = new System.Drawing.Size(23, 22);
-            this.TSbtnGlassSummary.Text = "Print";
+            this.TSbtnGlassSummary.Text = "Glass Summary";
             this.TSbtnGlassSummary.Click += new System.EventHandler(this.TSbtnGlassSummary_Click);
+            // 
+            // TSbtnContractSummary
+            // 
+            this.TSbtnContractSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSbtnContractSummary.Image = ((System.Drawing.Image)(resources.GetObject("TSbtnContractSummary.Image")));
+            this.TSbtnContractSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSbtnContractSummary.Name = "TSbtnContractSummary";
+            this.TSbtnContractSummary.Size = new System.Drawing.Size(23, 22);
+            this.TSbtnContractSummary.Text = "Contract Summary";
             // 
             // QuoteItemListView
             // 
@@ -174,5 +186,6 @@
         private System.Windows.Forms.ToolStripButton TSbtnPrint;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton TSbtnGlassSummary;
+        private System.Windows.Forms.ToolStripButton TSbtnContractSummary;
     }
 }

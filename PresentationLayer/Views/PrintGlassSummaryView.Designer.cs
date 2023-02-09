@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintGlassSummaryView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.chkbx_ShowPrice = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dtp_Date = new System.Windows.Forms.DateTimePicker();
@@ -37,11 +39,10 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSGlassSummary = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSGlassSummary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -54,6 +55,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(750, 40);
             this.panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chkbx_ShowPrice);
+            this.panel2.Controls.Add(this.btnRefresh);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(554, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(196, 40);
+            this.panel2.TabIndex = 13;
             // 
             // chkbx_ShowPrice
             // 
@@ -104,16 +115,6 @@
             this.reportViewer1.TabIndex = 4;
             this.reportViewer1.ZoomPercent = 75;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.chkbx_ShowPrice);
-            this.panel2.Controls.Add(this.btnRefresh);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(554, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(196, 40);
-            this.panel2.TabIndex = 13;
-            // 
             // PrintGlassSummaryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,15 +122,16 @@
             this.ClientSize = new System.Drawing.Size(750, 261);
             this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PrintGlassSummaryView";
             this.Text = "PrintGlassSummaryView";
             this.Load += new System.EventHandler(this.PrintGlassSummaryView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BSGlassSummary)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BSGlassSummary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
