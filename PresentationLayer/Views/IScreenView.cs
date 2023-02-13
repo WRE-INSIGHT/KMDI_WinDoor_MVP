@@ -33,6 +33,7 @@ namespace PresentationLayer.Views
         event EventHandler nudPlisseRdValueChangeEventRaise;
         event EventHandler nudDiscountValueChangeEventRaised;
         event EventHandler txtItemNumTextChangeEventRaised;
+        event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
 
         void ShowScreemView();
 
@@ -44,6 +45,7 @@ namespace PresentationLayer.Views
         NumericUpDown getNudPlisseRd();
         Label getLblPlisseRd();
         TextBox getTxtitemListNumber();
+        ComboBox getCmbFreedom();
 
     }
 }

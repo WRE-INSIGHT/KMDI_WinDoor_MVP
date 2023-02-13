@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuoteItemListView));
             this.pnlPrintBody = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -146,11 +145,12 @@
             // TSbtnContractSummary
             // 
             this.TSbtnContractSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSbtnContractSummary.Image = ((System.Drawing.Image)(resources.GetObject("TSbtnContractSummary.Image")));
+            this.TSbtnContractSummary.Image = global::PresentationLayer.Properties.Resources.Summary_v2;
             this.TSbtnContractSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnContractSummary.Name = "TSbtnContractSummary";
             this.TSbtnContractSummary.Size = new System.Drawing.Size(23, 22);
             this.TSbtnContractSummary.Text = "Contract Summary";
+            this.TSbtnContractSummary.Click += new System.EventHandler(this.TSbtnContractSummary_Click);
             // 
             // QuoteItemListView
             // 

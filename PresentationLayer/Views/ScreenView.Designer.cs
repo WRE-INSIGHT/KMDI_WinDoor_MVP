@@ -48,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_addOns = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cmb_freedomSize = new System.Windows.Forms.ComboBox();
             this.lbl_plissedRd = new System.Windows.Forms.Label();
             this.nud_plissedRd = new System.Windows.Forms.NumericUpDown();
             this.lbl_Plissé = new System.Windows.Forms.Label();
@@ -119,7 +120,6 @@
             this.dgv_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
-            this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
@@ -173,7 +173,7 @@
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 41;
             this.label2.Text = "Item Number";
-           // 
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -212,7 +212,7 @@
             this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
             this.lbl_Quantity.TabIndex = 38;
             this.lbl_Quantity.Text = "Quantity";
-             // 
+            // 
             // txt_windoorID
             // 
             this.txt_windoorID.Location = new System.Drawing.Point(240, 6);
@@ -271,6 +271,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.cmb_freedomSize);
             this.panel5.Controls.Add(this.lbl_plissedRd);
             this.panel5.Controls.Add(this.nud_plissedRd);
             this.panel5.Controls.Add(this.lbl_Plissé);
@@ -295,6 +296,15 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(227, 316);
             this.panel5.TabIndex = 67;
+            // 
+            // cmb_freedomSize
+            // 
+            this.cmb_freedomSize.FormattingEnabled = true;
+            this.cmb_freedomSize.Location = new System.Drawing.Point(143, 111);
+            this.cmb_freedomSize.Name = "cmb_freedomSize";
+            this.cmb_freedomSize.Size = new System.Drawing.Size(74, 21);
+            this.cmb_freedomSize.TabIndex = 0;
+            this.cmb_freedomSize.SelectedValueChanged += new System.EventHandler(this.cmb_freedomSize_SelectedValueChanged);
             // 
             // lbl_plissedRd
             // 
@@ -447,6 +457,7 @@
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
             this.nud_Height.TabIndex = 70;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
+            this.nud_Height.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Height_KeyPress);
             // 
             // nud_Width
             // 
@@ -455,6 +466,7 @@
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
             this.nud_Width.TabIndex = 69;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
+            this.nud_Width.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Width_KeyPress);
             // 
             // lbl_ScreenHeight
             // 
@@ -599,5 +611,6 @@
         private System.Windows.Forms.NumericUpDown nud_Discount;
         private System.Windows.Forms.TextBox txt_ItemNum;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmb_freedomSize;
     }
 }

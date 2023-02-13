@@ -1238,7 +1238,6 @@ namespace PresentationLayer.Presenter
         {
             #region Save
 
-
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
             wndr_content.Add("ClientsName: " + inputted_projectName);

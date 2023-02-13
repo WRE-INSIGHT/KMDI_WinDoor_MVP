@@ -419,7 +419,7 @@ namespace ModelLayer.Model.Quotation.Screen
         #region ZeroGravityChain
 
         #region ItemQuantity
-        
+
             roller_case_Qty = 1,
             sliding_bar_Qty = 1,
             mesh_w_tube_Qty = 1,
@@ -529,6 +529,30 @@ namespace ModelLayer.Model.Quotation.Screen
                 Maxxy_Contigencies = 0,
         #endregion
 
+        #region Freedom Screen Variables
+                AUDtoPeso_ExchangRate = 40m,
+                Freedom_BasedPrice = 0,
+                Freedom_PowderCoating = 150m,
+                Freedom_MeshUp = 0,
+                Freedom_AUDTCost = 0,
+                Freedom_PesoTCost = 0,
+
+                Freedom_Foiling_Cassette = 0,
+                Freedom_Foiling_TopRail = 0,
+                Freedom_Foiling_SideRail = 0,
+                Freedom_Foiling_PullBar = 0,
+                Freedom_Foiling_Total = 0,
+
+                Freedom_KM04 = 0,
+                Freedom_Accessories = 8000m,
+                Freedom_Installation_Cost = 3600m,
+                Freedom_OverHead_Cost = 8500m,
+                Freedom_Fr_Shipping_Cost = 100000m,
+
+                Freedom_tCost_SF = 0,
+                Freedom_tAmount = 0,
+        #endregion
+
         AddOnsPrice,
 
         pvc1067PriceLinearMeter,
@@ -547,7 +571,7 @@ namespace ModelLayer.Model.Quotation.Screen
         ContingenciesCost,
         TotalPrice,
         Discount,
-     
+
 
         #region BuiltinSideRoll Variables
 
@@ -658,7 +682,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private ScreenType _screen_Type;
         public ScreenType Screen_Types
         {
@@ -685,7 +708,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private Base_Color _screen_BaseColor;
         public Base_Color Screen_BaseColor
@@ -714,7 +736,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private string _screen_WindoorID; //location
         public string Screen_WindoorID //location
@@ -888,7 +909,6 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _springLoad_Visibility;
-
         public bool SpringLoad_Visibility
         {
             get
@@ -901,7 +921,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_0505Width;
         public int Screen_0505Width
@@ -917,7 +936,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_1067Height;
         public int Screen_1067Height
         {
@@ -931,7 +949,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_0505Qty;
         public int Screen_0505Qty
@@ -947,7 +964,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_1067Qty;
         public int Screen_1067Qty
         {
@@ -961,7 +977,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private bool _screen_CenterClosureVisibility;
         public bool Screen_CenterClosureVisibility
@@ -991,7 +1006,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_LatchKitQty;
         public int Screen_LatchKitQty
         {
@@ -1020,7 +1034,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private bool _screen_6040MilledProfileVisibility;
         public bool Screen_6040MilledProfileVisibility
         {
@@ -1034,7 +1047,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_6040MilledProfile;
         public int Screen_6040MilledProfile
@@ -1078,7 +1090,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_LandCover;
         public int Screen_LandCover
         {
@@ -1120,7 +1131,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_1067PVCbox;
         public int Screen_1067PVCbox
@@ -1164,7 +1174,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_1385MilledProfile;
         public int Screen_1385MilledProfile
         {
@@ -1206,7 +1215,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_373or374MilledProfile;
         public int Screen_373or374MilledProfile
@@ -1250,7 +1258,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_6052MilledProfile;
         public int Screen_6052MilledProfile
         {
@@ -1279,7 +1286,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private bool _screen_ExchangeRateVisibility;
         public bool Screen_ExchangeRateVisibility
         {
@@ -1293,7 +1299,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_ExchangeRate;
         public int Screen_ExchangeRate
@@ -1339,7 +1344,6 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _sp_magnumscreenType_visibility;
-
         public bool SP_MagnumScreenType_Visibility
         {
             get
@@ -1352,7 +1356,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-   
+
         private int _plissedRd_panels;
         public int PlissedRd_Panels
         {
@@ -1382,7 +1386,6 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _discountPercentage;
-
         public decimal DiscountPercentage
         {
             get
@@ -1397,7 +1400,6 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screenItemNumber;
-        
         public decimal Screen_ItemNumber
         {
             get
@@ -1410,6 +1412,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private decimal _nxtscreenItemNumber;
         public decimal Screen_NextItemNumber
         {
@@ -1423,11 +1426,39 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
+        private Freedom_ScreenSize _freedom_screensize;
+        public Freedom_ScreenSize Freedom_ScreenSize
+        {
+            get
+            {
+                return _freedom_screensize;
+            }
+            set
+            {
+                _freedom_screensize = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Freedom_ScreenType _freedom_screentype;
+        public Freedom_ScreenType Freedom_ScreenType
+        {
+            get
+            {
+                return _freedom_screentype;
+            }
+            set
+            {
+                _freedom_screentype = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
         public void ItemNumberList()
-        {           
+        {
             var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             Screen_NextItemNumber = _strippedItemNum + 1;
 
@@ -1440,10 +1471,10 @@ namespace ModelLayer.Model.Quotation.Screen
             {
                 Screen_ItemNumber = Screen_ItemNumber;
                 ItemList.Add(Screen_ItemNumber);
-            }                                   
+            }
         }
         public void DeleteItemNumber(decimal x)
-        {       
+        {
             //var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             //Screen_NextItemNumber = _strippedItemNum - 1;                     
             ItemList.Remove(x);
@@ -1551,12 +1582,12 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
                     }
-                         RollUpCostingMaterials = HeadRailPrice +
-                         SlidingBarPrice +
-                         MeshWithTubePrice +
-                         GuidePrice +
-                         PilePrice +
-                         AntiwindBrushPrice;
+                    RollUpCostingMaterials = HeadRailPrice +
+                    SlidingBarPrice +
+                    MeshWithTubePrice +
+                    GuidePrice +
+                    PilePrice +
+                    AntiwindBrushPrice;
 
 
                     TotalRollUpCostingMaterials = (RollUpCostingMaterials +
@@ -2885,7 +2916,7 @@ namespace ModelLayer.Model.Quotation.Screen
                                 break;
                             }
                         }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.2m) * 2.8m;
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.2m);
                         #endregion
                     }
                     else if (Screen_Factor >= 2.3m && Screen_Factor < 2.4m)
@@ -2932,7 +2963,7 @@ namespace ModelLayer.Model.Quotation.Screen
                                 break;
                             }
                         }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.3m) * 2.9m;
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.3m);
                         #endregion
                     }
                     else
@@ -2979,7 +3010,7 @@ namespace ModelLayer.Model.Quotation.Screen
                                 break;
                             }
                         }
-                        built_in_SR_tAmount = (price_base_on_Weight / 2.4m) * 3m;
+                        built_in_SR_tAmount = (price_base_on_Weight / 2.4m);
 
                         #endregion
                     }
@@ -3135,7 +3166,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
                         #endregion
                     }
-                    else if(Screen_BaseColor == Base_Color._DarkBrown)
+                    else if (Screen_BaseColor == Base_Color._DarkBrown)
                     {
                         #region woodFinish
 
@@ -3169,6 +3200,2503 @@ namespace ModelLayer.Model.Quotation.Screen
                     }
 
                     #endregion
+                }
+                else if (Screen_Types == ScreenType._Freedom)
+                {
+
+                    #region Freedom Screen
+
+                    if (Freedom_ScreenType == Freedom_ScreenType._single)
+                    {
+                        if (Freedom_ScreenSize == Freedom_ScreenSize._80mm)
+                        {
+                            #region Single 80 mm 
+
+                            if (Screen_Height <= 2200m)
+                            {
+                                #region 2200  Base Price
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 990m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1017m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 1043m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1070m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1097m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1123m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1150m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1176m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1203m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1229m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1256m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1282m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1309m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1322m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2200m && Screen_Height <= 2400m)
+                            {
+                                #region 2400 Base Price
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 1026m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1053m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 1079m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1106m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1132m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1159m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1185m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1212m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1238m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1265m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1291m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1318m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1344m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1358m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2400m && Screen_Height <= 2600m)
+                            {
+                                #region 2600 Base Price
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 1064m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1090m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 117m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1143m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1170m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1196m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1223m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1250m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1276m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1303m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1329m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1356m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1382m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1395m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2600m && Screen_Height <= 2800m)
+                            {
+                                #region 2800 Base Price 
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 1102m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1128m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 1155m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1181m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1208m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1234m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1261m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1287m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1314m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1340m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1367m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1393m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1420m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1433m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2800m && Screen_Height <= 3000m)
+                            {
+                                #region  3000 Base Price 
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 1139m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1166m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 1192m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1219m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1245m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1272m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1298m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1325m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1352m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1378m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1405m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1431m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1458m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1471m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 3000m && Screen_Height <= 3200m)
+                            {
+                                #region 3200 Base Price
+
+                                if (Screen_Width <= 2000m)
+                                {
+                                    Freedom_BasedPrice = 1177m;
+                                }
+                                else if (Screen_Width > 2000m && Screen_Width <= 2200m)
+                                {
+                                    Freedom_BasedPrice = 1204m;
+                                }
+                                else if (Screen_Width > 2200m && Screen_Width <= 2400m)
+                                {
+                                    Freedom_BasedPrice = 1230m;
+                                }
+                                else if (Screen_Width > 2400m && Screen_Width <= 2600m)
+                                {
+                                    Freedom_BasedPrice = 1257m;
+                                }
+                                else if (Screen_Width > 2600m && Screen_Width <= 2800m)
+                                {
+                                    Freedom_BasedPrice = 1283m;
+                                }
+                                else if (Screen_Width > 2800m && Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1310m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1336m;
+                                }
+                                else if (Screen_Width > 3200 && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1363m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1389m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1416m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1442m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1469m;
+                                }
+                                else if (Screen_Width > 4200m && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1495m;
+                                }
+                                else if (Screen_Width > 4400m)
+                                {
+                                    Freedom_BasedPrice = 1509m;
+                                }
+
+                                #endregion
+                            }
+
+                            #endregion
+                        }
+                        else if (Freedom_ScreenSize == Freedom_ScreenSize._100mm)
+                        {
+                            #region Single 100 mm 
+
+                            if (Screen_Height <= 2200m)
+                            {
+                                #region 2200 Base Price
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1140m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1167m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1195m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1222m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1249m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1276m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1304m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1331m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1358m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1386m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1416m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1447m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1477m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1508m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1538m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1569m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1599m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1629m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1645m;
+                                }
+
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2200m && Screen_Height <= 2400m)
+                            {
+                                #region 2400 Base Price
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1177m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1204m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1231m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1259m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1286m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1313m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1341m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1368m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1395m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1423m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1451m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1479m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1509m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1538m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1566m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1595m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1624m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1653m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1681m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2400m && Screen_Height <= 2600m)
+                            {
+                                #region 2600 Base Price
+
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1214m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1242m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1269m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1296m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1324m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1345m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1378m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1406m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1433m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1460m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1489m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1517m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1545m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1574m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1603m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1632m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1660m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1688m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1718m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2600m && Screen_Height <= 2800m)
+                            {
+                                #region 2800 Base Price
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1253m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1281m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1308m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1335m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1363m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1390m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1417m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1445m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1472m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1499m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1528m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1556m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1584m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1613m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1641m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1669m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1698m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1726m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1755m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2800m && Screen_Height <= 3000m)
+                            {
+                                #region 3000 Base Price 
+
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1291m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1319m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1346m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1373m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1400m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1428m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1455m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1482m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1510m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1537m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1564m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1592m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1619m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1646m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1675m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1702m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1729m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1758m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1791m;
+                                }
+
+
+                                #endregion
+
+                            }
+                            else if (Screen_Height > 3000m && Screen_Height <= 3200m)
+                            {
+                                #region 3200 Base Price
+
+                                if (Screen_Width <= 3000m)
+                                {
+                                    Freedom_BasedPrice = 1330m;
+                                }
+                                else if (Screen_Width > 3000m && Screen_Width <= 3200m)
+                                {
+                                    Freedom_BasedPrice = 1357m;
+                                }
+                                else if (Screen_Width > 3200m && Screen_Width <= 3400m)
+                                {
+                                    Freedom_BasedPrice = 1385m;
+                                }
+                                else if (Screen_Width > 3400m && Screen_Width <= 3600m)
+                                {
+                                    Freedom_BasedPrice = 1412m;
+                                }
+                                else if (Screen_Width > 3600m && Screen_Width <= 3800m)
+                                {
+                                    Freedom_BasedPrice = 1439m;
+                                }
+                                else if (Screen_Width > 3800m && Screen_Width <= 4000m)
+                                {
+                                    Freedom_BasedPrice = 1467m;
+                                }
+                                else if (Screen_Width > 4000m && Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 1494m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 1521m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 1549m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 1576m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 1603m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 1631m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 1658m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 1686m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 1715m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 1743m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 1771m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 1800m;
+                                }
+                                else if (Screen_Width > 6400m)
+                                {
+                                    Freedom_BasedPrice = 1828m;
+                                }
+
+                                #endregion
+                            }
+
+                            #endregion
+                        }
+                    }
+                    else if (Freedom_ScreenType == Freedom_ScreenType._double)
+                    {
+                        if(Freedom_ScreenSize == Freedom_ScreenSize._80mm)
+                        {
+                            #region Double 80 mm 
+                            if (Screen_Height <= 2200m)
+                            {
+                                #region 2200 Base Price
+
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2007m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2034m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2060m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2087m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2113m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2140m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2166m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2193m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2220m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2246m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2273m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2299m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2326m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2352m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2379m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2405m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2432m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2458m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2485;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2511m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2538m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2564m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2591m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2617m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 2644m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2200m && Screen_Height <= 2400m)
+                            {
+                                #region 2400 Base Price
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2079m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2105m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2132m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2158m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2185m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2211m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2238m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2264m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2291m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2317m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2344m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2370m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2397m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2424m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2450m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2477m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2503m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2530m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2556m;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2583m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2609m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2636m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2662m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2689m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 2715m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2400m && Screen_Height <= 2600m)
+                            {
+                                #region 2600 Base Price
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2154m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2181m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2207m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2234m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2260m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2287m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2313m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2340m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2366m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2393m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2419m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2446m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2472m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2499m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2526m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2552m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2579m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2605m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2632m;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2658m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2685m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2711m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2738m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2764m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 2791m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2600m && Screen_Height <= 2800m)
+                            {
+                                #region 2800 Base Price
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2230m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2256m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2283m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2309m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2336m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2362m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2389m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2415m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2442m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2468m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2495m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2521m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2548m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2574m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2601m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2628m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2654m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2681m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2707m;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2734m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2760m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2787m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2813m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2840m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 2866m;
+                                }
+                                #endregion
+                            }
+                            else if (Screen_Height > 2800m && Screen_Height <= 3000m)
+                            {
+                                #region 3000 Base Price 
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2305m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2332m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2358m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2385m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2411m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2438m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2464m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2491m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2517m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2544m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2570m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2597m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2623m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2650m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2676m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2703m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2730m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2756m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2783;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2809m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2836m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2862m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2889m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2915m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 2942m;
+                                }
+
+                                #endregion
+
+                            }
+                            else if (Screen_Height > 3000m && Screen_Height <= 3200m)
+                            {
+                                #region 3200 Base Price
+
+                                if (Screen_Width <= 4200m)
+                                {
+                                    Freedom_BasedPrice = 2381m;
+                                }
+                                else if (Screen_Width > 4200 && Screen_Width <= 4400m)
+                                {
+                                    Freedom_BasedPrice = 2407m;
+                                }
+                                else if (Screen_Width > 4400m && Screen_Width <= 4600m)
+                                {
+                                    Freedom_BasedPrice = 2434m;
+                                }
+                                else if (Screen_Width > 4600m && Screen_Width <= 4800m)
+                                {
+                                    Freedom_BasedPrice = 2460m;
+                                }
+                                else if (Screen_Width > 4800m && Screen_Width <= 5000m)
+                                {
+                                    Freedom_BasedPrice = 2487m;
+                                }
+                                else if (Screen_Width > 5000m && Screen_Width <= 5200m)
+                                {
+                                    Freedom_BasedPrice = 2513m;
+                                }
+                                else if (Screen_Width > 5200m && Screen_Width <= 5400m)
+                                {
+                                    Freedom_BasedPrice = 2540m;
+                                }
+                                else if (Screen_Width > 5400m && Screen_Width <= 5600m)
+                                {
+                                    Freedom_BasedPrice = 2566m;
+                                }
+                                else if (Screen_Width > 5600m && Screen_Width <= 5800m)
+                                {
+                                    Freedom_BasedPrice = 2593m;
+                                }
+                                else if (Screen_Width > 5800m && Screen_Width <= 6000m)
+                                {
+                                    Freedom_BasedPrice = 2619m;
+                                }
+                                else if (Screen_Width > 6000m && Screen_Width <= 6200m)
+                                {
+                                    Freedom_BasedPrice = 2646m;
+                                }
+                                else if (Screen_Width > 6200m && Screen_Width <= 6400m)
+                                {
+                                    Freedom_BasedPrice = 2672m;
+                                }
+                                else if (Screen_Width > 6400m && Screen_Width <= 6600m)
+                                {
+                                    Freedom_BasedPrice = 2699m;
+                                }
+                                else if (Screen_Width > 6600m && Screen_Width <= 6800m)
+                                {
+                                    Freedom_BasedPrice = 2725m;
+                                }
+                                else if (Screen_Width > 6800m && Screen_Width <= 7000m)
+                                {
+                                    Freedom_BasedPrice = 2752m;
+                                }
+                                else if (Screen_Width > 7000m && Screen_Width <= 7200m)
+                                {
+                                    Freedom_BasedPrice = 2778m;
+                                }
+                                else if (Screen_Width > 7200m && Screen_Width <= 7400m)
+                                {
+                                    Freedom_BasedPrice = 2805m;
+                                }
+                                else if (Screen_Width > 7400m && Screen_Width <= 7600m)
+                                {
+                                    Freedom_BasedPrice = 2832m;
+                                }
+                                else if (Screen_Width > 7600m && Screen_Width <= 7800m)
+                                {
+                                    Freedom_BasedPrice = 2858m;
+                                }
+                                else if (Screen_Width > 7800m && Screen_Width <= 8000m)
+                                {
+                                    Freedom_BasedPrice = 2885m;
+                                }
+                                else if (Screen_Width > 8000m && Screen_Width <= 8200m)
+                                {
+                                    Freedom_BasedPrice = 2911m;
+                                }
+                                else if (Screen_Width > 8200m && Screen_Width <= 8400m)
+                                {
+                                    Freedom_BasedPrice = 2938m;
+                                }
+                                else if (Screen_Width > 8400m && Screen_Width <= 8600m)
+                                {
+                                    Freedom_BasedPrice = 2964m;
+                                }
+                                else if (Screen_Width > 8600m && Screen_Width <= 8800m)
+                                {
+                                    Freedom_BasedPrice = 2991m;
+                                }
+                                else if (Screen_Width > 8800m)
+                                {
+                                    Freedom_BasedPrice = 3017m;
+                                }
+
+                                #endregion
+                            }
+                            #endregion
+                        }
+                        else if (Freedom_ScreenSize == Freedom_ScreenSize._100mm)
+                        {
+                            #region Double 100 mm 
+
+                            if (Screen_Height <= 2200m)
+                            {
+                                #region 2200 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2280m;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2037m;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2334m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2362m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2389m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2416m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2444m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2471m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2498m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2526m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2553m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2580m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2608m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 2635m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 2662m;
+                                }
+                                else if (Screen_Width > 8800 && Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 2690m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 2717m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 2744m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 2771m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 2801m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 2831m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 2863m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 2893m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 2924m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 2954m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 2985m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3015m;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3046m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3076m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3107m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3137m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3168m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3198m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3228m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3259m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3290m;
+                                }
+
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2200m && Screen_Height <= 2400m)
+                            {
+                                #region 2400 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2353;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2381m;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2408m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2435m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2463m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2490m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2517m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2545m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2572m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2599m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2627m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2654m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2681m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 2708m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 2736m;
+                                }
+                                else if (Screen_Width > 8800 && Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 2763m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 2790m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 2818m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 2845m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 2873m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 2902m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 2930m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 2958m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 2988m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 3017m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 3047m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3076m;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3105m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3133m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3161m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3190m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3219m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3248m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3277m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3305m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3362m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2400m && Screen_Height <= 2600m)
+                            {
+                                #region 2600 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2429m;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2456;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2484m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2511m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2538m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2566m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2593m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2620m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2648m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2675m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2690m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2717m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2757m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 2784m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 2811m;
+                                }
+                                else if (Screen_Width > 8800 && Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 2839m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 2866m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 2893m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 2921m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 2949m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 2977m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 3006m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 3034m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 3062m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 3091m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 3119m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3148m;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3177m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3206m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3235m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3263m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3292m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3320m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3348m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3377m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3435m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2600m && Screen_Height <= 2800m)
+                            {
+                                #region 2800 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2507m;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2534m;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2561m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2589m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2616m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2643m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2671m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2698m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2725m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2753m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2780m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2807m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2835m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 2862m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 2889m;
+                                }
+                                else if (Screen_Width > 8800 && Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 2916m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 2944m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 2971m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 2998m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 3027m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 3055m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 3084m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 3112m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 3140m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 3169m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 3197m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3225;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3254m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3282m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3310m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3339m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3367m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3396m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3424m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3452m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3509m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 2800m && Screen_Height <= 3000m)
+                            {
+                                #region 3000 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2582m;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2610m;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2637m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2664m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2692m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2719m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2746m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2774m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2801m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2828m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2856m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2883m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2910m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 2937m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 2965m;
+                                }
+                                else if (Screen_Width > 8800 && Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 2992m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 3019m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 3047m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 3074m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 3101m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 3129m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 3156m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 3183m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 3211m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 3238m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 3265m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3293m;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3321m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3349m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3377m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3404m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3431m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3459m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3487m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3515m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3583m;
+                                }
+
+                                #endregion
+                            }
+                            else if (Screen_Height > 3000m && Screen_Height <= 3200m)
+                            {
+                                #region 3200 Base Price
+
+                                if (Screen_Width <= 6000)
+                                {
+                                    Freedom_BasedPrice = 2660m;
+                                }
+                                else if (Screen_Width > 6000 && Screen_Width <= 6200)
+                                {
+                                    Freedom_BasedPrice = 2687m;
+                                }
+                                else if (Screen_Width > 6200 && Screen_Width <= 6400)
+                                {
+                                    Freedom_BasedPrice = 2715m;
+                                }
+                                else if (Screen_Width > 6400 && Screen_Width <= 6600)
+                                {
+                                    Freedom_BasedPrice = 2742m;
+                                }
+                                else if (Screen_Width > 6600 && Screen_Width <= 6800)
+                                {
+                                    Freedom_BasedPrice = 2769m;
+                                }
+                                else if (Screen_Width > 6800 && Screen_Width <= 7000)
+                                {
+                                    Freedom_BasedPrice = 2797m;
+                                }
+                                else if (Screen_Width > 7000 && Screen_Width <= 7200)
+                                {
+                                    Freedom_BasedPrice = 2824m;
+                                }
+                                else if (Screen_Width > 7200 && Screen_Width <= 7400)
+                                {
+                                    Freedom_BasedPrice = 2851m;
+                                }
+                                else if (Screen_Width > 7400 && Screen_Width <= 7600)
+                                {
+                                    Freedom_BasedPrice = 2879m;
+                                }
+                                else if (Screen_Width > 7600 && Screen_Width <= 7800)
+                                {
+                                    Freedom_BasedPrice = 2906m;
+                                }
+                                else if (Screen_Width > 7800 && Screen_Width <= 8000)
+                                {
+                                    Freedom_BasedPrice = 2933m;
+                                }
+                                else if (Screen_Width > 8000 && Screen_Width <= 8200)
+                                {
+                                    Freedom_BasedPrice = 2961m;
+                                }
+                                else if (Screen_Width > 8200 && Screen_Width <= 8400)
+                                {
+                                    Freedom_BasedPrice = 2988m;
+                                }
+                                else if (Screen_Width > 8400 && Screen_Width <= 8600)
+                                {
+                                    Freedom_BasedPrice = 3015m;
+                                }
+                                else if (Screen_Width > 8600 && Screen_Width <= 8800)
+                                {
+                                    Freedom_BasedPrice = 3043m;
+                                }
+                                else if (Screen_Width <= 9000)
+                                {
+                                    Freedom_BasedPrice = 3070m;
+                                }
+                                else if (Screen_Width > 9000 && Screen_Width <= 9200m)
+                                {
+                                    Freedom_BasedPrice = 3097m;
+                                }
+                                else if (Screen_Width > 9200m && Screen_Width <= 9400m)
+                                {
+                                    Freedom_BasedPrice = 3124m;
+                                }
+                                else if (Screen_Width > 9400m && Screen_Width <= 9600m)
+                                {
+                                    Freedom_BasedPrice = 3152m;
+                                }
+                                else if (Screen_Width > 9600m && Screen_Width <= 9800m)
+                                {
+                                    Freedom_BasedPrice = 3179m;
+                                }
+                                else if (Screen_Width > 9800m && Screen_Width <= 10000m)
+                                {
+                                    Freedom_BasedPrice = 3206m;
+                                }
+                                else if (Screen_Width > 10000m && Screen_Width <= 10200m)
+                                {
+                                    Freedom_BasedPrice = 3234m;
+                                }
+                                else if (Screen_Width > 10200m && Screen_Width <= 10400m)
+                                {
+                                    Freedom_BasedPrice = 3261m;
+                                }
+                                else if (Screen_Width > 10400m && Screen_Width <= 10600m)
+                                {
+                                    Freedom_BasedPrice = 3288m;
+                                }
+                                else if (Screen_Width > 10600m && Screen_Width <= 10800m)
+                                {
+                                    Freedom_BasedPrice = 3316m;
+                                }
+                                else if (Screen_Width > 10800m && Screen_Width <= 11000)
+                                {
+                                    Freedom_BasedPrice = 3344m;
+                                }
+                                else if (Screen_Width > 11000 && Screen_Width <= 11200)
+                                {
+                                    Freedom_BasedPrice = 3372m;
+                                }
+                                else if (Screen_Width > 11200 && Screen_Width <= 11400)
+                                {
+                                    Freedom_BasedPrice = 3401m;
+                                }
+                                else if (Screen_Width > 11400 && Screen_Width <= 11600)
+                                {
+                                    Freedom_BasedPrice = 3429m;
+                                }
+                                else if (Screen_Width > 11600 && Screen_Width <= 11800)
+                                {
+                                    Freedom_BasedPrice = 3458m;
+                                }
+                                else if (Screen_Width > 11800 && Screen_Width <= 12000)
+                                {
+                                    Freedom_BasedPrice = 3486m;
+                                }
+                                else if (Screen_Width > 12000 && Screen_Width <= 12200)
+                                {
+                                    Freedom_BasedPrice = 3514m;
+                                }
+                                else if (Screen_Width > 12200 && Screen_Width <= 12400)
+                                {
+                                    Freedom_BasedPrice = 3543m;
+                                }
+                                else if (Screen_Width > 12400 && Screen_Width <= 12600)
+                                {
+                                    Freedom_BasedPrice = 3571m;
+                                }
+                                else if (Screen_Width > 12600 && Screen_Width <= 12800)
+                                {
+                                    Freedom_BasedPrice = 3599m;
+                                }
+                                else if (Screen_Width > 12800)
+                                {
+                                    Freedom_BasedPrice = 3656m;
+                                }
+
+                                #endregion
+                            }
+                            #endregion
+                        }
+            
+                    }
+
+                    Freedom_MeshUp = ((12m * Screen_Width) / 1000m) * (Screen_Height / 1000m);
+                    Freedom_AUDTCost = Freedom_BasedPrice + Freedom_PowderCoating + Freedom_MeshUp;
+                    Freedom_PesoTCost = Freedom_AUDTCost * AUDtoPeso_ExchangRate;
+
+                    Freedom_Foiling_Cassette = (1573m * (Screen_Height + 30m)) / 1000m;
+                    Freedom_Foiling_TopRail = (394m * (Screen_Width + 30m)) / 1000m;
+                    Freedom_Foiling_SideRail = (630m * (Screen_Height + 30m)) / 1000m;
+                    Freedom_Foiling_PullBar = (1049m * (Screen_Height + 30m)) / 1000m;
+
+                    Freedom_Foiling_Total = Freedom_Foiling_Cassette +
+                                            Freedom_Foiling_TopRail +
+                                            Freedom_Foiling_SideRail +
+                                            Freedom_Foiling_PullBar;
+
+                    Freedom_KM04 = ((1300m * Screen_Width) / 1000m) * 2m;
+
+                    Freedom_tCost_SF = (Freedom_PesoTCost +
+                                        Freedom_Foiling_Total +
+                                        Freedom_KM04 +
+                                        Freedom_Installation_Cost +
+                                        Freedom_OverHead_Cost +
+                                        Freedom_Accessories) * Screen_Factor;
+
+                    Freedom_tAmount = (Freedom_tCost_SF * 0.55m) + Freedom_Fr_Shipping_Cost;
+
+                    #endregion      
+                           
                 }
 
                 if (Screen_PVCVisibility == true &&
@@ -3221,7 +5749,7 @@ namespace ModelLayer.Model.Quotation.Screen
                              ContingenciesCost +
                              AddOnsPrice;
 
-                if(Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
+                if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
                 {
                     TotalPrice = (TotalRollUpCostingMaterials +
                                   TotalPlisseCostingMaterials +
@@ -3231,50 +5759,58 @@ namespace ModelLayer.Model.Quotation.Screen
                                   SmallShopItemCost +
                                   OverheadCost +
                                   ContingenciesCost +
-                                  AddOnsPrice)  + (1000m * ((Screen_Height / 1000m ) * PlissedRd_Panels) );
+                                  AddOnsPrice) + (1000m * ((Screen_Height / 1000m) * PlissedRd_Panels));
                 }
 
                 #region Screen Unit Price & TotalAmount
 
                 if (Screen_Types == ScreenType._Magnum)
                 {
-                    Screen_UnitPrice = Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor;
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = (Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity,2);                                      
+                    Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);
                 }
-                else if (Screen_Types == ScreenType._RollUp || Screen_Types ==  ScreenType._Plisse)
-                {                    
-                    Screen_UnitPrice = Math.Ceiling(TotalPrice) * Screen_Factor;
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                else if (Screen_Types == ScreenType._RollUp || Screen_Types == ScreenType._Plisse)
+                {
+                    Screen_UnitPrice = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
-                }            
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
+                }
                 else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
-                    Screen_UnitPrice = Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor;
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = (Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                 }
                 else if (Screen_Types == ScreenType._BuiltInSideroll)
                 {
-                    Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2);
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                 }
                 else if (Screen_Types == ScreenType._Maxxy)
                 {
-                    Screen_UnitPrice = Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor;
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity * Screen_Set;
+                    Screen_UnitPrice = (Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Set * Screen_Quantity;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
+                }
+                else if(Screen_Types == ScreenType._Freedom)
+                {
+                    Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount)) * Screen_Set;
+                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
+
+                    Discount = Screen_UnitPrice * DiscountPercentage;
+                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                 }
 
                 Screen_Discount = (int)Decimal.Truncate(100 * DiscountPercentage);
@@ -3285,7 +5821,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._AD)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._AD) +  " ) " ;
+                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._AD) + " ) ";
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
                 {
@@ -3309,17 +5845,17 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
 
                 #endregion
-          
+
 
                 ClearingOperation();
-                
+
 
             }
             else
             {
                 Screen_TotalAmount = 0;
             }
-        
+
         }
 
         public void ClearingOperation()
@@ -3501,23 +6037,42 @@ namespace ModelLayer.Model.Quotation.Screen
             Maxxy_Contigencies = 0;
 
             #endregion
+
+            #region Clearing for Freedom Screen
+
+            Freedom_BasedPrice = 0;
+            Freedom_MeshUp = 0;
+            Freedom_AUDTCost = 0;
+            Freedom_PesoTCost = 0;
+
+            Freedom_Foiling_Cassette = 0;
+            Freedom_Foiling_TopRail = 0;
+            Freedom_Foiling_SideRail = 0;
+            Freedom_Foiling_PullBar = 0;
+            Freedom_Foiling_Total = 0;
+
+            Freedom_KM04 = 0;
+            Freedom_tCost_SF = 0;
+            Freedom_tAmount = 0;
+
+            #endregion
         }
 
 
 
-             public ScreenModel(decimal screen_itemnumber,
-                                int screen_width,
-                                int screen_height,
-                                ScreenType screen_types,
-                                string screen_windoorID,
-                                decimal screen_unitPrice,
-                                int screen_quantity,
-                                int screen_set,
-                                int discount,
-                                decimal screen_netPrice,
-                                decimal screen_totalAmount,
-                                string plissemagnumType
-                                )
+        public ScreenModel(decimal screen_itemnumber,
+                           int screen_width,
+                           int screen_height,
+                           ScreenType screen_types,
+                           string screen_windoorID,
+                           decimal screen_unitPrice,
+                           int screen_quantity,
+                           int screen_set,
+                           int discount,
+                           decimal screen_netPrice,
+                           decimal screen_totalAmount,
+                           string plissemagnumType
+                           )
         {
             Screen_ItemNumber = screen_itemnumber;
             Screen_Width = screen_width;

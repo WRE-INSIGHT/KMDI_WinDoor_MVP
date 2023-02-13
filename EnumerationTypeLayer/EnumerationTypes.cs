@@ -1038,6 +1038,7 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
             public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
             public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
+            public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
@@ -1053,7 +1054,22 @@ namespace EnumerationTypeLayer
             public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }
 
         }
-        
+
+        public class Freedom_ScreenSize : Enumeration<Freedom_ScreenSize, int>
+        {
+            public static readonly Freedom_ScreenSize _80mm = new Freedom_ScreenSize (0, "80mm");
+            public static readonly Freedom_ScreenSize _100mm = new Freedom_ScreenSize (1, "100mm");
+
+            public Freedom_ScreenSize(int value, string displayname) : base(value, displayname) { }
+        }
+        public class Freedom_ScreenType : Enumeration<Freedom_ScreenType, int>
+        {
+            public static readonly Freedom_ScreenType _single = new Freedom_ScreenType(0, "Single");
+            public static readonly Freedom_ScreenType _double = new Freedom_ScreenType(1, "Double");
+
+            public Freedom_ScreenType(int value, string displayname) : base(value, displayname) { }
+        }
+
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");

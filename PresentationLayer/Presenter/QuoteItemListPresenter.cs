@@ -43,7 +43,9 @@ namespace PresentationLayer.Presenter
             curr_GlassQty,
             curr_IntDescription,
             GeorgianBarVerticalQty = 0,
-            GeorgianBarHorizontalQty = 0;
+            GeorgianBarHorizontalQty = 0,
+            windoorTotalListCount = 0,
+            ScreenTotalListCount = 0;
 
         string prev_GlassSize,
                prev_GlassRef,
@@ -59,7 +61,9 @@ namespace PresentationLayer.Presenter
         decimal prev_GlassArea,
                 prev_GlassPrice,
                 curr_GlassArea,
-                curr_GlassPrice;
+                curr_GlassPrice,
+                windoorTotalListPrice = 0m,
+                ScreenTotalListPrice = 0m;
 
         bool existing = false;
         #endregion
@@ -82,6 +86,44 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewLoadEventRaised += _quoteItemListView_QuoteItemListViewLoadEventRaised;
             _quoteItemListView.TSbtnGlassSummaryClickEventRaised += _quoteItemListView_TSbtnGlassSummaryClickEventRaised;
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
+            _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
+        }
+
+        private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
+        {
+            DSQuotation _dtqoute = new DSQuotation();
+
+            ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+            ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
+
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            {
+                windoorTotalListCount = +windoorTotalListCount + wdm.WD_quantity;
+                var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
+                windoorTotalListPrice = +windoorTotalListPrice + price_x_quantity;
+            }
+
+            //Console.WriteLine("");
+            //Console.WriteLine("Windoor list count total of: "+ windoorTotalListCount.ToString());
+            //Console.WriteLine("Windoor total list price: "+ windoorTotalListPrice.ToString());
+            //Console.WriteLine("");
+            //Console.WriteLine("screen total list count: "+ ScreenTotalListCount.ToString());
+            //Console.WriteLine("screen total list price: "+ ScreenTotalListPrice.ToString());
+            //Console.WriteLine("");
+
+            _dtqoute.dtContractSummary.Rows.Add(
+                                                windoorTotalListCount,
+                                                windoorTotalListPrice,
+                                                ScreenTotalListCount,
+                                                ScreenTotalListPrice
+                                                );
+
+            _mainPresenter.printStatus = "ContractSummary";
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+
         }
 
         private void _quoteItemListView_QuoteItemListViewFormClosedEventRaised(object sender, FormClosedEventArgs e)
@@ -401,6 +443,8 @@ namespace PresentationLayer.Presenter
             IPrintGlassSummaryPresenter printGlass = _printGlassSummaryPresenter.GetNewInstance(_unityC, this, _mainPresenter, _windoorModel, _quotationModel);
             printGlass.GetPrintGlassSummaryView().GetBindingSource().DataSource = _dsq.dtGlassSummary.DefaultView;
             printGlass.GetPrintGlassSummaryView().ShowGlassSummaryView();
+
+            
         }
 
 
@@ -478,7 +522,7 @@ namespace PresentationLayer.Presenter
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-
+                    
 
                 }
             }

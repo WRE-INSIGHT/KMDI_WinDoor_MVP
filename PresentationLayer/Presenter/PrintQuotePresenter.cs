@@ -148,19 +148,30 @@ namespace PresentationLayer.Presenter
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
 
+                }else if (_mainPresenter.printStatus == "ContractSummary")
+                {           
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
                 }
 
+                if(_mainPresenter.printStatus != "ContractSummary")
+                {
+                    ReportParameter[] RParam = new ReportParameter[6];
+                    RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                    RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
+                    RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                    RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
+                    RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                   _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
-                ReportParameter[] RParam = new ReportParameter[6];
-                RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
-                RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
-                RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
-                RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
-                RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
-                RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
-
-
-                _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                }
+                else
+                {
+                    ReportParameter[] RParam = new ReportParameter[1];                 
+                    RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                }
+     
                 _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
                 _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
                 _printQuoteView.GetReportViewer().ZoomPercent = 75;

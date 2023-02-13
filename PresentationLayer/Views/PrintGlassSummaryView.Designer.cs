@@ -124,7 +124,7 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PrintGlassSummaryView";
-            this.Text = "PrintGlassSummaryView";
+            this.Text = "Glass Summary";
             this.Load += new System.EventHandler(this.PrintGlassSummaryView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

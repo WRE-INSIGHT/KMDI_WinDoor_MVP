@@ -40,655 +40,8 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox34</rd:DefaultName>
                 <Left>0.02064in</Left>
-                <Height>0.23215in</Height>
+                <Height>0.23214in</Height>
                 <Width>5.67798in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Rectangle Name="windoorPriceRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox21">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total List Price of Windows and Doors</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.187in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox24">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!WindoorListCount.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96361in</Left>
-                    <Height>0.17973in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox25">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!WindoorListPrice.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.17973in</Height>
-                    <Width>1.38219in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line13">
-                    <Top>0.187in</Top>
-                    <Left>2.95458in</Left>
-                    <Height>0in</Height>
-                    <Width>1.00301in</Width>
-                    <ZIndex>3</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.27381in</Top>
-                <Left>1.74404in</Left>
-                <Height>0.20751in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="insectScreenRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox22">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total List Price of Insect Screens</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Left>0.00301in</Left>
-                    <Height>0.18491in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox26">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!ScreenListCount.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00662in</Top>
-                    <Left>2.9606in</Left>
-                    <Height>0.18491in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox27">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!ScreenTotaListPrice.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.18267in</Height>
-                    <Width>1.38219in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line15">
-                    <Top>0.19153in</Top>
-                    <Left>2.96361in</Left>
-                    <Height>0in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>3</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.50248in</Top>
-                <Left>1.74103in</Left>
-                <Height>0.20363in</Height>
-                <Width>5.81283in</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="totalListRectangle">
-                <ReportItems>
-                  <Textbox Name="Textbox23">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>TOTAL LIST PRICES</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Top>0.00715in</Top>
-                    <Height>0.18551in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox29">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!WindoorScreenTotalListPrice.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.00715in</Top>
-                    <Left>4.43064in</Left>
-                    <Height>0.18551in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.73568in</Top>
-                <Left>1.74404in</Left>
-                <Height>0.19266in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>3</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="lessDiscountRctngl">
-                <ReportItems>
-                  <Textbox Name="Textbox30">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Less Discount</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Height>0.18979in</Height>
-                    <Width>2.43229in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox31">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!DiscountPercentage.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Center</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>2.96547in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox32">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!DiscountValue.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Left>4.42763in</Left>
-                    <Height>0.18979in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>0.94223in</Top>
-                <Left>1.74404in</Left>
-                <Height>0.20075in</Height>
-                <Width>5.80982in</Width>
-                <ZIndex>4</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Rectangle Name="totalDiscountedPriceWOVatRctngl">
-                <ReportItems>
-                  <Textbox Name="Textbox33">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>Total Discounted Price without VAT*</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                              <FontWeight>Bold</FontWeight>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style />
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox21</rd:DefaultName>
-                    <Top>0.00819in</Top>
-                    <Height>0.19904in</Height>
-                    <Width>2.54534in</Width>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Textbox Name="Textbox36">
-                    <CanGrow>true</CanGrow>
-                    <KeepTogether>true</KeepTogether>
-                    <Paragraphs>
-                      <Paragraph>
-                        <TextRuns>
-                          <TextRun>
-                            <Value>=Parameters!TotalPriceNOVat.Value</Value>
-                            <Style>
-                              <FontFamily>Segoe UI</FontFamily>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                        </TextRuns>
-                        <Style>
-                          <TextAlign>Right</TextAlign>
-                        </Style>
-                      </Paragraph>
-                    </Paragraphs>
-                    <rd:DefaultName>Textbox24</rd:DefaultName>
-                    <Top>0.01313in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0.19409in</Height>
-                    <Width>1.37617in</Width>
-                    <ZIndex>1</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>None</Style>
-                      </Border>
-                      <PaddingLeft>2pt</PaddingLeft>
-                      <PaddingRight>2pt</PaddingRight>
-                      <PaddingTop>2pt</PaddingTop>
-                      <PaddingBottom>2pt</PaddingBottom>
-                    </Style>
-                  </Textbox>
-                  <Line Name="Line8">
-                    <Top>0.21217in</Top>
-                    <Left>4.44227in</Left>
-                    <Height>0in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>2</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                  <Line Name="Line7">
-                    <Left>4.46334in</Left>
-                    <Height>0in</Height>
-                    <Width>1.37918in</Width>
-                    <ZIndex>3</ZIndex>
-                    <Style>
-                      <Border>
-                        <Style>Solid</Style>
-                      </Border>
-                    </Style>
-                  </Line>
-                </ReportItems>
-                <KeepTogether>true</KeepTogether>
-                <Top>1.15161in</Top>
-                <Left>1.73241in</Left>
-                <Height>0.22691in</Height>
-                <Width>5.84252in</Width>
-                <ZIndex>5</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Line Name="Line2">
-                <Top>0.48208in</Top>
-                <Left>4.69862in</Left>
-                <Height>0in</Height>
-                <Width>1.00301in</Width>
-                <ZIndex>6</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line3">
-                <Top>0.71582in</Top>
-                <Left>6.17298in</Left>
-                <Height>0in</Height>
-                <Width>1.38088in</Width>
-                <ZIndex>7</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line4">
-                <Top>0.71948in</Top>
-                <Left>4.70951in</Left>
-                <Height>0in</Height>
-                <Width>0.99814in</Width>
-                <ZIndex>8</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Line Name="Line10">
-                <Top>1.38859in</Top>
-                <Left>6.17769in</Left>
-                <Height>0in</Height>
-                <Width>1.37918in</Width>
-                <ZIndex>9</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>Solid</Style>
-                  </Border>
-                </Style>
-              </Line>
-              <Rectangle Name="Rectangle5">
-                <KeepTogether>true</KeepTogether>
-                <Top>0.01339in</Top>
-                <Left>6.16866in</Left>
-                <Height>0.21875in</Height>
-                <Width>1.38821in</Width>
-                <ZIndex>10</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Rectangle>
-              <Textbox Name="Textbox5">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!QuoteNumber.Value</Value>
-                        <Style>
-                          <FontFamily>Segoe UI</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Right</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox5</rd:DefaultName>
-                <Top>0.01339in</Top>
-                <Left>6.17468in</Left>
-                <Height>0.21876in</Height>
-                <Width>1.38219in</Width>
-                <ZIndex>11</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1085,7 +438,7 @@
                     </Paragraphs>
                     <rd:DefaultName>Textbox50</rd:DefaultName>
                     <Height>0.50527in</Height>
-                    <Width>7.57493in</Width>
+                    <Width>7.89043in</Width>
                     <Style>
                       <Border>
                         <Style>None</Style>
@@ -1098,10 +451,10 @@
                   </Textbox>
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
-                <Top>1.43026in</Top>
-                <Height>0.50528in</Height>
-                <Width>7.57493in</Width>
-                <ZIndex>12</ZIndex>
+                <Top>1.07952in</Top>
+                <Height>0.54277in</Height>
+                <Width>7.89043in</Width>
+                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -1607,8 +960,9 @@
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox51</rd:DefaultName>
+                    <Left>0.02064in</Left>
                     <Height>0.50262in</Height>
-                    <Width>7.55558in</Width>
+                    <Width>7.86979in</Width>
                     <Style>
                       <Border>
                         <Style>None</Style>
@@ -1621,10 +975,10 @@
                   </Textbox>
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
-                <Top>2.00499in</Top>
-                <Height>0.50262in</Height>
-                <Width>7.55558in</Width>
-                <ZIndex>13</ZIndex>
+                <Top>1.62229in</Top>
+                <Height>0.51651in</Height>
+                <Width>7.89043in</Width>
+                <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>Solid</Style>
@@ -1729,9 +1083,10 @@
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox1</rd:DefaultName>
-                    <Top>0.01389in</Top>
+                    <Top>0in</Top>
+                    <Left>0.02064in</Left>
                     <Height>0.44745in</Height>
-                    <Width>7.54655in</Width>
+                    <Width>7.86979in</Width>
                     <Style>
                       <Border>
                         <Style>None</Style>
@@ -1744,16 +1099,51 @@
                   </Textbox>
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
-                <Top>2.53539in</Top>
-                <Height>0.46134in</Height>
-                <Width>7.55558in</Width>
-                <ZIndex>14</ZIndex>
+                <Top>2.15269in</Top>
+                <Height>0.45409in</Height>
+                <Width>7.89043in</Width>
+                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>Solid</Style>
                   </Border>
                 </Style>
               </Rectangle>
+              <Textbox Name="Textbox5">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!QuoteNumber.Value</Value>
+                        <Style>
+                          <FontFamily>Segoe UI</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox5</rd:DefaultName>
+                <Top>0.01338in</Top>
+                <Left>6.16436in</Left>
+                <Height>0.21876in</Height>
+                <Width>1.39122in</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
               <Rectangle Name="Rectangle4">
                 <ReportItems>
                   <Textbox Name="Textbox2">
@@ -1816,10 +1206,10 @@
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox2</rd:DefaultName>
-                    <Top>0.01389in</Top>
-                    <Left>0.01935in</Left>
+                    <Top>0.00001in</Top>
+                    <Left>0.02064in</Left>
                     <Height>0.50786in</Height>
-                    <Width>7.50499in</Width>
+                    <Width>7.86979in</Width>
                     <Style>
                       <Border>
                         <Style>None</Style>
@@ -1856,10 +1246,11 @@
                   </Line>
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
-                <Top>3.0245in</Top>
-                <Height>0.55663in</Height>
-                <Width>7.55558in</Width>
-                <ZIndex>15</ZIndex>
+                <Top>2.60678in</Top>
+                <Left>0in</Left>
+                <Height>0.50787in</Height>
+                <Width>7.89043in</Width>
+                <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>Solid</Style>
@@ -1869,9 +1260,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>0.06069in</Top>
-            <Left>0.03962in</Left>
-            <Height>3.58113in</Height>
-            <Width>7.57493in</Width>
+            <Left>0.05491in</Left>
+            <Height>3.11465in</Height>
+            <Width>7.89043in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1892,10 +1283,10 @@
           </Rectangle>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>0.2512in</Top>
-        <Left>0.16071in</Left>
-        <Height>3.71861in</Height>
-        <Width>7.65967in</Width>
+        <Top>0.0125in</Top>
+        <Left>0.0125in</Left>
+        <Height>3.21821in</Height>
+        <Width>7.99526in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1903,52 +1294,19 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>4.08172in</Height>
+    <Height>3.6214in</Height>
     <Style />
   </Body>
-  <Width>7.98512in</Width>
+  <Width>8.08376in</Width>
   <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.25in</TopMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <ReportParameters>
     <ReportParameter Name="QuoteNumber">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="ScreenListCount">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="WindoorListCount">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="WindoorScreenTotalListPrice">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="DiscountPercentage">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="WindoorListPrice">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="ScreenTotaListPrice">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="DiscountValue">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="TotalPriceNOVat">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

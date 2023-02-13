@@ -65,7 +65,8 @@ namespace ModelLayer.Model.Quotation.Screen
         decimal DiscountPercentage { get; set; }
         decimal Screen_ItemNumber { get; set; }
         decimal Screen_NextItemNumber { get; set; }
-
+        Freedom_ScreenSize Freedom_ScreenSize { get; set; }
+        Freedom_ScreenType Freedom_ScreenType { get; set; }
 
 
     }

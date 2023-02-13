@@ -28,11 +28,13 @@ namespace PresentationLayer.Presenter
 
         private IScreenServices _screenService;
 
+        private List<Freedom_ScreenType> _freedomScreenType = new List<Freedom_ScreenType>();
+        private List<Freedom_ScreenSize> _freedomScreenSize = new List<Freedom_ScreenSize>();
+        private List<PlisseType> _plisseType = new List<PlisseType>();
         private DataTable _screenDT = new DataTable();
-
         private DataGridView _dgv_Screen;
-
-        private bool InitialLoad;
+        ScreenType screenType;
+        private bool IsPlisseLoad;
 
         CommonFunctions commonfunc = new CommonFunctions();
         Panel _pnlAddOns;
@@ -77,6 +79,8 @@ namespace PresentationLayer.Presenter
             _screenView.rdBtnWindowCheckChangeEventRaised += _screenView_rdBtnWindowCheckChangeEventRaised;
             _screenView.nudPlisseRdValueChangeEventRaise += _screenView_nudPlisseRdValueChangeEventRaise;
             _screenView.nudDiscountValueChangeEventRaised += _screenView_nudDiscountValueChangeEventRaised;
+            _screenView.cmbFreedomSizeSelectedValueChangedEventRaised += _screenView_cmbFreedomSizeSelectedValueChangedEventRaised;
+            
 
 
             _pnlAddOns = _screenView.GetPnlAddOns();
@@ -88,7 +92,10 @@ namespace PresentationLayer.Presenter
 
         }
 
-
+        private void _screenView_cmbFreedomSizeSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Freedom_ScreenSize = (Freedom_ScreenSize)((ComboBox)sender).SelectedValue;
+        }
 
         private void _screenView_nudDiscountValueChangeEventRaised(object sender, EventArgs e)
         {
@@ -130,6 +137,7 @@ namespace PresentationLayer.Presenter
                     var swp = row.ItemArray[0];
                     if (dgv_indices == i)
                     {
+                        
                         _screenModel.Screen_ItemNumber = Convert.ToDecimal(_screenView.screen_itemnumber.Text);
                         _screenModel.DeleteItemNumber(Convert.ToDecimal(dgv_value));
                         _dgv_Screen.Rows.RemoveAt(dgv_indices);
@@ -146,7 +154,11 @@ namespace PresentationLayer.Presenter
                             _screenModel.Screen_NextItemNumber = _itemnumholder;
                             _screenView.getTxtitemListNumber().Text = Convert.ToString(_screenModel.Screen_NextItemNumber);
                         }
+
+                        
+                        
                         break;
+                      
                     }
                     i++;
                 }
@@ -157,18 +169,28 @@ namespace PresentationLayer.Presenter
         #region Events
         private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
         {
-            var plisse_Rd = _screenModel.Screen_PlisséType = (PlisseType)((ComboBox)sender).SelectedValue;
-
-            if (plisse_Rd == PlisseType._RD)
+            //plisse and freedom use the same combobox
+            if(screenType != ScreenType._Freedom)
             {
-                _screenView.getNudPlisseRd().Visible = true;
-                _screenView.getLblPlisseRd().Visible = true;
+                var plisse_Rd = _screenModel.Screen_PlisséType = (PlisseType)((ComboBox)sender).SelectedValue;
+
+                if (plisse_Rd == PlisseType._RD)
+                {
+                    _screenView.getLblPlisseRd().Text = "Panel/s";
+                    _screenView.getNudPlisseRd().Visible = true;
+                    _screenView.getLblPlisseRd().Visible = true;
+                }
+                else
+                {
+                    _screenView.getNudPlisseRd().Visible = false;
+                    _screenView.getLblPlisseRd().Visible = false;
+                }
             }
             else
             {
-                _screenView.getNudPlisseRd().Visible = false;
-                _screenView.getLblPlisseRd().Visible = false;
+                _screenModel.Freedom_ScreenType = (Freedom_ScreenType)((ComboBox)sender).SelectedValue;
             }
+            
         }
 
         private void _screenView_tsBtnExchangeRateClickEventRaised(object sender, EventArgs e)
@@ -227,21 +249,57 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            ScreenType screenType = (ScreenType)((ComboBox)sender).SelectedValue;
+             screenType = (ScreenType)((ComboBox)sender).SelectedValue;
             _screenModel.Screen_Types = screenType;
 
             var plisseType = _screenModel.Screen_PlisséType;
 
-            if (screenType == ScreenType._Plisse)
+            if (screenType == ScreenType._Plisse || screenType == ScreenType._Freedom)
             {
-                _screenView.getLblPlisse().Visible = true;
-                _screenView.getCmbPlisse().Visible = true;
-
-                if (plisseType == PlisseType._RD)
+                if (screenType == ScreenType._Plisse)
                 {
-                    _screenView.getNudPlisseRd().Visible = true;
-                    _screenView.getLblPlisseRd().Visible = true;
+                 
+                    _screenView.getCmbPlisse().DataSource = _plisseType;
+
+                    #region Visibility false 
+                    _screenView.getCmbFreedom().Visible = false;
+                    _screenView.getLblPlisseRd().Visible = false;
+                    #endregion
+
+                    #region Visibility True 
+                    _screenView.getLblPlisse().Text = "Plissé Type";
+                    _screenView.getLblPlisse().Visible = true;
+                    _screenView.getCmbPlisse().Visible = true;
+                    #endregion
+
+                    if (plisseType == PlisseType._RD)
+                    {
+                        _screenView.getLblPlisseRd().Text = "Panel/s";
+                        _screenView.getNudPlisseRd().Visible = true;
+                        _screenView.getLblPlisseRd().Visible = true;
+                    }
                 }
+                else if (screenType == ScreenType._Freedom)
+                {
+
+                    _screenView.getCmbPlisse().DataSource = _freedomScreenType;
+
+                    #region visibility false                           
+                    _screenView.getNudPlisseRd().Visible = false;
+                    #endregion
+
+                    #region Visibility True 
+                    _screenView.getLblPlisse().Text = "Type";
+                    _screenView.getLblPlisse().Visible = true;
+                    _screenView.getCmbPlisse().Visible = true;
+                    _screenView.getCmbFreedom().Location = new System.Drawing.Point(87, 110);
+                    _screenView.getLblPlisseRd().Text = "Size";
+                    _screenView.getCmbFreedom().Visible = true;
+                    _screenView.getLblPlisseRd().Visible = true;
+                    #endregion
+
+                }
+
             }
             else
             {
@@ -249,6 +307,7 @@ namespace PresentationLayer.Presenter
                 _screenView.getCmbPlisse().Visible = false;
                 _screenView.getNudPlisseRd().Visible = false;
                 _screenView.getLblPlisseRd().Visible = false;
+                _screenView.getCmbFreedom().Visible = false;
             }
 
 
@@ -256,7 +315,7 @@ namespace PresentationLayer.Presenter
             {
                 _screenModel.SpringLoad_Visibility = true;
             }
-            else
+            else 
             {
                 _screenModel.SpringLoad_Visibility = false;
             }
@@ -265,12 +324,12 @@ namespace PresentationLayer.Presenter
             {
                 _screenModel.SP_MagnumScreenType_Visibility = true;
             }
-            else
+            else 
             {
                 _screenModel.SP_MagnumScreenType_Visibility = false;
             }
-
-
+              
+            
             _screenModel.ComputeScreenTotalPrice();
         }
 
@@ -350,10 +409,7 @@ namespace PresentationLayer.Presenter
                 GetCurrentAmount();
                 _screenDT.Rows.Add(CreateNewRow_ScreenDT());
                 _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
-            }
-
-            
-
+            }          
 
         }
 
@@ -381,6 +437,7 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            
 
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
@@ -399,6 +456,18 @@ namespace PresentationLayer.Presenter
             {
                 LoadScreenList();              
             }
+
+            foreach (PlisseType item in PlisseType.GetAll())
+            {
+                _plisseType.Add(item);
+            }
+
+            foreach (Freedom_ScreenType item in Freedom_ScreenType.GetAll())
+            {
+                _freedomScreenType.Add(item);
+            }
+
+            
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
             UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
@@ -469,6 +538,8 @@ namespace PresentationLayer.Presenter
         string setDesc, centerClosureDesc;
         public DataRow CreateNewRow_ScreenDT()
         {
+
+
             DataRow newRow;
             newRow = _screenDT.NewRow();
             string _Screen_Type; 
@@ -545,6 +616,7 @@ namespace PresentationLayer.Presenter
             binding.Add("Screen_Quantity", new Binding("Value", _screenModel, "Screen_Quantity", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("DiscountPercentage", new Binding("Value", _screenModel, "DiscountPercentage", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_ItemNumber", new Binding("Text", _screenModel, "Screen_ItemNumber", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Freedom_ScreenSize", new Binding("Text", _screenModel, "Freedom_ScreenSize", true, DataSourceUpdateMode.OnPropertyChanged));
 
 
 

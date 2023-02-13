@@ -1654,6 +1654,7 @@
     <Content Include="Resources\SinglePanel.png" />
     <None Include="Resources\SlidingPanel.png" />
     <None Include="Resources\TiltNTurnPanel.png" />
+    <None Include="Resources\Summary_v2.png" />
     <Content Include="Resources\Transom.png" />
     <Content Include="Resources\undo_30px.png" />
   </ItemGroup>
