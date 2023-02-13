@@ -561,15 +561,19 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                        Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         Frame_Padding_int = new Padding(10);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         Frame_Padding_int = new Padding(10, 10, 10, 5);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(10, 10, 10, 0);
                     }
@@ -584,18 +588,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                        Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         Frame_Padding_int = new Padding(default_pads);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         Frame_Padding_int = new Padding(default_pads,
                                                         default_pads,
                                                         default_pads,
                                                         (int)((int)26 * Frame_Zoom) - _frameDeduction);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || 
+                             Frame_BotFrameArtNo == BottomFrameTypes._9C66 || 
+                             Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,
                                                         default_pads,
@@ -619,15 +627,19 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                            Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 15);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
                         }
@@ -641,15 +653,19 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                            Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 15);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
                         }
@@ -666,18 +682,22 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                        Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         FrameImageRenderer_Padding_int = new Padding(default_pads_imgr);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                              Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
                                                                      default_pads_imgr,
                                                                      default_pads_imgr,
                                                                      (int)(26 * FrameImageRenderer_Zoom));
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
                                                                      default_pads_imgr,
@@ -700,15 +720,19 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || 
+                            Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 15);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
                         }
@@ -722,15 +746,19 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || 
+                            Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 15);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
                         }
@@ -747,11 +775,13 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || 
+                        Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         Frame_Padding_int = new Padding(default_pads);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                             Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         Frame_Padding_int = new Padding(default_pads,
                                                         default_pads,
@@ -759,7 +789,9 @@ namespace ModelLayer.Model.Quotation.Frame
                                                         (int)(26 * Frame_Zoom));
 
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 || Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,
                                                         default_pads,

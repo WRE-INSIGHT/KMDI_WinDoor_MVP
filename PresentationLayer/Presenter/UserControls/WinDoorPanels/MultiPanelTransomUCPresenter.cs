@@ -752,6 +752,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 suggest_HT = _multiPanelModel.MPanel_Height - 10;
@@ -811,6 +812,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 if (_multiPanelModel.MPanel_ParentModel?.MPanel_ParentModel?.MPanel_Type == "")
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
@@ -829,6 +831,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     else if (_multiPanelModel.MPanel_ParentModel?.MPanel_Placement == "Last")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
@@ -1437,6 +1440,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     pInnerHt = fpnl.ClientRectangle.Height - 40;
 
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height;
@@ -1448,6 +1452,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
@@ -1473,6 +1478,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
@@ -1549,6 +1555,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                     {
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
@@ -1566,12 +1573,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     else if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             botFrameDeduct = 11;
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
-                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             botFrameDeduct = 20;
                         }
@@ -1722,6 +1732,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                          lvl2_parent_Type == "") //M-T
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         ht_deduction = 0;
@@ -1759,12 +1770,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         lvl2_parent_Type == "") //M-T
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             wd_deduction = 17;
                                             ht_deduction = 20;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             wd_deduction = 17;
@@ -1777,12 +1791,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         if (parentObj_placement == "First")
                                         {
                                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                             {
                                                 wd_deduction = 15;
                                                 ht_deduction = 15;
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 wd_deduction = 15;
@@ -1792,13 +1809,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         else if (parentObj_placement == "Somewhere in Between")
                                         {
                                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                             {
                                                 bounds_PointY = 5;
                                                 ht_deduction = 10;
                                                 wd_deduction = 15;
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 bounds_PointY = 5;
@@ -1809,14 +1829,17 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         else if (parentObj_placement == "Last")
                                         {
                                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                             {
                                                 bounds_PointY = 5;
                                                 ht_deduction = 15;
                                                 wd_deduction = 15;
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                                                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 bounds_PointY = 5;
                                                 ht_deduction = 6;
@@ -1867,12 +1890,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         lvl2_parent_Type == "") //M-T
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                     {
                                         wd_deduction = 17;
                                         ht_deduction = 20;
                                     }
                                     else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         wd_deduction = 17;
@@ -1885,11 +1911,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     if (parentObj_placement == "First")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             ht_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             ht_deduction = 15;
@@ -1898,13 +1927,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     else if (parentObj_placement == "Somewhere in Between")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             bounds_PointY = 5;
                                             ht_deduction = 10;
                                             wd_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -1915,13 +1947,16 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     else if (parentObj_placement == "Last")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             bounds_PointY = 5;
                                             ht_deduction = 15;
                                             wd_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -1963,11 +1998,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         lvl2_parent_Type == "") //M-T
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                     {
                                         ht_deduction = 20;
                                     }
                                     else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         ht_deduction = 11;
@@ -1979,11 +2017,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     if (parentObj_placement == "First")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             ht_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             ht_deduction = 15;
@@ -1992,12 +2033,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     else if (parentObj_placement == "Somewhere in Between")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             bounds_PointY = 5;
                                             ht_deduction = 10;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -2007,12 +2051,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     else if (parentObj_placement == "Last")
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
-                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                                         {
                                             bounds_PointY = 5;
                                             ht_deduction = 15;
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -2045,7 +2092,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (zoom == 1.0f && lvl2_parent_Type == "")
                         {
-                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 ht_deduction = bSizeDeduction - 9;
                             }
@@ -3186,7 +3235,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         loc2_Y = pInnerY + pInnerHt;
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             if (zoom >= 0.50f)
                             {
@@ -3199,6 +3249,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom <= 0.26f)
@@ -3243,7 +3294,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             if (zoom >= 0.50f)
                             {
@@ -3258,6 +3310,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom <= 0.26f)
@@ -4007,6 +4060,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom == 0.26f)
@@ -4065,6 +4119,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom == 0.26f)

@@ -9204,7 +9204,12 @@ namespace PresentationLayer.Presenter
                 _windoorModel = item;
 
                 _quotationModel.Select_Current_Windoor(_windoorModel);
-
+                SetMainViewTitle(input_qrefno,
+                                _projectName,
+                                _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
                 //clear
 
                 _pnlMain.Controls.Clear();

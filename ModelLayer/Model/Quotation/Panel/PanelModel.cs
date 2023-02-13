@@ -3627,17 +3627,20 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
-                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                             {
                                 mpnlWd_deduct = 20;
                                 mpnlHt_deduct = 20;
                             }
-                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                             {
                                 mpnlWd_deduct = 20;
                                 mpnlHt_deduct = 15;
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 20;
@@ -3649,7 +3652,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
-                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                                Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                             {
                                 mpnlWd_deduct = 15;
                                 mpnlHt_deduct = 20;
@@ -3676,7 +3680,8 @@ namespace ModelLayer.Model.Quotation.Panel
                                     }
                                 }
                             }
-                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                             {
                                 mpnlWd_deduct = 15;
                                 mpnlHt_deduct = 15;
@@ -3703,6 +3708,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 }
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 15;
@@ -3846,20 +3852,22 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
-                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                    Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 20;
                 }
-                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 &&
-                         Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 15;
                 }
                 else if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
-                         Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                          Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 10;
@@ -3966,8 +3974,9 @@ namespace ModelLayer.Model.Quotation.Panel
                     if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
                     {
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
-                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                             Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
                         }
@@ -4291,8 +4300,9 @@ namespace ModelLayer.Model.Quotation.Panel
 
 
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
-                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                             Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
                         }
@@ -4307,9 +4317,10 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) && 
-                            Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
-                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) && 
+                             Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
+                             Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
                             Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
                         }
@@ -4353,7 +4364,8 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
                 divSize = 16;
-                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                    Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 20;
@@ -4388,7 +4400,8 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                     }
                 }
-                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                 {
                     mpnlWd_deduct = 20;
                     mpnlHt_deduct = 16;
@@ -4410,6 +4423,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
                 else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     mpnlWd_deduct = 20;

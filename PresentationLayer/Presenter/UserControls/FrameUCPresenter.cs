@@ -156,11 +156,11 @@ namespace PresentationLayer.Presenter.UserControls
             int divCount = Convert.ToInt32(lst_data[1]);
 
             int bot_deduct = (int)(_frameModel.Frame_Type - 10);
-            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+            if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
             {
                 bot_deduct = (int)(_frameModel.Frame_Type - 10);
             }
-            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
                 bot_deduct = 26 - 10;
             }
