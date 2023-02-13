@@ -695,7 +695,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     bool divchkdm = false;
 
-                                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door && _mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
@@ -1107,7 +1107,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             bool divchkdm = false;
 
-                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                            if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door && _mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("C70"))
                             {
                                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)

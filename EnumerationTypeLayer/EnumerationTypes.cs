@@ -849,7 +849,9 @@ namespace EnumerationTypeLayer
             public static readonly BottomFrameTypes _7507 = new BottomFrameTypes(0, "7507");
             public static readonly BottomFrameTypes _7502 = new BottomFrameTypes(1, "7502");
             public static readonly BottomFrameTypes _7789 = new BottomFrameTypes(2, "7789");
-            public static readonly BottomFrameTypes _None = new BottomFrameTypes(3, "None");
+            public static readonly BottomFrameTypes _6052 = new BottomFrameTypes(3, "6052");
+            public static readonly BottomFrameTypes _6050 = new BottomFrameTypes(4, "6050");
+            public static readonly BottomFrameTypes _None = new BottomFrameTypes(5, "None");
 
             private BottomFrameTypes(int value, string displayName) : base(value, displayName) { }
         }

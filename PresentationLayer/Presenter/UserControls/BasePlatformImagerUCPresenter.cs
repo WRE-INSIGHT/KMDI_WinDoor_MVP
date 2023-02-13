@@ -824,6 +824,19 @@ namespace PresentationLayer.Presenter.UserControls
                                                 mParentLoc_X1 += divModel.DivImageRenderer_Width;
                                             }
                                         }
+                                       if (parentMpnl_obj.Name.Contains("Panel"))
+                                        {
+                                            if (mpnl.MPanel_Type == "Mullion")
+                                            {
+                                                IPanelModel panelModel = mpnl.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_Y1 += panelModel.PanelImageRenderer_Height;
+                                            }
+                                            else if (mpnl.MPanel_Type == "Transom")
+                                            {
+                                                IPanelModel panelModel = mpnl.MPanel_ParentModel.MPanelLst_Panel.Find(panel => panel.Panel_Name == parentMpnl_obj.Name);
+                                                mParentLoc_X1 += panelModel.PanelImageRenderer_Width;
+                                            }
+                                        }
                                     }
                                     else
                                     {

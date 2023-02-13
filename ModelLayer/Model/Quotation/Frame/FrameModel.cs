@@ -700,11 +700,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 15);
                         }
@@ -722,11 +722,11 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_Type == Frame_Padding.Door)
                     {
-                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                        if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {
                             Frame_Padding_int = new Padding(20);
                         }
-                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 15);
                         }
@@ -747,11 +747,11 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_Type == Frame_Padding.Door)
                 {
-                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._7507 || Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         Frame_Padding_int = new Padding(default_pads);
                     }
-                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502 || Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         Frame_Padding_int = new Padding(default_pads,
                                                         default_pads,

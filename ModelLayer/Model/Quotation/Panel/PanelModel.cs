@@ -3846,6 +3846,26 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             else
             {
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                {
+                    mpnlWd_deduct = 20;
+                    mpnlHt_deduct = 20;
+                }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 &&
+                         Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    mpnlWd_deduct = 20;
+                    mpnlHt_deduct = 15;
+                }
+                else if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                         Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                {
+                    mpnlWd_deduct = 20;
+                    mpnlHt_deduct = 10;
+                }
+
+
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
                     int panelSize = 0;
@@ -3933,20 +3953,38 @@ namespace ModelLayer.Model.Quotation.Panel
                             pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
                         }
                     }
-                    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom) - (int)(Panel_Margin.Bottom * Panel_Zoom));
-                    //if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+                    //if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    //                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     //{
-                    //    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom));
+                    //    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
                     //}
-                    //else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    //else
                     //{
-                    //    pnl_ht = (int)(Panel_Height * Panel_Zoom);
+                    //    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom) - (int)(Panel_Margin.Bottom * Panel_Zoom));
                     //}
-                    //else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
-                    //{
 
-                    //    pnl_ht = (int)(Panel_Height * Panel_Zoom);
-                    //}
+                    if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
+                    {
+                        if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
+                        }
+                        else
+                        {
+                            pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom));
+                        }
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+                        pnl_ht = (int)(Panel_Height * Panel_Zoom);
+                    }
+                    else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                    {
+
+                        pnl_ht = (int)(Panel_Height * Panel_Zoom);
+                    }
                 }
                 else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
@@ -3977,7 +4015,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
                         {
-                            pnl_ht = ((parent_mpanelHT - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
+                            pnl_ht = ((parent_mpanelHT - (int)(mpnlHt_deduct * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
                         }
                         else
                         {
@@ -3988,7 +4026,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else
                             {
-                                pnl_ht = ((parent_mpanelHT - (int)(20 * Panel_Zoom)) - (totalHt_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
+                                pnl_ht = ((parent_mpanelHT - (int)(mpnlHt_deduct * Panel_Zoom)) - (totalHt_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
                             }
                         }
                     }
@@ -4033,7 +4071,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 div_count = 0,
                 totalpanel_inside_parentMpanel = 0,
                 divSize = 0;
-            int panelSize = 0;
+            int panelTotalHt = 0, panelTotalWd = 0;
             int count = 0;
             int totalPanelCount = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
             if (PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
@@ -4061,7 +4099,8 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if (pnl.Panel_Name != Panel_Name)
                         {
-                            panelSize += pnl.PanelImageRenderer_Width;
+                            panelTotalWd += pnl.PanelImageRenderer_Width;
+                            panelTotalHt += pnl.PanelImageRenderer_Height;
                             count += 1;
                         }
 
@@ -4078,7 +4117,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else
                             {
-                                pnl_wd = ((parent_mpanelWd) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelSize) / (totalPanelCount - count);
+                                pnl_wd = ((parent_mpanelWd) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelTotalWd) / (totalPanelCount - count);
                             }
                             //pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom) - (3 * div_count);
 
@@ -4091,7 +4130,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else
                             {
-                                pnl_wd = (parent_mpanelWd - panelSize) / (totalPanelCount - count);
+                                pnl_wd = (parent_mpanelWd - panelTotalWd) / (totalPanelCount - count);
                             }
                             //pnl_wd = (int)(Panel_Width * PanelImageRenderer_Zoom);
                         }
@@ -4099,16 +4138,33 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                     {
+
                         if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
                         {
-                            //pnl_ht = (int)(Panel_Height * PanelImageRenderer_Zoom) - (5 * div_count);
-                            pnl_ht = (int)(Panel_Height * PanelImageRenderer_Zoom) - (5 * div_count);
+                            if (isEqual)
+                            {
+                                pnl_ht = ((parent_mpanelHT) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
+                            }
+                            else
+                            {
+                                pnl_ht = ((parent_mpanelHT) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions) - panelTotalHt) / (totalPanelCount - count);
+                            }
+                            //pnl_ht = (int)(Panel_Width * PanelImageRenderer_Zoom) - (3 * div_count);
+
                         }
                         else
                         {
-                            pnl_ht = (int)(Panel_Height * PanelImageRenderer_Zoom);
+                            if (isEqual)
+                            {
+                                pnl_ht = parent_mpanelHT / totalPanelCount;
+                            }
+                            else
+                            {
+                                pnl_ht = (parent_mpanelHT - panelTotalHt) / (totalPanelCount - count);
+                            }
+                            //pnl_ht = (int)(Panel_Width * PanelImageRenderer_Zoom);
                         }
-                        pnl_wd = parent_mpanelHT;
+                        pnl_wd = parent_mpanelWd;
                     }
                 }
                 else if (Panel_ParentFrameModel != null)
@@ -4223,13 +4279,44 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_WidthToBind = pnl_wd;
 
                     }
+
+
                     if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
                     {
-                        Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+
+                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            deduct = 3;
+                        }
+
+
+                        if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
+                        }
+                        else
+                        {
+                            Panel_HeightToBind = (int)(Panel_Height * Panel_Zoom);
+                        }
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                     {
-                        Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
+
+
+                        
+                        if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) && 
+                            Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
+                            Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        {
+                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
+                        }
+                        else
+                        {
+                            Panel_HeightToBind = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deduct);
+                        }
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                     {

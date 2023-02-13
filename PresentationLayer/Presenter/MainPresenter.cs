@@ -8982,6 +8982,29 @@ namespace PresentationLayer.Presenter
                     {
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
+                        BottomFrameTypes frameBotFrameType = null;
+                        if (_windoorModel.WD_profile == "C70 Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7507;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7502;
+                            }
+                        }
+                        else if (_windoorModel.WD_profile == "PremiLine Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6052;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6050;
+                            }
+                        }
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -8992,7 +9015,7 @@ namespace PresentationLayer.Presenter
                                                                        _windoorModel.WD_zoom,
                                                                        FrameProfile_ArticleNo._7502,
                                                                        _windoorModel,
-                                                                       null,
+                                                                       frameBotFrameType,
                                                                        frameID,
                                                                        "",
                                                                        true,
