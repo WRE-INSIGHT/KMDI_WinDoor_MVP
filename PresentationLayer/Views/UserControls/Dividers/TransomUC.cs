@@ -88,6 +88,23 @@ namespace PresentationLayer.Views.UserControls.Dividers
             this.DataBindings.Add(ModelBinding["Div_WidthToBind"]);
             this.DataBindings.Add(ModelBinding["Div_HeightToBind"]);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+            this.Dispose();
+            deleteToolStripMenuItem.Dispose();
+            cmenu_transom.Dispose();
+        }
 
         private void TransomUC_MouseClick(object sender, MouseEventArgs e)
         {

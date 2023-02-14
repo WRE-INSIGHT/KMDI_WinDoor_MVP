@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using ModelLayer.Model.Project;
+using ModelLayer.Model.User;
 using PresentationLayer.Views.Costing_Head;
 using ServiceLayer.Services.ProjectQuoteServices;
 using System;
@@ -17,6 +18,8 @@ namespace PresentationLayer.Presenter.Costing_Head
     {
         private IUnityContainer _unityC;
         IAddProjectView _addProjectView;
+        private int _projectId;
+        private IUserModel _userModel;
         private IProjectQuoteServices _projQuoteServices;
         private IMainPresenter _mainPresenter;
         ComboBox _cmbProvince, _cmbCity, _cmbArea;
@@ -39,14 +42,28 @@ namespace PresentationLayer.Presenter.Costing_Head
             _addProjectView.AddProjectViewLoadEventRaised += _addProjectView_AddProjectViewLoadEventRaised;
             _addProjectView.cmbProvinceSelectedItemChange += _addProjectView_cmbProvinceSelectedItemChange;
             _addProjectView.btnSaveClickEventRaised += _addProjectView_btnSaveClickEventRaised;
+            _addProjectView.AddProjectViewFormClosedEventRaised += _addProjectView_AddProjectViewFormClosedEventRaised;
+        }
+
+        private void _addProjectView_AddProjectViewFormClosedEventRaised(object sender, FormClosedEventArgs e)
+        {
+            _addProjectView.ClearBinding();
         }
 
         private async void _addProjectView_btnSaveClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-                await SaveProject();
-                MessageBox.Show("Save Succesfully!");
+                if (_projectId == 0)
+                {
+                    await SaveProject();
+                    MessageBox.Show("Save Succesfully!");
+                }
+                else
+                {
+                    await _projQuoteServices.UpdateProject(_projectId, _projectModel, _userModel);
+                }
+               
                 _addProjectView.CloseThisView();
 
             }
@@ -87,8 +104,8 @@ namespace PresentationLayer.Presenter.Costing_Head
             projectBinding.Add("Street", new Binding("Text", _projectModel, "Street", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Village", new Binding("Text", _projectModel, "Village", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Barangay", new Binding("Text", _projectModel, "Barangay", true, DataSourceUpdateMode.OnPropertyChanged));
-            projectBinding.Add("City", new Binding("Text", _projectModel, "City", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Province", new Binding("Text", _projectModel, "Province", true, DataSourceUpdateMode.OnPropertyChanged));
+            projectBinding.Add("City", new Binding("Text", _projectModel, "City", true, DataSourceUpdateMode.OnPropertyChanged));
             projectBinding.Add("Area", new Binding("Text", _projectModel, "Area", true, DataSourceUpdateMode.OnPropertyChanged));
             return projectBinding;
         }
@@ -107,6 +124,7 @@ namespace PresentationLayer.Presenter.Costing_Head
                 _cmbArea.SelectedItem = dataTable.Rows[i][1].ToString().Trim();
 
             }
+            _cmbCity.Text = _projectModel.City;
         }
 
         private async void _addProjectView_AddProjectViewLoadEventRaised(object sender, EventArgs e)
@@ -114,7 +132,15 @@ namespace PresentationLayer.Presenter.Costing_Head
             try
             {
                 await Load_Province();
+                if(_projectId != 0)
+                {
+                    await _projQuoteServices.EditProject(_projectId, _projectModel);
+                }else
+                {
+                    
+                }
                 _addProjectView.ThisBinding(CreateBindingDictionary());
+
             }
             catch (Exception ex)
             {
@@ -137,7 +163,9 @@ namespace PresentationLayer.Presenter.Costing_Head
         }
 
         public IAddProjectPresenter GetNewInstance(IUnityContainer unityC, 
-                                                   IMainPresenter mainPresenter)
+                                                   IMainPresenter mainPresenter,
+                                                   int projectId,
+                                                   IUserModel userModel)
         {
             unityC
                .RegisterType<IAddProjectView, AddProjectView>()
@@ -145,12 +173,38 @@ namespace PresentationLayer.Presenter.Costing_Head
             AddProjectPresenter presenter = unityC.Resolve<AddProjectPresenter>();
             presenter._unityC = unityC;
             presenter._mainPresenter = mainPresenter;
+            presenter._projectId = projectId;
+            presenter._userModel = userModel;
             return presenter;
         }
         public void ShowThisView()
         {
             _addProjectView.ShowThisView();
         }
-       
+
+        public void ClearBinding()
+        {
+            _addProjectView.ClearBinding();
+        }
+
+        public void ClearProjectModel()
+        {
+            _projectModel.Title = "";
+            _projectModel.Firstname = "";
+            _projectModel.Lastname = "";
+            _projectModel.CompanyName = "";
+            _projectModel.ContactNo = "";
+            _projectModel.FileLableAs = "";
+            _projectModel.UnitNo = "";
+            _projectModel.Establishment = "";
+            _projectModel.HouseNo = "";
+            _projectModel.Street = "";
+            _projectModel.Village = "";
+            _projectModel.Barangay = "";
+            _projectModel.City = "";
+            _projectModel.Province = "";
+            _projectModel.Area = "";
+            _projectModel.CompleteAddress = "";
+        }
     }
 }

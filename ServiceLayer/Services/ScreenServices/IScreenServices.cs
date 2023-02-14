@@ -5,15 +5,18 @@ namespace ServiceLayer.Services.ScreenServices
 {
     public interface IScreenServices
     {
-        IScreenModel AddScreenModel(int screen_id,
+        IScreenModel AddScreenModel(decimal screen_itemnumber,
                                     int screen_width,
                                     int screen_height,
-                                    decimal screen_factor,
                                     ScreenType screen_types,
                                     string screen_windoorID,
                                     decimal screen_unitPrice,
                                     int screen_quantity,
-                                    decimal screen_totalAmount);
+                                    int screen_set,
+                                    int discount,
+                                    decimal screen_netPrice,
+                                    decimal screen_totalAmount,
+                                    string plissemagnumType);
 
         void ValidateModel(IScreenModel screenModel);
     }

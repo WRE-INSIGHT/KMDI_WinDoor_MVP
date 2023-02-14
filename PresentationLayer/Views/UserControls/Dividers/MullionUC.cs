@@ -104,6 +104,24 @@ namespace PresentationLayer.Views.UserControls.Dividers
         {
             EventHelpers.RaiseEvent(this, mullionUCSizeChangedEventRaised, e);
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+
+        }
+        private void RemoveDataBinding()
+        {
+            this.DataBindings.Clear();
+
+            this.Dispose();
+            cmenu_mullion.Dispose();
+            deleteToolStripMenuItem.Dispose();
+        }
 
         private void MullionUC_KeyDown(object sender, KeyEventArgs e)
         {

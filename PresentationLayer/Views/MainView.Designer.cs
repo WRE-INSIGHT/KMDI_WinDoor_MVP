@@ -93,6 +93,7 @@
             this.tsLbl_Loading = new System.Windows.Forms.ToolStripLabel();
             this.tsLbl_Status = new System.Windows.Forms.ToolStripLabel();
             this.ViewImagerToolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ScreentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SortItemtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -527,7 +528,8 @@
             this.tsp_Sync,
             this.tsLbl_Loading,
             this.tsLbl_Status,
-            this.ViewImagerToolStripButton1});
+            this.ViewImagerToolStripButton1,
+            this.ScreentoolStripButton});
             this.tsMain.Location = new System.Drawing.Point(0, 24);
             this.tsMain.Name = "tsMain";
             this.tsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -740,6 +742,17 @@
             this.ViewImagerToolStripButton1.Size = new System.Drawing.Size(24, 29);
             this.ViewImagerToolStripButton1.Text = "View Imager";
             this.ViewImagerToolStripButton1.Click += new System.EventHandler(this.ViewImagerToolStripButton1_Click);
+            // 
+            // ScreentoolStripButton
+            // 
+            this.ScreentoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ScreentoolStripButton.Enabled = false;
+            this.ScreentoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ScreentoolStripButton.Image")));
+            this.ScreentoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ScreentoolStripButton.Name = "ScreentoolStripButton";
+            this.ScreentoolStripButton.Size = new System.Drawing.Size(24, 29);
+            this.ScreentoolStripButton.Text = "Screen";
+            this.ScreentoolStripButton.Click += new System.EventHandler(this.ScreentoolStripButton_Click);
             // 
             // pnlRight
             // 
@@ -1026,6 +1039,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
             this.Load += new System.EventHandler(this.MainView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyUp);
             this.mnsMainMenu.ResumeLayout(false);
             this.mnsMainMenu.PerformLayout();
             this.tsMain.ResumeLayout(false);
@@ -1142,5 +1157,6 @@
         private System.Windows.Forms.ToolStripButton duplicateSample;
         private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
         private System.Windows.Forms.ToolStripButton newfactorBtn;
+        private System.Windows.Forms.ToolStripButton ScreentoolStripButton;
     }
 }

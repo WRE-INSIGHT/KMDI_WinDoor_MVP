@@ -185,9 +185,17 @@ namespace PresentationLayer.Presenter
 
         private int i = 0;
         private decimal newfactor = 0;
+
         #endregion
 
         #region GetSet
+
+        private List<IScreenModel> _screenList = new List<IScreenModel>();
+        public List<IScreenModel> Screen_List
+        {
+            get { return _screenList; }
+            set { _screenList = value; }
+        }
 
         public DataTable GlassThicknessDT
         {
@@ -931,13 +939,22 @@ namespace PresentationLayer.Presenter
             _mainView.ChangeSyncDirectoryToolStripMenuItemClickEventRaised += new EventHandler(OnChangeSyncDirectoryToolStripMenuItemClickEventRaised);
             _mainView.NudCurrentPriceValueChangedEventRaised += new EventHandler(OnNudCurrentPriceValueChangedEventRaised);
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
+            _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
         }
-
-
-
         #region Events  
-
+        private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
+        {
+            int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 120;
+            if (numberOfTextLinesToMove > 0)
+            {
+                ZoomIn();
+            }
+            else
+            {
+                ZoomOut();
+            }
+        }
         #region setnewfactor
         private void OnsetNewFactorEventRaised(object sender, EventArgs e)
         {
@@ -947,55 +964,62 @@ namespace PresentationLayer.Presenter
         public async void setNewFactor()
         {
             decimal value;
-
-            if (i <= 0)
+            try
             {
-                string[] province = projectAddress.Split(',');
-                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                //value = await _quotationServices.GetFactorByProvince(province);
-            }
-            else
-            {
-                value = newfactor;
-            }
-            string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
-            if (input != "" && input != "0")
-            {
-                try
+                if (i <= 0)
                 {
-                    decimal deci_input = Convert.ToDecimal(input);
-                    if (deci_input > 0)
+                    string[] province = projectAddress.Split(',');
+                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                    //value = await _quotationServices.GetFactorByProvince(province);
+                }
+                else
+                {
+                    value = newfactor;
+                }
+                string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
+                if (input != "" && input != "0")
+                {
+                    try
                     {
-                        if (deci_input != value)
+                        decimal deci_input = Convert.ToDecimal(input);
+                        if (deci_input > 0)
                         {
-                            _quotationModel.PricingFactor = deci_input;
-                            MessageBox.Show("New Factor Set Sucessfully");
-                            GetCurrentPrice();
-                            newfactor = deci_input;
-                            i++;
+                            if (deci_input != value)
+                            {
+                                _quotationModel.PricingFactor = deci_input;
+                                MessageBox.Show("New Factor Set Sucessfully");
+                                GetCurrentPrice();
+                                newfactor = deci_input;
+                                i++;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                        else if (deci_input < 0)
+                        {
+                            MessageBox.Show("Invalid number");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.HResult == -2146233033)
+                        {
+                            MessageBox.Show("Please input a number.");
                         }
                         else
                         {
-                            MessageBox.Show("Set Factor is the same as old", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(ex.Message, ex.HResult.ToString());
                         }
                     }
-                    else if (deci_input < 0)
-                    {
-                        MessageBox.Show("Invalid number");
-                    }
                 }
-                catch (Exception ex)
-                {
-                    if (ex.HResult == -2146233033)
-                    {
-                        MessageBox.Show("Please input a number.");
-                    }
-                    else
-                    {
-                        MessageBox.Show(ex.Message, ex.HResult.ToString());
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
@@ -1009,9 +1033,16 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                updatePriceFromMainViewToItemList();
-                _windoorModel.WD_fileLoad = false;
-                _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                if (_quotationModel != null)
+                {
+                    updatePriceFromMainViewToItemList();
+                    _windoorModel.WD_fileLoad = false;
+                    _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
+                }
+                else
+                {
+                    _lblCurrentPrice.Value = 0;
+                }
             }
         }
 
@@ -1068,15 +1099,18 @@ namespace PresentationLayer.Presenter
         private void OnScreenToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
             // int screenID = _screenModel.Screen_id += 1;
-            _screenModel = _screenServices.AddScreenModel(0,
+            _screenModel = _screenServices.AddScreenModel(0.0m,
                                                           0,
                                                           0,
-                                                          0.0m,
-                                                          null,
+                                                          null,                                                        
                                                           string.Empty,
                                                           0.0m,
                                                           0,
-                                                          0.0m);
+                                                          0,
+                                                          0,
+                                                          0.0m,
+                                                          0.0m,
+                                                          string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
@@ -1296,7 +1330,7 @@ namespace PresentationLayer.Presenter
                                         {
                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                             {
-                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                             }
                                         }
                                         wndr_content.Add("\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1371,7 +1405,7 @@ namespace PresentationLayer.Presenter
                                                         {
                                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                             {
-                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                             }
                                                         }
                                                         wndr_content.Add("\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1487,7 +1521,7 @@ namespace PresentationLayer.Presenter
                                                                         {
                                                                             foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                                             {
-                                                                                lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                                lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                                             }
                                                                         }
                                                                         wndr_content.Add("\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -1586,7 +1620,7 @@ namespace PresentationLayer.Presenter
                                                                                     {
                                                                                         foreach (string pnl_lstLouverArtNo in pnl.Panel_LstLouverArtNo)
                                                                                         {
-                                                                                            lstLouverArtNo = pnl_lstLouverArtNo + ",";
+                                                                                            lstLouverArtNo += pnl_lstLouverArtNo + ",";
                                                                                         }
                                                                                     }
                                                                                     wndr_content.Add("\t\t\t\t\t" + prop.Name + ": " + lstLouverArtNo);
@@ -2041,7 +2075,11 @@ namespace PresentationLayer.Presenter
                                 break;
                             }
                         }
-
+                        else if (wndrId == _quotationModel.Lst_Windoor.Count())
+                        {
+                            Load_Windoor_Item(_quotationModel.Lst_Windoor[wndrId - 1]);
+                            break;
+                        }
                         else
                         {
                             if (wndrId - 1 == _quotationModel.Lst_Windoor.Count())
@@ -2087,41 +2125,12 @@ namespace PresentationLayer.Presenter
 
         private void OnButtonPlusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
-
-            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
-            {
-                ndx_zoomPercentage++;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                _windoorModel.SetDimensions_basePlatform();
-                _windoorModel.SetZoom();
-                _windoorModel.Fit_MyControls_ToBindDimensions();
-                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-                //FitControls_InsideMultiPanel();
-                //Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
+            ZoomIn();
         }
 
         private void OnButtonMinusZoomClickEventRaised(object sender, EventArgs e)
         {
-            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
-
-            if (ndx_zoomPercentage > 0)
-            {
-                ndx_zoomPercentage--;
-                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
-                _windoorModel.SetDimensions_basePlatform();
-                _windoorModel.SetZoom();
-                _windoorModel.Fit_MyControls_ToBindDimensions();
-                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
-
-                //FitControls_InsideMultiPanel();
-                //Fit_MyControls_byControlsLocation();
-            }
-            _basePlatformPresenter.InvalidateBasePlatform();
-            _basePlatformPresenter.Invalidate_flpMainControls();
+            ZoomOut();
         }
 
         private void OnLabelSizeClickEventRaised(object sender, EventArgs e)
@@ -2257,7 +2266,7 @@ namespace PresentationLayer.Presenter
             {
                 mainTodo = todo;
                 bgw.RunWorkerAsync();
-                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items")
+                if (todo == "Open_WndrFiles" || todo == "Add_Existing_Items" || todo == "Duplicate_Item")
                 {
                     _mainView.GetToolStripLabelLoading().Text = "Initializing";
                     ToggleMode(true, false);
@@ -2979,6 +2988,8 @@ namespace PresentationLayer.Presenter
                 switch (mainTodo)
                 {
                     case "Open_WndrFiles":
+                    case "Add_Existing_Items":
+                    case "Duplicate_Item":
                         Opening_dotwndr(e.ProgressPercentage);
                         _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
                         if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
@@ -2991,17 +3002,7 @@ namespace PresentationLayer.Presenter
                         }
 
                         break;
-                    case "Add_Existing_Items":
-                        Opening_dotwndr(e.ProgressPercentage);
-                        _mainView.GetTsProgressLoading().Value = e.ProgressPercentage;
-                        if (_mainView.GetToolStripLabelLoading().Text != "Initializing...")
-                        {
-                            _mainView.GetToolStripLabelLoading().Text += ".";
-                        }
-                        else
-                        {
-                            _mainView.GetToolStripLabelLoading().Text = "Initializing";
-                        }
+                    
 
                         break;
                     default:
@@ -3022,6 +3023,7 @@ namespace PresentationLayer.Presenter
                 {
                     case "Open_WndrFiles":
                     case "Add_Existing_Items":
+                    case "Duplicate_Item":
                         for (int i = 0; i < file_lines.Length; i++)
                         {
                             if (bgw.CancellationPending == true)
@@ -3090,6 +3092,7 @@ namespace PresentationLayer.Presenter
                     {
                         case "Open_WndrFiles":
                         case "Add_Existing_Items":
+                        case "Duplicate_Item":
                             //tmr_fadeOutText.Enabled = true;
                             //tmr_fadeOutText.Start();
 
@@ -3280,14 +3283,15 @@ namespace PresentationLayer.Presenter
                     Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
 
                     updatePriceOfMainView();
+                    ItemScroll = 0;
                 }
-                else if (mainTodo == "Add_Existing_Items")
+                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
-                }
+                    ItemScroll = _mainView.GetPanelItems().VerticalScroll.Maximum;
 
-                ItemScroll = 0;
+                }
                 PropertiesScroll = 0;
             }
             switch (inside_quotation)
@@ -4146,11 +4150,14 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("Panel_Index_Inside_SPanel:"))
                         {
                             panel_Index_Inside_SPanel = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
-
                         }
                         if (row_str.Contains("Panel_Placement:"))
                         {
                             panel_Placement = extractedValue_str;
+                        }
+                        if (row_str.Contains("Panel_GlassPricePerSqrMeter:"))
+                        {
+                            panel_GlassPricePerSqrMeter = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         if (row_str.Contains("Panel_Overlap_Sash:"))
                         {
@@ -7284,9 +7291,9 @@ namespace PresentationLayer.Presenter
                                                                                panel_Orient,
                                                                                panel_HingeOptions,
                                                                                panel_SlidingTypeVisibility,
-                                                                               panel_SlidingTypes);
+                                                                               panel_SlidingTypes
+                                                                               );
             pnlModel.Panel_fileLoad = true;
-
             pnlModel.Panel_ChkText = panel_ChkText;
             pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
             pnlModel.Panel_Type = panel_Type;
@@ -7301,6 +7308,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_OriginalDisplayWidth = panel_OriginalDisplayWidth;
             pnlModel.Panel_OriginalDisplayWidthDecimal = panel_OriginalDisplayWidthDecimal;
             pnlModel.Panel_Index_Inside_SPanel = panel_Index_Inside_SPanel;
+            pnlModel.Panel_GlassPricePerSqrMeter = panel_GlassPricePerSqrMeter;
             //pnlModel.Panel_PropertyHeight = panel_PropertyHeight;
             //pnlModel.Panel_HandleOptionsHeight = panel_HandleOptionsHeight;
             pnlModel.Panel_LouverBladesCount = panel_LouverBladesCount;
@@ -8119,6 +8127,7 @@ namespace PresentationLayer.Presenter
             panel_PropertyHeight,
             panel_HandleOptionsHeight,
             panel_LouverBladesCount;
+     decimal panel_GlassPricePerSqrMeter;
         bool panel_Orient,
              panel_OrientVisibility,
              panel_Visibility,
@@ -8907,7 +8916,7 @@ namespace PresentationLayer.Presenter
                         Windoor_Save_PropertiesUC();
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                        StartWorker("Open_WndrFiles");
+                        StartWorker("Duplicate_Item");
 
 
                     }
@@ -8972,6 +8981,29 @@ namespace PresentationLayer.Presenter
                     {
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
+                        BottomFrameTypes frameBotFrameType = null;
+                        if (_windoorModel.WD_profile == "C70 Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7507;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7502;
+                            }
+                        }
+                        else if (_windoorModel.WD_profile == "PremiLine Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6052;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6050;
+                            }
+                        }
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -8982,7 +9014,7 @@ namespace PresentationLayer.Presenter
                                                                        _windoorModel.WD_zoom,
                                                                        FrameProfile_ArticleNo._7502,
                                                                        _windoorModel,
-                                                                       null,
+                                                                       frameBotFrameType,
                                                                        frameID,
                                                                        "",
                                                                        true,
@@ -9171,7 +9203,12 @@ namespace PresentationLayer.Presenter
                 _windoorModel = item;
 
                 _quotationModel.Select_Current_Windoor(_windoorModel);
-
+                SetMainViewTitle(input_qrefno,
+                                _projectName,
+                                _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
                 //clear
 
                 _pnlMain.Controls.Clear();
@@ -9948,6 +9985,7 @@ namespace PresentationLayer.Presenter
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
+            Load_Windoor_Item(_windoorModel);
         }
 
 
@@ -10303,8 +10341,16 @@ namespace PresentationLayer.Presenter
         }
         public async void SetPricingFactor()
         {
-            string[] province = projectAddress.Split(',');
-            _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            try
+            {
+                string[] province = projectAddress.Split(',');
+                _quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
             //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
@@ -10791,7 +10837,43 @@ namespace PresentationLayer.Presenter
             }
 
         }
+        public void ZoomIn()
+        {
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
 
+            if (ndx_zoomPercentage < _windoorModel.Arr_ZoomPercentage.Count() - 1)
+            {
+                ndx_zoomPercentage++;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
+        public void ZoomOut()
+        {
+            int ndx_zoomPercentage = Array.IndexOf(_windoorModel.Arr_ZoomPercentage, _windoorModel.WD_zoom);
+
+            if (ndx_zoomPercentage > 0)
+            {
+                ndx_zoomPercentage--;
+                _windoorModel.WD_zoom = _windoorModel.Arr_ZoomPercentage[ndx_zoomPercentage];
+                _windoorModel.SetDimensions_basePlatform();
+                _windoorModel.SetZoom();
+                _windoorModel.Fit_MyControls_ToBindDimensions();
+                _windoorModel.Fit_MyControls_ImagersToBindDimensions();
+
+                //FitControls_InsideMultiPanel();
+                //Fit_MyControls_byControlsLocation();
+            }
+            _basePlatformPresenter.InvalidateBasePlatform();
+            _basePlatformPresenter.Invalidate_flpMainControls();
+        }
         public void GetCurrentPrice()
         {
             Run_GetListOfMaterials_SpecificItem();

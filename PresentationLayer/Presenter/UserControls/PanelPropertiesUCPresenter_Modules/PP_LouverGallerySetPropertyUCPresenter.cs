@@ -268,6 +268,45 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             //_panelModel.Panel_LouverHandleLocation = LouverHandleLoc_Option._RH;
             //_panelModel.Panel_LouverGalleryColor = LouverColor_Option._black;
             _LouverGallerySetPropertyUC.ThisBinding(CreateBindingDictionary());
+
+            if (_lst_gallerySetOptionUCP == null)
+            {
+                _lst_gallerySetOptionUCP = new List<IPP_LouverGallerySetOptionPropertyUCPresenter>();
+            }
+
+            if (_panelModel.Panel_LstLouverArtNo != null)
+            {
+                foreach (string louverArtNo in _panelModel.Panel_LstLouverArtNo)
+                {
+
+                    IPP_LouverGallerySetOptionPropertyUCPresenter GallerySetOption = _pp_LouverGallerySetOptionPropertyUCPresenter.GetNewInstance(_unityC, _mainPresenter, _panelModel, this);
+                    _lst_gallerySetOptionUCP.Add(GallerySetOption);
+                    UserControl GallerySetOptionUC = (UserControl)GallerySetOption.GetLouverGallerySetOptionPropertyUC();
+                    GallerySetOptionUC.Dock = DockStyle.Top;
+                    _pnlLouverBody.Controls.Add(GallerySetOptionUC);
+
+                    _panelModel.Panel_LouverGallerySetOptionVisibility = true;
+
+                    _panelModel.AdjustPropertyPanelHeight("addLouverGallerySetArtNo");
+
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySetArtNo");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addLouverGallerySetArtNo");
+                    }
+
+                    GallerySetOptionUC.BringToFront();
+                    ((UserControl)_LouverGallerySetPropertyUC).Height += constants.panel_property_LouverGallerySetArtNoOptionsheight;
+
+                    GallerySetOption.GetLouverGallerySetOptionPropertyUC().GetCmbLouverGalleryArtNo().Text = louverArtNo;
+
+                    gallerySet_count++;
+                    _panelModel.Panel_LouverGallerySetCount++;
+                    GallerySetOption.GetLouverGallerySetOptionPropertyUC().lblGallerySetArtNo = "Set " + gallerySet_count.ToString();
+                }
+                SortGallerySetOrderNumber();
+            }
         }
 
         public IPP_LouverGallerySetPropertyUC GetLouverGallerySetPropertyUC()

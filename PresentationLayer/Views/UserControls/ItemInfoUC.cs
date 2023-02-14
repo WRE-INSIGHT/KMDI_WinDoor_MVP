@@ -90,19 +90,7 @@ namespace PresentationLayer.Views.UserControls
         {
             e.Effect = DragDropEffects.All;
         }
-        public string WD_Item
-        {
-            get
-            {
-                return lbl_item.Text;
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
+       
         private void lbl_item_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

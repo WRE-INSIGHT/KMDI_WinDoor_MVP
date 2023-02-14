@@ -52,6 +52,8 @@ namespace PresentationLayer.Views.Costing_Head
         public event EventHandler AddProjectViewLoadEventRaised;
         public event EventHandler cmbProvinceSelectedItemChange;
         public event EventHandler btnSaveClickEventRaised;
+        public event FormClosedEventHandler AddProjectViewFormClosedEventRaised;
+
         private void AddProjectView_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, AddProjectViewLoadEventRaised, e);
@@ -72,6 +74,67 @@ namespace PresentationLayer.Views.Costing_Head
         public void CloseThisView()
         {
             this.Close();
+            this.Dispose();
+        }
+        private void AddProjectView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EventHelpers.RaiseFormClosedEvent(sender, AddProjectViewFormClosedEventRaised, e);
+        }
+
+        public void ClearBinding()
+        {
+            txt_Title.DataBindings.Clear();
+            txt_FirstnameStr.DataBindings.Clear();
+            txt_LastnameStr.DataBindings.Clear();
+            txt_CompanynameStr.DataBindings.Clear();
+            txt_ContactnoStr.DataBindings.Clear();
+            cmb_FilelableasStr.DataBindings.Clear();
+            txt_UnitStr.DataBindings.Clear();
+            txt_EstablishmentStr.DataBindings.Clear();
+            txt_HousenoStr.DataBindings.Clear();
+            txt_StreetStr.DataBindings.Clear();
+            txt_VillageStr.DataBindings.Clear();
+            txt_BarangayStr.DataBindings.Clear();
+            cmb_CityStr.DataBindings.Clear();
+            cmb_ProvinceStr.DataBindings.Clear();
+            cmb_AreaStr.DataBindings.Clear();
+
+
+            txt_Title.Dispose();
+            txt_FirstnameStr.Dispose();
+            txt_LastnameStr.Dispose();
+            txt_CompanynameStr.Dispose();
+            txt_ContactnoStr.Dispose();
+            cmb_FilelableasStr.Dispose();
+            txt_UnitStr.Dispose();
+            txt_EstablishmentStr.Dispose();
+            txt_HousenoStr.Dispose();
+            txt_StreetStr.Dispose();
+            txt_VillageStr.Dispose();
+            txt_BarangayStr.Dispose();
+            cmb_CityStr.Dispose();
+            cmb_ProvinceStr.Dispose();
+            cmb_AreaStr.Dispose();
+
+            label1.Dispose();
+            label2.Dispose();
+            label3.Dispose();
+            label4.Dispose();
+            label5.Dispose();
+            label6.Dispose();
+            label7.Dispose();
+            label8.Dispose();
+            label9.Dispose();
+            label10.Dispose();
+
+            label11.Dispose();
+            label12.Dispose();
+            label13.Dispose();
+            label14.Dispose();
+            label15.Dispose();
+
+            btn_Save.Dispose();
+
             this.Dispose();
         }
     }

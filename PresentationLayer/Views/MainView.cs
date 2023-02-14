@@ -61,6 +61,7 @@ namespace PresentationLayer.Views
                 tsBtnNConcrete.Enabled = value;
                 newfactorBtn.Enabled = value;
                 SetGlassToolStripMenuItem.Enabled = value;
+                ScreentoolStripButton.Enabled = value;
                 duplicateItemToolStripButton1.Enabled = value;
                 refreshToolStripButton.Enabled = value;
                 ViewImagerToolStripButton1.Enabled = value;
@@ -251,13 +252,22 @@ namespace PresentationLayer.Views
         public event EventHandler ChangeSyncDirectoryToolStripMenuItemClickEventRaised;
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
         public event EventHandler setNewFactorEventRaised;
-       
+        public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
 
         public MainView()
         {
             InitializeComponent();
             pnlItems.MouseWheel += PnlItems_MouseWheel;
+            pnlMain.MouseWheel += PnlMain_MouseWheel;
             pnlPropertiesBody.MouseWheel += PnlProperties_MouseWheel;
+        }
+
+        private void PnlMain_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (CrtlPress)
+            {
+                EventHelpers.RaiseMouseEvent(sender, PanelMainMouseWheelRaiseEvent, e);
+            }
         }
 
         private void PnlProperties_MouseWheel(object sender, MouseEventArgs e)
@@ -572,7 +582,10 @@ namespace PresentationLayer.Views
 
         }
 
-
+        private void ScreentoolStripButton_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
+        }
         private void screenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, screenToolStripMenuItemClickEventRaised, e);
@@ -610,6 +623,19 @@ namespace PresentationLayer.Views
         private void pnlItems_Scroll(object sender, ScrollEventArgs e)
         {
             ItemScroll = pnlItems.VerticalScroll.Value;
+        }
+        bool CrtlPress = false;
+        private void MainView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((ModifierKeys & Keys.Control) == Keys.Control)
+            {
+                CrtlPress = true;
+            }
+        }
+
+        private void MainView_KeyUp(object sender, KeyEventArgs e)
+        {
+            CrtlPress = false;
         }
     }
 }

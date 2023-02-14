@@ -957,7 +957,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
                 if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
-                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                     {
                         mpnlWd_deduct = 16;
                         mpnlHt_deduct = 20;
@@ -972,7 +973,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnlHt_deduct = 16;
                         }
                     }
-                    else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
+                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 15;
@@ -987,8 +989,9 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             mpnlHt_deduct = 16;
                         }
                     }
-                    else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                    if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         mpnlWd_deduct = 15;
                         mpnlHt_deduct = 10;
@@ -1585,11 +1588,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 || 
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
                         }
-                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                        else if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                                 MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                         {
                             ht_deduct = 15;
                         }
@@ -1822,6 +1827,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 10, 0);
@@ -1841,6 +1847,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_ParentModel.MPanel_Placement == "Last")
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 10, 0);
@@ -1888,6 +1895,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 10, 0);
@@ -1907,6 +1915,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_ParentModel.MPanel_Placement == "Last")
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 10, 0);
@@ -1953,6 +1962,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 0, 0);
@@ -1972,6 +1982,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     if (MPanel_ParentModel.MPanel_Placement == "Last")
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 0, 0);
@@ -2009,6 +2020,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                             {
                                 if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                                    MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                                     MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {
                                     pnl_margin = new Padding(10, 0, 10, 0);

@@ -33,6 +33,41 @@ namespace PresentationLayer.Views.UserControls
                 _panelID = value;
             }
         }
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+
+            if (this.Parent == null)
+            {
+                RemoveDataBinding();
+            }
+           
+        }
+
+        private void RemoveDataBinding()
+        {
+            pnum_Width.DataBindings.Clear();
+            pnum_Height.DataBindings.Clear();
+            lbl_pnlname.DataBindings.Clear();
+            lbl_Type.DataBindings.Clear();
+            chk_Orientation.DataBindings.Clear();
+            this.DataBindings.Clear();
+
+
+
+            pnum_Width.Dispose();
+            pnum_Height.Dispose();
+            lbl_pnlname.Dispose();
+            lbl_Type.Dispose();
+            chk_Orientation.Dispose();
+            pnl_panelSpecsBody.Dispose();
+            lbl_Height.Dispose();
+            lbl_PanelGlassID.Dispose();
+            lbl_pnlSpecs.Dispose();
+            lbl_Width.Dispose();
+            this.Dispose();
+
+        }
 
         private int _panelGlassID;
         public int PanelGlass_ID

@@ -43,21 +43,21 @@ namespace PresentationLayer.Presenter
                 foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
                 {
                     Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
-                    foreach(IFrameModel frm in wdm.lst_frame)
+                    foreach (IFrameModel frm in wdm.lst_frame)
                     {
-                        foreach(IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                        foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
                         {
                             foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                             {
                                 Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
                             }
                         }
-                        foreach(IPanelModel pnl in frm.Lst_Panel)
+                        foreach (IPanelModel pnl in frm.Lst_Panel)
                         {
                             Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
                         }
                     }
-                    
+
 
                 }
 
@@ -70,7 +70,7 @@ namespace PresentationLayer.Presenter
                         select new { Value = g.Key, Count = count };
                 foreach (var x in q)
                 {
-                    if(x.Count > GlassCount)
+                    if (x.Count > GlassCount)
                     {
                         GlassCount = x.Count;
                         GlassThickness = x.Value.ToString();
@@ -81,7 +81,7 @@ namespace PresentationLayer.Presenter
                 string baseColor = "";
                 for (int i = 0; i < duplicateBaseColor.Count(); i++)
                 {
-                    if(i == 0)
+                    if (i == 0)
                     {
                         baseColor += duplicateBaseColor.ToList()[i];
                     }
@@ -103,7 +103,7 @@ namespace PresentationLayer.Presenter
                         baseColor += " & " + duplicateBaseColor.ToList()[i];
                     }
                 }
-                if(GlassThickness != "Unglazed" && GlassThickness != "")
+                if (GlassThickness != "Unglazed" && GlassThickness != "")
                 {
                     GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
                 }
@@ -126,8 +126,8 @@ namespace PresentationLayer.Presenter
             catch (Exception ex)
             {
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
-            }            
-          
+            }
+
         }
 
         private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)
