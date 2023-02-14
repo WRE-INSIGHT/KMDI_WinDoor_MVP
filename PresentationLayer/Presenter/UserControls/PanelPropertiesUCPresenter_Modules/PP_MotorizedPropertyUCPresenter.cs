@@ -18,12 +18,14 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private IPanelModel _panelModel;
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
+        private IFramePropertiesUCPresenter _framePropertiesUCPresenter;
         ConstantVariables const_var = new ConstantVariables();
         bool _initialLoad = true;
 
-        public PP_MotorizedPropertyUCPresenter(IPP_MotorizedPropertyUC pp_motorizedPropertyUC)
+        public PP_MotorizedPropertyUCPresenter(IPP_MotorizedPropertyUC pp_motorizedPropertyUC, IFramePropertiesUCPresenter framePropertiesUCPresenter)
         {
             _pp_motorizedPropertyUC = pp_motorizedPropertyUC;
+            _framePropertiesUCPresenter = framePropertiesUCPresenter;
             SubscribeToEventsSetup();
         }
 
@@ -104,16 +106,28 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (chk.Checked == true)
             {
                 chk.Text = "Yes";
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCmbMotorized");
+
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
 
-                _panelModel.AdjustPropertyPanelHeight("addCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("minusHandle");
+
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCmbMotorized");
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusHandle");
                 }
+
+
+                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addCmbMotorized");
+
+                    _panelModel.AdjustPropertyPanelHeight("addCmbMotorized");
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addCmbMotorized");
+                    }
+                }
+
                 if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                 {
                     if (_panelModel.Panel_MiddleCloserVisibility == true)
@@ -235,7 +249,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     }
                 }
 
-                _panelModel.AdjustMotorizedPropertyHeight("whole");
+                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.AdjustMotorizedPropertyHeight("whole");
+                }
 
                 if (_panelModel.Panel_Type.Contains("Casement"))
                 {
@@ -362,21 +379,48 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_2dHingeVisibility = true;
                     _panelModel.Panel_ButtHingeVisibility = false;
                 }
+
+                if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("PremiLine") &&
+                    _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+                    _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
+                {
+                    _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNoVisibility = true;
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addTrackProfile");
+                    _panelModel.Panel_ParentFrameModel.FrameProp_Height += const_var.frame_TrackProfileproperty_PanelHeight; 
+                    _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(const_var.frame_TrackProfileproperty_PanelHeight);
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addTrackProfile");
+                    }
+
+                }
             }
             else if (chk.Checked == false)
             {
                 chk.Text = "No";
-                
-                _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
+
                 _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addHandle");
 
-                _panelModel.AdjustPropertyPanelHeight("minusCmbMotorized");
                 _panelModel.AdjustPropertyPanelHeight("addHandle");
+
                 if (_panelModel.Panel_ParentMultiPanelModel != null)
                 {
-                    _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
                     _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHandle");
                 }
+
+
+                if (!_panelModel.Panel_Type.Contains("Sliding"))
+                {
+                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
+
+                    _panelModel.AdjustPropertyPanelHeight("minusCmbMotorized");
+
+                    if (_panelModel.Panel_ParentMultiPanelModel != null)
+                    {
+                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "minusCmbMotorized");
+                    }
+                }
+
                 if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                 {
                     if (_panelModel.Panel_MiddleCloserVisibility == false)

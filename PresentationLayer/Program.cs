@@ -425,6 +425,9 @@ namespace PresentationLayer
                 .RegisterType<IPP_LouverGallerySetOptionPropertyUC, PP_LouverGallerySetOptionPropertyUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPP_LouverGallerySetOptionPropertyUCPresenter, PP_LouverGallerySetOptionPropertyUCPresenter>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<IFP_TrackProfilePropertyUCPresenter, FP_TrackProfilePropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFP_TrackProfilePropertyUC, FP_TrackProfilePropertyUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())

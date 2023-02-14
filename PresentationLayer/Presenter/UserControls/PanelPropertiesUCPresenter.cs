@@ -435,7 +435,7 @@ namespace PresentationLayer.Presenter.UserControls
                 sashProp.Dock = DockStyle.Top;
                 sashProp.BringToFront();
 
-                if (_panelModel.Panel_Type.Contains("Casement")|| _panelModel.Panel_Type.Contains("TiltNTurn"))
+                if (_panelModel.Panel_Type.Contains("Casement") || _panelModel.Panel_Type.Contains("TiltNTurn"))
                 {
                     if (_panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._7581)
                     {
@@ -450,7 +450,7 @@ namespace PresentationLayer.Presenter.UserControls
                             _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addHinge");
                         }
                     }
-                   
+
 
                     if (_panelModel.Panel_HingeOptions == HingeOption._2DHinge)
                     {
@@ -478,7 +478,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                             if (_panelModel.Panel_ParentMultiPanelModel != null)
                             {
-                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "add3dHinge");
+                                _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addTrackProfile");
                             }
                         }
                     }
@@ -581,6 +581,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _panelModel.Panel_RollersTypesVisibility = true;
                     _panelModel.Panel_AluminumTrackQtyVisibility = true;
 
+                    _panelModel.AdjustMotorizedPropertyHeight("chkMotorizedOnly");
                     _panelModel.AdjustPropertyPanelHeight("addRollerType");
                     _panelModel.AdjustPropertyPanelHeight("addSlidingType");
                     _panelModel.AdjustPropertyPanelHeight("addAluminumTrackQty");

@@ -950,10 +950,10 @@ namespace PresentationLayer.Presenter
 
             if (i <= 0)
             {
-                //string[] province = projectAddress.Split(',');
-                //value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                value = await _quotationServices.GetFactorByProvince(province);
+                string[] province = projectAddress.Split(',');
+                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                //value = await _quotationServices.GetFactorByProvince(province);
             }
             else
             {
@@ -7496,7 +7496,6 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_ScrewSetsArtNo = panel_ScrewSetsArtNo;
             pnlModel.Panel_PVCCenterProfileArtNo = panel_PVCCenterProfileArtNo;
             pnlModel.Panel_GS100_T_EM_T_HMCOVER_ArtNo = panel_GS100_T_EM_T_HMCOVER_ArtNo;
-            pnlModel.Panel_TrackProfileArtNo = panel_TrackProfileArtNo;
             pnlModel.Panel_TrackRailArtNo = panel_TrackRailArtNo;
             pnlModel.Panel_TrackRailArtNoVisibility = panel_TrackRailArtNoVisibility;
             pnlModel.Panel_MicrocellOneSafetySensorArtNo = panel_MicrocellOneSafetySensorArtNo;

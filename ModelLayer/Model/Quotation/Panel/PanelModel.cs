@@ -2658,20 +2658,6 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
 
-        private TrackProfile_ArticleNo _panel_TrackProfileArtNo;
-        public TrackProfile_ArticleNo Panel_TrackProfileArtNo
-        {
-            get
-            {
-                return _panel_TrackProfileArtNo;
-            }
-
-            set
-            {
-                _panel_TrackProfileArtNo = value;
-                NotifyPropertyChanged();
-            }
-        }
 
         private TrackRail_ArticleNo _panel_TrackRailArtNo;
         public TrackRail_ArticleNo Panel_TrackRailArtNo
@@ -4619,6 +4605,10 @@ namespace ModelLayer.Model.Quotation.Panel
             if (mode == "addChkMotorized")
             {
                 Panel_PropertyHeight += constants.panel_property_motorizedChkOptionsheight;
+            }
+            else if (mode == "minusChkMotorized")
+            {
+                Panel_PropertyHeight -= constants.panel_property_motorizedChkOptionsheight;
             }
             else if (mode == "addCmbMotorized")
             {
@@ -7404,6 +7394,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -7428,6 +7419,30 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_ParentFrameModel.Frame_MechJointArticleNo = Frame_MechJointArticleNo._9C52;
                         Panel_RollersTypes = RollersTypes._HDRoller;
                         Panel_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
+                    }
+
+                    if (Panel_MotorizedOptionVisibility == true)
+                    {
+                        Panel_PVCCenterProfileArtNo = PVCCenterProfile_ArticleNo._6067;
+
+                        if (base_color == Base_Color._DarkBrown)
+                        {
+                            Panel_GS100_T_EM_T_HMCOVER_ArtNo = GS100_T_EM_T_HMCOVER_ArticleNo._L15056103B;
+                        }
+                        else
+                        {
+                            Panel_GS100_T_EM_T_HMCOVER_ArtNo = GS100_T_EM_T_HMCOVER_ArticleNo._L15056103;
+                        }
+
+                        Panel_TrackRailArtNo = TrackRail_ArticleNo._L15056196;
+                        Panel_MicrocellOneSafetySensorArtNo = MicrocellOneSafetySensor_ArticleNo._L15056051;
+                        Panel_AutodoorBracketForGS100UPVCArtNo = AutodoorBracketForGS100UPVC_ArticleNo._L15227001;
+                        Panel_GS100EndCapScrewM5AndLSupportArtNo = GS100EndCapScrewM5AndLSupport_ArticleNo._L15227002;
+                        Panel_EuroLeadExitButtonArtNo = EuroLeadExitButton_ArticleNo._L15224001;
+                        Panel_TOOTHBELT_EM_CMArtNo = TOOTHBELT_EM_CM_ArticleNo._A7134370;
+                        Panel_GuBeaZenMicrowaveSensorArtNo = GuBeaZenMicrowaveSensor_ArticleNo._L15049052;
+                        Panel_SlidingDoorKitGs100_1ArtNo = SlidingDoorKitGs100_1_ArticleNo._A9002180;
+                        Panel_GS100CoverKitArtNo = GS100CoverKit_ArticleNo._L15049052;
                     }
                 }
 
@@ -9147,19 +9162,21 @@ namespace ModelLayer.Model.Quotation.Panel
         public void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion)
         {
             int roundoff = (Panel_DisplayWidthDecimal >= 5) ? 1 : 0;
-            
+
             tbl_explosion.Rows.Add("Guide Track Profile " + Panel_GuideTrackProfileArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
-                                   Panel_DisplayWidth * 2,//Panel_ParentFrameModel.Frame_Width,
+                                   (Panel_DisplayWidth * 2) + roundoff,//Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
                                    @"|  |");
         }
 
         public void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion)
         {
+            int roundoff = (Panel_DisplayWidthDecimal >= 5) ? 1 : 0;
+
             tbl_explosion.Rows.Add("Aluminum Track " + Panel_AluminumTrackArtNo.DisplayName,
                                    Panel_AluminumTrackQty, "pc(s)",
-                                   Panel_DisplayWidth * 2,//Panel_ParentFrameModel.Frame_Width,
+                                   (Panel_DisplayWidth * 2) + roundoff,//Panel_ParentFrameModel.Frame_Width,
                                    "Frame",
                                    @"|  |");
         }

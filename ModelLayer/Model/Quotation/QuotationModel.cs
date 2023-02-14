@@ -775,7 +775,6 @@ namespace ModelLayer.Model.Quotation
 
                                         if (perFrame == true)
                                         {
-
                                             if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                             {
                                                 if (pnl_curCtrl.Panel_Type == "Awning Panel")
@@ -1233,7 +1232,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (perFrame == true)
                                                 {
-
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);

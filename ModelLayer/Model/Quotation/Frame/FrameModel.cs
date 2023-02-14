@@ -918,6 +918,36 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private bool _frameTrackProfileArtNoVisibility;
+        public bool Frame_TrackProfileArtNoVisibility
+        {
+            get
+            {
+                return _frameTrackProfileArtNoVisibility;
+            }
+
+            set
+            {
+                _frameTrackProfileArtNoVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private TrackProfile_ArticleNo _frameTrackProfileArtNo;
+        public TrackProfile_ArticleNo Frame_TrackProfileArtNo
+        {
+            get
+            {
+                return _frameTrackProfileArtNo;
+            }
+
+            set
+            {
+                _frameTrackProfileArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1317,6 +1347,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 else if (mode == "minusLouverGlassDeduction")
                 {
                     FrameProp_Height -= constants.panel_property_LouverGlassheightDeduction;
+                }
+                else if (mode == "addTrackProfile")
+                {
+                    FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                }
+                else if (mode == "minusTrackProfile")
+                {
+                    FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
                 }
             }
             else if (objtype == "Div")

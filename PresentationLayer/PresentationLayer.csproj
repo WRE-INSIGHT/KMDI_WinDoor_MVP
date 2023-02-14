@@ -178,8 +178,10 @@
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
@@ -668,9 +670,16 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_SlidingRailsPropertyUC.Designer.cs">
       <DependentUpon>FP_SlidingRailsPropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_TrackProfilePropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_TrackProfilePropertyUC.Designer.cs">
+      <DependentUpon>FP_TrackProfilePropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_TrackProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1344,6 +1353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_SlidingRailsPropertyUC.resx">
       <DependentUpon>FP_SlidingRailsPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_TrackProfilePropertyUC.resx">
+      <DependentUpon>FP_TrackProfilePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameUC.resx">
       <DependentUpon>FrameUC.cs</DependentUpon>

@@ -71,6 +71,8 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameConnectionType Frame_ConnectionType { get; set; }
         bool Frame_ConnectionTypeVisibility { get; set; }
         Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
+        bool Frame_TrackProfileArtNoVisibility { get; set; }
+        TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
