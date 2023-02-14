@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommonComponents;
+using System.Drawing.Imaging;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -73,6 +74,22 @@ namespace PresentationLayer.Views.UserControls
         private void BasePlatformImagerUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, BasePlatformImagerUCLoadEventRaised, e);
+        }
+        private void BasePlatformImagerUC_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Images|*.png;*.bmp;*.jpg";
+            dialog.AddExtension = true;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                int width = Convert.ToInt32(this.Width);
+                int height = Convert.ToInt32(this.Height);
+                using (Bitmap bmp = new Bitmap(width, height))
+                {
+                    this.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
+                    bmp.Save(dialog.FileName, ImageFormat.Jpeg);
+                }
+            }
         }
     }
 }
