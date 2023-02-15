@@ -45,7 +45,7 @@ namespace ModelLayer.Model.Quotation.Frame
         public enum Frame_Padding
         {
             Window = 26,
-            Door = 33
+            Door = 32
         }
 
         private static int _frame_basicDeduction = 10;

@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace ModelLayer.Model.Quotation.Panel
 {
@@ -3891,13 +3892,14 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     parent_mpanelWd = Panel_ParentMultiPanelModel.MPanel_WidthToBind;
 
+
                     if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
-                        divSize = (int)(26 * Panel_Zoom);
+                        divSize = (int)((int)Frame_Padding.Window * Panel_Zoom);
                     }
                     else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        divSize = (int)(33 * Panel_Zoom);
+                        divSize = (int)((int)Frame_Padding.Door * Panel_Zoom);
                     }
                     int totalWd_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Sum(div => div.Div_WidthToBind);
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
@@ -3983,6 +3985,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         else
                         {
                             pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom));
+                           
                         }
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
@@ -4013,11 +4016,11 @@ namespace ModelLayer.Model.Quotation.Panel
                     parent_mpanelHT = Panel_ParentMultiPanelModel.MPanel_HeightToBind;
                     if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
-                        divSize = (int)(26 * Panel_Zoom);
+                        divSize = (int)((int)Frame_Padding.Window * Panel_Zoom);
                     }
                     else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
-                        divSize = (int)(33 * Panel_Zoom);
+                        divSize = (int)((int)Frame_Padding.Door * Panel_Zoom);
                     }
                     int totalHt_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Sum(div => div.Div_HeightToBind);
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)

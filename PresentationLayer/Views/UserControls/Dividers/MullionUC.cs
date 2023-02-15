@@ -142,6 +142,7 @@ namespace PresentationLayer.Views.UserControls.Dividers
         private void MullionUC_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             EventHelpers.RaiseMouseEvent(this, mullionUCMouseDoubleClickedEventRaised, e);
+            Console.WriteLine(this.Location);
         }
 
         public void FocusOnThis()

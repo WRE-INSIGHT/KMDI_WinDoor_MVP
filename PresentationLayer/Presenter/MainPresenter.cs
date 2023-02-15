@@ -6955,15 +6955,7 @@ namespace PresentationLayer.Presenter
                                     div_DMStrikerArtNo = dmsan;
                                 }
                             }
-                            int divSize = 0;
-                            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-                            {
-                                divSize = 26;
-                            }
-                            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-                            {
-                                divSize = 33;
-                            }
+                            int divSize = (int)_frameModel.Frame_Type;
                             int divHeigth = 0,
                                 divWidth = 0;
                             if (_multiPanelModel2ndLvl.MPanel_Type == "Mullion")
