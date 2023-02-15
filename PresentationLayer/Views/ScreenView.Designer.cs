@@ -123,6 +123,7 @@
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
+            this.dgv_Screen.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellEndEdit);
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
             // cmsScreen
@@ -190,6 +191,7 @@
             this.nud_Discount.Size = new System.Drawing.Size(59, 22);
             this.nud_Discount.TabIndex = 39;
             this.nud_Discount.ValueChanged += new System.EventHandler(this.nud_Discount_ValueChanged);
+            this.nud_Discount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Discount_KeyPress);
             // 
             // nud_Quantity
             // 
@@ -203,6 +205,7 @@
             0,
             0});
             this.nud_Quantity.ValueChanged += new System.EventHandler(this.nud_Quantity_ValueChanged);
+            this.nud_Quantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Quantity_KeyPress);
             // 
             // lbl_Quantity
             // 

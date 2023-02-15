@@ -34,6 +34,7 @@ namespace PresentationLayer.Views
         event EventHandler nudDiscountValueChangeEventRaised;
         event EventHandler txtItemNumTextChangeEventRaised;
         event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
+        event EventHandler CellEndEditEventRaised;
 
         void ShowScreemView();
 

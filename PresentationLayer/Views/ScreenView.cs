@@ -94,6 +94,7 @@ namespace PresentationLayer.Views
         public event EventHandler nudDiscountValueChangeEventRaised;
         public event EventHandler txtItemNumTextChangeEventRaised;
         public event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
+        public event EventHandler CellEndEditEventRaised;
         
 
         public void ShowScreemView()
@@ -276,9 +277,27 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, cmbFreedomSizeSelectedValueChangedEventRaised,e);
         }
+        private void nud_Width_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWidthValueChangedEventRaised, e);
+        }
+        private void nud_Height_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudHeightValueChangedEventRaised, e);
+        }
+        private void dgv_Screen_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CellEndEditEventRaised, e);
+        }
+        private void nud_Quantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
+        }
 
-       
-
+        private void nud_Discount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudDiscountValueChangeEventRaised, e);
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {       
             nud_plissedRd.DataBindings.Add(ModelBinding["PlissedRd_Panels"]);
@@ -297,14 +316,7 @@ namespace PresentationLayer.Views
             txt_windoorID.DataBindings.Add(ModelBinding["Screen_ItemNumber"]);
             cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
-        private void nud_Width_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudWidthValueChangedEventRaised, e);
-        }
 
-        private void nud_Height_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nudHeightValueChangedEventRaised, e);
-        }
+        
     }
 }

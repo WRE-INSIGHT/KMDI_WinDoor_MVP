@@ -1371,16 +1371,16 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-        private string _plisseMagnumType;
-        public string PlisseMagnumType
+        private string _screen_description;
+        public string Screen_Description
         {
             get
             {
-                return _plisseMagnumType;
+                return _screen_description;
             }
             set
             {
-                _plisseMagnumType = value;
+                _screen_description = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1454,6 +1454,21 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _frmCellEndEdit;
+        public bool FromCellEndEdit
+        {
+            get
+            {
+                return _frmCellEndEdit;
+            }
+            set
+            {
+                _frmCellEndEdit = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
@@ -1501,7 +1516,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
             if (Screen_Width != 0 &&
                 Screen_Height != 0 &&
-                Screen_Factor != 0)
+                Screen_Factor != 0 || FromCellEndEdit == true)
             {
                 if (Screen_Types == ScreenType._RollUp)
                 {
@@ -3203,7 +3218,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
-
                     #region Freedom Screen
 
                     if (Freedom_ScreenType == Freedom_ScreenType._single)
@@ -5695,8 +5709,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
                     Freedom_tAmount = (Freedom_tCost_SF * 0.55m) + Freedom_Fr_Shipping_Cost;
 
-                    #endregion      
-                           
+                    #endregion                               
                 }
 
                 if (Screen_PVCVisibility == true &&
@@ -5766,15 +5779,22 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 if (Screen_Types == ScreenType._Magnum)
                 {
-                    Screen_UnitPrice = (Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = (Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    }                 
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
-
+                    
                     Discount = Screen_UnitPrice * DiscountPercentage;
                     Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);
+                    
                 }
                 else if (Screen_Types == ScreenType._RollUp || Screen_Types == ScreenType._Plisse)
                 {
-                    Screen_UnitPrice = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -5782,7 +5802,10 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
-                    Screen_UnitPrice = (Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = (Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -5790,7 +5813,10 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._BuiltInSideroll)
                 {
-                    Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -5798,7 +5824,10 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Maxxy)
                 {
-                    Screen_UnitPrice = (Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = (Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -5806,7 +5835,10 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if(Screen_Types == ScreenType._Freedom)
                 {
-                    Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount)) * Screen_Set;
+                    if (FromCellEndEdit != true)
+                    {
+                        Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount)) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -5817,38 +5849,63 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 #endregion
 
-                #region Screen Type Description
+                #region Screen Type Description 
+
 
                 if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._AD)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._AD) + " ) ";
+                    Screen_Description = " ( " + Convert.ToString(PlisseType._AD) + " ) ";
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(PlisseType._RD) + " ) ";
+                    Screen_Description = " ( " + Convert.ToString(PlisseType._RD) + " ) ";
                 }
                 else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Single_Fixed)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Single_Fixed) + " ) ";
+                    Screen_Description = " ( " + Convert.ToString(Magnum_ScreenType._Single_Fixed) + " ) ";
                 }
                 else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Double_Fixed)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Double_Fixed) + " ) ";
+                    Screen_Description = " ( " + Convert.ToString(Magnum_ScreenType._Double_Fixed) + " ) ";
                 }
                 else if (Screen_Types == ScreenType._Magnum && Magnum_ScreenType == Magnum_ScreenType._Single_Central)
                 {
-                    PlisseMagnumType = " ( " + Convert.ToString(Magnum_ScreenType._Single_Central) + " ) ";
+                    Screen_Description = " ( " + Convert.ToString(Magnum_ScreenType._Single_Central) + " ) ";
+                }
+                else if(Screen_Types == ScreenType._Freedom)
+                {
+                    if (Freedom_ScreenType == Freedom_ScreenType._single)
+                    {
+                        if(Freedom_ScreenSize == Freedom_ScreenSize._80mm)
+                        {
+                            Screen_Description = " ( " + Convert.ToString(Freedom_ScreenSize._80mm) + "," + Convert.ToString(Freedom_ScreenType._single) +  " ) ";
+                        }
+                        else
+                        {
+                            Screen_Description = " ( " + Convert.ToString(Freedom_ScreenSize._100mm) + "," + Convert.ToString(Freedom_ScreenType._single) + " ) ";
+                        }
+                    }
+                    else if(Freedom_ScreenType == Freedom_ScreenType._double)
+                    {
+                        if(Freedom_ScreenSize == Freedom_ScreenSize._80mm)
+                        {
+                            Screen_Description = " ( " + Convert.ToString(Freedom_ScreenSize._80mm) + "," + Convert.ToString(Freedom_ScreenType._double) + " ) ";
+                        }
+                        else
+                        {
+                            Screen_Description = " ( " + Convert.ToString(Freedom_ScreenSize._100mm) + "," + Convert.ToString(Freedom_ScreenType._double) + " ) ";
+                        }
+                    }
                 }
                 else
                 {
-                    PlisseMagnumType = " ";
+                    Screen_Description = " ";
                 }
 
                 #endregion
 
 
                 ClearingOperation();
-
 
             }
             else
@@ -6071,7 +6128,7 @@ namespace ModelLayer.Model.Quotation.Screen
                            int discount,
                            decimal screen_netPrice,
                            decimal screen_totalAmount,
-                           string plissemagnumType
+                           string screen_description
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6085,7 +6142,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_Discount = discount;
             Screen_NetPrice = screen_netPrice;
             Screen_TotalAmount = screen_totalAmount;
-            PlisseMagnumType = plissemagnumType;
+            Screen_Description = screen_description;
         }
     }
 }

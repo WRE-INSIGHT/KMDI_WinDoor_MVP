@@ -61,13 +61,13 @@ namespace ModelLayer.Model.Quotation.Screen
         bool SP_MagnumScreenType_Visibility { get; set; }
         Magnum_ScreenType Magnum_ScreenType { get; set; }
         int PlissedRd_Panels { get; set; }
-        string PlisseMagnumType { get; set; }
+        string Screen_Description { get; set; }
         decimal DiscountPercentage { get; set; }
         decimal Screen_ItemNumber { get; set; }
         decimal Screen_NextItemNumber { get; set; }
         Freedom_ScreenSize Freedom_ScreenSize { get; set; }
         Freedom_ScreenType Freedom_ScreenType { get; set; }
-
+        bool FromCellEndEdit { get; set; }
 
     }
 }
