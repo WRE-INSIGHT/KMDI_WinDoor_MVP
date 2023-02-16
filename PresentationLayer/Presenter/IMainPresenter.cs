@@ -38,6 +38,7 @@ namespace PresentationLayer.Presenter
         string inputted_custRefNo { get; set; }
         bool isNewProject { get; set; }
         string aeic { get; set; }
+        string position { get; set; }
         string projectAddress { get; set; }
         string titleLastname { get; set; }
         DateTime dateAssigned { get; set; }

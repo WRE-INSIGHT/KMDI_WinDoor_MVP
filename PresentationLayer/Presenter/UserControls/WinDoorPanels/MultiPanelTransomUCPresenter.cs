@@ -500,16 +500,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int multiPanel_boundsWD = _multiPanelModel.MPanel_Width - 20,
                     multiPanel_boundsHT = _multiPanelModel.MPanel_Height - 20,
                     totalPanelCount = _multiPanelModel.MPanel_Divisions + 1;
-
-                if (_frameModel.Frame_Type.ToString().Contains("Window"))
-                {
-                    divSize = 26;
-                }
-                else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-                {
-                    divSize = 33;
-                }
-
+                divSize = (int)_frameModel.Frame_Type;
                 for (int i = 0; i < iteration; i++)
                 {
                     if (_multiPanelModel != null)

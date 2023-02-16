@@ -41,8 +41,8 @@ namespace PresentationLayer.CommonMethods
                                            IPanelModel panelModel = null,
                                            IMultiPanelTransomUCPresenter multiTransomUCP = null,
                                            IMultiPanelMullionUCPresenter multiMullionUCP = null)
-                                           //IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
-                                           //IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
+        //IMultiPanelMullionImagerUCPresenter multiMullionImagerUCP = null,
+        //IMultiPanelTransomImagerUCPresenter multiTransomImagerUCP = null)
         {
             FlowLayoutPanel parentfpnl = new FlowLayoutPanel();
             IMultiPanelModel parentModel = null;
@@ -63,19 +63,17 @@ namespace PresentationLayer.CommonMethods
 
             if (frameModel.Frame_Type.ToString().Contains("Window"))
             {
-                divSize = 26;
+                divSize = (int)Frame_Padding.Window;
             }
             else if (frameModel.Frame_Type.ToString().Contains("Door"))
             {
-                divSize = 33;
-
+                divSize = (int)Frame_Padding.Door;
                 if (frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                    frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                   frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     divchkdm = true;
                 }
             }
-
             Control last_ctrl = null;
             if (parentModel.MPanelLst_Objects.Count() >= 1)
             {
@@ -169,7 +167,7 @@ namespace PresentationLayer.CommonMethods
                     ITransomUC transomUC = transomUCP.GetTransom();
                     parentfpnl.Controls.Add((UserControl)transomUC);
                     transomUCP.SetInitialLoadFalse();//SetInitialLoadFalse para magresize yung div
-                    parentModel.AddControl_MPanelLstObjects((UserControl)transomUC, 
+                    parentModel.AddControl_MPanelLstObjects((UserControl)transomUC,
                                                             frameModel.Frame_Type.ToString(),
                                                             true);
                     parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)transomUC,
@@ -215,7 +213,7 @@ namespace PresentationLayer.CommonMethods
                     IMullionUC mullionUC = mullionUCP.GetMullion();
                     parentfpnl.Controls.Add((UserControl)mullionUC);
                     mullionUCP.SetInitialLoadFalse();//SetInitialLoadFalse para magresize yung div
-                    parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC, 
+                    parentModel.AddControl_MPanelLstObjects((UserControl)mullionUC,
                                                              frameModel.Frame_Type.ToString(),
                                                              true);
                     parentModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC,
@@ -505,20 +503,20 @@ namespace PresentationLayer.CommonMethods
             {
                 pixels_count = 26;
             }
-            else if (wd_formula == 23)
+            else if (wd_formula == 22)
             {
-                pixels_count = 33;
+                pixels_count = 32;
             }
             else if (wd_formula == 10)
             {
                 pixels_count = 18;
             }
-            else if (wd_formula == 13)
+            else if (wd_formula == 12)
             {
-                pixels_count = 23;
+                pixels_count = 22;
             }
 
-            if (wd_formula == 26 || wd_formula == 33)
+            if (wd_formula == 26 || wd_formula == 32)
             {
                 leftLine[0] = new Point(1, 5);
                 leftLine[1] = new Point(1, Ht_beforeCurve);
@@ -534,7 +532,7 @@ namespace PresentationLayer.CommonMethods
                 upperCurve[1] = new Point(accessible_Wd / 2, 1);
                 upperCurve[2] = new Point(1, 5);
             }
-            else if (wd_formula == 18 || wd_formula == 23)
+            else if (wd_formula == 18 || wd_formula == 22)
             {
                 if (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj.Contains("PanelUC")) ||
                     (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj == "")))
@@ -586,7 +584,7 @@ namespace PresentationLayer.CommonMethods
                     upperCurve[2] = new Point(1, 5);
                 }
             }
-            else if (wd_formula == 10 || wd_formula == 13)
+            else if (wd_formula == 10 || wd_formula == 12)
             {
 
                 leftLine[0] = new Point((width - pixels_count) + 1, 4);
@@ -694,20 +692,20 @@ namespace PresentationLayer.CommonMethods
             {
                 pixels_count = 26;
             }
-            else if (height == 23)
+            else if (height == 22)
             {
-                pixels_count = 33;
+                pixels_count = 32;
             }
             else if (height == 10)
             {
                 pixels_count = 18;
             }
-            else if (height == 13)
+            else if (height == 12)
             {
-                pixels_count = 23;
+                pixels_count = 22;
             }
 
-            if (height == 26 || height == 33)
+            if (height == 26 || height == 32)
             {
                 upperLine[0] = new Point(5, 1);
                 upperLine[1] = new Point(Wd_beforeCurve, 1);
@@ -723,7 +721,7 @@ namespace PresentationLayer.CommonMethods
                 leftCurve[1] = new Point(1, accessible_Ht / 2);
                 leftCurve[2] = new Point(5, 1);
             }
-            else if (height == 18 || height == 23)
+            else if (height == 18 || height == 22)
             {
                 if (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj.Contains("PanelUC")) ||
                     (((prev_obj.Contains("MultiTransom") || prev_obj.Contains("MultiMullion")) && nxt_obj == "")))
@@ -775,7 +773,7 @@ namespace PresentationLayer.CommonMethods
                     leftCurve[2] = new Point(5, 1);
                 }
             }
-            else if (height == 10 || height == 13)
+            else if (height == 10 || height == 12)
             {
                 upperLine[0] = new Point(4, (height - pixels_count) + 1);
                 upperLine[1] = new Point(Wd_beforeCurve, (height - pixels_count) + 1);

@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
 using static ModelLayer.Model.Quotation.Divider.DividerModel;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace ModelLayer.Model.Quotation.MultiPanel
 {
@@ -3971,11 +3972,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 int divSize = 0;
                 if (MPanel_FrameModelParent.Frame_Type.ToString().Contains("Window"))
                 {
-                    divSize = 26;
+                    divSize = (int)Frame_Padding.Window;
                 }
                 else if (MPanel_FrameModelParent.Frame_Type.ToString().Contains("Door"))
                 {
-                    divSize = 33;
+                    divSize = (int)Frame_Padding.Door;
                 }
                 int totalPanelCount = MPanel_Divisions + 1;
                 foreach (IPanelModel pnl in MPanelLst_Panel)
