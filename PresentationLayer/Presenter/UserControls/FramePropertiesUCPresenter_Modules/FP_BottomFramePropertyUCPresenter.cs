@@ -46,30 +46,30 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
                 if (fzoom >= 0.50f)
                 {
-                    if (botft == BottomFrameTypes._None || botft == BottomFrameTypes._7789)
+                    if (botft == BottomFrameTypes._None || botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._9C66)
                     {
                         _frameModel.Frame_Padding_int = new Padding(fpadding.Left, fpadding.Top, fpadding.Right, 0);
                     }
-                    else if (botft == BottomFrameTypes._7507)
+                    else if (botft == BottomFrameTypes._7507 || botft == BottomFrameTypes._6052)
                     {
                         _frameModel.Frame_Padding_int = new Padding(fpadding.Left, fpadding.Top, fpadding.Right, fpadding.Top);
                     }
-                    else if (botft == BottomFrameTypes._7502)
+                    else if (botft == BottomFrameTypes._7502 || botft == BottomFrameTypes._6050)
                     {
                         _frameModel.Frame_Padding_int = new Padding(fpadding.Left, fpadding.Top, fpadding.Right, Convert.ToInt32(26 * fzoom));
                     }
                 }
                 else if (fzoom <= 0.26f)
                 {
-                    if (botft == BottomFrameTypes._7507)
+                    if (botft == BottomFrameTypes._7507 || botft == BottomFrameTypes._6052)
                     {
                         _frameModel.Frame_Padding_int = new Padding(20);
                     }
-                    else if (botft == BottomFrameTypes._7502)
+                    else if (botft == BottomFrameTypes._7502 || botft == BottomFrameTypes._6050)
                     {
                         _frameModel.Frame_Padding_int = new Padding(20, 20, 20, 15);
                     }
-                    else if (botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._None)
+                    else if (botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._9C66 || botft == BottomFrameTypes._None)
                     {
                         _frameModel.Frame_Padding_int = new Padding(20, 20, 20, 0);
                     }
@@ -77,30 +77,30 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
                 if (fzoom_imgr >= 0.50f)
                 {
-                    if (botft == BottomFrameTypes._None || botft == BottomFrameTypes._7789)
+                    if (botft == BottomFrameTypes._None || botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._9C66)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(fpads_imgr.Left, fpads_imgr.Top, fpads_imgr.Right, 0);
                     }
-                    else if (botft == BottomFrameTypes._7507)
+                    else if (botft == BottomFrameTypes._7507 || botft == BottomFrameTypes._6052)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(fpads_imgr.Left, fpads_imgr.Top, fpads_imgr.Right, fpads_imgr.Top);
                     }
-                    else if (botft == BottomFrameTypes._7502)
+                    else if (botft == BottomFrameTypes._7502 || botft == BottomFrameTypes._6050)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(fpads_imgr.Left, fpads_imgr.Top, fpads_imgr.Right, Convert.ToInt32(26 * fzoom_imgr));
                     }
                 }
                 else if (fzoom_imgr <= 0.26f)
                 {
-                    if (botft == BottomFrameTypes._7507)
+                    if (botft == BottomFrameTypes._7507 || botft == BottomFrameTypes._6052)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(20);
                     }
-                    else if (botft == BottomFrameTypes._7502)
+                    else if (botft == BottomFrameTypes._7502 || botft == BottomFrameTypes._6050)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 15);
                     }
-                    else if (botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._None)
+                    else if (botft == BottomFrameTypes._7789 || botft == BottomFrameTypes._9C66 || botft == BottomFrameTypes._None)
                     {
                         _frameModel.FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
                     }

@@ -835,7 +835,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                        mul.ClientRectangle.Width - w,
                                                                        mul.ClientRectangle.Height - w));
             }
-            else if ((_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == 16) &&
+            else if ((_divModel.Div_Width == (int)_frameModel.Frame_Type || _divModel.Div_Width == ((int)FrameModel.Frame_Padding.Door / 2)) &&
                      _frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
             {
                 g.DrawRectangle(new Pen(Color.Black, w), new Rectangle(0,
@@ -843,7 +843,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                                                        mul.ClientRectangle.Width - w,
                                                                        mul.ClientRectangle.Height - w));
             }
-            else if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
+            else 
+            if (_divModel.Div_Width == (int)_frameModel.Frame_Type - _multiPanelModel.MPanel_AddPixel)
             {
                 if (prevCtrl_isPanel == false)
                 {

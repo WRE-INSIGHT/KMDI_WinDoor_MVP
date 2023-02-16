@@ -188,9 +188,6 @@ namespace PresentationLayer.Views.UserControls.WinDoorPanels
         {
             EventHelpers.RaiseMouseEvent(sender, multiMullionUCMouseClickEventRaised, e);
         }
-
-       
-
         public FlowLayoutPanel Getflp()
         {
             return flp_MultiMullion;

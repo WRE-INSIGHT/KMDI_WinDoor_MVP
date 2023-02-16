@@ -620,6 +620,19 @@ namespace PresentationLayer.Presenter
                 _isOpenProject = value;
             }
         }
+        private string _position;
+        public string position
+        {
+            get
+            {
+                return _position;
+            }
+
+            set
+            {
+                _position = value;
+            }
+        }
         private string _aeic;
         public string aeic
         {
@@ -6980,15 +6993,7 @@ namespace PresentationLayer.Presenter
                                     div_DMStrikerArtNo = dmsan;
                                 }
                             }
-                            int divSize = 0;
-                            if (_frameModel.Frame_Type.ToString().Contains("Window"))
-                            {
-                                divSize = 26;
-                            }
-                            else if (_frameModel.Frame_Type.ToString().Contains("Door"))
-                            {
-                                divSize = 33;
-                            }
+                            int divSize = (int)_frameModel.Frame_Type;
                             int divHeigth = 0,
                                 divWidth = 0;
                             if (_multiPanelModel2ndLvl.MPanel_Type == "Mullion")
@@ -9458,6 +9463,29 @@ Magnum_ScreenType magnum_ScreenType;
                     {
                         bool NewFrameSizeFit = CheckAvailableDimensionFromBasePlatform(frmDimension_numWd,
                                                                                        frmDimension_numHt);
+                        BottomFrameTypes frameBotFrameType = null;
+                        if (_windoorModel.WD_profile == "C70 Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7507;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._7502;
+                            }
+                        }
+                        else if (_windoorModel.WD_profile == "PremiLine Profile")
+                        {
+                            if (frameType == Frame_Padding.Door)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6052;
+                            }
+                            else if (frameType == Frame_Padding.Window)
+                            {
+                                frameBotFrameType = BottomFrameTypes._6050;
+                            }
+                        }
                         if (NewFrameSizeFit)
                         {
                             int frameID = _windoorModel.frameIDCounter += 1;
@@ -9468,7 +9496,7 @@ Magnum_ScreenType magnum_ScreenType;
                                                                        _windoorModel.WD_zoom,
                                                                        FrameProfile_ArticleNo._7502,
                                                                        _windoorModel,
-                                                                       null,
+                                                                       frameBotFrameType,
                                                                        frameID,
                                                                        "",
                                                                        true,
@@ -9657,7 +9685,12 @@ Magnum_ScreenType magnum_ScreenType;
                 _windoorModel = item;
 
                 _quotationModel.Select_Current_Windoor(_windoorModel);
-
+                SetMainViewTitle(input_qrefno,
+                                _projectName,
+                                _custRefNo,
+                                 _windoorModel.WD_name,
+                                 _windoorModel.WD_profile,
+                                 false);
                 //clear
 
                 _pnlMain.Controls.Clear();
@@ -10434,6 +10467,7 @@ Magnum_ScreenType magnum_ScreenType;
         {
             _windoorModel.lst_objects.Remove((UserControl)concreteModel.Concrete_UC);
             _windoorModel.lst_concrete.Remove(concreteModel);
+            Load_Windoor_Item(_windoorModel);
         }
 
 
