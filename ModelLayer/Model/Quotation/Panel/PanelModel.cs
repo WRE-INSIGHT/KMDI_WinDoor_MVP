@@ -3877,6 +3877,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 if (Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
+
+                   
                     int panelSize = 0;
                     int totalPanelCount = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
                     foreach (IPanelModel pnl in Panel_ParentMultiPanelModel.MPanelLst_Panel)
@@ -3892,14 +3894,16 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     parent_mpanelWd = Panel_ParentMultiPanelModel.MPanel_WidthToBind;
 
-
+                    int deductHt = 0;
                     if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
                         divSize = (int)((int)Frame_Padding.Window * Panel_Zoom);
+                        deductHt = (int)(((int)Frame_Padding.Window - Panel_ParentFrameModel.Frame_BasicDeduction) * Panel_Zoom);
                     }
                     else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         divSize = (int)((int)Frame_Padding.Door * Panel_Zoom);
+                        deductHt = (int)(((int)Frame_Padding.Door - Panel_ParentFrameModel.Frame_BasicDeduction) * Panel_Zoom);
                     }
                     int totalWd_divModel = Panel_ParentMultiPanelModel.MPanelLst_Divider.Sum(div => div.Div_WidthToBind);
                     if (Panel_ParentMultiPanelModel.MPanel_DividerEnabled)
@@ -3912,14 +3916,6 @@ namespace ModelLayer.Model.Quotation.Panel
                         }
                         else
                         {
-                            //if (Panel_ParentMultiPanelModel.MPanelLst_Objects[0].Name.Contains("Multi"))
-                            //{
-                            //    pnl_wd = ((parent_mpanelWd - (int)(10 * Panel_Zoom)) - (totalWd_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
-
-                            //}
-                            //else
-                            //{
-
                             pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (totalWd_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
 
                             //}
@@ -3932,24 +3928,6 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
 
                         }
-
-                        //if (Panel_ParentMultiPanelModel.isDisplaySizeEqual() || Panel_Placement == "First")
-                        //{
-                        //    pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (divSize * Panel_ParentMultiPanelModel.MPanel_Divisions)) / totalPanelCount;
-
-                        //}
-                        //else
-                        //{
-                        //    if (Panel_ParentMultiPanelModel.MPanelLst_Objects[0].Name.Contains("Multi"))
-                        //    {
-                        //        pnl_wd = ((parent_mpanelWd - (int)(10 * Panel_Zoom)) - (totalWd_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
-
-                        //    }
-                        //    else
-                        //    {
-                        //        pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - (totalWd_divModel) - panelSize) / (totalPanelCount - ((Panel_ParentMultiPanelModel.MPanelLst_Panel.Count + Panel_ParentMultiPanelModel.MPanelLst_MultiPanel.Count) - 1));
-                        //    }
-                        //}
                     }
                     else
                     {
@@ -3963,16 +3941,6 @@ namespace ModelLayer.Model.Quotation.Panel
                             pnl_wd = ((parent_mpanelWd - (int)(20 * Panel_Zoom)) - panelSize) / (totalPanelCount - (Panel_ParentMultiPanelModel.MPanelLst_Panel.Count - 1));
                         }
                     }
-                    //if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                    //                 Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
-                    //{
-                    //    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom));
-                    //}
-                    //else
-                    //{
-                    //    pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(Panel_Margin.Top * Panel_Zoom) - (int)(Panel_Margin.Bottom * Panel_Zoom));
-                    //}
-
                     if (Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame"))
                     {
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
@@ -3990,7 +3958,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                     {
-                        pnl_ht = (int)(Panel_Height * Panel_Zoom);
+                        pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - deductHt);
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                     {

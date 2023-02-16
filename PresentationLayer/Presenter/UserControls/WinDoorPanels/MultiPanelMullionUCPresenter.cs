@@ -169,6 +169,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
                 Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Location " + ((FlowLayoutPanel)sender).Parent.Location);
                 Console.WriteLine();
                 multiMullionUC = (FlowLayoutPanel)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;

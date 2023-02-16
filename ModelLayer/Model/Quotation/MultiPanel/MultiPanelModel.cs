@@ -1285,11 +1285,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 wd = 0, ht = 0, divSize = 0;
             if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
-                divSize = 13;
+                divSize = (int)FrameModel.Frame_Padding.Window / 2;
             }
             else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                divSize = 16;
+                divSize = (int)FrameModel.Frame_Padding.Door / 2;
             }
 
             if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
@@ -1754,13 +1754,29 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
-                                pnl_margin = new Padding(10, 8, 0, 10);
+                                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
+                                {
+                                    pnl_margin = new Padding(10, 8, 0, 10);
+                                }
+                                else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    pnl_margin = new Padding(10, 10, 0, 10);
+                                }
+                               
                                 pnl.Panel_Placement = "First";
                             }
                             else if ((!MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions) ||
                                      (MPanel_DividerEnabled && pnl.Panel_Index_Inside_MPanel == MPanel_Divisions * 2))
                             {
-                                pnl_margin = new Padding(0, 8, 10, 10);
+
+                                if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Window)
+                                {
+                                    pnl_margin = new Padding(0, 8, 10, 10);
+                                }
+                                else if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
+                                {
+                                    pnl_margin = new Padding(0, 10, 10, 10);
+                                }
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1817,6 +1833,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
+
+
                                 pnl_margin = new Padding(10, 10, 10, 0);
                                 pnl.Panel_Placement = "First";
                             }
