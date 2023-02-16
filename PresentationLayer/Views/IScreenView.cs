@@ -10,6 +10,7 @@ namespace PresentationLayer.Views
         NumericUpDown screen_height { get; set; }
         NumericUpDown screen_width { get; set; }
         TextBox screen_itemnumber { get; set; }
+        NumericUpDown screen_quantity { get; set; }
 
         NumericUpDown screen_discountpercentage { get; set; }
 

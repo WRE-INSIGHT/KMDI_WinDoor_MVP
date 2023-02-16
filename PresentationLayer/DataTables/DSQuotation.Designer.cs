@@ -1126,6 +1126,8 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtItemNumber;
             
+            private global::System.Data.DataColumn columndtDiscountAverage;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtScreenDataTable() {
@@ -1257,6 +1259,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtDiscountAverageColumn {
+                get {
+                    return this.columndtDiscountAverage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1292,7 +1302,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtScreenRow AdddtScreenRow(string dtScreenType, string dtDimension, string dtWindoorID, string dtUnitPrice, int dtQuantity, string dtPrice, decimal dtScreenItemNumber, decimal dtDiscountedPrice, decimal dtLaborAndMobilization, string dtNetPriceWithOutVat, string dtDiscountPercentage, string dtItemNumber) {
+            public dtScreenRow AdddtScreenRow(string dtScreenType, string dtDimension, string dtWindoorID, string dtUnitPrice, int dtQuantity, decimal dtPrice, decimal dtScreenItemNumber, string dtDiscountedPrice, decimal dtLaborAndMobilization, string dtNetPriceWithOutVat, string dtDiscountPercentage, string dtItemNumber, decimal dtDiscountAverage) {
                 dtScreenRow rowdtScreenRow = ((dtScreenRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtScreenType,
@@ -1306,7 +1316,8 @@ namespace PresentationLayer.DataTables {
                         dtLaborAndMobilization,
                         dtNetPriceWithOutVat,
                         dtDiscountPercentage,
-                        dtItemNumber};
+                        dtItemNumber,
+                        dtDiscountAverage};
                 rowdtScreenRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtScreenRow);
                 return rowdtScreenRow;
@@ -1341,6 +1352,7 @@ namespace PresentationLayer.DataTables {
                 this.columndtNetPriceWithOutVat = base.Columns["dtNetPriceWithOutVat"];
                 this.columndtDiscountPercentage = base.Columns["dtDiscountPercentage"];
                 this.columndtItemNumber = base.Columns["dtItemNumber"];
+                this.columndtDiscountAverage = base.Columns["dtDiscountAverage"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1356,11 +1368,11 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtUnitPrice);
                 this.columndtQuantity = new global::System.Data.DataColumn("dtQuantity", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtQuantity);
-                this.columndtPrice = new global::System.Data.DataColumn("dtPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndtPrice = new global::System.Data.DataColumn("dtPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtPrice);
                 this.columndtScreenItemNumber = new global::System.Data.DataColumn("dtScreenItemNumber", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtScreenItemNumber);
-                this.columndtDiscountedPrice = new global::System.Data.DataColumn("dtDiscountedPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columndtDiscountedPrice = new global::System.Data.DataColumn("dtDiscountedPrice", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtDiscountedPrice);
                 this.columndtLaborAndMobilization = new global::System.Data.DataColumn("dtLaborAndMobilization", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtLaborAndMobilization);
@@ -1370,6 +1382,8 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtDiscountPercentage);
                 this.columndtItemNumber = new global::System.Data.DataColumn("dtItemNumber", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtItemNumber);
+                this.columndtDiscountAverage = new global::System.Data.DataColumn("dtDiscountAverage", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtDiscountAverage);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2415,10 +2429,10 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string dtPrice {
+            public decimal dtPrice {
                 get {
                     try {
-                        return ((string)(this[this.tabledtScreen.dtPriceColumn]));
+                        return ((decimal)(this[this.tabledtScreen.dtPriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dtPrice\' in table \'dtScreen\' is DBNull.", e);
@@ -2447,10 +2461,10 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal dtDiscountedPrice {
+            public string dtDiscountedPrice {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtScreen.dtDiscountedPriceColumn]));
+                        return ((string)(this[this.tabledtScreen.dtDiscountedPriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'dtDiscountedPrice\' in table \'dtScreen\' is DBNull.", e);
@@ -2522,6 +2536,22 @@ namespace PresentationLayer.DataTables {
                 }
                 set {
                     this[this.tabledtScreen.dtItemNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal dtDiscountAverage {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtScreen.dtDiscountAverageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtDiscountAverage\' in table \'dtScreen\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtScreen.dtDiscountAverageColumn] = value;
                 }
             }
             
@@ -2667,6 +2697,18 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdtItemNumberNull() {
                 this[this.tabledtScreen.dtItemNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtDiscountAverageNull() {
+                return this.IsNull(this.tabledtScreen.dtDiscountAverageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtDiscountAverageNull() {
+                this[this.tabledtScreen.dtDiscountAverageColumn] = global::System.Convert.DBNull;
             }
         }
         

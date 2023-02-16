@@ -61,6 +61,18 @@ namespace PresentationLayer.Views
             }
         }
 
+        public NumericUpDown screen_quantity
+        {
+            get
+            {
+                return nud_Quantity;
+            }
+            set
+            {
+                nud_Quantity.Value = Convert.ToInt32(value);
+            }
+        }
+
         public TextBox screen_itemnumber
         {
             get

@@ -1039,6 +1039,9 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
             public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
             public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
+            public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
+            public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary For Insect Screen");
+            
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }

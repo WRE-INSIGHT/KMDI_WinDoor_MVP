@@ -104,11 +104,11 @@ namespace PresentationLayer.Presenter
             }
 
             //Console.WriteLine("");
-            //Console.WriteLine("Windoor list count total of: "+ windoorTotalListCount.ToString());
-            //Console.WriteLine("Windoor total list price: "+ windoorTotalListPrice.ToString());
+            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
+            //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
             //Console.WriteLine("");
-            //Console.WriteLine("screen total list count: "+ ScreenTotalListCount.ToString());
-            //Console.WriteLine("screen total list price: "+ ScreenTotalListPrice.ToString());
+            //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
+            //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
             //Console.WriteLine("");
 
             _dtqoute.dtContractSummary.Rows.Add(

@@ -1513,6 +1513,19 @@ namespace ModelLayer.Model.Quotation.Screen
 
             #endregion
 
+            #region screen default quantity & discount 
+
+            if(Screen_Quantity == 0)
+            {
+                Screen_Quantity = 1;
+            }
+
+            if(DiscountPercentage == 0)
+            {
+                DiscountPercentage = 0.3m;
+            }
+
+            #endregion
 
             if (Screen_Width != 0 &&
                 Screen_Height != 0 &&
@@ -5844,6 +5857,15 @@ namespace ModelLayer.Model.Quotation.Screen
                     Discount = Screen_UnitPrice * DiscountPercentage;
                     Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                 }
+                else if (Screen_Types == ScreenType._NoInsectScreen || Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                {
+                    Screen_Quantity = 0;
+                    Screen_UnitPrice = 0;
+                    DiscountPercentage = 0;
+                    Screen_TotalAmount = 0;
+                    Discount = 0;
+                    Screen_NetPrice = 0;
+                }
 
                 Screen_Discount = (int)Decimal.Truncate(100 * DiscountPercentage);
 
@@ -5910,7 +5932,12 @@ namespace ModelLayer.Model.Quotation.Screen
             }
             else
             {
-                Screen_TotalAmount = 0;
+                    Screen_Quantity = 0;
+                    Screen_UnitPrice = 0;
+                    DiscountPercentage = 0;
+                    Screen_TotalAmount = 0;
+                    Discount = 0;
+                    Screen_NetPrice = 0;                              
             }
 
         }

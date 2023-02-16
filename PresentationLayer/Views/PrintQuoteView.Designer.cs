@@ -67,7 +67,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(664, 3);
+            this.label7.Location = new System.Drawing.Point(627, 3);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 19);
             this.label7.TabIndex = 14;
@@ -78,7 +78,7 @@
             this.rtbox_Body.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbox_Body.Location = new System.Drawing.Point(664, 22);
+            this.rtbox_Body.Location = new System.Drawing.Point(627, 22);
             this.rtbox_Body.Name = "rtbox_Body";
             this.rtbox_Body.Size = new System.Drawing.Size(260, 112);
             this.rtbox_Body.TabIndex = 13;
@@ -87,7 +87,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(453, 3);
+            this.label6.Location = new System.Drawing.Point(416, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 19);
             this.label6.TabIndex = 12;
@@ -95,7 +95,7 @@
             // 
             // rtbox_Salutation
             // 
-            this.rtbox_Salutation.Location = new System.Drawing.Point(453, 22);
+            this.rtbox_Salutation.Location = new System.Drawing.Point(416, 22);
             this.rtbox_Salutation.Name = "rtbox_Salutation";
             this.rtbox_Salutation.Size = new System.Drawing.Size(205, 112);
             this.rtbox_Salutation.TabIndex = 11;
@@ -104,7 +104,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(242, 3);
+            this.label5.Location = new System.Drawing.Point(205, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 19);
             this.label5.TabIndex = 10;
@@ -112,7 +112,7 @@
             // 
             // rtbox_Address
             // 
-            this.rtbox_Address.Location = new System.Drawing.Point(242, 22);
+            this.rtbox_Address.Location = new System.Drawing.Point(205, 22);
             this.rtbox_Address.Name = "rtbox_Address";
             this.rtbox_Address.Size = new System.Drawing.Size(205, 112);
             this.rtbox_Address.TabIndex = 9;
@@ -134,9 +134,9 @@
             // 
             this.dtp_Date.CustomFormat = "MMM. dd, yyyy";
             this.dtp_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Date.Location = new System.Drawing.Point(84, 24);
+            this.dtp_Date.Location = new System.Drawing.Point(78, 22);
             this.dtp_Date.Name = "dtp_Date";
-            this.dtp_Date.Size = new System.Drawing.Size(152, 25);
+            this.dtp_Date.Size = new System.Drawing.Size(121, 25);
             this.dtp_Date.TabIndex = 7;
             this.dtp_Date.Value = new System.DateTime(2022, 11, 22, 0, 0, 0, 0);
             this.dtp_Date.ValueChanged += new System.EventHandler(this.dtp_Date_ValueChanged);
@@ -144,7 +144,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 27);
+            this.label4.Location = new System.Drawing.Point(34, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 19);
             this.label4.TabIndex = 6;

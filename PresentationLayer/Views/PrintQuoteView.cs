@@ -52,6 +52,8 @@ namespace PresentationLayer.Views
         }
 
 
+
+
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
         private void PrintQuoteView_Load(object sender, EventArgs e)
@@ -97,5 +99,7 @@ namespace PresentationLayer.Views
         {
 
         }
+
+     
     }
 }
