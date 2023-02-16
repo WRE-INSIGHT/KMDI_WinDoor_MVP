@@ -290,6 +290,7 @@ namespace PresentationLayer.Presenter
                     _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
                     
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
+                    _mainPresenter.position = _dgvAssignedProj.Rows[e.RowIndex].Cells["Position"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
                     _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
                     _CELandingView.SetText_LblNav(_projName);

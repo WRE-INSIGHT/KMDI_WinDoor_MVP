@@ -620,6 +620,19 @@ namespace PresentationLayer.Presenter
                 _isOpenProject = value;
             }
         }
+        private string _position;
+        public string position
+        {
+            get
+            {
+                return _position;
+            }
+
+            set
+            {
+                _position = value;
+            }
+        }
         private string _aeic;
         public string aeic
         {
