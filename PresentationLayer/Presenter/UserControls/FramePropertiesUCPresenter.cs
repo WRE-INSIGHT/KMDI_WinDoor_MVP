@@ -85,19 +85,63 @@ namespace PresentationLayer.Presenter.UserControls
 
                         //  RailsAdditionalHt = false;
                     }
-                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
-                    {
-                        _frameModel.Frame_ConnectionTypeVisibility = true;
-                        _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
-                        _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
-                    }
-                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
-                    {
-                        _frameModel.Frame_ConnectionTypeVisibility = false;
-                        _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
-                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
-                    }
 
+                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                    {
+                        if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                        {
+                            _frameModel.Frame_ConnectionTypeVisibility = false;
+                            _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                        }
+
+                        if (_frameModel.Frame_TrackProfileArtNoVisibility == true &&
+                       _frameModel.Frame_Type == Frame_Padding.Door)
+                        {
+                            _frameModel.Frame_TrackProfileArtNoVisibility = false;
+                            _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
+                        }
+                    }
+                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                    {
+                        if (_frameModel.Frame_ConnectionTypeVisibility == false)
+                        {
+                            _frameModel.Frame_ConnectionTypeVisibility = true;
+                            _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                        }
+
+                        if (_frameModel.Frame_TrackProfileArtNoVisibility == false &&
+                            _frameModel.Frame_Type == Frame_Padding.Door)
+                        {
+                            _frameModel.Frame_TrackProfileArtNoVisibility = true;
+                            _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+                        }
+                    }
+                      
+                    //if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
+                    //{
+                    //    _frameModel.Frame_ConnectionTypeVisibility = true;
+                    //    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                    //}
+                    //else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
+                    //{
+                    //    _frameModel.Frame_ConnectionTypeVisibility = false;
+                    //    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                    //}
+
+                    //if (_frameModel.Frame_TrackProfileArtNoVisibility == false &&
+                    //    _frameModel.Frame_Type == Frame_Padding.Door)
+                    //{
+                    //    _frameModel.Frame_TrackProfileArtNoVisibility = true;
+                    //    _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+                    //}
+                     
                     //RailsDeductHt = true;
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -120,6 +164,14 @@ namespace PresentationLayer.Presenter.UserControls
                         _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
                     }
                     //  RailsAdditionalHt = true;
+
+                    if (_frameModel.Frame_TrackProfileArtNoVisibility == true &&
+                        _frameModel.Frame_Type == Frame_Padding.Door)
+                    {
+                        _frameModel.Frame_TrackProfileArtNoVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
+                    }
                 }
 
                 _mainPresenter.GetCurrentPrice();
@@ -347,9 +399,9 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TrackProfilePropUC);
             TrackProfilePropUC.Dock = DockStyle.Top;
             TrackProfilePropUC.BringToFront();
-            _frameModel.Frame_TrackProfileArtNoVisibility = true;
-            _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
-            _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+            //_frameModel.Frame_TrackProfileArtNoVisibility = true;
+            //_frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+            //_framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
 
 
             //if (_frameModel.Frame_Type == Frame_Padding.Door)

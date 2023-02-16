@@ -383,16 +383,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (_mainPresenter.windoorModel_MainPresenter.WD_profile.Contains("PremiLine") &&
                     _panelModel.Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                     _panelModel.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
-                {
-                    _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNoVisibility = true;
-                    _panelModel.Panel_ParentFrameModel.AdjustPropertyPanelHeight("Panel", "addTrackProfile");
-                    _panelModel.Panel_ParentFrameModel.FrameProp_Height += const_var.frame_TrackProfileproperty_PanelHeight; 
-                    _framePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(const_var.frame_TrackProfileproperty_PanelHeight);
-                    if (_panelModel.Panel_ParentMultiPanelModel != null)
-                    {
-                        _panelModel.Panel_ParentMultiPanelModel.AdjustPropertyPanelHeight("Panel", "addTrackProfile");
-                    }
-
+                { 
+                    _panelModel.Panel_ParentFrameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._L15056140;
                 }
             }
             else if (chk.Checked == false)

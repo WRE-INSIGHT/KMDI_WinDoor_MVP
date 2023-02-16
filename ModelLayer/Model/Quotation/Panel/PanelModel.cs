@@ -4317,10 +4317,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
 
 
-                        
+
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) && 
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -8453,6 +8453,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
             }
+            Panel_MotorizedMechQty = motor;
             return motor;
         }
 
@@ -9504,6 +9505,97 @@ namespace ModelLayer.Model.Quotation.Panel
                                    4, "pc(s)",
                                    "",
                                    "Sash",
+                                   "");
+        }
+
+        public void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GS-100, T/EM,T/HM COVER + END CAP 3.5m " + Panel_GS100_T_EM_T_HMCOVER_ArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+
+        public void Insert_TrackRail6m_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Track Rail, 6m " + Panel_TrackRailArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_MicrocellOneSafetySensor_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Microcell One Safety Sensor " + Panel_MicrocellOneSafetySensorArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_AutoDoorBracketForGS100Upvc_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Auto Door Bracket For GS-100 Upvc " + Panel_AutodoorBracketForGS100UPVCArtNo.DisplayName,
+                                   2, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_GS100EndCapScrewMp5andLSupport_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GS-100 End Cap Screw M.5 & L Support " + Panel_GS100EndCapScrewM5AndLSupportArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_EuroLeadButtonWhite_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Euro Lead Button, White " + Panel_EuroLeadExitButtonArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_ToothbeltEMCM62m_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Toothbelt EM/CM/62m " + Panel_TOOTHBELT_EM_CMArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "7000",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_GuBeaZenMicrowaveSensorSilver_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GU BEA ZEN Microwave Sensor, Silver " + Panel_GuBeaZenMicrowaveSensorArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_SlidingDoorKitGS100s1_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sliding Door Kit GS-100/1 " + Panel_SlidingDoorKitGs100_1ArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
+                                   "");
+        }
+
+        public void Insert_GS100CoverKit_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("GS-100 Cover Kit " + Panel_GS100CoverKitArtNo.DisplayName,
+                                   1, "pc(s)",
+                                   "",
+                                   "",
                                    "");
         }
 

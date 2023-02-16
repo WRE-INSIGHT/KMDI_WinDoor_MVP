@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Modules
 {
@@ -29,6 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _TrackProfilePropertyUC_TrackProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            _frameModel.Frame_TrackProfileArtNo = TrackProfile_ArticleNo._none;
             _TrackProfilePropertyUC.ThisBinding(CreateBindingDictionary());
         }
 

@@ -438,6 +438,25 @@ namespace ModelLayer.Model.Quotation.Panel
         void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
         void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
+        void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_TrackRail6m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_MicrocellOneSafetySensor_MaterialList(DataTable tbl_explosion);
+
+        void Insert_AutoDoorBracketForGS100Upvc_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GS100EndCapScrewMp5andLSupport_MaterialList(DataTable tbl_explosion);
+
+        void Insert_EuroLeadButtonWhite_MaterialList(DataTable tbl_explosion);
+
+        void Insert_ToothbeltEMCM62m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GuBeaZenMicrowaveSensorSilver_MaterialList(DataTable tbl_explosion);
+
+        void Insert_SlidingDoorKitGS100s1_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GS100CoverKit_MaterialList(DataTable tbl_explosion);
 
         void Insert_PlantOnWeatherStripHead_MaterialList(DataTable tbl_explosion);
         void Insert_PlantOnWeatherStripSeal_MaterialList(DataTable tbl_explosion);

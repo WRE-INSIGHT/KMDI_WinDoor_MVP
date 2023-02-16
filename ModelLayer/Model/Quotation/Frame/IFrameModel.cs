@@ -63,6 +63,7 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameReinfForPremi_ArticleNo Frame_ReinfForPremiArtNo { get; set; }
 
         bool Frame_If_InwardMotorizedCasement { get; set; }
+        bool Frame_If_InwardMotorizedSliding { get; set; }
         MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
@@ -81,7 +82,7 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
         void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
-
+        void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();
         void SetfrmDimensionZoom();
