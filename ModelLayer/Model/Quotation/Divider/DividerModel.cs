@@ -377,11 +377,11 @@ namespace ModelLayer.Model.Quotation.Divider
 
             if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
-                divsize = 13;
+                divsize = (int)FrameModel.Frame_Padding.Window / 2;
             }
             else if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                divsize = 16;
+                divsize = (int)FrameModel.Frame_Padding.Door / 2;
             }
 
             if (Div_Type == DividerType.Mullion)
@@ -525,11 +525,11 @@ namespace ModelLayer.Model.Quotation.Divider
 
             if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Window)
             {
-                divsize = 13;
+                divsize = ((int)FrameModel.Frame_Padding.Window / 2);
             }
             else if (Div_FrameParent.Frame_Type == FrameModel.Frame_Padding.Door)
             {
-                divsize = 16;
+                divsize = ((int)FrameModel.Frame_Padding.Door / 2);
             }
 
             if (Div_Type == DividerType.Mullion)

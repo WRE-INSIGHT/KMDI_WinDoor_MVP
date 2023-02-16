@@ -54,6 +54,7 @@
             this.Load += new System.EventHandler(this.BasePlatformImagerUC_Load);
             this.SizeChanged += new System.EventHandler(this.BasePlatformImagerUC_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.BasePlatformImagerUC_Paint);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.BasePlatformImagerUC_MouseDoubleClick);
             this.ResumeLayout(false);
 
         }
