@@ -26,6 +26,12 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void SubscribeToEventSetup()
         {
             _TrackProfilePropertyUC.TrackProfilePropertyUCLoadEventRaised += _TrackProfilePropertyUC_TrackProfilePropertyUCLoadEventRaised;
+            _TrackProfilePropertyUC.TrackProfileSelectedValueChangedEventRaised += _TrackProfilePropertyUC_TrackProfileSelectedValueChangedEventRaised;
+        }
+
+        private void _TrackProfilePropertyUC_TrackProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _frameModel.Frame_TrackProfileArtNo = (TrackProfile_ArticleNo)((ComboBox)sender).SelectedValue;
         }
 
         private void _TrackProfilePropertyUC_TrackProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -57,12 +63,12 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         public Dictionary<string, Binding> CreateBindingDictionary()
         {
-            Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
+            Dictionary<string, Binding> bindingTrack = new Dictionary<string, Binding>();
 
-            binding.Add("Frame_TrackProfileArtNoVisibility", new Binding("VISIBLE", _frameModel, "Frame_TrackProfileArtNoVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            binding.Add("Frame_TrackProfileArtNo", new Binding("Text", _frameModel, "Frame_TrackProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            bindingTrack.Add("Frame_TrackProfileArtNoVisibility", new Binding("Visible", _frameModel, "Frame_TrackProfileArtNoVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            bindingTrack.Add("Frame_TrackProfileArtNo", new Binding("Text", _frameModel, "Frame_TrackProfileArtNo", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            return binding;
+            return bindingTrack;
         }
     }
 }

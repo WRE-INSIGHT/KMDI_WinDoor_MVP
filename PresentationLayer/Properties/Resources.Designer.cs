@@ -253,6 +253,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ExtensionBot1 {
+            get {
+                object obj = ResourceManager.GetObject("ExtensionBot1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ExtensionLeft {
             get {
                 object obj = ResourceManager.GetObject("ExtensionLeft", resourceCulture);
@@ -266,6 +276,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap ExtensionRight {
             get {
                 object obj = ResourceManager.GetObject("ExtensionRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExtensionRight1 {
+            get {
+                object obj = ResourceManager.GetObject("ExtensionRight1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

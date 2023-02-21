@@ -74,6 +74,13 @@ namespace ModelLayer.Model.Quotation.Frame
         Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         bool Frame_TrackProfileArtNoVisibility { get; set; }
         TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
+        MeshType Frame_MeshType { get; set; }
+        bool Frame_ScreenVisibility { get; set; }
+        bool Frame_ScreenOption { get; set; }
+        bool Frame_ScreenHeightOption { get; set; }
+        bool Frame_ScreenHeightVisibility { get; set; }
+        int Frame_ScreenFrameHeight { get; set; }
+        bool Frame_ScreenFrameHeightEnable { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);

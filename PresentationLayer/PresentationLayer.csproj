@@ -177,9 +177,11 @@
     <Compile Include="Presenter\UserControls\BasePlatformPresenter.cs" />
     <Compile Include="Presenter\UserControls\ConcretePropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_FrameConnectionTypePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
@@ -678,6 +680,7 @@
     </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_ScreenPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_TrackProfilePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameUC.cs">
@@ -1632,6 +1635,8 @@
     <None Include="Resources\exchange.png" />
     <None Include="Resources\duplicate.png" />
     <None Include="Resources\dupli.png" />
+    <None Include="Resources\ExtensionBot1.png" />
+    <None Include="Resources\ExtensionRight1.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

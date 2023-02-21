@@ -9,6 +9,10 @@
         public int frame_SlidingRailsQtyproperty_PanelHeight = 45;
         public int frame_ConnectionTypeproperty_PanelHeight = 39;
         public int frame_TrackProfileproperty_PanelHeight = 36;
+        public int frame_ScreenProperty_PanelHeight = 60;
+        public int frame_ScreenHeightProperty_PanelHeight = 31;
+
+
 
         #endregion
         #region ConcreteModelConstants

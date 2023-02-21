@@ -13,7 +13,7 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
             InitializeComponent();
         }
         public event EventHandler TrackProfilePropertyUCLoadEventRaised;
-
+        public event EventHandler TrackProfileSelectedValueChangedEventRaised;
 
 
         private void FP_TrackProfilePropertyUC_Load(object sender, EventArgs e)
@@ -32,6 +32,11 @@ namespace PresentationLayer.Views.UserControls.FrameProperties_Modules
         {
             this.DataBindings.Add(ModelBinding["Frame_TrackProfileArtNoVisibility"]);
             cmb_TrackProfile.DataBindings.Add(ModelBinding["Frame_TrackProfileArtNo"]);
+        }
+
+        private void cmb_TrackProfile_SelectedValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, TrackProfileSelectedValueChangedEventRaised, e);
         }
     }
 }
