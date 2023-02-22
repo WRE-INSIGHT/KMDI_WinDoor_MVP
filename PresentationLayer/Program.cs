@@ -410,6 +410,15 @@ namespace PresentationLayer
                 .RegisterType<ISP_MagnumScreenTypeUCPresenter, SP_MagnumScreenTypeUCPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_MagnumScreenTypeUC, SP_MagnumScreenTypeUC>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_PVCbox1067WithReinPropertyUCPresenter, SP_PVCbox1067WithReinPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_PVCbox1067WithReinPropertyUC, SP_PVCbox1067WithReinPropertyUC>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISP_6040MilledProfileWithReinforcementPropertyUCPresenter, SP_6040MilledProfileWithReinforcementPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_6040MilledProfileWithReinforcementPropertyUC, SP_6040MilledProfileWithReinforcementPropertyUC>(new ContainerControlledLifetimeManager())
+
+                .RegisterType<ISP_LandCoverPropertyUCPresenter, SP_LandCoverPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_LandCoverPropertyUC, SP_LandCoverPropertyUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 

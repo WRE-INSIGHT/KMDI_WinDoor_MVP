@@ -15,6 +15,10 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void SP_LandCoverPropertyUC_Load(object sender, EventArgs e)
         {
+
+            nud_LandCover.Maximum = decimal.MaxValue;
+            nud_LandCoverQty.Maximum = decimal.MaxValue;
+
             EventHelpers.RaiseEvent(sender, SPLandCoverPropertyUCLoadEventRaised, e);
         }
 
@@ -22,7 +26,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         {
             this.DataBindings.Add(ModelBinding["Screen_LandCoverVisibility"]);
             nud_LandCover.DataBindings.Add(ModelBinding["Screen_LandCover"]);
-            nud_LandCoverQty.DataBindings.Add(ModelBinding[" "]);
+            nud_LandCoverQty.DataBindings.Add(ModelBinding["Screen_LandCoverQty"]);
 
         }
     }

@@ -13,10 +13,10 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         }
         public event EventHandler SP373or374MilledProfilePropertyUCLoadEventRaised;
 
-
-
         private void SP_373or374MilledProfilePropertyUC_Load(object sender, EventArgs e)
         {
+            nud_373or374MilledProfile.Maximum = decimal.MaxValue;
+            nud_373or374MilledProfileQty.Maximum = decimal.MaxValue;
             EventHelpers.RaiseEvent(sender, SP373or374MilledProfilePropertyUCLoadEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

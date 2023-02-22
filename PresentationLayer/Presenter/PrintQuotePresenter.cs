@@ -120,6 +120,7 @@ namespace PresentationLayer.Presenter
                                                     + _mainPresenter.titleLastname
                                                     + ",";
                 _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+                _printQuoteView.QuotationOuofTownExpenses = "50000";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
             }
@@ -147,15 +148,18 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ScreenItem")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
-
-                }else if (_mainPresenter.printStatus == "ContractSummary")
+                }
+                else if (_mainPresenter.printStatus == "ContractSummary")
                 {           
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
                 }
 
                 if(_mainPresenter.printStatus == "ScreenItem")
                 {
-                    ReportParameter[] RParam = new ReportParameter[8];
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+
+                    ReportParameter[] RParam = new ReportParameter[9];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -164,11 +168,25 @@ namespace PresentationLayer.Presenter
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[7] = new ReportParameter("ASPosition", "Account Executive");
-                   _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[8] = new ReportParameter("ListScreen", "True");
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("ListScreen", "False");
+                    }
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
+                
                     ReportParameter[] RParam = new ReportParameter[6];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
@@ -177,14 +195,28 @@ namespace PresentationLayer.Presenter
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                                      
                 }
                 else
-                {
-                    ReportParameter[] RParam = new ReportParameter[1];                 
+                {            
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
+                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
+                    int oftexpenses = Convert.ToInt32(trimmedamount);
+
+                    ReportParameter[] RParam = new ReportParameter[4];                 
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[2] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
+
                 }
-     
+                
                 _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
                 _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
                 _printQuoteView.GetReportViewer().ZoomPercent = 75;

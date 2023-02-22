@@ -68,6 +68,8 @@ namespace ModelLayer.Model.Quotation.Screen
         Freedom_ScreenSize Freedom_ScreenSize { get; set; }
         Freedom_ScreenType Freedom_ScreenType { get; set; }
         bool FromCellEndEdit { get; set; }
-
+        bool Screen_1067PVCboxVisibility { get; set; }
+        int Screen_1067PVCboxQty { get; set; }
+        int Screen_1067PVCbox { get; set; }
     }
 }

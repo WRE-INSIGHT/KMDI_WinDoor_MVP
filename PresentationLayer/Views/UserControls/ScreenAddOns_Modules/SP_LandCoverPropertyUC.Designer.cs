@@ -39,7 +39,7 @@
             // lbl_LandCover
             // 
             this.lbl_LandCover.AutoSize = true;
-            this.lbl_LandCover.Location = new System.Drawing.Point(4, 7);
+            this.lbl_LandCover.Location = new System.Drawing.Point(5, 10);
             this.lbl_LandCover.Name = "lbl_LandCover";
             this.lbl_LandCover.Size = new System.Drawing.Size(65, 13);
             this.lbl_LandCover.TabIndex = 0;
@@ -47,14 +47,14 @@
             // 
             // nud_LandCover
             // 
-            this.nud_LandCover.Location = new System.Drawing.Point(75, 5);
+            this.nud_LandCover.Location = new System.Drawing.Point(8, 26);
             this.nud_LandCover.Name = "nud_LandCover";
-            this.nud_LandCover.Size = new System.Drawing.Size(58, 20);
+            this.nud_LandCover.Size = new System.Drawing.Size(68, 20);
             this.nud_LandCover.TabIndex = 1;
             // 
             // nud_LandCoverQty
             // 
-            this.nud_LandCoverQty.Location = new System.Drawing.Point(162, 5);
+            this.nud_LandCoverQty.Location = new System.Drawing.Point(116, 26);
             this.nud_LandCoverQty.Name = "nud_LandCoverQty";
             this.nud_LandCoverQty.Size = new System.Drawing.Size(62, 20);
             this.nud_LandCoverQty.TabIndex = 29;
@@ -62,7 +62,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(136, 8);
+            this.label2.Location = new System.Drawing.Point(85, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 30;
@@ -77,7 +77,7 @@
             this.Controls.Add(this.nud_LandCover);
             this.Controls.Add(this.lbl_LandCover);
             this.Name = "SP_LandCoverPropertyUC";
-            this.Size = new System.Drawing.Size(227, 31);
+            this.Size = new System.Drawing.Size(205, 50);
             this.Load += new System.EventHandler(this.SP_LandCoverPropertyUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_LandCover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_LandCoverQty)).EndInit();
