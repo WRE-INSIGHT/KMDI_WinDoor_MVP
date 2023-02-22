@@ -98,11 +98,13 @@ namespace ModelLayer.Model.Quotation
 
             string screws_for_inst_where = "";
 
-            bool perFrame = false;
-            bool slidingChck = false;
+            bool perFrame = false,
+                 SlidingMotorizePerFrame = false,
+                 slidingChck = false;
             foreach (IFrameModel frame in item.lst_frame)
             {
                 perFrame = true;
+                SlidingMotorizePerFrame = true;
                 slidingChck = false;
 
                 frame.SetExplosionValues_Frame();
@@ -775,12 +777,11 @@ namespace ModelLayer.Model.Quotation
 
                                         if (perFrame == true)
                                         {
-
                                             if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true)
                                             {
                                                 if (pnl_curCtrl.Panel_Type == "Awning Panel")
                                                 {
-                                                    pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List, pnl_curCtrl.MotorizeMechQty());
 
                                                     int hinge_screws = pnl_curCtrl.Add_Hinges_screws4fab();
                                                     add_screws_fab_hinges += hinge_screws;
@@ -1222,12 +1223,17 @@ namespace ModelLayer.Model.Quotation
                                                     slidingChck = false;
                                                 }
 
+                                                if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                                {
+                                                    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SealingElement_MaterialList(Material_List);
+                                                }
+
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
 
                                                 if (perFrame == true)
                                                 {
-
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
@@ -1264,6 +1270,22 @@ namespace ModelLayer.Model.Quotation
                                                     pnl_curCtrl.Insert_AluminumPullHandle_MaterialList(Material_List);
                                                 }
 
+                                                if (pnl_curCtrl.Panel_MotorizedOptionVisibility == true &&
+                                                    SlidingMotorizePerFrame == true)
+                                                {
+                                                    pnl_curCtrl.Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(Material_List);
+                                                    frame.Insert_GS100EMTrackProfile2p6n3m_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_TrackRail6m_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_MicrocellOneSafetySensor_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_AutoDoorBracketForGS100Upvc_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_GS100EndCapScrewMp5andLSupport_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_EuroLeadButtonWhite_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_ToothbeltEMCM62m_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_GuBeaZenMicrowaveSensorSilver_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_SlidingDoorKitGS100s1_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_GS100CoverKit_MaterialList(Material_List);
+                                                    SlidingMotorizePerFrame = false;
+                                                }
                                             }
 
                                         }
@@ -1382,7 +1404,6 @@ namespace ModelLayer.Model.Quotation
                                                 int espag_screws = pnl_curCtrl.Add_Espagnolette_screws4fab();
                                                 add_screws_fab_espag += espag_screws;
                                             }
-
                                         }
                                     }
                                 }
@@ -1472,7 +1493,7 @@ namespace ModelLayer.Model.Quotation
 
                         if (pnl.Panel_MotorizedOptionVisibility == true)
                         {
-                            pnl.Insert_MotorizedInfo_MaterialList(Material_List);
+                            pnl.Insert_MotorizedInfo_MaterialList(Material_List, 0);
 
                             int hinge_screws = pnl.Add_Hinges_screws4fab();
                             add_screws_fab_hinges += hinge_screws;
@@ -1615,6 +1636,13 @@ namespace ModelLayer.Model.Quotation
                                 if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                 {
+
+                                    if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                    {
+                                        frame.Insert_ConnectorType_MaterialList(Material_List);
+                                        pnl.Insert_SealingElement_MaterialList(Material_List);
+                                    }
+
                                     pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                     pnl.Insert_AluminumTrack_MaterialList(Material_List);
 
@@ -1947,7 +1975,14 @@ namespace ModelLayer.Model.Quotation
 
             Material_List.Rows.Add("Screws for Installation",
                                    Screws_for_Installation, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
-            if (slidingChck == true)
+
+            if (item.WD_profile == "PremiLine Profile")
+            {
+                Material_List.Rows.Add("Screws for 6050 Frame",
+                                  Screws_for_6050Frame, "pc(s)", "", screws_for_inst_where); // FRAME, SASH, TRANSOM & MULLION
+            }
+
+            if (slidingChck == true && item.WD_profile == "PremiLine Profile")
             {
                 Material_List.Rows.Add("ACC FOR 6055 9D56",
                         ACC_for_6050, "pc(s)", "", screws_for_inst_where); // FRAME
@@ -6339,7 +6374,7 @@ namespace ModelLayer.Model.Quotation
 
                                         #endregion
                                     }
-                                   
+
                                     #region Glass Based Price
 
                                     //if (pnl.Panel_GlassThicknessDesc != null)
@@ -7012,7 +7047,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                     MotorizePrice += MotorizeMechPricePerPiece * Singlepnl.Panel_MotorizedMechQty;
                                 }
-                                #endregion 
+                                #endregion
 
                                 #region EspagPrice
 

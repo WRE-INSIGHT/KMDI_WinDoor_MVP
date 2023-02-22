@@ -20,6 +20,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFP_BottomFramePropertyUCPresenter _fp_botFramePropertyUCP;
         private IFP_SlidingRailsPropertyUCPresenter _fp_slidingRailsPropertyUCPresenter;
         private IFP_FrameConnectionTypePropertyUCPresenter _fp_frameConnectionTypePropertyUCPresenter;
+        private IFP_TrackProfilePropertyUCPresenter _fp_TrackProfilePropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -33,13 +34,15 @@ namespace PresentationLayer.Presenter.UserControls
                                           IFrameServices frameServices,
                                           IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP,
                                           IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter,
-                                          IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter)
+                                          IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter,
+                                          IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
             _fp_botFramePropertyUCP = fp_botFramePropertyUCP;
             _fp_slidingRailsPropertyUCPresenter = fp_slidingRailsPropertyUCPresenter;
             _fp_frameConnectionTypePropertyUCPresenter = fp_frameConnectionTypePropertyUCPresenter;
+            _fp_TrackProfilePropertyUCPresenter = fp_TrackProfilePropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -63,9 +66,9 @@ namespace PresentationLayer.Presenter.UserControls
         string prev_frameArtNo = "";
         private void _framePropertiesUC_cmbFrameProfileSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
-            if (initialized == true )
+            if (initialized == true)
             {
-                
+
                 _frameModel.Frame_ArtNo = (FrameProfile_ArticleNo)((ComboBox)sender).SelectedValue;
 
                 if ((_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -82,19 +85,63 @@ namespace PresentationLayer.Presenter.UserControls
 
                         //  RailsAdditionalHt = false;
                     }
-                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
-                    {
-                        _frameModel.Frame_ConnectionTypeVisibility = true;
-                        _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
-                        _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
-                    }
-                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
-                    {
-                        _frameModel.Frame_ConnectionTypeVisibility = false;
-                        _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
-                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
-                    }
 
+                    if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                    {
+                        if (_frameModel.Frame_ConnectionTypeVisibility == true)
+                        {
+                            _frameModel.Frame_ConnectionTypeVisibility = false;
+                            _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                        }
+
+                        if (_frameModel.Frame_TrackProfileArtNoVisibility == true &&
+                       _frameModel.Frame_Type == Frame_Padding.Door)
+                        {
+                            _frameModel.Frame_TrackProfileArtNoVisibility = false;
+                            _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
+                        }
+                    }
+                    else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                    {
+                        if (_frameModel.Frame_ConnectionTypeVisibility == false)
+                        {
+                            _frameModel.Frame_ConnectionTypeVisibility = true;
+                            _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                        }
+
+                        if (_frameModel.Frame_TrackProfileArtNoVisibility == false &&
+                            _frameModel.Frame_Type == Frame_Padding.Door)
+                        {
+                            _frameModel.Frame_TrackProfileArtNoVisibility = true;
+                            _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+                        }
+                    }
+                      
+                    //if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
+                    //{
+                    //    _frameModel.Frame_ConnectionTypeVisibility = true;
+                    //    _frameModel.FrameProp_Height += constants.frame_ConnectionTypeproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(constants.frame_ConnectionTypeproperty_PanelHeight);
+                    //}
+                    //else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 && _frameModel.Frame_ConnectionTypeVisibility == true)
+                    //{
+                    //    _frameModel.Frame_ConnectionTypeVisibility = false;
+                    //    _frameModel.FrameProp_Height -= constants.frame_ConnectionTypeproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
+                    //}
+
+                    //if (_frameModel.Frame_TrackProfileArtNoVisibility == false &&
+                    //    _frameModel.Frame_Type == Frame_Padding.Door)
+                    //{
+                    //    _frameModel.Frame_TrackProfileArtNoVisibility = true;
+                    //    _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                    //    _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+                    //}
+                     
                     //RailsDeductHt = true;
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
@@ -117,6 +164,14 @@ namespace PresentationLayer.Presenter.UserControls
                         _framePropertiesUC.AddHT_PanelBody(-constants.frame_ConnectionTypeproperty_PanelHeight);
                     }
                     //  RailsAdditionalHt = true;
+
+                    if (_frameModel.Frame_TrackProfileArtNoVisibility == true &&
+                        _frameModel.Frame_Type == Frame_Padding.Door)
+                    {
+                        _frameModel.Frame_TrackProfileArtNoVisibility = false;
+                        _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                        _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
+                    }
                 }
 
                 _mainPresenter.GetCurrentPrice();
@@ -284,7 +339,7 @@ namespace PresentationLayer.Presenter.UserControls
         bool initialized = false;
         private void OnFramePropertiesLoadEventRaised(object sender, EventArgs e)
         {
-           
+
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
             if (_frameModel.Frame_Type == Frame_Padding.Window)
@@ -337,6 +392,17 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(connectorPropUC);
             connectorPropUC.Dock = DockStyle.Top;
             connectorPropUC.BringToFront();
+
+
+            IFP_TrackProfilePropertyUCPresenter TrackProfile = _fp_TrackProfilePropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter);
+            UserControl TrackProfilePropUC = (UserControl)TrackProfile.GetTrackProfilePropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TrackProfilePropUC);
+            TrackProfilePropUC.Dock = DockStyle.Top;
+            TrackProfilePropUC.BringToFront();
+            //_frameModel.Frame_TrackProfileArtNoVisibility = true;
+            //_frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+            //_framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+
 
             //if (_frameModel.Frame_Type == Frame_Padding.Door)
             //{
