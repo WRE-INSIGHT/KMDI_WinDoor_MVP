@@ -163,7 +163,7 @@ namespace PresentationLayer.Presenter
         private MenuStrip _msMainMenu;
         private Base_Color baseColor;
 
-        
+
 
         private Control _controlRaised_forDMSelection;
         private IDividerModel _divModel_forDMSelection;
@@ -7919,7 +7919,6 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_ScrewSetsArtNo = panel_ScrewSetsArtNo;
             pnlModel.Panel_PVCCenterProfileArtNo = panel_PVCCenterProfileArtNo;
             pnlModel.Panel_GS100_T_EM_T_HMCOVER_ArtNo = panel_GS100_T_EM_T_HMCOVER_ArtNo;
-            pnlModel.Panel_TrackProfileArtNo = panel_TrackProfileArtNo;
             pnlModel.Panel_TrackRailArtNo = panel_TrackRailArtNo;
             pnlModel.Panel_TrackRailArtNoVisibility = panel_TrackRailArtNoVisibility;
             pnlModel.Panel_MicrocellOneSafetySensorArtNo = panel_MicrocellOneSafetySensorArtNo;
@@ -8039,7 +8038,7 @@ namespace PresentationLayer.Presenter
                 multiMullionUC = _multiMullionUC4th;
                 multiTransomUC = _multiTransomUC4th;
             }
-         
+
             if (panel_Type.Contains("Fixed Panel"))
             {
                 IFixedPanelUCPresenter fixedUCP;
@@ -11369,7 +11368,7 @@ Magnum_ScreenType magnum_ScreenType;
                 _quotationModel.itemSelectStatus = false;
                 _quotationModel.BOMandItemlistStatus = "PriceItemList";
             }
-            if(ItemLoad == false)
+            if (ItemLoad == false)
             {
                 _quotationModel.ItemCostingPriceAndPoints();
             }
@@ -11443,8 +11442,8 @@ Magnum_ScreenType magnum_ScreenType;
                         }
                         else
                         {
-                            if(availableHeight > frmDimension_numHt && 
-                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd && 
+                            if (availableHeight > frmDimension_numHt &&
+                              (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
                                _windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
@@ -11494,9 +11493,9 @@ Magnum_ScreenType magnum_ScreenType;
                         {
 
 
-                            if (availableHeight > frmDimension_numHt && 
+                            if (availableHeight > frmDimension_numHt &&
                                 (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
-                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name) 
+                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += crtm.Concrete_Height;

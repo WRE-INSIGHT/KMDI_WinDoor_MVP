@@ -37,6 +37,9 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _V226 = new FrameReinf_ArticleNo(2, "V226"); //G58
             public static readonly FrameReinf_ArticleNo _TV107 = new FrameReinf_ArticleNo(3, "T-V107");
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
+            public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
+
+            
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1061,6 +1064,7 @@ namespace EnumerationTypeLayer
 
         }
 
+
         public class Freedom_ScreenSize : Enumeration<Freedom_ScreenSize, int>
         {
             public static readonly Freedom_ScreenSize _80mm = new Freedom_ScreenSize (0, "80mm");
@@ -1148,6 +1152,8 @@ namespace EnumerationTypeLayer
             public static readonly TrackProfile_ArticleNo _L15056143 = new TrackProfile_ArticleNo(3, "L-15056-143");
             public static readonly TrackProfile_ArticleNo _L15056144 = new TrackProfile_ArticleNo(4, "L-15056-144");
             public static readonly TrackProfile_ArticleNo _L15056146 = new TrackProfile_ArticleNo(5, "L-15056-146");
+            public static readonly TrackProfile_ArticleNo _none = new TrackProfile_ArticleNo(6, "None");
+
 
             private TrackProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1368,6 +1374,15 @@ namespace EnumerationTypeLayer
             public static readonly LouverColor_Option _white = new LouverColor_Option(1, "White");
 
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
+        {
+            public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+
+            private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
+
+
         }
     }
 }

@@ -78,7 +78,7 @@
             this.Cms_GallerySetArtNo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeArtNoToolStripMenuItem});
             this.Cms_GallerySetArtNo.Name = "Cms_GallerySetArtNo";
-            this.Cms_GallerySetArtNo.Size = new System.Drawing.Size(157, 48);
+            this.Cms_GallerySetArtNo.Size = new System.Drawing.Size(157, 26);
             // 
             // changeArtNoToolStripMenuItem
             // 

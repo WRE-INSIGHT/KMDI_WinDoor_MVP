@@ -276,7 +276,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         PVCCenterProfile_ArticleNo Panel_PVCCenterProfileArtNo { get; set; }
         GS100_T_EM_T_HMCOVER_ArticleNo Panel_GS100_T_EM_T_HMCOVER_ArtNo { get; set; }
-        TrackProfile_ArticleNo Panel_TrackProfileArtNo { get; set; }
+        //bool Panel_TrackProfileArtNoVisibility { get; set; }
+        //TrackProfile_ArticleNo Panel_TrackProfileArtNo { get; set; }
         TrackRail_ArticleNo Panel_TrackRailArtNo { get; set; }
         bool Panel_TrackRailArtNoVisibility { get; set; }
         MicrocellOneSafetySensor_ArticleNo Panel_MicrocellOneSafetySensorArtNo { get; set; }
@@ -289,6 +290,7 @@ namespace ModelLayer.Model.Quotation.Panel
         GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
         int Panel_OverLappingPanelQty { get; set; }
         AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo { get; set; }
+        SealingElement_ArticleNo Panel_SealingElement_ArticleNo { get; set; }
         PlantOnWeatherStripHead_ArticleNo Panel_PlantOnWeatherStripHeadArtNo { get; set; }
         PlantOnWeatherStripSeal_ArticleNo Panel_PlantOnWeatherStripSealArtNo { get; set; }
         LouverFrameWeatherStripHead_ArticleNo Panel_LouverFrameWeatherStripHeadArtNo { get; set; }
@@ -360,7 +362,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         void Insert_SashInfo_MaterialList(DataTable tbl_explosion);
         void Insert_CoverProfileInfo_MaterialList(DataTable tbl_explosion);
-        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion);
+        void Insert_MotorizedInfo_MaterialList(DataTable tbl_explosion, int motorCount);
         void Insert_FrictionStay_MaterialList(DataTable tbl_explosion);
         void Insert_SnapNKeep_MaterialList(DataTable tbl_explosion);
         void Insert_FixedCam_MaterialList(DataTable tbl_explosion);
@@ -435,6 +437,26 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
         void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
+        void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
+        void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_TrackRail6m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_MicrocellOneSafetySensor_MaterialList(DataTable tbl_explosion);
+
+        void Insert_AutoDoorBracketForGS100Upvc_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GS100EndCapScrewMp5andLSupport_MaterialList(DataTable tbl_explosion);
+
+        void Insert_EuroLeadButtonWhite_MaterialList(DataTable tbl_explosion);
+
+        void Insert_ToothbeltEMCM62m_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GuBeaZenMicrowaveSensorSilver_MaterialList(DataTable tbl_explosion);
+
+        void Insert_SlidingDoorKitGS100s1_MaterialList(DataTable tbl_explosion);
+
+        void Insert_GS100CoverKit_MaterialList(DataTable tbl_explosion);
 
         void Insert_PlantOnWeatherStripHead_MaterialList(DataTable tbl_explosion);
         void Insert_PlantOnWeatherStripSeal_MaterialList(DataTable tbl_explosion);
@@ -446,5 +468,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_LouvreGallerySet_MaterialList(DataTable tbl_explosion);
 
         #endregion
+
+        int MotorizeMechQty();
     }
 }
