@@ -2040,8 +2040,57 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_frameInfoForScreen_MaterialList(DataTable tbl_explosion)
         {
+            string cutType = "";
+            int frameAllowance = 0;
 
+            if (Frame_ScreenHeightOption == false)
+            {
+                cutType = @"|  |";
 
+                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    frameAllowance = 0;
+                }
+                else
+                {
+                    frameAllowance = 20;
+                }
+            }
+            else if (Frame_ScreenHeightOption == true)
+            {
+                cutType = @"\  /";
+                frameAllowance = 5;
+            }
+
+            int screenFrameHeight = (Frame_ConnectionType == FrameConnectionType._MechanicalJoint && Frame_ScreenHeightOption == true) ? Frame_ExplosionHeight : (Frame_ScreenFrameHeight + frameAllowance);
+            int screenFrameWidthReinf = (Frame_ScreenHeightOption == false) ? (Frame_Width - 10) : Frame_ReinfWidth;
+
+            tbl_explosion.Rows.Add("Frame Width " + Frame_ArtNoForPremi.ToString(),
+                                   2, "pc(s)",
+                                   (Frame_Width + frameAllowance).ToString(),
+                                   "Frame",
+                                   cutType);
+
+            if (Frame_ScreenHeightOption == true)
+            {
+                tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNoForPremi.ToString(),
+                                                   2, "pc(s)",
+                                                   screenFrameHeight,
+                                                   "Frame",
+                                                   cutType);
+
+                tbl_explosion.Rows.Add("Frame Reinf Height " + Frame_ReinfForPremiArtNo.ToString(),
+                                       2, "pc(s)",
+                                       Frame_ReinfHeight.ToString(),
+                                       "Frame",
+                                       @"|  |");
+            }
+
+            tbl_explosion.Rows.Add("Frame Reinf Width " + Frame_ReinfForPremiArtNo.ToString(),
+                                 2, "pc(s)",
+                                 screenFrameWidthReinf.ToString(),
+                                 "Frame",
+                                 @"|  |");
         }
 
 

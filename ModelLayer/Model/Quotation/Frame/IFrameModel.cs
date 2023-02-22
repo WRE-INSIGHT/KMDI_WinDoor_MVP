@@ -86,10 +86,12 @@ namespace ModelLayer.Model.Quotation.Frame
         void DeductPropertyPanelHeight(int propertyHeight);
         void Insert_frameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion);
+        void Insert_frameInfoForScreen_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
         void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
+
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();
         void SetfrmDimensionZoom();

@@ -32,9 +32,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.chk_Screen = new System.Windows.Forms.CheckBox();
             this.pnl_ScreenHeight = new System.Windows.Forms.Panel();
+            this.nud_screenHeight = new System.Windows.Forms.NumericUpDown();
             this.chck_screenHeightOption = new System.Windows.Forms.CheckBox();
             this.pnl_screenHeightPic = new System.Windows.Forms.Panel();
-            this.nud_screenHeight = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.pnl_ScreenHeight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_screenHeight)).BeginInit();
@@ -70,7 +70,7 @@
             this.chk_Screen.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
             this.chk_Screen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chk_Screen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_Screen.Location = new System.Drawing.Point(107, 3);
+            this.chk_Screen.Location = new System.Drawing.Point(107, 2);
             this.chk_Screen.Name = "chk_Screen";
             this.chk_Screen.Size = new System.Drawing.Size(47, 21);
             this.chk_Screen.TabIndex = 36;
@@ -87,15 +87,23 @@
             this.pnl_ScreenHeight.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_ScreenHeight.Location = new System.Drawing.Point(0, 25);
             this.pnl_ScreenHeight.Name = "pnl_ScreenHeight";
-            this.pnl_ScreenHeight.Size = new System.Drawing.Size(157, 31);
+            this.pnl_ScreenHeight.Size = new System.Drawing.Size(157, 26);
             this.pnl_ScreenHeight.TabIndex = 25;
+            // 
+            // nud_screenHeight
+            // 
+            this.nud_screenHeight.Location = new System.Drawing.Point(32, 4);
+            this.nud_screenHeight.Name = "nud_screenHeight";
+            this.nud_screenHeight.Size = new System.Drawing.Size(102, 20);
+            this.nud_screenHeight.TabIndex = 31;
+            this.nud_screenHeight.ValueChanged += new System.EventHandler(this.nud_screenHeight_ValueChanged);
             // 
             // chck_screenHeightOption
             // 
             this.chck_screenHeightOption.AutoSize = true;
             this.chck_screenHeightOption.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chck_screenHeightOption.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chck_screenHeightOption.Location = new System.Drawing.Point(138, 12);
+            this.chck_screenHeightOption.Location = new System.Drawing.Point(140, 9);
             this.chck_screenHeightOption.Name = "chck_screenHeightOption";
             this.chck_screenHeightOption.Size = new System.Drawing.Size(12, 11);
             this.chck_screenHeightOption.TabIndex = 30;
@@ -107,18 +115,10 @@
             this.pnl_screenHeightPic.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_screenHeightPic.BackgroundImage = global::PresentationLayer.Properties.Resources.ExtensionRight1;
             this.pnl_screenHeightPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pnl_screenHeightPic.Location = new System.Drawing.Point(3, 7);
+            this.pnl_screenHeightPic.Location = new System.Drawing.Point(5, 4);
             this.pnl_screenHeightPic.Name = "pnl_screenHeightPic";
             this.pnl_screenHeightPic.Size = new System.Drawing.Size(21, 21);
             this.pnl_screenHeightPic.TabIndex = 29;
-            // 
-            // nud_screenHeight
-            // 
-            this.nud_screenHeight.Location = new System.Drawing.Point(30, 7);
-            this.nud_screenHeight.Name = "nud_screenHeight";
-            this.nud_screenHeight.Size = new System.Drawing.Size(102, 20);
-            this.nud_screenHeight.TabIndex = 31;
-            this.nud_screenHeight.ValueChanged += new System.EventHandler(this.nud_screenHeight_ValueChanged);
             // 
             // FP_ScreenPropertyUC
             // 
@@ -128,7 +128,7 @@
             this.Controls.Add(this.pnl_ScreenHeight);
             this.Controls.Add(this.panel1);
             this.Name = "FP_ScreenPropertyUC";
-            this.Size = new System.Drawing.Size(157, 58);
+            this.Size = new System.Drawing.Size(157, 54);
             this.Load += new System.EventHandler(this.FP_ScreenPropertyUC_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

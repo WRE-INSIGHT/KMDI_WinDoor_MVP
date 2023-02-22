@@ -128,6 +128,12 @@ namespace ModelLayer.Model.Quotation
                     frame.Insert_frameInfoForPremi_MaterialList(Material_List); // 2nd frame
                 }
 
+                if (frame.Frame_ScreenOption == true)
+                {
+                    frame.Insert_frameInfoForScreen_MaterialList(Material_List); // add another frame
+                }
+
+
                 if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
