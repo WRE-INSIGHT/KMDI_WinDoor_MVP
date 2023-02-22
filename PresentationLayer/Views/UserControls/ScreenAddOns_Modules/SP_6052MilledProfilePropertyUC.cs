@@ -18,6 +18,9 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void SP_6052MilledProfilePropertyUC_Load(object sender, EventArgs e)
         {
+            nud_6052MilledProfile.Maximum = decimal.MaxValue;
+            nud_6052MilledProfileQty.Maximum = decimal.MaxValue;
+
             EventHelpers.RaiseEvent(sender, SP6052MilledProfilePropertyUCLoadEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

@@ -561,6 +561,33 @@ namespace ModelLayer.Model.Quotation.Screen
         pvc0505Price,
         pvc1067Price,
 
+        #region Plisse AddOns
+        pvc1067withreinforcementPriceLinearMeter,
+        milledprofile6040PriceLinearMeter,
+        landCoverPriceLinearMeter,
+
+        pvc1067withreinPrice,
+        milledprofile6040Price,
+        landCoverPrice,
+        #endregion
+
+        #region Maxxy Addones
+            milled373or374PricePerLinearMeter,
+            milled373or374Price,
+        #endregion
+
+        #region built in Addons
+            milled1385profilePricePerLinearMeter,
+            milled6052profilePricePerLinearMeter,
+
+            milled1385Price,
+            milled6052Price,
+        #endregion
+
+        #region centerclosure
+            LatchkitPrice = 1500,
+            IntermediatePartPrice = 800,
+        #endregion
 
         basicMats,
         WasteCost,
@@ -1504,23 +1531,41 @@ namespace ModelLayer.Model.Quotation.Screen
             {
                 pvc1067PriceLinearMeter = 300;
                 pvc0505PricePerLinearMeter = 420;
+
+                pvc1067withreinforcementPriceLinearMeter = 410;
+                milledprofile6040PriceLinearMeter = 325;
+                landCoverPriceLinearMeter = 560;
+
+                milled373or374PricePerLinearMeter = 150;
+
+                milled1385profilePricePerLinearMeter = 243;
+                milled6052profilePricePerLinearMeter = 400;
             }
             else if (Screen_BaseColor == Base_Color._DarkBrown)
             {
                 pvc1067PriceLinearMeter = 495;
                 pvc0505PricePerLinearMeter = 735;
+
+                pvc1067withreinforcementPriceLinearMeter = 660;
+                milledprofile6040PriceLinearMeter = 500;
+                landCoverPriceLinearMeter = 745;
+
+                milled373or374PricePerLinearMeter = 220;
+
+                milled1385profilePricePerLinearMeter = 600;
+                milled6052profilePricePerLinearMeter = 590;
             }
 
             #endregion
 
             #region screen default quantity & discount 
 
-            if(Screen_Quantity == 0)
+            if (Screen_Quantity == 0)
             {
                 Screen_Quantity = 1;
             }
 
-            if(DiscountPercentage == 0)
+            if (DiscountPercentage == 0)
             {
                 DiscountPercentage = 0.3m;
             }
@@ -4133,7 +4178,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     }
                     else if (Freedom_ScreenType == Freedom_ScreenType._double)
                     {
-                        if(Freedom_ScreenSize == Freedom_ScreenSize._80mm)
+                        if (Freedom_ScreenSize == Freedom_ScreenSize._80mm)
                         {
                             #region Double 80 mm 
                             if (Screen_Height <= 2200m)
@@ -5694,7 +5739,7 @@ namespace ModelLayer.Model.Quotation.Screen
                             }
                             #endregion
                         }
-            
+
                     }
 
                     Freedom_MeshUp = ((12m * Screen_Width) / 1000m) * (Screen_Height / 1000m);
@@ -5725,6 +5770,10 @@ namespace ModelLayer.Model.Quotation.Screen
                     #endregion                               
                 }
 
+
+                #region Screen AddOns
+
+                #region roll up Screen
                 if (Screen_PVCVisibility == true &&
                     Screen_0505Width != 0 &&
                     Screen_1067Height != 0 &&
@@ -5734,6 +5783,64 @@ namespace ModelLayer.Model.Quotation.Screen
                     pvc0505Price = ((Screen_0505Width * Screen_0505Qty) / 1000m) * pvc0505PricePerLinearMeter * Screen_Factor;
                     pvc1067Price = ((Screen_1067Height * Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * Screen_Factor;
                 }
+                #endregion
+
+                #region Plisse Screen
+                if(Screen_1067PVCboxVisibility == true &&
+                    Screen_1067PVCbox != 0 &&
+                    Screen_1067PVCboxQty != 0)
+                   
+                {
+                    pvc1067withreinPrice = ((Screen_1067PVCbox * Screen_1067PVCboxQty) / 1000m) * pvc1067withreinforcementPriceLinearMeter * Screen_Factor;
+                }
+                else if (Screen_6040MilledProfileVisibility == true &&
+                    Screen_6040MilledProfile != 0 &&
+                    Screen_6040MilledProfileQty != 0)
+                {
+                    milledprofile6040Price = ((Screen_6040MilledProfile * Screen_6040MilledProfileQty) / 1000m) * milledprofile6040PriceLinearMeter * Screen_Factor;
+                }
+                #endregion
+
+                #region Maxxy Screen
+
+                if(Screen_373or374MilledProfileVisibility == true &&
+                    Screen_373or374MilledProfile != 0 && 
+                    Screen_373or374MilledProfileQty != 0)
+                {
+                    milled373or374Price = ((Screen_373or374MilledProfile * Screen_373or374MilledProfileQty) / 1000m) * milled373or374PricePerLinearMeter * Screen_Factor;
+
+                }
+
+                #endregion
+
+                #region Built in sideroll
+                
+                if(Screen_1385MilledProfileVisibility == true && 
+                   Screen_1385MilledProfile != 0 &&
+                   Screen_1385MilledProfileQty != 0)
+                {
+                    milled1385Price = ((Screen_1385MilledProfile * Screen_1385MilledProfileQty) / 1000m) * milled1385profilePricePerLinearMeter * Screen_Factor;
+
+                }
+                else if(Screen_6052MilledProfileVisibility == true &&
+                        Screen_6052MilledProfile != 0 &&
+                        Screen_6052MilledProfileQty != 0)
+                {
+                    milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * Screen_Factor;
+
+                }
+                #endregion
+
+                #region center closure
+
+                if(Screen_CenterClosureVisibility == true && Screen_CenterClosureVisibilityOption == true)
+                {
+
+                }
+
+                #endregion
+
+                #endregion
 
                 decimal RollUpAdditional = TotalRollUpCostingMaterials - RollUpCostingMaterials;
 
@@ -5763,7 +5870,9 @@ namespace ModelLayer.Model.Quotation.Screen
                                     OverheadCost) * 0.05m;
 
                 AddOnsPrice = pvc0505Price +
-                              pvc1067Price;
+                              pvc1067Price +
+                              pvc1067withreinPrice +
+                              milledprofile6040Price;
 
                 TotalPrice = TotalRollUpCostingMaterials +
                              TotalPlisseCostingMaterials +
@@ -5790,17 +5899,21 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 #region Screen Unit Price & TotalAmount
 
-                if (Screen_Types == ScreenType._Magnum)
+                if (Screen_Types == ScreenType._Magnum || 
+                    Screen_Types == ScreenType._Maxxy  ||
+                    Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = (Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) * Screen_Set;
-                    }                 
+                        Screen_UnitPrice = ((Math.Ceiling(Magnum_Screen_tAmount) + 
+                                             Math.Ceiling(Maxxy_Screen_tAmount) +
+                                             Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) * Screen_Set;
+                    }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
-                    
+
                     Discount = Screen_UnitPrice * DiscountPercentage;
                     Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);
-                    
+
                 }
                 else if (Screen_Types == ScreenType._RollUp || Screen_Types == ScreenType._Plisse)
                 {
@@ -5812,18 +5925,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
                     Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
-                }
-                else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
-                {
-                    if (FromCellEndEdit != true)
-                    {
-                        Screen_UnitPrice = (Math.Ceiling(ZG_totalMaterial_Cost) * Screen_Factor) * Screen_Set;
-                    }
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
-
-                    Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
-                }
+                }            
                 else if (Screen_Types == ScreenType._BuiltInSideroll)
                 {
                     if (FromCellEndEdit != true)
@@ -5835,18 +5937,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     Discount = Screen_UnitPrice * DiscountPercentage;
                     Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                 }
-                else if (Screen_Types == ScreenType._Maxxy)
-                {
-                    if (FromCellEndEdit != true)
-                    {
-                        Screen_UnitPrice = (Math.Ceiling(Maxxy_Screen_tAmount) * Screen_Factor) * Screen_Set;
-                    }
-                    Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
-
-                    Discount = Screen_UnitPrice * DiscountPercentage;
-                    Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
-                }
-                else if(Screen_Types == ScreenType._Freedom)
+                else if (Screen_Types == ScreenType._Freedom)
                 {
                     if (FromCellEndEdit != true)
                     {
@@ -6033,6 +6124,7 @@ namespace ModelLayer.Model.Quotation.Screen
             RALColor_TotalCost = 0;
             MillFinish_TotalCost = 0;
             Foiled_TotalCost = 0;
+            Magnum_Screen_tAmount = 0;
             #endregion
 
             #region clearing for Zero Gravity
@@ -6140,6 +6232,14 @@ namespace ModelLayer.Model.Quotation.Screen
             Freedom_tAmount = 0;
 
             #endregion
+
+            pvc1067withreinPrice = 0;
+            milledprofile6040Price = 0;
+            landCoverPrice = 0;
+            milled373or374Price = 0;
+            milled1385Price = 0;
+            milled6052Price = 0;
+
         }
 
 

@@ -56,9 +56,9 @@
             // 
             this.nud_1385MilledProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nud_1385MilledProfile.Location = new System.Drawing.Point(66, 6);
+            this.nud_1385MilledProfile.Location = new System.Drawing.Point(73, 6);
             this.nud_1385MilledProfile.Name = "nud_1385MilledProfile";
-            this.nud_1385MilledProfile.Size = new System.Drawing.Size(68, 20);
+            this.nud_1385MilledProfile.Size = new System.Drawing.Size(61, 20);
             this.nud_1385MilledProfile.TabIndex = 32;
             // 
             // lbl_1385MilledProfile

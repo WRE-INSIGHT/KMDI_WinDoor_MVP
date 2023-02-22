@@ -38,7 +38,7 @@
             // 
             // nud_373or374MilledProfileQty
             // 
-            this.nud_373or374MilledProfileQty.Location = new System.Drawing.Point(164, 7);
+            this.nud_373or374MilledProfileQty.Location = new System.Drawing.Point(116, 26);
             this.nud_373or374MilledProfileQty.Name = "nud_373or374MilledProfileQty";
             this.nud_373or374MilledProfileQty.Size = new System.Drawing.Size(62, 20);
             this.nud_373or374MilledProfileQty.TabIndex = 45;
@@ -46,7 +46,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(137, 11);
+            this.label2.Location = new System.Drawing.Point(85, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 46;
@@ -56,20 +56,19 @@
             // 
             this.nud_373or374MilledProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nud_373or374MilledProfile.Location = new System.Drawing.Point(66, 6);
+            this.nud_373or374MilledProfile.Location = new System.Drawing.Point(8, 26);
             this.nud_373or374MilledProfile.Name = "nud_373or374MilledProfile";
-            this.nud_373or374MilledProfile.Size = new System.Drawing.Size(68, 20);
+            this.nud_373or374MilledProfile.Size = new System.Drawing.Size(46, 20);
             this.nud_373or374MilledProfile.TabIndex = 44;
             // 
             // lbl_373or374MilledProfile
             // 
             this.lbl_373or374MilledProfile.AutoSize = true;
-            this.lbl_373or374MilledProfile.Location = new System.Drawing.Point(1, 4);
+            this.lbl_373or374MilledProfile.Location = new System.Drawing.Point(5, 10);
             this.lbl_373or374MilledProfile.Name = "lbl_373or374MilledProfile";
-            this.lbl_373or374MilledProfile.Size = new System.Drawing.Size(66, 26);
+            this.lbl_373or374MilledProfile.Size = new System.Drawing.Size(128, 13);
             this.lbl_373or374MilledProfile.TabIndex = 43;
-            this.lbl_373or374MilledProfile.Text = "373 or 374 \r\nMilled Profile";
-            this.lbl_373or374MilledProfile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_373or374MilledProfile.Text = "373 or 374 Milled Profiles ";
             // 
             // SP_373or374MilledProfilePropertyUC
             // 
@@ -80,7 +79,7 @@
             this.Controls.Add(this.nud_373or374MilledProfile);
             this.Controls.Add(this.lbl_373or374MilledProfile);
             this.Name = "SP_373or374MilledProfilePropertyUC";
-            this.Size = new System.Drawing.Size(227, 35);
+            this.Size = new System.Drawing.Size(205, 50);
             this.Load += new System.EventHandler(this.SP_373or374MilledProfilePropertyUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfileQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_373or374MilledProfile)).EndInit();

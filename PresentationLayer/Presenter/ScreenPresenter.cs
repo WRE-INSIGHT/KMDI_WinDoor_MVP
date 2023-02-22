@@ -414,6 +414,9 @@ namespace PresentationLayer.Presenter
                         _screenView.getNudPlisseRd().Visible = true;
                         _screenView.getLblPlisseRd().Visible = true;
                     }
+                    _screenModel.Screen_1067PVCboxVisibility = true;
+                    _screenModel.Screen_6040MilledProfileVisibility = true;
+                    _screenModel.Screen_LandCoverVisibility = true;
                 }
                 else if (screenType == ScreenType._Freedom)
                 {
@@ -433,6 +436,7 @@ namespace PresentationLayer.Presenter
                     _screenView.getCmbFreedom().Visible = true;
                     _screenView.getLblPlisseRd().Visible = true;
                     #endregion
+                   
 
                 }
 
@@ -444,17 +448,44 @@ namespace PresentationLayer.Presenter
                 _screenView.getNudPlisseRd().Visible = false;
                 _screenView.getLblPlisseRd().Visible = false;
                 _screenView.getCmbFreedom().Visible = false;
+                _screenModel.Screen_6040MilledProfileVisibility = false;
+                _screenModel.Screen_1067PVCboxVisibility = false;
+                _screenModel.Screen_LandCoverVisibility = false;
+
             }
 
+            if(screenType == ScreenType._BuiltInSideroll)
+            {
+                _screenModel.Screen_6052MilledProfileVisibility = true;
+                _screenModel.Screen_1385MilledProfileVisibility = true;
+            }
+            else
+            {
+                _screenModel.Screen_6052MilledProfileVisibility = false;
+                _screenModel.Screen_1385MilledProfileVisibility = false;
+            }
 
             if (screenType == ScreenType._RollUp)
             {
                 _screenModel.SpringLoad_Visibility = true;
+                _screenModel.Screen_PVCVisibility = true;
             }
             else
             {
                 _screenModel.SpringLoad_Visibility = false;
+                _screenModel.Screen_PVCVisibility = false;
+
             }
+
+            if(screenType == ScreenType._Maxxy)
+            {
+                _screenModel.Screen_373or374MilledProfileVisibility = true;
+            }
+            else
+            {
+                _screenModel.Screen_373or374MilledProfileVisibility = false;
+            }
+            
 
             if (screenType == ScreenType._Magnum)
             {
@@ -496,38 +527,43 @@ namespace PresentationLayer.Presenter
             Discounted price [7]
             Discount Percentage [6]
             */
-            var NetPriceTotal =  _mainPresenter.Screen_List.Sum(x => x.Screen_NetPrice);
-            decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
-            Console.WriteLine(DiscountPercentage.ToString());
-            if (_screenDT != null)
+            try
             {
-                foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
+                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                Console.WriteLine(DiscountPercentage.ToString());
+                if (_screenDT != null)
                 {
-                    _dsq.dtScreen.Rows.Add(Datarow.Cells[1].Value ?? string.Empty,
-                                           Datarow.Cells[2].Value ?? string.Empty,
-                                           Datarow.Cells[3].Value ?? string.Empty,
-                                           Datarow.Cells[4].Value ?? string.Empty,
-                                           Datarow.Cells[5].Value ?? 0,
-                                           NetPriceTotal,
-                                           Datarow.Cells[0].Value ?? 0,
-                                           Datarow.Cells[7].Value ?? 0,
-                                           1,
-                                           "",
-                                           Datarow.Cells[6].Value ?? string.Empty,
-                                           "",
-                                           DiscountPercentage
-                                           );
+                    foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
+                    {
+                        _dsq.dtScreen.Rows.Add(Datarow.Cells[1].Value ?? string.Empty,
+                                               Datarow.Cells[2].Value ?? string.Empty,
+                                               Datarow.Cells[3].Value ?? string.Empty,
+                                               Datarow.Cells[4].Value ?? string.Empty,
+                                               Datarow.Cells[5].Value ?? 0,
+                                               NetPriceTotal,
+                                               Datarow.Cells[0].Value ?? 0,
+                                               Datarow.Cells[7].Value ?? 0,
+                                               1,
+                                               "",
+                                               Datarow.Cells[6].Value ?? string.Empty,
+                                               "",
+                                               DiscountPercentage
+                                               );
+                    }
                 }
+                _mainPresenter.printStatus = "ScreenItem";
 
-
-
-
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
             }
-            _mainPresenter.printStatus = "ScreenItem";
+            catch (Exception ex)
+            {
+                MessageBox.Show("Screen List Count is 0: "," ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
-            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
-            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+           
         }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -615,7 +651,6 @@ namespace PresentationLayer.Presenter
             {
                 _freedomScreenType.Add(item);
             }
-
 
 
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);

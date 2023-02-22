@@ -63,7 +63,10 @@ namespace PresentationLayer.Presenter
                 curr_GlassArea,
                 curr_GlassPrice,
                 windoorTotalListPrice = 0m,
-                ScreenTotalListPrice = 0m;
+                ScreenTotalListPrice = 0m,
+                windoorDiscountAverage,
+                ScreenDiscountAverage,
+                screen_Windoor_DiscountAverage;
 
         bool existing = false;
         #endregion
@@ -88,41 +91,69 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
         }
-
+        int divisor = 2;
         private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
         {
             DSQuotation _dtqoute = new DSQuotation();
+            try
+            {            
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {                  
+                    var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
+                    windoorTotalListPrice = +windoorTotalListPrice + price_x_quantity;
+                }
 
-            ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
-            ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
-
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                windoorTotalListCount = _quotationModel.Lst_Windoor.Sum(m => m.WD_quantity);
+                windoorDiscountAverage = (_quotationModel.Lst_Windoor.Sum(x => x.WD_discount) / _quotationModel.Lst_Windoor.Sum(y => y.WD_quantity)) / 100;
+            }
+            catch (Exception ex)
             {
-                windoorTotalListCount = +windoorTotalListCount + wdm.WD_quantity;
-                var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
-                windoorTotalListPrice = +windoorTotalListPrice + price_x_quantity;
+                Console.WriteLine("Error in windoormodel lst_windoor " + this + " " + ex.Message);
+                divisor = 1;
             }
 
-            //Console.WriteLine("");
-            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
-            //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
-            //Console.WriteLine("");
-            //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
-            //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
-            //Console.WriteLine("");
+            try
+            {
+                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
+                ScreenDiscountAverage = (Convert.ToDecimal(_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / ScreenTotalListCount) / 100;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in screenmodel " + this + " " + ex.Message);
+                divisor = 1;
+            }
+                     
+                screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
 
-            _dtqoute.dtContractSummary.Rows.Add(
-                                                windoorTotalListCount,
-                                                windoorTotalListPrice,
-                                                ScreenTotalListCount,
-                                                ScreenTotalListPrice
-                                                );
+                Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
+                Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
+                Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
+                //Console.WriteLine("");
+                //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
+                //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
+                //Console.WriteLine("");
+                //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
+                //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
+                //Console.WriteLine("");
 
-            _mainPresenter.printStatus = "ContractSummary";
+                _dtqoute.dtContractSummary.Rows.Add(
+                                                    windoorTotalListCount,
+                                                    windoorTotalListPrice,
+                                                    ScreenTotalListCount,
+                                                    ScreenTotalListPrice,
+                                                    screen_Windoor_DiscountAverage
+                                                    );
 
-            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
-            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
-            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                windoorTotalListPrice = 0;
+                _mainPresenter.printStatus = "ContractSummary";
+
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
+                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+
+
+       
 
         }
 
@@ -171,7 +202,7 @@ namespace PresentationLayer.Presenter
                                     curr_GlassLoc = lstQuoteUC.GetiQuoteItemListUC().ItemName;
                                     curr_GlassDesc = pnl.Panel_GlassThicknessDesc;
                                     curr_GlassPrice = Math.Round((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) + ((pnlGlassArea * pnl.Panel_GlassPricePerSqrMeter) * _quotationModel.PricingFactor), 2);
-                                    curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0,2));
+                                    curr_IntDescription = Convert.ToInt32(curr_GlassDesc.Substring(0, 2));
 
                                     if (prev_GlassItemNo != 0)
                                     {
@@ -235,7 +266,7 @@ namespace PresentationLayer.Presenter
                                                     GlassLocation = prev_GlassLoc,
                                                     GlassDescription = prev_GlassDesc,
                                                     GlassPrice = prev_GlassPrice,
-                                                    IntDesc = prev_IntDescription                                                   
+                                                    IntDesc = prev_IntDescription
 
                                                 });
                                             }
@@ -422,9 +453,9 @@ namespace PresentationLayer.Presenter
             #endregion
 
             #region print glassrdlclist        
-            
+
             List<GlassRDLC> sorted = _lstGlassSummary.OrderBy(x => x.IntDesc)
-                                                     .ThenBy(x => x.GlassItemNo)                                                                                                           
+                                                     .ThenBy(x => x.GlassItemNo)
                                                      .ToList();
             foreach (var item in sorted)
             {
@@ -444,7 +475,7 @@ namespace PresentationLayer.Presenter
             printGlass.GetPrintGlassSummaryView().GetBindingSource().DataSource = _dsq.dtGlassSummary.DefaultView;
             printGlass.GetPrintGlassSummaryView().ShowGlassSummaryView();
 
-            
+
         }
 
 
@@ -522,7 +553,7 @@ namespace PresentationLayer.Presenter
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-                    
+
 
                 }
             }
@@ -733,9 +764,11 @@ namespace PresentationLayer.Presenter
         public decimal GlassArea { get; set; }
         public decimal GlassPrice { get; set; }
         public int GlassItemNo { get; set; }
-        public int GlassQuantity { get; set; }              
-        public int IntDesc { get; set; }          
-        
+        public int GlassQuantity { get; set; }
+        public int IntDesc { get; set; }
+
     }
+
+
 
 }

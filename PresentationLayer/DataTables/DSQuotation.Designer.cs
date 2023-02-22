@@ -1525,6 +1525,8 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtScreenListPrice;
             
+            private global::System.Data.DataColumn columndtDiscountAverage;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtContractSummaryDataTable() {
@@ -1592,6 +1594,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtDiscountAverageColumn {
+                get {
+                    return this.columndtDiscountAverage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1627,13 +1637,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtContractSummaryRow AdddtContractSummaryRow(int dtWindoorListCount, decimal dtWindoorListPrice, int dtScreenListCount, decimal dtScreenListPrice) {
+            public dtContractSummaryRow AdddtContractSummaryRow(int dtWindoorListCount, decimal dtWindoorListPrice, int dtScreenListCount, decimal dtScreenListPrice, decimal dtDiscountAverage) {
                 dtContractSummaryRow rowdtContractSummaryRow = ((dtContractSummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtWindoorListCount,
                         dtWindoorListPrice,
                         dtScreenListCount,
-                        dtScreenListPrice};
+                        dtScreenListPrice,
+                        dtDiscountAverage};
                 rowdtContractSummaryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtContractSummaryRow);
                 return rowdtContractSummaryRow;
@@ -1660,6 +1671,7 @@ namespace PresentationLayer.DataTables {
                 this.columndtWindoorListPrice = base.Columns["dtWindoorListPrice"];
                 this.columndtScreenListCount = base.Columns["dtScreenListCount"];
                 this.columndtScreenListPrice = base.Columns["dtScreenListPrice"];
+                this.columndtDiscountAverage = base.Columns["dtDiscountAverage"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1673,6 +1685,8 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtScreenListCount);
                 this.columndtScreenListPrice = new global::System.Data.DataColumn("dtScreenListPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtScreenListPrice);
+                this.columndtDiscountAverage = new global::System.Data.DataColumn("dtDiscountAverage", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtDiscountAverage);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2794,6 +2808,22 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal dtDiscountAverage {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtContractSummary.dtDiscountAverageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtDiscountAverage\' in table \'dtContractSummary\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtContractSummary.dtDiscountAverageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsdtWindoorListCountNull() {
                 return this.IsNull(this.tabledtContractSummary.dtWindoorListCountColumn);
             }
@@ -2838,6 +2868,18 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdtScreenListPriceNull() {
                 this[this.tabledtContractSummary.dtScreenListPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtDiscountAverageNull() {
+                return this.IsNull(this.tabledtContractSummary.dtDiscountAverageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtDiscountAverageNull() {
+                this[this.tabledtContractSummary.dtDiscountAverageColumn] = global::System.Convert.DBNull;
             }
         }
         

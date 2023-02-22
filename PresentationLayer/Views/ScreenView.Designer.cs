@@ -267,6 +267,7 @@
             // 
             // pnl_addOns
             // 
+            this.pnl_addOns.BackColor = System.Drawing.Color.Transparent;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 315);
             this.pnl_addOns.Name = "pnl_addOns";
             this.pnl_addOns.Size = new System.Drawing.Size(227, 232);
@@ -295,9 +296,10 @@
             this.panel5.Controls.Add(this.lbl_ScreenHeight);
             this.panel5.Controls.Add(this.lbl_ScreenWidth);
             this.panel5.Controls.Add(this.label4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 316);
+            this.panel5.Size = new System.Drawing.Size(227, 547);
             this.panel5.TabIndex = 67;
             // 
             // cmb_freedomSize
@@ -541,7 +543,7 @@
             this.ClientSize = new System.Drawing.Size(1033, 574);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(840, 527);
             this.Name = "ScreenView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

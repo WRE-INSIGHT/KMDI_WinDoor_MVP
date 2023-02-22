@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_UniversalLabel = new System.Windows.Forms.Label();
+            this.chkbox_show = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.rtbox_Body = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -42,12 +44,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
+            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txt_oftexpenses);
+            this.panel1.Controls.Add(this.lbl_UniversalLabel);
+            this.panel1.Controls.Add(this.chkbox_show);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.rtbox_Body);
             this.panel1.Controls.Add(this.label6);
@@ -63,6 +69,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 137);
             this.panel1.TabIndex = 2;
+            // 
+            // lbl_UniversalLabel
+            // 
+            this.lbl_UniversalLabel.AutoSize = true;
+            this.lbl_UniversalLabel.Location = new System.Drawing.Point(34, 59);
+            this.lbl_UniversalLabel.Name = "lbl_UniversalLabel";
+            this.lbl_UniversalLabel.Size = new System.Drawing.Size(106, 19);
+            this.lbl_UniversalLabel.TabIndex = 16;
+            this.lbl_UniversalLabel.Text = "For Screen Only";
+            // 
+            // chkbox_show
+            // 
+            this.chkbox_show.AutoSize = true;
+            this.chkbox_show.Checked = true;
+            this.chkbox_show.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbox_show.Location = new System.Drawing.Point(38, 81);
+            this.chkbox_show.Name = "chkbox_show";
+            this.chkbox_show.Size = new System.Drawing.Size(159, 23);
+            this.chkbox_show.TabIndex = 15;
+            this.chkbox_show.Text = "Screen Contract Page";
+            this.chkbox_show.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.chkbox_show.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -163,6 +191,13 @@
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
             // 
+            // txt_oftexpenses
+            // 
+            this.txt_oftexpenses.Location = new System.Drawing.Point(38, 106);
+            this.txt_oftexpenses.Name = "txt_oftexpenses";
+            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
+            this.txt_oftexpenses.TabIndex = 17;
+            // 
             // PrintQuoteView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,5 +234,8 @@
         private System.Windows.Forms.Label label4;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         public System.Windows.Forms.BindingSource BSQuotation;
+        private System.Windows.Forms.CheckBox chkbox_show;
+        private System.Windows.Forms.Label lbl_UniversalLabel;
+        private System.Windows.Forms.TextBox txt_oftexpenses;
     }
 }
