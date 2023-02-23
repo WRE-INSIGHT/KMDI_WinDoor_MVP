@@ -21,6 +21,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFP_SlidingRailsPropertyUCPresenter _fp_slidingRailsPropertyUCPresenter;
         private IFP_FrameConnectionTypePropertyUCPresenter _fp_frameConnectionTypePropertyUCPresenter;
         private IFP_TrackProfilePropertyUCPresenter _fp_TrackProfilePropertyUCPresenter;
+        private IFP_ScreenPropertyUCPresenter _fp_ScreenPropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -35,7 +36,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IFP_BottomFramePropertyUCPresenter fp_botFramePropertyUCP,
                                           IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter,
                                           IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter,
-                                          IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter)
+                                          IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter,
+                                          IFP_ScreenPropertyUCPresenter fp_ScreenPropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
@@ -43,6 +45,7 @@ namespace PresentationLayer.Presenter.UserControls
             _fp_slidingRailsPropertyUCPresenter = fp_slidingRailsPropertyUCPresenter;
             _fp_frameConnectionTypePropertyUCPresenter = fp_frameConnectionTypePropertyUCPresenter;
             _fp_TrackProfilePropertyUCPresenter = fp_TrackProfilePropertyUCPresenter;
+            _fp_ScreenPropertyUCPresenter = fp_ScreenPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -86,6 +89,21 @@ namespace PresentationLayer.Presenter.UserControls
                         //  RailsAdditionalHt = false;
                     }
 
+                    if (_frameModel.Frame_ScreenVisibility == false)
+                    {
+                        _frameModel.Frame_ScreenVisibility = true;
+                        if (_frameModel.Frame_ScreenOption == true)
+                        {
+                            _frameModel.FrameProp_Height += constants.frame_ScreenProperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenProperty_PanelHeight);
+                        }
+                        else if (_frameModel.Frame_ScreenOption == false)
+                        {
+                            _frameModel.FrameProp_Height += constants.frame_ScreenHeightProperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+                        }
+                    }
+
                     if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                     {
                         if (_frameModel.Frame_ConnectionTypeVisibility == true)
@@ -102,6 +120,22 @@ namespace PresentationLayer.Presenter.UserControls
                             _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
                             _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
                         }
+
+                        //if (_frameModel.Frame_ScreenVisibility == true &&
+                        //    _frameModel.Frame_Type == Frame_Padding.Door)
+                        //{
+                        //    _frameModel.Frame_ScreenVisibility = false;
+                        //    if (_frameModel.Frame_ScreenOption == true)
+                        //    {
+                        //        _frameModel.FrameProp_Height -= constants.frame_ScreenProperty_PanelHeight;
+                        //        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ScreenProperty_PanelHeight);
+                        //    }
+                        //    else if (_frameModel.Frame_ScreenOption == false)
+                        //    {
+                        //        _frameModel.FrameProp_Height -= constants.frame_ScreenHeightProperty_PanelHeight;
+                        //        _framePropertiesUC.AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
+                        //    }
+                        //}
                     }
                     else if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                     {
@@ -118,9 +152,9 @@ namespace PresentationLayer.Presenter.UserControls
                             _frameModel.Frame_TrackProfileArtNoVisibility = true;
                             _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
                             _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
-                        }
+                        } 
                     }
-                      
+                    #region old algo 
                     //if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
                     //{
                     //    _frameModel.Frame_ConnectionTypeVisibility = true;
@@ -141,8 +175,9 @@ namespace PresentationLayer.Presenter.UserControls
                     //    _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
                     //    _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
                     //}
-                     
+
                     //RailsDeductHt = true;
+                    #endregion
                 }
                 else if (!(_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6050 ||
                            _frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052))
@@ -171,6 +206,22 @@ namespace PresentationLayer.Presenter.UserControls
                         _frameModel.Frame_TrackProfileArtNoVisibility = false;
                         _frameModel.FrameProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
                         _framePropertiesUC.AddHT_PanelBody(-constants.frame_TrackProfileproperty_PanelHeight);
+                    }
+
+                    if (_frameModel.Frame_ScreenVisibility == true &&
+                       _frameModel.Frame_Type == Frame_Padding.Door)
+                    {
+                        _frameModel.Frame_ScreenVisibility = false;
+                        if (_frameModel.Frame_ScreenOption == true)
+                        {
+                            _frameModel.FrameProp_Height -= constants.frame_ScreenProperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_ScreenProperty_PanelHeight);
+                        }
+                        else if (_frameModel.Frame_ScreenOption == false)
+                        {
+                            _frameModel.FrameProp_Height -= constants.frame_ScreenHeightProperty_PanelHeight;
+                            _framePropertiesUC.AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
+                        }
                     }
                 }
 
@@ -281,7 +332,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                 }
 
-             
+
                 curr_rbtnText = rbtn.Text;
             }
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
@@ -355,11 +406,11 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (_frameModel.Frame_Type == Frame_Padding.Door)
             {
-             
+
                 if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                 {
                     _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-                   
+
                 }
                 else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                 {
@@ -399,9 +450,12 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TrackProfilePropUC);
             TrackProfilePropUC.Dock = DockStyle.Top;
             TrackProfilePropUC.BringToFront();
-            //_frameModel.Frame_TrackProfileArtNoVisibility = true;
-            //_frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
-            //_framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
+
+            IFP_ScreenPropertyUCPresenter screen = _fp_ScreenPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter,this);
+            UserControl ScreenPropUC = (UserControl)screen.GetScreenPropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
+            ScreenPropUC.Dock = DockStyle.Top;
+            ScreenPropUC.BringToFront();
 
 
             //if (_frameModel.Frame_Type == Frame_Padding.Door)

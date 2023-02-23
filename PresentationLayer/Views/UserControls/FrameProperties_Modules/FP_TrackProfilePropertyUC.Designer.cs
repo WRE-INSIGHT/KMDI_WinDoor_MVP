@@ -53,6 +53,7 @@
             this.cmb_TrackProfile.Name = "cmb_TrackProfile";
             this.cmb_TrackProfile.Size = new System.Drawing.Size(86, 21);
             this.cmb_TrackProfile.TabIndex = 21;
+            this.cmb_TrackProfile.SelectedValueChanged += new System.EventHandler(this.cmb_TrackProfile_SelectedValueChanged);
             // 
             // FP_TrackProfilePropertyUC
             // 
