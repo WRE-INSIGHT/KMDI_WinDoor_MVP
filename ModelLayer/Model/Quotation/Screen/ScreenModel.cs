@@ -587,6 +587,9 @@ namespace ModelLayer.Model.Quotation.Screen
         #region centerclosure
             LatchkitPrice = 1500,
             IntermediatePartPrice = 800,
+
+            LatchkitTotal, 
+            IntermediatePartTotal,
         #endregion
 
         basicMats,
@@ -5784,23 +5787,20 @@ namespace ModelLayer.Model.Quotation.Screen
                     pvc1067Price = ((Screen_1067Height * Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * Screen_Factor;
                 }
                 #endregion
-
                 #region Plisse Screen
                 if(Screen_1067PVCboxVisibility == true &&
                     Screen_1067PVCbox != 0 &&
-                    Screen_1067PVCboxQty != 0)
-                   
+                    Screen_1067PVCboxQty != 0)                   
                 {
                     pvc1067withreinPrice = ((Screen_1067PVCbox * Screen_1067PVCboxQty) / 1000m) * pvc1067withreinforcementPriceLinearMeter * Screen_Factor;
                 }
-                else if (Screen_6040MilledProfileVisibility == true &&
+                if (Screen_6040MilledProfileVisibility == true &&
                     Screen_6040MilledProfile != 0 &&
                     Screen_6040MilledProfileQty != 0)
                 {
                     milledprofile6040Price = ((Screen_6040MilledProfile * Screen_6040MilledProfileQty) / 1000m) * milledprofile6040PriceLinearMeter * Screen_Factor;
                 }
                 #endregion
-
                 #region Maxxy Screen
 
                 if(Screen_373or374MilledProfileVisibility == true &&
@@ -5808,11 +5808,9 @@ namespace ModelLayer.Model.Quotation.Screen
                     Screen_373or374MilledProfileQty != 0)
                 {
                     milled373or374Price = ((Screen_373or374MilledProfile * Screen_373or374MilledProfileQty) / 1000m) * milled373or374PricePerLinearMeter * Screen_Factor;
-
                 }
 
                 #endregion
-
                 #region Built in sideroll
                 
                 if(Screen_1385MilledProfileVisibility == true && 
@@ -5820,22 +5818,20 @@ namespace ModelLayer.Model.Quotation.Screen
                    Screen_1385MilledProfileQty != 0)
                 {
                     milled1385Price = ((Screen_1385MilledProfile * Screen_1385MilledProfileQty) / 1000m) * milled1385profilePricePerLinearMeter * Screen_Factor;
-
                 }
-                else if(Screen_6052MilledProfileVisibility == true &&
+                if(Screen_6052MilledProfileVisibility == true &&
                         Screen_6052MilledProfile != 0 &&
                         Screen_6052MilledProfileQty != 0)
                 {
                     milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * Screen_Factor;
-
                 }
                 #endregion
-
                 #region center closure
 
                 if(Screen_CenterClosureVisibility == true && Screen_CenterClosureVisibilityOption == true)
                 {
-
+                    LatchkitTotal = (LatchkitPrice * Screen_LatchKitQty) * Screen_Factor;
+                    IntermediatePartTotal = (IntermediatePartPrice * Screen_IntermediatePartQty) * Screen_Factor;
                 }
 
                 #endregion
@@ -5905,9 +5901,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = ((Math.Ceiling(Magnum_Screen_tAmount) + 
+                        Screen_UnitPrice = (((Math.Ceiling(Magnum_Screen_tAmount) + 
                                              Math.Ceiling(Maxxy_Screen_tAmount) +
-                                             Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) * Screen_Set;
+                                             Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) + milled373or374Price ) * Screen_Set;
                     }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
@@ -5930,7 +5926,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * Screen_Set;
+                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2)  * (Screen_Factor + .6m)) + milled1385Price + milled6052Price) * Screen_Set;
                     }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 

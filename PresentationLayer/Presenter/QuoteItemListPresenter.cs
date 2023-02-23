@@ -45,7 +45,8 @@ namespace PresentationLayer.Presenter
             GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0,
             windoorTotalListCount = 0,
-            ScreenTotalListCount = 0;
+            ScreenTotalListCount = 0,
+            divisor = 2;
 
         string prev_GlassSize,
                prev_GlassRef,
@@ -91,7 +92,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
         }
-        int divisor = 2;
+       
         private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
         {
             DSQuotation _dtqoute = new DSQuotation();
@@ -148,12 +149,9 @@ namespace PresentationLayer.Presenter
                 windoorTotalListPrice = 0;
                 _mainPresenter.printStatus = "ContractSummary";
 
-                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
+                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
                 printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-
-
-       
 
         }
 
@@ -684,7 +682,7 @@ namespace PresentationLayer.Presenter
             }
             _mainPresenter.printStatus = "WinDoorItems";
 
-            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter);
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
             printQuote.GetPrintQuoteView().ShowPrintQuoteView();
         }
