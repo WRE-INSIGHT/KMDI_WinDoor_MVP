@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -6,6 +7,8 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
@@ -19,6 +22,7 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IMainPresenter _mainPresenter;
+        private IQuotationModel _quotationModel;
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
@@ -138,8 +142,9 @@ namespace PresentationLayer.Presenter
                 ReportDataSource RDSQuote = new ReportDataSource();
                 RDSQuote.Name = "DataSet1";
                 RDSQuote.Value = _printQuoteView.GetBindingSource();
-
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
+
+
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
                 if (_mainPresenter.printStatus== "WinDoorItems")
                 {
@@ -177,16 +182,46 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[8] = new ReportParameter("ListScreen", "False");
                     }
-
+                    
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-
+                                       
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
-                
+
+                    #region seperate Image 
+                    try
+                    {
+                        for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                        {
+                            MemoryStream mstream = new MemoryStream();
+                            MemoryStream mstream2 = new MemoryStream();
+                            Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                                  topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+
+                            itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+                            if (topView != null)
+                            {
+                                topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                            }
+
+                            byte[] arrimageForItemImage = mstream.ToArray();
+                            byte[] arrimageForTopView = mstream2.ToArray();
+
+                            string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                            string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
+                    }
+                    #endregion
+
                     ReportParameter[] RParam = new ReportParameter[6];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
@@ -197,7 +232,7 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                                       
                 }
-                else
+                else if(_mainPresenter.printStatus == "ContractSummary")
                 {            
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
@@ -214,14 +249,13 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
-
+                   
                 }
-                
+
                 _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
                 _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
                 _printQuoteView.GetReportViewer().ZoomPercent = 75;
-                _printQuoteView.GetReportViewer().RefreshReport();
-
+                _printQuoteView.GetReportViewer().RefreshReport();                
 
             }
             catch (Exception ex)
@@ -230,6 +264,8 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        
+        
         public IPrintQuoteView GetPrintQuoteView()
         {
             return _printQuoteView;
@@ -238,7 +274,9 @@ namespace PresentationLayer.Presenter
 
         public IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
                                                    IQuoteItemListPresenter quoteItemListPresenter,
-                                                   IMainPresenter mainPresenter)
+                                                   IMainPresenter mainPresenter,
+                                                   IQuotationModel quotationModel
+                                                   )
         {
             unityC
                 .RegisterType<IPrintQuoteView, PrintQuoteView>()
@@ -247,6 +285,7 @@ namespace PresentationLayer.Presenter
             printQuote._unityC = unityC;
             printQuote._quoteItemListPresenter = quoteItemListPresenter;
             printQuote._mainPresenter = mainPresenter;
+            printQuote._quotationModel = quotationModel;
 
 
             return printQuote;

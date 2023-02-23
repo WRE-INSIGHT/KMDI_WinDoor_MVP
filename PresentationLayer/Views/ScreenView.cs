@@ -108,7 +108,6 @@ namespace PresentationLayer.Views
         public event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
         public event EventHandler CellEndEditEventRaised;
         
-
         public void ShowScreemView()
         {
             this.Show();

@@ -1,4 +1,5 @@
-﻿using PresentationLayer.Views;
+﻿using ModelLayer.Model.Quotation;
+using PresentationLayer.Views;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -7,7 +8,8 @@ namespace PresentationLayer.Presenter
     {
         IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
                                             IQuoteItemListPresenter quoteItemListPresenter,
-                                            IMainPresenter mainPresenter); //
+                                            IMainPresenter mainPresenter,
+                                            IQuotationModel _quotationModel); //
         IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
                                             IMainPresenter mainPresenter);
 
