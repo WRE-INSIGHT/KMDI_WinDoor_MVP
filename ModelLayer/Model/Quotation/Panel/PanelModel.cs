@@ -3987,7 +3987,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         else
                         {
                             pnl_ht = (int)(Panel_ParentMultiPanelModel.MPanel_HeightToBind - (20 * Panel_Zoom));
-                           
+
                         }
                     }
                     else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
@@ -5385,6 +5385,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SashHeight = Panel_DisplayHeight - (sash_deduct * 2) + 5;
                     Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
+                    Panel_GlassWidth = Panel_SashWidth - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
+                    Panel_GlassHeight = Panel_SashHeight - 5 - (glass_deduct * 2) - 6;
+                    Panel_GlassHeightDecimal = Panel_SashHeightDecimal;
                 }
                 //else if (Panel_ParentFrameModel.Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
                 //{

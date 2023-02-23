@@ -39,14 +39,14 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
             public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
 
-            
+
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class FrameReinfForPremi_ArticleNo : Enumeration<FrameReinfForPremi_ArticleNo>
         {
-            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-115");
+            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-155");
             public static readonly FrameReinfForPremi_ArticleNo _TV107 = new FrameReinfForPremi_ArticleNo(1, "T-V107");
 
             private FrameReinfForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
