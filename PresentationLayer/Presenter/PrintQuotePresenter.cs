@@ -47,6 +47,7 @@ namespace PresentationLayer.Presenter
                 foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
                 {
                     Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
+
                     foreach (IFrameModel frm in wdm.lst_frame)
                     {
                         foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
@@ -65,6 +66,7 @@ namespace PresentationLayer.Presenter
 
                 }
 
+               
                 int GlassCount = 0;
                 string GlassThickness = "";
                 var q = from x in Lst_Panel
@@ -192,43 +194,25 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
 
-                    #region seperate Image 
-                    try
-                    {
-                        for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-                        {
-                            MemoryStream mstream = new MemoryStream();
-                            MemoryStream mstream2 = new MemoryStream();
-                            Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
-                                  topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
-
-                            itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-
-                            if (topView != null)
-                            {
-                                topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
-                            }
-
-                            byte[] arrimageForItemImage = mstream.ToArray();
-                            byte[] arrimageForTopView = mstream2.ToArray();
-
-                            string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
-                            string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
-                    }
-                    #endregion
-
-                    ReportParameter[] RParam = new ReportParameter[6];
+                    ReportParameter[] RParam = new ReportParameter[8];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
                     RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[6] = new ReportParameter("ShowItemImage", "True");
+                    }
+                    else
+                    {
+                        RParam[6] = new ReportParameter("ShowItemImage", "False");
+                    }
+
+                    RParam[7] = new ReportParameter("ItemNumber", "4");
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                                       
                 }

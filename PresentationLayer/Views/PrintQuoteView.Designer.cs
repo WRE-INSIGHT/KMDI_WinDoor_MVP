@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
             this.lbl_UniversalLabel = new System.Windows.Forms.Label();
             this.chkbox_show = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
-            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +69,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 137);
             this.panel1.TabIndex = 2;
+            // 
+            // txt_oftexpenses
+            // 
+            this.txt_oftexpenses.Location = new System.Drawing.Point(38, 106);
+            this.txt_oftexpenses.Name = "txt_oftexpenses";
+            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
+            this.txt_oftexpenses.TabIndex = 17;
             // 
             // lbl_UniversalLabel
             // 
@@ -190,13 +197,6 @@
             // BSQuotation
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
-            // 
-            // txt_oftexpenses
-            // 
-            this.txt_oftexpenses.Location = new System.Drawing.Point(38, 106);
-            this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
-            this.txt_oftexpenses.TabIndex = 17;
             // 
             // PrintQuoteView
             // 

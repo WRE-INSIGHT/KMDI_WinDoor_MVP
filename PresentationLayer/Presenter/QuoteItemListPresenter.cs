@@ -70,6 +70,7 @@ namespace PresentationLayer.Presenter
                 screen_Windoor_DiscountAverage;
 
         bool existing = false;
+        bool showImage;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -522,6 +523,7 @@ namespace PresentationLayer.Presenter
                         DimensionDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n";
                     }
 
+                    
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
@@ -659,9 +661,18 @@ namespace PresentationLayer.Presenter
                     string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
                     string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
-
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
 
+                    if (lstQuoteUC.GetiQuoteItemListUC().showitemMage.Checked == true)
+                    {
+                        showImage = true;
+                    }
+                    else
+                    {
+                        showImage = false;
+                    }
+
+                    Console.WriteLine(showImage.ToString());
                     _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
                     _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
@@ -673,13 +684,16 @@ namespace PresentationLayer.Presenter
                                           lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
-                                          byteToStrForTopView);
+                                          byteToStrForTopView,
+                                          showImage);
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
             }
+                        
             _mainPresenter.printStatus = "WinDoorItems";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
