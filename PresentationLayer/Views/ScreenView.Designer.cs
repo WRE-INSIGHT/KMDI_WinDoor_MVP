@@ -48,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnl_addOns = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.cmb_freedomSize = new System.Windows.Forms.ComboBox();
             this.lbl_plissedRd = new System.Windows.Forms.Label();
             this.nud_plissedRd = new System.Windows.Forms.NumericUpDown();
             this.lbl_Plissé = new System.Windows.Forms.Label();
@@ -119,10 +120,10 @@
             this.dgv_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
-            this.dgv_Screen.ReadOnly = true;
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
+            this.dgv_Screen.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellEndEdit);
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
             // cmsScreen
@@ -173,7 +174,7 @@
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 41;
             this.label2.Text = "Item Number";
-           // 
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -190,6 +191,7 @@
             this.nud_Discount.Size = new System.Drawing.Size(59, 22);
             this.nud_Discount.TabIndex = 39;
             this.nud_Discount.ValueChanged += new System.EventHandler(this.nud_Discount_ValueChanged);
+            this.nud_Discount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Discount_KeyPress);
             // 
             // nud_Quantity
             // 
@@ -203,6 +205,7 @@
             0,
             0});
             this.nud_Quantity.ValueChanged += new System.EventHandler(this.nud_Quantity_ValueChanged);
+            this.nud_Quantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Quantity_KeyPress);
             // 
             // lbl_Quantity
             // 
@@ -212,7 +215,7 @@
             this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
             this.lbl_Quantity.TabIndex = 38;
             this.lbl_Quantity.Text = "Quantity";
-             // 
+            // 
             // txt_windoorID
             // 
             this.txt_windoorID.Location = new System.Drawing.Point(240, 6);
@@ -264,6 +267,7 @@
             // 
             // pnl_addOns
             // 
+            this.pnl_addOns.BackColor = System.Drawing.Color.Transparent;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 315);
             this.pnl_addOns.Name = "pnl_addOns";
             this.pnl_addOns.Size = new System.Drawing.Size(227, 232);
@@ -271,6 +275,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.cmb_freedomSize);
             this.panel5.Controls.Add(this.lbl_plissedRd);
             this.panel5.Controls.Add(this.nud_plissedRd);
             this.panel5.Controls.Add(this.lbl_Plissé);
@@ -291,10 +296,20 @@
             this.panel5.Controls.Add(this.lbl_ScreenHeight);
             this.panel5.Controls.Add(this.lbl_ScreenWidth);
             this.panel5.Controls.Add(this.label4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 316);
+            this.panel5.Size = new System.Drawing.Size(227, 547);
             this.panel5.TabIndex = 67;
+            // 
+            // cmb_freedomSize
+            // 
+            this.cmb_freedomSize.FormattingEnabled = true;
+            this.cmb_freedomSize.Location = new System.Drawing.Point(143, 111);
+            this.cmb_freedomSize.Name = "cmb_freedomSize";
+            this.cmb_freedomSize.Size = new System.Drawing.Size(74, 21);
+            this.cmb_freedomSize.TabIndex = 0;
+            this.cmb_freedomSize.SelectedValueChanged += new System.EventHandler(this.cmb_freedomSize_SelectedValueChanged);
             // 
             // lbl_plissedRd
             // 
@@ -447,6 +462,7 @@
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
             this.nud_Height.TabIndex = 70;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
+            this.nud_Height.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Height_KeyPress);
             // 
             // nud_Width
             // 
@@ -455,6 +471,7 @@
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
             this.nud_Width.TabIndex = 69;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
+            this.nud_Width.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Width_KeyPress);
             // 
             // lbl_ScreenHeight
             // 
@@ -526,7 +543,7 @@
             this.ClientSize = new System.Drawing.Size(1033, 574);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimumSize = new System.Drawing.Size(840, 527);
             this.Name = "ScreenView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -599,5 +616,6 @@
         private System.Windows.Forms.NumericUpDown nud_Discount;
         private System.Windows.Forms.TextBox txt_ItemNum;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmb_freedomSize;
     }
 }

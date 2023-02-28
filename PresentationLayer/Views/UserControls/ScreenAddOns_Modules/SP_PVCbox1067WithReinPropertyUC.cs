@@ -17,6 +17,10 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void SP_PVCbox1067WithReinPropertyUC_Load(object sender, EventArgs e)
         {
+            nud_1067PVCbox.Maximum = decimal.MaxValue;
+            nud_1067PVCboxQty.Maximum = decimal.MaxValue;
+
+
             EventHelpers.RaiseEvent(sender, SPPVCbox1067WithReinPropertyUCLoadEventRaised, e);
         }
 
@@ -28,6 +32,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             nud_1067PVCboxQty.DataBindings.Add(ModelBinding["Screen_1067PVCboxQty"]);
 
         }
+
 
     }
 }

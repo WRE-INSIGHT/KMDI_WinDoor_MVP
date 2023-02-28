@@ -1,4 +1,5 @@
 ﻿using Microsoft.Reporting.WinForms;
+using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
@@ -6,6 +7,8 @@ using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
@@ -19,6 +22,7 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IMainPresenter _mainPresenter;
+        private IQuotationModel _quotationModel;
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
@@ -120,6 +124,7 @@ namespace PresentationLayer.Presenter
                                                     + _mainPresenter.titleLastname
                                                     + ",";
                 _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+                _printQuoteView.QuotationOuofTownExpenses = "50000";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
             }
@@ -137,8 +142,9 @@ namespace PresentationLayer.Presenter
                 ReportDataSource RDSQuote = new ReportDataSource();
                 RDSQuote.Name = "DataSet1";
                 RDSQuote.Value = _printQuoteView.GetBindingSource();
-
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
+
+
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
                 if (_mainPresenter.printStatus== "WinDoorItems")
                 {
@@ -147,25 +153,109 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ScreenItem")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
-
+                }
+                else if (_mainPresenter.printStatus == "ContractSummary")
+                {           
+                    _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
                 }
 
+                if(_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
 
-                ReportParameter[] RParam = new ReportParameter[6];
-                RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
-                RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
-                RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
-                RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
-                RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
-                RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    ReportParameter[] RParam = new ReportParameter[9];
+                    RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                    RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
+                    RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                    RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
+                    RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[7] = new ReportParameter("ASPosition", "Account Executive");
 
+                    if (_printQuoteView.ShowLastPage().Checked)
+                    {
+                        RParam[8] = new ReportParameter("ListScreen", "True");
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("ListScreen", "False");
+                    }
+                    
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                                       
+                }
+                else if (_mainPresenter.printStatus == "WinDoorItems")
+                {
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Visible = false;
+                    _printQuoteView.GetOutofTownExpenses().Visible = false;
 
-                _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                    #region seperate Image 
+                    try
+                    {
+                        for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                        {
+                            MemoryStream mstream = new MemoryStream();
+                            MemoryStream mstream2 = new MemoryStream();
+                            Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                                  topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+
+                            itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+                            if (topView != null)
+                            {
+                                topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                            }
+
+                            byte[] arrimageForItemImage = mstream.ToArray();
+                            byte[] arrimageForTopView = mstream2.ToArray();
+
+                            string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                            string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
+                    }
+                    #endregion
+
+                    ReportParameter[] RParam = new ReportParameter[6];
+                    RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
+                    RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
+                    RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
+                    RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
+                    RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
+                    RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+                                      
+                }
+                else if(_mainPresenter.printStatus == "ContractSummary")
+                {            
+                    _printQuoteView.ShowLastPage().Visible = false;
+                    _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
+                    _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
+                    _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
+                    int oftexpenses = Convert.ToInt32(trimmedamount);
+
+                    ReportParameter[] RParam = new ReportParameter[4];                 
+                    RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[2] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
+                   
+                }
+
                 _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
                 _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
                 _printQuoteView.GetReportViewer().ZoomPercent = 75;
-                _printQuoteView.GetReportViewer().RefreshReport();
-
+                _printQuoteView.GetReportViewer().RefreshReport();                
 
             }
             catch (Exception ex)
@@ -174,6 +264,8 @@ namespace PresentationLayer.Presenter
             }
         }
 
+        
+        
         public IPrintQuoteView GetPrintQuoteView()
         {
             return _printQuoteView;
@@ -182,7 +274,9 @@ namespace PresentationLayer.Presenter
 
         public IPrintQuotePresenter GetNewInstance(IUnityContainer unityC,
                                                    IQuoteItemListPresenter quoteItemListPresenter,
-                                                   IMainPresenter mainPresenter)
+                                                   IMainPresenter mainPresenter,
+                                                   IQuotationModel quotationModel
+                                                   )
         {
             unityC
                 .RegisterType<IPrintQuoteView, PrintQuoteView>()
@@ -191,6 +285,7 @@ namespace PresentationLayer.Presenter
             printQuote._unityC = unityC;
             printQuote._quoteItemListPresenter = quoteItemListPresenter;
             printQuote._mainPresenter = mainPresenter;
+            printQuote._quotationModel = quotationModel;
 
 
             return printQuote;

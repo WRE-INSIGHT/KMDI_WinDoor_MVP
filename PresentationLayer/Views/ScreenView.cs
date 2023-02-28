@@ -61,6 +61,18 @@ namespace PresentationLayer.Views
             }
         }
 
+        public NumericUpDown screen_quantity
+        {
+            get
+            {
+                return nud_Quantity;
+            }
+            set
+            {
+                nud_Quantity.Value = Convert.ToInt32(value);
+            }
+        }
+
         public TextBox screen_itemnumber
         {
             get
@@ -93,7 +105,9 @@ namespace PresentationLayer.Views
         public event EventHandler nudPlisseRdValueChangeEventRaise;
         public event EventHandler nudDiscountValueChangeEventRaised;
         public event EventHandler txtItemNumTextChangeEventRaised;
-
+        public event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
+        public event EventHandler CellEndEditEventRaised;
+        
         public void ShowScreemView()
         {
             this.Show();
@@ -134,6 +148,10 @@ namespace PresentationLayer.Views
             return lbl_plissedRd;
         }
 
+        public ComboBox getCmbFreedom()
+        {
+            return cmb_freedomSize;
+        }
         public TextBox getTxtitemListNumber()
         {
             return txt_ItemNum;
@@ -162,6 +180,14 @@ namespace PresentationLayer.Views
             }
             cmb_PlisséType.DataSource = Plisse;
 
+            List<Freedom_ScreenSize> Freedom = new List<Freedom_ScreenSize>();
+
+            foreach(Freedom_ScreenSize item in Freedom_ScreenSize.GetAll())
+            {
+                Freedom.Add(item);
+            }
+            cmb_freedomSize.DataSource = Freedom;
+                  
 
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
         }
@@ -180,7 +206,6 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
         }
-
 
         private void cmb_ScreenType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -259,10 +284,33 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, txtItemNumTextChangeEventRaised, e);
         }
-
-        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        private void cmb_freedomSize_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            EventHelpers.RaiseEvent(sender, cmbFreedomSizeSelectedValueChangedEventRaised,e);
+        }
+        private void nud_Width_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWidthValueChangedEventRaised, e);
+        }
+        private void nud_Height_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudHeightValueChangedEventRaised, e);
+        }
+        private void dgv_Screen_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, CellEndEditEventRaised, e);
+        }
+        private void nud_Quantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudQuantityValueChangedEventRaised, e);
+        }
+
+        private void nud_Discount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudDiscountValueChangeEventRaised, e);
+        }
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {       
             nud_plissedRd.DataBindings.Add(ModelBinding["PlissedRd_Panels"]);
             rdBtn_Window.DataBindings.Add(ModelBinding["Screen_Types_Window"]);
             rdBtn_Door.DataBindings.Add(ModelBinding["Screen_Types_Door"]);
@@ -277,7 +325,7 @@ namespace PresentationLayer.Views
             nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
             nud_Discount.DataBindings.Add(ModelBinding["DiscountPercentage"]);
             txt_windoorID.DataBindings.Add(ModelBinding["Screen_ItemNumber"]);
-
+            cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
 
         

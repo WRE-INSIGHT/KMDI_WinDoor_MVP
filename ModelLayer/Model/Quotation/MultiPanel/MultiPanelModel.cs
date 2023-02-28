@@ -661,7 +661,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 }
                             }
                         }
-                      
+
                     }
                     else if (MPanel_ParentModel.MPanel_Placement == "Last")
                     {
@@ -1682,7 +1682,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     wd = Convert.ToInt32(MPanel_Width * MPanel_Zoom);
 
                     ht = Convert.ToInt32(MPanel_Height * MPanel_Zoom);
-                  
+
                 }
                 else if (MPanel_Zoom == 1.0f)
                 {
@@ -2386,7 +2386,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 if (MPanel_Type == "Transom")
                 {
-                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_DisplayHeight ),
+                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_DisplayHeight),
                         totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_DisplayHeight);
 
                     int totalDisplayHeight = totalHt_panelModel + totalHt_MpanelModel;
@@ -3766,6 +3766,14 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 {
                     MPanelProp_Height -= constants.panel_property_LouverGlassheightDeduction;
                 }
+                else if (mode == "addTrackProfile")
+                {
+                    MPanelProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
+                }
+                else if (mode == "minusTrackProfile")
+                {
+                    MPanelProp_Height -= constants.frame_TrackProfileproperty_PanelHeight;
+                }
             }
             else if (objtype == "Div")
             {
@@ -4740,7 +4748,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
         }
 
-        
+
         #endregion
 
         public MultiPanelModel(int mpanelID,

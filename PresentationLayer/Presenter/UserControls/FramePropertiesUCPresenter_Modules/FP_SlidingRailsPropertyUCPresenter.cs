@@ -36,6 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _slidingRailsPropertyUC.ThisBinding(CreateBindingDictionary());
+            _frameModel.Frame_SlidingRailsQty = 2;
         }
 
         public IFP_SlidingRailsPropertyUC GetSlidingRailsPropertyUC()
@@ -61,7 +62,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
-            binding.Add("Frame_SlidingRailsQty", new Binding("Text", _frameModel, "Frame_SlidingRailsQty", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Frame_SlidingRailsQty", new Binding("Value", _frameModel, "Frame_SlidingRailsQty", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Frame_SlidingRailsQtyVisibility", new Binding("Visible", _frameModel, "Frame_SlidingRailsQtyVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;

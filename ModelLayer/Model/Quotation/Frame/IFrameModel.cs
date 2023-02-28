@@ -63,6 +63,7 @@ namespace ModelLayer.Model.Quotation.Frame
         FrameReinfForPremi_ArticleNo Frame_ReinfForPremiArtNo { get; set; }
 
         bool Frame_If_InwardMotorizedCasement { get; set; }
+        bool Frame_If_InwardMotorizedSliding { get; set; }
         MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
@@ -70,13 +71,26 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_SlidingRailsQtyVisibility { get; set; }
         FrameConnectionType Frame_ConnectionType { get; set; }
         bool Frame_ConnectionTypeVisibility { get; set; }
+        Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
+        bool Frame_TrackProfileArtNoVisibility { get; set; }
+        TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
+        MeshType Frame_MeshType { get; set; }
+        bool Frame_ScreenVisibility { get; set; }
+        bool Frame_ScreenOption { get; set; }
+        bool Frame_ScreenHeightOption { get; set; }
+        bool Frame_ScreenHeightVisibility { get; set; }
+        int Frame_ScreenFrameHeight { get; set; }
+        bool Frame_ScreenFrameHeightEnable { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
         void Insert_frameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_frameInfoForPremi_MaterialList(DataTable tbl_explosion);
+        void Insert_frameInfoForScreen_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
+        void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
+        void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();
         int Add_MilledFrameWidth_screws4fab();

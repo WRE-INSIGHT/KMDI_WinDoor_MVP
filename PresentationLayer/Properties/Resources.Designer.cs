@@ -253,6 +253,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ExtensionBot1 {
+            get {
+                object obj = ResourceManager.GetObject("ExtensionBot1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ExtensionLeft {
             get {
                 object obj = ResourceManager.GetObject("ExtensionLeft", resourceCulture);
@@ -266,6 +276,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap ExtensionRight {
             get {
                 object obj = ResourceManager.GetObject("ExtensionRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExtensionRight1 {
+            get {
+                object obj = ResourceManager.GetObject("ExtensionRight1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,6 +326,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap FixedPanel2 {
             get {
                 object obj = ResourceManager.GetObject("FixedPanel2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap glass__1_ {
+            get {
+                object obj = ResourceManager.GetObject("glass (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -506,6 +536,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap SlidingPanel {
             get {
                 object obj = ResourceManager.GetObject("SlidingPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Summary_v2 {
+            get {
+                object obj = ResourceManager.GetObject("Summary_v2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

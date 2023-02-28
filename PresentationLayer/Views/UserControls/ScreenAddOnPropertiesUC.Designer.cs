@@ -37,6 +37,7 @@
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.Transparent;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.btn_addMats);
             this.panel5.Controls.Add(this.lbl_addOns);
@@ -68,6 +69,7 @@
             // pnl_addOns
             // 
             this.pnl_addOns.AutoScroll = true;
+            this.pnl_addOns.BackColor = System.Drawing.Color.Transparent;
             this.pnl_addOns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 33);
             this.pnl_addOns.Name = "pnl_addOns";
@@ -78,6 +80,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.pnl_addOns);
             this.Controls.Add(this.panel5);
             this.Name = "ScreenAddOnPropertiesUC";

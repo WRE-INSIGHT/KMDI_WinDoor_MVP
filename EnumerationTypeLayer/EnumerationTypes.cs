@@ -37,13 +37,16 @@ namespace EnumerationTypeLayer
             public static readonly FrameReinf_ArticleNo _V226 = new FrameReinf_ArticleNo(2, "V226"); //G58
             public static readonly FrameReinf_ArticleNo _TV107 = new FrameReinf_ArticleNo(3, "T-V107");
             public static readonly FrameReinf_ArticleNo _TV110 = new FrameReinf_ArticleNo(4, "T-V110");
+            public static readonly FrameReinf_ArticleNo _NA120 = new FrameReinf_ArticleNo(5, "NA120");
+
+
 
             private FrameReinf_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class FrameReinfForPremi_ArticleNo : Enumeration<FrameReinfForPremi_ArticleNo>
         {
-            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-115");
+            public static readonly FrameReinfForPremi_ArticleNo _V115 = new FrameReinfForPremi_ArticleNo(0, "V-155");
             public static readonly FrameReinfForPremi_ArticleNo _TV107 = new FrameReinfForPremi_ArticleNo(1, "T-V107");
 
             private FrameReinfForPremi_ArticleNo(int value, string displayName) : base(value, displayName) { }
@@ -849,8 +852,8 @@ namespace EnumerationTypeLayer
             public static readonly BottomFrameTypes _7507 = new BottomFrameTypes(0, "7507");
             public static readonly BottomFrameTypes _7502 = new BottomFrameTypes(1, "7502");
             public static readonly BottomFrameTypes _7789 = new BottomFrameTypes(2, "7789");
-            public static readonly BottomFrameTypes _6052 = new BottomFrameTypes(3, "6052");
-            public static readonly BottomFrameTypes _6050 = new BottomFrameTypes(4, "6050");
+            public static readonly BottomFrameTypes _6050 = new BottomFrameTypes(3, "6050");
+            public static readonly BottomFrameTypes _6052 = new BottomFrameTypes(4, "6052");
             public static readonly BottomFrameTypes _9C66 = new BottomFrameTypes(5, "9C66");
             public static readonly BottomFrameTypes _None = new BottomFrameTypes(6, "None");
 
@@ -1041,6 +1044,10 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
             public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
             public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
+            public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
+            public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
+            public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary For Insect Screen");
+            
 
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
@@ -1056,7 +1063,24 @@ namespace EnumerationTypeLayer
             public Magnum_ScreenType(int value, string displayName) : base(value, displayName) { }
 
         }
-        
+
+
+        public class Freedom_ScreenSize : Enumeration<Freedom_ScreenSize, int>
+        {
+            public static readonly Freedom_ScreenSize _80mm = new Freedom_ScreenSize (0, "80mm");
+            public static readonly Freedom_ScreenSize _100mm = new Freedom_ScreenSize (1, "100mm");
+
+            public Freedom_ScreenSize(int value, string displayname) : base(value, displayname) { }
+        }
+        public class Freedom_ScreenType : Enumeration<Freedom_ScreenType, int>
+        {
+            public static readonly Freedom_ScreenType _single = new Freedom_ScreenType(0, "Single");
+            public static readonly Freedom_ScreenType _double = new Freedom_ScreenType(1, "Double");
+
+            public Freedom_ScreenType(int value, string displayname) : base(value, displayname) { }
+        }
+
+
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");
@@ -1129,6 +1153,8 @@ namespace EnumerationTypeLayer
             public static readonly TrackProfile_ArticleNo _L15056143 = new TrackProfile_ArticleNo(3, "L-15056-143");
             public static readonly TrackProfile_ArticleNo _L15056144 = new TrackProfile_ArticleNo(4, "L-15056-144");
             public static readonly TrackProfile_ArticleNo _L15056146 = new TrackProfile_ArticleNo(5, "L-15056-146");
+            public static readonly TrackProfile_ArticleNo _none = new TrackProfile_ArticleNo(6, "None");
+
 
             private TrackProfile_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
@@ -1349,6 +1375,15 @@ namespace EnumerationTypeLayer
             public static readonly LouverColor_Option _white = new LouverColor_Option(1, "White");
 
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
+        }
+
+        public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
+        {
+            public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+
+            private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
+
+
         }
     }
 }
