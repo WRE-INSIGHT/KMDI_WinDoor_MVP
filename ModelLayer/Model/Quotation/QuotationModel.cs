@@ -2141,6 +2141,8 @@ namespace ModelLayer.Model.Quotation
                 FrameReinPrice,
                 FramePricePerLinearMeter,
                 FrameReinPricePerLinearMeter,
+                FrameThresholdPricePerLinearMeter,
+
 
                 SashPerimeter,
                 SashPrice = 0,
@@ -2471,7 +2473,8 @@ namespace ModelLayer.Model.Quotation
             GeorgianBar_0726Price_Woodgrain = 467.22m,
             CoverProfile_0914Price = 20.68m,
             CoverProfile_0373Price = 105.41m,
-            ThresholdPricePerPiece = 1229.34m,
+            ThresholdForC70PricePerPiece = 1229.34m,
+            ThresholdForPremiPricePerPiece = 1181.84m,
             WeatherBarPricePerPiece = 236.75m,
             GuideTrackPricePerLinearMeter = 157.18m,
             InterlockPricePerPiece = 333.77m,
@@ -2927,7 +2930,8 @@ namespace ModelLayer.Model.Quotation
                 GeorgianBar_0726Price_Woodgrain = 467.22m;
                 CoverProfile_0914Price = 20.68m;
                 CoverProfile_0373Price = 105.41m;
-                ThresholdPricePerPiece = 1229.34m;
+                ThresholdForC70PricePerPiece = 1229.34m;
+                ThresholdForPremiPricePerPiece = 1181.84m;
                 WeatherBarPricePerPiece = 236.75m;
                 GuideTrackPricePerLinearMeter = 157.18m;
                 InterlockPricePerPiece = 333.77m;
@@ -3243,7 +3247,8 @@ namespace ModelLayer.Model.Quotation
                 GeorgianBar_0726Price_Woodgrain = 467.22m;
                 CoverProfile_0914Price = 20.68m;
                 CoverProfile_0373Price = 105.41m;
-                ThresholdPricePerPiece = 1229.34m;
+                ThresholdForC70PricePerPiece = 1229.34m;
+                ThresholdForPremiPricePerPiece = 1181.84m;
                 WeatherBarPricePerPiece = 236.75m;
                 GuideTrackPricePerLinearMeter = 157.18m;
                 InterlockPricePerPiece = 333.77m;
@@ -3507,7 +3512,7 @@ namespace ModelLayer.Model.Quotation
 
                             FramePricePerLinearMeter = FramePricePerLinearMeter_2060_White;
                             FrameReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
-                            GlazingGasketPrice += (FramePerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                            GlazingGasketPrice += (FramePerimeter / 1000m) * GlazingGasketPricePerLinearMeter;
                         }
                         else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                         {
@@ -3534,40 +3539,43 @@ namespace ModelLayer.Model.Quotation
                             FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
                         }
 
-                        FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
-                        FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                        FramePrice += (FramePerimeter / 1000m) * FramePricePerLinearMeter;
+                        FrameReinPrice += (FramePerimeter / 1000m) * FrameReinPricePerLinearMeter;
                         #endregion
 
                         #region 3RailsForPremi
-                        if (fr.Frame_SlidingRailsQty == 3)
+                        if (fr.Frame_SlidingRailsQtyVisibility == true)
                         {
-                            if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
+                            if (fr.Frame_SlidingRailsQty == 3)
                             {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6050)
                                 {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6055_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6055_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6055;
                                 }
-                                else
+                                else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
                                 {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6055_WoodGrain;
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
                                 }
-                                FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6055;
-                            }
-                            else if (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052)
-                            {
-                                if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
-                                {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_White;
-                                }
-                                else
-                                {
-                                    FramePricePerLinearMeter = FramePricePerLinearMeter_6052Milled_WoodGrain;
-                                }
-                                FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
-                            }
 
-                            FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
-                            FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                                FramePrice += (FramePerimeter / 1000m) * FramePricePerLinearMeter;
+                                FrameReinPrice += (FramePerimeter / 1000m) * FrameReinPricePerLinearMeter;
+                            }
                         }
                         #endregion
 
@@ -3601,13 +3609,13 @@ namespace ModelLayer.Model.Quotation
 
                             if (fr.Frame_ScreenHeightOption == true)
                             {
-                                FramePrice += (FramePerimeter / 1000) * FramePricePerLinearMeter;
-                                FrameReinPrice += (FramePerimeter / 1000) * FrameReinPricePerLinearMeter;
+                                FramePrice += (FramePerimeter / 1000m) * FramePricePerLinearMeter;
+                                FrameReinPrice += (FramePerimeter / 1000m) * FrameReinPricePerLinearMeter;
                             }
                             else
                             {
-                                FramePrice += ((fr.Frame_Width * 2) / 1000) * FramePricePerLinearMeter;
-                                FrameReinPrice += ((fr.Frame_Width * 2) / 1000) * FrameReinPricePerLinearMeter;
+                                FramePrice += ((fr.Frame_Width * 2) / 1000m) * FramePricePerLinearMeter;
+                                FrameReinPrice += ((fr.Frame_Width * 2) / 1000m) * FrameReinPricePerLinearMeter;
                             }
                         }
                         #endregion
@@ -3626,24 +3634,77 @@ namespace ModelLayer.Model.Quotation
                         SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
                         #endregion
 
-
                         #region bottomFramePrice
                         if (fr.Frame_BotFrameEnable == true)
                         {
+                            FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
+                            FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
+
                             if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                             {
-                                ThresholdPrice += (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
-
-                                FramePrice -= (fr.Frame_Width / 1000) * FramePricePerLinearMeter;
-                                FrameReinPrice -= (fr.Frame_Width / 1000) * FrameReinPricePerLinearMeter;
+                                ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForC70PricePerPiece;
+                                FrameThresholdPricePerLinearMeter = ThresholdForC70PricePerPiece;
                             }
                             else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
                             {
-                                ThresholdPrice += (fr.Frame_Width / 1000) * ThresholdPricePerPiece;
-
-                                FramePrice -= (fr.Frame_Width / 1000) * FramePricePerLinearMeter;
-                                FrameReinPrice -= (fr.Frame_Width / 1000) * FrameReinPricePerLinearMeter;
+                                ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForPremiPricePerPiece;
+                                FrameThresholdPricePerLinearMeter = ThresholdForPremiPricePerPiece;
                             }
+                            else
+                            {
+                                if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_7502_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_7502_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7502;
+                                }
+                                else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7507)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_7507_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_7507_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_7507;
+                                }
+                                else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6050_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6050_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6050;
+                                }
+                                else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                                {
+                                    if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6052_White;
+                                    }
+                                    else
+                                    {
+                                        FramePricePerLinearMeter = FramePricePerLinearMeter_6052_WoodGrain;
+                                    }
+                                    FrameReinPricePerLinearMeter = FrameReinPricePerLinearMeter_6052;
+                                }
+
+                                FramePrice += (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
+                                FrameReinPrice += (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
+                            }
+
                         }
                         #endregion
 
@@ -3660,15 +3721,9 @@ namespace ModelLayer.Model.Quotation
 
                         #region MultiPnl 
                         if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
-                        {
-                            if (fr.Frame_SlidingRailsQty > 2)
-                            {
-                                // materials of 6055 and 6055-milled
-                            }
-
+                        {  
                             foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                            {
-
+                            { 
                                 foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                                 {
                                     //CostingPoints -= 2 * ProfileColorPoints;
@@ -6895,8 +6950,8 @@ namespace ModelLayer.Model.Quotation
                                     }
 
                                     WeatherBarPrice += (fr.Frame_Width / 1000m) * WeatherBarPricePerPiece;
-                                    WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300) * BarFastenerPricePerPiece;
-                                    WaterSeepagePrice += (fr.Frame_Width / 1000) * WaterSeepagePricePerLinearMeter;
+                                    WeatherBarFastenerPrice += (int)(fr.Frame_Width / 300m) * BarFastenerPricePerPiece;
+                                    WaterSeepagePrice += (fr.Frame_Width / 1000m) * WaterSeepagePricePerLinearMeter;
                                     GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
                                     AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
 
@@ -6981,7 +7036,7 @@ namespace ModelLayer.Model.Quotation
                                         SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
                                         SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
 
-                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                        GlazingGasketPrice += (SashPerimeter / 1000m) * GlazingGasketPricePerLinearMeter;
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
@@ -7081,7 +7136,7 @@ namespace ModelLayer.Model.Quotation
                                         SashPricePerLinearMeter = SashPricePerLinearMeter_2067_White;
                                         SashReinPricePerLinearMeter = G58ReinPricePerLinearMeter_V226;
 
-                                        GlazingGasketPrice += (SashPerimeter / 1000) * GlazingGasketPricePerLinearMeter;
+                                        GlazingGasketPrice += (SashPerimeter / 1000m) * GlazingGasketPricePerLinearMeter;
                                     }
                                     else if (Singlepnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040)
                                     {
@@ -9714,7 +9769,7 @@ namespace ModelLayer.Model.Quotation
                         #region Ancillary Profile Cost
 
                         Price_List.Rows.Add("Threshold Price",
-                                        ThresholdPricePerPiece.ToString("N", new CultureInfo("en-US")),
+                                        FrameThresholdPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
                                         Math.Round(ThresholdPrice, 2).ToString("N", new CultureInfo("en-US")),
                                         "",
                                         "",
