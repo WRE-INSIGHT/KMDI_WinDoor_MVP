@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlPrintHeader = new System.Windows.Forms.Panel();
+            this.chkbox_selectall = new System.Windows.Forms.CheckBox();
             this.TSbtnPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.TSbtnGlassSummary = new System.Windows.Forms.ToolStripButton();
@@ -56,7 +57,7 @@
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Right;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(390, 0);
+            this.label4.Location = new System.Drawing.Point(396, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 46);
             this.label4.TabIndex = 7;
@@ -67,9 +68,9 @@
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Right;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(509, 0);
+            this.label3.Location = new System.Drawing.Point(515, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 46);
+            this.label3.Size = new System.Drawing.Size(113, 46);
             this.label3.TabIndex = 6;
             this.label3.Text = "Price";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -99,6 +100,7 @@
             // pnlPrintHeader
             // 
             this.pnlPrintHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPrintHeader.Controls.Add(this.chkbox_selectall);
             this.pnlPrintHeader.Controls.Add(this.label4);
             this.pnlPrintHeader.Controls.Add(this.label3);
             this.pnlPrintHeader.Controls.Add(this.label2);
@@ -108,6 +110,19 @@
             this.pnlPrintHeader.Name = "pnlPrintHeader";
             this.pnlPrintHeader.Size = new System.Drawing.Size(868, 48);
             this.pnlPrintHeader.TabIndex = 4;
+            // 
+            // chkbox_selectall
+            // 
+            this.chkbox_selectall.AutoSize = true;
+            this.chkbox_selectall.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkbox_selectall.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chkbox_selectall.Location = new System.Drawing.Point(0, 0);
+            this.chkbox_selectall.Name = "chkbox_selectall";
+            this.chkbox_selectall.Size = new System.Drawing.Size(71, 46);
+            this.chkbox_selectall.TabIndex = 8;
+            this.chkbox_selectall.Text = "Select all";
+            this.chkbox_selectall.UseVisualStyleBackColor = true;
+            this.chkbox_selectall.CheckedChanged += new System.EventHandler(this.chkbox_selectall_CheckedChanged);
             // 
             // TSbtnPrint
             // 
@@ -135,7 +150,7 @@
             // TSbtnGlassSummary
             // 
             this.TSbtnGlassSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSbtnGlassSummary.Image = global::PresentationLayer.Properties.Resources.glass__1_;
+            this.TSbtnGlassSummary.Image = global::PresentationLayer.Properties.Resources.glass;
             this.TSbtnGlassSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnGlassSummary.Name = "TSbtnGlassSummary";
             this.TSbtnGlassSummary.Size = new System.Drawing.Size(23, 22);
@@ -145,7 +160,7 @@
             // TSbtnContractSummary
             // 
             this.TSbtnContractSummary.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSbtnContractSummary.Image = global::PresentationLayer.Properties.Resources.Summary_v2;
+            this.TSbtnContractSummary.Image = global::PresentationLayer.Properties.Resources.report;
             this.TSbtnContractSummary.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnContractSummary.Name = "TSbtnContractSummary";
             this.TSbtnContractSummary.Size = new System.Drawing.Size(23, 22);
@@ -168,6 +183,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuoteItemListView_FormClosed);
             this.Load += new System.EventHandler(this.QuoteItemListView_Load);
             this.pnlPrintHeader.ResumeLayout(false);
+            this.pnlPrintHeader.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -187,5 +203,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton TSbtnGlassSummary;
         private System.Windows.Forms.ToolStripButton TSbtnContractSummary;
+        private System.Windows.Forms.CheckBox chkbox_selectall;
     }
 }

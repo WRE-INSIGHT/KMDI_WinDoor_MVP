@@ -32,9 +32,22 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
 
         #region Variables
+        public List<IQuoteItemListUCPresenter> LstQuoteItemUC
+        {
+            get { return _lstQuoteItemUC; }
+            set { _lstQuoteItemUC = value; }
+        }
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+
+        public List<ShowItemImage> ShowItemImage_CheckList
+        {
+            get { return _showItemImage_CheckList; }
+            set { _showItemImage_CheckList = value; }
+        }
+        private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
+
         private List<int> _lstItemArea = new List<int>();
-        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
+        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();     
 
         int prev_GlassItemNo,
             prev_GlassQty,
@@ -70,6 +83,7 @@ namespace PresentationLayer.Presenter
                 screen_Windoor_DiscountAverage;
 
         bool existing = false;
+        bool showImage;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -91,8 +105,11 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TSbtnGlassSummaryClickEventRaised += _quoteItemListView_TSbtnGlassSummaryClickEventRaised;
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
+            _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
         }
-       
+
+
+
         private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
         {
             DSQuotation _dtqoute = new DSQuotation();
@@ -522,6 +539,7 @@ namespace PresentationLayer.Presenter
                         DimensionDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n";
                     }
 
+                    
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
@@ -540,19 +558,16 @@ namespace PresentationLayer.Presenter
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemPrice.Value = Math.Round(wdm.WD_price, 2);  //TotaPrice;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblPrice().Text = Math.Round(wdm.WD_price, 2).ToString();  //TotaPrice.ToString();
 
-
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemQuantity.Value = wdm.WD_quantity;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblQuantity().Text = wdm.WD_quantity.ToString();
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
-
-
+              
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-
-
+               
                 }
             }
             catch (Exception ex)
@@ -561,6 +576,30 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void OnchkboxSelectallCheckedChangeEventRaised(object sender, EventArgs e)
+        {
+
+            bool chkbox_checkstate_frmQuoteItemList = Convert.ToBoolean(_quoteItemListView.GetChkboxSelectAll().CheckState);
+
+            for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+            {
+                IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+
+                if (chkbox_checkstate_frmQuoteItemList == true)
+                {
+                    lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().Checked = true;
+                }
+                else
+                {
+                    lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().Checked = false;
+                }
+                Console.WriteLine("Event select all.: " + chkbox_checkstate_frmQuoteItemList.ToString());
+
+            }
+
+        }
+
 
         public void SetAllItemDiscount(int inputedDiscount)
         {
@@ -659,9 +698,32 @@ namespace PresentationLayer.Presenter
                     string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
                     string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
-
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+ 
+                    bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
 
+                    if (chkbox_checkstate == true)
+                    {
+                        showImage = true;
+                        ShowItemImage_CheckList.Add(new ShowItemImage
+                        {
+                            ItemIndex = i,
+                            ItemboolImage = showImage
+
+                        });           
+                    }
+                    else
+                    {
+                        showImage = false;
+                        ShowItemImage_CheckList.Add(new ShowItemImage
+                        {
+                            ItemIndex = i,
+                            ItemboolImage = showImage
+
+                        });
+                    }
+
+                    Console.WriteLine("EventPrint.: " + showImage.ToString());
                     _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
                     _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
@@ -673,13 +735,16 @@ namespace PresentationLayer.Presenter
                                           lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
-                                          byteToStrForTopView);
+                                          byteToStrForTopView,
+                                          showImage);
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
             }
+                        
             _mainPresenter.printStatus = "WinDoorItems";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
@@ -766,6 +831,14 @@ namespace PresentationLayer.Presenter
         public int IntDesc { get; set; }
 
     }
+
+    public class ShowItemImage
+    {
+        public int ItemIndex { get; set; }
+        public bool ItemboolImage { get; set; }
+
+    }
+
 
 
 

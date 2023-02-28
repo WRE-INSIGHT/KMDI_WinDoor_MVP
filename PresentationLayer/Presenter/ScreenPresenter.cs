@@ -222,13 +222,12 @@ namespace PresentationLayer.Presenter
 
                     }
                     #endregion
-
                 }
             }
 
 
             _mainPresenter.SetChangesMark();
-
+         
         }
         private void _screenView_cmbFreedomSizeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -609,7 +608,6 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Net Price", "Net Price", "System.String"));
 
 
-
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].Width = 35;
             _screenView.GetDatagrid().Columns[1].Width = 330;
@@ -622,7 +620,6 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             
-
 
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
