@@ -164,7 +164,7 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 bot_deduct = 26 - 10;
             }
-            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 || _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
             {
                 bot_deduct = 0;
             }
@@ -917,7 +917,7 @@ namespace PresentationLayer.Presenter.UserControls
                     _mainPresenter.DeductPanelGlassID();
                 }
             }
-            
+
             _basePlatformUCP.ViewDeleteControl((UserControl)_frameUC);
             _basePlatformUCP.InvalidateBasePlatform();
             _basePlatformUCP.Invalidate_flpMain();
@@ -927,7 +927,7 @@ namespace PresentationLayer.Presenter.UserControls
             _mainPresenter.DeleteFrame_OnFrameList_WindoorModel(_frameModel);
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.DeselectDivider();
-            if(_mainPresenter.windoorModel_MainPresenter.lst_frame.Count == 0)
+            if (_mainPresenter.windoorModel_MainPresenter.lst_frame.Count == 0)
             {
                 _mainPresenter.windoorModel_MainPresenter.frameIDCounter = 0;
 
