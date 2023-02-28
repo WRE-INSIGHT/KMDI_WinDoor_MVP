@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chklstbox_itemnum = new System.Windows.Forms.CheckedListBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.txt_oftexpenses = new System.Windows.Forms.TextBox();
             this.lbl_UniversalLabel = new System.Windows.Forms.Label();
             this.chkbox_show = new System.Windows.Forms.CheckBox();
@@ -40,7 +42,6 @@
             this.rtbox_Salutation = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.rtbox_Address = new System.Windows.Forms.RichTextBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.dtp_Date = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
@@ -51,7 +52,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.txt_oftexpenses);
+            this.panel1.Controls.Add(this.chklstbox_itemnum);
             this.panel1.Controls.Add(this.lbl_UniversalLabel);
             this.panel1.Controls.Add(this.chkbox_show);
             this.panel1.Controls.Add(this.label7);
@@ -60,7 +63,6 @@
             this.panel1.Controls.Add(this.rtbox_Salutation);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.rtbox_Address);
-            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.dtp_Date);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -69,6 +71,29 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 137);
             this.panel1.TabIndex = 2;
+            // 
+            // chklstbox_itemnum
+            // 
+            this.chklstbox_itemnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chklstbox_itemnum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chklstbox_itemnum.FormattingEnabled = true;
+            this.chklstbox_itemnum.Location = new System.Drawing.Point(902, 22);
+            this.chklstbox_itemnum.Name = "chklstbox_itemnum";
+            this.chklstbox_itemnum.ScrollAlwaysVisible = true;
+            this.chklstbox_itemnum.Size = new System.Drawing.Size(103, 80);
+            this.chklstbox_itemnum.TabIndex = 18;
+            this.chklstbox_itemnum.SelectedIndexChanged += new System.EventHandler(this.chklstbox_itemnum_SelectedIndexChanged);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Location = new System.Drawing.Point(902, 106);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(106, 28);
+            this.btnRefresh.TabIndex = 8;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // txt_oftexpenses
             // 
@@ -154,17 +179,6 @@
             this.rtbox_Address.Text = "To:\nMr. Gilbert Lee\n#408 Bougainvilla St., Ayala\nAlabang Village, Muntinlupa City" +
     "\n";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(930, 108);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 25);
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // dtp_Date
             // 
             this.dtp_Date.CustomFormat = "MMM. dd, yyyy";
@@ -237,5 +251,6 @@
         private System.Windows.Forms.CheckBox chkbox_show;
         private System.Windows.Forms.Label lbl_UniversalLabel;
         private System.Windows.Forms.TextBox txt_oftexpenses;
+        private System.Windows.Forms.CheckedListBox chklstbox_itemnum;
     }
 }

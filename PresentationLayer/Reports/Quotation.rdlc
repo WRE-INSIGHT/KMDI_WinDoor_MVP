@@ -215,7 +215,7 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>2.44099in</Top>
+        <Top>2.27849in</Top>
         <Left>6.35447in</Left>
         <Height>0.25in</Height>
         <Width>1.505in</Width>
@@ -254,7 +254,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.03125in</Height>
+              <Height>0.04688in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -566,7 +566,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.42992in</Height>
+              <Height>1.25734in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -697,7 +697,7 @@
                           <MIMEType>image/png</MIMEType>
                           <Sizing>FitProportional</Sizing>
                           <Top>0.04519in</Top>
-                          <Left>0.02778in</Left>
+                          <Left>0.03333in</Left>
                           <Height>1.08959in</Height>
                           <Width>2.30916in</Width>
                           <Style>
@@ -713,7 +713,7 @@
                           <Value>=Fields!dtTopViewImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
                           <Sizing>FitProportional</Sizing>
-                          <Top>1.13477in</Top>
+                          <Top>0.88477in</Top>
                           <Left>0.02778in</Left>
                           <Height>0.25278in</Height>
                           <Width>1.96541in</Width>
@@ -767,7 +767,7 @@
                           </Paragraphs>
                           <rd:DefaultName>dtDescription</rd:DefaultName>
                           <Left>0.02778in</Left>
-                          <Height>1.38473in</Height>
+                          <Height>1.24172in</Height>
                           <Width>1.91879in</Width>
                           <Style>
                             <Border>
@@ -960,7 +960,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.96454in</Top>
         <Left>0.24486in</Left>
-        <Height>1.46117in</Height>
+        <Height>1.30422in</Height>
         <Width>7.62711in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -975,19 +975,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.22936in</Width>
+              <Width>0.86542in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.79521in</Width>
+              <Width>5.13812in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.37813in</Height>
+              <Height>0.24393in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox34">
+                    <Textbox Name="Textbox19">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1001,11 +1001,10 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox34</rd:DefaultName>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1017,25 +1016,24 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox25">
+                    <Textbox Name="dtDescription2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!ShowItemImage.Value</Value>
+                              <Value>=Fields!dtDescription.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <rd:DefaultName>dtDescription2</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1048,7 +1046,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>3.63628in</Height>
+              <Height>4.74747in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1085,7 +1083,6 @@
                       <Source>Database</Source>
                       <Value>=Fields!dtImage.Value</Value>
                       <MIMEType>image/png</MIMEType>
-                      <Sizing>FitProportional</Sizing>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -1097,70 +1094,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.39062in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox8">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox8</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox11">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.39062in</Height>
+              <Height>0.26215in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1245,20 +1179,18 @@
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember>
-              <Visibility>
-                <Hidden>true</Hidden>
-              </Visibility>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
               <Group Name="Details1" />
               <TablixMembers>
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>true</Hidden>
+                  </Visibility>
+                </TablixMember>
                 <TablixMember>
                   <Visibility>
                     <Hidden>=iif(Fields!dtShowImage.Value = true,false,true)</Hidden>
                   </Visibility>
                 </TablixMember>
-                <TablixMember />
                 <TablixMember>
                   <Visibility>
                     <Hidden>=iif(Fields!dtShowImage.Value = true,false,true)</Hidden>
@@ -1269,10 +1201,13 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>2.87015in</Top>
-        <Left>1.21713in</Left>
-        <Height>4.79566in</Height>
-        <Width>6.02457in</Width>
+        <PageBreak>
+          <BreakLocation>Start</BreakLocation>
+        </PageBreak>
+        <Top>2.54168in</Top>
+        <Left>0.4793in</Left>
+        <Height>5.25354in</Height>
+        <Width>6.00354in</Width>
         <ZIndex>6</ZIndex>
         <Visibility>
           <Hidden>=iif(Parameters!ShowItemImage.Value = "True", false, true)</Hidden>
@@ -1284,7 +1219,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>7.87414in</Height>
+    <Height>7.82698in</Height>
     <Style>
       <Border>
         <Color>LightGrey</Color>

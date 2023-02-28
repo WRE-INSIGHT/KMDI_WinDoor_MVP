@@ -1645,6 +1645,7 @@
     <None Include="Resources\icons8-documents.gif" />
     <None Include="Resources\icons8-banknotes-48.png" />
     <None Include="Resources\glass %281%29.png" />
+    <None Include="Resources\glass.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
@@ -1668,6 +1669,7 @@
     <Content Include="Resources\redo_30px.png" />
     <Content Include="Resources\refresh_30px.png" />
     <None Include="Resources\search_filled_100px.png" />
+    <None Include="Resources\report.png" />
     <Content Include="Resources\SinglePanel.png" />
     <None Include="Resources\SlidingPanel.png" />
     <None Include="Resources\TiltNTurnPanel.png" />

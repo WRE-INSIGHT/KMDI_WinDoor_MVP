@@ -4,10 +4,13 @@ using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.DataTables;
+using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,6 +26,9 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IMainPresenter _mainPresenter;
         private IQuotationModel _quotationModel;
+        bool showImage, 
+            chklist_exist = false,
+            checklist_raised = false;
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
@@ -36,18 +42,22 @@ namespace PresentationLayer.Presenter
         {
             _printQuoteView.btnRefreshClickEventRaised += _printQuoteView_btnRefreshClickEventRaised;
             _printQuoteView.PrintQuoteViewLoadEventRaised += _printQuoteView_PrintQuoteViewLoadEventRaised;
+            _printQuoteView.SelectedIndexChangeEventRaised += _printQuoteView_SelectedIndexChangeEventRaised;
         }
+
 
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
             try
-            {
+            {             
                 List<string> Lst_BaseColor = new List<string>();
                 List<string> Lst_Panel = new List<string>();
                 foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
                 {
                     Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
 
+                   _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
+                    
                     foreach (IFrameModel frm in wdm.lst_frame)
                     {
                         foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
@@ -65,7 +75,7 @@ namespace PresentationLayer.Presenter
 
 
                 }
-
+                                
                
                 int GlassCount = 0;
                 string GlassThickness = "";
@@ -129,6 +139,8 @@ namespace PresentationLayer.Presenter
                 _printQuoteView.QuotationOuofTownExpenses = "50000";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
+
+                
             }
             catch (Exception ex)
             {
@@ -137,16 +149,103 @@ namespace PresentationLayer.Presenter
 
         }
 
+
+        private void ShowItemImage()
+        {
+            foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
+            {
+                chklist_exist = true;
+                break;
+            }
+                      
+                #region ShowItemImage 
+
+                DSQuotation _dsq = new DSQuotation();
+
+                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                {
+
+                    MemoryStream mstream = new MemoryStream();
+                    MemoryStream mstream2 = new MemoryStream();
+                    Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                          topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+
+                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+                    if (topView != null)
+                    {
+                        topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+
+                    byte[] arrimageForItemImage = mstream.ToArray();
+                    byte[] arrimageForTopView = mstream2.ToArray();
+
+                    string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                    string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+
+                    IQuoteItemListUCPresenter lstQuoteUC = _quoteItemListPresenter.LstQuoteItemUC[i];
+
+                if(chklist_exist == true)
+                {
+                    foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
+                    {
+                        showImage = false;
+
+                        var itemToIndx = Convert.ToInt32(item);
+                        if (i == itemToIndx)
+                        {
+                            showImage = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    showImage = false;
+                }
+                   
+                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
+
+                    _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDesc,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                          byteToStrForItemImage,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                          Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
+                                          i + 1,
+                                          byteToStrForTopView,
+                                          showImage);
+
+                }
+
+                #endregion
+
+                this.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
+                chklist_exist = false;           
+        }
+
+        private void _printQuoteView_SelectedIndexChangeEventRaised(object sender, EventArgs e)
+        {
+            checklist_raised = true;
+        }
         private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)
         {
             try
             {
+                if(checklist_raised == true)
+                {
+                    ShowItemImage();
+                }
+                Console.WriteLine("Checklist_Raise.: " + checklist_raised.ToString());
+
+
                 ReportDataSource RDSQuote = new ReportDataSource();
                 RDSQuote.Name = "DataSet1";
                 RDSQuote.Value = _printQuoteView.GetBindingSource();
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
-
-
+                
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
                 if (_mainPresenter.printStatus== "WinDoorItems")
                 {
@@ -165,6 +264,7 @@ namespace PresentationLayer.Presenter
                 {
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
+                    _printQuoteView.GetChkLstBox().Visible = false;
 
                     ReportParameter[] RParam = new ReportParameter[9];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -193,6 +293,13 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
+                    checklist_raised = false;
+
+                    foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
+                    {
+                        _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
+                    }
+                    _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
 
                     ReportParameter[] RParam = new ReportParameter[8];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -217,7 +324,8 @@ namespace PresentationLayer.Presenter
                                       
                 }
                 else if(_mainPresenter.printStatus == "ContractSummary")
-                {            
+                {     
+                    _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);

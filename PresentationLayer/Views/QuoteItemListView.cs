@@ -6,6 +6,12 @@ namespace PresentationLayer.Views
 {
     public partial class QuoteItemListView : Form, IQuoteItemListView
     {
+
+        public CheckBox GetChkboxSelectAll()
+        {
+            return chkbox_selectall;
+        }
+
         public QuoteItemListView()
         {
             InitializeComponent();
@@ -15,6 +21,7 @@ namespace PresentationLayer.Views
         public event EventHandler QuoteItemListViewLoadEventRaised;
         public event EventHandler TsbtnContractSummaryClickEventRaised;
         public event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
+        public event EventHandler chkboxSelectallCheckedChangeEventRaised;
         
         private void TSbtnPrint_Click(object sender, EventArgs e)
         {
@@ -51,6 +58,11 @@ namespace PresentationLayer.Views
         private void TSbtnContractSummary_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TsbtnContractSummaryClickEventRaised, e);
+        }
+
+        private void chkbox_selectall_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxSelectallCheckedChangeEventRaised, e);
         }
     }
 }
