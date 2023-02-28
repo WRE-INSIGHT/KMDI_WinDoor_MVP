@@ -51,26 +51,16 @@ namespace PresentationLayer.Views
 
         }
 
-
-        public event EventHandler btnRefreshClickEventRaised;
-        public event EventHandler PrintQuoteViewLoadEventRaised;
-        private void PrintQuoteView_Load(object sender, EventArgs e)
+        public string QuotationOuofTownExpenses
         {
-            rtbox_Address.Text = "";
-            rtbox_Salutation.Text = "";
-            rtbox_Body.Text = "";
-            dtp_Date.Value = DateTime.Now;
-            EventHelpers.RaiseEvent(sender, PrintQuoteViewLoadEventRaised, e);
-        }
-
-        public void ShowPrintQuoteView()
-        {
-            this.Show();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, btnRefreshClickEventRaised, e);
+            get
+            {
+                return txt_oftexpenses.Text;
+            }
+            set
+            {
+                txt_oftexpenses.Text = value;
+            }
         }
 
         public ReportViewer GetReportViewer()
@@ -82,12 +72,53 @@ namespace PresentationLayer.Views
         {
             return BSQuotation;
         }
-
+        public CheckBox ShowLastPage()
+        {
+            return chkbox_show;
+        }
+        public TextBox GetOutofTownExpenses()
+        {
+            return txt_oftexpenses;
+        }
+        
         public DateTimePicker GetDTPDate()
         {
             return dtp_Date;
         }
 
+        public Label GetUniversalLabel()
+        {
+            return lbl_UniversalLabel;
+        }
+
+        public Button GetRefreshBtn()
+        {
+            return btnRefresh;
+        }
+        public void ShowPrintQuoteView()
+        {
+            this.Show();
+        }
+
+        public event EventHandler btnRefreshClickEventRaised;
+        public event EventHandler PrintQuoteViewLoadEventRaised;
+        private void PrintQuoteView_Load(object sender, EventArgs e)
+        {
+            rtbox_Address.Text = "";
+            rtbox_Salutation.Text = "";
+            rtbox_Body.Text = "";
+            txt_oftexpenses.Text = "";
+            dtp_Date.Value = DateTime.Now;
+            EventHelpers.RaiseEvent(sender, PrintQuoteViewLoadEventRaised, e);
+        }
+
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnRefreshClickEventRaised, e);
+        }
+
+       
         private void BSQuotation_CurrentChanged(object sender, EventArgs e)
         {
 
@@ -97,5 +128,7 @@ namespace PresentationLayer.Views
         {
 
         }
+
+     
     }
 }

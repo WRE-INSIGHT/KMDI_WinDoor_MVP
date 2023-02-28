@@ -1251,7 +1251,6 @@ namespace PresentationLayer.Presenter
         {
             #region Save
 
-
             wndr_content.Add("QuoteId: " + _quoteId);
             wndr_content.Add("ProjectName: " + _projectName);
             wndr_content.Add("ClientsName: " + inputted_projectName);
@@ -1268,6 +1267,17 @@ namespace PresentationLayer.Presenter
             {
                 SaveWindoorModel(wdm);
 
+            }
+            foreach(ScreenModel scm in Screen_List)
+            {
+                wndr_content.Add("~");
+
+                foreach(var prop in scm.GetType().GetProperties())
+                {
+                    wndr_content.Add(prop.Name + ": " + prop.GetValue(scm, null));
+                    //wndr_content.Add("_screenServices." + prop.Name + " = " + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1) + ";");
+                }
+                wndr_content.Add("~");
             }
             wndr_content.Add("EndofFile");
             #endregion
@@ -1311,7 +1321,7 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-
+                   
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -2288,7 +2298,7 @@ namespace PresentationLayer.Presenter
                 {
                     ToggleMode(false, false);
                 }
-
+               
             }
             else
             {
@@ -2430,6 +2440,7 @@ namespace PresentationLayer.Presenter
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(12.0f, "12 mm Tempered Clear Oversized", "NA", true, false, false, false, false);//
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Tempered Tinted Bronze", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Tempered Tinted Bronze", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(10.0f, "10 mm Tempered Tinted Bronze", "NA", true, false, false, false, false);
@@ -3185,6 +3196,7 @@ namespace PresentationLayer.Presenter
             }
             if (row_str.Contains("QuoteId:"))
             {
+                inside_screen = false;
                 _itemLoad = true;
                 if (_isOpenProject && !isNewProject)
                 {
@@ -3280,6 +3292,20 @@ namespace PresentationLayer.Presenter
             {
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
+                inside_item = false;
+            }
+            else if (row_str == "~")
+            {
+                if (inside_screen)
+                {
+                    Load_Screen();
+                    inside_screen = false;
+                }
+                else
+                {                  
+                    inside_screen = true;
+                }
+               
             }
             if (row_str == "EndofFile")
             {
@@ -3906,7 +3932,7 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
-                    if (inside_concrete)
+                    else if(inside_concrete)
                     {
                         #region Load for Concrete Model
 
@@ -7228,8 +7254,393 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
+                    else if (inside_screen)
+                    {
+                        #region Load for Screen
+
+
+                        if (row_str.Contains("Screen_id:"))
+                        {
+                            screen_id = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Types_Window:"))
+                        {
+                            screen_Types_Window = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Types_Door:"))
+                        {
+                            screen_Types_Door = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Width:"))
+                        {
+                            screen_Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Height:"))
+                        {
+                            screen_Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Factor:"))
+                        {
+                            screen_Factor = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Types:"))
+                        {
+                            foreach (ScreenType scrnType in ScreenType.GetAll())
+                            {
+                                if (scrnType.ToString() == extractedValue_str)
+                                {
+                                    screen_Types = scrnType;
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Screen_PlisséType:"))
+                        {
+                            foreach (PlisseType plssTyp in PlisseType.GetAll())
+                            {
+                                if(plssTyp.ToString() == extractedValue_str)
+                                {
+                                    screen_PlisséType = plssTyp;
+                                }                              
+                            }
+                        }
+                        else if (row_str.Contains("Screen_BaseColor:"))
+                        {
+                            foreach(Base_Color BsClr in Base_Color.GetAll())
+                            {
+                                if(BsClr.ToString() == extractedValue_str)
+                                {
+                                    screen_BaseColor = BsClr;
+                                }
+                            }
+                            
+                        }
+                        else if (row_str.Contains("Screen_Set:"))
+                        {
+                            screen_Set = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_WindoorID:"))
+                        {
+                            screen_WindoorID = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Screen_UnitPrice:"))
+                        {
+                            screen_UnitPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Quantity:"))
+                        {
+                            screen_Quantity = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_TotalAmount:"))
+                        {
+                            screen_TotalAmount = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_NetPrice:"))
+                        {
+                            screen_NetPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_Discount:"))
+                        {
+                            screen_Discount = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_DiscountedPrice:"))
+                        {
+                            screen_DiscountedPrice = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_DiscountedPriceWithoutVat:"))
+                        {
+                            screen_DiscountedPriceWithoutVat = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_LaborAndMobilization:"))
+                        {
+                            screen_LaborAndMobilization = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_TotalNetPriceWithoutVat:"))
+                        {
+                            screen_TotalNetPriceWithoutVat = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_PVCVisibility:"))
+                        {
+                            screen_PVCVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("SpringLoad_Checked:"))
+                        {
+                            springLoad_Checked = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("SpringLoad_Visibility:"))
+                        {
+                            springLoad_Visibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_0505Width:"))
+                        {
+                            screen_0505Width = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1067Height:"))
+                        {
+                            screen_1067Height = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_0505Qty:"))
+                        {
+                            screen_0505Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_1067Qty:"))
+                        {
+                            screen_1067Qty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_CenterClosureVisibility:"))
+                        {
+                            screen_CenterClosureVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_CenterClosureVisibilityOption:"))
+                        {
+                            screen_CenterClosureVisibilityOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_LatchKitQty:"))
+                        {                      
+                            screen_LatchKitQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_IntermediatePartQty:"))
+                        {
+                            screen_IntermediatePartQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_6040MilledProfileVisibility:"))
+                        {
+                            screen_6040MilledProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_6040MilledProfile:"))
+                        {
+                            screen_6040MilledProfile = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_6040MilledProfileQty:"))
+                        {
+                            screen_6040MilledProfileQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_LandCoverVisibility:"))
+                        {
+                            screen_LandCoverVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_LandCover:"))
+                        {
+                            screen_LandCover = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_LandCoverQty:"))
+                        {
+                            screen_LandCoverQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_1067PVCboxVisibility:"))
+                        {
+                            screen_1067PVCboxVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1067PVCbox:"))
+                        {
+                            screen_1067PVCbox = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1067PVCboxQty:"))
+                        {
+                            screen_1067PVCboxQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1385MilledProfileVisibility:"))
+                        {
+                            screen_1385MilledProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1385MilledProfile:"))
+                        {
+                            screen_1385MilledProfile = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_1385MilledProfileQty:"))
+                        {
+                            screen_1385MilledProfileQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_373or374MilledProfileVisibility:"))
+                        {
+                            screen_373or374MilledProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_373or374MilledProfile:"))
+                        {
+                            screen_373or374MilledProfile = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_373or374MilledProfileQty:"))
+                        {
+                            screen_373or374MilledProfileQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_6052MilledProfileVisibility:"))
+                        {
+                            screen_6052MilledProfileVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_6052MilledProfile:"))
+                        {
+                            screen_6052MilledProfile = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_6052MilledProfileQty:"))
+                        {
+                            screen_6052MilledProfileQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_ExchangeRateVisibility:"))
+                        {
+                            screen_ExchangeRateVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_ExchangeRate:"))
+                        {
+                            screen_ExchangeRate = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Magnum_ScreenType:"))
+                        {
+                            foreach(Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
+                            {
+                                if(mgnmScrnTyp.ToString() == extractedValue_str)
+                                {
+                                    magnum_ScreenType = mgnmScrnTyp;
+
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Reinforced:"))
+                        {
+                            reinforced = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("SP_MagnumScreenType_Visibility:"))
+                        {
+                            sp_MagnumScreenType_Visibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        else if (row_str.Contains("PlissedRd_Panels:"))
+                        {
+                            plissedRd_Panels = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+
+                        }
+                        else if (row_str.Contains("Screen_Description:"))
+                        {
+                            screen_description = extractedValue_str;
+                        }
+                        else if (row_str.Contains("DiscountPercentage:"))
+                        {
+                            discountPercentage = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_ItemNumber:"))
+                        {
+                            screen_ItemNumber = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Screen_NextItemNumber:"))
+                        {
+                            screen_NextItemNumber = decimal.Parse(extractedValue_str);
+                        }
+                        else if (row_str.Contains("Freedom_ScreenSize:"))
+                        {
+                            foreach(Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
+                            {
+                                if(frdmsize.ToString() == extractedValue_str)
+                                {
+                                    freedom_ScreenSize = frdmsize;
+
+                                }
+                            }
+                        }
+                        else if (row_str.Contains("Freedom_ScreenType:"))
+                        {
+                            foreach(Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
+                            {
+                                if(frdmtype.ToString() == extractedValue_str)
+                                {
+                                    freedom_ScreenType = frdmtype;
+                                }
+                            }
+                        }
+
+                        #endregion
+                    }
                     break;
             }
+
+        }
+
+        private void Load_Screen()
+        {
+            IScreenModel scr = _screenServices.AddScreenModel(screen_ItemNumber,
+                                                             screen_Width,
+                                                             screen_Height,
+                                                             screen_Types,
+                                                             screen_WindoorID,
+                                                             screen_UnitPrice,
+                                                             screen_Quantity,
+                                                             screen_Set,
+                                                             screen_Discount,
+                                                             screen_NetPrice,
+                                                             screen_TotalAmount,
+                                                             screen_description);
+
+            scr.Screen_id = screen_id;
+            scr.Screen_Types_Window = screen_Types_Window;
+            scr.Screen_Types_Door = screen_Types_Door;
+            scr.Screen_Width = screen_Width;
+            scr.Screen_Height = screen_Height;
+            scr.Screen_Factor = screen_Factor;
+            scr.Screen_Types = screen_Types;
+            scr.Screen_PlisséType = screen_PlisséType;
+            scr.Screen_BaseColor = screen_BaseColor;
+            scr.Screen_Set = screen_Set;
+            scr.Screen_WindoorID = screen_WindoorID;
+            scr.Screen_UnitPrice = screen_UnitPrice;
+            scr.Screen_Quantity = screen_Quantity;
+            scr.Screen_TotalAmount = screen_TotalAmount;
+            scr.Screen_NetPrice = screen_NetPrice;
+            scr.Screen_Discount = screen_Discount;
+            scr.Screen_DiscountedPrice = screen_DiscountedPrice;
+            scr.Screen_DiscountedPriceWithoutVat = screen_DiscountedPriceWithoutVat;
+            scr.Screen_LaborAndMobilization = screen_LaborAndMobilization;
+            scr.Screen_TotalNetPriceWithoutVat = screen_TotalNetPriceWithoutVat;
+            scr.Screen_PVCVisibility = screen_PVCVisibility;
+            scr.SpringLoad_Checked = springLoad_Checked;
+            scr.SpringLoad_Visibility = springLoad_Visibility;
+            scr.Screen_0505Width = screen_0505Width;
+            scr.Screen_1067Height = screen_1067Height;
+            scr.Screen_0505Qty = screen_0505Qty;
+            scr.Screen_1067Qty = screen_1067Qty;
+            scr.Screen_CenterClosureVisibility = screen_CenterClosureVisibility;
+            scr.Screen_CenterClosureVisibilityOption = screen_CenterClosureVisibilityOption;
+            scr.Screen_LatchKitQty = screen_LatchKitQty;
+            scr.Screen_IntermediatePartQty = screen_IntermediatePartQty;
+            scr.Screen_6040MilledProfileVisibility = screen_6040MilledProfileVisibility;
+            scr.Screen_6040MilledProfile = screen_6040MilledProfile;
+            scr.Screen_6040MilledProfileQty = screen_6040MilledProfileQty;
+            scr.Screen_LandCoverVisibility = screen_LandCoverVisibility;
+            scr.Screen_LandCover = screen_LandCover;
+            scr.Screen_LandCoverQty = screen_LandCoverQty;
+            //scr.Screen_1067PVCboxVisibility = screen_1067PVCboxVisibility;
+            //scr.Screen_1067PVCbox = screen_1067PVCbox;
+            //scr.Screen_1067PVCboxQty = screen_1067PVCboxQty;
+            scr.Screen_1385MilledProfileVisibility = screen_1385MilledProfileVisibility;
+            scr.Screen_1385MilledProfile = screen_1385MilledProfile;
+            scr.Screen_1385MilledProfileQty = screen_1385MilledProfileQty;
+            scr.Screen_373or374MilledProfileVisibility = screen_373or374MilledProfileVisibility;
+            scr.Screen_373or374MilledProfile = screen_373or374MilledProfile;
+            scr.Screen_373or374MilledProfileQty = screen_373or374MilledProfileQty;
+            scr.Screen_6052MilledProfileVisibility = screen_6052MilledProfileVisibility;
+            scr.Screen_6052MilledProfile = screen_6052MilledProfile;
+            scr.Screen_6052MilledProfileQty = screen_6052MilledProfileQty;
+            scr.Screen_ExchangeRateVisibility = screen_ExchangeRateVisibility;
+            scr.Screen_ExchangeRate = screen_ExchangeRate;
+            scr.Magnum_ScreenType = magnum_ScreenType;
+            scr.Reinforced = reinforced;
+            scr.SP_MagnumScreenType_Visibility = sp_MagnumScreenType_Visibility;
+            scr.PlissedRd_Panels = plissedRd_Panels;
+            scr.Screen_Description = screen_description;
+            scr.DiscountPercentage = discountPercentage;
+            scr.Screen_ItemNumber = screen_ItemNumber;
+            scr.Screen_NextItemNumber = screen_NextItemNumber;
+            scr.Freedom_ScreenSize = freedom_ScreenSize;
+            scr.Freedom_ScreenType = freedom_ScreenType;
+
+            this.Screen_List.Add(scr);
         }
 
         private void Panel_Load()
@@ -8007,7 +8418,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider,inside_screen;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -8505,6 +8916,71 @@ namespace PresentationLayer.Presenter
         List<Control> mPanelLst_Imagers;
         IMultiPanelModel mPanel_ParentModel;
         #endregion
+        #region Screen Properties
+
+        bool reinforced,
+             sp_MagnumScreenType_Visibility,
+             screen_Types_Window,
+             screen_Types_Door,
+             screen_PVCVisibility,
+             springLoad_Checked,
+             springLoad_Visibility,
+             screen_CenterClosureVisibility,
+             screen_CenterClosureVisibilityOption,
+             screen_6040MilledProfileVisibility,
+             screen_LandCoverVisibility,
+             screen_ExchangeRateVisibility,
+             screen_6052MilledProfileVisibility,
+             screen_373or374MilledProfileVisibility,
+             screen_1067PVCboxVisibility,
+             screen_1385MilledProfileVisibility;
+        decimal screen_Factor,
+                screen_UnitPrice,
+                screen_TotalAmount,
+                screen_NetPrice,
+                screen_DiscountedPrice,
+                screen_DiscountedPriceWithoutVat,
+                screen_LaborAndMobilization,
+                screen_TotalNetPriceWithoutVat;
+        int screen_id,
+            screen_Set,
+            screen_Quantity,
+            screen_Width,
+            screen_Height,
+            screen_Discount,
+            screen_0505Width,
+            screen_1067Height,
+            screen_0505Qty,
+            screen_1067Qty,
+            screen_LatchKitQty,
+            screen_IntermediatePartQty,
+            screen_6040MilledProfile,
+            screen_6040MilledProfileQty,
+            screen_LandCover,
+            screen_LandCoverQty,
+            screen_1067PVCbox,
+            screen_1067PVCboxQty,
+            screen_1385MilledProfile,
+            screen_1385MilledProfileQty,
+            screen_373or374MilledProfile,
+            screen_373or374MilledProfileQty,
+            screen_6052MilledProfile,
+            screen_6052MilledProfileQty,
+            screen_ExchangeRate,
+            plissedRd_Panels;
+        string screen_WindoorID,
+               screen_description;
+        decimal discountPercentage,
+                screen_ItemNumber,
+                screen_NextItemNumber;
+        Freedom_ScreenSize freedom_ScreenSize;
+        Freedom_ScreenType freedom_ScreenType;
+        ScreenType screen_Types;
+        PlisseType screen_PlisséType;
+        Base_Color screen_BaseColor;
+Magnum_ScreenType magnum_ScreenType;
+
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
@@ -8526,6 +9002,7 @@ namespace PresentationLayer.Presenter
             _multiTransomUC4th = null;
             _multiModelParent = null;
             mpnllvl = string.Empty;
+            _screenList = new List<IScreenModel>();
             _pnlItems.Controls.Clear();
 
 

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_UniversalLabel = new System.Windows.Forms.Label();
+            this.chkbox_show = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.rtbox_Body = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -42,12 +44,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
+            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txt_oftexpenses);
+            this.panel1.Controls.Add(this.lbl_UniversalLabel);
+            this.panel1.Controls.Add(this.chkbox_show);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.rtbox_Body);
             this.panel1.Controls.Add(this.label6);
@@ -64,10 +70,32 @@
             this.panel1.Size = new System.Drawing.Size(1008, 137);
             this.panel1.TabIndex = 2;
             // 
+            // lbl_UniversalLabel
+            // 
+            this.lbl_UniversalLabel.AutoSize = true;
+            this.lbl_UniversalLabel.Location = new System.Drawing.Point(34, 59);
+            this.lbl_UniversalLabel.Name = "lbl_UniversalLabel";
+            this.lbl_UniversalLabel.Size = new System.Drawing.Size(106, 19);
+            this.lbl_UniversalLabel.TabIndex = 16;
+            this.lbl_UniversalLabel.Text = "For Screen Only";
+            // 
+            // chkbox_show
+            // 
+            this.chkbox_show.AutoSize = true;
+            this.chkbox_show.Checked = true;
+            this.chkbox_show.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbox_show.Location = new System.Drawing.Point(38, 81);
+            this.chkbox_show.Name = "chkbox_show";
+            this.chkbox_show.Size = new System.Drawing.Size(159, 23);
+            this.chkbox_show.TabIndex = 15;
+            this.chkbox_show.Text = "Screen Contract Page";
+            this.chkbox_show.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.chkbox_show.UseVisualStyleBackColor = true;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(664, 3);
+            this.label7.Location = new System.Drawing.Point(627, 3);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 19);
             this.label7.TabIndex = 14;
@@ -78,7 +106,7 @@
             this.rtbox_Body.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbox_Body.Location = new System.Drawing.Point(664, 22);
+            this.rtbox_Body.Location = new System.Drawing.Point(627, 22);
             this.rtbox_Body.Name = "rtbox_Body";
             this.rtbox_Body.Size = new System.Drawing.Size(260, 112);
             this.rtbox_Body.TabIndex = 13;
@@ -87,7 +115,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(453, 3);
+            this.label6.Location = new System.Drawing.Point(416, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 19);
             this.label6.TabIndex = 12;
@@ -95,7 +123,7 @@
             // 
             // rtbox_Salutation
             // 
-            this.rtbox_Salutation.Location = new System.Drawing.Point(453, 22);
+            this.rtbox_Salutation.Location = new System.Drawing.Point(416, 22);
             this.rtbox_Salutation.Name = "rtbox_Salutation";
             this.rtbox_Salutation.Size = new System.Drawing.Size(205, 112);
             this.rtbox_Salutation.TabIndex = 11;
@@ -104,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(242, 3);
+            this.label5.Location = new System.Drawing.Point(205, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 19);
             this.label5.TabIndex = 10;
@@ -112,7 +140,7 @@
             // 
             // rtbox_Address
             // 
-            this.rtbox_Address.Location = new System.Drawing.Point(242, 22);
+            this.rtbox_Address.Location = new System.Drawing.Point(205, 22);
             this.rtbox_Address.Name = "rtbox_Address";
             this.rtbox_Address.Size = new System.Drawing.Size(205, 112);
             this.rtbox_Address.TabIndex = 9;
@@ -134,9 +162,9 @@
             // 
             this.dtp_Date.CustomFormat = "MMM. dd, yyyy";
             this.dtp_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Date.Location = new System.Drawing.Point(84, 24);
+            this.dtp_Date.Location = new System.Drawing.Point(78, 22);
             this.dtp_Date.Name = "dtp_Date";
-            this.dtp_Date.Size = new System.Drawing.Size(152, 25);
+            this.dtp_Date.Size = new System.Drawing.Size(121, 25);
             this.dtp_Date.TabIndex = 7;
             this.dtp_Date.Value = new System.DateTime(2022, 11, 22, 0, 0, 0, 0);
             this.dtp_Date.ValueChanged += new System.EventHandler(this.dtp_Date_ValueChanged);
@@ -144,7 +172,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 27);
+            this.label4.Location = new System.Drawing.Point(34, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 19);
             this.label4.TabIndex = 6;
@@ -162,6 +190,13 @@
             // BSQuotation
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
+            // 
+            // txt_oftexpenses
+            // 
+            this.txt_oftexpenses.Location = new System.Drawing.Point(38, 106);
+            this.txt_oftexpenses.Name = "txt_oftexpenses";
+            this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
+            this.txt_oftexpenses.TabIndex = 17;
             // 
             // PrintQuoteView
             // 
@@ -199,5 +234,8 @@
         private System.Windows.Forms.Label label4;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         public System.Windows.Forms.BindingSource BSQuotation;
+        private System.Windows.Forms.CheckBox chkbox_show;
+        private System.Windows.Forms.Label lbl_UniversalLabel;
+        private System.Windows.Forms.TextBox txt_oftexpenses;
     }
 }

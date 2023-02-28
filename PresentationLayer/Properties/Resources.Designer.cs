@@ -333,6 +333,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap glass__1_ {
+            get {
+                object obj = ResourceManager.GetObject("glass (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_banknotes_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-banknotes-48", resourceCulture);
@@ -526,6 +536,16 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap SlidingPanel {
             get {
                 object obj = ResourceManager.GetObject("SlidingPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Summary_v2 {
+            get {
+                object obj = ResourceManager.GetObject("Summary_v2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

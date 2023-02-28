@@ -25,7 +25,7 @@ namespace ServiceLayer.Services.ScreenServices
                                                int discount,
                                                decimal screen_netPrice,
                                                decimal screen_totalAmount,
-                                               string plissemagnumType)
+                                               string screen_description)
         {
              IScreenModel scrn = new ScreenModel(screen_itemnumber,
                                                 screen_width,
@@ -38,7 +38,7 @@ namespace ServiceLayer.Services.ScreenServices
                                                 discount,
                                                 screen_netPrice,
                                                 screen_totalAmount,
-                                                plissemagnumType);
+                                                screen_description);
 
             ValidateModel(scrn);
             return scrn;
@@ -55,7 +55,7 @@ namespace ServiceLayer.Services.ScreenServices
                                                 int discount,
                                                 decimal screen_netPrice,
                                                 decimal screen_totalAmount,
-                                                string plissemagnumType)
+                                                string screen_description)
         {
 
                IScreenModel _screenModel = CreateScreen(screen_itemnumber,
@@ -69,7 +69,7 @@ namespace ServiceLayer.Services.ScreenServices
                                                         discount,
                                                         screen_netPrice,
                                                         screen_totalAmount,
-                                                        plissemagnumType);
+                                                        screen_description);
 
             return _screenModel;
         }

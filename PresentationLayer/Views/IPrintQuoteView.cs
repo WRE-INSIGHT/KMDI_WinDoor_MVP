@@ -9,9 +9,11 @@ namespace PresentationLayer.Views
         string QuotationAddress { get; set; }
         string QuotationSalutation { get; set; }
         string QuotationBody { get; set; }
-
-
-
+        string QuotationOuofTownExpenses { get; set; }
+        CheckBox ShowLastPage();
+        Label GetUniversalLabel();
+        Button GetRefreshBtn();
+        TextBox GetOutofTownExpenses();
         void ShowPrintQuoteView();
 
 

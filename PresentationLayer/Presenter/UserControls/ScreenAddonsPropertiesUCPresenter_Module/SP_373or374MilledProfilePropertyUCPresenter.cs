@@ -29,7 +29,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         private void _sp_373or374MilledProfilePropertyUC_SP373or374MilledProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-
+            _sp_373or374MilledProfilePropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
         public ISP_373or374MilledProfilePropertyUC Get373or374MilledProfilePropertyUC()
@@ -60,6 +60,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             binding.Add("Screen_373or374MilledProfileVisibility", new Binding("Visible", _screenModel, "Screen_373or374MilledProfileVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_373or374MilledProfile", new Binding("Value", _screenModel, "Screen_373or374MilledProfile", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Screen_373or374MilledProfileQty", new Binding("Value", _screenModel, "Screen_373or374MilledProfileQty", true, DataSourceUpdateMode.OnPropertyChanged));
+
 
             return binding;
         }

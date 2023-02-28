@@ -972,7 +972,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.86321in</Height>
+    <Height>3.6705in</Height>
     <Style>
       <Border>
         <Color>LightGrey</Color>
@@ -1368,7 +1368,7 @@ Banilad, Mandaue City, Cebu, Phils. 6014
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.70261in</Height>
+      <Height>0.69219in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1393,7 +1393,7 @@ Banilad, Mandaue City, Cebu, Phils. 6014
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>0.38889in</Top>
+          <Top>0.375in</Top>
           <Left>0.07427in</Left>
           <Height>0.25in</Height>
           <Width>7.88896in</Width>
