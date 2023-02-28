@@ -915,7 +915,8 @@ namespace PresentationLayer.Presenter
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
-            _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
+            _mainView.MainViewClosedEventRaised += new EventHandler(OnMainViewClosedEventRaised);
+            _mainView.MainViewClosingEventRaised += new FormClosingEventHandler(OnMainViewClosingEventRaised);
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
@@ -955,7 +956,49 @@ namespace PresentationLayer.Presenter
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
         }
+
+
         #region Events  
+        private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to save your changes in " + wndrFileName + "?", "Closing Application",
+                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveChanges();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                if(_quotationModel != null)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to save your progress?", "Closing Application",
+                                               MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                        if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                        {
+                            wndr_content = new List<string>();
+                            SaveAs();
+                        }
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+
+                }
+            }
+
+           
+        }
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
         {
             int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 120;
@@ -2225,10 +2268,16 @@ namespace PresentationLayer.Presenter
         bool onload = false;
         BackgroundWorker bgw = new BackgroundWorker();
         BackgroundWorker updatefile_bgw = new BackgroundWorker();
+        IDictionary<string, object> trympl = new Dictionary<string, object>();
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
+
+                foreach (var props in _windoorModel.lst_frame[0].Lst_MultiPanel[0].GetType().GetProperties())
+                {
+                    trympl.Add(props.Name, props.GetValue(_windoorModel.lst_frame[0].Lst_MultiPanel[0], null));
+                }
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
                     DialogResult dialogResult = DialogResult.No;
@@ -2308,7 +2357,7 @@ namespace PresentationLayer.Presenter
             _mainView.GetToolStripLabelLoading().Visible = visibility;
             _mainView.GetTsProgressLoading().Visible = visibility;
         }
-        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
+        private void OnMainViewClosedEventRaised(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
             _loginView.CloseLoginView();
@@ -2903,17 +2952,17 @@ namespace PresentationLayer.Presenter
 
                     SetChangesMark();
                     _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
+                    string existing_wndrfile = _mainView.GetOpenFileDialog().FileName;
 
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    FileInfo f = new FileInfo(wndrfile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                    int startFileName = existing_wndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(existing_wndrfile);
+                    f.MoveTo(Path.ChangeExtension(existing_wndrfile, ".txt"));
+                    string outFile = existing_wndrfile.Substring(0, startFileName) +
+                                     existing_wndrfile.Substring(startFileName, existing_wndrfile.LastIndexOf(".") - startFileName) + ".txt";
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+                    f.MoveTo(Path.ChangeExtension(existing_wndrfile, ".wndr"));
                     onload = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
@@ -2984,6 +3033,28 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
+
+            foreach (var prop in trympl)
+            {
+                foreach (var props in _windoorModel.lst_frame[0].Lst_MultiPanel[0].GetType().GetProperties())
+                {
+                    if (prop.Key == props.Name)
+                    {
+                        string currentVal = Convert.ToString(props.GetValue(_windoorModel.lst_frame[0].Lst_MultiPanel[0], null));
+                        string existVal = "";
+                        if(prop.Value!=null)
+                        {
+                            existVal = prop.Value.GetType().ToString();
+                        }
+                        if (currentVal != existVal)
+                        {
+                            Console.WriteLine("New mpnl " + existVal);
+                            Console.WriteLine("existing mpnl " + existVal);
+                            Console.WriteLine();
+                        }
+                    }
+                }
+            }
             toggle = !toggle;
             if (toggle == true)
             {
@@ -3200,13 +3271,11 @@ namespace PresentationLayer.Presenter
             {
                 inside_item = false;
                 inside_frame = true;
-
             }
             else if (row_str == "/")
             {
                 inside_concrete = true;
             }
-
             else if (row_str.Contains("#"))
             {
                 if (inside_panel)
@@ -3237,11 +3306,11 @@ namespace PresentationLayer.Presenter
                 {
                     Panel_Load();
                 }
+                inside_multi = false;
                 if (file_lines[row].ToString() == "\t\t\t]")
                 {
                     _multiPanelModel4thLvl = null;
                     mpnllvl = "third level";
-
                 }
                 else if (file_lines[row].ToString() == "\t\t]")
                 {
@@ -3253,7 +3322,6 @@ namespace PresentationLayer.Presenter
                     _multiPanelModel2ndLvl = null;
                     mpnllvl = "";
                 }
-
             }
             else if (row_str.Contains("|"))
             {
@@ -3265,6 +3333,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "}")
             {
+                inside_frame = false;
                 if (inside_panel)
                 {
                     Panel_Load();
@@ -3278,6 +3347,7 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == ")")
             {
+                inside_item = false;
                 _basePlatformPresenter.InvalidateBasePlatform();
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
             }
@@ -7235,69 +7305,69 @@ namespace PresentationLayer.Presenter
         private void Panel_Load()
         {
             IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
-                                                                               panel_Height,
-                                                                               (Control)panel_Parent,
-                                                                               (UserControl)panel_FrameGroup,
-                                                                               (UserControl)panel_FramePropertiesGroup,
-                                                                               (UserControl)panel_MultiPanelGroup,
-                                                                               panel_Type,
-                                                                               panel_Visibility,
-                                                                               _frameModel.Frame_Zoom,
-                                                                               _frameModel,
-                                                                               null,
-                                                                               panel_DisplayWidth,
-                                                                               panel_DisplayWidthDecimal,
-                                                                               panel_DisplayHeight,
-                                                                               panel_DisplayHeightDecimal,
-                                                                               panel_GlazingBeadArtNo,
-                                                                               panel_GlassFilm,
-                                                                               panel_SashProfileArtNo,
-                                                                               panel_SashReinfArtNo,
-                                                                               panel_GlassType,
-                                                                               panel_EspagnoletteArtNo,
-                                                                               //panel_StrikerArtNo,
-                                                                               Striker_ArticleNo._M89ANTA,
-                                                                               panel_MiddleCloserArtNo,
-                                                                               panel_LockingKitArtNo,
-                                                                               panel_MotorizedMechArtNo,
-                                                                               panel_HandleType,
-                                                                               panel_ExtensionTopArtNo,
-                                                                               panel_ExtensionTop2ArtNo,
-                                                                               panel_ExtensionBotArtNo,
-                                                                               panel_ExtensionBot2ArtNo,
-                                                                               panel_ExtensionLeftArtNo,
-                                                                               panel_ExtensionLeft2ArtNo,
-                                                                               panel_ExtensionRightArtNo,
-                                                                               panel_ExtensionRight2ArtNo,
-                                                                               panel_ExtTopChk,
-                                                                               panel_ExtBotChk,
-                                                                               panel_ExtLeftChk,
-                                                                               panel_ExtRightChk,
-                                                                               panel_ExtTopQty,
-                                                                               panel_ExtBotQty,
-                                                                               panel_ExtLeftQty,
-                                                                               panel_ExtRightQty,
-                                                                               panel_ExtTop2Qty,
-                                                                               panel_ExtBot2Qty,
-                                                                               panel_ExtLeft2Qty,
-                                                                               panel_ExtRight2Qty,
-                                                                               panel_RotoswingArtNo,
-                                                                               panel_GeorgianBarArtNo,
-                                                                               panel_OverlapSash,
-                                                                               panel_GeorgianBar_VerticalQty,
-                                                                               panel_GeorgianBar_HorizontalQty,
-                                                                               panel_GeorgianBarOptionVisibility,
-                                                                               panel_ID,
-                                                                               panel_GlassID,
-                                                                               panel_ImageRendererZoom,
-                                                                               panel_Index_Inside_MPanel,
-                                                                               panel_Dock,
-                                                                               panel_Name,
-                                                                               panel_Orient,
-                                                                               panel_HingeOptions,
-                                                                               panel_SlidingTypeVisibility,
-                                                                               panel_SlidingTypes
-                                                                               );
+                                                                panel_Height,
+                                                                (Control)panel_Parent,
+                                                                (UserControl)panel_FrameGroup,
+                                                                (UserControl)panel_FramePropertiesGroup,
+                                                                (UserControl)panel_MultiPanelGroup,
+                                                                panel_Type,
+                                                                panel_Visibility,
+                                                                _frameModel.Frame_Zoom,
+                                                                _frameModel,
+                                                                null,
+                                                                panel_DisplayWidth,
+                                                                panel_DisplayWidthDecimal,
+                                                                panel_DisplayHeight,
+                                                                panel_DisplayHeightDecimal,
+                                                                panel_GlazingBeadArtNo,
+                                                                panel_GlassFilm,
+                                                                panel_SashProfileArtNo,
+                                                                panel_SashReinfArtNo,
+                                                                panel_GlassType,
+                                                                panel_EspagnoletteArtNo,
+                                                                //panel_StrikerArtNo,
+                                                                Striker_ArticleNo._M89ANTA,
+                                                                panel_MiddleCloserArtNo,
+                                                                panel_LockingKitArtNo,
+                                                                panel_MotorizedMechArtNo,
+                                                                panel_HandleType,
+                                                                panel_ExtensionTopArtNo,
+                                                                panel_ExtensionTop2ArtNo,
+                                                                panel_ExtensionBotArtNo,
+                                                                panel_ExtensionBot2ArtNo,
+                                                                panel_ExtensionLeftArtNo,
+                                                                panel_ExtensionLeft2ArtNo,
+                                                                panel_ExtensionRightArtNo,
+                                                                panel_ExtensionRight2ArtNo,
+                                                                panel_ExtTopChk,
+                                                                panel_ExtBotChk,
+                                                                panel_ExtLeftChk,
+                                                                panel_ExtRightChk,
+                                                                panel_ExtTopQty,
+                                                                panel_ExtBotQty,
+                                                                panel_ExtLeftQty,
+                                                                panel_ExtRightQty,
+                                                                panel_ExtTop2Qty,
+                                                                panel_ExtBot2Qty,
+                                                                panel_ExtLeft2Qty,
+                                                                panel_ExtRight2Qty,
+                                                                panel_RotoswingArtNo,
+                                                                panel_GeorgianBarArtNo,
+                                                                panel_OverlapSash,
+                                                                panel_GeorgianBar_VerticalQty,
+                                                                panel_GeorgianBar_HorizontalQty,
+                                                                panel_GeorgianBarOptionVisibility,
+                                                                panel_ID,
+                                                                panel_GlassID,
+                                                                panel_ImageRendererZoom,
+                                                                panel_Index_Inside_MPanel,
+                                                                panel_Dock,
+                                                                panel_Name,
+                                                                panel_Orient,
+                                                                panel_HingeOptions,
+                                                                panel_SlidingTypeVisibility,
+                                                                panel_SlidingTypes
+                                                                );
             pnlModel.Panel_fileLoad = true;
             pnlModel.Panel_ChkText = panel_ChkText;
             pnlModel.Panel_ParentMultiPanelModel = panel_ParentMultiPanelModel;
@@ -7523,9 +7593,6 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_OverLappingPanelQty = panel_OverLappingPanelQty;
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArticleNo;
 
-
-
-
             #region louvre 
 
 
@@ -7564,11 +7631,6 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_CasementSealWidth = panel_CasementSealWidth;
             pnlModel.Panel_RubberSealWidth = panel_RubberSealWidth;
             #endregion
-
-
-
-
-
             #endregion
             IPanelPropertiesUCPresenter panelPropUCP = _panelPropertiesUCP.GetNewInstance(_unityC, pnlModel, this);
             UserControl panelPropUC = (UserControl)panelPropUCP.GetPanelPropertiesUC();
@@ -9886,13 +9948,7 @@ namespace PresentationLayer.Presenter
                     {
                         mpanel.Fit_MyControls_ToBindDimensions();
                         mpanel.Fit_MyControls_ImagersToBindDimensions();
-                        foreach (IMultiPanelModel mpanels in mpanel.MPanelLst_MultiPanel)
-                        {
-                            foreach (IPanelModel pnl in mpanels.MPanelLst_Panel)
-                            {
-                                pnl.SetDimensionToBind_2ndlvl_using_BaseDimension();
-                            }
-                        }
+                        
                     }
 
                 }

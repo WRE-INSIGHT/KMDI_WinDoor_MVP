@@ -73,6 +73,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             try
             {
                 Console.WriteLine(" " + _divModel.Div_WidthToBind);
+                Console.WriteLine(" " + ((UserControl)sender).Location);
                 mullionUC = (UserControl)sender;
                 Console.WriteLine(mullionUC.Width);
                 Console.WriteLine();

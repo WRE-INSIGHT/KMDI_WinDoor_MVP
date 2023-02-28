@@ -7,7 +7,7 @@ namespace PresentationLayer.Views
     public interface IMainView
     {
         event EventHandler MainViewLoadEventRaised;
-        event EventHandler MainViewClosingEventRaised;
+        event EventHandler MainViewClosedEventRaised;
         event EventHandler OpenToolStripButtonClickEventRaised;
         event EventHandler NewFrameButtonClickEventRaised;
         event EventHandler SortItemButtonClickEventRaised;
@@ -45,7 +45,7 @@ namespace PresentationLayer.Views
         event EventHandler NudCurrentPriceValueChangedEventRaised;
         event EventHandler setNewFactorEventRaised;
         event MouseEventHandler PanelMainMouseWheelRaiseEvent;
-
+        event FormClosingEventHandler MainViewClosingEventRaised;
 
         string mainview_title { get; set; }
         float Zoom { get; set; }

@@ -215,7 +215,7 @@ namespace PresentationLayer.Views
 
         #endregion
         public event EventHandler MainViewLoadEventRaised;
-        public event EventHandler MainViewClosingEventRaised;
+        public event FormClosingEventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
         public event EventHandler NewConcreteButtonClickEventRaised;
@@ -253,6 +253,7 @@ namespace PresentationLayer.Views
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
         public event EventHandler setNewFactorEventRaised;
         public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
+        public event EventHandler MainViewClosedEventRaised;
 
         public MainView()
         {
@@ -311,7 +312,7 @@ namespace PresentationLayer.Views
 
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            EventHelpers.RaiseEvent(this, MainViewClosingEventRaised, e);
+            EventHelpers.RaiseEvent(this, MainViewClosedEventRaised, e);
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
@@ -636,6 +637,11 @@ namespace PresentationLayer.Views
         private void MainView_KeyUp(object sender, KeyEventArgs e)
         {
             CrtlPress = false;
+        }
+
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, MainViewClosingEventRaised, e);
         }
     }
 }

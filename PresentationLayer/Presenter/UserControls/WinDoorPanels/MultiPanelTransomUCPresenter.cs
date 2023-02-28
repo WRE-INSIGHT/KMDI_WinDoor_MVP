@@ -171,10 +171,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_WidthToBind);
-                Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_HeightToBind);
-                multiTransomUC = (FlowLayoutPanel)sender;
+                Console.WriteLine("Mpanel Width " + _multiPanelModel.MPanel_Width);
+                Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_Height);
+                Console.WriteLine("Mpanel Widthtobind " + _multiPanelModel.MPanel_WidthToBind);
+                Console.WriteLine("Mpanel heighttobind " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Location " + ((FlowLayoutPanel)sender).Parent.Location);
                 Console.WriteLine();
+                multiTransomUC = (FlowLayoutPanel)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
                 int framePropertyHeight = 0;
@@ -520,19 +523,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             int mpanelDisplayWidth = _multiPanelModel.MPanel_DisplayWidth,
                                 mpanelDisplayWidthDecimal = _multiPanelModel.MPanel_DisplayWidthDecimal,
                                 mpanelDisplayHeight = _multiPanelModel.MPanel_DisplayHeight / (_multiPanelModel.MPanel_Divisions + 1);
-
-                            //string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
-                            //decimal DisplayHT_dec = Convert.ToDecimal(disp_ht_decimal) / totalPanelCount;
-
-                            //int suggest_DisplayHT = (int)Math.Truncate(DisplayHT_dec);
-                            //int DisplayHT_singleDecimalPlace = 0;
-
-                            //string[] DisplayHT_dec_split = decimal.Round(DisplayHT_dec, 1, MidpointRounding.AwayFromZero).ToString().Split('.');
-
-                            //if (DisplayHT_dec_split.Count() > 1)
-                            //{
-                            //    DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
-                            //}
                             #region MyRegion
 
                             string disp_ht_decimal = _multiPanelModel.MPanel_DisplayHeight + "." + _multiPanelModel.MPanel_DisplayHeightDecimal;
@@ -574,12 +564,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 DisplayHT_singleDecimalPlace = Convert.ToInt32(DisplayHT_dec_split[1]);
                             }
 
-                            if (_userModel.Department != "Sales & Operations (Costing)")
-                            {
+                           
                                 int EqualDisplayHT = (int)Math.Truncate(Convert.ToDecimal(disp_ht_decimal) / totalPanelCount);
                                 int EqualMPanelHT = ((_multiPanelModel.MPanel_Height - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
                                 suggest_HT = EqualMPanelHT - (EqualDisplayHT - suggest_DisplayHT);
-                            }
                             #endregion
 
                             FlowDirection flow = FlowDirection.LeftToRight;
@@ -849,10 +837,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             suggest_HT = EqualPanelHt - (EqualDisplayHt - suggest_DisplayHT);
                         }
 
-                        if (_multiPanelModel.MPanel_ParentModel != null)
-                        {
-                            suggest_Wd = multiPanel_boundsWD + 2;
-                        }
+                        //if (_multiPanelModel.MPanel_ParentModel != null)
+                        //{
+                        //    suggest_Wd = multiPanel_boundsWD + 2;
+                        //}
 
                         IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -1847,17 +1835,19 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             bounds_PointX = (int)(10 * zoom);
                             if (lvl2_parent_Type != "")
                             {
-                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                                //wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
                             }
                             else if (lvl2_parent_Type == "")
                             {
-                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                                ////wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
                             }
                         }
                         else if (zoom == 1.0f)
                         {
                             bounds_PointX = (int)(10 * zoom);
-                            wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
+                            wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) - 1;
                         }
                     }
                     else if (thisObj_placement == "Last")
@@ -2069,7 +2059,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             }
                             else if (lvl2_parent_Type == "")
                             {
-                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom) + 2;
+                                wd_deduction = (int)((10 + (pixels_count + 1)) * zoom);
                             }
                         }
                         else if (zoom == 1.0f)
@@ -3257,10 +3247,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     g.DrawLine(Pens.Black, new Point(loc_X, loc_Y),
                                            new Point(pInnerX, loc2_Y));
 
-                    if (zoom == 0.50f)
+                    if (zoom == 1.0f)
                     {
-                        divs_bounds_values[2].X -= 2;
-                        divs_bounds_values[2].Width += 2;
+                        divs_bounds_values[2].X += 1;
                     }
                     else if (zoom <= 0.26f)
                     {
@@ -3336,11 +3325,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         divs_bounds_values[3].Width += 1;
                     }
-                    else if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[2].X -= 2;
-                        divs_bounds_values[2].Width += 2;
-                    }
+                    //else if (zoom == 0.50f)
+                    //{
+                    //    divs_bounds_values[2].X -= 2;
+                    //    divs_bounds_values[2].Width += 2;
+                    //}
                     else if (zoom <= 0.26f)
                     {
                         divs_bounds_values[3].Width += 3;
@@ -3797,12 +3786,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Height += 3;
                     }
 
-                    if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[2].X -= 2;
-                        divs_bounds_values[2].Width += 2;
-                    }
-                    else if (zoom <= 0.26f)
+                    //if (zoom == 0.50f)
+                    //{
+                    //    divs_bounds_values[2].X -= 2;
+                    //    divs_bounds_values[2].Width += 2;
+                    //}
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[2].X -= 3;
                         divs_bounds_values[2].Width += 3;
@@ -3920,12 +3909,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[0].Height += 3;
                     }
 
-                    if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[2].X -= 2;
-                        divs_bounds_values[2].Width += 2;
-                    }
-                    else if (zoom <= 0.26f)
+                    //if (zoom == 0.50f)
+                    //{
+                    //    divs_bounds_values[2].X -= 2;
+                    //    divs_bounds_values[2].Width += 2;
+                    //}
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[2].X -= 3;
                         divs_bounds_values[2].Width += 3;
@@ -4080,12 +4069,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         divs_bounds_values[1].Height += 4;
                     }
 
-                    if (zoom == 0.50f)
-                    {
-                        divs_bounds_values[2].X -= 2;
-                        divs_bounds_values[2].Width += 2;
-                    }
-                    else if (zoom <= 0.26f)
+                    //if (zoom == 0.50f)
+                    //{
+                    //    divs_bounds_values[2].X -= 2;
+                    //    divs_bounds_values[2].Width += 2;
+                    //}
+                    if (zoom <= 0.26f)
                     {
                         divs_bounds_values[2].X -= 3;
                         divs_bounds_values[2].Width += 3;

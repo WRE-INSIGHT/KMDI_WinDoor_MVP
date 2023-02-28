@@ -54,5 +54,10 @@ namespace CommonComponents
         {
             controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
         }
+
+        public static void RaiseFormClosingEvent(object objectRaisingEvent, FormClosingEventHandler controlEventHandlerRaised, FormClosingEventArgs controlEventArgs)
+        {
+            controlEventHandlerRaised?.Invoke(objectRaisingEvent, controlEventArgs);
+        }
     }
 }
