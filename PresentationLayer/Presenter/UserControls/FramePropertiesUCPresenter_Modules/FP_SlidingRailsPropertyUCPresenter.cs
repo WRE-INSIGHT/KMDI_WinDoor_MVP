@@ -30,6 +30,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _slidingRailsPropertyUC_nudRailsQtyValueChangedEventRaised(object sender, EventArgs e)
         {
+            _frameModel.Frame_SlidingRailsQty = (int)((NumericUpDown)sender).Value; 
             _mainPresenter.GetCurrentPrice();
         }
 
