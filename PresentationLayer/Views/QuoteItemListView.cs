@@ -12,6 +12,19 @@ namespace PresentationLayer.Views
             return chkbox_selectall;
         }
 
+        private bool _renderpdfatbackground;
+        public bool RenderPdfAtBackground
+        {
+            get
+            {
+                return _renderpdfatbackground;
+            }
+            set
+            {
+                _renderpdfatbackground = value;
+            }
+        }
+
         private bool _getItemListUC_CheckState;
         public bool GetItemListUC_CheckBoxState
         {

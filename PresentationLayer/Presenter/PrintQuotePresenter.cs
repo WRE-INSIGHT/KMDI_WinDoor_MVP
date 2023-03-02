@@ -137,8 +137,8 @@ namespace PresentationLayer.Presenter
                                                     + _mainPresenter.titleLastname
                                                     + ",";
                 _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
-                //_printQuoteView.GetShowPageNum().Checked = true; Showpagenum checked on load
-                _printQuoteView.QuotationOuofTownExpenses = "50000";
+                _printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load
+                _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
 
@@ -234,22 +234,32 @@ namespace PresentationLayer.Presenter
         }
         private void _printQuoteView_btnRefreshClickEventRaised(object sender, System.EventArgs e)
         {
+
+            PrintRDLCReport();
+
+            _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
+            _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
+            _printQuoteView.GetReportViewer().ZoomPercent = 75;
+            _printQuoteView.GetReportViewer().RefreshReport();
+        }
+
+        public void PrintRDLCReport()
+        {
             try
             {
-                if(checklist_raised == true)
+                if (checklist_raised == true)
                 {
                     ShowItemImage();
                 }
                 Console.WriteLine("Checklist_Raise.: " + checklist_raised.ToString());
 
-
                 ReportDataSource RDSQuote = new ReportDataSource();
                 RDSQuote.Name = "DataSet1";
                 RDSQuote.Value = _printQuoteView.GetBindingSource();
                 _printQuoteView.GetReportViewer().LocalReport.DataSources.Add(RDSQuote);
-                
+
                 //_printQuoteView.GetReportViewer().ProcessingMode = ProcessingMode.Local;
-                if (_mainPresenter.printStatus== "WinDoorItems")
+                if (_mainPresenter.printStatus == "WinDoorItems")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Quotation.rdlc";
                 }
@@ -258,11 +268,11 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Screen.rdlc";
                 }
                 else if (_mainPresenter.printStatus == "ContractSummary")
-                {           
+                {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
                 }
 
-                if(_mainPresenter.printStatus == "ScreenItem")
+                if (_mainPresenter.printStatus == "ScreenItem")
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
@@ -306,12 +316,12 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
-
-                    foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
-                    {
-                        _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
-                    }
-                    _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
+                    
+                        foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
+                        {
+                            _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
+                        }                                          
+                        _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
 
                     ReportParameter[] RParam = new ReportParameter[8];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -320,18 +330,18 @@ namespace PresentationLayer.Presenter
                     RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
-     
-                    if(checklist_raised == true)
+
+                    if (checklist_raised == true)
                     {
                         bool indexes_exist = false;
-                        foreach(var item in _printQuoteView.GetChkLstBox().CheckedIndices)
+                        foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
                         {
                             //check checklist for indexes
                             indexes_exist = true;
                             break;
                         }
 
-                        if(indexes_exist == true)
+                        if (indexes_exist == true)
                         {
                             RParam[6] = new ReportParameter("ShowItemImage", "True");
                         }
@@ -362,15 +372,15 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[7] = new ReportParameter("ShowPageNum", "False");
                     }
-      
-                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);              
+
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     _quoteItemListPresenter.GetQuoteItemListView().GetItemListUC_CheckBoxState = false;
                     checklist_raised = false;
 
-                    #endregion
 
+                    #endregion
                 }
-                else if(_mainPresenter.printStatus == "ContractSummary")
+                else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     #region Contract Summary RDLC 
                     _printQuoteView.GetChkLstBox().Visible = false;
@@ -381,7 +391,7 @@ namespace PresentationLayer.Presenter
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
-                    ReportParameter[] RParam = new ReportParameter[5];                 
+                    ReportParameter[] RParam = new ReportParameter[5];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[2] = new ReportParameter("ASPosition", "Account Executive");
@@ -397,15 +407,12 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
+
+              
+
                     #endregion
                 }
-
-                _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
-                _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
-                _printQuoteView.GetReportViewer().ZoomPercent = 75;
-                _printQuoteView.GetReportViewer().RefreshReport();                
 
             }
             catch (Exception ex)
@@ -413,7 +420,6 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show(ex.Message);
             }
         }
-
         
         
         public IPrintQuoteView GetPrintQuoteView()

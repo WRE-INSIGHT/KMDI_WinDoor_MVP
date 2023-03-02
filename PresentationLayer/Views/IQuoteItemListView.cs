@@ -17,5 +17,6 @@ namespace PresentationLayer.Views
         void closeQuoteItemList();
         CheckBox GetChkboxSelectAll();
         bool GetItemListUC_CheckBoxState { get; set; }
+        bool RenderPdfAtBackground { get; set; }
     }
 }
