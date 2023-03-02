@@ -704,6 +704,7 @@ namespace PresentationLayer.Presenter
 
                     if (chkbox_checkstate == true)
                     {
+                        this._quoteItemListView.GetItemListUC_CheckBoxState = true;
                         showImage = true;
                         ShowItemImage_CheckList.Add(new ShowItemImage
                         {

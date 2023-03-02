@@ -16,5 +16,6 @@ namespace PresentationLayer.Views
         void showQuoteItemList();
         void closeQuoteItemList();
         CheckBox GetChkboxSelectAll();
+        bool GetItemListUC_CheckBoxState { get; set; }
     }
 }

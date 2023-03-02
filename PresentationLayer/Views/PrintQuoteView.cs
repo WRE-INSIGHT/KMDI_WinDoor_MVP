@@ -98,6 +98,10 @@ namespace PresentationLayer.Views
         {
             return chklstbox_itemnum;
         }
+        public CheckBox GetShowPageNum()
+        {
+            return chk_showpagenum;
+        }
 
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
@@ -136,5 +140,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, SelectedIndexChangeEventRaised, e);
         }
+
+       
     }
 }

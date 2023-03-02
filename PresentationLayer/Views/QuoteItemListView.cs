@@ -12,6 +12,19 @@ namespace PresentationLayer.Views
             return chkbox_selectall;
         }
 
+        private bool _getItemListUC_CheckState;
+        public bool GetItemListUC_CheckBoxState
+        {
+            get
+            {
+                return _getItemListUC_CheckState;
+            }
+            set
+            {
+                _getItemListUC_CheckState = value;
+            }
+        }
+
         public QuoteItemListView()
         {
             InitializeComponent();

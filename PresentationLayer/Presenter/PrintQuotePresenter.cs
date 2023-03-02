@@ -57,7 +57,8 @@ namespace PresentationLayer.Presenter
                     Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
 
                    _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
-                    
+                   
+                   
                     foreach (IFrameModel frm in wdm.lst_frame)
                     {
                         foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
@@ -136,6 +137,7 @@ namespace PresentationLayer.Presenter
                                                     + _mainPresenter.titleLastname
                                                     + ",";
                 _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+                //_printQuoteView.GetShowPageNum().Checked = true; Showpagenum checked on load
                 _printQuoteView.QuotationOuofTownExpenses = "50000";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);
@@ -262,11 +264,12 @@ namespace PresentationLayer.Presenter
 
                 if(_mainPresenter.printStatus == "ScreenItem")
                 {
+                    #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
 
-                    ReportParameter[] RParam = new ReportParameter[9];
+                    ReportParameter[] RParam = new ReportParameter[10];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -284,16 +287,25 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[8] = new ReportParameter("ListScreen", "False");
                     }
-                    
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[9] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[9] = new ReportParameter("ShowPageNum", "False");
+                    }
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-                                       
+                    #endregion
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
+                    #region Windoor RDLC
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
-                    checklist_raised = false;
 
                     foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
                     {
@@ -308,8 +320,31 @@ namespace PresentationLayer.Presenter
                     RParam[3] = new ReportParameter("Body", _printQuoteView.QuotationBody);
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
+     
+                    if(checklist_raised == true)
+                    {
+                        bool indexes_exist = false;
+                        foreach(var item in _printQuoteView.GetChkLstBox().CheckedIndices)
+                        {
+                            //check checklist for indexes
+                            indexes_exist = true;
+                            break;
+                        }
 
-                    if (_printQuoteView.ShowLastPage().Checked)
+                        if(indexes_exist == true)
+                        {
+                            RParam[6] = new ReportParameter("ShowItemImage", "True");
+                        }
+                        else
+                        {
+                            RParam[6] = new ReportParameter("ShowItemImage", "False");
+                        }
+                    }
+                    else if (_quoteItemListPresenter.GetQuoteItemListView().GetChkboxSelectAll().Checked)
+                    {
+                        RParam[6] = new ReportParameter("ShowItemImage", "True");
+                    }
+                    else if (_quoteItemListPresenter.GetQuoteItemListView().GetItemListUC_CheckBoxState == true)
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
@@ -318,13 +353,26 @@ namespace PresentationLayer.Presenter
                         RParam[6] = new ReportParameter("ShowItemImage", "False");
                     }
 
-                    RParam[7] = new ReportParameter("ItemNumber", "4");
 
-                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-                                      
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[7] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[7] = new ReportParameter("ShowPageNum", "False");
+                    }
+      
+                    _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);              
+                    _quoteItemListPresenter.GetQuoteItemListView().GetItemListUC_CheckBoxState = false;
+                    checklist_raised = false;
+
+                    #endregion
+
                 }
                 else if(_mainPresenter.printStatus == "ContractSummary")
-                {     
+                {
+                    #region Contract Summary RDLC 
                     _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
@@ -333,15 +381,25 @@ namespace PresentationLayer.Presenter
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
-                    ReportParameter[] RParam = new ReportParameter[4];                 
+                    ReportParameter[] RParam = new ReportParameter[5];                 
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[2] = new ReportParameter("ASPosition", "Account Executive");
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
+
+                    if (_printQuoteView.GetShowPageNum().Checked)
+                    {
+                        RParam[4] = new ReportParameter("ShowPageNum", "True");
+                    }
+                    else
+                    {
+                        RParam[4] = new ReportParameter("ShowPageNum", "False");
+                    }
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
-                   
+                    #endregion
                 }
 
                 _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);

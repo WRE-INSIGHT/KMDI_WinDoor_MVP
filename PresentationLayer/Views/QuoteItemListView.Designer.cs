@@ -115,10 +115,9 @@
             // 
             this.chkbox_selectall.AutoSize = true;
             this.chkbox_selectall.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkbox_selectall.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkbox_selectall.Location = new System.Drawing.Point(0, 0);
+            this.chkbox_selectall.Location = new System.Drawing.Point(0, 30);
             this.chkbox_selectall.Name = "chkbox_selectall";
-            this.chkbox_selectall.Size = new System.Drawing.Size(71, 46);
+            this.chkbox_selectall.Size = new System.Drawing.Size(71, 17);
             this.chkbox_selectall.TabIndex = 8;
             this.chkbox_selectall.Text = "Select all";
             this.chkbox_selectall.UseVisualStyleBackColor = true;

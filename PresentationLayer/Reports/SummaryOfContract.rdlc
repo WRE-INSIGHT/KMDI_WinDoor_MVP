@@ -2820,6 +2820,9 @@
           <Left>3.42721in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
+          <Visibility>
+            <Hidden>=iif(Parameters!ShowPageNum.Value = "True", false, true)</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2904,6 +2907,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="OutofTownExpenses">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowPageNum">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
