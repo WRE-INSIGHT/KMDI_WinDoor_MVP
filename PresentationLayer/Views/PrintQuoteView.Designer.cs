@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.chk_showpagenum = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.txt_oftexpenses = new System.Windows.Forms.TextBox();
@@ -47,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +75,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(75, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 19);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Show Page No.";
             // 
             // chk_showpagenum
             // 
@@ -229,15 +238,6 @@
             // BSQuotation
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(75, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 19);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Show Page No.";
             // 
             // PrintQuoteView
             // 

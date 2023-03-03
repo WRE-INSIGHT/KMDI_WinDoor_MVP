@@ -30,24 +30,50 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
+        private IPDFCompilerPresenter _pdfCompilerPresenter;
+        private IRDLCReportCompilerPresenter _rdlcReportCompilerPresenter;
 
         #region Variables
+        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+        private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
+        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
+        private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
+        private List<int> _lstItemArea = new List<int>();
+        private bool _renderPDFAtBackground;
+
+        public bool RenderPDFAtBackGround
+        {
+            get
+            {
+                return _renderPDFAtBackground;
+            }
+            set
+            {
+                _renderPDFAtBackground = value;
+            }
+        }
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
             set { _lstQuoteItemUC = value; }
         }
-        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
-
         public List<ShowItemImage> ShowItemImage_CheckList
         {
             get { return _showItemImage_CheckList; }
             set { _showItemImage_CheckList = value; }
         }
-        private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
+        public List<int> RDLCReportCompilerItemIndexes
+        {
+            get
+            {
+                return _rdlcReportCompilerItemIndexes;
+            }
+            set
+            {
+                _rdlcReportCompilerItemIndexes = value;
+            }
+        }
 
-        private List<int> _lstItemArea = new List<int>();
-        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();     
 
         int prev_GlassItemNo,
             prev_GlassQty,
@@ -88,12 +114,16 @@ namespace PresentationLayer.Presenter
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
                                       IPrintQuotePresenter printQuotePresenter,
-                                      IPrintGlassSummaryPresenter printGlassSummaryPresenter
+                                      IPrintGlassSummaryPresenter printGlassSummaryPresenter,
+                                      IPDFCompilerPresenter pdfCompilerPresenter,
+                                      IRDLCReportCompilerPresenter rdlcReportCompilerPresenter
                                       )
         {
             _quoteItemListView = quoteItemListView;
             _printQuotePresenter = printQuotePresenter;
             _printGlassSummaryPresenter = printGlassSummaryPresenter;
+            _pdfCompilerPresenter = pdfCompilerPresenter;
+            _rdlcReportCompilerPresenter = rdlcReportCompilerPresenter;
             SubscribeToEventSetup();
         }
 
@@ -106,12 +136,14 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
+            _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
+
+
 
         public void PrintWindoorRDLC()
         {
             DSQuotation _dsq = new DSQuotation();
-
             /*
           ID
           dtItemName
@@ -193,29 +225,52 @@ namespace PresentationLayer.Presenter
                     string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
-
-                    bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
-
-                    if (chkbox_checkstate == true)
+                    if(RenderPDFAtBackGround != true)
                     {
-                        this._quoteItemListView.GetItemListUC_CheckBoxState = true;
-                        showImage = true;
-                        ShowItemImage_CheckList.Add(new ShowItemImage
-                        {
-                            ItemIndex = i,
-                            ItemboolImage = showImage
+                        bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
 
-                        });
+                        if (chkbox_checkstate == true)
+                        {
+                            this._quoteItemListView.GetItemListUC_CheckBoxState = true;
+                            showImage = true;
+                            ShowItemImage_CheckList.Add(new ShowItemImage
+                            {
+                                ItemIndex = i,
+                                ItemboolImage = showImage
+
+                            });
+                        }
+                        else
+                        {
+                            showImage = false;
+                            ShowItemImage_CheckList.Add(new ShowItemImage
+                            {
+                                ItemIndex = i,
+                                ItemboolImage = showImage
+
+                            });
+                        }
                     }
                     else
                     {
-                        showImage = false;
-                        ShowItemImage_CheckList.Add(new ShowItemImage
+                        #region RDLCReportCompiler Executed
+                        if (RDLCReportCompilerItemIndexes.Count != 0)
                         {
-                            ItemIndex = i,
-                            ItemboolImage = showImage
-
-                        });
+                            foreach(var item in RDLCReportCompilerItemIndexes.ToArray())
+                            {
+                                showImage = false;
+                                if(i == item)
+                                {
+                                    showImage = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            showImage = false;
+                        }
+                        #endregion
                     }
 
                     Console.WriteLine("EventPrint.: " + showImage.ToString());
@@ -244,8 +299,16 @@ namespace PresentationLayer.Presenter
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
-            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-         
+            if(RenderPDFAtBackGround != true)
+            {
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            else
+            {
+                printQuote.EventLoad();
+                printQuote.PrintRDLCReport();
+            }
+
         }
 
         public void PrintContractSummaryRDLC()
@@ -318,6 +381,11 @@ namespace PresentationLayer.Presenter
         private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
         {
             PrintContractSummaryRDLC();
+        }
+        private void OnTSbtnPDFCompilerClickEventRaised(object sender, EventArgs e)
+        {
+            IPDFCompilerPresenter pdfCompiler = _pdfCompilerPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this, _mainPresenter);
+            pdfCompiler.GetPDFCompilerView().GetPDFCompilerView();
         }
 
         private void _quoteItemListView_QuoteItemListViewFormClosedEventRaised(object sender, FormClosedEventArgs e)

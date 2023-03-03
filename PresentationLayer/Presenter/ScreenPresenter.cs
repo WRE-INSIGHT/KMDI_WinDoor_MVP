@@ -503,8 +503,9 @@ namespace PresentationLayer.Presenter
                 _screenModel.SP_MagnumScreenType_Visibility = false;
             }
 
-
+            
             _screenModel.ComputeScreenTotalPrice();
+            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
 
         private void _screenView_cmbbaseColorSelectedValueChangedEventRaised(object sender, EventArgs e)

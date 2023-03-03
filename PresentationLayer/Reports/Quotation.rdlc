@@ -992,7 +992,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!dtDescription.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1031,6 +1034,7 @@
                         </Border>
                       </Style>
                     </Image>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

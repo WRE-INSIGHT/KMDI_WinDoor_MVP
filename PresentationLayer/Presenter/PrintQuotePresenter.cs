@@ -45,104 +45,106 @@ namespace PresentationLayer.Presenter
             _printQuoteView.SelectedIndexChangeEventRaised += _printQuoteView_SelectedIndexChangeEventRaised;
         }
 
-
-        private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
+        public void EventLoad()
         {
-            try
-            {             
-                List<string> Lst_BaseColor = new List<string>();
-                List<string> Lst_Panel = new List<string>();
-                foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
-                {
-                    Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
+            List<string> Lst_BaseColor = new List<string>();
+            List<string> Lst_Panel = new List<string>();
+            foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
+            {
+                Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
 
-                   _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
-                   
-                   
-                    foreach (IFrameModel frm in wdm.lst_frame)
+                _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
+
+
+                foreach (IFrameModel frm in wdm.lst_frame)
+                {
+                    foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
                     {
-                        foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
-                        {
-                            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                            {
-                                Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
-                            }
-                        }
-                        foreach (IPanelModel pnl in frm.Lst_Panel)
+                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                         {
                             Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
                         }
                     }
-
-
-                }
-                                
-               
-                int GlassCount = 0;
-                string GlassThickness = "";
-                var q = from x in Lst_Panel
-                        group x by x into g
-                        let count = g.Count()
-                        orderby count descending
-                        select new { Value = g.Key, Count = count };
-                foreach (var x in q)
-                {
-                    if (x.Count > GlassCount)
+                    foreach (IPanelModel pnl in frm.Lst_Panel)
                     {
-                        GlassCount = x.Count;
-                        GlassThickness = x.Value.ToString();
+                        Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
                     }
                 }
 
-                var duplicateBaseColor = Lst_BaseColor.Distinct().ToList();
-                string baseColor = "";
-                for (int i = 0; i < duplicateBaseColor.Count(); i++)
+
+            }
+
+
+            int GlassCount = 0;
+            string GlassThickness = "";
+            var q = from x in Lst_Panel
+                    group x by x into g
+                    let count = g.Count()
+                    orderby count descending
+                    select new { Value = g.Key, Count = count };
+            foreach (var x in q)
+            {
+                if (x.Count > GlassCount)
                 {
-                    if (i == 0)
-                    {
-                        baseColor += duplicateBaseColor.ToList()[i];
-                    }
-                    else if (i == 1)
-                    {
-                        if (duplicateBaseColor.Count() == 3)
-                        {
-                            baseColor += ", " + duplicateBaseColor.ToList()[i];
+                    GlassCount = x.Count;
+                    GlassThickness = x.Value.ToString();
+                }
+            }
 
-                        }
-                        else
-                        {
-                            baseColor += " & " + duplicateBaseColor.ToList()[i];
+            var duplicateBaseColor = Lst_BaseColor.Distinct().ToList();
+            string baseColor = "";
+            for (int i = 0; i < duplicateBaseColor.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    baseColor += duplicateBaseColor.ToList()[i];
+                }
+                else if (i == 1)
+                {
+                    if (duplicateBaseColor.Count() == 3)
+                    {
+                        baseColor += ", " + duplicateBaseColor.ToList()[i];
 
-                        }
                     }
-                    else if (i == 2)
+                    else
                     {
                         baseColor += " & " + duplicateBaseColor.ToList()[i];
+
                     }
                 }
-                if (GlassThickness != "Unglazed" && GlassThickness != "")
+                else if (i == 2)
                 {
-                    GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
+                    baseColor += " & " + duplicateBaseColor.ToList()[i];
                 }
-                baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
-                                              + "USING "
-                                              + baseColor.ToUpper()
-                                              + " PROFILES\n"
-                                              + "USING "
-                                              + GlassThickness.ToUpper()
-                                              + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                              + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
-                _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
-                                                    + _mainPresenter.titleLastname
-                                                    + ",";
-                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
-                _printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load
+            }
+            if (GlassThickness != "Unglazed" && GlassThickness != "")
+            {
+                GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
+            }
+            baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
+            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                          + "USING "
+                                          + baseColor.ToUpper()
+                                          + " PROFILES\n"
+                                          + "USING "
+                                          + GlassThickness.ToUpper()
+                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+            _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                + _mainPresenter.titleLastname
+                                                + ",";
+            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+            _printQuoteView.GetDTPDate().Value = DateTime.Now;
+        }
+        private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
+        {
+            try
+            {
+                EventLoad();
+                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load
                 _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.GetReportViewer().RefreshReport();
-                _printQuoteView_btnRefreshClickEventRaised(sender, e);
-
-                
+                _printQuoteView_btnRefreshClickEventRaised(sender, e);           
             }
             catch (Exception ex)
             {
@@ -247,6 +249,7 @@ namespace PresentationLayer.Presenter
         {
             try
             {
+
                 if (checklist_raised == true)
                 {
                     ShowItemImage();
@@ -358,6 +361,10 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
+                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        RParam[6] = new ReportParameter("ShowItemImage", "True");
+                    }
                     else
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "False");
@@ -377,6 +384,32 @@ namespace PresentationLayer.Presenter
                     _quoteItemListPresenter.GetQuoteItemListView().GetItemListUC_CheckBoxState = false;
                     checklist_raised = false;
 
+                    #region RenderPDFAtBackground
+                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\Quotation.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
 
                     #endregion
                 }

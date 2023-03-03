@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuoteItemListView));
             this.pnlPrintBody = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.TSbtnGlassSummary = new System.Windows.Forms.ToolStripButton();
             this.TSbtnContractSummary = new System.Windows.Forms.ToolStripButton();
+            this.TSbtnPDFCompiler = new System.Windows.Forms.ToolStripButton();
             this.pnlPrintHeader.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -139,7 +141,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSbtnPrint,
             this.TSbtnGlassSummary,
-            this.TSbtnContractSummary});
+            this.TSbtnContractSummary,
+            this.TSbtnPDFCompiler});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(868, 25);
@@ -165,6 +168,16 @@
             this.TSbtnContractSummary.Size = new System.Drawing.Size(23, 22);
             this.TSbtnContractSummary.Text = "Contract Summary";
             this.TSbtnContractSummary.Click += new System.EventHandler(this.TSbtnContractSummary_Click);
+            // 
+            // TSbtnPDFCompiler
+            // 
+            this.TSbtnPDFCompiler.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSbtnPDFCompiler.Image = ((System.Drawing.Image)(resources.GetObject("TSbtnPDFCompiler.Image")));
+            this.TSbtnPDFCompiler.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TSbtnPDFCompiler.Name = "TSbtnPDFCompiler";
+            this.TSbtnPDFCompiler.Size = new System.Drawing.Size(23, 22);
+            this.TSbtnPDFCompiler.Text = "toolStripButton1";
+            this.TSbtnPDFCompiler.Click += new System.EventHandler(this.TSbtnPDFCompiler_Click);
             // 
             // QuoteItemListView
             // 
@@ -203,5 +216,6 @@
         private System.Windows.Forms.ToolStripButton TSbtnGlassSummary;
         private System.Windows.Forms.ToolStripButton TSbtnContractSummary;
         private System.Windows.Forms.CheckBox chkbox_selectall;
+        private System.Windows.Forms.ToolStripButton TSbtnPDFCompiler;
     }
 }
