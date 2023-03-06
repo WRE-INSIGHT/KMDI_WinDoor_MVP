@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.36</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.37</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>37</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -153,22 +153,26 @@
     <Compile Include="Presenter\IGlassThicknessListPresenter.cs" />
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
+    <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
     <Compile Include="Presenter\IPricingPresenter.cs" />
     <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
     <Compile Include="Presenter\IpromptYesNoPresenter.cs" />
     <Compile Include="Presenter\IQuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\IRDLCReportCompilerPresenter.cs" />
     <Compile Include="Presenter\IScreenPresenter.cs" />
     <Compile Include="Presenter\ISetMultipleGlassThicknessPresenter.cs" />
     <Compile Include="Presenter\ISetTopViewSlidingPanellingPresenter.cs" />
     <Compile Include="Presenter\ISortItemPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
+    <Compile Include="Presenter\PDFCompilerPresenter.cs" />
     <Compile Include="Presenter\PricingPresenter.cs" />
     <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
     <Compile Include="Presenter\promptYesNoPresenter.cs" />
     <Compile Include="Presenter\QuoteItemListPresenter.cs" />
+    <Compile Include="Presenter\RDLCReportCompilerPresenter.cs" />
     <Compile Include="Presenter\ScreenPresenter.cs" />
     <Compile Include="Presenter\SetMultipleGlassThicknessPresenter.cs" />
     <Compile Include="Presenter\SetTopViewSlidingPanellingPresenter.cs" />
@@ -464,11 +468,13 @@
     <Compile Include="Views\IGlassThicknessListView.cs" />
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IPDFCompilerView.cs" />
     <Compile Include="Views\IPricingView.cs" />
     <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
     <Compile Include="Views\IpromptYesNo.cs" />
     <Compile Include="Views\IQuoteItemListView.cs" />
+    <Compile Include="Views\IRDLCReportCompilerView.cs" />
     <Compile Include="Views\IScreenView.cs" />
     <Compile Include="Views\ISetMultipleGlassThicknessView.cs" />
     <Compile Include="Views\ISetTopViewSlidingPanellingView.cs" />
@@ -484,6 +490,12 @@
     </Compile>
     <Compile Include="Views\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PDFCompilerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PDFCompilerView.Designer.cs">
+      <DependentUpon>PDFCompilerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PricingView.cs">
       <SubType>Form</SubType>
@@ -514,6 +526,12 @@
     </Compile>
     <Compile Include="Views\QuoteItemListView.Designer.cs">
       <DependentUpon>QuoteItemListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RDLCReportCompilerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RDLCReportCompilerView.Designer.cs">
+      <DependentUpon>RDLCReportCompilerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ScreenView.cs">
       <SubType>Form</SubType>
@@ -1268,6 +1286,9 @@
     <EmbeddedResource Include="Views\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PDFCompilerView.resx">
+      <DependentUpon>PDFCompilerView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\PricingView.resx">
       <DependentUpon>PricingView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1282,6 +1303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QuoteItemListView.resx">
       <DependentUpon>QuoteItemListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RDLCReportCompilerView.resx">
+      <DependentUpon>RDLCReportCompilerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ScreenView.resx">
       <DependentUpon>ScreenView.cs</DependentUpon>

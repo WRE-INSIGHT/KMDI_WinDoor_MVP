@@ -12,6 +12,21 @@ namespace PresentationLayer.Views
             return chkbox_selectall;
         }
 
+        private bool _renderpdfatbackground;
+
+        private bool _getItemListUC_CheckState;
+        public bool GetItemListUC_CheckBoxState
+        {
+            get
+            {
+                return _getItemListUC_CheckState;
+            }
+            set
+            {
+                _getItemListUC_CheckState = value;
+            }
+        }
+
         public QuoteItemListView()
         {
             InitializeComponent();
@@ -22,7 +37,9 @@ namespace PresentationLayer.Views
         public event EventHandler TsbtnContractSummaryClickEventRaised;
         public event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
         public event EventHandler chkboxSelectallCheckedChangeEventRaised;
-        
+        public event EventHandler TSbtnPDFCompilerClickEventRaised;
+
+
         private void TSbtnPrint_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TSbtnPrintClickEventRaised, e);
@@ -63,6 +80,11 @@ namespace PresentationLayer.Views
         private void chkbox_selectall_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkboxSelectallCheckedChangeEventRaised, e);
+        }
+
+        private void TSbtnPDFCompiler_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, TSbtnPDFCompilerClickEventRaised, e);
         }
     }
 }

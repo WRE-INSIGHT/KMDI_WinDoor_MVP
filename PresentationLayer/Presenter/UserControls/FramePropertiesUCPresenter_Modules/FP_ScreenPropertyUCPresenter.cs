@@ -36,6 +36,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
         private void _screenPropertyUC_nudScreenHeightValueChangedEventRaised(object sender, EventArgs e)
         {
             _frameModel.Frame_ScreenFrameHeight = (int)((NumericUpDown)sender).Value;
+            _mainPresenter.GetCurrentPrice();
         }
 
 
@@ -52,7 +53,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
                 _frameModel.Frame_ScreenHeightVisibility = false;
                 _frameModel.Frame_ScreenOption = false;
                 _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(-constants.frame_ScreenHeightProperty_PanelHeight);
-
+                _frameModel.Frame_ScreenHeightOption = false;
             }
             else if (chk.Checked == true)
             {
@@ -61,6 +62,7 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
                 _frameModel.Frame_ScreenOption = true;
                 _FramePropertiesUCPresenter.GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
             }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _screenPropertyUC_FScreenPropertyUCLoadEventRaised(object sender, EventArgs e)

@@ -31,9 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chklstbox_itemnum = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chk_showpagenum = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.txt_oftexpenses = new System.Windows.Forms.TextBox();
+            this.chklstbox_itemnum = new System.Windows.Forms.CheckedListBox();
             this.lbl_UniversalLabel = new System.Windows.Forms.Label();
             this.chkbox_show = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,6 +54,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.chk_showpagenum);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.txt_oftexpenses);
             this.panel1.Controls.Add(this.chklstbox_itemnum);
@@ -69,25 +73,32 @@
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1008, 137);
+            this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
             // 
-            // chklstbox_itemnum
+            // label1
             // 
-            this.chklstbox_itemnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chklstbox_itemnum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chklstbox_itemnum.FormattingEnabled = true;
-            this.chklstbox_itemnum.Location = new System.Drawing.Point(902, 22);
-            this.chklstbox_itemnum.Name = "chklstbox_itemnum";
-            this.chklstbox_itemnum.ScrollAlwaysVisible = true;
-            this.chklstbox_itemnum.Size = new System.Drawing.Size(103, 80);
-            this.chklstbox_itemnum.TabIndex = 18;
-            this.chklstbox_itemnum.SelectedIndexChanged += new System.EventHandler(this.chklstbox_itemnum_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(75, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 19);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Show Page No.";
+            // 
+            // chk_showpagenum
+            // 
+            this.chk_showpagenum.AutoSize = true;
+            this.chk_showpagenum.BackColor = System.Drawing.Color.Transparent;
+            this.chk_showpagenum.Location = new System.Drawing.Point(38, 8);
+            this.chk_showpagenum.Name = "chk_showpagenum";
+            this.chk_showpagenum.Size = new System.Drawing.Size(15, 14);
+            this.chk_showpagenum.TabIndex = 19;
+            this.chk_showpagenum.UseVisualStyleBackColor = false;
             // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(902, 106);
+            this.btnRefresh.Location = new System.Drawing.Point(902, 113);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(106, 28);
             this.btnRefresh.TabIndex = 8;
@@ -102,6 +113,18 @@
             this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
             this.txt_oftexpenses.TabIndex = 17;
             // 
+            // chklstbox_itemnum
+            // 
+            this.chklstbox_itemnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chklstbox_itemnum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chklstbox_itemnum.FormattingEnabled = true;
+            this.chklstbox_itemnum.Location = new System.Drawing.Point(902, 22);
+            this.chklstbox_itemnum.Name = "chklstbox_itemnum";
+            this.chklstbox_itemnum.ScrollAlwaysVisible = true;
+            this.chklstbox_itemnum.Size = new System.Drawing.Size(103, 80);
+            this.chklstbox_itemnum.TabIndex = 18;
+            this.chklstbox_itemnum.SelectedIndexChanged += new System.EventHandler(this.chklstbox_itemnum_SelectedIndexChanged);
+            // 
             // lbl_UniversalLabel
             // 
             this.lbl_UniversalLabel.AutoSize = true;
@@ -114,8 +137,6 @@
             // chkbox_show
             // 
             this.chkbox_show.AutoSize = true;
-            this.chkbox_show.Checked = true;
-            this.chkbox_show.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkbox_show.Location = new System.Drawing.Point(38, 81);
             this.chkbox_show.Name = "chkbox_show";
             this.chkbox_show.Size = new System.Drawing.Size(159, 23);
@@ -138,9 +159,9 @@
             this.rtbox_Body.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbox_Body.Location = new System.Drawing.Point(627, 22);
+            this.rtbox_Body.Location = new System.Drawing.Point(627, 26);
             this.rtbox_Body.Name = "rtbox_Body";
-            this.rtbox_Body.Size = new System.Drawing.Size(260, 112);
+            this.rtbox_Body.Size = new System.Drawing.Size(260, 118);
             this.rtbox_Body.TabIndex = 13;
             this.rtbox_Body.Text = resources.GetString("rtbox_Body.Text");
             // 
@@ -155,9 +176,11 @@
             // 
             // rtbox_Salutation
             // 
-            this.rtbox_Salutation.Location = new System.Drawing.Point(416, 22);
+            this.rtbox_Salutation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.rtbox_Salutation.Location = new System.Drawing.Point(416, 26);
             this.rtbox_Salutation.Name = "rtbox_Salutation";
-            this.rtbox_Salutation.Size = new System.Drawing.Size(205, 112);
+            this.rtbox_Salutation.Size = new System.Drawing.Size(205, 118);
             this.rtbox_Salutation.TabIndex = 11;
             this.rtbox_Salutation.Text = "INITIAL QUOTATION\n\nDear Mr. Lee,";
             // 
@@ -172,9 +195,11 @@
             // 
             // rtbox_Address
             // 
-            this.rtbox_Address.Location = new System.Drawing.Point(205, 22);
+            this.rtbox_Address.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.rtbox_Address.Location = new System.Drawing.Point(205, 26);
             this.rtbox_Address.Name = "rtbox_Address";
-            this.rtbox_Address.Size = new System.Drawing.Size(205, 112);
+            this.rtbox_Address.Size = new System.Drawing.Size(205, 118);
             this.rtbox_Address.TabIndex = 9;
             this.rtbox_Address.Text = "To:\nMr. Gilbert Lee\n#408 Bougainvilla St., Ayala\nAlabang Village, Muntinlupa City" +
     "\n";
@@ -183,7 +208,7 @@
             // 
             this.dtp_Date.CustomFormat = "MMM. dd, yyyy";
             this.dtp_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Date.Location = new System.Drawing.Point(78, 22);
+            this.dtp_Date.Location = new System.Drawing.Point(78, 26);
             this.dtp_Date.Name = "dtp_Date";
             this.dtp_Date.Size = new System.Drawing.Size(121, 25);
             this.dtp_Date.TabIndex = 7;
@@ -193,7 +218,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 25);
+            this.label4.Location = new System.Drawing.Point(34, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 19);
             this.label4.TabIndex = 6;
@@ -202,9 +227,9 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.Location = new System.Drawing.Point(0, 137);
+            this.reportViewer1.Location = new System.Drawing.Point(0, 144);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1008, 324);
+            this.reportViewer1.Size = new System.Drawing.Size(1008, 317);
             this.reportViewer1.TabIndex = 3;
             this.reportViewer1.ZoomPercent = 75;
             // 
@@ -252,5 +277,7 @@
         private System.Windows.Forms.Label lbl_UniversalLabel;
         private System.Windows.Forms.TextBox txt_oftexpenses;
         private System.Windows.Forms.CheckedListBox chklstbox_itemnum;
+        private System.Windows.Forms.CheckBox chk_showpagenum;
+        private System.Windows.Forms.Label label1;
     }
 }

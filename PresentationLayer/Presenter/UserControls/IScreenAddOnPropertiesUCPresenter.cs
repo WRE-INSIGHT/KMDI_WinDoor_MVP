@@ -10,7 +10,8 @@ namespace PresentationLayer.Presenter.UserControls
         IScreenAddOnPropertiesUC GetScreenAddOnPropertiesUCView();
         IScreenAddOnPropertiesUCPresenter GetNewInstance(IUnityContainer unityC,
                                                          IMainPresenter mainPresenter,
-                                                         IScreenModel screenModel
+                                                         IScreenModel screenModel,
+                                                         IScreenPresenter screenPresenter
                                                          );  
 
 

@@ -17,6 +17,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
         
 
         public SP_SpringLoadedUCPresenter(ISP_SpringLoadedUC springLoadedUC)
@@ -38,9 +39,15 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         private void OnspringLoadedCheckboxEventRaised(object sender, EventArgs e)
         {
-
-
-
+            if (_springLoadedUC.SpringLoadedCheckBox().Checked)
+            {
+                _screenModel.SpringLoad_Checked = true;
+            }
+            else
+            {
+                _screenModel.SpringLoad_Checked = false;
+            }
+            _screenPresenter.GetCurrentAmount();  
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
@@ -53,7 +60,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             return binding;
         }
 
-        public ISP_SpringLoadedUCPresenter GetNewInstance(IUnityContainer unityC,IMainPresenter mainPresenter,IScreenModel screenModel)
+        public ISP_SpringLoadedUCPresenter GetNewInstance(IUnityContainer unityC,IMainPresenter mainPresenter,IScreenModel screenModel,IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_SpringLoadedUC, SP_SpringLoadedUC>()
@@ -63,6 +70,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             springloadedpresenter._unityC = unityC;
             springloadedpresenter._mainPresenter = mainPresenter;
             springloadedpresenter._screenModel = screenModel;
+            springloadedpresenter._screenPresenter = screenPresenter;
 
             return springloadedpresenter;
         }

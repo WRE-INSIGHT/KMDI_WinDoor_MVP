@@ -1892,15 +1892,20 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public void Insert_frameInfo_MaterialList(DataTable tbl_explosion)
         {
-            int FrameQty;
-            if (Frame_BotFrameArtNo == BottomFrameTypes._7507)
+            int FrameQty = 2;
+            if (Frame_BotFrameVisible == true)
             {
-                FrameQty = 2;
+                if (Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
+                    Frame_BotFrameArtNo == BottomFrameTypes._6052)
+                {
+                    FrameQty = 2;
+                }
+                else
+                {
+                    FrameQty = 1;
+                }
             }
-            else
-            {
-                FrameQty = 1;
-            }
+
 
 
             string cutType = "", MotorizrCutType = "", widthArtNo = "";
@@ -1991,7 +1996,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
 
             int FrameQty, reinfQty;
-            if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 FrameQty = 1;
                 reinfQty = 0;
@@ -2133,6 +2139,29 @@ namespace ModelLayer.Model.Quotation.Frame
                                  Frame_ExplosionWidth.ToString(),
                                  "Frame",
                                  @"|  |");
+            }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            {
+                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                                   1, "pc(s)",
+                                   Frame_Width,
+                                   "Frame",
+                                   @"|  |");
+
+                tbl_explosion.Rows.Add("Bottom Frame Reinf Width " + FrameReinf_ArticleNo._TV110,
+                                 1, "pc(s)",
+                                 Frame_Width - 10,
+                                 "Frame",
+                                 @"|  |");
+            }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                     Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            {
+                tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
+                                   1, "pc(s)",
+                                   Frame_Width,
+                                   "Frame",
+                                   @"|  |");
             }
         }
         public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)

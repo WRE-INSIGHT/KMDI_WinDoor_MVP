@@ -440,6 +440,15 @@ namespace PresentationLayer
                 .RegisterType<IFP_ScreenPropertyUCPresenter, FP_ScreenPropertyUCPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFP_ScreenPropertyUC, FP_ScreenPropertyUC>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISetMultipleGlassThicknessPresenter, SetMultipleGlassThicknessPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<ISetMultipleGlassThicknessView, SetMultipleGlassThicknessView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPDFCompilerView, PDFCompilerView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPDFCompilerPresenter, PDFCompilerPresenter>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IRDLCReportCompilerView,RDLCReportCompilerView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IRDLCReportCompilerPresenter,RDLCReportCompilerPresenter>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())
                 .RegisterType<IConcreteUCPresenter, ConcreteUCPresenter>(new ContainerControlledLifetimeManager())
@@ -451,8 +460,7 @@ namespace PresentationLayer
                 .RegisterType<ICustomerRefNoRepository, CustomerRefNoRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IQuotationRepository, QuotationRepository>(new InjectionConstructor(_sqlconStr))
 
-                 .RegisterType<ISetMultipleGlassThicknessPresenter, SetMultipleGlassThicknessPresenter>(new ContainerControlledLifetimeManager())
-                 .RegisterType<ISetMultipleGlassThicknessView, SetMultipleGlassThicknessView>(new ContainerControlledLifetimeManager())
+
                 ;
 
             Application.EnableVisualStyles();

@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         public SP_6040MilledProfileWithReinforcementPropertyUCPresenter(ISP_6040MilledProfileWithReinforcementPropertyUC MilledProfile6040)
         {
@@ -25,6 +26,15 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private void SubscribeToEventSetup()
         {
             _6040MilledProfile.SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised += _6040MilledProfile_SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised;
+            _6040MilledProfile.nud_6040MilledProfile_ValueChangedEventRaised += _6040MilledProfile_nud_6040MilledProfile_ValueChangedEventRaised;
+        }
+
+        private void _6040MilledProfile_nud_6040MilledProfile_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Screen_6040MilledProfile = _6040MilledProfile.Screen_6040MilledProfile;
+            _screenModel.Screen_6040MilledProfileQty = _6040MilledProfile.Screen_6040MilledProfileQty;
+
+            _screenPresenter.GetCurrentAmount();
         }
 
         private void _6040MilledProfile_SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -39,7 +49,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_6040MilledProfileWithReinforcementPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                                             IMainPresenter mainPresenter,
-                                                                                            IScreenModel screenModel)
+                                                                                            IScreenModel screenModel,
+                                                                                            IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_6040MilledProfileWithReinforcementPropertyUC, SP_6040MilledProfileWithReinforcementPropertyUC>()
@@ -48,6 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             MilledProfile6040._unityC = unityC;
             MilledProfile6040._mainPresenter = mainPresenter;
             MilledProfile6040._screenModel = screenModel;
+            MilledProfile6040._screenPresenter = screenPresenter;
 
 
 

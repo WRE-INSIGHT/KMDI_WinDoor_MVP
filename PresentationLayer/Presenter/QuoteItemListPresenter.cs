@@ -30,24 +30,62 @@ namespace PresentationLayer.Presenter
         private IWindoorModel _windoorModel;
         private IQuoteItemListUCPresenter _quoteItemListUCPresenter;
         private IMainPresenter _mainPresenter;
+        private IPDFCompilerPresenter _pdfCompilerPresenter;
+        private IRDLCReportCompilerPresenter _rdlcReportCompilerPresenter;
 
         #region Variables
+        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
+        private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
+        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
+        private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
+        private List<int> _lstItemArea = new List<int>();
+        private bool _renderPDFAtBackground;
+        private string _rdlcReportCompilerOutofTownExpenses;
+
+        public string RDLCReportCompilerOutOfTownExpenses
+        {
+            get
+            {
+                return _rdlcReportCompilerOutofTownExpenses;
+            }
+            set
+            {
+                _rdlcReportCompilerOutofTownExpenses = value;
+            }
+        }
+        public bool RenderPDFAtBackGround
+        {
+            get
+            {
+                return _renderPDFAtBackground;
+            }
+            set
+            {
+                _renderPDFAtBackground = value;
+            }
+        }
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
             set { _lstQuoteItemUC = value; }
         }
-        private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
-
         public List<ShowItemImage> ShowItemImage_CheckList
         {
             get { return _showItemImage_CheckList; }
             set { _showItemImage_CheckList = value; }
         }
-        private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
+        public List<int> RDLCReportCompilerItemIndexes
+        {
+            get
+            {
+                return _rdlcReportCompilerItemIndexes;
+            }
+            set
+            {
+                _rdlcReportCompilerItemIndexes = value;
+            }
+        }
 
-        private List<int> _lstItemArea = new List<int>();
-        private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();     
 
         int prev_GlassItemNo,
             prev_GlassQty,
@@ -70,7 +108,8 @@ namespace PresentationLayer.Presenter
                curr_GlassDesc,
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
-               DimensionDesc;
+               DimensionDesc,
+               setDesc;
 
         decimal prev_GlassArea,
                 prev_GlassPrice,
@@ -88,12 +127,16 @@ namespace PresentationLayer.Presenter
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
                                       IPrintQuotePresenter printQuotePresenter,
-                                      IPrintGlassSummaryPresenter printGlassSummaryPresenter
+                                      IPrintGlassSummaryPresenter printGlassSummaryPresenter,
+                                      IPDFCompilerPresenter pdfCompilerPresenter,
+                                      IRDLCReportCompilerPresenter rdlcReportCompilerPresenter
                                       )
         {
             _quoteItemListView = quoteItemListView;
             _printQuotePresenter = printQuotePresenter;
             _printGlassSummaryPresenter = printGlassSummaryPresenter;
+            _pdfCompilerPresenter = pdfCompilerPresenter;
+            _rdlcReportCompilerPresenter = rdlcReportCompilerPresenter;
             SubscribeToEventSetup();
         }
 
@@ -106,17 +149,237 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.QuoteItemListViewFormClosedEventRaised += _quoteItemListView_QuoteItemListViewFormClosedEventRaised;
             _quoteItemListView.TsbtnContractSummaryClickEventRaised += new EventHandler(OnTsbtnContractSummaryClickEventRaised);
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
+            _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
 
 
+        public void PrintScreenRDLC()
+        {
+            DSQuotation _dsq = new DSQuotation();
+            try
+            {
+                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                Console.WriteLine(DiscountPercentage.ToString());
 
-        private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+
+                    if (item.Screen_Set > 1)
+                    {
+                        setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                    }
+                    else
+                    {
+                        setDesc = " ";
+                    }
+
+                    _dsq.dtScreen.Rows.Add(item.Screen_Types + setDesc + item.Screen_Description,
+                                            item.Screen_Width + " x " + item.Screen_Height,
+                                            item.Screen_WindoorID,
+                                            item.Screen_UnitPrice.ToString("n"),
+                                            item.Screen_Quantity,
+                                            NetPriceTotal,
+                                            Convert.ToString(item.Screen_ItemNumber),
+                                            item.Screen_NetPrice.ToString("n"),
+                                            1,
+                                            "",
+                                            Convert.ToString(item.Screen_Discount) + "%",
+                                            "",
+                                            DiscountPercentage
+                                            );
+                }
+                _mainPresenter.printStatus = "ScreenItem";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+            printQuote.EventLoad();
+            printQuote.PrintRDLCReport();
+
+        }
+
+        public void PrintWindoorRDLC()
+        {
+            DSQuotation _dsq = new DSQuotation();
+            /*
+          ID
+          dtItemName
+          dtDescription
+          dtDimension
+          dtImage
+          dtQuantity
+          dtPrice
+          dtDiscount
+          dtNetPrice
+           */
+            try
+            {
+                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                {
+                    #region ScalingItemSizePicture
+                    //int max = this._lstItemArea[0],
+                    //    ItemNewWidth,
+                    //    ItemNewHeight,
+                    //    maxHeight = 190,
+                    //    maxWidth = 190,
+                    //    wdAndHtDiff;
+                    //decimal itemSizePercentage;
+
+                    //int currentItem = this._lstItemArea[i],
+                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
+                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
+
+                    //decimal ProportionItemSizePercentage;
+
+                    //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
+                    //{
+                    //    max = Math.Max(max, this._lstItemArea[ii]);
+                    //}
+
+                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
+                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
+                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
+                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
+
+
+                    //if (itemWidth > itemHeight)
+                    //{
+                    //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
+                    //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
+                    //}
+                    //else if (itemWidth < itemHeight)
+                    //{
+                    //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
+                    //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
+                    //}
+                    //else
+                    //{
+
+                    //}
+
+                    //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
+
+
+                    //resizedImg.Save(mstream, ImageFormat.Png);
+                    #endregion
+
+                    MemoryStream mstream = new MemoryStream();
+                    MemoryStream mstream2 = new MemoryStream();
+                    Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
+                          topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+
+                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
+
+                    if (topView != null)
+                    {
+                        topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+
+                    byte[] arrimageForItemImage = mstream.ToArray();
+                    byte[] arrimageForTopView = mstream2.ToArray();
+
+                    string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
+                    string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+
+                    IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
+                    if(RenderPDFAtBackGround != true)
+                    {
+                        bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
+
+                        if (chkbox_checkstate == true)
+                        {
+                            this._quoteItemListView.GetItemListUC_CheckBoxState = true;
+                            showImage = true;
+                            ShowItemImage_CheckList.Add(new ShowItemImage
+                            {
+                                ItemIndex = i,
+                                ItemboolImage = showImage
+
+                            });
+                        }
+                        else
+                        {
+                            showImage = false;
+                            ShowItemImage_CheckList.Add(new ShowItemImage
+                            {
+                                ItemIndex = i,
+                                ItemboolImage = showImage
+
+                            });
+                        }
+                    }
+                    else
+                    {
+                        #region RDLCReportCompiler Executed
+                        if (RDLCReportCompilerItemIndexes.Count != 0)
+                        {
+                            foreach(var item in RDLCReportCompilerItemIndexes.ToArray())
+                            {
+                                showImage = false;
+                                if(i == item)
+                                {
+                                    showImage = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            showImage = false;
+                        }
+                        #endregion
+                    }
+
+                    Console.WriteLine("EventPrint.: " + showImage.ToString());
+                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
+
+                    _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDesc,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
+                                          byteToStrForItemImage,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
+                                          lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
+                                          lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
+                                          Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
+                                          i + 1,
+                                          byteToStrForTopView,
+                                          showImage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
+            }
+
+            _mainPresenter.printStatus = "WinDoorItems";
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
+            if(RenderPDFAtBackGround != true)
+            {
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            else
+            {
+                printQuote.EventLoad();
+                printQuote.PrintRDLCReport();
+            }
+
+        }
+
+        public void PrintContractSummaryRDLC()
         {
             DSQuotation _dtqoute = new DSQuotation();
             try
-            {            
+            {
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                {                  
+                {
                     var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
                     windoorTotalListPrice = +windoorTotalListPrice + price_x_quantity;
                 }
@@ -141,35 +404,59 @@ namespace PresentationLayer.Presenter
                 Console.WriteLine("Error in screenmodel " + this + " " + ex.Message);
                 divisor = 1;
             }
-                     
-                screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
 
-                Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
-                Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
-                Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
-                //Console.WriteLine("");
-                //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
-                //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
-                //Console.WriteLine("");
-                //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
-                //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
-                //Console.WriteLine("");
+            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
 
-                _dtqoute.dtContractSummary.Rows.Add(
-                                                    windoorTotalListCount,
-                                                    windoorTotalListPrice,
-                                                    ScreenTotalListCount,
-                                                    ScreenTotalListPrice,
-                                                    screen_Windoor_DiscountAverage
-                                                    );
+            Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
+            Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
+            Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
+            //Console.WriteLine("");
+            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
+            //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
+            //Console.WriteLine("");
+            //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
+            //Console.WriteLine("screen total list price: " + ScreenTotalListPrice.ToString());
+            //Console.WriteLine("");
 
-                windoorTotalListPrice = 0;
-                _mainPresenter.printStatus = "ContractSummary";
+            _dtqoute.dtContractSummary.Rows.Add(
+                                                windoorTotalListCount,
+                                                windoorTotalListPrice,
+                                                ScreenTotalListCount,
+                                                ScreenTotalListPrice,
+                                                screen_Windoor_DiscountAverage
+                                                );
 
-                IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
-                printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+            windoorTotalListPrice = 0;
+            _mainPresenter.printStatus = "ContractSummary";
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
+            if (RenderPDFAtBackGround != true)
+            {
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            else
+            {
+                printQuote.EventLoad();
+                printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                printQuote.PrintRDLCReport();
+            }
 
+        }
+
+        private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
+        {
+            PrintWindoorRDLC();
+        }
+
+        private void OnTsbtnContractSummaryClickEventRaised(object sender, EventArgs e)
+        {
+            PrintContractSummaryRDLC();
+        }
+        private void OnTSbtnPDFCompilerClickEventRaised(object sender, EventArgs e)
+        {
+            IPDFCompilerPresenter pdfCompiler = _pdfCompilerPresenter.GetNewInstance(_unityC, _quotationModel, _quoteItemListUCPresenter, _windoorModel, this, _mainPresenter);
+            pdfCompiler.GetPDFCompilerView().GetPDFCompilerView();
         }
 
         private void _quoteItemListView_QuoteItemListViewFormClosedEventRaised(object sender, FormClosedEventArgs e)
@@ -436,7 +723,7 @@ namespace PresentationLayer.Presenter
                 }
                 i++;
             }
-
+            
             #region Last Item 
             foreach (var item in _lstGlassSummary.ToArray())
             {
@@ -490,10 +777,7 @@ namespace PresentationLayer.Presenter
             printGlass.GetPrintGlassSummaryView().GetBindingSource().DataSource = _dsq.dtGlassSummary.DefaultView;
             printGlass.GetPrintGlassSummaryView().ShowGlassSummaryView();
 
-
         }
-
-
 
         int TotalItemArea = 0;
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
@@ -579,7 +863,6 @@ namespace PresentationLayer.Presenter
 
         private void OnchkboxSelectallCheckedChangeEventRaised(object sender, EventArgs e)
         {
-
             bool chkbox_checkstate_frmQuoteItemList = Convert.ToBoolean(_quoteItemListView.GetChkboxSelectAll().CheckState);
 
             for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
@@ -595,11 +878,8 @@ namespace PresentationLayer.Presenter
                     lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().Checked = false;
                 }
                 Console.WriteLine("Event select all.: " + chkbox_checkstate_frmQuoteItemList.ToString());
-
             }
-
         }
-
 
         public void SetAllItemDiscount(int inputedDiscount)
         {
@@ -612,144 +892,6 @@ namespace PresentationLayer.Presenter
         public void refreshItemList(object sender, EventArgs e)
         {
             _quoteItemListView_QuoteItemListViewLoadEventRaised(sender, e);
-        }
-
-        private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)
-        {
-            DSQuotation _dsq = new DSQuotation();
-
-            /*
-          ID
-          dtItemName
-          dtDescription
-          dtDimension
-          dtImage
-          dtQuantity
-          dtPrice
-          dtDiscount
-          dtNetPrice
-           */
-            try
-            {
-                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-                {
-                    #region ScalingItemSizePicture
-                    //int max = this._lstItemArea[0],
-                    //    ItemNewWidth,
-                    //    ItemNewHeight,
-                    //    maxHeight = 190,
-                    //    maxWidth = 190,
-                    //    wdAndHtDiff;
-                    //decimal itemSizePercentage;
-
-                    //int currentItem = this._lstItemArea[i],
-                    //    itemWidth = _quotationModel.Lst_Windoor[i].WD_width,
-                    //    itemHeight = _quotationModel.Lst_Windoor[i].WD_height;
-
-                    //decimal ProportionItemSizePercentage;
-
-                    //for (int ii = 1; ii < this._lstItemArea.Count; ii++)
-                    //{
-                    //    max = Math.Max(max, this._lstItemArea[ii]);
-                    //}
-
-                    //itemSizePercentage = (decimal)currentItem / (decimal)max;
-                    ////ItemScalingSize = (currentItem / max) * itemSizePercentage;
-                    //ItemNewWidth = (int)((decimal)itemSizePercentage * maxWidth);
-                    //ItemNewHeight = (int)((decimal)itemSizePercentage * maxHeight);
-
-
-                    //if (itemWidth > itemHeight)
-                    //{
-                    //    ProportionItemSizePercentage = ((decimal)itemHeight / (decimal)itemWidth) ;
-                    //    ItemNewHeight = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewHeight);
-                    //}
-                    //else if (itemWidth < itemHeight)
-                    //{
-                    //    ProportionItemSizePercentage = ((decimal)itemWidth / (decimal)itemHeight);
-                    //    ItemNewWidth = (int)((decimal)ProportionItemSizePercentage * (decimal)ItemNewWidth);
-                    //}
-                    //else
-                    //{
-
-                    //}
-
-                    //var resizedImg = ResizeImage(img, ItemNewWidth, ItemNewHeight);
-
-
-                    //resizedImg.Save(mstream, ImageFormat.Png);
-                    #endregion
-
-                    MemoryStream mstream = new MemoryStream();
-                    MemoryStream mstream2 = new MemoryStream();
-                    Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
-                          topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
-
-                    itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
-
-                    if (topView != null)
-                    {
-                        topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
-                    }
-
-                    byte[] arrimageForItemImage = mstream.ToArray();
-                    byte[] arrimageForTopView = mstream2.ToArray();
-
-                    string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
-                    string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
-
-                    IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
- 
-                    bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
-
-                    if (chkbox_checkstate == true)
-                    {
-                        showImage = true;
-                        ShowItemImage_CheckList.Add(new ShowItemImage
-                        {
-                            ItemIndex = i,
-                            ItemboolImage = showImage
-
-                        });           
-                    }
-                    else
-                    {
-                        showImage = false;
-                        ShowItemImage_CheckList.Add(new ShowItemImage
-                        {
-                            ItemIndex = i,
-                            ItemboolImage = showImage
-
-                        });
-                    }
-
-                    Console.WriteLine("EventPrint.: " + showImage.ToString());
-                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
-
-                    _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
-                                          lstQuoteUC.GetiQuoteItemListUC().itemDesc,
-                                          lstQuoteUC.GetiQuoteItemListUC().itemWindoorNumber,
-                                          byteToStrForItemImage,
-                                          lstQuoteUC.GetiQuoteItemListUC().itemQuantity.Value,
-                                          lstQuoteUC.GetiQuoteItemListUC().itemPrice.Value.ToString("N", new CultureInfo("en-US")),
-                                          lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
-                                          Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
-                                          i + 1,
-                                          byteToStrForTopView,
-                                          showImage);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
-            }
-                        
-            _mainPresenter.printStatus = "WinDoorItems";
-
-            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter,_quotationModel);
-            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
-            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
         }
 
         //for ScalingItemSizePicture

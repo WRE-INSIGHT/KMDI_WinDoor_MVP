@@ -15,6 +15,7 @@ namespace PresentationLayer.Views
         Button GetRefreshBtn();
         TextBox GetOutofTownExpenses();
         CheckedListBox GetChkLstBox();
+        CheckBox GetShowPageNum();
         void ShowPrintQuoteView();
 
 

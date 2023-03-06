@@ -8,7 +8,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 {
     public interface ISP_373or374MilledProfilePropertyUCPresenter
     {
-        ISP_373or374MilledProfilePropertyUCPresenter CreateNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, IScreenModel screenModel);
+        ISP_373or374MilledProfilePropertyUCPresenter CreateNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, IScreenModel screenModel, IScreenPresenter screenPresenter);
         ISP_373or374MilledProfilePropertyUC Get373or374MilledProfilePropertyUC();
     }
 }

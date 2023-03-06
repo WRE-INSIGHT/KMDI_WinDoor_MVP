@@ -2149,6 +2149,9 @@ DELIVERY:</Value>
           <Left>3.41268in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
+          <Visibility>
+            <Hidden>=iif(Parameters!ShowPageNum.Value = "True", false, true)</Hidden>
+          </Visibility>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2299,6 +2302,10 @@ DELIVERY:</Value>
     </ReportParameter>
     <ReportParameter Name="ListScreen">
       <DataType>Boolean</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowPageNum">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

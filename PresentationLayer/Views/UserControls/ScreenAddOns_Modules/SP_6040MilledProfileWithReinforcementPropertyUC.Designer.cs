@@ -44,6 +44,8 @@
             this.nud_6040MilledProfile.Name = "nud_6040MilledProfile";
             this.nud_6040MilledProfile.Size = new System.Drawing.Size(68, 20);
             this.nud_6040MilledProfile.TabIndex = 3;
+            this.nud_6040MilledProfile.ValueChanged += new System.EventHandler(this.nud_6040MilledProfile_ValueChanged);
+            this.nud_6040MilledProfile.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_6040MilledProfile_KeyDown);
             // 
             // lbl_6040MilledProfile
             // 
@@ -57,15 +59,17 @@
             // 
             // nud_6040MilledProfileQty
             // 
-            this.nud_6040MilledProfileQty.Location = new System.Drawing.Point(116, 26);
+            this.nud_6040MilledProfileQty.Location = new System.Drawing.Point(128, 26);
             this.nud_6040MilledProfileQty.Name = "nud_6040MilledProfileQty";
             this.nud_6040MilledProfileQty.Size = new System.Drawing.Size(62, 20);
             this.nud_6040MilledProfileQty.TabIndex = 29;
+            this.nud_6040MilledProfileQty.ValueChanged += new System.EventHandler(this.nud_6040MilledProfileQty_ValueChanged);
+            this.nud_6040MilledProfileQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_6040MilledProfileQty_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 28);
+            this.label2.Location = new System.Drawing.Point(97, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 30;
