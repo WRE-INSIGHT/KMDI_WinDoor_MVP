@@ -50,31 +50,64 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
             }
 
-            _rdlcReportCompilerView.TxtBxOutofTownExpenses = "0.00";
+            //_rdlcReportCompilerView.TxtBxOutofTownExpenses = "0.00";
         }
 
         private void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
         {
-            _quoteItemListPresenter.RenderPDFAtBackGround = true;
-
-            #region Windoor RDLC
-            foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+            try
             {
-                var selectedindex = Convert.ToInt32(item);
-                _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
-            }
-            _quoteItemListPresenter.PrintWindoorRDLC();
-            #endregion
-            #region Summary Of Contract
-            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-            _quoteItemListPresenter.PrintContractSummaryRDLC();
-            #endregion
-            #region Screen
-            _quoteItemListPresenter.PrintScreenRDLC();
-            #endregion
+                if (!string.IsNullOrWhiteSpace(_rdlcReportCompilerView.TxtBxOutofTownExpenses))
+                {
+                    int num;
+                    if (int.TryParse(_rdlcReportCompilerView.TxtBxOutofTownExpenses, out num))
+                    {
+                        if (num > 0)
+                        {
+                            _quoteItemListPresenter.RenderPDFAtBackGround = true;
 
-            MessageBox.Show("Report Compilation Complete", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            SetVariablesToDeffault();
+                            #region Windoor RDLC
+                            foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                            {
+                                var selectedindex = Convert.ToInt32(item);
+                                _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
+                            }
+                            _quoteItemListPresenter.PrintWindoorRDLC();
+                            #endregion
+                            #region Summary Of Contract
+                            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+                            _quoteItemListPresenter.PrintContractSummaryRDLC();
+                            #endregion
+                            #region Screen
+                            _quoteItemListPresenter.PrintScreenRDLC();
+                            #endregion
+
+
+
+                            MessageBox.Show("Report Compilation Complete", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            SetVariablesToDeffault();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error Negative Value Detected", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Expenses Must Be A Valid Number", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Out of Town Expenses is Required", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Compiler Error" + " " + this + ex.Message);
+            }
+            
         }
 
         private void SetVariablesToDeffault()

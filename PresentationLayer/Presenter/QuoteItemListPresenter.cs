@@ -108,7 +108,8 @@ namespace PresentationLayer.Presenter
                curr_GlassDesc,
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
-               DimensionDesc;
+               DimensionDesc,
+               setDesc;
 
         decimal prev_GlassArea,
                 prev_GlassPrice,
@@ -151,7 +152,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
 
-        string setDesc;
+
         public void PrintScreenRDLC()
         {
             DSQuotation _dsq = new DSQuotation();

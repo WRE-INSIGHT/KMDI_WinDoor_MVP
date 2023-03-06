@@ -194,9 +194,9 @@
             this.label5.ForeColor = System.Drawing.Color.Red;
             this.label5.Location = new System.Drawing.Point(286, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 15);
+            this.label5.Size = new System.Drawing.Size(126, 15);
             this.label5.TabIndex = 3;
-            this.label5.Text = "*Out of Town Expense";
+            this.label5.Text = "*Out of Town Expenses";
             // 
             // label4
             // 
