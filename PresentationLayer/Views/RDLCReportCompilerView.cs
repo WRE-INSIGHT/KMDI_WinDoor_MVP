@@ -13,7 +13,7 @@ namespace PresentationLayer.Views
 {
     public partial class RDLCReportCompilerView : Form, IRDLCReportCompilerView
     {
-        private bool _renderPDFAtBackGround;
+
         public CheckedListBox GetChecklistBoxIndex()
         {
             return chk_showimagelist;
@@ -45,7 +45,7 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
-
+        
         private void btnCompileReport_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, BtnCompileReportClickEventRaised,e);

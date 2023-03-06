@@ -7,16 +7,39 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 {
     public partial class SP_CenterClosurePropertyUC : UserControl, ISP_CenterClosurePropertyUC
     {
+        public event EventHandler chkBoxCenterClosureCheckedChangedEventRaised;
+        public event EventHandler SPCenterClosurePropertyUCLoadEventRaised;
+        public event EventHandler nud_LatchKitQty_ValueChangedEventRaised;
+        public event EventHandler nud_IntermediatePartQty_ValueChangedEventRaised;
+
+        public int Screen_LatchKitQty
+        {
+            get
+            {
+                return Convert.ToInt32(nud_LatchKitQty.Value);
+            }
+            set
+            {
+                nud_LatchKitQty.Value = value;
+            }
+        }
+
+        public int Screen_IntermediatePartQty
+        {
+            get
+            {
+                return Convert.ToInt32(nud_IntermediatePartQty.Value);
+            }
+            set
+            {
+                nud_IntermediatePartQty.Value = value;
+            }
+        }
+
         public SP_CenterClosurePropertyUC()
         {
             InitializeComponent();
         }
-
-        public event EventHandler chkBoxCenterClosureCheckedChangedEventRaised;
-        public event EventHandler SPCenterClosurePropertyUCLoadEventRaised;
-        public event EventHandler nudIntermediatePartValueChangedEventRaised;
-        public event EventHandler nudIntermediatePartQtyValueChangedEventRaised;
-
 
         private void chkBox_CenterClosure_CheckedChanged(object sender, EventArgs e)
         {
@@ -28,14 +51,23 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             EventHelpers.RaiseEvent(sender, SPCenterClosurePropertyUCLoadEventRaised, e);
         }
 
-        private void nud_IntermediatePart_ValueChanged(object sender, EventArgs e)
+        private void nud_LatchKitQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nudIntermediatePartValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud_LatchKitQty_ValueChangedEventRaised, e);
+        }
+
+        private void nud_LatchKitQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud_LatchKitQty_ValueChangedEventRaised, e);
         }
 
         private void nud_IntermediatePartQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nudIntermediatePartQtyValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud_IntermediatePartQty_ValueChangedEventRaised, e);
+        }
+        private void nud_IntermediatePartQty_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud_IntermediatePartQty_ValueChangedEventRaised, e);
         }
 
         public Panel GetPanelBody()
@@ -50,5 +82,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             nud_IntermediatePartQty.DataBindings.Add(ModelBinding["Screen_IntermediatePartQty"]);
 
         }
+
+  
     }
 }

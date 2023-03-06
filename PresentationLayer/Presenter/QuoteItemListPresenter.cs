@@ -40,7 +40,19 @@ namespace PresentationLayer.Presenter
         private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
         private List<int> _lstItemArea = new List<int>();
         private bool _renderPDFAtBackground;
+        private string _rdlcReportCompilerOutofTownExpenses;
 
+        public string RDLCReportCompilerOutOfTownExpenses
+        {
+            get
+            {
+                return _rdlcReportCompilerOutofTownExpenses;
+            }
+            set
+            {
+                _rdlcReportCompilerOutofTownExpenses = value;
+            }
+        }
         public bool RenderPDFAtBackGround
         {
             get
@@ -139,7 +151,56 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
 
+        string setDesc;
+        public void PrintScreenRDLC()
+        {
+            DSQuotation _dsq = new DSQuotation();
+            try
+            {
+                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                Console.WriteLine(DiscountPercentage.ToString());
 
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+
+                    if (item.Screen_Set > 1)
+                    {
+                        setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                    }
+                    else
+                    {
+                        setDesc = " ";
+                    }
+
+                    _dsq.dtScreen.Rows.Add(item.Screen_Types + setDesc + item.Screen_Description,
+                                            item.Screen_Width + " x " + item.Screen_Height,
+                                            item.Screen_WindoorID,
+                                            item.Screen_UnitPrice.ToString("n"),
+                                            item.Screen_Quantity,
+                                            NetPriceTotal,
+                                            Convert.ToString(item.Screen_ItemNumber),
+                                            item.Screen_NetPrice.ToString("n"),
+                                            1,
+                                            "",
+                                            Convert.ToString(item.Screen_Discount) + "%",
+                                            "",
+                                            DiscountPercentage
+                                            );
+                }
+                _mainPresenter.printStatus = "ScreenItem";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
+            printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
+            printQuote.EventLoad();
+            printQuote.PrintRDLCReport();
+
+        }
 
         public void PrintWindoorRDLC()
         {
@@ -369,8 +430,17 @@ namespace PresentationLayer.Presenter
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
-            printQuote.GetPrintQuoteView().ShowPrintQuoteView();
-           
+            if (RenderPDFAtBackGround != true)
+            {
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+            }
+            else
+            {
+                printQuote.EventLoad();
+                printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                printQuote.PrintRDLCReport();
+            }
+
         }
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)

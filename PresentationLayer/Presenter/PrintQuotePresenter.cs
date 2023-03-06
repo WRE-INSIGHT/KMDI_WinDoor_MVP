@@ -311,6 +311,43 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\Screen.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+                   
+
+
                     #endregion
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
@@ -442,7 +479,32 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
 
-              
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\SummaryOfContract.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
 
                     #endregion
                 }

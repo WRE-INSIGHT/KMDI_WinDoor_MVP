@@ -42,6 +42,8 @@
             this.nud_1385MilledProfileQty.Name = "nud_1385MilledProfileQty";
             this.nud_1385MilledProfileQty.Size = new System.Drawing.Size(62, 20);
             this.nud_1385MilledProfileQty.TabIndex = 33;
+            this.nud_1385MilledProfileQty.ValueChanged += new System.EventHandler(this.nud_1385MilledProfileQty_ValueChanged);
+            this.nud_1385MilledProfileQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_1385MilledProfileQty_KeyDown);
             // 
             // label2
             // 
@@ -60,6 +62,8 @@
             this.nud_1385MilledProfile.Name = "nud_1385MilledProfile";
             this.nud_1385MilledProfile.Size = new System.Drawing.Size(61, 20);
             this.nud_1385MilledProfile.TabIndex = 32;
+            this.nud_1385MilledProfile.ValueChanged += new System.EventHandler(this.nud_1385MilledProfile_ValueChanged);
+            this.nud_1385MilledProfile.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_1385MilledProfile_KeyDown);
             // 
             // lbl_1385MilledProfile
             // 

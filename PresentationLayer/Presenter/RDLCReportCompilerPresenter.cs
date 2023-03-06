@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
@@ -12,7 +13,7 @@ using Unity;
 
 namespace PresentationLayer.Presenter
 {
-   public class RDLCReportCompilerPresenter : IRDLCReportCompilerPresenter
+    public class RDLCReportCompilerPresenter : IRDLCReportCompilerPresenter
     {
         IRDLCReportCompilerView _rdlcReportCompilerView;
         private IUnityContainer _unityC;
@@ -44,28 +45,35 @@ namespace PresentationLayer.Presenter
 
         private void OnRDLCReportCompilerViewLoadEventRaise(object sender, EventArgs e)
         {
-            foreach(IWindoorModel wdm in _quotationModel.Lst_Windoor)
+            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
             }
 
-            _rdlcReportCompilerView.TxtBxOutofTownExpenses = "50,000.00";
+            _rdlcReportCompilerView.TxtBxOutofTownExpenses = "0.00";
         }
 
         private void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
         {
-            
-            foreach(var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+            _quoteItemListPresenter.RenderPDFAtBackGround = true;
+
+            #region Windoor RDLC
+            foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
             {
                 var selectedindex = Convert.ToInt32(item);
                 _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
             }
-            _quoteItemListPresenter.RenderPDFAtBackGround = true;
             _quoteItemListPresenter.PrintWindoorRDLC();
+            #endregion
+            #region Summary Of Contract
+            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+            _quoteItemListPresenter.PrintContractSummaryRDLC();
+            #endregion
+            #region Screen
+            _quoteItemListPresenter.PrintScreenRDLC();
+            #endregion
 
-
-
-            MessageBox.Show("Report Compilation Complete"," ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Report Compilation Complete", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SetVariablesToDeffault();
         }
 

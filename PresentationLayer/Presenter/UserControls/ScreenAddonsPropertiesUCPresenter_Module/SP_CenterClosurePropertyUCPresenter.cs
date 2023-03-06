@@ -15,7 +15,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
-
+        private IScreenPresenter _screenPresenter;
+        
         public SP_CenterClosurePropertyUCPresenter(ISP_CenterClosurePropertyUC sp_centerClosurePropertyUC)
         {
             _sp_centerClosurePropertyUC = sp_centerClosurePropertyUC;
@@ -28,6 +29,18 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             _sp_centerClosurePropertyUC.SPCenterClosurePropertyUCLoadEventRaised += _sp_centerClosurePropertyUC_SPCenterClosurePropertyUCLoadEventRaised;
             _sp_centerClosurePropertyUC.chkBoxCenterClosureCheckedChangedEventRaised += _sp_centerClosurePropertyUC_chkBoxCenterClosureCheckedChangedEventRaised;
 
+            _sp_centerClosurePropertyUC.nud_LatchKitQty_ValueChangedEventRaised += _sp_centerClosurePropertyUC_nud_LatchKitQty_ValueChangedEventRaised;
+            _sp_centerClosurePropertyUC.nud_IntermediatePartQty_ValueChangedEventRaised += _sp_centerClosurePropertyUC_nud_IntermediatePartQty_ValueChangedEventRaised;
+
+        }
+
+        private void _sp_centerClosurePropertyUC_nud_LatchKitQty_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenPresenter.GetCurrentAmount();
+        }
+        private void _sp_centerClosurePropertyUC_nud_IntermediatePartQty_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenPresenter.GetCurrentAmount();
         }
 
         private void _sp_centerClosurePropertyUC_chkBoxCenterClosureCheckedChangedEventRaised(object sender, EventArgs e)
@@ -69,7 +82,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_CenterClosurePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                       IMainPresenter mainPresenter,
-                                                                      IScreenModel screenModel)
+                                                                      IScreenModel screenModel,
+                                                                      IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_CenterClosurePropertyUC, SP_CenterClosurePropertyUC>()
@@ -78,6 +92,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             centerClosure._unityC = unityC;
             centerClosure._mainPresenter = mainPresenter;
             centerClosure._screenModel = screenModel;
+            centerClosure._screenPresenter = screenPresenter;
 
             return centerClosure;
         }

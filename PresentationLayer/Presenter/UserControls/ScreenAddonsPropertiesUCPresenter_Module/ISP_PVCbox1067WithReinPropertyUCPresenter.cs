@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         ISP_PVCbox1067WithReinPropertyUC GetPVCbox1067WithReinPropertyUC();
         ISP_PVCbox1067WithReinPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                     IMainPresenter mainPresenter,
-                                                                    IScreenModel screenModel);
+                                                                    IScreenModel screenModel,
+                                                                    IScreenPresenter screenPresenter);
     }
 }

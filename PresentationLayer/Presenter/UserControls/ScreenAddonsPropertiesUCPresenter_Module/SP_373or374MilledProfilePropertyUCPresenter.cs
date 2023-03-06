@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         public SP_373or374MilledProfilePropertyUCPresenter(ISP_373or374MilledProfilePropertyUC sp_373or374MilledProfilePropertyUC)
         {
@@ -25,6 +26,14 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private void SubscribeToEventSetup()
         {
             _sp_373or374MilledProfilePropertyUC.SP373or374MilledProfilePropertyUCLoadEventRaised += _sp_373or374MilledProfilePropertyUC_SP373or374MilledProfilePropertyUCLoadEventRaised;
+            _sp_373or374MilledProfilePropertyUC.nud_373or374MilledProfile_ValueChangedEventRaise += _sp_373or374MilledProfilePropertyUC_nud_373or374MilledProfile_ValueChangedEventRaise;
+        }
+
+        private void _sp_373or374MilledProfilePropertyUC_nud_373or374MilledProfile_ValueChangedEventRaise(object sender, EventArgs e)
+        {
+            _screenModel.Screen_373or374MilledProfile = _sp_373or374MilledProfilePropertyUC.Screen_373or374MilledProfile;
+            _screenModel.Screen_373or374MilledProfileQty = _sp_373or374MilledProfilePropertyUC.Screen_373or374MilledProfileQty;
+            _screenPresenter.GetCurrentAmount();
         }
 
         private void _sp_373or374MilledProfilePropertyUC_SP373or374MilledProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -39,7 +48,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_373or374MilledProfilePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                               IMainPresenter mainPresenter,
-                                                                              IScreenModel screenModel)
+                                                                              IScreenModel screenModel,
+                                                                              IScreenPresenter screenPresenter)
         {
             unityC
                     .RegisterType<ISP_373or374MilledProfilePropertyUC, SP_373or374MilledProfilePropertyUC>()
@@ -48,6 +58,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             milledProfile373or374._unityC = unityC;
             milledProfile373or374._mainPresenter = mainPresenter;
             milledProfile373or374._screenModel = screenModel;
+            milledProfile373or374._screenPresenter = screenPresenter;
 
 
             return milledProfile373or374;
