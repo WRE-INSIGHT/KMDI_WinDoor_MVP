@@ -98,12 +98,13 @@
             // btn_CompileReports
             // 
             this.btn_CompileReports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CompileReports.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_CompileReports.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_CompileReports.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_CompileReports.Location = new System.Drawing.Point(3, 3);
             this.btn_CompileReports.Name = "btn_CompileReports";
             this.btn_CompileReports.Size = new System.Drawing.Size(142, 36);
             this.btn_CompileReports.TabIndex = 0;
+            this.btn_CompileReports.TabStop = false;
             this.btn_CompileReports.Text = "Compile Quotation,Screen And Summary.";
             this.btn_CompileReports.UseVisualStyleBackColor = true;
             this.btn_CompileReports.Click += new System.EventHandler(this.btn_CompileReports_Click);
@@ -111,12 +112,13 @@
             // btn_CompilePDF
             // 
             this.btn_CompilePDF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CompilePDF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_CompilePDF.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_CompilePDF.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic);
             this.btn_CompilePDF.Location = new System.Drawing.Point(159, 3);
             this.btn_CompilePDF.Name = "btn_CompilePDF";
             this.btn_CompilePDF.Size = new System.Drawing.Size(122, 36);
             this.btn_CompilePDF.TabIndex = 1;
+            this.btn_CompilePDF.TabStop = false;
             this.btn_CompilePDF.Text = "Compile PDF Files";
             this.btn_CompilePDF.UseVisualStyleBackColor = true;
             this.btn_CompilePDF.Click += new System.EventHandler(this.btn_CompilePDF_Click);

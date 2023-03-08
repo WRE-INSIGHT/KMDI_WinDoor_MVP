@@ -40,6 +40,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.chk_showimagelist = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.chk_selectall = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -178,6 +179,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.chk_selectall);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -185,6 +187,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(455, 20);
             this.panel3.TabIndex = 0;
+            // 
+            // chk_selectall
+            // 
+            this.chk_selectall.AutoSize = true;
+            this.chk_selectall.Location = new System.Drawing.Point(57, 1);
+            this.chk_selectall.Name = "chk_selectall";
+            this.chk_selectall.Size = new System.Drawing.Size(70, 17);
+            this.chk_selectall.TabIndex = 4;
+            this.chk_selectall.Text = "Select All";
+            this.chk_selectall.UseVisualStyleBackColor = true;
+            this.chk_selectall.CheckedChanged += new System.EventHandler(this.chk_selectall_CheckedChanged);
             // 
             // label5
             // 
@@ -249,5 +262,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox chk_selectall;
     }
 }

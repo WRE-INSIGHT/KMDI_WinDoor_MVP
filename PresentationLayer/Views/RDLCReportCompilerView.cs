@@ -33,14 +33,18 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
-
         public void CloseRDLCReportCompilerView()
         {
             this.Close();
         }
+        public CheckBox CheckListSelectAll()
+        {
+            return chk_selectall;
+        }
 
         public event EventHandler BtnCompileReportClickEventRaised;
-        public event EventHandler RDLCReportCompilerViewLoadEventRaise;
+        public event EventHandler RDLCReportCompilerViewLoadEventRaised;
+        public event EventHandler chkselectallCheckedChangedEventRaised;
 
         public RDLCReportCompilerView()
         {
@@ -54,7 +58,12 @@ namespace PresentationLayer.Views
 
         private void RDLCReportCompilerView_Load(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, RDLCReportCompilerViewLoadEventRaise,e);
+            EventHelpers.RaiseEvent(sender, RDLCReportCompilerViewLoadEventRaised,e);
+        }
+
+        private void chk_selectall_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkselectallCheckedChangedEventRaised,e);
         }
     }
 }

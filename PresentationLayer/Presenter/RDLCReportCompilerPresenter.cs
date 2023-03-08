@@ -48,10 +48,28 @@ namespace PresentationLayer.Presenter
         private void SubScribeToEventSetup()
         {
             _rdlcReportCompilerView.BtnCompileReportClickEventRaised += new EventHandler(OnBtnCompileReportClickEventRaised);
-            _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaise += new EventHandler(OnRDLCReportCompilerViewLoadEventRaise);
+            _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
+            _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
+        }
+        private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.CheckListSelectAll().Checked)
+            {
+                for(int i = 0;i< _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Count; i++)
+                {
+                    _rdlcReportCompilerView.GetChecklistBoxIndex().SetItemChecked(i,true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Count; i++)
+                {
+                    _rdlcReportCompilerView.GetChecklistBoxIndex().SetItemChecked(i, false);
+                }
+            }
         }
 
-        private void OnRDLCReportCompilerViewLoadEventRaise(object sender, EventArgs e)
+        private void OnRDLCReportCompilerViewLoadEventRaised(object sender, EventArgs e)
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {

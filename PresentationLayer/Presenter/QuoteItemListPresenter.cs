@@ -989,8 +989,4 @@ namespace PresentationLayer.Presenter
         public bool ItemboolImage { get; set; }
 
     }
-
-
-
-
 }

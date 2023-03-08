@@ -45,7 +45,7 @@ namespace PresentationLayer.Presenter
         public PDFCompilerPresenter(IPDFCompilerView pdfCompilerView,
                                     IRDLCReportCompilerPresenter rdlcReportCompilerPresenter)
         {
-            _pdfCompilerView = pdfCompilerView;
+            _pdfCompilerView = pdfCompilerView; 
             _rdlcReportCompilerPresenter = rdlcReportCompilerPresenter;
             SubscribeToEventSetup();
         }
@@ -55,7 +55,7 @@ namespace PresentationLayer.Presenter
             _pdfCompilerView.changeSyncDirToolStripMenuItemClickEventRaised += new EventHandler(OnchangeSyncDirToolStripMenuItemClickEventRaised);
             _pdfCompilerView.btnCompileReportsClickEventRaised += new EventHandler(OnbtnCompileReportsClickEventRaised);
             _pdfCompilerView.btnCompilePDFClickEventRaised += new EventHandler(OnbtnCompilePDFClickEventRaised);
-            _pdfCompilerView.PDFCompilerViewFormClosedEventRaised += new FormClosedEventHandler(OnPDFCompilerViewFormClosedEventRaised);
+            _pdfCompilerView.PDFCompilerViewFormClosedEventRaised += new FormClosedEventHandler(OnPDFCompilerViewFormClosedEventRaised);           
         }
 
         private void OnbtnCompilePDFClickEventRaised(object sender, EventArgs e)

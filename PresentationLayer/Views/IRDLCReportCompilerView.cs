@@ -7,9 +7,11 @@ namespace PresentationLayer.Views
     {
         string TxtBxOutofTownExpenses { get; set; }
         event EventHandler BtnCompileReportClickEventRaised;
-        event EventHandler RDLCReportCompilerViewLoadEventRaise;
+        event EventHandler RDLCReportCompilerViewLoadEventRaised;
+        event EventHandler chkselectallCheckedChangedEventRaised;
         CheckedListBox GetChecklistBoxIndex();
         void ShowRDLCReportCompilerView();
         void CloseRDLCReportCompilerView();
+        CheckBox CheckListSelectAll();
     }
 }

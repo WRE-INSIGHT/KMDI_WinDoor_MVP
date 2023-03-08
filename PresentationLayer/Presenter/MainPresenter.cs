@@ -1115,7 +1115,7 @@ namespace PresentationLayer.Presenter
             _screenModel = _screenServices.AddScreenModel(0.0m,
                                                           0,
                                                           0,
-                                                          null,                                                        
+                                                          null,
                                                           string.Empty,
                                                           0.0m,
                                                           0,
@@ -1128,6 +1128,8 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
+
+
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1259,6 +1261,8 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
             wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
+            wndr_content.Add("AEIC_POS: " + _position);
+
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
                 wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
@@ -3369,6 +3373,10 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("AEIC:"))
                     {
                         _aeic = extractedValue_str;
+                    }
+                    else if (row_str.Contains("AEIC_POS:"))
+                    {
+                        _position = extractedValue_str;
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {

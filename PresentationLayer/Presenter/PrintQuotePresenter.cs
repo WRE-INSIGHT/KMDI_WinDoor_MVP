@@ -290,7 +290,7 @@ namespace PresentationLayer.Presenter
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[7] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[7] = new ReportParameter("ASPosition",_mainPresenter.position);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -464,7 +464,7 @@ namespace PresentationLayer.Presenter
                     ReportParameter[] RParam = new ReportParameter[5];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[2] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
 
                     if (_printQuoteView.GetShowPageNum().Checked)
