@@ -333,7 +333,7 @@ namespace PresentationLayer.Presenter
                                out warnings
                                );
 
-                            string defDir = Properties.Settings.Default.WndrDir + @"\Screen.PDF";
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Screen.PDF";
                             using (FileStream fs = new FileStream(defDir, FileMode.Create))
                             {
                                 fs.Write(bytes, 0, bytes.Length);
@@ -398,7 +398,7 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
-                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Count != 0)
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
@@ -440,7 +440,7 @@ namespace PresentationLayer.Presenter
                            out warnings
                            );
 
-                        string defDir = Properties.Settings.Default.WndrDir + @"\Quotation.PDF";
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Quotation.PDF";
                         using (FileStream fs = new FileStream(defDir, FileMode.Create))
                         {
                             fs.Write(bytes, 0, bytes.Length);
@@ -498,7 +498,7 @@ namespace PresentationLayer.Presenter
                            out warnings
                            );
 
-                        string defDir = Properties.Settings.Default.WndrDir + @"\SummaryOfContract.PDF";
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\SummaryOfContract.PDF";
                         using (FileStream fs = new FileStream(defDir, FileMode.Create))
                         {
                             fs.Write(bytes, 0, bytes.Length);

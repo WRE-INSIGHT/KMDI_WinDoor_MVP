@@ -1,10 +1,15 @@
 ﻿using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +30,9 @@ namespace PresentationLayer.Presenter
         private IPDFCompilerPresenter _pdfCompilerPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
 
+        #region variables 
+        private bool CompileRDLC;     
+        #endregion
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
                                            IPrintQuotePresenter printQuotePresenter)
         {
@@ -64,28 +72,118 @@ namespace PresentationLayer.Presenter
                     {
                         if (num > 0)
                         {
+                            string projname = _mainPresenter.inputted_projectName;
+                            string filename = Properties.Settings.Default.WndrDir + @"\" + projname + ".PDF";
+                            string targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+                            Directory.CreateDirectory(targetpath);
                             _quoteItemListPresenter.RenderPDFAtBackGround = true;
 
-                            #region Windoor RDLC
-                            foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                            if (File.Exists(filename))
                             {
-                                var selectedindex = Convert.ToInt32(item);
-                                _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
+                                DialogResult dlgRes = MessageBox.Show(projname + ".PDF already Exist, Do you want to Replace It ?", "Confirm Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if(dlgRes == DialogResult.Yes)
+                                {
+                                    CompileRDLC = true;
+                                }
+                                else
+                                {
+                                    CompileRDLC = false;
+                                }
                             }
-                            _quoteItemListPresenter.PrintWindoorRDLC();
-                            #endregion
-                            #region Summary Of Contract
-                            _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-                            _quoteItemListPresenter.PrintContractSummaryRDLC();
-                            #endregion
-                            #region Screen
-                            _quoteItemListPresenter.PrintScreenRDLC();
-                            #endregion
+                            else
+                            {
+                                CompileRDLC = true;
+                            }
+
+                            if (CompileRDLC == true)
+                            {
+                                #region Windoor RDLC
+                                foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
+                                {
+                                    var selectedindex = Convert.ToInt32(item);
+                                    _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Add(selectedindex);
+                                }
+                                _quoteItemListPresenter.PrintWindoorRDLC();
+                                #endregion
+                                #region Summary Of Contract
+                                _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
+                                _quoteItemListPresenter.PrintContractSummaryRDLC();
+                                #endregion
+                                #region Screen
+                                if (_mainPresenter.Screen_List.Count != 0)
+                                {
+                                    _quoteItemListPresenter.PrintScreenRDLC();
+                                }
+                                #endregion
+                                #region PDF Compiler
+
+                                string[] files = GetFiles();
+
+                                PdfDocument outputDocument = new PdfDocument();
+
+                                XFont font = new XFont("Segoe UI", 10);
+                                XBrush brush = XBrushes.Black;
 
 
+                                foreach (string file in files)
+                                {
 
-                            MessageBox.Show("Report Compilation Complete", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            SetVariablesToDeffault();
+                                    PdfDocument inputDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import);
+
+                                    int count = inputDocument.PageCount;
+                                    for (int idx = 0; idx < count; idx++)
+                                    {
+                                        PdfPage page = inputDocument.Pages[idx];
+                                        outputDocument.AddPage(page);
+                                    }
+
+                                }
+
+                                #region page counter
+                                string noPages = outputDocument.Pages.Count.ToString();
+                                for (int i = 0; i < outputDocument.Pages.Count; ++i)
+                                {
+                                    PdfPage page = outputDocument.Pages[i];
+
+                                    // Make a layout rectangle.
+                                    XRect layoutRectangle = new XRect(0/*X*/, page.Height - 25/*Y*/, page.Width/*Width*/, font.Height/*Height*/);
+
+                                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                                    {
+                                        gfx.DrawString(
+                                            "Page " + (i + 1).ToString() + " of " + noPages,
+                                            font,
+                                            brush,
+                                            layoutRectangle,
+                                            XStringFormats.Center);
+                                    }
+
+                                }
+                                #endregion                   
+
+                                outputDocument.Save(filename);
+                                DialogResult dialogresult = MessageBox.Show("Open " + projname + ".PDF File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (dialogresult == DialogResult.Yes)
+                                {
+                                    Process.Start(filename);
+                                }
+
+
+                                #endregion
+                            }
+
+                            if (Directory.Exists(targetpath))
+                            {
+                                try
+                                {
+                                    Directory.Delete(targetpath, true);
+                                }
+                                catch (IOException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                            SetVariablesToDefault();
                         }
                         else
                         {
@@ -110,10 +208,29 @@ namespace PresentationLayer.Presenter
             
         }
 
-        private void SetVariablesToDeffault()
+        private static string[] GetFiles()
+        {
+            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+            DirectoryInfo di = new DirectoryInfo(defDir);
+            FileInfo[] files = di.GetFiles("*.pdf");
+
+            int i = 0;
+            string[] names = new string[files.Length];
+
+            foreach (var r in files)
+            {
+                names[i] = r.FullName;
+                i = i + 1;
+            }
+
+            return names;
+        }
+
+        private void SetVariablesToDefault()
         {
             _quoteItemListPresenter.RenderPDFAtBackGround = false;
             _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Clear();
+            CompileRDLC = false;
         }
 
         public IRDLCReportCompilerPresenter GetNewIntance(IUnityContainer unityC,

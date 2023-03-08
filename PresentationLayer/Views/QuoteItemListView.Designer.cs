@@ -176,7 +176,7 @@
             this.TSbtnPDFCompiler.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnPDFCompiler.Name = "TSbtnPDFCompiler";
             this.TSbtnPDFCompiler.Size = new System.Drawing.Size(23, 22);
-            this.TSbtnPDFCompiler.Text = "toolStripButton1";
+            this.TSbtnPDFCompiler.Text = "PDF Compiler";
             this.TSbtnPDFCompiler.Click += new System.EventHandler(this.TSbtnPDFCompiler_Click);
             // 
             // QuoteItemListView

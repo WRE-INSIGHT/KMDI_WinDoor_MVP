@@ -2274,7 +2274,7 @@ namespace PresentationLayer.Presenter
                         _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                         _basePlatformImagerUCPresenter.SendToBack_baseImager();
                         StartWorker("Open_WndrFiles");
-                    }
+                    } 
                 }
             }
             catch (Exception ex)

@@ -17,6 +17,7 @@ namespace PresentationLayer.Views
         public event EventHandler changeSyncDirToolStripMenuItemClickEventRaised;
         public event EventHandler btnCompileReportsClickEventRaised;
         public event EventHandler btnCompilePDFClickEventRaised;
+        public event FormClosedEventHandler PDFCompilerViewFormClosedEventRaised;
 
         public OpenFileDialog GetFileDialog()
         {
@@ -49,6 +50,11 @@ namespace PresentationLayer.Views
         private void btn_CompilePDF_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, btnCompilePDFClickEventRaised ,e );
+        }
+
+        private void PDFCompilerView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            EventHelpers.RaiseFormClosedEvent(sender, PDFCompilerViewFormClosedEventRaised,e);
         }
     }
 }

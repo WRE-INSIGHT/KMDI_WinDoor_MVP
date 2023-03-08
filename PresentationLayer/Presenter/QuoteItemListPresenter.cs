@@ -463,6 +463,15 @@ namespace PresentationLayer.Presenter
         {
             //_mainPresenter.GetCurrentPrice();
             _mainPresenter.updatePriceOfMainView();
+            try
+            {
+                Application.OpenForms["PDFCompilerView"].Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error In FormClose " + this + ex.Message);
+            }
+
         }
 
         private void _quoteItemListView_TSbtnGlassSummaryClickEventRaised(object sender, EventArgs e)

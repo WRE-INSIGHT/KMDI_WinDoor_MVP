@@ -33,6 +33,7 @@ namespace PresentationLayer.Views
         {
             this.Show();
         }
+
         public void CloseRDLCReportCompilerView()
         {
             this.Close();
