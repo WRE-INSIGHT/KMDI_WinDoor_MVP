@@ -2071,8 +2071,8 @@ namespace PresentationLayer.Presenter
                                 }
 
                             }
-                            wdm.lst_frame.Clear();
-                            _quotationModel.Lst_Windoor.Remove(wdm);
+                            //_windoorModel.lst_frame.Clear();
+                            _quotationModel.Lst_Windoor.Remove(_windoorModel);
 
                             break;
                         }
