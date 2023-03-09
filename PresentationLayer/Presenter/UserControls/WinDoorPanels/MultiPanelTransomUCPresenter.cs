@@ -22,6 +22,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -175,7 +176,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Mpanel height " + _multiPanelModel.MPanel_Height);
                 Console.WriteLine("Mpanel Widthtobind " + _multiPanelModel.MPanel_WidthToBind);
                 Console.WriteLine("Mpanel heighttobind " + _multiPanelModel.MPanel_HeightToBind);
+                Console.WriteLine("Mpanel Width Imager " + _multiPanelModel.MPanelImageRenderer_Width);
+                Console.WriteLine("Mpanel height Imager " + _multiPanelModel.MPanelImageRenderer_Height);
                 Console.WriteLine("Location " + ((FlowLayoutPanel)sender).Parent.Location);
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine();
                 multiTransomUC = (FlowLayoutPanel)sender;
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -385,9 +390,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
             }
         }
 
@@ -472,6 +482,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -654,8 +670,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                 _frameModel.Lst_MultiPanel = _mainPresenter.Arrange_Frame_MultiPanelModel(_frameModel);
                                             }
                                     }
-                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
+                                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                                     _mainPresenter.Run_GetListOfMaterials_SpecificItem();
                                 }
@@ -732,6 +748,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 suggest_HT = _multiPanelModel.MPanel_Height - 10;
@@ -792,6 +809,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
@@ -811,6 +829,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             suggest_HT = (((_multiPanelModel.MPanel_Height - 10) - (divSize * _multiPanelModel.MPanel_Divisions)) / totalPanelCount);
@@ -1166,7 +1185,6 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                     }
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                    _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
 
                 }
                 _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
@@ -1176,6 +1194,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -1359,6 +1383,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
                 catch (Exception ex)
                 {
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var frame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = frame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                     if (ex.HResult == -2146233033)
                     {
                         MessageBox.Show("Please input a number.");
@@ -1420,6 +1450,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height;
@@ -1432,6 +1463,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         pInnerHt = fpnl.ClientRectangle.Height - (_frameModel.Frame_Deduction + _frameModel.Frame_Padding_int.Bottom);
@@ -1458,6 +1490,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             {
                 if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                    _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     corner_points[4] = new Point(0, fpnl.ClientRectangle.Height - 1);
@@ -1535,6 +1568,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                     {
                         botFrameDeduct = (int)(9 * _frameModel.Frame_Zoom);
@@ -1553,6 +1587,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             botFrameDeduct = 11;
@@ -1712,6 +1747,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                        _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                         _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         ht_deduction = 0;
@@ -1758,6 +1794,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             wd_deduction = 17;
@@ -1779,6 +1816,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 wd_deduction = 15;
@@ -1798,6 +1836,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 bounds_PointY = 5;
@@ -1818,6 +1857,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             }
                                             else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                     _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                      _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                             {
                                                 bounds_PointY = 5;
@@ -1880,6 +1920,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         wd_deduction = 17;
@@ -1900,6 +1941,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             ht_deduction = 15;
@@ -1918,6 +1960,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -1938,6 +1981,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -1987,6 +2031,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                              _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                     {
                                         ht_deduction = 11;
@@ -2006,6 +2051,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             ht_deduction = 15;
@@ -2023,6 +2069,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -2041,6 +2088,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         }
                                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             bounds_PointY = 5;
@@ -2075,6 +2123,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         {
                             if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 ht_deduction = bSizeDeduction - 9;
@@ -3231,6 +3280,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom <= 0.26f)
@@ -3291,6 +3341,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom <= 0.26f)
@@ -4041,6 +4092,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom == 0.26f)
@@ -4100,6 +4152,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             if (zoom == 1.0f || zoom == 0.26f)

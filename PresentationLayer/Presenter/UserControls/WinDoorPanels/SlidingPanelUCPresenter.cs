@@ -15,6 +15,7 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -180,7 +181,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, -1);
                                 IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                                 if (pnls == null)
                                 {
@@ -231,7 +232,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     }
                                     pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, 1);
                                 IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                                 if (pnls == null)
                                 {
@@ -268,12 +269,15 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         {
             try
             {
-                //Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
-                //Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
+                Console.WriteLine("Panel Renderer Width " + _panelModel.PanelImageRenderer_Width);
+                Console.WriteLine("Panel Renderer Height " + _panelModel.PanelImageRenderer_Height);
                 Console.WriteLine("Sliding WidthToBind " + _panelModel.Panel_WidthToBind);
                 Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
                 Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
                 Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
+                Console.WriteLine("Sliding Height " + _panelModel.Panel_Margin);
+                Console.WriteLine("Sliding Display Width " + _panelModel.Panel_DisplayWidth);
+                Console.WriteLine("Sliding Display Height " + _panelModel.Panel_DisplayHeight);
                 //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
                 //Console.WriteLine("Parent HeightToBind " + _multiPanelModel.MPanel_HeightToBind);
 
@@ -290,6 +294,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Location: " + slidingUC.Location);
                 Console.WriteLine();
 
+
+                //if (_panelModel.Panel_Parent.Name.Contains("Frame"))
+                //{
+                //    Console.WriteLine("Single");
+                //}
+                //else if (_panelModel.Panel_ParentMultiPanelModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                //{
+                //    Console.WriteLine("2nd");
+                //}
+                //else if (_panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                //{
+                //    Console.WriteLine("3rd");
+                //}
+                //else if (_panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
+                //{
+                //    Console.WriteLine("4th");
+                //}
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
                 int propertyHeight = 0;
                 int framePropertyHeight = 0;
@@ -496,6 +517,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -984,7 +1011,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, mullion_movement);
                                 IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                                 if (pnls == null)
                                 {
@@ -1002,6 +1029,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1039,6 +1072,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -1221,9 +1260,47 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             if (_multiPanelModel != null)
             {
                 _multiPanelModel.MPanelLst_Panel.Remove(_panelModel);
-            }
+                foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                {
+                    mpnl.Reload_PanelMargin();
 
+                    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    {
+                        pnl.SetDimensionToBind_using_BaseDimension();
+                    }
+
+
+                    //foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                    //{
+
+                    //    if (mpnl.MPanel_Type == "Mullion")
+                    //    {
+                    //        if ((pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
+                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
+                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
+                    //             pnl.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    //        {
+                    //            pnl.Panel_HeightToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(pnl.Panel_Margin.Top * pnl.Panel_Zoom));
+                    //        }
+                    //        else
+                    //        {
+
+                    //            pnl.Panel_HeightToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(pnl.Panel_Margin.Top * pnl.Panel_Zoom) - (int)(pnl.Panel_Margin.Bottom * pnl.Panel_Zoom));
+
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        pnl.Panel_WidthToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_WidthToBind - (int)(pnl.Panel_Margin.Left * pnl.Panel_Zoom) - (int)(pnl.Panel_Margin.Right * pnl.Panel_Zoom));
+                    //    }
+
+                    //}
+                }
+            }
+           
             #endregion
+            _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
             _mainPresenter.itemDescription();
             _mainPresenter.GetCurrentPrice();
         }

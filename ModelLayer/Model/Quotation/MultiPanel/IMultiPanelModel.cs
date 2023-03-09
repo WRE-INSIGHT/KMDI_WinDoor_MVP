@@ -120,8 +120,11 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                             string mpanelparent_placement = ""); //2nd level
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
-        void Fit_My2ndLvlControls_Dimensions();
-        void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl);
+        void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpanel, 
+                                             IMultiPanelModel nxt_mpnl, 
+                                             IPanelModel prev_pnl, 
+                                             IPanelModel nxt_pnl,
+                                             int movement);
         void Fit_EqualPanel_ToBindDimensions();
         void Fit_DisplayDimensions();
         void Fit_PanelDimensions();

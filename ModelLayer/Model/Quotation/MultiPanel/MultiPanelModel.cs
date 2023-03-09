@@ -561,23 +561,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
 
         #region Methods
 
-        public void Fit_My2ndLvlControls_Dimensions()
-
-        {
-            if (MPanelLst_MultiPanel.Count > 0)
-            {
-                foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                {
-                    mpnl.SetDimensions_childObjs(0, "");
-                    mpnl.SetDimensions_childPanelObjs(0);
-                }
-            }
-            else
-            {
-               
-            }
-
-        }
+     
 
         public void SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt)
         {
@@ -598,10 +582,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
                                 }
+                                //else if (MPanel_Zoom == 0.50f)
+                                //{
+                                //    pnl.Panel_WidthToBind = ((int)(pnl.Panel_Width * pnl.Panel_Zoom));
+                                //    int totalWd_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_WidthToBind + pnls.Panel_MarginToBind.Left + pnls.Panel_MarginToBind.Right),
+                                //        totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
+                                //        totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+
+                                //    int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel;
+                                //    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
+
+                                //    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                //    {
+                                //        pnl.Panel_WidthToBind += diff_MPanelWd_VS_MyCtrlsWidth;
+                                //    }
+                                //    else if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                //    {
+                                //        pnl.Panel_WidthToBind -= diff_MPanelWd_VS_MyCtrlsWidth;
+                                //    }
+                                //}
                                 else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                     pnl.Panel_WidthToBind += pnlwdToBind;
+
                                 }
                             }
                         }
@@ -621,14 +625,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
-                                    {
-                                        pnl.Panel_WidthToBind = (int)Math.Ceiling(pnl.Panel_Width * MPanel_Zoom);
-                                    }
-                                    else if (MPanel_Zoom <= 0.26f)
+                                    //else if (MPanel_Zoom == 0.50f)
+                                    //{
+                                    //    pnl.Panel_WidthToBind = ((int)(pnl.Panel_Width * pnl.Panel_Zoom));
+                                    //    int totalWd_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_WidthToBind + pnls.Panel_MarginToBind.Left + pnls.Panel_MarginToBind.Right),
+                                    //        totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
+                                    //        totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+
+                                    //    int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel - 1;
+                                    //    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
+
+                                    //    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                    //    {
+                                    //        pnl.Panel_WidthToBind += diff_MPanelWd_VS_MyCtrlsWidth;
+                                    //    }
+                                    //    else if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                    //    {
+                                    //        pnl.Panel_WidthToBind -= diff_MPanelWd_VS_MyCtrlsWidth;
+                                    //    }
+                                    //}
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                         pnl.Panel_WidthToBind += pnlwdToBind;
+
                                     }
                                 }
                             }
@@ -643,20 +663,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_WidthToBind += divmovement;
                                     }
-                                    //else if(MPanel_Zoom == 0.50f)
+                                    //else if (MPanel_Zoom == 0.50f)
                                     //{
-                                    //    pnl.Panel_WidthToBind = (int)Math.Ceiling(pnl.Panel_Width * MPanel_Zoom);
-                                    //    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_WidthToBind),
-                                    //       totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
-                                    //       totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
-                                    //    int totalWidth_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
-                                    //    int diff_MPanelHt_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls - 10;
-                                    //    pnl.Panel_WidthToBind += diff_MPanelHt_VS_MyCtrlsWidth
+                                    //    pnl.Panel_WidthToBind = ((int)(pnl.Panel_Width * pnl.Panel_Zoom));
+                                    //    int totalWd_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_WidthToBind + pnls.Panel_MarginToBind.Left + pnls.Panel_MarginToBind.Right),
+                                    //        totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
+                                    //        totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+
+                                    //    int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel - 1;
+                                    //    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
+
+                                    //    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                    //    {
+                                    //        pnl.Panel_WidthToBind += diff_MPanelWd_VS_MyCtrlsWidth;
+                                    //    }
+                                    //    else if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                    //    {
+                                    //        pnl.Panel_WidthToBind -= diff_MPanelWd_VS_MyCtrlsWidth;
+                                    //    }
                                     //}
                                     else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                         pnl.Panel_WidthToBind += pnlwdToBind;
+
                                     }
                                 }
                             }
@@ -676,10 +706,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_WidthToBind += divmovement;
                                 }
+                                //else if (MPanel_Zoom == 0.50f)
+                                //{
+                                //    pnl.Panel_WidthToBind = ((int)(pnl.Panel_Width * pnl.Panel_Zoom));
+                                //    int totalWd_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_WidthToBind + pnls.Panel_MarginToBind.Left + pnls.Panel_MarginToBind.Right),
+                                //        totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
+                                //        totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
+
+                                //    int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel;
+                                //    int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
+
+                                //    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                //    {
+                                //        pnl.Panel_WidthToBind += diff_MPanelWd_VS_MyCtrlsWidth;
+                                //    }
+                                //    else if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                //    {
+                                //        pnl.Panel_WidthToBind -= diff_MPanelWd_VS_MyCtrlsWidth;
+                                //    }
+                                //}
                                 else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlwdToBind = MPanel_WidthToBind - MPanel_WidthToBindPrev;
                                     pnl.Panel_WidthToBind += pnlwdToBind;
+
                                 }
                             }
                         }
@@ -702,20 +752,28 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     pnl.Panel_HeightToBind += divmovement;
                                 }
 
-                                else if (MPanel_Zoom == 0.50f)
-                                {
-                                    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
-                                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
-                                        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
-                                        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                //else if (MPanel_Zoom == 0.50f)
+                                //{
+                                //    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
+                                //    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
+                                //          totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                                //          totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
 
-                                    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
-                                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
-                                    pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
-                                   
+                                //    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
+                                //    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
-                                }
-                                else if (MPanel_Zoom <= 0.26f)
+                                //    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                //    {
+                                //        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
+                                //    }
+                                //    else if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                //    {
+                                //        pnl.Panel_HeightToBind -= diff_MPanelHt_VS_MyCtrlsHeight;
+                                //    }
+
+
+                                //}
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                     pnl.Panel_HeightToBind += pnlhtToBind;
@@ -739,19 +797,30 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
-                                    {
-                                        pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
-                                        int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
-                                            totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
-                                            totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                    //else if (MPanel_Zoom == 0.50f)
+                                    //{
+                                    //    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
+                                    //    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
+                                    //       totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                                    //       totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
 
-                                        int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
-                                        int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
-                                        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
+                                    //    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel - 1;
+                                    //    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
 
-                                    }
-                                    else if (MPanel_Zoom <= 0.26f)
+                                    //    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                    //    {
+                                    //        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
+                                    //    }
+                                    //    else if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                    //    {
+                                    //        pnl.Panel_HeightToBind -= diff_MPanelHt_VS_MyCtrlsHeight;
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        Console.WriteLine(MPanel_HeightToBind - totalHeight_Controls + 1);
+                                    //    }
+                                    //}
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                         pnl.Panel_HeightToBind += pnlhtToBind;
@@ -770,18 +839,26 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         pnl.Panel_HeightToBind += divmovement;
                                     }
-                                    else if (MPanel_Zoom == 0.50f)
-                                    {
-                                        pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
-                                        int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
-                                            totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
-                                            totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                    //else if (MPanel_Zoom == 0.50f)
+                                    //{
+                                    //    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
+                                    //    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
+                                    //        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                                    //        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
 
-                                        int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
-                                        int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
-                                        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
-                                    }
-                                    else if (MPanel_Zoom <= 0.26f)
+                                    //    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel - 1;
+                                    //    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
+
+                                    //    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                    //    {
+                                    //        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
+                                    //    }
+                                    //    else if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                    //    {
+                                    //        pnl.Panel_HeightToBind -= diff_MPanelHt_VS_MyCtrlsHeight;
+                                    //    }
+                                    //}
+                                    else if (MPanel_Zoom <= 0.50f)
                                     {
                                         int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                         pnl.Panel_HeightToBind += pnlhtToBind;
@@ -804,18 +881,26 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 {
                                     pnl.Panel_HeightToBind += divmovement;
                                 }
-                                else if (MPanel_Zoom == 0.50f)
-                                {
-                                    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
-                                    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
-                                        totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
-                                        totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
+                                //else if (MPanel_Zoom == 0.50f)
+                                //{
+                                //    pnl.Panel_HeightToBind = ((int)(pnl.Panel_Height * pnl.Panel_Zoom));
+                                //    int totalHt_panelModel = MPanelLst_Panel.Sum(pnls => pnls.Panel_HeightToBind + pnls.Panel_MarginToBind.Top + pnls.Panel_MarginToBind.Bottom),
+                                //           totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
+                                //           totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
 
-                                    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
-                                    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
-                                    pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
-                                }
-                                else if (MPanel_Zoom <= 0.26f)
+                                //    int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
+                                //    int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
+
+                                //    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                //    {
+                                //        pnl.Panel_HeightToBind += diff_MPanelHt_VS_MyCtrlsHeight;
+                                //    }
+                                //    else if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                //    {
+                                //        pnl.Panel_HeightToBind -= diff_MPanelHt_VS_MyCtrlsHeight;
+                                //    }
+                                //}
+                                else if (MPanel_Zoom <= 0.50f)
                                 {
                                     int pnlhtToBind = MPanel_HeightToBind - MPanel_HeightToBindPrev;
                                     pnl.Panel_HeightToBind += pnlhtToBind;
@@ -825,6 +910,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                 }
             }
+
+           
         }
 
         public void Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(int divmovement, string prevOrNxt)
@@ -1033,6 +1120,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     }
                     if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                         MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                         MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         mpnlWd_deduct = 15;
@@ -1052,48 +1140,13 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                     }
                 }
-                //int deduct = 0;
-                //if (MPanel_Placement == "Somewhere in Between")
-                //{
-
-                //    if (MPanel_Zoom == 0.5f)
-                //    {
-                //        if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
-                //        {
-                //            deduct = 11;
-                //        }
-                //        else
-                //        {
-                //            deduct = 10;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
-                //        {
-                //            deduct = 20;
-                //        }
-                //        else
-                //        {
-                //            deduct = 16;
-                //        }
-                //    }
-
-                //}
-                //else if (MPanel_Placement == "First" ||
-                //         MPanel_Placement == "Last")
-                //{
-                //    deduct = (int)(18 * MPanel_Zoom);
-                //}
-
 
                 if (MPanel_Type == "Mullion")
                 {
                     foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Height += divmovement;
-                        //pnl.Panel_DisplayHeight += divmovement;
-                        pnl.Panel_DisplayHeight = MPanel_DisplayHeight;
+                        pnl.Panel_DisplayHeight += divmovement;
                         pnl.Panel_DisplayHeightDecimal = MPanel_DisplayHeightDecimal;
 
                         if (MPanel_Zoom == 1.0f)
@@ -1107,7 +1160,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanel_Zoom <= 0.26f)
                         {
-                            int pnlhtToBind = MPanel_HeightToBind - mpnlHt_deduct;
+                            int pnlhtToBind = MPanel_HeightToBind - 10;
                             pnl.Panel_HeightToBind = pnlhtToBind;
                         }
                     }
@@ -1117,8 +1170,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     foreach (IPanelModel pnl in MPanelLst_Panel)
                     {
                         pnl.Panel_Width += divmovement;
-                        //pnl.Panel_DisplayWidth += divmovement;
-                        pnl.Panel_DisplayWidth = MPanel_DisplayWidth;
+                        pnl.Panel_DisplayWidth += divmovement;
                         pnl.Panel_DisplayWidthDecimal = MPanel_DisplayWidthDecimal;
 
                         if (MPanel_Zoom == 1.0f)
@@ -1132,7 +1184,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         }
                         else if (MPanel_Zoom <= 0.26f)
                         {
-                            int pnlwdToBind = MPanel_WidthToBind - mpnlWd_deduct;
+                            int pnlwdToBind = MPanel_WidthToBind - pnl.Panel_MarginToBind.Left - pnl.Panel_Margin.Right;
                             pnl.Panel_WidthToBind = pnlwdToBind;
                         }
                     }
@@ -1503,21 +1555,41 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             int parent_wdToBind = MPanel_ParentModel.MPanelImageRenderer_Width,
                 parent_htToBind = MPanel_ParentModel.MPanelImageRenderer_Height,
                 totalpanel_inside_parentMpanel = MPanel_ParentModel.MPanel_Divisions + 1,
+                totalObject = MPanel_ParentModel.MPanelLst_Panel.Count + MPanel_ParentModel.MPanelLst_MultiPanel.Count,
                 div_count = MPanel_ParentModel.MPanel_Divisions,
                 divSize = (int)MPanel_FrameModelParent.Frame_Type,
                 wd = 0, ht = 0;
-
             if (MPanelImageRenderer_Zoom == 1.0f || MPanelImageRenderer_Zoom == 0.50f)
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {
-                    wd = (((parent_wdToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+                    int totalWidth_Imagers = MPanel_ParentModel.MPanelLst_Panel.Sum(pnl => pnl.PanelImageRenderer_Width) +
+                                             MPanel_ParentModel.MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanelImageRenderer_Width);
+
+                    if (MPanel_Placement == "First")
+                    {
+                        wd = (((parent_wdToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+                    }
+                    else
+                    {
+                        wd = ((parent_wdToBind - totalWidth_Imagers) - ((Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count))) / ((div_count + 1) - (totalObject - 1));
+                    }
                     ht = parent_htToBind;
                 }
                 else if (MPanel_ParentModel.MPanel_Type == "Transom")
                 {
+                    int totalHeight_Imagers = MPanel_ParentModel.MPanelLst_Panel.Sum(pnl => pnl.PanelImageRenderer_Height) +
+                                              MPanel_ParentModel.MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanelImageRenderer_Height);
                     wd = parent_wdToBind;
-                    ht = (((parent_htToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+                    if (MPanel_Placement == "First")
+                    {
+                        ht = (((parent_htToBind) - (Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count)) / totalpanel_inside_parentMpanel);
+
+                    }
+                    else
+                    {
+                        ht = ((parent_htToBind - totalHeight_Imagers) - ((Convert.ToInt32(divSize * MPanelImageRenderer_Zoom) * div_count))) / ((div_count + 1) - (totalObject - 1));
+                    }
                 }
             }
             else if (MPanelImageRenderer_Zoom <= 0.26f)
@@ -1654,7 +1726,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 || 
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             ht_deduct = 10;
@@ -1923,8 +1996,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                         {
                             if (pnl.Panel_Index_Inside_MPanel == 0)
                             {
-
-
                                 pnl_margin = new Padding(10, 10, 8, 0);
                                 pnl.Panel_Placement = "First";
                             }
@@ -1937,6 +2008,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 8, 0);
@@ -1957,6 +2029,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(10, 0, 8, 0);
@@ -1971,7 +2044,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                         pnl_margin = new Padding(10, 0, 8, 10);
                                     }
                                 }
-
                                 pnl.Panel_Placement = "Last";
                             }
                             else
@@ -1987,7 +2059,6 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                 if (MPanel_FrameModelParent.Frame_Type == FrameModel.Frame_Padding.Door)
                                 {
                                     pnl_margin = new Padding(10, 10, 8, 0);
-
                                 }
                                 else
                                 {
@@ -2005,6 +2076,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 8, 0);
@@ -2025,6 +2097,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 8, 0);
@@ -2072,6 +2145,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 8, 0);
@@ -2092,6 +2166,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                                     {
                                         if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                            MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                             MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                         {
                                             pnl_margin = new Padding(8, 0, 8, 0);
@@ -2130,6 +2205,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                     MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                    MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                     MPanel_FrameModelParent.Frame_BotFrameArtNo == BottomFrameTypes._None)
                                 {
                                     pnl_margin = new Padding(10, 0, 10, 0);
@@ -3869,45 +3945,115 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             MPanelProp_Height -= propertyHeight;
         }
 
-        public void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl)
+        public void Fit_MyControls_ToBindDimensions(IMultiPanelModel prev_mpnl, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl, int movement)
         {
-            if (MPanelLst_Objects.Count() > 0)
+            if (MPanelLst_Objects.Count() > 0 && movement != 0)
             {
                 if (MPanel_Type == "Transom")
                 {
                     int totalHt_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_HeightToBind + pnl.Panel_MarginToBind.Top + pnl.Panel_MarginToBind.Bottom),
                         totalHt_divModel = MPanelLst_Divider.Sum(div => div.Div_HeightToBind),
                         totalHt_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_HeightToBind);
-
                     int totalHeight_Controls = totalHt_panelModel + totalHt_divModel + totalHt_MpanelModel;
                     int diff_MPanelHt_VS_MyCtrlsHeight = MPanel_HeightToBind - totalHeight_Controls;
-
                     if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                     {
                         while (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                         {
-                            foreach (IPanelModel pnl in MPanelLst_Panel)
+                            foreach (var mpnObject in MPanelLst_Objects)
                             {
-                                if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                foreach (IPanelModel pnl in MPanelLst_Panel)
                                 {
-                                    if (prev_pnl == pnl || nxt_pnl == pnl)
+                                    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                                     {
-                                        pnl.Panel_HeightToBind++;
-                                        diff_MPanelHt_VS_MyCtrlsHeight--;
-                                    }
+                                        if ((prev_pnl == pnl && pnl.Panel_Name == mpnObject.Name) || (nxt_pnl == pnl && pnl.Panel_Name == mpnObject.Name))
+                                        {
+                                          
+                                            pnl.Panel_HeightToBind++;
+                                            diff_MPanelHt_VS_MyCtrlsHeight--;
+                                            if (prev_pnl == pnl)
+                                            {
+                                                prev_pnl.Panel_Height++;
+                                                prev_pnl.Panel_DisplayHeight++;
 
+                                                if (nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Height--;
+                                                    nxt_pnl.Panel_DisplayHeight--;
+                                                }
+                                                else if (nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Height--;
+                                                    nxt_mpnl.MPanel_DisplayHeight--;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_pnl == pnl)
+                                            {
+                                                nxt_pnl.Panel_Height++;
+                                                nxt_pnl.Panel_DisplayHeight++;
+
+                                                if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Height--;
+                                                    prev_pnl.Panel_DisplayHeight--;
+                                                }
+                                                else if (prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Height--;
+                                                    prev_mpnl.MPanel_DisplayHeight--;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                            foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                            {
-                                if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
+                                foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (diff_MPanelHt_VS_MyCtrlsHeight > 0)
                                     {
-                                        mpnl.MPanel_HeightToBind++;
-                                        diff_MPanelHt_VS_MyCtrlsHeight--;
-                                    }
+                                        if ((prev_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name) || (nxt_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name))
+                                        {
+                                           
+                                            mpnl.MPanel_HeightToBind++;
+                                            diff_MPanelHt_VS_MyCtrlsHeight--;
+                                            if (prev_mpnl == mpnl)
+                                            {
+                                                prev_mpnl.MPanel_Height++;
+                                                prev_mpnl.MPanel_DisplayHeight++;
 
+                                                if (nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Height--;
+                                                    nxt_mpnl.MPanel_DisplayHeight--;
+                                                }
+                                                else if (nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Height--;
+                                                    nxt_pnl.Panel_DisplayHeight--;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_mpnl == mpnl)
+                                            {
+                                                nxt_mpnl.MPanel_Height++;
+                                                nxt_mpnl.MPanel_DisplayHeight++;
+
+                                                if (prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Height--;
+                                                    prev_mpnl.MPanel_DisplayHeight--;
+                                                }
+                                                else if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Height--;
+                                                    prev_pnl.Panel_DisplayHeight--;
+                                                }
+
+                                                movement--;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -3916,69 +4062,281 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         while (diff_MPanelHt_VS_MyCtrlsHeight < 0)
                         {
-                            foreach (IPanelModel pnl in MPanelLst_Panel)
+                            foreach (var mpnObject in MPanelLst_Objects)
                             {
-                                if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                foreach (IPanelModel pnl in MPanelLst_Panel)
                                 {
-                                    if (prev_pnl == pnl || nxt_pnl == pnl)
+                                    if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
                                     {
-                                        pnl.Panel_HeightToBind--;
-                                        diff_MPanelHt_VS_MyCtrlsHeight++;
-                                    }
+                                        if ((prev_pnl == pnl && pnl.Panel_Name == mpnObject.Name) || (nxt_pnl == pnl && pnl.Panel_Name == mpnObject.Name))
+                                        {
+                                            pnl.Panel_HeightToBind--;
+                                            diff_MPanelHt_VS_MyCtrlsHeight++;
+                                            if (prev_pnl == pnl)
+                                            {
+                                                prev_pnl.Panel_Height--;
+                                                prev_pnl.Panel_DisplayHeight--;
+                                                nxt_pnl.Panel_Height++;
+                                                nxt_pnl.Panel_DisplayHeight++;
+                                                movement++;
+                                            }
+                                            else if (nxt_pnl == pnl)
+                                            {
+                                                nxt_pnl.Panel_Height--;
+                                                nxt_pnl.Panel_DisplayHeight--;
 
+                                                prev_pnl.Panel_Height++;
+                                                prev_pnl.Panel_DisplayHeight++;
+                                                movement--;
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                            foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                            {
-                                if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
+                                foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (diff_MPanelHt_VS_MyCtrlsHeight < 0)
                                     {
-                                        mpnl.MPanel_HeightToBind--;
-                                        diff_MPanelHt_VS_MyCtrlsHeight++;
-                                    }
+                                        if ((prev_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name) || (nxt_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name))
+                                        {
+                                            mpnl.MPanel_HeightToBind--;
+                                            diff_MPanelHt_VS_MyCtrlsHeight++;
 
+                                            if (prev_mpnl == mpnl)
+                                            {
+                                                prev_mpnl.MPanel_Height--;
+                                                prev_mpnl.MPanel_DisplayHeight--;
+
+                                                if(nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Height++;
+                                                    nxt_mpnl.MPanel_DisplayHeight++;
+                                                }
+                                                else if (nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Height++;
+                                                    nxt_pnl.Panel_DisplayHeight++;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_mpnl == mpnl)
+                                            {
+                                                nxt_mpnl.MPanel_Height--;
+                                                nxt_mpnl.MPanel_DisplayHeight--;
+
+                                                if(prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Height++;
+                                                    prev_mpnl.MPanel_DisplayHeight++;
+                                                }
+                                                else if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Height++;
+                                                    prev_pnl.Panel_DisplayHeight++;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                    if (prev_mpnl != null)
+                    {
+                        if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                            MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            prev_mpnl.SetDimensions_childPanelObjs(movement);
+
+                            foreach (IMultiPanelModel mpanel in prev_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                            {
+
+                                if (prev_mpnl.MPanel_Name == mpanel.MPanel_Name)
+                                {
+                                    mpanel.SetDimensions_childObjs(movement, "prev");
+                                    ////mpanel.SetDimensions_childPanelObjs(movement);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            prev_mpnl.SetDimensions_childPanelObjs(movement);
+                            foreach (IMultiPanelModel mpanel in prev_mpnl.MPanelLst_MultiPanel)
+                            {
+                                mpanel.MPanel_HeightToBind = prev_mpnl.MPanel_HeightToBind;
+                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(movement, "prev");
+                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(movement, "prev");
+                            }
+                            foreach (IDividerModel div in prev_mpnl.MPanelLst_Divider)
+                            {
+                                div.Div_Height += movement;
+                                div.Div_DisplayHeight += movement;
+                                div.SetDimensionsToBind_using_DivZoom();
+                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                            }
+                        }
+                        if (prev_mpnl.MPanelImageRenderer_Zoom == 0.26f || prev_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                            prev_mpnl.MPanelImageRenderer_Zoom == 0.13f || prev_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                        {
+                            prev_mpnl.ImagerSetDimensions_childPanelObjs(movement);
+                        }
+                        else
+                        {
+                            prev_mpnl.ImagerSetDimensions_childPanelObjs(movement);
+                        }
+                    }
+                    
+                    if (nxt_mpnl != null)
+                    {
+                        if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                            MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            nxt_mpnl.SetDimensions_childPanelObjs(-movement);
+                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                            {
+                                if (nxt_mpnl.MPanel_Name == mpanel.MPanel_Name)
+                                {
+                                    mpanel.SetDimensions_childObjs(-movement, "nxt");
+                                    //mpanel.SetDimensions_childPanelObjs(-movement);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            nxt_mpnl.SetDimensions_childPanelObjs(-movement);
+                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                            {
+                                mpanel.MPanel_HeightToBind = nxt_mpnl.MPanel_HeightToBind;
+                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-movement, "nxt");
+                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-movement, "nxt");
+                            }
+                            foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                            {
+                                div.Div_Height -= movement;
+                                div.Div_DisplayHeight -= movement;
+
+                                div.SetDimensionsToBind_using_DivZoom();
+                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                            }
+                        }
+                        if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                           nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                        {
+                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-movement);
+                        }
+                        else
+                        {
+                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-movement);
+                        }
+                    }
+                 
                 }
-                else if (MPanel_Type == "Mullion")
+                else if (MPanel_Type == "Mullion") // MULLLLLLLLLLLLLLLLLLLLLLLLLLLLLIIIIIIIIIIIIOOOOOOOOOOOOOOOOOOOOOOOONNNNNN
                 {
                     int totalWd_panelModel = MPanelLst_Panel.Sum(pnl => pnl.Panel_WidthToBind + pnl.Panel_MarginToBind.Right + pnl.Panel_MarginToBind.Left),
                         totalWd_divModel = MPanelLst_Divider.Sum(div => div.Div_WidthToBind),
                         totalWd_MpanelModel = MPanelLst_MultiPanel.Sum(mpnl => mpnl.MPanel_WidthToBind);
-
                     int totalWidth_Controls = totalWd_panelModel + totalWd_divModel + totalWd_MpanelModel;
-
                     int diff_MPanelWd_VS_MyCtrlsWidth = MPanel_WidthToBind - totalWidth_Controls;
-
                     if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                     {
                         while (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                         {
-                            foreach (IPanelModel pnl in MPanelLst_Panel)
+                            foreach (var mpnObject in MPanelLst_Objects)
                             {
-                                if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                foreach (IPanelModel pnl in MPanelLst_Panel)
                                 {
-                                    if (prev_pnl == pnl || nxt_pnl == pnl)
+                                    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                                     {
-                                        pnl.Panel_WidthToBind++;
-                                        diff_MPanelWd_VS_MyCtrlsWidth--;
-                                    }
+                                        if ((prev_pnl == pnl && pnl.Panel_Name == mpnObject.Name) || (nxt_pnl == pnl && pnl.Panel_Name == mpnObject.Name))
+                                        {
+                                            pnl.Panel_WidthToBind++;
+                                            diff_MPanelWd_VS_MyCtrlsWidth--;
+                                            if (prev_pnl == pnl)
+                                            {
+                                                prev_pnl.Panel_Width++;
+                                                prev_pnl.Panel_DisplayWidth++;
 
+
+                                                if(nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Width--;
+                                                    nxt_pnl.Panel_DisplayWidth--;
+                                                }
+                                               else if (nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Width--;
+                                                    nxt_mpnl.MPanel_DisplayWidth--;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_pnl == pnl)
+                                            {
+                                                nxt_pnl.Panel_Width++;
+                                                nxt_pnl.Panel_DisplayWidth++;
+
+                                                if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Width--;
+                                                    prev_pnl.Panel_DisplayWidth--;
+                                                }
+                                                else if (prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Width--;
+                                                    prev_mpnl.MPanel_DisplayWidth--;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+
+                                    }
                                 }
-                            }
-                            foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                            {
-                                if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
+                                foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (diff_MPanelWd_VS_MyCtrlsWidth > 0)
                                     {
-                                        mpnl.MPanel_WidthToBind++;
-                                        diff_MPanelWd_VS_MyCtrlsWidth--;
-                                    }
+                                        if ((prev_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name) || (nxt_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name))
+                                        {
+                                            mpnl.MPanel_WidthToBind++;
+                                            diff_MPanelWd_VS_MyCtrlsWidth--;
+                                            if (prev_mpnl == mpnl)
+                                            {
+                                                prev_mpnl.MPanel_Width++;
+                                                prev_mpnl.MPanel_DisplayWidth++;
 
+                                                if(nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Width--;
+                                                    nxt_mpnl.MPanel_DisplayWidth--;
+                                                }
+                                                else if (nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Width--;
+                                                    nxt_pnl.Panel_DisplayWidth--;
+                                                }
+
+
+                                                movement++;
+                                            }
+                                            else if (nxt_mpnl == mpnl)
+                                            {
+                                                nxt_mpnl.MPanel_Width++;
+                                                nxt_mpnl.MPanel_DisplayWidth++;
+                                                if(prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Width--;
+                                                    prev_mpnl.MPanel_DisplayWidth--;
+                                                }
+                                                else if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Width--;
+                                                    prev_pnl.Panel_DisplayWidth--;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
                         }
@@ -3987,30 +4345,196 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                     {
                         while (diff_MPanelWd_VS_MyCtrlsWidth < 0)
                         {
-                            foreach (IPanelModel pnl in MPanelLst_Panel)
+                            foreach (var mpnObject in MPanelLst_Objects)
                             {
-                                if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                foreach (IPanelModel pnl in MPanelLst_Panel)
                                 {
-                                    if (prev_pnl == pnl || nxt_pnl == pnl)
+                                    if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
                                     {
-                                        pnl.Panel_WidthToBind--;
-                                        diff_MPanelWd_VS_MyCtrlsWidth++;
-                                    }
+                                        if ((prev_pnl == pnl && pnl.Panel_Name == mpnObject.Name) || (nxt_pnl == pnl && pnl.Panel_Name == mpnObject.Name))
+                                        {
+                                            pnl.Panel_WidthToBind--;
+                                            diff_MPanelWd_VS_MyCtrlsWidth++;
+                                            if (prev_pnl == pnl)
+                                            {
+                                                prev_pnl.Panel_Width--;
+                                                prev_pnl.Panel_DisplayWidth--;
 
+                                                if(nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Width++;
+                                                    nxt_pnl.Panel_DisplayWidth++;
+                                                }
+                                                else if (nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Width++;
+                                                    nxt_mpnl.MPanel_DisplayWidth++;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_pnl == pnl)
+                                            {
+                                                nxt_pnl.Panel_Width--;
+                                                nxt_pnl.Panel_DisplayWidth--;
+
+                                                if(prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Width++;
+                                                    prev_pnl.Panel_DisplayWidth++;
+                                                }
+                                                else if (prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Width++;
+                                                    prev_mpnl.MPanel_DisplayWidth++;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
+                                {
+                                    if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
+                                    {
+                                        if ((prev_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name) || (nxt_mpnl == mpnl && mpnl.MPanel_Name == mpnObject.Name))
+                                        {
+                                            mpnl.MPanel_WidthToBind--;
+                                            diff_MPanelWd_VS_MyCtrlsWidth++;
+                                            if (prev_mpnl == mpnl)
+                                            {
+                                                prev_mpnl.MPanel_Width--;
+                                                prev_mpnl.MPanel_DisplayWidth--;
+                                                if(nxt_mpnl != null)
+                                                {
+                                                    nxt_mpnl.MPanel_Width++;
+                                                    nxt_mpnl.MPanel_DisplayWidth++;
+                                                }
+                                                else if (nxt_pnl != null)
+                                                {
+                                                    nxt_pnl.Panel_Width++;
+                                                    nxt_pnl.Panel_DisplayWidth++;
+                                                }
+                                                movement++;
+                                            }
+                                            else if (nxt_mpnl == mpnl)
+                                            {
+                                                nxt_mpnl.MPanel_Width--;
+                                                nxt_mpnl.MPanel_DisplayWidth--;
+                                                if(prev_mpnl != null)
+                                                {
+                                                    prev_mpnl.MPanel_Width++;
+                                                    prev_mpnl.MPanel_DisplayWidth++;
+                                                }
+                                                else if (prev_pnl != null)
+                                                {
+                                                    prev_pnl.Panel_Width++;
+                                                    prev_pnl.Panel_DisplayWidth++;
+                                                }
+                                                movement--;
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
-                            foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
-                            {
-                                if (diff_MPanelWd_VS_MyCtrlsWidth < 0)
-                                {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
-                                    {
-                                        mpnl.MPanel_WidthToBind--;
-                                        diff_MPanelWd_VS_MyCtrlsWidth++;
-                                    }
+                        }
+                    }
 
+                    if (prev_mpnl != null)
+                    {
+
+
+                        if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                            MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            prev_mpnl.SetDimensions_childPanelObjs(movement);
+                            foreach (IMultiPanelModel mpanel in prev_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                            {
+                                if (prev_mpnl.MPanel_Name == mpanel.MPanel_Name)
+                                {
+                                    mpanel.SetDimensions_childObjs(movement, "prev");
                                 }
                             }
+                        }
+                        else
+                        {
+
+                            prev_mpnl.SetDimensions_childPanelObjs(movement);
+                            foreach (IMultiPanelModel mpanel in prev_mpnl.MPanelLst_MultiPanel)
+                            {
+                                mpanel.MPanel_WidthToBind = prev_mpnl.MPanel_WidthToBind;
+                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(movement, "prev");
+                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(movement, "prev");
+                            }
+
+                            foreach (IDividerModel div in prev_mpnl.MPanelLst_Divider)
+                            {
+                                div.Div_Width += movement;
+                                div.Div_DisplayWidth += movement;
+
+                                div.SetDimensionsToBind_using_DivZoom();
+                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                            }
+                        }
+
+
+                        if (prev_mpnl.MPanelImageRenderer_Zoom == 0.26f || prev_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                            prev_mpnl.MPanelImageRenderer_Zoom == 0.13f || prev_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                        {
+
+                            prev_mpnl.ImagerSetDimensions_childPanelObjs(movement);
+                        }
+                        else
+                        {
+                            prev_mpnl.ImagerSetDimensions_childPanelObjs(movement);
+                        }
+                    }
+
+                    if (nxt_mpnl != null)
+                    {
+                        if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                            MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                        {
+                            nxt_mpnl.SetDimensions_childPanelObjs(-movement);
+
+                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                            {
+                                if (nxt_mpnl.MPanel_Name == mpanel.MPanel_Name)
+                                {
+                                    mpanel.SetDimensions_childObjs(-movement, "nxt");
+                                }
+                            }
+
+                        }
+                        else
+                        {
+
+                            nxt_mpnl.SetDimensions_childPanelObjs(-movement);
+
+                            foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                            {
+                                mpanel.MPanel_WidthToBind = nxt_mpnl.MPanel_WidthToBind;
+                                mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-movement, "nxt");
+                                mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-movement, "nxt");
+                            }
+                            foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                            {
+                                div.Div_Width -= movement;
+                                div.Div_DisplayWidth -= movement;
+
+                                div.SetDimensionsToBind_using_DivZoom();
+                                div.SetDimensionsToBind_using_DivZoom_Imager();
+                            }
+                        }
+                        if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                           nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                        {
+                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-movement);
+                        }
+                        else
+                        {
+                            nxt_mpnl.ImagerSetDimensions_childPanelObjs(-movement);
                         }
                     }
                 }
@@ -4380,7 +4904,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             return isEqual;
         }
 
-        public void Fit_MyControls_ImagersToBindDimensions(IMultiPanelModel prev_mpanel, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl)
+        public void Fit_MyControls_ImagersToBindDimensions(IMultiPanelModel prev_mpnl, IMultiPanelModel nxt_mpnl, IPanelModel prev_pnl, IPanelModel nxt_pnl)
         {
             if (MPanelLst_Objects.Count() > 0)
             {
@@ -4410,7 +4934,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (diff_MPanelImagerHt_VS_MyImagersHeight > 0)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (prev_mpnl == mpnl || nxt_mpnl == mpnl)
                                     {
                                         mpnl.MPanelImageRenderer_Height++;
                                         diff_MPanelImagerHt_VS_MyImagersHeight--;
@@ -4442,7 +4966,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (diff_MPanelImagerHt_VS_MyImagersHeight < 0)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (prev_mpnl == mpnl || nxt_mpnl == mpnl)
                                     {
                                         mpnl.MPanelImageRenderer_Height--;
                                         diff_MPanelImagerHt_VS_MyImagersHeight++;
@@ -4478,7 +5002,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (diff_MPanelImagerWd_VS_MyImagersWidth > 0)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (prev_mpnl == mpnl || nxt_mpnl == mpnl)
                                     {
                                         mpnl.MPanelImageRenderer_Width++;
                                         diff_MPanelImagerWd_VS_MyImagersWidth--;
@@ -4507,7 +5031,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                             {
                                 if (diff_MPanelImagerWd_VS_MyImagersWidth < 0)
                                 {
-                                    if (prev_mpanel == mpnl || nxt_mpnl == mpnl)
+                                    if (prev_mpnl == mpnl || nxt_mpnl == mpnl)
                                     {
                                         mpnl.MPanelImageRenderer_Width--;
                                         diff_MPanelImagerWd_VS_MyImagersWidth++;

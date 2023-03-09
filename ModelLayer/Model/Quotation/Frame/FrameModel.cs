@@ -573,6 +573,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(10, 10, 10, 0);
@@ -603,6 +604,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,
@@ -639,6 +641,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
@@ -665,6 +668,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
@@ -697,6 +701,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
@@ -732,6 +737,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
@@ -758,6 +764,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
@@ -791,6 +798,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,

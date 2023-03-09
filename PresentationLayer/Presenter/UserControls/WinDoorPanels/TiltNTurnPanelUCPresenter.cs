@@ -301,7 +301,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.SetPanelGlassID();
             _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             #endregion
-
+            _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
             _mainPresenter.DeselectDivider();
             _mainPresenter.itemDescription();
             _mainPresenter.GetCurrentPrice();

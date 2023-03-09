@@ -9,6 +9,7 @@ using PresentationLayer.Views.UserControls;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -87,7 +88,12 @@ namespace PresentationLayer.Presenter.UserControls
             }
             catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + errorFrame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 //MessageBox.Show(ex.Message);
             }    
             
@@ -1106,6 +1112,12 @@ namespace PresentationLayer.Presenter.UserControls
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + errorFrame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }

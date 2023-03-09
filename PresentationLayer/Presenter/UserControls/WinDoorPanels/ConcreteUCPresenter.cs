@@ -9,6 +9,7 @@ using ModelLayer.Variables;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -226,9 +227,14 @@ namespace PresentationLayer.Presenter.UserControls
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
             }
         }
 
@@ -246,6 +252,12 @@ namespace PresentationLayer.Presenter.UserControls
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }

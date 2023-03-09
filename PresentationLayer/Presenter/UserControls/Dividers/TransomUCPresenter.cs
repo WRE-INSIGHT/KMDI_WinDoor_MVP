@@ -20,6 +20,7 @@ using ModelLayer.Variables;
 using ModelLayer.Model.Quotation.WinDoor;
 using ModelLayer.Model.Quotation.Concrete;
 using static EnumerationTypeLayer.EnumerationTypes;
+using System.Diagnostics;
 
 namespace PresentationLayer.Presenter.UserControls.Dividers
 {
@@ -75,6 +76,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
             {
                 transomUC = (UserControl)sender;
                 Console.WriteLine("Div Heigth to bind " + _divModel.Div_HeightToBind);
+                Console.WriteLine("Div Heigth Imager " + _divModel.DivImageRenderer_Height);
                 Console.WriteLine(" " + ((UserControl)sender).Location);
                 Console.WriteLine();
                 IWindoorModel wdm = _frameModel.Frame_WindoorModel;
@@ -278,9 +280,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("\nError in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
             }
         }
 
@@ -535,10 +542,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, -1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
                             _mainPresenter.GetCurrentPrice();
 
                         }
@@ -744,10 +750,9 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, -1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
-                            _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
                             _mainPresenter.GetCurrentPrice();
 
                         }
@@ -900,16 +905,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 e.Button == MouseButtons.Left)
             {
                 _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                //foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                //{
-                //    pnl.SetDimensionsToBind_using_ZoomPercentage();
-                //    pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
-                //}
-                //_multiPanelModel.Fit_MyControls_ToBindDimensions();
-                //_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
-                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -973,205 +969,165 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         if (expected_Panel1MinHT >= 30 && expected_Panel2MinHT >= 30)
                         {
                             transom_movement = (e.Y - _point_of_origin.Y);
-
-                            if (prev_ctrl is IMultiPanelUC)
+                            if (transom_movement != 0)
                             {
-                                prev_mpanel.MPanel_Height += transom_movement;
-                                prev_mpanel.MPanel_DisplayHeight += transom_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (prev_ctrl is IMultiPanelUC)
                                 {
-                                    prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
-                                    
-                                    foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
+                                    prev_mpanel.MPanel_Height += transom_movement;
+                                    prev_mpanel.MPanel_DisplayHeight += transom_movement;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        if(prev_ctrl.Name == mpanel.MPanel_Name)
+                                        prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs(transom_movement, "prev");
-                                            mpanel.SetDimensions_childPanelObjs(transom_movement);
+                                            mpanel.MPanel_Height += transom_movement;
+                                            mpanel.MPanel_DisplayHeight += transom_movement;
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_TransomDivMovement(transom_movement);
                                         }
-                                      
-                                    }
-                                }
-                                else
-                                {
-                                    prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                  
-                                    prev_mpanel.SetDimensions_childPanelObjs(transom_movement);
-                             
-
-                                    foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
-                                    {
-                                        mpanel.MPanel_Height += transom_movement;
-                                        mpanel.MPanel_DisplayHeight += transom_movement;
-
-                                        mpanel.SetDimensionsToBind_TransomDivMovement();
-                                        mpanel.Imager_SetDimensionsToBind_TransomDivMovement(transom_movement);
-
-                                        mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(transom_movement, "prev");
-                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(transom_movement, "prev");
-                                    }
-
-                                    foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
-                                    {
-                                        div.Div_Height += transom_movement;
-                                        div.Div_DisplayHeight += transom_movement;
-
-                                        div.SetDimensionsToBind_using_DivZoom();
-                                        div.SetDimensionsToBind_using_DivZoom_Imager();
-                                    }
-                                }
-
-                                if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
-                                {
-                                    prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
-                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(transom_movement);
-                                }
-                                else
-                                {
-                                    prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    prev_mpanel.Imager_SetDimensionsToBind_TransomDivMovement(transom_movement);
-                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(transom_movement);
-                                }
-                            }
-                            else if (prev_ctrl is IPanelUC)
-                            {
-                                prev_pnl.Panel_Height += transom_movement;
-                                prev_pnl.Panel_DisplayHeight += transom_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
-                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
-                                    {
-                                        mpnl.SetDimensions_childObjs();
-                                    }
-                                }
-                                if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
-                                {
-                                    prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
-                                }
-                            }
-
-                            if (nxt_ctrl is IMultiPanelUC)
-                            {
-                                nxt_mpnl.MPanel_Height -= transom_movement;
-                                nxt_mpnl.MPanel_DisplayHeight -= transom_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
-                                    foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
-                                    {
-                                        if (nxt_ctrl.Name == mpanel.MPanel_Name)
+                                        foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
                                         {
-                                            mpanel.SetDimensions_childObjs(-transom_movement, "nxt");
-                                            mpanel.SetDimensions_childPanelObjs(-transom_movement);
+                                            div.Div_Height += transom_movement;
+                                            div.Div_DisplayHeight += transom_movement;
+
+                                            div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    nxt_mpnl.SetDimensions_childPanelObjs(-transom_movement);
-
-                                    foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                                    if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
+                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
                                     {
-                                        mpanel.MPanel_Height -= transom_movement;
-                                        mpanel.MPanel_DisplayHeight -= transom_movement;
-
-                                        mpanel.SetDimensionsToBind_TransomDivMovement();
-                                        mpanel.Imager_SetDimensionsToBind_TransomDivMovement(-transom_movement);
-
-                                        mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-transom_movement, "nxt");
-                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-transom_movement, "nxt");
+                                        prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
-
-                                    foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                                    else
                                     {
-                                        div.Div_Height -= transom_movement;
-                                        div.Div_DisplayHeight -= transom_movement;
-
-                                        div.SetDimensionsToBind_using_DivZoom();
-                                        div.SetDimensionsToBind_using_DivZoom_Imager();
+                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_TransomDivMovement(transom_movement);
                                     }
                                 }
-                                if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
-                                   nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                else if (prev_ctrl is IPanelUC)
                                 {
-                                    nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    prev_pnl.Panel_Height += transom_movement;
+                                    prev_pnl.Panel_DisplayHeight += transom_movement;
 
-                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-transom_movement);
-                                }
-                                else
-                                {
-                                    nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    nxt_mpnl.Imager_SetDimensionsToBind_TransomDivMovement(-transom_movement);
-                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-transom_movement);
-                                }
-                            }
-                            else if (nxt_ctrl is IPanelUC)
-                            {
-                                nxt_pnl.Panel_Height -= transom_movement;
-                                nxt_pnl.Panel_DisplayHeight -= transom_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
-                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        mpnl.SetDimensions_childObjs();
+                                        prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                        //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        //{
+                                        //    mpnl.SetDimensions_childObjs(transom_movement, "prev");
+                                        //}
+                                    }
+                                    if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    {
+                                        prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
                                     }
                                 }
-                                if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+
+                                if (nxt_ctrl is IMultiPanelUC)
                                 {
-                                    nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    nxt_mpnl.MPanel_Height -= transom_movement;
+                                    nxt_mpnl.MPanel_DisplayHeight -= transom_movement;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+
+                                        foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                                        {
+                                            mpanel.MPanel_Height -= transom_movement;
+                                            mpanel.MPanel_DisplayHeight -= transom_movement;
+                                            mpanel.SetDimensionsToBind_TransomDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_TransomDivMovement(-transom_movement);
+                                        }
+                                        foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                                        {
+                                            div.Div_Height -= transom_movement;
+                                            div.Div_DisplayHeight -= transom_movement;
+
+                                            div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
+                                        }
+                                    }
+                                    if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                                       nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                    {
+                                        nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_TransomDivMovement(-transom_movement);
+                                    }
                                 }
-                                else
+                                else if (nxt_ctrl is IPanelUC)
                                 {
-                                    nxt_pnl.SetDimensionImagerToBind_using_BaseDimension();
+                                    nxt_pnl.Panel_Height -= transom_movement;
+                                    nxt_pnl.Panel_DisplayHeight -= transom_movement;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                    {
+                                        nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
+                                    if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    {
+                                        nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionImagerToBind_using_BaseDimension();
+                                    }
                                 }
                             }
                         }
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, transom_movement);
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                     }
-                    _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
-                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
-                    _mainPresenter.GetCurrentPrice();
-
+                    _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
+                    _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 }
-                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+               
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("\nError in File " + frame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
         }
-
         private void _transomUC_transomUCMouseDownEventRaised(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -1180,12 +1136,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 _point_of_origin = e.Location;
             }
         }
-
         public ITransomUC GetTransom(string test) //for Testing
         {
             return _transomUC;
         }
-
         public ITransomUCPresenter GetNewInstance(IUnityContainer unityC) //for Testing
         {
             unityC

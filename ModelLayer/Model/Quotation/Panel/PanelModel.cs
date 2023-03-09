@@ -3501,6 +3501,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 20;
@@ -3569,6 +3570,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 15;
@@ -3726,6 +3728,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                           Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                           Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                           Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -3793,6 +3796,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     //{
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -4097,6 +4101,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -4114,6 +4119,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
@@ -4220,6 +4226,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     mpnlWd_deduct = 20;

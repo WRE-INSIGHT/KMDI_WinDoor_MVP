@@ -924,6 +924,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                                     i++;
                                                 }
                                             }
+                                            break;
                                         }
                                     }
                                     break;
@@ -934,6 +935,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 }
                 #endregion
             }
+            PanelGlassID_Counter = i;
         }
 
         public void SetMiddleCloser_onPanel()

@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -969,6 +970,11 @@ namespace PresentationLayer.Presenter
                 {
                     SaveChanges();
                 }
+                else if (dialogResult == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+
                 else if (dialogResult == DialogResult.Cancel)
                 {
                     e.Cancel = true;
@@ -988,6 +994,14 @@ namespace PresentationLayer.Presenter
                             wndr_content = new List<string>();
                             SaveAs();
                         }
+                        else
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        e.Cancel = false;
                     }
                     else if (dialogResult == DialogResult.Cancel)
                     {
@@ -1061,6 +1075,12 @@ namespace PresentationLayer.Presenter
                     }
                     catch (Exception ex)
                     {
+                        var st = new StackTrace(ex, true);
+                        // Get the top stack frame
+                        var frame = st.GetFrame(0);
+                        // Get the line number from the stack frame
+                        var line = frame.GetFileLineNumber();
+                        Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                         if (ex.HResult == -2146233033)
                         {
                             MessageBox.Show("Please input a number.");
@@ -1074,7 +1094,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -1142,6 +1167,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -1279,6 +1310,12 @@ namespace PresentationLayer.Presenter
                 }
                 catch (Exception ex)
                 {
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var frame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = frame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                     MessageBox.Show(ex.Message);
                 }
 
@@ -1854,6 +1891,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -1867,6 +1910,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -1881,6 +1930,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -1896,6 +1951,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -2278,16 +2339,10 @@ namespace PresentationLayer.Presenter
         bool onload = false;
         BackgroundWorker bgw = new BackgroundWorker();
         BackgroundWorker updatefile_bgw = new BackgroundWorker();
-        IDictionary<string, object> trympl = new Dictionary<string, object>();
         private void OnOpenToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
             try
             {
-
-                foreach (var props in _windoorModel.lst_frame[0].Lst_MultiPanel[0].GetType().GetProperties())
-                {
-                    trympl.Add(props.Name, props.GetValue(_windoorModel.lst_frame[0].Lst_MultiPanel[0], null));
-                }
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
                     DialogResult dialogResult = DialogResult.No;
@@ -2328,6 +2383,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -2948,6 +3009,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show("Error Message: " + ex.Message);
             }
@@ -2990,6 +3057,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3044,28 +3117,6 @@ namespace PresentationLayer.Presenter
         }
         private void OnViewImagerToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
-            foreach (var prop in trympl)
-            {
-                foreach (var props in _windoorModel.lst_frame[0].Lst_MultiPanel[0].GetType().GetProperties())
-                {
-                    if (prop.Key == props.Name)
-                    {
-                        string currentVal = Convert.ToString(props.GetValue(_windoorModel.lst_frame[0].Lst_MultiPanel[0], null));
-                        string existVal = "";
-                        if(prop.Value!=null)
-                        {
-                            existVal = prop.Value.GetType().ToString();
-                        }
-                        if (currentVal != existVal)
-                        {
-                            Console.WriteLine("New mpnl " + existVal);
-                            Console.WriteLine("existing mpnl " + existVal);
-                            Console.WriteLine();
-                        }
-                    }
-                }
-            }
             toggle = !toggle;
             if (toggle == true)
             {
@@ -3106,6 +3157,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, "Error Occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3144,6 +3201,12 @@ namespace PresentationLayer.Presenter
             }
             catch (SqlException ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 if (ex.Number == -2)
                 {
@@ -3164,6 +3227,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 csfunc.LogToFile(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message);
                 ToggleMode(false, true);
@@ -3254,6 +3323,12 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -9813,8 +9888,13 @@ Magnum_ScreenType magnum_ScreenType;
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Location: " + this + "\n\n Error: " + ex.Message);
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -10255,6 +10335,12 @@ Magnum_ScreenType magnum_ScreenType;
                 }
                 catch (Exception ex)
                 {
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var errorFrame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = errorFrame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + errorFrame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                     MessageBox.Show(ex.Message);
                 }
 
@@ -10886,6 +10972,12 @@ Magnum_ScreenType magnum_ScreenType;
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + errorFrame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
             

@@ -12,6 +12,7 @@ using PresentationLayer.Views.UserControls.Dividers;
 using PresentationLayer.Views.UserControls.WinDoorPanels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -72,7 +73,8 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
         {
             try
             {
-                Console.WriteLine(" " + _divModel.Div_WidthToBind);
+                Console.WriteLine("W " + _divModel.Div_WidthToBind);
+                Console.WriteLine("H " + _divModel.Div_HeightToBind);
                 Console.WriteLine(" " + ((UserControl)sender).Location);
                 mullionUC = (UserControl)sender;
                 Console.WriteLine(mullionUC.Width);
@@ -277,9 +279,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
             }
         }
 
@@ -526,10 +533,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, 1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+
                             _mainPresenter.GetCurrentPrice();
 
                         }
@@ -726,10 +733,10 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, -1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
-                            _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                            _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
+                            //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
+
                             _mainPresenter.GetCurrentPrice();
 
 
@@ -881,16 +888,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                 e.Button == MouseButtons.Left)
             {
                 _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
-                ////foreach (IPanelModel pnl in _multiPanelModel.MPanelLst_Panel)
-                ////{
-                ////    pnl.SetDimensionsToBind_using_ZoomPercentage();
-                ////    pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
-                ////}
-                ////_multiPanelModel.Fit_MyControls_ToBindDimensions();
-                ////_multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
-                _multiPanelModel.Fit_My2ndLvlControls_Dimensions();
-                _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+                _mainPresenter.GetCurrentPrice();
             }
 
                
@@ -957,201 +955,165 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         if (expected_Panel1MinWD >= 30 && expected_Panel2MinWD >= 30)
                         {
                             mullion_movement = (e.X - _point_of_origin.X);
-
-                            if (prev_ctrl is IMultiPanelUC)
+                            if (mullion_movement != 0)
                             {
-                                prev_mpanel.MPanel_Width += mullion_movement;
-                                prev_mpanel.MPanel_DisplayWidth += mullion_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
+                                if (prev_ctrl is IMultiPanelUC)
                                 {
-                                    prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
-                                    foreach (IMultiPanelModel mpanel in prev_mpanel.MPanel_ParentModel.MPanelLst_MultiPanel)
+                                    prev_mpanel.MPanel_Width += mullion_movement;
+                                    prev_mpanel.MPanel_DisplayWidth += mullion_movement;
+
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        if (prev_ctrl.Name == mpanel.MPanel_Name)
+                                        prev_mpanel.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
+
+                                        foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs(mullion_movement, "prev");
-                                            mpanel.SetDimensions_childPanelObjs(mullion_movement);
+                                            mpanel.MPanel_Width += mullion_movement;
+                                            mpanel.MPanel_DisplayWidth += mullion_movement;
+
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
+                                        }
+                                        foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
+                                        {
+                                            div.Div_Width += mullion_movement;
+                                            div.Div_DisplayWidth += mullion_movement;
+
+                                            div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    prev_mpanel.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    prev_mpanel.SetDimensions_childPanelObjs(mullion_movement);
-                                    foreach (IMultiPanelModel mpanel in prev_mpanel.MPanelLst_MultiPanel)
+                                    if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
+                                        prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
                                     {
-                                        mpanel.MPanel_Width += mullion_movement;
-                                        mpanel.MPanel_DisplayWidth += mullion_movement;
-
-                                        mpanel.SetDimensionsToBind_MullionDivMovement();
-                                        mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
-
-                                        mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
-                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(mullion_movement, "prev");
+                                        prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
-                                    
-                                    foreach (IDividerModel div in prev_mpanel.MPanelLst_Divider)
+                                    else
                                     {
-                                        div.Div_Width += mullion_movement;
-                                        div.Div_DisplayWidth += mullion_movement;
-
-                                        div.SetDimensionsToBind_using_DivZoom();
-                                        div.SetDimensionsToBind_using_DivZoom_Imager();
+                                        prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
                                     }
                                 }
+                                else if (prev_ctrl is IPanelUC)
+                                {
+                                    prev_pnl.Panel_Width += mullion_movement;
+                                    prev_pnl.Panel_DisplayWidth += mullion_movement;
 
-                                if (prev_mpanel.MPanelImageRenderer_Zoom == 0.26f || prev_mpanel.MPanelImageRenderer_Zoom == 0.17f ||
-                                    prev_mpanel.MPanelImageRenderer_Zoom == 0.13f || prev_mpanel.MPanelImageRenderer_Zoom == 0.10f)
-                                {
-                                    prev_mpanel.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
-                                }
-                                else
-                                {
-                                    prev_mpanel.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    prev_mpanel.Imager_SetDimensionsToBind_MullionDivMovement(mullion_movement);
-                                    prev_mpanel.ImagerSetDimensions_childPanelObjs(mullion_movement);
-                                }
-                            }
-                            else if (prev_ctrl is IPanelUC)
-                            {
-                                prev_pnl.Panel_Width += mullion_movement;
-                                prev_pnl.Panel_DisplayWidth += mullion_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    prev_pnl.SetDimensionToBind_using_BaseDimension();
-                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        mpnl.SetDimensions_childObjs();
+                                        prev_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionToBind_using_BaseDimension();
+                                        //foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                        //{
+                                        //    mpnl.SetDimensions_childObjs();
+                                        //}
+                                    }
+                                    if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    {
+                                        prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
                                     }
                                 }
-                                if (prev_pnl.PanelImageRenderer_Zoom == 0.26f || prev_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    prev_pnl.PanelImageRenderer_Zoom == 0.13f || prev_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                if (nxt_ctrl is IMultiPanelUC)
                                 {
-                                    prev_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    prev_pnl.SetDimensionImagerToBind_using_BaseDimension();
-                                }
-                            }
+                                    nxt_mpnl.MPanel_Width -= mullion_movement;
+                                    nxt_mpnl.MPanel_DisplayWidth -= mullion_movement;
 
-                            if (nxt_ctrl is IMultiPanelUC)
-                            {
-                                nxt_mpnl.MPanel_Width -= mullion_movement;
-                                nxt_mpnl.MPanel_DisplayWidth -= mullion_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-
-                                    nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
-                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
-
-                                    foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanel_ParentModel.MPanelLst_MultiPanel)
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        if (nxt_ctrl.Name == mpanel.MPanel_Name)
+                                        nxt_mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
                                         {
-                                            mpanel.SetDimensions_childObjs(-mullion_movement, "nxt");
-                                            mpanel.SetDimensions_childPanelObjs(-mullion_movement);
+                                            mpanel.MPanel_Width -= mullion_movement;
+                                            mpanel.MPanel_DisplayWidth -= mullion_movement;
+                                            mpanel.SetDimensionsToBind_MullionDivMovement();
+                                            mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
+                                        }
+                                        foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                                        {
+                                            div.Div_Width -= mullion_movement;
+                                            div.Div_DisplayWidth -= mullion_movement;
+
+                                            div.SetDimensionsToBind_using_DivZoom();
+                                            div.SetDimensionsToBind_using_DivZoom_Imager();
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    nxt_mpnl.SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    nxt_mpnl.SetDimensions_childPanelObjs(-mullion_movement);
-
-                                    foreach (IMultiPanelModel mpanel in nxt_mpnl.MPanelLst_MultiPanel)
+                                    if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
                                     {
-                                        mpanel.MPanel_Width -= mullion_movement;
-                                        mpanel.MPanel_DisplayWidth -= mullion_movement;
-
-                                        mpanel.SetDimensionsToBind_MullionDivMovement();
-                                        mpanel.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
-
-                                        mpanel.SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
-                                        mpanel.Imager_SetDimensions_PanelObjs_of_3rdLevelMPanel(-mullion_movement, "nxt");
+                                        nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
-                                    
-                                    foreach (IDividerModel div in nxt_mpnl.MPanelLst_Divider)
+                                    else
                                     {
-                                        div.Div_Width += mullion_movement;
-                                        div.Div_DisplayWidth += mullion_movement;
-
-                                        div.SetDimensionsToBind_using_DivZoom();
-                                        div.SetDimensionsToBind_using_DivZoom_Imager();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
+                                        nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
                                     }
                                 }
-                                if (nxt_mpnl.MPanelImageRenderer_Zoom == 0.26f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.17f ||
-                                    nxt_mpnl.MPanelImageRenderer_Zoom == 0.13f || nxt_mpnl.MPanelImageRenderer_Zoom == 0.10f)
+                                else if (nxt_ctrl is IPanelUC)
                                 {
-                                    nxt_mpnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
-                                }
-                                else
-                                {
-                                    nxt_mpnl.Imager_SetDimensionsToBind_using_ParentMultiPanelModel();
-                                    nxt_mpnl.Imager_SetDimensionsToBind_MullionDivMovement(-mullion_movement);
-                                    nxt_mpnl.ImagerSetDimensions_childPanelObjs(-mullion_movement);
-                                }
+                                    nxt_pnl.Panel_Width -= mullion_movement;
+                                    nxt_pnl.Panel_DisplayWidth -= mullion_movement;
 
-                            }
-                            else if (nxt_ctrl is IPanelUC)
-                            {
-                                nxt_pnl.Panel_Width -= mullion_movement;
-                                nxt_pnl.Panel_DisplayWidth -= mullion_movement;
-
-                                if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
-                                    _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
-                                {
-                                    nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    nxt_pnl.SetDimensionToBind_using_BaseDimension();
-                                    foreach (IMultiPanelModel mpnl in _multiPanelModel.MPanelLst_MultiPanel)
+                                    if (_divModel.Div_Zoom == 0.26f || _divModel.Div_Zoom == 0.17f ||
+                                        _divModel.Div_Zoom == 0.13f || _divModel.Div_Zoom == 0.10f)
                                     {
-                                        mpnl.SetDimensions_childObjs();
+                                        nxt_pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
-                                }
-
-                                if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
-                                    nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
-                                {
-                                    nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
-                                }
-                                else
-                                {
-                                    nxt_pnl.SetDimensionImagerToBind_using_BaseDimension();
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionToBind_using_BaseDimension();
+                                    }
+                                    if (nxt_pnl.PanelImageRenderer_Zoom == 0.26f || nxt_pnl.PanelImageRenderer_Zoom == 0.17f ||
+                                        nxt_pnl.PanelImageRenderer_Zoom == 0.13f || nxt_pnl.PanelImageRenderer_Zoom == 0.10f)
+                                    {
+                                        nxt_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
+                                    }
+                                    else
+                                    {
+                                        nxt_pnl.SetDimensionImagerToBind_using_BaseDimension();
+                                    }
                                 }
                             }
                         }
+                        _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, mullion_movement);
+                        _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                     }
-                    _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
-                    _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                     _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
                     _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
-                    _mainPresenter.GetCurrentPrice();
+                   
 
                 }
 
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
             }
         }
 

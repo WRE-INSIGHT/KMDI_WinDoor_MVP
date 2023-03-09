@@ -15,6 +15,7 @@ using PresentationLayer.Views.UserControls.WinDoorPanels;
 using ServiceLayer.Services.DividerServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -178,7 +179,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 }
                                 pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, -1);
                             IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                             if (pnls == null)
                             {
@@ -229,7 +230,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 }
                                 pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, 1);
                             IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                             if (pnls == null)
                             {
@@ -729,7 +730,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                         pres_pnl.Imager_SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                                     }
                                 }
-                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl);
+                                _multiPanelModel.Fit_MyControls_ToBindDimensions(null, null, prev_pnl, pres_pnl, mullion_movement);
                                 IPanelModel pnls = _multiPanelModel.MPanelLst_Panel.Find(pnl => pnl.Panel_Overlap_Sash != OverlapSash._None);
                                 if (pnls == null)
                                 {
@@ -747,6 +748,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 Logger log = new Logger(ex.Message, ex.StackTrace);
                 MessageBox.Show(ex.Message, ex.HResult.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -803,6 +810,12 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             }
             catch (Exception ex)
             {
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -1062,9 +1075,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var frame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = frame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + frame.ToString() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 }
             }
         }
