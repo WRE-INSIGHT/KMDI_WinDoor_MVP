@@ -184,8 +184,6 @@ namespace PresentationLayer.Presenter
         private ITransomImagerUCPresenter _transomImagerUCP;
 
 
-        private int i = 0;
-        private decimal newfactor = 0;
 
         #endregion
 
@@ -1036,32 +1034,29 @@ namespace PresentationLayer.Presenter
             decimal value;
             try
             {
-                if (i <= 0)
-                {
-                    string[] province = projectAddress.Split(',');
-                    value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-                    //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
-                    //value = await _quotationServices.GetFactorByProvince(province);
-                }
-                else
-                {
-                    value = newfactor;
-                }
-                string input = Interaction.InputBox("Set New Factor", "Factor", value.ToString());
+                string[] province = projectAddress.Split(',');
+                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
+                //value = await _quotationServices.GetFactorByProvince(province);
+                string factorTypes = "Province: " 
+                                   + (province[province.Length - 2]).Trim() 
+                                   + "\nCurrent/File Factor: " 
+                                   + _quotationModel.PricingFactor
+                                   + "\nFactor in database: "
+                                   + value;
+                string input = Interaction.InputBox(factorTypes, "Set New Factor", _quotationModel.PricingFactor.ToString());
                 if (input != "" && input != "0")
                 {
                     try
                     {
-                        decimal deci_input = Convert.ToDecimal(input);
+                        decimal deci_input = Convert.ToDecimal(String.Format("{0:0.00}", Convert.ToDecimal(input)));
                         if (deci_input > 0)
                         {
-                            if (deci_input != value)
+                            if (deci_input != _quotationModel.PricingFactor)
                             {
                                 _quotationModel.PricingFactor = deci_input;
                                 MessageBox.Show("New Factor Set Sucessfully");
                                 GetCurrentPrice();
-                                newfactor = deci_input;
-                                i++;
                             }
                             else
                             {
@@ -2175,8 +2170,8 @@ namespace PresentationLayer.Presenter
                                 }
 
                             }
-                            wdm.lst_frame.Clear();
-                            _quotationModel.Lst_Windoor.Remove(wdm);
+                            //_windoorModel.lst_frame.Clear();
+                            _quotationModel.Lst_Windoor.Remove(_windoorModel);
 
                             break;
                         }
@@ -3517,7 +3512,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
-                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : extractedValue_str);
+                        _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
                     }
                     else if (row_str.Contains("Quotation_ref_no"))
                     {
