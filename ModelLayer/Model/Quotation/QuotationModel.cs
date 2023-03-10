@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace ModelLayer.Model.Quotation
 {
@@ -133,8 +134,15 @@ namespace ModelLayer.Model.Quotation
                     frame.Insert_frameInfoForScreen_MaterialList(Material_List); // add another frame
                 }
 
+                if (frame.Frame_Type == Frame_Padding.Door &&
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    frame.Insert_ConnectingProfile_MaterialList(Material_List);
+                }
 
-                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
+                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                    frame.Frame_BotFrameArtNo != BottomFrameTypes._6052 &&
+                    frame.Frame_BotFrameArtNo != BottomFrameTypes._None)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
                 }
@@ -165,7 +173,8 @@ namespace ModelLayer.Model.Quotation
                             IMultiPanelModel mpnl_Parent_lvl3 = null;
                             string mpanel_placement = "",
                                    mpanelParentlvl2_placement = "",
-                                   mpnl_Parent_lvl3_mpanelType = "";
+                                   mpnl_Parent_lvl3_mpanelType = "",
+                                   mpnl_Stacks = "";
 
                             if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
                             {
@@ -239,7 +248,8 @@ namespace ModelLayer.Model.Quotation
                                               div_prevCtrl = null;
                                 Control nxt_ctrl, prevCtrl;
 
-                                bool mullion_already_added = false;
+                                bool mullion_already_added = false,
+                                     boundedByBottomFrame = false;
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -330,6 +340,51 @@ namespace ModelLayer.Model.Quotation
 
                                         int total_cladd4UPVC_xpbolts = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                         exp_bolt += total_cladd4UPVC_xpbolts;
+
+                                        #region CheckBoundedByBottomFrame
+                                        if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                        {
+                                            if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                            {
+                                                if (mpnl_curCtrl != null)
+                                                {
+                                                    if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                    {
+                                                        boundedByBottomFrame = true;
+                                                    }
+                                                }
+                                            }
+                                            else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                            {
+                                                if (pnl_curCtrl != null)
+                                                {
+                                                    if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                                    {
+                                                        boundedByBottomFrame = true;
+                                                    }
+                                                }
+                                            }
+
+                                            if (mpnl.MPanel_ParentModel != null)
+                                            {
+                                                if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                {
+                                                    if (mpnl_curCtrl != null)
+                                                    {
+                                                        if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                        {
+                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                        #endregion
                                     }
 
                                     if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
@@ -352,6 +407,44 @@ namespace ModelLayer.Model.Quotation
 
                                         int mj_screws = div_nxtCtrl.Add_MechJoint_screws4fab();
                                         add_screws_fab_mech_joint += mj_screws;
+
+                                        #region CheckBoundedByBottomFrame
+                                        if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                        {
+                                            if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level sta ck
+                                            {
+                                                if (mpnl.MPanel_Placement == "Last")
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+                                            else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                            {
+                                                if (pnl_curCtrl != null) //lvl 1
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+
+                                            if (mpnl.MPanel_ParentModel != null)
+                                            {
+                                                if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                {
+                                                    if (mpnl_curCtrl != null)
+                                                    {
+                                                        if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                        {
+                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        #endregion
                                     }
 
                                     Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
@@ -405,6 +498,7 @@ namespace ModelLayer.Model.Quotation
                                                                                   div_nxtCtrl.Div_Type,
                                                                                   mpnl.MPanel_DividerEnabled,
                                                                                   0,
+                                                                                  boundedByBottomFrame,
                                                                                   divNxt_ifDM,
                                                                                   divPrev_ifDM,
                                                                                   div_nxtCtrl,
@@ -493,6 +587,73 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                             }
+
+                                            if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                            {
+                                                if (mpnl.MPanel_Type == "Transom")
+                                                {
+                                                    if (mpnl.MPanel_ParentModel != null)
+                                                    {
+                                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                        {
+                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                                    {
+                                                        if (pnl_curCtrl != null)
+                                                        {
+                                                            if (pnl_curCtrl.Panel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                                    {
+                                                        if (pnl_curCtrl != null)
+                                                        {
+                                                            if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+
+                                                if (mpnl.MPanel_Type == "Mullion")
+                                                {
+                                                    if (mpnl.MPanel_ParentModel != null)
+                                                    {
+                                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                        {
+                                                            if (mpnl.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                                    {
+                                                        if (mpnl.MPanel_Placement == "Last")
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                                    {
+                                                        if (pnl_curCtrl != null) //lvl 1
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
 
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -500,6 +661,7 @@ namespace ModelLayer.Model.Quotation
                                                                                   div_prevCtrl.Div_Type,
                                                                                   mpnl.MPanel_DividerEnabled,
                                                                                   0,
+                                                                                  boundedByBottomFrame,
                                                                                   divNxt_ifDM,
                                                                                   divPrev_ifDM,
                                                                                   div_nxtCtrl,
@@ -543,6 +705,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     mpanelParentlvl2_placement);
                                     }
                                 }
+
+                                Console.WriteLine("bottome frame:" + boundedByBottomFrame);
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -1125,9 +1289,75 @@ namespace ModelLayer.Model.Quotation
                                                     divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
                                                     divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
                                 bool divNxt_ifDM = false,
-                                     divPrev_ifDM = false;
+                                     divPrev_ifDM = false,
+                                     boundedByBottomFrame = false;
 
-                                //mpanel_placement = mpnl.MPanel_Placement;
+                                //mpanel_placement = mpnl.MPanel_Placement; 
+
+                                #region ChckBoundedByBotFrame
+                                if (mpnl.MPanel_Type == "Transom")
+                                {
+                                    if (mpnl.MPanel_ParentModel != null)
+                                    {
+                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                        {
+                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                    }
+                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                    {
+                                        if (pnl_curCtrl != null)
+                                        {
+                                            if (pnl_curCtrl.Panel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                    }
+                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                    {
+                                        if (pnl_curCtrl != null)
+                                        {
+                                            if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                if (mpnl.MPanel_Type == "Mullion")
+                                {
+                                    if (mpnl.MPanel_ParentModel != null)
+                                    {
+                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                        {
+                                            if (mpnl.MPanel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                    }
+                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                    {
+                                        if (mpnl.MPanel_Placement == "Last")
+                                        {
+                                            boundedByBottomFrame = true;
+                                        }
+                                    }
+                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                    {
+                                        if (pnl_curCtrl != null) //lvl 1
+                                        {
+                                            boundedByBottomFrame = true;
+                                        }
+                                    }
+                                }
+                                #endregion
 
                                 int OverLappingPanel_Qty = 0;
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -1147,6 +1377,7 @@ namespace ModelLayer.Model.Quotation
                                                                               DividerModel.DividerType.None,
                                                                               mpnl.MPanel_DividerEnabled,
                                                                               OverLappingPanel_Qty,
+                                                                              boundedByBottomFrame,
                                                                               divNxt_ifDM,
                                                                               divPrev_ifDM,
                                                                               div_nxtCtrl,
@@ -1215,6 +1446,18 @@ namespace ModelLayer.Model.Quotation
                                             pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                                         }
 
+
+                                        if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                            pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                        {
+                                            //if (OverLappingPanel_Qty != 0)
+                                            //{
+                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                            // } 
+                                        }
+
+
                                         if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
                                         {
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
@@ -1260,15 +1503,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 }
 
-                                                if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                                    pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
-                                                {
-                                                    //if (OverLappingPanel_Qty != 0)
-                                                    //{
-                                                    pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
-                                                    // } 
-                                                }
                                                 if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
                                                     frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                                                     pnl_curCtrl.Panel_DisplayHeight >= 3200)
@@ -3651,7 +3885,8 @@ namespace ModelLayer.Model.Quotation
                                 ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForC70PricePerPiece;
                                 FrameThresholdPricePerLinearMeter = ThresholdForC70PricePerPiece;
                             }
-                            else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                            else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     fr.Frame_BotFrameArtNo == BottomFrameTypes._A166)
                             {
                                 ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForPremiPricePerPiece;
                                 FrameThresholdPricePerLinearMeter = ThresholdForPremiPricePerPiece;
@@ -3727,9 +3962,9 @@ namespace ModelLayer.Model.Quotation
 
                         #region MultiPnl 
                         if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
-                        {  
+                        {
                             foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                            { 
+                            {
                                 foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                                 {
                                     //CostingPoints -= 2 * ProfileColorPoints;

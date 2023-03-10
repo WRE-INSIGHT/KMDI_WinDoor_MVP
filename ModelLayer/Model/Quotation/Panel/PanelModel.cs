@@ -3644,6 +3644,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 20;
@@ -3712,6 +3713,7 @@ namespace ModelLayer.Model.Quotation.Panel
                             }
                             else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                      Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
                                 mpnlWd_deduct = 15;
@@ -3869,6 +3871,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                           Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                           Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                           Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
@@ -3979,6 +3982,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -4306,6 +4310,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                         {
@@ -4323,6 +4328,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                         if ((Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
                              Panel_ParentMultiPanelModel.MPanel_Placement == "Last" &&
                              Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
@@ -4429,6 +4435,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
                 else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                         Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                          Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None)
                 {
                     mpnlWd_deduct = 20;
@@ -6400,6 +6407,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                                   DividerType div_type,
                                                   bool mpnlDivEneable,
                                                   int OverLappingPanel_Qty,
+                                                  bool ChckBoundedByBotframe,
                                                   bool if_divNxt_is_dummy_mullion,
                                                   bool if_divPrev_is_dummy_mullion,
                                                   IDividerModel divNxt,
@@ -6838,7 +6846,6 @@ namespace ModelLayer.Model.Quotation.Panel
             {
                 if (mpanel_placement == "First" ||
                     mpanel_placement == "Last" ||
-                    mpanel_placement == "" ||
                     mpanel_placement == "")
                 {
                     if (Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._7502 || Panel_ParentFrameModel.Frame_ArtNo == FrameProfile_ArticleNo._2060)
@@ -7193,7 +7200,11 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     deduction_for_sashHT -= 2;
                 }
-
+                int a = 0;
+                if (ChckBoundedByBotframe == true)
+                {
+                    a = 99999;
+                }
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
                     Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
@@ -7202,8 +7213,9 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     Panel_SashWidth = ((((Panel_DisplayWidth - deduction_for_sashWD) - dm_deduct) - inward_motorized_deduction)) + 5;
                 }
+
                 Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
-                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
+                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5 + a;
                 Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                 Panel_OriginalSashWidth = Panel_SashWidth;
@@ -8462,6 +8474,16 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             Panel_MotorizedMechQty = motor;
             return motor;
+        }
+
+        public bool ChckIfBoundedByBottomFrame()
+        {
+            bool chkBtmFrm = false;
+
+
+
+
+            return chkBtmFrm;
         }
 
         #region Material_List

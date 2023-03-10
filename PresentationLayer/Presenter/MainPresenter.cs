@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -1115,7 +1116,7 @@ namespace PresentationLayer.Presenter
             _screenModel = _screenServices.AddScreenModel(0.0m,
                                                           0,
                                                           0,
-                                                          null,                                                        
+                                                          null,
                                                           string.Empty,
                                                           0.0m,
                                                           0,
@@ -1268,11 +1269,11 @@ namespace PresentationLayer.Presenter
                 SaveWindoorModel(wdm);
 
             }
-            foreach(ScreenModel scm in Screen_List)
+            foreach (ScreenModel scm in Screen_List)
             {
                 wndr_content.Add("~");
 
-                foreach(var prop in scm.GetType().GetProperties())
+                foreach (var prop in scm.GetType().GetProperties())
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(scm, null));
                     //wndr_content.Add("_screenServices." + prop.Name + " = " + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1) + ";");
@@ -1321,7 +1322,7 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-                   
+
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -2298,7 +2299,7 @@ namespace PresentationLayer.Presenter
                 {
                     ToggleMode(false, false);
                 }
-               
+
             }
             else
             {
@@ -3026,7 +3027,7 @@ namespace PresentationLayer.Presenter
                         }
 
                         break;
-                    
+
 
                         break;
                     default:
@@ -3302,10 +3303,10 @@ namespace PresentationLayer.Presenter
                     inside_screen = false;
                 }
                 else
-                {                  
+                {
                     inside_screen = true;
                 }
-               
+
             }
             if (row_str == "EndofFile")
             {
@@ -3324,7 +3325,7 @@ namespace PresentationLayer.Presenter
                     updatePriceOfMainView();
                     ItemScroll = 0;
                 }
-                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
+                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item")
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
@@ -3932,7 +3933,7 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
-                    else if(inside_concrete)
+                    else if (inside_concrete)
                     {
                         #region Load for Concrete Model
 
@@ -7297,22 +7298,22 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (PlisseType plssTyp in PlisseType.GetAll())
                             {
-                                if(plssTyp.ToString() == extractedValue_str)
+                                if (plssTyp.ToString() == extractedValue_str)
                                 {
                                     screen_PlisséType = plssTyp;
-                                }                              
+                                }
                             }
                         }
                         else if (row_str.Contains("Screen_BaseColor:"))
                         {
-                            foreach(Base_Color BsClr in Base_Color.GetAll())
+                            foreach (Base_Color BsClr in Base_Color.GetAll())
                             {
-                                if(BsClr.ToString() == extractedValue_str)
+                                if (BsClr.ToString() == extractedValue_str)
                                 {
                                     screen_BaseColor = BsClr;
                                 }
                             }
-                            
+
                         }
                         else if (row_str.Contains("Screen_Set:"))
                         {
@@ -7398,7 +7399,7 @@ namespace PresentationLayer.Presenter
                             screen_CenterClosureVisibilityOption = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_LatchKitQty:"))
-                        {                      
+                        {
                             screen_LatchKitQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_IntermediatePartQty:"))
@@ -7496,9 +7497,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Magnum_ScreenType:"))
                         {
-                            foreach(Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
+                            foreach (Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
                             {
-                                if(mgnmScrnTyp.ToString() == extractedValue_str)
+                                if (mgnmScrnTyp.ToString() == extractedValue_str)
                                 {
                                     magnum_ScreenType = mgnmScrnTyp;
 
@@ -7536,9 +7537,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenSize:"))
                         {
-                            foreach(Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
+                            foreach (Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
                             {
-                                if(frdmsize.ToString() == extractedValue_str)
+                                if (frdmsize.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenSize = frdmsize;
 
@@ -7547,9 +7548,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenType:"))
                         {
-                            foreach(Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
+                            foreach (Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
                             {
-                                if(frdmtype.ToString() == extractedValue_str)
+                                if (frdmtype.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenType = frdmtype;
                                 }
@@ -8418,7 +8419,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider,inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -8543,7 +8544,7 @@ namespace PresentationLayer.Presenter
             panel_PropertyHeight,
             panel_HandleOptionsHeight,
             panel_LouverBladesCount;
-     decimal panel_GlassPricePerSqrMeter;
+        decimal panel_GlassPricePerSqrMeter;
         bool panel_Orient,
              panel_OrientVisibility,
              panel_Visibility,
@@ -8978,7 +8979,7 @@ namespace PresentationLayer.Presenter
         ScreenType screen_Types;
         PlisseType screen_PlisséType;
         Base_Color screen_BaseColor;
-Magnum_ScreenType magnum_ScreenType;
+        Magnum_ScreenType magnum_ScreenType;
 
         #endregion
         string mpnllvl = "";
@@ -10151,40 +10152,43 @@ Magnum_ScreenType magnum_ScreenType;
                     {
                         string gbmode = "";
                         bool same_sash = false;
-                        SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
-                        bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
-                        bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
-                        if (mpnl.MPanel_DividerEnabled == true)
-                        {
-                            if (allWithSash == true && allNoSash == false)
+                        if (mpnl.MPanelLst_Panel.Count != 0)
+                        { 
+                            SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                            bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                            bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                            if (mpnl.MPanel_DividerEnabled == true)
                             {
-                                gbmode = "withSash";
-                                int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
-                                if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                                if (allWithSash == true && allNoSash == false)
                                 {
-                                    same_sash = true;
-                                }
-                                else
-                                {
-                                    same_sash = false;
-                                }
-                            }
-                            else if (allWithSash == false && allNoSash == true)
-                            {
-                                gbmode = "noSash";
-                            }
-                            else if (allWithSash == false && allNoSash == false)
-                            {
-                                gbmode = "";
-                            }
-
-                            if (gbmode != "")
-                            {
-                                if (same_sash == true || gbmode == "noSash")
-                                {
-                                    if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                    gbmode = "withSash";
+                                    int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                                    if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
                                     {
-                                        unbalancedGlass_cnt++;
+                                        same_sash = true;
+                                    }
+                                    else
+                                    {
+                                        same_sash = false;
+                                    }
+                                }
+                                else if (allWithSash == false && allNoSash == true)
+                                {
+                                    gbmode = "noSash";
+                                }
+                                else if (allWithSash == false && allNoSash == false)
+                                {
+                                    gbmode = "";
+                                }
+
+                                if (gbmode != "")
+                                {
+                                    if (same_sash == true || gbmode == "noSash")
+                                    {
+                                        if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                        {
+                                            unbalancedGlass_cnt++;
+                                        }
                                     }
                                 }
                             }
@@ -10194,6 +10198,13 @@ Magnum_ScreenType magnum_ScreenType;
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var errorFrame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = errorFrame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 }
 
             }
@@ -10832,7 +10843,7 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
             //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
             //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
