@@ -65,8 +65,14 @@ namespace PresentationLayer
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args != null && args.Length > 0)
+            {
+                string filePath = args[0];
+                Properties.Settings.Default.FilePath = filePath;
+                Properties.Settings.Default.Save();
+            }
             IUnityContainer UnityC;
             string _sqlconStr = Properties.Settings.Default.slqcon;
 

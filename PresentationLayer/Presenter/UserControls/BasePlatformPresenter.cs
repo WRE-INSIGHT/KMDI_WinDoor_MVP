@@ -365,16 +365,27 @@ namespace PresentationLayer.Presenter.UserControls
                 #region Darwin
 
 
-                int total_panel = 0, total_panelWD = 0, total_panelHT = 0, total_mpanel = 0, concrete_count = 0, concrete_countWD = 0, concrete_countHT = 0;
+                int total_panel = 0, total_panelWD = 0, total_panelHT = 0, total_mpanel = 0, concrete_countWD = 0, concrete_countHT = 0;
                 foreach (IFrameModel frame in _windoorModel.lst_frame)
                 {
                     total_panel += frame.Lst_Panel.Count();
-                    total_panelWD += frame.Lst_Panel.Count();
-                    total_panelHT += frame.Lst_Panel.Count();
+
+
+                    if(frame.Frame_UC.Location.Y == 0)
+                    {
+                        total_panelWD += frame.Lst_Panel.Count();
+                    }
+                    if (frame.Frame_UC.Location.X == 0)
+                    {
+                        total_panelHT += frame.Lst_Panel.Count();
+                    }
+
                     total_mpanel += frame.Lst_MultiPanel.Count();
 
                     foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
+
+
                         if (mpnl.MPanel_Parent.Name.Contains("Frame"))
                         {
                             foreach (var mpnlObject in mpnl.MPanelLst_Objects)
@@ -453,23 +464,21 @@ namespace PresentationLayer.Presenter.UserControls
                     if(concrete.Concrete_UC.Location.Y == 0)
                     {
                         concrete_countWD++;
-                        concrete_count++;
                     }
                     if (concrete.Concrete_UC.Location.X == 0)
                     {
                         concrete_countHT++;
-                        concrete_count++;
                     }
                 }
                 if (total_panel > 1 || total_mpanel >= 1)
                 {
                     decimal[,] actual_arr_wd_locX = null;
                     decimal[,] actual_arr_ht_locY = null;
-                    int ndx = 0;
                     if (total_panel > 1 && total_mpanel == 0) // single panel
                     {
-                        actual_arr_wd_locX =  new decimal[total_panel + concrete_countWD, 2];
-                        actual_arr_ht_locY = new decimal[total_panel + concrete_countHT, 2];
+                        int ndxX = 0, ndxY = 0;
+                        actual_arr_wd_locX =  new decimal[total_panelWD + concrete_countWD, 2];
+                        actual_arr_ht_locY = new decimal[total_panelHT + concrete_countHT, 2];
                         foreach (Control wndr_objects in _windoorModel.lst_objects)
                         {
                             if (wndr_objects.Name.Contains("Frame"))
@@ -486,18 +495,27 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                             decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
-                                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndxX, 0] = DispWd_dec;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndxY, 0] = DispHt_dec;
+                                            }
                                             Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
-
                                             int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
                                                 ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
-
-                                            actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            ndx++;
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndxX, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                                ndxX++;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndxY, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                                ndxY++;
+                                            }
                                         }
                                     }
                                 }
@@ -514,18 +532,27 @@ namespace PresentationLayer.Presenter.UserControls
 
                                         decimal DispWd_dec = (decimal)concrete.Concrete_Width + Convert.ToDecimal(Wd_decimal_str);
                                         decimal DispHt_dec = (decimal)concrete.Concrete_Height + Convert.ToDecimal(Ht_decimal_str);
-
-                                        actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                                        actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
+                                        if (concrete.Concrete_UC.Location.Y == 0)
+                                        {
+                                            actual_arr_wd_locX[ndxX, 0] = DispWd_dec;
+                                        }
+                                        if (concrete.Concrete_UC.Location.X == 0)
+                                        {
+                                            actual_arr_ht_locY[ndxY, 0] = DispHt_dec;
+                                        }
                                         Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
-
                                         int ctrl_pointToScreen_X = concrete_ctrl.PointToScreen(mainPresenter_loc).X,
                                             ctrl_pointToScreen_Y = concrete_ctrl.PointToScreen(mainPresenter_loc).Y;
-
-                                        actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                        actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                        ndx++;
+                                        if (concrete.Concrete_UC.Location.Y == 0)
+                                        {
+                                            actual_arr_wd_locX[ndxX, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            ndxX++;
+                                        }
+                                        if (concrete.Concrete_UC.Location.X == 0)
+                                        {
+                                            actual_arr_ht_locY[ndxY, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            ndxY++;
+                                        }
                                     }
                                 }
                             }
@@ -556,17 +583,25 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                             decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
-                                            actual_arr_wd_locX[ndxX, 0] = DispWd_dec;
-                                            actual_arr_ht_locY[ndxY, 0] = DispHt_dec;
-
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndxX, 0] = DispWd_dec;
+                                            }
+                                            if(frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndxY, 0] = DispHt_dec;
+                                            }
                                             Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
-
                                             int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
                                                 ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
-
-                                            actual_arr_wd_locX[ndxX, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            actual_arr_ht_locY[ndxY, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndxX, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndxY, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
                                         }
                                     }
                                     if (wndr_objects.Name == frame.Frame_Name && frame.Frame_UC.Location.Y == 0)
@@ -653,21 +688,6 @@ namespace PresentationLayer.Presenter.UserControls
                                                     }
                                                 }
                                             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                             //foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                                             //{
                                             //    foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -926,8 +946,8 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (total_panel > 0 || total_mpanel > 0 && concrete_countWD == 0 && concrete_countHT == 0)
                 {
-                    decimal[,] actual_arr_wd_locX = new decimal[total_panel + concrete_count, 2];
-                    decimal[,] actual_arr_ht_locY = new decimal[total_panel + concrete_count, 2];
+                    decimal[,] actual_arr_wd_locX = new decimal[total_panelWD + concrete_countWD, 2];
+                    decimal[,] actual_arr_ht_locY = new decimal[total_panelHT + concrete_countHT, 2];
                     int ndx = 0;
 
                     if (total_panel > 0 && total_mpanel == 0) // single panel
@@ -948,18 +968,30 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                             decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
-                                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+                                            }
                                             Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
 
                                             int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
                                                 ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
-
-                                            actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            ndx++;
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
+                                            if(frame.Frame_UC.Location.Y == 0 || frame.Frame_UC.Location.X == 0)
+                                            {
+                                                ndx++;
+                                            }
                                         }
                                     }
                                 }
@@ -976,18 +1008,30 @@ namespace PresentationLayer.Presenter.UserControls
 
                                         decimal DispWd_dec = (decimal)concrete.Concrete_Width + Convert.ToDecimal(Wd_decimal_str);
                                         decimal DispHt_dec = (decimal)concrete.Concrete_Height + Convert.ToDecimal(Ht_decimal_str);
-
-                                        actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                                        actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
+                                        if (concrete.Concrete_UC.Location.Y == 0)
+                                        {
+                                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                        }
+                                        if (concrete.Concrete_UC.Location.X == 0)
+                                        {
+                                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+                                        }
                                         Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
 
                                         int ctrl_pointToScreen_X = concrete_ctrl.PointToScreen(mainPresenter_loc).X,
                                             ctrl_pointToScreen_Y = concrete_ctrl.PointToScreen(mainPresenter_loc).Y;
-
-                                        actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                        actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                        ndx++;
+                                        if (concrete.Concrete_UC.Location.Y == 0)
+                                        {
+                                            actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                        }
+                                        if (concrete.Concrete_UC.Location.X == 0)
+                                        {
+                                            actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                        }
+                                        if (concrete.Concrete_UC.Location.X == 0 || concrete.Concrete_UC.Location.Y == 0)
+                                        {
+                                            ndx++;
+                                        }
                                     }
 
                                 }
@@ -1013,18 +1057,32 @@ namespace PresentationLayer.Presenter.UserControls
 
                                             decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                             decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
-                                            actual_arr_wd_locX[ndx, 0] = DispWd_dec;
-                                            actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndx, 0] = DispWd_dec;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndx, 0] = DispHt_dec;
+                                            }
                                             Point mainPresenter_loc = (_mainPresenter.GetMainView() as Form).Location;
 
                                             int ctrl_pointToScreen_X = frame_ctrl.PointToScreen(mainPresenter_loc).X,
                                                 ctrl_pointToScreen_Y = frame_ctrl.PointToScreen(mainPresenter_loc).Y;
+                                            if (frame.Frame_UC.Location.Y == 0)
+                                            {
+                                                actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
+                                            if (frame.Frame_UC.Location.X == 0)
+                                            {
+                                                actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
+                                            }
+                                            if (frame.Frame_UC.Location.Y == 0 || frame.Frame_UC.Location.X == 0)
+                                            {
+                                                ndx++;
+                                            }
 
-                                            actual_arr_wd_locX[ndx, 1] = ctrl_pointToScreen_X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            actual_arr_ht_locY[ndx, 1] = ctrl_pointToScreen_Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
-                                            ndx++;
+
                                         }
                                     }
                                     else if (frame.Lst_Panel.Count == 0 && frame.Lst_MultiPanel.Count >= 1)
@@ -1040,10 +1098,8 @@ namespace PresentationLayer.Presenter.UserControls
 
                                                 decimal DispWd_dec = (decimal)pnl.Panel_DisplayWidth + Convert.ToDecimal(Wd_decimal_str);
                                                 decimal DispHt_dec = (decimal)pnl.Panel_DisplayHeight + Convert.ToDecimal(Ht_decimal_str);
-
                                                 actual_arr_wd_locX[ndx, 0] = DispWd_dec;
                                                 actual_arr_ht_locY[ndx, 0] = DispHt_dec;
-
                                                 actual_arr_wd_locX[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).X;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                                 actual_arr_ht_locY[ndx, 1] = ctrl.PointToScreen(((Form)_mainPresenter.GetMainView()).Location).Y;// ((Form)_mainPresenter.GetMainView()).PointToClient(ctrl.Location).X; //ctrl.Location.X;
                                                 ndx++;
