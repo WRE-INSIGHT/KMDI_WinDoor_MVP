@@ -13,5 +13,7 @@ namespace PresentationLayer.Views
         void ShowRDLCReportCompilerView();
         void CloseRDLCReportCompilerView();
         CheckBox CheckListSelectAll();
+        SaveFileDialog GetSaveFileDialog();
+        Form GetRDLCReportCompilerForm();
     }
 }

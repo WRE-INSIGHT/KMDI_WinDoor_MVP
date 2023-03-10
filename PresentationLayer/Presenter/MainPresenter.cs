@@ -1185,7 +1185,6 @@ namespace PresentationLayer.Presenter
             if (wndrfile != _mainView.GetSaveFileDialog().FileName)
             {
                 wndrfile = _mainView.GetSaveFileDialog().FileName;
-
             }
             else
             {

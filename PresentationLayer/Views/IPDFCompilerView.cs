@@ -9,8 +9,10 @@ namespace PresentationLayer.Views
         event EventHandler btnCompilePDFClickEventRaised;
         event EventHandler changeSyncDirToolStripMenuItemClickEventRaised;
         event FormClosedEventHandler PDFCompilerViewFormClosedEventRaised;
+
         void GetPDFCompilerView();
         void ClosePDFCompilerView();
         OpenFileDialog GetFileDialog();
+
     }
 }

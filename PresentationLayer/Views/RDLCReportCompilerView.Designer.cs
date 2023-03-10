@@ -43,6 +43,7 @@
             this.chk_selectall = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -221,6 +222,11 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Optional";
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Pdf Files|*.pdf";
+            this.saveFileDialog.Title = "Save ";
+            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +269,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.CheckBox chk_selectall;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

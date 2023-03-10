@@ -7,18 +7,16 @@ using PdfSharp.Pdf.IO;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Unity;
 
 namespace PresentationLayer.Presenter
 {
-   public class PDFCompilerPresenter : IPDFCompilerPresenter
+    public class PDFCompilerPresenter : IPDFCompilerPresenter
     {
 
         IPDFCompilerView _pdfCompilerView;
@@ -31,10 +29,13 @@ namespace PresentationLayer.Presenter
         private IRDLCReportCompilerPresenter _rdlcReportCompilerPresenter;
 
         #region variable
-        string MergePath;
-        string PDfFileName;
+        string MergePath,
+               MergePathFullname,
+               PDfFileName,
+               filename;
         bool CompilePdf = false;
         StringBuilder sb = new StringBuilder();
+        Regex regex = new Regex(@"[\\/:""*?<>|]+");
         #endregion
 
         public IPDFCompilerView GetPDFCompilerView()
@@ -55,30 +56,71 @@ namespace PresentationLayer.Presenter
             _pdfCompilerView.changeSyncDirToolStripMenuItemClickEventRaised += new EventHandler(OnchangeSyncDirToolStripMenuItemClickEventRaised);
             _pdfCompilerView.btnCompileReportsClickEventRaised += new EventHandler(OnbtnCompileReportsClickEventRaised);
             _pdfCompilerView.btnCompilePDFClickEventRaised += new EventHandler(OnbtnCompilePDFClickEventRaised);
-            _pdfCompilerView.PDFCompilerViewFormClosedEventRaised += new FormClosedEventHandler(OnPDFCompilerViewFormClosedEventRaised);           
+            _pdfCompilerView.PDFCompilerViewFormClosedEventRaised += new FormClosedEventHandler(OnPDFCompilerViewFormClosedEventRaised);
+       
+        }
+
+        private void OnPDFCompilerViewLoadEventRaised(object sender, EventArgs e)
+        {
+            _pdfCompilerView.GetFileDialog().ShowDialog();
         }
 
         private void OnbtnCompilePDFClickEventRaised(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
+            _pdfCompilerView.GetFileDialog().FileName = " ";
+
+            if (_pdfCompilerView.GetFileDialog().ShowDialog() == DialogResult.OK)
             {
-                MergePath = fbd.SelectedPath;
+                MergePath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+                DirectoryInfo dirInfo = Directory.CreateDirectory(MergePath);
+                dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
-                DirectoryInfo list = new DirectoryInfo(MergePath);
-                FileInfo[] files =  list.GetFiles("*.pdf");
+                foreach (string file in _pdfCompilerView.GetFileDialog().FileNames)
+                {
+                    PDfFileName = Path.GetFileName(file);
+                    MergePathFullname = Path.Combine(MergePath, PDfFileName);                   
+                    File.Copy(file, MergePathFullname, true);
+                    sb.AppendLine(PDfFileName);
+                }
 
-                foreach(FileInfo i in files)
+                DialogResult DiagRes = MessageBox.Show(sb.ToString() + "\n" + "Do you want to compile this files ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DiagRes == DialogResult.Yes)
                 {
-                    sb.AppendFormat("{0}{1}", i.Name, Environment.NewLine);
+                    do
+                    {
+                        PDfFileName = Interaction.InputBox("e.g. " + _mainPresenter.inputted_projectName.ToString(), "File Name", _mainPresenter.inputted_projectName.ToString());
+                        if(PDfFileName.Length == 0)
+                        {
+                            DeleteCreatedDir();
+                            break;
+                        }
+                        if (!File.Exists(Properties.Settings.Default.WndrDir + @"\" + PDfFileName + ".PDF"))
+                        {
+                            var res = regex.IsMatch(PDfFileName, 0);
+                            if(res != true)
+                            {
+                                CompilePdf = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Filename contains illegal characters","",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                            }
+                        }
+                        else
+                        {
+                            DialogResult dg = MessageBox.Show(PDfFileName + ".PDF already Exist, Do you want to replace it? ","Confirm Save",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                            if(dg == DialogResult.Yes)
+                            {
+                                CompilePdf = true;
+                            }                        
+                        }
+
+                    } while (CompilePdf == false);
                 }
-                
-                DialogResult diagRes = MessageBox.Show(sb.ToString() + "\n" + "Do you want to Compile this Files ?","List of Files",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if(diagRes == DialogResult.Yes)
+                else
                 {
-                    CompilePdf = true;                  
+                    DeleteCreatedDir();
                 }
-                sb.Clear();                                                        
             }
 
             if (CompilePdf == true)
@@ -99,7 +141,6 @@ namespace PresentationLayer.Presenter
                         PdfPage page = inputDocument.Pages[idx];
                         outputDocument.AddPage(page);
                     }
-
                 }
 
                 #region page counter
@@ -125,23 +166,42 @@ namespace PresentationLayer.Presenter
                 #endregion
 
                 //save document
-                PDfFileName = Interaction.InputBox("e.g. " + _mainPresenter.inputted_projectName.ToString(), "File Name", _mainPresenter.inputted_projectName.ToString());
-                if(PDfFileName.Length <= 0)
-                {
-                    PDfFileName = _mainPresenter.inputted_projectName;
-                }
-                string filename = MergePath + @"\" + PDfFileName + ".pdf";
+                filename = Properties.Settings.Default.WndrDir + @"\" + PDfFileName + ".PDF";
                 outputDocument.Save(filename);
 
-                DialogResult diagRes = MessageBox.Show("Do you want to Open PDF File ?","Report Compilation Complete",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if(diagRes == DialogResult.Yes)
+                DeleteCreatedDir();         
+                DialogResult diagRes = MessageBox.Show("Open "+ PDfFileName + ".PDF File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (diagRes == DialogResult.Yes)
                 {
                     Process.Start(filename);
                 }
+
                 #endregion
             }
-            _pdfCompilerView.ClosePDFCompilerView();
+            setVariablesToDefault();
         }
+
+        private void setVariablesToDefault()
+        {
+            sb.Clear();
+            CompilePdf = false;
+        }
+
+        private void DeleteCreatedDir()
+        {
+            if (Directory.Exists(MergePath))
+            {
+                try
+                {
+                    Directory.Delete(MergePath, true);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
         private string[] GetFiles()
         {         
             DirectoryInfo di = new DirectoryInfo(MergePath);

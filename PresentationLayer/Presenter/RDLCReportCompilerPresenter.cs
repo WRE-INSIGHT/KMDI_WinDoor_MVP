@@ -8,10 +8,12 @@ using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -29,15 +31,24 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         private IPDFCompilerPresenter _pdfCompilerPresenter;
         private IQuoteItemListPresenter _quoteItemListPresenter;
+        private IPDFWaitFormPresenter _pdfWaitFormPresenter;
 
         #region variables 
-        private bool CompileRDLC;     
+        BackgroundWorker bgw = new BackgroundWorker();
+        private bool CompileRDLC;
+        string fullname,
+               projname,
+               targetpath,
+               filename;
         #endregion
+
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
-                                           IPrintQuotePresenter printQuotePresenter)
+                                           IPrintQuotePresenter printQuotePresenter,
+                                           IPDFWaitFormPresenter pdfWaitFormPresenter)
         {
             _rdlcReportCompilerView = rdlcReportCompilerView;
             _printQuotePresenter = printQuotePresenter;
+            _pdfWaitFormPresenter = pdfWaitFormPresenter;
             SubScribeToEventSetup();
         }
 
@@ -50,7 +61,33 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.BtnCompileReportClickEventRaised += new EventHandler(OnBtnCompileReportClickEventRaised);
             _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
+
+            bgw.WorkerReportsProgress = true;
+            bgw.WorkerSupportsCancellation = true;
+            bgw.DoWork += Bgw_DoWork;
+            bgw.ProgressChanged += Bgw_ProgressChanged;
+            
         }
+
+        private delegate void DELEGATE();
+        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (!bgw.CancellationPending)
+            {
+                Delegate del = new DELEGATE(DoCompilePDf);
+                _rdlcReportCompilerView.GetRDLCReportCompilerForm().Invoke(del);
+            }
+        }
+        private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+        public void DoCompilePDf()
+        {
+
+        }
+
+
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
         {
             if (_rdlcReportCompilerView.CheckListSelectAll().Checked)
@@ -79,6 +116,7 @@ namespace PresentationLayer.Presenter
             //_rdlcReportCompilerView.TxtBxOutofTownExpenses = "0.00";
         }
 
+
         private void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
         {
             try
@@ -90,31 +128,27 @@ namespace PresentationLayer.Presenter
                     {
                         if (num > 0)
                         {
-                            string projname = _mainPresenter.inputted_projectName;
-                            string filename = Properties.Settings.Default.WndrDir + @"\" + projname + ".PDF";
-                            string targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
-                            Directory.CreateDirectory(targetpath);
-                            _quoteItemListPresenter.RenderPDFAtBackGround = true;
+                            projname = _mainPresenter.inputted_projectName;
 
-                            if (File.Exists(filename))
+                            _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
+                            _rdlcReportCompilerView.GetSaveFileDialog().InitialDirectory = Properties.Settings.Default.WndrDir;
+                            if (_rdlcReportCompilerView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
                             {
-                                DialogResult dlgRes = MessageBox.Show(projname + ".PDF already Exist, Do you want to Replace It ?", "Confirm Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if(dlgRes == DialogResult.Yes)
-                                {
-                                    CompileRDLC = true;
-                                }
-                                else
-                                {
-                                    CompileRDLC = false;
-                                }
-                            }
-                            else
-                            {
+                                targetpath = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder";
+                                DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
+                                dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+
+                                fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
+                                _quoteItemListPresenter.RenderPDFAtBackGround = true;
                                 CompileRDLC = true;
                             }
 
+                            IPDFWaitFormPresenter waitPresenter = _pdfWaitFormPresenter.GetNewInstance(_unityC,_mainPresenter);
+                            //waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());
+
                             if (CompileRDLC == true)
                             {
+                                                               
                                 #region Windoor RDLC
                                 foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
@@ -134,7 +168,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 #endregion
                                 #region PDF Compiler
-
+                                
                                 string[] files = GetFiles();
 
                                 PdfDocument outputDocument = new PdfDocument();
@@ -177,31 +211,31 @@ namespace PresentationLayer.Presenter
                                     }
 
                                 }
-                                #endregion                   
+                                #endregion
+                                outputDocument.Save(fullname);
 
-                                outputDocument.Save(filename);
-                                DialogResult dialogresult = MessageBox.Show("Open " + projname + ".PDF File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (Directory.Exists(targetpath))
+                                {
+                                    try
+                                    {
+                                        Directory.Delete(targetpath, true);
+                                    }
+                                    catch (IOException ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
+                                }
+                                filename = Path.GetFileName(fullname);
+                                DialogResult dialogresult = MessageBox.Show("Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (dialogresult == DialogResult.Yes)
                                 {
-                                    Process.Start(filename);
+                                    Process.Start(fullname);
                                 }
-
-
                                 #endregion
-                            }
 
-                            if (Directory.Exists(targetpath))
-                            {
-                                try
-                                {
-                                    Directory.Delete(targetpath, true);
-                                }
-                                catch (IOException ex)
-                                {
-                                    MessageBox.Show(ex.Message);
-                                }
                             }
                             SetVariablesToDefault();
+
                         }
                         else
                         {

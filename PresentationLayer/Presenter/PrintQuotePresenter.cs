@@ -461,9 +461,16 @@ namespace PresentationLayer.Presenter
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null)
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
+
                     ReportParameter[] RParam = new ReportParameter[5];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
-                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
 

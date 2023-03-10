@@ -13,11 +13,6 @@ namespace PresentationLayer.Views
 {
     public partial class RDLCReportCompilerView : Form, IRDLCReportCompilerView
     {
-
-        public CheckedListBox GetChecklistBoxIndex()
-        {
-            return chk_showimagelist;
-        }
         public string TxtBxOutofTownExpenses
         {
             get
@@ -28,6 +23,10 @@ namespace PresentationLayer.Views
             {
                 txt_oftexpenses.Text = value;
             }
+        }
+        public CheckedListBox GetChecklistBoxIndex()
+        {
+            return chk_showimagelist;
         }
         public void ShowRDLCReportCompilerView()
         {
@@ -40,6 +39,14 @@ namespace PresentationLayer.Views
         public CheckBox CheckListSelectAll()
         {
             return chk_selectall;
+        }
+        public  SaveFileDialog GetSaveFileDialog()
+        {
+            return saveFileDialog;
+        }
+        public Form GetRDLCReportCompilerForm()
+        {
+            return this;
         }
 
         public event EventHandler BtnCompileReportClickEventRaised;
@@ -60,7 +67,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, RDLCReportCompilerViewLoadEventRaised,e);
         }
-
+ 
         private void chk_selectall_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkselectallCheckedChangedEventRaised,e);

@@ -126,6 +126,8 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Pdf Files|*.pdf";
+            this.openFileDialog1.Multiselect = true;
             // 
             // PDFCompilerView
             // 
