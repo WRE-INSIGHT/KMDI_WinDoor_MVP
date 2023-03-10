@@ -62,10 +62,10 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
 
-            bgw.WorkerReportsProgress = true;
-            bgw.WorkerSupportsCancellation = true;
-            bgw.DoWork += Bgw_DoWork;
-            bgw.ProgressChanged += Bgw_ProgressChanged;
+            //bgw.WorkerReportsProgress = true;
+            //bgw.WorkerSupportsCancellation = true;
+            //bgw.DoWork += Bgw_DoWork;
+            //bgw.ProgressChanged += Bgw_ProgressChanged;
             
         }
 

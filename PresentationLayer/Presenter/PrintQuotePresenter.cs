@@ -290,7 +290,7 @@ namespace PresentationLayer.Presenter
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[7] = new ReportParameter("ASPosition",_mainPresenter.position);
+                    RParam[7] = new ReportParameter("ASPosition", _mainPresenter.position);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -345,7 +345,7 @@ namespace PresentationLayer.Presenter
                     {
                         Console.WriteLine("quoteitemlistpresenter is not used" + ex);
                     }
-                   
+
 
 
                     #endregion
@@ -356,12 +356,12 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
-                    
-                        foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
-                        {
-                            _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
-                        }                                          
-                        _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
+
+                    foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
+                    {
+                        _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
+                    }
+                    _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
 
                     ReportParameter[] RParam = new ReportParameter[8];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -398,7 +398,7 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
-                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Count != 0)
+                    else if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Count != 0)
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
@@ -422,7 +422,7 @@ namespace PresentationLayer.Presenter
                     checklist_raised = false;
 
                     #region RenderPDFAtBackground
-                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
                     {
                         Warning[] warnings;
                         string[] streamIds;
@@ -462,7 +462,7 @@ namespace PresentationLayer.Presenter
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
                     #region save files without pos in AEIC
-                    if (_mainPresenter.position == null)
+                    if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
                     {
                         _mainPresenter.position = " ";
                     }
