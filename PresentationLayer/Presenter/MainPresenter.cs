@@ -2250,24 +2250,7 @@ namespace PresentationLayer.Presenter
                             SaveChanges();
                         }
                         Clearing_Operation();
-                        wndrProjectFileName = _mainView.GetOpenFileDialog().FileName;
-                        isNewProject = false;
-                        isOpenProject = true;
-                        wndrfile = _mainView.GetOpenFileDialog().FileName;
-                        //csfunc.DecryptFile(wndrfile);
-                        int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                        wndrFileName = wndrfile.Substring(startFileName);
-                        FileInfo f = new FileInfo(wndrfile);
-                        f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                        string outFile = wndrfile.Substring(0, startFileName) +
-                                         wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-
-                        file_lines = File.ReadAllLines(outFile);
-                        f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
-                        onload = true;
-                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                        _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                        StartWorker("Open_WndrFiles");
+                        openFileMethod(_mainView.GetOpenFileDialog().FileName);
                     }
                 }
             }
@@ -2277,6 +2260,28 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Corrupted file", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void openFileMethod(string filePath)
+        {
+            wndrProjectFileName = filePath;
+            isNewProject = false;
+            isOpenProject = true;
+            wndrfile = filePath;
+            //csfunc.DecryptFile(wndrfile);
+            int startFileName = wndrfile.LastIndexOf("\\") + 1;
+            wndrFileName = wndrfile.Substring(startFileName);
+            FileInfo f = new FileInfo(wndrfile);
+            f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
+            string outFile = wndrfile.Substring(0, startFileName) +
+                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+
+            file_lines = File.ReadAllLines(outFile);
+            f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+            onload = true;
+            _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
+            _basePlatformImagerUCPresenter.SendToBack_baseImager();
+            StartWorker("Open_WndrFiles");
+        }
+
         private void StartWorker(string todo)
         {
             if (bgw.IsBusy != true)
@@ -2882,6 +2887,12 @@ namespace PresentationLayer.Presenter
             bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
             bgw.ProgressChanged += Bgw_ProgressChanged;
             bgw.DoWork += Bgw_DoWork;
+            if (Properties.Settings.Default.FilePath != "")
+            {
+                openFileMethod(Properties.Settings.Default.FilePath);
+                Properties.Settings.Default.FilePath = "";
+                Properties.Settings.Default.Save();
+            }
         }
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
