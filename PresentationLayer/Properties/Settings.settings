@@ -20,5 +20,8 @@
     <Setting Name="slqcon" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Data Source='121.58.229.248,49107';Network Library=DBMSSOCN;Initial Catalog='DWMS_DB';User ID='kmdiadmin';Password='kmdiadmin';</Value>
     </Setting>
+    <Setting Name="FilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
