@@ -290,7 +290,7 @@ namespace PresentationLayer.Presenter
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[7] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[7] = new ReportParameter("ASPosition",_mainPresenter.position);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -311,6 +311,43 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Screen.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+                   
+
+
                     #endregion
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
@@ -361,7 +398,7 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
-                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Count != 0)
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
@@ -403,7 +440,7 @@ namespace PresentationLayer.Presenter
                            out warnings
                            );
 
-                        string defDir = Properties.Settings.Default.WndrDir + @"\Quotation.PDF";
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Quotation.PDF";
                         using (FileStream fs = new FileStream(defDir, FileMode.Create))
                         {
                             fs.Write(bytes, 0, bytes.Length);
@@ -424,10 +461,17 @@ namespace PresentationLayer.Presenter
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null)
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
+
                     ReportParameter[] RParam = new ReportParameter[5];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
-                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[2] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
+                    RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
 
                     if (_printQuoteView.GetShowPageNum().Checked)
@@ -442,7 +486,32 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
 
-              
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\SummaryOfContract.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
 
                     #endregion
                 }

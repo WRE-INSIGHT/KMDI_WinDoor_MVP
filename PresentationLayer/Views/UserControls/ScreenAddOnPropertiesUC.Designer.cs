@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btn_addMats = new System.Windows.Forms.Button();
             this.lbl_addOns = new System.Windows.Forms.Label();
             this.pnl_addOns = new System.Windows.Forms.Panel();
             this.panel5.SuspendLayout();
@@ -39,23 +38,12 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.Transparent;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.btn_addMats);
             this.panel5.Controls.Add(this.lbl_addOns);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(227, 33);
             this.panel5.TabIndex = 28;
-            // 
-            // btn_addMats
-            // 
-            this.btn_addMats.Location = new System.Drawing.Point(153, 3);
-            this.btn_addMats.Name = "btn_addMats";
-            this.btn_addMats.Size = new System.Drawing.Size(70, 26);
-            this.btn_addMats.TabIndex = 27;
-            this.btn_addMats.Text = "Add";
-            this.btn_addMats.UseVisualStyleBackColor = true;
-            this.btn_addMats.Click += new System.EventHandler(this.btn_addMats_Click);
             // 
             // lbl_addOns
             // 
@@ -96,7 +84,6 @@
 
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lbl_addOns;
-        private System.Windows.Forms.Button btn_addMats;
         private System.Windows.Forms.Panel pnl_addOns;
     }
 }

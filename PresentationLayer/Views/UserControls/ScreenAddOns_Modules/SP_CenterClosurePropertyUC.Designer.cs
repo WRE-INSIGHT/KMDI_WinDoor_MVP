@@ -84,6 +84,7 @@
             this.nud_IntermediatePartQty.Size = new System.Drawing.Size(122, 20);
             this.nud_IntermediatePartQty.TabIndex = 30;
             this.nud_IntermediatePartQty.ValueChanged += new System.EventHandler(this.nud_IntermediatePartQty_ValueChanged);
+            this.nud_IntermediatePartQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_IntermediatePartQty_KeyDown);
             // 
             // nud_LatchKitQty
             // 
@@ -93,6 +94,8 @@
             this.nud_LatchKitQty.Name = "nud_LatchKitQty";
             this.nud_LatchKitQty.Size = new System.Drawing.Size(122, 20);
             this.nud_LatchKitQty.TabIndex = 29;
+            this.nud_LatchKitQty.ValueChanged += new System.EventHandler(this.nud_LatchKitQty_ValueChanged);
+            this.nud_LatchKitQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_LatchKitQty_KeyDown);
             // 
             // lbl_IntermediatePart
             // 

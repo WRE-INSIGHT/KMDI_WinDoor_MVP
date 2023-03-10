@@ -137,8 +137,6 @@
             // chkbox_show
             // 
             this.chkbox_show.AutoSize = true;
-            this.chkbox_show.Checked = true;
-            this.chkbox_show.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkbox_show.Location = new System.Drawing.Point(38, 81);
             this.chkbox_show.Name = "chkbox_show";
             this.chkbox_show.Size = new System.Drawing.Size(159, 23);

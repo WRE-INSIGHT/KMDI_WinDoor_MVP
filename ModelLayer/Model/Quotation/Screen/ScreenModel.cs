@@ -6059,7 +6059,6 @@ namespace ModelLayer.Model.Quotation.Screen
             TotalPrice = 0;
             LocalMaterialPrice = 0;
             #endregion
-
             #region clearing for Magnum Screen
             Bushing_Qty = 0;
             MinyClips_Qty = 0;
@@ -6122,7 +6121,6 @@ namespace ModelLayer.Model.Quotation.Screen
             Foiled_TotalCost = 0;
             Magnum_Screen_tAmount = 0;
             #endregion
-
             #region clearing for Zero Gravity
 
             pile_Qty = 0;
@@ -6149,7 +6147,6 @@ namespace ModelLayer.Model.Quotation.Screen
             screw_4x25_Price = 0;
 
             #endregion
-
             #region Clearing for Built in SR 
             price_base_on_Height = 0;
             price_base_on_Weight = 0;
@@ -6172,7 +6169,6 @@ namespace ModelLayer.Model.Quotation.Screen
             current_deci_index = 0;
             next_deci_index = 0;
             #endregion
-
             #region Clearing for Maxxy Screen
 
             PP_Maxy_5mmTube = 0;
@@ -6209,7 +6205,6 @@ namespace ModelLayer.Model.Quotation.Screen
             Maxxy_Contigencies = 0;
 
             #endregion
-
             #region Clearing for Freedom Screen
 
             Freedom_BasedPrice = 0;

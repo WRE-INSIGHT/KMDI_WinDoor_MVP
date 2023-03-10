@@ -12,8 +12,6 @@ namespace PresentationLayer.Views
             return chkbox_selectall;
         }
 
-        private bool _renderpdfatbackground;
-
         private bool _getItemListUC_CheckState;
         public bool GetItemListUC_CheckBoxState
         {

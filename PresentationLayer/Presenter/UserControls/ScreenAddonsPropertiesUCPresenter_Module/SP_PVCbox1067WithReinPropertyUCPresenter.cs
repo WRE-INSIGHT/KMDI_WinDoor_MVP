@@ -14,7 +14,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
-
+        private IScreenPresenter _screenPresenter;
+        
         public SP_PVCbox1067WithReinPropertyUCPresenter(ISP_PVCbox1067WithReinPropertyUC PVCbox1067WithReinPropertyUC)
         {
             _PVCbox1067WithReinPropertyUC = PVCbox1067WithReinPropertyUC;
@@ -25,6 +26,15 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private void subcribeToEventSetup()
         {
             _PVCbox1067WithReinPropertyUC.SPPVCbox1067WithReinPropertyUCLoadEventRaised += _PVCbox1067WithReinPropertyUC_SPPVCbox1067WithReinPropertyUCLoadEventRaised;
+            _PVCbox1067WithReinPropertyUC.nud_1067PVCbox_ValueChangedEventRaised += _PVCbox1067WithReinPropertyUC_nud_1067PVCbox_ValueChangedEventRaised;
+        }
+
+        private void _PVCbox1067WithReinPropertyUC_nud_1067PVCbox_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            _screenModel.Screen_1067PVCbox = _PVCbox1067WithReinPropertyUC.Screen_1067PVCbox;
+            _screenModel.Screen_1067PVCboxQty = _PVCbox1067WithReinPropertyUC.Screen_1067PVCboxQty;
+           
+            _screenPresenter.GetCurrentAmount();
         }
 
         private void _PVCbox1067WithReinPropertyUC_SPPVCbox1067WithReinPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -39,7 +49,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_PVCbox1067WithReinPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                                         IMainPresenter mainPresenter,
-                                                                                        IScreenModel screenModel)
+                                                                                        IScreenModel screenModel,
+                                                                                        IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_PVCbox1067WithReinPropertyUC, SP_PVCbox1067WithReinPropertyUC>()
@@ -48,6 +59,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             pvc1067._unityC = unityC;
             pvc1067._mainPresenter = mainPresenter;
             pvc1067._screenModel = screenModel;
+            pvc1067._screenPresenter = screenPresenter;
 
 
 

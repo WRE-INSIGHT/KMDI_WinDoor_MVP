@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         ISP_6040MilledProfileWithReinforcementPropertyUC Get6040MilledProfile();
         ISP_6040MilledProfileWithReinforcementPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                                             IMainPresenter mainPresenter,
-                                                                                            IScreenModel screenModel);
+                                                                                            IScreenModel screenModel,
+                                                                                            IScreenPresenter screenPresenter);
     }
 }
