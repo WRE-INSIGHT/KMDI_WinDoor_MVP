@@ -282,6 +282,13 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
 
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
+
                     ReportParameter[] RParam = new ReportParameter[10];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
