@@ -75,6 +75,7 @@
             this.Name = "PDFWaitFormView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDFWaitFormView";
+            this.TopMost = true;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

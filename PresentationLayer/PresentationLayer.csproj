@@ -1665,6 +1665,7 @@
   <ItemGroup>
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
+    <None Include="Resources\126.gif" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />

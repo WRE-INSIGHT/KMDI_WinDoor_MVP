@@ -33,6 +33,7 @@ namespace PresentationLayer.Presenter
         private IQuoteItemListPresenter _quoteItemListPresenter;
         private IPDFWaitFormPresenter _pdfWaitFormPresenter;
 
+
         #region variables 
         BackgroundWorker bgw = new BackgroundWorker();
         private bool CompileRDLC;
@@ -40,6 +41,7 @@ namespace PresentationLayer.Presenter
                projname,
                targetpath,
                filename;
+        Thread _loadingThread;
         #endregion
 
         public RDLCReportCompilerPresenter(IRDLCReportCompilerView rdlcReportCompilerView,
@@ -49,6 +51,7 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView = rdlcReportCompilerView;
             _printQuotePresenter = printQuotePresenter;
             _pdfWaitFormPresenter = pdfWaitFormPresenter;
+
             SubScribeToEventSetup();
         }
 
@@ -62,31 +65,26 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
 
-            bgw.WorkerReportsProgress = true;
-            bgw.WorkerSupportsCancellation = true;
-            bgw.DoWork += Bgw_DoWork;
-            bgw.ProgressChanged += Bgw_ProgressChanged;
-            
+            //bgw.WorkerReportsProgress = true;
+            //bgw.WorkerSupportsCancellation = true;
+            //bgw.DoWork += Bgw_DoWork;
+            //bgw.ProgressChanged += Bgw_ProgressChanged;
+         
         }
 
-        private delegate void DELEGATE();
-        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            if (!bgw.CancellationPending)
-            {
-                Delegate del = new DELEGATE(DoCompilePDf);
-                _rdlcReportCompilerView.GetRDLCReportCompilerForm().Invoke(del);
-            }
-        }
-        private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
+        //private delegate void DELEGATE();
+        //private void Bgw_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    if (!bgw.CancellationPending)
+        //    {
+        //        Delegate del = new DELEGATE(DoCompilePDf);
+        //        _rdlcReportCompilerView.GetRDLCReportCompilerForm().Invoke(del);
+        //    }
+        //}
+        //private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
 
-        }
-        public void DoCompilePDf()
-        {
-
-        }
-
+        //}
 
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
         {
@@ -112,12 +110,24 @@ namespace PresentationLayer.Presenter
             {
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
             }
-
-            //_rdlcReportCompilerView.TxtBxOutofTownExpenses = "0.00";
         }
 
+        public void Bgw_CompilePDF()
+        {
+            IPDFWaitFormPresenter waitPresenter = _pdfWaitFormPresenter.GetNewInstance(_unityC, _mainPresenter);
+            waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());                
+        }
 
-        private void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
+        public async void ShowPDFLoad()
+        {
+            await Task.Yield();
+            IPDFWaitFormPresenter waitPresenter = _pdfWaitFormPresenter.GetNewInstance(_unityC, _mainPresenter);
+            waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());
+            await Task.Delay(10000);
+            waitPresenter.GetPDFWaitFormView().ClosePDFWaitFormView();
+        }
+              
+        private async void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -128,6 +138,8 @@ namespace PresentationLayer.Presenter
                     {
                         if (num > 0)
                         {
+                            _loadingThread = new Thread(Bgw_CompilePDF);
+                            
                             projname = _mainPresenter.inputted_projectName;
 
                             _rdlcReportCompilerView.GetSaveFileDialog().FileName = projname;
@@ -138,17 +150,19 @@ namespace PresentationLayer.Presenter
                                 DirectoryInfo dirInfo = Directory.CreateDirectory(targetpath);
                                 dirInfo.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
 
+                                foreach(FileInfo file in dirInfo.EnumerateFiles())
+                                {
+                                    file.Delete();
+                                }
+                             
                                 fullname = _rdlcReportCompilerView.GetSaveFileDialog().FileName;
                                 _quoteItemListPresenter.RenderPDFAtBackGround = true;
                                 CompileRDLC = true;
                             }
 
-                            IPDFWaitFormPresenter waitPresenter = _pdfWaitFormPresenter.GetNewInstance(_unityC,_mainPresenter);
-                            //waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());
-
                             if (CompileRDLC == true)
                             {
-                                                               
+                               _loadingThread.Start();
                                 #region Windoor RDLC
                                 foreach (var item in _rdlcReportCompilerView.GetChecklistBoxIndex().CheckedIndices)
                                 {
@@ -168,7 +182,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 #endregion
                                 #region PDF Compiler
-                                
+
                                 string[] files = GetFiles();
 
                                 PdfDocument outputDocument = new PdfDocument();
@@ -212,6 +226,7 @@ namespace PresentationLayer.Presenter
 
                                 }
                                 #endregion
+                                await Task.Delay(2000);
                                 outputDocument.Save(fullname);
 
                                 if (Directory.Exists(targetpath))
@@ -226,16 +241,15 @@ namespace PresentationLayer.Presenter
                                     }
                                 }
                                 filename = Path.GetFileName(fullname);
-                                DialogResult dialogresult = MessageBox.Show("Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                DialogResult dialogresult = MessageBox.Show(new Form { TopMost = true }, "Open " + filename + " File ?", "Report Compilation Complete", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                                 if (dialogresult == DialogResult.Yes)
                                 {
                                     Process.Start(fullname);
                                 }
                                 #endregion
-
-                            }
+                               _loadingThread.Abort();                               
+                            }                           
                             SetVariablesToDefault();
-
                         }
                         else
                         {
@@ -250,12 +264,12 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     MessageBox.Show("Out of Town Expenses is Required", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                
+                }             
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Compiler Error" + " " + this + ex.Message);
+                _loadingThread.Abort();
             }
             
         }
