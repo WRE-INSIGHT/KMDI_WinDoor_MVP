@@ -593,14 +593,12 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (mpnl.MPanel_Type == "Transom")
                                                 {
-                                                    if (mpnl.MPanel_ParentModel != null)
+
+                                                    if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
                                                     {
-                                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                        if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
                                                         {
-                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
-                                                            {
-                                                                boundedByBottomFrame = true;
-                                                            }
+                                                            boundedByBottomFrame = true;
                                                         }
                                                     }
                                                     else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
@@ -628,14 +626,11 @@ namespace ModelLayer.Model.Quotation
 
                                                 if (mpnl.MPanel_Type == "Mullion")
                                                 {
-                                                    if (mpnl.MPanel_ParentModel != null)
+                                                    if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
                                                     {
-                                                        if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                        if (mpnl.MPanel_Placement == "Last")
                                                         {
-                                                            if (mpnl.MPanel_Placement == "Last")
-                                                            {
-                                                                boundedByBottomFrame = true;
-                                                            }
+                                                            boundedByBottomFrame = true;
                                                         }
                                                     }
                                                     else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
@@ -706,7 +701,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
-                                Console.WriteLine("bottome frame:" + boundedByBottomFrame);
+                                Console.WriteLine("bottom frame:" + boundedByBottomFrame);
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -1358,6 +1353,9 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
                                 #endregion
+
+                                Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
+
 
                                 int OverLappingPanel_Qty = 0;
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
