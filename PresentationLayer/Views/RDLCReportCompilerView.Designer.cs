@@ -40,8 +40,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.chk_showimagelist = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.chk_selectall = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -178,6 +180,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.chk_selectall);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -185,6 +188,17 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(455, 20);
             this.panel3.TabIndex = 0;
+            // 
+            // chk_selectall
+            // 
+            this.chk_selectall.AutoSize = true;
+            this.chk_selectall.Location = new System.Drawing.Point(57, 1);
+            this.chk_selectall.Name = "chk_selectall";
+            this.chk_selectall.Size = new System.Drawing.Size(70, 17);
+            this.chk_selectall.TabIndex = 4;
+            this.chk_selectall.Text = "Select All";
+            this.chk_selectall.UseVisualStyleBackColor = true;
+            this.chk_selectall.CheckedChanged += new System.EventHandler(this.chk_selectall_CheckedChanged);
             // 
             // label5
             // 
@@ -207,6 +221,11 @@
             this.label4.Size = new System.Drawing.Size(53, 15);
             this.label4.TabIndex = 0;
             this.label4.Text = "Optional";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Pdf Files|*.pdf";
+            this.saveFileDialog.Title = "Save ";
             // 
             // RDLCReportCompilerView
             // 
@@ -249,5 +268,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox chk_selectall;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

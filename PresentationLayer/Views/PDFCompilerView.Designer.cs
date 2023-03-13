@@ -61,7 +61,7 @@
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Text = "Settings";
             // 
             // changeSyncDirToolStripMenuItem
             // 
@@ -98,12 +98,13 @@
             // btn_CompileReports
             // 
             this.btn_CompileReports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CompileReports.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_CompileReports.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_CompileReports.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_CompileReports.Location = new System.Drawing.Point(3, 3);
             this.btn_CompileReports.Name = "btn_CompileReports";
             this.btn_CompileReports.Size = new System.Drawing.Size(142, 36);
             this.btn_CompileReports.TabIndex = 0;
+            this.btn_CompileReports.TabStop = false;
             this.btn_CompileReports.Text = "Compile Quotation,Screen And Summary.";
             this.btn_CompileReports.UseVisualStyleBackColor = true;
             this.btn_CompileReports.Click += new System.EventHandler(this.btn_CompileReports_Click);
@@ -111,12 +112,13 @@
             // btn_CompilePDF
             // 
             this.btn_CompilePDF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_CompilePDF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_CompilePDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_CompilePDF.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_CompilePDF.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic);
             this.btn_CompilePDF.Location = new System.Drawing.Point(159, 3);
             this.btn_CompilePDF.Name = "btn_CompilePDF";
             this.btn_CompilePDF.Size = new System.Drawing.Size(122, 36);
             this.btn_CompilePDF.TabIndex = 1;
+            this.btn_CompilePDF.TabStop = false;
             this.btn_CompilePDF.Text = "Compile PDF Files";
             this.btn_CompilePDF.UseVisualStyleBackColor = true;
             this.btn_CompilePDF.Click += new System.EventHandler(this.btn_CompilePDF_Click);
@@ -124,6 +126,8 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Pdf Files|*.pdf";
+            this.openFileDialog1.Multiselect = true;
             // 
             // PDFCompilerView
             // 
@@ -137,6 +141,7 @@
             this.Name = "PDFCompilerView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDFCompiler";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PDFCompilerView_FormClosed);
             this.toolstrip_compiler.ResumeLayout(false);
             this.toolstrip_compiler.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -149,12 +154,12 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolstrip_compiler;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem changeSyncDirToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btn_CompileReports;
         private System.Windows.Forms.Button btn_CompilePDF;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem changeSyncDirToolStripMenuItem;
     }
 }
