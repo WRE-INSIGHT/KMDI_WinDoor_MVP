@@ -533,7 +533,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, 1);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, -1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             _multiPanelModel.Fit_EqualPanel_ToBindDimensions();
 
@@ -733,7 +733,7 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                     }
                                 }
                             }
-                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, -1);
+                            _multiPanelModel.Fit_MyControls_ToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl, 1);
                             _multiPanelModel.Fit_MyControls_ImagersToBindDimensions(prev_mpanel, nxt_mpnl, prev_pnl, nxt_pnl);
                             //_multiPanelModel.Fit_EqualPanel_ToBindDimensions();
 

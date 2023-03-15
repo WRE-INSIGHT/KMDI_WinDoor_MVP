@@ -275,7 +275,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 Console.WriteLine("Sliding HeightToBind " + _panelModel.Panel_HeightToBind);
                 Console.WriteLine("Sliding Width " + _panelModel.Panel_Width);
                 Console.WriteLine("Sliding Height " + _panelModel.Panel_Height);
-                Console.WriteLine("Sliding Height " + _panelModel.Panel_Margin);
+                Console.WriteLine("Sliding Margin " + _panelModel.Panel_MarginToBind);
                 Console.WriteLine("Sliding Display Width " + _panelModel.Panel_DisplayWidth);
                 Console.WriteLine("Sliding Display Height " + _panelModel.Panel_DisplayHeight);
                 //Console.WriteLine("Parent WidthToBind " + _multiPanelModel.MPanel_WidthToBind);
@@ -1266,36 +1266,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                     {
-                        pnl.SetDimensionToBind_using_BaseDimension();
+                        if(pnl.Panel_Zoom >= 50f)
+                        {
+                            pnl.SetDimensionToBind_using_BaseDimension();
+                        }
                     }
-
-
-                    //foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                    //{
-
-                    //    if (mpnl.MPanel_Type == "Mullion")
-                    //    {
-                    //        if ((pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
-                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
-                    //             pnl.Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._None) &&
-                    //             pnl.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                    //        {
-                    //            pnl.Panel_HeightToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(pnl.Panel_Margin.Top * pnl.Panel_Zoom));
-                    //        }
-                    //        else
-                    //        {
-
-                    //            pnl.Panel_HeightToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_HeightToBind - (int)(pnl.Panel_Margin.Top * pnl.Panel_Zoom) - (int)(pnl.Panel_Margin.Bottom * pnl.Panel_Zoom));
-
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        pnl.Panel_WidthToBind = (int)(pnl.Panel_ParentMultiPanelModel.MPanel_WidthToBind - (int)(pnl.Panel_Margin.Left * pnl.Panel_Zoom) - (int)(pnl.Panel_Margin.Right * pnl.Panel_Zoom));
-                    //    }
-
-                    //}
                 }
             }
            
@@ -1303,6 +1278,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             _mainPresenter.windoorModel_MainPresenter.SetPanelGlassID();
             _mainPresenter.itemDescription();
             _mainPresenter.GetCurrentPrice();
+            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
         }
 
         private void _slidingPanelUC_slidingPanelUCMouseLeaveEventRaised(object sender, EventArgs e)
