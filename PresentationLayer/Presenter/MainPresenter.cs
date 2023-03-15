@@ -148,7 +148,7 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
-        private string _wndrFileName;
+        private string _wndrFilePath, _wndrFileName;
         private DateTime _quotationDate;
 
         private CommonFunctions _commonfunc = new CommonFunctions();
@@ -578,6 +578,18 @@ namespace PresentationLayer.Presenter
             set
             {
                 _dateAssigned = value;
+            }
+        }
+        public string wndrFilePath
+        {
+            get
+            {
+                return _wndrFilePath;
+            }
+
+            set
+            {
+                _wndrFilePath = value;
             }
         }
         public string wndrFileName
@@ -1144,9 +1156,7 @@ namespace PresentationLayer.Presenter
 
         }
 
-        string wndrfile = "",
-               wndrProjectFileName = "",
-              searchStr = "",
+        string searchStr = "",
               todo,
               mainTodo;
         public bool online_login = true;
@@ -1173,17 +1183,17 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
-            wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
-            if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
+            if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
-                wndrfile = _mainView.GetSaveFileDialog().FileName;
+                _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
 
             }
             else
             {
-                if (!_mainView.mainview_title.Contains(wndrfile))
+                if (!_mainView.mainview_title.Contains(_wndrFilePath))
                 {
-                    _mainView.mainview_title += "( " + wndrfile + " )";
+                    _mainView.mainview_title += "( " + _wndrFilePath + " )";
                 }
             }
             saveToolStripButton_Click();
@@ -1194,13 +1204,13 @@ namespace PresentationLayer.Presenter
             //saveToolStripButton.Enabled = false;
             //UppdateDictionaries();
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrfile != "")
+            if (_wndrFilePath != "")
             {
                 try
                 {
-                    string txtfile = wndrfile.Replace(".wndr", ".txt");
+                    string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                     File.WriteAllLines(txtfile, Saving_dotwndr());
-                    File.Delete(wndrfile);
+                    File.Delete(_wndrFilePath);
                     FileInfo f = new FileInfo(txtfile);
                     f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                     //File.SetAttributes(txtfile, FileAttributes.Hidden);
@@ -1220,7 +1230,7 @@ namespace PresentationLayer.Presenter
                             //updatefile_bgw.RunWorkerAsync();
                             //}
                     MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
+                    _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
                     SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -2262,20 +2272,19 @@ namespace PresentationLayer.Presenter
         }
         private void openFileMethod(string filePath)
         {
-            wndrProjectFileName = filePath;
+            _wndrFilePath = filePath;
             isNewProject = false;
             isOpenProject = true;
-            wndrfile = filePath;
             //csfunc.DecryptFile(wndrfile);
-            int startFileName = wndrfile.LastIndexOf("\\") + 1;
-            wndrFileName = wndrfile.Substring(startFileName);
-            FileInfo f = new FileInfo(wndrfile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-            string outFile = wndrfile.Substring(0, startFileName) +
-                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+            wndrFileName = _wndrFilePath.Substring(startFileName);
+            FileInfo f = new FileInfo(_wndrFilePath);
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
+            string outFile = _wndrFilePath.Substring(0, startFileName) +
+                             _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
             file_lines = File.ReadAllLines(outFile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+            f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -2919,20 +2928,28 @@ namespace PresentationLayer.Presenter
 
                     SetChangesMark();
                     _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
+                    string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    FileInfo f = new FileInfo(wndrfile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                    int startFileName = addExistingwndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(addExistingwndrfile);
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".txt"));
+                    string outFile = addExistingwndrfile.Substring(0, startFileName) +
+                                     addExistingwndrfile.Substring(startFileName, addExistingwndrfile.LastIndexOf(".") - startFileName) + ".txt";
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
+                    
+                    ////foreach(string strline in file_lines) 
+                    ////{
+                    ////    if(strline.Contains("WD_name:"))
+                    ////    {
+                    ////        MessageBox.Show(strline);
+                    ////    }
+                    ////}
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -3029,9 +3046,6 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-
-                        break;
-                    
 
                         break;
                     default:
@@ -9029,8 +9043,8 @@ Magnum_ScreenType magnum_ScreenType;
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
-            wndrFileName = string.Empty;
-            wndrfile = string.Empty;
+            _wndrFilePath = string.Empty;
+            _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
@@ -9061,7 +9075,7 @@ Magnum_ScreenType magnum_ScreenType;
         {
             _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-            if (!saved && wndrProjectFileName != "")
+            if (!saved && _wndrFilePath != "")
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
@@ -9193,7 +9207,8 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
-                    wndrProjectFileName = "";
+                    _wndrFilePath = string.Empty;
+                    _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -10776,12 +10791,12 @@ Magnum_ScreenType magnum_ScreenType;
         public void SaveChanges()
         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrProjectFileName != "")
+            if (_wndrFilePath != "")
             {
 
-                string txtfile = wndrProjectFileName.Replace(".wndr", ".txt");
+                string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.Delete(wndrfile);
+                File.Delete(_wndrFilePath);
                 FileInfo f = new FileInfo(txtfile);
                 f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                 //File.SetAttributes(txtfile, FileAttributes.Hidden);
