@@ -19,7 +19,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_0505Width.Value = value;
             }
         }
-
         public int Screen_0505Qty
         {
             get
@@ -31,7 +30,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_0505Qty.Value = value;
             }
         }
-
         public int Screen_1067Height
         {
             get
@@ -43,7 +41,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_1067Height.Value = value;
             }
         }
-
         public int Screen_1067Qty
         {
             get
@@ -56,10 +53,29 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             }
         }
 
+        public NumericUpDown GetNumericUpDownScreen0505width()
+        {
+            return nud_0505Width;
+        }  
+        public NumericUpDown GetNumericUpDownScreen0505Qty()
+        {
+            return nud_0505Qty;
+        }
+        public NumericUpDown GetNumericUpDownScreen1067height()
+        {
+            return nud_1067Height;
+        }
+        public NumericUpDown GetNumericUpDownScreen1067Qty()
+        {
+            return nud_1067Qty;
+        }
+
         public event EventHandler SPPVCboxPropertyUCLoadEventRaised;
         public event EventHandler nud0505WidthValueChangedEventRaised;
         public event EventHandler nud1067HeightValueChangedEventRaised;
-
+        public event EventHandler nud0505QtyValueChangedEventRaised;
+        public event EventHandler nud1067QtyValueChangedEventRaised;
+        
         public SP_PVCboxPropertyUC()
         {
             InitializeComponent();
@@ -94,7 +110,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         }
         private void nud_0505Qty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud0505WidthValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud0505QtyValueChangedEventRaised, e);
         }
         private void nud_0505Width_KeyDown(object sender, KeyEventArgs e)
         {
@@ -102,8 +118,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         }
         private void nud_0505Qty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud0505WidthValueChangedEventRaised, e);
-
+            EventHelpers.RaiseEvent(sender, nud0505QtyValueChangedEventRaised, e);
         }
 
         private void nud_1067Height_ValueChanged(object sender, EventArgs e)
@@ -113,16 +128,15 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void nud_1067Qty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud1067HeightValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1067QtyValueChangedEventRaised, e);
         }
         private void nud_1067Height_KeyDown(object sender, KeyEventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud1067HeightValueChangedEventRaised, e);
         }
-
         private void nud_1067Qty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud1067HeightValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1067QtyValueChangedEventRaised, e);
         }
 
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)

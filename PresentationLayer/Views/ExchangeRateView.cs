@@ -12,6 +12,17 @@ namespace PresentationLayer.Views
             InitializeComponent();
         }
 
+        public NumericUpDown GetNumerinUpDown()
+        {
+            return nud_ExchangeRate;
+        }
+
+        public NumericUpDown GetNumericUpDownAUD()
+        {
+            return nud_ExchangeRateAUD;
+        }
+
+        public event EventHandler nudExchangeRateAUDValueChangedEventRaised;
         public event EventHandler ExchangeRateViewLoadEventRaised;
         public event EventHandler nudExchangeRateValueChangedEventRaised;
 
@@ -25,6 +36,10 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, nudExchangeRateValueChangedEventRaised, e);
         }
 
+        private void nud_ExchangeRateAUD_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudExchangeRateAUDValueChangedEventRaised, e);
+        }
         public void ShowExchangeRate()
         {
             this.Show();
@@ -35,5 +50,7 @@ namespace PresentationLayer.Views
             this.DataBindings.Add(ModelBinding["Screen_ExchangeRateVisibility"]);
             nud_ExchangeRate.DataBindings.Add(ModelBinding["Screen_ExchangeRate"]);
         }
+
+
     }
 }

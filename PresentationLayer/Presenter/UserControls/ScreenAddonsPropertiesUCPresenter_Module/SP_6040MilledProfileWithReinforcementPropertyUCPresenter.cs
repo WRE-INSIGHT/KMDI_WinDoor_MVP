@@ -15,11 +15,14 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
         private IScreenPresenter _screenPresenter;
+        private NumericUpDown _nud6040ProfileWithRein;
+        private NumericUpDown _nud6040ProfileWithReinQty;
 
         public SP_6040MilledProfileWithReinforcementPropertyUCPresenter(ISP_6040MilledProfileWithReinforcementPropertyUC MilledProfile6040)
         {
             _6040MilledProfile = MilledProfile6040;
-
+            _nud6040ProfileWithRein = _6040MilledProfile.GetNumericUpDown6040ProfilewRein();
+            _nud6040ProfileWithReinQty = _6040MilledProfile.GetNumericUpDown6040ProfilewReinQty();
             SubscribeToEventSetup();
         }
 
@@ -27,14 +30,52 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         {
             _6040MilledProfile.SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised += _6040MilledProfile_SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised;
             _6040MilledProfile.nud_6040MilledProfile_ValueChangedEventRaised += _6040MilledProfile_nud_6040MilledProfile_ValueChangedEventRaised;
+            _6040MilledProfile.nud6040MilledProfileQtyValueChangedEventRaised += _6040MilledProfile_nud6040MilledProfileQtyValueChangedEventRaised;
         }
 
         private void _6040MilledProfile_nud_6040MilledProfile_ValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_6040MilledProfile = _6040MilledProfile.Screen_6040MilledProfile;
-            _screenModel.Screen_6040MilledProfileQty = _6040MilledProfile.Screen_6040MilledProfileQty;
-
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if(_nud6040ProfileWithRein.Text == "" || _nud6040ProfileWithRein.Text == " ")
+                {
+                    _screenModel.Screen_6040MilledProfile = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_6040MilledProfile = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _nud6040ProfileWithRein.Value = 0;
+            }
+            
+                      
+        }
+        private void _6040MilledProfile_nud6040MilledProfileQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_nud6040ProfileWithReinQty.Text == "" || _nud6040ProfileWithReinQty.Text == " ")
+                {
+                    _screenModel.Screen_6040MilledProfileQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_6040MilledProfileQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _nud6040ProfileWithReinQty.Value = 0;
+            }
         }
 
         private void _6040MilledProfile_SP6040MilledProfileWithReinforcementPropertyUCLoadEventRaised(object sender, EventArgs e)

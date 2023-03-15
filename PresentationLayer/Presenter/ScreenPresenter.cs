@@ -333,12 +333,12 @@ namespace PresentationLayer.Presenter
             {
                 _screenModel.Freedom_ScreenType = (Freedom_ScreenType)((ComboBox)sender).SelectedValue;
             }
-
+            GetCurrentAmount();
         }
 
         private void _screenView_tsBtnExchangeRateClickEventRaised(object sender, EventArgs e)
         {
-            IExchangeRatePresenter exchangeRate = _exchangeRatePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            IExchangeRatePresenter exchangeRate = _exchangeRatePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,this);
             exchangeRate.GetExchangeRateView().ShowExchangeRate();
         }
 
@@ -361,7 +361,6 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_Quantity = (int)((NumericUpDown)sender).Value;
             _screenModel.ComputeScreenTotalPrice();
             _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
-
         }
 
         private void _screenView_nudFactorValueChangedEventRaised(object sender, EventArgs e)
@@ -640,6 +639,7 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_Quantity = 1;
             _screenModel.Screen_Set = 1;
             _screenModel.Screen_ExchangeRate = 64;
+            _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
 

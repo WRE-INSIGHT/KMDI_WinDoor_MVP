@@ -15,11 +15,14 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
         private IScreenPresenter _screenPresenter;
+        private NumericUpDown _nud1067PVCBox;
+        private NumericUpDown _nud1067PVCBoxQty;
         
         public SP_PVCbox1067WithReinPropertyUCPresenter(ISP_PVCbox1067WithReinPropertyUC PVCbox1067WithReinPropertyUC)
         {
             _PVCbox1067WithReinPropertyUC = PVCbox1067WithReinPropertyUC;
-
+            _nud1067PVCBox = _PVCbox1067WithReinPropertyUC.GetNumericUpDown1067PVCBox();
+            _nud1067PVCBoxQty = _PVCbox1067WithReinPropertyUC.GetNumericUpDown1067PVCBoxQty();
             subcribeToEventSetup();
         }
 
@@ -27,14 +30,51 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         {
             _PVCbox1067WithReinPropertyUC.SPPVCbox1067WithReinPropertyUCLoadEventRaised += _PVCbox1067WithReinPropertyUC_SPPVCbox1067WithReinPropertyUCLoadEventRaised;
             _PVCbox1067WithReinPropertyUC.nud_1067PVCbox_ValueChangedEventRaised += _PVCbox1067WithReinPropertyUC_nud_1067PVCbox_ValueChangedEventRaised;
+            _PVCbox1067WithReinPropertyUC.nud1067PVCboxQtyValueChangedEventRaised += _PVCbox1067WithReinPropertyUC_nud1067PVCboxQtyValueChangedEventRaised;
         }
 
         private void _PVCbox1067WithReinPropertyUC_nud_1067PVCbox_ValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_1067PVCbox = _PVCbox1067WithReinPropertyUC.Screen_1067PVCbox;
-            _screenModel.Screen_1067PVCboxQty = _PVCbox1067WithReinPropertyUC.Screen_1067PVCboxQty;
-           
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if(_nud1067PVCBox.Text == "" || _nud1067PVCBox.Text == " ")
+                {
+                    _screenModel.Screen_1067PVCbox = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_1067PVCbox = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message );
+                _nud1067PVCBox.Value = 0;
+            }
+            
+        }
+        private void _PVCbox1067WithReinPropertyUC_nud1067PVCboxQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_nud1067PVCBoxQty.Text == "" || _nud1067PVCBoxQty.Text == " ")
+                {
+                    _screenModel.Screen_1067PVCboxQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_1067PVCboxQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _nud1067PVCBoxQty.Value = 0;
+            }
         }
 
         private void _PVCbox1067WithReinPropertyUC_SPPVCbox1067WithReinPropertyUCLoadEventRaised(object sender, EventArgs e)

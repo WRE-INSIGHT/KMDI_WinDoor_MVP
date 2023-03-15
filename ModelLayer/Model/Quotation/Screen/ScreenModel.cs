@@ -1484,7 +1484,19 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
+        private int _screen_ExchangeRateAUD;
+        public int Screen_ExchangeRateAUD
+        {
+            get
+            {
+                return _screen_ExchangeRateAUD;
+            }
+            set
+            {
+                _screen_ExchangeRateAUD = value;
+                NotifyPropertyChanged();
+            }
+        }
         private bool _frmCellEndEdit;
         public bool FromCellEndEdit
         {
@@ -2991,6 +3003,11 @@ namespace ModelLayer.Model.Quotation.Screen
                                 price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
                                 break;
                             }
+                            else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                            {
+                                price_base_on_Weight = width_Base_Price_List[0];
+                                break;
+                            }
                         }
                         built_in_SR_tAmount = (price_base_on_Weight / 2.2m);
                         #endregion
@@ -3038,6 +3055,11 @@ namespace ModelLayer.Model.Quotation.Screen
                                 price_base_on_Weight = Math.Round(width_Base_Price_List[i], 2) + percentage_multiplier;
                                 break;
                             }
+                            else if (Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                            {
+                                price_base_on_Weight = width_Base_Price_List[0];
+                                break;
+                            }
                         }
                         built_in_SR_tAmount = (price_base_on_Weight / 2.3m);
                         #endregion
@@ -3083,6 +3105,11 @@ namespace ModelLayer.Model.Quotation.Screen
                                 weight_deci = (Width_mm_to_meters - deci_getter[i]) / 0.1m;
                                 percentage_multiplier = width_Base_Price_Inc * weight_deci;
                                 price_base_on_Weight = width_Base_Price_List[i] + percentage_multiplier;
+                                break;
+                            }
+                            else if(Width_mm_to_meters >= 1.0m && Width_mm_to_meters < 1.1m)
+                            {
+                                price_base_on_Weight = width_Base_Price_List[0];
                                 break;
                             }
                         }
@@ -5747,7 +5774,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
                     Freedom_MeshUp = ((12m * Screen_Width) / 1000m) * (Screen_Height / 1000m);
                     Freedom_AUDTCost = Freedom_BasedPrice + Freedom_PowderCoating + Freedom_MeshUp;
-                    Freedom_PesoTCost = Freedom_AUDTCost * AUDtoPeso_ExchangRate;
+                    Freedom_PesoTCost = Freedom_AUDTCost * Screen_ExchangeRateAUD;
 
                     Freedom_Foiling_Cassette = (1573m * (Screen_Height + 30m)) / 1000m;
                     Freedom_Foiling_TopRail = (394m * (Screen_Width + 30m)) / 1000m;
@@ -5868,7 +5895,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 AddOnsPrice = pvc0505Price +
                               pvc1067Price +
                               pvc1067withreinPrice +
-                              milledprofile6040Price;
+                              milledprofile6040Price +
+                              LatchkitTotal +
+                              IntermediatePartTotal;
 
                 TotalPrice = TotalRollUpCostingMaterials +
                              TotalPlisseCostingMaterials +
@@ -5903,7 +5932,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         Screen_UnitPrice = (((Math.Ceiling(Magnum_Screen_tAmount) + 
                                              Math.Ceiling(Maxxy_Screen_tAmount) +
-                                             Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) + milled373or374Price ) * Screen_Set;
+                                             Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) + milled373or374Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
@@ -5926,7 +5955,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2)  * (Screen_Factor + .6m)) + milled1385Price + milled6052Price) * Screen_Set;
+                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2)  * (Screen_Factor + .6m)) + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
@@ -5937,7 +5966,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount)) * Screen_Set;
+                        Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount) + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
@@ -6012,7 +6041,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
 
                 #endregion
-
 
                 ClearingOperation();
 
@@ -6230,6 +6258,10 @@ namespace ModelLayer.Model.Quotation.Screen
             milled373or374Price = 0;
             milled1385Price = 0;
             milled6052Price = 0;
+
+            LatchkitTotal = 0;
+            IntermediatePartTotal = 0;
+
 
         }
 

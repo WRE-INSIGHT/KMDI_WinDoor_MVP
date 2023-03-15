@@ -23,7 +23,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_LatchKitQty.Value = value;
             }
         }
-
         public int Screen_IntermediatePartQty
         {
             get
@@ -34,6 +33,14 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             {
                 nud_IntermediatePartQty.Value = value;
             }
+        }
+        public NumericUpDown GetNumericUpDownLatchKit()
+        {
+            return nud_LatchKitQty;
+        }
+        public NumericUpDown GetNumericUpDownIntermediatePart()
+        {
+            return nud_IntermediatePartQty;
         }
 
         public SP_CenterClosurePropertyUC()
@@ -48,19 +55,19 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void SP_CenterClosurePropertyUC_Load(object sender, EventArgs e)
         {
+            nud_LatchKitQty.Maximum = decimal.MaxValue;
+            nud_IntermediatePartQty.Maximum = decimal.MaxValue; 
             EventHelpers.RaiseEvent(sender, SPCenterClosurePropertyUCLoadEventRaised, e);
         }
-
+      
         private void nud_LatchKitQty_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud_LatchKitQty_ValueChangedEventRaised, e);
         }
-
         private void nud_LatchKitQty_KeyDown(object sender, KeyEventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud_LatchKitQty_ValueChangedEventRaised, e);
         }
-
         private void nud_IntermediatePartQty_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud_IntermediatePartQty_ValueChangedEventRaised, e);
@@ -80,9 +87,8 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
             chkBox_CenterClosure.DataBindings.Add(ModelBinding["Screen_CenterClosureVisibilityOption"]);
             nud_LatchKitQty.DataBindings.Add(ModelBinding["Screen_LatchKitQty"]);
             nud_IntermediatePartQty.DataBindings.Add(ModelBinding["Screen_IntermediatePartQty"]);
-
         }
 
-  
+        
     }
 }

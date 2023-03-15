@@ -13,6 +13,8 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         int Screen_LatchKitQty { get; set; }
         int Screen_IntermediatePartQty { get; set; }
+        NumericUpDown GetNumericUpDownLatchKit();
+        NumericUpDown GetNumericUpDownIntermediatePart();
         Panel GetPanelBody();
 
 
