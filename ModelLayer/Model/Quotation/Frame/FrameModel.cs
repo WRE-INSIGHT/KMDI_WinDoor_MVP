@@ -1162,6 +1162,10 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 botFrameDiff = 20;
             }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                botFrameDiff = 20;
+            }
             else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 botFrameDiff = 14;
@@ -1176,6 +1180,12 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
+                Frame_BotFrameVisible == true &&
+                Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
             }
             else if (Frame_Type == Frame_Padding.Door &&
                 Frame_BotFrameVisible == true &&
@@ -1277,6 +1287,12 @@ namespace ModelLayer.Model.Quotation.Frame
                Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
+               Frame_BotFrameVisible == true &&
+               Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size  - 10;
             }
             else if (Frame_Type == Frame_Padding.Door &&
                Frame_BotFrameVisible == true &&
@@ -2186,7 +2202,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
                                  1, "pc(s)",
-                                 Frame_ExplosionWidth.ToString(),
+                                 Frame_Width.ToString(),
                                  "Frame",
                                  @"|  |");
             }

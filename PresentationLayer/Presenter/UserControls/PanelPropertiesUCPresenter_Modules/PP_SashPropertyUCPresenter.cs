@@ -937,11 +937,13 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     curr_sash = SashProfile_ArticleNo._7581;
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
                 }
                 else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                 {
                     curr_sash = SashProfile_ArticleNo._374;
                     _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
+                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
                 }
                 if (_panelModel.Panel_Type.Contains("Fixed") == false)
                 {

@@ -9551,22 +9551,22 @@ namespace ModelLayer.Model.Quotation
                                             }
 
                                             BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
-
+                                           
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
-                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
                                             {
-                                                GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((286.81m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
                                             {
-                                                GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((262.91m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                             {
-                                                GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((215.11m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                         }
                                     }
