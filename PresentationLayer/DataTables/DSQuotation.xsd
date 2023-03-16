@@ -25,6 +25,7 @@
               <xs:element name="dtNetPrice" msprop:Generator_ColumnVarNameInTable="columndtNetPrice" msprop:Generator_ColumnPropNameInRow="dtNetPrice" msprop:Generator_ColumnPropNameInTable="dtNetPriceColumn" msprop:Generator_UserColumnName="dtNetPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="dtItemNumber" msprop:Generator_ColumnVarNameInTable="columndtItemNumber" msprop:Generator_ColumnPropNameInRow="dtItemNumber" msprop:Generator_ColumnPropNameInTable="dtItemNumberColumn" msprop:Generator_UserColumnName="dtItemNumber" type="xs:string" minOccurs="0" />
               <xs:element name="dtTopViewImage" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInRow="dtTopViewImage" msprop:Generator_ColumnVarNameInTable="columndtTopViewImage" msprop:Generator_ColumnPropNameInTable="dtTopViewImageColumn" msprop:Generator_UserColumnName="dtTopViewImage" type="xs:string" minOccurs="0" />
+              <xs:element name="dtShowImage" msprop:Generator_ColumnVarNameInTable="columndtShowImage" msprop:Generator_ColumnPropNameInRow="dtShowImage" msprop:Generator_ColumnPropNameInTable="dtShowImageColumn" msprop:Generator_UserColumnName="dtShowImage" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

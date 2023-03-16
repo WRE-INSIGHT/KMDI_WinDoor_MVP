@@ -43,6 +43,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public string ItemName
+        {
+            get
+            {
+                return lbl_item.Text;
+            }
+        }
+
         public ItemInfoUC()
         {
             InitializeComponent();

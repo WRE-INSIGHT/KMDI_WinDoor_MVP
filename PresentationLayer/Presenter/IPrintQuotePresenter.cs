@@ -1,5 +1,6 @@
 ﻿using ModelLayer.Model.Quotation;
 using PresentationLayer.Views;
+using System.Collections.Generic;
 using Unity;
 
 namespace PresentationLayer.Presenter
@@ -14,5 +15,7 @@ namespace PresentationLayer.Presenter
                                             IMainPresenter mainPresenter);
 
         IPrintQuoteView GetPrintQuoteView();
+        void PrintRDLCReport();
+        void EventLoad();
     }
 }

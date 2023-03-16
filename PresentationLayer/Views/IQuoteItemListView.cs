@@ -10,9 +10,14 @@ namespace PresentationLayer.Views
         event EventHandler QuoteItemListViewLoadEventRaised;
         event EventHandler TsbtnContractSummaryClickEventRaised;
         event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
+        event EventHandler chkboxSelectallCheckedChangeEventRaised;
+        event EventHandler TSbtnPDFCompilerClickEventRaised;
 
         Panel GetPnlPrintBody();
         void showQuoteItemList();
         void closeQuoteItemList();
+        CheckBox GetChkboxSelectAll();
+        bool GetItemListUC_CheckBoxState { get; set; }
+
     }
 }

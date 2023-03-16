@@ -39,6 +39,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.chk_showitemImage = new System.Windows.Forms.CheckBox();
             this.tboxItemName = new System.Windows.Forms.TextBox();
             this.txt_ItemNumber = new System.Windows.Forms.TextBox();
             this.pboxTopView = new System.Windows.Forms.PictureBox();
@@ -168,6 +169,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.chk_showitemImage);
             this.panel3.Controls.Add(this.tboxItemName);
             this.panel3.Controls.Add(this.txt_ItemNumber);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -176,14 +178,22 @@
             this.panel3.Size = new System.Drawing.Size(200, 26);
             this.panel3.TabIndex = 23;
             // 
+            // chk_showitemImage
+            // 
+            this.chk_showitemImage.AutoSize = true;
+            this.chk_showitemImage.Location = new System.Drawing.Point(55, 6);
+            this.chk_showitemImage.Name = "chk_showitemImage";
+            this.chk_showitemImage.Size = new System.Drawing.Size(15, 14);
+            this.chk_showitemImage.TabIndex = 23;
+            this.chk_showitemImage.UseVisualStyleBackColor = true;
+            // 
             // tboxItemName
             // 
             this.tboxItemName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tboxItemName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tboxItemName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tboxItemName.Location = new System.Drawing.Point(58, 0);
+            this.tboxItemName.Location = new System.Drawing.Point(71, 0);
             this.tboxItemName.Name = "tboxItemName";
-            this.tboxItemName.Size = new System.Drawing.Size(142, 25);
+            this.tboxItemName.Size = new System.Drawing.Size(128, 25);
             this.tboxItemName.TabIndex = 21;
             this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
@@ -195,7 +205,7 @@
             this.txt_ItemNumber.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_ItemNumber.Location = new System.Drawing.Point(0, 0);
             this.txt_ItemNumber.Name = "txt_ItemNumber";
-            this.txt_ItemNumber.Size = new System.Drawing.Size(58, 25);
+            this.txt_ItemNumber.Size = new System.Drawing.Size(52, 25);
             this.txt_ItemNumber.TabIndex = 22;
             this.txt_ItemNumber.Text = "Item";
             // 
@@ -332,5 +342,6 @@
         private System.Windows.Forms.ToolStripMenuItem setAllDiscountToolStripMenuItem;
         public System.Windows.Forms.Label lblDiscount;
         public System.Windows.Forms.NumericUpDown NudItemDiscount;
+        private System.Windows.Forms.CheckBox chk_showitemImage;
     }
 }

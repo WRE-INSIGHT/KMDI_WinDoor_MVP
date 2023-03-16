@@ -14,11 +14,14 @@ namespace PresentationLayer.Views
         Label GetUniversalLabel();
         Button GetRefreshBtn();
         TextBox GetOutofTownExpenses();
+        CheckedListBox GetChkLstBox();
+        CheckBox GetShowPageNum();
         void ShowPrintQuoteView();
 
 
         event EventHandler btnRefreshClickEventRaised;
         event EventHandler PrintQuoteViewLoadEventRaised;
+        event EventHandler SelectedIndexChangeEventRaised;
 
 
         ReportViewer GetReportViewer();

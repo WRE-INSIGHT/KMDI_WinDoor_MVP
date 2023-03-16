@@ -33,7 +33,8 @@ namespace PresentationLayer.Views.UserControls
         Label GetLblDiscount();
         Label GetLblPrice();
         Label GetLblNetPrice();
-
+        CheckBox GetChkboxItemImage();
+        CheckBox showitemMage { get; set; }
         string ItemName { get; set; }
         string ItemNumber { get; set; }
         string itemWindoorNumber { get; set; }

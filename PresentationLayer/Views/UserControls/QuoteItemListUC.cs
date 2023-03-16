@@ -59,7 +59,22 @@ namespace PresentationLayer.Views.UserControls
                 rtboxDesc.Text = value;
             }
         }
+        public CheckBox GetChkboxItemImage()
+        { 
+            return chk_showitemImage;
+        }
 
+        public CheckBox showitemMage
+        {
+            get
+            {
+                return chk_showitemImage;
+            }
+            set
+            {
+                chk_showitemImage.Checked = Convert.ToBoolean(value);
+            }
+        }
         public NumericUpDown itemQuantity
         {
             get
@@ -139,7 +154,6 @@ namespace PresentationLayer.Views.UserControls
         {
             return lblNetPrice;
         }
-
 
 
         private void QuoteItemListUC_Load(object sender, EventArgs e)
