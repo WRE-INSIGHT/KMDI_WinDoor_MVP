@@ -1631,6 +1631,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\view.png" />
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
     <Content Include="Resources\AddNew_Door.png" />

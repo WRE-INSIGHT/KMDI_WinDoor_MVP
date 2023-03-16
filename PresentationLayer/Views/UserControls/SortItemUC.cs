@@ -94,5 +94,19 @@ namespace PresentationLayer.Views.UserControls
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if(panelSort.Height > 100)
+            {
+                this.Height = 28;
+            }
+            else
+            {
+                this.Height = 141;
+            }
+        
+        }
     }
 }

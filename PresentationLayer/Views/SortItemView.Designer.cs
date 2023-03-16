@@ -42,7 +42,7 @@
             this.pnlSortItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSortItem.Location = new System.Drawing.Point(0, 61);
             this.pnlSortItem.Name = "pnlSortItem";
-            this.pnlSortItem.Size = new System.Drawing.Size(584, 536);
+            this.pnlSortItem.Size = new System.Drawing.Size(603, 536);
             this.pnlSortItem.TabIndex = 6;
             this.pnlSortItem.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragDrop);
             this.pnlSortItem.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragEnter);
@@ -54,7 +54,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(584, 61);
+            this.panel1.Size = new System.Drawing.Size(603, 61);
             this.panel1.TabIndex = 7;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -73,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 597);
+            this.ClientSize = new System.Drawing.Size(603, 597);
             this.Controls.Add(this.pnlSortItem);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

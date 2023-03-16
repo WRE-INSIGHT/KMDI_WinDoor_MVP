@@ -155,13 +155,14 @@ namespace PresentationLayer.Presenter
 
         private void _sortItemView_SortItemDragDropEventRaiseEvent(object sender, DragEventArgs e)
         {
-            lstItem.Clear();
-            DeleteEnable = false;
+           
             Point p = _sortItemView.GetPnlSortItem().PointToClient(new Point(e.X, e.Y));
             var item = _sortItemView.GetPnlSortItem().GetChildAtPoint(p);
             int index = _sortItemView.GetPnlSortItem().Controls.GetChildIndex(item, false);
             if (item != e.Data.GetData(e.Data.GetFormats()[0]))
             {
+                lstItem.Clear();
+                DeleteEnable = false;
                 _sortItemView.GetPnlSortItem().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
                 //Get All WindoorModel by name
                 List<IWindoorModel> lstwndr = new List<IWindoorModel>();
