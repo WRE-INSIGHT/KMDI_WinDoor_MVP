@@ -9004,7 +9004,7 @@ Magnum_ScreenType magnum_ScreenType;
 
         #region ViewUpdate(Controls)
 
-        private void Clearing_Operation()
+        public void Clearing_Operation()
         {
             _quotationModel = null;
             _frameModel = null;

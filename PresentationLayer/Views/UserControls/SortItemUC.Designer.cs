@@ -34,10 +34,10 @@
             this.lbl_dimension = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
-            this.lbl_item = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cb_item = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
@@ -62,6 +62,7 @@
             this.rtboxDesc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtboxDesc.Location = new System.Drawing.Point(0, 20);
             this.rtboxDesc.Name = "rtboxDesc";
+            this.rtboxDesc.ReadOnly = true;
             this.rtboxDesc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.rtboxDesc.Size = new System.Drawing.Size(327, 58);
             this.rtboxDesc.TabIndex = 17;
@@ -88,7 +89,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.pboxItemImage);
-            this.panel2.Controls.Add(this.lbl_item);
+            this.panel2.Controls.Add(this.cb_item);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -98,6 +99,7 @@
             // pboxItemImage
             // 
             this.pboxItemImage.BackColor = System.Drawing.Color.White;
+            this.pboxItemImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pboxItemImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pboxItemImage.Location = new System.Drawing.Point(0, 20);
             this.pboxItemImage.Name = "pboxItemImage";
@@ -105,27 +107,7 @@
             this.pboxItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxItemImage.TabIndex = 20;
             this.pboxItemImage.TabStop = false;
-            // 
-            // lbl_item
-            // 
-            this.lbl_item.AutoEllipsis = true;
-            this.lbl_item.BackColor = System.Drawing.SystemColors.Control;
-            this.lbl_item.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_item.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_item.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_item.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_item.ForeColor = System.Drawing.Color.Black;
-            this.lbl_item.Location = new System.Drawing.Point(0, 0);
-            this.lbl_item.Name = "lbl_item";
-            this.lbl_item.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_item.Size = new System.Drawing.Size(271, 20);
-            this.lbl_item.TabIndex = 22;
-            this.lbl_item.Tag = "";
-            this.lbl_item.Text = "lbl_item";
-            this.lbl_item.UseMnemonic = false;
-            this.lbl_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseDown);
-            this.lbl_item.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseMove);
-            this.lbl_item.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbl_item_MouseUp);
+            this.pboxItemImage.Click += new System.EventHandler(this.pboxItemImage_Click);
             // 
             // contextMenuStrip1
             // 
@@ -147,6 +129,23 @@
             this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.duplicateToolStripMenuItem.Text = "Duplicate";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
+            // 
+            // cb_item
+            // 
+            this.cb_item.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cb_item.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cb_item.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cb_item.FlatAppearance.BorderSize = 3;
+            this.cb_item.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.cb_item.Location = new System.Drawing.Point(0, 0);
+            this.cb_item.Name = "cb_item";
+            this.cb_item.Size = new System.Drawing.Size(271, 20);
+            this.cb_item.TabIndex = 25;
+            this.cb_item.UseVisualStyleBackColor = true;
+            this.cb_item.CheckedChanged += new System.EventHandler(this.cb_item_CheckedChanged);
+            this.cb_item.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb_item_MouseDown);
+            this.cb_item.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb_item_MouseMove);
+            this.cb_item.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_item_MouseUp);
             // 
             // SortItemUC
             // 
@@ -173,9 +172,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pboxItemImage;
         public System.Windows.Forms.Label lbl_dimension;
-        public System.Windows.Forms.Label lbl_item;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cb_item;
     }
 }
