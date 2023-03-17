@@ -2971,8 +2971,8 @@ namespace PresentationLayer.Presenter
 
         private void OnSortItemButtonClickEventRaised(object sender, EventArgs e)
         {
-            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            sortItem.GetSortItemView().showSortItem();
+            _sortItemPresenter = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+            _sortItemPresenter.GetSortItemView().showSortItem();
         }
         private void OnItemsDragEventRaiseEvent(object sender, DragEventArgs e)
         {
