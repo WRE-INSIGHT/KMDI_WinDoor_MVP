@@ -11,7 +11,10 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
-
+        public Form GetExchangeRateForm()
+        {
+            return this;
+        }
         public NumericUpDown GetNumerinUpDown()
         {
             return nud_ExchangeRate;
@@ -28,6 +31,7 @@ namespace PresentationLayer.Views
 
         private void ExchangeRateView_Load(object sender, EventArgs e)
         {
+            
             EventHelpers.RaiseEvent(sender, ExchangeRateViewLoadEventRaised, e);
         }
 

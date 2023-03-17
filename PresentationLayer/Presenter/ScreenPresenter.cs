@@ -133,6 +133,7 @@ namespace PresentationLayer.Presenter
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show("Invalid Input: " + " " + ex.Message);
+                                        Console.WriteLine("Error in " + this + " " + ex.Message);
                                     }
 
                                 }
@@ -216,6 +217,7 @@ namespace PresentationLayer.Presenter
                                     catch (Exception ex)
                                     {
                                         MessageBox.Show("Invalid Input: " + this + "\n\n Error: " + ex.Message);
+                                        
                                     }
 
                                 }
@@ -372,16 +374,32 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_nudHeightValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_Height = (int)((NumericUpDown)sender).Value;
-            _screenModel.ComputeScreenTotalPrice();
-            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+            try
+            {
+                _screenModel.Screen_Height = (int)((NumericUpDown)sender).Value;
+                _screenModel.ComputeScreenTotalPrice();
+                _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in heightValue Loc: " + this + " " + ex.Message);
+            }
+            
         }
 
         private void _screenView_nudWidthValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_Width = (int)((NumericUpDown)sender).Value;
-            _screenModel.ComputeScreenTotalPrice();
-            _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+            try
+            {
+                _screenModel.Screen_Width = (int)((NumericUpDown)sender).Value;
+                _screenModel.ComputeScreenTotalPrice();
+                _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in widthValue Loc:" + this + " " + ex.Message);             
+            }
+            
         }
 
         private void _screenView_nudPlisseRdValueChangeEventRaise(object sender, EventArgs e)
@@ -587,21 +605,27 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_btnAddClickEventRaised(object sender, EventArgs e)
         {
-
-            _screenModel.Screen_ItemNumber = Convert.ToDecimal(_screenitemnum.Text);
-            _screenModel.ItemNumberList();
-            _screenView.getTxtitemListNumber().Text = Convert.ToString(_screenModel.Screen_NextItemNumber);
-
-            if (_screenModel.Screen_ItemNumber != 0)
+            try
             {
-                GetCurrentAmount();
-                _screenDT.Rows.Add(CreateNewRow_ScreenDT());
-                _screenView.screen_quantity.Value = _screenModel.Screen_Quantity;
-                _screenView.screen_discountpercentage.Value = _screenModel.Screen_Discount;
-                _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+                _screenModel.Screen_ItemNumber = Convert.ToDecimal(_screenitemnum.Text);
+                _screenModel.ItemNumberList();
+                _screenView.getTxtitemListNumber().Text = Convert.ToString(_screenModel.Screen_NextItemNumber);
 
+                if (_screenModel.Screen_ItemNumber != 0)
+                {
+                    GetCurrentAmount();
+                    _screenDT.Rows.Add(CreateNewRow_ScreenDT());
+                    _screenView.screen_quantity.Value = _screenModel.Screen_Quantity;
+                    _screenView.screen_discountpercentage.Value = _screenModel.Screen_Discount;
+                    _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+
+                }
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                MessageBox.Show("Invalid Item Number","",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }           
         }
 
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)

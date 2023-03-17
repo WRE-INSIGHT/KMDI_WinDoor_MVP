@@ -75,12 +75,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 30);
+            this.ClientSize = new System.Drawing.Size(229, 26);
             this.Controls.Add(this.nud_ExchangeRateAUD);
             this.Controls.Add(this.lblAUD);
             this.Controls.Add(this.nud_ExchangeRate);
             this.Controls.Add(this.lblEuro);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(249, 69);
+            this.MinimumSize = new System.Drawing.Size(249, 69);
             this.Name = "ExchangeRateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exchange Rate";

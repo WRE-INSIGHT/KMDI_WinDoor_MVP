@@ -9,6 +9,7 @@ namespace PresentationLayer.Views
         event EventHandler ExchangeRateViewLoadEventRaised;
         event EventHandler nudExchangeRateValueChangedEventRaised;
         event EventHandler nudExchangeRateAUDValueChangedEventRaised;
+        Form GetExchangeRateForm();
         NumericUpDown GetNumerinUpDown();
         NumericUpDown GetNumericUpDownAUD();
         void ShowExchangeRate();

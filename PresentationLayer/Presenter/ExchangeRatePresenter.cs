@@ -62,6 +62,9 @@ namespace PresentationLayer.Presenter
 
         private void _exchangeRateView_ExchangeRateViewLoadEventRaised(object sender, EventArgs e)
         {
+            _exchangeRateView.GetExchangeRateForm().MaximizeBox = false;
+            _exchangeRateView.GetExchangeRateForm().MinimizeBox = false;
+            _exchangeRateView.GetExchangeRateForm().TopMost = true;
             _exchangeRateView.GetNumericUpDownAUD().Maximum = decimal.MaxValue;
             _exchangeRateView.GetNumerinUpDown().Maximum = decimal.MaxValue;
             _exchangeRateView.ThisBinding(CreateBindingDictionary());
