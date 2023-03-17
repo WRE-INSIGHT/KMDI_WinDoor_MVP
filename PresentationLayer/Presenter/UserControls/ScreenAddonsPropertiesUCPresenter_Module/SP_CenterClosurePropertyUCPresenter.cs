@@ -36,16 +36,50 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         private void _sp_centerClosurePropertyUC_nud_LatchKitQty_ValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if (_sp_centerClosurePropertyUC.GetNumericUpDownLatchKit().Text == "" || _sp_centerClosurePropertyUC.GetNumericUpDownLatchKit().Text == " ")
+                {
+                    _screenModel.Screen_LatchKitQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_LatchKitQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in CenterClosure LatchKitQty " + ex.Message);
+                _screenModel.Screen_LatchKitQty = 0;
+            }
+
         }
         private void _sp_centerClosurePropertyUC_nud_IntermediatePartQty_ValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if (_sp_centerClosurePropertyUC.GetNumericUpDownIntermediatePart().Text == "" || _sp_centerClosurePropertyUC.GetNumericUpDownIntermediatePart().Text == " ")
+                {
+                    _screenModel.Screen_IntermediatePartQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_IntermediatePartQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in CenterClosure IntermediatePart " + ex.Message);
+                _screenModel.Screen_IntermediatePartQty = 0;
+            }
         }
 
         private void _sp_centerClosurePropertyUC_chkBoxCenterClosureCheckedChangedEventRaised(object sender, EventArgs e)
         {
-
             if (_screenModel.Screen_CenterClosureVisibilityOption == true)
             {
                 _sp_centerClosurePropertyUC.GetPanelBody().Visible = false;

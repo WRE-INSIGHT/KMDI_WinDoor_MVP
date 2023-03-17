@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
     {
         public event EventHandler SP6052MilledProfilePropertyUCLoadEventRaised;
         public event EventHandler nud_6052MilledProfile_ValueChangedEventRaised;
+        public event EventHandler nud_6052MilledProfileQty_ValueChangedEventRaised;
 
         public int Screen_6052MilledProfile
         {
@@ -21,7 +22,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_6052MilledProfile.Value = value;
             }
         }
-
         public int Screen_6052MilledProfileQty
         {
             get
@@ -33,7 +33,14 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_6052MilledProfileQty.Value = value;
             }
         }
-
+        public NumericUpDown GetNumericUpDown6052MilledProfile()
+        {
+            return nud_6052MilledProfile;
+        }
+        public NumericUpDown GetNumericUpDown6052MilledQty()
+        {
+            return nud_6052MilledProfileQty;
+        }
         public SP_6052MilledProfilePropertyUC()
         {
             InitializeComponent();
@@ -57,12 +64,12 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         }
         private void nud_6052MilledProfileQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_6052MilledProfile_ValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud_6052MilledProfileQty_ValueChangedEventRaised, e);
         }
 
         private void nud_6052MilledProfileQty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_6052MilledProfile_ValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud_6052MilledProfileQty_ValueChangedEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {

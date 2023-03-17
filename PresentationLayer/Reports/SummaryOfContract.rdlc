@@ -2672,7 +2672,7 @@
                               <Value>=(((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value)) - ((((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value)) * 2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <Format>#,0.00;(#,0.00)</Format>
+                                <Format>0.00;(0.00)</Format>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
                             </TextRun>
@@ -2711,11 +2711,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) - ((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value)</Value>
+                              <Value>=Math.Truncate((((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (1 - Fields!dtDiscountAverage.Value)) * 100 ) / 100</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>'PHP' #,0.00;('PHP' #,0.00)</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2738,6 +2738,7 @@
                         <PaddingRight>2pt</PaddingRight>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

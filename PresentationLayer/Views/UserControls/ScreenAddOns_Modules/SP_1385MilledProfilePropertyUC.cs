@@ -19,7 +19,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_1385MilledProfile.Value = value;
             }
         }
-
         public int Screen_1385MilledProfileQty
         {
             get
@@ -31,9 +30,18 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_1385MilledProfileQty.Value = value;
             }
         }
+        public NumericUpDown GetNumericUpDown1385Milled()
+        {
+            return nud_1385MilledProfile;
+        }
+        public NumericUpDown GetNumerincUpDown1385MilledQty()
+        {
+            return nud_1385MilledProfileQty;
+        }
 
         public event EventHandler nud1385MilledProfileValueChangedEventRaised;
         public event EventHandler SP1385MilledProfilePropertyUCLoadEventRaised;
+        public event EventHandler nud1385MilledProfileQtyValueChangedEventRaised;
 
         public SP_1385MilledProfilePropertyUC()
         {
@@ -58,11 +66,11 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         }
         private void nud_1385MilledProfileQty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud1385MilledProfileValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1385MilledProfileQtyValueChangedEventRaised, e);
         }
         private void nud_1385MilledProfileQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud1385MilledProfileValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1385MilledProfileQtyValueChangedEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {

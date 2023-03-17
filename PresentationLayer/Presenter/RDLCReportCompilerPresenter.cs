@@ -115,7 +115,7 @@ namespace PresentationLayer.Presenter
         public void Bgw_CompilePDF()
         {
             IPDFWaitFormPresenter waitPresenter = _pdfWaitFormPresenter.GetNewInstance(_unityC, _mainPresenter);
-            waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());                
+            waitPresenter.GetPDFWaitFormView().ShowPDFwaitFormView(_rdlcReportCompilerView.GetRDLCReportCompilerForm());               
         }
 
         public async void ShowPDFLoad()
@@ -127,7 +127,7 @@ namespace PresentationLayer.Presenter
             waitPresenter.GetPDFWaitFormView().ClosePDFWaitFormView();
         }
               
-        private async void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
+        private  void OnBtnCompileReportClickEventRaised(object sender, EventArgs e)
         {
             try
             {
@@ -226,7 +226,7 @@ namespace PresentationLayer.Presenter
 
                                 }
                                 #endregion
-                                await Task.Delay(2000);
+                                //await Task.Delay(1000);
                                 outputDocument.Save(fullname);
 
                                 if (Directory.Exists(targetpath))
@@ -247,7 +247,7 @@ namespace PresentationLayer.Presenter
                                     Process.Start(fullname);
                                 }
                                 #endregion
-                               _loadingThread.Abort();                               
+                               _loadingThread.Abort();                            
                             }                           
                             SetVariablesToDefault();
                         }
