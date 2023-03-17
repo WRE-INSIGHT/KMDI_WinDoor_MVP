@@ -24,17 +24,24 @@ namespace PresentationLayer.Views
         }
         public void ShowPDFwaitFormView(Form parent)
         {
-            if (parent != null)
+            try
             {
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = new Point(parent.Location.X + parent.Width / 2 - this.Width / 2,
-                    parent.Location.Y + parent.Height / 2 - this.Height / 2);
+                if (parent != null)
+                {
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new Point(parent.Location.X + parent.Width / 2 - this.Width / 2,
+                        parent.Location.Y + parent.Height / 2 - this.Height / 2);
+                }
+                else
+                {
+                    this.StartPosition = FormStartPosition.CenterParent;
+                }
+                this.ShowDialog();
             }
-            else
+            catch (Exception ex)
             {
-                this.StartPosition = FormStartPosition.CenterParent;
+                Console.WriteLine("Error in " + this +" " + ex.Message );
             }
-            this.Show();
         }
         public void ClosePDFWaitFormView()
         {

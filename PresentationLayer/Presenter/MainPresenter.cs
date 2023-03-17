@@ -2255,26 +2255,7 @@ namespace PresentationLayer.Presenter
                         Clearing_Operation();
 
                         openFileMethod(_mainView.GetOpenFileDialog().FileName);
-
-                        wndrProjectFileName = _mainView.GetOpenFileDialog().FileName;
-                        isNewProject = false;
-                        isOpenProject = true;
-                        wndrfile = _mainView.GetOpenFileDialog().FileName;
-                        //csfunc.DecryptFile(wndrfile);
-                        int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                        wndrFileName = wndrfile.Substring(startFileName);
-                        FileInfo f = new FileInfo(wndrfile);
-                        f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                        string outFile = wndrfile.Substring(0, startFileName) +
-                                         wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
-
-                        file_lines = File.ReadAllLines(outFile);
-                        f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
-                        onload = true;
-                        _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
-                        _basePlatformImagerUCPresenter.SendToBack_baseImager();
-                        StartWorker("Open_WndrFiles");
-                    } 
+                    }
 
                 }
             }

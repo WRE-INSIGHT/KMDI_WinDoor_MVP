@@ -6,7 +6,10 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 {
     public interface ISP_MagnumScreenTypeUCPresenter
     {
-        ISP_MagnumScreenTypeUCPresenter CreateNewInstance(IUnityContainer unityC, IMainPresenter mainPresenter, IScreenModel screenModel);
+        ISP_MagnumScreenTypeUCPresenter CreateNewInstance(IUnityContainer unityC, 
+                                                          IMainPresenter mainPresenter,
+                                                          IScreenModel screenModel,
+                                                          IScreenPresenter screenPresenter);
         ISP_MagnumScreenTypeUC GetMagnumScreenTypeView();
     }
 }

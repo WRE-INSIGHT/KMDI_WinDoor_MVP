@@ -15,10 +15,15 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
         private IScreenPresenter _screenPresenter;
+        private NumericUpDown _nud373or374Profile;
+        private NumericUpDown _nud373or374Qty;   
+
 
         public SP_373or374MilledProfilePropertyUCPresenter(ISP_373or374MilledProfilePropertyUC sp_373or374MilledProfilePropertyUC)
         {
             _sp_373or374MilledProfilePropertyUC = sp_373or374MilledProfilePropertyUC;
+            _nud373or374Profile = _sp_373or374MilledProfilePropertyUC.GetNumericUpDown373or374Profile();
+            _nud373or374Qty = sp_373or374MilledProfilePropertyUC.GetNumericUpDown373or374Qty();
 
             SubscribeToEventSetup();
         }
@@ -27,13 +32,52 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         {
             _sp_373or374MilledProfilePropertyUC.SP373or374MilledProfilePropertyUCLoadEventRaised += _sp_373or374MilledProfilePropertyUC_SP373or374MilledProfilePropertyUCLoadEventRaised;
             _sp_373or374MilledProfilePropertyUC.nud_373or374MilledProfile_ValueChangedEventRaise += _sp_373or374MilledProfilePropertyUC_nud_373or374MilledProfile_ValueChangedEventRaise;
+            _sp_373or374MilledProfilePropertyUC.nud373or374MilledProfileQtyValueChangedEventRaised += _sp_373or374MilledProfilePropertyUC_nud373or374MilledProfileQtyValueChangedEventRaised;
         }
 
         private void _sp_373or374MilledProfilePropertyUC_nud_373or374MilledProfile_ValueChangedEventRaise(object sender, EventArgs e)
         {
-            _screenModel.Screen_373or374MilledProfile = _sp_373or374MilledProfilePropertyUC.Screen_373or374MilledProfile;
-            _screenModel.Screen_373or374MilledProfileQty = _sp_373or374MilledProfilePropertyUC.Screen_373or374MilledProfileQty;
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if (_nud373or374Profile.Text == "" || _nud373or374Profile.Text == " ")
+                {
+                    _screenModel.Screen_373or374MilledProfile = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_373or374MilledProfile = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _nud373or374Profile.Value = 0;
+            }
+            
+            
+        }
+        private void _sp_373or374MilledProfilePropertyUC_nud373or374MilledProfileQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_nud373or374Qty.Text == "" || _nud373or374Qty.Text == " ")
+                {
+                    _screenModel.Screen_373or374MilledProfileQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_373or374MilledProfileQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message );
+                _nud373or374Qty.Value = 0;
+            }
         }
 
         private void _sp_373or374MilledProfilePropertyUC_SP373or374MilledProfilePropertyUCLoadEventRaised(object sender, EventArgs e)

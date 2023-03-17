@@ -27,13 +27,54 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         {
             _sp_6052MilledProfilePropertyUC.SP6052MilledProfilePropertyUCLoadEventRaised += _sp_6052MilledProfilePropertyUC_SP6052MilledProfilePropertyUCLoadEventRaised;
             _sp_6052MilledProfilePropertyUC.nud_6052MilledProfile_ValueChangedEventRaised += _sp_6052MilledProfilePropertyUC_nud_6052MilledProfile_ValueChangedEventRaised;
+            _sp_6052MilledProfilePropertyUC.nud_6052MilledProfileQty_ValueChangedEventRaised += _sp_6052MilledProfilePropertyUC_nud_6052MilledProfileQty_ValueChangedEventRaised;
         }
-
+    
         private void _sp_6052MilledProfilePropertyUC_nud_6052MilledProfile_ValueChangedEventRaised(object sender, EventArgs e)
         {
-            _screenModel.Screen_6052MilledProfile = _sp_6052MilledProfilePropertyUC.Screen_6052MilledProfile;
-            _screenModel.Screen_6052MilledProfileQty = _sp_6052MilledProfilePropertyUC.Screen_6052MilledProfileQty;
-            _screenPresenter.GetCurrentAmount();
+            try
+            {
+                if (_sp_6052MilledProfilePropertyUC.GetNumericUpDown6052MilledProfile().Text == "" || _sp_6052MilledProfilePropertyUC.GetNumericUpDown6052MilledProfile().Text == " ")
+                {
+                    _screenModel.Screen_6052MilledProfile = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_6052MilledProfile = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _screenModel.Screen_6052MilledProfile = 0;
+            }
+            
+            
+        }
+        private void _sp_6052MilledProfilePropertyUC_nud_6052MilledProfileQty_ValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_sp_6052MilledProfilePropertyUC.GetNumericUpDown6052MilledQty().Text == "" || _sp_6052MilledProfilePropertyUC.GetNumericUpDown6052MilledQty().Text == " ")
+                {
+                    _screenModel.Screen_6052MilledProfileQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_6052MilledProfileQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+                _screenModel.Screen_6052MilledProfileQty = 0;
+            }
+
+
         }
 
         private void _sp_6052MilledProfilePropertyUC_SP6052MilledProfilePropertyUCLoadEventRaised(object sender, EventArgs e)

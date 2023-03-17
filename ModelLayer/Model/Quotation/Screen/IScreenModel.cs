@@ -67,6 +67,7 @@ namespace ModelLayer.Model.Quotation.Screen
         decimal Screen_NextItemNumber { get; set; }
         Freedom_ScreenSize Freedom_ScreenSize { get; set; }
         Freedom_ScreenType Freedom_ScreenType { get; set; }
+        int Screen_ExchangeRateAUD { get; set; }
         bool FromCellEndEdit { get; set; }
         bool Screen_1067PVCboxVisibility { get; set; }
         int Screen_1067PVCboxQty { get; set; }

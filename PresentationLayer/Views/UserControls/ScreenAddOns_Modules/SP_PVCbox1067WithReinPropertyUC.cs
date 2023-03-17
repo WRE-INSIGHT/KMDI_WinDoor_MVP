@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
     {
         public event EventHandler SPPVCbox1067WithReinPropertyUCLoadEventRaised;
         public event EventHandler nud_1067PVCbox_ValueChangedEventRaised;
+        public event EventHandler nud1067PVCboxQtyValueChangedEventRaised;
 
         public int Screen_1067PVCbox
         {
@@ -21,7 +22,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_1067PVCbox.Value = value;
             }
         }
-
         public int Screen_1067PVCboxQty
         {
             get
@@ -33,6 +33,15 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_1067PVCboxQty.Value = value;
             }
         }
+        public NumericUpDown GetNumericUpDown1067PVCBox()
+        {
+            return nud_1067PVCbox;
+        }
+        public NumericUpDown GetNumericUpDown1067PVCBoxQty()
+        {
+            return nud_1067PVCboxQty;
+        }
+        
         public SP_PVCbox1067WithReinPropertyUC()
         {
             InitializeComponent();
@@ -59,13 +68,13 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void nud_1067PVCboxQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_1067PVCbox_ValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1067PVCboxQtyValueChangedEventRaised, e);
 
         }
 
         private void nud_1067PVCboxQty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_1067PVCbox_ValueChangedEventRaised, e);
+            EventHelpers.RaiseEvent(sender, nud1067PVCboxQtyValueChangedEventRaised, e);
 
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
