@@ -66,6 +66,7 @@ namespace PresentationLayer.Presenter.UserControls
                         #region FrameModel
                         foreach (FrameModel frm in wdm.lst_frame)
                         {
+
                             if (frm.Frame_Name == wndrObject.Name)
                             {
                                 if (frm.Frame_Name == wndrObject.Name)
@@ -73,6 +74,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     propertyHeight += frm.Frame_PropertiesUC.Height;
                                     break;
                                 }
+
                                 #region  Frame Panel
                                 foreach (PanelModel pnl in frm.Lst_Panel)
                                 {
