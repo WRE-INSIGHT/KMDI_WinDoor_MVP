@@ -7281,11 +7281,28 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     deduction_for_sashHT -= 2;
                 }
-                int a = 0;
+
                 if (ChckBoundedByBotframe == true)
                 {
-                    a = 99999;
+                    if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        deduction_for_sashHT -= 6;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                    {
+
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+
+                    }
                 }
+
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 || Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                 {
                     Panel_SashWidth = ((((Panel_ParentFrameModel.Frame_Width - deduction_for_sashWD + SashOverlap_additional) - dm_deduct) - inward_motorized_deduction) / TotalNumberOfPanel) + 5;
@@ -7296,7 +7313,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 }
 
                 Panel_SashWidthDecimal = Panel_DisplayWidthDecimal;
-                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5 + a;
+                Panel_SashHeight = (Panel_DisplayHeight - deduction_for_sashHT) + 5;
                 Panel_SashHeightDecimal = Panel_DisplayHeightDecimal;
 
                 Panel_OriginalSashWidth = Panel_SashWidth;
