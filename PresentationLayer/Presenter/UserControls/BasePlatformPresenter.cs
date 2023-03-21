@@ -87,7 +87,6 @@ namespace PresentationLayer.Presenter.UserControls
             }
             catch (Exception ex)
             {
-
                 //MessageBox.Show(ex.Message);
             }    
             

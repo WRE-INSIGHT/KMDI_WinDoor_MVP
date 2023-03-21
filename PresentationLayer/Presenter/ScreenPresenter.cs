@@ -404,7 +404,16 @@ namespace PresentationLayer.Presenter
 
         private void _screenView_nudPlisseRdValueChangeEventRaise(object sender, EventArgs e)
         {
-            _screenModel.PlissedRd_Panels = (int)((NumericUpDown)sender).Value;
+            try
+            {
+                _screenModel.PlissedRd_Panels = (int)((NumericUpDown)sender).Value;
+                GetCurrentAmount();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+            }
+            
         }
 
         private void _screenView_cmbScreenTypeSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -638,7 +647,7 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Quantity", "Quantity", "System.Int32"));
             _screenDT.Columns.Add(CreateColumn("Discount", "Discount", "System.String"));
             _screenDT.Columns.Add(CreateColumn("Net Price", "Net Price", "System.String"));
-
+            
 
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].Width = 35;
@@ -651,8 +660,8 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[5].Width = 85;
             _screenView.GetDatagrid().Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                      
             
-
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
