@@ -1697,6 +1697,7 @@
     <None Include="Resources\ExtensionRight1.png" />
     <None Include="Resources\fade90.gif" />
     <None Include="Resources\fade90v2.gif" />
+    <None Include="Resources\fade901.gif" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />
@@ -1706,6 +1707,7 @@
     <None Include="Resources\icons8-banknotes-48.png" />
     <None Include="Resources\glass %281%29.png" />
     <None Include="Resources\glass.png" />
+    <None Include="Resources\folder.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />
