@@ -688,7 +688,19 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        public int Panel_LouverBladesCount { get; set; }
+        private int _PanelLouverBladesCount;
+        public int Panel_LouverBladesCount
+        {
+            get
+            {
+                return _PanelLouverBladesCount;
+            }
+            set
+            {
+                _PanelLouverBladesCount = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private bool _panel_louverBladesVisibility;
         public bool Panel_LouverBladesVisibility
@@ -7286,15 +7298,15 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                     {
-                        deduction_for_sashHT -= 6;
+                        deduction_for_sashHT -= 14;
                     }
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
                     {
-
+                        deduction_for_sashHT -= 45;
                     }
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
-
+                        deduction_for_sashHT -= 18;
                     }
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
@@ -9430,20 +9442,26 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void Insert_Interlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Interlock " + Panel_InterlockArtNo.DisplayName,
-                                   2, "pc(s)",
-                                   Panel_SashHeight - 5,
-                                   "Sash",
-                                   @"|  |");
+            if (Panel_InterlockArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Interlock " + Panel_InterlockArtNo.DisplayName,
+                                       2, "pc(s)",
+                                       Panel_SashHeight - 5,
+                                       "Sash",
+                                       @"|  |");
+            }
         }
 
         public void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion)
         {
-            tbl_explosion.Rows.Add("Extension for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
-                                   2, "pc(s)",
-                                   Panel_SashHeight - 30,
-                                   "Sash",
-                                   @"|  |");
+            if (Panel_ExtensionForInterlockArtNo != null)
+            {
+                tbl_explosion.Rows.Add("Extension for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
+                                                  2, "pc(s)",
+                                                  Panel_SashHeight - 30,
+                                                  "Sash",
+                                                  @"|  |");
+            }
         }
 
         public void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion)

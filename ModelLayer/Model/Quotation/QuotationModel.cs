@@ -234,7 +234,7 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
-                             
+
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i += 2)
                             {
@@ -585,7 +585,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                             }
-
+                                            #region CheckIfBoundedByBottomFrame 
                                             if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
                                             frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
                                             {
@@ -647,6 +647,7 @@ namespace ModelLayer.Model.Quotation
                                                     }
                                                 }
                                             }
+                                            #endregion
                                         }
 
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -1255,17 +1256,17 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
-                              
+
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i++)
                             {
 
-                              
+
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
-                             
+
 
                                 IDividerModel div_nxtCtrl = null,
                                         div_prevCtrl = null;
@@ -3896,7 +3897,9 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                         #region bottomFramePrice
-                        if (fr.Frame_BotFrameEnable == true)
+                        if (fr.Frame_BotFrameVisible == true &&
+                            (fr.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6050))
                         {
                             FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
                             FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
@@ -9551,7 +9554,7 @@ namespace ModelLayer.Model.Quotation
                                             }
 
                                             BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
-                                           
+
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
                                                 GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
