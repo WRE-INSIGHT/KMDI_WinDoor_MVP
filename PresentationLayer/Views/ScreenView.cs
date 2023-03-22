@@ -12,7 +12,6 @@ namespace PresentationLayer.Views
         {
             InitializeComponent();
         }
-
         public NumericUpDown screen_width
         {
             get
@@ -24,7 +23,6 @@ namespace PresentationLayer.Views
                 nud_Width.Value = Convert.ToDecimal(value);
             }
         }
-
         public NumericUpDown screen_height
         {
             get
@@ -36,7 +34,6 @@ namespace PresentationLayer.Views
                 nud_Height.Value = Convert.ToDecimal(value);
             }
         }
-
         public NumericUpDown screen_factor
         {
             get
@@ -48,7 +45,6 @@ namespace PresentationLayer.Views
                 nud_Factor.Value = Convert.ToDecimal(value);
             }
         }
-
         public NumericUpDown screen_discountpercentage
         {
             get
@@ -60,7 +56,6 @@ namespace PresentationLayer.Views
                 nud_Discount.Value = Convert.ToDecimal(value);
             }
         }
-
         public NumericUpDown screen_quantity
         {
             get
@@ -72,7 +67,6 @@ namespace PresentationLayer.Views
                 nud_Quantity.Value = Convert.ToInt32(value);
             }
         }
-
         public TextBox screen_itemnumber
         {
             get
@@ -188,7 +182,6 @@ namespace PresentationLayer.Views
             }
             cmb_freedomSize.DataSource = Freedom;
                   
-
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
         }
 

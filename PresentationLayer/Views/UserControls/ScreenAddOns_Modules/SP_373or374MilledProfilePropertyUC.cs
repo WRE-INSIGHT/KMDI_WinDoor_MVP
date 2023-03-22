@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
     {
         public event EventHandler SP373or374MilledProfilePropertyUCLoadEventRaised;
         public event EventHandler nud_373or374MilledProfile_ValueChangedEventRaise;
+        public event EventHandler nud373or374MilledProfileQtyValueChangedEventRaised;
 
         public int Screen_373or374MilledProfile
         {
@@ -21,7 +22,6 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_373or374MilledProfile.Value = value;
             }
         }
-
         public int Screen_373or374MilledProfileQty
         {
             get
@@ -33,6 +33,16 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
                 nud_373or374MilledProfileQty.Value = value;
             }
         }
+
+        public NumericUpDown GetNumericUpDown373or374Profile()
+        {
+            return nud_373or374MilledProfile;
+        }
+        public NumericUpDown GetNumericUpDown373or374Qty()
+        {
+            return nud_373or374MilledProfileQty;
+        }
+
         public SP_373or374MilledProfilePropertyUC()
         {
             InitializeComponent();
@@ -56,12 +66,12 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 
         private void nud_373or374MilledProfileQty_ValueChanged(object sender, EventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_373or374MilledProfile_ValueChangedEventRaise, e);
+            EventHelpers.RaiseEvent(sender, nud373or374MilledProfileQtyValueChangedEventRaised, e);
         }
 
         private void nud_373or374MilledProfileQty_KeyDown(object sender, KeyEventArgs e)
         {
-            EventHelpers.RaiseEvent(sender, nud_373or374MilledProfile_ValueChangedEventRaise, e);
+            EventHelpers.RaiseEvent(sender, nud373or374MilledProfileQtyValueChangedEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {

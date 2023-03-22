@@ -2062,7 +2062,7 @@ namespace ModelLayer.Model.Quotation
                 wndr_item.WD_Selected = false;
             }
 
-            item.WD_Selected = true;
+            item.WD_Selected = true;         
         }
 
         public QuotationModel(string quotation_ref_no,
@@ -9422,10 +9422,10 @@ namespace ModelLayer.Model.Quotation
 
                     }
 
-
+                    wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
                     InstallationCost = InstallationPoints * CostPerPoints;
-
+                   
                     // Math.Round( , 2) +
 
                     FittingAndSuppliesCost = Math.Round(FSPrice, 2) +

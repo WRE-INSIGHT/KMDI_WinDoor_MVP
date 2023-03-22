@@ -65,8 +65,14 @@ namespace PresentationLayer
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            if (args != null && args.Length > 0)
+            {
+                string filePath = args[0];
+                Properties.Settings.Default.FilePath = filePath;
+                Properties.Settings.Default.Save();
+            }
             IUnityContainer UnityC;
             string _sqlconStr = Properties.Settings.Default.slqcon;
 
@@ -448,6 +454,9 @@ namespace PresentationLayer
 
                  .RegisterType<IRDLCReportCompilerView,RDLCReportCompilerView>(new ContainerControlledLifetimeManager())
                  .RegisterType<IRDLCReportCompilerPresenter,RDLCReportCompilerPresenter>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IPDFWaitFormPresenter, PDFWaitFormPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IPDFWaitFormView, PDFWaitFormView>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

@@ -453,19 +453,7 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
         public void SetZoom()

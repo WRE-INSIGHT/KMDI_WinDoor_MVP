@@ -17,6 +17,11 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         public event EventHandler reinforcedCheckBoxEventRaised;
         public event EventHandler magnumScreenTypeEventRaised;
         public event EventHandler magnumScreenTypeUCloadEventRaised;
+
+        public CheckBox GetReinforcedCheckBox()
+        {
+            return reinforcedChkBx;
+        }
         public SP_MagnumScreenTypeUC()
         {
             InitializeComponent();

@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.37</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.38</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>38</ApplicationRevision>
+    <ApplicationRevision>39</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -80,6 +80,26 @@
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -154,6 +174,7 @@
     <Compile Include="Presenter\ILoginPresenter.cs" />
     <Compile Include="Presenter\IMainPresenter.cs" />
     <Compile Include="Presenter\IPDFCompilerPresenter.cs" />
+    <Compile Include="Presenter\IPDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\IPricingPresenter.cs" />
     <Compile Include="Presenter\IPrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\IPrintQuotePresenter.cs" />
@@ -167,6 +188,7 @@
     <Compile Include="Presenter\LoginPresenter.cs" />
     <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Presenter\PDFCompilerPresenter.cs" />
+    <Compile Include="Presenter\PDFWaitFormPresenter.cs" />
     <Compile Include="Presenter\PricingPresenter.cs" />
     <Compile Include="Presenter\PrintGlassSummaryPresenter.cs" />
     <Compile Include="Presenter\PrintQuotePresenter.cs" />
@@ -469,6 +491,7 @@
     <Compile Include="Views\ILoginView.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\IPDFCompilerView.cs" />
+    <Compile Include="Views\IPDFWaitFormView.cs" />
     <Compile Include="Views\IPricingView.cs" />
     <Compile Include="Views\IPrintGlassSummaryView.cs" />
     <Compile Include="Views\IPrintQuoteView.cs" />
@@ -496,6 +519,12 @@
     </Compile>
     <Compile Include="Views\PDFCompilerView.Designer.cs">
       <DependentUpon>PDFCompilerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PDFWaitFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PDFWaitFormView.Designer.cs">
+      <DependentUpon>PDFWaitFormView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PricingView.cs">
       <SubType>Form</SubType>
@@ -1289,6 +1318,9 @@
     <EmbeddedResource Include="Views\PDFCompilerView.resx">
       <DependentUpon>PDFCompilerView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PDFWaitFormView.resx">
+      <DependentUpon>PDFWaitFormView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\PricingView.resx">
       <DependentUpon>PricingView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1633,6 +1665,7 @@
   <ItemGroup>
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
+    <None Include="Resources\126.gif" />
     <Content Include="Resources\AddNew_Door.png" />
     <Content Include="Resources\AddNew_Window.png" />
     <Content Include="Resources\animat-cloudsync.gif" />
@@ -1661,6 +1694,8 @@
     <None Include="Resources\dupli.png" />
     <None Include="Resources\ExtensionBot1.png" />
     <None Include="Resources\ExtensionRight1.png" />
+    <None Include="Resources\fade90.gif" />
+    <None Include="Resources\fade90v2.gif" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

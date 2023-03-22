@@ -63,6 +63,16 @@ namespace PresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _126 {
+            get {
+                object obj = ResourceManager.GetObject("126", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _43 {
             get {
                 object obj = ResourceManager.GetObject("43", resourceCulture);
@@ -306,6 +316,26 @@ namespace PresentationLayer.Properties {
         internal static System.Drawing.Bitmap external_glass_interior_homedecor_vol4_microdots_premium_microdot_graphic {
             get {
                 object obj = ResourceManager.GetObject("external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fade90 {
+            get {
+                object obj = ResourceManager.GetObject("fade90", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fade90v2 {
+            get {
+                object obj = ResourceManager.GetObject("fade90v2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

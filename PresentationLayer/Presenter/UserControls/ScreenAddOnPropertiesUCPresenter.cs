@@ -112,7 +112,7 @@ namespace PresentationLayer.Presenter.UserControls
             pvc1067withrein.Dock = DockStyle.Top;
             pvc1067withrein.BringToFront();
 
-            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl magnumScreenType = (UserControl)magnumScreenTypeUCP.GetMagnumScreenTypeView();
             _pnlAddOns.Controls.Add(magnumScreenType);
             magnumScreenType.Dock = DockStyle.Top;

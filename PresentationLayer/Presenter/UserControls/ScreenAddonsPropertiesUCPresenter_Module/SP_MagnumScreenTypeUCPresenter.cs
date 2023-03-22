@@ -18,6 +18,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IMainPresenter _mainPresenter;
         private IUnityContainer _unityC;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         public ISP_MagnumScreenTypeUC GetMagnumScreenTypeView()
         {
@@ -39,12 +40,22 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
     
         private void OnreinforcedCheckBoxEventRaised(object sender, EventArgs e)
         {
-           // throw new NotImplementedException();
+            if (_magnumScreenTypeView.GetReinforcedCheckBox().Checked)
+            {
+                _screenModel.Reinforced = true;
+            }
+            else
+            {
+                _screenModel.Reinforced = false;
+
+            }
+            _screenPresenter.GetCurrentAmount();
         }
 
         private void OnmagnumScreenTypeEventRaised(object sender, EventArgs e)
         {
             _screenModel.Magnum_ScreenType = (Magnum_ScreenType)((ComboBox)sender).SelectedValue;
+            _screenPresenter.GetCurrentAmount();
         }
 
         private Dictionary<string, Binding> CreateBindingDictionary()
@@ -60,7 +71,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_MagnumScreenTypeUCPresenter CreateNewInstance(IUnityContainer unityC, 
                                                                 IMainPresenter mainPresenter, 
-                                                                IScreenModel screenModel)
+                                                                IScreenModel screenModel,
+                                                                IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_MagnumScreenTypeUCPresenter, SP_MagnumScreenTypeUCPresenter>()
@@ -69,6 +81,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             magnumscreen._unityC = unityC;
             magnumscreen._mainPresenter = mainPresenter;
             magnumscreen._screenModel = screenModel;
+            magnumscreen._screenPresenter = screenPresenter;
 
             return magnumscreen;
         }
