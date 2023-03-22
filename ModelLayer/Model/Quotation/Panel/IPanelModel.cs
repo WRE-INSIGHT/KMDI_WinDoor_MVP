@@ -346,6 +346,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                            DividerType div_type,
                                            bool mpnlDivEneable,
                                            int OverLappingPanel_Qty,
+                                           bool ChckBoundedByBotframe,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
                                            IDividerModel divNxt,
@@ -470,5 +471,6 @@ namespace ModelLayer.Model.Quotation.Panel
         #endregion
 
         int MotorizeMechQty();
+        bool ChckIfBoundedByBottomFrame();
     }
 }

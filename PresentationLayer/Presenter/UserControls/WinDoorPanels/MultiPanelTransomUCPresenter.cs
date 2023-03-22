@@ -22,6 +22,7 @@ using ServiceLayer.Services.MultiPanelServices;
 using ServiceLayer.Services.PanelServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -307,7 +308,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                             {
                                                                 if (fourthlvlmpnl.MPanel_Name == multiTransomUC.Parent.Name)
                                                                 {
-                                                                    _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight + pnlPropertyHeight  - 19;
+                                                                    _mainPresenter.PropertiesScroll = propertyHeight + framePropertyHeight + concretePropertyHeight + mpnlPropertyHeight + divPropertyHeight + pnlPropertyHeight - 19;
                                                                     return;
 
                                                                 }
@@ -660,11 +661,11 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                 {
                                     if (_multiPanelModel.MPanel_ParentModel != null)
                                     {
-                                     
-                                            if (_multiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame"))
-                                            {
-                                                _frameModel.Lst_MultiPanel = _mainPresenter.Arrange_Frame_MultiPanelModel(_frameModel);
-                                            }
+
+                                        if (_multiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame"))
+                                        {
+                                            _frameModel.Lst_MultiPanel = _mainPresenter.Arrange_Frame_MultiPanelModel(_frameModel);
+                                        }
                                     }
                                     _multiPanelModel.Fit_MyControls_ImagersToBindDimensions();
                                     _multiPanelModel.Fit_MyControls_ToBindDimensions();
@@ -1189,6 +1190,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var errorFrame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = errorFrame.GetFileLineNumber();
+                Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
             }
         }
 
@@ -1379,6 +1387,13 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         MessageBox.Show(ex.Message, ex.HResult.ToString());
                     }
+
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var errorFrame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = errorFrame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 }
             }
         }
@@ -1570,7 +1585,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             botFrameDeduct = 11;
                         }
                         else if (_frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7507 ||
-                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 || 
+                                 _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
                                  _frameModel.Frame_BotFrameArtNo == BottomFrameTypes._6052)
                         {

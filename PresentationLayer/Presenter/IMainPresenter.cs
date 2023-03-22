@@ -68,6 +68,7 @@ namespace PresentationLayer.Presenter
         DataTable Spacer { get; }
         DataTable Color { get; }
         string wndrFileName { get; set; }
+        string wndrFilePath { get; set; }
         NumericUpDown LblCurrentPrice { get; set; }
 
         IMainView GetMainView();
@@ -106,6 +107,7 @@ namespace PresentationLayer.Presenter
                                 int frmDimension_numHt,
                                 string frmDimension_profileType,
                                 string frmDimension_baseColor);
+        void Clearing_Operation();
         void frmDimensionResults(frmDimensionPresenter.Show_Purpose purpose,
                                  int frmDimension_numWd,
                                  int frmDimension_numHt);
