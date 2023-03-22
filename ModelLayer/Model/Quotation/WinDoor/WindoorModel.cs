@@ -555,7 +555,6 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 return _WD_customArrowToggle;
             }
-
             set
             {
                 _WD_customArrowToggle = value;
@@ -678,7 +677,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
             {
-                zm = _arr_zoomPercentage[0];
+                zm = _arr_zoomPercentage[0];            
             }
 
             return zm;

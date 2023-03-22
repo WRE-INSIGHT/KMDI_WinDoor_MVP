@@ -3659,7 +3659,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_CostingPoints:"))
                         {
-                            _windoorModel.WD_CostingPoints = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            _windoorModel.WD_CostingPoints = decimal.Parse(extractedValue_str);
                         }
 
                         if (row_str.Contains("Dictionary_wd_redArrowLines:"))

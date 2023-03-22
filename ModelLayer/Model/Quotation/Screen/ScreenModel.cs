@@ -669,7 +669,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private int _screen_Width;
         public int Screen_Width
         {
@@ -809,7 +808,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
-
         private decimal _screen_TotalAmount;
         public decimal Screen_TotalAmount
         {
@@ -837,7 +835,6 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
-
 
         private int _screen_Discount;
         public int Screen_Discount
@@ -5982,6 +5979,15 @@ namespace ModelLayer.Model.Quotation.Screen
                     Discount = 0;
                     Screen_NetPrice = 0;
                 }
+                else
+                {
+                    Screen_Quantity = 0;
+                    Screen_UnitPrice = 0;
+                    DiscountPercentage = 0;
+                    Screen_TotalAmount = 0;
+                    Discount = 0;
+                    Screen_NetPrice = 0;
+                }
 
                 Screen_Discount = (int)Decimal.Truncate(100 * DiscountPercentage);
 
@@ -6047,12 +6053,12 @@ namespace ModelLayer.Model.Quotation.Screen
             }
             else
             {
-                    Screen_Quantity = 0;
-                    Screen_UnitPrice = 0;
-                    DiscountPercentage = 0;
-                    Screen_TotalAmount = 0;
-                    Discount = 0;
-                    Screen_NetPrice = 0;                              
+                Screen_Quantity = 0;
+                Screen_UnitPrice = 0;
+                DiscountPercentage = 0;
+                Screen_TotalAmount = 0;
+                Discount = 0;
+                Screen_NetPrice = 0;                              
             }
 
         }
