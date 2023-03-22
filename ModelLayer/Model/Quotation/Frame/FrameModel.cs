@@ -561,6 +561,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(10, 10, 10, 0);
@@ -591,6 +592,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,
@@ -627,6 +629,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
@@ -653,6 +656,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             FrameImageRenderer_Padding_int = new Padding(20, 20, 20, 0);
@@ -685,6 +689,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         FrameImageRenderer_Padding_int = new Padding(default_pads_imgr,
@@ -720,6 +725,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
@@ -746,6 +752,7 @@ namespace ModelLayer.Model.Quotation.Frame
                         }
                         else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                 Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                                  Frame_BotFrameArtNo == BottomFrameTypes._None)
                         {
                             Frame_Padding_int = new Padding(20, 20, 20, 0);
@@ -779,6 +786,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     }
                     else if (Frame_BotFrameArtNo == BottomFrameTypes._7789 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
                              Frame_BotFrameArtNo == BottomFrameTypes._None)
                     {
                         Frame_Padding_int = new Padding(default_pads,
@@ -842,6 +850,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     Frame_ReinfArtNo = FrameReinf_ArticleNo._TV107;
                     Frame_ArtNoForPremi = FrameProfileForPremi_ArticleNo._6052_milled;
+                    Frame_ConnectingProfile_ArticleNo = ConnectingProfile_ArticleNo._0373;
                 }
 
                 NotifyPropertyChanged();
@@ -965,6 +974,21 @@ namespace ModelLayer.Model.Quotation.Frame
             set
             {
                 _frameTrackProfileArtNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private ConnectingProfile_ArticleNo _FrameConnectingProfile_ArticleNo;
+        public ConnectingProfile_ArticleNo Frame_ConnectingProfile_ArticleNo
+        {
+            get
+            {
+                return _FrameConnectingProfile_ArticleNo;
+            }
+
+            set
+            {
+                _FrameConnectingProfile_ArticleNo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -1121,25 +1145,47 @@ namespace ModelLayer.Model.Quotation.Frame
               MechjointDeduction = 38,
               submerged = 11;
 
-            if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 botFrameDiff = 20;
             }
-            else
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                botFrameDiff = 20;
+            }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 botFrameDiff = 14;
             }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            {
+                botFrameDiff = 20;
+            }
 
             if (Frame_Type == Frame_Padding.Door &&
-                Frame_BotFrameEnable == true &&
+                Frame_BotFrameVisible == true &&
                 Frame_BotFrameArtNo == BottomFrameTypes._7502)
             {
                 Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
             }
             else if (Frame_Type == Frame_Padding.Door &&
+                Frame_BotFrameVisible == true &&
+                Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
+                Frame_BotFrameVisible == true &&
+                Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            {
+                Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
                      Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType != null &&
-                     Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                     (Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
+                      Frame_BotFrameArtNo == BottomFrameTypes._9C66))
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
@@ -1176,7 +1222,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType != null &&
-                     Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                     Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                     Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
@@ -1224,14 +1271,27 @@ namespace ModelLayer.Model.Quotation.Frame
 
 
             if (Frame_Type == Frame_Padding.Door &&
-               Frame_BotFrameEnable == true &&
+               Frame_BotFrameVisible == true &&
                Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
+               Frame_BotFrameVisible == true &&
+               Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            {
+                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size  - 10;
+            }
+            else if (Frame_Type == Frame_Padding.Door &&
+               Frame_BotFrameVisible == true &&
+               Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
                 Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                    Frame_ConnectionType != null &&
-                   Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                   Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                   Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
@@ -1269,7 +1329,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint &&
-                     Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                     Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                     Frame_BotFrameArtNo == BottomFrameTypes._A166)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
@@ -1945,6 +2006,11 @@ namespace ModelLayer.Model.Quotation.Frame
                                   "Frame",
                                   @"|  |");
             }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050 ||
+                     Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            {
+                reinfQty = 1;
+            }
             else
             {
                 reinfQty = 2;
@@ -2106,7 +2172,7 @@ namespace ModelLayer.Model.Quotation.Frame
         }
         public void Insert_BottomFrame_MaterialList(DataTable tbl_explosion)
         {
-            if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            if (Frame_BotFrameArtNo == BottomFrameTypes._7502 && Frame_ArtNo == FrameProfile_ArticleNo._7507)
             {
                 tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
                                    1, "pc(s)",
@@ -2124,11 +2190,11 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
                                  1, "pc(s)",
-                                 Frame_ExplosionWidth.ToString(),
+                                 Frame_Width.ToString(),
                                  "Frame",
                                  @"|  |");
             }
-            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050 && Frame_ArtNo == FrameProfile_ArticleNo._6052)
             {
                 tbl_explosion.Rows.Add("Bottom Frame Width " + Frame_BotFrameArtNo.ToString(),
                                    1, "pc(s)",
@@ -2152,6 +2218,17 @@ namespace ModelLayer.Model.Quotation.Frame
                                    @"|  |");
             }
         }
+        public void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Connecting Profile " + Frame_ConnectingProfile_ArticleNo.DisplayName,
+                                                   1, "pc(s)",
+                                                   Frame_Width,
+                                                   "Sash",
+                                                   @"\  /");
+
+        }
+
+
         public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)
         {
             if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)

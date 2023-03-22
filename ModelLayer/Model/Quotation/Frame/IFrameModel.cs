@@ -74,6 +74,7 @@ namespace ModelLayer.Model.Quotation.Frame
         Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         bool Frame_TrackProfileArtNoVisibility { get; set; }
         TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
+        ConnectingProfile_ArticleNo Frame_ConnectingProfile_ArticleNo { get; set; }
         MeshType Frame_MeshType { get; set; }
         bool Frame_ScreenVisibility { get; set; }
         bool Frame_ScreenOption { get; set; }
@@ -89,6 +90,7 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_frameInfoForScreen_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
+        void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion);
         void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
 
