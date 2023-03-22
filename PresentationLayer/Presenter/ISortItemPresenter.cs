@@ -13,6 +13,9 @@ namespace PresentationLayer.Presenter
 {
     public interface ISortItemPresenter
     {
+        List<string> lstItem { get; set; }
+        bool DeleteEnable { set; }
+
         ISortItemView GetSortItemView();
         ISortItemPresenter GetNewInstance(IUnityContainer unityC,
                                                IQuotationModel quotationModel,

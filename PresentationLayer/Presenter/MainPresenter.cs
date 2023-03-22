@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -148,7 +149,7 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
-        private string _wndrFileName;
+        private string _wndrFilePath, _wndrFileName;
         private DateTime _quotationDate;
 
         private CommonFunctions _commonfunc = new CommonFunctions();
@@ -578,6 +579,18 @@ namespace PresentationLayer.Presenter
             set
             {
                 _dateAssigned = value;
+            }
+        }
+        public string wndrFilePath
+        {
+            get
+            {
+                return _wndrFilePath;
+            }
+
+            set
+            {
+                _wndrFilePath = value;
             }
         }
         public string wndrFileName
@@ -1146,9 +1159,7 @@ namespace PresentationLayer.Presenter
 
         }
 
-        string wndrfile = "",
-               wndrProjectFileName = "",
-              searchStr = "",
+        string searchStr = "",
               todo,
               mainTodo;
         public bool online_login = true;
@@ -1175,16 +1186,17 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
-            wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
-            if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
+            if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
-                wndrfile = _mainView.GetSaveFileDialog().FileName;
+                _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
+
             }
             else
             {
-                if (!_mainView.mainview_title.Contains(wndrfile))
+                if (!_mainView.mainview_title.Contains(_wndrFilePath))
                 {
-                    _mainView.mainview_title += "( " + wndrfile + " )";
+                    _mainView.mainview_title += "( " + _wndrFilePath + " )";
                 }
             }
             saveToolStripButton_Click();
@@ -1195,13 +1207,13 @@ namespace PresentationLayer.Presenter
             //saveToolStripButton.Enabled = false;
             //UppdateDictionaries();
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrfile != "")
+            if (_wndrFilePath != "")
             {
                 try
                 {
-                    string txtfile = wndrfile.Replace(".wndr", ".txt");
+                    string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                     File.WriteAllLines(txtfile, Saving_dotwndr());
-                    File.Delete(wndrfile);
+                    File.Delete(_wndrFilePath);
                     FileInfo f = new FileInfo(txtfile);
                     f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                     //File.SetAttributes(txtfile, FileAttributes.Hidden);
@@ -1221,7 +1233,7 @@ namespace PresentationLayer.Presenter
                             //updatefile_bgw.RunWorkerAsync();
                             //}
                     MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
+                    _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
                     SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -1265,11 +1277,11 @@ namespace PresentationLayer.Presenter
                 SaveWindoorModel(wdm);
 
             }
-            foreach(ScreenModel scm in Screen_List)
+            foreach (ScreenModel scm in Screen_List)
             {
                 wndr_content.Add("~");
 
-                foreach(var prop in scm.GetType().GetProperties())
+                foreach (var prop in scm.GetType().GetProperties())
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(scm, null));
                     //wndr_content.Add("_screenServices." + prop.Name + " = " + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1) + ";");
@@ -1318,7 +1330,7 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-                   
+
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -2267,20 +2279,19 @@ namespace PresentationLayer.Presenter
         }
         private void openFileMethod(string filePath)
         {
-            wndrProjectFileName = filePath;
+            _wndrFilePath = filePath;
             isNewProject = false;
             isOpenProject = true;
-            wndrfile = filePath;
             //csfunc.DecryptFile(wndrfile);
-            int startFileName = wndrfile.LastIndexOf("\\") + 1;
-            wndrFileName = wndrfile.Substring(startFileName);
-            FileInfo f = new FileInfo(wndrfile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-            string outFile = wndrfile.Substring(0, startFileName) +
-                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+            wndrFileName = _wndrFilePath.Substring(startFileName);
+            FileInfo f = new FileInfo(_wndrFilePath);
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
+            string outFile = _wndrFilePath.Substring(0, startFileName) +
+                             _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
             file_lines = File.ReadAllLines(outFile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+            f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -2302,7 +2313,7 @@ namespace PresentationLayer.Presenter
                 {
                     ToggleMode(false, false);
                 }
-               
+
             }
             else
             {
@@ -2924,20 +2935,28 @@ namespace PresentationLayer.Presenter
 
                     SetChangesMark();
                     _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
+                    string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    FileInfo f = new FileInfo(wndrfile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                    int startFileName = addExistingwndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(addExistingwndrfile);
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".txt"));
+                    string outFile = addExistingwndrfile.Substring(0, startFileName) +
+                                     addExistingwndrfile.Substring(startFileName, addExistingwndrfile.LastIndexOf(".") - startFileName) + ".txt";
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
+                    
+                    ////foreach(string strline in file_lines) 
+                    ////{
+                    ////    if(strline.Contains("WD_name:"))
+                    ////    {
+                    ////        MessageBox.Show(strline);
+                    ////    }
+                    ////}
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -3034,9 +3053,6 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-
-                        break;
-                    
 
                         break;
                     default:
@@ -3312,10 +3328,10 @@ namespace PresentationLayer.Presenter
                     inside_screen = false;
                 }
                 else
-                {                  
+                {
                     inside_screen = true;
                 }
-               
+
             }
             if (row_str == "EndofFile")
             {
@@ -3334,7 +3350,7 @@ namespace PresentationLayer.Presenter
                     updatePriceOfMainView();
                     ItemScroll = 0;
                 }
-                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
+                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item")
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
@@ -3946,7 +3962,7 @@ namespace PresentationLayer.Presenter
                         }
                         #endregion
                     }
-                    else if(inside_concrete)
+                    else if (inside_concrete)
                     {
                         #region Load for Concrete Model
 
@@ -7311,22 +7327,22 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (PlisseType plssTyp in PlisseType.GetAll())
                             {
-                                if(plssTyp.ToString() == extractedValue_str)
+                                if (plssTyp.ToString() == extractedValue_str)
                                 {
                                     screen_PlisséType = plssTyp;
-                                }                              
+                                }
                             }
                         }
                         else if (row_str.Contains("Screen_BaseColor:"))
                         {
-                            foreach(Base_Color BsClr in Base_Color.GetAll())
+                            foreach (Base_Color BsClr in Base_Color.GetAll())
                             {
-                                if(BsClr.ToString() == extractedValue_str)
+                                if (BsClr.ToString() == extractedValue_str)
                                 {
                                     screen_BaseColor = BsClr;
                                 }
                             }
-                            
+
                         }
                         else if (row_str.Contains("Screen_Set:"))
                         {
@@ -7412,7 +7428,7 @@ namespace PresentationLayer.Presenter
                             screen_CenterClosureVisibilityOption = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_LatchKitQty:"))
-                        {                      
+                        {
                             screen_LatchKitQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_IntermediatePartQty:"))
@@ -7510,9 +7526,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Magnum_ScreenType:"))
                         {
-                            foreach(Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
+                            foreach (Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
                             {
-                                if(mgnmScrnTyp.ToString() == extractedValue_str)
+                                if (mgnmScrnTyp.ToString() == extractedValue_str)
                                 {
                                     magnum_ScreenType = mgnmScrnTyp;
 
@@ -7550,9 +7566,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenSize:"))
                         {
-                            foreach(Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
+                            foreach (Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
                             {
-                                if(frdmsize.ToString() == extractedValue_str)
+                                if (frdmsize.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenSize = frdmsize;
 
@@ -7561,9 +7577,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenType:"))
                         {
-                            foreach(Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
+                            foreach (Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
                             {
-                                if(frdmtype.ToString() == extractedValue_str)
+                                if (frdmtype.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenType = frdmtype;
                                 }
@@ -8432,7 +8448,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider,inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -8557,7 +8573,7 @@ namespace PresentationLayer.Presenter
             panel_PropertyHeight,
             panel_HandleOptionsHeight,
             panel_LouverBladesCount;
-     decimal panel_GlassPricePerSqrMeter;
+        decimal panel_GlassPricePerSqrMeter;
         bool panel_Orient,
              panel_OrientVisibility,
              panel_Visibility,
@@ -8992,14 +9008,14 @@ namespace PresentationLayer.Presenter
         ScreenType screen_Types;
         PlisseType screen_PlisséType;
         Base_Color screen_BaseColor;
-Magnum_ScreenType magnum_ScreenType;
+        Magnum_ScreenType magnum_ScreenType;
 
         #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
 
-        private void Clearing_Operation()
+        public void Clearing_Operation()
         {
             _quotationModel = null;
             _frameModel = null;
@@ -9038,8 +9054,8 @@ Magnum_ScreenType magnum_ScreenType;
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
-            wndrFileName = string.Empty;
-            wndrfile = string.Empty;
+            _wndrFilePath = string.Empty;
+            _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
@@ -9070,7 +9086,7 @@ Magnum_ScreenType magnum_ScreenType;
         {
             _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-            if (!saved && wndrProjectFileName != "")
+            if (!saved && _wndrFilePath != "")
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
@@ -9202,7 +9218,8 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
-                    wndrProjectFileName = "";
+                    _wndrFilePath = string.Empty;
+                    _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -10165,40 +10182,43 @@ Magnum_ScreenType magnum_ScreenType;
                     {
                         string gbmode = "";
                         bool same_sash = false;
-                        SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
-                        bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
-                        bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
-                        if (mpnl.MPanel_DividerEnabled == true)
-                        {
-                            if (allWithSash == true && allNoSash == false)
+                        if (mpnl.MPanelLst_Panel.Count != 0)
+                        { 
+                            SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                            bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                            bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                            if (mpnl.MPanel_DividerEnabled == true)
                             {
-                                gbmode = "withSash";
-                                int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
-                                if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                                if (allWithSash == true && allNoSash == false)
                                 {
-                                    same_sash = true;
-                                }
-                                else
-                                {
-                                    same_sash = false;
-                                }
-                            }
-                            else if (allWithSash == false && allNoSash == true)
-                            {
-                                gbmode = "noSash";
-                            }
-                            else if (allWithSash == false && allNoSash == false)
-                            {
-                                gbmode = "";
-                            }
-
-                            if (gbmode != "")
-                            {
-                                if (same_sash == true || gbmode == "noSash")
-                                {
-                                    if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                    gbmode = "withSash";
+                                    int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                                    if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
                                     {
-                                        unbalancedGlass_cnt++;
+                                        same_sash = true;
+                                    }
+                                    else
+                                    {
+                                        same_sash = false;
+                                    }
+                                }
+                                else if (allWithSash == false && allNoSash == true)
+                                {
+                                    gbmode = "noSash";
+                                }
+                                else if (allWithSash == false && allNoSash == false)
+                                {
+                                    gbmode = "";
+                                }
+
+                                if (gbmode != "")
+                                {
+                                    if (same_sash == true || gbmode == "noSash")
+                                    {
+                                        if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                        {
+                                            unbalancedGlass_cnt++;
+                                        }
                                     }
                                 }
                             }
@@ -10208,6 +10228,13 @@ Magnum_ScreenType magnum_ScreenType;
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var errorFrame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = errorFrame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 }
 
             }
@@ -10785,12 +10812,12 @@ Magnum_ScreenType magnum_ScreenType;
         public void SaveChanges()
         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrProjectFileName != "")
+            if (_wndrFilePath != "")
             {
 
-                string txtfile = wndrProjectFileName.Replace(".wndr", ".txt");
+                string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.Delete(wndrfile);
+                File.Delete(_wndrFilePath);
                 FileInfo f = new FileInfo(txtfile);
                 f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                 //File.SetAttributes(txtfile, FileAttributes.Hidden);
@@ -10846,7 +10873,7 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
             //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
             //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
