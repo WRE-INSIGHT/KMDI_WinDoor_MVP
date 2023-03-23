@@ -161,7 +161,7 @@ namespace PresentationLayer.Presenter
             if (item != e.Data.GetData(e.Data.GetFormats()[0]) && item != null)
             {
                 lstItem.Clear();
-                DeleteEnable = false;
+                //DeleteEnable = false;
                 //Set index of dragged sort item.
                 _sortItemView.GetPnlSortItem().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
                 //Set index of ItemInfo based on sortitem index
@@ -201,6 +201,10 @@ namespace PresentationLayer.Presenter
                     sortItemUC.ItemName = "Item " + itemCount;
                     itemCount--;
                     sortItemUC.itemDesc = _quotationModel.Lst_Windoor[itemCount].WD_description;
+                    if (sortItemUC.itemChecked)
+                    {
+                        lstItem.Add(sortItemUC.ItemName);
+                    }
                 }
                 //rename all itemInfo.
                 itemCount = _mainPresenter.GetMainView().GetPanelItems().Controls.Count;
@@ -210,7 +214,6 @@ namespace PresentationLayer.Presenter
                     itemCount--;
                     //itemInfouc.item = _quotationModel.Lst_Windoor[itemCount].WD_description;
                 }
-                _sortItemView.GetPnlSortItem().Invalidate();
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
             }
         }

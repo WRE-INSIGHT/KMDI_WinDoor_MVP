@@ -78,6 +78,14 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public bool itemChecked
+        {
+            get
+            {
+                return cb_item.Checked;
+            }
+        }
+
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);
