@@ -471,6 +471,6 @@ namespace ModelLayer.Model.Quotation.Panel
         #endregion
 
         int MotorizeMechQty();
-        bool ChckIfBoundedByBottomFrame();
+
     }
 }

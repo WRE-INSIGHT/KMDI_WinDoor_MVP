@@ -5327,29 +5327,32 @@ namespace ModelLayer.Model.Quotation.Panel
                 totalBotFrameDeduction = 0;
 
             bool ChckBotFrame = false;
-            if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
-            {
-                botFrameDeduction = 20;
-                ChckBotFrame = true;
-            }
-            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
-            {
-                botFrameDeduction = 2;
-                ChckBotFrame = true;
-            }
-            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-            {
-                botFrameDeduction = 33 - 8;
-                ChckBotFrame = true;
 
-            }
-            else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            if (Panel_ParentFrameModel.Frame_BotFrameVisible == true)
             {
-                botFrameDeduction = 33;
-                ChckBotFrame = true;
-            }
+                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                    Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                {
+                    botFrameDeduction = 20;
+                    ChckBotFrame = true;
+                }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                {
+                    botFrameDeduction = 2;
+                    ChckBotFrame = true;
+                }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                {
+                    botFrameDeduction = 33 - 8;
+                    ChckBotFrame = true;
 
+                }
+                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                {
+                    botFrameDeduction = 33;
+                    ChckBotFrame = true;
+                }
+            }
             if (Panel_SashPropertyVisibility == true)
             {
                 if ((Panel_Type.Contains("Awning") || Panel_Type.Contains("Casement")) && Panel_GlassThickness == 6.0f)
@@ -6398,24 +6401,26 @@ namespace ModelLayer.Model.Quotation.Panel
                     frameDeduction = 61;
                 }
 
-                if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                    Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                if (Panel_ParentFrameModel.Frame_BotFrameVisible == true)
                 {
-                    botFrameDeduction = frameDeduction - 20;
+                    if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        botFrameDeduction = frameDeduction - 20;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                    {
+                        botFrameDeduction = frameDeduction - 2;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        botFrameDeduction = frameDeduction - 14;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        botFrameDeduction = frameDeduction - 20;
+                    }
                 }
-                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
-                {
-                    botFrameDeduction = frameDeduction - 2;
-                }
-                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
-                {
-                    botFrameDeduction = frameDeduction - 14;
-                }
-                else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
-                {
-                    botFrameDeduction = frameDeduction - 20;
-                }
-
                 Panel_SashWidth = 0;
                 Panel_SashHeight = 0;
 
@@ -7294,7 +7299,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     deduction_for_sashHT -= 2;
                 }
 
-                if (ChckBoundedByBotframe == true)
+                if (ChckBoundedByBotframe == true && Panel_ParentFrameModel.Frame_BotFrameVisible == true)
                 {
                     if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
                     {
@@ -7311,7 +7316,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
                     {
-
+                        deduction_for_sashHT -= 41;
                     }
                 }
 
@@ -7342,6 +7347,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 //Panel_GlazingBeadWidthDecimal = Panel_SashWidthDecimal;
                 //Panel_GlazingBeadHeight = Panel_SashHeight;
                 //Panel_GlazingBeadHeightDecimal = Panel_SashHeightDecimal;
+
                 string name = Panel_Name;
                 Panel_GlassWidth = ((Panel_SashWidth - 5) - (glass_deduct * 2)) - glassAllowance_Deduct;
                 Panel_GlassWidthDecimal = Panel_SashWidthDecimal;
@@ -8432,9 +8438,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     #endregion
                 }
 
-                #region PopupAndRSS
-
-
+                #region PopupAndRSS 
                 //else if (Panel_HandleType == Handle_Type._PopUp)
                 //{
                 //    if (base_color == Base_Color._White || base_color == Base_Color._Ivory)
@@ -8483,6 +8487,27 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (Panel_SashPropertyVisibility == false)
             {
                 Panel_CoverProfileArtNo = CoverProfile_ArticleNo._0914;
+
+                if (ChckBoundedByBotframe == true && Panel_ParentFrameModel.Frame_BotFrameVisible == true)
+                {
+                    if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7502)
+                    {
+                        deduction_for_ht -= 14;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._7789)
+                    {
+                        deduction_for_ht -= 45;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        deduction_for_ht -= 18;
+                    }
+                    else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                             Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        deduction_for_ht -= 41;
+                    }
+                }
 
                 Panel_SashWidth = 0;
                 Panel_SashHeight = 0;
@@ -8584,16 +8609,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
             Panel_MotorizedMechQty = motor;
             return motor;
-        }
-
-        public bool ChckIfBoundedByBottomFrame()
-        {
-            bool chkBtmFrm = false;
-
-
-
-
-            return chkBtmFrm;
         }
 
         #region Material_List
