@@ -456,8 +456,10 @@ namespace PresentationLayer.Presenter.UserControls
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
             ScreenPropUC.Dock = DockStyle.Top;
             ScreenPropUC.BringToFront();
-
-
+            if (_frameModel.Frame_ScreenOption)
+            {
+                GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
+            }
             //if (_frameModel.Frame_Type == Frame_Padding.Door)
             //{
             //    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
