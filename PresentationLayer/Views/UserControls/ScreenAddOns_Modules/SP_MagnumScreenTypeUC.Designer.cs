@@ -50,9 +50,9 @@
             this.screenTypeLabel.AutoSize = true;
             this.screenTypeLabel.Location = new System.Drawing.Point(5, 9);
             this.screenTypeLabel.Name = "screenTypeLabel";
-            this.screenTypeLabel.Size = new System.Drawing.Size(68, 13);
+            this.screenTypeLabel.Size = new System.Drawing.Size(79, 13);
             this.screenTypeLabel.TabIndex = 2;
-            this.screenTypeLabel.Text = "Screen Type";
+            this.screenTypeLabel.Text = "Plissé SR Type";
             // 
             // reinforcedChkBx
             // 

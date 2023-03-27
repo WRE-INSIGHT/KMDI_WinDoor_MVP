@@ -101,7 +101,8 @@ namespace PresentationLayer.Views
         public event EventHandler txtItemNumTextChangeEventRaised;
         public event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
         public event EventHandler CellEndEditEventRaised;
-        
+        public event DataGridViewCellMouseEventHandler dgvScreenColumnHeaderMouseClick;
+
         public void ShowScreemView()
         {
             this.Show();
@@ -302,6 +303,14 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, nudDiscountValueChangeEventRaised, e);
         }
+        private void dgv_Screen_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {           
+        }
+        private void dgv_Screen_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EventHelpers.RaiseDatagridviewCellMouseEvent(sender, dgvScreenColumnHeaderMouseClick, e);
+
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {       
             nud_plissedRd.DataBindings.Add(ModelBinding["PlissedRd_Panels"]);
@@ -321,6 +330,6 @@ namespace PresentationLayer.Views
             cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
 
-        
+       
     }
 }
