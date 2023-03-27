@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.38</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.40</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationRevision>41</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1663,6 +1663,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\view.png" />
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
     <None Include="Resources\126.gif" />
@@ -1696,6 +1697,7 @@
     <None Include="Resources\ExtensionRight1.png" />
     <None Include="Resources\fade90.gif" />
     <None Include="Resources\fade90v2.gif" />
+    <None Include="Resources\fade901.gif" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />
@@ -1705,6 +1707,7 @@
     <None Include="Resources\icons8-banknotes-48.png" />
     <None Include="Resources\glass %281%29.png" />
     <None Include="Resources\glass.png" />
+    <None Include="Resources\folder.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />

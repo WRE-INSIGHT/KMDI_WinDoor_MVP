@@ -20,10 +20,8 @@ namespace PresentationLayer.Presenter.UserControls
         private int _mX = 0;
         private int _mY = 0;
         private int _DDradius = 40;
-        public SortItemUCPresenter(ISortItemPresenter sortItemPresenter,
-                                   ISortItemUC sortItemUC)
+        public SortItemUCPresenter(ISortItemUC sortItemUC)
         {
-            _sortItemPresenter = sortItemPresenter;
             _sortItemUC = sortItemUC;
             SubscribeToEventSetUp();
         }
@@ -31,10 +29,32 @@ namespace PresentationLayer.Presenter.UserControls
         private void SubscribeToEventSetUp()
         {
             _sortItemUC.SortItemUCLoadEventRaised += _sortItemUC_SortItemUCLoadEventRaised;
-            _sortItemUC.lblItemMouseDownEventRaised += _sortItemUC_lblItemMouseDownEventRaised;
-            _sortItemUC.lblItemMouseMoveEventRaised += _sortItemUC_lblItemMouseMoveEventRaised;
-            _sortItemUC.lblItemMouseUpEventRaised += _sortItemUC_lblItemMouseUpEventRaised;
+            _sortItemUC.cbItemMouseDownEventRaised += _sortItemUC_cbItemMouseDownEventRaised;
+            _sortItemUC.cbItemMouseMoveEventRaised += _sortItemUC_cbItemMouseMoveEventRaised;
+            _sortItemUC.cbItemMouseUpEventRaised += _sortItemUC_cbItemMouseUpEventRaised;
             _sortItemUC.DuplicateToolStripButtonClickEventRaised += _sortItemUC_DuplicateToolStripButtonClickEventRaised;
+            _sortItemUC.cbitem_CheckedChangedEventRaised += _sortItemUC_cbitem_CheckedChangedEventRaised;
+        }
+
+        private void _sortItemUC_cbitem_CheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            var chk = ((CheckBox)sender);
+            if (chk.Checked)
+            {
+                _sortItemPresenter.lstItem.Add(chk.Text);
+            }
+            else
+            {
+                _sortItemPresenter.lstItem.Remove(chk.Text);
+            }
+            if(_sortItemPresenter.lstItem.Count == 0)
+            {
+                _sortItemPresenter.DeleteEnable = false;
+            }
+            else
+            {
+                _sortItemPresenter.DeleteEnable = true;
+            }
         }
 
         private void _sortItemUC_DuplicateToolStripButtonClickEventRaised(object sender, EventArgs e)
@@ -42,12 +62,12 @@ namespace PresentationLayer.Presenter.UserControls
             
         }
 
-        private void _sortItemUC_lblItemMouseUpEventRaised(object sender, MouseEventArgs e)
+        private void _sortItemUC_cbItemMouseUpEventRaised(object sender, MouseEventArgs e)
         {
             _isDragging = false;
         }
 
-        private void _sortItemUC_lblItemMouseMoveEventRaised(object sender, MouseEventArgs e)
+        private void _sortItemUC_cbItemMouseMoveEventRaised(object sender, MouseEventArgs e)
         {
             if (!_isDragging)
             {
@@ -68,7 +88,7 @@ namespace PresentationLayer.Presenter.UserControls
             }
         }
 
-        private void _sortItemUC_lblItemMouseDownEventRaised(object sender, MouseEventArgs e)
+        private void _sortItemUC_cbItemMouseDownEventRaised(object sender, MouseEventArgs e)
         {
             _mX = e.X;
             _mY = e.Y;
@@ -79,7 +99,7 @@ namespace PresentationLayer.Presenter.UserControls
             
         }
 
-        public ISortItemUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel)
+        public ISortItemUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, ISortItemPresenter sortItemPresenter)
         {
             unityC
                .RegisterType<ISortItemUCPresenter, SortItemUCPresenter>()
@@ -87,6 +107,7 @@ namespace PresentationLayer.Presenter.UserControls
             SortItemUCPresenter sortItem = unityC.Resolve<SortItemUCPresenter>();
             sortItem._unityC = unityC;
             sortItem._windoorModel = windoorModel;
+            sortItem._sortItemPresenter = sortItemPresenter;
             return sortItem;
         }
 

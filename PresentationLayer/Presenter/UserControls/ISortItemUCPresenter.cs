@@ -11,7 +11,7 @@ namespace PresentationLayer.Presenter.UserControls
 {
     public interface ISortItemUCPresenter
     {
-        ISortItemUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel);
+        ISortItemUCPresenter GetNewInstance(IUnityContainer unityC, IWindoorModel windoorModel, ISortItemPresenter sortItemPresenter);
         ISortItemUC GetSortItemUC();
     }
 }
