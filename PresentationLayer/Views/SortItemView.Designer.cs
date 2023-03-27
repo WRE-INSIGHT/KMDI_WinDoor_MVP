@@ -40,9 +40,9 @@
             this.pnlSortItem.AutoScroll = true;
             this.pnlSortItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSortItem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSortItem.Location = new System.Drawing.Point(0, 61);
+            this.pnlSortItem.Location = new System.Drawing.Point(0, 29);
             this.pnlSortItem.Name = "pnlSortItem";
-            this.pnlSortItem.Size = new System.Drawing.Size(603, 536);
+            this.pnlSortItem.Size = new System.Drawing.Size(603, 568);
             this.pnlSortItem.TabIndex = 6;
             this.pnlSortItem.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragDrop);
             this.pnlSortItem.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlSortItem_DragEnter);
@@ -54,14 +54,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(603, 61);
+            this.panel1.Size = new System.Drawing.Size(603, 29);
             this.panel1.TabIndex = 7;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btn_Delete
             // 
             this.btn_Delete.Enabled = false;
-            this.btn_Delete.Location = new System.Drawing.Point(3, 35);
+            this.btn_Delete.Location = new System.Drawing.Point(3, 3);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(124, 23);
             this.btn_Delete.TabIndex = 0;

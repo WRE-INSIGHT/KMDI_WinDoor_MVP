@@ -25,7 +25,7 @@ namespace PresentationLayer.Views
 
         public void showSortItem()
         {
-            this.Show();
+            this.ShowDialog();
         }
 
         

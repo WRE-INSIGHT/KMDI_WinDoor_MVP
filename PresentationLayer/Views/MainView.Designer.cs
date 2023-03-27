@@ -784,6 +784,7 @@
             // SortItemtoolStripButton1
             // 
             this.SortItemtoolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SortItemtoolStripButton1.Enabled = false;
             this.SortItemtoolStripButton1.Image = global::PresentationLayer.Properties.Resources.icons8_front_sorting_96px;
             this.SortItemtoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SortItemtoolStripButton1.Name = "SortItemtoolStripButton1";

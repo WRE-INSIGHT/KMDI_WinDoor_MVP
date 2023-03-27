@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
@@ -55,6 +56,36 @@ namespace PresentationLayer.Views.UserControls
                 rtboxDesc.Text = value;
             }
         }
+        private bool _itemSelected;
+        public bool itemSelected
+        {
+            get
+            {
+                return _itemSelected;
+            }
+
+            set
+            {
+                _itemSelected = value;
+                if (_itemSelected)
+                {
+                    cb_item.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    cb_item.ForeColor = Color.Black;
+                }
+            }
+        }
+
+        public bool itemChecked
+        {
+            get
+            {
+                return cb_item.Checked;
+            }
+        }
+
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);

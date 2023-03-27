@@ -22,6 +22,8 @@ namespace PresentationLayer.Views.UserControls
         string itemDesc { get; set; }
         PictureBox GetPboxItemImage();
         string itemDimension { get; set; }
+        bool itemSelected { get; set; }
+        bool itemChecked { get;}
         UserControl GetSortItem();
     }
 }
