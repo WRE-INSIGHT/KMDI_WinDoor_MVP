@@ -30,7 +30,9 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = true;
                     customArrowHeadToolStripMenuItem.Enabled = true;
                     slidingTopViewToolStripMenuItem.Enabled = true;
-                    
+                    SortItemtoolStripButton1.Enabled = true;
+
+
                 }
                 else
                 {
@@ -43,7 +45,8 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = false;
                     customArrowHeadToolStripMenuItem.Enabled = false;
                     slidingTopViewToolStripMenuItem.Enabled = false;
-                    
+                    SortItemtoolStripButton1.Enabled = false;
+
                 }
             }
         }

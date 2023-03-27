@@ -105,6 +105,14 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                                 {
                                     framePropertyHeight += constants.frame_ConnectionTypeproperty_PanelHeight;
                                 }
+                                if (_frameModel.Frame_ScreenVisibility == true)
+                                {
+                                    framePropertyHeight += constants.frame_ScreenHeightProperty_PanelHeight;
+                                    if (_frameModel.Frame_ScreenOption == true)
+                                    {
+                                        framePropertyHeight += constants.frame_ScreenHeightProperty_PanelHeight;
+                                    }
+                                }
                                 #region  Frame Panel
                                 //foreach (PanelModel pnl in frm.Lst_Panel)
                                 //{

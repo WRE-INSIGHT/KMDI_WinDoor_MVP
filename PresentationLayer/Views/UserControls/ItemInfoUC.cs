@@ -49,6 +49,10 @@ namespace PresentationLayer.Views.UserControls
             {
                 return lbl_item.Text;
             }
+            set
+            {
+                lbl_item.Text = value;
+            }
         }
 
         public ItemInfoUC()
