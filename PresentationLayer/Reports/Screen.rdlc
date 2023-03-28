@@ -986,7 +986,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= -(Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10)</Value>
+                    <Value>= -(Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/100)</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -1021,7 +1021,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10))</Value>
+                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/100))</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -1056,7 +1056,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10))</Value>
+                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/100))</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                       <Format>'PHP' #,0.00;('PHP' #,0.00)</Format>
@@ -1103,7 +1103,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox24</rd:DefaultName>
             <Top>0.19443in</Top>
-            <Left>3.25424in</Left>
+            <Left>3.24858in</Left>
             <Height>0.25in</Height>
             <Width>1.74982in</Width>
             <ZIndex>9</ZIndex>

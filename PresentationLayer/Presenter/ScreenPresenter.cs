@@ -35,6 +35,9 @@ namespace PresentationLayer.Presenter
         private DataGridView _dgv_Screen;
         private ScreenType screenType;
         private bool sortAscending = true;
+        private decimal screenDiscountAverage;
+        decimal NetPriceTotal;
+        decimal total;
 
 
         CommonFunctions commonfunc = new CommonFunctions();
@@ -628,8 +631,25 @@ namespace PresentationLayer.Presenter
             */
             try
             {
-                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);              
-                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                //var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    NetPriceTotal = item.Screen_TotalAmount * item.Screen_Quantity;
+                    total = total + NetPriceTotal; 
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                    }
+                }
+
+                decimal DiscountPercentage = screenDiscountAverage / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
                 Console.WriteLine(DiscountPercentage.ToString());
                 if (_screenDT != null)
                 {
@@ -640,7 +660,7 @@ namespace PresentationLayer.Presenter
                                                Datarow.Cells[3].Value ?? string.Empty,
                                                Datarow.Cells[4].Value ?? string.Empty,
                                                Datarow.Cells[5].Value ?? 0,
-                                               NetPriceTotal,
+                                               total,
                                                Datarow.Cells[0].Value ?? 0,
                                                Datarow.Cells[7].Value ?? 0,
                                                1,
@@ -651,6 +671,9 @@ namespace PresentationLayer.Presenter
                                                );
                     }
                 }
+                NetPriceTotal = 0;
+                total = 0;
+                screenDiscountAverage = 0;
                 _mainPresenter.printStatus = "ScreenItem";
 
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
@@ -659,10 +682,10 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Screen List Count is 0: "," ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-           
+
         }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
