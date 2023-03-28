@@ -417,6 +417,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion);
         void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion);
         void Insert_WeatherBar_MaterialList(DataTable tbl_explosion);
+        void Insert_EndCapForWeatherBar_MaterialList(DataTable tbl_explosion);
         void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
         void Insert_Interlock_MaterialList(DataTable tbl_explosion);
         void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion);

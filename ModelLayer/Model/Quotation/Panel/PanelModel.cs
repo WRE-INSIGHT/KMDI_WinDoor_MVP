@@ -5667,6 +5667,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
                     Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
                     Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_EndCapForWeatherBarArtNo = EndCapForWeatherBar_ArticleNo._9483;
                     Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
                     if (Panel_Overlap_Sash == OverlapSash._Left || Panel_Overlap_Sash == OverlapSash._Right)
                     {
@@ -5686,6 +5687,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
                     Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
                     Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_EndCapForWeatherBarArtNo = EndCapForWeatherBar_ArticleNo._9483;
                     Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
                     if (Panel_Overlap_Sash == OverlapSash._Left || Panel_Overlap_Sash == OverlapSash._Right)
                     {
@@ -7618,6 +7620,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
                     Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
                     Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_EndCapForWeatherBarArtNo = EndCapForWeatherBar_ArticleNo._9483;
                     Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
                     if (OverLappingPanel_Qty != 0)
                     {
@@ -7631,6 +7634,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
 
+                    Panel_OverLappingPanelQty = OverLappingPanel_Qty;
                 }
 
                 if (Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
@@ -7638,6 +7642,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_GuideTrackProfileArtNo = GuideTrackProfile_ArticleNo._6059;
                     Panel_AluminumTrackArtNo = AluminumTrack_ArticleNo._9C51;
                     Panel_WeatherBarArtNo = WeatherBar_ArticleNo._1244;
+                    Panel_EndCapForWeatherBarArtNo = EndCapForWeatherBar_ArticleNo._9483;
                     Panel_WaterSeepageArtNo = WaterSeepage_ArticleNo._1646;
                     if (OverLappingPanel_Qty != 0)
                     {
@@ -7650,6 +7655,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     Panel_SealingBlockArtNo = SealingBlock_ArticleNo._9C63;
                     Panel_GBSpacerArtNo = GBSpacer_ArticleNo._9C54;
                     Panel_SpacerArtNo = Spacer_ArticleNo._M063;
+
                     if (Panel_ParentFrameModel.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                     {
                         Panel_ParentFrameModel.Frame_MechJointArticleNo = Frame_MechJointArticleNo._9C52;
@@ -7680,6 +7686,7 @@ namespace ModelLayer.Model.Quotation.Panel
                         Panel_SlidingDoorKitGs100_1ArtNo = SlidingDoorKitGs100_1_ArticleNo._A9002180;
                         Panel_GS100CoverKitArtNo = GS100CoverKit_ArticleNo._L15049052;
                     }
+                    Panel_OverLappingPanelQty = OverLappingPanel_Qty;
                 }
 
                 #region MiddleCloser
@@ -9446,6 +9453,15 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"|  |");
         }
 
+        public void Insert_EndCapForWeatherBar_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("End cap for Weather Bar " + Panel_EndCapForWeatherBarArtNo.DisplayName,
+                                   1, "pair",
+                                   "",
+                                   "Weather Bar",
+                                   "");
+        }
+
         public void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Water Seepage " + Panel_WaterSeepageArtNo.DisplayName,
@@ -9492,7 +9508,7 @@ namespace ModelLayer.Model.Quotation.Panel
         {
             tbl_explosion.Rows.Add("Brush Seal " + Panel_BrushSealArtNo.DisplayName,
                                    1, "pc(s)",
-                                   Panel_SashHeight - 5,
+                                   ((Panel_SashHeight - 5) * (Panel_OverLappingPanelQty * 2)),
                                    "Weather Bar",
                                    "");
         }

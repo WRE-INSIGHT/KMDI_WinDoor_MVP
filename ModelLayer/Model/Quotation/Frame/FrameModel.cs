@@ -254,103 +254,6 @@ namespace ModelLayer.Model.Quotation.Frame
 
         public IWindoorModel Frame_WindoorModel { get; set; }
 
-        private BottomFrameTypes _frameBotFrameArticleNo;
-        public BottomFrameTypes Frame_BotFrameArtNo
-        {
-            get
-            {
-                return _frameBotFrameArticleNo;
-            }
-            set
-            {
-                _frameBotFrameArticleNo = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private bool _frameBotFrameEnable;
-        public bool Frame_BotFrameEnable
-        {
-            get
-            {
-                return _frameBotFrameEnable;
-            }
-            set
-            {
-                _frameBotFrameEnable = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private bool _frameBotFrameVisible;
-        public bool Frame_BotFrameVisible
-        {
-            get
-            {
-                return _frameBotFrameVisible;
-            }
-            set
-            {
-                _frameBotFrameVisible = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private int _frame_SlidingRailsQty;
-        public int Frame_SlidingRailsQty
-        {
-            get
-            {
-                return _frame_SlidingRailsQty;
-            }
-            set
-            {
-                _frame_SlidingRailsQty = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private bool _frame_SlidingRailsQtyVisibility;
-        public bool Frame_SlidingRailsQtyVisibility
-        {
-            get
-            {
-                return _frame_SlidingRailsQtyVisibility;
-            }
-            set
-            {
-                _frame_SlidingRailsQtyVisibility = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private FrameConnectionType _frameConnectionType;
-        public FrameConnectionType Frame_ConnectionType
-        {
-            get
-            {
-                return _frameConnectionType;
-            }
-            set
-            {
-                _frameConnectionType = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private bool _frame_connectionTypeVisibility;
-        public bool Frame_ConnectionTypeVisibility
-        {
-            get
-            {
-                return _frame_connectionTypeVisibility;
-            }
-            set
-            {
-                _frame_connectionTypeVisibility = value;
-                NotifyPropertyChanged();
-            }
-        }
 
         private UserControl _frameUC;
         public UserControl Frame_UC
@@ -1122,6 +1025,118 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private BottomFrameTypes _frameBotFrameArticleNo;
+        public BottomFrameTypes Frame_BotFrameArtNo
+        {
+            get
+            {
+                return _frameBotFrameArticleNo;
+            }
+            set
+            {
+                _frameBotFrameArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameBotFrameEnable;
+        public bool Frame_BotFrameEnable
+        {
+            get
+            {
+                return _frameBotFrameEnable;
+            }
+            set
+            {
+                _frameBotFrameEnable = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frameBotFrameVisible;
+        public bool Frame_BotFrameVisible
+        {
+            get
+            {
+                return _frameBotFrameVisible;
+            }
+            set
+            {
+                _frameBotFrameVisible = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private MechnJointForFrame_ArticleNo _frameMechanicalJointConnector_Artno;
+        public MechnJointForFrame_ArticleNo Frame_MechanicalJointConnector_Artno
+        {
+            get
+            {
+                return _frameMechanicalJointConnector_Artno;
+            }
+            set
+            {
+                _frameMechanicalJointConnector_Artno = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _frame_SlidingRailsQty;
+        public int Frame_SlidingRailsQty
+        {
+            get
+            {
+                return _frame_SlidingRailsQty;
+            }
+            set
+            {
+                _frame_SlidingRailsQty = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frame_SlidingRailsQtyVisibility;
+        public bool Frame_SlidingRailsQtyVisibility
+        {
+            get
+            {
+                return _frame_SlidingRailsQtyVisibility;
+            }
+            set
+            {
+                _frame_SlidingRailsQtyVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private FrameConnectionType _frameConnectionType;
+        public FrameConnectionType Frame_ConnectionType
+        {
+            get
+            {
+                return _frameConnectionType;
+            }
+            set
+            {
+                _frameConnectionType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _frame_connectionTypeVisibility;
+        public bool Frame_ConnectionTypeVisibility
+        {
+            get
+            {
+                return _frame_connectionTypeVisibility;
+            }
+            set
+            {
+                _frame_connectionTypeVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
@@ -1173,6 +1188,7 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
                 botFrameDiff = 20;
+                Frame_MechanicalJointConnector_Artno = MechnJointForFrame_ArticleNo._9C52;
             }
 
             if (Frame_Type == Frame_Padding.Door &&
@@ -1191,7 +1207,14 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_BotFrameVisible == true &&
                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
-                Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    Frame_ExplosionHeight = _frameHeight - botFrameDiff - MechjointDeduction;
+                }
+                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                {
+                    Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+                }
             }
             else if (Frame_Type == Frame_Padding.Door &&
                      Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
@@ -1292,13 +1315,13 @@ namespace ModelLayer.Model.Quotation.Frame
                Frame_BotFrameVisible == true &&
                Frame_BotFrameArtNo == BottomFrameTypes._7789)
             {
-                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size  - 10;
+                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
             }
             else if (Frame_Type == Frame_Padding.Door &&
                Frame_BotFrameVisible == true &&
                Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
-                Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                    Frame_ConnectionType != null &&
@@ -2230,6 +2253,17 @@ namespace ModelLayer.Model.Quotation.Frame
                                    @"|  |");
             }
         }
+
+        public void Insert_MechanicalJointConnector_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Mechanical Joint Connector " + Frame_MechanicalJointConnector_Artno.DisplayName,
+                                                   2, "pc(s)",
+                                                   "",
+                                                   "Frame",
+                                                   @"");
+
+        }
+
         public void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion)
         {
             tbl_explosion.Rows.Add("Connecting Profile " + Frame_ConnectingProfile_ArticleNo.DisplayName,
@@ -2239,7 +2273,6 @@ namespace ModelLayer.Model.Quotation.Frame
                                                    @"\  /");
 
         }
-
 
         public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)
         {

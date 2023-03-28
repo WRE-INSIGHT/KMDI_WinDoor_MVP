@@ -145,6 +145,10 @@ namespace ModelLayer.Model.Quotation
                     frame.Frame_BotFrameArtNo != BottomFrameTypes._None)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
+                    if (frame.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        frame.Insert_MechanicalJointConnector_MaterialList(Material_List);
+                    }
                 }
 
                 if (frame.Frame_If_InwardMotorizedCasement)
@@ -1506,6 +1510,7 @@ namespace ModelLayer.Model.Quotation
                                                 if (perFrame == true)
                                                 {
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
@@ -1911,6 +1916,7 @@ namespace ModelLayer.Model.Quotation
                                     if (perFrame == true)
                                     {
                                         pnl.Insert_WeatherBar_MaterialList(Material_List);
+                                        pnl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                         pnl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                         pnl.Insert_WaterSeepage_MaterialList(Material_List);
                                         pnl.Insert_BrushSeal_MaterialList(Material_List);
@@ -2624,6 +2630,10 @@ namespace ModelLayer.Model.Quotation
                 RotoswingHanldePricePerPiece = 257.93m,
                 RotoswingHanldeForSlidingPricePerPiece = 1123.91m,
                 RioHandlePricePerPiece = 481.49m,
+                PopUpHandlePricePerPiece = 250m,
+                DHandlePricePerPiece = 500m,
+                DummyDHandlePricePerPiece = 1000m,
+                DHandleInOutLockingPricePerPiece = 1300m,
 
                 Espag741012_PricePerPiece = 284.15m,
                 LeverEspagPricePerPiece = 825.81m,
@@ -4366,6 +4376,30 @@ namespace ModelLayer.Model.Quotation
                                                     HandlePrice += RioHandlePricePerPiece;
 
                                                     HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._PopUp)
+                                                {
+                                                    HandlePrice += PopUpHandlePricePerPiece;
+
+                                                    HandleBasePrice = PopUpHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D)
+                                                {
+                                                    HandlePrice += DHandlePricePerPiece;
+
+                                                    HandleBasePrice = DHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._DummyD)
+                                                {
+                                                    HandlePrice += DummyDHandlePricePerPiece;
+
+                                                    HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                                {
+                                                    HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                                    HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                                 }
                                             }
                                             #endregion
@@ -6997,8 +7031,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         #endregion
 
-                        #region SinglePnl
-
+                        #region SinglePnl 
                         else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                         {
                             IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -7226,6 +7259,30 @@ namespace ModelLayer.Model.Quotation
                                             HandlePrice += RioHandlePricePerPiece;
 
                                             HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._PopUp)
+                                        {
+                                            HandlePrice += PopUpHandlePricePerPiece;
+
+                                            HandleBasePrice = PopUpHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D)
+                                        {
+                                            HandlePrice += DHandlePricePerPiece;
+
+                                            HandleBasePrice = DHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._DummyD)
+                                        {
+                                            HandlePrice += DummyDHandlePricePerPiece;
+
+                                            HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                        {
+                                            HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                            HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                         }
                                     }
                                     #endregion
