@@ -825,7 +825,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Less         Discount</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                     </Style>
@@ -941,7 +941,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Left>6.35084in</Left>
+            <Left>6.3702in</Left>
             <Height>0.20833in</Height>
             <Width>1.16816in</Width>
             <ZIndex>3</ZIndex>
@@ -986,7 +986,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= ((First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100) ))-(First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100) ) * 2</Value>
+                    <Value>= -(Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10)</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -1000,7 +1000,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
             <Top>0.19443in</Top>
-            <Left>6.35084in</Left>
+            <Left>6.36334in</Left>
             <Height>0.20486in</Height>
             <Width>1.16816in</Width>
             <ZIndex>6</ZIndex>
@@ -1021,7 +1021,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100))</Value>
+                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10))</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -1056,7 +1056,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100))</Value>
+                    <Value>=(Fields!dtPrice.Value)-((Fields!dtPrice.Value)*((Fields!dtDiscountAverage.Value)/10))</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                       <Format>'PHP' #,0.00;('PHP' #,0.00)</Format>
@@ -1091,7 +1091,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=(Fields!dtDiscountAverage.Value) / 100</Value>
+                    <Value>="Less " &amp; First(Fields!dtDiscountPercentage.Value, "DataSet1") &amp; " Discount"</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <Format>0%</Format>
@@ -1102,10 +1102,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox24</rd:DefaultName>
-            <Top>0.20693in</Top>
-            <Left>3.47267in</Left>
+            <Top>0.19443in</Top>
+            <Left>3.25424in</Left>
             <Height>0.25in</Height>
-            <Width>0.4122in</Width>
+            <Width>1.74982in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -1122,7 +1122,7 @@
         <Top>1.76736in</Top>
         <Left>0.1641in</Left>
         <Height>1.07862in</Height>
-        <Width>7.53835in</Width>
+        <Width>7.53836in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>

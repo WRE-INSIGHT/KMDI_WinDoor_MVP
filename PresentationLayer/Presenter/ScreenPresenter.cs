@@ -628,7 +628,7 @@ namespace PresentationLayer.Presenter
             */
             try
             {
-                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);              
                 decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
                 Console.WriteLine(DiscountPercentage.ToString());
                 if (_screenDT != null)

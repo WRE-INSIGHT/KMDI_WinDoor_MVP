@@ -414,7 +414,8 @@ namespace PresentationLayer.Presenter
             {
                 ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
-                ScreenDiscountAverage = (Convert.ToDecimal(_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / ScreenTotalListCount) / 100;
+                //ScreenDiscountAverage = (Convert.ToDecimal(_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / ScreenTotalListCount) / 100;
+                ScreenDiscountAverage = windoorDiscountAverage;
             }
             catch (Exception ex)
             {
