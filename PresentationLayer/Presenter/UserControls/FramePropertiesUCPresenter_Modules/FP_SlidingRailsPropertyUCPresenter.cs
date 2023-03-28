@@ -30,14 +30,31 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _slidingRailsPropertyUC_nudRailsQtyValueChangedEventRaised(object sender, EventArgs e)
         {
-            _frameModel.Frame_SlidingRailsQty = (int)((NumericUpDown)sender).Value; 
-            _mainPresenter.GetCurrentPrice();
+            int railQty=(int)((NumericUpDown)sender).Value;
+            if (railQty <= 5 && railQty >= 2)
+            {
+                _frameModel.Frame_SlidingRailsQty = railQty;
+                _mainPresenter.GetCurrentPrice();
+            }
+            else
+            {
+                if (railQty > 5)
+                {
+                    ((NumericUpDown)sender).Value = 5;
+                }
+                else if (railQty < 2)
+                {
+                    ((NumericUpDown)sender).Value = 2;
+                }
+                MessageBox.Show("Rail must be 2 - 5 only");   
+            }
+          
         }
 
         private void _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            _slidingRailsPropertyUC.ThisBinding(CreateBindingDictionary());
             _frameModel.Frame_SlidingRailsQty = 2;
+            _slidingRailsPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 
         public IFP_SlidingRailsPropertyUC GetSlidingRailsPropertyUC()
