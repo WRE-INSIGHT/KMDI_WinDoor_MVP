@@ -431,11 +431,14 @@ namespace PresentationLayer.Presenter
 
             try
             {
-                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+               // ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
 
                 foreach (var item in _mainPresenter.Screen_List)
                 {
+                    var total = item.Screen_TotalAmount * item.Screen_Quantity;
+                    ScreenTotalListPrice = ScreenTotalListPrice + total;
+
                     if (item.Screen_Quantity > 1)
                     {
                         for (int i = 1; i <= item.Screen_Quantity; i++)
