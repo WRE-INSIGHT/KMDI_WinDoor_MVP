@@ -2109,26 +2109,31 @@ namespace PresentationLayer.Presenter.UserControls
                     pInnerHt = client_ht,
                     pInnerWd = client_wd,
                     NoOfBaldes = panelModel.Panel_LouverBladesCount;
-                double Lvr_GlassHt = 0;
 
                 float Ht_Allowance = 20 * _windoorModel.WD_zoom_forImageRenderer;
-
+                double Lvr_GlassHt = 0, Total_Lvr_GlassHt = (int)(Ht_Allowance / 2);
+                pInnerHt -= (int)Ht_Allowance;
                 //side blade
                 for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
                 {
-                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;//33 + (33 * 0.75);
-                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
-                    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
-
+                    Lvr_GlassHt = pInnerHt / (int)NoOfBaldes;
+                    Total_Lvr_GlassHt += Lvr_GlassHt;
+                    Lvr_NewLocation = (( (int)Ht_Allowance) + Lvr_Gap) + (int)Total_Lvr_GlassHt;
+                    //Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
+                    int New_Lvr_GlassHt_Location = (int)Lvr_GlassHt;
+                    if ((Lvr_GlassHt + (int)(Ht_Allowance / 2)) != Total_Lvr_GlassHt)
+                    {
+                        New_Lvr_GlassHt_Location = (int)Total_Lvr_GlassHt - ((int)Lvr_GlassHt * ii) - (int)(Ht_Allowance / 2);
+                    }
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((pInnerX - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
+                        new Point((pInnerX - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt),
 
                         new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point(pInnerX+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point(pInnerX+4, (int)Total_Lvr_GlassHt),
 
-                        new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                        new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
                         new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
                      };
 
@@ -2149,14 +2154,16 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
-                        new Point((int)client_wd + pInnerX, Lvr_NewLocation + (int)Lvr_GlassHt), // - 26 para mag slant yung blade
-                        new Point(pInnerX , Lvr_NewLocation + (int)Lvr_GlassHt)
+                        new Point((int)client_wd + pInnerX, (int)Total_Lvr_GlassHt), // - 26 para mag slant yung blade
+                        new Point(pInnerX , (int)Total_Lvr_GlassHt)
                     };
                     for (int i = 0; i < blade.Length; i += 2)
                     {
                         g.DrawLine(p, blade[i], blade[i + 1]);
                     }
                 }
+
+                
             }
            
 
