@@ -26,6 +26,7 @@ namespace PresentationLayer.Presenter
         List<int> RDLCReportCompilerItemIndexes { get; set; }
         bool RenderPDFAtBackGround { get; set; }
         string RDLCReportCompilerOutOfTownExpenses { get; set; }
+        decimal OutOfTownCharges { get; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

@@ -47,7 +47,7 @@
             // 
             // nud_1067PVCboxQty
             // 
-            this.nud_1067PVCboxQty.Location = new System.Drawing.Point(116, 26);
+            this.nud_1067PVCboxQty.Location = new System.Drawing.Point(128, 26);
             this.nud_1067PVCboxQty.Name = "nud_1067PVCboxQty";
             this.nud_1067PVCboxQty.Size = new System.Drawing.Size(62, 20);
             this.nud_1067PVCboxQty.TabIndex = 29;
@@ -57,7 +57,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 28);
+            this.label2.Location = new System.Drawing.Point(97, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 30;
