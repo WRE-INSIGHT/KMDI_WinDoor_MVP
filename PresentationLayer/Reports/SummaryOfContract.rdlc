@@ -2669,10 +2669,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=(((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value)) - ((((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value)) * 2)</Value>
+                              <Value>=-(((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value))</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
-                                <Format>0.00;(0.00)</Format>
+                                <Format>#,0.00;(#,0.00)</Format>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
                             </TextRun>
@@ -2715,7 +2715,7 @@
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;(#,0.00)</Format>
+                                <Format>'PHP' #,0.00;('PHP' #,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>

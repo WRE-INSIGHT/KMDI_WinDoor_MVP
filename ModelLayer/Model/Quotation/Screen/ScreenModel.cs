@@ -6375,7 +6375,8 @@ namespace ModelLayer.Model.Quotation.Screen
                            int discount,
                            decimal screen_netPrice,
                            decimal screen_totalAmount,
-                           string screen_description
+                           string screen_description,
+                           decimal factor                          
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6390,6 +6391,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_NetPrice = screen_netPrice;
             Screen_TotalAmount = screen_totalAmount;
             Screen_Description = screen_description;
+            Screen_Factor = factor;
         }
     }
 }

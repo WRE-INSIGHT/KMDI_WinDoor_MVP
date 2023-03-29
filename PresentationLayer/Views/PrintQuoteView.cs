@@ -102,12 +102,37 @@ namespace PresentationLayer.Views
         {
             return chk_showpagenum;
         }
+        public Label GetAddressLabel()
+        {
+            return lbl_address;
+        }
+        public Label GetSalutationLabel()
+        {
+            return label6;
+        }
+        public Label GetBodyLabel()
+        {
+            return label7;
+        }
+        public RichTextBox GetQuotationBody()
+        {
+            return rtbox_Body;
+        }
+        public RichTextBox GetQuotationSalutation()
+        {
+            return rtbox_Salutation;
+        }
+        public RichTextBox GetQuotationAddress()
+        {
+            return rtbox_Address;
+        }
 
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
         public event EventHandler SelectedIndexChangeEventRaised;
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             DSQuotation _dsq = new DSQuotation();
 
             rtbox_Address.Text = "";
