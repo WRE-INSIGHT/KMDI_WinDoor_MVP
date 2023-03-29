@@ -3,6 +3,7 @@ using PresentationLayer.CommonMethods;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
+using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.ScreenServices;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,12 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IQuotationServices _quotationServices;
+
 
         private IPrintQuotePresenter _printQuotePresenter;
         private IScreenAddOnPropertiesUCPresenter _screenAddOnPropertiesUCPresenter;
         private IExchangeRatePresenter _exchangeRatePresenter;
-
         private IScreenServices _screenService;
 
         private List<Freedom_ScreenType> _freedomScreenType = new List<Freedom_ScreenType>();
@@ -961,7 +963,8 @@ namespace PresentationLayer.Presenter
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
-                                                  IScreenModel screenModel)
+                                                  IScreenModel screenModel
+                                                  )
         {
             unityC
                     .RegisterType<IScreenView, ScreenView>()
@@ -970,6 +973,7 @@ namespace PresentationLayer.Presenter
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
+            
 
             return screen;
         }
