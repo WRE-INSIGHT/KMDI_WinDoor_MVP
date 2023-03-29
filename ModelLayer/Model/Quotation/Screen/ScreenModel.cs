@@ -5820,6 +5820,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     milledprofile6040Price = ((Screen_6040MilledProfile * Screen_6040MilledProfileQty) / 1000m) * milledprofile6040PriceLinearMeter * Screen_Factor;
                 }
+                if (Screen_6052MilledProfileVisibility == true &&
+                        Screen_6052MilledProfile != 0 &&
+                        Screen_6052MilledProfileQty != 0)
+                {
+                    milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * Screen_Factor;
+                }
                 #endregion
                 #region Maxxy Screen
 
@@ -5954,7 +5960,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         if (FromCellEndEdit != true)
                         {
                             Screen_UnitPrice = ((Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) 
-                                                + LatchkitTotal + IntermediatePartTotal + pvc1067withreinPrice + milledprofile6040Price) 
+                                                + LatchkitTotal + IntermediatePartTotal + pvc1067withreinPrice + milledprofile6040Price + milled6052Price) 
                                                 * Screen_Set;
                         }
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
@@ -6028,7 +6034,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                 {
-                    Screen_Description = "Plissé SR SlimeLine Insect Screen";
+                    Screen_Description = "Plissé SR Slim Line Insect Screen";
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {

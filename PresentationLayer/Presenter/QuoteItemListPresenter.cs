@@ -41,6 +41,8 @@ namespace PresentationLayer.Presenter
         private List<int> _lstItemArea = new List<int>();
         private bool _renderPDFAtBackground;
         private string _rdlcReportCompilerOutofTownExpenses;
+        private string[] province;
+        private string archi;
 
         public string RDLCReportCompilerOutOfTownExpenses
         {
@@ -85,6 +87,14 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerItemIndexes = value;
             }
         }
+        public decimal OutOfTownCharges
+        {
+            get
+            {
+                return outOfTownCharges;
+            }
+            
+        }
 
 
         int prev_GlassItemNo,
@@ -124,7 +134,9 @@ namespace PresentationLayer.Presenter
                 windoortotaldiscount,
                 screentotaldiscount,
                 screen_priceXquantiy,
-                screenUnitPriceTotal;
+                screenUnitPriceTotal,
+                outOfTownCharges,
+                outOfTownChargesMultiplier;
 
 
         bool existing = false;
@@ -410,8 +422,7 @@ namespace PresentationLayer.Presenter
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
                     var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
-                    windoorTotalListPrice = +windoorTotalListPrice + price_x_quantity;
-
+                    windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
                     if (wdm.WD_quantity > 1)
                     {
                         for (int i = 1; i <= wdm.WD_quantity; i++)
@@ -465,12 +476,30 @@ namespace PresentationLayer.Presenter
                 divisor = 1;
             }
 
-            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+             screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+             province = _mainPresenter.projectAddress.Split(',');
+             archi = province[province.Length - 1].Trim();
 
-            total_DiscountedPrice_wo_VAT = (windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage);
-            Console.WriteLine("This is total DiscountedPrice w/o Vat " + total_DiscountedPrice_wo_VAT);
-            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
+            if(archi == "Luzon")
+            {
+                outOfTownChargesMultiplier = 0.025m;
+            }
+            else if (archi == "Visayas")
+            {
+                outOfTownChargesMultiplier = 0.04m;
+            }
+            else if (archi == "Mindanao")
+            {
+                outOfTownChargesMultiplier = 0.05m;
+            }
 
+            outOfTownCharges = (windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier;
+            if(outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
+            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage),2);
+
+            Console.WriteLine(archi + " " + outOfTownCharges.ToString());
+            Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT),2));
+            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);         
             //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
             //Console.WriteLine("Windoor DiscountTotal: " +  _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
             //Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
@@ -525,6 +554,7 @@ namespace PresentationLayer.Presenter
             screen_Windoor_DiscountAverage = 0;
             screen_priceXquantiy = 0;
             screenUnitPriceTotal = 0;
+            outOfTownCharges = 0;
 
         }
 

@@ -504,6 +504,7 @@ namespace PresentationLayer.Presenter
                         _screenView.getNudPlisseRd().Visible = true;
                         _screenView.getLblPlisseRd().Visible = true;                       
                     }
+                 
                     if (plisseType == PlisseType._SR)
                     {
                         _screenModel.SP_MagnumScreenType_Visibility = true;
@@ -512,6 +513,7 @@ namespace PresentationLayer.Presenter
                     {
                         _screenModel.SP_MagnumScreenType_Visibility = false;
                     }
+                    _screenModel.Screen_6052MilledProfileVisibility = true;
                     _screenModel.Screen_1067PVCboxVisibility = true;
                     _screenModel.Screen_6040MilledProfileVisibility = true;
                     _screenModel.Screen_LandCoverVisibility = false;
@@ -546,6 +548,7 @@ namespace PresentationLayer.Presenter
                 _screenView.getLblPlisseRd().Visible = false;
                 _screenView.getCmbFreedom().Visible = false;
                 _screenModel.Screen_6040MilledProfileVisibility = false;
+                _screenModel.Screen_6052MilledProfileVisibility = false;        
                 _screenModel.Screen_1067PVCboxVisibility = false;
                 _screenModel.Screen_LandCoverVisibility = false;
 
@@ -558,7 +561,11 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                _screenModel.Screen_6052MilledProfileVisibility = false;
+                // condition to prevent closing of add-ons in plisse 
+                if (screenType != ScreenType._Plisse)
+                {
+                    _screenModel.Screen_6052MilledProfileVisibility = false;
+                }
                 _screenModel.Screen_1385MilledProfileVisibility = false;
             }
 
