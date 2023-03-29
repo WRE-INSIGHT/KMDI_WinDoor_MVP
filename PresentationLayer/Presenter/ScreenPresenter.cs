@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter
         private decimal Screen_priceXquantiy;
 
 
+
         CommonFunctions commonfunc = new CommonFunctions();
         Panel _pnlAddOns;
         NumericUpDown _screenWidth, _screenHeight, _factor, _discount;
@@ -626,6 +627,7 @@ namespace PresentationLayer.Presenter
             */
             try
             {
+
                 var ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);             
                 foreach (var item in _mainPresenter.Screen_List)
                 {
@@ -642,8 +644,10 @@ namespace PresentationLayer.Presenter
                     {
                         screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
                     }
+
                     Console.WriteLine(item.Screen_UnitPrice.ToString());
                     Console.WriteLine(item.Screen_TotalAmount.ToString());
+
                 }
 
                 decimal DiscountPercentage = screenDiscountAverage / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
@@ -679,10 +683,10 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Screen List Count is 0: "," ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-           
+
         }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
