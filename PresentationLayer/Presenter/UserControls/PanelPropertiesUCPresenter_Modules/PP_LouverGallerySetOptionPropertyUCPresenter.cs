@@ -38,7 +38,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _pp_LouverGallerySetOptionPropertyUC_changeArtNoToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
-            string input = Interaction.InputBox("Please Input the Gallery Set Article Number", "WinDoor Maker", _pp_LouverGallerySetOptionPropertyUC.GetCmbLouverGalleryArtNo().Text);
+            string input = Interaction.InputBox("Please Input the Gallery Set Article Number \n\n Sample:  LVRG-152-02-S-RH-BLK", "WinDoor Maker", _pp_LouverGallerySetOptionPropertyUC.GetCmbLouverGalleryArtNo().Text);
             bool HasSpace = input.Contains(" ");
 
             if (input != "" &&
@@ -51,7 +51,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     int lvrUpdate = Convert.ToInt32(GetSetNum);
 
                     _pp_LouverGallerySetOptionPropertyUC.GetCmbLouverGalleryArtNo().Text = input.ToUpper();
-                    _panelModel.Panel_LstLouverArtNo[lvrUpdate] = input.ToUpper();
+                    _panelModel.Panel_LstLouverArtNo[lvrUpdate - 1] = input.ToUpper();
+                    _mainPresenter.GetCurrentPrice();
                 }
                 catch (Exception ex)
                 {
