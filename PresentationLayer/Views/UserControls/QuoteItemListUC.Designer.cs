@@ -189,6 +189,8 @@
             // 
             // tboxItemName
             // 
+            this.tboxItemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxItemName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.tboxItemName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tboxItemName.Location = new System.Drawing.Point(71, 0);

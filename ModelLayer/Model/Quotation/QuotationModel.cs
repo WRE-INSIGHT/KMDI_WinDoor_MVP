@@ -145,6 +145,10 @@ namespace ModelLayer.Model.Quotation
                     frame.Frame_BotFrameArtNo != BottomFrameTypes._None)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
+                    if (frame.Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                    {
+                        frame.Insert_MechanicalJointConnector_MaterialList(Material_List);
+                    }
                 }
 
                 if (frame.Frame_If_InwardMotorizedCasement)
@@ -234,7 +238,7 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
-                             
+
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i += 2)
                             {
@@ -585,7 +589,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                             }
-
+                                            #region CheckIfBoundedByBottomFrame 
                                             if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
                                             frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
                                             {
@@ -647,6 +651,7 @@ namespace ModelLayer.Model.Quotation
                                                     }
                                                 }
                                             }
+                                            #endregion
                                         }
 
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -1255,17 +1260,17 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
-                              
+
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i++)
                             {
 
-                              
+
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
-                             
+
 
                                 IDividerModel div_nxtCtrl = null,
                                         div_prevCtrl = null;
@@ -1505,6 +1510,7 @@ namespace ModelLayer.Model.Quotation
                                                 if (perFrame == true)
                                                 {
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
@@ -1910,6 +1916,7 @@ namespace ModelLayer.Model.Quotation
                                     if (perFrame == true)
                                     {
                                         pnl.Insert_WeatherBar_MaterialList(Material_List);
+                                        pnl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                         pnl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                         pnl.Insert_WaterSeepage_MaterialList(Material_List);
                                         pnl.Insert_BrushSeal_MaterialList(Material_List);
@@ -2317,7 +2324,7 @@ namespace ModelLayer.Model.Quotation
                 wndr_item.WD_Selected = false;
             }
 
-            item.WD_Selected = true;
+            item.WD_Selected = true;         
         }
 
         public QuotationModel(string quotation_ref_no,
@@ -2623,6 +2630,10 @@ namespace ModelLayer.Model.Quotation
                 RotoswingHanldePricePerPiece = 257.93m,
                 RotoswingHanldeForSlidingPricePerPiece = 1123.91m,
                 RioHandlePricePerPiece = 481.49m,
+                PopUpHandlePricePerPiece = 250m,
+                DHandlePricePerPiece = 500m,
+                DummyDHandlePricePerPiece = 1000m,
+                DHandleInOutLockingPricePerPiece = 1300m,
 
                 Espag741012_PricePerPiece = 284.15m,
                 LeverEspagPricePerPiece = 825.81m,
@@ -3896,7 +3907,9 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                         #region bottomFramePrice
-                        if (fr.Frame_BotFrameEnable == true)
+                        if (fr.Frame_BotFrameVisible == true &&
+                            (fr.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6050))
                         {
                             FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
                             FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
@@ -4363,6 +4376,30 @@ namespace ModelLayer.Model.Quotation
                                                     HandlePrice += RioHandlePricePerPiece;
 
                                                     HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._PopUp)
+                                                {
+                                                    HandlePrice += PopUpHandlePricePerPiece;
+
+                                                    HandleBasePrice = PopUpHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D)
+                                                {
+                                                    HandlePrice += DHandlePricePerPiece;
+
+                                                    HandleBasePrice = DHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._DummyD)
+                                                {
+                                                    HandlePrice += DummyDHandlePricePerPiece;
+
+                                                    HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                                {
+                                                    HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                                    HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                                 }
                                             }
                                             #endregion
@@ -6406,15 +6443,26 @@ namespace ModelLayer.Model.Quotation
 
                                         CostingPoints += ProfileColorPoints;
                                         InstallationPoints += (ProfileColorPoints / 3);
+                                        if (pnl.Panel_LouverMotorizeCheck == true)
+                                        {
+                                            LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter)) / 1000m;
+                                            LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter)) / 1000m;
+                                            PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter)) / 1000m;
+                                            PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter)) / 1000m;
 
-                                        LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                        LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
-                                        PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                        PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
+                                            BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
+                                            PowerKitIncludingWiresPrice += 132.59m * 1.3m * 1.1m * forex;
+                                        }
+                                        else if (pnl.Panel_LouverMotorizeCheck == false)
+                                        {
+                                            LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                            LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
+                                            PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                            PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
 
-                                        BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
-                                        GalleryAdaptorPrice += ((pnl.Panel_DisplayHeight * 2) * GalleryAdaptorPricePerMeter) / 1000m;
-
+                                            BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
+                                            GalleryAdaptorPrice += ((pnl.Panel_DisplayHeight * 2) * GalleryAdaptorPricePerMeter) / 1000m;
+                                        }
 
                                         if (pnl.Panel_LstLouverArtNo != null)
                                         {
@@ -6706,7 +6754,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                             {
-                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0, BladeAluMultiplier = 0;
                                                 BladeUsagePerPieceOfAluminum = (pnl.Panel_Width / 1); // 1= # of panels
 
                                                 if (BladeUsagePerPieceOfAluminum < 800)
@@ -6718,11 +6766,25 @@ namespace ModelLayer.Model.Quotation
                                                     BladeUsagePerPieceOfAluminumCount = 6;
                                                 }
 
-                                                OneSidedFoiledCost += 698.40m * forex;
-                                                PowderCoatedWhiteIvoryCost += 551.77m * forex;
-                                                TwoSideFoiledWoodGrainCost += 926.47m * forex;
-                                                MillFinishCost += 191.21m * forex;
-                                                //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                                BladeAluMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfAluminumCount);//1 = # of panel
+
+                                                //OneSidedFoiledCost += 698.40m * forex;
+                                                //PowderCoatedWhiteIvoryCost += 551.77m * forex;
+                                                //TwoSideFoiledWoodGrainCost += 926.47m * forex;
+                                                //MillFinishCost += 191.21m * forex;
+
+                                                decimal alumBladesPrice = 0;
+                                                if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                                    wdm.WD_BaseColor == Base_Color._White) //2 lang pinipili ng costing Milled or woodgrain
+                                                {
+                                                    alumBladesPrice = 35.63m * forex;
+                                                }
+                                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                                {
+                                                    alumBladesPrice = 926.47m * 5.8m;
+                                                }
+
+                                                GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness >= 6.0f &&
@@ -6969,8 +7031,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         #endregion
 
-                        #region SinglePnl
-
+                        #region SinglePnl 
                         else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                         {
                             IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -7198,6 +7259,30 @@ namespace ModelLayer.Model.Quotation
                                             HandlePrice += RioHandlePricePerPiece;
 
                                             HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._PopUp)
+                                        {
+                                            HandlePrice += PopUpHandlePricePerPiece;
+
+                                            HandleBasePrice = PopUpHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D)
+                                        {
+                                            HandlePrice += DHandlePricePerPiece;
+
+                                            HandleBasePrice = DHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._DummyD)
+                                        {
+                                            HandlePrice += DummyDHandlePricePerPiece;
+
+                                            HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                        {
+                                            HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                            HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                         }
                                     }
                                     #endregion
@@ -9551,7 +9636,7 @@ namespace ModelLayer.Model.Quotation
                                             }
 
                                             BladeGlassMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfGlassCount);//1 = # of panel
-                                           
+
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
                                                 GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
@@ -9573,7 +9658,7 @@ namespace ModelLayer.Model.Quotation
                                     else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                     {
                                         bladeType = "Aluminum";
-                                        decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                        decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0, BladeAluMultiplier = 0;
                                         BladeUsagePerPieceOfAluminum = (Singlepnl.Panel_Width / 1); // 1= # of panels
 
                                         if (BladeUsagePerPieceOfAluminum < 800)
@@ -9585,21 +9670,24 @@ namespace ModelLayer.Model.Quotation
                                             BladeUsagePerPieceOfAluminumCount = 6;
                                         }
 
+                                        BladeAluMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfAluminumCount);//1 = # of panel
+
                                         //OneSidedFoiledCost += 698.40m * forex;
                                         //PowderCoatedWhiteIvoryCost += 551.77m * forex;
                                         //TwoSideFoiledWoodGrainCost += 926.47m * forex;
                                         //MillFinishCost += 191.21m * forex;
 
+                                        decimal alumBladesPrice = 0;
                                         if (wdm.WD_BaseColor == Base_Color._Ivory ||
-                                            wdm.WD_BaseColor == Base_Color._White)
+                                            wdm.WD_BaseColor == Base_Color._White) //2 lang pinipili ng costing Milled or woodgrain
                                         {
-                                            GlassBladePrice = 35.63m * forex;
+                                            alumBladesPrice = 35.63m * forex;
                                         }
                                         else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                         {
-                                            GlassBladePrice = 926.47m * 5.8m;
+                                            alumBladesPrice = 926.47m * 5.8m;
                                         }
-
+                                        GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness >= 6.0f &&
@@ -9678,10 +9766,10 @@ namespace ModelLayer.Model.Quotation
 
                     }
 
-
+                    wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
                     InstallationCost = InstallationPoints * CostPerPoints;
-
+                   
                     // Math.Round( , 2) +
 
                     FittingAndSuppliesCost = Math.Round(FSPrice, 2) +

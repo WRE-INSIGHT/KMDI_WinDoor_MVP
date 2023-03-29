@@ -9,6 +9,7 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         event EventHandler magnumScreenTypeEventRaised;
         event EventHandler reinforcedCheckBoxEventRaised;
         event EventHandler magnumScreenTypeUCloadEventRaised;
+        CheckBox GetReinforcedCheckBox();
         void ThisBinding(Dictionary<string, Binding> ModelBinding);
     }
 }

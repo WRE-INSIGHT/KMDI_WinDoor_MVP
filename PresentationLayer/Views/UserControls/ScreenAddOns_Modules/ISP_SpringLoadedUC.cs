@@ -8,7 +8,7 @@ namespace PresentationLayer.Views.UserControls
     {
         event EventHandler springLoadedCheckboxEventRaised;
         event EventHandler spSpringLoadedUCLoadEventRaised;
-
+        CheckBox SpringLoadedCheckBox();
         void ThisBinding(Dictionary<string, Binding> ModelBinding);
     }
 }

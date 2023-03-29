@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         public SP_1385MilledProfilePropertyUCPresenter(ISP_1385MilledProfilePropertyUC sp_1385MilledProfilePropertyUC)
         {
@@ -25,8 +26,56 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private void SubcribeToEventSetup()
         {
             _sp_1385MilledProfilePropertyUC.SP1385MilledProfilePropertyUCLoadEventRaised += _sp_1385MilledProfilePropertyUC_SP1385MilledProfilePropertyUCLoadEventRaised;
+            _sp_1385MilledProfilePropertyUC.nud1385MilledProfileValueChangedEventRaised += _sp_1385MilledProfilePropertyUC_nud1385MilledProfileValueChangedEventRaised;
+            _sp_1385MilledProfilePropertyUC.nud1385MilledProfileQtyValueChangedEventRaised += _sp_1385MilledProfilePropertyUC_nud1385MilledProfileQtyValueChangedEventRaised;
         }
 
+        private void _sp_1385MilledProfilePropertyUC_nud1385MilledProfileValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_sp_1385MilledProfilePropertyUC.GetNumericUpDown1385Milled().Text == "" || _sp_1385MilledProfilePropertyUC.GetNumericUpDown1385Milled().Text == " ")
+                {
+                    _screenModel.Screen_1385MilledProfile = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_1385MilledProfile = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message );
+                _screenModel.Screen_1385MilledProfile = 0;
+            }
+
+
+        }
+        private void _sp_1385MilledProfilePropertyUC_nud1385MilledProfileQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_sp_1385MilledProfilePropertyUC.GetNumerincUpDown1385MilledQty().Text == "" || _sp_1385MilledProfilePropertyUC.GetNumerincUpDown1385MilledQty().Text == " ")
+                {
+                    _screenModel.Screen_1385MilledProfileQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_1385MilledProfileQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message  );
+                _screenModel.Screen_1385MilledProfileQty = 0;
+            }
+            
+            
+        }
         private void _sp_1385MilledProfilePropertyUC_SP1385MilledProfilePropertyUCLoadEventRaised(object sender, EventArgs e)
         {
             _sp_1385MilledProfilePropertyUC.ThisBinding(CreateBindingDictionary());
@@ -39,7 +88,8 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         public ISP_1385MilledProfilePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                           IMainPresenter mainPresenter,
-                                                                          IScreenModel screenModel)
+                                                                          IScreenModel screenModel,
+                                                                          IScreenPresenter screenPresenter)
         {
             unityC
                     .RegisterType<ISP_1385MilledProfilePropertyUC, SP_1385MilledProfilePropertyUC>()
@@ -48,6 +98,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             milledProfile1385._unityC = unityC;
             milledProfile1385._mainPresenter = mainPresenter;
             milledProfile1385._screenModel = screenModel;
+            milledProfile1385._screenPresenter = screenPresenter;
 
 
             return milledProfile1385;

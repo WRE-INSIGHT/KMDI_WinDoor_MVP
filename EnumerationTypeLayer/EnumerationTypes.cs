@@ -1034,22 +1034,21 @@ namespace EnumerationTypeLayer
         }
 
         public class ScreenType : Enumeration<ScreenType, int>
-        {
+        { 
             public static readonly ScreenType _BuiltInSideroll = new ScreenType(3, "Built-In Sideroll Insect Screen");
-            public static readonly ScreenType _ChainDriven = new ScreenType(6, "Chain Driven Screen");
-            public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
-            public static readonly ScreenType _Magnum = new ScreenType(8, "Magnum Screen");
-            public static readonly ScreenType _Maxxy = new ScreenType(9, "Maxxy Screen");
-            public static readonly ScreenType _Piconet = new ScreenType(4, "Piconet Insect Screen");
+            //public static readonly ScreenType _ChainDriven = new ScreenType(6, "Chain Driven Screen");
+            //public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
+            //public static readonly ScreenType _Magnum = new ScreenType(8, "Magnum Screen");
+            public static readonly ScreenType _Maxxy = new ScreenType(9, "Maxxy Insect Screen ");
+            //public static readonly ScreenType _Piconet = new ScreenType(4, "Piconet Insect Screen");
             public static readonly ScreenType _Plisse = new ScreenType(1, "Plissé Insect Screen");
             public static readonly ScreenType _RollUp = new ScreenType(0, "Roll-up Insect Screen");
-            public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
-            public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Screen");
+            //public static readonly ScreenType _Sliding = new ScreenType(2, "Sliding Insect Screen"); // using mesh
+            public static readonly ScreenType _ZeroGravityChainDriven = new ScreenType(7, "Zero Gravity Chain Driven Insect Screen");
             public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
             public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
-            public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary For Insect Screen");
+            public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary for Insect Screen");
             
-
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
         }

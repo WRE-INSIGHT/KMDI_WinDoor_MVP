@@ -11,6 +11,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
 
         ISP_1385MilledProfilePropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                                           IMainPresenter mainPresenter,
-                                                                          IScreenModel screenModel);
+                                                                          IScreenModel screenModel,
+                                                                          IScreenPresenter screenPresenter);
     }
 }

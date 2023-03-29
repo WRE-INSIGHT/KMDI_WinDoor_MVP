@@ -124,6 +124,8 @@
             this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellEndEdit);
+            this.dgv_Screen.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Screen_ColumnHeaderMouseClick);
+            this.dgv_Screen.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Screen_ColumnHeaderMouseDoubleClick);
             this.dgv_Screen.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Screen_RowPostPaint);
             // 
             // cmsScreen
@@ -524,6 +526,7 @@
             this.tsBtnExchangeRate.Name = "tsBtnExchangeRate";
             this.tsBtnExchangeRate.Size = new System.Drawing.Size(24, 24);
             this.tsBtnExchangeRate.Text = "Exchange Rate";
+            this.tsBtnExchangeRate.Visible = false;
             this.tsBtnExchangeRate.Click += new System.EventHandler(this.tsBtnExchangeRate_Click);
             // 
             // tsBtnPrintScreen

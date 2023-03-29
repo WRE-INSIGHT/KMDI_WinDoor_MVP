@@ -122,14 +122,14 @@ namespace PresentationLayer.Presenter
                 GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
             }
             baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
-                                          + "USING "
-                                          + baseColor.ToUpper()
-                                          + " PROFILES\n"
-                                          + "USING "
-                                          + GlassThickness.ToUpper()
-                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
+            //+"USING "
+            //+ baseColor.ToUpper()
+            //+ " PROFILES\n"
+            //+ "USING "
+            //+ GlassThickness.ToUpper()
+            //+ " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+            //+ "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
@@ -279,8 +279,24 @@ namespace PresentationLayer.Presenter
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(795, 26);
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Right | AnchorStyles.Left;
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(795, 3);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(589, 26);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(589, 3);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(383, 26);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(383, 3);
+
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
+
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
 
                     ReportParameter[] RParam = new ReportParameter[10];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -290,7 +306,7 @@ namespace PresentationLayer.Presenter
                     RParam[4] = new ReportParameter("CustomerRef", _mainPresenter.inputted_custRefNo);
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[7] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[7] = new ReportParameter("ASPosition", _mainPresenter.position);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -311,20 +327,70 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
+
+                    try
+                    {
+                        #region RenderPDFAtBackground
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                        {
+                            Warning[] warnings;
+                            string[] streamIds;
+                            string mimeType = string.Empty;
+                            string encoding = string.Empty;
+                            string extension = string.Empty;
+
+                            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                               ("PDF",
+                               null,
+                               out mimeType,
+                               out encoding,
+                               out extension,
+                               out streamIds,
+                               out warnings
+                               );
+
+                            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Screen.PDF";
+                            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                            {
+                                fs.Write(bytes, 0, bytes.Length);
+                            }
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("quoteitemlistpresenter is not used" + ex);
+                    }
+
+
+
                     #endregion
                 }
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
                     #region Windoor RDLC
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627,26);
+                    //_printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(627,26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
-                    
-                        foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
-                        {
-                            _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
-                        }                                          
-                        _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
+
+                    foreach (var item in _quoteItemListPresenter.ShowItemImage_CheckList.ToArray())
+                    {
+                        _printQuoteView.GetChkLstBox().SetItemChecked(item.ItemIndex, item.ItemboolImage);
+                    }
+                    _quoteItemListPresenter.ShowItemImage_CheckList.Clear();
 
                     ReportParameter[] RParam = new ReportParameter[8];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
@@ -361,7 +427,7 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
-                    else if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    else if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Count != 0)
                     {
                         RParam[6] = new ReportParameter("ShowItemImage", "True");
                     }
@@ -385,7 +451,7 @@ namespace PresentationLayer.Presenter
                     checklist_raised = false;
 
                     #region RenderPDFAtBackground
-                    if(_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
                     {
                         Warning[] warnings;
                         string[] streamIds;
@@ -403,7 +469,7 @@ namespace PresentationLayer.Presenter
                            out warnings
                            );
 
-                        string defDir = Properties.Settings.Default.WndrDir + @"\Quotation.PDF";
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\Quotation.PDF";
                         using (FileStream fs = new FileStream(defDir, FileMode.Create))
                         {
                             fs.Write(bytes, 0, bytes.Length);
@@ -416,6 +482,18 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     #region Contract Summary RDLC 
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
@@ -424,10 +502,17 @@ namespace PresentationLayer.Presenter
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 
+                    #region save files without pos in AEIC
+                    if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
+                    {
+                        _mainPresenter.position = " ";
+                    }
+                    #endregion
+
                     ReportParameter[] RParam = new ReportParameter[5];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
-                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
-                    RParam[2] = new ReportParameter("ASPosition", "Account Executive");
+                    RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
+                    RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
 
                     if (_printQuoteView.GetShowPageNum().Checked)
@@ -442,7 +527,32 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
                     _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
 
-              
+                    #region RenderPDFAtBackground
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
+                    {
+                        Warning[] warnings;
+                        string[] streamIds;
+                        string mimeType = string.Empty;
+                        string encoding = string.Empty;
+                        string extension = string.Empty;
+
+                        byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+                           ("PDF",
+                           null,
+                           out mimeType,
+                           out encoding,
+                           out extension,
+                           out streamIds,
+                           out warnings
+                           );
+
+                        string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\SummaryOfContract.PDF";
+                        using (FileStream fs = new FileStream(defDir, FileMode.Create))
+                        {
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
+                    }
+                    #endregion
 
                     #endregion
                 }

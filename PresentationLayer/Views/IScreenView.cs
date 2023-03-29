@@ -36,6 +36,7 @@ namespace PresentationLayer.Views
         event EventHandler txtItemNumTextChangeEventRaised;
         event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
         event EventHandler CellEndEditEventRaised;
+        event DataGridViewCellMouseEventHandler dgvScreenColumnHeaderMouseClick;
 
         void ShowScreemView();
 

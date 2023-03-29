@@ -50,6 +50,7 @@
             this.nud_1067Height.Size = new System.Drawing.Size(75, 20);
             this.nud_1067Height.TabIndex = 21;
             this.nud_1067Height.ValueChanged += new System.EventHandler(this.nud_1067Height_ValueChanged);
+            this.nud_1067Height.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_1067Height_KeyDown);
             // 
             // nud_0505Width
             // 
@@ -58,6 +59,7 @@
             this.nud_0505Width.Size = new System.Drawing.Size(75, 20);
             this.nud_0505Width.TabIndex = 20;
             this.nud_0505Width.ValueChanged += new System.EventHandler(this.nud_0505Width_ValueChanged);
+            this.nud_0505Width.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_0505Width_KeyDown);
             // 
             // lbl_ScreenHeight
             // 
@@ -84,6 +86,7 @@
             this.nud_1067Qty.Size = new System.Drawing.Size(62, 20);
             this.nud_1067Qty.TabIndex = 26;
             this.nud_1067Qty.ValueChanged += new System.EventHandler(this.nud_1067Qty_ValueChanged);
+            this.nud_1067Qty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_1067Qty_KeyDown);
             // 
             // nud_0505Qty
             // 
@@ -92,6 +95,7 @@
             this.nud_0505Qty.Size = new System.Drawing.Size(62, 20);
             this.nud_0505Qty.TabIndex = 25;
             this.nud_0505Qty.ValueChanged += new System.EventHandler(this.nud_0505Qty_ValueChanged);
+            this.nud_0505Qty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_0505Qty_KeyDown);
             // 
             // label2
             // 

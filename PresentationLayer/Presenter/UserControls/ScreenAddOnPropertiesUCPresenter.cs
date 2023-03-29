@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         private ISP_PVCboxPropertyUCPresenter _sp_pVCboxPropertyUCPresenter;
         private ISP_CenterClosurePropertyUCPresenter _sp_CenterClosurePropertyUCPresenter;
@@ -74,20 +75,20 @@ namespace PresentationLayer.Presenter.UserControls
         private void _sp_screenAddOnPropertiesUC_ScreenAddOnPropertiesUCLoadEventRaised(object sender, EventArgs e)
         {
           
-            ISP_6052MilledProfilePropertyUCPresenter milled6052profilepresenter = _sp_6052MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel);
+            ISP_6052MilledProfilePropertyUCPresenter milled6052profilepresenter = _sp_6052MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel,_screenPresenter);
             UserControl milled6052presenter = (UserControl)milled6052profilepresenter.Get6052MilledProfilePropertyUC();
             _pnlAddOns.Controls.Add(milled6052presenter);
             milled6052presenter.Dock = DockStyle.Top;
             milled6052presenter.BringToFront();
 
             
-            ISP_1385MilledProfilePropertyUCPresenter milled1385profilepresenter = _sp_1385MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel);
+            ISP_1385MilledProfilePropertyUCPresenter milled1385profilepresenter = _sp_1385MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel,_screenPresenter);
             UserControl miled1385presenter = (UserControl)milled1385profilepresenter.Get1385MilledProfilePropertyUC();
             _pnlAddOns.Controls.Add(miled1385presenter);
             miled1385presenter.Dock = DockStyle.Top;
             miled1385presenter.BringToFront();
 
-            ISP_373or374MilledProfilePropertyUCPresenter milled373or374profilepresenter = _sp_373or374MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_373or374MilledProfilePropertyUCPresenter milled373or374profilepresenter = _sp_373or374MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl milled373or374presenter = (UserControl)milled373or374profilepresenter.Get373or374MilledProfilePropertyUC();
             _pnlAddOns.Controls.Add(milled373or374presenter);
             milled373or374presenter.Dock = DockStyle.Top;
@@ -99,32 +100,32 @@ namespace PresentationLayer.Presenter.UserControls
             landcover.Dock = DockStyle.Top;
             landcover.BringToFront();
 
-            ISP_6040MilledProfileWithReinforcementPropertyUCPresenter _6040milledprofilewithrein = _sp_6040milledProfilewithreinforcementPropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_6040MilledProfileWithReinforcementPropertyUCPresenter _6040milledprofilewithrein = _sp_6040milledProfilewithreinforcementPropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl _6040milledprofile = (UserControl)_6040milledprofilewithrein.Get6040MilledProfile();
             _pnlAddOns.Controls.Add(_6040milledprofile);
             _6040milledprofile.Dock = DockStyle.Top;
             _6040milledprofile.BringToFront();
 
-            ISP_PVCbox1067WithReinPropertyUCPresenter pvcbox1067withreinprop = _sp_pvcbox1067WithReinPropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_PVCbox1067WithReinPropertyUCPresenter pvcbox1067withreinprop = _sp_pvcbox1067WithReinPropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl pvc1067withrein = (UserControl)pvcbox1067withreinprop.GetPVCbox1067WithReinPropertyUC();
             _pnlAddOns.Controls.Add(pvc1067withrein);
             pvc1067withrein.Dock = DockStyle.Top;
             pvc1067withrein.BringToFront();
 
-            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl magnumScreenType = (UserControl)magnumScreenTypeUCP.GetMagnumScreenTypeView();
             _pnlAddOns.Controls.Add(magnumScreenType);
             magnumScreenType.Dock = DockStyle.Top;
             magnumScreenType.BringToFront();
 
-            ISP_SpringLoadedUCPresenter springloadedUCP = _sp_SpringLoadedPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_SpringLoadedUCPresenter springloadedUCP = _sp_SpringLoadedPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl springloadedUC = (UserControl)springloadedUCP.GetspringloadedUC();
             _pnlAddOns.Controls.Add(springloadedUC);
             springloadedUC.Dock = DockStyle.Top;
             springloadedUC.BringToFront();
 
 
-            ISP_PVCboxPropertyUCPresenter pvcBoxPropUCP = _sp_pVCboxPropertyUCPresenter.CreatenewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_PVCboxPropertyUCPresenter pvcBoxPropUCP = _sp_pVCboxPropertyUCPresenter.CreatenewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl pvcBoxProp = (UserControl)pvcBoxPropUCP.GetPVCboxPropertyUC();
             _pnlAddOns.Controls.Add(pvcBoxProp);
             pvcBoxProp.Dock = DockStyle.Top;
@@ -132,7 +133,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             _screenModel.Screen_CenterClosureVisibility = true;
             _screenModel.Screen_CenterClosureVisibilityOption = true;
-            ISP_CenterClosurePropertyUCPresenter centerClosurePropUCP = _sp_CenterClosurePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_CenterClosurePropertyUCPresenter centerClosurePropUCP = _sp_CenterClosurePropertyUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl centerClosureProp = (UserControl)centerClosurePropUCP.GetISP_CenterClosurePropertyUC();
             _pnlAddOns.Controls.Add(centerClosureProp);
             centerClosureProp.Dock = DockStyle.Top;
@@ -150,7 +151,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         public IScreenAddOnPropertiesUCPresenter GetNewInstance(IUnityContainer unityC,
                                                                     IMainPresenter mainPresenter,
-                                                                    IScreenModel screenModel)
+                                                                    IScreenModel screenModel,
+                                                                    IScreenPresenter screenPresenter)
         {
             unityC
                     .RegisterType<IScreenAddOnPropertiesUC, ScreenAddOnPropertiesUC>()
@@ -159,6 +161,7 @@ namespace PresentationLayer.Presenter.UserControls
             screenAddOns._unityC = unityC;
             screenAddOns._mainPresenter = mainPresenter;
             screenAddOns._screenModel = screenModel;
+            screenAddOns._screenPresenter = screenPresenter;
             return screenAddOns;
         }
 

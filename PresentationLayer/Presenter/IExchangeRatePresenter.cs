@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter
         IExchangeRateView GetExchangeRateView();
         IExchangeRatePresenter CreateNewInstance(IUnityContainer unityC,
                                                  IMainPresenter mainPresenter,
-                                                 IScreenModel screenModel);
+                                                 IScreenModel screenModel,
+                                                 IScreenPresenter screenPresenter);
     }
 }

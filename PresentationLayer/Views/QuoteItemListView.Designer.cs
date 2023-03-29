@@ -176,7 +176,7 @@
             this.TSbtnPDFCompiler.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TSbtnPDFCompiler.Name = "TSbtnPDFCompiler";
             this.TSbtnPDFCompiler.Size = new System.Drawing.Size(23, 22);
-            this.TSbtnPDFCompiler.Text = "toolStripButton1";
+            this.TSbtnPDFCompiler.Text = "PDF Compiler";
             this.TSbtnPDFCompiler.Click += new System.EventHandler(this.TSbtnPDFCompiler_Click);
             // 
             // QuoteItemListView
@@ -194,6 +194,7 @@
             this.Text = "Item List";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuoteItemListView_FormClosed);
             this.Load += new System.EventHandler(this.QuoteItemListView_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.QuoteItemListView_KeyDown);
             this.pnlPrintHeader.ResumeLayout(false);
             this.pnlPrintHeader.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

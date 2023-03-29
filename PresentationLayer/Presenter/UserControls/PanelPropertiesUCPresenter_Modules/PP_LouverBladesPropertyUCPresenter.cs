@@ -56,6 +56,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
 
             binding.Add("Panel_LouverBladesVisibility", new Binding("Visible", _panelModel, "Panel_LouverBladesVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverBladesCount", new Binding("Value", _panelModel, "Panel_LouverBladesCount", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

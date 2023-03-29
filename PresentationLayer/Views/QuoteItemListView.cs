@@ -12,8 +12,6 @@ namespace PresentationLayer.Views
             return chkbox_selectall;
         }
 
-        private bool _renderpdfatbackground;
-
         private bool _getItemListUC_CheckState;
         public bool GetItemListUC_CheckBoxState
         {
@@ -55,6 +53,7 @@ namespace PresentationLayer.Views
         }
         private void QuoteItemListView_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             EventHelpers.RaiseEvent(sender, QuoteItemListViewLoadEventRaised, e);
         }
         public Panel GetPnlPrintBody()
@@ -85,6 +84,27 @@ namespace PresentationLayer.Views
         private void TSbtnPDFCompiler_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, TSbtnPDFCompilerClickEventRaised, e);
+        }
+
+        private void QuoteItemListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control == true && e.KeyCode == Keys.W)
+                {
+                    TSbtnPrint_Click(sender, e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.G)
+                {
+                    TSbtnGlassSummary_Click(sender, e);
+                }
+                else if(e.Control == true && e.KeyCode == Keys.C)
+                {
+                    TSbtnContractSummary_Click(sender, e);
+                }
+                else if(e.Control == true && e.KeyCode == Keys.P)
+                {
+                    TSbtnPDFCompiler_Click(sender, e);
+                }
+            
         }
     }
 }

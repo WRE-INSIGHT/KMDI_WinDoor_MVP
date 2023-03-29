@@ -1183,11 +1183,14 @@ namespace PresentationLayer.Presenter
                                                           0,
                                                           0.0m,
                                                           0.0m,
-                                                          string.Empty);
+                                                          string.Empty,
+                                                          0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
+
+
         }
 
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
@@ -1317,6 +1320,8 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("CustomerRefNo: " + _custRefNo);
             wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
+            wndr_content.Add("AEIC_POS: " + _position);
+
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
                 wndr_content.Add(prop.Name + ": " + prop.GetValue(_quotationModel, null));
@@ -2314,8 +2319,10 @@ namespace PresentationLayer.Presenter
                             SaveChanges();
                         }
                         Clearing_Operation();
+
                         openFileMethod(_mainView.GetOpenFileDialog().FileName);
                     }
+
                 }
             }
             catch (Exception ex)
@@ -3459,6 +3466,10 @@ namespace PresentationLayer.Presenter
                     {
                         _aeic = extractedValue_str;
                     }
+                    else if (row_str.Contains("AEIC_POS:"))
+                    {
+                        _position = extractedValue_str;
+                    }
                     else if (row_str.Contains("PricingFactor"))
                     {
                         _quotationModel.PricingFactor = Convert.ToDecimal(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0.00" : (String.Format("{0:0.00}", Convert.ToDecimal(extractedValue_str))));
@@ -3734,7 +3745,7 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("WD_CostingPoints:"))
                         {
-                            _windoorModel.WD_CostingPoints = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                            _windoorModel.WD_CostingPoints = decimal.Parse(extractedValue_str);
                         }
 
                         if (row_str.Contains("Dictionary_wd_redArrowLines:"))
@@ -7723,7 +7734,8 @@ namespace PresentationLayer.Presenter
                                                              screen_Discount,
                                                              screen_NetPrice,
                                                              screen_TotalAmount,
-                                                             screen_description);
+                                                             screen_description,
+                                                             screen_Factor);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;

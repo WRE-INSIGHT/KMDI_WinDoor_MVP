@@ -42,7 +42,7 @@
             this.rtbox_Body = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.rtbox_Salutation = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbl_address = new System.Windows.Forms.Label();
             this.rtbox_Address = new System.Windows.Forms.RichTextBox();
             this.dtp_Date = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             this.panel1.Controls.Add(this.rtbox_Body);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.rtbox_Salutation);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lbl_address);
             this.panel1.Controls.Add(this.rtbox_Address);
             this.panel1.Controls.Add(this.dtp_Date);
             this.panel1.Controls.Add(this.label4);
@@ -137,8 +137,6 @@
             // chkbox_show
             // 
             this.chkbox_show.AutoSize = true;
-            this.chkbox_show.Checked = true;
-            this.chkbox_show.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkbox_show.Location = new System.Drawing.Point(38, 81);
             this.chkbox_show.Name = "chkbox_show";
             this.chkbox_show.Size = new System.Drawing.Size(159, 23);
@@ -186,14 +184,14 @@
             this.rtbox_Salutation.TabIndex = 11;
             this.rtbox_Salutation.Text = "INITIAL QUOTATION\n\nDear Mr. Lee,";
             // 
-            // label5
+            // lbl_address
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(205, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 19);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Address";
+            this.lbl_address.AutoSize = true;
+            this.lbl_address.Location = new System.Drawing.Point(205, 3);
+            this.lbl_address.Name = "lbl_address";
+            this.lbl_address.Size = new System.Drawing.Size(58, 19);
+            this.lbl_address.TabIndex = 10;
+            this.lbl_address.Text = "Address";
             // 
             // rtbox_Address
             // 
@@ -268,7 +266,7 @@
         private System.Windows.Forms.RichTextBox rtbox_Body;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox rtbox_Salutation;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbl_address;
         private System.Windows.Forms.RichTextBox rtbox_Address;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DateTimePicker dtp_Date;

@@ -7,9 +7,67 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
 {
     public partial class SP_PVCboxPropertyUC : UserControl, ISP_PVCboxPropertyUC
     {
-        public SP_PVCboxPropertyUC()
+        
+        public int Screen_0505Width
         {
-            InitializeComponent();
+            get
+            {
+                return Convert.ToInt32(nud_0505Width.Value);
+            }
+            set
+            {
+                nud_0505Width.Value = value;
+            }
+        }
+        public int Screen_0505Qty
+        {
+            get
+            {
+                return Convert.ToInt32(nud_0505Qty.Value);
+            }
+            set
+            {
+                nud_0505Qty.Value = value;
+            }
+        }
+        public int Screen_1067Height
+        {
+            get
+            {
+                return Convert.ToInt32(nud_1067Height.Value);
+            }
+            set
+            {
+                nud_1067Height.Value = value;
+            }
+        }
+        public int Screen_1067Qty
+        {
+            get
+            {
+                return Convert.ToInt32(nud_1067Qty.Value);
+            }
+            set
+            {
+                nud_1067Qty.Value = value;
+            }
+        }
+
+        public NumericUpDown GetNumericUpDownScreen0505width()
+        {
+            return nud_0505Width;
+        }  
+        public NumericUpDown GetNumericUpDownScreen0505Qty()
+        {
+            return nud_0505Qty;
+        }
+        public NumericUpDown GetNumericUpDownScreen1067height()
+        {
+            return nud_1067Height;
+        }
+        public NumericUpDown GetNumericUpDownScreen1067Qty()
+        {
+            return nud_1067Qty;
         }
 
         public event EventHandler SPPVCboxPropertyUCLoadEventRaised;
@@ -17,7 +75,11 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         public event EventHandler nud1067HeightValueChangedEventRaised;
         public event EventHandler nud0505QtyValueChangedEventRaised;
         public event EventHandler nud1067QtyValueChangedEventRaised;
-
+        
+        public SP_PVCboxPropertyUC()
+        {
+            InitializeComponent();
+        }
 
         // public event EventHandler ComputePVCboxPriceEventRaised;
 
@@ -46,18 +108,33 @@ namespace PresentationLayer.Views.UserControls.ScreenAddOns_Modules
         {
             EventHelpers.RaiseEvent(sender, nud0505WidthValueChangedEventRaised, e);
         }
+        private void nud_0505Qty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud0505QtyValueChangedEventRaised, e);
+        }
+        private void nud_0505Width_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud0505WidthValueChangedEventRaised, e);
+        }
+        private void nud_0505Qty_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud0505QtyValueChangedEventRaised, e);
+        }
 
         private void nud_1067Height_ValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud1067HeightValueChangedEventRaised, e);
         }
 
-        private void nud_0505Qty_ValueChanged(object sender, EventArgs e)
-        {
-            EventHelpers.RaiseEvent(sender, nud0505QtyValueChangedEventRaised, e);
-        }
-
         private void nud_1067Qty_ValueChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud1067QtyValueChangedEventRaised, e);
+        }
+        private void nud_1067Height_KeyDown(object sender, KeyEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nud1067HeightValueChangedEventRaised, e);
+        }
+        private void nud_1067Qty_KeyDown(object sender, KeyEventArgs e)
         {
             EventHelpers.RaiseEvent(sender, nud1067QtyValueChangedEventRaised, e);
         }

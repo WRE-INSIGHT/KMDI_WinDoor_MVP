@@ -13,6 +13,11 @@ namespace PresentationLayer.Views.UserControls
 {
     public partial class SP_SpringLoadedUC : UserControl, ISP_SpringLoadedUC
     {
+
+        public CheckBox SpringLoadedCheckBox()
+        {
+            return springloadedchkbox;
+        }
         public SP_SpringLoadedUC()
         {
             InitializeComponent();
