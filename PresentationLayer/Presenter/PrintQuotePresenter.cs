@@ -104,12 +104,10 @@ namespace PresentationLayer.Presenter
                     if (duplicateBaseColor.Count() == 3)
                     {
                         baseColor += ", " + duplicateBaseColor.ToList()[i];
-
                     }
                     else
                     {
                         baseColor += " & " + duplicateBaseColor.ToList()[i];
-
                     }
                 }
                 else if (i == 2)
@@ -122,14 +120,14 @@ namespace PresentationLayer.Presenter
                 GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
             }
             baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
-            //+"USING "
-            //+ baseColor.ToUpper()
-            //+ " PROFILES\n"
-            //+ "USING "
-            //+ GlassThickness.ToUpper()
-            //+ " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-            //+ "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                          + "USING "
+                                          + baseColor.ToUpper()
+                                          + " PROFILES\n"
+                                          + "USING "
+                                          + GlassThickness.ToUpper()
+                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
@@ -141,7 +139,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 EventLoad();
-                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load
+                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load            
                 _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);           
