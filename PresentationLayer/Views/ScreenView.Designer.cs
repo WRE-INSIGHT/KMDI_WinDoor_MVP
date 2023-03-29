@@ -526,6 +526,7 @@
             this.tsBtnExchangeRate.Name = "tsBtnExchangeRate";
             this.tsBtnExchangeRate.Size = new System.Drawing.Size(24, 24);
             this.tsBtnExchangeRate.Text = "Exchange Rate";
+            this.tsBtnExchangeRate.Visible = false;
             this.tsBtnExchangeRate.Click += new System.EventHandler(this.tsBtnExchangeRate_Click);
             // 
             // tsBtnPrintScreen

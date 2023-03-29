@@ -59,93 +59,92 @@ namespace PresentationLayer.Presenter
 
         private void _sortItemView_btnDeleteClickRaiseEvent(object sender, EventArgs e)
         {
-            
-            foreach (string item in lstItem)
+            DialogResult dr = MessageBox.Show("Are you sure, do you want to delete selected items?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
             {
-
-                _quotationModel.Lst_Windoor.Remove(_quotationModel.Lst_Windoor.Find(wndr => wndr.WD_name == item));
-                foreach (IItemInfoUC itemInfo in _mainPresenter.pnlItems_MainPresenter.Controls)
+                bool itemSelected = false;
+                foreach (string item in lstItem)
                 {
-                    if (itemInfo.ItemName == item)
-                    {
-                        _mainPresenter.pnlItems_MainPresenter.Controls.Remove((UserControl)itemInfo);
-                    }
 
-                }
-            }
-
-            _mainPresenter.pnlPropertiesBody_MainPresenter.Controls.Clear();
-            _mainPresenter.pnlMain_MainPresenter.Controls.Clear();
-            //_basePlatformPresenter.getBasePlatformViewUC().GetFlpMain().Controls.Clear();
-            int count = 1;
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            {
-                wdm.WD_name = "Item " + count;
-                wdm.WD_id = count;
-                count++;
-            }
-            List<IWindoorModel> lstwndr = new List<IWindoorModel>();
-            foreach (UserControl uc in _sortItemView.GetPnlSortItem().Controls)
-            {
-                for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
-                {
-                    IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-                    if (uc.Name == wdm.WD_name)
+                    _quotationModel.Lst_Windoor.Remove(_quotationModel.Lst_Windoor.Find(wndr => wndr.WD_name == item));
+                    foreach (IItemInfoUC itemInfo in _mainPresenter.pnlItems_MainPresenter.Controls)
                     {
-                        lstwndr.Add(wdm);
-                    }
-                }
-            }
-            lstwndr.Reverse();
-            _quotationModel.Lst_Windoor.Clear();
-            _quotationModel.Lst_Windoor = lstwndr;
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            {
-                foreach (UserControl uc in _mainPresenter.GetMainView().GetPanelItems().Controls)
-                {
-                    foreach (Control lbl in uc.Controls)
-                    {
-                        if (lbl.Text == wdm.WD_name)
+                        if (itemInfo.ItemName == item)
                         {
-                            uc.BringToFront();
+                            if (itemInfo.WD_Selected)
+                            {
+                                itemSelected = true;
+                            }
+                            _mainPresenter.pnlItems_MainPresenter.Controls.Remove((UserControl)itemInfo);
+                        }
+
+                    }
+                    foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
+                    {
+                        if (sortItemUC.ItemName == item)
+                        {
+                            _sortItemView.GetPnlSortItem().Controls.Remove((UserControl)sortItemUC);
                         }
                     }
                 }
-            }
-            int itemCount = 1;
-            foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-            {
-                wdm.WD_id = itemCount;
-                wdm.WD_name = "Item " + itemCount;
-                itemCount++;
-            }
-            _sortItemView.GetPnlSortItem().Invalidate();
-            _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-            LoadSortItem();
-            if(_quotationModel.Lst_Windoor.Count > 0)
-            {
-                _mainPresenter.Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
-            }
-            else
-            {
-                if (_quotationModel.Lst_Windoor.Count == 0)
+                if (itemSelected)
                 {
-                    _mainPresenter.Clearing_Operation();
+                    _mainPresenter.pnlPropertiesBody_MainPresenter.Controls.Clear();
+                    _mainPresenter.pnlMain_MainPresenter.Controls.Clear();
                 }
-                if (_quotationModel != null)
+                int itemcount = 0;
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-                    if (_quotationModel.Lst_Windoor.Count != 0)
+                    itemcount++;
+                    wdm.WD_name = "Item " + itemcount;
+                    wdm.WD_id = itemcount;
+                }
+                foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
+                {
+                    sortItemUC.ItemName = "Item " + itemcount;
+                    itemcount--;
+                    sortItemUC.itemDesc = _quotationModel.Lst_Windoor[itemcount].WD_description;
+                }
+
+                if (_quotationModel.Lst_Windoor.Count > 0)
+                {
+                    if (itemSelected)
                     {
-                        _mainPresenter.GetCurrentPrice();
+                        _mainPresenter.Load_Windoor_Item(_quotationModel.Lst_Windoor[0]);
+                        foreach (ISortItemUC siUC in _sortItemView.GetPnlSortItem().Controls)
+                        {
+                            if (siUC.ItemName == _quotationModel.Lst_Windoor[0].WD_name)
+                            {
+                                siUC.itemSelected = true;
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    _mainPresenter.LblCurrentPrice.Value = 0;
+                    if (_quotationModel.Lst_Windoor.Count == 0)
+                    {
+                        _mainPresenter.Clearing_Operation();
+                    }
+                    if (_quotationModel != null)
+                    {
+                        if (_quotationModel.Lst_Windoor.Count != 0)
+                        {
+                            _mainPresenter.GetCurrentPrice();
+                        }
+                    }
+                    else
+                    {
+                        _mainPresenter.LblCurrentPrice.Value = 0;
+                    }
                 }
+                lstItem.Clear();
+                DeleteEnable = false;
             }
-            lstItem.Clear();
-            DeleteEnable = false;
+           
+           
+
+           
         }
 
         private void _sortItemView_SortItemDragEnterEventRaiseEvent(object sender, DragEventArgs e)
@@ -159,50 +158,63 @@ namespace PresentationLayer.Presenter
             Point p = _sortItemView.GetPnlSortItem().PointToClient(new Point(e.X, e.Y));
             var item = _sortItemView.GetPnlSortItem().GetChildAtPoint(p);
             int index = _sortItemView.GetPnlSortItem().Controls.GetChildIndex(item, false);
-            if (item != e.Data.GetData(e.Data.GetFormats()[0]))
+            if (item != e.Data.GetData(e.Data.GetFormats()[0]) && item != null)
             {
                 lstItem.Clear();
-                DeleteEnable = false;
+                //DeleteEnable = false;
+                //Set index of dragged sort item.
                 _sortItemView.GetPnlSortItem().Controls.SetChildIndex((UserControl)e.Data.GetData(e.Data.GetFormats()[0]), index);
-                //Get All WindoorModel by name
+                //Set index of ItemInfo based on sortitem index
                 List<IWindoorModel> lstwndr = new List<IWindoorModel>();
-                foreach (UserControl uc in _sortItemView.GetPnlSortItem().Controls)
+                foreach (ISortItemUC sortItemuc in _sortItemView.GetPnlSortItem().Controls)
                 {
-                    for (int i = 0; i < _quotationModel.Lst_Windoor.Count; i++)
+                    foreach (IItemInfoUC itemInfouc in _mainPresenter.GetMainView().GetPanelItems().Controls)
                     {
-                        IWindoorModel wdm = _quotationModel.Lst_Windoor[i];
-                        if (uc.Name == wdm.WD_name)
+                        if(sortItemuc.ItemName == itemInfouc.ItemName)
                         {
-                            lstwndr.Add(wdm);
+                            int sortItemIndex = _sortItemView.GetPnlSortItem().Controls.GetChildIndex((UserControl)sortItemuc);
+                            _mainPresenter.GetMainView().GetPanelItems().Controls.SetChildIndex((UserControl)itemInfouc, sortItemIndex);
                         }
                     }
                 }
-                lstwndr.Reverse();
-                _quotationModel.Lst_Windoor.Clear();
-                _quotationModel.Lst_Windoor = lstwndr;
-                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                //remove the windoor model of dragged item and add with new index.
+                foreach(IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
-                    foreach (UserControl uc in _mainPresenter.GetMainView().GetPanelItems().Controls)
+                    if(wdm.WD_name == ((ISortItemUC)e.Data.GetData(e.Data.GetFormats()[0])).ItemName)
                     {
-                        foreach (Control lbl in uc.Controls)
-                        {
-                            if (lbl.Text == wdm.WD_name)
-                            {
-                                uc.BringToFront();
-                            }
-                        }
+                        _quotationModel.Lst_Windoor.Remove(wdm);
+                        _quotationModel.Lst_Windoor.Insert(_quotationModel.Lst_Windoor.Count - index, wdm);
+                        break;
                     }
                 }
-                int itemCount = 1;
+                int itemCount = 0;
+                //rename all windoor WD_name.
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                 {
+                    itemCount++;
                     wdm.WD_id = itemCount;
                     wdm.WD_name = "Item " + itemCount;
-                    itemCount++;
                 }
-                _sortItemView.GetPnlSortItem().Invalidate();
+                //rename all sortItem.
+                foreach (ISortItemUC sortItemUC in _sortItemView.GetPnlSortItem().Controls)
+                {
+                    sortItemUC.ItemName = "Item " + itemCount;
+                    itemCount--;
+                    sortItemUC.itemDesc = _quotationModel.Lst_Windoor[itemCount].WD_description;
+                    if (sortItemUC.itemChecked)
+                    {
+                        lstItem.Add(sortItemUC.ItemName);
+                    }
+                }
+                //rename all itemInfo.
+                itemCount = _mainPresenter.GetMainView().GetPanelItems().Controls.Count;
+                foreach (IItemInfoUC itemInfouc in _mainPresenter.GetMainView().GetPanelItems().Controls)
+                {
+                    itemInfouc.ItemName = "Item " + itemCount;
+                    itemCount--;
+                    //itemInfouc.item = _quotationModel.Lst_Windoor[itemCount].WD_description;
+                }
                 _mainPresenter.basePlatform_MainPresenter.InvalidateBasePlatform();
-                LoadSortItem();
             }
         }
 
@@ -228,6 +240,7 @@ namespace PresentationLayer.Presenter
                     sortItem.Dock = DockStyle.Top;
                     sortItem.BringToFront();
                     _sortItemUCPresenter.GetSortItemUC().ItemName = wdm.WD_name;
+                    _sortItemUCPresenter.GetSortItemUC().itemSelected = wdm.WD_Selected;
                     _sortItemUCPresenter.GetSortItemUC().itemDimension = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString();
                     _sortItemUCPresenter.GetSortItemUC().itemDesc = wdm.WD_description;
                     _sortItemUCPresenter.GetSortItemUC().GetPboxItemImage().Image = wdm.WD_image;
