@@ -2550,7 +2550,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtWindoorListPrice.Value</Value>
+                              <Value>=Math.Round((Fields!dtWindoorListPrice.Value),2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <Format>#,0.00;(#,0.00)</Format>
@@ -2588,7 +2588,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtScreenListPrice.Value</Value>
+                              <Value>=Math.Round((Fields!dtScreenListPrice.Value),2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <Format>#,0.00;(#,0.00)</Format>
@@ -2626,7 +2626,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=(Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)</Value>
+                              <Value>=Math.Round(Math.Round((Fields!dtWindoorListPrice.Value),2)+ Math.Round((Fields!dtScreenListPrice.Value),2),2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <Format>#,0.00;(#,0.00)</Format>
@@ -2669,7 +2669,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=-(((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (Fields!dtDiscountAverage.Value))</Value>
+                              <Value>=-Math.Round(  ( Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2) ) * (Fields!dtDiscountAverage.Value),2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <Format>#,0.00;(#,0.00)</Format>
@@ -2711,7 +2711,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Math.Truncate((((Fields!dtWindoorListPrice.Value) + (Fields!dtScreenListPrice.Value)) * (1 - Fields!dtDiscountAverage.Value)) * 100 ) / 100</Value>
+                              <Value>=(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2)))</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontWeight>Bold</FontWeight>
