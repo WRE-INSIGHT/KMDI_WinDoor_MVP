@@ -121,7 +121,10 @@ namespace PresentationLayer.Presenter
                 ScreenDiscountAverage,
                 screen_Windoor_DiscountAverage,
                 total_DiscountedPrice_wo_VAT,
-                windoortotaldiscount;
+                windoortotaldiscount,
+                screentotaldiscount,
+                screen_priceXquantiy,
+                screenUnitPriceTotal;
 
         bool existing = false;
         bool showImage;
@@ -160,8 +163,27 @@ namespace PresentationLayer.Presenter
             DSQuotation _dsq = new DSQuotation();
             try
             {
-                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
-                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+                 screenUnitPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //screenUnitPriceTotal = screenUnitPriceTotal + screen_priceXquantiy;
+
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    }
+                }
+
+                decimal DiscountPercentage = screentotaldiscount / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
+
                 Console.WriteLine(DiscountPercentage.ToString());
 
                 foreach (var item in _mainPresenter.Screen_List)
@@ -181,7 +203,7 @@ namespace PresentationLayer.Presenter
                                             item.Screen_WindoorID,
                                             item.Screen_UnitPrice.ToString("n"),
                                             item.Screen_Quantity,
-                                            NetPriceTotal,
+                                            screenUnitPriceTotal,
                                             Convert.ToString(item.Screen_ItemNumber),
                                             item.Screen_NetPrice.ToString("n"),
                                             1,
@@ -191,6 +213,7 @@ namespace PresentationLayer.Presenter
                                             DiscountPercentage
                                             );
                 }
+                clearingOperation();
                 _mainPresenter.printStatus = "ScreenItem";
             }
             catch (Exception ex)
@@ -414,7 +437,26 @@ namespace PresentationLayer.Presenter
             {
                 ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
-                ScreenDiscountAverage = (Convert.ToDecimal(_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / ScreenTotalListCount) / 100;
+
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //ScreenTotalListPrice = ScreenTotalListPrice + screen_priceXquantiy;
+
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    }
+                }
+
+                ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
             }
             catch (Exception ex)
             {
@@ -477,6 +519,10 @@ namespace PresentationLayer.Presenter
             ScreenDiscountAverage = 0;
             windoorDiscountAverage = 0;
             windoortotaldiscount = 0;
+            screentotaldiscount = 0;
+            screen_Windoor_DiscountAverage = 0;
+            screen_priceXquantiy = 0;
+            screenUnitPriceTotal = 0;
         }
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)

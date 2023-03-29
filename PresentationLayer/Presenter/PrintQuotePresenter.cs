@@ -122,14 +122,14 @@ namespace PresentationLayer.Presenter
                 GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
             }
             baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
-                                          + "USING "
-                                          + baseColor.ToUpper()
-                                          + " PROFILES\n"
-                                          + "USING "
-                                          + GlassThickness.ToUpper()
-                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
+            //+"USING "
+            //+ baseColor.ToUpper()
+            //+ " PROFILES\n"
+            //+ "USING "
+            //+ GlassThickness.ToUpper()
+            //+ " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+            //+ "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
@@ -279,6 +279,15 @@ namespace PresentationLayer.Presenter
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(795, 26);
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Right | AnchorStyles.Left;
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(795, 3);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(589, 26);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(589, 3);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(383, 26);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(383, 3);
+
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
 
@@ -360,6 +369,19 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
                     #region Windoor RDLC
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627,26);
+                    //_printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(627,26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
@@ -460,6 +482,18 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     #region Contract Summary RDLC 
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";

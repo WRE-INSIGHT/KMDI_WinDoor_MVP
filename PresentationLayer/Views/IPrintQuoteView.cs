@@ -23,9 +23,15 @@ namespace PresentationLayer.Views
         event EventHandler PrintQuoteViewLoadEventRaised;
         event EventHandler SelectedIndexChangeEventRaised;
 
-
         ReportViewer GetReportViewer();
         BindingSource GetBindingSource();
         DateTimePicker GetDTPDate();
+        RichTextBox GetQuotationBody();
+        RichTextBox GetQuotationSalutation();
+        RichTextBox GetQuotationAddress();
+        Label GetAddressLabel();
+        Label GetSalutationLabel();
+        Label GetBodyLabel();
+
     }
 }

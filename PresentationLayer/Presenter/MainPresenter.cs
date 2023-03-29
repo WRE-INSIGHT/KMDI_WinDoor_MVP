@@ -1130,7 +1130,8 @@ namespace PresentationLayer.Presenter
                                                           0,
                                                           0.0m,
                                                           0.0m,
-                                                          string.Empty);
+                                                          string.Empty,
+                                                          0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
@@ -7679,7 +7680,8 @@ namespace PresentationLayer.Presenter
                                                              screen_Discount,
                                                              screen_NetPrice,
                                                              screen_TotalAmount,
-                                                             screen_description);
+                                                             screen_description,
+                                                             screen_Factor);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;

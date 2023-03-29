@@ -634,6 +634,15 @@ namespace PresentationLayer.Views
             {
                 CrtlPress = true;
             }
+
+            if (e.Control == true && e.KeyCode == Keys.P)
+            {
+                itemListToolStripMenuItem_Click(sender, e);
+            }
+            else if (e.Control == true && e.KeyCode == Keys.S)
+            {
+                saveToolStripButton_Click(sender, e);
+            }
         }
 
         private void MainView_KeyUp(object sender, KeyEventArgs e)

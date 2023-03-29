@@ -184,6 +184,8 @@ namespace PresentationLayer.Views
             cmb_freedomSize.DataSource = Freedom;
                   
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
+
+            
         }
 
         private void btn_add_Click(object sender, EventArgs e)
