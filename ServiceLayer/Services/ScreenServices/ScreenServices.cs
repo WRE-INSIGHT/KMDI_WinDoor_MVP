@@ -25,7 +25,9 @@ namespace ServiceLayer.Services.ScreenServices
                                                int discount,
                                                decimal screen_netPrice,
                                                decimal screen_totalAmount,
-                                               string screen_description)
+                                               string screen_description,
+                                               decimal factor
+                                               )
         {
              IScreenModel scrn = new ScreenModel(screen_itemnumber,
                                                 screen_width,
@@ -38,7 +40,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                 discount,
                                                 screen_netPrice,
                                                 screen_totalAmount,
-                                                screen_description);
+                                                screen_description,
+                                                factor);
 
             ValidateModel(scrn);
             return scrn;
@@ -55,7 +58,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                 int discount,
                                                 decimal screen_netPrice,
                                                 decimal screen_totalAmount,
-                                                string screen_description)
+                                                string screen_description,
+                                                 decimal factor)
         {
 
                IScreenModel _screenModel = CreateScreen(screen_itemnumber,
@@ -69,7 +73,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                         discount,
                                                         screen_netPrice,
                                                         screen_totalAmount,
-                                                        screen_description);
+                                                        screen_description,
+                                                        factor);
 
             return _screenModel;
         }

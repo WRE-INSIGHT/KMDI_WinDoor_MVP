@@ -104,12 +104,10 @@ namespace PresentationLayer.Presenter
                     if (duplicateBaseColor.Count() == 3)
                     {
                         baseColor += ", " + duplicateBaseColor.ToList()[i];
-
                     }
                     else
                     {
                         baseColor += " & " + duplicateBaseColor.ToList()[i];
-
                     }
                 }
                 else if (i == 2)
@@ -133,7 +131,7 @@ namespace PresentationLayer.Presenter
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
-            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
@@ -141,7 +139,7 @@ namespace PresentationLayer.Presenter
             try
             {
                 EventLoad();
-                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load
+                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load            
                 _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);           
@@ -279,6 +277,15 @@ namespace PresentationLayer.Presenter
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(795, 26);
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Right | AnchorStyles.Left;
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(795, 3);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(589, 26);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(589, 3);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(383, 26);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(383, 3);
+
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
 
@@ -360,6 +367,19 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "WinDoorItems")
                 {
                     #region Windoor RDLC
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627,26);
+                    //_printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(627,26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Visible = false;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
@@ -460,6 +480,18 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     #region Contract Summary RDLC 
+
+                    #region  label & Rtextbox new location
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(205, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(416, 3);
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
+
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
+
+                    #endregion
+
                     _printQuoteView.GetChkLstBox().Visible = false;
                     _printQuoteView.ShowLastPage().Visible = false;
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";

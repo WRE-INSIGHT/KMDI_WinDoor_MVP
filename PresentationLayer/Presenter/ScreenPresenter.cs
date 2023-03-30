@@ -3,6 +3,7 @@ using PresentationLayer.CommonMethods;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
+using ServiceLayer.Services.QuotationServices;
 using ServiceLayer.Services.ScreenServices;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,12 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IQuotationServices _quotationServices;
+
 
         private IPrintQuotePresenter _printQuotePresenter;
         private IScreenAddOnPropertiesUCPresenter _screenAddOnPropertiesUCPresenter;
         private IExchangeRatePresenter _exchangeRatePresenter;
-
         private IScreenServices _screenService;
 
         private List<Freedom_ScreenType> _freedomScreenType = new List<Freedom_ScreenType>();
@@ -35,6 +37,9 @@ namespace PresentationLayer.Presenter
         private DataGridView _dgv_Screen;
         private ScreenType screenType;
         private bool sortAscending = true;
+        private decimal screenDiscountAverage;
+        private decimal Screen_priceXquantiy;
+
 
 
         CommonFunctions commonfunc = new CommonFunctions();
@@ -240,6 +245,7 @@ namespace PresentationLayer.Presenter
                                                 item.Screen_Quantity = _screenModel.Screen_Quantity;
                                                 item.Screen_Discount = _screenModel.Screen_Discount;
                                                 item.Screen_NetPrice = _screenModel.Screen_NetPrice;
+                                                item.Screen_TotalAmount = _screenModel.Screen_TotalAmount;
                                                 break;
                                             }
                                         }
@@ -280,8 +286,6 @@ namespace PresentationLayer.Presenter
             _mainPresenter.SetChangesMark();
          
         }
-
-
 
         private void _screenView_cmbFreedomSizeSelectedValueChangedEventRaised(object sender, EventArgs e)
         {
@@ -352,9 +356,6 @@ namespace PresentationLayer.Presenter
                     }
                     i++;
                     #endregion
-
-
-
                 }
 
             }
@@ -505,6 +506,7 @@ namespace PresentationLayer.Presenter
                         _screenView.getNudPlisseRd().Visible = true;
                         _screenView.getLblPlisseRd().Visible = true;                       
                     }
+                 
                     if (plisseType == PlisseType._SR)
                     {
                         _screenModel.SP_MagnumScreenType_Visibility = true;
@@ -513,6 +515,7 @@ namespace PresentationLayer.Presenter
                     {
                         _screenModel.SP_MagnumScreenType_Visibility = false;
                     }
+                    _screenModel.Screen_6052MilledProfileVisibility = true;
                     _screenModel.Screen_1067PVCboxVisibility = true;
                     _screenModel.Screen_6040MilledProfileVisibility = true;
                     _screenModel.Screen_LandCoverVisibility = false;
@@ -547,6 +550,7 @@ namespace PresentationLayer.Presenter
                 _screenView.getLblPlisseRd().Visible = false;
                 _screenView.getCmbFreedom().Visible = false;
                 _screenModel.Screen_6040MilledProfileVisibility = false;
+                _screenModel.Screen_6052MilledProfileVisibility = false;        
                 _screenModel.Screen_1067PVCboxVisibility = false;
                 _screenModel.Screen_LandCoverVisibility = false;
 
@@ -559,7 +563,11 @@ namespace PresentationLayer.Presenter
             }
             else
             {
-                _screenModel.Screen_6052MilledProfileVisibility = false;
+                // condition to prevent closing of add-ons in plisse 
+                if (screenType != ScreenType._Plisse)
+                {
+                    _screenModel.Screen_6052MilledProfileVisibility = false;
+                }
                 _screenModel.Screen_1385MilledProfileVisibility = false;
             }
 
@@ -628,9 +636,32 @@ namespace PresentationLayer.Presenter
             */
             try
             {
-                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
-                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+
+                var ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);             
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //Screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //NetPriceTotal = NetPriceTotal + Screen_priceXquantiy;
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for(int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screenDiscountAverage = screenDiscountAverage + item.Screen_Discount;
+                    }
+
+                    Console.WriteLine(item.Screen_UnitPrice.ToString());
+                    Console.WriteLine(item.Screen_TotalAmount.ToString());
+
+                }
+
+                decimal DiscountPercentage = screenDiscountAverage / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
                 Console.WriteLine(DiscountPercentage.ToString());
+                
                 if (_screenDT != null)
                 {
                     foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
@@ -640,7 +671,7 @@ namespace PresentationLayer.Presenter
                                                Datarow.Cells[3].Value ?? string.Empty,
                                                Datarow.Cells[4].Value ?? string.Empty,
                                                Datarow.Cells[5].Value ?? 0,
-                                               NetPriceTotal,
+                                               ScreenTotalListPrice,
                                                Datarow.Cells[0].Value ?? 0,
                                                Datarow.Cells[7].Value ?? 0,
                                                1,
@@ -651,6 +682,8 @@ namespace PresentationLayer.Presenter
                                                );
                     }
                 }
+                Screen_priceXquantiy = 0;
+                screenDiscountAverage = 0;
                 _mainPresenter.printStatus = "ScreenItem";
 
                 IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, _mainPresenter);
@@ -659,10 +692,10 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Screen List Count is 0: "," ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Screen List Count is 0: ", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-           
+
         }
 
         private void _screenView_dgvScreenRowPostPaintEventRaised(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -713,6 +746,8 @@ namespace PresentationLayer.Presenter
             _screenDT.Columns.Add(CreateColumn("Discount", "Discount", "System.String"));
             _screenDT.Columns.Add(CreateColumn("Net Price", "Net Price", "System.String"));
             _screenDT.Columns.Add(CreateColumn("ScreenType", "ScreenType", "System.String"));
+            _screenDT.Columns.Add(CreateColumn("Factor", "Factor", "System.Decimal"));
+            
 
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
             _screenView.GetDatagrid().Columns[0].Width = 35;
@@ -723,9 +758,9 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             _screenView.GetDatagrid().Columns[5].Width = 85;
             _screenView.GetDatagrid().Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            _screenView.GetDatagrid().Columns[8].AutoSizeMode =DataGridViewAutoSizeColumnMode.Fill;
+            _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;          
             _screenView.GetDatagrid().Columns[8].Visible = false;
+            _screenView.GetDatagrid().Columns[9].Visible = false;
                       
             
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
@@ -788,7 +823,8 @@ namespace PresentationLayer.Presenter
                                     item.Screen_Quantity,
                                     Convert.ToString(item.Screen_Discount) + "%",
                                     item.Screen_NetPrice.ToString("n"),
-                                    item.Screen_Types
+                                    item.Screen_Types,
+                                    item.Screen_Factor
                                   );
 
                 _screenModel.Screen_ItemNumber = item.Screen_ItemNumber;
@@ -812,6 +848,7 @@ namespace PresentationLayer.Presenter
             dt.Columns.Add("Discount", Type.GetType("System.String"));
             dt.Columns.Add("Net Price", Type.GetType("System.String"));
             dt.Columns.Add("ScreenType", Type.GetType("System.String"));
+            dt.Columns.Add("Factor", Type.GetType("System.Decimal"));
             
             foreach (DataRow screenDTRow in _screenDT.Rows)
             {
@@ -823,7 +860,9 @@ namespace PresentationLayer.Presenter
                             screenDTRow["Quantity"],
                             screenDTRow["Discount"],
                             screenDTRow["Net Price"],
-                            screenDTRow["ScreenType"]);
+                            screenDTRow["ScreenType"],
+                            screenDTRow["Factor"]);
+                        
             }
 
             return dt;
@@ -858,6 +897,8 @@ namespace PresentationLayer.Presenter
             newRow["Discount"] = Convert.ToString(_screenModel.Screen_Discount) + "%";
             newRow["Net Price"] = _screenModel.Screen_NetPrice.ToString("n");
             newRow["ScreenType"] = _screenModel.Screen_Types;
+            newRow["Factor"] = _screenModel.Screen_Factor;
+            
 
 
             IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_ItemNumber,
@@ -871,7 +912,8 @@ namespace PresentationLayer.Presenter
                                                              _screenModel.Screen_Discount,
                                                              _screenModel.Screen_NetPrice,
                                                              _screenModel.Screen_TotalAmount,
-                                                             _screenModel.Screen_Description);
+                                                             _screenModel.Screen_Description,
+                                                             _screenModel.Screen_Factor);
             _mainPresenter.Screen_List.Add(scr);
 
             return newRow;
@@ -921,7 +963,8 @@ namespace PresentationLayer.Presenter
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
-                                                  IScreenModel screenModel)
+                                                  IScreenModel screenModel
+                                                  )
         {
             unityC
                     .RegisterType<IScreenView, ScreenView>()
@@ -930,6 +973,7 @@ namespace PresentationLayer.Presenter
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
+            
 
             return screen;
         }
