@@ -95,7 +95,8 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_mech_joint = 0,
                 exp_bolt = 0,
                 frame_width = 0,
-                frame_height = 0;
+                frame_height = 0,
+                MechJointConnectorQty = 0;
 
             string screws_for_inst_where = "";
 
@@ -145,10 +146,6 @@ namespace ModelLayer.Model.Quotation
                     frame.Frame_BotFrameArtNo != BottomFrameTypes._None)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
-                    if (frame.Frame_BotFrameArtNo == BottomFrameTypes._6050)
-                    {
-                        frame.Insert_MechanicalJointConnector_MaterialList(Material_List);
-                    }
                 }
 
                 if (frame.Frame_If_InwardMotorizedCasement)
@@ -238,6 +235,14 @@ namespace ModelLayer.Model.Quotation
                             List<IPanelModel> panels = mpnl.MPanelLst_Panel;
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
+
+                            foreach (IDividerModel divArtNo in divs)
+                            {
+                                if (divArtNo.Div_ArtNo == Divider_ArticleNo._6052)
+                                {
+                                    MechJointConnectorQty += 2;
+                                }
+                            }
 
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i += 2)
@@ -704,7 +709,7 @@ namespace ModelLayer.Model.Quotation
                                     }
                                 }
 
-                                Console.WriteLine("bottom frame:" + boundedByBottomFrame);
+                                //Console.WriteLine("bottom frame:" + boundedByBottomFrame);
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -1501,7 +1506,6 @@ namespace ModelLayer.Model.Quotation
                                                 if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                                                 {
                                                     frame.Insert_ConnectorType_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_SealingElement_MaterialList(Material_List);
                                                 }
 
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
@@ -1907,7 +1911,6 @@ namespace ModelLayer.Model.Quotation
                                     if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                                     {
                                         frame.Insert_ConnectorType_MaterialList(Material_List);
-                                        pnl.Insert_SealingElement_MaterialList(Material_List);
                                     }
 
                                     pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
@@ -1944,10 +1947,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
-                                    if (true)
-                                    {
 
-                                    }
                                     if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
                                         frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                                         pnl.Panel_DisplayHeight >= 3200)
@@ -2159,9 +2159,15 @@ namespace ModelLayer.Model.Quotation
                     }
                     #endregion
                 }
+                if (MechJointConnectorQty != 0 || frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    frame.Insert_MechanicalJointConnector_MaterialList(Material_List, MechJointConnectorQty);
+                    frame.Insert_SealingElement_MaterialList(Material_List);
+                }
 
                 exp_bolt += (int)Math.Ceiling((decimal)((frame.Frame_Width * 2) + (frame.Frame_Height * 2)) / 700);
             }
+
 
             Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
             Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 3570);
@@ -2324,7 +2330,7 @@ namespace ModelLayer.Model.Quotation
                 wndr_item.WD_Selected = false;
             }
 
-            item.WD_Selected = true;         
+            item.WD_Selected = true;
         }
 
         public QuotationModel(string quotation_ref_no,
@@ -4009,7 +4015,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         foreach (int cladding_size in div.Div_CladdingSizeList.Values)
                                         {
-                                            claddingPrice = (cladding_size / 1000m) * claddingPricePerLinearMeter;
+                                            claddingPrice += (cladding_size / 1000m) * claddingPricePerLinearMeter;
                                         }
                                     }
                                     #endregion
@@ -4323,18 +4329,26 @@ namespace ModelLayer.Model.Quotation
                                         #region Awning
                                         else if (pnl.Panel_Type.Contains("Awning"))
                                         {
-                                            #region FSPrice
-                                            if (pnl.Panel_SashHeight >= 800)
+
+                                            if (pnl.Panel_HingeOptions == HingeOption._2DHinge || pnl.Panel_LouverMotorizeCheck == true)
                                             {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
-                                            else
+                                            else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                #region FSPrice
+                                                if (pnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
                                             }
-                                            #endregion
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
 
@@ -4679,7 +4693,7 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 MotorizeMechPricePerPiece = 39000m;
                                             }
-                                            MotorizePrice += MotorizeMechPricePerPiece * pnl.Panel_MotorizedMechQty;
+                                            MotorizePrice = MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
                                         }
                                         #endregion
 
@@ -7206,18 +7220,26 @@ namespace ModelLayer.Model.Quotation
                                 #region Awning 
                                 else if (Singlepnl.Panel_Type.Contains("Awning"))
                                 {
-                                    #region FSPrice
-                                    if (Singlepnl.Panel_SashHeight >= 800)
+                                    if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge || Singlepnl.Panel_LouverMotorizeCheck == true)
                                     {
-                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else
+                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
                                     {
-                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        #region FSPrice
+                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        {
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        }
+                                        else
+                                        {
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        }
+                                        #endregion
                                     }
-                                    #endregion
+
 
                                     if (Singlepnl.Panel_HandleOptionsVisibility == true)
                                     {
@@ -9769,7 +9791,7 @@ namespace ModelLayer.Model.Quotation
                     wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
                     InstallationCost = InstallationPoints * CostPerPoints;
-                   
+
                     // Math.Round( , 2) +
 
                     FittingAndSuppliesCost = Math.Round(FSPrice, 2) +
@@ -10607,6 +10629,7 @@ namespace ModelLayer.Model.Quotation
             SashReinPrice = 0;
             DivPrice = 0;
             DivReinPrice = 0;
+            claddingPrice = 0;
             DMPrice = 0;
             DMReinforcementPrice = 0;
             GbPrice = 0;
