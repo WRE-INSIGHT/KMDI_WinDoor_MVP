@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -321,61 +322,211 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                 // jelusi
 
+                //int Lvr_NewLocation = 0,
+                //    Lvr_Gap = 0,
+                //    pInnerY = 0,
+                //    pInnerX = 0,
+                //    pInnerHt = louver.Height,
+                //    pInnerWd = louver.Width,
+                //    NoOfBlades = _panelModel.Panel_LouverBladesCount;
+
+                //float Ht_Allowance = 20 * _frameModel.Frame_Zoom; // tag 10px na allowance sa taas at baba if 100%
+                //double Lvr_GlassHt = 0;
+
+                ////side blade
+                //for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
+                //{
+                //    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBlades))) / (int)NoOfBlades) / 2) + (int)NoOfBlades;
+                //    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
+                //    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBlades);
+
+                //    Point[] LvrSideBlade =
+                //     {
+                //        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((pInnerY - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                //        new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point(pInnerY+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                //        new Point(pInnerY-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                //        new Point(pInnerY-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                //     };
+
+                //    for (int i = 0; i < LvrSideBlade.Length; i += 2)
+                //    {
+                //        if (i == 4)
+                //        {
+                //            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //        else
+                //        {
+                //            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //    }
+
+                //    //blade
+                //    Point[] blade =
+                //    {
+                //        new Point(pInnerX, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((int)louver.Width - pInnerX - 7, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((int)louver.Width ,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
+                //        new Point(pInnerX, Lvr_NewLocation+(int)Lvr_GlassHt)
+                //    };
+                //    for (int i = 0; i < blade.Length; i += 2)
+                //    {
+                //        g.DrawLine(p, blade[i], blade[i + 1]);
+                //    }
+                //}
+
+
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //int Lvr_NewLocation = 0,
+                // Lvr_Gap = 0,
+                // pInnerY = 0,
+                // pInnerX = 0,
+                // pInnerHt = louver.Height,
+                // pInnerWd = louver.Width,
+                // NoOfBlades = _panelModel.Panel_LouverBladesCount;
+                //float Ht_Allowance = 20 * _frameModel.Frame_Zoom; // tag 10px na allowance sa taas at baba if 100%
+                //double Lvr_GlassHt = 0, Total_Lvr_GlassHt = 0;
+                //pInnerHt -= (int)Ht_Allowance;
+                ////side blade
+                //for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
+                //{
+                //    //Lvr_GlassHt = (((pInnerHt - (((int)NoOfBlades))) / (int)NoOfBlades) / 2) + (int)NoOfBlades;
+                //    Lvr_GlassHt = pInnerHt / (int)NoOfBlades;
+                //    Total_Lvr_GlassHt += Lvr_GlassHt;
+                //    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Total_Lvr_GlassHt;
+                //    int New_Lvr_GlassHt_Location = (int)Lvr_GlassHt;
+                //    if (Lvr_GlassHt != Total_Lvr_GlassHt)
+                //    {
+                //        New_Lvr_GlassHt_Location = (int)Total_Lvr_GlassHt - ((int)Lvr_GlassHt * ii);
+                //    }
+                //    //Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBlades);
+                //    Point[] LvrSideBlade =
+                //     {
+                //        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location) ,
+                //        new Point((pInnerY - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt),
+
+                //        new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point(pInnerY+4, (int)Total_Lvr_GlassHt),
+
+                //        new Point(pInnerY-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
+                //        new Point(pInnerY-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                //     };
+
+                //    for (int i = 0; i < LvrSideBlade.Length; i += 2)
+                //    {
+                //        if (i == 4)
+                //        {
+                //            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //        else
+                //        {
+                //            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //    }
+
+                //    //blade
+                //    Point[] blade =
+                //    {
+                //        new Point(pInnerX, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((int)louver.Width - pInnerX - 7, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((int)louver.Width ,(int)Total_Lvr_GlassHt), // - 19 para mag slant yung blade
+                //        new Point(pInnerX,(int)Total_Lvr_GlassHt)
+                //    };
+                //    for (int i = 0; i < blade.Length; i += 2)
+                //    {
+                //        g.DrawLine(p, blade[i], blade[i + 1]);
+                //    }
+                //}
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                 int Lvr_NewLocation = 0,
-                    Lvr_Gap = 0,
-                    pInnerY = 0,
-                    pInnerX = 0,
-                    pInnerHt = louver.Height,
-                    pInnerWd = louver.Width,
-                    NoOfBaldes = _panelModel.Panel_LouverBladesCount;
-
+                Lvr_Gap = 0,
+                pInnerY = 0,
+                pInnerX = 0,
+                pInnerHt = louver.Height,
+                pInnerWd = louver.Width,
+                NoOfBlades = _panelModel.Panel_LouverBladesCount;
                 float Ht_Allowance = 20 * _frameModel.Frame_Zoom; // tag 10px na allowance sa taas at baba if 100%
-                double Lvr_GlassHt = 0;
-
+                double Lvr_GlassHt = 0, Total_Lvr_GlassHt = (int)(Ht_Allowance/2);
+                pInnerHt -= (int)Ht_Allowance;
+                double ht_allowance_deci = 0.0, Lvr_GlassHt_deci = 0.0;
+                IDictionary<Point[], Point[]> lvrBlade = new Dictionary<Point[], Point[]>();
                 //side blade
                 for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
                 {
-                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;
-                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
-                    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
-
+                    //Lvr_GlassHt = (((pInnerHt - (((int)NoOfBlades))) / (int)NoOfBlades) / 2) + (int)NoOfBlades;
+                    Lvr_GlassHt = (double)pInnerHt / NoOfBlades;
+                    Total_Lvr_GlassHt += (int)Lvr_GlassHt;
+                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Total_Lvr_GlassHt;
+                    int New_Lvr_GlassHt_Location = (int)Lvr_GlassHt;
+                    ht_allowance_deci += (double)(Ht_Allowance - Math.Truncate(Ht_Allowance) );
+                    Lvr_GlassHt_deci += (Lvr_GlassHt - Math.Truncate(Lvr_GlassHt));
+                    if ((Lvr_GlassHt + (int)(Ht_Allowance / 2)) != Total_Lvr_GlassHt)
+                    {
+                        New_Lvr_GlassHt_Location = (int)Total_Lvr_GlassHt - ((int)Lvr_GlassHt * ii) - (int)(Ht_Allowance / 2);
+                    }
+                    //Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBlades);
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((pInnerY - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point((pInnerY - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location) ,
+                        new Point((pInnerY - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt),
 
                         new Point(pInnerY-2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point(pInnerY+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point(pInnerY+4, (int)Total_Lvr_GlassHt),
 
-                        new Point(pInnerY-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                        new Point(pInnerY-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
                         new Point(pInnerY-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
                      };
-
-                    for (int i = 0; i < LvrSideBlade.Length; i += 2)
-                    {
-                        if (i == 4)
-                        {
-                            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
-                        }
-                        else
-                        {
-                            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
-                        }
-                    }
-
                     //blade
                     Point[] blade =
                     {
                         new Point(pInnerX, Lvr_NewLocation-(int)Lvr_GlassHt),
                         new Point((int)louver.Width - pInnerX - 7, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((int)louver.Width ,Lvr_NewLocation+(int)Lvr_GlassHt), // - 19 para mag slant yung blade
-                        new Point(pInnerX, Lvr_NewLocation+(int)Lvr_GlassHt)
+                        new Point((int)louver.Width ,(int)Total_Lvr_GlassHt), // - 19 para mag slant yung blade
+                        new Point(pInnerX,(int)Total_Lvr_GlassHt)
                     };
-                    for (int i = 0; i < blade.Length; i += 2)
-                    {
-                        g.DrawLine(p, blade[i], blade[i + 1]);
-                    }
+                    lvrBlade.Add(LvrSideBlade, blade);
+
                 }
+
+
+                for (int ii = 0; ii < _panelModel.Panel_LouverBladesCount; ii++)
+                {
+                    IList<Point> lstPtsSide = new List<Point>();
+                    foreach (Point pnts in lvrBlade.ElementAt(ii).Key)
+                    {
+                        lstPtsSide.Add(new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _frameModel.Frame_Zoom) / 2)));
+                    }
+                    IList<Point> lstPtsblade = new List<Point>();
+                    foreach (Point pnts in lvrBlade.ElementAt(ii).Value)
+                    {
+                        lstPtsblade.Add(new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _frameModel.Frame_Zoom) /2)));
+                    }
+                    for (int i = 0; i < lvrBlade.ElementAt(ii).Key.Length; i += 2)
+                    {
+                        if (i == 4)
+                        {
+                            g.DrawLine(LvrPen2, lstPtsSide[i], lstPtsSide[i + 1]);
+                        }
+                        else
+                        {
+                            g.DrawLine(LvrPen, lstPtsSide[i], lstPtsSide[i + 1]);
+                        }
+                    }
+
+                    for (int i = 0; i < lvrBlade.ElementAt(ii).Value.Length; i += 2)
+                    {
+                        g.DrawLine(p, lstPtsblade[i], lstPtsblade[i + 1]);
+                    }
+
+                }
+
+
+
             }
             catch (Exception ex)
             {

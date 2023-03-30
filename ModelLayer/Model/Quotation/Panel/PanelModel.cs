@@ -2840,23 +2840,6 @@ namespace ModelLayer.Model.Quotation.Panel
             }
         }
 
-        private SealingElement_ArticleNo _panelsealingElementArticleNo;
-        public SealingElement_ArticleNo Panel_SealingElement_ArticleNo
-
-        {
-            get
-            {
-                return _panelsealingElementArticleNo;
-            }
-
-            set
-            {
-                _panelsealingElementArticleNo = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
         public PlantOnWeatherStripHead_ArticleNo Panel_PlantOnWeatherStripHeadArtNo { get; set; }
         public PlantOnWeatherStripSeal_ArticleNo Panel_PlantOnWeatherStripSealArtNo { get; set; }
         public LouverFrameWeatherStripHead_ArticleNo Panel_LouverFrameWeatherStripHeadArtNo { get; set; }
@@ -7660,7 +7643,6 @@ namespace ModelLayer.Model.Quotation.Panel
                     {
                         Panel_ParentFrameModel.Frame_MechJointArticleNo = Frame_MechJointArticleNo._9C52;
                         Panel_RollersTypes = RollersTypes._HDRoller;
-                        Panel_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
                     }
 
                     if (Panel_MotorizedOptionVisibility == true)
@@ -8588,6 +8570,7 @@ namespace ModelLayer.Model.Quotation.Panel
         public int MotorizeMechQty()
         {
             int motor = 0, resetChk = 0;
+
             foreach (IMultiPanelModel mpnl in Panel_ParentFrameModel.Lst_MultiPanel)
             {
                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -9675,14 +9658,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                    "");
         }
 
-        public void Insert_SealingElement_MaterialList(DataTable tbl_explosion)
-        {
-            tbl_explosion.Rows.Add("Sealing Element " + Panel_SealingElement_ArticleNo.DisplayName,
-                                   4, "pc(s)",
-                                   "",
-                                   "Sash",
-                                   "");
-        }
+
 
         public void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion)
         {

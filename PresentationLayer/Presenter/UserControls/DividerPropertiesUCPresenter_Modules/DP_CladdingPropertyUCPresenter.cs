@@ -1,14 +1,9 @@
-﻿using CommonComponents;
-using ModelLayer.Model.Quotation.Divider;
+﻿using ModelLayer.Model.Quotation.Divider;
 using PresentationLayer.Views.UserControls.DividerProperties_Modules;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
+using Unity;
 
 namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_Modules
 {
@@ -20,7 +15,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
         private IDividerModel _dividerModel;
         private IMainPresenter _mainPresenter;
         private IDividerPropertiesUCPresenter _divPropUCP;
-        
+
         public DP_CladdingPropertyUCPresenter(IDP_CladdingPropertyUC dp_claddingPropertyUC)
         {
             _dp_claddingPropertyUC = dp_claddingPropertyUC;
@@ -49,6 +44,9 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
                 _dividerModel.AdjustPropertyPanelHeight("minusCladdingArtNo");
                 _dividerModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "minusCladdingArtNo");
                 _dividerModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "minusCladdingArtNo");
+
+                _dividerModel.Div_CladdingSizeList.Clear();
+ 
             }
 
 
@@ -60,7 +58,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             Control pnl_parent = ((UserControl)_dp_claddingPropertyUC).Parent;
             pnl_parent.Controls.Remove((UserControl)_dp_claddingPropertyUC);
             _mainPresenter.PropertiesScroll = propertiesScroll;
-           
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _dp_claddingPropertyUC_numCladdingSizeValueChangedEventRaised(object sender, EventArgs e)
@@ -80,7 +78,7 @@ namespace PresentationLayer.Presenter.UserControls.DividerPropertiesUCPresenter_
             return _dp_claddingPropertyUC;
         }
 
-        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC, 
+        public IDP_CladdingPropertyUCPresenter GetNewInstance(IUnityContainer unityC,
                                                               IDividerModel divModel,
                                                               IMainPresenter mainPresenter,
                                                               IDividerPropertiesUCPresenter divPropUCP)
