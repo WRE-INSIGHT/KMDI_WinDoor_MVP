@@ -290,7 +290,6 @@ namespace ModelLayer.Model.Quotation.Panel
         GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
         int Panel_OverLappingPanelQty { get; set; }
         AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo { get; set; }
-        SealingElement_ArticleNo Panel_SealingElement_ArticleNo { get; set; }
         PlantOnWeatherStripHead_ArticleNo Panel_PlantOnWeatherStripHeadArtNo { get; set; }
         PlantOnWeatherStripSeal_ArticleNo Panel_PlantOnWeatherStripSealArtNo { get; set; }
         LouverFrameWeatherStripHead_ArticleNo Panel_LouverFrameWeatherStripHeadArtNo { get; set; }
@@ -439,7 +438,6 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
         void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
-        void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
         void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion);
 
         void Insert_TrackRail6m_MaterialList(DataTable tbl_explosion);
