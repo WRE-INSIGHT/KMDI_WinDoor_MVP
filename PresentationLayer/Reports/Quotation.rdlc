@@ -194,17 +194,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Total:</Value>
-                <Style>
-                  <FontFamily>Arial Narrow</FontFamily>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=Format(Sum(Fields!dtNetPrice.Value, "DataSet1"),"N")</Value>
+                <Value>="Total: " &amp; Format(Sum(Math.Round(Fields!dtNetPrice.Value,2), "DataSet1"),"N")</Value>
                 <Style>
                   <FontFamily>Arial Narrow</FontFamily>
                 </Style>
@@ -216,9 +206,9 @@
           </Paragraph>
         </Paragraphs>
         <Top>2.27849in</Top>
-        <Left>6.35447in</Left>
+        <Left>5.61846in</Left>
         <Height>0.25in</Height>
-        <Width>1.505in</Width>
+        <Width>2.24101in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -805,7 +795,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Sum(Fields!dtPrice.Value),"N")</Value>
+                              <Value>=Format(Math.Round(Sum(Fields!dtPrice.Value),2),"N")</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                                 <Format>0.00;(0.00)</Format>
@@ -892,7 +882,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Sum(Fields!dtNetPrice.Value),"N")</Value>
+                              <Value>=Format(Sum(Math.Round(Fields!dtNetPrice.Value,2)),"N")</Value>
                               <Style>
                                 <FontFamily>Arial Narrow</FontFamily>
                               </Style>
