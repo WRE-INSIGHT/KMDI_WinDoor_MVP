@@ -926,7 +926,8 @@ namespace PresentationLayer.Presenter
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
-            _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
+            _mainView.MainViewClosedEventRaised += new EventHandler(OnMainViewClosedEventRaised);
+            _mainView.MainViewClosingEventRaised += new FormClosingEventHandler(OnMainViewClosingEventRaised);
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
@@ -965,6 +966,58 @@ namespace PresentationLayer.Presenter
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
+        }
+
+        private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to save your changes in " + wndrFileName + "?", "Closing Application",
+                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveChanges();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                if (_quotationModel != null)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to save your progress?", "Closing Application",
+                                               MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                        if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                        {
+                            wndr_content = new List<string>();
+                            SaveAs();
+                        }
+                        else
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        e.Cancel = false;
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+
+                }
+            }
         }
         #region Events  
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
@@ -2334,11 +2387,12 @@ namespace PresentationLayer.Presenter
             _mainView.GetToolStripLabelLoading().Visible = visibility;
             _mainView.GetTsProgressLoading().Visible = visibility;
         }
-        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
+        private void OnMainViewClosedEventRaised(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
             _loginView.CloseLoginView();
         }
+
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {

@@ -140,7 +140,7 @@ namespace PresentationLayer.Presenter
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
-            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(" Luzon", "").Replace(" Visayas", "").Replace(" Mindanao", "");
+            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)

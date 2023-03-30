@@ -356,7 +356,7 @@ namespace ModelLayer.Model.Quotation.Frame
         }
 
 
- 
+
 
 
         public void SetZoom()
@@ -1055,6 +1055,22 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private SealingElement_ArticleNo _frameSealingElementArticleNo;
+        public SealingElement_ArticleNo Frame_SealingElement_ArticleNo
+
+        {
+            get
+            {
+                return _frameSealingElementArticleNo;
+            }
+
+            set
+            {
+                _frameSealingElementArticleNo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private MechnJointForFrame_ArticleNo _frameMechanicalJointConnector_Artno;
         public MechnJointForFrame_ArticleNo Frame_MechanicalJointConnector_Artno
         {
@@ -1068,6 +1084,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 NotifyPropertyChanged();
             }
         }
+
+        public int Frame_MechanicalJointConnectorQty { get; set; }
 
         private int _frame_SlidingRailsQty;
         public int Frame_SlidingRailsQty
@@ -1177,6 +1195,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 botFrameDiff = 20;
                 Frame_MechanicalJointConnector_Artno = MechnJointForFrame_ArticleNo._9C52;
+                Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             }
 
             if (Frame_Type == Frame_Padding.Door &&
@@ -1195,6 +1214,8 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_BotFrameVisible == true &&
                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
+                Frame_MechanicalJointConnectorQty += 2;
+
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
                     Frame_ExplosionHeight = _frameHeight - botFrameDiff - MechjointDeduction;
@@ -1223,6 +1244,8 @@ namespace ModelLayer.Model.Quotation.Frame
                      Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
+                Frame_MechanicalJointConnectorQty += 4;
+
                 if (Frame_If_InwardMotorizedSliding == true)
                 {
                     Frame_ExplosionHeight = _frameHeight;
@@ -2242,14 +2265,30 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        public void Insert_MechanicalJointConnector_MaterialList(DataTable tbl_explosion)
+        int totalMechJointQty = 0;
+        public void Insert_MechanicalJointConnector_MaterialList(DataTable tbl_explosion, int MechJointConnectorQty)
         {
+            int additionalRailingsMechJoint = 0;
+            if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                additionalRailingsMechJoint = ((Frame_SlidingRailsQty - 2) * 4);
+            }
+            totalMechJointQty = Frame_MechanicalJointConnectorQty + additionalRailingsMechJoint + MechJointConnectorQty;
             tbl_explosion.Rows.Add("Mechanical Joint Connector " + Frame_MechanicalJointConnector_Artno.DisplayName,
-                                                   2, "pc(s)",
+                                                  totalMechJointQty, "pc(s)",
                                                    "",
                                                    "Frame",
                                                    @"");
 
+        }
+
+        public void Insert_SealingElement_MaterialList(DataTable tbl_explosion)
+        {
+            tbl_explosion.Rows.Add("Sealing Element " + Frame_SealingElement_ArticleNo.DisplayName,
+                                   totalMechJointQty, "pc(s)",
+                                   "",
+                                   "Sash",
+                                   "");
         }
 
         public void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion)

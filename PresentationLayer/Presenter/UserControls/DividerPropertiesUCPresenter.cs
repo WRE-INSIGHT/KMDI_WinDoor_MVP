@@ -347,7 +347,7 @@ namespace PresentationLayer.Presenter.UserControls
                 _mainPresenter.GetCurrentPrice();
             }
             _mainPresenter.PropertiesScroll = propertiesScroll;
-            
+
         }
 
         private void _divProperties_btnSaveCladdingClickedEventRaised(object sender, EventArgs e)
@@ -405,14 +405,14 @@ namespace PresentationLayer.Presenter.UserControls
             Cladding_Count++;
 
             _dp_claddingBracketPropertyUCP.BringToFrontUC();
-     
+
             int locY = ((UserControl)_divProperties).Location.Y;
 
             _mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
 
             _divProperties.SetBtnSaveBackColor(Color.White);
             _mainPresenter.PropertiesScroll = propertiesScroll;
-            
+
         }
 
         private void _divProperties_CmbdivArtNoSelectedValueChangedEventRaised(object sender, EventArgs e)
@@ -432,7 +432,7 @@ namespace PresentationLayer.Presenter.UserControls
                 int propertiesScroll = _mainPresenter.PropertiesScroll;
                 _divModel.Div_CladdingProfileArtNo = (CladdingProfile_ArticleNo)((ComboBox)sender).SelectedValue;
                 _mainPresenter.PropertiesScroll = propertiesScroll;
-                
+
             }
         }
 
@@ -593,7 +593,7 @@ namespace PresentationLayer.Presenter.UserControls
 
         //public IDP_LeverEspagnolettePropertyUCPresenter GetLeverEspagUCP()
         //{
-           
+
         //    return _dp_leverEspagPropertyUCP;
         //}
 
