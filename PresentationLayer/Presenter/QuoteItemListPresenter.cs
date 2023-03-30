@@ -34,6 +34,7 @@ namespace PresentationLayer.Presenter
         private IRDLCReportCompilerPresenter _rdlcReportCompilerPresenter;
 
         #region Variables
+
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
         private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
@@ -137,8 +138,6 @@ namespace PresentationLayer.Presenter
                 screenUnitPriceTotal,
                 outOfTownCharges,
                 outOfTownChargesMultiplier;
-
-
         bool existing = false;
         bool showImage;
         decimal windoorpricecheck;//check price in rdlc report 
@@ -493,11 +492,13 @@ namespace PresentationLayer.Presenter
                 outOfTownChargesMultiplier = 0.05m;
             }
 
-            outOfTownCharges = (windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier;
+            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier),2);
             if(outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage),2);
 
-            Console.WriteLine(archi + " " + outOfTownCharges.ToString());
+
+            //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
+            Console.WriteLine(archi + " "  + OutOfTownCharges.ToString());
             Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT),2));
             Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);         
             //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
@@ -528,7 +529,7 @@ namespace PresentationLayer.Presenter
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
             if (RenderPDFAtBackGround != true)
-            {
+            {                    
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
             }
             else
