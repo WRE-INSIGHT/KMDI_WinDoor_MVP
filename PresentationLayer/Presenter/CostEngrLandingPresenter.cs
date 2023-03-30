@@ -324,18 +324,26 @@ namespace PresentationLayer.Presenter
         {
             DataTable dt = await _projQuoteServices.Get_ProjectByCostEngrID(searchStr, _userModel.EmployeeID, _userModel.AccountType);
             _dgvAssignedProj.DataSource = dt;
-
-            foreach (DataGridViewColumn col in _dgvAssignedProj.Columns)
-            {
-                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
-
             _dgvAssignedProj.Columns["Project_Id"].Visible = false;
             _dgvAssignedProj.Columns["File_Label"].Visible = false;
             _dgvAssignedProj.Columns["AEIC ID"].Visible = false;
             _dgvAssignedProj.Columns["Title Lastname"].Visible = false;
             _dgvAssignedProj.Columns["Factor"].Visible = false;
             _dgvAssignedProj.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
+            foreach (DataGridViewColumn col in _dgvAssignedProj.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            //Cost Engineer L
+            //foreach (DataGridViewRow row in _dgvAssignedProj.Rows)
+            //{
+            //    if (_userModel.EmployeeID == Convert.ToInt32(row.Cells["Employee_Id"].Value))
+            //    {
+            //        row.DefaultCellStyle.BackColor = Color.Red;
+            //    }
+            //}
+           
         }
 
         private async Task Load_DGV_CustRefNo(int proj_id)
@@ -347,7 +355,10 @@ namespace PresentationLayer.Presenter
             foreach (DataGridViewColumn col in _dgvCustRefNo.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
             }
+           
+               
 
             _dgvCustRefNo.Columns["Customer_Reference_Id"].Visible = false;
             _dgvCustRefNo.Columns["Cost Engr In-Charge Id"].Visible = false;

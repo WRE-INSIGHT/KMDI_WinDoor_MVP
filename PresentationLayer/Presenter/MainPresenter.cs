@@ -1869,7 +1869,7 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 //GetCurrentPrice();
-                itemDescription();
+                //itemDescription();
 
             }
             catch (Exception ex)
@@ -11098,7 +11098,7 @@ namespace PresentationLayer.Presenter
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                if (wdm.WD_Selected == true)
+                if (wdm.WD_Selected == true && !ItemLoad)
                 {
                     lst_DuplicatePnl.Clear();
                     lst_Description.Clear();
