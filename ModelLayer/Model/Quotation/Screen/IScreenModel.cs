@@ -72,6 +72,7 @@ namespace ModelLayer.Model.Quotation.Screen
         bool Screen_1067PVCboxVisibility { get; set; }
         int Screen_1067PVCboxQty { get; set; }
         int Screen_1067PVCbox { get; set; }
+        decimal Screen_AddOnsSpecialFactor { get;set;}
         void ScreenPropAddOnsReset();
     }
 }

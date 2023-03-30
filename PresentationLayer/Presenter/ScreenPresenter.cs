@@ -282,7 +282,7 @@ namespace PresentationLayer.Presenter
                 }
             }
 
-
+            
             _mainPresenter.SetChangesMark();
          
         }
@@ -734,7 +734,15 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Invalid Item Number","",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }           
         }
+        public async void GetProjectFactor()
+        {
+            string[] province = _mainPresenter.projectAddress.Split(',');
+            decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
 
+            _screenModel.Screen_AddOnsSpecialFactor = value;
+            Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+
+        }
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
         {
             _screenDT.Columns.Add(CreateColumn("Item No.", "Item No.", "System.Decimal"));
@@ -761,8 +769,8 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;          
             _screenView.GetDatagrid().Columns[8].Visible = false;
             _screenView.GetDatagrid().Columns[9].Visible = false;
-                      
-            
+
+             GetProjectFactor();
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
@@ -776,6 +784,8 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
+
+        
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
             if (_mainPresenter.Screen_List.Count != 0)
@@ -913,7 +923,8 @@ namespace PresentationLayer.Presenter
                                                              _screenModel.Screen_NetPrice,
                                                              _screenModel.Screen_TotalAmount,
                                                              _screenModel.Screen_Description,
-                                                             _screenModel.Screen_Factor);
+                                                             _screenModel.Screen_Factor,
+                                                             _screenModel.Screen_AddOnsSpecialFactor);
             _mainPresenter.Screen_List.Add(scr);
 
             return newRow;
@@ -963,7 +974,8 @@ namespace PresentationLayer.Presenter
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
-                                                  IScreenModel screenModel
+                                                  IScreenModel screenModel,
+                                                  IQuotationServices quotationServices
                                                   )
         {
             unityC
@@ -973,6 +985,7 @@ namespace PresentationLayer.Presenter
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
+            screen._quotationServices = quotationServices;
             
 
             return screen;

@@ -1131,12 +1131,12 @@ namespace PresentationLayer.Presenter
                                                           0.0m,
                                                           0.0m,
                                                           string.Empty,
+                                                          0.0m,
                                                           0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel,_quotationServices);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
-
 
         }
 
@@ -7681,7 +7681,8 @@ namespace PresentationLayer.Presenter
                                                              screen_NetPrice,
                                                              screen_TotalAmount,
                                                              screen_description,
-                                                             screen_Factor);
+                                                             screen_Factor,
+                                                             screen_AddOnsSpecialFactor);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;
@@ -7689,6 +7690,7 @@ namespace PresentationLayer.Presenter
             scr.Screen_Width = screen_Width;
             scr.Screen_Height = screen_Height;
             scr.Screen_Factor = screen_Factor;
+            scr.Screen_AddOnsSpecialFactor = screen_AddOnsSpecialFactor;
             scr.Screen_Types = screen_Types;
             scr.Screen_PlisséType = screen_PlisséType;
             scr.Screen_BaseColor = screen_BaseColor;
@@ -9073,7 +9075,8 @@ namespace PresentationLayer.Presenter
                 screen_DiscountedPrice,
                 screen_DiscountedPriceWithoutVat,
                 screen_LaborAndMobilization,
-                screen_TotalNetPriceWithoutVat;
+                screen_TotalNetPriceWithoutVat,
+                screen_AddOnsSpecialFactor;
         int screen_id,
             screen_Set,
             screen_Quantity,
