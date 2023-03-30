@@ -287,12 +287,11 @@ namespace PresentationLayer.Presenter
                 if (e.RowIndex > -1 && e.ColumnIndex > -1 && e.Button == MouseButtons.Left)
                 {
                     _projId = Convert.ToInt32(_dgvAssignedProj.Rows[e.RowIndex].Cells["Project_Id"].Value);
-                    _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString();
-                    
+                    _projName = _dgvAssignedProj.Rows[e.RowIndex].Cells["File_Label"].Value.ToString() == "Proj/Client`s Name" ? _dgvAssignedProj.Rows[e.RowIndex].Cells["Client Name"].Value.ToString() : _dgvAssignedProj.Rows[e.RowIndex].Cells["Company Name"].Value.ToString();
                     _mainPresenter.aeic = _dgvAssignedProj.Rows[e.RowIndex].Cells["AEIC"].Value.ToString();
                     _mainPresenter.position = _dgvAssignedProj.Rows[e.RowIndex].Cells["Position"].Value.ToString();
                     _mainPresenter.projectAddress = _dgvAssignedProj.Rows[e.RowIndex].Cells["Address"].Value.ToString();
-                    _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString();
+                    _mainPresenter.titleLastname = _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString().Trim() != ""? _dgvAssignedProj.Rows[e.RowIndex].Cells["Title Lastname"].Value.ToString().Trim(): "Sir/Madam";
                     _CELandingView.SetText_LblNav(_projName);
 
                     int index = _tPageNav_selectedIndex + 1;
