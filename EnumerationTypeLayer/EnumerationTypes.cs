@@ -1080,7 +1080,6 @@ namespace EnumerationTypeLayer
             public Freedom_ScreenType(int value, string displayname) : base(value, displayname) { }
         }
 
-
         public class PlisseType : Enumeration<PlisseType, int>
         {
             public static readonly PlisseType _SR = new PlisseType(0, "Plissé SR Slim Line Insect Screen");
