@@ -34,6 +34,7 @@ namespace PresentationLayer.Presenter
         private IRDLCReportCompilerPresenter _rdlcReportCompilerPresenter;
 
         #region Variables
+
         private List<IQuoteItemListUCPresenter> _lstQuoteItemUC = new List<IQuoteItemListUCPresenter>();
         private List<ShowItemImage> _showItemImage_CheckList = new List<ShowItemImage>();
         private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
@@ -41,6 +42,8 @@ namespace PresentationLayer.Presenter
         private List<int> _lstItemArea = new List<int>();
         private bool _renderPDFAtBackground;
         private string _rdlcReportCompilerOutofTownExpenses;
+        private string[] province;
+        private string archi;
 
         public string RDLCReportCompilerOutOfTownExpenses
         {
@@ -85,6 +88,14 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerItemIndexes = value;
             }
         }
+        public decimal OutOfTownCharges
+        {
+            get
+            {
+                return outOfTownCharges;
+            }
+            
+        }
 
 
         int prev_GlassItemNo,
@@ -121,8 +132,12 @@ namespace PresentationLayer.Presenter
                 ScreenDiscountAverage,
                 screen_Windoor_DiscountAverage,
                 total_DiscountedPrice_wo_VAT,
-                windoortotaldiscount;
-
+                windoortotaldiscount,
+                screentotaldiscount,
+                screen_priceXquantiy,
+                screenUnitPriceTotal,
+                outOfTownCharges,
+                outOfTownChargesMultiplier;
         bool existing = false;
         bool showImage;
         decimal windoorpricecheck;//check price in rdlc report 
@@ -160,8 +175,28 @@ namespace PresentationLayer.Presenter
             DSQuotation _dsq = new DSQuotation();
             try
             {
-                var NetPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
-                decimal DiscountPercentage = (_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / (_mainPresenter.Screen_List.Sum(y => y.Screen_Quantity));
+
+                 screenUnitPriceTotal = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //screenUnitPriceTotal = screenUnitPriceTotal + screen_priceXquantiy;
+
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    }
+                }
+
+                decimal DiscountPercentage = screentotaldiscount / _mainPresenter.Screen_List.Sum(y => y.Screen_Quantity);
+
                 Console.WriteLine(DiscountPercentage.ToString());
 
                 foreach (var item in _mainPresenter.Screen_List)
@@ -181,7 +216,7 @@ namespace PresentationLayer.Presenter
                                             item.Screen_WindoorID,
                                             item.Screen_UnitPrice.ToString("n"),
                                             item.Screen_Quantity,
-                                            NetPriceTotal,
+                                            screenUnitPriceTotal,
                                             Convert.ToString(item.Screen_ItemNumber),
                                             item.Screen_NetPrice.ToString("n"),
                                             1,
@@ -191,6 +226,7 @@ namespace PresentationLayer.Presenter
                                             DiscountPercentage
                                             );
                 }
+                clearingOperation();
                 _mainPresenter.printStatus = "ScreenItem";
             }
             catch (Exception ex)
@@ -207,7 +243,7 @@ namespace PresentationLayer.Presenter
 
         public void PrintWindoorRDLC()
         {
-            
+
             DSQuotation _dsq = new DSQuotation();
             /*
           ID
@@ -290,7 +326,7 @@ namespace PresentationLayer.Presenter
                     string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
                     IQuoteItemListUCPresenter lstQuoteUC = this._lstQuoteItemUC[i];
-                    if(RenderPDFAtBackGround != true)
+                    if (RenderPDFAtBackGround != true)
                     {
                         bool chkbox_checkstate = Convert.ToBoolean(lstQuoteUC.GetiQuoteItemListUC().GetChkboxItemImage().CheckState);
 
@@ -321,10 +357,10 @@ namespace PresentationLayer.Presenter
                         #region RDLCReportCompiler Executed
                         if (RDLCReportCompilerItemIndexes.Count != 0)
                         {
-                            foreach(var item in RDLCReportCompilerItemIndexes.ToArray())
+                            foreach (var item in RDLCReportCompilerItemIndexes.ToArray())
                             {
                                 showImage = false;
-                                if(i == item)
+                                if (i == item)
                                 {
                                     showImage = true;
                                     break;
@@ -352,19 +388,19 @@ namespace PresentationLayer.Presenter
                                           i + 1,
                                           byteToStrForTopView,
                                           showImage);
-                  windoorpricecheck = windoorpricecheck + Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text); // check price
+                    windoorpricecheck = windoorpricecheck + Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text); // check price
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex.Message + "\n Location: " + this);
             }
-            
+
             _mainPresenter.printStatus = "WinDoorItems";
             Console.WriteLine(" Windoor Total Discounted Price: " + windoorpricecheck.ToString());
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
-            if(RenderPDFAtBackGround != true)
+            if (RenderPDFAtBackGround != true)
             {
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
             }
@@ -378,18 +414,17 @@ namespace PresentationLayer.Presenter
 
         public void PrintContractSummaryRDLC()
         {
-            
+
             DSQuotation _dtqoute = new DSQuotation();
             try
             {
                 foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
-                {                                    
+                {
                     var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
-                    windoorTotalListPrice =+windoorTotalListPrice + price_x_quantity;
-                    
-                    if(wdm.WD_quantity > 1)
+                    windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
+                    if (wdm.WD_quantity > 1)
                     {
-                        for(int i = 1; i <= wdm.WD_quantity; i++)
+                        for (int i = 1; i <= wdm.WD_quantity; i++)
                         {
                             windoortotaldiscount = windoortotaldiscount + wdm.WD_discount;
                         }
@@ -402,7 +437,7 @@ namespace PresentationLayer.Presenter
                 }
                 windoorTotalListCount = _quotationModel.Lst_Windoor.Sum(m => m.WD_quantity);
                 windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Sum(y => y.WD_quantity) / 100;
-                
+
             }
             catch (Exception ex)
             {
@@ -414,7 +449,25 @@ namespace PresentationLayer.Presenter
             {
                 ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
-                ScreenDiscountAverage = (Convert.ToDecimal(_mainPresenter.Screen_List.Sum(s => s.Screen_Discount)) / ScreenTotalListCount) / 100;
+
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //ScreenTotalListPrice = ScreenTotalListPrice + screen_priceXquantiy;
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    }
+                }
+
+                ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
             }
             catch (Exception ex)
             {
@@ -422,12 +475,32 @@ namespace PresentationLayer.Presenter
                 divisor = 1;
             }
 
-            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+             screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+             province = _mainPresenter.projectAddress.Split(',');
+             archi = province[province.Length - 1].Trim();
 
-            total_DiscountedPrice_wo_VAT = (windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage);
-            Console.WriteLine("This is total DiscountedPrice w/o Vat " + total_DiscountedPrice_wo_VAT);
-            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);
+            if(archi == "Luzon")
+            {
+                outOfTownChargesMultiplier = 0.025m;
+            }
+            else if (archi == "Visayas")
+            {
+                outOfTownChargesMultiplier = 0.04m;
+            }
+            else if (archi == "Mindanao")
+            {
+                outOfTownChargesMultiplier = 0.05m;
+            }
 
+            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier),2);
+            if(outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
+            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage),2);
+
+
+            //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
+            Console.WriteLine(archi + " "  + OutOfTownCharges.ToString());
+            Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT),2));
+            Console.WriteLine("2 decimal places: " + Math.Truncate(total_DiscountedPrice_wo_VAT * 100) / 100);         
             //Console.WriteLine(" total windoor discount from forloop" + windoortotaldiscount);
             //Console.WriteLine("Windoor DiscountTotal: " +  _quotationModel.Lst_Windoor.Sum(x => x.WD_discount));
             //Console.WriteLine("Windoor Average Discount.: " + windoorDiscountAverage);
@@ -449,14 +522,14 @@ namespace PresentationLayer.Presenter
                                                 screen_Windoor_DiscountAverage
                                                 );
 
-            
+
             clearingOperation();
             _mainPresenter.printStatus = "ContractSummary";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
             if (RenderPDFAtBackGround != true)
-            {
+            {                    
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
             }
             else
@@ -468,6 +541,7 @@ namespace PresentationLayer.Presenter
 
         }
 
+
         private void clearingOperation()
         {
             windoorTotalListCount = 0;
@@ -477,6 +551,12 @@ namespace PresentationLayer.Presenter
             ScreenDiscountAverage = 0;
             windoorDiscountAverage = 0;
             windoortotaldiscount = 0;
+            screentotaldiscount = 0;
+            screen_Windoor_DiscountAverage = 0;
+            screen_priceXquantiy = 0;
+            screenUnitPriceTotal = 0;
+            outOfTownCharges = 0;
+
         }
 
         private void OnTSbtnPrintClickEventRaised(object sender, EventArgs e)

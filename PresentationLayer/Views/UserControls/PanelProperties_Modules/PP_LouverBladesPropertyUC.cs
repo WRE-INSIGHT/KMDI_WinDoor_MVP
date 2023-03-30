@@ -26,6 +26,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverBladesVisibility"]);
+            nud_LouverBlades.DataBindings.Add(ModelBinding["Panel_LouverBladesCount"]);
         }
     }
 }
