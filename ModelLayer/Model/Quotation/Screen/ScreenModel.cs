@@ -588,7 +588,7 @@ namespace ModelLayer.Model.Quotation.Screen
             LatchkitPrice = 1500,
             IntermediatePartPrice = 800,
 
-            LatchkitTotal, 
+            LatchkitTotal,
             IntermediatePartTotal,
         #endregion
 
@@ -601,6 +601,8 @@ namespace ModelLayer.Model.Quotation.Screen
         ContingenciesCost,
         TotalPrice,
         Discount,
+        AddOnsSpecialFactor,
+        
 
 
         #region BuiltinSideRoll Variables
@@ -642,6 +644,7 @@ namespace ModelLayer.Model.Quotation.Screen
         public int Screen_id { get; set; }
 
         private bool _screen_Types_Window;
+
         public bool Screen_Types_Window
         {
             get
@@ -670,6 +673,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_Width;
+
         public int Screen_Width
         {
             get
@@ -684,6 +688,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_Height;
+
         public int Screen_Height
         {
             get
@@ -697,7 +702,23 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private decimal _screenAddonsSpecialFactor;
+
+        public decimal Screen_AddOnsSpecialFactor
+        {
+            get
+            {
+                return _screenAddonsSpecialFactor;
+            }
+            set
+            {
+                _screenAddonsSpecialFactor = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private decimal _screen_Factor;
+
         public decimal Screen_Factor
         {
             get
@@ -712,6 +733,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private ScreenType _screen_Type;
+
         public ScreenType Screen_Types
         {
             get
@@ -724,7 +746,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private PlisseType _screen_PlisséType;
+
         public PlisseType Screen_PlisséType
         {
             get
@@ -739,6 +763,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private Base_Color _screen_BaseColor;
+
         public Base_Color Screen_BaseColor
         {
             get
@@ -753,6 +778,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_Set;
+
         public int Screen_Set
         {
             get
@@ -767,6 +793,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private string _screen_WindoorID; //location
+
         public string Screen_WindoorID //location
         {
             get
@@ -781,6 +808,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_UnitPrice;
+
         public decimal Screen_UnitPrice
         {
             get
@@ -795,6 +823,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_Quantity;
+
         public int Screen_Quantity
         {
             get
@@ -809,6 +838,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_TotalAmount;
+
         public decimal Screen_TotalAmount
         {
             get
@@ -823,6 +853,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_NetPrice;
+
         public decimal Screen_NetPrice
         {
             get
@@ -837,6 +868,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_Discount;
+
         public int Screen_Discount
         {
             get
@@ -851,6 +883,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_DiscountedPrice;
+
         public decimal Screen_DiscountedPrice
         {
             get
@@ -865,6 +898,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_DiscountedPriceWithoutVat;
+
         public decimal Screen_DiscountedPriceWithoutVat
         {
             get
@@ -879,6 +913,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_LaborAndMobilization;
+
         public decimal Screen_LaborAndMobilization
         {
             get
@@ -893,6 +928,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private decimal _screen_TotalNetPriceWithoutVat;
+
         public decimal Screen_TotalNetPriceWithoutVat
         {
             get
@@ -907,6 +943,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_PVCVisibility;
+
         public bool Screen_PVCVisibility
         {
             get
@@ -936,6 +973,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _springLoad_Visibility;
+
         public bool SpringLoad_Visibility
         {
             get
@@ -950,6 +988,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_0505Width;
+
         public int Screen_0505Width
         {
             get
@@ -964,6 +1003,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1067Height;
+
         public int Screen_1067Height
         {
             get
@@ -978,6 +1018,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_0505Qty;
+
         public int Screen_0505Qty
         {
             get
@@ -992,6 +1033,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1067Qty;
+
         public int Screen_1067Qty
         {
             get
@@ -1006,6 +1048,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_CenterClosureVisibility;
+
         public bool Screen_CenterClosureVisibility
         {
             get
@@ -1020,6 +1063,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_CenterClosureVisibilityOption;
+
         public bool Screen_CenterClosureVisibilityOption
         {
             get
@@ -1034,6 +1078,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_LatchKitQty;
+
         public int Screen_LatchKitQty
         {
             get
@@ -1048,6 +1093,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_IntermediatePartQty;
+
         public int Screen_IntermediatePartQty
         {
             get
@@ -1062,6 +1108,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_6040MilledProfileVisibility;
+
         public bool Screen_6040MilledProfileVisibility
         {
             get
@@ -1076,6 +1123,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_6040MilledProfile;
+
         public int Screen_6040MilledProfile
         {
             get
@@ -1090,6 +1138,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_6040MilledProfileQty;
+
         public int Screen_6040MilledProfileQty
         {
             get
@@ -1104,6 +1153,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_LandCoverVisibility;
+
         public bool Screen_LandCoverVisibility
         {
             get
@@ -1118,6 +1168,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_LandCover;
+
         public int Screen_LandCover
         {
             get
@@ -1132,6 +1183,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_LandCoverQty;
+
         public int Screen_LandCoverQty
         {
             get
@@ -1146,6 +1198,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_1067PVCboxVisibility;
+
         public bool Screen_1067PVCboxVisibility
         {
             get
@@ -1160,6 +1213,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1067PVCbox;
+
         public int Screen_1067PVCbox
         {
             get
@@ -1174,6 +1228,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1067PVCboxQty;
+
         public int Screen_1067PVCboxQty
         {
             get
@@ -1188,6 +1243,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_1385MilledProfileVisibility;
+
         public bool Screen_1385MilledProfileVisibility
         {
             get
@@ -1202,6 +1258,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1385MilledProfile;
+
         public int Screen_1385MilledProfile
         {
             get
@@ -1216,6 +1273,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_1385MilledProfileQty;
+
         public int Screen_1385MilledProfileQty
         {
             get
@@ -1230,6 +1288,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_373or374MilledProfileVisibility;
+
         public bool Screen_373or374MilledProfileVisibility
         {
             get
@@ -1244,6 +1303,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_373or374MilledProfile;
+
         public int Screen_373or374MilledProfile
         {
             get
@@ -1258,6 +1318,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_373or374MilledProfileQty;
+
         public int Screen_373or374MilledProfileQty
         {
             get
@@ -1272,6 +1333,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_6052MilledProfileVisibility;
+
         public bool Screen_6052MilledProfileVisibility
         {
             get
@@ -1286,6 +1348,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_6052MilledProfile;
+
         public int Screen_6052MilledProfile
         {
             get
@@ -1300,6 +1363,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_6052MilledProfileQty;
+
         public int Screen_6052MilledProfileQty
         {
             get
@@ -1314,6 +1378,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private bool _screen_ExchangeRateVisibility;
+
         public bool Screen_ExchangeRateVisibility
         {
             get
@@ -1328,6 +1393,7 @@ namespace ModelLayer.Model.Quotation.Screen
         }
 
         private int _screen_ExchangeRate;
+
         public int Screen_ExchangeRate
         {
             get
@@ -1340,7 +1406,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private Magnum_ScreenType _magnum_Screen_Type;
+
         public Magnum_ScreenType Magnum_ScreenType
         {
             get
@@ -1353,7 +1421,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private bool _reinforced;
+
         public bool Reinforced
         {
             get
@@ -1366,7 +1436,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private bool _sp_magnumscreenType_visibility;
+
         public bool SP_MagnumScreenType_Visibility
         {
             get
@@ -1379,7 +1451,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private int _plissedRd_panels;
+
         public int PlissedRd_Panels
         {
             get
@@ -1392,7 +1466,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private string _screen_description;
+
         public string Screen_Description
         {
             get
@@ -1405,7 +1481,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private decimal _discountPercentage;
+
         public decimal DiscountPercentage
         {
             get
@@ -1418,7 +1496,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private decimal _screenItemNumber;
+
         public decimal Screen_ItemNumber
         {
             get
@@ -1431,7 +1511,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private decimal _nxtscreenItemNumber;
+
         public decimal Screen_NextItemNumber
         {
             get
@@ -1444,7 +1526,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private Freedom_ScreenSize _freedom_screensize;
+
         public Freedom_ScreenSize Freedom_ScreenSize
         {
             get
@@ -1457,7 +1541,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private Freedom_ScreenType _freedom_screentype;
+
         public Freedom_ScreenType Freedom_ScreenType
         {
             get
@@ -1470,7 +1556,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private int _screen_ExchangeRateAUD;
+
         public int Screen_ExchangeRateAUD
         {
             get
@@ -1483,7 +1571,9 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
         private bool _frmCellEndEdit;
+
         public bool FromCellEndEdit
         {
             get
@@ -1571,6 +1661,19 @@ namespace ModelLayer.Model.Quotation.Screen
                 DiscountPercentage = 0.3m;
             }
 
+            #endregion
+
+            #region AddOnsSpecialFactor
+            if(Screen_AddOnsSpecialFactor == 1.3m)
+            {
+                AddOnsSpecialFactor = 2.9m;
+                Console.WriteLine("Addons in using a Factor " + AddOnsSpecialFactor);
+            }
+            else
+            {
+                AddOnsSpecialFactor = 3.0m;
+                Console.WriteLine("Addons in using a Factor " + AddOnsSpecialFactor);
+            }
             #endregion
 
             if (Screen_Width != 0 &&
@@ -2561,7 +2664,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 //else if (Screen_Types == ScreenType._Magnum)
                 //{
-                    
+
                 //}
                 else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
@@ -5812,13 +5915,19 @@ namespace ModelLayer.Model.Quotation.Screen
                     Screen_1067PVCbox != 0 &&
                     Screen_1067PVCboxQty != 0)
                 {
-                    pvc1067withreinPrice = ((Screen_1067PVCbox * Screen_1067PVCboxQty) / 1000m) * pvc1067withreinforcementPriceLinearMeter * Screen_Factor;
+                    pvc1067withreinPrice = ((Screen_1067PVCbox * Screen_1067PVCboxQty) / 1000m) * pvc1067withreinforcementPriceLinearMeter * AddOnsSpecialFactor;
                 }
                 if (Screen_6040MilledProfileVisibility == true &&
                     Screen_6040MilledProfile != 0 &&
                     Screen_6040MilledProfileQty != 0)
                 {
                     milledprofile6040Price = ((Screen_6040MilledProfile * Screen_6040MilledProfileQty) / 1000m) * milledprofile6040PriceLinearMeter * Screen_Factor;
+                }
+                if (Screen_6052MilledProfileVisibility == true &&
+                    Screen_6052MilledProfile != 0 &&
+                    Screen_6052MilledProfileQty != 0)
+                {
+                    milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * AddOnsSpecialFactor;
                 }
                 #endregion
                 #region Maxxy Screen
@@ -5827,7 +5936,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     Screen_373or374MilledProfile != 0 &&
                     Screen_373or374MilledProfileQty != 0)
                 {
-                    milled373or374Price = ((Screen_373or374MilledProfile * Screen_373or374MilledProfileQty) / 1000m) * milled373or374PricePerLinearMeter * Screen_Factor;
+                    milled373or374Price = ((Screen_373or374MilledProfile * Screen_373or374MilledProfileQty) / 1000m) * milled373or374PricePerLinearMeter * AddOnsSpecialFactor;
                 }
 
                 #endregion
@@ -5837,21 +5946,21 @@ namespace ModelLayer.Model.Quotation.Screen
                    Screen_1385MilledProfile != 0 &&
                    Screen_1385MilledProfileQty != 0)
                 {
-                    milled1385Price = ((Screen_1385MilledProfile * Screen_1385MilledProfileQty) / 1000m) * milled1385profilePricePerLinearMeter * Screen_Factor;
+                    milled1385Price = ((Screen_1385MilledProfile * Screen_1385MilledProfileQty) / 1000m) * milled1385profilePricePerLinearMeter * AddOnsSpecialFactor;
                 }
                 if (Screen_6052MilledProfileVisibility == true &&
                         Screen_6052MilledProfile != 0 &&
                         Screen_6052MilledProfileQty != 0)
                 {
-                    milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * Screen_Factor;
+                    milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * AddOnsSpecialFactor;
                 }
                 #endregion
                 #region center closure
 
                 if (Screen_CenterClosureVisibility == true && Screen_CenterClosureVisibilityOption == true)
                 {
-                    LatchkitTotal = (LatchkitPrice * Screen_LatchKitQty) * Screen_Factor;
-                    IntermediatePartTotal = (IntermediatePartPrice * Screen_IntermediatePartQty) * Screen_Factor;
+                    LatchkitTotal = (LatchkitPrice * Screen_LatchKitQty) * AddOnsSpecialFactor;
+                    IntermediatePartTotal = (IntermediatePartPrice * Screen_IntermediatePartQty) * AddOnsSpecialFactor;
                 }
 
                 #endregion
@@ -5948,13 +6057,13 @@ namespace ModelLayer.Model.Quotation.Screen
                         Screen_NetPrice = (Screen_UnitPrice - Discount) * Screen_Quantity;
                         #endregion
                     }
-                    else if(Screen_PlisséType == PlisseType._SR)
+                    else if (Screen_PlisséType == PlisseType._SR)
                     {
                         #region Plisse SR Magnum
                         if (FromCellEndEdit != true)
                         {
-                            Screen_UnitPrice = ((Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor) 
-                                                + LatchkitTotal + IntermediatePartTotal + pvc1067withreinPrice + milledprofile6040Price) 
+                            Screen_UnitPrice = ((Math.Ceiling(Magnum_Screen_tAmount) * Screen_Factor)
+                                                + LatchkitTotal + IntermediatePartTotal + pvc1067withreinPrice + milledprofile6040Price + milled6052Price)
                                                 * Screen_Set;
                         }
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
@@ -6028,7 +6137,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                 {
-                    Screen_Description = "Plissé SR SlimeLine Insect Screen";
+                    Screen_Description = "Plissé SR Slim Line Insect Screen";
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
@@ -6069,7 +6178,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_Description = "Roll-up Insect Screen";
                 }
-                else if ( Screen_Types == ScreenType._ZeroGravityChainDriven)
+                else if (Screen_Types == ScreenType._ZeroGravityChainDriven)
                 {
                     Screen_Description = "Zero Gravity Chain Driven Insect Screen";
                 }
@@ -6088,9 +6197,9 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 if (Screen_CenterClosureVisibility == true && Screen_CenterClosureVisibilityOption == true)
                 {
-                    if(LatchkitTotal != 0 && IntermediatePartTotal != 0)
+                    if (LatchkitTotal != 0 && IntermediatePartTotal != 0)
                     {
-                        Screen_Description = Screen_Description + " - Center Closure "; 
+                        Screen_Description = Screen_Description + " - Center Closure ";
                     }
                     else
                     {
@@ -6127,7 +6236,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 DiscountPercentage = 0;
                 Screen_TotalAmount = 0;
                 Discount = 0;
-                Screen_NetPrice = 0;                              
+                Screen_NetPrice = 0;
             }
 
         }
@@ -6336,12 +6445,14 @@ namespace ModelLayer.Model.Quotation.Screen
 
             LatchkitTotal = 0;
             IntermediatePartTotal = 0;
+
+            AddOnsSpecialFactor = 0;
         }
 
         public void ScreenPropAddOnsReset()
         {
             Screen_0505Width = 0;
-            Screen_0505Qty = 0;       
+            Screen_0505Qty = 0;
             Screen_1067Height = 0;
             Screen_1067Qty = 0;
 
@@ -6376,7 +6487,8 @@ namespace ModelLayer.Model.Quotation.Screen
                            decimal screen_netPrice,
                            decimal screen_totalAmount,
                            string screen_description,
-                           decimal factor                          
+                           decimal factor,
+                           decimal addonsspecialfactor
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6392,6 +6504,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_TotalAmount = screen_totalAmount;
             Screen_Description = screen_description;
             Screen_Factor = factor;
+            Screen_AddOnsSpecialFactor = addonsspecialfactor;
         }
     }
 }

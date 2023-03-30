@@ -417,7 +417,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJSUTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES </Value>
+                            <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES </Value>
                             <Style>
                               <FontFamily>Segoe UI</FontFamily>
                               <FontSize>12pt</FontSize>
@@ -2738,7 +2738,6 @@
                         <PaddingRight>2pt</PaddingRight>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
