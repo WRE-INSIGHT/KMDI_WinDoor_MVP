@@ -1477,23 +1477,68 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
                 GeorgianBar_GapY += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBarLeft_PointsY = new[]
+
+                Point[] GeorgianBarTop_PointsY = null;
+                Point[] GeorgianBarBottom_PointsY = null;
+                if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
-                };
-                for (int i = 0; i < GeorgianBarLeft_PointsY.Length - 1; i += 2)
-                {
-                    g.DrawLine(pOuterLine, GeorgianBarLeft_PointsY[i], GeorgianBarLeft_PointsY[i + 1]);
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
                 }
-                Point[] GeorgianBarRight_PointsY = new[]
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
-                };
-                for (int i = 0; i < GeorgianBarRight_PointsY.Length - 1; i += 2)
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
-                    g.DrawLine(pOuterLine, GeorgianBarRight_PointsY[i], GeorgianBarRight_PointsY[i + 1]);
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                for (int i = 0; i < GeorgianBarTop_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarTop_PointsY[i], GeorgianBarTop_PointsY[i + 1]);
+                }
+                for (int i = 0; i < GeorgianBarBottom_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarBottom_PointsY[i], GeorgianBarBottom_PointsY[i + 1]);
                 }
             }
 
@@ -1544,11 +1589,39 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapYs)));
                 GeorgianBar_GapYs += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBar_PointsY = new[]
+                Point[] GeorgianBar_PointsY = null;
+                if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
-                };
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                {
+                    GeorgianBar_PointsY = new[]
+                     {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                {
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line  - 2, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
                 for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
                 {
                     g.DrawLine(pInnerLine, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
