@@ -541,7 +541,6 @@ namespace PresentationLayer.Presenter
             clearingOperation();
         }
 
-
         private void clearingOperation()
         {
             windoorTotalListCount = 0;

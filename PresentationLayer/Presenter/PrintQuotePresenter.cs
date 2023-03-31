@@ -157,7 +157,6 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }
-
         }
 
 

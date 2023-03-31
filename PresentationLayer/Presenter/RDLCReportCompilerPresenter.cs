@@ -106,6 +106,7 @@ namespace PresentationLayer.Presenter
 
         private void OnRDLCReportCompilerViewLoadEventRaised(object sender, EventArgs e)
         {
+
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
