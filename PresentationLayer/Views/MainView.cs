@@ -647,6 +647,10 @@ namespace PresentationLayer.Views
             {
                 ScreentoolStripButton_Click(sender, e);
             }
+            else if(e.Alt == true && e.KeyCode == Keys.C)
+            {            
+                CreateNewItem_Clicked(sender, e);
+            }
         }
 
         private void MainView_KeyUp(object sender, KeyEventArgs e)

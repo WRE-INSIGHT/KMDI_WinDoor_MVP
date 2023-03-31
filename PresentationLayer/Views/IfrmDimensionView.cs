@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views
 {
@@ -9,6 +10,8 @@ namespace PresentationLayer.Views
         event EventHandler btnCancelClickedEventRaised;
         event EventHandler cmbSystemOptionSelectedValueChangedEventRaised;
         event EventHandler cmbBaseColorOptionSelectedValueChangedEventRaised;
+        event EventHandler numWidthEnterEventRaised;
+        event EventHandler numHeightEnterEventRaised;
 
         int InumWidth { get; set; }
         int InumHeight { get; set; }
@@ -19,5 +22,8 @@ namespace PresentationLayer.Views
         bool ThisVisibility { get; set; }
         void ShowfrmDimension();
         void ClosefrmDimension();
+        NumericUpDown GetNumWidth();
+        NumericUpDown GetNumHeigth();
+      
     }
 }
