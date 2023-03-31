@@ -506,6 +506,7 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 

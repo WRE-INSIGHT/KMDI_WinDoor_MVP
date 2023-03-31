@@ -136,7 +136,7 @@ namespace PresentationLayer.Presenter
                     int num;
                     if (int.TryParse(_rdlcReportCompilerView.TxtBxOutofTownExpenses, out num))
                     {
-                        if (num > 0)
+                        if (num >= 0)
                         {
                             _loadingThread = new Thread(Bgw_CompilePDF);
                             

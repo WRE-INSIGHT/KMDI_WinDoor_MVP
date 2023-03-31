@@ -278,7 +278,9 @@ namespace PresentationLayer.Presenter
                     {
                         Console.WriteLine("Cell End Edit " + ex.Message);
                     }
-                    
+                    _screenModel.Screen_UnitPrice = 0;
+                    _screenModel.Screen_Quantity = 0;
+                    _screenModel.DiscountPercentage = 0;
                 }
             }
 
@@ -893,12 +895,8 @@ namespace PresentationLayer.Presenter
                 setDesc = " ";
             }
 
-            //if (_screenModel.Screen_Width > 1500)
-            //{
-            //    centerClosureDesc = " - center closure";
-            //}
 
-            newRow["Item No."] = _screenModel.Screen_ItemNumber;//Convert.ToString(_screenModel.Screen_ItemNumber);
+            newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
             newRow["Window/Door I.D."] = _screenModel.Screen_WindoorID;

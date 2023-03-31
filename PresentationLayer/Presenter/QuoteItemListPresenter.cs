@@ -211,7 +211,7 @@ namespace PresentationLayer.Presenter
                         setDesc = " ";
                     }
 
-                    _dsq.dtScreen.Rows.Add(item.Screen_Types + setDesc + item.Screen_Description,
+                    _dsq.dtScreen.Rows.Add( item.Screen_Description,
                                             item.Screen_Width + " x " + item.Screen_Height,
                                             item.Screen_WindoorID,
                                             item.Screen_UnitPrice.ToString("n"),
@@ -523,14 +523,14 @@ namespace PresentationLayer.Presenter
                                                 );
 
 
-            clearingOperation();
+           
             _mainPresenter.printStatus = "ContractSummary";
 
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
             if (RenderPDFAtBackGround != true)
             {                    
-                printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                printQuote.GetPrintQuoteView().ShowPrintQuoteView();              
             }
             else
             {
@@ -538,7 +538,7 @@ namespace PresentationLayer.Presenter
                 printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
                 printQuote.PrintRDLCReport();
             }
-
+            clearingOperation();
         }
 
 
