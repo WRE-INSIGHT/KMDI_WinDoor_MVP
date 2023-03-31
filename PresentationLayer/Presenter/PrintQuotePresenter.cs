@@ -133,7 +133,7 @@ namespace PresentationLayer.Presenter
                                                           + "USING "
                                                           + GlassThickness.ToUpper()
                                                           + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+                                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
             }
             
 
