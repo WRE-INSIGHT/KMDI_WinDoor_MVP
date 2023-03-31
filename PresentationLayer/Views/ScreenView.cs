@@ -102,6 +102,8 @@ namespace PresentationLayer.Views
         public event EventHandler cmbFreedomSizeSelectedValueChangedEventRaised;
         public event EventHandler CellEndEditEventRaised;
         public event DataGridViewCellMouseEventHandler dgvScreenColumnHeaderMouseClick;
+        public event EventHandler dgvScreenCellDoubleClickEventRaised;
+        public event EventHandler dgvScreenCellClickEventRaised;
 
         public void ShowScreemView()
         {
@@ -306,12 +308,20 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, nudDiscountValueChangeEventRaised, e);
         }
         private void dgv_Screen_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {           
+        {       
+                
         }
         private void dgv_Screen_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             EventHelpers.RaiseDatagridviewCellMouseEvent(sender, dgvScreenColumnHeaderMouseClick, e);
-
+        }
+        private void dgv_Screen_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, dgvScreenCellDoubleClickEventRaised, e);
+        }
+        private void dgv_Screen_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, dgvScreenCellClickEventRaised, e);
         }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {       
@@ -332,6 +342,6 @@ namespace PresentationLayer.Views
             cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
 
-       
+
     }
 }

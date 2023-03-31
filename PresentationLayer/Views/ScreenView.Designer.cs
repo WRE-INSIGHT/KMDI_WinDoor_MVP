@@ -123,6 +123,8 @@
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
             this.dgv_Screen.TabIndex = 30;
+            this.dgv_Screen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellClick);
+            this.dgv_Screen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellDoubleClick);
             this.dgv_Screen.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellEndEdit);
             this.dgv_Screen.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Screen_ColumnHeaderMouseClick);
             this.dgv_Screen.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Screen_ColumnHeaderMouseDoubleClick);

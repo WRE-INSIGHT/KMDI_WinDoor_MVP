@@ -88,8 +88,8 @@ namespace PresentationLayer.Presenter
             _screenView.cmbFreedomSizeSelectedValueChangedEventRaised += _screenView_cmbFreedomSizeSelectedValueChangedEventRaised;
             _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised;
             _screenView.dgvScreenColumnHeaderMouseClick += _screenView_dgvScreenColumnHeaderMouseClick;
-
-
+            _screenView.dgvScreenCellDoubleClickEventRaised += _screenView_dgvScreenCellDoubleClickEventRaised;
+            _screenView.dgvScreenCellClickEventRaised += _screenView_dgvScreenCellClickEventRaised;
 
 
             _pnlAddOns = _screenView.GetPnlAddOns();
@@ -99,6 +99,16 @@ namespace PresentationLayer.Presenter
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
 
+        }
+
+        private void _screenView_dgvScreenCellClickEventRaised(object sender, EventArgs e)
+        {
+            _dgv_Screen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void _screenView_dgvScreenCellDoubleClickEventRaised(object sender, EventArgs e)
+        {
+            _dgv_Screen.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
 
         private void _screenView_dgvScreenColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
