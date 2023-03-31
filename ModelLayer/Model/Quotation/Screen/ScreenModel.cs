@@ -602,6 +602,9 @@ namespace ModelLayer.Model.Quotation.Screen
         TotalPrice,
         Discount,
         AddOnsSpecialFactor,
+        IncreasePercentage,
+        TotalUnitPrice,
+        
         
 
 
@@ -1587,6 +1590,48 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private bool _screen_PriceIncreaseVisibility;
+        public bool Screen_PriceIncreaseVisibility
+        {
+            get
+            {
+                return _screen_PriceIncreaseVisibility;
+            }
+            set
+            {
+                _screen_PriceIncreaseVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _screen_PriceIncreaseVisibilityOption;
+        public bool Screen_PriceIncreaseVisibilityOption
+        {
+            get
+            {
+                return _screen_PriceIncreaseVisibilityOption;
+            }
+            set
+            {
+                _screen_PriceIncreaseVisibilityOption = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _screen_PriceIncreasePercentage;
+        public int Screen_PriceIncreasePercentage
+        {
+            get
+            {
+                return _screen_PriceIncreasePercentage;
+            }
+            set
+            {
+                _screen_PriceIncreasePercentage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
@@ -1611,6 +1656,19 @@ namespace ModelLayer.Model.Quotation.Screen
             //var _strippedItemNum = (int)Decimal.Truncate(Screen_ItemNumber);
             //Screen_NextItemNumber = _strippedItemNum - 1;                     
             ItemList.Remove(x);
+        }
+
+        public void PriceIncreaseByPercentage()
+        {
+            if (Screen_PriceIncreaseVisibilityOption == true)
+            {
+                IncreasePercentage = Screen_PriceIncreasePercentage / 100m;
+                TotalUnitPrice = ((Screen_UnitPrice * IncreasePercentage) + Screen_UnitPrice);
+                Console.WriteLine(" Percentage increase by " + IncreasePercentage);
+                Console.WriteLine(" TotalUnitPrice " + TotalUnitPrice);
+                Screen_UnitPrice = TotalUnitPrice;
+            }
+
         }
 
         public void ComputeScreenTotalPrice()
@@ -1667,13 +1725,13 @@ namespace ModelLayer.Model.Quotation.Screen
             if(Screen_AddOnsSpecialFactor == 1.3m)
             {
                 AddOnsSpecialFactor = 2.9m;
-                Console.WriteLine("Addons in using a Factor " + AddOnsSpecialFactor);
             }
             else
             {
                 AddOnsSpecialFactor = 3.0m;
-                Console.WriteLine("Addons in using a Factor " + AddOnsSpecialFactor);
             }
+            Console.WriteLine("Addons is using a Factor " + AddOnsSpecialFactor);
+
             #endregion
 
             if (Screen_Width != 0 &&
@@ -6036,6 +6094,7 @@ namespace ModelLayer.Model.Quotation.Screen
                                              Math.Ceiling(Maxxy_Screen_tAmount) +
                                              Math.Ceiling(ZG_totalMaterial_Cost)) * Screen_Factor) + milled373or374Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
+                    PriceIncreaseByPercentage();
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -6046,11 +6105,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     if (Screen_Types == ScreenType._RollUp || Screen_PlisséType == PlisseType._AD || Screen_PlisséType == PlisseType._RD)
                     {
-                        #region roll-up & Plisse AD RD                     
+                        #region Roll-up & Plisse AD RD                     
                         if (FromCellEndEdit != true)
                         {
                             Screen_UnitPrice = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Set;
                         }
+                        PriceIncreaseByPercentage();
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                         Discount = Screen_UnitPrice * DiscountPercentage;
@@ -6066,6 +6126,7 @@ namespace ModelLayer.Model.Quotation.Screen
                                                 + LatchkitTotal + IntermediatePartTotal + pvc1067withreinPrice + milledprofile6040Price + milled6052Price)
                                                 * Screen_Set;
                         }
+                        PriceIncreaseByPercentage();
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                         Discount = Screen_UnitPrice * DiscountPercentage;
@@ -6080,6 +6141,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m)) + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
+                    PriceIncreaseByPercentage();
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -6093,6 +6155,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         Screen_UnitPrice = (Math.Ceiling(Freedom_tAmount) + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
+                    PriceIncreaseByPercentage();
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                     Discount = Screen_UnitPrice * DiscountPercentage;
@@ -6447,6 +6510,8 @@ namespace ModelLayer.Model.Quotation.Screen
             IntermediatePartTotal = 0;
 
             AddOnsSpecialFactor = 0;
+            IncreasePercentage = 0;
+            TotalUnitPrice = 0;
         }
 
         public void ScreenPropAddOnsReset()
@@ -6471,7 +6536,7 @@ namespace ModelLayer.Model.Quotation.Screen
 
             Screen_LatchKitQty = 0;
             Screen_IntermediatePartQty = 0;
-
+            Screen_PriceIncreasePercentage = 5;
         }
 
 

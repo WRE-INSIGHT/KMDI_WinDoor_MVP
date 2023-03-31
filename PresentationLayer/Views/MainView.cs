@@ -643,6 +643,10 @@ namespace PresentationLayer.Views
             {
                 saveToolStripButton_Click(sender, e);
             }
+            else if (e.Control == true && e.KeyCode == Keys.I)
+            {
+                ScreentoolStripButton_Click(sender, e);
+            }
         }
 
         private void MainView_KeyUp(object sender, KeyEventArgs e)
