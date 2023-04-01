@@ -70,7 +70,7 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_ConnectionTypeVisibility { get; set; }
         SealingElement_ArticleNo Frame_SealingElement_ArticleNo { get; set; }
 
-        Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
+        //Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         bool Frame_TrackProfileArtNoVisibility { get; set; }
         TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
         ConnectingProfile_ArticleNo Frame_ConnectingProfile_ArticleNo { get; set; }
@@ -84,7 +84,7 @@ namespace ModelLayer.Model.Quotation.Frame
         BottomFrameTypes Frame_BotFrameArtNo { get; set; }
         bool Frame_BotFrameEnable { get; set; }
         bool Frame_BotFrameVisible { get; set; }
-        MechnJointForFrame_ArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
+        Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
         int Frame_MechanicalJointConnectorQty { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
@@ -97,7 +97,7 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_MechanicalJointConnector_MaterialList(DataTable tbl_explosion, int MechJointConnectorQty);
         void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
         void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion);
-        void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
+        // void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();

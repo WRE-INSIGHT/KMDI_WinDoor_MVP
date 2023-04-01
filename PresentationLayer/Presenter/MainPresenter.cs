@@ -9547,7 +9547,7 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;
                         _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
                         _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
-                        _frameModel.Frame_MechJointArticleNo = frm_MechJointArticleNo;
+                        _frameModel.Frame_MechanicalJointConnector_Artno = frm_MechJointArticleNo;
                         _frameModel.Frame_TrackProfileArtNoVisibility = frm_TrackProfileArtNoVisibility;
                         _frameModel.Frame_TrackProfileArtNo = frm_TrackProfile_ArticleNo;
                         _frameModel.Frame_ConnectingProfile_ArticleNo = frm_ConnectingProfile_ArticleNo;
