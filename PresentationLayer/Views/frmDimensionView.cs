@@ -100,11 +100,22 @@ namespace PresentationLayer.Views
             }
         }
 
+        public NumericUpDown GetNumWidth()
+        {
+            return numWidth;
+        }
+        public NumericUpDown GetNumHeigth()
+        {
+            return numHeight;
+        }
+
         public event EventHandler btnCancelClickedEventRaised;
         public event EventHandler btnOKClickedEventRaised;
         public event EventHandler frmDimensionLoadEventRaised;
         public event EventHandler cmbSystemOptionSelectedValueChangedEventRaised;
         public event EventHandler cmbBaseColorOptionSelectedValueChangedEventRaised;
+        public event EventHandler numWidthEnterEventRaised;
+        public event EventHandler numHeightEnterEventRaised;
 
         public void ShowfrmDimension()
         {
@@ -164,6 +175,16 @@ namespace PresentationLayer.Views
         private void cmb_BaseColorOption_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbBaseColorOptionSelectedValueChangedEventRaised, e);
+        }
+
+        private void numWidth_Enter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numWidthEnterEventRaised, e);
+        }
+
+        private void numHeight_Enter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, numHeightEnterEventRaised, e);
         }
     }
 }

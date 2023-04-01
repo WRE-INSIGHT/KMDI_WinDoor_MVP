@@ -120,14 +120,23 @@ namespace PresentationLayer.Presenter
                 GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
             }
             baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-            _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
-                                          + "USING "
-                                          + baseColor.ToUpper()
-                                          + " PROFILES\n"
-                                          + "USING "
-                                          + GlassThickness.ToUpper()
-                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION**";
+            if(_mainPresenter.printStatus == "ScreenItem")
+            {
+                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
+            }
+            else
+            {
+                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                          + "USING "
+                                                          + baseColor.ToUpper()
+                                                          + " PROFILES\n"
+                                                          + "USING "
+                                                          + GlassThickness.ToUpper()
+                                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+            }
+            
+
             _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
                                                 + _mainPresenter.titleLastname
                                                 + ",";
@@ -148,7 +157,6 @@ namespace PresentationLayer.Presenter
             {
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }
-
         }
 
 
@@ -497,6 +505,7 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+
                     string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     int oftexpenses = Convert.ToInt32(trimmedamount);
 

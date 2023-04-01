@@ -13,6 +13,7 @@ namespace PresentationLayer.Views.UserControls
         event MouseEventHandler lblItemMouseMoveEventRaised;
         event MouseEventHandler lblItemMouseDownEventRaised;
         event MouseEventHandler lblItemMouseUpEventRaised;
+        event EventHandler DefaultDescriptionClickEventRaised;
         string ItemName { get; set; }
         //string ItemDimension { set; }
         //string ItemDesc { set; }

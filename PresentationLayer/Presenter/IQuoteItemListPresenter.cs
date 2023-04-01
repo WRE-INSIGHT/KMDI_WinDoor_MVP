@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter
                                                IWindoorModel windoorModel,
                                                IMainPresenter mainPresenter);
         void SetAllItemDiscount(int inputedDiscount);
-        void refreshItemList(object sender, EventArgs e);
+        void refreshItemList();
         void PrintWindoorRDLC();
         void PrintContractSummaryRDLC();
         void PrintScreenRDLC();

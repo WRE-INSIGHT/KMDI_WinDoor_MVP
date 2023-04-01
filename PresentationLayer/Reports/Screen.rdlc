@@ -46,6 +46,7 @@
                               <Value>Item</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -58,8 +59,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -81,6 +88,7 @@
                               <Value>Type of Insect Screen</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -93,8 +101,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -143,8 +157,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -164,7 +184,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Window/Door I.D.</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -176,8 +199,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -197,7 +226,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Unit Price</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -209,8 +241,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -232,6 +270,7 @@
                               <Value>Qty</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -244,8 +283,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -267,6 +312,7 @@
                               <Value>Discount</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -279,8 +325,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -302,6 +354,7 @@
                               <Value>Total Amount</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -314,8 +367,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -342,6 +401,7 @@
                               <Value>=Fields!dtScreenItemNumber.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -354,8 +414,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -377,6 +443,7 @@
                               <Value>=Fields!dtScreenType.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -389,8 +456,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -412,6 +485,7 @@
                               <Value>=Fields!dtDimension.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -424,8 +498,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -447,11 +527,12 @@
                               <Value>=Fields!dtWindoorID.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -459,8 +540,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -482,6 +569,7 @@
                               <Value>=Fields!dtUnitPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -494,8 +582,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -517,6 +611,7 @@
                               <Value>=Fields!dtQuantity.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -529,8 +624,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -552,6 +653,7 @@
                               <Value>=Fields!dtDiscountPercentage.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -564,8 +666,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -587,6 +695,7 @@
                               <Value>=Fields!dtDiscountedPrice.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -599,8 +708,14 @@
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
+                        <TopBorder>
+                          <Style>Solid</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -839,6 +954,8 @@
                     <Value>Discounted Price without VAT</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -859,7 +976,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Total Net Price Without VAT</Value>
+                    <Value />
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -955,30 +1072,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line1">
-            <Top>0.42707in</Top>
-            <Left>6.13182in</Left>
-            <Height>0in</Height>
-            <Width>1.3822in</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line2">
-            <Top>0.6961in</Top>
-            <Left>6.19777in</Left>
-            <Height>0in</Height>
-            <Width>1.31625in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
           <Textbox Name="Textbox4">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1003,7 +1096,7 @@
             <Left>6.35084in</Left>
             <Height>0.20486in</Height>
             <Width>1.16816in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1014,6 +1107,18 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Line Name="Line2">
+            <Top>0.4086in</Top>
+            <Left>6.13182in</Left>
+            <Height>0in</Height>
+            <Width>1.3822in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
           <Textbox Name="Textbox14">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1023,8 +1128,8 @@
                   <TextRun>
                     <Value>=First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100))</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>#,0.00;(#,0.00)</Format>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>'PHP' #,0.00;('PHP' #,0.00)</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1035,10 +1140,10 @@
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
             <Top>0.44096in</Top>
-            <Left>6.37019in</Left>
+            <Left>5.91876in</Left>
             <Height>0.22026in</Height>
-            <Width>1.16318in</Width>
-            <ZIndex>7</ZIndex>
+            <Width>1.6196in</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1069,11 +1174,14 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>0.6961in</Top>
-            <Left>5.89942in</Left>
+            <Top>0.70289in</Top>
+            <Left>5.91876in</Left>
             <Height>0.16446in</Height>
             <Width>1.61958in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>true</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1106,7 +1214,7 @@
             <Left>3.50424in</Left>
             <Height>0.25in</Height>
             <Width>0.4122in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1117,12 +1225,36 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Line Name="Line1">
+            <Top>0.66457in</Top>
+            <Left>6.13182in</Left>
+            <Height>0in</Height>
+            <Width>1.3822in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line3">
+            <Top>0.69235in</Top>
+            <Left>6.13182in</Left>
+            <Height>0in</Height>
+            <Width>1.3822in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>1.76736in</Top>
         <Left>0.1641in</Left>
         <Height>1.07862in</Height>
-        <Width>7.53835in</Width>
+        <Width>7.53836in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>

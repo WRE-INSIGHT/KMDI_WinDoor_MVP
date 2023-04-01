@@ -56,9 +56,9 @@
             this.chkBox_CenterClosure.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkBox_CenterClosure.Location = new System.Drawing.Point(3, 4);
             this.chkBox_CenterClosure.Name = "chkBox_CenterClosure";
-            this.chkBox_CenterClosure.Size = new System.Drawing.Size(120, 17);
+            this.chkBox_CenterClosure.Size = new System.Drawing.Size(123, 17);
             this.chkBox_CenterClosure.TabIndex = 31;
-            this.chkBox_CenterClosure.Text = "With Center Closure";
+            this.chkBox_CenterClosure.Text = "With Center Closure ";
             this.chkBox_CenterClosure.UseVisualStyleBackColor = true;
             this.chkBox_CenterClosure.CheckedChanged += new System.EventHandler(this.chkBox_CenterClosure_CheckedChanged);
             // 
@@ -136,11 +136,11 @@
 
         #endregion
         private System.Windows.Forms.Panel pnl_option;
-        private System.Windows.Forms.CheckBox chkBox_CenterClosure;
         private System.Windows.Forms.Panel pnl_Body;
         private System.Windows.Forms.NumericUpDown nud_IntermediatePartQty;
         private System.Windows.Forms.NumericUpDown nud_LatchKitQty;
         private System.Windows.Forms.Label lbl_IntermediatePart;
         private System.Windows.Forms.Label lbl_LatchKit;
+        private System.Windows.Forms.CheckBox chkBox_CenterClosure;
     }
 }

@@ -88,9 +88,11 @@ namespace PresentationLayer.Presenter
             _screenView.cmbFreedomSizeSelectedValueChangedEventRaised += _screenView_cmbFreedomSizeSelectedValueChangedEventRaised;
             _screenView.CellEndEditEventRaised += _screenView_CellEndEditEventRaised;
             _screenView.dgvScreenColumnHeaderMouseClick += _screenView_dgvScreenColumnHeaderMouseClick;
-
-
-
+            _screenView.dgvScreenCellDoubleClickEventRaised += _screenView_dgvScreenCellDoubleClickEventRaised;
+            _screenView.dgvScreenCellClickEventRaised += _screenView_dgvScreenCellClickEventRaised;
+            _screenView.nudFactorEnterEventRaised += _screenView_nudFactorEnterEventRaised;
+            _screenView.nudHeightEnterEventRaised += _screenView_nudHeightEnterEventRaised;
+            _screenView.nudWidthEnterEventRaised += _screenView_nudWidthEnterEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
@@ -99,6 +101,31 @@ namespace PresentationLayer.Presenter
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
 
+        }
+
+        private void _screenView_nudWidthEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudWidth().Select(0, _screenView.GetNudWidth().Text.Length);
+        }
+
+        private void _screenView_nudHeightEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudHeight().Select(0, _screenView.GetNudHeight().Text.Length);
+        }
+
+        private void _screenView_nudFactorEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudFactor().Select(0, _screenView.GetNudFactor().Text.Length);
+        }
+
+        private void _screenView_dgvScreenCellClickEventRaised(object sender, EventArgs e)
+        {
+            _dgv_Screen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void _screenView_dgvScreenCellDoubleClickEventRaised(object sender, EventArgs e)
+        {
+            _dgv_Screen.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
 
         private void _screenView_dgvScreenColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -278,11 +305,13 @@ namespace PresentationLayer.Presenter
                     {
                         Console.WriteLine("Cell End Edit " + ex.Message);
                     }
-                    
+                    _screenModel.Screen_UnitPrice = 0;
+                    _screenModel.Screen_Quantity = 0;
+                    _screenModel.DiscountPercentage = 0;
                 }
             }
 
-
+            
             _mainPresenter.SetChangesMark();
          
         }
@@ -734,7 +763,15 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Invalid Item Number","",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }           
         }
+        public async void GetProjectFactor()
+        {
+            string[] province = _mainPresenter.projectAddress.Split(',');
+            decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
 
+            _screenModel.Screen_AddOnsSpecialFactor = value;
+            Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+
+        }
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
         {
             _screenDT.Columns.Add(CreateColumn("Item No.", "Item No.", "System.Decimal"));
@@ -761,8 +798,8 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;          
             _screenView.GetDatagrid().Columns[8].Visible = false;
             _screenView.GetDatagrid().Columns[9].Visible = false;
-                      
-            
+
+             GetProjectFactor();
             _screenView.GetNudTotalPrice().Maximum = decimal.MaxValue;
             _screenView.GetNudTotalPrice().DecimalPlaces = 2;
             _screenWidth.Maximum = decimal.MaxValue;
@@ -776,6 +813,8 @@ namespace PresentationLayer.Presenter
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
+
+        
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
             if (_mainPresenter.Screen_List.Count != 0)
@@ -883,12 +922,8 @@ namespace PresentationLayer.Presenter
                 setDesc = " ";
             }
 
-            //if (_screenModel.Screen_Width > 1500)
-            //{
-            //    centerClosureDesc = " - center closure";
-            //}
 
-            newRow["Item No."] = _screenModel.Screen_ItemNumber;//Convert.ToString(_screenModel.Screen_ItemNumber);
+            newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + setDesc + centerClosureDesc;
             newRow["Dimension (mm) \n per panel"] = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
             newRow["Window/Door I.D."] = _screenModel.Screen_WindoorID;
@@ -913,7 +948,8 @@ namespace PresentationLayer.Presenter
                                                              _screenModel.Screen_NetPrice,
                                                              _screenModel.Screen_TotalAmount,
                                                              _screenModel.Screen_Description,
-                                                             _screenModel.Screen_Factor);
+                                                             _screenModel.Screen_Factor,
+                                                             _screenModel.Screen_AddOnsSpecialFactor);
             _mainPresenter.Screen_List.Add(scr);
 
             return newRow;
@@ -963,7 +999,8 @@ namespace PresentationLayer.Presenter
 
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
-                                                  IScreenModel screenModel
+                                                  IScreenModel screenModel,
+                                                  IQuotationServices quotationServices
                                                   )
         {
             unityC
@@ -973,6 +1010,7 @@ namespace PresentationLayer.Presenter
             screen._unityC = unityC;
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
+            screen._quotationServices = quotationServices;
             
 
             return screen;
