@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views
@@ -11,6 +12,7 @@ namespace PresentationLayer.Views
         {
             return chkbox_selectall;
         }
+
 
         private bool _getItemListUC_CheckState;
         public bool GetItemListUC_CheckBoxState
@@ -106,5 +108,7 @@ namespace PresentationLayer.Views
                 }
             
         }
+
+     
     }
 }

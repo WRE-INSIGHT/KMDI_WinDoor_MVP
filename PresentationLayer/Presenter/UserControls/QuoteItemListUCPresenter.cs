@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.WinDoor;
+using PresentationLayer.Views;
 using PresentationLayer.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,8 @@ namespace PresentationLayer.Presenter.UserControls
         decimal TotalNetPrice;
 
         public QuoteItemListUCPresenter(IQuoteItemListUC quoteItemListUC,
-                                        IQuoteItemListPresenter quoteItemListPresenter)
+                                        IQuoteItemListPresenter quoteItemListPresenter
+                                        )
         {
             _quoteItemListUC = quoteItemListUC;
             _quoteItemListPresenter = quoteItemListPresenter;
@@ -96,20 +98,16 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         //_windoorModel.setDiscount = "SetAllDiscount";
                         //_quoteItemListPresenter.SetAllItemDiscount(int_input);
-
                         foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
                         {
                             wdm.WD_discount = int_input;
                         }
-
-                        // _quoteItemListPresenter .GetQuoteItemListView().closeQuoteItemList();
+                        // _quoteItemListPresenter .GetQuoteItemListView().closeQuoteItemList(); 
+                        _quoteItemListPresenter.refreshItemList();
                         _quoteItemListPresenter = _quoteItemListPresenter.GetNewInstance(_unityC, _quotationModel, this, _windoorModel, _mainPresenter);
-                        //   _quoteItemListPresenter.GetQuoteItemListView().showQuoteItemList();
-
+                        _quoteItemListPresenter.GetQuoteItemListView().showQuoteItemList();
                         //_nudItemPrice.Maximum = decimal.MaxValue;
-
                         //_quoteItemListPresenter.refreshItemList(sender, e);
-
                         //foreach (IQuoteItemListUCPresenter item in _quoteItemListPresenter._lstQuoteItemUC)
                         //{ 
                         //    item.GetiQuoteItemListUC().itemDiscount.Value = int_input;
@@ -117,6 +115,7 @@ namespace PresentationLayer.Presenter.UserControls
                         //}
                         //_nudItemDiscount.Value = int_input;
                         //_lblDiscount.Text = int_input.ToString() + "%";
+
                     }
                     else if (int_input < 0)
                     {
@@ -135,9 +134,6 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-
-
-
         }
 
         private void _quoteItemListUC_suggestedPriceToolStripMenuItemClickEventRaised(object sender, EventArgs e)
