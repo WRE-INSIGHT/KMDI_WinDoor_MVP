@@ -141,6 +141,8 @@ namespace PresentationLayer.Presenter
         bool existing = false;
         bool showImage;
         decimal windoorpricecheck;//check price in rdlc report 
+        decimal olddiscount, updateddiscount;
+        int countfortick;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -589,7 +591,7 @@ namespace PresentationLayer.Presenter
         }
 
         private void _quoteItemListView_TSbtnGlassSummaryClickEventRaised(object sender, EventArgs e)
-        {
+        {          
             DSQuotation _dsq = new DSQuotation();
             /*
             dtItemNo
@@ -910,6 +912,7 @@ namespace PresentationLayer.Presenter
         }
 
         int TotalItemArea = 0;
+
         private void _quoteItemListView_QuoteItemListViewLoadEventRaised(object sender, EventArgs e)
         {
             try
@@ -953,7 +956,7 @@ namespace PresentationLayer.Presenter
                         DimensionDesc = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n";
                     }
 
-                    
+
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemNumber = "Item " + (i + 1);
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().ItemName = wdm.WD_itemName;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemWindoorNumber = wdm.WD_WindoorNumber; //location
@@ -977,11 +980,11 @@ namespace PresentationLayer.Presenter
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().itemDiscount.Value = wdm.WD_discount;
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetLblDiscount().Text = wdm.WD_discount.ToString() + "%";
-              
+
                     this._lstQuoteItemUC.Add(_quoteItemListUCPresenter);
                     TotalItemArea = wdm.WD_width * wdm.WD_height;
                     this._lstItemArea.Add(TotalItemArea);
-               
+
                 }
             }
             catch (Exception ex)
@@ -989,6 +992,7 @@ namespace PresentationLayer.Presenter
 
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         private void OnchkboxSelectallCheckedChangeEventRaised(object sender, EventArgs e)
@@ -1019,9 +1023,16 @@ namespace PresentationLayer.Presenter
             }
         }
 
-        public void refreshItemList(object sender, EventArgs e)
+        public void refreshItemList()
         {
-            _quoteItemListView_QuoteItemListViewLoadEventRaised(sender, e);
+            try
+            {
+                Application.OpenForms["QuoteItemListView"].Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error in " + this + ex.Message);
+            }
         }
 
         //for ScalingItemSizePicture

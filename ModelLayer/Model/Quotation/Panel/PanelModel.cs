@@ -1878,6 +1878,8 @@ namespace ModelLayer.Model.Quotation.Panel
         }
 
         public int Panel_MotorizedMechQty { get; set; }
+        public int Panel_MultiFrmMotorizedMechQty { get; set; }
+
 
         public int Panel_MotorizedMechSetQty { get; set; }
 
@@ -7641,7 +7643,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                     if (Panel_ParentFrameModel.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                     {
-                        Panel_ParentFrameModel.Frame_MechJointArticleNo = Frame_MechJointArticleNo._9C52;
+                        Panel_ParentFrameModel.Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
                         Panel_RollersTypes = RollersTypes._HDRoller;
                     }
 
@@ -8570,12 +8572,12 @@ namespace ModelLayer.Model.Quotation.Panel
         public int MotorizeMechQty()
         {
             int motor = 0, resetChk = 0;
-
+            //foreach (IFrameModel frm in Panel_ParentFrameModel.Frame_WindoorModel.lst_frame)
+            //{
             foreach (IMultiPanelModel mpnl in Panel_ParentFrameModel.Lst_MultiPanel)
             {
                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                 {
-                    resetChk++;
                     if (pnl.Panel_MotorizedOptionVisibility == true)
                     {
                         if (pnl.Panel_MotorizedMechArtNo == MotorizedMech_ArticleNo._409990E)
@@ -8597,7 +8599,10 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
             }
-            Panel_MotorizedMechQty = motor;
+            //    Panel_MotorizedMechQty = motor;
+            //}
+            //Panel_MultiFrmMotorizedMechQty = motor;
+
             return motor;
         }
 

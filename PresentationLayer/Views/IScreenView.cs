@@ -39,6 +39,9 @@ namespace PresentationLayer.Views
         event DataGridViewCellMouseEventHandler dgvScreenColumnHeaderMouseClick;
         event EventHandler dgvScreenCellDoubleClickEventRaised;
         event EventHandler dgvScreenCellClickEventRaised;
+        event EventHandler nudWidthEnterEventRaised;
+        event EventHandler nudHeightEnterEventRaised;
+        event EventHandler nudFactorEnterEventRaised;
 
         void ShowScreemView();
 
@@ -51,6 +54,12 @@ namespace PresentationLayer.Views
         Label getLblPlisseRd();
         TextBox getTxtitemListNumber();
         ComboBox getCmbFreedom();
+        NumericUpDown GetNudWidth();
+
+        NumericUpDown GetNudHeight();
+
+        NumericUpDown GetNudFactor();
+       
 
     }
 }

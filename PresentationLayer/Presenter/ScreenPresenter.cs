@@ -90,7 +90,9 @@ namespace PresentationLayer.Presenter
             _screenView.dgvScreenColumnHeaderMouseClick += _screenView_dgvScreenColumnHeaderMouseClick;
             _screenView.dgvScreenCellDoubleClickEventRaised += _screenView_dgvScreenCellDoubleClickEventRaised;
             _screenView.dgvScreenCellClickEventRaised += _screenView_dgvScreenCellClickEventRaised;
-
+            _screenView.nudFactorEnterEventRaised += _screenView_nudFactorEnterEventRaised;
+            _screenView.nudHeightEnterEventRaised += _screenView_nudHeightEnterEventRaised;
+            _screenView.nudWidthEnterEventRaised += _screenView_nudWidthEnterEventRaised;
 
             _pnlAddOns = _screenView.GetPnlAddOns();
             _screenWidth = _screenView.screen_width;
@@ -99,6 +101,21 @@ namespace PresentationLayer.Presenter
             _discount = _screenView.screen_discountpercentage;
             _screenitemnum = _screenView.screen_itemnumber;
 
+        }
+
+        private void _screenView_nudWidthEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudWidth().Select(0, _screenView.GetNudWidth().Text.Length);
+        }
+
+        private void _screenView_nudHeightEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudHeight().Select(0, _screenView.GetNudHeight().Text.Length);
+        }
+
+        private void _screenView_nudFactorEnterEventRaised(object sender, EventArgs e)
+        {
+            _screenView.GetNudFactor().Select(0, _screenView.GetNudFactor().Text.Length);
         }
 
         private void _screenView_dgvScreenCellClickEventRaised(object sender, EventArgs e)

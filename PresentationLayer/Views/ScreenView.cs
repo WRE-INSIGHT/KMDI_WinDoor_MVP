@@ -104,10 +104,27 @@ namespace PresentationLayer.Views
         public event DataGridViewCellMouseEventHandler dgvScreenColumnHeaderMouseClick;
         public event EventHandler dgvScreenCellDoubleClickEventRaised;
         public event EventHandler dgvScreenCellClickEventRaised;
+        public event EventHandler nudWidthEnterEventRaised;
+        public event EventHandler nudHeightEnterEventRaised;
+        public event EventHandler nudFactorEnterEventRaised;
+
 
         public void ShowScreemView()
         {
             this.Show();
+        }
+
+        public NumericUpDown GetNudWidth()
+        {
+            return nud_Width;
+        }
+        public NumericUpDown GetNudHeight()
+        {
+            return nud_Height;
+        }
+        public NumericUpDown GetNudFactor()
+        {
+            return nud_Factor;
         }
 
         public NumericUpDown GetNudTotalPrice()
@@ -156,6 +173,7 @@ namespace PresentationLayer.Views
 
         private void ScreenView_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             List<ScreenType> screen = new List<ScreenType>();
             foreach (ScreenType item in ScreenType.GetAll())
             {
@@ -186,7 +204,6 @@ namespace PresentationLayer.Views
             cmb_freedomSize.DataSource = Freedom;
                   
             EventHelpers.RaiseEvent(sender, ScreenViewLoadEventRaised, e);
-
             
         }
 
@@ -323,6 +340,18 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, dgvScreenCellClickEventRaised, e);
         }
+        private void nud_Width_Enter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudWidthEnterEventRaised, e);
+        }
+        private void nud_Height_Enter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudHeightEnterEventRaised, e);
+        }    
+        private void nud_Factor_Enter(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, nudFactorEnterEventRaised, e);
+        }
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {       
             nud_plissedRd.DataBindings.Add(ModelBinding["PlissedRd_Panels"]);
@@ -342,6 +371,12 @@ namespace PresentationLayer.Views
             cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
 
-
+        private void ScreenView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control == true && e.KeyCode == Keys.P)
+            {
+                EventHelpers.RaiseEvent(sender, tsBtnPrintScreenClickEventRaised, e);
+            }
+        }
     }
 }
