@@ -186,6 +186,7 @@ namespace ModelLayer.Model.Quotation.Panel
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
+        int Panel_MultiFrmMotorizedMechQty { get; set; }
         int Panel_MotorizedMechSetQty { get; set; }
         int Panel_2DHingeQty { get; set; }
         _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
