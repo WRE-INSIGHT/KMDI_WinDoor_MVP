@@ -106,11 +106,15 @@ namespace PresentationLayer.Presenter
 
         private void OnRDLCReportCompilerViewLoadEventRaised(object sender, EventArgs e)
         {
-
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
             }
+            _quoteItemListPresenter.CallFrmRDLCCompiler = true;
+            _quoteItemListPresenter.PrintContractSummaryRDLC();
+            _quoteItemListPresenter.CallFrmRDLCCompiler = false;
+            _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
+
         }
 
         public void Bgw_CompilePDF()
@@ -134,11 +138,8 @@ namespace PresentationLayer.Presenter
             {
                 if (!string.IsNullOrWhiteSpace(_rdlcReportCompilerView.TxtBxOutofTownExpenses))
                 {
-                    int num;
-                    if (int.TryParse(_rdlcReportCompilerView.TxtBxOutofTownExpenses, out num))
-                    {
-                        if (num >= 0)
-                        {
+                    
+                        
                             _loadingThread = new Thread(Bgw_CompilePDF);
                             
                             projname = _mainPresenter.inputted_projectName;
@@ -251,16 +252,8 @@ namespace PresentationLayer.Presenter
                                _loadingThread.Abort();                            
                             }                           
                             SetVariablesToDefault();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error Negative Value Detected", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Expenses Must Be A Valid Number", " ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                       
+                   
                 }
                 else
                 {

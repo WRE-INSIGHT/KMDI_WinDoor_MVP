@@ -130,6 +130,8 @@ namespace PresentationLayer.Views
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
         public event EventHandler SelectedIndexChangeEventRaised;
+        public event EventHandler txtoftexpensesKeyPressEventRaised;
+
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -149,8 +151,7 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender, btnRefreshClickEventRaised, e);
         }
-
-       
+  
         private void BSQuotation_CurrentChanged(object sender, EventArgs e)
         {
 
@@ -166,6 +167,12 @@ namespace PresentationLayer.Views
             EventHelpers.RaiseEvent(sender, SelectedIndexChangeEventRaised, e);
         }
 
-       
+        private void txt_oftexpenses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                EventHelpers.RaiseEvent(sender, txtoftexpensesKeyPressEventRaised, e);
+            }
+        }
     }
 }
