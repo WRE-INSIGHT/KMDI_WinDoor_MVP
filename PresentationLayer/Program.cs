@@ -425,6 +425,9 @@ namespace PresentationLayer
                 .RegisterType<ISP_LandCoverPropertyUCPresenter, SP_LandCoverPropertyUCPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_LandCoverPropertyUC, SP_LandCoverPropertyUC>(new ContainerControlledLifetimeManager())
 
+                .RegisterType<ISP_PriceIncreaseByPercentageUCPresenter,SP_PriceIncreaseByPercentageUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_PriceIncreaseByPercentageUC,SP_PriceIncreaseByPercentageUC>(new ContainerControlledLifetimeManager())
+
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
 

@@ -84,6 +84,7 @@
             0,
             0,
             0});
+            this.numWidth.Enter += new System.EventHandler(this.numWidth_Enter);
             // 
             // btnOK
             // 
@@ -123,6 +124,7 @@
             0,
             0,
             0});
+            this.numHeight.Enter += new System.EventHandler(this.numHeight_Enter);
             // 
             // panel1
             // 

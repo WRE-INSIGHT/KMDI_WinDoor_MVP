@@ -30,9 +30,9 @@
         {
             this.panelSort = new System.Windows.Forms.Panel();
             this.rtboxDesc = new System.Windows.Forms.RichTextBox();
-            this.lbl_dimension = new System.Windows.Forms.Label();
-            this.btnView = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnView = new System.Windows.Forms.Button();
+            this.lbl_dimension = new System.Windows.Forms.Label();
             this.cb_item = new System.Windows.Forms.CheckBox();
             this.pboxItemImage = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -68,6 +68,28 @@
             this.rtboxDesc.TabIndex = 17;
             this.rtboxDesc.Text = "";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnView);
+            this.panel3.Controls.Add(this.lbl_dimension);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(294, 27);
+            this.panel3.TabIndex = 18;
+            // 
+            // btnView
+            // 
+            this.btnView.BackgroundImage = global::PresentationLayer.Properties.Resources.view;
+            this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnView.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnView.Location = new System.Drawing.Point(267, 0);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(27, 27);
+            this.btnView.TabIndex = 24;
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.button1_Click);
+            // 
             // lbl_dimension
             // 
             this.lbl_dimension.AutoEllipsis = true;
@@ -84,28 +106,6 @@
             this.lbl_dimension.Tag = "";
             this.lbl_dimension.Text = "lbl_dimension";
             this.lbl_dimension.UseMnemonic = false;
-            // 
-            // btnView
-            // 
-            this.btnView.BackgroundImage = global::PresentationLayer.Properties.Resources.view;
-            this.btnView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnView.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnView.Location = new System.Drawing.Point(267, 0);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(27, 27);
-            this.btnView.TabIndex = 24;
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.btnView);
-            this.panel3.Controls.Add(this.lbl_dimension);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(294, 27);
-            this.panel3.TabIndex = 18;
             // 
             // cb_item
             // 

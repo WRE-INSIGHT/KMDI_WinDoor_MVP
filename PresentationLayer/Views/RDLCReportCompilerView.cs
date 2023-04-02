@@ -24,6 +24,11 @@ namespace PresentationLayer.Views
                 txt_oftexpenses.Text = value;
             }
         }
+        public TextBox GetOOTTextBox()
+        {
+            return txt_oftexpenses;
+        }
+
         public CheckedListBox GetChecklistBoxIndex()
         {
             return chk_showimagelist;

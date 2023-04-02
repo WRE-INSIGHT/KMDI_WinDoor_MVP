@@ -12,6 +12,7 @@ namespace PresentationLayer.Views
         event FormClosedEventHandler QuoteItemListViewFormClosedEventRaised;
         event EventHandler chkboxSelectallCheckedChangeEventRaised;
         event EventHandler TSbtnPDFCompilerClickEventRaised;
+       
 
         Panel GetPnlPrintBody();
         void showQuoteItemList();

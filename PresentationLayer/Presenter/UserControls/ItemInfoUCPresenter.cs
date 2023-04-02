@@ -31,6 +31,12 @@ namespace PresentationLayer.Presenter.UserControls
             _itemInfoUC.lblItemMouseDownEventRaised += _itemInfoUC_lblItemMouseDownEventRaised;
             _itemInfoUC.lblItemMouseMoveEventRaised += _itemInfoUC_lblItemMouseMoveEventRaised;
             _itemInfoUC.lblItemMouseUpEventRaised += _itemInfoUC_lblItemMouseUpEventRaised;
+            _itemInfoUC.DefaultDescriptionClickEventRaised += _itemInfoUC_DefaultDescriptionClickEventRaised;
+        }
+
+        private void _itemInfoUC_DefaultDescriptionClickEventRaised(object sender, EventArgs e)
+        {
+            _mainPresenter.itemDescription();
         }
 
         private void _itemInfoUC_lblItemMouseUpEventRaised(object sender, MouseEventArgs e)
