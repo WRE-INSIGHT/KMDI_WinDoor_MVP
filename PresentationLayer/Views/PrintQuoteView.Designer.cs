@@ -112,6 +112,7 @@
             this.txt_oftexpenses.Name = "txt_oftexpenses";
             this.txt_oftexpenses.Size = new System.Drawing.Size(145, 25);
             this.txt_oftexpenses.TabIndex = 17;
+            this.txt_oftexpenses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_oftexpenses_KeyDown);
             // 
             // chklstbox_itemnum
             // 

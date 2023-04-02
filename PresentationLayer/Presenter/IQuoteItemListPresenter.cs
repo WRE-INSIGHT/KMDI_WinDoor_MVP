@@ -17,7 +17,7 @@ namespace PresentationLayer.Presenter
                                                IWindoorModel windoorModel,
                                                IMainPresenter mainPresenter);
         void SetAllItemDiscount(int inputedDiscount);
-        void refreshItemList(object sender, EventArgs e);
+        void refreshItemList();
         void PrintWindoorRDLC();
         void PrintContractSummaryRDLC();
         void PrintScreenRDLC();
@@ -26,7 +26,9 @@ namespace PresentationLayer.Presenter
         List<int> RDLCReportCompilerItemIndexes { get; set; }
         bool RenderPDFAtBackGround { get; set; }
         string RDLCReportCompilerOutOfTownExpenses { get; set; }
+        bool CallFrmRDLCCompiler { get; set; }
         decimal OutOfTownCharges { get; }
+        void ContractSummaryComputation();
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }
