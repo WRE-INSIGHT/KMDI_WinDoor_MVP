@@ -954,6 +954,16 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl_curCtrl.Panel_Type == "Awning Panel")
                                                 {
+                                                    //pnl_curCtrl.MotorizeMechQty();
+                                                    //int mechanism;
+                                                    //if (item.lst_frame.Count == 0)
+                                                    //{
+                                                    //    mechanism = pnl_curCtrl.Panel_MotorizedMechQty;
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    mechanism = pnl_curCtrl.Panel_MultiFrmMotorizedMechQty;
+                                                    //}
                                                     pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List, pnl_curCtrl.MotorizeMechQty());
 
                                                     int hinge_screws = pnl_curCtrl.Add_Hinges_screws4fab();
@@ -1503,10 +1513,10 @@ namespace ModelLayer.Model.Quotation
                                                     slidingChck = false;
                                                 }
 
-                                                if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-                                                {
-                                                    frame.Insert_ConnectorType_MaterialList(Material_List);
-                                                }
+                                                //if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                                //{
+                                                //    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                                //}
 
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
@@ -1908,10 +1918,10 @@ namespace ModelLayer.Model.Quotation
                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                 {
 
-                                    if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-                                    {
-                                        frame.Insert_ConnectorType_MaterialList(Material_List);
-                                    }
+                                    //if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                    //{
+                                    //    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                    //}
 
                                     pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                     pnl.Insert_AluminumTrack_MaterialList(Material_List);
@@ -2352,7 +2362,8 @@ namespace ModelLayer.Model.Quotation
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
              // ChckColor = false,
-             check1stFrame = false;
+             check1stFrame = false,
+            chckPerFrameMotorMech = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -3594,6 +3605,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
                 {
+
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
                         #region baseOnDimensionAndColorPointsif
@@ -3997,7 +4009,7 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
+                        chckPerFrameMotorMech = true;
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
@@ -4693,7 +4705,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 MotorizeMechPricePerPiece = 39000m;
                                             }
-                                            MotorizePrice = MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
+                                            if (chckPerFrameMotorMech == true)
+                                            {
+                                                MotorizePrice += MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
+                                                chckPerFrameMotorMech = false;
+                                            }
                                         }
                                         #endregion
 
