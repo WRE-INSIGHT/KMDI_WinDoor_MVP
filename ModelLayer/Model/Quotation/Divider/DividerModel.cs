@@ -386,7 +386,7 @@ namespace ModelLayer.Model.Quotation.Divider
 
             if (Div_Type == DividerType.Mullion)
             {
-                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f)
+                if (_divZoom == 0.26f || _divZoom == 0.17f || _divZoom == 0.13f || _divZoom == 0.10f || _divZoom == 0.05f)
                 {
                     Div_WidthToBind = divsize;
                     Div_HeightToBind = ht;

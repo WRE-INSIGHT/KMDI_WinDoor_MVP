@@ -86,7 +86,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
         {
             get
             {
-                return _mpanelWidthToBind;
+               return _mpanelWidthToBind;
             }
             set
             {
@@ -1582,7 +1582,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             int wd = 0, ht = 0, wd_deduct = 0, ht_deduct = 0;
             if (MPanel_ParentModel == null)
             {
-                if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                if (/*MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)*/MPanel_Zoom >= 0.05f && MPanel_Zoom <= 0.26f)
                 {
                     wd_deduct = 20;
                     ht_deduct = 20;

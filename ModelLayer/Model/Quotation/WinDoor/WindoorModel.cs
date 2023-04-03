@@ -204,7 +204,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         private float _wdZoom;
         [Required(ErrorMessage = "Zoom value is Required")]
-        [Range(0.1, 100.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
+        [Range(0.001, 100.0, ErrorMessage = "Please enter a zoom value bigger than or equal to {1}")]
         public float WD_zoom
         {
             get
@@ -386,7 +386,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private float[] _arr_zoomPercentage = { 0.10f, 0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
+        private float[] _arr_zoomPercentage = { 0.01f,0.02f,0.05f,0.06f,0.08f,0.10f,
+                                                0.13f, 0.17f, 0.26f, 0.50f, 1.0f };
         public float[] Arr_ZoomPercentage
         {
             get
@@ -657,30 +658,42 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
             if (area <= 360000) //400w x 400h to 600w x 600h
             {
-                zm = _arr_zoomPercentage[5];
+                zm = _arr_zoomPercentage[10];
             }
             else if (area > 360000 && area <= 1000000) //(600w x 601h / 601w x 600h) to 1000w x 1000h
             {
-                zm = _arr_zoomPercentage[4];
+                zm = _arr_zoomPercentage[9];
             }
             else if (area > 1000000 && area <= 4000000) // (1000w x 1001h / 1001w x 1000h) to 2000w x 2000h
             {
-                zm = _arr_zoomPercentage[3];
+                zm = _arr_zoomPercentage[8];
             }
             else if (area > 4000000 && area <= 9000000) // (2000w x 2001h / 2001w x 2000h) to 3000w x 3000h
             {
-                zm = _arr_zoomPercentage[2];
+                zm = _arr_zoomPercentage[7];
             }
             else if (area > 9000000 && area <= 16000000) // (3000w x 3001h / 3001w x 3000h) to 4000w x 4000h
             {
-                zm = _arr_zoomPercentage[1];
+                zm = _arr_zoomPercentage[6];
             }
-            else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
+            else if (area > 16000000 && area <= 36000000) //  (4000w x 4001h / 4001w x 4000h) to 6000w x 6000h
             {
-                zm = _arr_zoomPercentage[0];            
+                zm = _arr_zoomPercentage[5];            
+            }
+            else if (area > 36000000 && area <= 49000000) // (6000w x 6001h / 6001w x 6000h) to 7000w x 7000h
+            {
+                zm = _arr_zoomPercentage[4];
+            } 
+            else if (area > 49000000 && area <= 100000000) // (7000w x 7001h / 7001 x 7000 ) to 10000w x 10000h
+            {
+                zm = _arr_zoomPercentage[3];
+            }
+            else if (area > 100000000 && area <= 144000000) // (10000 x 10001h / 10001 x 10000 ) to 12000 x 12000h
+            {
+                zm = Arr_ZoomPercentage[2];
             }
 
-            return zm;
+                return zm;
         }
 
         public void SetImageRenderingZoom()

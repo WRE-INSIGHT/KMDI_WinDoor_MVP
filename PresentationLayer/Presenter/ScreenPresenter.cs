@@ -529,7 +529,8 @@ namespace PresentationLayer.Presenter
                 _screenModel.SP_MagnumScreenType_Visibility = false;
             }
 
-            
+            _screenModel.Screen_LatchKitQty = 0;
+            _screenModel.Screen_IntermediatePartQty = 0;
             _screenModel.ComputeScreenTotalPrice();
             _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;
         }
