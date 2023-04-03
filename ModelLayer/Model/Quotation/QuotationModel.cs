@@ -3943,6 +3943,10 @@ namespace ModelLayer.Model.Quotation
                                 ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForPremiPricePerPiece;
                                 FrameThresholdPricePerLinearMeter = ThresholdForPremiPricePerPiece;
                             }
+                            else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._None)
+                            {
+                               // do nothing
+                            }
                             else
                             {
                                 if (fr.Frame_BotFrameArtNo == BottomFrameTypes._7502)
@@ -4009,7 +4013,9 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
+                        
                         chckPerFrameMotorMech = true;
+
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
