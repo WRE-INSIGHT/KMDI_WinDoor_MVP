@@ -15,5 +15,6 @@ namespace PresentationLayer.Views
         CheckBox CheckListSelectAll();
         SaveFileDialog GetSaveFileDialog();
         Form GetRDLCReportCompilerForm();
+        TextBox GetOOTTextBox();
     }
 }
