@@ -6290,6 +6290,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_Description = "No Insect Screen";
                 }
+                #region no&Unnecessary
+                Screen_Quantity = 0;
+                Screen_UnitPrice = 0;
+                DiscountPercentage = 0;
+                Screen_TotalAmount = 0;
+                Discount = 0;
+                Screen_NetPrice = 0;
+                #endregion
             }
             else
             {
