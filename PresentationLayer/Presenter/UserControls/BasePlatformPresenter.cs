@@ -157,6 +157,21 @@ namespace PresentationLayer.Presenter.UserControls
                     dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
                     dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 6, FontStyle.Bold);
                 }
+                else if (_windoorModel.WD_zoom == 0.08f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 7, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 7, FontStyle.Bold);
+                }
+                else if (_windoorModel.WD_zoom == 0.06f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 8, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 8, FontStyle.Bold);
+                }
+                else if (_windoorModel.WD_zoom == 0.05f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 9, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 9, FontStyle.Bold);
+                }
                 else
                 {
                     dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
