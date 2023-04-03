@@ -153,6 +153,18 @@ namespace PresentationLayer.Presenter
             _frmDimensionView.btnCancelClickedEventRaised += new EventHandler(OnbtnCancelClickedEventRaised);
             _frmDimensionView.cmbSystemOptionSelectedValueChangedEventRaised += new EventHandler(_frmDimensionView_cmbSystemOptionSelectedValueChangedEventRaised);
             _frmDimensionView.cmbBaseColorOptionSelectedValueChangedEventRaised += new EventHandler(_frmDimensionView_cmbBaseColorOptionSelectedValueChangedEventRaised);
+            _frmDimensionView.numWidthEnterEventRaised += new EventHandler(OnnumWidthEnterEventRaised);
+            _frmDimensionView.numHeightEnterEventRaised += new EventHandler(OnnumHeightEnterEventRaised);
+        }
+
+        private void OnnumHeightEnterEventRaised(object sender, EventArgs e)
+        {
+            _frmDimensionView.GetNumHeigth().Select(0, _frmDimensionView.GetNumHeigth().Text.Length);
+        }
+
+        private void OnnumWidthEnterEventRaised(object sender, EventArgs e)
+        {
+            _frmDimensionView.GetNumWidth().Select(0, _frmDimensionView.GetNumWidth().Text.Length);
         }
 
         private void _frmDimensionView_cmbBaseColorOptionSelectedValueChangedEventRaised(object sender, EventArgs e)

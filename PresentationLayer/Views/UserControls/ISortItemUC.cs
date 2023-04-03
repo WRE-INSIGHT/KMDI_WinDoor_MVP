@@ -9,17 +9,21 @@ namespace PresentationLayer.Views.UserControls
 {
     public interface ISortItemUC
     {
-        event MouseEventHandler lblItemMouseMoveEventRaised;
-        event MouseEventHandler lblItemMouseDownEventRaised;
-        event MouseEventHandler lblItemMouseUpEventRaised;
+        event MouseEventHandler cbItemMouseMoveEventRaised;
+        event MouseEventHandler cbItemMouseDownEventRaised;
+        event MouseEventHandler cbItemMouseUpEventRaised;
         event EventHandler SortItemUCLoadEventRaised;
         event EventHandler DeleteToolStripButtonClickEventRaised;
         event EventHandler DuplicateToolStripButtonClickEventRaised;
+
+        event EventHandler cbitem_CheckedChangedEventRaised;
         string ItemName { get; set; }
         //string itemWindoorNumber { get; set; }
         string itemDesc { get; set; }
         PictureBox GetPboxItemImage();
         string itemDimension { get; set; }
+        bool itemSelected { get; set; }
+        bool itemChecked { get;}
         UserControl GetSortItem();
     }
 }

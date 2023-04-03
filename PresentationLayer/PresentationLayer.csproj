@@ -27,12 +27,12 @@
     <ProductName>KMDI Systems WinDoorMaker</ProductName>
     <PublisherName>KMDI Programming Team</PublisherName>
     <SuiteName>KMDI Systems WinDoorMaker</SuiteName>
-    <MinimumRequiredVersion>1.0.0.38</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.51</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -230,6 +230,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_MagnumScreenTypeUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PriceIncreaseByPercentageUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\ISP_SpringLoadedUCPresenter.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_CenterClosurePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_LandCoverPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_MagnumScreenTypeUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PriceIncreaseByPercentageUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCbox1067WithReinPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_PVCboxPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ScreenAddonsPropertiesUCPresenter_Module\SP_SpringLoadedUCPresenter.cs" />
@@ -1007,6 +1009,7 @@
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_CenterClosurePropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_LandCoverPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_MagnumScreenTypeUC.cs" />
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PriceIncreaseByPercentageUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCbox1067WithReinPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_PVCboxPropertyUC.cs" />
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\ISP_SpringLoadedUC.cs" />
@@ -1051,6 +1054,12 @@
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.Designer.cs">
       <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PriceIncreaseByPercentageUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PriceIncreaseByPercentageUC.Designer.cs">
+      <DependentUpon>SP_PriceIncreaseByPercentageUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.cs">
       <SubType>UserControl</SubType>
@@ -1549,6 +1558,9 @@
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_MagnumScreenTypeUC.resx">
       <DependentUpon>SP_MagnumScreenTypeUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PriceIncreaseByPercentageUC.resx">
+      <DependentUpon>SP_PriceIncreaseByPercentageUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\ScreenAddOns_Modules\SP_PVCbox1067WithReinPropertyUC.resx">
       <DependentUpon>SP_PVCbox1067WithReinPropertyUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1663,6 +1675,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\view.png" />
     <None Include="Resources\AddNew_Concrete.png" />
     <None Include="Resources\43.png" />
     <None Include="Resources\126.gif" />
@@ -1696,6 +1709,7 @@
     <None Include="Resources\ExtensionRight1.png" />
     <None Include="Resources\fade90.gif" />
     <None Include="Resources\fade90v2.gif" />
+    <None Include="Resources\fade901.gif" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />
@@ -1705,6 +1719,7 @@
     <None Include="Resources\icons8-banknotes-48.png" />
     <None Include="Resources\glass %281%29.png" />
     <None Include="Resources\glass.png" />
+    <None Include="Resources\folder.png" />
     <Content Include="Resources\icons8_closed_window.ico" />
     <Content Include="Resources\icons8_closed_window_64.png" />
     <None Include="Resources\icons8_front_sorting_96px.png" />

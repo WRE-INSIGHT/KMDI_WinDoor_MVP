@@ -1477,23 +1477,68 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
                 GeorgianBar_GapY += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBarLeft_PointsY = new[]
+
+                Point[] GeorgianBarTop_PointsY = null;
+                Point[] GeorgianBarBottom_PointsY = null;
+                if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
-                };
-                for (int i = 0; i < GeorgianBarLeft_PointsY.Length - 1; i += 2)
-                {
-                    g.DrawLine(pOuterLine, GeorgianBarLeft_PointsY[i], GeorgianBarLeft_PointsY[i + 1]);
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
                 }
-                Point[] GeorgianBarRight_PointsY = new[]
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
-                };
-                for (int i = 0; i < GeorgianBarRight_PointsY.Length - 1; i += 2)
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
                 {
-                    g.DrawLine(pOuterLine, GeorgianBarRight_PointsY[i], GeorgianBarRight_PointsY[i + 1]);
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line, GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    GeorgianBarTop_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y-leftdeduction + addY),
+                    };
+                    GeorgianBarBottom_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + rightAddition + addY),
+                    };
+                }
+                for (int i = 0; i < GeorgianBarTop_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarTop_PointsY[i], GeorgianBarTop_PointsY[i + 1]);
+                }
+                for (int i = 0; i < GeorgianBarBottom_PointsY.Length - 1; i += 2)
+                {
+                    g.DrawLine(pOuterLine, GeorgianBarBottom_PointsY[i], GeorgianBarBottom_PointsY[i + 1]);
                 }
             }
 
@@ -1544,11 +1589,39 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 GBpointResultY = ((pGbarInnerY + client_ht - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapYs)));
                 GeorgianBar_GapYs += (client_ht - sashDeduction + (pGbarInnerY)) / (horizontalQty + 1);
-                Point[] GeorgianBar_PointsY = new[]
+                Point[] GeorgianBar_PointsY = null;
+                if (panelModel.Panel_Overlap_Sash == OverlapSash._Right)
                 {
-                  new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
-                  new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
-                };
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line - 2, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Left)
+                {
+                    GeorgianBar_PointsY = new[]
+                     {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._Both)
+                {
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD - inner_line, GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD + inner_line  - 2, GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
+                else if (panelModel.Panel_Overlap_Sash == OverlapSash._None)
+                {
+                    GeorgianBar_PointsY = new[]
+                    {
+                        new Point(pGbarInnerY+1 + Ppoint.X + sashD,GBpointResultY + Ppoint.Y + addY),
+                        new Point(pGbarInnerY-1 + client_wd + Ppoint.X - sashD,GBpointResultY + Ppoint.Y + addY),
+                    };
+                }
                 for (int i = 0; i < GeorgianBar_PointsY.Length - 1; i += 2)
                 {
                     g.DrawLine(pInnerLine, GeorgianBar_PointsY[i], GeorgianBar_PointsY[i + 1]);
@@ -2097,6 +2170,66 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (panelModel.Panel_Type == "Louver Panel")
             {
+                //Pen p = new Pen(Color.Black);
+                //Pen LvrPen = new Pen(Color.Black, 7);
+                //Pen LvrPen2 = new Pen(Color.White, 5);
+                //// jelusi
+
+                //int Lvr_NewLocation = 0,
+                //    Lvr_Gap = 0,
+                //    pInnerY = Ppoint.Y,
+                //    pInnerX = Ppoint.X,
+                //    pInnerHt = client_ht,
+                //    pInnerWd = client_wd,
+                //    NoOfBlades = panelModel.Panel_LouverBladesCount;
+                //double Lvr_GlassHt = 0;
+
+                //float Ht_Allowance = 20 * _windoorModel.WD_zoom_forImageRenderer;
+
+                ////side blade
+                //for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
+                //{
+                //    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBlades))) / (int)NoOfBlades) / 2) + (int)NoOfBlades;//33 + (33 * 0.75);
+                //    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
+                //    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBlades);
+
+                //    Point[] LvrSideBlade =
+                //     {
+                //        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point((pInnerX - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                //        new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
+                //        new Point(pInnerX+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+
+                //        new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
+                //        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                //     };
+
+                //    for (int i = 0; i < LvrSideBlade.Length; i += 2)
+                //    {
+                //        if (i == 4)
+                //        {
+                //            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //        else
+                //        {
+                //            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
+                //        }
+                //    }
+
+                //    //blade
+                //    Point[] blade =
+                //    {
+                //        new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
+                //        new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
+                //        new Point((int)client_wd + pInnerX, Lvr_NewLocation + (int)Lvr_GlassHt), // - 26 para mag slant yung blade
+                //        new Point(pInnerX , Lvr_NewLocation + (int)Lvr_GlassHt)
+                //    };
+                //    for (int i = 0; i < blade.Length; i += 2)
+                //    {
+                //        g.DrawLine(p, blade[i], blade[i + 1]);
+                //    }
+                //}
                 Pen p = new Pen(Color.Black);
                 Pen LvrPen = new Pen(Color.Black, 7);
                 Pen LvrPen2 = new Pen(Color.White, 5);
@@ -2108,61 +2241,83 @@ namespace PresentationLayer.Presenter.UserControls
                     pInnerX = Ppoint.X,
                     pInnerHt = client_ht,
                     pInnerWd = client_wd,
-                    NoOfBaldes = panelModel.Panel_LouverBladesCount;
-                double Lvr_GlassHt = 0;
+                    NoOfBlades = panelModel.Panel_LouverBladesCount;
 
                 float Ht_Allowance = 20 * _windoorModel.WD_zoom_forImageRenderer;
-
+                double Lvr_GlassHt = 0, Total_Lvr_GlassHt = (int)(Ht_Allowance / 2);
+                pInnerHt -= (int)Ht_Allowance;
+                double ht_allowance_deci = 0.0, Lvr_GlassHt_deci = 0.0;
                 //side blade
+                IDictionary<Point[], Point[]> lvrBlade = new Dictionary<Point[], Point[]>();
                 for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
                 {
-                    Lvr_GlassHt = (((pInnerHt - (((int)NoOfBaldes))) / (int)NoOfBaldes) / 2) + (int)NoOfBaldes;//33 + (33 * 0.75);
-                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Lvr_GlassHt;
-                    Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBaldes);
-
+                    Lvr_GlassHt = (double)pInnerHt / NoOfBlades;
+                    Total_Lvr_GlassHt += Lvr_GlassHt;
+                    Lvr_NewLocation = ((pInnerY + (int)Ht_Allowance) + Lvr_Gap) + (int)Total_Lvr_GlassHt;
+                    //Lvr_Gap += (pInnerHt - (int)Lvr_GlassHt) / ((int)NoOfBlades);
+                    int New_Lvr_GlassHt_Location = (int)Lvr_GlassHt;
+                    ht_allowance_deci += (double)(Ht_Allowance - Math.Truncate(Ht_Allowance));
+                    Lvr_GlassHt_deci += (Lvr_GlassHt - Math.Truncate(Lvr_GlassHt));
+                    if ((Lvr_GlassHt + (int)(Ht_Allowance / 2)) != Total_Lvr_GlassHt)
+                    {
+                        New_Lvr_GlassHt_Location = (int)Total_Lvr_GlassHt - ((int)Lvr_GlassHt * ii) - (int)(Ht_Allowance / 2);
+                    }
                     Point[] LvrSideBlade =
                      {
-                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point((pInnerX - 7) + pInnerWd + 4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point((pInnerX - 7) + pInnerWd - 2, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location),
+                        new Point((pInnerX - 7) + pInnerWd + 4, (int)Total_Lvr_GlassHt + pInnerY),
 
                         new Point(pInnerX-2, Lvr_NewLocation-(int)Lvr_GlassHt),
-                        new Point(pInnerX+4, Lvr_NewLocation+(int)Lvr_GlassHt),
+                        new Point(pInnerX+4, (int)Total_Lvr_GlassHt + pInnerY),
 
-                        new Point(pInnerX-4, Lvr_NewLocation-(int)Lvr_GlassHt-1),
-                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1)
+                        new Point(pInnerX-4, Lvr_NewLocation-(int)New_Lvr_GlassHt_Location-1),
+                        new Point(pInnerX-4, Lvr_NewLocation+(int)Lvr_GlassHt+1 + pInnerY )
                      };
-
-                    for (int i = 0; i < LvrSideBlade.Length; i += 2)
-                    {
-                        if (i == 4)
-                        {
-                            g.DrawLine(LvrPen2, LvrSideBlade[i], LvrSideBlade[i + 1]);
-                        }
-                        else
-                        {
-                            g.DrawLine(LvrPen, LvrSideBlade[i], LvrSideBlade[i + 1]);
-                        }
-                    }
-
-                    //blade
                     Point[] blade =
                     {
                         new Point(pInnerX, Lvr_NewLocation - (int)Lvr_GlassHt),
                         new Point((int)client_wd + pInnerX - 7, Lvr_NewLocation - (int)Lvr_GlassHt),
-                        new Point((int)client_wd + pInnerX, Lvr_NewLocation + (int)Lvr_GlassHt), // - 26 para mag slant yung blade
-                        new Point(pInnerX , Lvr_NewLocation + (int)Lvr_GlassHt)
+                        new Point((int)client_wd + pInnerX, (int)Total_Lvr_GlassHt+ pInnerY), // - 26 para mag slant yung blade
+                        new Point(pInnerX , (int)Total_Lvr_GlassHt + pInnerY)
                     };
-                    for (int i = 0; i < blade.Length; i += 2)
+                    lvrBlade.Add(LvrSideBlade, blade);
+                }
+
+
+
+                for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
+                {
+                    IList<Point> lstPtsSide = new List<Point>();
+                    foreach(Point pnts in lvrBlade.ElementAt(ii).Key)
                     {
-                        g.DrawLine(p, blade[i], blade[i + 1]);
+                        lstPtsSide.Add (new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
                     }
+
+                    IList<Point> lstPtsblade = new List<Point>();
+                    foreach (Point pnts in lvrBlade.ElementAt(ii).Value)
+                    {
+                        lstPtsblade.Add(new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
+                    }
+                    for (int i = 0; i < lvrBlade.ElementAt(ii).Key.Length; i += 2)
+                    {
+                        if (i == 4)
+                        {
+                            g.DrawLine(LvrPen2, lstPtsSide[i], lstPtsSide[i + 1]);
+                        }
+                        else
+                        {
+                            g.DrawLine(LvrPen, lstPtsSide[i], lstPtsSide[i + 1]);
+                        }
+                    }
+                   
+                    for (int i = 0; i < lvrBlade.ElementAt(ii).Value.Length; i += 2)
+                    {
+                        g.DrawLine(p, lstPtsblade[i], lstPtsblade[i + 1]);
+                    }
+                 
                 }
             }
-           
-
-
         }
-
         private void Draw_MultiPanel(PaintEventArgs e, IMultiPanelModel mpanelModel, Point Mpoint)
         {
             Graphics g = e.Graphics;

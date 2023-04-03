@@ -26,6 +26,7 @@ namespace PresentationLayer.Presenter.UserControls
         private ISP_373or374MilledProfilePropertyUCPresenter _sp_373or374MilledProfilePropertyUCPresenter;
         private ISP_1385MilledProfilePropertyUCPresenter _sp_1385MilledProfilePropertyUCPresenter;
         private ISP_6052MilledProfilePropertyUCPresenter _sp_6052MilledProfilePropertyUCPresenter;
+        private ISP_PriceIncreaseByPercentageUCPresenter _sp_PriceIncreaseByPercentageUCPresenter;
 
 
         Panel _pnlAddOns;
@@ -41,7 +42,8 @@ namespace PresentationLayer.Presenter.UserControls
                                                 ISP_LandCoverPropertyUCPresenter landCoverPresenter,
                                                 ISP_373or374MilledProfilePropertyUCPresenter sp_373or374MilledProfilePropertyUCPresenter,
                                                 ISP_1385MilledProfilePropertyUCPresenter sp_1385MilledProfilePropertyUCPresenter,
-                                                ISP_6052MilledProfilePropertyUCPresenter sp_6052MilledProfilePropertyUCPresenter
+                                                ISP_6052MilledProfilePropertyUCPresenter sp_6052MilledProfilePropertyUCPresenter,
+                                                ISP_PriceIncreaseByPercentageUCPresenter sp_PriceIncreaseByPercentageUCPresenter
                                                 )
         {
             _screenAddOnPropertiesUC = sp_screenAddOnPropertiesUC;
@@ -55,6 +57,7 @@ namespace PresentationLayer.Presenter.UserControls
             _sp_373or374MilledProfilePropertyUCPresenter = sp_373or374MilledProfilePropertyUCPresenter;
             _sp_1385MilledProfilePropertyUCPresenter = sp_1385MilledProfilePropertyUCPresenter;
             _sp_6052MilledProfilePropertyUCPresenter = sp_6052MilledProfilePropertyUCPresenter;
+            _sp_PriceIncreaseByPercentageUCPresenter = sp_PriceIncreaseByPercentageUCPresenter;
             _pnlAddOns = _screenAddOnPropertiesUC.GetPanelAddOns();
             SubcribeToEventSetUp();
         }
@@ -74,14 +77,18 @@ namespace PresentationLayer.Presenter.UserControls
 
         private void _sp_screenAddOnPropertiesUC_ScreenAddOnPropertiesUCLoadEventRaised(object sender, EventArgs e)
         {
-          
+            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel, _screenPresenter);
+            UserControl magnumScreenType = (UserControl)magnumScreenTypeUCP.GetMagnumScreenTypeView();
+            _pnlAddOns.Controls.Add(magnumScreenType);
+            magnumScreenType.Dock = DockStyle.Top;
+            magnumScreenType.BringToFront();
+
             ISP_6052MilledProfilePropertyUCPresenter milled6052profilepresenter = _sp_6052MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel,_screenPresenter);
             UserControl milled6052presenter = (UserControl)milled6052profilepresenter.Get6052MilledProfilePropertyUC();
             _pnlAddOns.Controls.Add(milled6052presenter);
             milled6052presenter.Dock = DockStyle.Top;
             milled6052presenter.BringToFront();
-
-            
+          
             ISP_1385MilledProfilePropertyUCPresenter milled1385profilepresenter = _sp_1385MilledProfilePropertyUCPresenter.CreateNewInstance(_unityC,_mainPresenter,_screenModel,_screenPresenter);
             UserControl miled1385presenter = (UserControl)milled1385profilepresenter.Get1385MilledProfilePropertyUC();
             _pnlAddOns.Controls.Add(miled1385presenter);
@@ -112,24 +119,24 @@ namespace PresentationLayer.Presenter.UserControls
             pvc1067withrein.Dock = DockStyle.Top;
             pvc1067withrein.BringToFront();
 
-            ISP_MagnumScreenTypeUCPresenter magnumScreenTypeUCP = _sp_magnumScreenTypePresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
-            UserControl magnumScreenType = (UserControl)magnumScreenTypeUCP.GetMagnumScreenTypeView();
-            _pnlAddOns.Controls.Add(magnumScreenType);
-            magnumScreenType.Dock = DockStyle.Top;
-            magnumScreenType.BringToFront();
-
             ISP_SpringLoadedUCPresenter springloadedUCP = _sp_SpringLoadedPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl springloadedUC = (UserControl)springloadedUCP.GetspringloadedUC();
             _pnlAddOns.Controls.Add(springloadedUC);
             springloadedUC.Dock = DockStyle.Top;
             springloadedUC.BringToFront();
 
-
             ISP_PVCboxPropertyUCPresenter pvcBoxPropUCP = _sp_pVCboxPropertyUCPresenter.CreatenewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl pvcBoxProp = (UserControl)pvcBoxPropUCP.GetPVCboxPropertyUC();
             _pnlAddOns.Controls.Add(pvcBoxProp);
             pvcBoxProp.Dock = DockStyle.Top;
             pvcBoxProp.BringToFront();
+
+            _screenModel.Screen_PriceIncreaseVisibility = true;
+            ISP_PriceIncreaseByPercentageUCPresenter priceIncreaseUCP = _sp_PriceIncreaseByPercentageUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel, _screenPresenter);
+            UserControl priceIncrease = (UserControl)priceIncreaseUCP.GetISP_PriceIncreaseByPercentageUC();
+            _pnlAddOns.Controls.Add(priceIncrease);
+            priceIncrease.Dock = DockStyle.Top;
+            priceIncrease.BringToFront();
 
             _screenModel.Screen_CenterClosureVisibility = true;
             _screenModel.Screen_CenterClosureVisibilityOption = true;
@@ -138,9 +145,8 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlAddOns.Controls.Add(centerClosureProp);
             centerClosureProp.Dock = DockStyle.Top;
             centerClosureProp.BringToFront();
-
+        
         }
-
 
         #endregion
 

@@ -37,6 +37,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -148,7 +149,7 @@ namespace PresentationLayer.Presenter
         private FrameModel.Frame_Padding frameType;
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
-        private string _wndrFileName;
+        private string _wndrFilePath, _wndrFileName;
         private DateTime _quotationDate;
 
         private CommonFunctions _commonfunc = new CommonFunctions();
@@ -580,6 +581,18 @@ namespace PresentationLayer.Presenter
                 _dateAssigned = value;
             }
         }
+        public string wndrFilePath
+        {
+            get
+            {
+                return _wndrFilePath;
+            }
+
+            set
+            {
+                _wndrFilePath = value;
+            }
+        }
         public string wndrFileName
         {
             get
@@ -913,7 +926,8 @@ namespace PresentationLayer.Presenter
         private void SubscribeToEventsSetup()
         {
             _mainView.MainViewLoadEventRaised += new EventHandler(OnMainViewLoadEventRaised);
-            _mainView.MainViewClosingEventRaised += new EventHandler(OnMainViewClosingEventRaised);
+            _mainView.MainViewClosedEventRaised += new EventHandler(OnMainViewClosedEventRaised);
+            _mainView.MainViewClosingEventRaised += new FormClosingEventHandler(OnMainViewClosingEventRaised);
             _mainView.OpenToolStripButtonClickEventRaised += new EventHandler(OnOpenToolStripButtonClickEventRaised);
             _mainView.NewFrameButtonClickEventRaised += new EventHandler(OnNewFrameButtonClickEventRaised);
             _mainView.NewQuotationMenuItemClickEventRaised += new EventHandler(OnNewQuotationMenuItemClickEventRaised);
@@ -952,6 +966,58 @@ namespace PresentationLayer.Presenter
             _mainView.setNewFactorEventRaised += new EventHandler(OnsetNewFactorEventRaised);
             _mainView.PanelMainMouseWheelRaiseEvent += new MouseEventHandler(OnPanelMainMouseWheelEventRaised);
 
+        }
+
+        private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to save your changes in " + wndrFileName + "?", "Closing Application",
+                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveChanges();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                if (_quotationModel != null)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to save your progress?", "Closing Application",
+                                               MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+                        if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+                        {
+                            wndr_content = new List<string>();
+                            SaveAs();
+                        }
+                        else
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        e.Cancel = false;
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+
+                }
+            }
         }
         #region Events  
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
@@ -1117,12 +1183,13 @@ namespace PresentationLayer.Presenter
                                                           0,
                                                           0.0m,
                                                           0.0m,
-                                                          string.Empty);
+                                                          string.Empty,
+                                                          0.0m,
+                                                          0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel,_quotationServices);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
-
 
         }
 
@@ -1146,9 +1213,7 @@ namespace PresentationLayer.Presenter
 
         }
 
-        string wndrfile = "",
-               wndrProjectFileName = "",
-              searchStr = "",
+        string searchStr = "",
               todo,
               mainTodo;
         public bool online_login = true;
@@ -1175,16 +1240,17 @@ namespace PresentationLayer.Presenter
 
         public void SaveAs()
         {
-            wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
-            if (wndrfile != _mainView.GetSaveFileDialog().FileName)
+            _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
+            if (_wndrFilePath != _mainView.GetSaveFileDialog().FileName)
             {
-                wndrfile = _mainView.GetSaveFileDialog().FileName;
+                _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
+
             }
             else
             {
-                if (!_mainView.mainview_title.Contains(wndrfile))
+                if (!_mainView.mainview_title.Contains(_wndrFilePath))
                 {
-                    _mainView.mainview_title += "( " + wndrfile + " )";
+                    _mainView.mainview_title += "( " + _wndrFilePath + " )";
                 }
             }
             saveToolStripButton_Click();
@@ -1195,13 +1261,13 @@ namespace PresentationLayer.Presenter
             //saveToolStripButton.Enabled = false;
             //UppdateDictionaries();
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrfile != "")
+            if (_wndrFilePath != "")
             {
                 try
                 {
-                    string txtfile = wndrfile.Replace(".wndr", ".txt");
+                    string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                     File.WriteAllLines(txtfile, Saving_dotwndr());
-                    File.Delete(wndrfile);
+                    File.Delete(_wndrFilePath);
                     FileInfo f = new FileInfo(txtfile);
                     f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                     //File.SetAttributes(txtfile, FileAttributes.Hidden);
@@ -1221,7 +1287,7 @@ namespace PresentationLayer.Presenter
                             //updatefile_bgw.RunWorkerAsync();
                             //}
                     MessageBox.Show("File saved!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    wndrProjectFileName = _mainView.GetSaveFileDialog().FileName;
+                    _wndrFilePath = _mainView.GetSaveFileDialog().FileName;
                     SetMainViewTitle(input_qrefno,
                                      _projectName,
                                      _custRefNo,
@@ -1265,11 +1331,11 @@ namespace PresentationLayer.Presenter
                 SaveWindoorModel(wdm);
 
             }
-            foreach(ScreenModel scm in Screen_List)
+            foreach (ScreenModel scm in Screen_List)
             {
                 wndr_content.Add("~");
 
-                foreach(var prop in scm.GetType().GetProperties())
+                foreach (var prop in scm.GetType().GetProperties())
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(scm, null));
                     //wndr_content.Add("_screenServices." + prop.Name + " = " + prop.Name.Substring(0,1).ToLower() + prop.Name.Substring(1) + ";");
@@ -1318,7 +1384,7 @@ namespace PresentationLayer.Presenter
                 else
                 {
                     wndr_content.Add(prop.Name + ": " + prop.GetValue(wdm, null));
-                   
+
                 }
             }
             foreach (Control wndrObject in wdm.lst_objects)
@@ -1803,7 +1869,7 @@ namespace PresentationLayer.Presenter
                 _frmDimensionPresenter.GetDimensionView().ClosefrmDimension();
                 _basePlatformPresenter.InvalidateBasePlatform();
                 //GetCurrentPrice();
-                itemDescription();
+                //itemDescription();
 
             }
             catch (Exception ex)
@@ -2267,20 +2333,19 @@ namespace PresentationLayer.Presenter
         }
         private void openFileMethod(string filePath)
         {
-            wndrProjectFileName = filePath;
+            _wndrFilePath = filePath;
             isNewProject = false;
             isOpenProject = true;
-            wndrfile = filePath;
             //csfunc.DecryptFile(wndrfile);
-            int startFileName = wndrfile.LastIndexOf("\\") + 1;
-            wndrFileName = wndrfile.Substring(startFileName);
-            FileInfo f = new FileInfo(wndrfile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-            string outFile = wndrfile.Substring(0, startFileName) +
-                             wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+            int startFileName = _wndrFilePath.LastIndexOf("\\") + 1;
+            wndrFileName = _wndrFilePath.Substring(startFileName);
+            FileInfo f = new FileInfo(_wndrFilePath);
+            f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
+            string outFile = _wndrFilePath.Substring(0, startFileName) +
+                             _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
 
             file_lines = File.ReadAllLines(outFile);
-            f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+            f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
             _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
             _basePlatformImagerUCPresenter.SendToBack_baseImager();
@@ -2302,7 +2367,7 @@ namespace PresentationLayer.Presenter
                 {
                     ToggleMode(false, false);
                 }
-               
+
             }
             else
             {
@@ -2322,11 +2387,12 @@ namespace PresentationLayer.Presenter
             _mainView.GetToolStripLabelLoading().Visible = visibility;
             _mainView.GetTsProgressLoading().Visible = visibility;
         }
-        private void OnMainViewClosingEventRaised(object sender, EventArgs e)
+        private void OnMainViewClosedEventRaised(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
             _loginView.CloseLoginView();
         }
+
 
         private void OnMainViewLoadEventRaised(object sender, EventArgs e)
         {
@@ -2924,20 +2990,28 @@ namespace PresentationLayer.Presenter
 
                     SetChangesMark();
                     _isOpenProject = false;
-                    wndrfile = _mainView.GetOpenFileDialog().FileName;
+                    string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
-                    int startFileName = wndrfile.LastIndexOf("\\") + 1;
-                    FileInfo f = new FileInfo(wndrfile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".txt"));
-                    string outFile = wndrfile.Substring(0, startFileName) +
-                                     wndrfile.Substring(startFileName, wndrfile.LastIndexOf(".") - startFileName) + ".txt";
+                    int startFileName = addExistingwndrfile.LastIndexOf("\\") + 1;
+                    FileInfo f = new FileInfo(addExistingwndrfile);
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".txt"));
+                    string outFile = addExistingwndrfile.Substring(0, startFileName) +
+                                     addExistingwndrfile.Substring(startFileName, addExistingwndrfile.LastIndexOf(".") - startFileName) + ".txt";
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
                     file_lines = File.ReadAllLines(outFile);
-                    f.MoveTo(Path.ChangeExtension(wndrfile, ".wndr"));
+                    f.MoveTo(Path.ChangeExtension(addExistingwndrfile, ".wndr"));
                     onload = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
+                    
+                    ////foreach(string strline in file_lines) 
+                    ////{
+                    ////    if(strline.Contains("WD_name:"))
+                    ////    {
+                    ////        MessageBox.Show(strline);
+                    ////    }
+                    ////}
                     _mainView.GetTsProgressLoading().Maximum = file_lines.Length;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     StartWorker("Add_Existing_Items");
@@ -2958,8 +3032,8 @@ namespace PresentationLayer.Presenter
 
         private void OnSortItemButtonClickEventRaised(object sender, EventArgs e)
         {
-            ISortItemPresenter sortItem = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
-            sortItem.GetSortItemView().showSortItem();
+            _sortItemPresenter = _sortItemPresenter.GetNewInstance(_unityC, _quotationModel, _sortItemUCPresenter, _windoorModel, this);
+            _sortItemPresenter.GetSortItemView().showSortItem();
         }
         private void OnItemsDragEventRaiseEvent(object sender, DragEventArgs e)
         {
@@ -3034,9 +3108,6 @@ namespace PresentationLayer.Presenter
                         {
                             _mainView.GetToolStripLabelLoading().Text = "Initializing";
                         }
-
-                        break;
-                    
 
                         break;
                     default:
@@ -3226,11 +3297,21 @@ namespace PresentationLayer.Presenter
             }
             else if (row_str == "/")
             {
+                if (inside_frame)
+                {
+                    Frame_Load();
+                }
+
                 inside_concrete = true;
             }
 
             else if (row_str.Contains("#"))
             {
+                if (inside_frame)
+                {
+                    Frame_Load();
+                }
+
                 if (inside_panel)
                 {
                     Panel_Load();
@@ -3239,6 +3320,10 @@ namespace PresentationLayer.Presenter
             }
             else if (file_lines[row].Contains("\t["))
             {
+                if (inside_frame)
+                {
+                    Frame_Load();
+                }
                 if (file_lines[row].ToString() == "\t[")
                 {
                     mpnllvl = "second level";
@@ -3294,6 +3379,7 @@ namespace PresentationLayer.Presenter
                 _frameModel.Lst_MultiPanel = Arrange_Frame_MultiPanelModel(_frameModel);
                 frm_Width = 0; ;
                 frm_Height = 0;
+                inside_frame = false;
                 frmDimension_profileType = "";
                 frmDimension_baseColor = "";
 
@@ -3312,10 +3398,10 @@ namespace PresentationLayer.Presenter
                     inside_screen = false;
                 }
                 else
-                {                  
+                {
                     inside_screen = true;
                 }
-               
+
             }
             if (row_str == "EndofFile")
             {
@@ -3334,7 +3420,7 @@ namespace PresentationLayer.Presenter
                     updatePriceOfMainView();
                     ItemScroll = 0;
                 }
-                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item") 
+                else if (mainTodo == "Add_Existing_Items" || mainTodo == "Duplicate_Item")
                 {
                     Load_Windoor_Item(_windoorModel);
                     _lblCurrentPrice.Value = _windoorModel.WD_price;
@@ -3830,10 +3916,6 @@ namespace PresentationLayer.Presenter
                         }
                         if (row_str.Contains("Frame_MilledReinfArtNo:"))
                         {
-                            if (row == Convert.ToInt32(9708))
-                            {
-                                int hi = 1;
-                            }
                             foreach (MilledFrameReinf_ArticleNo artcNo in MilledFrameReinf_ArticleNo.GetAll())
                             {
                                 if (artcNo.ToString() == extractedValue_str)
@@ -3842,20 +3924,7 @@ namespace PresentationLayer.Presenter
                                     break;
                                 }
                             }
-                            Scenario_Quotation(false,
-                                   false,
-                                   false,
-                                   false,
-                                   true,
-                                   false,
-                                   frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
-                                   frm_Width,
-                                   frm_Height,
-                                   frmDimension_profileType,
-                                   frmDimension_baseColor);
-
-
-                            inside_frame = false;
+                          
                         }
                         if (row_str.Contains("Frame_ArtNo:"))
                         {
@@ -3944,9 +4013,84 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
+
+                        if (row_str.Contains("Frame_MechJointArticleNo:"))
+                        {
+                            foreach (Frame_MechJointArticleNo artcNo in Frame_MechJointArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == extractedValue_str)
+                                {
+                                    frm_MechJointArticleNo = artcNo;
+                                    break;
+                                }
+                            }
+                            
+                        }
+                        if (row_str.Contains("Frame_TrackProfileArtNoVisibility:"))
+                        {
+                            frm_BotfrmVisible = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TrackProfileArtNo:"))
+                        {
+                            foreach (TrackProfile_ArticleNo artcNo in TrackProfile_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == extractedValue_str)
+                                {
+                                    frm_TrackProfile_ArticleNo = artcNo;
+                                    break;
+                                }
+                            }
+                        }
+                      
+                        if (row_str.Contains("Frame_ConnectingProfile_ArticleNo:"))
+                        {
+                            foreach (ConnectingProfile_ArticleNo artcNo in ConnectingProfile_ArticleNo.GetAll())
+                            {
+                                if (artcNo.ToString() == extractedValue_str)
+                                {
+                                    frm_ConnectingProfile_ArticleNo = artcNo;
+                                    break;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Frame_MeshType:"))
+                        {
+                            foreach (MeshType artcNo in MeshType.GetAll())
+                            {
+                                if (artcNo.ToString() == extractedValue_str)
+                                {
+                                    frm_MeshType = artcNo;
+                                    break;
+                                }
+                            }
+                        }
+                        if (row_str.Contains("Frame_ScreenVisibility:"))
+                        {
+                            frm_ScreenVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_ScreenOption:"))
+                        {
+                            frm_ScreenOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_ScreenHeightOption:"))
+                        {
+                            frm_ScreenHeightOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_ScreenHeightVisibility:"))
+                        {
+                            frm_ScreenHeightVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_ScreenFrameHeight:"))
+                        {
+                            frm_ScreenFrameHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_ScreenFrameHeightEnable:"))
+                        {
+                            frm_ScreenFrameHeightEnable = Convert.ToBoolean(extractedValue_str);
+                        }
                         #endregion
                     }
-                    else if(inside_concrete)
+                    else if (inside_concrete)
                     {
                         #region Load for Concrete Model
 
@@ -7311,22 +7455,22 @@ namespace PresentationLayer.Presenter
                         {
                             foreach (PlisseType plssTyp in PlisseType.GetAll())
                             {
-                                if(plssTyp.ToString() == extractedValue_str)
+                                if (plssTyp.ToString() == extractedValue_str)
                                 {
                                     screen_PlisséType = plssTyp;
-                                }                              
+                                }
                             }
                         }
                         else if (row_str.Contains("Screen_BaseColor:"))
                         {
-                            foreach(Base_Color BsClr in Base_Color.GetAll())
+                            foreach (Base_Color BsClr in Base_Color.GetAll())
                             {
-                                if(BsClr.ToString() == extractedValue_str)
+                                if (BsClr.ToString() == extractedValue_str)
                                 {
                                     screen_BaseColor = BsClr;
                                 }
                             }
-                            
+
                         }
                         else if (row_str.Contains("Screen_Set:"))
                         {
@@ -7412,7 +7556,7 @@ namespace PresentationLayer.Presenter
                             screen_CenterClosureVisibilityOption = Convert.ToBoolean(extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_LatchKitQty:"))
-                        {                      
+                        {
                             screen_LatchKitQty = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                         }
                         else if (row_str.Contains("Screen_IntermediatePartQty:"))
@@ -7510,9 +7654,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Magnum_ScreenType:"))
                         {
-                            foreach(Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
+                            foreach (Magnum_ScreenType mgnmScrnTyp in Magnum_ScreenType.GetAll())
                             {
-                                if(mgnmScrnTyp.ToString() == extractedValue_str)
+                                if (mgnmScrnTyp.ToString() == extractedValue_str)
                                 {
                                     magnum_ScreenType = mgnmScrnTyp;
 
@@ -7550,9 +7694,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenSize:"))
                         {
-                            foreach(Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
+                            foreach (Freedom_ScreenSize frdmsize in Freedom_ScreenSize.GetAll())
                             {
-                                if(frdmsize.ToString() == extractedValue_str)
+                                if (frdmsize.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenSize = frdmsize;
 
@@ -7561,9 +7705,9 @@ namespace PresentationLayer.Presenter
                         }
                         else if (row_str.Contains("Freedom_ScreenType:"))
                         {
-                            foreach(Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
+                            foreach (Freedom_ScreenType frdmtype in Freedom_ScreenType.GetAll())
                             {
-                                if(frdmtype.ToString() == extractedValue_str)
+                                if (frdmtype.ToString() == extractedValue_str)
                                 {
                                     freedom_ScreenType = frdmtype;
                                 }
@@ -7590,7 +7734,9 @@ namespace PresentationLayer.Presenter
                                                              screen_Discount,
                                                              screen_NetPrice,
                                                              screen_TotalAmount,
-                                                             screen_description);
+                                                             screen_description,
+                                                             screen_Factor,
+                                                             screen_AddOnsSpecialFactor);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;
@@ -7598,6 +7744,7 @@ namespace PresentationLayer.Presenter
             scr.Screen_Width = screen_Width;
             scr.Screen_Height = screen_Height;
             scr.Screen_Factor = screen_Factor;
+            scr.Screen_AddOnsSpecialFactor = screen_AddOnsSpecialFactor;
             scr.Screen_Types = screen_Types;
             scr.Screen_PlisséType = screen_PlisséType;
             scr.Screen_BaseColor = screen_BaseColor;
@@ -7656,7 +7803,22 @@ namespace PresentationLayer.Presenter
 
             this.Screen_List.Add(scr);
         }
+        private void Frame_Load()
+        {
+            Scenario_Quotation(false,
+                                 false,
+                                 false,
+                                 false,
+                                 true,
+                                 false,
+                                 frmDimensionPresenter.Show_Purpose.CreateNew_Frame,
+                                 frm_Width,
+                                 frm_Height,
+                                 frmDimension_profileType,
+                                 frmDimension_baseColor);
+            inside_frame = false;
 
+        }
         private void Panel_Load()
         {
             IPanelModel pnlModel = _panelServices.AddPanelModel(panel_Width,
@@ -8432,7 +8594,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider,inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -8451,7 +8613,9 @@ namespace PresentationLayer.Presenter
               frm_Deduction,
               frm_ReinfHeight,
               frm_ExplosionHeight,
-              frmProp_Height;
+              frmProp_Height,
+              frm_ScreenFrameHeight;
+
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
 
@@ -8460,10 +8624,16 @@ namespace PresentationLayer.Presenter
         bool frm_Visible,
              frm_BotfrmEnable,
              frm_BotfrmVisible,
+             frm_TrackProfileArtNoVisibility,
              frm_SlidingRailsQtyVisibility,
              frm_ConnectionTypeVisibility,
              frm_CmenuDeleteVisibility,
-             frm_If_InwardMotorizedCasement;
+             frm_If_InwardMotorizedCasement,
+             frm_ScreenVisibility,
+             frm_ScreenOption,
+             frm_ScreenHeightOption,
+             frm_ScreenHeightVisibility,
+             frm_ScreenFrameHeightEnable;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -8481,6 +8651,10 @@ namespace PresentationLayer.Presenter
         FrameReinf_ArticleNo frm_ReinfArtNo;
         FrameReinfForPremi_ArticleNo frm_ReinfForPremiArtNo;
         MilledFrame_ArticleNo frm_MilledArtNo;
+        Frame_MechJointArticleNo frm_MechJointArticleNo;
+        ConnectingProfile_ArticleNo frm_ConnectingProfile_ArticleNo;
+        MeshType frm_MeshType;
+        TrackProfile_ArticleNo frm_TrackProfile_ArticleNo;
         MilledFrameReinf_ArticleNo frm_MilledReinfArtNo;
         #endregion
         #region WindoorModel Properties
@@ -8557,7 +8731,7 @@ namespace PresentationLayer.Presenter
             panel_PropertyHeight,
             panel_HandleOptionsHeight,
             panel_LouverBladesCount;
-     decimal panel_GlassPricePerSqrMeter;
+        decimal panel_GlassPricePerSqrMeter;
         bool panel_Orient,
              panel_OrientVisibility,
              panel_Visibility,
@@ -8955,7 +9129,8 @@ namespace PresentationLayer.Presenter
                 screen_DiscountedPrice,
                 screen_DiscountedPriceWithoutVat,
                 screen_LaborAndMobilization,
-                screen_TotalNetPriceWithoutVat;
+                screen_TotalNetPriceWithoutVat,
+                screen_AddOnsSpecialFactor;
         int screen_id,
             screen_Set,
             screen_Quantity,
@@ -8992,14 +9167,14 @@ namespace PresentationLayer.Presenter
         ScreenType screen_Types;
         PlisseType screen_PlisséType;
         Base_Color screen_BaseColor;
-Magnum_ScreenType magnum_ScreenType;
+        Magnum_ScreenType magnum_ScreenType;
 
         #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
 
-        private void Clearing_Operation()
+        public void Clearing_Operation()
         {
             _quotationModel = null;
             _frameModel = null;
@@ -9038,8 +9213,8 @@ Magnum_ScreenType magnum_ScreenType;
             SetMainViewTitle("");
             CreateNewWindoorBtn_Disable();
             ItemToolStrip_Disable();
-            wndrFileName = string.Empty;
-            wndrfile = string.Empty;
+            _wndrFilePath = string.Empty;
+            _wndrFileName = string.Empty;
             _mainView.GetToolStripButtonSave().Enabled = false;
             _mainView.CreateNewWindoorBtnEnabled = false;
             //_basePlatformPresenter.getBasePlatformViewUC().thisVisibility = false;
@@ -9070,7 +9245,7 @@ Magnum_ScreenType magnum_ScreenType;
         {
             _mainView.mainview_title = project_name + " [" + cust_ref_no + "] (" + qrefno.ToUpper() + ") >> " + itemname + " (" + profiletype + ")";
             _mainView.mainview_title = (saved == false) ? _mainView.mainview_title + "*" : _mainView.mainview_title.Replace("*", "");
-            if (!saved && wndrProjectFileName != "")
+            if (!saved && _wndrFilePath != "")
             {
                 _mainView.GetToolStripButtonSave().Enabled = true;
             }
@@ -9202,7 +9377,8 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 if (QoutationInputBox_OkClicked && NewItem_OkClicked && !AddedFrame && !AddedConcrete && !OpenWindoorFile && !Duplicate)
                 {
-                    wndrProjectFileName = "";
+                    _wndrFilePath = string.Empty;
+                    _wndrFileName = string.Empty;
                     _basePlatformImagerUCPresenter.SendToBack_baseImager();
                     if (_frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._Ivory.ToString() ||
                               _frmDimensionPresenter.baseColor_frmDimensionPresenter == Base_Color._White.ToString())
@@ -9374,6 +9550,17 @@ Magnum_ScreenType magnum_ScreenType;
                         _frameModel.Frame_ReinfForPremiArtNo = frm_ReinfForPremiArtNo;
                         _frameModel.Frame_MilledArtNo = frm_MilledArtNo;
                         _frameModel.Frame_MilledReinfArtNo = frm_MilledReinfArtNo;
+                        _frameModel.Frame_MechanicalJointConnector_Artno = frm_MechJointArticleNo;
+                        _frameModel.Frame_TrackProfileArtNoVisibility = frm_TrackProfileArtNoVisibility;
+                        _frameModel.Frame_TrackProfileArtNo = frm_TrackProfile_ArticleNo;
+                        _frameModel.Frame_ConnectingProfile_ArticleNo = frm_ConnectingProfile_ArticleNo;
+                        _frameModel.Frame_MeshType = frm_MeshType;
+                        _frameModel.Frame_ScreenVisibility = frm_ScreenVisibility;
+                        _frameModel.Frame_ScreenOption = frm_ScreenOption;
+                        _frameModel.Frame_ScreenHeightOption = frm_ScreenHeightOption;
+                        _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
+                        _frameModel.Frame_ScreenFrameHeight = frm_ScreenFrameHeight;
+                        _frameModel.Frame_ScreenFrameHeightEnable = frm_ScreenFrameHeightEnable;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
@@ -10165,40 +10352,43 @@ Magnum_ScreenType magnum_ScreenType;
                     {
                         string gbmode = "";
                         bool same_sash = false;
-                        SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
-                        bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
-                        bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
-                        if (mpnl.MPanel_DividerEnabled == true)
-                        {
-                            if (allWithSash == true && allNoSash == false)
+                        if (mpnl.MPanelLst_Panel.Count != 0)
+                        { 
+                            SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
+                            bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
+                            bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
+                            if (mpnl.MPanel_DividerEnabled == true)
                             {
-                                gbmode = "withSash";
-                                int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
-                                if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
+                                if (allWithSash == true && allNoSash == false)
                                 {
-                                    same_sash = true;
-                                }
-                                else
-                                {
-                                    same_sash = false;
-                                }
-                            }
-                            else if (allWithSash == false && allNoSash == true)
-                            {
-                                gbmode = "noSash";
-                            }
-                            else if (allWithSash == false && allNoSash == false)
-                            {
-                                gbmode = "";
-                            }
-
-                            if (gbmode != "")
-                            {
-                                if (same_sash == true || gbmode == "noSash")
-                                {
-                                    if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                    gbmode = "withSash";
+                                    int ref_sash_count = mpnl.MPanelLst_Panel.Select(pnl => pnl.Panel_SashProfileArtNo == ref_sash).Count();
+                                    if (ref_sash_count == mpnl.MPanelLst_Panel.Count)
                                     {
-                                        unbalancedGlass_cnt++;
+                                        same_sash = true;
+                                    }
+                                    else
+                                    {
+                                        same_sash = false;
+                                    }
+                                }
+                                else if (allWithSash == false && allNoSash == true)
+                                {
+                                    gbmode = "noSash";
+                                }
+                                else if (allWithSash == false && allNoSash == false)
+                                {
+                                    gbmode = "";
+                                }
+
+                                if (gbmode != "")
+                                {
+                                    if (same_sash == true || gbmode == "noSash")
+                                    {
+                                        if (mpnl.MPanel_Divisions >= 2 && mpnl.MPanel_GlassBalanced == false)
+                                        {
+                                            unbalancedGlass_cnt++;
+                                        }
                                     }
                                 }
                             }
@@ -10208,6 +10398,13 @@ Magnum_ScreenType magnum_ScreenType;
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+
+                    var st = new StackTrace(ex, true);
+                    // Get the top stack frame
+                    var errorFrame = st.GetFrame(0);
+                    // Get the line number from the stack frame
+                    var line = errorFrame.GetFileLineNumber();
+                    Console.WriteLine("Error in File " + errorFrame.GetFileName() + "\n Line: " + line.ToString() + "\n Error: " + ex.Message);
                 }
 
             }
@@ -10785,12 +10982,12 @@ Magnum_ScreenType magnum_ScreenType;
         public void SaveChanges()
         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
-            if (wndrProjectFileName != "")
+            if (_wndrFilePath != "")
             {
 
-                string txtfile = wndrProjectFileName.Replace(".wndr", ".txt");
+                string txtfile = _wndrFilePath.Replace(".wndr", ".txt");
                 File.WriteAllLines(txtfile, Saving_dotwndr());
-                File.Delete(wndrfile);
+                File.Delete(_wndrFilePath);
                 FileInfo f = new FileInfo(txtfile);
                 f.MoveTo(Path.ChangeExtension(txtfile, ".wndr"));
                 //File.SetAttributes(txtfile, FileAttributes.Hidden);
@@ -10846,7 +11043,7 @@ Magnum_ScreenType magnum_ScreenType;
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
             //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
             //_quotationModel.PricingFactor = await _quotationServices.GetFactorByProvince(province);
         }
@@ -10904,7 +11101,7 @@ Magnum_ScreenType magnum_ScreenType;
         {
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
-                if (wdm.WD_Selected == true)
+                if (wdm.WD_Selected == true && !ItemLoad)
                 {
                     lst_DuplicatePnl.Clear();
                     lst_Description.Clear();

@@ -31,9 +31,6 @@ namespace ModelLayer.Model.Quotation.Frame
         List<IMultiPanelModel> Lst_MultiPanel { get; set; }
         List<IDividerModel> Lst_Divider { get; set; }
         float Frame_Zoom { get; set; }
-        BottomFrameTypes Frame_BotFrameArtNo { get; set; }
-        bool Frame_BotFrameEnable { get; set; }
-        bool Frame_BotFrameVisible { get; set; }
 
         UserControl Frame_UC { get; set; }
         UserControl Frame_PropertiesUC { get; set; }
@@ -71,9 +68,12 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_SlidingRailsQtyVisibility { get; set; }
         FrameConnectionType Frame_ConnectionType { get; set; }
         bool Frame_ConnectionTypeVisibility { get; set; }
-        Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
+        SealingElement_ArticleNo Frame_SealingElement_ArticleNo { get; set; }
+
+        //Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         bool Frame_TrackProfileArtNoVisibility { get; set; }
         TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }
+        ConnectingProfile_ArticleNo Frame_ConnectingProfile_ArticleNo { get; set; }
         MeshType Frame_MeshType { get; set; }
         bool Frame_ScreenVisibility { get; set; }
         bool Frame_ScreenOption { get; set; }
@@ -81,6 +81,11 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_ScreenHeightVisibility { get; set; }
         int Frame_ScreenFrameHeight { get; set; }
         bool Frame_ScreenFrameHeightEnable { get; set; }
+        BottomFrameTypes Frame_BotFrameArtNo { get; set; }
+        bool Frame_BotFrameEnable { get; set; }
+        bool Frame_BotFrameVisible { get; set; }
+        Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
+        int Frame_MechanicalJointConnectorQty { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
@@ -89,7 +94,10 @@ namespace ModelLayer.Model.Quotation.Frame
         void Insert_frameInfoForScreen_MaterialList(DataTable tbl_explosion);
         void Insert_MilledFrameInfo_MaterialList(DataTable tbl_explosion);
         void Insert_BottomFrame_MaterialList(DataTable tbl_explosion);
-        void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
+        void Insert_MechanicalJointConnector_MaterialList(DataTable tbl_explosion, int MechJointConnectorQty);
+        void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
+        void Insert_ConnectingProfile_MaterialList(DataTable tbl_explosion);
+        // void Insert_ConnectorType_MaterialList(DataTable tbl_explosion);
         void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion);
 
         int Add_framePerimeter_screws4fab();

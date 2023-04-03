@@ -25,7 +25,10 @@ namespace ServiceLayer.Services.ScreenServices
                                                int discount,
                                                decimal screen_netPrice,
                                                decimal screen_totalAmount,
-                                               string screen_description)
+                                               string screen_description,
+                                               decimal factor,
+                                               decimal addonsspecialfactor
+                                               )
         {
              IScreenModel scrn = new ScreenModel(screen_itemnumber,
                                                 screen_width,
@@ -38,7 +41,9 @@ namespace ServiceLayer.Services.ScreenServices
                                                 discount,
                                                 screen_netPrice,
                                                 screen_totalAmount,
-                                                screen_description);
+                                                screen_description,
+                                                factor,
+                                                addonsspecialfactor);
 
             ValidateModel(scrn);
             return scrn;
@@ -55,7 +60,10 @@ namespace ServiceLayer.Services.ScreenServices
                                                 int discount,
                                                 decimal screen_netPrice,
                                                 decimal screen_totalAmount,
-                                                string screen_description)
+                                                string screen_description,
+                                                 decimal factor,
+                                                 decimal addonsspecialfactor
+                                                 )
         {
 
                IScreenModel _screenModel = CreateScreen(screen_itemnumber,
@@ -69,7 +77,9 @@ namespace ServiceLayer.Services.ScreenServices
                                                         discount,
                                                         screen_netPrice,
                                                         screen_totalAmount,
-                                                        screen_description);
+                                                        screen_description,
+                                                        factor,
+                                                        addonsspecialfactor);
 
             return _screenModel;
         }

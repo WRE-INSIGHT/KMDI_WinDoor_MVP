@@ -43,6 +43,18 @@ namespace PresentationLayer.Views.UserControls
             }
         }
 
+        public string ItemName
+        {
+            get
+            {
+                return lbl_item.Text;
+            }
+            set
+            {
+                lbl_item.Text = value;
+            }
+        }
+
         public ItemInfoUC()
         {
             InitializeComponent();
@@ -53,6 +65,7 @@ namespace PresentationLayer.Views.UserControls
         public event MouseEventHandler lblItemMouseMoveEventRaised;
         public event MouseEventHandler lblItemMouseDownEventRaised;
         public event MouseEventHandler lblItemMouseUpEventRaised;
+        public event EventHandler DefaultDescriptionClickEventRaised;
 
         public void BringToFrontThis()
         {
@@ -124,6 +137,11 @@ namespace PresentationLayer.Views.UserControls
         private void lbl_item_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void defaultDescriptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, DefaultDescriptionClickEventRaised, e);
         }
     }
 }

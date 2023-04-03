@@ -106,6 +106,7 @@ namespace PresentationLayer.Presenter
 
         private void OnRDLCReportCompilerViewLoadEventRaised(object sender, EventArgs e)
         {
+
             foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
             {
                 _rdlcReportCompilerView.GetChecklistBoxIndex().Items.Add("Item: " + wdm.WD_id);
@@ -136,7 +137,7 @@ namespace PresentationLayer.Presenter
                     int num;
                     if (int.TryParse(_rdlcReportCompilerView.TxtBxOutofTownExpenses, out num))
                     {
-                        if (num > 0)
+                        if (num >= 0)
                         {
                             _loadingThread = new Thread(Bgw_CompilePDF);
                             

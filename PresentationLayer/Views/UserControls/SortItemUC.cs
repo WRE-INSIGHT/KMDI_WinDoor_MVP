@@ -1,5 +1,6 @@
 ﻿using CommonComponents;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
@@ -11,21 +12,22 @@ namespace PresentationLayer.Views.UserControls
             InitializeComponent();
         }
         public event EventHandler SortItemUCLoadEventRaised;
-        public event MouseEventHandler lblItemMouseMoveEventRaised;
-        public event MouseEventHandler lblItemMouseDownEventRaised;
-        public event MouseEventHandler lblItemMouseUpEventRaised;
+        public event MouseEventHandler cbItemMouseMoveEventRaised;
+        public event MouseEventHandler cbItemMouseDownEventRaised;
+        public event MouseEventHandler cbItemMouseUpEventRaised;
         public event EventHandler DeleteToolStripButtonClickEventRaised;
         public event EventHandler DuplicateToolStripButtonClickEventRaised;
+        public event EventHandler cbitem_CheckedChangedEventRaised;
 
         public string ItemName
         {
             get
             {
-                return lbl_item.Text;
+                return cb_item.Text;
             }
             set
             {
-                lbl_item.Text = value;
+                cb_item.Text = value;
             }
         }
         public PictureBox GetPboxItemImage()
@@ -54,24 +56,54 @@ namespace PresentationLayer.Views.UserControls
                 rtboxDesc.Text = value;
             }
         }
+        private bool _itemSelected;
+        public bool itemSelected
+        {
+            get
+            {
+                return _itemSelected;
+            }
+
+            set
+            {
+                _itemSelected = value;
+                if (_itemSelected)
+                {
+                    cb_item.ForeColor = Color.Blue;
+                }
+                else
+                {
+                    cb_item.ForeColor = Color.Black;
+                }
+            }
+        }
+
+        public bool itemChecked
+        {
+            get
+            {
+                return cb_item.Checked;
+            }
+        }
+
         private void SortItemUC_Load(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, SortItemUCLoadEventRaised, e);
         }
 
-        private void lbl_item_MouseMove(object sender, MouseEventArgs e)
+        private void cb_item_MouseMove(object sender, MouseEventArgs e)
         {
-            EventHelpers.RaiseMouseEvent(sender, lblItemMouseMoveEventRaised, e);
+            EventHelpers.RaiseMouseEvent(sender, cbItemMouseMoveEventRaised, e);
         }
 
-        private void lbl_item_MouseUp(object sender, MouseEventArgs e)
+        private void cb_item_MouseUp(object sender, MouseEventArgs e)
         {
-            EventHelpers.RaiseMouseEvent(sender, lblItemMouseUpEventRaised, e);
+            EventHelpers.RaiseMouseEvent(sender, cbItemMouseUpEventRaised, e);
         }
 
-        private void lbl_item_MouseDown(object sender, MouseEventArgs e)
+        private void cb_item_MouseDown(object sender, MouseEventArgs e)
         {
-            EventHelpers.RaiseMouseEvent(sender, lblItemMouseDownEventRaised, e);
+            EventHelpers.RaiseMouseEvent(sender, cbItemMouseDownEventRaised, e);
         }
 
         public UserControl GetSortItem()
@@ -82,6 +114,30 @@ namespace PresentationLayer.Views.UserControls
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, DuplicateToolStripButtonClickEventRaised, e);
+        }
+
+        private void cb_item_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, cbitem_CheckedChangedEventRaised, e);
+        }
+
+        private void pboxItemImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if(panelSort.Height > 100)
+            {
+                this.Height = 28;
+            }
+            else
+            {
+                this.Height = 141;
+            }
+        
         }
     }
 }

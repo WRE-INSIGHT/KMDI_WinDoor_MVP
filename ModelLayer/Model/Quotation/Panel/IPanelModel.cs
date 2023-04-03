@@ -186,6 +186,7 @@ namespace ModelLayer.Model.Quotation.Panel
         MotorizedMech_ArticleNo Panel_MotorizedMechArtNo { get; set; }
         int Panel_MotorizedPropertyHeight { get; set; }
         int Panel_MotorizedMechQty { get; set; }
+        int Panel_MultiFrmMotorizedMechQty { get; set; }
         int Panel_MotorizedMechSetQty { get; set; }
         int Panel_2DHingeQty { get; set; }
         _2DHinge_ArticleNo Panel_2dHingeArtNo_nonMotorized { get; set; }
@@ -290,7 +291,6 @@ namespace ModelLayer.Model.Quotation.Panel
         GS100CoverKit_ArticleNo Panel_GS100CoverKitArtNo { get; set; }
         int Panel_OverLappingPanelQty { get; set; }
         AluminumPullHandle_ArticleNo Panel_AluminumPullHandleArtNo { get; set; }
-        SealingElement_ArticleNo Panel_SealingElement_ArticleNo { get; set; }
         PlantOnWeatherStripHead_ArticleNo Panel_PlantOnWeatherStripHeadArtNo { get; set; }
         PlantOnWeatherStripSeal_ArticleNo Panel_PlantOnWeatherStripSealArtNo { get; set; }
         LouverFrameWeatherStripHead_ArticleNo Panel_LouverFrameWeatherStripHeadArtNo { get; set; }
@@ -346,6 +346,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                            DividerType div_type,
                                            bool mpnlDivEneable,
                                            int OverLappingPanel_Qty,
+                                           bool ChckBoundedByBotframe,
                                            bool if_divNxt_is_dummy_mullion,
                                            bool if_divPrev_is_dummy_mullion,
                                            IDividerModel divNxt,
@@ -416,6 +417,7 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_GuideTrackProfile_MaterialList(DataTable tbl_explosion);
         void Insert_AluminumTrack_MaterialList(DataTable tbl_explosion);
         void Insert_WeatherBar_MaterialList(DataTable tbl_explosion);
+        void Insert_EndCapForWeatherBar_MaterialList(DataTable tbl_explosion);
         void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
         void Insert_Interlock_MaterialList(DataTable tbl_explosion);
         void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion);
@@ -437,7 +439,6 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_CoverProfileForPremiInfo_MaterialList(DataTable tbl_explosion);
         void Panel_PropertyChange(bool Checked);
         void Insert_AluminumPullHandle_MaterialList(DataTable tbl_explosion);
-        void Insert_SealingElement_MaterialList(DataTable tbl_explosion);
         void Insert_GS100TEMHMCOVERENDCAP3p5m_MaterialList(DataTable tbl_explosion);
 
         void Insert_TrackRail6m_MaterialList(DataTable tbl_explosion);
@@ -470,5 +471,6 @@ namespace ModelLayer.Model.Quotation.Panel
         #endregion
 
         int MotorizeMechQty();
+
     }
 }

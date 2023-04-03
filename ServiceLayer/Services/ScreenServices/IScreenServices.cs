@@ -16,7 +16,9 @@ namespace ServiceLayer.Services.ScreenServices
                                     int discount,
                                     decimal screen_netPrice,
                                     decimal screen_totalAmount,
-                                    string plissemagnumType);
+                                    string plissemagnumType,
+                                    decimal factor,
+                                    decimal addonsspecialfactor);
 
         void ValidateModel(IScreenModel screenModel);
     }

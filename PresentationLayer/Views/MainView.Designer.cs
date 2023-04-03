@@ -784,6 +784,7 @@
             // SortItemtoolStripButton1
             // 
             this.SortItemtoolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SortItemtoolStripButton1.Enabled = false;
             this.SortItemtoolStripButton1.Image = global::PresentationLayer.Properties.Resources.icons8_front_sorting_96px;
             this.SortItemtoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SortItemtoolStripButton1.Name = "SortItemtoolStripButton1";
@@ -1037,6 +1038,7 @@
             this.Name = "MainView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainView_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
             this.Load += new System.EventHandler(this.MainView_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainView_KeyDown);

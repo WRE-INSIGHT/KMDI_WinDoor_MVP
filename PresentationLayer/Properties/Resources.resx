@@ -139,9 +139,6 @@
   <data name="MultiplePanelTransom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiplePanel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fade90" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\fade90.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="refresh_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,9 +223,6 @@
   <data name="medical" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\medical.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fade90v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\fade90v2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MultiplePanelMullion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiplePanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -259,6 +253,9 @@
   <data name="glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ExtensionBot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExtensionBot1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -277,7 +274,10 @@
   <data name="enabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="126" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\126.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fade90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fade901.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static EnumerationTypeLayer.EnumerationTypes;
+using static ModelLayer.Model.Quotation.Frame.FrameModel;
 
 namespace ModelLayer.Model.Quotation
 {
@@ -94,7 +95,8 @@ namespace ModelLayer.Model.Quotation
                 add_screws_fab_mech_joint = 0,
                 exp_bolt = 0,
                 frame_width = 0,
-                frame_height = 0;
+                frame_height = 0,
+                MechJointConnectorQty = 0;
 
             string screws_for_inst_where = "";
 
@@ -133,8 +135,15 @@ namespace ModelLayer.Model.Quotation
                     frame.Insert_frameInfoForScreen_MaterialList(Material_List); // add another frame
                 }
 
+                if (frame.Frame_Type == Frame_Padding.Door &&
+                    frame.Frame_ArtNo == FrameProfile_ArticleNo._6052)
+                {
+                    frame.Insert_ConnectingProfile_MaterialList(Material_List);
+                }
 
-                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507)
+                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                    frame.Frame_BotFrameArtNo != BottomFrameTypes._6052 &&
+                    frame.Frame_BotFrameArtNo != BottomFrameTypes._None)
                 {
                     frame.Insert_BottomFrame_MaterialList(Material_List);
                 }
@@ -150,6 +159,76 @@ namespace ModelLayer.Model.Quotation
                     #region MultiPanel Parent
                     foreach (IMultiPanelModel mpnl in frame.Lst_MultiPanel)
                     {
+                        IDividerModel divTopOrLeft = null,
+                                        divBotOrRight = null,
+                                        divTopOrLeft_lvl3 = null,
+                                        divBotOrRight_lvl3 = null;
+
+                        IMultiPanelModel mpnl_Parent_lvl3 = null;
+                        string mpanel_placement = "",
+                               mpanelParentlvl2_placement = "",
+                               mpnl_Parent_lvl3_mpanelType = "",
+                               mpnl_Stacks = "";
+
+                        if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                        {
+                            IMultiPanelModel mpnl_Parent = mpnl.MPanel_ParentModel;
+                            Control mpnl_ctrl = mpnl_Parent.MPanelLst_Objects.Find(mpanel => mpanel.Name == mpnl.MPanel_Name);
+                            int mpnl_ndx = mpnl_Parent.MPanelLst_Objects.IndexOf(mpnl_ctrl);
+                            Control div_nxtctrl, div_prevctrl;
+
+                            if (mpnl.MPanel_Placement == "First")
+                            {
+                                div_nxtctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx + 1];
+                                divBotOrRight = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl.Name);
+                            }
+                            else if (mpnl.MPanel_Placement == "Somewhere in Between")
+                            {
+                                div_nxtctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx + 1];
+                                div_prevctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx - 1];
+
+                                divTopOrLeft = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl.Name);
+                                divBotOrRight = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl.Name);
+                            }
+                            else if (mpnl.MPanel_Placement == "Last")
+                            {
+                                div_prevctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx - 1];
+                                divTopOrLeft = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl.Name);
+                            }
+                        }
+
+                        if (mpnl.MPanel_ParentModel != null)
+                        {
+                            if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                            {
+                                mpnl_Parent_lvl3 = mpnl.MPanel_ParentModel.MPanel_ParentModel;
+                                mpanelParentlvl2_placement = mpnl.MPanel_ParentModel.MPanel_Placement;
+                                mpnl_Parent_lvl3_mpanelType = mpnl_Parent_lvl3.MPanel_Type;
+
+                                Control mpnl_ctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects.Find(mpanel => mpanel.Name == mpnl.MPanel_ParentModel.MPanel_Name);
+                                int mpnl_ndx_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects.IndexOf(mpnl_ctrl_lvl3);
+                                Control div_nxtctrl_lvl3, div_prevctrl_lvl3;
+
+                                if (mpnl.MPanel_ParentModel.MPanel_Placement == "First")
+                                {
+                                    div_nxtctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 + 1];
+                                    divBotOrRight_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl_lvl3.Name);
+                                }
+                                else if (mpnl.MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
+                                {
+                                    div_nxtctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 + 1];
+                                    div_prevctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 - 1];
+
+                                    divTopOrLeft_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl_lvl3.Name);
+                                    divBotOrRight_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl_lvl3.Name);
+                                }
+                                else if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                {
+                                    div_prevctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 - 1];
+                                    ////divTopOrLeft_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl_lvl3.Name);
+                                }
+                            }
+                        }
                         #region WithDivider 
                         if (mpnl.MPanel_DividerEnabled)
                         {
@@ -157,76 +236,13 @@ namespace ModelLayer.Model.Quotation
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
-                            IDividerModel divTopOrLeft = null,
-                                          divBotOrRight = null,
-                                          divTopOrLeft_lvl3 = null,
-                                          divBotOrRight_lvl3 = null;
-
-                            IMultiPanelModel mpnl_Parent_lvl3 = null;
-                            string mpanel_placement = "",
-                                   mpanelParentlvl2_placement = "",
-                                   mpnl_Parent_lvl3_mpanelType = "";
-
-                            if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                            foreach (IDividerModel divArtNo in divs)
                             {
-                                IMultiPanelModel mpnl_Parent = mpnl.MPanel_ParentModel;
-                                Control mpnl_ctrl = mpnl_Parent.MPanelLst_Objects.Find(mpanel => mpanel.Name == mpnl.MPanel_Name);
-                                int mpnl_ndx = mpnl_Parent.MPanelLst_Objects.IndexOf(mpnl_ctrl);
-                                Control div_nxtctrl, div_prevctrl;
-
-                                if (mpnl.MPanel_Placement == "First")
+                                if (divArtNo.Div_ArtNo == Divider_ArticleNo._6052)
                                 {
-                                    div_nxtctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx + 1];
-                                    divBotOrRight = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl.Name);
-                                }
-                                else if (mpnl.MPanel_Placement == "Somewhere in Between")
-                                {
-                                    div_nxtctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx + 1];
-                                    div_prevctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx - 1];
-
-                                    divTopOrLeft = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl.Name);
-                                    divBotOrRight = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl.Name);
-                                }
-                                else if (mpnl.MPanel_Placement == "Last")
-                                {
-                                    div_prevctrl = mpnl_Parent.MPanelLst_Objects[mpnl_ndx - 1];
-                                    divTopOrLeft = mpnl_Parent.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl.Name);
+                                    MechJointConnectorQty += 2;
                                 }
                             }
-
-                            if (mpnl.MPanel_ParentModel != null)
-                            {
-                                if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
-                                {
-                                    mpnl_Parent_lvl3 = mpnl.MPanel_ParentModel.MPanel_ParentModel;
-                                    mpanelParentlvl2_placement = mpnl.MPanel_ParentModel.MPanel_Placement;
-                                    mpnl_Parent_lvl3_mpanelType = mpnl_Parent_lvl3.MPanel_Type;
-
-                                    Control mpnl_ctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects.Find(mpanel => mpanel.Name == mpnl.MPanel_ParentModel.MPanel_Name);
-                                    int mpnl_ndx_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects.IndexOf(mpnl_ctrl_lvl3);
-                                    Control div_nxtctrl_lvl3, div_prevctrl_lvl3;
-
-                                    if (mpnl.MPanel_ParentModel.MPanel_Placement == "First")
-                                    {
-                                        div_nxtctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 + 1];
-                                        divBotOrRight_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl_lvl3.Name);
-                                    }
-                                    else if (mpnl.MPanel_ParentModel.MPanel_Placement == "Somewhere in Between")
-                                    {
-                                        div_nxtctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 + 1];
-                                        div_prevctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 - 1];
-
-                                        divTopOrLeft_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl_lvl3.Name);
-                                        divBotOrRight_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_nxtctrl_lvl3.Name);
-                                    }
-                                    else if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
-                                    {
-                                        div_prevctrl_lvl3 = mpnl_Parent_lvl3.MPanelLst_Objects[mpnl_ndx_lvl3 - 1];
-                                        divTopOrLeft_lvl3 = mpnl_Parent_lvl3.MPanelLst_Divider.Find(div => div.Div_Name == div_prevctrl_lvl3.Name);
-                                    }
-                                }
-                            }
-
 
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i += 2)
@@ -239,7 +255,8 @@ namespace ModelLayer.Model.Quotation
                                               div_prevCtrl = null;
                                 Control nxt_ctrl, prevCtrl;
 
-                                bool mullion_already_added = false;
+                                bool mullion_already_added = false,
+                                     boundedByBottomFrame = false;
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -330,6 +347,51 @@ namespace ModelLayer.Model.Quotation
 
                                         int total_cladd4UPVC_xpbolts = div_nxtCtrl.Add_CladdBracket4UPVC_expbolts();
                                         exp_bolt += total_cladd4UPVC_xpbolts;
+
+                                        #region CheckBoundedByBottomFrame
+                                        if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                        {
+                                            if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                            {
+                                                if (mpnl_curCtrl != null)
+                                                {
+                                                    if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                    {
+                                                        boundedByBottomFrame = true;
+                                                    }
+                                                }
+                                            }
+                                            else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                            {
+                                                if (pnl_curCtrl != null)
+                                                {
+                                                    if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                                    {
+                                                        boundedByBottomFrame = true;
+                                                    }
+                                                }
+                                            }
+
+                                            if (mpnl.MPanel_ParentModel != null)
+                                            {
+                                                if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                {
+                                                    if (mpnl_curCtrl != null)
+                                                    {
+                                                        if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                        {
+                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                        #endregion
                                     }
 
                                     if (div_nxtCtrl.Div_ChkDM == false && !mullion_already_added && mpnl.MPanel_Type == "Mullion")
@@ -352,6 +414,44 @@ namespace ModelLayer.Model.Quotation
 
                                         int mj_screws = div_nxtCtrl.Add_MechJoint_screws4fab();
                                         add_screws_fab_mech_joint += mj_screws;
+
+                                        #region CheckBoundedByBottomFrame
+                                        if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                        {
+                                            if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level sta ck
+                                            {
+                                                if (mpnl.MPanel_Placement == "Last")
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+                                            else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                            {
+                                                if (pnl_curCtrl != null) //lvl 1
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+
+                                            if (mpnl.MPanel_ParentModel != null)
+                                            {
+                                                if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                {
+                                                    if (mpnl_curCtrl != null)
+                                                    {
+                                                        if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                                        {
+                                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        #endregion
                                     }
 
                                     Divider_ArticleNo divArtNo_nxtCtrl = Divider_ArticleNo._None,
@@ -405,6 +505,7 @@ namespace ModelLayer.Model.Quotation
                                                                                   div_nxtCtrl.Div_Type,
                                                                                   mpnl.MPanel_DividerEnabled,
                                                                                   0,
+                                                                                  boundedByBottomFrame,
                                                                                   divNxt_ifDM,
                                                                                   divPrev_ifDM,
                                                                                   div_nxtCtrl,
@@ -493,6 +594,69 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
                                             }
+                                            #region CheckIfBoundedByBottomFrame 
+                                            if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                            {
+                                                if (mpnl.MPanel_Type == "Transom")
+                                                {
+
+                                                    if (divBotOrRight_lvl3 != null) //(mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                    {
+                                                        if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                                    {
+                                                        if (pnl_curCtrl != null)
+                                                        {
+                                                            if (pnl_curCtrl.Panel_Placement == "Last")
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                                    {
+                                                        if (pnl_curCtrl != null)
+                                                        {
+                                                            if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                                            {
+                                                                boundedByBottomFrame = true;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+
+                                                if (mpnl.MPanel_Type == "Mullion")
+                                                {
+                                                    if (divBotOrRight_lvl3 != null) //(mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                                    {
+                                                        if (mpnl.MPanel_Placement == "Last")
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                                    {
+                                                        if (mpnl.MPanel_Placement == "Last")
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                    else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                                    {
+                                                        if (pnl_curCtrl != null) //lvl 1
+                                                        {
+                                                            boundedByBottomFrame = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #endregion
                                         }
 
                                         pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
@@ -500,6 +664,7 @@ namespace ModelLayer.Model.Quotation
                                                                                   div_prevCtrl.Div_Type,
                                                                                   mpnl.MPanel_DividerEnabled,
                                                                                   0,
+                                                                                  boundedByBottomFrame,
                                                                                   divNxt_ifDM,
                                                                                   divPrev_ifDM,
                                                                                   div_nxtCtrl,
@@ -543,6 +708,8 @@ namespace ModelLayer.Model.Quotation
                                                                                     mpanelParentlvl2_placement);
                                     }
                                 }
+
+                                //Console.WriteLine("bottom frame:" + boundedByBottomFrame);
 
                                 if (pnl_curCtrl != null)
                                 {
@@ -787,6 +954,16 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 if (pnl_curCtrl.Panel_Type == "Awning Panel")
                                                 {
+                                                    //pnl_curCtrl.MotorizeMechQty();
+                                                    //int mechanism;
+                                                    //if (item.lst_frame.Count == 0)
+                                                    //{
+                                                    //    mechanism = pnl_curCtrl.Panel_MotorizedMechQty;
+                                                    //}
+                                                    //else
+                                                    //{
+                                                    //    mechanism = pnl_curCtrl.Panel_MultiFrmMotorizedMechQty;
+                                                    //}
                                                     pnl_curCtrl.Insert_MotorizedInfo_MaterialList(Material_List, pnl_curCtrl.MotorizeMechQty());
 
                                                     int hinge_screws = pnl_curCtrl.Add_Hinges_screws4fab();
@@ -1099,21 +1276,16 @@ namespace ModelLayer.Model.Quotation
                             List<IDividerModel> divs = mpnl.MPanelLst_Divider;
                             List<IMultiPanelModel> mpanels = mpnl.MPanelLst_MultiPanel;
 
-                            //IMultiPanelModel mpnl_Parent_lvl3 = null;
-                            string mpanel_placement = "",
-                                   mpanelParentlvl2_placement = "",
-                                   mpnl_Parent_lvl3_mpanelType = "";
-
                             int obj_count = mpnl.GetVisibleObjects().Count();
                             for (int i = 0; i < obj_count; i++)
                             {
 
-                                //mpanel_placement = mpnl.MPanel_Placement;
+
                                 Control cur_ctrl = mpnl.GetVisibleObjects().ToList()[i];
                                 IPanelModel pnl_curCtrl = panels.Find(pnl => pnl.Panel_Name == cur_ctrl.Name);
                                 IMultiPanelModel mpnl_curCtrl = mpanels.Find(mpanel => mpanel.MPanel_Name == cur_ctrl.Name);
 
-                                //Control nxt_ctrl, prevCtrl;
+
 
                                 IDividerModel div_nxtCtrl = null,
                                         div_prevCtrl = null;
@@ -1125,9 +1297,77 @@ namespace ModelLayer.Model.Quotation
                                                     divArtNo_LeftOrTop_lvl3 = Divider_ArticleNo._None,
                                                     divArtNo_RightOrBot_lvl3 = Divider_ArticleNo._None;
                                 bool divNxt_ifDM = false,
-                                     divPrev_ifDM = false;
+                                     divPrev_ifDM = false,
+                                     boundedByBottomFrame = false;
 
-                                //mpanel_placement = mpnl.MPanel_Placement;
+                                //mpanel_placement = mpnl.MPanel_Placement; 
+
+                                #region ChckBoundedByBotFrame
+                                if (frame.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                                            frame.Frame_BotFrameArtNo != BottomFrameTypes._6052)
+                                {
+                                    if (mpnl.MPanel_Type == "Transom")
+                                    {
+
+                                        if (divTopOrLeft_lvl3 != null || divBotOrRight_lvl3 != null)//(mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                        {
+                                            if (mpnl.MPanel_ParentModel.MPanel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                        else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                        {
+                                            if (pnl_curCtrl != null)
+                                            {
+                                                if (pnl_curCtrl.Panel_Placement == "Last")
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+                                        }
+                                        else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                        {
+                                            if (pnl_curCtrl != null)
+                                            {
+                                                if (pnl_curCtrl.Panel_Placement == "Last") //lvl 1
+                                                {
+                                                    boundedByBottomFrame = true;
+                                                }
+                                            }
+                                        }
+                                    }
+
+
+                                    if (mpnl.MPanel_Type == "Mullion")
+                                    {
+                                        if ((divTopOrLeft_lvl3 != null || divBotOrRight_lvl3 != null))//(mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Multi")) //3rd level stack
+                                        {
+                                            if (mpnl.MPanel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                        else if (mpnl.MPanel_Parent.Name.Contains("Multi")) //2nd level stack
+                                        {
+                                            if (mpnl.MPanel_Placement == "Last")
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                        else if (mpnl.MPanel_Parent.Name.Contains("Frame"))
+                                        {
+                                            if (pnl_curCtrl != null) //lvl 1
+                                            {
+                                                boundedByBottomFrame = true;
+                                            }
+                                        }
+                                    }
+                                }
+                                #endregion
+
+                                Console.WriteLine("no div bottom frame:" + boundedByBottomFrame);
+
 
                                 int OverLappingPanel_Qty = 0;
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
@@ -1142,11 +1382,28 @@ namespace ModelLayer.Model.Quotation
 
                                 if (pnl_curCtrl != null)
                                 {
+                                    if (pnl_curCtrl.Panel_Placement == "First")
+                                    {
+                                        if (divTopOrLeft_lvl3 != null)
+                                        {
+                                            divArtNo_LeftOrTop_lvl3 = divTopOrLeft_lvl3.Div_ArtNo;
+                                        }
+                                    }
+                                    else if (pnl_curCtrl.Panel_Placement == "Last")
+                                    {
+                                        if (divBotOrRight_lvl3 != null)
+                                        {
+                                            divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
+                                        }
+                                    }
+
+
                                     pnl_curCtrl.SetPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                               divArtNo_prevCtrl,
                                                                               DividerModel.DividerType.None,
                                                                               mpnl.MPanel_DividerEnabled,
                                                                               OverLappingPanel_Qty,
+                                                                              boundedByBottomFrame,
                                                                               divNxt_ifDM,
                                                                               divPrev_ifDM,
                                                                               div_nxtCtrl,
@@ -1162,6 +1419,21 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 else if (mpnl_curCtrl != null)
                                 {
+                                    if (mpnl_curCtrl.MPanel_Placement == "First")
+                                    {
+                                        if (divTopOrLeft_lvl3 != null)
+                                        {
+                                            divArtNo_LeftOrTop_lvl3 = divTopOrLeft_lvl3.Div_ArtNo;
+                                        }
+                                    }
+                                    else if (mpnl_curCtrl.MPanel_Placement == "Last")
+                                    {
+                                        if (divBotOrRight_lvl3 != null)
+                                        {
+                                            divArtNo_RightOrBot_lvl3 = divBotOrRight_lvl3.Div_ArtNo;
+                                        }
+                                    }
+
                                     mpnl_curCtrl.SetMPanelExplosionValues_Panel(divArtNo_nxtCtrl,
                                                                                 divArtNo_prevCtrl,
                                                                                 DividerModel.DividerType.None,
@@ -1215,6 +1487,18 @@ namespace ModelLayer.Model.Quotation
                                             pnl_curCtrl.Insert_GlazingRebateBlock_MaterialList(Material_List);
                                         }
 
+
+                                        if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
+                                            pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                        {
+                                            //if (OverLappingPanel_Qty != 0)
+                                            //{
+                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                            // } 
+                                        }
+
+
                                         if (pnl_curCtrl.Panel_Type.Contains("Sliding"))
                                         {
                                             if (pnl_curCtrl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6040 ||
@@ -1229,11 +1513,10 @@ namespace ModelLayer.Model.Quotation
                                                     slidingChck = false;
                                                 }
 
-                                                if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-                                                {
-                                                    frame.Insert_ConnectorType_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_SealingElement_MaterialList(Material_List);
-                                                }
+                                                //if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                                //{
+                                                //    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                                //}
 
                                                 pnl_curCtrl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                                 pnl_curCtrl.Insert_AluminumTrack_MaterialList(Material_List);
@@ -1241,6 +1524,7 @@ namespace ModelLayer.Model.Quotation
                                                 if (perFrame == true)
                                                 {
                                                     pnl_curCtrl.Insert_WeatherBar_MaterialList(Material_List);
+                                                    pnl_curCtrl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_WaterSeepage_MaterialList(Material_List);
                                                     pnl_curCtrl.Insert_BrushSeal_MaterialList(Material_List);
@@ -1260,15 +1544,6 @@ namespace ModelLayer.Model.Quotation
 
                                                 }
 
-                                                if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                                    pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
-                                                {
-                                                    //if (OverLappingPanel_Qty != 0)
-                                                    //{
-                                                    pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
-                                                    pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
-                                                    // } 
-                                                }
                                                 if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
                                                     frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                                                     pnl_curCtrl.Panel_DisplayHeight >= 3200)
@@ -1643,11 +1918,10 @@ namespace ModelLayer.Model.Quotation
                                     pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041)
                                 {
 
-                                    if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-                                    {
-                                        frame.Insert_ConnectorType_MaterialList(Material_List);
-                                        pnl.Insert_SealingElement_MaterialList(Material_List);
-                                    }
+                                    //if (frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                                    //{
+                                    //    frame.Insert_ConnectorType_MaterialList(Material_List);
+                                    //}
 
                                     pnl.Insert_GuideTrackProfile_MaterialList(Material_List);
                                     pnl.Insert_AluminumTrack_MaterialList(Material_List);
@@ -1655,6 +1929,7 @@ namespace ModelLayer.Model.Quotation
                                     if (perFrame == true)
                                     {
                                         pnl.Insert_WeatherBar_MaterialList(Material_List);
+                                        pnl.Insert_EndCapForWeatherBar_MaterialList(Material_List);
                                         pnl.Insert_WeatherBarFastener_MaterialList(Material_List);
                                         pnl.Insert_WaterSeepage_MaterialList(Material_List);
                                         pnl.Insert_BrushSeal_MaterialList(Material_List);
@@ -1682,10 +1957,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         pnl.Insert_StrikerForSliding_MaterialList(Material_List);
                                     }
-                                    if (true)
-                                    {
 
-                                    }
                                     if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
                                         frame.Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                                         pnl.Panel_DisplayHeight >= 3200)
@@ -1897,9 +2169,15 @@ namespace ModelLayer.Model.Quotation
                     }
                     #endregion
                 }
+                if (MechJointConnectorQty != 0 || frame.Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                {
+                    frame.Insert_MechanicalJointConnector_MaterialList(Material_List, MechJointConnectorQty);
+                    frame.Insert_SealingElement_MaterialList(Material_List);
+                }
 
                 exp_bolt += (int)Math.Ceiling((decimal)((frame.Frame_Width * 2) + (frame.Frame_Height * 2)) / 700);
             }
+
 
             Frame_PUFoamingQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 29694);
             Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)(totalFrames_width + totalFrames_height) / 3570);
@@ -2062,7 +2340,7 @@ namespace ModelLayer.Model.Quotation
                 wndr_item.WD_Selected = false;
             }
 
-            item.WD_Selected = true;         
+            item.WD_Selected = true;
         }
 
         public QuotationModel(string quotation_ref_no,
@@ -2084,7 +2362,8 @@ namespace ModelLayer.Model.Quotation
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
              // ChckColor = false,
-             check1stFrame = false;
+             check1stFrame = false,
+            chckPerFrameMotorMech = false;
 
         string BOM_divDesc,
                HandleDesc,
@@ -2368,6 +2647,10 @@ namespace ModelLayer.Model.Quotation
                 RotoswingHanldePricePerPiece = 257.93m,
                 RotoswingHanldeForSlidingPricePerPiece = 1123.91m,
                 RioHandlePricePerPiece = 481.49m,
+                PopUpHandlePricePerPiece = 250m,
+                DHandlePricePerPiece = 500m,
+                DummyDHandlePricePerPiece = 1000m,
+                DHandleInOutLockingPricePerPiece = 1300m,
 
                 Espag741012_PricePerPiece = 284.15m,
                 LeverEspagPricePerPiece = 825.81m,
@@ -3322,6 +3605,7 @@ namespace ModelLayer.Model.Quotation
 
                 if (wdm.WD_Selected == true || BOMandItemlistStatus == "PriceItemList")
                 {
+
                     foreach (IFrameModel fr in wdm.lst_frame)
                     {
                         #region baseOnDimensionAndColorPointsif
@@ -3641,7 +3925,9 @@ namespace ModelLayer.Model.Quotation
                         #endregion
 
                         #region bottomFramePrice
-                        if (fr.Frame_BotFrameEnable == true)
+                        if (fr.Frame_BotFrameVisible == true &&
+                            (fr.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6050))
                         {
                             FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
                             FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
@@ -3651,7 +3937,8 @@ namespace ModelLayer.Model.Quotation
                                 ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForC70PricePerPiece;
                                 FrameThresholdPricePerLinearMeter = ThresholdForC70PricePerPiece;
                             }
-                            else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+                            else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                                     fr.Frame_BotFrameArtNo == BottomFrameTypes._A166)
                             {
                                 ThresholdPrice += (fr.Frame_Width / 1000m) * ThresholdForPremiPricePerPiece;
                                 FrameThresholdPricePerLinearMeter = ThresholdForPremiPricePerPiece;
@@ -3722,14 +4009,14 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-
+                        chckPerFrameMotorMech = true;
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
 
                         #region MultiPnl 
                         if (fr.Lst_MultiPanel.Count() >= 1 && fr.Lst_Panel.Count() == 0)//multi pnl
-                        {  
+                        {
                             foreach (IMultiPanelModel mpnl in fr.Lst_MultiPanel)
-                            { 
+                            {
                                 foreach (IDividerModel div in mpnl.MPanelLst_Divider)
                                 {
                                     //CostingPoints -= 2 * ProfileColorPoints;
@@ -3740,7 +4027,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         foreach (int cladding_size in div.Div_CladdingSizeList.Values)
                                         {
-                                            claddingPrice = (cladding_size / 1000m) * claddingPricePerLinearMeter;
+                                            claddingPrice += (cladding_size / 1000m) * claddingPricePerLinearMeter;
                                         }
                                     }
                                     #endregion
@@ -4054,18 +4341,26 @@ namespace ModelLayer.Model.Quotation
                                         #region Awning
                                         else if (pnl.Panel_Type.Contains("Awning"))
                                         {
-                                            #region FSPrice
-                                            if (pnl.Panel_SashHeight >= 800)
+
+                                            if (pnl.Panel_HingeOptions == HingeOption._2DHinge || pnl.Panel_LouverMotorizeCheck == true)
                                             {
-                                                FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                _2DHingePrice += _2DHingePricePerPiece * pnl.Panel_2DHingeQty_nonMotorized;
                                             }
-                                            else
+                                            else if (pnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                             {
-                                                FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                                FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                #region FSPrice
+                                                if (pnl.Panel_SashHeight >= 800)
+                                                {
+                                                    FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_26HD_casementPricePerPiece;
+                                                }
+                                                else
+                                                {
+                                                    FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                                    FSBasePrice = FS_16HD_casementPricePerPiece;
+                                                }
+                                                #endregion
                                             }
-                                            #endregion
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
 
@@ -4107,6 +4402,30 @@ namespace ModelLayer.Model.Quotation
                                                     HandlePrice += RioHandlePricePerPiece;
 
                                                     HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._PopUp)
+                                                {
+                                                    HandlePrice += PopUpHandlePricePerPiece;
+
+                                                    HandleBasePrice = PopUpHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D)
+                                                {
+                                                    HandlePrice += DHandlePricePerPiece;
+
+                                                    HandleBasePrice = DHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._DummyD)
+                                                {
+                                                    HandlePrice += DummyDHandlePricePerPiece;
+
+                                                    HandleBasePrice = RioHandlePricePerPiece;
+                                                }
+                                                else if (pnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                                {
+                                                    HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                                    HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                                 }
                                             }
                                             #endregion
@@ -4386,7 +4705,11 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 MotorizeMechPricePerPiece = 39000m;
                                             }
-                                            MotorizePrice += MotorizeMechPricePerPiece * pnl.Panel_MotorizedMechQty;
+                                            if (chckPerFrameMotorMech == true)
+                                            {
+                                                MotorizePrice += MotorizeMechPricePerPiece * pnl.MotorizeMechQty();
+                                                chckPerFrameMotorMech = false;
+                                            }
                                         }
                                         #endregion
 
@@ -6150,15 +6473,26 @@ namespace ModelLayer.Model.Quotation
 
                                         CostingPoints += ProfileColorPoints;
                                         InstallationPoints += (ProfileColorPoints / 3);
+                                        if (pnl.Panel_LouverMotorizeCheck == true)
+                                        {
+                                            LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter)) / 1000m;
+                                            LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter)) / 1000m;
+                                            PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter)) / 1000m;
+                                            PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter)) / 1000m;
 
-                                        LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                        LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
-                                        PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
-                                        PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
+                                            BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
+                                            PowerKitIncludingWiresPrice += 132.59m * 1.3m * 1.1m * forex;
+                                        }
+                                        else if (pnl.Panel_LouverMotorizeCheck == false)
+                                        {
+                                            LouvreFrameWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (LouvreFrameWeatherStripHeadPricePerMeter + LouvreFrameWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                            LouvreFrameBottomWeatherStripPrice += (pnl.Panel_DisplayWidth * (LouvreFrameBottomWeatherStripPricePerMeter + LouvreFrameBottomWeatherStripPowderCoatingPrice)) / 1000m;
+                                            PlantonWeatherStripHeadPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripHeadPricePerMeter + PlantonWeatherStripHeadPowderCoatingPrice)) / 1000m;
+                                            PlantonWeatherStripSillPrice += (pnl.Panel_DisplayWidth * (PlantonWeatherStripSillPricePerMeter + PlantonWeatherStripSillPowderCoatingPrice)) / 1000m;
 
-                                        BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
-                                        GalleryAdaptorPrice += ((pnl.Panel_DisplayHeight * 2) * GalleryAdaptorPricePerMeter) / 1000m;
-
+                                            BubbleSealPrice += ((pnl.Panel_DisplayWidth * 2) * BubbleSealPricePerMeter * pnl.Panel_LouverBladesCount) / 1000m;
+                                            GalleryAdaptorPrice += ((pnl.Panel_DisplayHeight * 2) * GalleryAdaptorPricePerMeter) / 1000m;
+                                        }
 
                                         if (pnl.Panel_LstLouverArtNo != null)
                                         {
@@ -6450,7 +6784,7 @@ namespace ModelLayer.Model.Quotation
                                             }
                                             else if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                             {
-                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                                decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0, BladeAluMultiplier = 0;
                                                 BladeUsagePerPieceOfAluminum = (pnl.Panel_Width / 1); // 1= # of panels
 
                                                 if (BladeUsagePerPieceOfAluminum < 800)
@@ -6462,11 +6796,25 @@ namespace ModelLayer.Model.Quotation
                                                     BladeUsagePerPieceOfAluminumCount = 6;
                                                 }
 
-                                                OneSidedFoiledCost += 698.40m * forex;
-                                                PowderCoatedWhiteIvoryCost += 551.77m * forex;
-                                                TwoSideFoiledWoodGrainCost += 926.47m * forex;
-                                                MillFinishCost += 191.21m * forex;
-                                                //  MillFinishCost += Math.Round(((1 * Convert.ToDecimal(lvrgBlades)))); // 1= # of panels
+                                                BladeAluMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfAluminumCount);//1 = # of panel
+
+                                                //OneSidedFoiledCost += 698.40m * forex;
+                                                //PowderCoatedWhiteIvoryCost += 551.77m * forex;
+                                                //TwoSideFoiledWoodGrainCost += 926.47m * forex;
+                                                //MillFinishCost += 191.21m * forex;
+
+                                                decimal alumBladesPrice = 0;
+                                                if (wdm.WD_BaseColor == Base_Color._Ivory ||
+                                                    wdm.WD_BaseColor == Base_Color._White) //2 lang pinipili ng costing Milled or woodgrain
+                                                {
+                                                    alumBladesPrice = 35.63m * forex;
+                                                }
+                                                else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
+                                                {
+                                                    alumBladesPrice = 926.47m * 5.8m;
+                                                }
+
+                                                GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness >= 6.0f &&
@@ -6713,8 +7061,7 @@ namespace ModelLayer.Model.Quotation
                         }
                         #endregion
 
-                        #region SinglePnl
-
+                        #region SinglePnl 
                         else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                         {
                             IPanelModel Singlepnl = fr.Lst_Panel[0];
@@ -6889,18 +7236,26 @@ namespace ModelLayer.Model.Quotation
                                 #region Awning 
                                 else if (Singlepnl.Panel_Type.Contains("Awning"))
                                 {
-                                    #region FSPrice
-                                    if (Singlepnl.Panel_SashHeight >= 800)
+                                    if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge || Singlepnl.Panel_LouverMotorizeCheck == true)
                                     {
-                                        FSPrice += FS_26HD_casementPricePerPiece * 2;
-                                        FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else
+                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
                                     {
-                                        FSPrice += FS_16HD_casementPricePerPiece * 2;
-                                        FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        #region FSPrice
+                                        if (Singlepnl.Panel_SashHeight >= 800)
+                                        {
+                                            FSPrice += FS_26HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_26HD_casementPricePerPiece;
+                                        }
+                                        else
+                                        {
+                                            FSPrice += FS_16HD_casementPricePerPiece * 2;
+                                            FSBasePrice = FS_16HD_casementPricePerPiece;
+                                        }
+                                        #endregion
                                     }
-                                    #endregion
+
 
                                     if (Singlepnl.Panel_HandleOptionsVisibility == true)
                                     {
@@ -6942,6 +7297,30 @@ namespace ModelLayer.Model.Quotation
                                             HandlePrice += RioHandlePricePerPiece;
 
                                             HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._PopUp)
+                                        {
+                                            HandlePrice += PopUpHandlePricePerPiece;
+
+                                            HandleBasePrice = PopUpHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D)
+                                        {
+                                            HandlePrice += DHandlePricePerPiece;
+
+                                            HandleBasePrice = DHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._DummyD)
+                                        {
+                                            HandlePrice += DummyDHandlePricePerPiece;
+
+                                            HandleBasePrice = RioHandlePricePerPiece;
+                                        }
+                                        else if (Singlepnl.Panel_HandleType == Handle_Type._D_IO_Locking)
+                                        {
+                                            HandlePrice += DHandleInOutLockingPricePerPiece;
+
+                                            HandleBasePrice = DHandleInOutLockingPricePerPiece;
                                         }
                                     }
                                     #endregion
@@ -9298,26 +9677,26 @@ namespace ModelLayer.Model.Quotation
 
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
-                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
                                             {
-                                                GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((286.81m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
                                             {
-                                                GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((262.91m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                             {
-                                                GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                GlassBladePrice += ((215.11m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
                                             }
                                         }
                                     }
                                     else if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._Aluminum)
                                     {
                                         bladeType = "Aluminum";
-                                        decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0;
+                                        decimal BladeUsagePerPieceOfAluminum = 0, BladeUsagePerPieceOfAluminumCount = 0, BladeAluMultiplier = 0;
                                         BladeUsagePerPieceOfAluminum = (Singlepnl.Panel_Width / 1); // 1= # of panels
 
                                         if (BladeUsagePerPieceOfAluminum < 800)
@@ -9329,21 +9708,24 @@ namespace ModelLayer.Model.Quotation
                                             BladeUsagePerPieceOfAluminumCount = 6;
                                         }
 
+                                        BladeAluMultiplier = ((1 * Convert.ToInt32(lvrgBlades)) / BladeUsagePerPieceOfAluminumCount);//1 = # of panel
+
                                         //OneSidedFoiledCost += 698.40m * forex;
                                         //PowderCoatedWhiteIvoryCost += 551.77m * forex;
                                         //TwoSideFoiledWoodGrainCost += 926.47m * forex;
                                         //MillFinishCost += 191.21m * forex;
 
+                                        decimal alumBladesPrice = 0;
                                         if (wdm.WD_BaseColor == Base_Color._Ivory ||
-                                            wdm.WD_BaseColor == Base_Color._White)
+                                            wdm.WD_BaseColor == Base_Color._White) //2 lang pinipili ng costing Milled or woodgrain
                                         {
-                                            GlassBladePrice = 35.63m * forex;
+                                            alumBladesPrice = 35.63m * forex;
                                         }
                                         else if (wdm.WD_BaseColor == Base_Color._DarkBrown)
                                         {
-                                            GlassBladePrice = 926.47m * 5.8m;
+                                            alumBladesPrice = 926.47m * 5.8m;
                                         }
-
+                                        GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness >= 6.0f &&
@@ -9425,7 +9807,7 @@ namespace ModelLayer.Model.Quotation
                     wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
                     InstallationCost = InstallationPoints * CostPerPoints;
-                   
+
                     // Math.Round( , 2) +
 
                     FittingAndSuppliesCost = Math.Round(FSPrice, 2) +
@@ -10263,6 +10645,7 @@ namespace ModelLayer.Model.Quotation
             SashReinPrice = 0;
             DivPrice = 0;
             DivReinPrice = 0;
+            claddingPrice = 0;
             DMPrice = 0;
             DMReinforcementPrice = 0;
             GbPrice = 0;

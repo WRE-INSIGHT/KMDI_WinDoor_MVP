@@ -30,7 +30,9 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = true;
                     customArrowHeadToolStripMenuItem.Enabled = true;
                     slidingTopViewToolStripMenuItem.Enabled = true;
-                    
+                    SortItemtoolStripButton1.Enabled = true;
+
+
                 }
                 else
                 {
@@ -43,7 +45,8 @@ namespace PresentationLayer.Views
                     glassBalancingToolStripMenuItem.Enabled = false;
                     customArrowHeadToolStripMenuItem.Enabled = false;
                     slidingTopViewToolStripMenuItem.Enabled = false;
-                    
+                    SortItemtoolStripButton1.Enabled = false;
+
                 }
             }
         }
@@ -215,7 +218,7 @@ namespace PresentationLayer.Views
 
         #endregion
         public event EventHandler MainViewLoadEventRaised;
-        public event EventHandler MainViewClosingEventRaised;
+        public event FormClosingEventHandler MainViewClosingEventRaised;
         public event EventHandler OpenToolStripButtonClickEventRaised;
         public event EventHandler NewFrameButtonClickEventRaised;
         public event EventHandler NewConcreteButtonClickEventRaised;
@@ -253,7 +256,7 @@ namespace PresentationLayer.Views
         public event EventHandler NudCurrentPriceValueChangedEventRaised;
         public event EventHandler setNewFactorEventRaised;
         public event MouseEventHandler PanelMainMouseWheelRaiseEvent;
-
+        public event EventHandler MainViewClosedEventRaised;
         public MainView()
         {
             InitializeComponent();
@@ -311,7 +314,7 @@ namespace PresentationLayer.Views
 
         private void MainView_FormClosed(object sender, FormClosedEventArgs e)
         {
-            EventHelpers.RaiseEvent(this, MainViewClosingEventRaised, e);
+            EventHelpers.RaiseEvent(this, MainViewClosedEventRaised, e);
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
@@ -631,11 +634,41 @@ namespace PresentationLayer.Views
             {
                 CrtlPress = true;
             }
+
+            if (e.Control == true && e.KeyCode == Keys.P)
+            {
+                itemListToolStripMenuItem_Click(sender, e);
+            }
+            else if (e.Control == true && e.KeyCode == Keys.S)
+            {
+                saveToolStripButton_Click(sender, e);
+            }
+            else if (e.Control == true && e.KeyCode == Keys.I)
+            {
+                ScreentoolStripButton_Click(sender, e);
+            }
+            else if(e.Alt == true && e.KeyCode == Keys.C)
+            {                           
+                CreateNewItem_Clicked(C70ToolStripMenuItem, e);
+            }
+            else if(e.Alt == true && e.KeyCode == Keys.P)
+            {
+                CreateNewItem_Clicked(PremiLineToolStripMenuItem, e);
+            }
+            else if (e.Alt == true && e.KeyCode == Keys.G)
+            {
+                CreateNewItem_Clicked(G58ToolStripMenuItem, e);
+            }
         }
 
         private void MainView_KeyUp(object sender, KeyEventArgs e)
         {
             CrtlPress = false;
+        }
+
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, MainViewClosingEventRaised, e);
         }
     }
 }

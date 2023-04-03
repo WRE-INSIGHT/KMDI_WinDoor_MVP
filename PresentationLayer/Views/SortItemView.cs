@@ -21,10 +21,11 @@ namespace PresentationLayer.Views
         public event EventHandler SortItemViewLoadEventRaised;
         public event DragEventHandler SortItemDragDropEventRaiseEvent;
         public event DragEventHandler SortItemDragEnterEventRaiseEvent;
+        public event EventHandler btnDeleteClickRaiseEvent;
 
         public void showSortItem()
         {
-            this.Show();
+            this.ShowDialog();
         }
 
         
@@ -51,6 +52,26 @@ namespace PresentationLayer.Views
         public Form GetSortItem()
         {
             return this;
+        }
+
+        private void pnlSortItem_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public Button btnDelete()
+        {
+            return btn_Delete;
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, btnDeleteClickRaiseEvent, e);
         }
     }
 }
