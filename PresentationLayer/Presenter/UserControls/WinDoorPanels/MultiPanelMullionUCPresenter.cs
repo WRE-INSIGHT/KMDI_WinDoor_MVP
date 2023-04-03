@@ -3160,7 +3160,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f || 
+                        zoom == 0.08f || zoom == 0.06f || zoom == 0.05f || zoom == 0.02f || zoom == 0.01f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
@@ -3189,7 +3190,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     divs_bounds_values[2].Width += 2;
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f ||
+                        zoom == 0.08f || zoom == 0.06f || zoom == 0.05f || zoom == 0.02f || zoom == 0.01f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
@@ -3217,7 +3219,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f ||
+                        zoom == 0.08f || zoom == 0.06f || zoom == 0.05f || zoom == 0.02f || zoom == 0.01f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
@@ -3254,7 +3257,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f ||
+                        zoom == 0.08f || zoom == 0.06f || zoom == 0.05f || zoom == 0.02f || zoom == 0.01f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
@@ -3302,7 +3306,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
 
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom >= 0.01f && zoom <= 0.26f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
@@ -3326,7 +3330,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     divs_bounds_values[3].Width += 2;
 
-                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f)
+                    if (zoom == 0.26f || zoom == 0.17f || zoom == 0.13f || zoom == 0.10f ||
+                        zoom == 0.08f || zoom == 0.06f || zoom == 0.05f || zoom == 0.02f || zoom == 0.01f)
                     {
                         divs_bounds_values[3].Width += 1;
                     }
