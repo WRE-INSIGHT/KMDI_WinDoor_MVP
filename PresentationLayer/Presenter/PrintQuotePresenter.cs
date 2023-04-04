@@ -43,7 +43,10 @@ namespace PresentationLayer.Presenter
             _printQuoteView.btnRefreshClickEventRaised += _printQuoteView_btnRefreshClickEventRaised;
             _printQuoteView.PrintQuoteViewLoadEventRaised += _printQuoteView_PrintQuoteViewLoadEventRaised;
             _printQuoteView.SelectedIndexChangeEventRaised += _printQuoteView_SelectedIndexChangeEventRaised;
+            _printQuoteView.txtoftexpensesKeyPressEventRaised += _printQuoteView_txtoftexpensesKeyPressEventRaised;
         }
+
+
 
         public void EventLoad()
         {
@@ -249,6 +252,21 @@ namespace PresentationLayer.Presenter
             _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
             _printQuoteView.GetReportViewer().ZoomPercent = 75;
             _printQuoteView.GetReportViewer().RefreshReport();
+        }
+
+        private void _printQuoteView_txtoftexpensesKeyPressEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal OOTValue = Convert.ToDecimal(_printQuoteView.QuotationOuofTownExpenses);
+                string formattedOOTVal = OOTValue.ToString("N2");
+                _printQuoteView.QuotationOuofTownExpenses = formattedOOTVal;
+                _printQuoteView_btnRefreshClickEventRaised(sender, e);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in "  + this + ex.Message);
+            }
         }
 
         public void PrintRDLCReport()
@@ -506,8 +524,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
 
-                    string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
-                    int oftexpenses = Convert.ToInt32(trimmedamount);
+                    //string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
+                    //int oftexpenses = Convert.ToInt32(trimmedamount);
 
                     #region save files without pos in AEIC
                     if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
@@ -520,7 +538,7 @@ namespace PresentationLayer.Presenter
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
-                    RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + oftexpenses.ToString("n")));
+                    RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -532,7 +550,7 @@ namespace PresentationLayer.Presenter
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
-                    _printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
+                    //_printQuoteView.QuotationOuofTownExpenses = oftexpenses.ToString("n");
 
                     #region RenderPDFAtBackground
                     if (_quoteItemListPresenter.RenderPDFAtBackGround == true)
