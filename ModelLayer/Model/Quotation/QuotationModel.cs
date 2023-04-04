@@ -7246,7 +7246,7 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         _2DHingePrice += _2DHingePricePerPiece * Singlepnl.Panel_2DHingeQty_nonMotorized;
                                     }
-                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._2DHinge)
+                                    else if (Singlepnl.Panel_HingeOptions == HingeOption._FrictionStay)
                                     {
                                         #region FSPrice
                                         if (Singlepnl.Panel_SashHeight >= 800)
