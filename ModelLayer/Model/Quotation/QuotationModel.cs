@@ -3922,7 +3922,7 @@ namespace ModelLayer.Model.Quotation
                             SealantPricePerCan = SealantPricePerCan_BrownBlack;
                         }
                         SealantPrice += Frame_SealantWHQty_Total * SealantPricePerCan;
-                        #endregion
+                        #endregion 
 
                         #region bottomFramePrice
                         if (fr.Frame_BotFrameVisible == true &&
@@ -3945,7 +3945,7 @@ namespace ModelLayer.Model.Quotation
                             }
                             else if (fr.Frame_BotFrameArtNo == BottomFrameTypes._None)
                             {
-                               // do nothing
+                                // do nothing
                             }
                             else
                             {
@@ -4013,7 +4013,7 @@ namespace ModelLayer.Model.Quotation
                         {
                             ChckPlasticWedge = false;
                         }
-                        
+
                         chckPerFrameMotorMech = true;
 
                         PUFoamingPrice += Frame_PUFoamingQty_Total * PUFoamingPricePerCan;
@@ -4075,7 +4075,7 @@ namespace ModelLayer.Model.Quotation
                                                 DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                             }
 
-                                            DivPrice += ((div.Div_Width) / 1000m) * DividerPricePerSqrMeter;
+                                            DivPrice += ((div.Div_ExplosionWidth) / 1000m) * DividerPricePerSqrMeter;
                                             DivReinPrice += ((div.Div_ReinfWidth) / 1000m) * DividerReinPricePerSqrMeter;
                                             MechJointPrice += MechanicalJointPricePerPiece * 2;
                                         }
@@ -4157,7 +4157,7 @@ namespace ModelLayer.Model.Quotation
                                                     DividerReinPricePerSqrMeter = FrameReinPricePerLinearMeter_6052;
                                                 }
 
-                                                DivPrice += ((div.Div_Height) / 1000m) * DividerPricePerSqrMeter;
+                                                DivPrice += ((div.Div_ExplosionHeight) / 1000m) * DividerPricePerSqrMeter;
                                                 DivReinPrice += ((div.Div_ReinfHeight) / 1000m) * DividerReinPricePerSqrMeter;
                                                 MechJointPrice += MechanicalJointPricePerPiece * 2;
                                                 #endregion
