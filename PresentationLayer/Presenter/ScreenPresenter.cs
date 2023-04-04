@@ -765,11 +765,18 @@ namespace PresentationLayer.Presenter
         }
         public async void GetProjectFactor()
         {
-            string[] province = _mainPresenter.projectAddress.Split(',');
-            decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-
-            _screenModel.Screen_AddOnsSpecialFactor = value;
-            Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+            try
+            {
+                string[] province = _mainPresenter.projectAddress.Split(',');
+                decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                _screenModel.Screen_AddOnsSpecialFactor = value;
+                Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this + " " + ex.Message );
+            }
+                     
 
         }
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
@@ -856,6 +863,7 @@ namespace PresentationLayer.Presenter
                 if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                 {
                     Screen_DimensionFormat = " - ";
+                    item.Screen_Quantity = 0;
                 }
                 else
                 {
