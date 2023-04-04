@@ -464,51 +464,51 @@ namespace PresentationLayer.Presenter.UserControls
             bracketProp.BringToFront();
             if (_divModel.Div_CladdingSizeList != null)
             {
-
-                if (_divModel.Div_CladdingSizeList.Count > 0)
-                {
-
-                    foreach (var cladding in _divModel.Div_CladdingSizeList)
+                    if (_divModel.Div_CladdingSizeList.Count > 0)
                     {
 
-                        _divModel.Div_CladdingProfileArtNoVisibility = true;
-                        _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
-                        if (cladding_count < 1)
+                        foreach (var cladding in _divModel.Div_CladdingSizeList)
                         {
-                            _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
-                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
-                            _divModel.Div_claddingBracketVisibility = false;
+
+                            _divModel.Div_CladdingProfileArtNoVisibility = true;
+                            _divModel.Div_CladdingProfileArtNo = CladdingProfile_ArticleNo._WK50;
+                            if (cladding_count < 1)
+                            {
+                                _divModel.AdjustPropertyPanelHeight("addCladdingArtNo");
+                                _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+                                _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladdingArtNo");
+                                _divModel.Div_claddingBracketVisibility = false;
+                            }
+
+                            IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, _mainPresenter, this);
+                            IDP_CladdingPropertyUC claddingPropUC = claddingUCP.GetCladdingPropertyUC();
+                            _lst_claddUCP.Add(claddingUCP);
+
+                            claddingPropUC.Cladding_Size = (int)cladding.Value;
+                            claddingPropUC.Cladding_ID = cladding.Key;
+                            claddingPropUC.Divider_Type = _divModel.Div_Type.ToString();
+                            UserControl claddingUC = (UserControl)claddingPropUC;
+                            claddingUC.Dock = DockStyle.Top;
+                            _divPropertiesBodyPNL.Controls.Add(claddingUC);
+
+                            _divModel.AdjustPropertyPanelHeight("addCladding");
+                            _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                            _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
+                            claddingUC.BringToFront();
+
+                            _divModel.Div_CladdingCount++;
+                            Cladding_Count++;
+
+                            _dp_claddingBracketPropertyUCP.BringToFrontUC();
+
+                            int locY = ((UserControl)_divProperties).Location.Y;
+
+                            //_mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
+
+                            _divProperties.SetBtnSaveBackColor(Color.White);
                         }
-
-                        IDP_CladdingPropertyUCPresenter claddingUCP = _dp_claddingPropertyUCP.GetNewInstance(_unityC, _divModel, _mainPresenter, this);
-                        IDP_CladdingPropertyUC claddingPropUC = claddingUCP.GetCladdingPropertyUC();
-                        _lst_claddUCP.Add(claddingUCP);
-
-                        claddingPropUC.Cladding_Size = (int)cladding.Value;
-                        claddingPropUC.Cladding_ID = cladding.Key;
-                        claddingPropUC.Divider_Type = _divModel.Div_Type.ToString();
-                        UserControl claddingUC = (UserControl)claddingPropUC;
-                        claddingUC.Dock = DockStyle.Top;
-                        _divPropertiesBodyPNL.Controls.Add(claddingUC);
-
-                        _divModel.AdjustPropertyPanelHeight("addCladding");
-                        _divModel.Div_MPanelParent.AdjustPropertyPanelHeight("Div", "addCladding");
-                        _divModel.Div_FrameParent.AdjustPropertyPanelHeight("Div", "addCladding");
-                        claddingUC.BringToFront();
-
-                        _divModel.Div_CladdingCount++;
-                        Cladding_Count++;
-
-                        _dp_claddingBracketPropertyUCP.BringToFrontUC();
-
-                        int locY = ((UserControl)_divProperties).Location.Y;
-
-                        //_mainPresenter.Set_pnlPropertiesBody_ScrollView(locY + const_var.div_property_claddingOptionsHeight);
-
-                        _divProperties.SetBtnSaveBackColor(Color.White);
                     }
-                }
+                
             }
             if (_divModel.Div_FrameParent.Frame_WindoorModel.WD_profile.Contains("C70"))
             {
