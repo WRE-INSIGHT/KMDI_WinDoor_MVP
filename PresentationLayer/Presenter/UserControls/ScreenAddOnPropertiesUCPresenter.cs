@@ -101,7 +101,7 @@ namespace PresentationLayer.Presenter.UserControls
             milled373or374presenter.Dock = DockStyle.Top;
             milled373or374presenter.BringToFront();
 
-            ISP_LandCoverPropertyUCPresenter landCoverPresenter = _sp_landCoverPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel);
+            ISP_LandCoverPropertyUCPresenter landCoverPresenter = _sp_landCoverPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel,_screenPresenter);
             UserControl landcover = (UserControl)landCoverPresenter.GetLandCoverPropertyUC();
             _pnlAddOns.Controls.Add(landcover);
             landcover.Dock = DockStyle.Top;
@@ -130,6 +130,7 @@ namespace PresentationLayer.Presenter.UserControls
             _pnlAddOns.Controls.Add(pvcBoxProp);
             pvcBoxProp.Dock = DockStyle.Top;
             pvcBoxProp.BringToFront();
+          
 
             _screenModel.Screen_PriceIncreaseVisibility = true;
             ISP_PriceIncreaseByPercentageUCPresenter priceIncreaseUCP = _sp_PriceIncreaseByPercentageUCPresenter.CreateNewInstance(_unityC, _mainPresenter, _screenModel, _screenPresenter);

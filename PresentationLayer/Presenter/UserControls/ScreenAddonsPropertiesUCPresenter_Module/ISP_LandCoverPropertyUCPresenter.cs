@@ -10,6 +10,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         ISP_LandCoverPropertyUC GetLandCoverPropertyUC();
         ISP_LandCoverPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
                                                            IMainPresenter mainPresenter,
-                                                           IScreenModel screenModel);
+                                                           IScreenModel screenModel,
+                                                           IScreenPresenter screenPresenter);
     }
 }
