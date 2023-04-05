@@ -1194,8 +1194,6 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
                 botFrameDiff = 20;
-                Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
-                Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             }
 
             if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
@@ -1204,50 +1202,45 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             }
 
-            if (Frame_Type == Frame_Padding.Door &&
-                Frame_BotFrameVisible == true &&
-                Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            if (Frame_BotFrameVisible == true &&
+                Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                Frame_BotFrameArtNo != BottomFrameTypes._6052)
             {
-                Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
-            }
-            else if (Frame_Type == Frame_Padding.Door &&
-                Frame_BotFrameVisible == true &&
-                Frame_BotFrameArtNo == BottomFrameTypes._7789)
-            {
-                Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
-            }
-            else if (Frame_Type == Frame_Padding.Door &&
-                Frame_BotFrameVisible == true &&
-                Frame_BotFrameArtNo == BottomFrameTypes._6050)
-            {
-                Frame_MechanicalJointConnectorQty = 2;
-
-                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
                 {
-                    Frame_ExplosionHeight = _frameHeight - botFrameDiff - MechjointDeduction;
+                    Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
                 }
-                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
                 {
                     Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
                 }
-            }
-            else if (Frame_Type == Frame_Padding.Door &&
-                     Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                     Frame_ConnectionType != null &&
-                     (Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
-                      Frame_BotFrameArtNo == BottomFrameTypes._9C66))
-            {
-                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
                 {
-                    Frame_ExplosionHeight = _frameHeight - MechjointDeduction - botFrameDiff + submerged;
+                    Frame_MechanicalJointConnectorQty = 2;
+
+                    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                    {
+                        Frame_ExplosionHeight = _frameHeight - botFrameDiff - MechjointDeduction;
+                    }
+                    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                    {
+                        Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+                    }
                 }
-                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
+                         Frame_BotFrameArtNo == BottomFrameTypes._9C66)
                 {
-                    Frame_ExplosionHeight = _frameHeight - botFrameDiff + submerged + 3;
+                    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                    {
+                        Frame_ExplosionHeight = _frameHeight - MechjointDeduction - botFrameDiff + submerged;
+                    }
+                    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                    {
+                        Frame_ExplosionHeight = _frameHeight - botFrameDiff + submerged + 3;
+                    }
                 }
             }
-            else if (Frame_Type == Frame_Padding.Door &&
-                     Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
                 Frame_MechanicalJointConnectorQty = 4;
@@ -1272,30 +1265,35 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
                 Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
             }
-            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                     Frame_ConnectionType != null &&
-                     Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                     Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
-                    Frame_ExplosionWidth = _frameWidth;
+                    if (Frame_If_InwardMotorizedSliding == true)
+                    {
+                        Frame_ExplosionWidth = _frameWidth - (MechjointDeduction * 2);
+                    }
+                    else
+                    {
+                        Frame_ExplosionWidth = _frameWidth;
+                    }
+
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        Frame_ExplosionWidth = _frameWidth;
+                    }
+
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
                     Frame_ExplosionWidth = _frameWidth + 5;
-                }
-            }
-            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                     Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-            {
-                if (Frame_If_InwardMotorizedSliding == true)
-                {
-                    Frame_ExplosionWidth = _frameWidth - (MechjointDeduction * 2);
-                }
-                else
-                {
-                    Frame_ExplosionWidth = _frameWidth;
+
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                       Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        Frame_ExplosionWidth = _frameWidth + 5;
+                    }
                 }
             }
             else
@@ -1321,41 +1319,37 @@ namespace ModelLayer.Model.Quotation.Frame
                 reinf_size = 38;
             }
 
-
-            if (Frame_Type == Frame_Padding.Door &&
-               Frame_BotFrameVisible == true &&
-               Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            if (Frame_BotFrameVisible == true &&
+                Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
+                Frame_BotFrameArtNo != BottomFrameTypes._6052)
             {
-                Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
-            }
-            else if (Frame_Type == Frame_Padding.Door &&
-               Frame_BotFrameVisible == true &&
-               Frame_BotFrameArtNo == BottomFrameTypes._7789)
-            {
-                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
-            }
-            else if (Frame_Type == Frame_Padding.Door &&
-               Frame_BotFrameVisible == true &&
-               Frame_BotFrameArtNo == BottomFrameTypes._6050)
-            {
-                Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
-            }
-            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                   Frame_ConnectionType != null &&
-                   Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                   Frame_BotFrameArtNo == BottomFrameTypes._A166)
-            {
-                if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
                 {
-                    Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+                    Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
                 }
-                else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
                 {
-                    Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+                    Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
+                }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+                {
+                    Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
+                }
+                else if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                         Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                {
+                    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                    {
+                        Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+                    }
+                    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+                    {
+                        Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+                    }
                 }
             }
             else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                    Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+                     Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
                 int deductMultiplier = 1;
                 if (Frame_If_InwardMotorizedSliding == true)
@@ -1366,7 +1360,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 {
                     deductMultiplier = 2;
                 }
-                Frame_ReinfHeight = Frame_ExplosionHeight - (reinf_size * 2) - (10 * deductMultiplier);
+                Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - (10 * deductMultiplier);
             }
             else
             {
@@ -1379,232 +1373,292 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
                 Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
             }
-            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                     Frame_ConnectionType == FrameConnectionType._MechanicalJoint &&
-                     Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
-                     Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052)
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
-                    Frame_ReinfWidth = Frame_ExplosionWidth - (reinf_size * 2) - 10;
+                    Frame_ReinfWidth = Frame_ExplosionWidth - 10;
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                        Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
+                    }
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
-                    Frame_ReinfWidth = Frame_ExplosionWidth - (reinf_size * 2) - 10;
+                    Frame_ReinfWidth = _frameWidth - 10;
+                    if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+                         Frame_BotFrameArtNo == BottomFrameTypes._A166)
+                    {
+                        Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
+                    }
                 }
-            }
-            else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
-                    Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-            {
-                Frame_ReinfWidth = Frame_ExplosionWidth - 10;
             }
             else
             {
                 Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
             }
 
-            #region other algo 
-            //int botFrameDiff = 0,// 14 = difference of 7502 & 7507 thickness
-            //    MechjointDeduction = 38,
-            //    submerged = 11;
-
-            //if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            #region Old algo
+            //       public void SetExplosionValues_Frame()
             //{
-            //    botFrameDiff = 20;
-            //}
-            //else
-            //{
-            //    botFrameDiff = 14;
-            //}
-
-            //if (Frame_Type == Frame_Padding.Door &&
-            //    Frame_BotFrameEnable == true &&
-            //    Frame_BotFrameArtNo == BottomFrameTypes._7502)
-            //{
-            //    Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
-            //}
-            //else if (Frame_Type == Frame_Padding.Door &&
-            //         Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            //{
-            //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        if (Lst_Panel[0].Panel_SashProfileArtNo == SashProfile_ArticleNo._395 &&
+            //            Lst_Panel[0].Panel_MotorizedOptionVisibility == true)
             //        {
-            //            Frame_ExplosionHeight = _frameHeight - MechjointDeduction - botFrameDiff + submerged;
+            //            Frame_If_InwardMotorizedCasement = true;
             //        }
-            //        else
+            //    }
+            //    else if (Lst_Panel.Count == 0 && Lst_MultiPanel.Count >= 1) //multipanel
+            //    {
+            //        foreach (IMultiPanelModel mpnl in Lst_MultiPanel)
             //        {
-            //            if (Frame_If_InwardMotorizedSliding == true)
+            //            foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
             //            {
-            //                Frame_ExplosionHeight = _frameHeight;
-            //            }
-            //            else
-            //            {
-            //                Frame_ExplosionHeight = _frameHeight - (MechjointDeduction * 2);
+            //                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._374 &&
+            //                    pnl.Panel_MotorizedOptionVisibility == true)
+            //                {
+            //                    Frame_If_InwardMotorizedCasement = true;
+            //                }
+
+            //                if (pnl.Panel_SashProfileArtNo == SashProfile_ArticleNo._6041 &&
+            //                    pnl.Panel_MotorizedOptionVisibility == true)
+            //                {
+            //                    Frame_If_InwardMotorizedSliding = true;
+            //                }
             //            }
             //        }
             //    }
-            //    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+
+            //    int botFrameDiff = 0,// 14 = difference of 7502 & 7507 thickness
+            //      MechjointDeduction = 38,
+            //      submerged = 11;
+
+            //    if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+            //        Frame_BotFrameArtNo == BottomFrameTypes._A166)
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        botFrameDiff = 20;
+            //    }
+            //    else if (Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            //    {
+            //        botFrameDiff = 20;
+            //    }
+            //    else if (Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            //    {
+            //        botFrameDiff = 14;
+            //    }
+            //    else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            //    {
+            //        botFrameDiff = 20;
+            //        Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
+            //        Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
+            //    }
+
+            //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    {
+            //        Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
+            //        Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
+            //    }
+
+            //    if (Frame_Type == Frame_Padding.Door &&
+            //        Frame_BotFrameVisible == true &&
+            //        Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            //    {
+            //        Frame_ExplosionHeight = _frameHeight + botFrameDiff + 5;
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //        Frame_BotFrameVisible == true &&
+            //        Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            //    {
+            //        Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //        Frame_BotFrameVisible == true &&
+            //        Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            //    {
+            //        Frame_MechanicalJointConnectorQty = 2;
+
+            //        if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //        {
+            //            Frame_ExplosionHeight = _frameHeight - botFrameDiff - MechjointDeduction;
+            //        }
+            //        else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+            //        {
+            //            Frame_ExplosionHeight = _frameHeight - botFrameDiff + 3;
+            //        }
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //             Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //             Frame_ConnectionType != null &&
+            //             (Frame_BotFrameArtNo == BottomFrameTypes._A166 ||
+            //              Frame_BotFrameArtNo == BottomFrameTypes._9C66))
+            //    {
+            //        if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //        {
+            //            Frame_ExplosionHeight = _frameHeight - MechjointDeduction - botFrameDiff + submerged;
+            //        }
+            //        else if (Frame_ConnectionType == FrameConnectionType._Weldable)
             //        {
             //            Frame_ExplosionHeight = _frameHeight - botFrameDiff + submerged + 3;
+            //        }
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //             Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //             Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    {
+            //        Frame_MechanicalJointConnectorQty = 4;
+
+            //        if (Frame_If_InwardMotorizedSliding == true)
+            //        {
+            //            Frame_ExplosionHeight = _frameHeight;
+            //        }
+            //        else
+            //        {
+            //            Frame_ExplosionHeight = _frameHeight - (MechjointDeduction * 2);
             //        }
             //    }
             //    else
             //    {
             //        Frame_ExplosionHeight = _frameHeight + 5;
             //    }
-            //}
-            //else
-            //{
-            //    Frame_ExplosionHeight = _frameHeight + 5;
-            //}
 
-            //if (Frame_If_InwardMotorizedCasement)
-            //{
-            //    Frame_ExplosionWidth = _frameWidth - 35 + 5;
-            //    Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
-            //    Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
-            //}
-            //else if (Frame_Type == Frame_Padding.Door &&
-            //         Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            //{
-            //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    if (Frame_If_InwardMotorizedCasement)
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        Frame_ExplosionWidth = _frameWidth - 35 + 5;
+            //        Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+            //        Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            //    }
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //             Frame_ConnectionType != null &&
+            //             Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+            //             Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            //    {
+            //        if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             //        {
             //            Frame_ExplosionWidth = _frameWidth;
             //        }
-            //        else
-            //        {
-            //            if (Frame_If_InwardMotorizedSliding == true)
-            //            {
-            //                Frame_ExplosionWidth = _frameWidth - (MechjointDeduction * 2);
-            //            }
-            //            else
-            //            {
-            //                Frame_ExplosionWidth = _frameWidth;
-            //            }
-            //        }
-            //    }
-            //    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
-            //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        else if (Frame_ConnectionType == FrameConnectionType._Weldable)
             //        {
             //            Frame_ExplosionWidth = _frameWidth + 5;
+            //        }
+            //    }
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //             Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    {
+            //        if (Frame_If_InwardMotorizedSliding == true)
+            //        {
+            //            Frame_ExplosionWidth = _frameWidth - (MechjointDeduction * 2);
+            //        }
+            //        else
+            //        {
+            //            Frame_ExplosionWidth = _frameWidth;
             //        }
             //    }
             //    else
             //    {
             //        Frame_ExplosionWidth = _frameWidth + 5;
             //    }
-            //}
-            //else
-            //{
-            //    Frame_ExplosionWidth = _frameWidth + 5;
-            //}
 
-            //int reinf_size = 0;
-            //if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676 || Frame_ReinfArtNo == FrameReinf_ArticleNo._V226)
-            //{
-            //    reinf_size = 29;
-            //}
-            //else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
-            //{
-            //    reinf_size = 43;
-            //}
-            //else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
-            //{
-            //    reinf_size = 20;
-            //}
-            //else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
-            //{
-            //    reinf_size = 38;
-            //}
-
-
-            //if (Frame_Type == Frame_Padding.Door &&
-            //   Frame_BotFrameEnable == true &&
-            //   Frame_BotFrameArtNo == BottomFrameTypes._7502)
-            //{
-            //    Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
-            //}
-            //else if (Frame_Type == Frame_Padding.Door &&
-            //         Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            //{
-            //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    int reinf_size = 0;
+            //    if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R676 || Frame_ReinfArtNo == FrameReinf_ArticleNo._V226)
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        reinf_size = 29;
+            //    }
+            //    else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._R677)
+            //    {
+            //        reinf_size = 43;
+            //    }
+            //    else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV110)
+            //    {
+            //        reinf_size = 20;
+            //    }
+            //    else if (Frame_ReinfArtNo == FrameReinf_ArticleNo._TV107)
+            //    {
+            //        reinf_size = 38;
+            //    }
+
+
+            //    if (Frame_Type == Frame_Padding.Door &&
+            //       Frame_BotFrameVisible == true &&
+            //       Frame_BotFrameArtNo == BottomFrameTypes._7502)
+            //    {
+            //        Frame_ReinfHeight = _frameHeight + botFrameDiff - (reinf_size * 2) - 10;
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //       Frame_BotFrameVisible == true &&
+            //       Frame_BotFrameArtNo == BottomFrameTypes._7789)
+            //    {
+            //        Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
+            //    }
+            //    else if (Frame_Type == Frame_Padding.Door &&
+            //       Frame_BotFrameVisible == true &&
+            //       Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            //    {
+            //        Frame_ReinfHeight = _frameHeight - botFrameDiff - reinf_size - 10;
+            //    }
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //           Frame_ConnectionType != null &&
+            //           Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+            //           Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            //    {
+            //        if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             //        {
             //            Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+            //        }
+            //        else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+            //        {
+            //            Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
+            //        }
+            //    }
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //            Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    {
+            //        int deductMultiplier = 1;
+            //        if (Frame_If_InwardMotorizedSliding == true)
+            //        {
+            //            deductMultiplier = 1;
             //        }
             //        else
             //        {
-            //            int deductMultiplier = 1;
-            //            if (Frame_If_InwardMotorizedSliding == true)
-            //            {
-            //                deductMultiplier = 1;
-            //            }
-            //            else
-            //            {
-            //                deductMultiplier = 2;
-            //            }
-            //            Frame_ReinfHeight = Frame_ExplosionHeight - (reinf_size * 2) - (10 * deductMultiplier);
+            //            deductMultiplier = 2;
             //        }
-            //    }
-            //    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
-            //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
-            //        {
-            //            Frame_ReinfHeight = _frameHeight - reinf_size - botFrameDiff + submerged - 10;
-            //        }
+            //        Frame_ReinfHeight = Frame_ExplosionHeight - (reinf_size * 2) - (10 * deductMultiplier);
             //    }
             //    else
             //    {
             //        Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
             //    }
-            //}
-            //else
-            //{
-            //    Frame_ReinfHeight = _frameHeight - (reinf_size * 2) - 10;
-            //}
 
-            //if (Frame_If_InwardMotorizedCasement)
-            //{
-            //    Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
-            //    Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
-            //    Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
-            //}
-            //else if (Frame_Type == Frame_Padding.Door &&
-            //         Frame_ArtNo == FrameProfile_ArticleNo._6052)
-            //{
-            //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            //    if (Frame_If_InwardMotorizedCasement)
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
+            //        Frame_ReinfWidth = _frameWidth - 35 - (reinf_size * 2) - 10;
+            //        Frame_MilledArtNo = MilledFrame_ArticleNo._7502Milled;
+            //        Frame_MilledReinfArtNo = MilledFrameReinf_ArticleNo._R_676;
+            //    }
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //             Frame_ConnectionType == FrameConnectionType._MechanicalJoint &&
+            //             Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
+            //             Frame_BotFrameArtNo == BottomFrameTypes._A166)
+            //    {
+            //        if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             //        {
             //            Frame_ReinfWidth = Frame_ExplosionWidth - (reinf_size * 2) - 10;
             //        }
-            //        else
+            //        else if (Frame_ConnectionType == FrameConnectionType._Weldable)
             //        {
-            //            Frame_ReinfWidth = Frame_ExplosionWidth - 10;
+            //            Frame_ReinfWidth = Frame_ExplosionWidth - (reinf_size * 2) - 10;
             //        }
             //    }
-            //    else if (Frame_ConnectionType == FrameConnectionType._Weldable)
+            //    else if (Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
+            //            Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             //    {
-            //        if (Frame_BotFrameArtNo == BottomFrameTypes._9C66)
-            //        {
-            //            Frame_ReinfWidth = Frame_ExplosionWidth - (reinf_size * 2) - 10;
-            //        }
+            //        Frame_ReinfWidth = Frame_E1xplosionWidth - 10;
             //    }
             //    else
             //    {
             //        Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
             //    }
-            //}
-            //else
-            //{
-            //    Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
             //}
             #endregion
         }
