@@ -983,11 +983,11 @@ namespace EnumerationTypeLayer
             private SealingElement_ArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class MechnJointForFrame_ArticleNo : Enumeration<MechnJointForFrame_ArticleNo, int>
+        public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
         {
-            public static readonly MechnJointForFrame_ArticleNo _9C52 = new MechnJointForFrame_ArticleNo(0, "9C52");
+            public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
 
-            private MechnJointForFrame_ArticleNo(int value, string displayName) : base(value, displayName) { }
+            private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
         }
 
         public class EndCapFor9C58_ArticleNo : Enumeration<EndCapFor9C58_ArticleNo, int>
@@ -1034,7 +1034,7 @@ namespace EnumerationTypeLayer
         }
 
         public class ScreenType : Enumeration<ScreenType, int>
-        { 
+        {
             public static readonly ScreenType _BuiltInSideroll = new ScreenType(3, "Built-In Sideroll Insect Screen");
             //public static readonly ScreenType _ChainDriven = new ScreenType(6, "Chain Driven Screen");
             //public static readonly ScreenType _Fixed = new ScreenType(5, "Fixed Screen"); // using mesh 
@@ -1048,7 +1048,7 @@ namespace EnumerationTypeLayer
             public static readonly ScreenType _Freedom = new ScreenType(10, "Freedom Screen");
             public static readonly ScreenType _NoInsectScreen = new ScreenType(11, "No Insect Screen");
             public static readonly ScreenType _UnnecessaryForInsectScreen = new ScreenType(12, "Unnecessary for Insect Screen");
-            
+
 
             private ScreenType(int value, string displayName) : base(value, displayName) { }
         }
@@ -1067,8 +1067,8 @@ namespace EnumerationTypeLayer
 
         public class Freedom_ScreenSize : Enumeration<Freedom_ScreenSize, int>
         {
-            public static readonly Freedom_ScreenSize _80mm = new Freedom_ScreenSize (0, "80mm");
-            public static readonly Freedom_ScreenSize _100mm = new Freedom_ScreenSize (1, "100mm");
+            public static readonly Freedom_ScreenSize _80mm = new Freedom_ScreenSize(0, "80mm");
+            public static readonly Freedom_ScreenSize _100mm = new Freedom_ScreenSize(1, "100mm");
 
             public Freedom_ScreenSize(int value, string displayname) : base(value, displayname) { }
         }
@@ -1376,13 +1376,13 @@ namespace EnumerationTypeLayer
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
-        {
-            public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+        //public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
+        //{
+        //    public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
 
-            private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
+        //    private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
 
 
-        }
+        //}
     }
 }

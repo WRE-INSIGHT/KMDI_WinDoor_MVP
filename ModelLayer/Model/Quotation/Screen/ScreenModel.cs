@@ -587,6 +587,7 @@ namespace ModelLayer.Model.Quotation.Screen
         #region centerclosure
             LatchkitPrice = 1500,
             IntermediatePartPrice = 800,
+            Intermediate_X_,
 
             LatchkitTotal,
             IntermediatePartTotal,
@@ -1678,8 +1679,8 @@ namespace ModelLayer.Model.Quotation.Screen
             if (Screen_BaseColor == Base_Color._White ||
                 Screen_BaseColor == Base_Color._Ivory)
             {
-                pvc1067PriceLinearMeter = 300;
-                pvc0505PricePerLinearMeter = 420;
+                pvc1067PriceLinearMeter = 420;
+                pvc0505PricePerLinearMeter = 300;
 
                 pvc1067withreinforcementPriceLinearMeter = 410;
                 milledprofile6040PriceLinearMeter = 325;
@@ -1692,8 +1693,8 @@ namespace ModelLayer.Model.Quotation.Screen
             }
             else if (Screen_BaseColor == Base_Color._DarkBrown)
             {
-                pvc1067PriceLinearMeter = 495;
-                pvc0505PricePerLinearMeter = 735;
+                pvc1067PriceLinearMeter = 735;
+                pvc0505PricePerLinearMeter = 495;
 
                 pvc1067withreinforcementPriceLinearMeter = 660;
                 milledprofile6040PriceLinearMeter = 500;
@@ -5987,6 +5988,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     milled6052Price = ((Screen_6052MilledProfile * Screen_6052MilledProfileQty) / 1000m) * milled6052profilePricePerLinearMeter * AddOnsSpecialFactor;
                 }
+                if(Screen_LandCoverVisibility == true &&
+                    Screen_LandCover != 0 &&
+                    _screen_LandCoverQty != 0)
+                {
+                    landCoverPrice = ((Screen_LandCover * Screen_LandCoverQty) / 1000m) * landCoverPriceLinearMeter * Screen_Factor;
+                }
                 #endregion
                 #region Maxxy Screen
 
@@ -6018,7 +6025,28 @@ namespace ModelLayer.Model.Quotation.Screen
                 if (Screen_CenterClosureVisibility == true && Screen_CenterClosureVisibilityOption == true)
                 {
                     LatchkitTotal = (LatchkitPrice * Screen_LatchKitQty) * AddOnsSpecialFactor;
-                    IntermediatePartTotal = (IntermediatePartPrice * Screen_IntermediatePartQty) * AddOnsSpecialFactor;
+
+                    if(LatchkitTotal > 0)
+                    {
+                        if (Screen_Height <= 1499m)
+                        {
+                            Intermediate_X_ = 0;
+                        }
+                        else
+                        {
+                            Intermediate_X_ = ((Screen_Height - 1500m - 450m) / 1000m);
+                        }
+                    }
+                    else if(Screen_Height <= 1499m)
+                    {
+                        Intermediate_X_ = 0;
+                    }
+                    else
+                    {
+                        Intermediate_X_ = ((Screen_Height - 1500m - 450m) / 1000m);
+                    }
+                    IntermediatePartTotal = (IntermediatePartPrice * Intermediate_X_ * Screen_IntermediatePartQty) * AddOnsSpecialFactor;
+
                 }
 
                 #endregion
@@ -6057,7 +6085,8 @@ namespace ModelLayer.Model.Quotation.Screen
                               pvc1067withreinPrice +
                               milledprofile6040Price +
                               LatchkitTotal +
-                              IntermediatePartTotal;
+                              IntermediatePartTotal +
+                              landCoverPrice ;
 
                 TotalPrice = TotalRollUpCostingMaterials +
                              TotalPlisseCostingMaterials +
@@ -6066,8 +6095,9 @@ namespace ModelLayer.Model.Quotation.Screen
                              DandTCost +
                              SmallShopItemCost +
                              OverheadCost +
-                             ContingenciesCost +
-                             AddOnsPrice;
+                             ContingenciesCost;
+                             //+
+                             //AddOnsPrice;
 
                 if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._RD)
                 {
@@ -6108,7 +6138,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         #region Roll-up & Plisse AD RD                     
                         if (FromCellEndEdit != true)
                         {
-                            Screen_UnitPrice = (Math.Ceiling(TotalPrice) * Screen_Factor) * Screen_Set;
+                            Screen_UnitPrice = ((Math.Ceiling(TotalPrice) * Screen_Factor) + AddOnsPrice) * Screen_Set;                    
                         }
                         PriceIncreaseByPercentage();
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
@@ -6139,7 +6169,7 @@ namespace ModelLayer.Model.Quotation.Screen
                     #region built in 
                     if (FromCellEndEdit != true)
                     {
-                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m)) + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
+                        Screen_UnitPrice = ((Math.Round(built_in_SR_tAmount, 2) * (Screen_Factor + .6m) * 1.2m ) + milled1385Price + milled6052Price + LatchkitTotal + IntermediatePartTotal) * Screen_Set;
                     }
                     PriceIncreaseByPercentage();
                     Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
@@ -6290,6 +6320,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_Description = "No Insect Screen";
                 }
+                #region no&Unnecessary
+                Screen_Quantity = 0;
+                Screen_UnitPrice = 0;
+                DiscountPercentage = 0;
+                Screen_TotalAmount = 0;
+                Discount = 0;
+                Screen_NetPrice = 0;
+                #endregion
             }
             else
             {

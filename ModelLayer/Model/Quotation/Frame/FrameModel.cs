@@ -836,20 +836,20 @@ namespace ModelLayer.Model.Quotation.Frame
         public MilledFrame_ArticleNo Frame_MilledArtNo { get; set; }
         public MilledFrameReinf_ArticleNo Frame_MilledReinfArtNo { get; set; }
 
-        private Frame_MechJointArticleNo _frameMechJointArticleNo;
-        public Frame_MechJointArticleNo Frame_MechJointArticleNo
-        {
-            get
-            {
-                return _frameMechJointArticleNo;
-            }
+        //private Frame_MechJointArticleNo _frameMechJointArticleNo;
+        //public Frame_MechJointArticleNo Frame_MechJointArticleNo
+        //{
+        //    get
+        //    {
+        //        return _frameMechJointArticleNo;
+        //    }
 
-            set
-            {
-                _frameMechJointArticleNo = value;
-                NotifyPropertyChanged();
-            }
-        }
+        //    set
+        //    {
+        //        _frameMechJointArticleNo = value;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
 
         private bool _frameTrackProfileArtNoVisibility;
         public bool Frame_TrackProfileArtNoVisibility
@@ -1071,8 +1071,8 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
-        private MechnJointForFrame_ArticleNo _frameMechanicalJointConnector_Artno;
-        public MechnJointForFrame_ArticleNo Frame_MechanicalJointConnector_Artno
+        private Frame_MechJointArticleNo _frameMechanicalJointConnector_Artno;
+        public Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno
         {
             get
             {
@@ -1194,7 +1194,13 @@ namespace ModelLayer.Model.Quotation.Frame
             else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
                 botFrameDiff = 20;
-                Frame_MechanicalJointConnector_Artno = MechnJointForFrame_ArticleNo._9C52;
+                Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
+                Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
+            }
+
+            if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                Frame_MechanicalJointConnector_Artno = Frame_MechJointArticleNo._9C52;
                 Frame_SealingElement_ArticleNo = SealingElement_ArticleNo._9C97;
             }
 
@@ -1214,7 +1220,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 Frame_BotFrameVisible == true &&
                 Frame_BotFrameArtNo == BottomFrameTypes._6050)
             {
-                Frame_MechanicalJointConnectorQty += 2;
+                Frame_MechanicalJointConnectorQty = 2;
 
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
@@ -1244,7 +1250,7 @@ namespace ModelLayer.Model.Quotation.Frame
                      Frame_ArtNo == FrameProfile_ArticleNo._6052 &&
                      Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
-                Frame_MechanicalJointConnectorQty += 4;
+                Frame_MechanicalJointConnectorQty = 4;
 
                 if (Frame_If_InwardMotorizedSliding == true)
                 {
@@ -2301,17 +2307,17 @@ namespace ModelLayer.Model.Quotation.Frame
 
         }
 
-        public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)
-        {
-            if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
-            {
-                tbl_explosion.Rows.Add("Mechanical Joint Corner Connector " + Frame_MechJointArticleNo.DisplayName,
-                                                       4, "pc(s)",
-                                                       "",
-                                                       "Sash",
-                                                       "");
-            }
-        }
+        //public void Insert_ConnectorType_MaterialList(DataTable tbl_explosion)
+        //{
+        //    if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+        //    {
+        //        tbl_explosion.Rows.Add("Mechanical Joint Corner Connector " + Frame_MechJointArticleNo.DisplayName,
+        //                                               4, "pc(s)",
+        //                                               "",
+        //                                               "Sash",
+        //                                               "");
+        //    }
+        //}
 
         public void Insert_GS100EMTrackProfile2p6n3m_MaterialList(DataTable tbl_explosion)
         {
