@@ -393,35 +393,36 @@ namespace PresentationLayer.Presenter.UserControls
 
             _framePropertiesUC.ThisBinding(CreateBindingDictionary());
 
-            if (_frameModel.Frame_Type == Frame_Padding.Window)
+            if (_mainPresenter.ItemLoad == false)
             {
-                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                if (_frameModel.Frame_Type == Frame_Padding.Window)
                 {
-                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
+                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
+                    }
                 }
-                else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                else if (_frameModel.Frame_Type == Frame_Padding.Door)
                 {
-                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
+
+                    if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+
+                    }
+                    else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                    {
+                        _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
+                    }
+                    _frameModel.Frame_BotFrameVisible = true;
+                    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
+                    _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
                 }
             }
-            else if (_frameModel.Frame_Type == Frame_Padding.Door)
-            {
-
-                if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
-                {
-                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-
-                }
-                else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-                {
-                    _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
-                }
-                _frameModel.Frame_BotFrameVisible = true;
-                _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;
-                _framePropertiesUC.AddHT_PanelBody(constants.frame_botframeproperty_PanelHeight);
-            }
-
-
 
             curr_rbtnText = _frameModel.Frame_Type.ToString();
             prev_frameArtNo = _frameModel.Frame_ArtNo.ToString();
