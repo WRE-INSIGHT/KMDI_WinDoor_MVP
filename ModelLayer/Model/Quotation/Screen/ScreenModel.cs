@@ -5961,11 +5961,15 @@ namespace ModelLayer.Model.Quotation.Screen
                 #region roll up Screen
                 if (Screen_PVCVisibility == true &&
                     Screen_0505Width != 0 &&
-                    Screen_1067Height != 0 &&
-                    Screen_0505Qty != 0 &&
-                    Screen_1067Qty != 0)
+                    Screen_0505Qty != 0 
+                    )
                 {
                     pvc0505Price = ((Screen_0505Width * Screen_0505Qty) / 1000m) * pvc0505PricePerLinearMeter * Screen_Factor;
+                }
+                else if (Screen_PVCVisibility == true &&
+                        Screen_1067Height != 0 &&
+                        Screen_1067Qty != 0)
+                {
                     pvc1067Price = ((Screen_1067Height * Screen_1067Qty) / 1000m) * pvc1067PriceLinearMeter * Screen_Factor;
                 }
                 #endregion
