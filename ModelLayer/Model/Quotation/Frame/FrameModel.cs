@@ -314,7 +314,7 @@ namespace ModelLayer.Model.Quotation.Frame
                     pnl.Panel_Zoom = Frame_Zoom;
                     pnl.PanelImageRenderer_Zoom = FrameImageRenderer_Zoom;
                     if (/*Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
-                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
                     {
                         pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                         pnl.Imager_SetDimensionsToBind_using_ZoomPercentage();
@@ -341,7 +341,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 pnl.Panel_Zoom = Frame_Zoom;
                 if (/*Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
-                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                    Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
                 {
                     pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                 }
@@ -380,7 +380,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 if (pnl.Panel_ParentMultiPanelModel != null)
                 {
                     if (/*Frame_Zoom == 0.17f || Frame_Zoom == 0.26f ||
-                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                        Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
                     {
                         pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                     }
@@ -444,7 +444,7 @@ namespace ModelLayer.Model.Quotation.Frame
         {
             _frameDeduction = (int)(_frame_basicDeduction * Frame_Zoom);
             if (/*Frame_Zoom == 0.26f || Frame_Zoom == 0.17f ||
-                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
             {
                 if (Frame_Type == Frame_Padding.Window)
                 {
@@ -510,7 +510,7 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FrameImageRendererPadding_Default()
         {
             if (/*FrameImageRenderer_Zoom == 0.26f || FrameImageRenderer_Zoom == 0.17f ||
-                FrameImageRenderer_Zoom == 0.13f || FrameImageRenderer_Zoom == 0.10f*/Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                FrameImageRenderer_Zoom == 0.13f || FrameImageRenderer_Zoom == 0.10f*/Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
             {
                 if (_is_MPanel) // meaning MPanel
                 {
@@ -606,7 +606,7 @@ namespace ModelLayer.Model.Quotation.Frame
         private void FramePadding_Default()
         {
             if (/*Frame_Zoom == 0.26f || Frame_Zoom == 0.17f ||
-                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/ Frame_Zoom >= 0.05f && Frame_Zoom <= 0.26f)
+                Frame_Zoom == 0.13f || Frame_Zoom == 0.10f*/ Frame_Zoom >= 0.01f && Frame_Zoom <= 0.26f)
             {
                 if (_is_MPanel) // meaning MPanel
                 {

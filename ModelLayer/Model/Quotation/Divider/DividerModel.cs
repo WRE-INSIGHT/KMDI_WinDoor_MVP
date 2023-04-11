@@ -421,8 +421,8 @@ namespace ModelLayer.Model.Quotation.Divider
             
             if (Div_Type == DividerType.Mullion)
             {
-                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
-                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                if (/*DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f*/DivImageRenderer_Zoom >= 0.01f && DivImageRenderer_Zoom <= 0.26f)
                 {
                     DivImageRenderer_Height = ht + 10;
                     DivImageRenderer_Width = divsize;
@@ -469,8 +469,8 @@ namespace ModelLayer.Model.Quotation.Divider
             }
             else if (Div_Type == DividerType.Transom)
             {
-                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
-                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                if (/*DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f*/DivImageRenderer_Zoom >= 0.01f && DivImageRenderer_Zoom <= 0.26f)
                 {
                     DivImageRenderer_Width = wd + 10;
                     DivImageRenderer_Height = divsize;
@@ -534,8 +534,8 @@ namespace ModelLayer.Model.Quotation.Divider
 
             if (Div_Type == DividerType.Mullion)
             {
-                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
-                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                if (/*DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f*/DivImageRenderer_Zoom >= 0.01f && DivImageRenderer_Zoom <= 0.26f)
                 {
                     DivImageRenderer_Width = divsize;
                     DivImageRenderer_Height = ht + 10;
@@ -548,8 +548,8 @@ namespace ModelLayer.Model.Quotation.Divider
             }
             else if (Div_Type == DividerType.Transom)
             {
-                if (DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
-                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f)
+                if (/*DivImageRenderer_Zoom == 0.26f || DivImageRenderer_Zoom == 0.17f ||
+                    DivImageRenderer_Zoom == 0.13f || DivImageRenderer_Zoom == 0.10f*/DivImageRenderer_Zoom >= 0.01f && DivImageRenderer_Zoom <= 0.26f)
                 {
                     DivImageRenderer_Width = wd + 10;
                     DivImageRenderer_Height = divsize;
