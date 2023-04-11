@@ -1377,7 +1377,7 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
                 {
-                    Frame_ReinfWidth = Frame_ExplosionWidth - 10;
+                    Frame_ReinfWidth = _frameWidth - 10;
                     if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                         Frame_BotFrameArtNo == BottomFrameTypes._A166)
                     {
@@ -1386,7 +1386,7 @@ namespace ModelLayer.Model.Quotation.Frame
                 }
                 else if (Frame_ConnectionType == FrameConnectionType._Weldable)
                 {
-                    Frame_ReinfWidth = _frameWidth - 10;
+                    Frame_ReinfWidth = _frameWidth - (reinf_size * 2) - 10;
                     if (Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                          Frame_BotFrameArtNo == BottomFrameTypes._A166)
                     {
@@ -2092,9 +2092,14 @@ namespace ModelLayer.Model.Quotation.Frame
                                                   "Frame",
                                                   cutType);
 
-            if (Frame_If_InwardMotorizedSliding == true)
+            if (Frame_If_InwardMotorizedSliding == true || Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
             {
                 cutType = "";
+                MotorizrCutType = @"[  ]";
+            }
+            else if (Frame_BotFrameArtNo == BottomFrameTypes._6050)
+            {
+                cutType = @"\ |";
             }
 
             tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNo.ToString(),
@@ -2184,7 +2189,10 @@ namespace ModelLayer.Model.Quotation.Frame
                                    Frame_ExplosionWidth.ToString(),
                                    "Frame",
                                    cutType);
-
+            if (Frame_ConnectionType == FrameConnectionType._MechanicalJoint)
+            {
+                cutType = @"[  ]";
+            }
             tbl_explosion.Rows.Add("Frame Height " + Frame_ArtNoForPremi.ToString(),
                                    2, "pc(s)",
                                    Frame_ExplosionHeight,
