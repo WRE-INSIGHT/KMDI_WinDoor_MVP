@@ -7081,10 +7081,12 @@ namespace PresentationLayer.Presenter
                         else if (row_str.Contains("Div_CladdingSizeList:"))
                         {
                             div_CladdingSizeList = new Dictionary<int, int>();
+
                             string[] words = extractedValue_str.Split(';');
                             if (extractedValue_str.Contains("<"))
                             {                               
-                                foreach (string str in words)
+
+                               foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
                                     {

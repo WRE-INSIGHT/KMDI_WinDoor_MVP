@@ -7200,7 +7200,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                int handle_deduct = 0, glass_deduct = 0, glassAllowance_Deduct = 0, inward_motorized_deduction = 0, SashOverlap_additional = 0, TotalNumberOfPanel = 1;
+                int handle_deduct = 0,
+                    glass_deduct = 0,
+                    glassAllowance_Deduct = 0,
+                    inward_motorized_deduction = 0,
+                    SashOverlap_additional = 0,
+                    TotalNumberOfPanel = 1;
 
                 if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675 || Panel_SashReinfArtNo == SashReinf_ArticleNo._207)
                 {
@@ -7296,6 +7301,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         deduction_for_sashHT -= 18;
+                        handle_deduct = 65;
                     }
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)

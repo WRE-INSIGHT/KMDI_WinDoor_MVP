@@ -548,7 +548,7 @@ namespace PresentationLayer.Presenter
                     _screenModel.Screen_6052MilledProfileVisibility = true;
                     _screenModel.Screen_1067PVCboxVisibility = true;
                     _screenModel.Screen_6040MilledProfileVisibility = true;
-                    _screenModel.Screen_LandCoverVisibility = false;
+                    _screenModel.Screen_LandCoverVisibility = true;
                 }
                 else if (screenType == ScreenType._Freedom)
                 {
@@ -843,7 +843,7 @@ namespace PresentationLayer.Presenter
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel,this);
             UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
             _pnlAddOns.Controls.Add(addOnsProp);
-            addOnsProp.Dock = DockStyle.Top;
+            addOnsProp.Dock = DockStyle.Fill;
             addOnsProp.BringToFront();
         }
 
