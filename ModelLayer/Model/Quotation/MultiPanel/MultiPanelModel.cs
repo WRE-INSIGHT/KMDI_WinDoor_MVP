@@ -1292,8 +1292,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 divSize = 16;
             }
 
-            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
-                MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+            if (/*MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f*/MPanel_Zoom >= 0.01f && MPanel_Zoom <= 0.26f)
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {
@@ -1381,8 +1381,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 div_count = MPanel_ParentModel.MPanel_Divisions,
                 wd = 0, ht = 0;
 
-            if (MPanelImageRenderer_Zoom == 0.26f || MPanelImageRenderer_Zoom == 0.17f ||
-                MPanelImageRenderer_Zoom == 0.13f || MPanelImageRenderer_Zoom == 0.10f)
+            if (/*MPanelImageRenderer_Zoom == 0.26f || MPanelImageRenderer_Zoom == 0.17f ||
+                MPanelImageRenderer_Zoom == 0.13f || MPanelImageRenderer_Zoom == 0.10f*/MPanelImageRenderer_Zoom >= 0.01f && MPanelImageRenderer_Zoom <= 0.26f)
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {
@@ -1582,7 +1582,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             int wd = 0, ht = 0, wd_deduct = 0, ht_deduct = 0;
             if (MPanel_ParentModel == null)
             {
-                if (/*MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)*/MPanel_Zoom >= 0.05f && MPanel_Zoom <= 0.26f)
+                if (/*MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f || MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)*/MPanel_Zoom >= 0.01f && MPanel_Zoom <= 0.26f)
                 {
                     wd_deduct = 20;
                     ht_deduct = 20;
@@ -1668,8 +1668,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IPanelModel pnl in MPanelLst_Panel)
             {
                 pnl.Panel_Zoom = MPanel_Zoom;
-                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
-                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                if (/*MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f*/MPanel_Zoom >= 0.01f && MPanel_Zoom <= 0.26f)
                 {
                     pnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                     if (MPanel_Type == "Transom")
@@ -1705,8 +1705,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             foreach (IMultiPanelModel mpnl in MPanelLst_MultiPanel)
             {
                 mpnl.MPanel_Zoom = MPanel_Zoom;
-                if (MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
-                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+                if (/*MPanel_Zoom == 0.17f || MPanel_Zoom == 0.26f ||
+                    MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f*/MPanel_Zoom >= 0.01f && MPanel_Zoom <= 0.26f)
                 {
                     mpnl.SetDimensionsToBind_usingZoom_below26_with_DividerMovement();
                 }
@@ -2262,6 +2262,7 @@ namespace ModelLayer.Model.Quotation.MultiPanel
                 }
             }
         }
+
         public void Fit_DisplayDimensions()
         {
             int totalCount_objs_to_accomodate = 0;
@@ -4472,8 +4473,8 @@ namespace ModelLayer.Model.Quotation.MultiPanel
             {
                 divSize = 16;
             }
-            if (MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
-                MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f)
+            if (/*MPanel_Zoom == 0.26f || MPanel_Zoom == 0.17f ||
+                MPanel_Zoom == 0.13f || MPanel_Zoom == 0.10f*/MPanel_Zoom >= 0.01f && MPanel_Zoom <= 0.26f)
             {
                 if (MPanel_ParentModel.MPanel_Type == "Mullion")
                 {

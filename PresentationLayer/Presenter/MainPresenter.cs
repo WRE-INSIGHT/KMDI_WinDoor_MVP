@@ -6775,6 +6775,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_divider)
                     {
+                  
                         #region Load for Divider
                         if (row_str.Contains("Div_ID:"))
                         {
@@ -7083,19 +7084,20 @@ namespace PresentationLayer.Presenter
 
                             string[] words = extractedValue_str.Split(';');
                             if (extractedValue_str.Contains("<"))
-                            {
-                                foreach (string str in words)
+                            {                               
+
+                               foreach (string str in words)
                                 {
                                     if (str.Trim() != string.Empty)
                                     {
                                         int key = Convert.ToInt32(str.Split('<', ',')[1]);
-                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);
+                                        int value = Convert.ToInt32(str.Split(',', '>')[1]);                                       
                                         div_CladdingSizeList.Add(key, value);
                                     }
 
                                 }
-                            }
-
+                            }                           
+                                                      
                             //div_CladdingSizeList.Reverse();
                         }
                         else if (row_str.Contains("Div_CladdingCount:"))
@@ -7412,9 +7414,11 @@ namespace PresentationLayer.Presenter
                             inside_divider = false;
                         }
                         #endregion
+                        
                     }
                     else if (inside_screen)
                     {
+                        
                         #region Load for Screen
 
 
