@@ -44,6 +44,19 @@ namespace PresentationLayer.Presenter
         private string _rdlcReportCompilerOutofTownExpenses;
         private string[] province;
         private string archi;
+        private bool _callFrmRDLCCompiler;
+
+        public bool CallFrmRDLCCompiler
+        {
+            get
+            {
+                return _callFrmRDLCCompiler;
+            }
+            set
+            {
+                _callFrmRDLCCompiler = value;               
+            }
+        }
 
         public string RDLCReportCompilerOutOfTownExpenses
         {
@@ -67,6 +80,9 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
+
+   
+        
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -402,6 +418,7 @@ namespace PresentationLayer.Presenter
             Console.WriteLine(" Windoor Total Discounted Price: " + windoorpricecheck.ToString());
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
+
             if (RenderPDFAtBackGround != true)
             {
                 printQuote.GetPrintQuoteView().ShowPrintQuoteView();
@@ -498,7 +515,6 @@ namespace PresentationLayer.Presenter
             if(outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
             total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage),2);
 
-
             //Console.WriteLine(archi + " " + outOfTownCharges.ToString());
             Console.WriteLine(archi + " "  + OutOfTownCharges.ToString());
             Console.WriteLine("This is total DiscountedPrice w/o Vat " + Math.Round((total_DiscountedPrice_wo_VAT),2));
@@ -509,7 +525,7 @@ namespace PresentationLayer.Presenter
             //Console.WriteLine("Screen Average Discount.: " + ScreenDiscountAverage);
             //Console.WriteLine("Screen & Windoor Discount Average.: " + screen_Windoor_DiscountAverage);
             //Console.WriteLine("");
-            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.ToString());
+            //Console.WriteLine("Windoor list count total of: " + windoorTotalListCount.T oString());
             //Console.WriteLine("Windoor total list price: " + windoorTotalListPrice.ToString());
             //Console.WriteLine("");
             //Console.WriteLine("screen total list count: " + ScreenTotalListCount.ToString());
@@ -523,26 +539,112 @@ namespace PresentationLayer.Presenter
                                                 ScreenTotalListPrice,
                                                 screen_Windoor_DiscountAverage
                                                 );
-
-
-           
+          
             _mainPresenter.printStatus = "ContractSummary";
-
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dtqoute.dtContractSummary.DefaultView;
-            if (RenderPDFAtBackGround != true)
-            {                    
-                printQuote.GetPrintQuoteView().ShowPrintQuoteView();              
-            }
-            else
+            if (CallFrmRDLCCompiler != true)
             {
-                printQuote.EventLoad();
-                printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
-                printQuote.PrintRDLCReport();
+                if (RenderPDFAtBackGround != true)
+                {
+                    printQuote.GetPrintQuoteView().ShowPrintQuoteView();
+                    printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = OutOfTownCharges.ToString("N2");
+                }
+                else
+                {
+                    printQuote.EventLoad();
+                    printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                    printQuote.PrintRDLCReport();
+                }
             }
             clearingOperation();
         }
 
+        public void ContractSummaryComputation()
+        {
+            DSQuotation _dtqoute = new DSQuotation();
+            try
+            {
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    var price_x_quantity = wdm.WD_price * wdm.WD_quantity;
+                    windoorTotalListPrice = windoorTotalListPrice + price_x_quantity;
+                    if (wdm.WD_quantity > 1)
+                    {
+                        for (int i = 1; i <= wdm.WD_quantity; i++)
+                        {
+                            windoortotaldiscount = windoortotaldiscount + wdm.WD_discount;
+                        }
+                    }
+                    else
+                    {
+                        windoortotaldiscount = windoortotaldiscount + wdm.WD_discount;
+                    }
+
+                }
+                windoorTotalListCount = _quotationModel.Lst_Windoor.Sum(m => m.WD_quantity);
+                windoorDiscountAverage = windoortotaldiscount / _quotationModel.Lst_Windoor.Sum(y => y.WD_quantity) / 100;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in windoormodel lst_windoor " + this + " " + ex.Message);
+                divisor = 1;
+            }
+
+            try
+            {
+                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
+
+                foreach (var item in _mainPresenter.Screen_List)
+                {
+                    //screen_priceXquantiy = item.Screen_UnitPrice * item.Screen_Quantity;
+                    //ScreenTotalListPrice = ScreenTotalListPrice + screen_priceXquantiy;
+                    if (item.Screen_Quantity > 1)
+                    {
+                        for (int i = 1; i <= item.Screen_Quantity; i++)
+                        {
+                            screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                        }
+                    }
+                    else
+                    {
+                        screentotaldiscount = screentotaldiscount + item.Screen_Discount;
+                    }
+                }
+
+                ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in screenmodel " + this + " " + ex.Message);
+                divisor = 1;
+            }
+
+            screen_Windoor_DiscountAverage = (windoorDiscountAverage + ScreenDiscountAverage) / divisor;
+            province = _mainPresenter.projectAddress.Split(',');
+            archi = province[province.Length - 1].Trim();
+
+            if (archi == "Luzon")
+            {
+                outOfTownChargesMultiplier = 0.025m;
+            }
+            else if (archi == "Visayas")
+            {
+                outOfTownChargesMultiplier = 0.04m;
+            }
+            else if (archi == "Mindanao")
+            {
+                outOfTownChargesMultiplier = 0.05m;
+            }
+
+            outOfTownCharges = Math.Round(((windoorTotalListPrice + ScreenTotalListPrice) * outOfTownChargesMultiplier), 2);
+            if (outOfTownCharges <= 50000) { outOfTownCharges = 50000; }
+            total_DiscountedPrice_wo_VAT = Math.Round((windoorTotalListPrice + ScreenTotalListPrice) * (1 - screen_Windoor_DiscountAverage), 2);
+     
+            clearingOperation();
+        }
         private void clearingOperation()
         {
             windoorTotalListCount = 0;
@@ -556,7 +658,7 @@ namespace PresentationLayer.Presenter
             screen_Windoor_DiscountAverage = 0;
             screen_priceXquantiy = 0;
             screenUnitPriceTotal = 0;
-            outOfTownCharges = 0;
+            //outOfTownCharges = 0;
 
         }
 

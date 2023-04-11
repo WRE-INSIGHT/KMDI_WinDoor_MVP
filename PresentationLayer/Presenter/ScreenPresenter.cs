@@ -39,6 +39,7 @@ namespace PresentationLayer.Presenter
         private bool sortAscending = true;
         private decimal screenDiscountAverage;
         private decimal Screen_priceXquantiy;
+        private string Screen_DimensionFormat;
 
 
 
@@ -547,7 +548,7 @@ namespace PresentationLayer.Presenter
                     _screenModel.Screen_6052MilledProfileVisibility = true;
                     _screenModel.Screen_1067PVCboxVisibility = true;
                     _screenModel.Screen_6040MilledProfileVisibility = true;
-                    _screenModel.Screen_LandCoverVisibility = false;
+                    _screenModel.Screen_LandCoverVisibility = true;
                 }
                 else if (screenType == ScreenType._Freedom)
                 {
@@ -764,11 +765,18 @@ namespace PresentationLayer.Presenter
         }
         public async void GetProjectFactor()
         {
-            string[] province = _mainPresenter.projectAddress.Split(',');
-            decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
-
-            _screenModel.Screen_AddOnsSpecialFactor = value;
-            Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+            try
+            {
+                string[] province = _mainPresenter.projectAddress.Split(',');
+                decimal value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+                _screenModel.Screen_AddOnsSpecialFactor = value;
+                Console.WriteLine(_screenModel.Screen_AddOnsSpecialFactor.ToString() + " Project Factor Based on Location ");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this + " " + ex.Message );
+            }
+                     
 
         }
         private void _screenView_ScreenViewLoadEventRaised(object sender, System.EventArgs e)
@@ -835,7 +843,7 @@ namespace PresentationLayer.Presenter
             IScreenAddOnPropertiesUCPresenter addOnsPropUCP = _screenAddOnPropertiesUCPresenter.GetNewInstance(_unityC, _mainPresenter, _screenModel,this);
             UserControl addOnsProp = (UserControl)addOnsPropUCP.GetScreenAddOnPropertiesUCView();
             _pnlAddOns.Controls.Add(addOnsProp);
-            addOnsProp.Dock = DockStyle.Top;
+            addOnsProp.Dock = DockStyle.Fill;
             addOnsProp.BringToFront();
         }
 
@@ -852,10 +860,20 @@ namespace PresentationLayer.Presenter
                     setDesc = " ";
                 }
 
+                if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                {
+                    Screen_DimensionFormat = " - ";
+                    item.Screen_Quantity = 0;
+                }
+                else
+                {
+                    Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                }
+
                 _screenDT.Rows.Add(
                                     item.Screen_ItemNumber,//Convert.ToString(item.Screen_ItemNumber),
                                     item.Screen_Description + setDesc,
-                                    item.Screen_Width + " x " + item.Screen_Height,
+                                    Screen_DimensionFormat,
                                     item.Screen_WindoorID,
                                     item.Screen_UnitPrice.ToString("n"),
                                     item.Screen_Quantity,
@@ -921,10 +939,19 @@ namespace PresentationLayer.Presenter
                 setDesc = " ";
             }
 
+            if (_screenModel.Screen_Types == ScreenType._UnnecessaryForInsectScreen || _screenModel.Screen_Types == ScreenType._NoInsectScreen)
+            {
+                Screen_DimensionFormat = " - ";
+            }
+            else
+            {
+                Screen_DimensionFormat = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
+            }
+
 
             newRow["Item No."] = _screenModel.Screen_ItemNumber;
             newRow["Type of Insect Screen"] = _screenModel.Screen_Description  + setDesc + centerClosureDesc;
-            newRow["Dimension (mm) \n per panel"] = _screenModel.Screen_Width + " x " + _screenModel.Screen_Height;
+            newRow["Dimension (mm) \n per panel"] = Screen_DimensionFormat;
             newRow["Window/Door I.D."] = _screenModel.Screen_WindoorID;
             newRow["Price"] = _screenModel.Screen_UnitPrice.ToString("n");
             newRow["Quantity"] = _screenModel.Screen_Quantity;
@@ -933,7 +960,6 @@ namespace PresentationLayer.Presenter
             newRow["ScreenType"] = _screenModel.Screen_Types;
             newRow["Factor"] = _screenModel.Screen_Factor;
             
-
 
             IScreenModel scr = _screenService.AddScreenModel(_screenModel.Screen_ItemNumber,
                                                              _screenModel.Screen_Width,

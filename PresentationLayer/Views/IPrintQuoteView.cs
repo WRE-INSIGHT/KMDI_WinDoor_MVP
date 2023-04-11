@@ -22,6 +22,7 @@ namespace PresentationLayer.Views
         event EventHandler btnRefreshClickEventRaised;
         event EventHandler PrintQuoteViewLoadEventRaised;
         event EventHandler SelectedIndexChangeEventRaised;
+        event EventHandler txtoftexpensesKeyPressEventRaised;
 
         ReportViewer GetReportViewer();
         BindingSource GetBindingSource();
