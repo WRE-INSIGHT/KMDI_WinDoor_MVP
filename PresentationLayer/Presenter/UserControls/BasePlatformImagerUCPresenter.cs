@@ -26,6 +26,8 @@ namespace PresentationLayer.Presenter.UserControls
 
         IWindoorModel _windoorModel;
         IMainPresenter _mainPresenter;
+        Font dmnsion_font_wd;
+        Font dmnsion_font_ht;
 
         CommonFunctions _commonfunc = new CommonFunctions();
 
@@ -1058,8 +1060,17 @@ namespace PresentationLayer.Presenter.UserControls
             Pen redP = new Pen(Color.Red);
             redP.Width = 3.5f;
 
-            Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-            Font dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            if(_windoorModel.WD_width >= 10000)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
+            }
+            else
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            }
+             
 
             int total_frame = _windoorModel.lst_frame.Count();
             int total_panel = 0, total_mpanel = 0;
@@ -1411,6 +1422,7 @@ namespace PresentationLayer.Presenter.UserControls
                 tenPercentAdditional = 8;
                 gfont_size = 43;
             }
+            
           
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
