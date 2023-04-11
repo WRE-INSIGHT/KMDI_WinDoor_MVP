@@ -51,18 +51,22 @@
             this.nud_LandCover.Name = "nud_LandCover";
             this.nud_LandCover.Size = new System.Drawing.Size(68, 20);
             this.nud_LandCover.TabIndex = 1;
+            this.nud_LandCover.ValueChanged += new System.EventHandler(this.nud_LandCover_ValueChanged);
+            this.nud_LandCover.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_LandCover_KeyDown);
             // 
             // nud_LandCoverQty
             // 
-            this.nud_LandCoverQty.Location = new System.Drawing.Point(116, 26);
+            this.nud_LandCoverQty.Location = new System.Drawing.Point(128, 26);
             this.nud_LandCoverQty.Name = "nud_LandCoverQty";
             this.nud_LandCoverQty.Size = new System.Drawing.Size(62, 20);
             this.nud_LandCoverQty.TabIndex = 29;
+            this.nud_LandCoverQty.ValueChanged += new System.EventHandler(this.nud_LandCoverQty_ValueChanged);
+            this.nud_LandCoverQty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nud_LandCoverQty_KeyDown);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(85, 28);
+            this.label2.Location = new System.Drawing.Point(97, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 30;

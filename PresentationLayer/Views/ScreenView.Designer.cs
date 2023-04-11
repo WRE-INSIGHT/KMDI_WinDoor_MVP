@@ -106,9 +106,9 @@
             this.panel4.Controls.Add(this.dgv_Screen);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(227, 27);
+            this.panel4.Location = new System.Drawing.Point(235, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(806, 547);
+            this.panel4.Size = new System.Drawing.Size(798, 547);
             this.panel4.TabIndex = 41;
             // 
             // dgv_Screen
@@ -121,7 +121,7 @@
             this.dgv_Screen.Location = new System.Drawing.Point(0, 37);
             this.dgv_Screen.Name = "dgv_Screen";
             this.dgv_Screen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Screen.Size = new System.Drawing.Size(806, 510);
+            this.dgv_Screen.Size = new System.Drawing.Size(798, 510);
             this.dgv_Screen.TabIndex = 30;
             this.dgv_Screen.TabStop = false;
             this.dgv_Screen.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Screen_CellClick);
@@ -160,30 +160,31 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(806, 37);
-            this.panel3.TabIndex = 29;
+            this.panel3.Size = new System.Drawing.Size(798, 37);
+            this.panel3.TabIndex = 2;
             // 
             // txt_ItemNum
             // 
-            this.txt_ItemNum.Location = new System.Drawing.Point(425, 6);
+            this.txt_ItemNum.Location = new System.Drawing.Point(62, 8);
             this.txt_ItemNum.Name = "txt_ItemNum";
-            this.txt_ItemNum.Size = new System.Drawing.Size(100, 22);
-            this.txt_ItemNum.TabIndex = 10;
+            this.txt_ItemNum.Size = new System.Drawing.Size(38, 22);
+            this.txt_ItemNum.TabIndex = 0;
             this.txt_ItemNum.TextChanged += new System.EventHandler(this.txt_ItemNum_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 12);
+            this.label2.Location = new System.Drawing.Point(6, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 41;
-            this.label2.Text = "Item Number";
+            this.label2.Text = "Item No.";
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(664, 11);
+            this.label1.Location = new System.Drawing.Point(656, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 40;
@@ -191,19 +192,20 @@
             // 
             // nud_Discount
             // 
-            this.nud_Discount.Location = new System.Drawing.Point(735, 6);
+            this.nud_Discount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nud_Discount.Location = new System.Drawing.Point(727, 8);
             this.nud_Discount.Name = "nud_Discount";
             this.nud_Discount.Size = new System.Drawing.Size(59, 22);
-            this.nud_Discount.TabIndex = 12;
+            this.nud_Discount.TabIndex = 4;
             this.nud_Discount.ValueChanged += new System.EventHandler(this.nud_Discount_ValueChanged);
             this.nud_Discount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Discount_KeyPress);
             // 
             // nud_Quantity
             // 
-            this.nud_Quantity.Location = new System.Drawing.Point(600, 6);
+            this.nud_Quantity.Location = new System.Drawing.Point(509, 8);
             this.nud_Quantity.Name = "nud_Quantity";
             this.nud_Quantity.Size = new System.Drawing.Size(50, 22);
-            this.nud_Quantity.TabIndex = 11;
+            this.nud_Quantity.TabIndex = 3;
             this.nud_Quantity.Value = new decimal(new int[] {
             1,
             0,
@@ -215,7 +217,7 @@
             // lbl_Quantity
             // 
             this.lbl_Quantity.AutoSize = true;
-            this.lbl_Quantity.Location = new System.Drawing.Point(543, 11);
+            this.lbl_Quantity.Location = new System.Drawing.Point(452, 12);
             this.lbl_Quantity.Name = "lbl_Quantity";
             this.lbl_Quantity.Size = new System.Drawing.Size(51, 13);
             this.lbl_Quantity.TabIndex = 38;
@@ -223,16 +225,16 @@
             // 
             // txt_windoorID
             // 
-            this.txt_windoorID.Location = new System.Drawing.Point(240, 6);
+            this.txt_windoorID.Location = new System.Drawing.Point(218, 8);
             this.txt_windoorID.Name = "txt_windoorID";
             this.txt_windoorID.Size = new System.Drawing.Size(100, 22);
-            this.txt_windoorID.TabIndex = 9;
+            this.txt_windoorID.TabIndex = 1;
             this.txt_windoorID.TextChanged += new System.EventHandler(this.txt_windoorID_TextChanged);
             // 
             // lbl_WindoorID
             // 
             this.lbl_WindoorID.AutoSize = true;
-            this.lbl_WindoorID.Location = new System.Drawing.Point(145, 11);
+            this.lbl_WindoorID.Location = new System.Drawing.Point(117, 12);
             this.lbl_WindoorID.Name = "lbl_WindoorID";
             this.lbl_WindoorID.Size = new System.Drawing.Size(95, 13);
             this.lbl_WindoorID.TabIndex = 35;
@@ -240,10 +242,10 @@
             // 
             // nud_Sets
             // 
-            this.nud_Sets.Location = new System.Drawing.Point(78, 6);
+            this.nud_Sets.Location = new System.Drawing.Point(385, 8);
             this.nud_Sets.Name = "nud_Sets";
             this.nud_Sets.Size = new System.Drawing.Size(50, 22);
-            this.nud_Sets.TabIndex = 8;
+            this.nud_Sets.TabIndex = 2;
             this.nud_Sets.Value = new decimal(new int[] {
             1,
             0,
@@ -254,7 +256,7 @@
             // lbl_sets
             // 
             this.lbl_sets.AutoSize = true;
-            this.lbl_sets.Location = new System.Drawing.Point(23, 11);
+            this.lbl_sets.Location = new System.Drawing.Point(330, 12);
             this.lbl_sets.Name = "lbl_sets";
             this.lbl_sets.Size = new System.Drawing.Size(49, 13);
             this.lbl_sets.TabIndex = 29;
@@ -267,16 +269,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 547);
+            this.panel1.Size = new System.Drawing.Size(235, 547);
             this.panel1.TabIndex = 31;
             // 
             // pnl_addOns
             // 
-            this.pnl_addOns.BackColor = System.Drawing.Color.Transparent;
+            this.pnl_addOns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnl_addOns.BackColor = System.Drawing.Color.Silver;
             this.pnl_addOns.Location = new System.Drawing.Point(0, 315);
             this.pnl_addOns.Name = "pnl_addOns";
-            this.pnl_addOns.Size = new System.Drawing.Size(227, 232);
-            this.pnl_addOns.TabIndex = 28;
+            this.pnl_addOns.Size = new System.Drawing.Size(235, 232);
+            this.pnl_addOns.TabIndex = 1;
             // 
             // panel5
             // 
@@ -304,8 +308,8 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(227, 547);
-            this.panel5.TabIndex = 67;
+            this.panel5.Size = new System.Drawing.Size(235, 547);
+            this.panel5.TabIndex = 0;
             // 
             // cmb_freedomSize
             // 
@@ -313,7 +317,7 @@
             this.cmb_freedomSize.Location = new System.Drawing.Point(143, 111);
             this.cmb_freedomSize.Name = "cmb_freedomSize";
             this.cmb_freedomSize.Size = new System.Drawing.Size(74, 21);
-            this.cmb_freedomSize.TabIndex = 0;
+            this.cmb_freedomSize.TabIndex = 4;
             this.cmb_freedomSize.SelectedValueChanged += new System.EventHandler(this.cmb_freedomSize_SelectedValueChanged);
             // 
             // lbl_plissedRd
@@ -330,7 +334,7 @@
             this.nud_plissedRd.Location = new System.Drawing.Point(87, 110);
             this.nud_plissedRd.Name = "nud_plissedRd";
             this.nud_plissedRd.Size = new System.Drawing.Size(50, 22);
-            this.nud_plissedRd.TabIndex = 39;
+            this.nud_plissedRd.TabIndex = 3;
             this.nud_plissedRd.Value = new decimal(new int[] {
             1,
             0,
@@ -353,7 +357,7 @@
             this.cmb_PlisséType.Location = new System.Drawing.Point(87, 89);
             this.cmb_PlisséType.Name = "cmb_PlisséType";
             this.cmb_PlisséType.Size = new System.Drawing.Size(130, 21);
-            this.cmb_PlisséType.TabIndex = 83;
+            this.cmb_PlisséType.TabIndex = 2;
             this.cmb_PlisséType.SelectedIndexChanged += new System.EventHandler(this.cmb_PlisséType_SelectedIndexChanged);
             // 
             // rdBtn_Door
@@ -363,7 +367,6 @@
             this.rdBtn_Door.Name = "rdBtn_Door";
             this.rdBtn_Door.Size = new System.Drawing.Size(51, 17);
             this.rdBtn_Door.TabIndex = 5;
-            this.rdBtn_Door.TabStop = true;
             this.rdBtn_Door.Text = "Door";
             this.rdBtn_Door.UseVisualStyleBackColor = true;
             this.rdBtn_Door.CheckedChanged += new System.EventHandler(this.rdBtn_Door_CheckedChanged);
@@ -375,7 +378,6 @@
             this.rdBtn_Window.Name = "rdBtn_Window";
             this.rdBtn_Window.Size = new System.Drawing.Size(69, 17);
             this.rdBtn_Window.TabIndex = 4;
-            this.rdBtn_Window.TabStop = true;
             this.rdBtn_Window.Text = "Window";
             this.rdBtn_Window.UseVisualStyleBackColor = true;
             this.rdBtn_Window.CheckedChanged += new System.EventHandler(this.rdBtn_Window_CheckedChanged);
@@ -385,7 +387,7 @@
             this.btn_add.Location = new System.Drawing.Point(57, 271);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(98, 26);
-            this.btn_add.TabIndex = 13;
+            this.btn_add.TabIndex = 9;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -405,7 +407,7 @@
             this.cmb_baseColor.Location = new System.Drawing.Point(87, 37);
             this.cmb_baseColor.Name = "cmb_baseColor";
             this.cmb_baseColor.Size = new System.Drawing.Size(130, 21);
-            this.cmb_baseColor.TabIndex = 6;
+            this.cmb_baseColor.TabIndex = 0;
             this.cmb_baseColor.SelectedValueChanged += new System.EventHandler(this.cmb_baseColor_SelectedValueChanged);
             // 
             // nud_Factor
@@ -413,7 +415,7 @@
             this.nud_Factor.Location = new System.Drawing.Point(87, 190);
             this.nud_Factor.Name = "nud_Factor";
             this.nud_Factor.Size = new System.Drawing.Size(130, 22);
-            this.nud_Factor.TabIndex = 3;
+            this.nud_Factor.TabIndex = 7;
             this.nud_Factor.ValueChanged += new System.EventHandler(this.nud_Factor_ValueChanged);
             this.nud_Factor.Enter += new System.EventHandler(this.nud_Factor_Enter);
             // 
@@ -432,7 +434,8 @@
             this.nud_TotalPrice.Location = new System.Drawing.Point(87, 230);
             this.nud_TotalPrice.Name = "nud_TotalPrice";
             this.nud_TotalPrice.Size = new System.Drawing.Size(130, 22);
-            this.nud_TotalPrice.TabIndex = 76;
+            this.nud_TotalPrice.TabIndex = 8;
+            this.nud_TotalPrice.TabStop = false;
             // 
             // lbl_whitePrice
             // 
@@ -458,7 +461,7 @@
             this.cmb_ScreenType.Location = new System.Drawing.Point(87, 62);
             this.cmb_ScreenType.Name = "cmb_ScreenType";
             this.cmb_ScreenType.Size = new System.Drawing.Size(130, 21);
-            this.cmb_ScreenType.TabIndex = 7;
+            this.cmb_ScreenType.TabIndex = 1;
             this.cmb_ScreenType.SelectedValueChanged += new System.EventHandler(this.cmb_ScreenType_SelectedValueChanged);
             // 
             // nud_Height
@@ -466,7 +469,7 @@
             this.nud_Height.Location = new System.Drawing.Point(87, 162);
             this.nud_Height.Name = "nud_Height";
             this.nud_Height.Size = new System.Drawing.Size(130, 22);
-            this.nud_Height.TabIndex = 2;
+            this.nud_Height.TabIndex = 6;
             this.nud_Height.ValueChanged += new System.EventHandler(this.nud_Height_ValueChanged);
             this.nud_Height.Enter += new System.EventHandler(this.nud_Height_Enter);
             this.nud_Height.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Height_KeyPress);
@@ -476,7 +479,7 @@
             this.nud_Width.Location = new System.Drawing.Point(87, 134);
             this.nud_Width.Name = "nud_Width";
             this.nud_Width.Size = new System.Drawing.Size(130, 22);
-            this.nud_Width.TabIndex = 0;
+            this.nud_Width.TabIndex = 5;
             this.nud_Width.ValueChanged += new System.EventHandler(this.nud_Width_ValueChanged);
             this.nud_Width.Enter += new System.EventHandler(this.nud_Width_Enter);
             this.nud_Width.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_Width_KeyPress);

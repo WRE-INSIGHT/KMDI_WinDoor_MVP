@@ -14,6 +14,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
+        private IScreenPresenter _screenPresenter;
 
         public SP_LandCoverPropertyUCPresenter(ISP_LandCoverPropertyUC LandCoverPropertyUC)
         {
@@ -25,6 +26,53 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         private void SubscribeToEventSetup()
         {
             _LandCoverPropertyUC.SPLandCoverPropertyUCLoadEventRaised += _LandCoverPropertyUC_SPLandCoverPropertyUCLoadEventRaised;
+            _LandCoverPropertyUC.nudLandCoverValueChangedEventRaised += _LandCoverPropertyUC_nudLandCoverValueChangedEventRaised;
+            _LandCoverPropertyUC.nudLandCoverQtyValueChangedEventRaised += _LandCoverPropertyUC_nudLandCoverQtyValueChangedEventRaised;
+        }
+
+        private void _LandCoverPropertyUC_nudLandCoverQtyValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if(_LandCoverPropertyUC.GetNudLandCoverQty().Text == "" || _LandCoverPropertyUC.GetNudLandCoverQty().Text == " ")
+                {
+                    _screenModel.Screen_LandCoverQty = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_LandCoverQty = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("error in " + this + ex.Message);
+                _screenModel.Screen_LandCoverQty = 0;
+            }
+        }
+
+        private void _LandCoverPropertyUC_nudLandCoverValueChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_LandCoverPropertyUC.GetNudLandCover().Text == "" || _LandCoverPropertyUC.GetNudLandCover().Text == " ")
+                {
+                    _screenModel.Screen_LandCover = 0;
+                    _screenPresenter.GetCurrentAmount();
+                }
+                else
+                {
+                    _screenModel.Screen_LandCover = (int)((NumericUpDown)sender).Value;
+                    _screenPresenter.GetCurrentAmount();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error in " + this + ex.Message);
+                _screenModel.Screen_LandCover = 0;
+            }
+           
         }
 
         private void _LandCoverPropertyUC_SPLandCoverPropertyUCLoadEventRaised(object sender, EventArgs e)
@@ -38,8 +86,9 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
         }
 
         public ISP_LandCoverPropertyUCPresenter CreateNewInstance(IUnityContainer unityC,
-                                                                                          IMainPresenter mainPresenter,
-                                                                                          IScreenModel screenModel)
+                                                                  IMainPresenter mainPresenter,
+                                                                  IScreenModel screenModel,
+                                                                  IScreenPresenter screenPresenter)
         {
             unityC
                 .RegisterType<ISP_LandCoverPropertyUC, SP_LandCoverPropertyUC>()
@@ -48,6 +97,7 @@ namespace PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPrese
             LandCover._unityC = unityC;
             LandCover._mainPresenter = mainPresenter;
             LandCover._screenModel = screenModel;
+            LandCover._screenPresenter = screenPresenter;
 
 
 
