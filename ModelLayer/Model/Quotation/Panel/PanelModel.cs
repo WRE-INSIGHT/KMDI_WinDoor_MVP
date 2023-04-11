@@ -1793,14 +1793,14 @@ namespace ModelLayer.Model.Quotation.Panel
                 _panelMotorizedOptionVisibility = value;
                 if (_panelMotorizedOptionVisibility == true)
                 {
-                    if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
-                    {
-                        Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-                    }
-                    else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-                    {
-                        Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
-                    }
+                    //if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+                    //{
+                    //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+                    //}
+                    //else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
+                    //{
+                    //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
+                    //}
                     //if (Panel_ParentMultiPanelModel != null)
                     //{
                     //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
@@ -1819,25 +1819,25 @@ namespace ModelLayer.Model.Quotation.Panel
                 {
                     if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                     {
-                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                        {
-                            Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
-                        }
-                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
-                        }
+                        //if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        //{
+                        //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7502;
+                        //}
+                        //else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        //{
+                        //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
+                        //}
                     }
                     else if (Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                     {
-                        if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                        {
-                            Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
-                        }
-                        else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                        {
-                            Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
-                        }
+                        //if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                        //{
+                        //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6050;
+                        //}
+                        //else if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                        //{
+                        //    Panel_ParentFrameModel.Frame_ArtNo = FrameProfile_ArticleNo._6052;
+                        //}
                     }
 
                     if (Panel_DisplayWidth >= 1100)
@@ -7203,7 +7203,12 @@ namespace ModelLayer.Model.Quotation.Panel
                     }
                 }
 
-                int handle_deduct = 0, glass_deduct = 0, glassAllowance_Deduct = 0, inward_motorized_deduction = 0, SashOverlap_additional = 0, TotalNumberOfPanel = 1;
+                int handle_deduct = 0,
+                    glass_deduct = 0,
+                    glassAllowance_Deduct = 0,
+                    inward_motorized_deduction = 0,
+                    SashOverlap_additional = 0,
+                    TotalNumberOfPanel = 1;
 
                 if (Panel_SashReinfArtNo == SashReinf_ArticleNo._R675 || Panel_SashReinfArtNo == SashReinf_ArticleNo._207)
                 {
@@ -7299,6 +7304,7 @@ namespace ModelLayer.Model.Quotation.Panel
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._6050)
                     {
                         deduction_for_sashHT -= 18;
+                        handle_deduct = 65;
                     }
                     else if (Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._9C66 ||
                              Panel_ParentFrameModel.Frame_BotFrameArtNo == BottomFrameTypes._A166)
