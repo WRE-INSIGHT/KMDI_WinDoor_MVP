@@ -765,8 +765,16 @@ namespace ModelLayer.Model.Quotation.WinDoor
             {
                 zm = Arr_ZoomPercentage[2];
             }
+            else if(area > 144000000 && area <= 900000000) // (12000 x 12001h / 12000 x 12000) to 300000 x 300000 
+            {
+                zm = Arr_ZoomPercentage[1];
+            }
+            else if (area > 900000000) // 50000 x 50000 
+            {
+                zm = Arr_ZoomPercentage[0];
+            }
 
-                return zm;
+            return zm;
         }
 
         public void SetImageRenderingZoom()

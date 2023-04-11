@@ -7693,7 +7693,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_divider)
                     {
-                        
+                  
                         #region Load for Divider
                         if (row_str.Contains("Div_ID:"))
                         {
@@ -8334,6 +8334,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_screen)
                     {
+                        
                         #region Load for Screen
 
 

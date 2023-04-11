@@ -172,6 +172,16 @@ namespace PresentationLayer.Presenter.UserControls
                     dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 9, FontStyle.Bold);
                     dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 9, FontStyle.Bold);
                 }
+                else if (_windoorModel.WD_zoom == 0.02f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 10, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 10, FontStyle.Bold);
+                }
+                else if (_windoorModel.WD_zoom == 0.01f)
+                {
+                    dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 12, FontStyle.Bold);
+                    dmnsion_font_ht = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) + 12, FontStyle.Bold);
+                }
                 else
                 {
                     dmnsion_font_wd = new Font("Segoe UI", (20 * _windoorModel.WD_zoom) - 3, FontStyle.Bold);
@@ -1181,7 +1191,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
 
         private float Draw_Arrow_Width(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
-        {
+        { 
             Graphics g = e.Graphics;
 
             string dmnsion_w = wd.ToString();
