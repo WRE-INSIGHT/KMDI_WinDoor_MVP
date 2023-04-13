@@ -139,7 +139,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Unpaid fess shall be charged </Value>
+                            <Value>Unpaid fees shall be charged </Value>
                             <Style>
                               <FontFamily>Segoe UI</FontFamily>
                               <FontSize>8pt</FontSize>
@@ -417,8 +417,18 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES </Value>
+                            <Value>FINAL AGREED PRICE SHALL BE SUBJECTED TO REVISIONS AND/OR ADJUSTMENT BASED ON ACTUAL DESIGNS, MEASUREMENT AND QUANTITIES</Value>
                             <Style>
+                              <FontStyle>Italic</FontStyle>
+                              <FontFamily>Segoe UI</FontFamily>
+                              <FontWeight>Bold</FontWeight>
+                              <TextDecoration>None</TextDecoration>
+                            </Style>
+                          </TextRun>
+                          <TextRun>
+                            <Value xml:space="preserve"> </Value>
+                            <Style>
+                              <FontStyle>Italic</FontStyle>
                               <FontFamily>Segoe UI</FontFamily>
                               <FontSize>12pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -973,6 +983,7 @@
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
                 <Top>1.85084in</Top>
+                <Left>0.00336in</Left>
                 <Height>0.55722in</Height>
                 <Width>7.82702in</Width>
                 <ZIndex>1</ZIndex>
@@ -1367,6 +1378,7 @@
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
                 <Top>2.41026in</Top>
+                <Left>0.00336in</Left>
                 <Height>0.46813in</Height>
                 <Width>7.8287in</Width>
                 <ZIndex>2</ZIndex>
@@ -1478,6 +1490,7 @@
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
                 <Top>2.8909in</Top>
+                <Left>0.00336in</Left>
                 <Height>0.6108in</Height>
                 <Width>7.8287in</Width>
                 <ZIndex>3</ZIndex>
@@ -1490,9 +1503,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>0.03908in</Top>
-            <Left>0.05827in</Left>
+            <Left>0.05491in</Left>
             <Height>3.5017in</Height>
-            <Width>7.8287in</Width>
+            <Width>7.83206in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2293,7 +2306,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.17131in</Height>
+                  <Height>0.2196in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2471,7 +2484,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Left>1.8966in</Left>
-            <Height>1.12377in</Height>
+            <Height>1.17206in</Height>
             <Width>3.83629in</Width>
             <ZIndex>3</ZIndex>
             <Style>
@@ -2700,7 +2713,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.17131in</Height>
+              <Height>0.2196in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -2777,7 +2790,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.01251in</Top>
         <Left>6.29061in</Left>
-        <Height>1.12376in</Height>
+        <Height>1.17205in</Height>
         <Width>1.60382in</Width>
         <ZIndex>1</ZIndex>
         <Style>
