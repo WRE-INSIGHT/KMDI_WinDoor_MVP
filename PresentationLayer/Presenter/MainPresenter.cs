@@ -1047,9 +1047,9 @@ namespace PresentationLayer.Presenter
                 value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
                 //string province = projectAddress.Split(',').LastOrDefault().Replace("Luzon", string.Empty).Replace("Visayas", string.Empty).Replace("Mindanao", string.Empty).Trim();
                 //value = await _quotationServices.GetFactorByProvince(province);
-                string factorTypes = "Province: " 
-                                   + (province[province.Length - 2]).Trim() 
-                                   + "\nCurrent/File Factor: " 
+                string factorTypes = "Province: "
+                                   + (province[province.Length - 2]).Trim()
+                                   + "\nCurrent/File Factor: "
                                    + _quotationModel.PricingFactor
                                    + "\nFactor in database: "
                                    + value;
@@ -1188,7 +1188,7 @@ namespace PresentationLayer.Presenter
                                                           0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel,_quotationServices);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
 
         }
@@ -3004,7 +3004,7 @@ namespace PresentationLayer.Presenter
                     onload = true;
                     Windoor_Save_UserControl();
                     Windoor_Save_PropertiesUC();
-                    
+
                     ////foreach(string strline in file_lines) 
                     ////{
                     ////    if(strline.Contains("WD_name:"))
@@ -3924,7 +3924,7 @@ namespace PresentationLayer.Presenter
                                     break;
                                 }
                             }
-                          
+
                         }
                         if (row_str.Contains("Frame_ArtNo:"))
                         {
@@ -4024,7 +4024,7 @@ namespace PresentationLayer.Presenter
                                     break;
                                 }
                             }
-                            
+
                         }
                         if (row_str.Contains("Frame_TrackProfileArtNoVisibility:"))
                         {
@@ -4041,7 +4041,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                      
+
                         if (row_str.Contains("Frame_ConnectingProfile_ArticleNo:"))
                         {
                             foreach (ConnectingProfile_ArticleNo artcNo in ConnectingProfile_ArticleNo.GetAll())
@@ -10354,7 +10354,7 @@ namespace PresentationLayer.Presenter
                         string gbmode = "";
                         bool same_sash = false;
                         if (mpnl.MPanelLst_Panel.Count != 0)
-                        { 
+                        {
                             SashProfile_ArticleNo ref_sash = mpnl.MPanelLst_Panel[0].Panel_SashProfileArtNo;
                             bool allWithSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == true);
                             bool allNoSash = mpnl.MPanelLst_Panel.All(pnl => pnl.Panel_SashPropertyVisibility == false);
@@ -11389,7 +11389,7 @@ namespace PresentationLayer.Presenter
                                     }
                                     else
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + "\n");
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + "\n");
                                     }
                                 }
                                 else
