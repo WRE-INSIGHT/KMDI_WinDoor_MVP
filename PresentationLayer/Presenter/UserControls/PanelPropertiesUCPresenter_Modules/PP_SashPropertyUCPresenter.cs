@@ -931,42 +931,44 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         {
             _pp_sashPropertyUC.ThisBinding(CreateBindingDictionary());
 
-            if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
+            if (_mainPresenter.ItemLoad == false)
             {
-                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
                 {
-                    curr_sash = SashProfile_ArticleNo._7581;
-                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
-                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                    if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        curr_sash = SashProfile_ArticleNo._7581;
+                        _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._7581;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._R675;
+                    }
+                    else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        curr_sash = SashProfile_ArticleNo._374;
+                        _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
+                    }
+                    if (_panelModel.Panel_Type.Contains("Fixed") == false)
+                    {
+                        _panelModel.Panel_2dHingeVisibility = true;
+                        _panelModel.Panel_ButtHingeVisibility = false;
+                    }
                 }
-                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
                 {
-                    curr_sash = SashProfile_ArticleNo._374;
-                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._374;
-                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._655;
-                }
-                if (_panelModel.Panel_Type.Contains("Fixed") == false)
-                {
-                    _panelModel.Panel_2dHingeVisibility = true;
-                    _panelModel.Panel_ButtHingeVisibility = false;
+                    if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
+                    {
+                        curr_sash = SashProfile_ArticleNo._6040;
+                        _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104;
+                    }
+                    else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    {
+                        curr_sash = SashProfile_ArticleNo._6041;
+                        _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
+                        _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106;
+                    }
                 }
             }
-            else if (_panelModel.Panel_ParentFrameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
-            {
-                if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
-                {
-                    curr_sash = SashProfile_ArticleNo._6040;
-                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6040;
-                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV104; 
-                }
-                else if (_panelModel.Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Door)
-                {
-                    curr_sash = SashProfile_ArticleNo._6041;
-                    _panelModel.Panel_SashProfileArtNo = SashProfile_ArticleNo._6041;
-                    _panelModel.Panel_SashReinfArtNo = SashReinf_ArticleNo._TV106; 
-                }
-            }
-
             //if (_panelModel.Panel_Type.Contains("Fixed") == false)
             //{
             //    curr_sash = SashProfile_ArticleNo._7581;
