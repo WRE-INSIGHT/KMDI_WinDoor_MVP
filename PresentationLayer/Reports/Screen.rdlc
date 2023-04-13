@@ -1046,7 +1046,7 @@
                   <TextRun>
                     <Value>=Fields!dtPrice.Value</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
                       <rd:FormatSymbolCulture>fil-PH</rd:FormatSymbolCulture>
                     </Style>
@@ -1081,7 +1081,7 @@
                   <TextRun>
                     <Value>= -((First(Fields!dtPrice.Value, "DataSet1") * ((Fields!dtDiscountAverage.Value) / 100) ))</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <Format>#,0.00;(#,0.00)</Format>
                     </Style>
                   </TextRun>
