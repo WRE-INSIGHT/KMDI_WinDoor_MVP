@@ -280,8 +280,6 @@ namespace PresentationLayer.Presenter.UserControls.Dividers
                         }
                         #endregion
                     }
-
-
                 }
             }
             catch (Exception)
