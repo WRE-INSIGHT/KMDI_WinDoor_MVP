@@ -23,8 +23,10 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
+                    <SpaceBefore>5pt</SpaceBefore>
                     <Style>
                       <TextAlign>Center</TextAlign>
+                      <LineHeight>20pt</LineHeight>
                     </Style>
                   </Paragraph>
                   <Paragraph>
@@ -33,7 +35,7 @@
                         <Value />
                         <Style>
                           <FontStyle>Normal</FontStyle>
-                          <FontSize>18pt</FontSize>
+                          <FontSize>12pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                           <TextDecoration>None</TextDecoration>
                           <Color>#000000</Color>
@@ -42,6 +44,7 @@
                     </TextRuns>
                     <Style>
                       <TextAlign>Center</TextAlign>
+                      <LineHeight>20pt</LineHeight>
                     </Style>
                   </Paragraph>
                   <Paragraph>
@@ -60,6 +63,7 @@
                     <ListLevel>1</ListLevel>
                     <Style>
                       <TextAlign>Left</TextAlign>
+                      <LineHeight>20pt</LineHeight>
                     </Style>
                   </Paragraph>
                   <Paragraph>
@@ -77,7 +81,9 @@
                       </TextRun>
                     </TextRuns>
                     <ListLevel>1</ListLevel>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -94,8 +100,12 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <TextAlign>General</TextAlign>
+                      <LineHeight>1pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -122,8 +132,12 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <TextAlign>General</TextAlign>
+                      <LineHeight>1pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -140,8 +154,12 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <TextAlign>General</TextAlign>
+                      <LineHeight>1pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -158,8 +176,12 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <TextAlign>General</TextAlign>
+                      <LineHeight>1pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -176,7 +198,9 @@
                     </TextRuns>
                     <ListLevel>1</ListLevel>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -193,8 +217,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -221,8 +248,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -238,8 +268,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -256,7 +289,9 @@
                     </TextRuns>
                     <ListLevel>1</ListLevel>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -273,8 +308,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -291,8 +329,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -309,8 +350,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -327,7 +371,9 @@
                     </TextRuns>
                     <ListLevel>1</ListLevel>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -344,8 +390,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -362,8 +411,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -380,8 +432,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -398,7 +453,9 @@
                     </TextRuns>
                     <ListLevel>1</ListLevel>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -413,7 +470,9 @@
                       </TextRun>
                     </TextRuns>
                     <ListLevel>1</ListLevel>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -430,8 +489,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -448,8 +510,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -466,8 +531,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -481,12 +549,6 @@
                           <Color>#000000</Color>
                         </Style>
                       </TextRun>
-                    </TextRuns>
-                    <ListLevel>1</ListLevel>
-                    <Style />
-                  </Paragraph>
-                  <Paragraph>
-                    <TextRuns>
                       <TextRun>
                         <Value xml:space="preserve"> </Value>
                         <Style>
@@ -498,7 +560,26 @@
                       </TextRun>
                     </TextRuns>
                     <ListLevel>1</ListLevel>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
+                  </Paragraph>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value />
+                        <Style>
+                          <FontStyle>Normal</FontStyle>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>None</TextDecoration>
+                          <Color>#000000</Color>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <ListLevel>1</ListLevel>
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -515,8 +596,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -533,8 +617,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -551,8 +638,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -579,8 +669,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -597,8 +690,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -615,8 +711,11 @@
                     </TextRuns>
                     <ListStyle>Bulleted</ListStyle>
                     <ListLevel>2</ListLevel>
+                    <SpaceBefore>2pt</SpaceBefore>
                     <SpaceAfter>5pt</SpaceAfter>
-                    <Style />
+                    <Style>
+                      <LineHeight>20pt</LineHeight>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>

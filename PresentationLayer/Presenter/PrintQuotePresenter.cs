@@ -577,6 +577,7 @@ namespace PresentationLayer.Presenter
                         {
                             fs.Write(bytes, 0, bytes.Length);
                         }
+                        printAnnexRDLC();
                     }
                     #endregion
 
@@ -591,7 +592,32 @@ namespace PresentationLayer.Presenter
             }
         }
         
-        
+        public void printAnnexRDLC()
+        {
+            _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
+
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+               ("PDF",
+               null,
+               out mimeType,
+               out encoding,
+               out extension,
+               out streamIds,
+               out warnings
+               );
+
+            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\X.PDF";
+            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+            {
+                fs.Write(bytes, 0, bytes.Length);
+            }
+        }
         public IPrintQuoteView GetPrintQuoteView()
         {
             return _printQuoteView;
