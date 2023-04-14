@@ -297,6 +297,7 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
+                    //_printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
                 }
 
                 if (_mainPresenter.printStatus == "ScreenItem")
@@ -585,7 +586,8 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
+                Console.WriteLine(this + " error in  print" + ex.Message);
             }
         }
         
