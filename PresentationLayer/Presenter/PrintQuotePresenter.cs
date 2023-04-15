@@ -44,9 +44,89 @@ namespace PresentationLayer.Presenter
             _printQuoteView.PrintQuoteViewLoadEventRaised += _printQuoteView_PrintQuoteViewLoadEventRaised;
             _printQuoteView.SelectedIndexChangeEventRaised += _printQuoteView_SelectedIndexChangeEventRaised;
             _printQuoteView.txtoftexpensesKeyPressEventRaised += _printQuoteView_txtoftexpensesKeyPressEventRaised;
+            _printQuoteView.chkboxLnMCheckedChangedEventRaised += _printQuoteView_chkboxLnMCheckedChangedEventRaised;
+            _printQuoteView.chkboxFCCheckedChangedEventRaised += _printQuoteView_chkboxFCCheckedChangedEventRaised;
+            _printQuoteView.chkboxVATCheckedChangedEventRaised += _printQuoteView_chkboxVATCheckedChangedEventRaised;
         }
 
+        private void _printQuoteView_chkboxVATCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_printQuoteView.GetVatChkbox().Checked)
+            {
+                if (_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetVatTxtbox().Visible = true;
+                    _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(330, 88);
+                }
+                else if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _printQuoteView.GetVatTxtbox().Visible = true;
 
+                    var Curr_X_Location = _printQuoteView.GetVatChkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int Vat_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(Vat_X_Loc, 90);
+                    _printQuoteView.GetVatTxtbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                }
+            }
+            else
+            {
+                _printQuoteView.GetVatTxtbox().Visible = false;
+            }
+        }
+
+        private void _printQuoteView_chkboxFCCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_printQuoteView.GetFreightChargesChkbox().Checked)
+            {
+                if (_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetFreightChargeTxtBox().Visible = true;
+                    _printQuoteView.GetFreightChargeTxtBox().Location = new System.Drawing.Point(330, 59);
+                }
+                else if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _printQuoteView.GetFreightChargeTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetFreightChargesChkbox().Location.X;            
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int FreightC_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetFreightChargeTxtBox().Location = new System.Drawing.Point(FreightC_X_Loc, 59);
+                    _printQuoteView.GetFreightChargeTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                }
+            }
+            else
+            {
+                _printQuoteView.GetFreightChargeTxtBox().Visible = false;
+            }
+        }
+
+        private void _printQuoteView_chkboxLnMCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
+            {
+                if(_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Location = new System.Drawing.Point(330,28);
+                }
+                else if(_mainPresenter.printStatus == "ContractSummary")
+                {                                    
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetLabor_N_MobiChkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int LnMMobiTxtBox_X_Loc = converted_XLoc + 130 ;                                  
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Location = new System.Drawing.Point(LnMMobiTxtBox_X_Loc, 28);
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    
+                }
+            }
+            else
+            {
+                _printQuoteView.GetLabor_N_MobiTxtBox().Visible = false;
+            }
+        }
 
         public void EventLoad()
         {
@@ -145,6 +225,8 @@ namespace PresentationLayer.Presenter
                                                 + ",";
             _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
+            _printQuoteView.VatPercentage = "12";
+            
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -250,7 +332,7 @@ namespace PresentationLayer.Presenter
 
             _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
             _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
-            _printQuoteView.GetReportViewer().ZoomPercent = 75;
+            _printQuoteView.GetReportViewer().ZoomPercent = 100;
             _printQuoteView.GetReportViewer().RefreshReport();
         }
 
@@ -304,17 +386,34 @@ namespace PresentationLayer.Presenter
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
-
-                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(795, 26);
-                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Right | AnchorStyles.Left;
-                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(795, 3);
-                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(589, 26);
-                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(589, 3);
-                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(383, 26);
-                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(383, 3);
-
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
+
+                    #region label,TextBox & Rtextbox  new loc         
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(845, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(639, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(433, 26);
+
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(845, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(639, 3);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(433, 3);
+
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
+                    _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
+
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true;
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(265, 3);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205,26);
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205,59);
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205,88);
+
+
+                    #endregion                  
 
                     #region save files without pos in AEIC
                     if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
@@ -401,10 +500,10 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
 
                     _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627,26);
-                    //_printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(627,26);
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620,118);
                     #endregion
 
                     _printQuoteView.ShowLastPage().Visible = false;
@@ -517,6 +616,24 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(500,118);
+
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true;
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(1200, 5);
+                    _printQuoteView.GetAdditionalInfoLabel().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(1130,28);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(1130,59);
+                    _printQuoteView.GetFreightChargesChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(1130,88);
+                    _printQuoteView.GetVatChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+
+
+
+
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
@@ -524,6 +641,7 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
 
                     //string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     //int oftexpenses = Convert.ToInt32(trimmedamount);
@@ -534,12 +652,12 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-
-                    ReportParameter[] RParam = new ReportParameter[5];
+                    ReportParameter[] RParam = new ReportParameter[7];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
+                    RParam[6] = new ReportParameter("VatPercentage",_printQuoteView.VatPercentage);
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -548,6 +666,15 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[4] = new ReportParameter("ShowPageNum", "False");
+                    }
+
+                    if (_printQuoteView.GetVatChkbox().Checked)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+                    else
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

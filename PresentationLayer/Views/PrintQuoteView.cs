@@ -62,6 +62,17 @@ namespace PresentationLayer.Views
                 txt_oftexpenses.Text = value;
             }
         }
+        public string VatPercentage
+        {
+            get
+            {
+                return txtbox_VAT.Text;
+            }
+            set
+            {
+                txtbox_VAT.Text = value;
+            }
+        }
         public ReportViewer GetReportViewer()
         {
             return reportViewer1;
@@ -126,11 +137,42 @@ namespace PresentationLayer.Views
         {
             return rtbox_Address;
         }
+        public Label GetAdditionalInfoLabel()
+        {
+            return lbl_addinfo;
+        }
+        public CheckBox GetLabor_N_MobiChkbox()
+        {
+            return chkbox_LnM;
+        }
+        public CheckBox GetFreightChargesChkbox()
+        {
+            return chkbox_FC;
+        }
+        public CheckBox GetVatChkbox()
+        {
+            return chkbox_VAT;
+        }
+        public TextBox GetLabor_N_MobiTxtBox()
+        {
+            return txtbox_LnM;
+        }
+        public TextBox GetFreightChargeTxtBox()
+        {
+            return txtbox_FC;
+        }
+        public TextBox GetVatTxtbox()
+        {
+            return txtbox_VAT;
+        }
 
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
         public event EventHandler SelectedIndexChangeEventRaised;
         public event EventHandler txtoftexpensesKeyPressEventRaised;
+        public event EventHandler chkboxLnMCheckedChangedEventRaised;
+        public event EventHandler chkboxFCCheckedChangedEventRaised;
+        public event EventHandler chkboxVATCheckedChangedEventRaised;
 
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
@@ -173,6 +215,21 @@ namespace PresentationLayer.Views
             {
                 EventHelpers.RaiseEvent(sender, txtoftexpensesKeyPressEventRaised, e);
             }
+        }
+
+        private void chkbox_LnM_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender,chkboxLnMCheckedChangedEventRaised,e);
+        }
+
+        private void chkbox_FC_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender,chkboxFCCheckedChangedEventRaised,e);
+        }
+
+        private void chkbox_VAT_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxVATCheckedChangedEventRaised, e);
         }
     }
 }
