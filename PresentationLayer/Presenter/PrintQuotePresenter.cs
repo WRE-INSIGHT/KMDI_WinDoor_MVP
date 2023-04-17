@@ -146,7 +146,7 @@ namespace PresentationLayer.Presenter
 
         private void _printQuoteView_PrintQuoteViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
-             Console.WriteLine("closing na yung form ng print ");
+            Console.WriteLine("closing na yung form ng print ");
             GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
             basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
             QuotationBody_key = _mainPresenter.printStatus + "_" + "QuotationBody";
@@ -157,7 +157,6 @@ namespace PresentationLayer.Presenter
 
             if (_rdlcHeaderIsPresent == true)
             {
-                Console.WriteLine("meron laman dun sa dictionary update ang need");
                 _mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
                 _mainPresenter.RDLCHeader[basecolor_key] = baseColor;
                 _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
@@ -167,8 +166,7 @@ namespace PresentationLayer.Presenter
                 _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
             }
             else
-            {
-                Console.WriteLine("walang laman sa dictionary add ang need labyu");              
+            {            
                 _mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
                 _mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
                 _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);

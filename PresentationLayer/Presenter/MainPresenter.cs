@@ -3419,6 +3419,18 @@ namespace PresentationLayer.Presenter
                 }
 
             }
+            else if(row_str == "." )
+            {
+                if (inside_rdlcDic)
+                {
+                    //Load_RDLCHeaders();
+                    inside_rdlcDic = false;
+                }
+                else
+                {
+                    inside_rdlcDic = true;
+                }
+            }
               if (row_str == "EndofFile")
             {
                 int wndrId = 0;
@@ -7733,11 +7745,65 @@ namespace PresentationLayer.Presenter
 
                         #endregion
                     }
+                    else if (inside_rdlcDic)
+                    {
+                        if (row_str != ".")
+                        {
+                            string[] key = row_str.Split(':');
+                            var value = row_str.Substring(row_str.IndexOf(": ") + 1 );
+
+                            if (rdlcDicChangeKey == true)
+                            {
+                                RDLCDictionary_key = key[0];
+                                Console.WriteLine(RDLCDictionary_key);
+                            }
+                            if(value == "" || value == " ")
+                            {
+                                value = "\n" + "\n";
+                            }
+                            else if(value == " To: ")
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = true;
+                            }
+                            else if (rdlcAddNewLineToAddr == true)
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = false;
+                            }
+                            else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            {
+                                value = value + "\n";
+                            }
+
+                            //add ng symbol for additional spaces
+                            // change algo for spaces 
+                                                      
+                            RDLCDictionary_value = RDLCDictionary_value + value;
+                            Console.WriteLine(value);
+                            rdlcDicChangeKey = false;
+                        }
+                        else
+                        {
+                            if(RDLCDictionary_key != null && RDLCDictionary_value != null)
+                            {
+                                Console.WriteLine("not null insert to dictionary");
+                                Load_RDLCHeaders();
+                                rdlcDicChangeKey = true;
+                                RDLCDictionary_key = null;
+                                RDLCDictionary_value = null;
+                            }
+                        }
+                    }
                     break;
             }
 
         }
 
+        private void Load_RDLCHeaders()
+        {
+            _rdlcHeaders.Add(RDLCDictionary_key,RDLCDictionary_value.TrimStart());
+        }
         private void Load_Screen()
         {
             IScreenModel scr = _screenServices.AddScreenModel(screen_ItemNumber,
@@ -8611,7 +8677,9 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
+             rdlcDicChangeKey = true,
+             rdlcAddNewLineToAddr = false;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -9186,6 +9254,10 @@ namespace PresentationLayer.Presenter
         Base_Color screen_BaseColor;
         Magnum_ScreenType magnum_ScreenType;
 
+        #endregion
+        #region rdlcDictionary Properties
+        string RDLCDictionary_key,
+               RDLCDictionary_value;
         #endregion
         string mpnllvl = "";
 
