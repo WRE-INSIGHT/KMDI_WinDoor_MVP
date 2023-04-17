@@ -206,10 +206,12 @@
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TrackProfilePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\FP_TubularPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_FrameConnectionTypePropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_ScreenPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_SlidingRailsPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TrackProfilePropertyUCPresenter.cs" />
+    <Compile Include="Presenter\UserControls\FramePropertiesUCPresenter_Modules\IFP_TubularPropertyUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\IScreenAddOnPropertiesUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\ISortItemUCPresenter.cs" />
     <Compile Include="Presenter\UserControls\PanelPropertiesUCPresenter_Modules\IPP_LouverBladesPropertyUCPresenter.cs" />
@@ -727,11 +729,18 @@
     <Compile Include="Views\UserControls\FrameProperties_Modules\FP_TrackProfilePropertyUC.Designer.cs">
       <DependentUpon>FP_TrackProfilePropertyUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_TubularPropertyUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UserControls\FrameProperties_Modules\FP_TubularPropertyUC.Designer.cs">
+      <DependentUpon>FP_TubularPropertyUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_BottomFramePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_FrameConnectionTypePropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_ScreenPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_SlidingRailsPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_TrackProfilePropertyUC.cs" />
+    <Compile Include="Views\UserControls\FrameProperties_Modules\IFP_TubularPropertyUC.cs" />
     <Compile Include="Views\UserControls\FrameUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1426,6 +1435,9 @@
     <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_TrackProfilePropertyUC.resx">
       <DependentUpon>FP_TrackProfilePropertyUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\UserControls\FrameProperties_Modules\FP_TubularPropertyUC.resx">
+      <DependentUpon>FP_TubularPropertyUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UserControls\FrameUC.resx">
       <DependentUpon>FrameUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -1710,6 +1722,7 @@
     <None Include="Resources\fade90.gif" />
     <None Include="Resources\fade90v2.gif" />
     <None Include="Resources\fade901.gif" />
+    <None Include="Resources\ExtensionBot11.png" />
     <Content Include="Resources\file_40px.png" />
     <Content Include="Resources\file_80px.png" />
     <None Include="Resources\FixedPanel.png" />

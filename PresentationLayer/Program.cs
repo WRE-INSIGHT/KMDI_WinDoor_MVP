@@ -425,8 +425,8 @@ namespace PresentationLayer
                 .RegisterType<ISP_LandCoverPropertyUCPresenter, SP_LandCoverPropertyUCPresenter>(new ContainerControlledLifetimeManager())
                 .RegisterType<ISP_LandCoverPropertyUC, SP_LandCoverPropertyUC>(new ContainerControlledLifetimeManager())
 
-                .RegisterType<ISP_PriceIncreaseByPercentageUCPresenter,SP_PriceIncreaseByPercentageUCPresenter>(new ContainerControlledLifetimeManager())
-                .RegisterType<ISP_PriceIncreaseByPercentageUC,SP_PriceIncreaseByPercentageUC>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_PriceIncreaseByPercentageUCPresenter, SP_PriceIncreaseByPercentageUCPresenter>(new ContainerControlledLifetimeManager())
+                .RegisterType<ISP_PriceIncreaseByPercentageUC, SP_PriceIncreaseByPercentageUC>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IExchangeRateView, ExchangeRateView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IExchangeRatePresenter, ExchangeRatePresenter>(new ContainerControlledLifetimeManager())
@@ -455,11 +455,14 @@ namespace PresentationLayer
                  .RegisterType<IPDFCompilerView, PDFCompilerView>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPDFCompilerPresenter, PDFCompilerPresenter>(new ContainerControlledLifetimeManager())
 
-                 .RegisterType<IRDLCReportCompilerView,RDLCReportCompilerView>(new ContainerControlledLifetimeManager())
-                 .RegisterType<IRDLCReportCompilerPresenter,RDLCReportCompilerPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IRDLCReportCompilerView, RDLCReportCompilerView>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IRDLCReportCompilerPresenter, RDLCReportCompilerPresenter>(new ContainerControlledLifetimeManager())
 
                  .RegisterType<IPDFWaitFormPresenter, PDFWaitFormPresenter>(new ContainerControlledLifetimeManager())
                  .RegisterType<IPDFWaitFormView, PDFWaitFormView>(new ContainerControlledLifetimeManager())
+
+                 .RegisterType<IFP_TubularPropertyUCPresenter, FP_TubularPropertyUCPresenter>(new ContainerControlledLifetimeManager())
+                 .RegisterType<IFP_TubularPropertyUC, FP_TubularPropertyUC>(new ContainerControlledLifetimeManager())
 
                 .RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(_sqlconStr))
                 .RegisterType<IConcreteUC, ConcreteUC>(new ContainerControlledLifetimeManager())

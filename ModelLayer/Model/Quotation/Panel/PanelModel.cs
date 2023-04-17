@@ -3046,6 +3046,21 @@ namespace ModelLayer.Model.Quotation.Panel
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _panelLouverRPLeverHandleCheck;
+        public bool Panel_LouverRPLeverHandleCheck
+        {
+            get
+            {
+                return _panelLouverRPLeverHandleCheck;
+            }
+
+            set
+            {
+                _panelLouverRPLeverHandleCheck = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods

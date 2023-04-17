@@ -2415,6 +2415,9 @@ namespace ModelLayer.Model.Quotation
                 SashReinPricePerLinearMeter_6040 = 287.58m,
                 SashReinPricePerLinearMeter_6041 = 655.49m,
 
+                ExtensionProfile15mmPricePerLinearMeter_WoodGrain = 910.00m,
+                ExtensionProfile15mmPricePerLinearMeter_White = 790.00m,
+
                 FramePerimeter,
                 FramePrice,
                 FrameReinPrice,
@@ -2422,12 +2425,16 @@ namespace ModelLayer.Model.Quotation
                 FrameReinPricePerLinearMeter,
                 FrameThresholdPricePerLinearMeter,
 
+                ExtensionProfile15mmPricePerLinearMeter,
 
                 SashPerimeter,
                 SashPrice = 0,
                 SashReinPrice,
                 SashPricePerLinearMeter,
                 SashReinPricePerLinearMeter,
+
+                ExtensionProfile15mmPrice,
+
         #endregion
         #region Mullion/TransomPrice
 
@@ -2866,6 +2873,9 @@ namespace ModelLayer.Model.Quotation
             SecurityKit_16blades = 4368.00m,
             SecurityKit_17blades = 4641.00m,
 
+            RingpullLeverHandlePricePerPiece = 1500.00m,
+            TubularPricePerLinearMeter = 1000.00m,
+
             LouvreFrameWeatherStripHeadPrice,
             LouvreFrameBottomWeatherStripPrice,
             PlantonWeatherStripHeadPrice,
@@ -2887,9 +2897,12 @@ namespace ModelLayer.Model.Quotation
             SecurityKitPrice,
             SecurityKitCost,
 
+            RingpullLeverHandlePrice,
+            TubularPrice,
+
         #endregion
 
-                BrushSealPricePerLinearMeter = 15.80m,
+        BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
@@ -3910,6 +3923,30 @@ namespace ModelLayer.Model.Quotation
                         }
                         #endregion
 
+                        #region ExtensionProfile
+                        if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                            fr.Frame_Width > 6000)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_White;
+                            }
+                            else
+                            {
+                                ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_WoodGrain;
+                            }
+
+                            ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
+                        }
+                        #endregion
+
+                        #region Tubular
+                        if (fr.Frame_TubularVisibility == true)
+                        {
+                            TubularPrice += ((fr.Frame_TubularWidth / 1000m) * TubularPricePerLinearMeter) + ((fr.Frame_TubularHeight / 1000m) * TubularPricePerLinearMeter);
+                        }
+                        #endregion
+
                         #region SealantPrice 
                         Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
 
@@ -3927,7 +3964,7 @@ namespace ModelLayer.Model.Quotation
                         #region bottomFramePrice
                         if (fr.Frame_BotFrameVisible == true &&
                             (fr.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
-                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6050))
+                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6052))
                         {
                             FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
                             FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
@@ -6735,6 +6772,13 @@ namespace ModelLayer.Model.Quotation
 
                                             }
                                         }
+
+                                        #region RingpullLeverHandle
+                                        if (pnl.Panel_LouverRPLeverHandleCheck == true)
+                                        {
+                                            RingpullLeverHandlePrice = RingpullLeverHandlePricePerPiece;
+                                        }
+                                        #endregion
 
                                         #region Glass 
                                         if (pnl.Panel_GlassThickness >= 6.0f)
@@ -9644,8 +9688,16 @@ namespace ModelLayer.Model.Quotation
                                             SecurityKitPrice += SecurityKitCost + (Singlepnl.Panel_DisplayHeight / 1000m) * 685 * 2; // =(285+400)
                                         }
                                         #endregion
+
                                     }
                                 }
+
+                                #region RingpullLeverHandle
+                                if (Singlepnl.Panel_LouverRPLeverHandleCheck == true)
+                                {
+                                    RingpullLeverHandlePrice = RingpullLeverHandlePricePerPiece;
+                                }
+                                #endregion
 
                                 #region Glass 
                                 if (Singlepnl.Panel_GlassThickness >= 6.0f)
@@ -9876,6 +9928,8 @@ namespace ModelLayer.Model.Quotation
                                    Math.Round(claddingPrice, 2) +
                                    Math.Round(DMPrice, 2) +
                                    Math.Round(DMReinforcementPrice, 2) +
+                                   Math.Round(ExtensionProfile15mmPrice, 2) +
+                                   Math.Round(TubularPrice, 2) +
                                    Math.Round(SealantPrice, 2) +
                                    Math.Round(PUFoamingPrice, 2) +
                                    Math.Round(FittingAndSuppliesCost, 2) +
@@ -9893,7 +9947,8 @@ namespace ModelLayer.Model.Quotation
                                  Math.Round(GlassBladePrice, 2) +
                                  Math.Round(GalleryPrice, 2) +
                                  Math.Round(PowerKitIncludingWiresPrice, 2) +
-                                 Math.Round(SecurityKitPrice, 2);
+                                 Math.Round(SecurityKitPrice, 2) +
+                                 Math.Round(RingpullLeverHandlePrice, 2);
 
                     LouverPrice = LouverCost;
                     LouverCost = LouverCost * PricingFactor * 1.12m; //1.12vat
@@ -10079,6 +10134,20 @@ namespace ModelLayer.Model.Quotation
                         Price_List.Rows.Add("Dummy Mullion Reinforcement Price",
                                            FrameReinPricePerLinearMeter_7502.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(DMReinforcementPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                        Price_List.Rows.Add("15mm Extension Profile Price",
+                                       ExtensionProfile15mmPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(ExtensionProfile15mmPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
+
+                        Price_List.Rows.Add("Tubular Price",
+                                           TubularPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(TubularPrice, 2).ToString("N", new CultureInfo("en-US")),
                                            "",
                                            "",
                                            "Material Cost");
@@ -10573,6 +10642,13 @@ namespace ModelLayer.Model.Quotation
                                         "",
                                         "Louver Material Cost");
 
+                        Price_List.Rows.Add("Ringpull Lever Handle Price",
+                                     Math.Round(RingpullLeverHandlePricePerPiece, 2).ToString("N", new CultureInfo("en-US")),
+                                     Math.Round(RingpullLeverHandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                     "",
+                                     "",
+                                     "Louver Material Cost");
+
                         Price_List.Rows.Add("Total Price",
                                        "",
                                        Math.Round(LouverPrice, 2).ToString("N", new CultureInfo("en-US")),
@@ -10654,6 +10730,8 @@ namespace ModelLayer.Model.Quotation
             claddingPrice = 0;
             DMPrice = 0;
             DMReinforcementPrice = 0;
+            ExtensionProfile15mmPrice = 0;
+            TubularPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
             FilmPrice = 0;
@@ -10727,7 +10805,7 @@ namespace ModelLayer.Model.Quotation
             GlassBladePrice = 0;
             GalleryPrice = 0;
             LouverPrice = 0;
-
+            RingpullLeverHandlePrice = 0;
         }
     }
 }
