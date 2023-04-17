@@ -188,7 +188,13 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
-
+        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        
+        public IDictionary<string,string> RDLCHeader
+        {
+            get { return _rdlcHeaders; }
+            set { _rdlcHeaders = value; }
+        }
         private List<IScreenModel> _screenList = new List<IScreenModel>();
         public List<IScreenModel> Screen_List
         {
@@ -1342,6 +1348,14 @@ namespace PresentationLayer.Presenter
                 }
                 wndr_content.Add("~");
             }
+
+            foreach (var dic in _rdlcHeaders)
+            {
+                wndr_content.Add(".");
+                wndr_content.Add(dic.Key + ": " + dic.Value);
+                wndr_content.Add(".");
+            }
+
             wndr_content.Add("EndofFile");
             #endregion
 
@@ -2964,6 +2978,8 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FilePath = "";
                 Properties.Settings.Default.Save();
             }
+
+
         }
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -3390,7 +3406,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 inside_item = false;
             }
-            else if (row_str == "~")
+            else   if (row_str == "~")
             {
                 if (inside_screen)
                 {
@@ -3403,7 +3419,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            if (row_str == "EndofFile")
+              if (row_str == "EndofFile")
             {
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)

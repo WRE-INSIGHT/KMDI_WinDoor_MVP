@@ -173,6 +173,7 @@ namespace PresentationLayer.Views
         public event EventHandler chkboxLnMCheckedChangedEventRaised;
         public event EventHandler chkboxFCCheckedChangedEventRaised;
         public event EventHandler chkboxVATCheckedChangedEventRaised;
+        public event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
@@ -221,15 +222,18 @@ namespace PresentationLayer.Views
         {
             EventHelpers.RaiseEvent(sender,chkboxLnMCheckedChangedEventRaised,e);
         }
-
         private void chkbox_FC_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender,chkboxFCCheckedChangedEventRaised,e);
         }
-
         private void chkbox_VAT_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkboxVATCheckedChangedEventRaised, e);
+        }
+
+        private void PrintQuoteView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            EventHelpers.RaiseFormClosingEvent(sender, PrintQuoteViewFormClosingEventRaised, e);
         }
     }
 }

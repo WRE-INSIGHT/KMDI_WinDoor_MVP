@@ -27,6 +27,7 @@ namespace PresentationLayer.Views
         event EventHandler chkboxLnMCheckedChangedEventRaised;
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
+        event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         ReportViewer GetReportViewer();
         BindingSource GetBindingSource();
