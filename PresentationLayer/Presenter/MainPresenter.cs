@@ -2457,6 +2457,7 @@ namespace PresentationLayer.Presenter
             #region Single
             //single Annealed
             _glassThicknessDT.Rows.Add(0.0f, "Unglazed", "NA", true, false, false, false, false);
+            _glassThicknessDT.Rows.Add(0.0f, "Security Mesh", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(5.0f, "5 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(6.0f, "6 mm Clear", "NA", true, false, false, false, false);
             _glassThicknessDT.Rows.Add(8.0f, "8 mm Clear", "NA", true, false, false, false, false);
@@ -11451,19 +11452,19 @@ namespace PresentationLayer.Presenter
                                 {
                                     string blades = string.Concat(split1.Where(Char.IsDigit));
                                     blades = blades.Replace("1150", "").Replace("1152", "");
-                                    if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <=9)
+                                    if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <= 9)
                                     {
-                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(18, "0");
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "0");
                                     }
                                     else if (Convert.ToInt32(blades) >= 10)
                                     {
-                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(18, "1");
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
                                     }
                                 }
 
                                 if (DuplicatePnl.Contains("LVRG") &&
                                     (pnlCount >= 2 && pnlCount <= 9))
-                                { 
+                                {
                                     string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
                                     lst_DuplicatePnl.Add(DuplicateLouverPnl);
                                 }
