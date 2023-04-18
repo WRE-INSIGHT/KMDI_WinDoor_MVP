@@ -11,6 +11,9 @@
         public int frame_TrackProfileproperty_PanelHeight = 36;
         public int frame_ScreenProperty_PanelHeight = 54;
         public int frame_ScreenHeightProperty_PanelHeight = 26;
+        public int frame_TubularOption = 27;
+        public int frame_TubularHeightAndWidth = 52;
+
 
 
 
@@ -54,7 +57,7 @@
         public int panel_property_TrackRailOptionsheight = 30;
         //public int panel_property_LouverOptionsheight = 191;
         public int panel_property_LouverBladesOptionsheight = 28;
-        public int panel_property_LouverGalleryOptionsheight = 86;
+        public int panel_property_LouverGalleryOptionsheight = 117;
         public int panel_property_LouverGallerySetOptionsheight = 210;//178;
         public int panel_property_LouverGallerySetArtNoOptionsheight = 29;
         public int panel_property_LouverGlassheightDeduction = 54;
