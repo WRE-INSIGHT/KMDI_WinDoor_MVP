@@ -2318,6 +2318,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
+                    _rdlcHeaders.Clear();              
                     DialogResult dialogResult = DialogResult.No;
                     if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
                     {
@@ -3005,6 +3006,7 @@ namespace PresentationLayer.Presenter
 
 
                     SetChangesMark();
+                    add_existing = true;
                     _isOpenProject = false;
                     string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
@@ -3423,7 +3425,7 @@ namespace PresentationLayer.Presenter
             {
                 if (inside_rdlcDic)
                 {
-                    //Load_RDLCHeaders();
+                    Load_RDLCHeaders();
                     inside_rdlcDic = false;
                 }
                 else
@@ -3433,6 +3435,7 @@ namespace PresentationLayer.Presenter
             }
               if (row_str == "EndofFile")
             {
+                add_existing = false;
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
@@ -7755,7 +7758,7 @@ namespace PresentationLayer.Presenter
                             if (rdlcDicChangeKey == true)
                             {
                                 RDLCDictionary_key = key[0];
-                                Console.WriteLine(RDLCDictionary_key);
+                                //Console.WriteLine(RDLCDictionary_key);
                             }
                             if(value == "" || value == " ")
                             {
@@ -7780,20 +7783,20 @@ namespace PresentationLayer.Presenter
                             // change algo for spaces 
                                                       
                             RDLCDictionary_value = RDLCDictionary_value + value;
-                            Console.WriteLine(value);
+                           // Console.WriteLine(value);
                             rdlcDicChangeKey = false;
                         }
-                        else
-                        {
-                            if(RDLCDictionary_key != null && RDLCDictionary_value != null)
-                            {
-                                Console.WriteLine("not null insert to dictionary");
-                                Load_RDLCHeaders();
-                                rdlcDicChangeKey = true;
-                                RDLCDictionary_key = null;
-                                RDLCDictionary_value = null;
-                            }
-                        }
+                        //else
+                        //{
+                        //    if(RDLCDictionary_key != null && RDLCDictionary_value != null)
+                        //    {
+                        //       // Console.WriteLine("not null insert to dictionary");
+                        //        Load_RDLCHeaders();
+                        //        rdlcDicChangeKey = true;
+                        //        RDLCDictionary_key = "";
+                        //        RDLCDictionary_value = "";
+                        //    }
+                        //}
                     }
                     break;
             }
@@ -7802,7 +7805,19 @@ namespace PresentationLayer.Presenter
 
         private void Load_RDLCHeaders()
         {
-            _rdlcHeaders.Add(RDLCDictionary_key,RDLCDictionary_value.TrimStart());
+            if (add_existing == false)
+            {
+              _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
+                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :"  +  RDLCDictionary_value.TrimStart());
+            }
+
+            if (RDLCDictionary_key != null && RDLCDictionary_value != null)
+            {
+                // Console.WriteLine("not null insert to dictionary");
+                rdlcDicChangeKey = true;
+                RDLCDictionary_key = "";
+                RDLCDictionary_value = "";
+            }
         }
         private void Load_Screen()
         {
@@ -8679,7 +8694,8 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
              rdlcDicChangeKey = true,
-             rdlcAddNewLineToAddr = false;
+             rdlcAddNewLineToAddr = false,
+             add_existing = false;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -9526,7 +9542,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
-                {
+                {               
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
