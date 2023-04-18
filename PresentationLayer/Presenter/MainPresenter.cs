@@ -727,6 +727,7 @@ namespace PresentationLayer.Presenter
             }
         }
 
+
         #endregion
 
         public MainPresenter(IMainView mainView,
@@ -2964,6 +2965,8 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FilePath = "";
                 Properties.Settings.Default.Save();
             }
+
+
         }
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -9775,6 +9778,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
+            GetIntownOutofTown();
         }
 
 
@@ -11096,7 +11100,8 @@ namespace PresentationLayer.Presenter
                glassThick,
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
-               additionalZero;
+               additionalZero,
+               GeorgianBarArtNoDesc;
         #endregion
         public void itemDescription()
         {
@@ -11242,6 +11247,7 @@ namespace PresentationLayer.Presenter
                                         {
                                             GeorgianBarHorizontalQty += pnl.Panel_GeorgianBar_HorizontalQty;
                                             GeorgianBarVerticalQty += pnl.Panel_GeorgianBar_VerticalQty;
+                                            GeorgianBarArtNoDesc = pnl.Panel_GeorgianBarArtNo.ToString();
                                         }
 
                                         //panel name desc
@@ -11401,6 +11407,7 @@ namespace PresentationLayer.Presenter
                                 {
                                     GeorgianBarHorizontalQty += Singlepnl.Panel_GeorgianBar_HorizontalQty;
                                     GeorgianBarVerticalQty += Singlepnl.Panel_GeorgianBar_VerticalQty;
+                                    GeorgianBarArtNoDesc = Singlepnl.Panel_GeorgianBarArtNo.ToString();
                                 }
                             }
                             #endregion
@@ -11440,9 +11447,23 @@ namespace PresentationLayer.Presenter
 
                                 int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
 
+                                if (DuplicatePnl.Contains("LVRG"))
+                                {
+                                    string blades = string.Concat(split1.Where(Char.IsDigit));
+                                    blades = blades.Replace("1150", "").Replace("1152", "");
+                                    if (Convert.ToInt32(blades) >= 2 && Convert.ToInt32(blades) <=9)
+                                    {
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(18, "0");
+                                    }
+                                    else if (Convert.ToInt32(blades) >= 10)
+                                    {
+                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(18, "1");
+                                    }
+                                }
+
                                 if (DuplicatePnl.Contains("LVRG") &&
                                     (pnlCount >= 2 && pnlCount <= 9))
-                                {
+                                { 
                                     string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
                                     lst_DuplicatePnl.Add(DuplicateLouverPnl);
                                 }
@@ -11505,12 +11526,12 @@ namespace PresentationLayer.Presenter
 
                     if (GeorgianBarHorizontalQty > 0)
                     {
-                        GeorgianBarHorizontalDesc = "GeorgianBar Horizontal: " + GeorgianBarHorizontalQty + "\n";
+                        GeorgianBarHorizontalDesc = "GeorgianBar Horizontal " + GeorgianBarArtNoDesc + " : " + GeorgianBarHorizontalQty + "\n";
                     }
 
                     if (GeorgianBarVerticalQty > 0)
                     {
-                        GeorgianBarVerticalDesc = "GeorgianBar Vertical: " + GeorgianBarVerticalQty + "\n";
+                        GeorgianBarVerticalDesc = "GeorgianBar Vertical " + GeorgianBarArtNoDesc + " : " + GeorgianBarVerticalQty + "\n";
                     }
 
                     wdm.WD_description += GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
@@ -11590,6 +11611,22 @@ namespace PresentationLayer.Presenter
             SetChangesMark();
         }
 
+        public async void GetIntownOutofTown()
+        {
+            decimal value;
+            string[] province = projectAddress.Split(',');
+            value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+
+            if (value == 1.30m)
+            {
+                _quotationModel.ProvinceIntownOrOutoftown = true;
+            }
+            else if (value == 1.40m)
+            {
+                _quotationModel.ProvinceIntownOrOutoftown = false;
+            }
+
+        }
         public void updatePriceFromMainViewToItemList()
         {
             if (_quotationModel != null)

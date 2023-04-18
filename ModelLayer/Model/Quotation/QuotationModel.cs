@@ -47,6 +47,8 @@ namespace ModelLayer.Model.Quotation
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
+        public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
@@ -2435,6 +2437,8 @@ namespace ModelLayer.Model.Quotation
 
                 ExtensionProfile15mmPrice,
 
+
+
         #endregion
         #region Mullion/TransomPrice
 
@@ -2629,7 +2633,6 @@ namespace ModelLayer.Model.Quotation
 
         FilmPrice,
         GlassPrice,
-        Glass_HeightxWidth_Total,
         #endregion
         #region FittingAndSupplies
 
@@ -2773,8 +2776,9 @@ namespace ModelLayer.Model.Quotation
             AluminumTrackPricePerLinearMeter = 251.10m,
             WaterSeepagePricePerLinearMeter = 153.73m,
             AluminumPullHandlePricePerLinearMeter = 2480.18m,
+            GlazingAdaptorPricePerMeter = 250.00m,
 
-
+            GlazingAdaptorPrice,
             GlazingGasketPrice,
             GeorgianBarCost,
             CoverProfileCost,
@@ -2789,9 +2793,11 @@ namespace ModelLayer.Model.Quotation
 
             GeorgianBarPrice,
             CoverProfilePrice,
+
+            GlazingBeadPerimeter,
         #endregion
         #region LouverMatsPrice
-            LouvreFrameWeatherStripHeadPricePerMeter = 108.45m, // 629/5.8
+        LouvreFrameWeatherStripHeadPricePerMeter = 108.45m, // 629/5.8
             LouvreFrameBottomWeatherStripPricePerMeter = 87.07m, // 505/5.8
             PlantonWeatherStripHeadPricePerMeter = 153.79m, // 892/5.8
             PlantonWeatherStripSillPricePerMeter = 190.86m, // 1107/5.8
@@ -2925,7 +2931,9 @@ namespace ModelLayer.Model.Quotation
                 FittingAndSuppliesCost,
                 AccesorriesCost,
                 AncillaryProfileCost,
-                TotaPrice;
+                TotaPrice,
+
+                provinceBaseMultiplier;
         #endregion
 
         #region changePriceBasedOnDate
@@ -5723,6 +5731,14 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
+                                        #region GlazingAdaptor
+                                        if (pnl.Panel_ChkGlazingAdaptor == true)
+                                        {
+                                            GlazingBeadPerimeter = (pnl.Panel_GlazingBeadHeight + pnl.Panel_GlazingBeadWidth) * 2;
+                                            GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                        }
+                                        #endregion
+
                                         HandleDesc = pnl.Panel_HandleType.ToString();
 
                                         CostingPoints += ProfileColorPoints * 4;
@@ -6509,6 +6525,13 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
+                                        #region GlazingAdaptor
+                                        if (pnl.Panel_ChkGlazingAdaptor == true)
+                                        {
+                                            GlazingBeadPerimeter = (pnl.Panel_GlazingBeadHeight + pnl.Panel_GlazingBeadWidth) * 2;
+                                            GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                        }
+                                        #endregion
                                     }
                                     else if (pnl.Panel_Type.Contains("Louver"))
                                     {
@@ -8602,6 +8625,14 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
+                                #region GlazingAdaptor
+                                if (Singlepnl.Panel_ChkGlazingAdaptor == true)
+                                {
+                                    GlazingBeadPerimeter = (Singlepnl.Panel_GlazingBeadHeight + Singlepnl.Panel_GlazingBeadWidth) * 2;
+                                    GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                }
+                                #endregion
+
                                 HandleDesc = Singlepnl.Panel_HandleType.ToString();
 
                                 CostingPoints += ProfileColorPoints * 4;
@@ -9378,6 +9409,14 @@ namespace ModelLayer.Model.Quotation
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
                                 }
                                 #endregion
+
+                                #region GlazingAdaptor
+                                if (Singlepnl.Panel_ChkGlazingAdaptor == true)
+                                {
+                                    GlazingBeadPerimeter = (Singlepnl.Panel_GlazingBeadHeight + Singlepnl.Panel_GlazingBeadWidth) * 2;
+                                    GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                }
+                                #endregion
                             }
                             else if (Singlepnl.Panel_Type.Contains("Louver"))
                             {
@@ -9862,6 +9901,16 @@ namespace ModelLayer.Model.Quotation
 
                     }
 
+                    //CostingFactor
+                    if (ProvinceIntownOrOutoftown == true)
+                    {
+                        provinceBaseMultiplier = 2.90m;
+                    }
+                    else if (ProvinceIntownOrOutoftown == false)
+                    {
+                        provinceBaseMultiplier = 3.00m;
+                    }
+
                     wdm.WD_CostingPoints = CostingPoints;
                     LaborCost = CostingPoints * CostPerPoints;
                     InstallationCost = InstallationPoints * CostPerPoints;
@@ -9900,7 +9949,7 @@ namespace ModelLayer.Model.Quotation
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
-                                           Math.Round((GeorgianBarCost * 3), 2) + // 3 = costing factor for Georgian bar
+                                           Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + // 3 = costing factor for Georgian bar
                                            Math.Round(CoverProfileCost, 2) +
                                            Math.Round(GlazingGasketPrice, 2) +
                                            Math.Round(WeatherBarPrice, 2) +
@@ -9910,7 +9959,8 @@ namespace ModelLayer.Model.Quotation
                                            Math.Round(AlumTrackPrice, 2) +
                                            Math.Round(InterlockPrice, 2) +
                                            Math.Round(ExtensionForInterlockPrice, 2) +
-                                           Math.Round(AluminumPullHandlePrice, 2);
+                                           Math.Round(AluminumPullHandlePrice, 2) +
+                                           Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2);// 3 = costing factor for Glazing Adaptor
 
                     AccesorriesCost = Math.Round(EndCapPrice, 2) +
                                       Math.Round(MechJointPrice, 2) +
@@ -10341,6 +10391,13 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "",
                                    "Ancillary Profile");
+
+                        Price_List.Rows.Add("Glazing Adaptor Price",
+                              GlazingAdaptorPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(GlazingAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Ancillary Profile");
 
                         Price_List.Rows.Add("Total",
                                           "",
@@ -10784,7 +10841,7 @@ namespace ModelLayer.Model.Quotation
             InterlockPrice = 0;
             ExtensionForInterlockPrice = 0;
             AluminumPullHandlePrice = 0;
-
+            GlazingAdaptorPrice = 0;
 
             AccesorriesCost = 0;
             EndCapPrice = 0;

@@ -6436,7 +6436,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_GlazingBeadWidth = Panel_GlassWidth + 200;
                 Panel_GlazingBeadWidthDecimal = Panel_GlassWidthDecimal;
-                Panel_GlazingBeadHeight = Panel_GlassHeight;
+                Panel_GlazingBeadHeight = Panel_GlassHeight +200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
                 //Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
