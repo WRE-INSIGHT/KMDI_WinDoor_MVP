@@ -188,7 +188,13 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
-
+        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        
+        public IDictionary<string,string> RDLCHeader
+        {
+            get { return _rdlcHeaders; }
+            set { _rdlcHeaders = value; }
+        }
         private List<IScreenModel> _screenList = new List<IScreenModel>();
         public List<IScreenModel> Screen_List
         {
@@ -1342,6 +1348,14 @@ namespace PresentationLayer.Presenter
                 }
                 wndr_content.Add("~");
             }
+
+            foreach (var dic in _rdlcHeaders)
+            {
+                wndr_content.Add(".");
+                wndr_content.Add(dic.Key + ": " + dic.Value);
+                wndr_content.Add(".");
+            }
+
             wndr_content.Add("EndofFile");
             #endregion
 
@@ -2304,6 +2318,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
+                    _rdlcHeaders.Clear();              
                     DialogResult dialogResult = DialogResult.No;
                     if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
                     {
@@ -2964,6 +2979,8 @@ namespace PresentationLayer.Presenter
                 Properties.Settings.Default.FilePath = "";
                 Properties.Settings.Default.Save();
             }
+
+
         }
         private void OnAddProjectsToolStripMenuItemClickEventRaised(object sender, EventArgs e)
         {
@@ -2989,6 +3006,7 @@ namespace PresentationLayer.Presenter
 
 
                     SetChangesMark();
+                    add_existing = true;
                     _isOpenProject = false;
                     string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
@@ -3301,7 +3319,7 @@ namespace PresentationLayer.Presenter
                 {
                     Frame_Load();
                 }
-
+                inside_item = false;
                 inside_concrete = true;
             }
 
@@ -3390,7 +3408,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 inside_item = false;
             }
-            else if (row_str == "~")
+            else   if (row_str == "~")
             {
                 if (inside_screen)
                 {
@@ -3403,8 +3421,21 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            if (row_str == "EndofFile")
+            else if(row_str == "." )
             {
+                if (inside_rdlcDic)
+                {
+                    Load_RDLCHeaders();
+                    inside_rdlcDic = false;
+                }
+                else
+                {
+                    inside_rdlcDic = true;
+                }
+            }
+              if (row_str == "EndofFile")
+            {
+                add_existing = false;
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
@@ -7717,11 +7748,62 @@ namespace PresentationLayer.Presenter
 
                         #endregion
                     }
+                    else if (inside_rdlcDic)
+                    {
+                        #region Load for RLDC Headers
+                        if (row_str != ".")
+                        {
+                            string[] key = row_str.Split(':');
+                            var value = row_str.Substring(row_str.IndexOf(": ") + 1 );
+
+                            if (rdlcDicChangeKey == true)
+                            {
+                                RDLCDictionary_key = key[0];
+                            }
+                            if(value == "" || value == " ")
+                            {
+                                value = "\n" + "\n";
+                            }
+                            else if(value == " To: ")
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = true;
+                            }
+                            else if (rdlcAddNewLineToAddr == true)
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = false;
+                            }
+                            else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            {
+                                value = value + "\n";
+                            }                                               
+                            RDLCDictionary_value = RDLCDictionary_value + value;
+                            rdlcDicChangeKey = false;
+                        }
+                        #endregion
+                    }
                     break;
             }
 
         }
 
+        private void Load_RDLCHeaders()
+        {
+            if (add_existing == false)
+            {
+              _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
+                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :"  +  RDLCDictionary_value.TrimStart());
+            }
+
+            if (RDLCDictionary_key != null && RDLCDictionary_value != null)
+            {
+                // Console.WriteLine("not null insert to dictionary");
+                rdlcDicChangeKey = true;
+                RDLCDictionary_key = "";
+                RDLCDictionary_value = "";
+            }
+        }
         private void Load_Screen()
         {
             IScreenModel scr = _screenServices.AddScreenModel(screen_ItemNumber,
@@ -8595,7 +8677,10 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
+             rdlcDicChangeKey = true,
+             rdlcAddNewLineToAddr = false,
+             add_existing = false;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -9171,6 +9256,10 @@ namespace PresentationLayer.Presenter
         Magnum_ScreenType magnum_ScreenType;
 
         #endregion
+        #region rdlcDictionary Properties
+        string RDLCDictionary_key,
+               RDLCDictionary_value;
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
@@ -9438,7 +9527,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
-                {
+                {               
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
