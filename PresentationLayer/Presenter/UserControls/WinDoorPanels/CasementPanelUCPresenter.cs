@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -821,9 +820,9 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     _frameModel.AdjustPropertyPanelHeight("Panel", "minusCornerDrive");
 
                 }
-                if(_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
+                if (_panelModel == _mainPresenter.PrevPnlModel_forDMSelection)
                 {
-                    if(_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
+                    if (_frameModel.Frame_Type == FrameModel.Frame_Padding.Door)
                     {
                         _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoline;
                     }
@@ -831,7 +830,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _mainPresenter.NxtPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
                     }
-                        
+
                 }
                 else
                 {
@@ -843,7 +842,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     {
                         _mainPresenter.PrevPnlModel_forDMSelection.Panel_HandleType = Handle_Type._Rotoswing;
                     }
-                    
+
                 }
                 _mainPresenter.DivModel_forDMSelection.Div_DMPanel = _panelModel;
                 _mainPresenter.PrevPnlModel_forDMSelection.Panel_BackColor = Color.DarkGray;
@@ -879,7 +878,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                     {
                                         framePropertyHeight += constants.frame_botframeproperty_PanelHeight;
                                     }
-                                    if(_frameModel.Frame_SlidingRailsQtyVisibility == true)
+                                    if (_frameModel.Frame_SlidingRailsQtyVisibility == true)
                                     {
                                         framePropertyHeight += constants.frame_SlidingRailsQtyproperty_PanelHeight;
                                     }
@@ -1076,7 +1075,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 }
             }
         }
-        
+
         int _timer_count;
         private void _tmr_Tick(object sender, EventArgs e)
         {
@@ -1286,7 +1285,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
         bool _HeightChange = false,
              _WidthChange = false;
 
-      
+
 
         private void OnCasementPanelUCPaintEventRaised(object sender, PaintEventArgs e)
         {
@@ -1438,6 +1437,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     glassType = "Unglazed";
                 }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                {
+                    glassType = "Security Mesh";
+                }
                 else
                 {
                     glassType = "";
@@ -1467,7 +1470,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 in_or_out = "Inward";
             }
 
-            if (glassType == "Unglazed")
+            if (glassType == "Unglazed" ||
+                glassType == "Security Mesh")
             {
                 g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
                                       new Font("Segoe UI", 8.0f, FontStyle.Bold),

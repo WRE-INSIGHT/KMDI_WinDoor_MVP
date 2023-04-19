@@ -27,6 +27,24 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _louverGalleryPropertyUC.LouverBladesCombinationPropertyUCLoadEventRaised += _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised;
             _louverGalleryPropertyUC.cmbBladeTypeSelectedValueChangedEventRaised += _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised;
             _louverGalleryPropertyUC.chkSecurityGrillCheckedChangedEventRaised += _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised;
+            _louverGalleryPropertyUC.chkRingpullLeverHandleCheckedChangedEventRaised += _louverGalleryPropertyUC_chkRingpullLeverHandleCheckedChangedEventRaised;
+        }
+
+        private void _louverGalleryPropertyUC_chkRingpullLeverHandleCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+
+            if (chk.Checked == false)
+            {
+                chk.Text = "No";
+                _panelModel.Panel_LouverRPLeverHandleCheck = false;
+            }
+            else if (chk.Checked == true)
+            {
+                chk.Text = "Yes";
+                _panelModel.Panel_LouverRPLeverHandleCheck = true;
+            }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised(object sender, EventArgs e)

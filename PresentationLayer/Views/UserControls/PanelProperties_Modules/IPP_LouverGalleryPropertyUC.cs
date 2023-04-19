@@ -8,5 +8,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler LouverBladesCombinationPropertyUCLoadEventRaised;
         event EventHandler cmbBladeTypeSelectedValueChangedEventRaised;
         event EventHandler chkSecurityGrillCheckedChangedEventRaised;
+        event EventHandler chkRingpullLeverHandleCheckedChangedEventRaised;
     }
 }
