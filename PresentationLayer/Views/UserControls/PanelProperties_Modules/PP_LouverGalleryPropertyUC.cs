@@ -47,6 +47,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         {
             this.DataBindings.Add(ModelBinding["Panel_LouverGalleryVisibility"]);
             cmb_BladeType.DataBindings.Add(ModelBinding["Panel_LouverBladeTypeOption"]);
+            chk_RingpullLeverHandle.DataBindings.Add(ModelBinding["Panel_LouverRPLeverHandleCheck"]);
+            chk_SecurityGrill.DataBindings.Add(ModelBinding["Panel_LouverSecurityGrillCheck"]);
         }
          
     }
