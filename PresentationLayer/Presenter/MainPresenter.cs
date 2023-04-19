@@ -3319,7 +3319,7 @@ namespace PresentationLayer.Presenter
                 {
                     Frame_Load();
                 }
-
+                inside_item = false;
                 inside_concrete = true;
             }
 
@@ -7750,6 +7750,7 @@ namespace PresentationLayer.Presenter
                     }
                     else if (inside_rdlcDic)
                     {
+                        #region Load for RLDC Headers
                         if (row_str != ".")
                         {
                             string[] key = row_str.Split(':');
@@ -7758,7 +7759,6 @@ namespace PresentationLayer.Presenter
                             if (rdlcDicChangeKey == true)
                             {
                                 RDLCDictionary_key = key[0];
-                                //Console.WriteLine(RDLCDictionary_key);
                             }
                             if(value == "" || value == " ")
                             {
@@ -7777,26 +7777,11 @@ namespace PresentationLayer.Presenter
                             else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
                             {
                                 value = value + "\n";
-                            }
-
-                            //add ng symbol for additional spaces
-                            // change algo for spaces 
-                                                      
+                            }                                               
                             RDLCDictionary_value = RDLCDictionary_value + value;
-                           // Console.WriteLine(value);
                             rdlcDicChangeKey = false;
                         }
-                        //else
-                        //{
-                        //    if(RDLCDictionary_key != null && RDLCDictionary_value != null)
-                        //    {
-                        //       // Console.WriteLine("not null insert to dictionary");
-                        //        Load_RDLCHeaders();
-                        //        rdlcDicChangeKey = true;
-                        //        RDLCDictionary_key = "";
-                        //        RDLCDictionary_value = "";
-                        //    }
-                        //}
+                        #endregion
                     }
                     break;
             }
