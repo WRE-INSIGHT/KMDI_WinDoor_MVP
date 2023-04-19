@@ -33,7 +33,6 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         private void _louverGalleryPropertyUC_chkRingpullLeverHandleCheckedChangedEventRaised(object sender, EventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
-
             if (chk.Checked == false)
             {
                 chk.Text = "No";
@@ -71,6 +70,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            //_panelModel.Panel_LouverRPLeverHandleCheck = true;
             _panelModel.Panel_LouverBladeTypeOption = BladeType_Option._glass;
             _louverGalleryPropertyUC.ThisBinding(CreateBindingDictionary());
         }
@@ -102,6 +102,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             binding.Add("Panel_LouverGalleryVisibility", new Binding("Visible", _panelModel, "Panel_LouverGalleryVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_LouverBladeTypeOption", new Binding("Text", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverRPLeverHandleCheck", new Binding("Checked", _panelModel, "Panel_LouverRPLeverHandleCheck", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverSecurityGrillCheck", new Binding("Checked", _panelModel, "Panel_LouverSecurityGrillCheck", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

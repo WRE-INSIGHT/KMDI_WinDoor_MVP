@@ -3879,7 +3879,6 @@ namespace PresentationLayer.Presenter
                         {
                             frm_Name = extractedValue_str;
                         }
-
                         if (row_str.Contains("Frame_WidthToBind:"))
                         {
                             frm_WidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -4121,6 +4120,32 @@ namespace PresentationLayer.Presenter
                         {
                             frm_ScreenFrameHeightEnable = Convert.ToBoolean(extractedValue_str);
                         }
+                        if (row_str.Contains("Frame_TubularVisibility:"))
+                        {
+                            frm_TubularVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularOption:"))
+                        {
+                            frm_TubularOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularWidthVisibility:"))
+                        {
+                            frm_TubularWidthVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularHeightVisibility:"))
+                        {
+                            frm_TubularHeightVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularHeight:"))
+                        {
+                            frm_TubularHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularWidth:"))
+                        {
+                            frm_TubularWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+
                         #endregion
                     }
                     else if (inside_concrete)
@@ -4497,9 +4522,17 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                        if (row_str.Contains("Panel_SlidingTypeVisibility:"))
+                        if (row_str.Contains("Panel_LouverRPLeverHandleCheck:"))
                         {
-                            panel_SlidingTypeVisibility = Convert.ToBoolean(extractedValue_str);
+                            panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Panel_LouverRPLeverHandleCheck:"))
+                        {
+                            panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Panel_LouverSecurityGrillCheck:"))
+                        {
+                            panel_LouverSecurityGrillCheck = Convert.ToBoolean(extractedValue_str);
                         }
                         //Explosion
                         else if (row_str.Contains("PanelGlass_ID:"))
@@ -8217,6 +8250,9 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_LouverHandleType = panel_LouverHandleType;
             pnlModel.Panel_LouverHandleLocation = panel_LouverHandleLocation;
             pnlModel.Panel_LouverGalleryColor = panel_LouverGalleryColor;
+            pnlModel.Panel_LouverRPLeverHandleCheck = panel_LouverRPLeverHandleCheck;
+            pnlModel.Panel_LouverSecurityGrillCheck = panel_LouverSecurityGrillCheck;
+            
 
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArtNo;
             pnlModel.Panel_PlantOnWeatherStripHeadArtNo = panel_PlantOnWeatherStripHeadArtNo;
@@ -8702,7 +8738,9 @@ namespace PresentationLayer.Presenter
               frm_ReinfHeight,
               frm_ExplosionHeight,
               frmProp_Height,
-              frm_ScreenFrameHeight;
+              frm_ScreenFrameHeight,
+              frm_TubularHeight,
+              frm_TubularWidth;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -8721,7 +8759,11 @@ namespace PresentationLayer.Presenter
              frm_ScreenOption,
              frm_ScreenHeightOption,
              frm_ScreenHeightVisibility,
-             frm_ScreenFrameHeightEnable;
+             frm_ScreenFrameHeightEnable,
+             frm_TubularVisibility,
+             frm_TubularOption,
+             frm_TubularWidthVisibility,
+             frm_TubularHeightVisibility;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -8830,7 +8872,9 @@ namespace PresentationLayer.Presenter
              panel_RotolineOptionsVisibility,
              panel_MVDOptionsVisibility,
              panel_RotaryOptionsVisibility,
-             panel_SlidingTypeVisibility;
+             panel_SlidingTypeVisibility,
+             panel_LouverRPLeverHandleCheck,
+             panel_LouverSecurityGrillCheck;
         float panel_ImageRendererZoom,
               panel_Zoom;
 
@@ -9653,6 +9697,12 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
                         _frameModel.Frame_ScreenFrameHeight = frm_ScreenFrameHeight;
                         _frameModel.Frame_ScreenFrameHeightEnable = frm_ScreenFrameHeightEnable;
+                        _frameModel.Frame_TubularVisibility = frm_TubularVisibility;
+                        _frameModel.Frame_TubularOption = frm_TubularOption;
+                        _frameModel.Frame_TubularWidthVisibility = frm_TubularWidthVisibility;
+                        _frameModel.Frame_TubularHeightVisibility = frm_TubularHeightVisibility;
+                        _frameModel.Frame_TubularHeight = frm_TubularHeight;
+                        _frameModel.Frame_TubularWidth = frm_TubularWidth;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
