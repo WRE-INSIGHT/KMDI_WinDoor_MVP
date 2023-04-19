@@ -21,6 +21,7 @@ namespace PresentationLayer.Presenter
         void PrintWindoorRDLC();
         void PrintContractSummaryRDLC();
         void PrintScreenRDLC();
+        void QuoteItemList_PrintAnnexRDLC();
         List<IQuoteItemListUCPresenter> LstQuoteItemUC { get; set; }
         List<ShowItemImage> ShowItemImage_CheckList { get; set; }
         List<int> RDLCReportCompilerItemIndexes { get; set; }

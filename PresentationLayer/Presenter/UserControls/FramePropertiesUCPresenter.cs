@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter.UserControls
         private IFP_FrameConnectionTypePropertyUCPresenter _fp_frameConnectionTypePropertyUCPresenter;
         private IFP_TrackProfilePropertyUCPresenter _fp_TrackProfilePropertyUCPresenter;
         private IFP_ScreenPropertyUCPresenter _fp_ScreenPropertyUCPresenter;
+        private IFP_TubularPropertyUCPresenter _fp_TubularPropertyUCPresenter;
 
         private IMainPresenter _mainPresenter;
         private IFrameModel _frameModel;
@@ -37,7 +38,8 @@ namespace PresentationLayer.Presenter.UserControls
                                           IFP_SlidingRailsPropertyUCPresenter fp_slidingRailsPropertyUCPresenter,
                                           IFP_FrameConnectionTypePropertyUCPresenter fp_frameConnectionTypePropertyUCPresenter,
                                           IFP_TrackProfilePropertyUCPresenter fp_TrackProfilePropertyUCPresenter,
-                                          IFP_ScreenPropertyUCPresenter fp_ScreenPropertyUCPresenter)
+                                          IFP_ScreenPropertyUCPresenter fp_ScreenPropertyUCPresenter,
+                                          IFP_TubularPropertyUCPresenter fp_TubularPropertyUCPresenter)
         {
             _framePropertiesUC = framePropertiesUC;
             _frameServices = frameServices;
@@ -46,6 +48,7 @@ namespace PresentationLayer.Presenter.UserControls
             _fp_frameConnectionTypePropertyUCPresenter = fp_frameConnectionTypePropertyUCPresenter;
             _fp_TrackProfilePropertyUCPresenter = fp_TrackProfilePropertyUCPresenter;
             _fp_ScreenPropertyUCPresenter = fp_ScreenPropertyUCPresenter;
+            _fp_TubularPropertyUCPresenter = fp_TubularPropertyUCPresenter;
 
             SubscribeToEventsSetup();
         }
@@ -152,7 +155,7 @@ namespace PresentationLayer.Presenter.UserControls
                             _frameModel.Frame_TrackProfileArtNoVisibility = true;
                             _frameModel.FrameProp_Height += constants.frame_TrackProfileproperty_PanelHeight;
                             _framePropertiesUC.AddHT_PanelBody(constants.frame_TrackProfileproperty_PanelHeight);
-                        } 
+                        }
                     }
                     #region old algo 
                     //if (_frameModel.Frame_ArtNo == FrameProfile_ArticleNo._6052 && _frameModel.Frame_ConnectionTypeVisibility == false)
@@ -239,10 +242,13 @@ namespace PresentationLayer.Presenter.UserControls
             _frameModel.Frame_Type = (Frame_Padding)Enum.Parse(typeof(Frame_Padding), rbtn.Text, true);
             if (_frameModel.Frame_WindoorModel.WD_profile.Contains("C70"))
             {
+                _frameModel.Frame_TubularVisibility = true;
+                _frameModel.FrameProp_Height += constants.frame_TubularOption;
+                _framePropertiesUC.AddHT_PanelBody(constants.frame_TubularOption);
+
                 if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
                     _frameModel.Frame_BotFrameVisible = true;
-
                     if (rbtn.Text == "Door" && rbtn.Checked == true)
                     {
                         _frameModel.Frame_ArtNo = FrameProfile_ArticleNo._7507;
@@ -293,6 +299,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
             else if (_frameModel.Frame_WindoorModel.WD_profile.Contains("PremiLine"))
             {
+                _frameModel.Frame_TubularVisibility = false; 
+
                 if (curr_rbtnText == "Window" || curr_rbtnText == "Concrete")
                 {
                     _frameModel.Frame_BotFrameVisible = true;
@@ -452,15 +460,23 @@ namespace PresentationLayer.Presenter.UserControls
             TrackProfilePropUC.Dock = DockStyle.Top;
             TrackProfilePropUC.BringToFront();
 
-            IFP_ScreenPropertyUCPresenter screen = _fp_ScreenPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter,this);
+            IFP_ScreenPropertyUCPresenter screen = _fp_ScreenPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter, this);
             UserControl ScreenPropUC = (UserControl)screen.GetScreenPropertyUC();
             _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(ScreenPropUC);
             ScreenPropUC.Dock = DockStyle.Top;
             ScreenPropUC.BringToFront();
+
+            IFP_TubularPropertyUCPresenter tubular = _fp_TubularPropertyUCPresenter.GetNewInstance(_unityC, _frameModel, _mainPresenter, this);
+            UserControl TubePropUC = (UserControl)tubular.GetTubularPropertyUC();
+            _framePropertiesUC.GetBodyPropertiesPNL().Controls.Add(TubePropUC);
+            TubePropUC.Dock = DockStyle.Top;
+            TubePropUC.BringToFront();
+
             if (_frameModel.Frame_ScreenOption)
             {
                 GetFramePropertiesUC().AddHT_PanelBody(constants.frame_ScreenHeightProperty_PanelHeight);
             }
+
             //if (_frameModel.Frame_Type == Frame_Padding.Door)
             //{
             //    _frameModel.FrameProp_Height += constants.frame_botframeproperty_PanelHeight;

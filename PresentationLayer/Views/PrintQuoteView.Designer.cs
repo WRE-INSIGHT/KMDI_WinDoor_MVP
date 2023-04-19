@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrintQuoteView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbox_VAT = new System.Windows.Forms.TextBox();
+            this.txtbox_FC = new System.Windows.Forms.TextBox();
+            this.txtbox_LnM = new System.Windows.Forms.TextBox();
+            this.chkbox_VAT = new System.Windows.Forms.CheckBox();
+            this.chkbox_FC = new System.Windows.Forms.CheckBox();
+            this.chkbox_LnM = new System.Windows.Forms.CheckBox();
+            this.lbl_addinfo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.chk_showpagenum = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -54,6 +61,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtbox_VAT);
+            this.panel1.Controls.Add(this.txtbox_FC);
+            this.panel1.Controls.Add(this.txtbox_LnM);
+            this.panel1.Controls.Add(this.chkbox_VAT);
+            this.panel1.Controls.Add(this.chkbox_FC);
+            this.panel1.Controls.Add(this.chkbox_LnM);
+            this.panel1.Controls.Add(this.lbl_addinfo);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.chk_showpagenum);
             this.panel1.Controls.Add(this.btnRefresh);
@@ -76,6 +90,76 @@
             this.panel1.Size = new System.Drawing.Size(1008, 144);
             this.panel1.TabIndex = 2;
             // 
+            // txtbox_VAT
+            // 
+            this.txtbox_VAT.Location = new System.Drawing.Point(802, 90);
+            this.txtbox_VAT.Name = "txtbox_VAT";
+            this.txtbox_VAT.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_VAT.TabIndex = 27;
+            this.txtbox_VAT.Visible = false;
+            // 
+            // txtbox_FC
+            // 
+            this.txtbox_FC.Location = new System.Drawing.Point(802, 59);
+            this.txtbox_FC.Name = "txtbox_FC";
+            this.txtbox_FC.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_FC.TabIndex = 26;
+            this.txtbox_FC.Visible = false;
+            // 
+            // txtbox_LnM
+            // 
+            this.txtbox_LnM.Location = new System.Drawing.Point(802, 28);
+            this.txtbox_LnM.Name = "txtbox_LnM";
+            this.txtbox_LnM.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_LnM.TabIndex = 25;
+            this.txtbox_LnM.Visible = false;
+            // 
+            // chkbox_VAT
+            // 
+            this.chkbox_VAT.AutoSize = true;
+            this.chkbox_VAT.Location = new System.Drawing.Point(673, 88);
+            this.chkbox_VAT.Name = "chkbox_VAT";
+            this.chkbox_VAT.Size = new System.Drawing.Size(74, 23);
+            this.chkbox_VAT.TabIndex = 24;
+            this.chkbox_VAT.Text = "VAT (%)";
+            this.chkbox_VAT.UseVisualStyleBackColor = true;
+            this.chkbox_VAT.Visible = false;
+            this.chkbox_VAT.CheckedChanged += new System.EventHandler(this.chkbox_VAT_CheckedChanged);
+            // 
+            // chkbox_FC
+            // 
+            this.chkbox_FC.AutoSize = true;
+            this.chkbox_FC.Location = new System.Drawing.Point(673, 59);
+            this.chkbox_FC.Name = "chkbox_FC";
+            this.chkbox_FC.Size = new System.Drawing.Size(119, 23);
+            this.chkbox_FC.TabIndex = 23;
+            this.chkbox_FC.Text = "Freight Charge";
+            this.chkbox_FC.UseVisualStyleBackColor = true;
+            this.chkbox_FC.Visible = false;
+            this.chkbox_FC.CheckedChanged += new System.EventHandler(this.chkbox_FC_CheckedChanged);
+            // 
+            // chkbox_LnM
+            // 
+            this.chkbox_LnM.AutoSize = true;
+            this.chkbox_LnM.Location = new System.Drawing.Point(673, 28);
+            this.chkbox_LnM.Name = "chkbox_LnM";
+            this.chkbox_LnM.Size = new System.Drawing.Size(123, 23);
+            this.chkbox_LnM.TabIndex = 22;
+            this.chkbox_LnM.Text = "Labor && Mobi...";
+            this.chkbox_LnM.UseVisualStyleBackColor = true;
+            this.chkbox_LnM.Visible = false;
+            this.chkbox_LnM.CheckedChanged += new System.EventHandler(this.chkbox_LnM_CheckedChanged);
+            // 
+            // lbl_addinfo
+            // 
+            this.lbl_addinfo.AutoSize = true;
+            this.lbl_addinfo.Location = new System.Drawing.Point(729, 5);
+            this.lbl_addinfo.Name = "lbl_addinfo";
+            this.lbl_addinfo.Size = new System.Drawing.Size(103, 19);
+            this.lbl_addinfo.TabIndex = 21;
+            this.lbl_addinfo.Text = "Additional  Info";
+            this.lbl_addinfo.Visible = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -97,7 +181,8 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Location = new System.Drawing.Point(902, 113);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(106, 28);
@@ -162,7 +247,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbox_Body.Location = new System.Drawing.Point(627, 26);
             this.rtbox_Body.Name = "rtbox_Body";
-            this.rtbox_Body.Size = new System.Drawing.Size(260, 118);
+            this.rtbox_Body.Size = new System.Drawing.Size(40, 118);
             this.rtbox_Body.TabIndex = 13;
             this.rtbox_Body.Text = resources.GetString("rtbox_Body.Text");
             // 
@@ -252,6 +337,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Print Quote";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrintQuoteView_FormClosing);
             this.Load += new System.EventHandler(this.PrintQuoteView_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -280,5 +366,12 @@
         private System.Windows.Forms.CheckedListBox chklstbox_itemnum;
         private System.Windows.Forms.CheckBox chk_showpagenum;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_addinfo;
+        private System.Windows.Forms.CheckBox chkbox_LnM;
+        private System.Windows.Forms.CheckBox chkbox_VAT;
+        private System.Windows.Forms.CheckBox chkbox_FC;
+        private System.Windows.Forms.TextBox txtbox_VAT;
+        private System.Windows.Forms.TextBox txtbox_FC;
+        private System.Windows.Forms.TextBox txtbox_LnM;
     }
 }

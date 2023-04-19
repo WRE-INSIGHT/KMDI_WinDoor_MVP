@@ -36,9 +36,13 @@
             this.pnl_chkMotorizedOptions = new System.Windows.Forms.Panel();
             this.lbl_motorized = new System.Windows.Forms.Label();
             this.chk_SecurityGrill = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chk_RingpullLeverHandle = new System.Windows.Forms.CheckBox();
             this.pnl_BladeType.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pnl_chkMotorizedOptions.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_BladeType
@@ -129,21 +133,60 @@
             this.chk_SecurityGrill.UseVisualStyleBackColor = false;
             this.chk_SecurityGrill.CheckedChanged += new System.EventHandler(this.chk_SecurityGrill_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.chk_RingpullLeverHandle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 84);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(150, 31);
+            this.panel1.TabIndex = 74;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.label3.Size = new System.Drawing.Size(91, 24);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "RP Lever handle";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // chk_RingpullLeverHandle
+            // 
+            this.chk_RingpullLeverHandle.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_RingpullLeverHandle.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.chk_RingpullLeverHandle.FlatAppearance.BorderSize = 0;
+            this.chk_RingpullLeverHandle.FlatAppearance.CheckedBackColor = System.Drawing.Color.SteelBlue;
+            this.chk_RingpullLeverHandle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chk_RingpullLeverHandle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_RingpullLeverHandle.Location = new System.Drawing.Point(98, 6);
+            this.chk_RingpullLeverHandle.Name = "chk_RingpullLeverHandle";
+            this.chk_RingpullLeverHandle.Size = new System.Drawing.Size(50, 21);
+            this.chk_RingpullLeverHandle.TabIndex = 35;
+            this.chk_RingpullLeverHandle.Text = "No";
+            this.chk_RingpullLeverHandle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_RingpullLeverHandle.UseVisualStyleBackColor = false;
+            this.chk_RingpullLeverHandle.CheckedChanged += new System.EventHandler(this.chk_RingpullLeverHandle_CheckedChanged);
+            // 
             // PP_LouverGalleryPropertyUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnl_chkMotorizedOptions);
             this.Controls.Add(this.pnl_BladeType);
             this.Controls.Add(this.panel2);
             this.Name = "PP_LouverGalleryPropertyUC";
-            this.Size = new System.Drawing.Size(150, 86);
+            this.Size = new System.Drawing.Size(150, 117);
             this.Load += new System.EventHandler(this.PP_LouverBladesCombinationPropertyUC_Load);
             this.pnl_BladeType.ResumeLayout(false);
             this.pnl_BladeType.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnl_chkMotorizedOptions.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -157,5 +200,8 @@
         private System.Windows.Forms.Panel pnl_chkMotorizedOptions;
         private System.Windows.Forms.Label lbl_motorized;
         private System.Windows.Forms.CheckBox chk_SecurityGrill;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chk_RingpullLeverHandle;
     }
 }

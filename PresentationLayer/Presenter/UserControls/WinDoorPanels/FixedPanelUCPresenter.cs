@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
 using Unity;
 using static EnumerationTypeLayer.EnumerationTypes;
@@ -1228,6 +1227,10 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     glassType = "Unglazed";
                 }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                {
+                    glassType = "Security Mesh";
+                }
                 else
                 {
                     glassType = "";
@@ -1244,7 +1247,8 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             (fixedpnl.ClientRectangle.Height / 2) + 15,
                                             fixedpnl.ClientRectangle.Width,
                                             10);
-            if (glassType == "Unglazed")
+            if (glassType == "Unglazed" ||
+                glassType == "Security Mesh")
             {
                 g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
                                       new Font("Segoe UI", 8.0f, FontStyle.Bold),
@@ -1279,7 +1283,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                           (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                           (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                 }
-               
+
 
 
                 if (_panelModel.Panel_Orient == true)
@@ -1299,7 +1303,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + sashDeduction,
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                 }
-               
+
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
@@ -1317,7 +1321,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w + (sashDeduction * 2),
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                 }
-                
+
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line - sashDeduction,
@@ -1335,7 +1339,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                                          (fixedpnl.ClientRectangle.Width - (outer_line * 2)) - w,
                                                          (fixedpnl.ClientRectangle.Height - (outer_line * 2)) - w));
                 }
-                
+
                 if (_panelModel.Panel_Orient == true)
                 {
                     g.DrawRectangle(new Pen(col, 3), new Rectangle(inner_line,
@@ -1376,14 +1380,14 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 int this_indx = _multiPanelModel.MPanelLst_Objects.IndexOf((UserControl)_fixedPanelUC);
                 Control nextCtrl = null,
                         prevCtrl = null;
-                if(_multiPanelModel.MPanelLst_Objects.Count > (this_indx + 2))
+                if (_multiPanelModel.MPanelLst_Objects.Count > (this_indx + 2))
                 {
                     nextCtrl = _multiPanelModel.MPanelLst_Objects[this_indx + 2];
                     if (!nextCtrl.Name.Contains("Multi"))
                     {
                         nextCtrl = null;
                     }
-                    if(this_indx > 1)
+                    if (this_indx > 1)
                     {
                         prevCtrl = _multiPanelModel.MPanelLst_Objects[this_indx - 2];
                         if (!prevCtrl.Name.Contains("Multi"))
@@ -1391,7 +1395,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                             prevCtrl = null;
                         }
                     }
-                   
+
                 }
                 if (this_indx > 1 && _multiPanelModel.MPanel_DividerEnabled && nextCtrl != null)
                 {
@@ -1412,18 +1416,18 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                     if (divCtrl.Name.Contains("Mullion"))
                     {
                         IMullionUC mullionUC = (MullionUC)_multiPanelModel.MPanelLst_Objects[this_indx - 1];
-                       
 
-                        if(prevCtrl == null)
+
+                        if (prevCtrl == null)
                         {
                             IDividerModel leftDiv = _multiPanelModel.MPanelLst_Divider.Find(divs => divs.Div_Name == ((UserControl)mullionUC).Name);
                             leftDiv.Div_WidthToBind -= div_mpnl_deduct_Tobind;
                             leftDiv.Div_Width -= 8;
                         }
-                        
+
                         _multiPanelModel.Adapt_sizeToBind_MPanelDivMPanel_Controls((UserControl)mullionUC, _frameModel.Frame_Type.ToString());
                         mullionUC.InvalidateThis();
-                        if(leftMpnl != null)
+                        if (leftMpnl != null)
                         {
                             leftMpnl.MPanel_WidthToBind -= div_mpnl_deduct_Tobind;
                         }
@@ -1465,7 +1469,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 _mainPresenter.DeleteDividerPropertiesUC(div.Div_ID);
                 div.Div_MPanelParent.MPanelLst_Divider.Remove(div);
                 _frameModel.Lst_Divider.Remove(div);
-              
+
                 _multiPanelModel.DeductPropertyPanelHeight(div.Div_PropHeight);
                 _frameModel.DeductPropertyPanelHeight(div.Div_PropHeight);
             }

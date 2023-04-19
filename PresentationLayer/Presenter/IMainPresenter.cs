@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        IDictionary<string, string> RDLCHeader { get; set; }
         List<IScreenModel> Screen_List { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
