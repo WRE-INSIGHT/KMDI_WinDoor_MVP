@@ -17,5 +17,6 @@ namespace PresentationLayer.Presenter
         IPrintQuoteView GetPrintQuoteView();
         void PrintRDLCReport();
         void EventLoad();
+        void printAnnexRDLC();
     }
 }

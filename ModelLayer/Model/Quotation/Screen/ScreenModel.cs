@@ -412,8 +412,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Magnum31mmTopGuide_MillFinish_Qty,
             Magnum31mmTensionersProfile_MillFinish_Qty,
             Magnum31mmsideU_MillFinish_Qty,
-        #endregion
-
+        #endregion       
         #endregion
 
         #region ZeroGravityChain
@@ -605,9 +604,6 @@ namespace ModelLayer.Model.Quotation.Screen
         AddOnsSpecialFactor,
         IncreasePercentage,
         TotalUnitPrice,
-        
-        
-
 
         #region BuiltinSideRoll Variables
 
@@ -639,6 +635,9 @@ namespace ModelLayer.Model.Quotation.Screen
         int curr_index_pos = 0;
         #endregion
 
+        int _plisséSRPerPanelWidth,
+            _screenOriginalWidth,
+            _screenPreviousWidth;
 
 
         #endregion
@@ -1707,7 +1706,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
 
             #endregion
-
             #region screen default quantity & discount 
 
             if (Screen_Quantity == 0)
@@ -1721,7 +1719,6 @@ namespace ModelLayer.Model.Quotation.Screen
             }
 
             #endregion
-
             #region AddOnsSpecialFactor
             if(Screen_AddOnsSpecialFactor == 1.3m)
             {
@@ -1734,11 +1731,29 @@ namespace ModelLayer.Model.Quotation.Screen
             Console.WriteLine("Addons is using a Factor " + AddOnsSpecialFactor);
 
             #endregion
+            #region ChangeScreenWidthPerPanel
+            if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR && _screenOriginalWidth != 0)
+            {
+                if(Screen_Width == _plisséSRPerPanelWidth)
+                {
+                    Screen_Width = _screenOriginalWidth;
+                }
+                else
+                {
+                    Screen_Width = Screen_Width;
+                }
+            }
+            else
+            {
+                Screen_Width = Screen_Width;
+            }
+            #endregion
 
             if (Screen_Width != 0 &&
                 Screen_Height != 0 &&
                 Screen_Factor != 0 || FromCellEndEdit == true)
             {
+
                 if (Screen_Types == ScreenType._RollUp)
                 {
                     #region RollUp 
@@ -6164,7 +6179,7 @@ namespace ModelLayer.Model.Quotation.Screen
                         Screen_TotalAmount = Screen_UnitPrice * Screen_Quantity;
 
                         Discount = Screen_UnitPrice * DiscountPercentage;
-                        Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);
+                        Screen_NetPrice = Math.Round((Screen_UnitPrice - Discount) * Screen_Quantity, 2);                                            
                         #endregion
                     }
                 }
@@ -6298,10 +6313,18 @@ namespace ModelLayer.Model.Quotation.Screen
                     {
                         Screen_Description = Screen_Description + " - Center Closure ";
                     }
+                    else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
+                    {
+                        Screen_Description = Screen_Description + " - Center Closure ";
+
+                        _plisséSRPerPanelWidth = Screen_Width / 2;
+                        _screenPreviousWidth = Screen_Width;
+                        _screenOriginalWidth = Screen_Width;
+                        Screen_Width = _plisséSRPerPanelWidth;
+                    }
                     else
                     {
-                        Screen_Description = Screen_Description;
-
+                        Screen_Description = Screen_Description;                     
                     }
                 }
                 else
@@ -6554,6 +6577,7 @@ namespace ModelLayer.Model.Quotation.Screen
             AddOnsSpecialFactor = 0;
             IncreasePercentage = 0;
             TotalUnitPrice = 0;
+
         }
 
         public void ScreenPropAddOnsReset()

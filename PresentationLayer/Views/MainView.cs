@@ -634,30 +634,37 @@ namespace PresentationLayer.Views
             {
                 CrtlPress = true;
             }
+            if (tsBtnNwin.Enabled == true)
+            {
 
-            if (e.Control == true && e.KeyCode == Keys.P)
-            {
-                itemListToolStripMenuItem_Click(sender, e);
+                if (e.Control == true && e.KeyCode == Keys.P)
+                {
+                    itemListToolStripMenuItem_Click(sender, e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.S)
+                {
+                    saveToolStripButton_Click(sender, e);
+                }
+                else if (e.Control == true && e.KeyCode == Keys.I)
+                {
+                    ScreentoolStripButton_Click(sender, e);
+                }
+                else if (e.Alt == true && e.KeyCode == Keys.C)
+                {
+                    CreateNewItem_Clicked(C70ToolStripMenuItem, e);
+                }
+                else if (e.Alt == true && e.KeyCode == Keys.P)
+                {
+                    CreateNewItem_Clicked(PremiLineToolStripMenuItem, e);
+                }
+                else if (e.Alt == true && e.KeyCode == Keys.G)
+                {
+                    CreateNewItem_Clicked(G58ToolStripMenuItem, e);
+                }
             }
-            else if (e.Control == true && e.KeyCode == Keys.S)
+            if (e.Control == true && e.KeyCode == Keys.O)
             {
-                saveToolStripButton_Click(sender, e);
-            }
-            else if (e.Control == true && e.KeyCode == Keys.I)
-            {
-                ScreentoolStripButton_Click(sender, e);
-            }
-            else if(e.Alt == true && e.KeyCode == Keys.C)
-            {                           
-                CreateNewItem_Clicked(C70ToolStripMenuItem, e);
-            }
-            else if(e.Alt == true && e.KeyCode == Keys.P)
-            {
-                CreateNewItem_Clicked(PremiLineToolStripMenuItem, e);
-            }
-            else if (e.Alt == true && e.KeyCode == Keys.G)
-            {
-                CreateNewItem_Clicked(G58ToolStripMenuItem, e);
+                openToolStripButton_Click(sender,  e);
             }
         }
 

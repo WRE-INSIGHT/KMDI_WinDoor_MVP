@@ -188,7 +188,13 @@ namespace PresentationLayer.Presenter
         #endregion
 
         #region GetSet
-
+        private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
+        
+        public IDictionary<string,string> RDLCHeader
+        {
+            get { return _rdlcHeaders; }
+            set { _rdlcHeaders = value; }
+        }
         private List<IScreenModel> _screenList = new List<IScreenModel>();
         public List<IScreenModel> Screen_List
         {
@@ -1343,6 +1349,14 @@ namespace PresentationLayer.Presenter
                 }
                 wndr_content.Add("~");
             }
+
+            foreach (var dic in _rdlcHeaders)
+            {
+                wndr_content.Add(".");
+                wndr_content.Add(dic.Key + ": " + dic.Value);
+                wndr_content.Add(".");
+            }
+
             wndr_content.Add("EndofFile");
             #endregion
 
@@ -2305,6 +2319,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
+                    _rdlcHeaders.Clear();              
                     DialogResult dialogResult = DialogResult.No;
                     if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
                     {
@@ -2993,6 +3008,7 @@ namespace PresentationLayer.Presenter
 
 
                     SetChangesMark();
+                    add_existing = true;
                     _isOpenProject = false;
                     string addExistingwndrfile = _mainView.GetOpenFileDialog().FileName;
 
@@ -3305,7 +3321,7 @@ namespace PresentationLayer.Presenter
                 {
                     Frame_Load();
                 }
-
+                inside_item = false;
                 inside_concrete = true;
             }
 
@@ -3394,7 +3410,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 inside_item = false;
             }
-            else if (row_str == "~")
+            else   if (row_str == "~")
             {
                 if (inside_screen)
                 {
@@ -3407,8 +3423,21 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            if (row_str == "EndofFile")
+            else if(row_str == "." )
             {
+                if (inside_rdlcDic)
+                {
+                    Load_RDLCHeaders();
+                    inside_rdlcDic = false;
+                }
+                else
+                {
+                    inside_rdlcDic = true;
+                }
+            }
+              if (row_str == "EndofFile")
+            {
+                add_existing = false;
                 int wndrId = 0;
                 foreach (IWindoorModel wndr in _quotationModel.Lst_Windoor)
                 {
@@ -3850,7 +3879,6 @@ namespace PresentationLayer.Presenter
                         {
                             frm_Name = extractedValue_str;
                         }
-
                         if (row_str.Contains("Frame_WidthToBind:"))
                         {
                             frm_WidthToBind = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
@@ -4092,6 +4120,32 @@ namespace PresentationLayer.Presenter
                         {
                             frm_ScreenFrameHeightEnable = Convert.ToBoolean(extractedValue_str);
                         }
+                        if (row_str.Contains("Frame_TubularVisibility:"))
+                        {
+                            frm_TubularVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularOption:"))
+                        {
+                            frm_TubularOption = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularWidthVisibility:"))
+                        {
+                            frm_TubularWidthVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularHeightVisibility:"))
+                        {
+                            frm_TubularHeightVisibility = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularHeight:"))
+                        {
+                            frm_TubularHeight = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+                        if (row_str.Contains("Frame_TubularWidth:"))
+                        {
+                            frm_TubularWidth = Convert.ToInt32(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
+                        }
+
+
                         #endregion
                     }
                     else if (inside_concrete)
@@ -4468,9 +4522,17 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                         }
-                        if (row_str.Contains("Panel_SlidingTypeVisibility:"))
+                        if (row_str.Contains("Panel_LouverRPLeverHandleCheck:"))
                         {
-                            panel_SlidingTypeVisibility = Convert.ToBoolean(extractedValue_str);
+                            panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Panel_LouverRPLeverHandleCheck:"))
+                        {
+                            panel_LouverRPLeverHandleCheck = Convert.ToBoolean(extractedValue_str);
+                        }
+                        if (row_str.Contains("Panel_LouverSecurityGrillCheck:"))
+                        {
+                            panel_LouverSecurityGrillCheck = Convert.ToBoolean(extractedValue_str);
                         }
                         //Explosion
                         else if (row_str.Contains("PanelGlass_ID:"))
@@ -7721,11 +7783,62 @@ namespace PresentationLayer.Presenter
 
                         #endregion
                     }
+                    else if (inside_rdlcDic)
+                    {
+                        #region Load for RLDC Headers
+                        if (row_str != ".")
+                        {
+                            string[] key = row_str.Split(':');
+                            var value = row_str.Substring(row_str.IndexOf(": ") + 1 );
+
+                            if (rdlcDicChangeKey == true)
+                            {
+                                RDLCDictionary_key = key[0];
+                            }
+                            if(value == "" || value == " ")
+                            {
+                                value = "\n" + "\n";
+                            }
+                            else if(value == " To: ")
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = true;
+                            }
+                            else if (rdlcAddNewLineToAddr == true)
+                            {
+                                value = value + "\n";
+                                rdlcAddNewLineToAddr = false;
+                            }
+                            else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            {
+                                value = value + "\n";
+                            }                                               
+                            RDLCDictionary_value = RDLCDictionary_value + value;
+                            rdlcDicChangeKey = false;
+                        }
+                        #endregion
+                    }
                     break;
             }
 
         }
 
+        private void Load_RDLCHeaders()
+        {
+            if (add_existing == false)
+            {
+              _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
+                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :"  +  RDLCDictionary_value.TrimStart());
+            }
+
+            if (RDLCDictionary_key != null && RDLCDictionary_value != null)
+            {
+                // Console.WriteLine("not null insert to dictionary");
+                rdlcDicChangeKey = true;
+                RDLCDictionary_key = "";
+                RDLCDictionary_value = "";
+            }
+        }
         private void Load_Screen()
         {
             IScreenModel scr = _screenServices.AddScreenModel(screen_ItemNumber,
@@ -8137,6 +8250,9 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_LouverHandleType = panel_LouverHandleType;
             pnlModel.Panel_LouverHandleLocation = panel_LouverHandleLocation;
             pnlModel.Panel_LouverGalleryColor = panel_LouverGalleryColor;
+            pnlModel.Panel_LouverRPLeverHandleCheck = panel_LouverRPLeverHandleCheck;
+            pnlModel.Panel_LouverSecurityGrillCheck = panel_LouverSecurityGrillCheck;
+            
 
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArtNo;
             pnlModel.Panel_PlantOnWeatherStripHeadArtNo = panel_PlantOnWeatherStripHeadArtNo;
@@ -8599,7 +8715,10 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen;
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
+             rdlcDicChangeKey = true,
+             rdlcAddNewLineToAddr = false,
+             add_existing = false;
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -8619,7 +8738,9 @@ namespace PresentationLayer.Presenter
               frm_ReinfHeight,
               frm_ExplosionHeight,
               frmProp_Height,
-              frm_ScreenFrameHeight;
+              frm_ScreenFrameHeight,
+              frm_TubularHeight,
+              frm_TubularWidth;
 
         int[] Arr_padding_norm,
                 Arr_padding_withmpnl;
@@ -8638,7 +8759,11 @@ namespace PresentationLayer.Presenter
              frm_ScreenOption,
              frm_ScreenHeightOption,
              frm_ScreenHeightVisibility,
-             frm_ScreenFrameHeightEnable;
+             frm_ScreenFrameHeightEnable,
+             frm_TubularVisibility,
+             frm_TubularOption,
+             frm_TubularWidthVisibility,
+             frm_TubularHeightVisibility;
         Padding frm_Padding_int,
                 frmImageRenderer_Padding_int;
         float frmImageRenderer_Zoom,
@@ -8747,7 +8872,9 @@ namespace PresentationLayer.Presenter
              panel_RotolineOptionsVisibility,
              panel_MVDOptionsVisibility,
              panel_RotaryOptionsVisibility,
-             panel_SlidingTypeVisibility;
+             panel_SlidingTypeVisibility,
+             panel_LouverRPLeverHandleCheck,
+             panel_LouverSecurityGrillCheck;
         float panel_ImageRendererZoom,
               panel_Zoom;
 
@@ -9175,6 +9302,10 @@ namespace PresentationLayer.Presenter
         Magnum_ScreenType magnum_ScreenType;
 
         #endregion
+        #region rdlcDictionary Properties
+        string RDLCDictionary_key,
+               RDLCDictionary_value;
+        #endregion
         string mpnllvl = "";
 
         #region ViewUpdate(Controls)
@@ -9442,7 +9573,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
-                {
+                {               
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
@@ -9566,6 +9697,12 @@ namespace PresentationLayer.Presenter
                         _frameModel.Frame_ScreenHeightVisibility = frm_ScreenHeightVisibility;
                         _frameModel.Frame_ScreenFrameHeight = frm_ScreenFrameHeight;
                         _frameModel.Frame_ScreenFrameHeightEnable = frm_ScreenFrameHeightEnable;
+                        _frameModel.Frame_TubularVisibility = frm_TubularVisibility;
+                        _frameModel.Frame_TubularOption = frm_TubularOption;
+                        _frameModel.Frame_TubularWidthVisibility = frm_TubularWidthVisibility;
+                        _frameModel.Frame_TubularHeightVisibility = frm_TubularHeightVisibility;
+                        _frameModel.Frame_TubularHeight = frm_TubularHeight;
+                        _frameModel.Frame_TubularWidth = frm_TubularWidth;
                         _frameModel.Set_DimensionsToBind_using_FrameZoom();
                         _frameModel.Set_ImagerDimensions_using_ImagerZoom();
                         _frameModel.Set_FramePadding();
