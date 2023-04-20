@@ -16,6 +16,8 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler LouverBladesCombinationPropertyUCLoadEventRaised;
         public event EventHandler cmbBladeTypeSelectedValueChangedEventRaised;
         public event EventHandler chkSecurityGrillCheckedChangedEventRaised;
+        public event EventHandler chkRingpullLeverHandleCheckedChangedEventRaised;
+
         private void PP_LouverBladesCombinationPropertyUC_Load(object sender, EventArgs e)
         {
             List<BladeType_Option> BladeType = new List<BladeType_Option>();
@@ -27,23 +29,26 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
             EventHelpers.RaiseEvent(sender, LouverBladesCombinationPropertyUCLoadEventRaised, e);
         }
-
         private void cmb_BladeType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbBladeTypeSelectedValueChangedEventRaised, e);
         }
-
-        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
-        {
-            this.DataBindings.Add(ModelBinding["Panel_LouverGalleryVisibility"]);
-            cmb_BladeType.DataBindings.Add(ModelBinding["Panel_LouverBladeTypeOption"]);
-        }
-
-
-
         private void chk_SecurityGrill_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkSecurityGrillCheckedChangedEventRaised, e);
         }
+
+        private void chk_RingpullLeverHandle_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkRingpullLeverHandleCheckedChangedEventRaised, e);
+        }
+        public void ThisBinding(Dictionary<string, Binding> ModelBinding)
+        {
+            this.DataBindings.Add(ModelBinding["Panel_LouverGalleryVisibility"]);
+            cmb_BladeType.DataBindings.Add(ModelBinding["Panel_LouverBladeTypeOption"]);
+            chk_RingpullLeverHandle.DataBindings.Add(ModelBinding["Panel_LouverRPLeverHandleCheck"]);
+            chk_SecurityGrill.DataBindings.Add(ModelBinding["Panel_LouverSecurityGrillCheck"]);
+        }
+         
     }
 }

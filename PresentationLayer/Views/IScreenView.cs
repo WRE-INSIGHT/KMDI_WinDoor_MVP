@@ -11,9 +11,9 @@ namespace PresentationLayer.Views
         NumericUpDown screen_width { get; set; }
         TextBox screen_itemnumber { get; set; }
         NumericUpDown screen_quantity { get; set; }
-
         NumericUpDown screen_discountpercentage { get; set; }
 
+        string screenViewWindoorID { get; set; }
         event EventHandler ScreenViewLoadEventRaised;
         event EventHandler btnAddClickEventRaised;
         event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;

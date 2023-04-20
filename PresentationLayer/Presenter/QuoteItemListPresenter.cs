@@ -560,6 +560,11 @@ namespace PresentationLayer.Presenter
             clearingOperation();
         }
 
+        public void QuoteItemList_PrintAnnexRDLC()
+        {
+            _printQuotePresenter.printAnnexRDLC();
+        }
+
         public void ContractSummaryComputation()
         {
             DSQuotation _dtqoute = new DSQuotation();

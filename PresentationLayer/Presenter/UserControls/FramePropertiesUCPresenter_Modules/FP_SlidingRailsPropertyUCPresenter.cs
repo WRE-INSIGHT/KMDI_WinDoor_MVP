@@ -53,7 +53,14 @@ namespace PresentationLayer.Presenter.UserControls.FramePropertiesUCPresenter_Mo
 
         private void _slidingRailsPropertyUC_FPSlidingRailsPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
-            _frameModel.Frame_SlidingRailsQty = 2;
+            if (_frameModel.Frame_SlidingRailsQty == 0)
+            {
+                _frameModel.Frame_SlidingRailsQty = 2;
+            }
+            else
+            {
+                _frameModel.Frame_SlidingRailsQty = _frameModel.Frame_SlidingRailsQty;
+            }
             _slidingRailsPropertyUC.ThisBinding(CreateBindingDictionary());
         }
 

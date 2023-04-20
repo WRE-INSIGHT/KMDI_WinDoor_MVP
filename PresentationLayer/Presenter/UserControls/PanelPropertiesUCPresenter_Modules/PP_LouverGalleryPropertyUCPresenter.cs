@@ -27,6 +27,23 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             _louverGalleryPropertyUC.LouverBladesCombinationPropertyUCLoadEventRaised += _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised;
             _louverGalleryPropertyUC.cmbBladeTypeSelectedValueChangedEventRaised += _louverGalleryPropertyUC_cmbBladeTypeSelectedValueChangedEventRaised;
             _louverGalleryPropertyUC.chkSecurityGrillCheckedChangedEventRaised += _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised;
+            _louverGalleryPropertyUC.chkRingpullLeverHandleCheckedChangedEventRaised += _louverGalleryPropertyUC_chkRingpullLeverHandleCheckedChangedEventRaised;
+        }
+
+        private void _louverGalleryPropertyUC_chkRingpullLeverHandleCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+            if (chk.Checked == false)
+            {
+                chk.Text = "No";
+                _panelModel.Panel_LouverRPLeverHandleCheck = false;
+            }
+            else if (chk.Checked == true)
+            {
+                chk.Text = "Yes";
+                _panelModel.Panel_LouverRPLeverHandleCheck = true;
+            }
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _louverGalleryPropertyUC_chkSecurityGrillCheckedChangedEventRaised(object sender, EventArgs e)
@@ -53,6 +70,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void _louverGalleryPropertyUC_LouverBladesCombinationPropertyUCLoadEventRaised(object sender, EventArgs e)
         {
+            //_panelModel.Panel_LouverRPLeverHandleCheck = true;
             _panelModel.Panel_LouverBladeTypeOption = BladeType_Option._glass;
             _louverGalleryPropertyUC.ThisBinding(CreateBindingDictionary());
         }
@@ -84,6 +102,8 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
             binding.Add("Panel_LouverGalleryVisibility", new Binding("Visible", _panelModel, "Panel_LouverGalleryVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("Panel_LouverBladeTypeOption", new Binding("Text", _panelModel, "Panel_LouverBladeTypeOption", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverRPLeverHandleCheck", new Binding("Checked", _panelModel, "Panel_LouverRPLeverHandleCheck", true, DataSourceUpdateMode.OnPropertyChanged));
+            binding.Add("Panel_LouverSecurityGrillCheck", new Binding("Checked", _panelModel, "Panel_LouverSecurityGrillCheck", true, DataSourceUpdateMode.OnPropertyChanged));
 
             return binding;
         }

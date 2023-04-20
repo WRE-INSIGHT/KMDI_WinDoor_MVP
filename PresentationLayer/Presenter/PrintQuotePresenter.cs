@@ -28,13 +28,26 @@ namespace PresentationLayer.Presenter
         private IQuotationModel _quotationModel;
         bool showImage, 
             chklist_exist = false,
-            checklist_raised = false;
+            checklist_raised = false,
+            _rdlcHeaderIsPresent = false;
+        string GlassThickness_key,
+               basecolor_key,
+               QuotationBody_key,
+               QuotationSalutation_key,
+               QuotationAddress_key,
+               VatPercentage_key,
+               QuotationOuofTownExpenses_key,
+               GlassThickness,
+               baseColor;
+
+
+
+
+
 
         public PrintQuotePresenter(IPrintQuoteView printQuoteView)
         {
             _printQuoteView = printQuoteView;
-
-
             SubscribrToEventSetup();
         }
 
@@ -44,115 +57,285 @@ namespace PresentationLayer.Presenter
             _printQuoteView.PrintQuoteViewLoadEventRaised += _printQuoteView_PrintQuoteViewLoadEventRaised;
             _printQuoteView.SelectedIndexChangeEventRaised += _printQuoteView_SelectedIndexChangeEventRaised;
             _printQuoteView.txtoftexpensesKeyPressEventRaised += _printQuoteView_txtoftexpensesKeyPressEventRaised;
+            _printQuoteView.chkboxLnMCheckedChangedEventRaised += _printQuoteView_chkboxLnMCheckedChangedEventRaised;
+            _printQuoteView.chkboxFCCheckedChangedEventRaised += _printQuoteView_chkboxFCCheckedChangedEventRaised;
+            _printQuoteView.chkboxVATCheckedChangedEventRaised += _printQuoteView_chkboxVATCheckedChangedEventRaised;
+            _printQuoteView.PrintQuoteViewFormClosingEventRaised += _printQuoteView_PrintQuoteViewFormClosingEventRaised;
         }
 
 
 
-        public void EventLoad()
+        private void _printQuoteView_chkboxVATCheckedChangedEventRaised(object sender, EventArgs e)
         {
-            List<string> Lst_BaseColor = new List<string>();
-            List<string> Lst_Panel = new List<string>();
-            foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
+            if (_printQuoteView.GetVatChkbox().Checked)
             {
-                Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
-
-                _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
-
-
-                foreach (IFrameModel frm in wdm.lst_frame)
+                if (_mainPresenter.printStatus == "ScreenItem")
                 {
-                    foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
-                    {
-                        foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
-                        {
-                            Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
-                        }
-                    }
-                    foreach (IPanelModel pnl in frm.Lst_Panel)
-                    {
-                        Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
-                    }
+                    _printQuoteView.GetVatTxtbox().Visible = true;
+                    _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(330, 88);
                 }
-
-
-            }
-
-
-            int GlassCount = 0;
-            string GlassThickness = "";
-            var q = from x in Lst_Panel
-                    group x by x into g
-                    let count = g.Count()
-                    orderby count descending
-                    select new { Value = g.Key, Count = count };
-            foreach (var x in q)
-            {
-                if (x.Count > GlassCount)
+                else if (_mainPresenter.printStatus == "ContractSummary")
                 {
-                    GlassCount = x.Count;
-                    GlassThickness = x.Value.ToString();
-                }
-            }
+                    _printQuoteView.GetVatTxtbox().Visible = true;
 
-            var duplicateBaseColor = Lst_BaseColor.Distinct().ToList();
-            string baseColor = "";
-            for (int i = 0; i < duplicateBaseColor.Count(); i++)
-            {
-                if (i == 0)
-                {
-                    baseColor += duplicateBaseColor.ToList()[i];
+                    var Curr_X_Location = _printQuoteView.GetVatChkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int Vat_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetVatTxtbox().Location = new System.Drawing.Point(Vat_X_Loc, 90);
+                    _printQuoteView.GetVatTxtbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                 }
-                else if (i == 1)
-                {
-                    if (duplicateBaseColor.Count() == 3)
-                    {
-                        baseColor += ", " + duplicateBaseColor.ToList()[i];
-                    }
-                    else
-                    {
-                        baseColor += " & " + duplicateBaseColor.ToList()[i];
-                    }
-                }
-                else if (i == 2)
-                {
-                    baseColor += " & " + duplicateBaseColor.ToList()[i];
-                }
-            }
-            if (GlassThickness != "Unglazed" && GlassThickness != "")
-            {
-                GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
-            }
-            baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
-            if(_mainPresenter.printStatus == "ScreenItem")
-            {
-                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
             }
             else
             {
-                _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
-                                                          + "USING "
-                                                          + baseColor.ToUpper()
-                                                          + " PROFILES\n"
-                                                          + "USING "
-                                                          + GlassThickness.ToUpper()
-                                                          + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
-                                                          + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                _printQuoteView.GetVatTxtbox().Visible = false;
+            }
+        }
+
+        private void _printQuoteView_chkboxFCCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_printQuoteView.GetFreightChargesChkbox().Checked)
+            {
+                if (_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetFreightChargeTxtBox().Visible = true;
+                    _printQuoteView.GetFreightChargeTxtBox().Location = new System.Drawing.Point(330, 59);
+                }
+                else if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _printQuoteView.GetFreightChargeTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetFreightChargesChkbox().Location.X;            
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int FreightC_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetFreightChargeTxtBox().Location = new System.Drawing.Point(FreightC_X_Loc, 59);
+                    _printQuoteView.GetFreightChargeTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                }
+            }
+            else
+            {
+                _printQuoteView.GetFreightChargeTxtBox().Visible = false;
+            }
+        }
+
+        private void _printQuoteView_chkboxLnMCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
+            {
+                if(_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Location = new System.Drawing.Point(330,28);
+                }
+                else if(_mainPresenter.printStatus == "ContractSummary")
+                {                                    
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetLabor_N_MobiChkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int LnMMobiTxtBox_X_Loc = converted_XLoc + 130 ;                                  
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Location = new System.Drawing.Point(LnMMobiTxtBox_X_Loc, 28);
+                    _printQuoteView.GetLabor_N_MobiTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    
+                }
+            }
+            else
+            {
+                _printQuoteView.GetLabor_N_MobiTxtBox().Visible = false;
+            }
+        }
+
+        private void _printQuoteView_PrintQuoteViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
+        {
+            Console.WriteLine("closing na yung form ng print ");
+            GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
+            basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
+            QuotationBody_key = _mainPresenter.printStatus + "_" + "QuotationBody";
+            QuotationSalutation_key = _mainPresenter.printStatus + "_" + "QuotationSalutation";
+            QuotationAddress_key = _mainPresenter.printStatus + "_" + "QuotationAddress";
+            VatPercentage_key = _mainPresenter.printStatus + "_" + "VatPercentage";
+            QuotationOuofTownExpenses_key = _mainPresenter.printStatus + "_" + "QuotationOuofTownExpenses_key";
+
+            if (_rdlcHeaderIsPresent == true)
+            {
+                _mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
+                _mainPresenter.RDLCHeader[basecolor_key] = baseColor;
+                _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
+                _mainPresenter.RDLCHeader[QuotationSalutation_key] = _printQuoteView.QuotationSalutation;
+                _mainPresenter.RDLCHeader[QuotationAddress_key] = _printQuoteView.QuotationAddress;
+                _mainPresenter.RDLCHeader[VatPercentage_key] = _printQuoteView.VatPercentage;
+                _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
+            }
+            else
+            {            
+                _mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
+                _mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
+                _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);
+                _mainPresenter.RDLCHeader.Add(QuotationSalutation_key, _printQuoteView.QuotationSalutation);
+                _mainPresenter.RDLCHeader.Add(QuotationAddress_key, _printQuoteView.QuotationAddress);
+                _mainPresenter.RDLCHeader.Add(VatPercentage_key, _printQuoteView.VatPercentage);
+                _mainPresenter.RDLCHeader.Add(QuotationOuofTownExpenses_key,_printQuoteView.QuotationOuofTownExpenses);
+
+            }
+        }
+        public void EventLoad()
+        {
+           
+           List<string> Lst_BaseColor = new List<string>();
+           List<string> Lst_Panel = new List<string>();
+           foreach (IWindoorModel wdm in _mainPresenter.qoutationModel_MainPresenter.Lst_Windoor)
+           {
+               Lst_BaseColor.Add(wdm.WD_BaseColor.ToString());
+
+               _printQuoteView.GetChkLstBox().Items.Add("Item: " + wdm.WD_id);
+
+
+               foreach (IFrameModel frm in wdm.lst_frame)
+               {
+                   foreach (IMultiPanelModel mpnl in frm.Lst_MultiPanel)
+                   {
+                       foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
+                       {
+                           Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
+                       }
+                   }
+                   foreach (IPanelModel pnl in frm.Lst_Panel)
+                   {
+                       Lst_Panel.Add(pnl.Panel_GlassThicknessDesc.ToString());
+                   }
+               }
+
+
+           }
+
+
+           int GlassCount = 0;
+            GlassThickness = "";
+           var q = from x in Lst_Panel
+                   group x by x into g
+                   let count = g.Count()
+                   orderby count descending
+                   select new { Value = g.Key, Count = count };
+           foreach (var x in q)
+           {
+               if (x.Count > GlassCount)
+               {
+                   GlassCount = x.Count;
+                   GlassThickness = x.Value.ToString();
+               }
+           }
+
+           var duplicateBaseColor = Lst_BaseColor.Distinct().ToList();
+            baseColor = "";
+           for (int i = 0; i < duplicateBaseColor.Count(); i++)
+           {
+               if (i == 0)
+               {
+                   baseColor += duplicateBaseColor.ToList()[i];
+               }
+               else if (i == 1)
+               {
+                   if (duplicateBaseColor.Count() == 3)
+                   {
+                       baseColor += ", " + duplicateBaseColor.ToList()[i];
+                   }
+                   else
+                   {
+                       baseColor += " & " + duplicateBaseColor.ToList()[i];
+                   }
+               }
+               else if (i == 2)
+               {
+                   baseColor += " & " + duplicateBaseColor.ToList()[i];
+               }
+           }
+                      
+            foreach (var headers_keys in _mainPresenter.RDLCHeader)
+            {
+                if (headers_keys.Key.Contains(_mainPresenter.printStatus))
+                {
+                    _rdlcHeaderIsPresent = true;
+                    break;
+                }
+            }
+
+            if (_rdlcHeaderIsPresent == true)
+            {
+                foreach(var headers in _mainPresenter.RDLCHeader)
+                {
+                    if(headers.Key.Contains(_mainPresenter.printStatus))
+                    {
+                        if (headers.Key.Contains("GlassThickness"))
+                        {
+                            GlassThickness = headers.Value;
+                        }
+                        else if (headers.Key.Contains("baseColor"))
+                        {
+                            baseColor = headers.Value;
+                        }
+                        else if (headers.Key.Contains("QuotationBody"))
+                        {
+                            _printQuoteView.QuotationBody = headers.Value;
+                        }
+                        else if (headers.Key.Contains("QuotationSalutation"))
+                        {
+                            _printQuoteView.QuotationSalutation = headers.Value;
+                        }
+                        else if (headers.Key.Contains("QuotationAddress"))
+                        {
+                            _printQuoteView.QuotationAddress = headers.Value;
+                        }
+                        else if (headers.Key.Contains("VatPercentage"))
+                        {
+                            _printQuoteView.VatPercentage = headers.Value;
+                        }
+                        else if (headers.Key.Contains("QuotationOuofTownExpenses"))
+                        {
+                            _printQuoteView.QuotationOuofTownExpenses = headers.Value;
+                        }
+                                                 
+                    }
+                }
+            }
+            else
+            {
+
+                if (GlassThickness != "Unglazed" && GlassThickness != "")
+                {
+                    GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
+                }
+                baseColor = baseColor.Replace("Dark Brown", "WOODGRAIN");
+                if (_mainPresenter.printStatus == "ScreenItem")
+                {
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for the Insect Screens corresponding to our world-class PVC-u windows and doors from Germany for your requirements on your residence.";
+                }
+                else
+                {
+                    _printQuoteView.QuotationBody = "Thank you for letting us serve you. Please find herewith our quotation for our world-class uPVC windows and doors from Germany for your requirements on your residence.\n\n"
+                                                              + "USING "
+                                                              + baseColor.ToUpper()
+                                                              + " PROFILES\n"
+                                                              + "USING " 
+                                                              + GlassThickness.ToUpper()
+                                                              + " GLASS UNLESS OTHERWISE SPECIFIED\n\n"
+                                                              + "PRICE VALIDITY: 30 DAYS FROM DATE OF THIS QUOTATION";
+                }
+
+                _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
+                                                    + _mainPresenter.titleLastname
+                                                    + ",";
+                _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
+                _printQuoteView.QuotationOuofTownExpenses = "0";
+                _printQuoteView.VatPercentage = "12";
             }
             
-
-            _printQuoteView.QuotationSalutation = "INITIAL QUOTATION\n\nDear "
-                                                + _mainPresenter.titleLastname
-                                                + ",";
-            _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
-            _printQuoteView.GetDTPDate().Value = DateTime.Now;
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
             try
             {
                 EventLoad();
-                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load            
-                _printQuoteView.QuotationOuofTownExpenses = "0";
+                //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load     
+                _printQuoteView.GetDTPDate().Value = DateTime.Now;
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);           
             }
@@ -250,7 +433,7 @@ namespace PresentationLayer.Presenter
 
             _printQuoteView.GetReportViewer().SetDisplayMode(DisplayMode.PrintLayout);
             _printQuoteView.GetReportViewer().ZoomMode = ZoomMode.Percent;
-            _printQuoteView.GetReportViewer().ZoomPercent = 75;
+            _printQuoteView.GetReportViewer().ZoomPercent = 100;
             _printQuoteView.GetReportViewer().RefreshReport();
         }
 
@@ -297,23 +480,45 @@ namespace PresentationLayer.Presenter
                 else if (_mainPresenter.printStatus == "ContractSummary")
                 {
                     _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.SummaryOfContract.rdlc";
+                    //_printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
                 }
 
                 if (_mainPresenter.printStatus == "ScreenItem")
                 {
                     #region Screen RDLC
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
-
-                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(795, 26);
-                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Right | AnchorStyles.Left;
-                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(795, 3);
-                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(589, 26);
-                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(589, 3);
-                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(383, 26);
-                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(383, 3);
-
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
                     _printQuoteView.GetOutofTownExpenses().Visible = false;
                     _printQuoteView.GetChkLstBox().Visible = false;
+
+                    #region label,TextBox & Rtextbox  new loc         
+                    _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(845, 26);
+                    _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(639, 26);
+                    _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(433, 26);
+
+                    _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(845, 3);
+                    _printQuoteView.GetSalutationLabel().Location = new System.Drawing.Point(639, 3);
+                    _printQuoteView.GetAddressLabel().Location = new System.Drawing.Point(433, 3);
+
+                    _printQuoteView.GetQuotationBody().Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620, 118);
+                    _printQuoteView.GetQuotationBody().Width = _printQuoteView.GetQuotationBody().Width - 120;
+
+
+
+
+                    #endregion
+
+                    #region Visibility Additional info
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = false;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = false;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = false;
+                    _printQuoteView.GetVatChkbox().Visible = false;
+                    _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(265, 3);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205, 26);
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205, 59);
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205, 88);
+                    #endregion
 
                     #region save files without pos in AEIC
                     if (_mainPresenter.position == null || _mainPresenter.position == " " || _mainPresenter.position == "")
@@ -400,10 +605,10 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetBodyLabel().Location = new System.Drawing.Point(627, 3);
 
                     _printQuoteView.GetQuotationBody().Location = new System.Drawing.Point(627,26);
-                    //_printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(627,26);
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(620,118);
                     #endregion
 
                     _printQuoteView.ShowLastPage().Visible = false;
@@ -516,6 +721,22 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetQuotationSalutation().Location = new System.Drawing.Point(416, 26);
                     _printQuoteView.GetQuotationAddress().Location = new System.Drawing.Point(205, 26);
 
+                    _printQuoteView.GetQuotationBody().Size = new System.Drawing.Size(500,118);
+
+                    #endregion
+                    #region Visibility Additional Info
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true;
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(1200, 5);
+                    _printQuoteView.GetAdditionalInfoLabel().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(1130, 28);
+                    _printQuoteView.GetLabor_N_MobiChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(1130, 59);
+                    _printQuoteView.GetFreightChargesChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(1130, 88);
+                    _printQuoteView.GetVatChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
@@ -523,6 +744,7 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetUniversalLabel().Text = "Out Of Town Expenses";
                     _printQuoteView.GetOutofTownExpenses().Location = new System.Drawing.Point(38, 81);
                     _printQuoteView.GetRefreshBtn().Location = new System.Drawing.Point(38, 109);
+                    _printQuoteView.GetRefreshBtn().Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
 
                     //string trimmedamount = new string(_printQuoteView.QuotationOuofTownExpenses.Where(Char.IsDigit).ToArray());
                     //int oftexpenses = Convert.ToInt32(trimmedamount);
@@ -533,12 +755,12 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-
-                    ReportParameter[] RParam = new ReportParameter[5];
+                    ReportParameter[] RParam = new ReportParameter[7];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
+                    RParam[6] = new ReportParameter("VatPercentage",_printQuoteView.VatPercentage);
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -547,6 +769,15 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[4] = new ReportParameter("ShowPageNum", "False");
+                    }
+
+                    if (_printQuoteView.GetVatChkbox().Checked)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+                    else
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
@@ -576,6 +807,7 @@ namespace PresentationLayer.Presenter
                         {
                             fs.Write(bytes, 0, bytes.Length);
                         }
+                        printAnnexRDLC();
                     }
                     #endregion
 
@@ -585,11 +817,37 @@ namespace PresentationLayer.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
+                Console.WriteLine(this + " error in  print" + ex.Message);
             }
         }
         
-        
+        public void printAnnexRDLC()
+        {
+            _printQuoteView.GetReportViewer().LocalReport.ReportEmbeddedResource = @"PresentationLayer.Reports.Annex.rdlc";
+
+            Warning[] warnings;
+            string[] streamIds;
+            string mimeType = string.Empty;
+            string encoding = string.Empty;
+            string extension = string.Empty;
+
+            byte[] bytes = _printQuoteView.GetReportViewer().LocalReport.Render
+               ("PDF",
+               null,
+               out mimeType,
+               out encoding,
+               out extension,
+               out streamIds,
+               out warnings
+               );
+
+            string defDir = Properties.Settings.Default.WndrDir + @"\KMDIRDLCMergeFolder\X.PDF";
+            using (FileStream fs = new FileStream(defDir, FileMode.Create))
+            {
+                fs.Write(bytes, 0, bytes.Length);
+            }
+        }
         public IPrintQuoteView GetPrintQuoteView()
         {
             return _printQuoteView;

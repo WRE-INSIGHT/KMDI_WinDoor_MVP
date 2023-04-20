@@ -34,6 +34,7 @@ namespace ModelLayer.Model.Quotation
         bool itemSelectStatus { get; set; }
         List<IWindoorModel> Lst_Windoor { get; set; }
         List<decimal> lstTotalPrice { get; set; }
+        bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
 
         DataTable GetListOfMaterials(IWindoorModel item);
         void Select_Current_Windoor(IWindoorModel item);

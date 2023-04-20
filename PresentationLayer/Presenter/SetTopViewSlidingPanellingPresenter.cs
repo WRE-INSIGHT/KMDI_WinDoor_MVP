@@ -1,6 +1,5 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
-using ModelLayer.Model.Quotation.Panel;
 using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
@@ -162,7 +161,8 @@ namespace PresentationLayer.Presenter
                 {
                     line_X_Distance = _pnlPanelling.Width / pnlCount;
                 }
-                int InitialDistance = 20;
+                int InitialDistance = 50;
+                g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance, line_LtR_Y), new Point(_pnlPanelling.Width - 10, line_LtR_Y));
                 for (int a = 0; a < pnlLeftCounter; a++)
                 {
 
@@ -173,11 +173,11 @@ namespace PresentationLayer.Presenter
 
                     if (a % 2 == 0)
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x2, 10));
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
                     }
                     else
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y), new Point(x1, 10));
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
                     }
                     //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
                     InitialDistance = x2;
@@ -197,11 +197,11 @@ namespace PresentationLayer.Presenter
 
                     if (a % 2 == 0)
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x2, 10));
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
                     }
                     else
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y), new Point(x1, 10));
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
                     }
                     //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
                     InitialDistance = x2;

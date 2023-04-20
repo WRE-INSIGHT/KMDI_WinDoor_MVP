@@ -78,7 +78,19 @@ namespace PresentationLayer.Views
                 txt_ItemNum = value;
             }
         }
-  
+
+        public string screenViewWindoorID
+        {
+            get
+            {
+                return txt_windoorID.Text;
+            }
+            set
+            {
+                txt_windoorID.Text = value;
+            }
+        }
+
         public event EventHandler ScreenViewLoadEventRaised;
         public event EventHandler btnAddClickEventRaised;
         public event DataGridViewRowPostPaintEventHandler dgvScreenRowPostPaintEventRaised;
@@ -367,7 +379,7 @@ namespace PresentationLayer.Views
             txt_windoorID.DataBindings.Add(ModelBinding["Screen_WindoorID"]);
             nud_Quantity.DataBindings.Add(ModelBinding["Screen_Quantity"]);
             nud_Discount.DataBindings.Add(ModelBinding["DiscountPercentage"]);
-            txt_windoorID.DataBindings.Add(ModelBinding["Screen_ItemNumber"]);
+            txt_ItemNum.DataBindings.Add(ModelBinding["Screen_ItemNumber"]);
             cmb_freedomSize.DataBindings.Add(ModelBinding["Freedom_ScreenSize"]);
         }
 
