@@ -702,7 +702,7 @@
                           <Source>Database</Source>
                           <Value>=Fields!dtTopViewImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
-                          <Sizing>FitProportional</Sizing>
+                          <Sizing>Fit</Sizing>
                           <Top>0.98894in</Top>
                           <Left>0.05708in</Left>
                           <Height>0.25278in</Height>
