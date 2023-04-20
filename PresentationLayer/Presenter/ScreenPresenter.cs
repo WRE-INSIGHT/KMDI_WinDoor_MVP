@@ -924,14 +924,14 @@ namespace PresentationLayer.Presenter
                     if (screenInitialLoad != true)
                     {
                         if (wdm.WD_id == _screenModel.Screen_NextItemNumber)
-                        {
-                            _screenView.screenViewWindoorID = wdm.WD_itemName + " " + wdm.WD_WindoorNumber;
+                        {                       
+                            _screenView.screenViewWindoorID = wdm.WD_WindoorNumber + " " + wdm.WD_itemName;
                             break;
                         }
                     }
                     else
                     {
-                        _screenView.screenViewWindoorID = wdm.WD_itemName + " " + wdm.WD_WindoorNumber;
+                        _screenView.screenViewWindoorID = wdm.WD_WindoorNumber + " " + wdm.WD_itemName;
                         break;
                     }
                 }
