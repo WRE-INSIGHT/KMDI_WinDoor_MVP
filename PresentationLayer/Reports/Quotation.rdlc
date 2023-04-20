@@ -970,6 +970,44 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>= "Item #:  " &amp; Fields!dtItemNumber.Value &amp; "  "  &amp; "Windoor ID:  " &amp;  Fields!dtItemName.Value</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
               <Height>0.20633in</Height>
               <TablixCells>
                 <TablixCell>
@@ -1132,6 +1170,11 @@
                 </TablixMember>
                 <TablixMember>
                   <Visibility>
+                    <Hidden>=iif(Fields!dtShowImage.Value = true,false,true)</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember>
+                  <Visibility>
                     <Hidden>true</Hidden>
                   </Visibility>
                 </TablixMember>
@@ -1151,7 +1194,7 @@
         </PageBreak>
         <Top>2.54168in</Top>
         <Left>0.29351in</Left>
-        <Height>7.88947in</Height>
+        <Height>8.13947in</Height>
         <Width>7.31425in</Width>
         <ZIndex>6</ZIndex>
         <Visibility>
@@ -1164,7 +1207,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>10.51448in</Height>
+    <Height>10.68115in</Height>
     <Style>
       <Border>
         <Color>LightGrey</Color>
