@@ -11789,6 +11789,8 @@ namespace PresentationLayer.Presenter
                 }
             }
         }
+
+
         private bool CheckAvailableDimensionFromBasePlatform(int frmDimension_numWd, int frmDimension_numHt)
         {
             int occupiedWidth = 0,
@@ -11797,7 +11799,7 @@ namespace PresentationLayer.Presenter
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
             bool isDimensionFit = true;
-
+           
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
                 foreach (IFrameModel frm in _windoorModel.lst_frame)
@@ -11832,7 +11834,8 @@ namespace PresentationLayer.Presenter
                         {
                             if (availableHeight > frmDimension_numHt &&
                               (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
-                               _windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name)
+                               /*_windoorModel.lst_frame.LastOrDefault().Frame_Name == frm.Frame_Name*/
+                               _windoorModel.lst_objects.LastOrDefault().Name == frm.Frame_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += frm.Frame_Height;
@@ -11843,7 +11846,7 @@ namespace PresentationLayer.Presenter
                             {
                                 availableWidth -= frm.Frame_Width;
                             }
-
+                            //availableWidth -= frm.Frame_Width;
                         }
                     }
 
@@ -11879,11 +11882,10 @@ namespace PresentationLayer.Presenter
                         }
                         else
                         {
-
-
                             if (availableHeight > frmDimension_numHt &&
                                 (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
-                               _windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name)
+                               /*_windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name*/
+                                 _windoorModel.lst_objects.LastOrDefault().Name == crtm.Concrete_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
                                 occupiedHeight += crtm.Concrete_Height;
@@ -11894,6 +11896,7 @@ namespace PresentationLayer.Presenter
                             {
                                 availableWidth -= crtm.Concrete_Width;
                             }
+                            //availableWidth -= crtm.Concrete_Width;
                         }
                     }
 
