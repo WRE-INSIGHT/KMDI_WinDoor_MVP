@@ -11456,22 +11456,26 @@ namespace PresentationLayer.Presenter
                             else if (fr.Lst_Panel.Count() == 1 && fr.Lst_MultiPanel.Count() == 0)//single
                             {
                                 IPanelModel Singlepnl = fr.Lst_Panel[0];
+
                                 if (Singlepnl.Panel_MotorizedOptionVisibility == true)
                                 {
                                     motorizeDesc = "Panel Motorized ";
-                                    wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
                                 }
-                                else if (Singlepnl.Panel_Type.Contains("Louver"))
+                                else
+                                {
+                                    motorizeDesc = "1 Panel";
+                                }
+
+                                //if (Singlepnl.Panel_MotorizedOptionVisibility == true)
+                                //{ 
+                                //    wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + " " + FrameTypeDesc;
+                                //}
+                                //else
+
+                                if (Singlepnl.Panel_Type.Contains("Louver"))
                                 {
                                     pnl_LouverChk = true;
-                                    //if (Singlepnl.Panel_MotorizedOptionVisibility == true)
-                                    //{
-                                    //    motorizeDesc = "Panel Motorized ";
-                                    //}
-                                    //else
-                                    //{
-                                    //    motorizeDesc = "";
-                                    //}
+
 
                                     List<string> lst_LouverArtNoDistinct = new List<string>();
                                     if (Singlepnl.Panel_LstLouverArtNo != null)
@@ -11496,21 +11500,25 @@ namespace PresentationLayer.Presenter
                                     List<string> lst_LouverArtNoDistinctCheck = lst_LouverArtNoDistinct.Distinct().ToList();
                                     if (lst_LouverArtNoDistinctCheck.Count == 0)
                                     {
-                                        wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                        //wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                        lst_Description.Add("1 Panel " + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n");
                                     }
                                     else if (lst_LouverArtNoDistinctCheck.Count == 1)
                                     {
-                                        wdm.WD_description = wdm.WD_profile + "\n" + lst_LouverArtNoDistinctCheck[0];
+                                        //wdm.WD_description = wdm.WD_profile + "\n" + lst_LouverArtNoDistinctCheck[0];
+                                        lst_Description.Add("1 Panel " + lst_LouverArtNoDistinctCheck[0] + "\n");
                                     }
                                     else
                                     {
-                                        wdm.WD_description = wdm.WD_profile + "\n" + "LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
+                                        //wdm.WD_description = wdm.WD_profile + "\n" + "LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK";
+                                        lst_Description.Add("1 Panel LVRG-152-" + additionalZero + Singlepnl.Panel_LouverBladesCount + "-S-RH-BLK" + "\n");
                                     }
                                 }
                                 else
                                 {
-                                    motorizeDesc = "";
-                                    wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                    //wdm.WD_description = wdm.WD_profile + "\n1 " + motorizeDesc + Singlepnl.Panel_Type + " " + FrameTypeDesc;
+                                    lst_Description.Add(motorizeDesc + " " + Singlepnl.Panel_Type.Replace("Panel", string.Empty) + FrameTypeDesc + "\n");
+
                                 }
 
                                 //GlassThickness & Glassfilm
@@ -11529,7 +11537,7 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (Singlepnl.Panel_Type.Contains("Louver"))
                                     {
-                                        lst_glassThickness.Add("\n" + Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
+                                        lst_glassThickness.Add(Singlepnl.Panel_GlassThicknessDesc + " Blades" + "\n");
                                     }
                                     else
                                     {
@@ -11549,6 +11557,7 @@ namespace PresentationLayer.Presenter
                                 }
                             }
                             #endregion
+
                             else
                             {
                                 wdm.WD_description = wdm.WD_width.ToString() + " x " + wdm.WD_height.ToString() + "\n" +
@@ -11581,7 +11590,7 @@ namespace PresentationLayer.Presenter
                             {
                                 string split1 = words[a],
                                        split2 = words[a + 1];
-                                string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "\n";
+                                string DuplicatePnl = split1.Replace("1", split2.Replace(" ", string.Empty)) + "";
 
                                 int pnlCount = Convert.ToInt32(split2.Replace(" ", string.Empty));
 
@@ -11603,7 +11612,7 @@ namespace PresentationLayer.Presenter
                                     (pnlCount >= 2 && pnlCount <= 9))
                                 {
                                     string DuplicateLouverPnl = DuplicatePnl.Remove(13, 1).Insert(13, "1");
-                                    lst_DuplicatePnl.Add(DuplicateLouverPnl);
+                                    lst_DuplicatePnl.Add(DuplicateLouverPnl + "\n");
                                 }
                                 else if (DuplicatePnl.Contains("LVRG") &&
                                      pnlCount >= 10)
@@ -11613,7 +11622,7 @@ namespace PresentationLayer.Presenter
                                 }
                                 else
                                 {
-                                    lst_DuplicatePnl.Add(DuplicatePnl);
+                                    lst_DuplicatePnl.Add(DuplicatePnl + "\n");
                                 }
                                 a++;
                             }
@@ -11621,9 +11630,7 @@ namespace PresentationLayer.Presenter
                     }
                     #endregion
 
-                    #region NonDuplicatedItemListStringManipulation
-
-
+                    #region NonDuplicatedItemListStringManipulation 
                     //Not Duplicated Item
                     Dictionary<string, int> freqMap2 = lst_Description.GroupBy(a => a)
                                                    .Where(b => b.Count() == 1)
@@ -11631,8 +11638,8 @@ namespace PresentationLayer.Presenter
 
                     string NoneDuplicatePnlAndCount = String.Join("", freqMap2);
                     NewNoneDuplicatePnlAndCount = NoneDuplicatePnlAndCount.Replace("[", string.Empty);
-                    NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty);
-                    #endregion
+                    NewNoneDuplicatePnlAndCount = NewNoneDuplicatePnlAndCount.Replace(", 1]", string.Empty); //.Replace("\n", string.Empty)
+
 
                     List<string> lst_DescriptionDistinct = lst_Description.Distinct().ToList();
 
@@ -11645,6 +11652,7 @@ namespace PresentationLayer.Presenter
                             wdm.WD_description += lst_DescDist;
                         }
                     }
+                    #endregion
 
                     List<string> lst_glassThicknessDistinct = lst_glassThickness.Distinct().ToList();
 
