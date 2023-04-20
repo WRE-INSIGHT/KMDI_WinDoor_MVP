@@ -1,4 +1,6 @@
-﻿using ModelLayer.Model.Quotation.Screen;
+﻿using ModelLayer.Model.Quotation;
+using ModelLayer.Model.Quotation.Screen;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.CommonMethods;
 using PresentationLayer.DataTables;
 using PresentationLayer.Presenter.UserControls;
@@ -23,6 +25,8 @@ namespace PresentationLayer.Presenter
         private IMainPresenter _mainPresenter;
         private IScreenModel _screenModel;
         private IQuotationServices _quotationServices;
+        private IWindoorModel _windoorModel;
+        private IQuotationModel _quotationModel;
 
 
         private IPrintQuotePresenter _printQuotePresenter;
@@ -36,7 +40,8 @@ namespace PresentationLayer.Presenter
         private DataTable _screenDT = new DataTable();
         private DataGridView _dgv_Screen;
         private ScreenType screenType;
-        private bool sortAscending = true;
+        private bool sortAscending = true,
+                     screenInitialLoad = true;
         private decimal screenDiscountAverage,
                         Screen_priceXquantiy;
         private string Screen_DimensionFormat,
@@ -394,7 +399,8 @@ namespace PresentationLayer.Presenter
 
             }
             _screenDT.AcceptChanges();
-
+            _screenView.screenViewWindoorID = "";
+            WindoorIDGetter();
         }
 
         private void _screenView_cmbPlisséTypeSelectedIndexChangedEventRaised(object sender, EventArgs e)
@@ -759,6 +765,8 @@ namespace PresentationLayer.Presenter
                     _screenView.screen_quantity.Value = _screenModel.Screen_Quantity;
                     _screenView.screen_discountpercentage.Value = _screenModel.Screen_Discount;
                     _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
+                    screenInitialLoad = false;
+                    WindoorIDGetter();
                 }
             }
             catch (Exception ex)
@@ -818,13 +826,14 @@ namespace PresentationLayer.Presenter
             _factor.DecimalPlaces = 1;
             _discount.Value = 30;
             _screenitemnum.Text = "1";
+            _screenModel.Screen_ItemNumber = 1;
             _screenModel.Screen_Quantity = 1;
             _screenModel.Screen_Set = 1;
             _screenModel.Screen_ExchangeRate = 64;
             _screenModel.Screen_ExchangeRateAUD = 40;
             _screenModel.PlissedRd_Panels = 1;
             _screenModel.DiscountPercentage = 0.3m;
-
+            WindoorIDGetter();
         
             _dgv_Screen.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.Programmatic);
 
@@ -904,6 +913,36 @@ namespace PresentationLayer.Presenter
             _screenView.GetDatagrid().DataSource = PopulateDgvScreen();
 
         }
+
+        private void WindoorIDGetter()
+        {
+            try
+            {
+                _screenView.screenViewWindoorID = "";
+                foreach (IWindoorModel wdm in _quotationModel.Lst_Windoor)
+                {
+                    if (screenInitialLoad != true)
+                    {
+                        if (wdm.WD_id == _screenModel.Screen_NextItemNumber)
+                        {
+                            _screenView.screenViewWindoorID = wdm.WD_itemName + " " + wdm.WD_WindoorNumber;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        _screenView.screenViewWindoorID = wdm.WD_itemName + " " + wdm.WD_WindoorNumber;
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in getting windoor NAME & NUMBER " + this + ex.Message);
+            }
+
+        }
+
         #endregion
 
         public DataTable PopulateDgvScreen()
@@ -1054,7 +1093,9 @@ namespace PresentationLayer.Presenter
         public IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                                   IMainPresenter mainPresenter,
                                                   IScreenModel screenModel,
-                                                  IQuotationServices quotationServices
+                                                  IQuotationServices quotationServices,
+                                                  IQuotationModel quotationModel,
+                                                  IWindoorModel windoorModel
                                                   )
         {
             unityC
@@ -1065,6 +1106,8 @@ namespace PresentationLayer.Presenter
             screen._mainPresenter = mainPresenter;
             screen._screenModel = screenModel;
             screen._quotationServices = quotationServices;
+            screen._quotationModel = quotationModel;
+            screen._windoorModel = windoorModel;
             
 
             return screen;

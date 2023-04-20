@@ -1195,7 +1195,7 @@ namespace PresentationLayer.Presenter
                                                           0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices,_quotationModel,_windoorModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
 
         }
