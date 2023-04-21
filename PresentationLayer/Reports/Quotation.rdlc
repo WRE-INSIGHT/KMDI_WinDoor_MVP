@@ -1008,12 +1008,12 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.20633in</Height>
+              <Height>0.9216in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="dtDescription2">
-                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -1046,7 +1046,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>5.61484in</Height>
+              <Height>5.77109in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1105,7 +1105,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.80208in</Height>
+              <Height>1.63541in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1194,7 +1194,7 @@
         </PageBreak>
         <Top>2.54168in</Top>
         <Left>0.29351in</Left>
-        <Height>8.13947in</Height>
+        <Height>8.84432in</Height>
         <Width>7.31425in</Width>
         <ZIndex>6</ZIndex>
         <Visibility>
@@ -1207,7 +1207,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>10.68115in</Height>
+    <Height>11.38601in</Height>
     <Style>
       <Border>
         <Color>LightGrey</Color>

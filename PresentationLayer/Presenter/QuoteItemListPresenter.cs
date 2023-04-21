@@ -258,7 +258,11 @@ namespace PresentationLayer.Presenter
             printQuote.PrintRDLCReport();
 
         }
-
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat;
+        List<string> description_string_list = new List<string>();
         public void PrintWindoorRDLC()
         {
 
@@ -392,6 +396,67 @@ namespace PresentationLayer.Presenter
                         #endregion
                     }
 
+                  
+                    for(int j = 0; j< lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length;j++)
+                    {
+                       if(lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
+                        {
+                            count++;
+                            Console.WriteLine("number of lines in description" + " " + count);
+                        }
+
+                    }
+                    if(count >= 5)
+                    {
+                        change_desc_format = true;
+                        string[] splitted_string = lstQuoteUC.GetiQuoteItemListUC().itemDesc.Split('\n');
+                        foreach (var split in splitted_string)
+                        {
+                            //Console.WriteLine(" arr:  " + split);
+                            description_string_list.Add(split);
+                        }
+                        // for(int arr =0; arr <15; arr++)
+                        //{
+                        //    if(splitted_string.Count() > description_string_list.Count())
+                        //    {
+                        //        description_string_list.Add(splitted_string[arr]);
+                        //    }
+                        //    else
+                        //    {
+                        //        description_string_list.Add(" ");
+                        //    }
+                        //}
+                    }
+                    else
+                    {
+                        change_desc_format = false;
+                        count = 0; 
+                    }
+                    
+                    if(change_desc_format == true)
+                    {
+                        for(int x = 0; x < description_string_list.Count; x++)
+                        {
+                            newlinecount++;
+                            if (newlinecount == 3)
+                            {
+                                newlinecount = 0;
+                                separete_descFormat = separete_descFormat + " " + description_string_list[x] + "," + "\n";
+
+                            }
+                            else
+                            {
+                                separete_descFormat = separete_descFormat + " " + description_string_list[x];   
+                            }
+                        }
+                        Console.WriteLine(separete_descFormat.TrimEnd().Replace(" +", ""));
+                    }
+                    else
+                    {
+                        description_string_list.Clear();
+                        count = 0;
+                    }
+
                     Console.WriteLine("EventPrint.: " + showImage.ToString());
                     _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
@@ -407,6 +472,8 @@ namespace PresentationLayer.Presenter
                                           byteToStrForTopView,
                                           showImage);
                     windoorpricecheck = windoorpricecheck + Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text); // check price
+
+
                 }
             }
             catch (Exception ex)
