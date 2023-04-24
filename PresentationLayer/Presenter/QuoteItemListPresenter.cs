@@ -261,7 +261,7 @@ namespace PresentationLayer.Presenter
         int count = 0,
             newlinecount = 0;
         bool change_desc_format = false;
-        string separete_descFormat;
+        string separete_descFormat = null;
         List<string> description_string_list = new List<string>();
         public void PrintWindoorRDLC()
         {
@@ -396,13 +396,12 @@ namespace PresentationLayer.Presenter
                         #endregion
                     }
 
-                  
-                    for(int j = 0; j< lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length;j++)
+                    #region separate Item description
+                    for (int j = 0; j< lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length;j++)
                     {
                        if(lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
                         {
                             count++;
-                            Console.WriteLine("number of lines in description" + " " + count);
                         }
 
                     }
@@ -412,7 +411,6 @@ namespace PresentationLayer.Presenter
                         string[] splitted_string = lstQuoteUC.GetiQuoteItemListUC().itemDesc.Split('\n');
                         foreach (var split in splitted_string)
                         {
-                            //Console.WriteLine(" arr:  " + split);
                             description_string_list.Add(split);
                         }
                         // for(int arr =0; arr <15; arr++)
@@ -441,12 +439,12 @@ namespace PresentationLayer.Presenter
                             if (newlinecount == 3)
                             {
                                 newlinecount = 0;
-                                separete_descFormat = separete_descFormat + " " + description_string_list[x] + "," + "\n";
+                                separete_descFormat = separete_descFormat + "  " + description_string_list[x] + "," + "\n";
 
                             }
                             else
                             {
-                                separete_descFormat = separete_descFormat + " " + description_string_list[x];   
+                                separete_descFormat = separete_descFormat + "  " + description_string_list[x];   
                             }
                         }
                         Console.WriteLine(separete_descFormat.TrimEnd().Replace(" +", ""));
@@ -456,6 +454,13 @@ namespace PresentationLayer.Presenter
                         description_string_list.Clear();
                         count = 0;
                     }
+
+                    if(separete_descFormat == null)
+                    {
+                        separete_descFormat = lstQuoteUC.GetiQuoteItemListUC().itemDesc;
+                    }
+
+                    #endregion
 
                     Console.WriteLine("EventPrint.: " + showImage.ToString());
                     _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
@@ -470,9 +475,14 @@ namespace PresentationLayer.Presenter
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
                                           byteToStrForTopView,
-                                          showImage);
+                                          showImage,
+                                          separete_descFormat);
                     windoorpricecheck = windoorpricecheck + Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text); // check price
 
+                    description_string_list.Clear();
+                    count = 0;
+                    newlinecount = 0;
+                    separete_descFormat = null;
 
                 }
             }

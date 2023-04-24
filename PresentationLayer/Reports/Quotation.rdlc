@@ -744,7 +744,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtDescription.Value</Value>
+                                  <Value>=iif(Fields!dtShowImage.Value = true,Fields!dtDescription.Value &amp; System.Environment.Newline &amp; System.Environment.Newline  &amp; "***See Image in Another Page***",Fields!dtDescription.Value)</Value>
                                   <Style>
                                     <FontFamily>Arial Narrow</FontFamily>
                                   </Style>
@@ -1013,13 +1013,12 @@
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="dtDescription2">
-                      <CanShrink>true</CanShrink>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtDescription.Value</Value>
+                              <Value>=Fields!dtSeparateItemDesc.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1756,6 +1755,10 @@ Banilad, Mandaue City, Cebu, Phils. 6014
         <Field Name="dtShowImage">
           <DataField>dtShowImage</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="dtSeparateItemDesc">
+          <DataField>dtSeparateItemDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
