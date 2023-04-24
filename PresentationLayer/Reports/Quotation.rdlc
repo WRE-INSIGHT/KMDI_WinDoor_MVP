@@ -744,7 +744,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!dtDescription.Value</Value>
+                                  <Value>=iif(Fields!dtShowImage.Value = true,Fields!dtDescription.Value &amp; System.Environment.Newline &amp; System.Environment.Newline  &amp; "***See Image in Another Page***",Fields!dtDescription.Value)</Value>
                                   <Style>
                                     <FontFamily>Arial Narrow</FontFamily>
                                   </Style>
@@ -970,18 +970,55 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.20633in</Height>
+              <Height>0.25in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="dtDescription2">
+                    <Textbox Name="Textbox8">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!dtDescription.Value</Value>
+                              <Value>= "Item #:  " &amp; Fields!dtItemNumber.Value &amp; "  "  &amp; "Windoor ID:  " &amp;  Fields!dtItemName.Value</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.9216in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dtDescription2">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dtSeparateItemDesc.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1008,7 +1045,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>5.61484in</Height>
+              <Height>5.77109in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1067,7 +1104,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.80208in</Height>
+              <Height>1.63541in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1132,6 +1169,11 @@
                 </TablixMember>
                 <TablixMember>
                   <Visibility>
+                    <Hidden>=iif(Fields!dtShowImage.Value = true,false,true)</Hidden>
+                  </Visibility>
+                </TablixMember>
+                <TablixMember>
+                  <Visibility>
                     <Hidden>true</Hidden>
                   </Visibility>
                 </TablixMember>
@@ -1151,7 +1193,7 @@
         </PageBreak>
         <Top>2.54168in</Top>
         <Left>0.29351in</Left>
-        <Height>7.88947in</Height>
+        <Height>8.84432in</Height>
         <Width>7.31425in</Width>
         <ZIndex>6</ZIndex>
         <Visibility>
@@ -1164,7 +1206,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>10.51448in</Height>
+    <Height>11.38601in</Height>
     <Style>
       <Border>
         <Color>LightGrey</Color>
@@ -1713,6 +1755,10 @@ Banilad, Mandaue City, Cebu, Phils. 6014
         <Field Name="dtShowImage">
           <DataField>dtShowImage</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="dtSeparateItemDesc">
+          <DataField>dtSeparateItemDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

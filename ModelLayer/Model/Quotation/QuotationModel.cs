@@ -5747,6 +5747,7 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
                                             {
                                                 SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                             }
                                         }
                                         #endregion
@@ -6551,6 +6552,7 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
                                             {
                                                 SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                             }
                                         }
                                         #endregion
@@ -8660,6 +8662,7 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
                                     {
                                         SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                     }
                                 }
                                 #endregion
@@ -9454,6 +9457,7 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
                                     {
                                         SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                     }
                                 }
                                 #endregion
