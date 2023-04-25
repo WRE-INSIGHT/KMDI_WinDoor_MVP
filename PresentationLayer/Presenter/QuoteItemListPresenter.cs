@@ -46,6 +46,12 @@ namespace PresentationLayer.Presenter
         private string archi;
         private bool _callFrmRDLCCompiler;
 
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat = null;
+        List<string> description_string_list = new List<string>();
+
         public bool CallFrmRDLCCompiler
         {
             get
@@ -258,11 +264,7 @@ namespace PresentationLayer.Presenter
             printQuote.PrintRDLCReport();
 
         }
-        int count = 0,
-            newlinecount = 0;
-        bool change_desc_format = false;
-        string separete_descFormat = null;
-        List<string> description_string_list = new List<string>();
+        
         public void PrintWindoorRDLC()
         {
 
@@ -412,6 +414,7 @@ namespace PresentationLayer.Presenter
                         foreach (var split in splitted_string)
                         {
                             description_string_list.Add(split);
+                            Console.WriteLine(split);
                         }
                         // for(int arr =0; arr <15; arr++)
                         //{
@@ -440,7 +443,6 @@ namespace PresentationLayer.Presenter
                             {
                                 newlinecount = 0;
                                 separete_descFormat = separete_descFormat + "  " + description_string_list[x] + "," + "\n";
-
                             }
                             else
                             {
