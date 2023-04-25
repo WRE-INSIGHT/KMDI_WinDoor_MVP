@@ -1092,7 +1092,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="Item #:" &amp; " "  &amp; Fields!dtItemNumber.Value</Value>
+                              <Value>="Item No:"&amp;" "&amp; Fields!dtItemNumber.Value &amp;"   "&amp; "WindoorID:  " &amp; Fields!dtDimension.Value  &amp; "," &amp; Fields!dtItemName.Value</Value>
                               <Style>
                                 <FontFamily>segoe UI</FontFamily>
                                 <FontSize>9pt</FontSize>
