@@ -147,8 +147,8 @@ namespace PresentationLayer.Presenter
         private void _printQuoteView_PrintQuoteViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             Console.WriteLine("closing na yung form ng print ");
-            GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
-            basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
+           // GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
+           // basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
             QuotationBody_key = _mainPresenter.printStatus + "_" + "QuotationBody";
             QuotationSalutation_key = _mainPresenter.printStatus + "_" + "QuotationSalutation";
             QuotationAddress_key = _mainPresenter.printStatus + "_" + "QuotationAddress";
@@ -157,8 +157,8 @@ namespace PresentationLayer.Presenter
 
             if (_rdlcHeaderIsPresent == true)
             {
-                _mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
-                _mainPresenter.RDLCHeader[basecolor_key] = baseColor;
+                //_mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
+                //_mainPresenter.RDLCHeader[basecolor_key] = baseColor;
                 _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
                 _mainPresenter.RDLCHeader[QuotationSalutation_key] = _printQuoteView.QuotationSalutation;
                 _mainPresenter.RDLCHeader[QuotationAddress_key] = _printQuoteView.QuotationAddress;
@@ -167,8 +167,8 @@ namespace PresentationLayer.Presenter
             }
             else
             {            
-                _mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
-                _mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
+                //_mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
+                //_mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
                 _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);
                 _mainPresenter.RDLCHeader.Add(QuotationSalutation_key, _printQuoteView.QuotationSalutation);
                 _mainPresenter.RDLCHeader.Add(QuotationAddress_key, _printQuoteView.QuotationAddress);
@@ -327,7 +327,7 @@ namespace PresentationLayer.Presenter
                 _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.VatPercentage = "12";
             }
-            
+            _printQuoteView.GetDTPDate().Value = DateTime.Now;
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -335,7 +335,6 @@ namespace PresentationLayer.Presenter
             {
                 EventLoad();
                 //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load     
-                _printQuoteView.GetDTPDate().Value = DateTime.Now;
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);           
             }

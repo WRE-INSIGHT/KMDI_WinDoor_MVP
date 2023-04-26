@@ -1198,8 +1198,9 @@ namespace PresentationLayer.Presenter
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices,_quotationModel,_windoorModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
 
+            
         }
-
+       
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
 
@@ -1350,10 +1351,10 @@ namespace PresentationLayer.Presenter
                 wndr_content.Add("~");
             }
 
-            foreach (var dic in _rdlcHeaders)
+            foreach (var dic in _rdlcHeaders.OrderByDescending(e => e.Key))
             {
                 wndr_content.Add(".");
-                wndr_content.Add(dic.Key + ": " + dic.Value);
+                wndr_content.Add(dic.Key + "^ " + dic.Value);
                 wndr_content.Add(".");
             }
 
@@ -7788,31 +7789,114 @@ namespace PresentationLayer.Presenter
                         #region Load for RLDC Headers
                         if (row_str != ".")
                         {
-                            string[] key = row_str.Split(':');
-                            var value = row_str.Substring(row_str.IndexOf(": ") + 1 );
+                            string[] key = row_str.Split('^');
+                            var value = row_str.Substring(row_str.IndexOf("^ ") + 1 );
 
                             if (rdlcDicChangeKey == true)
                             {
                                 RDLCDictionary_key = key[0];
                             }
-                            if(value == "" || value == " ")
+
+                            #region algo 1
+                            //if (value == "" || value == " ")
+                            //{
+                            //    value = "\n" + "\n";
+                            //}
+                            //else if (value == "To: ")
+                            //{
+                            //    value = value + "\n";
+                            //    rdlcAddNewLineToAddr = true;
+                            //}
+                            //else if (rdlcAddNewLineToAddr == true)
+                            //{
+                            //    value = value + "\n";
+                            //    rdlcAddNewLineToAddr = false;
+                            //}
+                            //else if (RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            //{
+                            //    value = value + "\n";
+                            //}
+                            #endregion
+
+                            #region algo 2 
+                            if (RDLCDictionary_key.Contains("QuotationBody"))
                             {
-                                value = "\n" + "\n";
+                                #region QuoteBody
+                                //Check RDLCDic Contains
+
+                                if (value.ToLower().Contains("using"))
+                                {
+                                    _EntrytoKeyWordPriceValidity = false;
+                                    _EntrytoKeyWordUsing = true;
+                                    _EntryCountOfKeyWordUsing++;
+                                }
+                                else if (value.ToLower().Contains("price validity"))
+                                {
+                                    _EntrytoKeyWordUsing = false;
+                                    _EntrytoKeyWordPriceValidity = true;
+                                    _EntryCountOfKeyWordPriceValidity++;
+                                }
+                                else if(value == "" || value == " ")
+                                {
+                                    _EntrytoKeyWordUsing = false;
+                                    _EntrytoKeyWordPriceValidity = false;
+                                }
+
+                                //Add new line
+
+                                if (_EntrytoKeyWordUsing == true)
+                                {
+                                    if (_EntryCountOfKeyWordUsing <= 1)
+                                    {
+                                        value = "\n" + "\n" + value;
+                                    }
+                                    else if (_EntryCountOfKeyWordUsing > 1)
+                                    {
+                                        value = "\n" + value;
+                                    }
+                                }
+
+                                if (_EntrytoKeyWordPriceValidity == true)
+                                {
+                                    if (_EntryCountOfKeyWordPriceValidity <= 1)
+                                    {
+                                        value = "\n" + "\n" + value;
+                                    }
+                                }
+                                #endregion
                             }
-                            else if(value == " To: ")
+                            else if (RDLCDictionary_key.Contains("QuotationSalutation"))
                             {
-                                value = value + "\n";
-                                rdlcAddNewLineToAddr = true;
+                                #region Salutation 
+
+                                if (value.ToLower().Contains("dear"))
+                                {
+                                    value = "\n" + "\n" + value;
+                                }
+
+                                #endregion
                             }
-                            else if (rdlcAddNewLineToAddr == true)
+                            else if (RDLCDictionary_key.Contains("QuotationAddress"))
                             {
-                                value = value + "\n";
-                                rdlcAddNewLineToAddr = false;
+                                #region Address
+
+                                if (value.ToLower().Contains("to:"))
+                                {
+                                    value = value + "\n";
+                                }
+
+                                #endregion
                             }
-                            else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            else if (RDLCDictionary_key.Contains("VatPercentage"))
                             {
-                                value = value + "\n";
-                            }                                               
+                                // no condition needed so far
+                            }
+                            else if (RDLCDictionary_key.Contains("QuotationOuofTownExpenses_key"))
+                            {
+                                // no condition needed so far
+                            }
+                            #endregion 
+
                             RDLCDictionary_value = RDLCDictionary_value + value;
                             rdlcDicChangeKey = false;
                         }
@@ -7822,7 +7906,7 @@ namespace PresentationLayer.Presenter
             }
 
         }
-
+        
         private void Load_RDLCHeaders()
         {
             if (add_existing == false)
@@ -7837,6 +7921,10 @@ namespace PresentationLayer.Presenter
                 rdlcDicChangeKey = true;
                 RDLCDictionary_key = "";
                 RDLCDictionary_value = "";
+               _EntryCountOfKeyWordUsing = 0;
+               _EntryCountOfKeyWordPriceValidity = 0;
+               _EntrytoKeyWordUsing = false;
+               _EntrytoKeyWordPriceValidity = false;
             }
         }
         private void Load_Screen()
@@ -8717,8 +8805,13 @@ namespace PresentationLayer.Presenter
         #endregion
         bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
              rdlcDicChangeKey = true,
-             rdlcAddNewLineToAddr = false,
              add_existing = false;
+
+        int _EntryCountOfKeyWordUsing,
+            _EntryCountOfKeyWordPriceValidity;
+        bool _EntrytoKeyWordUsing = false,
+             _EntrytoKeyWordPriceValidity = false;
+
         #region Frame Properties
 
         string frmDimension_profileType = "",
@@ -11907,7 +12000,7 @@ namespace PresentationLayer.Presenter
                             //availableWidth -= crtm.Concrete_Width;
                         }
                     }
-
+                    
                 }
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
