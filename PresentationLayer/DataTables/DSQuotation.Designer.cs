@@ -406,6 +406,8 @@ namespace PresentationLayer.DataTables {
             
             private global::System.Data.DataColumn columndtShowImage;
             
+            private global::System.Data.DataColumn columndtSeparateItemDesc;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtQuoteDataTable() {
@@ -529,6 +531,14 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dtSeparateItemDescColumn {
+                get {
+                    return this.columndtSeparateItemDesc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -564,7 +574,7 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtQuoteRow AdddtQuoteRow(string dtItemName, string dtDescription, string dtDimension, string dtImage, int dtQuantity, decimal dtPrice, decimal dtDiscount, decimal dtNetPrice, string dtItemNumber, string dtTopViewImage, bool dtShowImage) {
+            public dtQuoteRow AdddtQuoteRow(string dtItemName, string dtDescription, string dtDimension, string dtImage, int dtQuantity, decimal dtPrice, decimal dtDiscount, decimal dtNetPrice, string dtItemNumber, string dtTopViewImage, bool dtShowImage, string dtSeparateItemDesc) {
                 dtQuoteRow rowdtQuoteRow = ((dtQuoteRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtItemName,
@@ -577,7 +587,8 @@ namespace PresentationLayer.DataTables {
                         dtNetPrice,
                         dtItemNumber,
                         dtTopViewImage,
-                        dtShowImage};
+                        dtShowImage,
+                        dtSeparateItemDesc};
                 rowdtQuoteRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtQuoteRow);
                 return rowdtQuoteRow;
@@ -611,6 +622,7 @@ namespace PresentationLayer.DataTables {
                 this.columndtItemNumber = base.Columns["dtItemNumber"];
                 this.columndtTopViewImage = base.Columns["dtTopViewImage"];
                 this.columndtShowImage = base.Columns["dtShowImage"];
+                this.columndtSeparateItemDesc = base.Columns["dtSeparateItemDesc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -638,6 +650,8 @@ namespace PresentationLayer.DataTables {
                 base.Columns.Add(this.columndtTopViewImage);
                 this.columndtShowImage = new global::System.Data.DataColumn("dtShowImage", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtShowImage);
+                this.columndtSeparateItemDesc = new global::System.Data.DataColumn("dtSeparateItemDesc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndtSeparateItemDesc);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2019,6 +2033,22 @@ namespace PresentationLayer.DataTables {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string dtSeparateItemDesc {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtQuote.dtSeparateItemDescColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dtSeparateItemDesc\' in table \'dtQuote\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtQuote.dtSeparateItemDescColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsdtItemNameNull() {
                 return this.IsNull(this.tabledtQuote.dtItemNameColumn);
             }
@@ -2147,6 +2177,18 @@ namespace PresentationLayer.DataTables {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdtShowImageNull() {
                 this[this.tabledtQuote.dtShowImageColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsdtSeparateItemDescNull() {
+                return this.IsNull(this.tabledtQuote.dtSeparateItemDescColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetdtSeparateItemDescNull() {
+                this[this.tabledtQuote.dtSeparateItemDescColumn] = global::System.Convert.DBNull;
             }
         }
         

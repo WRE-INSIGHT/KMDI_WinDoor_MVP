@@ -344,8 +344,11 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }
         }
-
-
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat = null;
+        List<string> description_string_list = new List<string>();
         private void ShowItemImage()
         {
             foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
@@ -391,6 +394,75 @@ namespace PresentationLayer.Presenter
                         if (i == itemToIndx)
                         {
                             showImage = true;
+
+                            #region separate Item description
+                            for (int j = 0; j < lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length; j++)
+                            {
+                                if (lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
+                                {
+                                    count++;
+                                }
+
+                            }
+                            if (count >= 5)
+                            {
+                                change_desc_format = true;
+                                string[] splitted_string = lstQuoteUC.GetiQuoteItemListUC().itemDesc.Split('\n');
+                                foreach (var split in splitted_string)
+                                {
+                                    description_string_list.Add(split);
+                                }
+                                // for(int arr =0; arr <15; arr++)
+                                //{
+                                //    if(splitted_string.Count() > description_string_list.Count())
+                                //    {
+                                //        description_string_list.Add(splitted_string[arr]);
+                                //    }
+                                //    else
+                                //    {
+                                //        description_string_list.Add(" ");
+                                //    }
+                                //}
+                            }
+                            else
+                            {
+                                change_desc_format = false;
+                                count = 0;
+                            }
+
+                            if (change_desc_format == true)
+                            {
+                                for (int x = 0; x < description_string_list.Count; x++)
+                                {
+                                    newlinecount++;
+                                    if (newlinecount == 3)
+                                    {
+                                        newlinecount = 0;
+                                        separete_descFormat = separete_descFormat + "  " + description_string_list[x] + "," + "\n";
+
+                                    }
+                                    else
+                                    {
+                                        separete_descFormat = separete_descFormat + "  " + description_string_list[x];
+                                    }
+                                }
+                                Console.WriteLine(separete_descFormat.TrimEnd().Replace(" +", ""));
+                            }
+                            else
+                            {
+                                description_string_list.Clear();
+                                count = 0;
+                            }
+
+                            if (separete_descFormat == null)
+                            {
+                                separete_descFormat = lstQuoteUC.GetiQuoteItemListUC().itemDesc;
+                            }
+
+                            #endregion
+
+
+
                             break;
                         }
                     }
@@ -399,8 +471,9 @@ namespace PresentationLayer.Presenter
                 {
                     showImage = false;
                 }
-                   
-                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
+
+
+                _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
                     _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                           lstQuoteUC.GetiQuoteItemListUC().itemDesc,
@@ -412,13 +485,20 @@ namespace PresentationLayer.Presenter
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
                                           byteToStrForTopView,
-                                          showImage);
+                                          showImage,
+                                          separete_descFormat
+                                          );
 
-                }
 
-                #endregion
+                description_string_list.Clear();
+                count = 0;
+                newlinecount = 0;
+                separete_descFormat = null;
+            }
 
-                this.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
+            #endregion
+
+            this.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
                 chklist_exist = false;           
         }
 
