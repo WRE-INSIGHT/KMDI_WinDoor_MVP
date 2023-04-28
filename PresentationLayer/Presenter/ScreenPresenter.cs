@@ -1109,7 +1109,7 @@ namespace PresentationLayer.Presenter
             screen._quotationModel = quotationModel;
             screen._windoorModel = windoorModel;
             
-
+            
             return screen;
         }
 

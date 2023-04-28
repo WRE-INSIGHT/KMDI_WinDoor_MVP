@@ -11,6 +11,8 @@ namespace PresentationLayer.Views
         string QuotationBody { get; set; }
         string QuotationOuofTownExpenses { get; set; }
         string VatPercentage { get; set; }
+        string LaborandMobilization { get; set; }
+        string FreightCharge { get; set; }
         CheckBox ShowLastPage();
         Label GetUniversalLabel();
         Button GetRefreshBtn();

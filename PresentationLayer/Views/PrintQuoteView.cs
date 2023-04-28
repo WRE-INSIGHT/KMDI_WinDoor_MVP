@@ -73,6 +73,28 @@ namespace PresentationLayer.Views
                 txtbox_VAT.Text = value;
             }
         }
+        public string LaborandMobilization
+        {
+            get
+            {
+                return txtbox_LnM.Text;
+            }
+            set
+            {
+                txtbox_LnM.Text = value;
+            }
+        }
+        public string FreightCharge
+        {
+            get
+            {
+                return txtbox_FC.Text;
+            }
+            set
+            {
+                txtbox_FC.Text = value;
+            }
+        }
         public ReportViewer GetReportViewer()
         {
             return reportViewer1;
