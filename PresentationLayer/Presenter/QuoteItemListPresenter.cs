@@ -1229,7 +1229,6 @@ namespace PresentationLayer.Presenter
             var destImage = new Bitmap(width, height);
 
             //maintains DPI regardless of physical size
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
             using (var graphics = Graphics.FromImage(destImage))
             {
