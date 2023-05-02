@@ -1329,6 +1329,29 @@ namespace ModelLayer.Model.Quotation.Frame
             {
                 _frameInversionClipOption = value;
                 NotifyPropertyChanged();
+        private int _frameFoldAndSlideTopViewLeftCount;
+        public int Frame_FoldAndSlideTopViewLeftCount
+        {
+            get
+            {
+                return _frameFoldAndSlideTopViewLeftCount;
+            }
+            set
+            {
+                _frameFoldAndSlideTopViewLeftCount = value;
+            }
+        }
+
+        private int _frameFoldAndSlideTopViewRightCount;
+        public int Frame_FoldAndSlideTopViewRightCount
+        {
+            get
+            {
+                return _frameFoldAndSlideTopViewRightCount;
+            }
+            set
+            {
+                _frameFoldAndSlideTopViewRightCount = value;
             }
         }
 

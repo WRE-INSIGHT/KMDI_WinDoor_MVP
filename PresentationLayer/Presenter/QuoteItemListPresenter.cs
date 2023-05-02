@@ -1408,7 +1408,7 @@ namespace PresentationLayer.Presenter
                                                                               + GeorgianBarHorizontalDesc + GeorgianBarVerticalDesc;
 
                     _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxItemImage().Image = wdm.WD_image;
-                    _quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
+                    //_quoteItemListUCPresenter.GetiQuoteItemListUC().GetPboxTopView().Image = wdm.WD_SlidingTopViewImage;
 
                     if (wdm.WD_price == 0 && wdm.IsFromLoad == true)
                     {

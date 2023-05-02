@@ -1,7 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.WinDoor;
-using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IWindoorModel _windoorModel;
-        private IItemInfoUCPresenter _itemInfoUCP;
+        //private IItemInfoUCPresenter _itemInfoUCP;
 
         PictureBox _pboxFrame;
         Panel _pnlPanelling;
@@ -32,6 +31,8 @@ namespace PresentationLayer.Presenter
         int pnlLeftCounter, pnlRightCounter, pnlCount, line_X_Distance = 0;
 
         string lineLocation;
+
+
         public SetTopViewSlidingPanellingPresenter(ISetTopViewSlidingPanellingView setTopViewSlidingPanelling)
         {
             _setTopViewSlidingPanelling = setTopViewSlidingPanelling;
@@ -58,8 +59,11 @@ namespace PresentationLayer.Presenter
             if (_windoorModel.pnlRightCounter != 0)
             {
                 _windoorModel.pnlRightCounter -= 1;
+                pnlRightCounter -= 1;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = pnlRightCounter;
                 _pnlPanelling.Invalidate();
-                //Console.WriteLine(pnlRightCounter);
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -80,8 +84,12 @@ namespace PresentationLayer.Presenter
             if (_windoorModel.pnlCount > (_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter))
             {
                 _windoorModel.pnlRightCounter += 1;
+                pnlRightCounter += 1;
+                
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = pnlRightCounter;
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 _pnlPanelling.Invalidate();
-                //Console.WriteLine(pnlRightCounter);
             }
         }
 
@@ -103,10 +111,11 @@ namespace PresentationLayer.Presenter
             if (_windoorModel.pnlLeftCounter != 0)
             {
                 _windoorModel.pnlLeftCounter -= 1;
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
-
+                pnlLeftCounter -= 1;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = pnlLeftCounter;
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 _pnlPanelling.Invalidate();
-                //Console.WriteLine(pnlLeftCounter);
 
             }
 
@@ -143,11 +152,14 @@ namespace PresentationLayer.Presenter
             if (_windoorModel.pnlCount > (_windoorModel.pnlLeftCounter + _windoorModel.pnlRightCounter))
             {
                 _windoorModel.pnlLeftCounter += 1;
+                pnlLeftCounter += 1;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = pnlLeftCounter;
                 _pnlPanelling.Invalidate();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
-                //Console.WriteLine(pnlLeftCounter);
             }
+
 
         }
 
@@ -537,6 +549,8 @@ namespace PresentationLayer.Presenter
             //Console.WriteLine(_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight);
 
         }
+
+
         public ISetTopViewSlidingPanellingView GetSetTopViewSlidingPanellingView()
         {
             return _setTopViewSlidingPanelling;
@@ -553,8 +567,8 @@ namespace PresentationLayer.Presenter
 
         public ISetTopViewSlidingPanellingPresenter CreateNewInstance(IUnityContainer unityC,
                                                                       IMainPresenter mainPresenter,
-                                                                      IWindoorModel windoorModel,
-                                                                      IItemInfoUCPresenter itemInfoUCP)
+                                                                      IWindoorModel windoorModel)
+        //IItemInfoUCPresenter itemInfoUCP)
         {
             unityC
                 .RegisterType<ISetTopViewSlidingPanellingView, SetTopViewSlidingPanellingView>()
@@ -563,7 +577,7 @@ namespace PresentationLayer.Presenter
             TopView._unityC = unityC;
             TopView._mainPresenter = mainPresenter;
             TopView._windoorModel = windoorModel;
-            TopView._itemInfoUCP = itemInfoUCP;
+            // TopView._itemInfoUCP = itemInfoUCP;
 
             return TopView;
         }
