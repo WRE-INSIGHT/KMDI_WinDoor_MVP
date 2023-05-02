@@ -114,8 +114,8 @@ namespace PresentationLayer.Presenter.UserControls
             windoorBinding.Add("WD_visibility", new Binding("Visible", _windoorModel, "WD_visibility", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_image", new Binding("Image", _windoorModel, "WD_image", true, DataSourceUpdateMode.OnPropertyChanged));
             windoorBinding.Add("WD_Selected", new Binding("WD_Selected", _windoorModel, "WD_Selected", true, DataSourceUpdateMode.OnPropertyChanged));
-            windoorBinding.Add("WD_SlidingTopViewVisibility", new Binding("Visible", _windoorModel, "WD_SlidingTopViewVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
-            windoorBinding.Add("WD_SlidingTopViewImage", new Binding("Image", _windoorModel, "WD_SlidingTopViewImage", true, DataSourceUpdateMode.OnPropertyChanged));
+            //windoorBinding.Add("WD_SlidingTopViewVisibility", new Binding("Visible", _windoorModel, "WD_SlidingTopViewVisibility", true, DataSourceUpdateMode.OnPropertyChanged));
+            //windoorBinding.Add("WD_SlidingTopViewImage", new Binding("Image", _windoorModel, "WD_SlidingTopViewImage", true, DataSourceUpdateMode.OnPropertyChanged));
             //windoorBinding.Add("WD_pboxImagerHeight", new Binding("Height", _windoorModel, "WD_pboxImagerHeight", true, DataSourceUpdateMode.OnPropertyChanged));
 
 

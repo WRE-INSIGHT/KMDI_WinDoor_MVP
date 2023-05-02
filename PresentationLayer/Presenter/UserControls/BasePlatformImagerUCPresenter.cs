@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
@@ -26,13 +25,17 @@ namespace PresentationLayer.Presenter.UserControls
 
         IWindoorModel _windoorModel;
         IMainPresenter _mainPresenter;
+        IUnityContainer _unityC;
+
 
         CommonFunctions _commonfunc = new CommonFunctions();
+        int deductBotPadding;
 
         public BasePlatformImagerUCPresenter(IBasePlatformImagerUC basePlatformImagerUC)
         {
             _basePlatformImagerUC = basePlatformImagerUC;
             _flpMain = _basePlatformImagerUC.GetFlpMain();
+
             SubscribeToEventsSetup();
         }
 
@@ -58,8 +61,11 @@ namespace PresentationLayer.Presenter.UserControls
         {
             List<Point> object_points = new List<Point>();
             List<int> curr_LocY = new List<int>();
+            DeductionForBottomFramePaddingImager();
 
             int flocX = 0, controlndex = 0, flocY = 0, prev_wd_covered = 0, prev_ht_covered = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+
+            #region oldAlgo
 
             //int occupiedWidth = 0,
             //    occupiedHeight = 0,
@@ -233,13 +239,7 @@ namespace PresentationLayer.Presenter.UserControls
             //    }
             //}
 
-
-
-
-
-
-
-
+            #endregion
 
             int occupiedWidth = 0,
               occupiedHeight = 0,
@@ -256,14 +256,11 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     if (wndrObject.Name.Contains("Frame"))
                     {
-
-
                         foreach (IFrameModel frm in _windoorModel.lst_frame)
                         {
                             if (wndrObject.Name == frm.Frame_Name)
                             {
-
-                                if(currentY != wndrObject.Location.Y)
+                                if (currentY != wndrObject.Location.Y)
                                 {
                                     flocY += MaxHeightImgager;
                                     flocX = 0;
@@ -281,7 +278,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         if (Maxheight < frm.Frame_Height)
                                         {
                                             Maxheight = frm.Frame_Height;
-                                            MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                            MaxHeightImgager = frm.FrameImageRenderer_Height - deductBotPadding;
                                         }
                                     }
                                     else
@@ -290,13 +287,12 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else if (availableWidth == frm.Frame_Width)
                                 {
-                                  
                                     ////Fit_MyObject_ToBindDimensions(startingObject, wndrObject);
                                     occupiedWidth += frm.Frame_Width;
                                     if (Maxheight < frm.Frame_Height)
                                     {
                                         Maxheight = frm.Frame_Height;
-                                        MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                        MaxHeightImgager = frm.FrameImageRenderer_Height - deductBotPadding;
                                     }
                                     startingObject = null;
                                     MaxHeightImgager = frm.FrameImageRenderer_Height;
@@ -319,7 +315,6 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else
                                 {
-
                                     object_points.Add(new Point(flocX, flocY));
                                     availableWidth -= frm.Frame_Width;
                                     flocX += frm.FrameImageRenderer_Width;
@@ -361,8 +356,8 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
                                 else if (availableWidth == crtm.Concrete_Width)
                                 {
-                                 
-                                   
+
+
                                     if (startingObject == null)
                                     {
                                         startingObject = wndrObject;
@@ -372,7 +367,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     if (Maxheight < crtm.Concrete_Height)
                                     {
                                         Maxheight = crtm.Concrete_Height;
-                                        
+
                                     }
                                     MaxHeightImgager = crtm.Concrete_ImagerHeightToBind;
 
@@ -409,16 +404,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
+            #region oldAlgo
 
             //foreach (Size frame_size in frameImager_sizes)
             //{
@@ -467,43 +453,32 @@ namespace PresentationLayer.Presenter.UserControls
             //            flocY += frame_size.Height;
             //        }
             //        total_wd_covered = 0;
-            //    }
-
-
-
+            //    } 
             //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            #endregion
 
             return object_points;
         }
 
+        public int DeductionForBottomFramePaddingImager()
+        {
+            int totalWdOfFrame = 0;
+            foreach (IFrameModel frm in _windoorModel.lst_frame)
+            {
+                totalWdOfFrame += frm.FrameImageRenderer_Width;
+            }
+            if (totalWdOfFrame < _windoorModel.WD_width)
+            {
+                deductBotPadding = 70;
+            }
+            else if (totalWdOfFrame != 0)
+            {
+                deductBotPadding = 70 / (totalWdOfFrame / _windoorModel.WD_width);
+
+            }
+
+            return deductBotPadding;
+        }
         public Point Panel_MPanel_DrawPoints_ParentIsFrame(Point framePoint, int frame_topPad, int frame_leftPad)
         {
             return new Point(framePoint.X + frame_leftPad, framePoint.Y + frame_topPad);
@@ -527,7 +502,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     foreach (IFrameModel frame in _windoorModel.lst_frame)
                     {
-                        if(objects.Name == frame.Frame_Name)
+                        if (objects.Name == frame.Frame_Name)
                         {
                             windoor_objects_sizes.Add(new Size(frame.FrameImageRenderer_Width, frame.FrameImageRenderer_Height));
                             break;
@@ -705,7 +680,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     }
 
                                 }
-                               
+
                                 mpnls = mpnl.MPanel_ParentModel;
                                 if (mpnls.MPanel_Type == "Mullion")
                                 {
@@ -736,7 +711,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         else if (mpnlParent.Name.Contains("MultiMullion_"))
                                         {
                                             IMultiPanelModel multiPanelModel = mpnls.MPanel_ParentModel.MPanelLst_MultiPanel.Find(mpanel => mpanel.MPanel_Name == mpnlParent.Name);
-                                            if(multiPanelModel.MPanel_Placement != "Last" && mpnlParent.Name != mpnls.MPanel_Name)
+                                            if (multiPanelModel.MPanel_Placement != "Last" && mpnlParent.Name != mpnls.MPanel_Name)
                                             {
                                                 indY += multiPanelModel.MPanelImageRenderer_Height;
                                             }
@@ -777,12 +752,13 @@ namespace PresentationLayer.Presenter.UserControls
                                 if (mpnl.MPanel_Type == "Mullion")
                                 {
                                     mParentLoc_Y1 = 0;
-                                    if(mpnls.MPanel_Placement != "First")
+                                    if (mpnls.MPanel_Placement != "First")
                                     {
                                         mParentLoc_X1 += indX;
                                     }
 
-                                } else if (mpnl.MPanel_Type == "Transom")
+                                }
+                                else if (mpnl.MPanel_Type == "Transom")
                                 {
                                     mParentLoc_X1 = 0;
 
@@ -796,7 +772,7 @@ namespace PresentationLayer.Presenter.UserControls
                                 {
                                     if (mpnl.MPanel_Name != parentMpnl_obj.Name)
                                     {
-                                        if(mpnl.MPanel_Type == "Mullion")
+                                        if (mpnl.MPanel_Type == "Mullion")
                                         {
                                             if (parentMpnl_obj.Name.Contains("MultiMullion_"))
                                             {
@@ -824,7 +800,7 @@ namespace PresentationLayer.Presenter.UserControls
                                                 mParentLoc_X1 += divModel.DivImageRenderer_Width;
                                             }
                                         }
-                                       if (parentMpnl_obj.Name.Contains("Panel"))
+                                        if (parentMpnl_obj.Name.Contains("Panel"))
                                         {
                                             if (mpnl.MPanel_Type == "Mullion")
                                             {
@@ -845,9 +821,9 @@ namespace PresentationLayer.Presenter.UserControls
                                 }
 
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y1, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X1);
-                               
+
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
-                               
+
                             }
                         }
                     }
@@ -874,7 +850,7 @@ namespace PresentationLayer.Presenter.UserControls
         }
         private void Draw_Concrete(PaintEventArgs e, Point cPoint, Size cSize, IConcreteModel concreteModel)
         {
-            Color color = Color.Black;
+            Color color = Color.Red;
 
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -898,7 +874,7 @@ namespace PresentationLayer.Presenter.UserControls
                 Point lowerPoint = new Point(0, 0);
                 if (i > cSize.Height)
                 {
-                    lowerPoint = new Point(cPoint.X + i - cSize.Height , cPoint.Y + cSize.Height - w);
+                    lowerPoint = new Point(cPoint.X + i - cSize.Height, cPoint.Y + cSize.Height - w);
                 }
                 else
                 {
@@ -1045,6 +1021,10 @@ namespace PresentationLayer.Presenter.UserControls
             //Draw_MultiPanel(e, mpnlModel, MPoint);
 
         }
+
+        int
+            line_X_Distance,
+            pnlCount;
         private void _basePlatformImagerUC_basePlatformPaintEventRaised(object sender, PaintEventArgs e)
         {
             UserControl basePL = (UserControl)sender;
@@ -1056,6 +1036,10 @@ namespace PresentationLayer.Presenter.UserControls
             int ctrl_Y = 35;
             float zoom = _windoorModel.WD_zoom_forImageRenderer;
             Pen redP = new Pen(Color.Red);
+            Pen greenP = new Pen(Color.Green);
+            Pen blueP = new Pen(Color.Blue);
+            Pen BlackP = new Pen(Color.Black, 3.5f);
+
             redP.Width = 3.5f;
 
             Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
@@ -1064,7 +1048,7 @@ namespace PresentationLayer.Presenter.UserControls
             int total_frame = _windoorModel.lst_frame.Count();
             int total_panel = 0, total_mpanel = 0;
 
-            foreach ( IFrameModel frame in _windoorModel.lst_frame)
+            foreach (IFrameModel frame in _windoorModel.lst_frame)
             {
                 total_panel += frame.Lst_Panel.Count();
                 total_mpanel += frame.Lst_MultiPanel.Count();
@@ -1087,9 +1071,67 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     locY = Draw_Arrow_Height(ht.Value, e, locY, dmnsion_font_ht, ctrl_Y);
                 }
+
+                //fold and slide top view
+                int InitialDistance = _flpMain.Location.X,
+                       pnlLeftCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount,
+                       pnlRightCounter = _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount,
+                       line_LtR_Y = _flpMain.Location.Y + (_flpMain.Height - 3) + 70;
+
+                if (pnlLeftCounter != 0 && pnlLeftCounter != 0)
+                {
+                    Point dmnsion_w_startP_topview = new Point(_flpMain.Location.X, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+                    Point dmnsion_w_endP_topview = new Point(_flpMain.Location.X + _flpMain.Width - 3, _flpMain.Location.Y + (_flpMain.Height - 3) + 70);
+
+                    if (total_panel != 0)
+                    {
+                        line_X_Distance = Math.Abs(_flpMain.Width / total_panel);
+                    }
+
+
+                    g.DrawLine(BlackP, dmnsion_w_startP_topview, dmnsion_w_endP_topview); // line
+
+
+                    for (int a = 0; a < pnlLeftCounter; a++)
+                    {
+                        int x1 = InitialDistance,
+                            x2 = InitialDistance + (line_X_Distance / 2);
+
+                        if (a % 2 == 0)
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                        }
+                        else
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                        }
+                        //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+                        InitialDistance = x2;
+                    }
+
+                    InitialDistance = _flpMain.Location.X + _flpMain.Width - 3;
+                    for (int a = 0; a < pnlRightCounter; a++)
+                    {
+                        int x1 = InitialDistance,
+                            x2 = InitialDistance - (line_X_Distance / 2);
+
+                        if (a % 2 == 0)
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, line_LtR_Y - 60));
+                        }
+                        else
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, line_LtR_Y - 60));
+                        }
+
+                        InitialDistance = x2;
+                    }
+                }
             }
             else if (total_panel == 1 && total_mpanel == 0)
             {
+
+
                 string dmnsion_w = _windoorModel.WD_width.ToString();
                 Point dmnsion_w_startP = new Point(_flpMain.Location.X, ctrl_Y - 17);
                 Point dmnsion_w_endP = new Point(_flpMain.Location.X + _flpMain.Width - 3, ctrl_Y - 17);
@@ -1149,7 +1191,7 @@ namespace PresentationLayer.Presenter.UserControls
                 };
 
                 g.DrawLines(redP, arrwhd_pnts_H1);
-                g.DrawLine(redP, dmnsion_h_startP , dmnsion_h_endP);
+                g.DrawLine(redP, dmnsion_h_startP, dmnsion_h_endP);
                 g.DrawLines(redP, arrwhd_pnts_H2);
                 TextRenderer.DrawText(g,
                                       dmnsion_h,
@@ -1160,6 +1202,8 @@ namespace PresentationLayer.Presenter.UserControls
                                       Color.White,
                                       TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 //arrow for HEIGHT
+
+
             }
 
             Bitmap bm = new Bitmap(basePL.Size.Width, basePL.Size.Height);
@@ -1223,7 +1267,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             return locX;
         }
-
+        int botPaddingMultiplier;
         private float Draw_Arrow_Height(decimal ht, PaintEventArgs e, float locY, Font dmnsion_font_ht, int ctrl_Y)
         {
             //arrow for HEIGHT
@@ -1232,8 +1276,41 @@ namespace PresentationLayer.Presenter.UserControls
             string dmnsion_h = ht.ToString();
             float DispHt_float = float.Parse(dmnsion_h);
 
-            PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.GetZoom_forRendering()));
-            PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
+
+            //PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.GetZoom_forRendering()));
+            //PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
+
+            float Zoom_forRendering = _windoorModel.GetZoom_forRendering();
+          
+            if (Zoom_forRendering == 1.00f)
+            {
+                botPaddingMultiplier = 1;
+            }
+            else if (Zoom_forRendering == 0.50f)
+            {
+                botPaddingMultiplier = 2;
+            }
+            else if (Zoom_forRendering == 0.26f)
+            {
+                botPaddingMultiplier = 4;
+            }
+            else if (Zoom_forRendering == 0.17f)
+            {
+                botPaddingMultiplier = 6;
+            }
+            else if (Zoom_forRendering == 0.13f)
+            {
+                botPaddingMultiplier = 8;
+            }
+            else if (Zoom_forRendering == 0.10f)
+            {
+                botPaddingMultiplier = 10;
+            }
+            DispHt_float -= (70 * botPaddingMultiplier) / _windoorModel.Dictionary_ht_redArrowLines.Count;
+            PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * Zoom_forRendering));
+            PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * Zoom_forRendering));
+
+
 
             if (dmnsion_h.Contains(".0"))
             {
@@ -1278,13 +1355,64 @@ namespace PresentationLayer.Presenter.UserControls
             return locY;
         }
 
+        #region Draw_SlidingTopView
+
+        //private float Draw_SlidingTopView(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
+        //{
+        //    Graphics g = e.Graphics;
+
+        //    string dmnsion_w = wd.ToString();
+
+        //    if (dmnsion_w.Contains(".0"))
+        //    {
+        //        dmnsion_w = dmnsion_w.Replace(".0", "");
+        //    }
+
+        //    float DispWd_float = float.Parse(dmnsion_w);
+
+
+        //    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.GetZoom_forRendering()),
+        //                                       (ctrl_Y - 17));
+        //    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.GetZoom_forRendering()),
+        //                                       (ctrl_Y - 17));
+
+
+        //    //g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance, line_LtR_Y), new Point(_pnlPanelling.Width - 10, line_LtR_Y));
+
+
+
+        //    PointF[] arrwhd_pnts_W1 =
+        //{
+        //                    new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
+        //                    dmnsion_w_startP,
+        //                    new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
+        //            };
+
+        //    PointF[] arrwhd_pnts_W2 =
+        //    {
+        //                    new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 100),
+        //                    dmnsion_w_endP,
+        //                    new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 100)
+        //                };
+
+        //    if (_windoorModel.lst_frame.Count() > 0)
+        //    {
+        //        g.DrawLine(new Pen(Color.Yellow, 3.5f), dmnsion_w_startP, dmnsion_w_endP);
+        //    }
+
+        //    //arrow for WIDTH
+        //    locX += DispWd_float;
+        //    return locX;
+        //}
+        #endregion
+
         private void Draw_Frame(PaintEventArgs e, Point fPoint, Size fSize, IFrameModel frameModel)
         {
             Pen blkPen = new Pen(Color.Black);
             blkPen.Width = 2;
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
+            DeductionForBottomFramePaddingImager();
             int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
 
             int top_pads = frameModel.FrameImageRenderer_Padding_int.Top,
@@ -1294,7 +1422,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             Rectangle pnl_inner = new Rectangle(new Point(fPoint.X + left_pads, fPoint.Y + top_pads),
                                                 new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),
-                                                         frameModel.FrameImageRenderer_Height - (top_pads + bot_pads)));
+                                                         frameModel.FrameImageRenderer_Height - deductBotPadding - (top_pads + bot_pads)));
 
 
             int pInnerX = pnl_inner.Location.X,
@@ -1308,9 +1436,9 @@ namespace PresentationLayer.Presenter.UserControls
                 new Point(pInnerX, pInnerY),
                 new Point(fPoint.X + frameModel.FrameImageRenderer_Width, fPoint.Y),
                 new Point(pInnerX + pInnerWd, pInnerY),
-                new Point(fPoint.X, frameModel.FrameImageRenderer_Height + fPoint.Y),
+                new Point(fPoint.X, frameModel.FrameImageRenderer_Height + fPoint.Y - deductBotPadding),
                 new Point(pInnerX, pInnerY + pInnerHt),
-                new Point(fPoint.X + frameModel.FrameImageRenderer_Width, frameModel.FrameImageRenderer_Height + fPoint.Y),
+                new Point(fPoint.X + frameModel.FrameImageRenderer_Width, frameModel.FrameImageRenderer_Height + fPoint.Y - deductBotPadding),
                 new Point(pInnerX + pInnerWd, pInnerY + pInnerHt)
             };
 
@@ -1326,7 +1454,7 @@ namespace PresentationLayer.Presenter.UserControls
             g.DrawRectangle(blkPen, new Rectangle(fPoint.X,
                                                   fPoint.Y,
                                                   fSize.Width - w,
-                                                  fSize.Height - w));
+                                                  fSize.Height - deductBotPadding - w));
         }
         float first = 0;
         private void Draw_Panel(PaintEventArgs e, IPanelModel panelModel, Point Ppoint)
@@ -1343,9 +1471,9 @@ namespace PresentationLayer.Presenter.UserControls
             int client_wd = 0, client_ht = 0;
 
 
-            
 
-            if(panelModel.Panel_ParentMultiPanelModel != null)
+
+            if (panelModel.Panel_ParentMultiPanelModel != null)
             {
                 if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Mullion")
                 {
@@ -1411,7 +1539,7 @@ namespace PresentationLayer.Presenter.UserControls
                 tenPercentAdditional = 8;
                 gfont_size = 43;
             }
-          
+
             Rectangle outer_bounds = new Rectangle(Ppoint.X,
                                                    Ppoint.Y,
                                                    client_wd - w,
@@ -1544,7 +1672,7 @@ namespace PresentationLayer.Presenter.UserControls
 
 
 
-            int addX = ((client_wd - (((int)(client_wd   - sashDeduction+ pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
+            int addX = ((client_wd - (((int)(client_wd - sashDeduction + pGbarInnerX) / (verticalQty + 1)) * verticalQty)) - ((client_wd + pGbarInnerX) / (verticalQty + 1))) / 2;
 
             //vertical
             for (int ii = 0; ii < verticalQty; ii++)
@@ -1668,7 +1796,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     //outer Line
                     //PointF outerLine1 = new PointF(Ppoint.X + outer_line - innerLineDeduction + w + tenPercentAdditional, Ppoint.Y + outer_line);
-                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line); 
+                    PointF outerLine1 = new PointF(Ppoint.X, Ppoint.Y + outer_line);
                     PointF outerLine2 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine3 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line);
                     PointF outerLine4 = new PointF(Ppoint.X + outer_line - innerLineDeduction + (client_wd - (outer_line * 2)) - w + innerLineDeduction, Ppoint.Y + outer_line + (client_ht - (outer_line * 2)) - w);
@@ -1739,7 +1867,7 @@ namespace PresentationLayer.Presenter.UserControls
                     }
                 }
             }
-           
+
 
             StringFormat drawFormat = new StringFormat();
             int pnl_ID = 0;
@@ -1826,9 +1954,9 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     Brush the_brush = new SolidBrush(Color.FromArgb(219, 80, 80));
                     int LocY = Ppoint.Y;
-                    if(font_size + 10 < client_ht)
+                    if (font_size + 10 < client_ht)
                     {
-                        if(panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
+                        if (panelModel.Panel_Type == "Awning Panel" || panelModel.Panel_Type == "Casement Panel")
                         {
                             LocY = Ppoint.Y + (client_ht / 2) - font_size + 10;
                         }
@@ -1857,13 +1985,13 @@ namespace PresentationLayer.Presenter.UserControls
 
 
                 Font drawFont = new Font("Times New Roman", font_size);// * zoom);
-                
+
                 drawFormat.Alignment = StringAlignment.Center;
                 drawFormat.LineAlignment = StringAlignment.Center;
                 g.DrawString("F", drawFont, new SolidBrush(Color.Black), panel_bounds, drawFormat);
 
 
-                
+
             }
             else if (panelModel.Panel_Type == "Casement Panel")
             {
@@ -1876,7 +2004,7 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW  = client_wd,
+                int sashW = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)//Left
@@ -1905,7 +2033,7 @@ namespace PresentationLayer.Presenter.UserControls
                 dgrayPen.DashStyle = DashStyle.Dash;
                 dgrayPen.Width = 3;
 
-                int sashW  = client_wd,
+                int sashW = client_wd,
                     sashH = client_ht;
 
                 if (panelModel.Panel_Orient == true)
@@ -1930,7 +2058,7 @@ namespace PresentationLayer.Presenter.UserControls
                     sashH = client_ht;
                 if (panelModel.Panel_Orient == false)
                 {
-                    
+
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
                   panelModel.Panel_SlidingTypes == SlidingTypes._Pivot ||
@@ -1948,7 +2076,7 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             ArrowExpectedWidth = (float)((sashW + sashOverlapValue) * 0.2);
                             ArrowExpectedHeight = (float)((sashW + sashOverlapValue) * 0.3);
-                            
+
                             //g.FillRectangle(new SolidBrush(Color.Red), arrowStartingX + Ppoint.X, arrowStartingY + Ppoint.Y, ArrowExpectedWidth, ArrowExpectedHeight);
                         }
                         arrowStartingX += ((sashW + sashOverlapValue) / 2) - (ArrowExpectedWidth / 2);
@@ -2028,7 +2156,7 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_Orient == true)
                 {
-                   
+
 
                     if (panelModel.Panel_SlidingTypes == SlidingTypes._Premiline ||
                         panelModel.Panel_SlidingTypes == SlidingTypes._FoldAndSlide ||
@@ -2130,7 +2258,7 @@ namespace PresentationLayer.Presenter.UserControls
 
             }
 
-            
+
             else if (panelModel.Panel_Type == "TiltNTurn Panel")
             {
                 g.DrawRectangle(new Pen(Color.Black, 3), new Rectangle(Ppoint.X + inner_line,
@@ -2288,9 +2416,9 @@ namespace PresentationLayer.Presenter.UserControls
                 for (int ii = 0; ii < panelModel.Panel_LouverBladesCount; ii++)
                 {
                     IList<Point> lstPtsSide = new List<Point>();
-                    foreach(Point pnts in lvrBlade.ElementAt(ii).Key)
+                    foreach (Point pnts in lvrBlade.ElementAt(ii).Key)
                     {
-                        lstPtsSide.Add (new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
+                        lstPtsSide.Add(new Point(pnts.X, pnts.Y + (int)(Lvr_GlassHt_deci / 2) + (int)((ht_allowance_deci * _windoorModel.WD_zoom_forImageRenderer) / 2)));
                     }
 
                     IList<Point> lstPtsblade = new List<Point>();
@@ -2309,12 +2437,12 @@ namespace PresentationLayer.Presenter.UserControls
                             g.DrawLine(LvrPen, lstPtsSide[i], lstPtsSide[i + 1]);
                         }
                     }
-                   
+
                     for (int i = 0; i < lvrBlade.ElementAt(ii).Value.Length; i += 2)
                     {
                         g.DrawLine(p, lstPtsblade[i], lstPtsblade[i + 1]);
                     }
-                 
+
                 }
             }
         }
@@ -2326,7 +2454,7 @@ namespace PresentationLayer.Presenter.UserControls
             float zoom = mpanelModel.MPanelImageRenderer_Zoom;
 
             int client_wd = mpanelModel.MPanelImageRenderer_Width,
-                client_ht = mpanelModel.MPanelImageRenderer_Height;
+                client_ht = mpanelModel.MPanelImageRenderer_Height - 70;
 
             Rectangle mpnl_bounds = new Rectangle(Mpoint, new Size(client_wd, client_ht));
             //SolidBrush mpnl_sBrush = new SolidBrush(Color.MistyRose);
@@ -2399,6 +2527,8 @@ namespace PresentationLayer.Presenter.UserControls
             imagerUCP._windoorModel = windoorModel;
             imagerUCP._mainPresenter = mainPresenter;
             imagerUCP._basePlatformImagerUC.ClearBinding((UserControl)_basePlatformImagerUC);
+            imagerUCP._unityC = unityC;
+
             return imagerUCP;
         }
         public Dictionary<string, Binding> CreateBindingDictionary()

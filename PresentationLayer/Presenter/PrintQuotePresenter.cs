@@ -363,21 +363,21 @@ namespace PresentationLayer.Presenter
 
                     MemoryStream mstream = new MemoryStream();
                     MemoryStream mstream2 = new MemoryStream();
-                    Image itemImage = _quotationModel.Lst_Windoor[i].WD_image,
-                          topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
+                Image itemImage = _quotationModel.Lst_Windoor[i].WD_image;
+                         // topView = _quotationModel.Lst_Windoor[i].WD_SlidingTopViewImage;
 
                     itemImage.Save(mstream, System.Drawing.Imaging.ImageFormat.Png);
 
-                    if (topView != null)
-                    {
-                        topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
-                    }
+                    //if (topView != null)
+                    //{
+                    //    topView.Save(mstream2, System.Drawing.Imaging.ImageFormat.Png);
+                    //}
 
                     byte[] arrimageForItemImage = mstream.ToArray();
-                    byte[] arrimageForTopView = mstream2.ToArray();
+                    //byte[] arrimageForTopView = mstream2.ToArray();
 
                     string byteToStrForItemImage = Convert.ToBase64String(arrimageForItemImage);
-                    string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
+                    //string byteToStrForTopView = Convert.ToBase64String(arrimageForTopView);
 
                     IQuoteItemListUCPresenter lstQuoteUC = _quoteItemListPresenter.LstQuoteItemUC[i];
 
@@ -411,7 +411,7 @@ namespace PresentationLayer.Presenter
                                           lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
-                                          byteToStrForTopView,
+                                          null,
                                           showImage);
 
                 }

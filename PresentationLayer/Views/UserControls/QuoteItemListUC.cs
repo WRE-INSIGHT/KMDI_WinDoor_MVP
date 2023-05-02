@@ -60,7 +60,7 @@ namespace PresentationLayer.Views.UserControls
             }
         }
         public CheckBox GetChkboxItemImage()
-        { 
+        {
             return chk_showitemImage;
         }
 
@@ -132,10 +132,10 @@ namespace PresentationLayer.Views.UserControls
         {
             return pboxItemImage;
         }
-        public PictureBox GetPboxTopView()
-        {
-            return pboxTopView;
-        }
+        //public PictureBox GetPboxTopView()
+        //{
+        //    return pboxTopView;
+        //}
         public Label GetLblQuantity()
         {
             return lblQuantity;

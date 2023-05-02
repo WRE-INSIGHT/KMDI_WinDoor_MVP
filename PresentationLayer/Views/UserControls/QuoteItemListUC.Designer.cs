@@ -42,7 +42,6 @@
             this.chk_showitemImage = new System.Windows.Forms.CheckBox();
             this.tboxItemName = new System.Windows.Forms.TextBox();
             this.txt_ItemNumber = new System.Windows.Forms.TextBox();
-            this.pboxTopView = new System.Windows.Forms.PictureBox();
             this.NudItemQuantity = new System.Windows.Forms.NumericUpDown();
             this.NudItemDiscount = new System.Windows.Forms.NumericUpDown();
             this.nudItemPrice = new System.Windows.Forms.NumericUpDown();
@@ -53,7 +52,6 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxTopView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).BeginInit();
@@ -150,7 +148,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.pboxItemImage);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.pboxTopView);
             this.panel2.Location = new System.Drawing.Point(1, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 165);
@@ -162,7 +159,7 @@
             this.pboxItemImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pboxItemImage.Location = new System.Drawing.Point(0, 26);
             this.pboxItemImage.Name = "pboxItemImage";
-            this.pboxItemImage.Size = new System.Drawing.Size(200, 109);
+            this.pboxItemImage.Size = new System.Drawing.Size(200, 139);
             this.pboxItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxItemImage.TabIndex = 20;
             this.pboxItemImage.TabStop = false;
@@ -210,17 +207,6 @@
             this.txt_ItemNumber.Size = new System.Drawing.Size(52, 25);
             this.txt_ItemNumber.TabIndex = 22;
             this.txt_ItemNumber.Text = "Item";
-            // 
-            // pboxTopView
-            // 
-            this.pboxTopView.BackColor = System.Drawing.Color.White;
-            this.pboxTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pboxTopView.Location = new System.Drawing.Point(0, 135);
-            this.pboxTopView.Name = "pboxTopView";
-            this.pboxTopView.Size = new System.Drawing.Size(200, 30);
-            this.pboxTopView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboxTopView.TabIndex = 22;
-            this.pboxTopView.TabStop = false;
             // 
             // NudItemQuantity
             // 
@@ -314,7 +300,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pboxItemImage)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxTopView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudItemDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudItemPrice)).EndInit();
@@ -336,7 +321,6 @@
         private System.Windows.Forms.TextBox tboxItemName;
         private System.Windows.Forms.NumericUpDown NudItemQuantity;
         private System.Windows.Forms.NumericUpDown nudItemPrice;
-        private System.Windows.Forms.PictureBox pboxTopView;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txt_ItemNumber;
         private System.Windows.Forms.ContextMenuStrip CMS_Items;
