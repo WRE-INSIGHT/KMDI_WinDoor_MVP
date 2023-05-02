@@ -170,7 +170,8 @@ namespace PresentationLayer.Presenter.UserControls
             }
 
             int wd = _frameModel.Frame_Width - (int)(_frameModel.Frame_Type - 10) * 2,
-                ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
+             ht = _frameModel.Frame_Height - ((int)(_frameModel.Frame_Type - 10) + bot_deduct);
+            
 
             IFramePropertiesUC framePropUC = _mainPresenter.GetFrameProperties(_frameModel.Frame_ID);
 
@@ -314,7 +315,7 @@ namespace PresentationLayer.Presenter.UserControls
                 {
                     handleArtNo = Rotoswing_HandleArtNo._RSC773452;
                 }
-
+                  
 
                 _frameModel.SetDeductFramePadding(false, false);
 

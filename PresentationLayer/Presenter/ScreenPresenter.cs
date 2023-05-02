@@ -625,7 +625,6 @@ namespace PresentationLayer.Presenter
                 _screenModel.Screen_373or374MilledProfileVisibility = false;
             }
 
-
             //if (screenType == ScreenType._Magnum)
             //{
             //    _screenModel.SP_MagnumScreenType_Visibility = true;
