@@ -40,7 +40,8 @@ namespace PresentationLayer.Presenter
                FreightCharge_key,
                QuotationOuofTownExpenses_key,
                GlassThickness,
-               baseColor;
+               baseColor,
+               Less_Discount_key;
 
 
 
@@ -63,9 +64,31 @@ namespace PresentationLayer.Presenter
             _printQuoteView.chkboxFCCheckedChangedEventRaised += _printQuoteView_chkboxFCCheckedChangedEventRaised;
             _printQuoteView.chkboxVATCheckedChangedEventRaised += _printQuoteView_chkboxVATCheckedChangedEventRaised;
             _printQuoteView.PrintQuoteViewFormClosingEventRaised += _printQuoteView_PrintQuoteViewFormClosingEventRaised;
+            _printQuoteView.chkboxLessDCheckedChangedEventRaised += _printQuoteView_chkboxLessDCheckedChangedEventRaised;
         }
 
+        private void _printQuoteView_chkboxLessDCheckedChangedEventRaised(object sender, EventArgs e)
+        {
 
+            if(_mainPresenter.printStatus == "ContractSummary")
+            {
+                if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                {
+                    _printQuoteView.GetLessDiscountTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetLessDiscountchkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int Vat_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetLessDiscountTxtBox().Location = new System.Drawing.Point(Vat_X_Loc, 118);
+                    _printQuoteView.GetLessDiscountTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                }
+                else
+                {
+                    _printQuoteView.GetLessDiscountTxtBox().Visible = false;
+
+                }
+            }
+        }
 
         private void _printQuoteView_chkboxVATCheckedChangedEventRaised(object sender, EventArgs e)
         {
@@ -158,6 +181,11 @@ namespace PresentationLayer.Presenter
             QuotationOuofTownExpenses_key = _mainPresenter.printStatus + "_" + "QuotationOuofTownExpenses";
             LaborandMobilization_key = _mainPresenter.printStatus + "_" + "LaborandMobilization";
             FreightCharge_key = _mainPresenter.printStatus + "_" + "FreightCharge";
+
+            if(_mainPresenter.printStatus == "ContractSummary")
+            {
+                Less_Discount_key = _mainPresenter.printStatus + "_" + "Less_Discount";
+            }
             
 
             if (_rdlcHeaderIsPresent == true)
@@ -171,6 +199,12 @@ namespace PresentationLayer.Presenter
                 _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
                 _mainPresenter.RDLCHeader[LaborandMobilization_key] = _printQuoteView.LaborandMobilization;
                 _mainPresenter.RDLCHeader[FreightCharge_key] = _printQuoteView.FreightCharge;
+
+                //specific for contract summarry
+                if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _mainPresenter.RDLCHeader[Less_Discount_key] = _printQuoteView.LessDiscount;
+                }
             }
             else
             {            
@@ -183,6 +217,12 @@ namespace PresentationLayer.Presenter
                 _mainPresenter.RDLCHeader.Add(QuotationOuofTownExpenses_key,_printQuoteView.QuotationOuofTownExpenses);
                 _mainPresenter.RDLCHeader.Add(LaborandMobilization_key, _printQuoteView.LaborandMobilization);
                 _mainPresenter.RDLCHeader.Add(FreightCharge_key, _printQuoteView.FreightCharge);
+                
+                //specific for contract summarry 
+                if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _mainPresenter.RDLCHeader.Add(Less_Discount_key, _printQuoteView.LessDiscount);
+                }
 
             }
         }
@@ -308,6 +348,9 @@ namespace PresentationLayer.Presenter
                         else if (headers.Key.Contains("FreightCharge"))
                         {
                             _printQuoteView.FreightCharge = headers.Value;
+                        }else if (headers.Key.Contains("Less_Discount"))
+                        {
+                            _printQuoteView.LessDiscount = headers.Value;
                         }
                                                  
                     }
@@ -345,6 +388,7 @@ namespace PresentationLayer.Presenter
                 _printQuoteView.VatPercentage = "12";
                 _printQuoteView.LaborandMobilization = "0";
                 _printQuoteView.FreightCharge = "0";
+                _printQuoteView.LessDiscount = "30";
             }
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
         }
@@ -854,6 +898,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
                     _printQuoteView.GetFreightChargesChkbox().Visible = true;
                     _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetLessDiscountchkbox().Visible = true;
+
                     _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(1200, 5);
                     _printQuoteView.GetAdditionalInfoLabel().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(1130, 28);
@@ -862,6 +908,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetFreightChargesChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(1130, 88);
                     _printQuoteView.GetVatChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLessDiscountchkbox().Location = new System.Drawing.Point(1130,118);
+                    _printQuoteView.GetLessDiscountchkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
@@ -880,12 +928,13 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-                    ReportParameter[] RParam = new ReportParameter[7];
+                    ReportParameter[] RParam = new ReportParameter[9];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
                     RParam[6] = new ReportParameter("VatPercentage",_printQuoteView.VatPercentage);
+                    RParam[7] = new ReportParameter("LessDiscountPercentage", _printQuoteView.LessDiscount);
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -903,6 +952,15 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[5] = new ReportParameter("ShowVat", "False");
+                    }
+
+                    if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

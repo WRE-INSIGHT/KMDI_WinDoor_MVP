@@ -95,9 +95,28 @@ namespace PresentationLayer.Views
                 txtbox_FC.Text = value;
             }
         }
+        public string LessDiscount
+        {
+            get
+            {
+                return txtbox_LessD.Text;
+            }
+            set
+            {
+                txtbox_LessD.Text = value;
+            }
+        }
+        public CheckBox GetLessDiscountchkbox()
+        {
+            return chkbox_LessD;
+        }
+        public TextBox GetLessDiscountTxtBox()
+        {
+            return txtbox_LessD;
+        }
         public ReportViewer GetReportViewer()
         {
-            return reportViewer1;
+             return reportViewer1;
         }
         public BindingSource GetBindingSource()
         {
@@ -195,6 +214,7 @@ namespace PresentationLayer.Views
         public event EventHandler chkboxLnMCheckedChangedEventRaised;
         public event EventHandler chkboxFCCheckedChangedEventRaised;
         public event EventHandler chkboxVATCheckedChangedEventRaised;
+        public event EventHandler chkboxLessDCheckedChangedEventRaised;
         public event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         private void PrintQuoteView_Load(object sender, EventArgs e)
@@ -256,6 +276,11 @@ namespace PresentationLayer.Views
         private void PrintQuoteView_FormClosing(object sender, FormClosingEventArgs e)
         {
             EventHelpers.RaiseFormClosingEvent(sender, PrintQuoteViewFormClosingEventRaised, e);
+        }
+
+        private void chkbox_LessD_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxLessDCheckedChangedEventRaised, e);
         }
     }
 }

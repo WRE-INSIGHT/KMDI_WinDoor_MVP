@@ -1613,8 +1613,8 @@
                                   <Style>None</Style>
                                 </Border>
                                 <BottomBorder>
-                                  <Style>Solid</Style>
-                                  <Width>0.5pt</Width>
+                                  <Style>Double</Style>
+                                  <Width>2pt</Width>
                                 </BottomBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingLeft>2pt</PaddingLeft>
@@ -1778,8 +1778,8 @@
                                   <Style>None</Style>
                                 </Border>
                                 <BottomBorder>
-                                  <Style>Solid</Style>
-                                  <Width>0.5pt</Width>
+                                  <Style>Double</Style>
+                                  <Width>2pt</Width>
                                 </BottomBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingLeft>2pt</PaddingLeft>
@@ -2090,7 +2090,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!dtDiscountAverage.Value</Value>
+                                      <Value>= iif(Parameters!UserDefineLessDiscount.Value = "True",Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100,Fields!dtDiscountAverage.Value)</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2147,6 +2147,7 @@
                                 <PaddingRight>2pt</PaddingRight>
                               </Style>
                             </Textbox>
+                            <rd:Selected>true</rd:Selected>
                           </CellContents>
                         </TablixCell>
                         <TablixCell>
@@ -2157,7 +2158,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=-Math.Round(  ( Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2) ) * (Fields!dtDiscountAverage.Value),2)</Value>
+                                      <Value>=iif(Parameters!UserDefineLessDiscount.Value = "True",-(Math.Round((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2) ) * (Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2)),-Math.Round(( Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2) ) * (Fields!dtDiscountAverage.Value),2))</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2321,7 +2322,16 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2)))</Value>
+                                      <Value>=(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) 
+- 
+iif(Parameters!UserDefineLessDiscount.Value = "True",
+
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2))),
+
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2))))</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2489,7 +2499,19 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * ((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2))))</Value>
+                                      <Value>=(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
+((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) 
+-
+iif(Parameters!UserDefineLessDiscount.Value= "True"
+,
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) * 
+Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2)))
+,
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) * 
+Math.Round((Fields!dtDiscountAverage.Value),2))))
+)</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2656,11 +2678,31 @@
                                   <TextRuns>
                                     <TextRun>
                                       <Value>=iif(Parameters!ShowVat.Value = "True",
-(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2))) 
+(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) 
+*
+iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2)) 
+)) 
 + 
-(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * ((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2))))
-
-,(Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) - (((Math.Round((Fields!dtWindoorListPrice.Value),2) + Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountAverage.Value),2))) )</Value>
+(Convert.ToDecimal(Parameters!VatPercentage.Value) / 100) * 
+((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) - 
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) 
+* 
+iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
+)))
+,
+(Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) 
+- 
+(((Math.Round((Fields!dtWindoorListPrice.Value),2) + 
+Math.Round((Fields!dtScreenListPrice.Value),2)) 
+*
+ iif(Parameters!UserDefineLessDiscount.Value = "True",Math.Round((Convert.ToDecimal(Parameters!LessDiscountPercentage.Value) / 100),2),Math.Round((Fields!dtDiscountAverage.Value),2))
+ )) )</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontWeight>Bold</FontWeight>
@@ -3173,6 +3215,14 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="VatPercentage">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LessDiscountPercentage">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="UserDefineLessDiscount">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

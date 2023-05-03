@@ -13,6 +13,9 @@ namespace PresentationLayer.Views
         string VatPercentage { get; set; }
         string LaborandMobilization { get; set; }
         string FreightCharge { get; set; }
+        string LessDiscount { get; set; }
+        TextBox GetLessDiscountTxtBox();
+        CheckBox GetLessDiscountchkbox();
         CheckBox ShowLastPage();
         Label GetUniversalLabel();
         Button GetRefreshBtn();
@@ -29,6 +32,7 @@ namespace PresentationLayer.Views
         event EventHandler chkboxLnMCheckedChangedEventRaised;
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
+        event EventHandler chkboxLessDCheckedChangedEventRaised;
         event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         ReportViewer GetReportViewer();
