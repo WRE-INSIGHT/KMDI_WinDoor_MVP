@@ -6436,7 +6436,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
                 Panel_GlazingBeadWidth = Panel_GlassWidth + 200;
                 Panel_GlazingBeadWidthDecimal = Panel_GlassWidthDecimal;
-                Panel_GlazingBeadHeight = Panel_GlassHeight +200;
+                Panel_GlazingBeadHeight = Panel_GlassHeight + 200;
                 Panel_GlazingBeadHeightDecimal = Panel_GlassHeightDecimal;
 
                 //Panel_GlazingBeadWidth = Panel_DisplayWidth; //- (33 * 2);
@@ -9480,24 +9480,24 @@ namespace ModelLayer.Model.Quotation.Panel
                                    @"|  |");
         }
 
-        public void Insert_Interlock_MaterialList(DataTable tbl_explosion)
+        public void Insert_Interlock_MaterialList(DataTable tbl_explosion, int bothOverlapQtyMultiplier)
         {
             if (Panel_InterlockArtNo != null)
             {
                 tbl_explosion.Rows.Add("Interlock " + Panel_InterlockArtNo.DisplayName,
-                                       2, "pc(s)",
+                                       2 * bothOverlapQtyMultiplier, "pc(s)",
                                        Panel_SashHeight - 5,
                                        "Sash",
                                        @"|  |");
             }
         }
 
-        public void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion)
+        public void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion, int bothOverlapQtyMultiplier)
         {
             if (Panel_ExtensionForInterlockArtNo != null)
             {
                 tbl_explosion.Rows.Add("Extension for Interlock " + Panel_ExtensionForInterlockArtNo.DisplayName,
-                                                  2, "pc(s)",
+                                                  2 * bothOverlapQtyMultiplier, "pc(s)",
                                                   Panel_SashHeight - 30,
                                                   "Sash",
                                                   @"|  |");

@@ -18,6 +18,7 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         public event EventHandler cmbGlazingArtNoSelectedValueEventRaised;
         public event EventHandler cmbFilmTypeSelectedValueEventRaised;
         public event EventHandler btnSelectGlassThicknessClickedEventRaised;
+        public event EventHandler chkGlazingAdaptorCheckedChangedEventRaised;
 
         private void PP_GlassPropertyUC_Load(object sender, EventArgs e)
         {
@@ -116,6 +117,9 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
         }
 
-
+        private void chk_GlazingAdaptor_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkGlazingAdaptorCheckedChangedEventRaised, e);
+        }
     }
 }
