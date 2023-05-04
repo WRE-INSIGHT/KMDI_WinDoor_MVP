@@ -1115,7 +1115,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_quotationModel != null)
                 {
-                    updatePriceFromMainViewToItemList();
+                     updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
                 }

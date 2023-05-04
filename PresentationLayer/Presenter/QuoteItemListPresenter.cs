@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -132,7 +133,7 @@ namespace PresentationLayer.Presenter
             ScreenTotalListCount = 0,
             divisor = 2;
 
-        string prev_GlassSize,
+        String prev_GlassSize,
                prev_GlassRef,
                prev_GlassLoc, prev_GlassDesc,
                curr_GlassSize,
@@ -142,7 +143,12 @@ namespace PresentationLayer.Presenter
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                DimensionDesc,
-               setDesc;
+               setDesc,
+               Screen_DimensionFormat,
+               Screen_UnitPrice,
+               Screen_Qty,
+               Screen_Discount,
+               Screen_NetPrice;
 
         decimal prev_GlassArea,
                 prev_GlassPrice,
@@ -193,7 +199,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
-
+        
         public void PrintScreenRDLC()
         {
             DSQuotation _dsq = new DSQuotation();
@@ -235,17 +241,34 @@ namespace PresentationLayer.Presenter
                         setDesc = " ";
                     }
 
-                    _dsq.dtScreen.Rows.Add( item.Screen_Description,
-                                            item.Screen_Width + " x " + item.Screen_Height,
+                    if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                    {
+                        Screen_DimensionFormat = " - ";
+                        Screen_UnitPrice = " - ";
+                        Screen_Qty = null;
+                        Screen_Discount = " - ";
+                        Screen_NetPrice = " - "; 
+                    }
+                    else
+                    {
+                        Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        Screen_UnitPrice = item.Screen_UnitPrice.ToString("n");
+                        Screen_Qty = item.Screen_Quantity.ToString();
+                        Screen_Discount = Convert.ToString(item.Screen_Discount) + "%";
+                        Screen_NetPrice = item.Screen_NetPrice.ToString("n");
+                    }
+
+                    _dsq.dtScreen.Rows.Add( item.Screen_Description + setDesc,
+                                            Screen_DimensionFormat, // Screen widht x height
                                             item.Screen_WindoorID,
-                                            item.Screen_UnitPrice.ToString("n"),
-                                            item.Screen_Quantity,
-                                            screenUnitPriceTotal,
+                                            Screen_UnitPrice, //screen unitprice
+                                            Screen_Qty, //screen quantity
+                                            screenUnitPriceTotal, 
                                             Convert.ToString(item.Screen_ItemNumber),
-                                            item.Screen_NetPrice.ToString("n"),
+                                            Screen_NetPrice, // screen Netprice
                                             1,
                                             "",
-                                            Convert.ToString(item.Screen_Discount) + "%",
+                                            Screen_Discount, //screen discount
                                             "",
                                             DiscountPercentage
                                             );
@@ -743,6 +766,12 @@ namespace PresentationLayer.Presenter
             screen_priceXquantiy = 0;
             screenUnitPriceTotal = 0;
             //outOfTownCharges = 0;
+             
+            Screen_DimensionFormat = null;
+            Screen_UnitPrice = null;        
+            Screen_Qty = null;                                            
+            Screen_Discount = null;      
+            Screen_NetPrice = null;      
 
         }
 
@@ -1229,7 +1258,6 @@ namespace PresentationLayer.Presenter
             var destImage = new Bitmap(width, height);
 
             //maintains DPI regardless of physical size
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
             using (var graphics = Graphics.FromImage(destImage))
             {
