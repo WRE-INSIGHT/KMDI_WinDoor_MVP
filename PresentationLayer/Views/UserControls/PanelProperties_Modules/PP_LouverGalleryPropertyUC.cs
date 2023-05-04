@@ -29,7 +29,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
 
             EventHelpers.RaiseEvent(sender, LouverBladesCombinationPropertyUCLoadEventRaised, e);
         }
-
         private void cmb_BladeType_SelectedValueChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, cmbBladeTypeSelectedValueChangedEventRaised, e);

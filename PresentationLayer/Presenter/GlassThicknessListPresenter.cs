@@ -22,7 +22,7 @@ namespace PresentationLayer.Presenter
         private IPanelModel _panelModel;
         private ISetMultipleGlassThicknessPresenter _setMultipleGlassThicknessPresenter;
         private IWindoorModel _windoorModel;
-        private GlassType _glassType;
+        private GlassType _glassType; 
         private DataTable _glassThicknessDT;
         private List<string> _panelIdList;
         private bool _setMultipleThicknessUpdate;
