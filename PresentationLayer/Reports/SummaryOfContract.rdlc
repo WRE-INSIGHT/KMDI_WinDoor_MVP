@@ -2047,6 +2047,7 @@
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Top</VerticalAlign>
+                                <PaddingLeft>1pt</PaddingLeft>
                               </Style>
                             </Textbox>
                             <ColSpan>2</ColSpan>
@@ -2147,7 +2148,6 @@
                                 <PaddingRight>2pt</PaddingRight>
                               </Style>
                             </Textbox>
-                            <rd:Selected>true</rd:Selected>
                           </CellContents>
                         </TablixCell>
                         <TablixCell>
@@ -2195,7 +2195,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Total Discounted Price Without VAT</Value>
+                                      <Value>Discounted Price Without VAT</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontWeight>Normal</FontWeight>
@@ -2211,6 +2211,7 @@
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Top</VerticalAlign>
+                                <PaddingLeft>1pt</PaddingLeft>
                               </Style>
                             </Textbox>
                             <ColSpan>2</ColSpan>
@@ -2389,6 +2390,7 @@ Math.Round((Fields!dtScreenListPrice.Value),2)) * Math.Round((Fields!dtDiscountA
                                   <Style>None</Style>
                                 </Border>
                                 <VerticalAlign>Top</VerticalAlign>
+                                <PaddingLeft>1pt</PaddingLeft>
                               </Style>
                             </Textbox>
                             <ColSpan>2</ColSpan>
@@ -2548,7 +2550,7 @@ Math.Round((Fields!dtDiscountAverage.Value),2))))
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=iif(Parameters!ShowVat.Value = "True","Discounted Price With VAT*","Discounted Price Without VAT*")</Value>
+                                      <Value>=iif(Parameters!ShowVat.Value = "True","Total Discounted Price With VAT*","Total Discounted Price Without VAT*")</Value>
                                       <Style>
                                         <FontFamily>Segoe UI</FontFamily>
                                         <FontWeight>Bold</FontWeight>
