@@ -2782,7 +2782,7 @@ namespace ModelLayer.Model.Quotation
             InterlockPricePerPiece = 333.77m,
             ExtensionForInterlockPricePerPiece = 789.01m,
             AluminumTrackPricePerLinearMeter = 251.10m,
-            WaterSeepagePricePerLinearMeter = 153.73m,
+            WaterSeepagePricePerLinearMeter = 378.47m,//alum //153.73m,//pvc
             AluminumPullHandlePricePerLinearMeter = 2480.18m,
             GlazingAdaptorPricePerMeter = 250.00m,
 
@@ -4236,7 +4236,7 @@ namespace ModelLayer.Model.Quotation
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_SashPropertyVisibility == true)
-                                    { 
+                                    {
                                         #region Casement 
                                         if (pnl.Panel_Type.Contains("Casement"))
                                         {
@@ -4537,8 +4537,8 @@ namespace ModelLayer.Model.Quotation
                                             GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
                                             AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
 
-                                         
-                                            if (pnl.Panel_Overlap_Sash != OverlapSash._None )
+
+                                            if (pnl.Panel_Overlap_Sash != OverlapSash._None)
                                             {
                                                 int bothOverlapQtyMultiplier = 1;
                                                 if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
