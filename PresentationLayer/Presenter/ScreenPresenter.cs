@@ -891,8 +891,6 @@ namespace PresentationLayer.Presenter
                 }
 
 
-
-
                 _screenDT.Rows.Add(
                                     item.Screen_ItemNumber,//Convert.ToString(item.Screen_ItemNumber),
                                     item.Screen_Description + setDesc,
@@ -1109,7 +1107,7 @@ namespace PresentationLayer.Presenter
             screen._quotationModel = quotationModel;
             screen._windoorModel = windoorModel;
             
-
+            
             return screen;
         }
 

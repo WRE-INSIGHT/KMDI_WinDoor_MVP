@@ -55,12 +55,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.BSQuotation = new System.Windows.Forms.BindingSource(this.components);
+            this.txtbox_LessD = new System.Windows.Forms.TextBox();
+            this.chkbox_LessD = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BSQuotation)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkbox_LessD);
+            this.panel1.Controls.Add(this.txtbox_LessD);
             this.panel1.Controls.Add(this.txtbox_VAT);
             this.panel1.Controls.Add(this.txtbox_FC);
             this.panel1.Controls.Add(this.txtbox_LnM);
@@ -323,6 +327,26 @@
             // 
             this.BSQuotation.CurrentChanged += new System.EventHandler(this.BSQuotation_CurrentChanged);
             // 
+            // txtbox_LessD
+            // 
+            this.txtbox_LessD.Location = new System.Drawing.Point(802, 117);
+            this.txtbox_LessD.Name = "txtbox_LessD";
+            this.txtbox_LessD.Size = new System.Drawing.Size(94, 25);
+            this.txtbox_LessD.TabIndex = 29;
+            this.txtbox_LessD.Visible = false;
+            // 
+            // chkbox_LessD
+            // 
+            this.chkbox_LessD.AutoSize = true;
+            this.chkbox_LessD.Location = new System.Drawing.Point(673, 118);
+            this.chkbox_LessD.Name = "chkbox_LessD";
+            this.chkbox_LessD.Size = new System.Drawing.Size(112, 23);
+            this.chkbox_LessD.TabIndex = 30;
+            this.chkbox_LessD.Text = "Less Discount";
+            this.chkbox_LessD.UseVisualStyleBackColor = true;
+            this.chkbox_LessD.Visible = false;
+            this.chkbox_LessD.CheckedChanged += new System.EventHandler(this.chkbox_LessD_CheckedChanged);
+            // 
             // PrintQuoteView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,5 +397,7 @@
         private System.Windows.Forms.TextBox txtbox_VAT;
         private System.Windows.Forms.TextBox txtbox_FC;
         private System.Windows.Forms.TextBox txtbox_LnM;
+        private System.Windows.Forms.TextBox txtbox_LessD;
+        private System.Windows.Forms.CheckBox chkbox_LessD;
     }
 }
