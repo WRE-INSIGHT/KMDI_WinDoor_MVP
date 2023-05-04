@@ -4236,7 +4236,7 @@ namespace ModelLayer.Model.Quotation
                                 foreach (IPanelModel pnl in mpnl.MPanelLst_Panel)
                                 {
                                     if (pnl.Panel_SashPropertyVisibility == true)
-                                    {
+                                    { 
                                         #region Casement 
                                         if (pnl.Panel_Type.Contains("Casement"))
                                         {
@@ -4400,6 +4400,23 @@ namespace ModelLayer.Model.Quotation
                                                 CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                             }
 
+                                            if (wdm.WD_profile == "PremiLine Profile" &&
+                                                                                        (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 ||
+                                                                                        fr.Frame_ArtNo == FrameProfile_ArticleNo._6050))
+                                            {
+                                                if (pnl.Panel_Overlap_Sash != OverlapSash._None)
+                                                {
+                                                    int bothOverlapQtyMultiplier = 1;
+                                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                                    {
+                                                        bothOverlapQtyMultiplier = 2;
+                                                    }
+
+                                                    InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                                    ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                                    SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
+                                                }
+                                            }
                                         }
                                         #endregion
                                         #region Awning
@@ -4520,6 +4537,7 @@ namespace ModelLayer.Model.Quotation
                                             GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
                                             AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
 
+                                         
                                             if (pnl.Panel_Overlap_Sash != OverlapSash._None )
                                             {
                                                 int bothOverlapQtyMultiplier = 1;
@@ -4643,6 +4661,24 @@ namespace ModelLayer.Model.Quotation
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
                                             SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
+
+                                            if (wdm.WD_profile == "PremiLine Profile" &&
+                                            (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 ||
+                                            fr.Frame_ArtNo == FrameProfile_ArticleNo._6050))
+                                            {
+                                                if (pnl.Panel_Overlap_Sash != OverlapSash._None)
+                                                {
+                                                    int bothOverlapQtyMultiplier = 1;
+                                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                                    {
+                                                        bothOverlapQtyMultiplier = 2;
+                                                    }
+
+                                                    InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                                    ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                                    SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
+                                                }
+                                            }
                                         }
                                         else
                                         {

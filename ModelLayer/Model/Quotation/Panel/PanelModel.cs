@@ -62,6 +62,7 @@ namespace ModelLayer.Model.Quotation.Panel
             set
             {
                 _panelOverlapSash = value;
+                Console.WriteLine(value);
             }
         }
         private DockStyle _panelDock;
