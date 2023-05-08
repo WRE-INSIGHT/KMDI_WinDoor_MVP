@@ -63,7 +63,8 @@ namespace PresentationLayer.Presenter.UserControls
         {
             List<Point> object_points = new List<Point>();
             List<int> curr_LocY = new List<int>();
-            DeductionForBottomFramePaddingImager();
+
+            //DeductionForBottomFramePaddingImager();
 
             int flocX = 0, controlndex = 0, flocY = 0, prev_wd_covered = 0, prev_ht_covered = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
 
@@ -262,6 +263,12 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             if (wndrObject.Name == frm.Frame_Name)
                             {
+
+                                float b = (float)frm.Frame_Height / (float)_windoorModel.WD_height;
+                                float c = (_windoorModel.WD_height - 140) * b; // frame
+                                float a = c * _windoorModel.GetZoom_forRendering(); // imager
+
+
                                 if (currentY != wndrObject.Location.Y)
                                 {
                                     flocY += MaxHeightImgager;
@@ -280,7 +287,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         if (Maxheight < frm.Frame_Height)
                                         {
                                             Maxheight = frm.Frame_Height;
-                                            MaxHeightImgager = frm.FrameImageRenderer_Height - deductBotPadding;
+                                            MaxHeightImgager = (int)Math.Round(a);//frm.FrameImageRenderer_Height;// - deductBotPadding;
                                         }
                                     }
                                     else
@@ -290,14 +297,16 @@ namespace PresentationLayer.Presenter.UserControls
                                 else if (availableWidth == frm.Frame_Width)
                                 {
                                     ////Fit_MyObject_ToBindDimensions(startingObject, wndrObject);
+
+
                                     occupiedWidth += frm.Frame_Width;
                                     if (Maxheight < frm.Frame_Height)
                                     {
                                         Maxheight = frm.Frame_Height;
-                                        MaxHeightImgager = frm.FrameImageRenderer_Height - deductBotPadding;
+                                        MaxHeightImgager = (int)Math.Round(a); //frm.FrameImageRenderer_Height;// - deductBotPadding;
                                     }
                                     startingObject = null;
-                                    MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                    MaxHeightImgager = (int)Math.Round(a); //frm.FrameImageRenderer_Height;
                                 }
                                 else
                                 {
@@ -305,7 +314,7 @@ namespace PresentationLayer.Presenter.UserControls
                                     occupiedWidth = 0;
                                     availableWidth = _windoorModel.WD_width;
                                     availableHeight -= Maxheight;
-                                    MaxHeightImgager = frm.FrameImageRenderer_Height;
+                                    MaxHeightImgager = (int)Math.Round(a); //frm.FrameImageRenderer_Height;
                                 }
                                 if (occupiedWidth >= _windoorModel.WD_width)
                                 {
@@ -462,20 +471,51 @@ namespace PresentationLayer.Presenter.UserControls
             return object_points;
         }
 
-        public int DeductionForBottomFramePaddingImager()
+        public int DeductionForBottomFramePaddingImager(int FH)
         {
             int totalWdOfFrame = 0;
+
+            float Zoom_forRendering = _windoorModel.GetZoom_forRendering();
+
+            if (Zoom_forRendering == 1.00f)
+            {
+                botPaddingMultiplier = 1;
+            }
+            else if (Zoom_forRendering == 0.50f)
+            {
+                botPaddingMultiplier = 2;
+            }
+            else if (Zoom_forRendering == 0.26f)
+            {
+                botPaddingMultiplier = 4;
+            }
+            else if (Zoom_forRendering == 0.17f)
+            {
+                botPaddingMultiplier = 6;
+            }
+            else if (Zoom_forRendering == 0.13f)
+            {
+                botPaddingMultiplier = 8;
+            }
+            else if (Zoom_forRendering == 0.10f)
+            {
+                botPaddingMultiplier = 10;
+            }
+
+            float b = (float)FH / (float)_windoorModel.WD_height;
+
+
             foreach (IFrameModel frm in _windoorModel.lst_frame)
             {
                 totalWdOfFrame += frm.FrameImageRenderer_Width;
             }
             if (totalWdOfFrame < _windoorModel.WD_width)
             {
-                deductBotPadding = 70;
+                deductBotPadding = (int)(70.0f * b);
             }
             else if (totalWdOfFrame != 0)
             {
-                deductBotPadding = 70 / (totalWdOfFrame / _windoorModel.WD_width);
+                deductBotPadding = (int)(70.0f * b) / (totalWdOfFrame / _windoorModel.WD_width);
 
             }
 
@@ -498,15 +538,20 @@ namespace PresentationLayer.Presenter.UserControls
 
             List<Size> windoor_objects_sizes = new List<Size>();
             //int flocX = 0, flocY = 0, total_wd_covered = 0, total_ht_covered = 0, frame_row = 0;
+
             foreach (var objects in _windoorModel.lst_objects)
             {
                 if (objects.Name.Contains("Frame"))
                 {
                     foreach (IFrameModel frame in _windoorModel.lst_frame)
                     {
+                        float b = (float)frame.Frame_Height / (float)_windoorModel.WD_height;
+                        float c = (_windoorModel.WD_height - 140) * b; // frame
+                        float a = c * _windoorModel.GetZoom_forRendering(); // imager
+
                         if (objects.Name == frame.Frame_Name)
                         {
-                            windoor_objects_sizes.Add(new Size(frame.FrameImageRenderer_Width, frame.FrameImageRenderer_Height));
+                            windoor_objects_sizes.Add(new Size(frame.FrameImageRenderer_Width, (int)Math.Round(a)));//frame.FrameImageRenderer_Height));
                             break;
                         }
                     }
@@ -1292,7 +1337,7 @@ namespace PresentationLayer.Presenter.UserControls
             //PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
 
             float Zoom_forRendering = _windoorModel.GetZoom_forRendering();
-          
+
             if (Zoom_forRendering == 1.00f)
             {
                 botPaddingMultiplier = 1;
@@ -1423,14 +1468,14 @@ namespace PresentationLayer.Presenter.UserControls
             blkPen.Width = 2;
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            DeductionForBottomFramePaddingImager();
+            DeductionForBottomFramePaddingImager(frameModel.Frame_Height);
             int fr_pads = frameModel.FrameImageRenderer_Padding_int.All;
 
             int top_pads = frameModel.FrameImageRenderer_Padding_int.Top,
                 right_pads = frameModel.FrameImageRenderer_Padding_int.Right,
                 left_pads = frameModel.FrameImageRenderer_Padding_int.Left,
                 bot_pads = frameModel.FrameImageRenderer_Padding_int.Bottom;
-
+            //deductBotPadding = 42;
             Rectangle pnl_inner = new Rectangle(new Point(fPoint.X + left_pads, fPoint.Y + top_pads),
                                                 new Size(frameModel.FrameImageRenderer_Width - (right_pads + left_pads),
                                                          frameModel.FrameImageRenderer_Height - deductBotPadding - (top_pads + bot_pads)));
@@ -1465,7 +1510,7 @@ namespace PresentationLayer.Presenter.UserControls
             g.DrawRectangle(blkPen, new Rectangle(fPoint.X,
                                                   fPoint.Y,
                                                   fSize.Width - w,
-                                                  fSize.Height - deductBotPadding - w));
+                                                  fSize.Height - w));
         }
         float first = 0;
         private void Draw_Panel(PaintEventArgs e, IPanelModel panelModel, Point Ppoint)
