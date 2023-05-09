@@ -954,6 +954,11 @@ namespace PresentationLayer.Presenter
                         RParam[5] = new ReportParameter("ShowVat", "False");
                     }
 
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowVatContactSummary == true)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+
                     if (_printQuoteView.GetLessDiscountchkbox().Checked)
                     {
                         RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");

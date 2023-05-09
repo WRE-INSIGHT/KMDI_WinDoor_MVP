@@ -890,7 +890,7 @@ namespace PresentationLayer.Presenter
                     Screen_NetPrice = item.Screen_NetPrice.ToString("n");
                 }
 
-
+                
                 _screenDT.Rows.Add(
                                     item.Screen_ItemNumber,//Convert.ToString(item.Screen_ItemNumber),
                                     item.Screen_Description + setDesc,

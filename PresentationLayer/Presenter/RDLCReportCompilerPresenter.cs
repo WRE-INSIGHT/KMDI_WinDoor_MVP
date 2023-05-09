@@ -64,6 +64,7 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.BtnCompileReportClickEventRaised += new EventHandler(OnBtnCompileReportClickEventRaised);
             _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkboxshowVatCheckedChangedEventRaised += new EventHandler(OnchkboxshowVatCheckedChangedEventRaised);
 
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
@@ -85,6 +86,18 @@ namespace PresentationLayer.Presenter
         //{
 
         //}
+
+        private void OnchkboxshowVatCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
+            {
+                _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = true;
+            }
+            else
+            {
+                _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
+            }
+        }
 
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
         {
@@ -114,6 +127,9 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter.PrintContractSummaryRDLC();
             _quoteItemListPresenter.CallFrmRDLCCompiler = false;
             _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
+            _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
+            _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
+            
 
         }
 
@@ -175,7 +191,12 @@ namespace PresentationLayer.Presenter
                                 #endregion
                                 #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-                                _quoteItemListPresenter.PrintContractSummaryRDLC();
+                                _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
+                               if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
+                               {
+                                   _quoteItemListPresenter.ShowVatContactSummary = true;
+                               }
+                               _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
                                 #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
@@ -289,6 +310,7 @@ namespace PresentationLayer.Presenter
         private void SetVariablesToDefault()
         {
             _quoteItemListPresenter.RenderPDFAtBackGround = false;
+            _quoteItemListPresenter.ShowVatContactSummary = false;
             _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Clear();
             CompileRDLC = false;
         }
