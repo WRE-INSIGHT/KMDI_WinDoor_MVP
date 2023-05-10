@@ -1470,6 +1470,21 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private string _screen_displayeddimension;
+
+        public string Screen_DisplayedDimension
+        {
+            get
+            {
+                return _screen_displayeddimension;
+            }
+            set
+            {
+                _screen_displayeddimension = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _screen_description;
 
         public string Screen_Description
@@ -1631,6 +1646,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
 
         #endregion
 

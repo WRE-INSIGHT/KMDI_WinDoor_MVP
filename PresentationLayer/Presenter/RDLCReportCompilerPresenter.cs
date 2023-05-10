@@ -91,10 +91,12 @@ namespace PresentationLayer.Presenter
         {
             if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
             {
+                _quoteItemListPresenter.ShowVatContactSummary = true;
                 _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = true;
             }
             else
             {
+                _quoteItemListPresenter.ShowVatContactSummary = false;
                 _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
             }
         }
@@ -192,10 +194,6 @@ namespace PresentationLayer.Presenter
                                 #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
                                 _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
-                               if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
-                               {
-                                   _quoteItemListPresenter.ShowVatContactSummary = true;
-                               }
                                _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
                                 #region Screen
@@ -310,7 +308,6 @@ namespace PresentationLayer.Presenter
         private void SetVariablesToDefault()
         {
             _quoteItemListPresenter.RenderPDFAtBackGround = false;
-            _quoteItemListPresenter.ShowVatContactSummary = false;
             _quoteItemListPresenter.RDLCReportCompilerItemIndexes.Clear();
             CompileRDLC = false;
         }

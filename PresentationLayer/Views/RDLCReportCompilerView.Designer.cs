@@ -33,7 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
+            this.txt_SummaryVat = new System.Windows.Forms.TextBox();
+            this.chkbox_showVat = new System.Windows.Forms.CheckBox();
             this.btnCompileReport = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.chk_showimagelist = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -41,16 +46,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.txt_SummaryVat = new System.Windows.Forms.TextBox();
-            this.txt_oftexpenses = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.chkbox_showVat = new System.Windows.Forms.CheckBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -111,6 +111,56 @@
             this.panel2.Size = new System.Drawing.Size(457, 145);
             this.panel2.TabIndex = 1;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.txt_oftexpenses, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_SummaryVat, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chkbox_showVat, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnCompileReport, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(288, 20);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 123);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // txt_oftexpenses
+            // 
+            this.txt_oftexpenses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_oftexpenses.Location = new System.Drawing.Point(3, 3);
+            this.txt_oftexpenses.Multiline = true;
+            this.txt_oftexpenses.Name = "txt_oftexpenses";
+            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 24);
+            this.txt_oftexpenses.TabIndex = 0;
+            // 
+            // txt_SummaryVat
+            // 
+            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 56);
+            this.txt_SummaryVat.Multiline = true;
+            this.txt_SummaryVat.Name = "txt_SummaryVat";
+            this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
+            this.txt_SummaryVat.TabIndex = 6;
+            // 
+            // chkbox_showVat
+            // 
+            this.chkbox_showVat.AutoSize = true;
+            this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
+            this.chkbox_showVat.Location = new System.Drawing.Point(3, 33);
+            this.chkbox_showVat.Name = "chkbox_showVat";
+            this.chkbox_showVat.Size = new System.Drawing.Size(46, 17);
+            this.chkbox_showVat.TabIndex = 7;
+            this.chkbox_showVat.Text = "*Vat";
+            this.chkbox_showVat.UseVisualStyleBackColor = true;
+            this.chkbox_showVat.CheckedChanged += new System.EventHandler(this.chkbox_showVat_CheckedChanged);
+            // 
             // btnCompileReport
             // 
             this.btnCompileReport.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -122,6 +172,14 @@
             this.btnCompileReport.Text = "Compile Report";
             this.btnCompileReport.UseVisualStyleBackColor = true;
             this.btnCompileReport.Click += new System.EventHandler(this.btnCompileReport_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Black;
+            this.panel5.Location = new System.Drawing.Point(3, 87);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(161, 4);
+            this.panel5.TabIndex = 8;
             // 
             // panel4
             // 
@@ -194,64 +252,6 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
-            // txt_SummaryVat
-            // 
-            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 56);
-            this.txt_SummaryVat.Multiline = true;
-            this.txt_SummaryVat.Name = "txt_SummaryVat";
-            this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
-            this.txt_SummaryVat.TabIndex = 6;
-            // 
-            // txt_oftexpenses
-            // 
-            this.txt_oftexpenses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_oftexpenses.Location = new System.Drawing.Point(3, 3);
-            this.txt_oftexpenses.Multiline = true;
-            this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 24);
-            this.txt_oftexpenses.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.txt_oftexpenses, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txt_SummaryVat, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.chkbox_showVat, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCompileReport, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(288, 20);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 123);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // chkbox_showVat
-            // 
-            this.chkbox_showVat.AutoSize = true;
-            this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
-            this.chkbox_showVat.Location = new System.Drawing.Point(3, 33);
-            this.chkbox_showVat.Name = "chkbox_showVat";
-            this.chkbox_showVat.Size = new System.Drawing.Size(42, 17);
-            this.chkbox_showVat.TabIndex = 7;
-            this.chkbox_showVat.Text = "Vat";
-            this.chkbox_showVat.UseVisualStyleBackColor = true;
-            this.chkbox_showVat.CheckedChanged += new System.EventHandler(this.chkbox_showVat_CheckedChanged);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(3, 87);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(161, 4);
-            this.panel5.TabIndex = 8;
-            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,11 +268,11 @@
             this.Load += new System.EventHandler(this.RDLCReportCompilerView_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
