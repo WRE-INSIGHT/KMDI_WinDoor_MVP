@@ -1190,7 +1190,8 @@ namespace PresentationLayer.Presenter
                                                           0.0m,
                                                           string.Empty,
                                                           0.0m,
-                                                          0.0m);
+                                                          0.0m,
+                                                          string.Empty);
 
             _screenModel.Screen_PVCVisibility = false;
             IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices,_quotationModel,_windoorModel);//, _screenDT);
@@ -7747,6 +7748,14 @@ namespace PresentationLayer.Presenter
                         {
                             screen_description = extractedValue_str;
                         }
+                        else if (row_str.Contains("Screen_DisplayedDimension:"))
+                        {
+                            screen_displayeddimension = extractedValue_str;
+                        }
+                        else if (row_str.Contains("Screen_AddOnsSpecialFactor:"))
+                        {
+                            screen_AddOnsSpecialFactor = decimal.Parse(extractedValue_str);
+                        }
                         else if (row_str.Contains("DiscountPercentage:"))
                         {
                             discountPercentage = decimal.Parse(extractedValue_str);
@@ -7941,7 +7950,8 @@ namespace PresentationLayer.Presenter
                                                              screen_TotalAmount,
                                                              screen_description,
                                                              screen_Factor,
-                                                             screen_AddOnsSpecialFactor);
+                                                             screen_AddOnsSpecialFactor,
+                                                             screen_displayeddimension);
 
             scr.Screen_id = screen_id;
             scr.Screen_Types_Window = screen_Types_Window;
@@ -7949,6 +7959,7 @@ namespace PresentationLayer.Presenter
             scr.Screen_Width = screen_Width;
             scr.Screen_Height = screen_Height;
             scr.Screen_Factor = screen_Factor;
+            scr.Screen_DisplayedDimension = screen_displayeddimension;
             scr.Screen_AddOnsSpecialFactor = screen_AddOnsSpecialFactor;
             scr.Screen_Types = screen_Types;
             scr.Screen_PlisséType = screen_PlisséType;
@@ -9382,7 +9393,8 @@ namespace PresentationLayer.Presenter
             screen_ExchangeRate,
             plissedRd_Panels;
         string screen_WindoorID,
-               screen_description;
+               screen_description,
+               screen_displayeddimension;
         decimal discountPercentage,
                 screen_ItemNumber,
                 screen_NextItemNumber;

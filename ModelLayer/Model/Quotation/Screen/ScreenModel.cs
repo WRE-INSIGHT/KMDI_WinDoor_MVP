@@ -6350,6 +6350,12 @@ namespace ModelLayer.Model.Quotation.Screen
 
                 #endregion
 
+                #region Screen DisplayedDimension
+
+                Screen_DisplayedDimension = Screen_Width + " x " + Screen_Height;
+
+                #endregion
+
                 ClearingOperation();
 
             }
@@ -6635,7 +6641,8 @@ namespace ModelLayer.Model.Quotation.Screen
                            decimal screen_totalAmount,
                            string screen_description,
                            decimal factor,
-                           decimal addonsspecialfactor
+                           decimal addonsspecialfactor,
+                           string screen_displayeddimension
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6652,6 +6659,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_Description = screen_description;
             Screen_Factor = factor;
             Screen_AddOnsSpecialFactor = addonsspecialfactor;
+            Screen_DisplayedDimension = screen_displayeddimension;
         }
     }
 }
