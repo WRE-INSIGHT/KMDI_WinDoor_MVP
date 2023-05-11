@@ -1470,6 +1470,21 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private string _screen_displayeddimension;
+
+        public string Screen_DisplayedDimension
+        {
+            get
+            {
+                return _screen_displayeddimension;
+            }
+            set
+            {
+                _screen_displayeddimension = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _screen_description;
 
         public string Screen_Description
@@ -1631,6 +1646,7 @@ namespace ModelLayer.Model.Quotation.Screen
                 NotifyPropertyChanged();
             }
         }
+
 
         #endregion
 
@@ -6249,7 +6265,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                 {
-                    Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    if(Reinforced == true)
+                    {
+                        Screen_Description = "Reinforced Plissé SR Slim Line Insect Screen";
+                    }
+                    else
+                    {
+                        Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    }
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
@@ -6331,6 +6354,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_Description = Screen_Description;
                 }
+
+                #endregion
+
+                #region Screen DisplayedDimension
+
+                Screen_DisplayedDimension = Screen_Width + " x " + Screen_Height;
 
                 #endregion
 
@@ -6619,7 +6648,8 @@ namespace ModelLayer.Model.Quotation.Screen
                            decimal screen_totalAmount,
                            string screen_description,
                            decimal factor,
-                           decimal addonsspecialfactor
+                           decimal addonsspecialfactor,
+                           string screen_displayeddimension
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6636,6 +6666,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_Description = screen_description;
             Screen_Factor = factor;
             Screen_AddOnsSpecialFactor = addonsspecialfactor;
+            Screen_DisplayedDimension = screen_displayeddimension;
         }
     }
 }

@@ -27,7 +27,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                decimal screen_totalAmount,
                                                string screen_description,
                                                decimal factor,
-                                               decimal addonsspecialfactor
+                                               decimal addonsspecialfactor,
+                                               string screen_displayeddimension
                                                )
         {
              IScreenModel scrn = new ScreenModel(screen_itemnumber,
@@ -43,7 +44,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                 screen_totalAmount,
                                                 screen_description,
                                                 factor,
-                                                addonsspecialfactor);
+                                                addonsspecialfactor,
+                                                screen_displayeddimension);
 
             ValidateModel(scrn);
             return scrn;
@@ -61,8 +63,9 @@ namespace ServiceLayer.Services.ScreenServices
                                                 decimal screen_netPrice,
                                                 decimal screen_totalAmount,
                                                 string screen_description,
-                                                 decimal factor,
-                                                 decimal addonsspecialfactor
+                                                decimal factor,
+                                                decimal addonsspecialfactor,
+                                                string screen_displayeddimension
                                                  )
         {
 
@@ -79,7 +82,8 @@ namespace ServiceLayer.Services.ScreenServices
                                                         screen_totalAmount,
                                                         screen_description,
                                                         factor,
-                                                        addonsspecialfactor);
+                                                        addonsspecialfactor,
+                                                        screen_displayeddimension);
 
             return _screenModel;
         }

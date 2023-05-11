@@ -61,6 +61,7 @@ namespace ModelLayer.Model.Quotation.Screen
         bool SP_MagnumScreenType_Visibility { get; set; }
         Magnum_ScreenType Magnum_ScreenType { get; set; }
         int PlissedRd_Panels { get; set; }
+        string Screen_DisplayedDimension { get; set; }
         string Screen_Description { get; set; }
         decimal DiscountPercentage { get; set; }
         decimal Screen_ItemNumber { get; set; }

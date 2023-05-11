@@ -123,7 +123,22 @@ namespace PresentationLayer.Views
 
         public void ShowScreemView()
         {
-            this.Show();
+            try
+            {
+                if (Screen.AllScreens.Length > 1)
+                {
+                    this.Location = Screen.AllScreens[1].WorkingArea.Location;
+                    this.Show();
+                }
+                else
+                {
+                    this.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(this + " " +  ex.Message);
+            }
         }
 
         public NumericUpDown GetNudWidth()

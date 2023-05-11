@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Unity;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Presenter
 {
@@ -40,11 +41,19 @@ namespace PresentationLayer.Presenter
         private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
         private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
         private List<int> _lstItemArea = new List<int>();
-        private bool _renderPDFAtBackground;
         private string _rdlcReportCompilerOutofTownExpenses;
+        private string _rdlcReportCompilerVatContractSummary;
         private string[] province;
         private string archi;
         private bool _callFrmRDLCCompiler;
+        private bool _renderPDFAtBackground;
+        private bool _showVatContractSummary;
+
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat = null;
+        List<string> description_string_list = new List<string>();
 
         public bool CallFrmRDLCCompiler
         {
@@ -57,7 +66,28 @@ namespace PresentationLayer.Presenter
                 _callFrmRDLCCompiler = value;               
             }
         }
-
+        public bool ShowVatContactSummary
+        {
+            get
+            {
+                return _showVatContractSummary;
+            }
+            set
+            {
+                _showVatContractSummary = value;
+            }
+        }
+        public string RDLCReportCompilerVatContractSummery
+        {
+            get
+            {
+                return _rdlcReportCompilerVatContractSummary;
+            }
+            set
+            {
+                _rdlcReportCompilerVatContractSummary = value;
+            }
+        }
         public string RDLCReportCompilerOutOfTownExpenses
         {
             get
@@ -80,9 +110,7 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-
    
-        
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -126,7 +154,7 @@ namespace PresentationLayer.Presenter
             ScreenTotalListCount = 0,
             divisor = 2;
 
-        string prev_GlassSize,
+        String prev_GlassSize,
                prev_GlassRef,
                prev_GlassLoc, prev_GlassDesc,
                curr_GlassSize,
@@ -136,7 +164,12 @@ namespace PresentationLayer.Presenter
                GeorgianBarHorizontalDesc,
                GeorgianBarVerticalDesc,
                DimensionDesc,
-               setDesc;
+               setDesc,
+               Screen_DimensionFormat,
+               Screen_UnitPrice,
+               Screen_Qty,
+               Screen_Discount,
+               Screen_NetPrice;
 
         decimal prev_GlassArea,
                 prev_GlassPrice,
@@ -187,7 +220,7 @@ namespace PresentationLayer.Presenter
             _quoteItemListView.chkboxSelectallCheckedChangeEventRaised += new EventHandler(OnchkboxSelectallCheckedChangeEventRaised);
             _quoteItemListView.TSbtnPDFCompilerClickEventRaised += new EventHandler(OnTSbtnPDFCompilerClickEventRaised);
         }
-
+        
         public void PrintScreenRDLC()
         {
             DSQuotation _dsq = new DSQuotation();
@@ -229,17 +262,34 @@ namespace PresentationLayer.Presenter
                         setDesc = " ";
                     }
 
-                    _dsq.dtScreen.Rows.Add( item.Screen_Description,
-                                            item.Screen_Width + " x " + item.Screen_Height,
+                    if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
+                    {
+                        Screen_DimensionFormat = " - ";
+                        Screen_UnitPrice = " - ";
+                        Screen_Qty = null;
+                        Screen_Discount = " - ";
+                        Screen_NetPrice = " - "; 
+                    }
+                    else
+                    {
+                        Screen_DimensionFormat = item.Screen_Width + " x " + item.Screen_Height;
+                        Screen_UnitPrice = item.Screen_UnitPrice.ToString("n");
+                        Screen_Qty = item.Screen_Quantity.ToString();
+                        Screen_Discount = Convert.ToString(item.Screen_Discount) + "%";
+                        Screen_NetPrice = item.Screen_NetPrice.ToString("n");
+                    }
+
+                    _dsq.dtScreen.Rows.Add( item.Screen_Description + setDesc,
+                                            Screen_DimensionFormat, // Screen widht x height
                                             item.Screen_WindoorID,
-                                            item.Screen_UnitPrice.ToString("n"),
-                                            item.Screen_Quantity,
-                                            screenUnitPriceTotal,
+                                            Screen_UnitPrice, //screen unitprice
+                                            Screen_Qty, //screen quantity
+                                            screenUnitPriceTotal, 
                                             Convert.ToString(item.Screen_ItemNumber),
-                                            item.Screen_NetPrice.ToString("n"),
+                                            Screen_NetPrice, // screen Netprice
                                             1,
                                             "",
-                                            Convert.ToString(item.Screen_Discount) + "%",
+                                            Screen_Discount, //screen discount
                                             "",
                                             DiscountPercentage
                                             );
@@ -258,11 +308,7 @@ namespace PresentationLayer.Presenter
             printQuote.PrintRDLCReport();
 
         }
-        int count = 0,
-            newlinecount = 0;
-        bool change_desc_format = false;
-        string separete_descFormat = null;
-        List<string> description_string_list = new List<string>();
+        
         public void PrintWindoorRDLC()
         {
 
@@ -412,6 +458,7 @@ namespace PresentationLayer.Presenter
                         foreach (var split in splitted_string)
                         {
                             description_string_list.Add(split);
+                            Console.WriteLine(split);
                         }
                         // for(int arr =0; arr <15; arr++)
                         //{
@@ -440,7 +487,6 @@ namespace PresentationLayer.Presenter
                             {
                                 newlinecount = 0;
                                 separete_descFormat = separete_descFormat + "  " + description_string_list[x] + "," + "\n";
-
                             }
                             else
                             {
@@ -631,6 +677,7 @@ namespace PresentationLayer.Presenter
                 {
                     printQuote.EventLoad();
                     printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                    printQuote.GetPrintQuoteView().VatPercentage = _rdlcReportCompilerVatContractSummary;
                     printQuote.PrintRDLCReport();
                 }
             }
@@ -741,6 +788,12 @@ namespace PresentationLayer.Presenter
             screen_priceXquantiy = 0;
             screenUnitPriceTotal = 0;
             //outOfTownCharges = 0;
+             
+            Screen_DimensionFormat = null;
+            Screen_UnitPrice = null;        
+            Screen_Qty = null;                                            
+            Screen_Discount = null;      
+            Screen_NetPrice = null;      
 
         }
 
@@ -1227,7 +1280,6 @@ namespace PresentationLayer.Presenter
             var destImage = new Bitmap(width, height);
 
             //maintains DPI regardless of physical size
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
             using (var graphics = Graphics.FromImage(destImage))
             {
