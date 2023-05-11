@@ -876,7 +876,14 @@ namespace PresentationLayer.Presenter
             {
                 if (item.Screen_Set > 1)
                 {
-                    _setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                    if (item.Screen_Description.Contains("(Sets of"))
+                    {
+                        _setDesc = " ";
+                    }
+                    else
+                    {
+                        _setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                    }
                 }
                 else
                 {

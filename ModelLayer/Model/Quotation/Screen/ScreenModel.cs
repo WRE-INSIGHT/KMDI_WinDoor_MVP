@@ -6265,7 +6265,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                 {
-                    Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    if(Reinforced == true)
+                    {
+                        Screen_Description = "Reinforced Plissé SR Slim Line Insect Screen";
+                    }
+                    else
+                    {
+                        Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    }
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
