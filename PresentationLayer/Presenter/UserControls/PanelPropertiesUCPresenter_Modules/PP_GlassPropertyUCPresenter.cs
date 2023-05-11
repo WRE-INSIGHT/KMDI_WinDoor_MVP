@@ -31,11 +31,18 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
 
         private void SubscribeToEventsSetup()
         {
-            _pp_glassPropertyUC.PPGlassPropertyLoadEventRaised += _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised;                   
+            _pp_glassPropertyUC.PPGlassPropertyLoadEventRaised += _pp_glassPropertyUC_PPGlassPropertyLoadEventRaised;
             _pp_glassPropertyUC.cmbGlazingArtNoSelectedValueEventRaised += _pp_glassPropertyUC_cmbGlazingArtNoSelectedValueEventRaised;
             _pp_glassPropertyUC.cmbGlassTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbGlassTypeSelectedValueEventRaised;
-            _pp_glassPropertyUC.cmbFilmTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised;             
+            _pp_glassPropertyUC.cmbFilmTypeSelectedValueEventRaised += _pp_glassPropertyUC_cmbFilmTypeSelectedValueEventRaised;
             _pp_glassPropertyUC.btnSelectGlassThicknessClickedEventRaised += _pp_glassPropertyUC_btnSelectGlassThicknessClickedEventRaised;
+            _pp_glassPropertyUC.chkGlazingAdaptorCheckedChangedEventRaised += _pp_glassPropertyUC_chkGlazingAdaptorCheckedChangedEventRaised;
+        }
+
+        private void _pp_glassPropertyUC_chkGlazingAdaptorCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            //_panelModel.Panel_ChkGlazingAdaptor = ((CheckBox)sender).ch;
+            //_mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_glassPropertyUC_btnSelectGlassThicknessClickedEventRaised(object sender, EventArgs e)
@@ -67,6 +74,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
             if (!_initialLoad)
             {
                 _panelModel.PanelGlazingBead_ArtNo = (GlazingBead_ArticleNo)((ComboBox)sender).SelectedValue;
+                _mainPresenter.GetCurrentPrice();
             }
         }
 
@@ -90,7 +98,7 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                     _panelModel.Panel_GlassType_Insu_Lami = "NA";
                 }
             }
-            
+
 
             _pp_glassPropertyUC.ThisBinding(CreateBindingDictionary());
             _panelModel.Panel_GlazingAdaptorArtNo = GlazingAdaptor_ArticleNo._6418;

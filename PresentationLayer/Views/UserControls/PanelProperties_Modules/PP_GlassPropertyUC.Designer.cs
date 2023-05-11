@@ -171,6 +171,7 @@
             this.chk_GlazingAdaptor.TabIndex = 35;
             this.chk_GlazingAdaptor.Text = "Glazing Adaptor";
             this.chk_GlazingAdaptor.UseVisualStyleBackColor = true;
+            this.chk_GlazingAdaptor.CheckedChanged += new System.EventHandler(this.chk_GlazingAdaptor_CheckedChanged);
             // 
             // pnl_GlassType
             // 
