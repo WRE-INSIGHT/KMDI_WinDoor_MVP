@@ -79,6 +79,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 {
                     _panelModel.Panel_GlassThicknessDesc = "Unglazed";
                 }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Security Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Security Mesh";
+                }
                 else
                 {
                     _panelModel.Panel_GlassThickness = 6;

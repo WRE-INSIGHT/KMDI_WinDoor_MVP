@@ -41,11 +41,13 @@ namespace PresentationLayer.Presenter
         private List<GlassRDLC> _lstGlassSummary = new List<GlassRDLC>();
         private List<int> _rdlcReportCompilerItemIndexes = new List<int>();
         private List<int> _lstItemArea = new List<int>();
-        private bool _renderPDFAtBackground;
         private string _rdlcReportCompilerOutofTownExpenses;
+        private string _rdlcReportCompilerVatContractSummary;
         private string[] province;
         private string archi;
         private bool _callFrmRDLCCompiler;
+        private bool _renderPDFAtBackground;
+        private bool _showVatContractSummary;
 
         int count = 0,
             newlinecount = 0;
@@ -64,7 +66,28 @@ namespace PresentationLayer.Presenter
                 _callFrmRDLCCompiler = value;               
             }
         }
-
+        public bool ShowVatContactSummary
+        {
+            get
+            {
+                return _showVatContractSummary;
+            }
+            set
+            {
+                _showVatContractSummary = value;
+            }
+        }
+        public string RDLCReportCompilerVatContractSummery
+        {
+            get
+            {
+                return _rdlcReportCompilerVatContractSummary;
+            }
+            set
+            {
+                _rdlcReportCompilerVatContractSummary = value;
+            }
+        }
         public string RDLCReportCompilerOutOfTownExpenses
         {
             get
@@ -87,9 +110,7 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-
    
-        
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -656,6 +677,7 @@ namespace PresentationLayer.Presenter
                 {
                     printQuote.EventLoad();
                     printQuote.GetPrintQuoteView().QuotationOuofTownExpenses = _rdlcReportCompilerOutofTownExpenses;
+                    printQuote.GetPrintQuoteView().VatPercentage = _rdlcReportCompilerVatContractSummary;
                     printQuote.PrintRDLCReport();
                 }
             }

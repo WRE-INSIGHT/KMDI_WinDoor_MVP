@@ -649,15 +649,15 @@ namespace PresentationLayer.Views
                 {
                     ScreentoolStripButton_Click(sender, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.C)
+                else if (e.Alt == true && e.Shift == true && e.KeyCode == Keys.C)
                 {
                     CreateNewItem_Clicked(C70ToolStripMenuItem, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.P)
+                else if (e.Alt == true && e.Shift == true && e.KeyCode == Keys.P)
                 {
                     CreateNewItem_Clicked(PremiLineToolStripMenuItem, e);
                 }
-                else if (e.Alt == true && e.KeyCode == Keys.G)
+                else if (e.Alt == true && e.Shift == true && e.KeyCode == Keys.G)
                 {
                     CreateNewItem_Clicked(G58ToolStripMenuItem, e);
                 }

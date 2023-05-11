@@ -28,6 +28,7 @@ namespace PresentationLayer.Presenter
         private bool _setMultipleThicknessUpdate;
         private IUnityContainer _unityC;
         CommonFunctions commonfunc = new CommonFunctions();
+        DataTable dt, filtered;
 
 
         public GlassType Panel_GlassType
@@ -54,6 +55,48 @@ namespace PresentationLayer.Presenter
             _glassThicknessListView.GlassThicknessListViewLoadEventRaised += _glassThicknessListView_GlassThicknessListViewLoadEventRaised;
             _glassThicknessListView.DgvGlassThicknessListRowpostpaintEventRaised += _glassThicknessListView_DgvGlassThicknessListRowpostpaintEventRaised;
             _glassThicknessListView.DgvGlassThicknessListCellDoubleClickEventRaised += _glassThicknessListView_DgvGlassThicknessListCellDoubleClickEventRaised;
+            _glassThicknessListView.txtboxsearchTextChangedEventRaised += _glassThicknessListView_txtboxsearchTextChangedEventRaised;
+        }
+
+        private void DataGridViewDisplayFormat()
+        {
+            try
+            {
+                
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["TotalThickness"].Visible = false;
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].Width = 500;
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["GlassType_Insu_Lami"].Visible = false;
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["PricePerSqrMeter"].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+                _glassThicknessListView.Get_DgvGlassThicknessList().Columns["PricePerSqrMeter"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in DataGridViewDisplayFormat " + this + " " + ex.Message);
+            }
+            
+        }
+
+        private void _glassThicknessListView_txtboxsearchTextChangedEventRaised(object sender, EventArgs e)
+        {
+            try
+            {
+                filtered = new DataTable();
+                filtered.Clear();
+                DataRow[] filteredRow = dt.Select("Description like '%" + _glassThicknessListView.SearchVal + "%'");
+
+                if (filteredRow.Length != 0)
+                {
+                    filtered = filteredRow.CopyToDataTable();
+                }
+                _glassThicknessListView.Get_DgvGlassThicknessList().DataSource = filtered;
+                DataGridViewDisplayFormat();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in " + this + " " + ex.Message);
+            }
+
         }
 
         private void _glassThicknessListView_DgvGlassThicknessListCellDoubleClickEventRaised(object sender, DataGridViewCellEventArgs e)
@@ -279,11 +322,7 @@ namespace PresentationLayer.Presenter
                 _glassThicknessListView.Get_DgvGlassThicknessList().DataSource = ConstructFiltered_glassThicknessDT();
             }
 
-            _glassThicknessListView.Get_DgvGlassThicknessList().Columns["TotalThickness"].Visible = false;
-            _glassThicknessListView.Get_DgvGlassThicknessList().Columns["Description"].SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            _glassThicknessListView.Get_DgvGlassThicknessList().Columns["GlassType_Insu_Lami"].Visible = false;
-
-
+            DataGridViewDisplayFormat();
         }
 
         public void ShowGlassThicknessListView()
@@ -293,7 +332,7 @@ namespace PresentationLayer.Presenter
 
         private DataTable ConstructFiltered_glassThicknessDT()
         {
-            DataTable dt = new DataTable();
+            dt = new DataTable();
             dt.Columns.Add("TotalThickness", Type.GetType("System.Decimal"));
             dt.Columns.Add("Description", Type.GetType("System.String"));
             dt.Columns.Add("GlassType_Insu_Lami", Type.GetType("System.String"));
@@ -356,16 +395,17 @@ namespace PresentationLayer.Presenter
                     }
                 }
             }
-
+            
             return dt;
         }
 
         private DataTable ConstructFiltered_glassThicknessDT_MultiSelect()
         {
-            DataTable dt = new DataTable();
+            dt = new DataTable();
             dt.Columns.Add("TotalThickness", Type.GetType("System.Decimal"));
             dt.Columns.Add("Description", Type.GetType("System.String"));
             dt.Columns.Add("GlassType_Insu_Lami", Type.GetType("System.String"));
+            dt.Columns.Add("PricePerSqrMeter", Type.GetType("System.Decimal"));
 
             if (Panel_GlassType == GlassType._Single)
             {
@@ -373,7 +413,7 @@ namespace PresentationLayer.Presenter
                 {
                     if ((bool)row["Single"] == true)
                     {
-                        dt.Rows.Add(row["TotalThickness"], row["Description"],row["GlassType_Insu_Lami"]);
+                        dt.Rows.Add(row["TotalThickness"], row["Description"],row["GlassType_Insu_Lami"],row["PricePerSqrMeter"]);               
                     }
                 }
             }
@@ -396,6 +436,7 @@ namespace PresentationLayer.Presenter
                     DataRow newrow = dt.NewRow();
                     newrow["TotalThickness"] = row["TotalThickness"];
                     newrow["Description"] = row["Description"];
+                    newrow["PricePerSqrMeter"] = row["PricePerSqrMeter"];
                     newrow["GlassType_Insu_Lami"] = row["GlassType_Insu_Lami"];
                     if (Panel_GlassType == GlassType._Double)
                     {
