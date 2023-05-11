@@ -7892,6 +7892,25 @@ namespace PresentationLayer.Presenter
                                 {
                                     value = value + "\n";
                                 }
+                                if (value.ToLower().Contains(inputted_projectName.ToLower()))
+                                {
+                                    
+                                    if (inputted_projectName.Trim().Length == value.Trim().Length)
+                                    {
+                                        value = value + "\n";
+                                    }
+                                    else
+                                    {
+                                        //Separate ProjectName insert address in new line
+                                        int _projectnameLength = inputted_projectName.Length;
+                                        string _projectNamefromLoad = value.Substring(0, _projectnameLength);
+                                        int _addressStartIndex = _projectnameLength;
+                                        int _addressLength = value.Length - _projectnameLength;
+                                        string _projectAddressfromLoad = value.Substring(_addressStartIndex, _addressLength);
+                                        string _projectName_x_projectaddress = _projectNamefromLoad + "\n" + _projectAddressfromLoad;
+                                        value = _projectName_x_projectaddress;
+                                    }
+                                }
 
                                 #endregion
                             }
