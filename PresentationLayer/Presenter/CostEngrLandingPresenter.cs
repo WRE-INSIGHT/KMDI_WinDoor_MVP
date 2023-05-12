@@ -109,7 +109,9 @@ namespace PresentationLayer.Presenter
                                             _mainPresenter.SaveChanges();
 
                                         }
+
                                         proceed = true;
+                                        _mainPresenter.RDLCHeader.Clear();
                                         _mainPresenter.Scenario_Quotation(false, false, false, false, false, false, frmDimensionPresenter.Show_Purpose.Quotation, 0, 0, "", "");
                                     }
                                 }
