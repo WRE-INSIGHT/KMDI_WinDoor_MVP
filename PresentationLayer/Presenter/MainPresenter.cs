@@ -189,8 +189,8 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
-        
-        public IDictionary<string,string> RDLCHeader
+
+        public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
             set { _rdlcHeaders = value; }
@@ -1115,7 +1115,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_quotationModel != null)
                 {
-                     updatePriceFromMainViewToItemList();
+                    updatePriceFromMainViewToItemList();
                     _windoorModel.WD_fileLoad = false;
                     _windoorModel.WD_currentPrice = _lblCurrentPrice.Value;
                 }
@@ -1195,12 +1195,12 @@ namespace PresentationLayer.Presenter
                                                           0.0m);
 
             _screenModel.Screen_PVCVisibility = false;
-            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices,_quotationModel,_windoorModel);//, _screenDT);
+            IScreenPresenter glassThicknessPresenter = _screenPresenter.CreateNewInstance(_unityC, this, _screenModel, _quotationServices, _quotationModel, _windoorModel);//, _screenDT);
             glassThicknessPresenter.GetScreenView().ShowScreemView();
 
-            
+
         }
-       
+
         private void OnSetGlassToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
 
@@ -2320,7 +2320,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
-                    _rdlcHeaders.Clear();              
+                    _rdlcHeaders.Clear();
                     DialogResult dialogResult = DialogResult.No;
                     if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
                     {
@@ -3411,7 +3411,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 inside_item = false;
             }
-            else   if (row_str == "~")
+            else if (row_str == "~")
             {
                 if (inside_screen)
                 {
@@ -3424,7 +3424,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            else if(row_str == "." )
+            else if (row_str == ".")
             {
                 if (inside_rdlcDic)
                 {
@@ -3436,7 +3436,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-              if (row_str == "EndofFile")
+            if (row_str == "EndofFile")
             {
                 add_existing = false;
                 int wndrId = 0;
@@ -7790,7 +7790,7 @@ namespace PresentationLayer.Presenter
                         if (row_str != ".")
                         {
                             string[] key = row_str.Split('^');
-                            var value = row_str.Substring(row_str.IndexOf("^ ") + 1 );
+                            var value = row_str.Substring(row_str.IndexOf("^ ") + 1);
 
                             if (rdlcDicChangeKey == true)
                             {
@@ -7836,7 +7836,7 @@ namespace PresentationLayer.Presenter
                                     _EntrytoKeyWordPriceValidity = true;
                                     _EntryCountOfKeyWordPriceValidity++;
                                 }
-                                else if(value == "" || value == " ")
+                                else if (value == "" || value == " ")
                                 {
                                     _EntrytoKeyWordUsing = false;
                                     _EntrytoKeyWordPriceValidity = false;
@@ -7906,13 +7906,13 @@ namespace PresentationLayer.Presenter
             }
 
         }
-        
+
         private void Load_RDLCHeaders()
         {
             if (add_existing == false)
             {
-              _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
-                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :"  +  RDLCDictionary_value.TrimStart());
+                _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
+                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :" + RDLCDictionary_value.TrimStart());
             }
 
             if (RDLCDictionary_key != null && RDLCDictionary_value != null)
@@ -7921,10 +7921,10 @@ namespace PresentationLayer.Presenter
                 rdlcDicChangeKey = true;
                 RDLCDictionary_key = "";
                 RDLCDictionary_value = "";
-               _EntryCountOfKeyWordUsing = 0;
-               _EntryCountOfKeyWordPriceValidity = 0;
-               _EntrytoKeyWordUsing = false;
-               _EntrytoKeyWordPriceValidity = false;
+                _EntryCountOfKeyWordUsing = 0;
+                _EntryCountOfKeyWordPriceValidity = 0;
+                _EntrytoKeyWordUsing = false;
+                _EntrytoKeyWordPriceValidity = false;
             }
         }
         private void Load_Screen()
@@ -8340,7 +8340,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_LouverGalleryColor = panel_LouverGalleryColor;
             pnlModel.Panel_LouverRPLeverHandleCheck = panel_LouverRPLeverHandleCheck;
             pnlModel.Panel_LouverSecurityGrillCheck = panel_LouverSecurityGrillCheck;
-            
+
 
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArtNo;
             pnlModel.Panel_PlantOnWeatherStripHeadArtNo = panel_PlantOnWeatherStripHeadArtNo;
@@ -8803,7 +8803,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,
              rdlcDicChangeKey = true,
              add_existing = false;
 
@@ -9666,7 +9666,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
-                {               
+                {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
@@ -11697,7 +11697,10 @@ namespace PresentationLayer.Presenter
                                     }
                                     else if (Convert.ToInt32(blades) >= 10)
                                     {
-                                        DuplicatePnl = DuplicatePnl.Remove(17, 1).Insert(17, "1");
+                                        if (Convert.ToInt32(blades) >= 20 && Convert.ToInt32(blades) <= 29)
+                                        {
+                                            DuplicatePnl = DuplicatePnl.Remove(18, 1).Insert(18, "1");
+                                        }
                                     }
                                 }
 
@@ -11900,7 +11903,7 @@ namespace PresentationLayer.Presenter
                 availableWidth = _windoorModel.WD_width,
                 availableHeight = _windoorModel.WD_height;
             bool isDimensionFit = true;
-           
+
             foreach (var wndrObject in _windoorModel.lst_objects)
             {
                 foreach (IFrameModel frm in _windoorModel.lst_frame)
@@ -11985,7 +11988,7 @@ namespace PresentationLayer.Presenter
                         {
                             if (availableHeight > frmDimension_numHt &&
                                 (_windoorModel.WD_width - occupiedWidth) < frmDimension_numWd &&
-                               /*_windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name*/
+                                 /*_windoorModel.lst_concrete.LastOrDefault().Concrete_Name == crtm.Concrete_Name*/
                                  _windoorModel.lst_objects.LastOrDefault().Name == crtm.Concrete_Name)
                             {
                                 availableWidth = _windoorModel.WD_width;
@@ -12000,7 +12003,7 @@ namespace PresentationLayer.Presenter
                             //availableWidth -= crtm.Concrete_Width;
                         }
                     }
-                    
+
                 }
             }
             if (availableWidth < frmDimension_numWd || availableHeight < frmDimension_numHt)
