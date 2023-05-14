@@ -11264,7 +11264,7 @@ namespace PresentationLayer.Presenter
         }
 
         public void SaveChanges()
-        {
+         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (_wndrFilePath != "")
             {

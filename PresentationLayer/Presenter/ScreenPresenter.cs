@@ -54,7 +54,8 @@ namespace PresentationLayer.Presenter
                        _Screen_NetPrice,
                        _Screen_PricingDimension,
                        _setDesc,
-                       centerClosureDesc
+                       centerClosureDesc,
+                       _printListPrice
                       ;
 
 
@@ -712,10 +713,20 @@ namespace PresentationLayer.Presenter
                 {
                     foreach (DataGridViewRow Datarow in _screenView.GetDatagrid().Rows)
                     {
+                        if(Datarow.Cells[4].Value.ToString() == " - ")
+                        {
+                            _printListPrice = "0";
+                        }
+                        else
+                        {
+                            _printListPrice = Datarow.Cells[4].Value.ToString();
+                        }
+                        
+
                         _dsq.dtScreen.Rows.Add(Datarow.Cells[1].Value ?? string.Empty,
                                                Datarow.Cells[2].Value ?? string.Empty,
                                                Datarow.Cells[3].Value ?? string.Empty,
-                                               Datarow.Cells[4].Value ?? string.Empty,
+                                               _printListPrice,
                                                Datarow.Cells[5].Value ?? 0,
                                                ScreenTotalListPrice,
                                                Datarow.Cells[0].Value ?? 0,
