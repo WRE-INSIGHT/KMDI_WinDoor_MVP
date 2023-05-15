@@ -46,7 +46,7 @@ namespace PresentationLayer.Views
         }
         public void showQuoteItemList()
         {
-            this.Show();
+            this.ShowDialog();
         }
 
         public void closeQuoteItemList()

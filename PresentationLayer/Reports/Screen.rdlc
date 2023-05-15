@@ -754,7 +754,6 @@
               <Rectangle Name="Rectangle3">
                 <ReportItems>
                   <Textbox Name="Textbox19">
-                    <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
@@ -812,6 +811,7 @@
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox19</rd:DefaultName>
+                    <Left>0.00999in</Left>
                     <Height>0.99132in</Height>
                     <Width>2.73488in</Width>
                     <Style>
@@ -826,8 +826,8 @@
                   </Textbox>
                 </ReportItems>
                 <KeepTogether>true</KeepTogether>
-                <Height>0.99132in</Height>
-                <Width>2.73488in</Width>
+                <Height>1.00138in</Height>
+                <Width>2.74487in</Width>
                 <Visibility>
                   <Hidden>= iif(Parameters!ListScreen.Value = "False", false,true)</Hidden>
                 </Visibility>
@@ -840,9 +840,9 @@
               </Rectangle>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>0.02256in</Top>
-            <Height>0.99132in</Height>
-            <Width>2.73488in</Width>
+            <Top>0.0125in</Top>
+            <Height>1.00138in</Height>
+            <Width>2.74487in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1702,7 +1702,6 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox72">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1731,7 +1730,6 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox73">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1756,7 +1754,6 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox74">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1781,7 +1778,6 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox75">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -1864,8 +1860,8 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
         <KeepTogether>true</KeepTogether>
         <Top>1.76736in</Top>
         <Left>0.19927in</Left>
-        <Height>1.31976in</Height>
-        <Width>7.54335in</Width>
+        <Height>1.22343in</Height>
+        <Width>7.53835in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -1876,7 +1872,6 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
       <Rectangle Name="termsOfPayment">
         <ReportItems>
           <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
@@ -1895,8 +1890,8 @@ First(Fields!dtPrice.Value, "DataSet1") - (First(Fields!dtPrice.Value, "DataSet1
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.27027in</Top>
-            <Left>0.02363in</Left>
+            <Top>3.79465in</Top>
+            <Left>0.0125in</Left>
             <Height>0.26042in</Height>
             <Width>7.51471in</Width>
             <Style>
@@ -1985,9 +1980,9 @@ DELIVERY:</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox34</rd:DefaultName>
-            <Top>0.03416in</Top>
-            <Height>2.49007in</Height>
-            <Width>7.53336in</Width>
+            <Left>0.005in</Left>
+            <Height>2.32361in</Height>
+            <Width>7.50902in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -2019,7 +2014,6 @@ DELIVERY:</Value>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox25">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -2052,7 +2046,6 @@ DELIVERY:</Value>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox27">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -2092,7 +2085,6 @@ DELIVERY:</Value>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox29">
-                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
@@ -2421,8 +2413,8 @@ DELIVERY:</Value>
                 <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
-            <Top>2.8541in</Top>
-            <Left>0.04796in</Left>
+            <Top>2.39306in</Top>
+            <Left>0.04142in</Left>
             <Height>0.70536in</Height>
             <Width>7.4904in</Width>
             <ZIndex>2</ZIndex>
@@ -2473,8 +2465,8 @@ DELIVERY:</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox54</rd:DefaultName>
-            <Top>3.72916in</Top>
-            <Left>0.04796in</Left>
+            <Top>3.23092in</Top>
+            <Left>0.07423in</Left>
             <Height>0.41667in</Height>
             <Width>2.4968in</Width>
             <ZIndex>3</ZIndex>
@@ -2489,8 +2481,8 @@ DELIVERY:</Value>
             </Style>
           </Textbox>
           <Line Name="Line4">
-            <Top>4.0625in</Top>
-            <Left>0.07423in</Left>
+            <Top>3.55808in</Top>
+            <Left>0.09923in</Left>
             <Height>0in</Height>
             <Width>2.13542in</Width>
             <ZIndex>4</ZIndex>
@@ -2501,7 +2493,6 @@ DELIVERY:</Value>
             </Style>
           </Line>
           <Textbox Name="Textbox55">
-            <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
@@ -2541,7 +2532,7 @@ DELIVERY:</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox54</rd:DefaultName>
-            <Top>3.72916in</Top>
+            <Top>3.23092in</Top>
             <Left>4.14221in</Left>
             <Height>0.41667in</Height>
             <Width>2.4968in</Width>
@@ -2557,7 +2548,7 @@ DELIVERY:</Value>
             </Style>
           </Textbox>
           <Line Name="Line5">
-            <Top>4.0625in</Top>
+            <Top>3.57438in</Top>
             <Left>4.16359in</Left>
             <Height>0in</Height>
             <Width>1.93971in</Width>
@@ -2570,10 +2561,10 @@ DELIVERY:</Value>
           </Line>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>2.91542in</Top>
+        <Top>3.11604in</Top>
         <Left>0.20426in</Left>
-        <Height>4.55499in</Height>
-        <Width>7.53836in</Width>
+        <Height>4.05507in</Height>
+        <Width>7.53182in</Width>
         <ZIndex>3</ZIndex>
         <Visibility>
           <Hidden>= iif(Parameters!ListScreen.Value = "True", false,true)</Hidden>
@@ -2712,7 +2703,7 @@ DELIVERY:</Value>
       </Border>
     </Style>
   </Body>
-  <Width>8.0842in</Width>
+  <Width>7.94365in</Width>
   <Page>
     <PageHeader>
       <Height>1.1254in</Height>
@@ -3079,8 +3070,8 @@ Banilad, Mandaue City, Cebu, Phils. 6014
             </Image>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>1.1254in</Height>
-          <Width>7.94365in</Width>
+          <Height>1.08196in</Height>
+          <Width>7.93016in</Width>
           <ZIndex>1</ZIndex>
           <Visibility>
             <Hidden>=IIF(Globals!PageNumber = 1 AND Parameters!ListScreen.Value = "True",FALSE,TRUE)</Hidden>
@@ -3159,7 +3150,7 @@ Banilad, Mandaue City, Cebu, Phils. 6014
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
           <Top>0.04306in</Top>
-          <Left>6.71828in</Left>
+          <Left>3.55578in</Left>
           <Height>0.225in</Height>
           <Width>1in</Width>
           <ZIndex>1</ZIndex>
