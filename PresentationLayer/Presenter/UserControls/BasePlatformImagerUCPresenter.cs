@@ -752,7 +752,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         else if (mpnlParent.Name.Contains("TransomUC_"))
                                         {
                                             IDividerModel divModel = mpnls.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == mpnlParent.Name);
-                                            indY += divModel.DivImageRenderer_Height;
+                                            indY += divModel.DivImageRenderer_Height - (70 / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));// 3rd
                                         }
                                         else if (mpnlParent.Name.Contains("MultiMullion_"))
                                         {
@@ -829,7 +829,7 @@ namespace PresentationLayer.Presenter.UserControls
                                             else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                                             {
                                                 IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height;
+                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height - (70 / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));//3rd
                                             }
                                         }
                                         else if (mpnl.MPanel_Type == "Transom")
@@ -1017,8 +1017,22 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
-
-                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), 70);
+                        //Console.WriteLine("1:" +mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name);
+                        //Console.WriteLine("2:" + mpnlModel.MPanel_ParentModel.MPanel_Name);
+                        //Console.WriteLine("3:" + mpnlModel.MPanel_Name);
+                        int a = 0;
+                        if (mpnlModel.MPanel_ParentModel.MPanel_ParentModel != null)
+                        {
+                            if (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                            {
+                                a = 70 / (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1);
+                            }
+                        }
+                        else
+                        {
+                            a = 70;
+                        }
+                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), a);
 
                         objLocX += mpnlModel.MPanelImageRenderer_Width;
                     }
@@ -1042,9 +1056,18 @@ namespace PresentationLayer.Presenter.UserControls
 
                         }
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
+                         
+                        int lastLevelDivisor = 0;
+                        if (mpnl.MPanel_ParentModel != null &&
+                            mpnl.MPanel_ParentModel.MPanel_ParentModel != null)
+                        {
+                            if (mpnl.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                            {
+                                lastLevelDivisor = mpnl.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1;
+                            }
+                        }
 
-
-                        objLocY += panelModel.PanelImageRenderer_Height - (70 / (mpnl.MPanel_Divisions + 1));
+                        objLocY += panelModel.PanelImageRenderer_Height - (70 / ((mpnl.MPanel_Divisions + 1)+ lastLevelDivisor));
                     }
                     else if (ctrl.Name.Contains("TransomUC_"))
                     {
@@ -1422,57 +1445,6 @@ namespace PresentationLayer.Presenter.UserControls
             return locY;
         }
 
-        #region Draw_SlidingTopView
-
-        //private float Draw_SlidingTopView(decimal wd, PaintEventArgs e, float locX, Font dmnsion_font_wd, int ctrl_Y)
-        //{
-        //    Graphics g = e.Graphics;
-
-        //    string dmnsion_w = wd.ToString();
-
-        //    if (dmnsion_w.Contains(".0"))
-        //    {
-        //        dmnsion_w = dmnsion_w.Replace(".0", "");
-        //    }
-
-        //    float DispWd_float = float.Parse(dmnsion_w);
-
-
-        //    PointF dmnsion_w_startP = new PointF(_flpMain.Location.X + (locX * _windoorModel.GetZoom_forRendering()),
-        //                                       (ctrl_Y - 17));
-        //    PointF dmnsion_w_endP = new PointF((_flpMain.Location.X - 3) + ((locX + DispWd_float) * _windoorModel.GetZoom_forRendering()),
-        //                                       (ctrl_Y - 17));
-
-
-        //    //g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance, line_LtR_Y), new Point(_pnlPanelling.Width - 10, line_LtR_Y));
-
-
-
-        //    PointF[] arrwhd_pnts_W1 =
-        //{
-        //                    new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y - 10),
-        //                    dmnsion_w_startP,
-        //                    new PointF(dmnsion_w_startP.X + 10,dmnsion_w_startP.Y + 10),
-        //            };
-
-        //    PointF[] arrwhd_pnts_W2 =
-        //    {
-        //                    new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y - 100),
-        //                    dmnsion_w_endP,
-        //                    new PointF(dmnsion_w_endP.X - 10, dmnsion_w_endP.Y + 100)
-        //                };
-
-        //    if (_windoorModel.lst_frame.Count() > 0)
-        //    {
-        //        g.DrawLine(new Pen(Color.Yellow, 3.5f), dmnsion_w_startP, dmnsion_w_endP);
-        //    }
-
-        //    //arrow for WIDTH
-        //    locX += DispWd_float;
-        //    return locX;
-        //}
-        #endregion
-
         private void Draw_Frame(PaintEventArgs e, Point fPoint, Size fSize, IFrameModel frameModel)
         {
             Pen blkPen = new Pen(Color.Black);
@@ -1523,7 +1495,7 @@ namespace PresentationLayer.Presenter.UserControls
             g.DrawRectangle(blkPen, new Rectangle(fPoint.X,
                                                   fPoint.Y,
                                                   fSize.Width - w,
-                                                  fSize.Height - w));
+                                                  fSize.Height + 2 - w));
         }
         float first = 0;
         private void Draw_Panel(PaintEventArgs e, IPanelModel panelModel, Point Ppoint)
@@ -1568,8 +1540,18 @@ namespace PresentationLayer.Presenter.UserControls
                 }
                 else if (panelModel.Panel_ParentMultiPanelModel.MPanel_Type == "Transom")
                 {
+                    int lastLevelDivisor = 0;
+                    if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel != null &&
+                        panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel != null)
+                    {
+                        if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                        {
+                            lastLevelDivisor = panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1;
+                        }
+                    }
+               
                     client_wd = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
-                    client_ht = panelModel.PanelImageRenderer_Height - (70 / (panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1)) + 1;
+                    client_ht = panelModel.PanelImageRenderer_Height - (70 / ((panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1) + lastLevelDivisor)) ;
                 }
             }
             else
