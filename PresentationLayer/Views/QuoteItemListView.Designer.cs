@@ -121,6 +121,7 @@
             this.chkbox_selectall.Name = "chkbox_selectall";
             this.chkbox_selectall.Size = new System.Drawing.Size(71, 17);
             this.chkbox_selectall.TabIndex = 8;
+            this.chkbox_selectall.TabStop = false;
             this.chkbox_selectall.Text = "Select all";
             this.chkbox_selectall.UseVisualStyleBackColor = true;
             this.chkbox_selectall.CheckedChanged += new System.EventHandler(this.chkbox_selectall_CheckedChanged);

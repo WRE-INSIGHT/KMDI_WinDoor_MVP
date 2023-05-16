@@ -359,7 +359,7 @@ namespace PresentationLayer.Presenter
             else
             {
 
-                if (GlassThickness != "Unglazed" && GlassThickness != "")
+                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh")
                 {
                     GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
                 }
@@ -952,6 +952,11 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[5] = new ReportParameter("ShowVat", "False");
+                    }
+
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowVatContactSummary == true)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
                     }
 
                     if (_printQuoteView.GetLessDiscountchkbox().Checked)

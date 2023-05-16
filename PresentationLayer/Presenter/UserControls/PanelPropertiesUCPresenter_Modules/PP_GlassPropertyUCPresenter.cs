@@ -40,9 +40,9 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
         }
 
         private void _pp_glassPropertyUC_chkGlazingAdaptorCheckedChangedEventRaised(object sender, EventArgs e)
-        {
-            //_panelModel.Panel_ChkGlazingAdaptor = ((CheckBox)sender).ch;
-            //_mainPresenter.GetCurrentPrice();
+        { 
+            _panelModel.Panel_ChkGlazingAdaptor = ((CheckBox)sender).Checked;
+            _mainPresenter.GetCurrentPrice();
         }
 
         private void _pp_glassPropertyUC_btnSelectGlassThicknessClickedEventRaised(object sender, EventArgs e)
@@ -86,6 +86,10 @@ namespace PresentationLayer.Presenter.UserControls.PanelPropertiesUCPresenter_Mo
                 if (_panelModel.Panel_GlassThicknessDesc == "Unglazed")
                 {
                     _panelModel.Panel_GlassThicknessDesc = "Unglazed";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc == "Security Mesh")
+                {
+                    _panelModel.Panel_GlassThicknessDesc = "Security Mesh";
                 }
                 else
                 {

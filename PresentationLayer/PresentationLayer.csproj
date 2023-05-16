@@ -1744,6 +1744,7 @@
     <Content Include="Resources\loading_trans.gif" />
     <None Include="Resources\LouverPanel.png" />
     <None Include="Resources\medical.png" />
+    <None Include="Resources\magnifying-glass.png" />
     <Content Include="Resources\minus2_104px.png" />
     <Content Include="Resources\minus_104px.png" />
     <Content Include="Resources\Mullion.png" />
