@@ -988,54 +988,71 @@ namespace PresentationLayer.Presenter
 
         private void OnMainViewClosingEventRaised(object sender, FormClosingEventArgs e)
         {
+            //if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("Do you want to save your changes in " + wndrFileName + "?", "Closing Application",
+            //                                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        SaveChanges();
+            //    }
+            //    else if (dialogResult == DialogResult.No)
+            //    {
+            //        e.Cancel = false;
+            //    }
+
+            //    else if (dialogResult == DialogResult.Cancel)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //}
+            //else
+            //{
+            //    if (_quotationModel != null)
+            //    {
+            //        DialogResult dialogResult = MessageBox.Show("Do you want to save your progress?", "Closing Application",
+            //                                   MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            //        if (dialogResult == DialogResult.Yes)
+            //        {
+            //            _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
+            //            if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
+            //            {
+            //                wndr_content = new List<string>();
+            //                SaveAs();
+            //            }
+            //            else
+            //            {
+            //                e.Cancel = true;
+            //            }
+            //        }
+            //        else if (dialogResult == DialogResult.No)
+            //        {
+            //            e.Cancel = false;
+            //        }
+            //        else if (dialogResult == DialogResult.Cancel)
+            //        {
+            //            e.Cancel = true;
+            //        }
+
+            //    }
+            //}
+
             if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
             {
-                DialogResult dialogResult = MessageBox.Show("Do you want to save your changes in " + wndrFileName + "?", "Closing Application",
-                                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                DialogResult dialogResult = MessageBox.Show("Changes in file is not save, Do you wish to continue ? " , "Closing Application",
+                                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if(dialogResult == DialogResult.No)
                 {
-                    SaveChanges();
+                    e.Cancel = true;
                 }
-                else if (dialogResult == DialogResult.No)
+                else if(dialogResult == DialogResult.Yes)
                 {
                     e.Cancel = false;
                 }
 
-                else if (dialogResult == DialogResult.Cancel)
-                {
-                    e.Cancel = true;
-                }
             }
-            else
-            {
-                if (_quotationModel != null)
-                {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to save your progress?", "Closing Application",
-                                               MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        _mainView.GetSaveFileDialog().FileName = _custRefNo + "(" + input_qrefno + ")";
-                        if (_mainView.GetSaveFileDialog().ShowDialog() == DialogResult.OK)
-                        {
-                            wndr_content = new List<string>();
-                            SaveAs();
-                        }
-                        else
-                        {
-                            e.Cancel = true;
-                        }
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        e.Cancel = false;
-                    }
-                    else if (dialogResult == DialogResult.Cancel)
-                    {
-                        e.Cancel = true;
-                    }
-
-                }
-            }
+          
         }
         #region Events  
         private void OnPanelMainMouseWheelEventRaised(object sender, MouseEventArgs e)
