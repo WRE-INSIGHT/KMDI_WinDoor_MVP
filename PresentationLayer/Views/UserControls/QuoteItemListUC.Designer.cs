@@ -80,7 +80,7 @@
             this.rtboxDesc.Name = "rtboxDesc";
             this.rtboxDesc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.rtboxDesc.Size = new System.Drawing.Size(201, 138);
-            this.rtboxDesc.TabIndex = 17;
+            this.rtboxDesc.TabIndex = 5;
             this.rtboxDesc.Text = "";
             this.rtboxDesc.TextChanged += new System.EventHandler(this.rtboxDesc_TextChanged);
             // 
@@ -91,7 +91,7 @@
             this.tboxWindoorNumber.Location = new System.Drawing.Point(0, 0);
             this.tboxWindoorNumber.Name = "tboxWindoorNumber";
             this.tboxWindoorNumber.Size = new System.Drawing.Size(201, 25);
-            this.tboxWindoorNumber.TabIndex = 18;
+            this.tboxWindoorNumber.TabIndex = 4;
             this.tboxWindoorNumber.TextChanged += new System.EventHandler(this.tboxWindoorNumber_TextChanged);
             // 
             // lblQuantity
@@ -154,7 +154,7 @@
             this.panel2.Location = new System.Drawing.Point(1, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 165);
-            this.panel2.TabIndex = 23;
+            this.panel2.TabIndex = 1;
             // 
             // pboxItemImage
             // 
@@ -184,7 +184,7 @@
             this.chk_showitemImage.Location = new System.Drawing.Point(55, 6);
             this.chk_showitemImage.Name = "chk_showitemImage";
             this.chk_showitemImage.Size = new System.Drawing.Size(15, 14);
-            this.chk_showitemImage.TabIndex = 23;
+            this.chk_showitemImage.TabIndex = 2;
             this.chk_showitemImage.UseVisualStyleBackColor = true;
             // 
             // tboxItemName
@@ -196,7 +196,7 @@
             this.tboxItemName.Location = new System.Drawing.Point(71, 0);
             this.tboxItemName.Name = "tboxItemName";
             this.tboxItemName.Size = new System.Drawing.Size(128, 25);
-            this.tboxItemName.TabIndex = 21;
+            this.tboxItemName.TabIndex = 3;
             this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
             // txt_ItemNumber
@@ -227,7 +227,8 @@
             this.NudItemQuantity.Location = new System.Drawing.Point(404, 1);
             this.NudItemQuantity.Name = "NudItemQuantity";
             this.NudItemQuantity.Size = new System.Drawing.Size(105, 22);
-            this.NudItemQuantity.TabIndex = 24;
+            this.NudItemQuantity.TabIndex = 5;
+            this.NudItemQuantity.TabStop = false;
             this.NudItemQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NudItemQuantity.Value = new decimal(new int[] {
             1,
@@ -242,7 +243,8 @@
             this.NudItemDiscount.Location = new System.Drawing.Point(642, 1);
             this.NudItemDiscount.Name = "NudItemDiscount";
             this.NudItemDiscount.Size = new System.Drawing.Size(105, 22);
-            this.NudItemDiscount.TabIndex = 25;
+            this.NudItemDiscount.TabIndex = 7;
+            this.NudItemDiscount.TabStop = false;
             this.NudItemDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NudItemDiscount.Value = new decimal(new int[] {
             30,
@@ -257,7 +259,8 @@
             this.nudItemPrice.Location = new System.Drawing.Point(523, 1);
             this.nudItemPrice.Name = "nudItemPrice";
             this.nudItemPrice.Size = new System.Drawing.Size(105, 22);
-            this.nudItemPrice.TabIndex = 26;
+            this.nudItemPrice.TabIndex = 6;
+            this.nudItemPrice.TabStop = false;
             this.nudItemPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudItemPrice.ThousandsSeparator = true;
             this.nudItemPrice.Value = new decimal(new int[] {
