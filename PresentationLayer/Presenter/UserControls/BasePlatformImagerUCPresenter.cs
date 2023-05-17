@@ -469,7 +469,7 @@ namespace PresentationLayer.Presenter.UserControls
         {
             int totalWdOfFrame = 0;
 
-            float b = (float)FH / (float)_windoorModel.WD_height;
+            float frameHTOverItemHT = (float)FH / (float)_windoorModel.WD_height;
 
             foreach (IFrameModel frm in _windoorModel.lst_frame)
             {
@@ -477,11 +477,11 @@ namespace PresentationLayer.Presenter.UserControls
             }
             if (totalWdOfFrame < _windoorModel.WD_width)
             {
-                deductBotPadding = (int)(70.0f * b);
+                deductBotPadding = (int)(70.0f * frameHTOverItemHT);
             }
             else if (totalWdOfFrame != 0)
             {
-                deductBotPadding = (int)(70.0f * b) / (totalWdOfFrame / _windoorModel.WD_width);
+                deductBotPadding = (int)(70.0f * frameHTOverItemHT) / (totalWdOfFrame / _windoorModel.WD_width);
             }
 
             return deductBotPadding;
@@ -489,42 +489,50 @@ namespace PresentationLayer.Presenter.UserControls
 
         public int DeductionForBottomFramePaddingImagerRendering()
         {
-            int d = 0;
+            int BotPad = 0;
             if (_windoorModel.GetZoom_forRendering() == 1.0f)
             {
-                d = 70 * 1;
+                BotPad = 70 * 1;
             }
             else if (_windoorModel.GetZoom_forRendering() == 0.5f)
             {
-                d = 70 * 2;
+                BotPad = 70 * 2;
             }
             else if (_windoorModel.GetZoom_forRendering() == 0.26f)
             {
-                d = 70 * 4;
+                BotPad = 70 * 4;
             }
             else if (_windoorModel.GetZoom_forRendering() == 0.17f)
             {
-                d = 70 * 6;
+                BotPad = 70 * 6;
             }
             else if (_windoorModel.GetZoom_forRendering() == 0.13f)
             {
-                d = 70 * 8;
+                BotPad = 70 * 8;
             }
             else if (_windoorModel.GetZoom_forRendering() == 0.10f)
             {
-                d = 70 * 10;
+                BotPad = 70 * 10;
             }
-            return d;
+            return BotPad;
         }
 
 
         public float NewimagerHeightDecuted70(int FH)
         {
-            float b = (float)FH / (float)_windoorModel.WD_height;
-            float c = (_windoorModel.WD_height - DeductionForBottomFramePaddingImagerRendering()) * b; // frame
-            float a = c * _windoorModel.GetZoom_forRendering(); // imager
+            float frameHTOverItemHT = (float)FH / (float)_windoorModel.WD_height;
+            float frameImagerRendering = (_windoorModel.WD_height - DeductionForBottomFramePaddingImagerRendering()) * frameHTOverItemHT; // frame
+            float NewImagerHeight = frameImagerRendering * _windoorModel.GetZoom_forRendering(); // imager
 
-            return a;
+            return NewImagerHeight;
+        }
+
+        int BotPaddingBaseOnItemSize;
+        public void BotPadBaseOnItemHT(int FH)
+        {
+            float frameHTOverItemHT = ((float)FH / _windoorModel.WD_height);
+            float NewBotPad = (70 * frameHTOverItemHT);
+            BotPaddingBaseOnItemSize = (int)NewBotPad; 
         }
         public Point Panel_MPanel_DrawPoints_ParentIsFrame(Point framePoint, int frame_topPad, int frame_leftPad)
         {
@@ -581,6 +589,8 @@ namespace PresentationLayer.Presenter.UserControls
                     IFrameModel frameModel = _windoorModel.lst_frame.Find(frame => frame.Frame_Name == _windoorModel.lst_objects[i].Name);
                     Draw_Frame(e, object_points[i], windoor_objects_sizes[i], frameModel);
 
+                    BotPadBaseOnItemHT(frameModel.Frame_Height);
+
                     //Draw panel per frame
                     if (frameModel.Lst_Panel.Count() == 1)
                     {
@@ -602,17 +612,16 @@ namespace PresentationLayer.Presenter.UserControls
                             if (mpnl.MPanel_Parent.Name.Contains("Frame"))
                             {
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top, frameModel.FrameImageRenderer_Padding_int.Left);
-                                Draw_MultiPanel(e, mpnl, MPoint, 70);
+                                Draw_MultiPanel(e, mpnl, MPoint, BotPaddingBaseOnItemSize); // 70
                                 Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
                             }
                             else if (mpnl.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
                             {
                                 Point MPoint = Panel_MPanel_DrawPoints_ParentIsFrame(object_points[i], frameModel.FrameImageRenderer_Padding_int.Top + mParentLoc_Y, frameModel.FrameImageRenderer_Padding_int.Left + mParentLoc_X);
-                                //Draw_MultiPanelParent(mpnl, MPoint, zoom, e);
+                              
                                 mParentLoc_X = 0;
                                 mParentLoc_Y = 0;
-
-
+                                 
                                 bool isMultiPanelName = false;
                                 foreach (Control parentMpnl_obj in mpnl.MPanel_Parent.Controls)
                                 {
@@ -626,7 +635,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                                         {
                                             IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                            mParentLoc_Y += divModel.DivImageRenderer_Height - (70 / (divModel.Div_MPanelParent.MPanel_Divisions + 1));
+                                            mParentLoc_Y += divModel.DivImageRenderer_Height - (BotPaddingBaseOnItemSize / (divModel.Div_MPanelParent.MPanel_Divisions + 1));
                                         }
                                         else if (parentMpnl_obj.Name.Contains("MultiMullion_"))
                                         {
@@ -754,7 +763,7 @@ namespace PresentationLayer.Presenter.UserControls
                                         else if (mpnlParent.Name.Contains("TransomUC_"))
                                         {
                                             IDividerModel divModel = mpnls.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == mpnlParent.Name);
-                                            indY += divModel.DivImageRenderer_Height - (70 / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));// 3rd
+                                            indY += divModel.DivImageRenderer_Height - (BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));// 3rd
                                         }
                                         else if (mpnlParent.Name.Contains("MultiMullion_"))
                                         {
@@ -831,7 +840,7 @@ namespace PresentationLayer.Presenter.UserControls
                                             else if (parentMpnl_obj.Name.Contains("TransomUC_"))
                                             {
                                                 IDividerModel divModel = mpnl.MPanel_ParentModel.MPanelLst_Divider.Find(div => div.Div_Name == parentMpnl_obj.Name);
-                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height - (70 / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));//3rd
+                                                mParentLoc_Y1 += divModel.DivImageRenderer_Height - (BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1));//3rd
                                             }
                                         }
                                         else if (mpnl.MPanel_Type == "Transom")
@@ -984,21 +993,20 @@ namespace PresentationLayer.Presenter.UserControls
                             locY_deduct = 5;
                         }
                         int a = 0;
-                        //Console.WriteLine(mpnl.MPanel_ParentModel.MPanel_Name);
-                        if (mpnl.MPanel_ParentModel != null)
+                        if (mpnl.MPanel_ParentModel != null) // 2nd lvl div ht
                         {
                             if (mpnl.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
                             {
-                                a = 70 / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1);
+                                a = BotPaddingBaseOnItemSize / (mpnl.MPanel_ParentModel.MPanel_Divisions + 1);
                             }
-                            else if (mpnl.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
+                            else if (mpnl.MPanel_ParentModel.MPanel_Name.Contains("MultiMullion_"))
                             {
-                                a = 70;
+                                a = BotPaddingBaseOnItemSize;
                             }
                         }
                         else
                         {
-                            a = 70;
+                            a = BotPaddingBaseOnItemSize;
                         }
 
                         Draw_Divider(e, divModel, new Point(objLocX, objLocY - locY_deduct), a);
@@ -1027,12 +1035,12 @@ namespace PresentationLayer.Presenter.UserControls
                         {
                             if (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
                             {
-                                a = 70 / (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1);
+                                a = BotPaddingBaseOnItemSize / (mpnlModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1);
                             }
                         }
                         else
                         {
-                            a = 70;
+                            a = BotPaddingBaseOnItemSize;
                         }
                         Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), a);
 
@@ -1058,7 +1066,7 @@ namespace PresentationLayer.Presenter.UserControls
 
                         }
                         Draw_Panel(e, panelModel, new Point(objLocX, objLocY));
-                         
+
                         int lastLevelDivisor = 0;
                         if (mpnl.MPanel_ParentModel != null &&
                             mpnl.MPanel_ParentModel.MPanel_ParentModel != null)
@@ -1069,7 +1077,7 @@ namespace PresentationLayer.Presenter.UserControls
                             }
                         }
 
-                        objLocY += panelModel.PanelImageRenderer_Height - (70 / ((mpnl.MPanel_Divisions + 1)+ lastLevelDivisor));
+                        objLocY += panelModel.PanelImageRenderer_Height - (BotPaddingBaseOnItemSize / ((mpnl.MPanel_Divisions + 1) + lastLevelDivisor));
                     }
                     else if (ctrl.Name.Contains("TransomUC_"))
                     {
@@ -1104,8 +1112,8 @@ namespace PresentationLayer.Presenter.UserControls
                         {
 
                         }
-                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), (70 / (mpnl.MPanel_Divisions + 1)));
-                        objLocY += mpnlModel.MPanelImageRenderer_Height - (70 / (mpnl.MPanel_Divisions + 1));
+                        Draw_MultiPanel(e, mpnlModel, new Point(objLocX, objLocY), (BotPaddingBaseOnItemSize / (mpnl.MPanel_Divisions + 1)));
+                        objLocY += mpnlModel.MPanelImageRenderer_Height - (BotPaddingBaseOnItemSize / (mpnl.MPanel_Divisions + 1));
                     }
                 }
             }
@@ -1377,36 +1385,6 @@ namespace PresentationLayer.Presenter.UserControls
             string dmnsion_h = ht.ToString();
             float DispHt_float = float.Parse(dmnsion_h);
 
-
-            //PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.GetZoom_forRendering()));
-            //PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
-
-            //float Zoom_forRendering = _windoorModel.GetZoom_forRendering();
-
-            //if (Zoom_forRendering == 1.00f)
-            //{
-            //    botPaddingMultiplier = 1;
-            //}
-            //else if (Zoom_forRendering == 0.50f)
-            //{
-            //    botPaddingMultiplier = 2;
-            //}
-            //else if (Zoom_forRendering == 0.26f)
-            //{
-            //    botPaddingMultiplier = 4;
-            //}
-            //else if (Zoom_forRendering == 0.17f)
-            //{
-            //    botPaddingMultiplier = 6;
-            //}
-            //else if (Zoom_forRendering == 0.13f)
-            //{
-            //    botPaddingMultiplier = 8;
-            //}
-            //else if (Zoom_forRendering == 0.10f)
-            //{
-            //    botPaddingMultiplier = 10;
-            //}
             DispHt_float -= (float)DeductionForBottomFramePaddingImagerRendering() / _windoorModel.Dictionary_ht_redArrowLines.Count;
             PointF dmnsion_h_startP = new PointF(70 - 17, _flpMain.Location.Y + (locY * _windoorModel.GetZoom_forRendering()));
             PointF dmnsion_h_endP = new PointF(70 - 17, (_flpMain.Location.Y - 3) + ((locY + DispHt_float) * _windoorModel.GetZoom_forRendering()));
@@ -1534,16 +1512,16 @@ namespace PresentationLayer.Presenter.UserControls
                     {
                         if (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Name.Contains("MultiTransom_"))
                         {
-                            BotPadDeduct = 70 / (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Divisions + 1);
+                            BotPadDeduct = BotPaddingBaseOnItemSize / (panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Divisions + 1);
                         }
                         else
                         {
-                            BotPadDeduct = 70;
+                            BotPadDeduct = BotPaddingBaseOnItemSize;
                         }
                     }
                     else
                     {
-                        BotPadDeduct = 70;
+                        BotPadDeduct = BotPaddingBaseOnItemSize;
                     }
 
                     client_wd = panelModel.PanelImageRenderer_Width;
@@ -1560,9 +1538,9 @@ namespace PresentationLayer.Presenter.UserControls
                             lastLevelDivisor = panelModel.Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_ParentModel.MPanel_Divisions + 1;
                         }
                     }
-               
+
                     client_wd = panelModel.Panel_ParentMultiPanelModel.MPanelImageRenderer_Width;
-                    client_ht = panelModel.PanelImageRenderer_Height - (70 / ((panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1) + lastLevelDivisor)) ;
+                    client_ht = panelModel.PanelImageRenderer_Height - (BotPaddingBaseOnItemSize / ((panelModel.Panel_ParentMultiPanelModel.MPanel_Divisions + 1) + lastLevelDivisor));
                 }
             }
             else
