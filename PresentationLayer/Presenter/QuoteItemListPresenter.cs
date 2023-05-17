@@ -192,6 +192,8 @@ namespace PresentationLayer.Presenter
         decimal windoorpricecheck;//check price in rdlc report 
         decimal olddiscount, updateddiscount;
         int countfortick;
+
+        decimal asd = 0m;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -255,17 +257,25 @@ namespace PresentationLayer.Presenter
 
                     if (item.Screen_Set > 1)
                     {
-                        setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        if (item.Screen_Description.Contains("(Sets of"))
+                        {
+                            setDesc = " ";
+                        }
+                        else
+                        {
+                            setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        }
                     }
                     else
                     {
                         setDesc = " ";
                     }
 
+
                     if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                     {
                         Screen_DimensionFormat = " - ";
-                        Screen_UnitPrice = " - ";
+                        Screen_UnitPrice = "0";
                         Screen_Qty = null;
                         Screen_Discount = " - ";
                         Screen_NetPrice = " - "; 
@@ -589,7 +599,7 @@ namespace PresentationLayer.Presenter
 
             try
             {
-                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                //ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
 
                 foreach (var item in _mainPresenter.Screen_List)
@@ -607,6 +617,7 @@ namespace PresentationLayer.Presenter
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;
