@@ -144,7 +144,7 @@ namespace PresentationLayer.Views
         }
         public void ShowPrintQuoteView()
         {
-            this.Show();
+            this.ShowDialog();
         }
         public CheckedListBox GetChkLstBox()
         {

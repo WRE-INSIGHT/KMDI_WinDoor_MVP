@@ -38,6 +38,7 @@ namespace PresentationLayer.Presenter
         string inputted_projectName { get; set; }
         string inputted_custRefNo { get; set; }
         bool isNewProject { get; set; }
+        bool ProvinceIntownOutofTown { get; set; }
         string aeic { get; set; }
         string position { get; set; }
         string projectAddress { get; set; }

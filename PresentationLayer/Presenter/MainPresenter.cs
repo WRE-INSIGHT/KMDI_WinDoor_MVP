@@ -150,6 +150,7 @@ namespace PresentationLayer.Presenter
         private int _quoteId;
         private string input_qrefno, _projectName, _custRefNo;
         private string _wndrFilePath, _wndrFileName;
+        private bool _provinceIntownOutofTown;
         private DateTime _quotationDate;
 
         private CommonFunctions _commonfunc = new CommonFunctions();
@@ -198,6 +199,18 @@ namespace PresentationLayer.Presenter
         {
             get { return _screenList; }
             set { _screenList = value; }
+        }
+
+        public bool ProvinceIntownOutofTown
+        {
+            get
+            {
+                return _provinceIntownOutofTown;
+            }
+            set
+            {
+                _provinceIntownOutofTown = value;
+            }
         }
 
         public DataTable GlassThicknessDT
@@ -1328,6 +1341,7 @@ namespace PresentationLayer.Presenter
             wndr_content.Add("DateAssigned: " + _dateAssigned);
             wndr_content.Add("AEIC: " + _aeic);
             wndr_content.Add("AEIC_POS: " + _position);
+            wndr_content.Add("ProvinceIntownOutofTown: " + _provinceIntownOutofTown);
 
             foreach (var prop in _quotationModel.GetType().GetProperties())
             {
@@ -3503,6 +3517,10 @@ namespace PresentationLayer.Presenter
                     else if (row_str.Contains("AEIC_POS:"))
                     {
                         _position = extractedValue_str;
+                    }
+                    else if (row_str.Contains("ProvinceIntownOutofTown:"))
+                    {
+                       _provinceIntownOutofTown = Convert.ToBoolean(string.IsNullOrWhiteSpace(extractedValue_str) == true ? "0" : extractedValue_str);
                     }
                     else if (row_str.Contains("PricingFactor"))
                     {
@@ -7892,6 +7910,25 @@ namespace PresentationLayer.Presenter
                                 {
                                     value = value + "\n";
                                 }
+                                if (value.ToLower().Contains(inputted_projectName.ToLower()))
+                                {
+                                    
+                                    if (inputted_projectName.Trim().Length == value.Trim().Length)
+                                    {
+                                        value = value + "\n";
+                                    }
+                                    else
+                                    {
+                                        //Separate ProjectName insert address in new line
+                                        int _projectnameLength = inputted_projectName.Length;
+                                        string _projectNamefromLoad = value.Substring(0, _projectnameLength);
+                                        int _addressStartIndex = _projectnameLength;
+                                        int _addressLength = value.Length - _projectnameLength;
+                                        string _projectAddressfromLoad = value.Substring(_addressStartIndex, _addressLength);
+                                        string _projectName_x_projectaddress = _projectNamefromLoad + "\n" + _projectAddressfromLoad;
+                                        value = _projectName_x_projectaddress;
+                                    }
+                                }
 
                                 #endregion
                             }
@@ -11227,7 +11264,7 @@ namespace PresentationLayer.Presenter
         }
 
         public void SaveChanges()
-        {
+         {
             _mainView.mainview_title = _mainView.mainview_title.Replace("*", "");
             if (_wndrFilePath != "")
             {
@@ -11863,19 +11900,20 @@ namespace PresentationLayer.Presenter
 
         public async void GetIntownOutofTown()
         {
-            decimal value;
-            string[] province = projectAddress.Split(',');
-            value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
 
-            if (value == 1.30m)
-            {
-                _quotationModel.ProvinceIntownOrOutoftown = true;
-            }
-            else if (value == 1.40m)
-            {
-                _quotationModel.ProvinceIntownOrOutoftown = false;
-            }
+                decimal value;
+                string[] province = projectAddress.Split(',');
+                value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
 
+                if (value == 1.30m)
+                {
+                    ProvinceIntownOutofTown = true;
+                }
+                else if (value == 1.40m)
+                {
+                     ProvinceIntownOutofTown = false;
+                }
+                       
         }
         public void updatePriceFromMainViewToItemList()
         {
