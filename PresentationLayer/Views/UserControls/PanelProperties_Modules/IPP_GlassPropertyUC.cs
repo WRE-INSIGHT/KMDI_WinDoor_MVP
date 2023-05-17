@@ -10,5 +10,6 @@ namespace PresentationLayer.Views.UserControls.PanelProperties_Modules
         event EventHandler cmbGlassTypeSelectedValueEventRaised;
         event EventHandler cmbGlazingArtNoSelectedValueEventRaised;
         event EventHandler PPGlassPropertyLoadEventRaised;
+        event EventHandler chkGlazingAdaptorCheckedChangedEventRaised;
     }
 }

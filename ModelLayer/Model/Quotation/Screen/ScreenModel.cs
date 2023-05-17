@@ -2305,7 +2305,6 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
                             #endregion
-
                         }
                         else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
                         {
@@ -2475,7 +2474,6 @@ namespace ModelLayer.Model.Quotation.Screen
                             _woodFinish = Foiled_TotalCost;
 
                             #endregion
-
                         }
 
                         Black_Alum_base = (2 * (Screen_Height - 1581m) / 1000m) * (23.0817m / 2.8m);
