@@ -417,6 +417,13 @@ namespace PresentationLayer.Presenter
                 _windoorModel.WD_TopViewType = "Fold and Slide";
             }
 
+
+            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
+            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+            //SetImagerHeight();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.SetWdFlpImage();
             _setTopViewSlidingPanelling.ThisBinding(CreateBindingDictionary());
         }

@@ -1,14 +1,9 @@
-﻿using System;
+﻿using CommonComponents;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CommonComponents;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace PresentationLayer.Views.UserControls
 {
@@ -59,6 +54,11 @@ namespace PresentationLayer.Views.UserControls
         public FlowLayoutPanel GetFlpMain()
         {
             return flp_frameDragDrop;
+        }
+
+        public UserControl GetBasePlatformImagerUC()
+        {
+            return this;
         }
 
         public void BringToFront_baseImager()
