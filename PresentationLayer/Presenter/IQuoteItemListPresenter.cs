@@ -29,7 +29,11 @@ namespace PresentationLayer.Presenter
         string RDLCReportCompilerOutOfTownExpenses { get; set; }
         bool CallFrmRDLCCompiler { get; set; }
         decimal OutOfTownCharges { get; }
+        string RDLCReportCompilerVatContractSummery { get; set; }
+        bool RDLCReportCompilerShowSubTotal { get; set; }
         void ContractSummaryComputation();
+        bool ShowVatContactSummary { get; set; }
+        string RDLCReportCompilerRowLimit { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

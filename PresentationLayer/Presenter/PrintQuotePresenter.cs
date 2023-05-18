@@ -36,9 +36,12 @@ namespace PresentationLayer.Presenter
                QuotationSalutation_key,
                QuotationAddress_key,
                VatPercentage_key,
+               LaborandMobilization_key,
+               FreightCharge_key,
                QuotationOuofTownExpenses_key,
                GlassThickness,
-               baseColor;
+               baseColor,
+               Less_Discount_key;
 
 
 
@@ -61,9 +64,48 @@ namespace PresentationLayer.Presenter
             _printQuoteView.chkboxFCCheckedChangedEventRaised += _printQuoteView_chkboxFCCheckedChangedEventRaised;
             _printQuoteView.chkboxVATCheckedChangedEventRaised += _printQuoteView_chkboxVATCheckedChangedEventRaised;
             _printQuoteView.PrintQuoteViewFormClosingEventRaised += _printQuoteView_PrintQuoteViewFormClosingEventRaised;
+            _printQuoteView.chkboxLessDCheckedChangedEventRaised += _printQuoteView_chkboxLessDCheckedChangedEventRaised;
+            _printQuoteView.chkboxsubtotalCheckedChangedEventRaised += _printQuoteView_chkboxsubtotalCheckedChangedEventRaised;
         }
 
+        private void _printQuoteView_chkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if(_mainPresenter.printStatus == "ScreenItem")
+            {
+                if (_printQuoteView.GetSubTotalCheckBox().Checked)
+                {
+                    _printQuoteView.GetRowLimitTxtBox().Visible = true;
+                    _printQuoteView.GetRowLimitTxtBox().Location = new System.Drawing.Point(330,117);
+                }
+                else
+                {
+                    _printQuoteView.GetRowLimitTxtBox().Visible = false;
+                }
+            }
+        }
 
+        private void _printQuoteView_chkboxLessDCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+
+            if(_mainPresenter.printStatus == "ContractSummary")
+            {
+                if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                {
+                    _printQuoteView.GetLessDiscountTxtBox().Visible = true;
+
+                    var Curr_X_Location = _printQuoteView.GetLessDiscountchkbox().Location.X;
+                    int converted_XLoc = Convert.ToInt32(Curr_X_Location);
+                    int Vat_X_Loc = converted_XLoc + 130;
+                    _printQuoteView.GetLessDiscountTxtBox().Location = new System.Drawing.Point(Vat_X_Loc, 118);
+                    _printQuoteView.GetLessDiscountTxtBox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                }
+                else
+                {
+                    _printQuoteView.GetLessDiscountTxtBox().Visible = false;
+
+                }
+            }
+        }
 
         private void _printQuoteView_chkboxVATCheckedChangedEventRaised(object sender, EventArgs e)
         {
@@ -147,33 +189,57 @@ namespace PresentationLayer.Presenter
         private void _printQuoteView_PrintQuoteViewFormClosingEventRaised(object sender, FormClosingEventArgs e)
         {
             Console.WriteLine("closing na yung form ng print ");
-            GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
-            basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
+           // GlassThickness_key = _mainPresenter.printStatus + "_" + "GlassThickness";
+           // basecolor_key = _mainPresenter.printStatus + "_" + "basecolor";
             QuotationBody_key = _mainPresenter.printStatus + "_" + "QuotationBody";
             QuotationSalutation_key = _mainPresenter.printStatus + "_" + "QuotationSalutation";
             QuotationAddress_key = _mainPresenter.printStatus + "_" + "QuotationAddress";
             VatPercentage_key = _mainPresenter.printStatus + "_" + "VatPercentage";
-            QuotationOuofTownExpenses_key = _mainPresenter.printStatus + "_" + "QuotationOuofTownExpenses_key";
+            QuotationOuofTownExpenses_key = _mainPresenter.printStatus + "_" + "QuotationOuofTownExpenses";
+            LaborandMobilization_key = _mainPresenter.printStatus + "_" + "LaborandMobilization";
+            FreightCharge_key = _mainPresenter.printStatus + "_" + "FreightCharge";
+
+            if(_mainPresenter.printStatus == "ContractSummary")
+            {
+                Less_Discount_key = _mainPresenter.printStatus + "_" + "Less_Discount";
+            }
+            
 
             if (_rdlcHeaderIsPresent == true)
             {
-                _mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
-                _mainPresenter.RDLCHeader[basecolor_key] = baseColor;
+                //_mainPresenter.RDLCHeader[GlassThickness_key] = GlassThickness;
+                //_mainPresenter.RDLCHeader[basecolor_key] = baseColor;
                 _mainPresenter.RDLCHeader[QuotationBody_key] = _printQuoteView.QuotationBody;
                 _mainPresenter.RDLCHeader[QuotationSalutation_key] = _printQuoteView.QuotationSalutation;
                 _mainPresenter.RDLCHeader[QuotationAddress_key] = _printQuoteView.QuotationAddress;
                 _mainPresenter.RDLCHeader[VatPercentage_key] = _printQuoteView.VatPercentage;
                 _mainPresenter.RDLCHeader[QuotationOuofTownExpenses_key] = _printQuoteView.QuotationOuofTownExpenses;
+                _mainPresenter.RDLCHeader[LaborandMobilization_key] = _printQuoteView.LaborandMobilization;
+                _mainPresenter.RDLCHeader[FreightCharge_key] = _printQuoteView.FreightCharge;
+
+                //specific for contract summarry
+                if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _mainPresenter.RDLCHeader[Less_Discount_key] = _printQuoteView.LessDiscount;
+                }
             }
             else
             {            
-                _mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
-                _mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
+                //_mainPresenter.RDLCHeader.Add(GlassThickness_key,GlassThickness);
+                //_mainPresenter.RDLCHeader.Add(basecolor_key,baseColor);
                 _mainPresenter.RDLCHeader.Add(QuotationBody_key, _printQuoteView.QuotationBody);
                 _mainPresenter.RDLCHeader.Add(QuotationSalutation_key, _printQuoteView.QuotationSalutation);
                 _mainPresenter.RDLCHeader.Add(QuotationAddress_key, _printQuoteView.QuotationAddress);
                 _mainPresenter.RDLCHeader.Add(VatPercentage_key, _printQuoteView.VatPercentage);
                 _mainPresenter.RDLCHeader.Add(QuotationOuofTownExpenses_key,_printQuoteView.QuotationOuofTownExpenses);
+                _mainPresenter.RDLCHeader.Add(LaborandMobilization_key, _printQuoteView.LaborandMobilization);
+                _mainPresenter.RDLCHeader.Add(FreightCharge_key, _printQuoteView.FreightCharge);
+                
+                //specific for contract summarry 
+                if (_mainPresenter.printStatus == "ContractSummary")
+                {
+                    _mainPresenter.RDLCHeader.Add(Less_Discount_key, _printQuoteView.LessDiscount);
+                }
 
             }
         }
@@ -292,6 +358,17 @@ namespace PresentationLayer.Presenter
                         {
                             _printQuoteView.QuotationOuofTownExpenses = headers.Value;
                         }
+                        else if (headers.Key.Contains("LaborandMobilization"))
+                        {
+                            _printQuoteView.LaborandMobilization = headers.Value;
+                        }
+                        else if (headers.Key.Contains("FreightCharge"))
+                        {
+                            _printQuoteView.FreightCharge = headers.Value;
+                        }else if (headers.Key.Contains("Less_Discount"))
+                        {
+                            _printQuoteView.LessDiscount = headers.Value;
+                        }
                                                  
                     }
                 }
@@ -299,7 +376,7 @@ namespace PresentationLayer.Presenter
             else
             {
 
-                if (GlassThickness != "Unglazed" && GlassThickness != "")
+                if (GlassThickness != "Unglazed" && GlassThickness != "" && GlassThickness != "Security Mesh")
                 {
                     GlassThickness = GlassThickness.Substring(0, GlassThickness.IndexOf("mm")).Trim() + ".0" + GlassThickness.Substring(GlassThickness.IndexOf("mm")).Trim();
                 }
@@ -326,8 +403,12 @@ namespace PresentationLayer.Presenter
                 _printQuoteView.QuotationAddress = "To: \n" + _mainPresenter.inputted_projectName + "\n" + _mainPresenter.projectAddress.Replace(", Luzon", "").Replace(", Visayas", "").Replace(", Mindanao", "");
                 _printQuoteView.QuotationOuofTownExpenses = "0";
                 _printQuoteView.VatPercentage = "12";
+                _printQuoteView.LaborandMobilization = "0";
+                _printQuoteView.FreightCharge = "0";
+                _printQuoteView.LessDiscount = "30";
             }
-            
+            _printQuoteView.GetDTPDate().Value = DateTime.Now;
+            _printQuoteView.RowLimit = "22";
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -335,7 +416,6 @@ namespace PresentationLayer.Presenter
             {
                 EventLoad();
                 //_printQuoteView.GetShowPageNum().Checked = true; //Showpagenum checked on load     
-                _printQuoteView.GetDTPDate().Value = DateTime.Now;
                 _printQuoteView.GetReportViewer().RefreshReport();
                 _printQuoteView_btnRefreshClickEventRaised(sender, e);           
             }
@@ -344,8 +424,11 @@ namespace PresentationLayer.Presenter
                 MessageBox.Show("Location: " + this + "\n\n" + ex.Message);
             }
         }
-
-
+        int count = 0,
+            newlinecount = 0;
+        bool change_desc_format = false;
+        string separete_descFormat = null;
+        List<string> description_string_list = new List<string>();
         private void ShowItemImage()
         {
             foreach (var item in _printQuoteView.GetChkLstBox().CheckedIndices)
@@ -391,6 +474,75 @@ namespace PresentationLayer.Presenter
                         if (i == itemToIndx)
                         {
                             showImage = true;
+
+                            #region separate Item description
+                            for (int j = 0; j < lstQuoteUC.GetiQuoteItemListUC().itemDesc.Length; j++)
+                            {
+                                if (lstQuoteUC.GetiQuoteItemListUC().itemDesc[j] == '\n')
+                                {
+                                    count++;
+                                }
+
+                            }
+                            if (count >= 5)
+                            {
+                                change_desc_format = true;
+                                string[] splitted_string = lstQuoteUC.GetiQuoteItemListUC().itemDesc.Split('\n');
+                                foreach (var split in splitted_string)
+                                {
+                                    description_string_list.Add(split);
+                                }
+                                // for(int arr =0; arr <15; arr++)
+                                //{
+                                //    if(splitted_string.Count() > description_string_list.Count())
+                                //    {
+                                //        description_string_list.Add(splitted_string[arr]);
+                                //    }
+                                //    else
+                                //    {
+                                //        description_string_list.Add(" ");
+                                //    }
+                                //}
+                            }
+                            else
+                            {
+                                change_desc_format = false;
+                                count = 0;
+                            }
+
+                            if (change_desc_format == true)
+                            {
+                                for (int x = 0; x < description_string_list.Count; x++)
+                                {
+                                    newlinecount++;
+                                    if (newlinecount == 3)
+                                    {
+                                        newlinecount = 0;
+                                        separete_descFormat = separete_descFormat + "  " + description_string_list[x] + "," + "\n";
+
+                                    }
+                                    else
+                                    {
+                                        separete_descFormat = separete_descFormat + "  " + description_string_list[x];
+                                    }
+                                }
+                                Console.WriteLine(separete_descFormat.TrimEnd().Replace(" +", ""));
+                            }
+                            else
+                            {
+                                description_string_list.Clear();
+                                count = 0;
+                            }
+
+                            if (separete_descFormat == null)
+                            {
+                                separete_descFormat = lstQuoteUC.GetiQuoteItemListUC().itemDesc;
+                            }
+
+                            #endregion
+
+
+
                             break;
                         }
                     }
@@ -399,8 +551,9 @@ namespace PresentationLayer.Presenter
                 {
                     showImage = false;
                 }
-                   
-                    _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
+
+
+                _dsq.dtQuote.dtTopViewImageColumn.AllowDBNull = true;
 
                     _dsq.dtQuote.Rows.Add(lstQuoteUC.GetiQuoteItemListUC().ItemName,
                                           lstQuoteUC.GetiQuoteItemListUC().itemDesc,
@@ -411,14 +564,21 @@ namespace PresentationLayer.Presenter
                                           lstQuoteUC.GetiQuoteItemListUC().itemDiscount.Value,
                                           Convert.ToDecimal(lstQuoteUC.GetiQuoteItemListUC().GetLblNetPrice().Text),
                                           i + 1,
-                                          null,
-                                          showImage);
+                                          byteToStrForTopView,
+                                          showImage,
+                                          separete_descFormat
+                                          );
 
-                }
 
-                #endregion
+                description_string_list.Clear();
+                count = 0;
+                newlinecount = 0;
+                separete_descFormat = null;
+            }
 
-                this.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
+            #endregion
+
+            this.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtQuote.DefaultView;
                 chklist_exist = false;           
         }
 
@@ -510,14 +670,16 @@ namespace PresentationLayer.Presenter
                     #endregion
 
                     #region Visibility Additional info
-                    _printQuoteView.GetAdditionalInfoLabel().Visible = false;
-                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = false;
-                    _printQuoteView.GetFreightChargesChkbox().Visible = false;
-                    _printQuoteView.GetVatChkbox().Visible = false;
+                    _printQuoteView.GetAdditionalInfoLabel().Visible = true;
+                    _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
+                    _printQuoteView.GetFreightChargesChkbox().Visible = true;
+                    _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetSubTotalCheckBox().Visible = true;
                     _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(265, 3);
                     _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205, 26);
                     _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205, 59);
                     _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205, 88);
+                    _printQuoteView.GetSubTotalCheckBox().Location = new System.Drawing.Point(205, 117);
                     #endregion
 
                     #region save files without pos in AEIC
@@ -527,7 +689,7 @@ namespace PresentationLayer.Presenter
                     }
                     #endregion
 
-                    ReportParameter[] RParam = new ReportParameter[10];
+                    ReportParameter[] RParam = new ReportParameter[18];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -536,6 +698,10 @@ namespace PresentationLayer.Presenter
                     RParam[5] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[6] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());
                     RParam[7] = new ReportParameter("ASPosition", _mainPresenter.position);
+                    RParam[13] = new ReportParameter("VatPercentage", _printQuoteView.VatPercentage);
+                    RParam[14] = new ReportParameter("LaborandMobilization", _printQuoteView.LaborandMobilization);
+                    RParam[15] = new ReportParameter("FreightCharge", _printQuoteView.FreightCharge);
+                    RParam[17] = new ReportParameter("RowLimit", _printQuoteView.RowLimit);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -554,6 +720,48 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[9] = new ReportParameter("ShowPageNum", "False");
                     }
+
+                    if (_printQuoteView.GetLabor_N_MobiChkbox().Checked)
+                    {
+                        RParam[10] = new ReportParameter("ShowLandM", "True");
+                    }
+                    else
+                    {
+                        RParam[10] = new ReportParameter("ShowLandM", "False");
+                    }
+                    if (_printQuoteView.GetFreightChargesChkbox().Checked)
+                    {
+                        RParam[11] = new ReportParameter("ShowFC","True");
+                    }
+                    else
+                    {
+                        RParam[11] = new ReportParameter("ShowFC", "False");
+                    }
+                    if (_printQuoteView.GetVatChkbox().Checked)
+                    {
+                        RParam[12] = new ReportParameter("ShowVat", "True");
+                    }
+                    else
+                    {
+                        RParam[12] = new ReportParameter("ShowVat", "False");
+                    }
+                    if (_printQuoteView.GetSubTotalCheckBox().Checked)
+                    {
+                        RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                    }
+                    else
+                    {
+                        RParam[16] = new ReportParameter("ShowSubTotal", "False");
+                    }
+
+                    if(_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerShowSubTotal == true)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                    }
+
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
@@ -590,8 +798,6 @@ namespace PresentationLayer.Presenter
                     {
                         Console.WriteLine("quoteitemlistpresenter is not used" + ex);
                     }
-
-
 
                     #endregion
                 }
@@ -729,6 +935,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
                     _printQuoteView.GetFreightChargesChkbox().Visible = true;
                     _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetLessDiscountchkbox().Visible = true;
+
                     _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(1200, 5);
                     _printQuoteView.GetAdditionalInfoLabel().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(1130, 28);
@@ -737,6 +945,8 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetFreightChargesChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(1130, 88);
                     _printQuoteView.GetVatChkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
+                    _printQuoteView.GetLessDiscountchkbox().Location = new System.Drawing.Point(1130,118);
+                    _printQuoteView.GetLessDiscountchkbox().Anchor = AnchorStyles.Right | AnchorStyles.Top;
                     #endregion
 
                     _printQuoteView.GetChkLstBox().Visible = false;
@@ -755,12 +965,13 @@ namespace PresentationLayer.Presenter
                         _mainPresenter.position = " ";
                     }
                     #endregion
-                    ReportParameter[] RParam = new ReportParameter[7];
+                    ReportParameter[] RParam = new ReportParameter[9];
                     RParam[0] = new ReportParameter("QuoteNumber", _mainPresenter.inputted_quotationRefNo);
                     RParam[1] = new ReportParameter("ASPersonnel", Convert.ToString(_mainPresenter.aeic).ToUpper());                 
                     RParam[2] = new ReportParameter("ASPosition", _mainPresenter.position);
                     RParam[3] = new ReportParameter("OutofTownExpenses", ("PHP " + _printQuoteView.QuotationOuofTownExpenses));
                     RParam[6] = new ReportParameter("VatPercentage",_printQuoteView.VatPercentage);
+                    RParam[7] = new ReportParameter("LessDiscountPercentage", _printQuoteView.LessDiscount);
 
                     if (_printQuoteView.GetShowPageNum().Checked)
                     {
@@ -778,6 +989,20 @@ namespace PresentationLayer.Presenter
                     else
                     {
                         RParam[5] = new ReportParameter("ShowVat", "False");
+                    }
+
+                    if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.ShowVatContactSummary == true)
+                    {
+                        RParam[5] = new ReportParameter("ShowVat", "True");
+                    }
+
+                    if (_printQuoteView.GetLessDiscountchkbox().Checked)
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "True");
+                    }
+                    else
+                    {
+                        RParam[8] = new ReportParameter("UserDefineLessDiscount", "False");
                     }
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);

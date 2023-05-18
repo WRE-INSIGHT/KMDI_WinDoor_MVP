@@ -73,9 +73,67 @@ namespace PresentationLayer.Views
                 txtbox_VAT.Text = value;
             }
         }
+        public string LaborandMobilization
+        {
+            get
+            {
+                return txtbox_LnM.Text;
+            }
+            set
+            {
+                txtbox_LnM.Text = value;
+            }
+        }
+        public string FreightCharge
+        {
+            get
+            {
+                return txtbox_FC.Text;
+            }
+            set
+            {
+                txtbox_FC.Text = value;
+            }
+        }
+        public string LessDiscount
+        {
+            get
+            {
+                return txtbox_LessD.Text;
+            }
+            set
+            {
+                txtbox_LessD.Text = value;
+            }
+        }
+        public string RowLimit
+        {
+            get
+            {
+                return txtbox_rowlimit.Text;
+            }
+            set
+            {
+                txtbox_rowlimit.Text = value;
+            }
+        }
+
+        public TextBox GetRowLimitTxtBox()
+        {
+            return txtbox_rowlimit;
+        }
+
+        public CheckBox GetLessDiscountchkbox()
+        {
+            return chkbox_LessD;
+        }
+        public TextBox GetLessDiscountTxtBox()
+        {
+            return txtbox_LessD;
+        }
         public ReportViewer GetReportViewer()
         {
-            return reportViewer1;
+             return reportViewer1;
         }
         public BindingSource GetBindingSource()
         {
@@ -103,7 +161,7 @@ namespace PresentationLayer.Views
         }
         public void ShowPrintQuoteView()
         {
-            this.Show();
+            this.ShowDialog();
         }
         public CheckedListBox GetChkLstBox()
         {
@@ -165,6 +223,10 @@ namespace PresentationLayer.Views
         {
             return txtbox_VAT;
         }
+        public CheckBox GetSubTotalCheckBox()
+        {
+            return chkbox_subtotal;
+        }
 
         public event EventHandler btnRefreshClickEventRaised;
         public event EventHandler PrintQuoteViewLoadEventRaised;
@@ -173,7 +235,10 @@ namespace PresentationLayer.Views
         public event EventHandler chkboxLnMCheckedChangedEventRaised;
         public event EventHandler chkboxFCCheckedChangedEventRaised;
         public event EventHandler chkboxVATCheckedChangedEventRaised;
+        public event EventHandler chkboxLessDCheckedChangedEventRaised;
+        public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
+        
 
         private void PrintQuoteView_Load(object sender, EventArgs e)
         {
@@ -234,6 +299,16 @@ namespace PresentationLayer.Views
         private void PrintQuoteView_FormClosing(object sender, FormClosingEventArgs e)
         {
             EventHelpers.RaiseFormClosingEvent(sender, PrintQuoteViewFormClosingEventRaised, e);
+        }
+
+        private void chkbox_LessD_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxLessDCheckedChangedEventRaised, e);
+        }
+
+        private void chkbox_subtotal_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender, chkboxsubtotalCheckedChangedEventRaised, e);
         }
     }
 }

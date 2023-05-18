@@ -420,8 +420,8 @@ namespace ModelLayer.Model.Quotation.Panel
         void Insert_WeatherBar_MaterialList(DataTable tbl_explosion);
         void Insert_EndCapForWeatherBar_MaterialList(DataTable tbl_explosion);
         void Insert_WaterSeepage_MaterialList(DataTable tbl_explosion);
-        void Insert_Interlock_MaterialList(DataTable tbl_explosion);
-        void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion);
+        void Insert_Interlock_MaterialList(DataTable tbl_explosion, int Insert_Interlock_MaterialList);
+        void Insert_ExternsionForInterlock_MaterialList(DataTable tbl_explosion, int Insert_Interlock_MaterialList);
         void Insert_WeatherBarFastener_MaterialList(DataTable tbl_explosion);
         void Insert_BrushSeal_MaterialList(DataTable tbl_explosion);
         void Insert_Rollers_MaterialList(DataTable tbl_explosion);

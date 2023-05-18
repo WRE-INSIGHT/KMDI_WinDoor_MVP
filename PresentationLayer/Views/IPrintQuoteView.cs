@@ -11,12 +11,21 @@ namespace PresentationLayer.Views
         string QuotationBody { get; set; }
         string QuotationOuofTownExpenses { get; set; }
         string VatPercentage { get; set; }
+        string LaborandMobilization { get; set; }
+        string FreightCharge { get; set; }
+        string LessDiscount { get; set; }
+        string RowLimit { get; set; }
+        TextBox GetRowLimitTxtBox();
+        TextBox GetLessDiscountTxtBox();
+        CheckBox GetLessDiscountchkbox();
         CheckBox ShowLastPage();
         Label GetUniversalLabel();
         Button GetRefreshBtn();
         TextBox GetOutofTownExpenses();
         CheckedListBox GetChkLstBox();
         CheckBox GetShowPageNum();
+        CheckBox GetSubTotalCheckBox();
+   
         void ShowPrintQuoteView();
 
 
@@ -27,6 +36,8 @@ namespace PresentationLayer.Views
         event EventHandler chkboxLnMCheckedChangedEventRaised;
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
+        event EventHandler chkboxLessDCheckedChangedEventRaised;
+        event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         ReportViewer GetReportViewer();

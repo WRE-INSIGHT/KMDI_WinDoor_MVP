@@ -46,7 +46,7 @@ namespace PresentationLayer.Views
         }
         public void showQuoteItemList()
         {
-            this.Show();
+            this.ShowDialog();
         }
 
         public void closeQuoteItemList()
@@ -90,19 +90,19 @@ namespace PresentationLayer.Views
 
         private void QuoteItemListView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control == true && e.KeyCode == Keys.W)
+            if (e.Control == true && e.Shift == true && e.KeyCode == Keys.W)
                 {
                     TSbtnPrint_Click(sender, e);
                 }
-                else if (e.Control == true && e.KeyCode == Keys.G)
+                else if (e.Control == true && e.Shift == true && e.KeyCode == Keys.G)
                 {
                     TSbtnGlassSummary_Click(sender, e);
                 }
-                else if(e.Control == true && e.KeyCode == Keys.C)
+                else if(e.Control == true && e.Shift == true && e.KeyCode == Keys.C)
                 {
                     TSbtnContractSummary_Click(sender, e);
                 }
-                else if(e.Control == true && e.KeyCode == Keys.P)
+                else if(e.Control == true && e.Shift == true && e.KeyCode == Keys.P)
                 {
                     TSbtnPDFCompiler_Click(sender, e);
                 }
