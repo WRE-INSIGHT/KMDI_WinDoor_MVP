@@ -189,8 +189,8 @@ namespace PresentationLayer.Presenter
 
         #region GetSet
         private IDictionary<string, string> _rdlcHeaders = new Dictionary<string, string>();
-        
-        public IDictionary<string,string> RDLCHeader
+
+        public IDictionary<string, string> RDLCHeader
         {
             get { return _rdlcHeaders; }
             set { _rdlcHeaders = value; }
@@ -2319,7 +2319,7 @@ namespace PresentationLayer.Presenter
             {
                 if (_mainView.GetOpenFileDialog().ShowDialog() == DialogResult.OK)
                 {
-                    _rdlcHeaders.Clear();              
+                    _rdlcHeaders.Clear();
                     DialogResult dialogResult = DialogResult.No;
                     if (!string.IsNullOrWhiteSpace(wndrFileName) && GetMainView().GetToolStripButtonSave().Enabled == true)
                     {
@@ -3410,7 +3410,7 @@ namespace PresentationLayer.Presenter
                 _basePlatformImagerUCPresenter.InvalidateBasePlatform();
                 inside_item = false;
             }
-            else   if (row_str == "~")
+            else if (row_str == "~")
             {
                 if (inside_screen)
                 {
@@ -3423,7 +3423,7 @@ namespace PresentationLayer.Presenter
                 }
 
             }
-            else if(row_str == "." )
+            else if (row_str == ".")
             {
                 if (inside_rdlcDic)
                 {
@@ -3435,7 +3435,7 @@ namespace PresentationLayer.Presenter
                     inside_rdlcDic = true;
                 }
             }
-              if (row_str == "EndofFile")
+            if (row_str == "EndofFile")
             {
                 add_existing = false;
                 int wndrId = 0;
@@ -7789,17 +7789,17 @@ namespace PresentationLayer.Presenter
                         if (row_str != ".")
                         {
                             string[] key = row_str.Split(':');
-                            var value = row_str.Substring(row_str.IndexOf(": ") + 1 );
+                            var value = row_str.Substring(row_str.IndexOf(": ") + 1);
 
                             if (rdlcDicChangeKey == true)
                             {
                                 RDLCDictionary_key = key[0];
                             }
-                            if(value == "" || value == " ")
+                            if (value == "" || value == " ")
                             {
                                 value = "\n" + "\n";
                             }
-                            else if(value == " To: ")
+                            else if (value == " To: ")
                             {
                                 value = value + "\n";
                                 rdlcAddNewLineToAddr = true;
@@ -7809,10 +7809,10 @@ namespace PresentationLayer.Presenter
                                 value = value + "\n";
                                 rdlcAddNewLineToAddr = false;
                             }
-                            else if(RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
+                            else if (RDLCDictionary_key.Contains("QuotationBody") && value.ToLower().Contains("using"))
                             {
                                 value = value + "\n";
-                            }                                               
+                            }
                             RDLCDictionary_value = RDLCDictionary_value + value;
                             rdlcDicChangeKey = false;
                         }
@@ -7827,8 +7827,8 @@ namespace PresentationLayer.Presenter
         {
             if (add_existing == false)
             {
-              _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
-                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :"  +  RDLCDictionary_value.TrimStart());
+                _rdlcHeaders.Add(RDLCDictionary_key, RDLCDictionary_value.TrimStart());
+                Console.WriteLine("KEY  :" + RDLCDictionary_key + "VALUE :" + RDLCDictionary_value.TrimStart());
             }
 
             if (RDLCDictionary_key != null && RDLCDictionary_value != null)
@@ -8252,7 +8252,7 @@ namespace PresentationLayer.Presenter
             pnlModel.Panel_LouverGalleryColor = panel_LouverGalleryColor;
             pnlModel.Panel_LouverRPLeverHandleCheck = panel_LouverRPLeverHandleCheck;
             pnlModel.Panel_LouverSecurityGrillCheck = panel_LouverSecurityGrillCheck;
-            
+
 
             pnlModel.Panel_AluminumPullHandleArtNo = panel_AluminumPullHandleArtNo;
             pnlModel.Panel_PlantOnWeatherStripHeadArtNo = panel_PlantOnWeatherStripHeadArtNo;
@@ -8715,7 +8715,7 @@ namespace PresentationLayer.Presenter
         }
 
         #endregion
-        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen,inside_rdlcDic,
+        bool inside_quotation, inside_item, inside_frame, inside_concrete, inside_panel, inside_multi, inside_divider, inside_screen, inside_rdlcDic,
              rdlcDicChangeKey = true,
              rdlcAddNewLineToAddr = false,
              add_existing = false;
@@ -9573,7 +9573,7 @@ namespace PresentationLayer.Presenter
                     }
                 }
                 else if (!QoutationInputBox_OkClicked && !NewItem_OkClicked && !AddedFrame && !AddedConcrete && OpenWindoorFile && !Duplicate) // Open File
-                {               
+                {
                     if (purpose == frmDimensionPresenter.Show_Purpose.CreateNew_Item)
                     {
                         _frmDimensionPresenter.SetBaseColor(frmDimension_baseColor);
@@ -11759,18 +11759,18 @@ namespace PresentationLayer.Presenter
 
         public async void GetIntownOutofTown()
         {
-            decimal value;
-            string[] province = projectAddress.Split(',');
-            value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
+            //decimal value;
+            //string[] province = projectAddress.Split(',');
+            //value = await _quotationServices.GetFactorByProvince((province[province.Length - 2]).Trim());
 
-            if (value == 1.30m)
-            {
-                _quotationModel.ProvinceIntownOrOutoftown = true;
-            }
-            else if (value == 1.40m)
-            {
-                _quotationModel.ProvinceIntownOrOutoftown = false;
-            }
+            //if (value == 1.30m)
+            //{
+            //    _quotationModel.ProvinceIntownOrOutoftown = true;
+            //}
+            //else if (value == 1.40m)
+            //{
+            _quotationModel.ProvinceIntownOrOutoftown = false;
+            // }
 
         }
         public void updatePriceFromMainViewToItemList()
