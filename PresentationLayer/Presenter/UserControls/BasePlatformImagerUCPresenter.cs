@@ -1238,9 +1238,17 @@ namespace PresentationLayer.Presenter.UserControls
 
             redP.Width = 3.5f;
 
+            if (_windoorModel.WD_width >= 10000)
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 12, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 12, FontStyle.Bold);
+            }
+            else
+            {
+                dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
+                dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
+            }
 
-            Font dmnsion_font_wd = new Font("Segoe UI", 22, FontStyle.Bold);
-            Font dmnsion_font_ht = new Font("Segoe UI", 22, FontStyle.Bold);
 
             int total_frame = _windoorModel.lst_frame.Count();
             int total_panel = 0, total_mpanel = 0;
@@ -2721,7 +2729,6 @@ namespace PresentationLayer.Presenter.UserControls
             imagerUCP._windoorModel = windoorModel;
             imagerUCP._mainPresenter = mainPresenter;
             imagerUCP._basePlatformImagerUC.ClearBinding((UserControl)_basePlatformImagerUC);
-            imagerUCP._unityC = unityC;
 
             return imagerUCP;
         }
