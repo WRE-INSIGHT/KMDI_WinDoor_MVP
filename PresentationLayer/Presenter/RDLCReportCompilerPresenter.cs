@@ -64,6 +64,8 @@ namespace PresentationLayer.Presenter
             _rdlcReportCompilerView.BtnCompileReportClickEventRaised += new EventHandler(OnBtnCompileReportClickEventRaised);
             _rdlcReportCompilerView.RDLCReportCompilerViewLoadEventRaised += new EventHandler(OnRDLCReportCompilerViewLoadEventRaised);
             _rdlcReportCompilerView.chkselectallCheckedChangedEventRaised += new EventHandler(OnchkselectallCheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkboxshowVatCheckedChangedEventRaised += new EventHandler(OnchkboxshowVatCheckedChangedEventRaised);
+            _rdlcReportCompilerView.chkboxsubtotalCheckedChangedEventRaised += new EventHandler(OnchkboxsubtotalCheckedChangedEventRaised);
 
             //bgw.WorkerReportsProgress = true;
             //bgw.WorkerSupportsCancellation = true;
@@ -71,6 +73,8 @@ namespace PresentationLayer.Presenter
             //bgw.ProgressChanged += Bgw_ProgressChanged;
          
         }
+
+
 
         //private delegate void DELEGATE();
         //private void Bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -85,6 +89,30 @@ namespace PresentationLayer.Presenter
         //{
 
         //}
+        private void OnchkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetSubTotalCheckBox().Checked)
+            {
+                _quoteItemListPresenter.RDLCReportCompilerShowSubTotal = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.RDLCReportCompilerShowSubTotal = false;
+            }
+        }
+        private void OnchkboxshowVatCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if (_rdlcReportCompilerView.GetShowVatCheckBox().Checked)
+            {
+                _quoteItemListPresenter.ShowVatContactSummary = true;
+                _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = true;
+            }
+            else
+            {
+                _quoteItemListPresenter.ShowVatContactSummary = false;
+                _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
+            }
+        }
 
         private void OnchkselectallCheckedChangedEventRaised(object sender, EventArgs e)
         {
@@ -114,6 +142,10 @@ namespace PresentationLayer.Presenter
             _quoteItemListPresenter.PrintContractSummaryRDLC();
             _quoteItemListPresenter.CallFrmRDLCCompiler = false;
             _rdlcReportCompilerView.GetOOTTextBox().Text = _quoteItemListPresenter.OutOfTownCharges.ToString("N2");
+            _rdlcReportCompilerView.GetContracSummaryVatTextBox().Visible = false;
+            _rdlcReportCompilerView.TxtBxContractSummaryVat = "12";
+            _rdlcReportCompilerView.TxtBxRowlimit = "21";
+            
 
         }
 
@@ -175,11 +207,13 @@ namespace PresentationLayer.Presenter
                                 #endregion
                                 #region Summary Of Contract
                                 _quoteItemListPresenter.RDLCReportCompilerOutOfTownExpenses = _rdlcReportCompilerView.TxtBxOutofTownExpenses;
-                                _quoteItemListPresenter.PrintContractSummaryRDLC();
+                                _quoteItemListPresenter.RDLCReportCompilerVatContractSummery = _rdlcReportCompilerView.TxtBxContractSummaryVat;
+                               _quoteItemListPresenter.PrintContractSummaryRDLC();
                                 #endregion
                                 #region Screen
                                 if (_mainPresenter.Screen_List.Count != 0)
                                 {
+                                    _quoteItemListPresenter.RDLCReportCompilerRowLimit = _rdlcReportCompilerView.TxtBxRowlimit;
                                     _quoteItemListPresenter.PrintScreenRDLC();
                                 }
                                 #endregion

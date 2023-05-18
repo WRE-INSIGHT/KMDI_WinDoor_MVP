@@ -139,6 +139,9 @@
   <data name="MultiplePanelTransom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiplePanel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="disabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enabled_forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="refresh_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -147,6 +150,12 @@
   </data>
   <data name="CasementPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CasementPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExtensionBot11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtensionBot11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExtensionBot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtensionBot1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\external-glass-interior-homedecor-vol4-microdots-premium-microdot-graphic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -159,9 +168,6 @@
   </data>
   <data name="icons8-banknotes-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-banknotes-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SlidingPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SlidingPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,14 +196,17 @@
   <data name="AddNew_Window" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddNew_Window.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ExtensionLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtensionLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ExtensionRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExtensionRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="print" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExtensionLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExtensionLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fade90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fade901.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loading_trans" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading_trans.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,6 +226,9 @@
   <data name="cancel_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TiltNTurnPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TiltNTurnPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -232,8 +244,8 @@
   <data name="Transom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Transom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="disabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enabled_forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SlidingPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SlidingPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AwningPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AwningPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,17 +259,14 @@
   <data name="LouverPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LouverPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="disabled_back_arrow_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\enabled_back_arrow_104px .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtensionBot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExtensionBot1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="disabled_back_arrow_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enabled_back_arrow_104px .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddNew_Concrete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddNew_Concrete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -274,10 +283,7 @@
   <data name="enabled_forward_button_104px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forward_button_104px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="fade90" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\fade901.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="magnifying-glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\magnifying-glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

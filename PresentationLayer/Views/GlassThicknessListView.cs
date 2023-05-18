@@ -18,9 +18,22 @@ namespace PresentationLayer.Views
             InitializeComponent();
         }
 
+        public string SearchVal
+        {
+            get
+            {
+                return txtbox_search.Text;
+            }
+            set
+            {
+                txtbox_search.Text = value;
+            }
+        }
+
         public event EventHandler GlassThicknessListViewLoadEventRaised;
         public event DataGridViewRowPostPaintEventHandler DgvGlassThicknessListRowpostpaintEventRaised;
         public event DataGridViewCellEventHandler DgvGlassThicknessListCellDoubleClickEventRaised;
+        public event EventHandler txtboxsearchTextChangedEventRaised;
 
         public DataGridView Get_DgvGlassThicknessList()
         {
@@ -59,6 +72,11 @@ namespace PresentationLayer.Views
         public void CloseThisDialog()
         {
             this.Close();
+        }
+
+        private void txtbox_search_TextChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender,txtboxsearchTextChangedEventRaised,e);
         }
     }
 }

@@ -18,7 +18,8 @@ namespace ServiceLayer.Services.ScreenServices
                                     decimal screen_totalAmount,
                                     string plissemagnumType,
                                     decimal factor,
-                                    decimal addonsspecialfactor);
+                                    decimal addonsspecialfactor,
+                                    string screen_displayeddimension);
 
         void ValidateModel(IScreenModel screenModel);
     }

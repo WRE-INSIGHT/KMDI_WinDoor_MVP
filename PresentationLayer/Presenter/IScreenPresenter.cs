@@ -1,5 +1,7 @@
 ﻿using CommonComponents;
+using ModelLayer.Model.Quotation;
 using ModelLayer.Model.Quotation.Screen;
+using ModelLayer.Model.Quotation.WinDoor;
 using PresentationLayer.Presenter.UserControls.ScreenAddonsPropertiesUCPresenter_Module;
 using PresentationLayer.Views;
 using ServiceLayer.Services.QuotationServices;
@@ -14,7 +16,9 @@ namespace PresentationLayer.Presenter
         IScreenPresenter CreateNewInstance(IUnityContainer unityC,
                                            IMainPresenter mainPresenter,
                                            IScreenModel screenModel,
-                                           IQuotationServices quotationServices);
+                                           IQuotationServices quotationServices,
+                                           IQuotationModel quotationModel,
+                                           IWindoorModel windoorModel);
        
 
 

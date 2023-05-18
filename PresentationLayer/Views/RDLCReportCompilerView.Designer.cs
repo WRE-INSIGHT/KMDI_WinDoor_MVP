@@ -35,6 +35,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_oftexpenses = new System.Windows.Forms.TextBox();
+            this.txt_SummaryVat = new System.Windows.Forms.TextBox();
+            this.chkbox_showVat = new System.Windows.Forms.CheckBox();
             this.btnCompileReport = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,6 +46,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
+            this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -100,6 +105,9 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.txtbox_rowlimit);
+            this.panel2.Controls.Add(this.chkbox_subtotal);
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
@@ -112,17 +120,21 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.txt_oftexpenses, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnCompileReport, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txt_SummaryVat, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.chkbox_showVat, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnCompileReport, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(288, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.28571F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.71429F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(167, 123);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
@@ -132,16 +144,36 @@
             this.txt_oftexpenses.Location = new System.Drawing.Point(3, 3);
             this.txt_oftexpenses.Multiline = true;
             this.txt_oftexpenses.Name = "txt_oftexpenses";
-            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 53);
+            this.txt_oftexpenses.Size = new System.Drawing.Size(161, 24);
             this.txt_oftexpenses.TabIndex = 0;
+            // 
+            // txt_SummaryVat
+            // 
+            this.txt_SummaryVat.Location = new System.Drawing.Point(3, 56);
+            this.txt_SummaryVat.Multiline = true;
+            this.txt_SummaryVat.Name = "txt_SummaryVat";
+            this.txt_SummaryVat.Size = new System.Drawing.Size(78, 24);
+            this.txt_SummaryVat.TabIndex = 6;
+            // 
+            // chkbox_showVat
+            // 
+            this.chkbox_showVat.AutoSize = true;
+            this.chkbox_showVat.ForeColor = System.Drawing.Color.Red;
+            this.chkbox_showVat.Location = new System.Drawing.Point(3, 33);
+            this.chkbox_showVat.Name = "chkbox_showVat";
+            this.chkbox_showVat.Size = new System.Drawing.Size(46, 17);
+            this.chkbox_showVat.TabIndex = 7;
+            this.chkbox_showVat.Text = "*Vat";
+            this.chkbox_showVat.UseVisualStyleBackColor = true;
+            this.chkbox_showVat.CheckedChanged += new System.EventHandler(this.chkbox_showVat_CheckedChanged);
             // 
             // btnCompileReport
             // 
             this.btnCompileReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCompileReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCompileReport.Location = new System.Drawing.Point(3, 73);
+            this.btnCompileReport.Location = new System.Drawing.Point(3, 97);
             this.btnCompileReport.Name = "btnCompileReport";
-            this.btnCompileReport.Size = new System.Drawing.Size(161, 47);
+            this.btnCompileReport.Size = new System.Drawing.Size(161, 23);
             this.btnCompileReport.TabIndex = 1;
             this.btnCompileReport.Text = "Compile Report";
             this.btnCompileReport.UseVisualStyleBackColor = true;
@@ -149,12 +181,11 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 62);
+            this.panel5.BackColor = System.Drawing.Color.Black;
+            this.panel5.Location = new System.Drawing.Point(3, 87);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(161, 5);
-            this.panel5.TabIndex = 2;
+            this.panel5.Size = new System.Drawing.Size(161, 4);
+            this.panel5.TabIndex = 8;
             // 
             // panel4
             // 
@@ -206,7 +237,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(286, 3);
+            this.label5.Location = new System.Drawing.Point(287, 1);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(126, 15);
             this.label5.TabIndex = 3;
@@ -227,6 +258,34 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
+            // chkbox_subtotal
+            // 
+            this.chkbox_subtotal.AutoSize = true;
+            this.chkbox_subtotal.Location = new System.Drawing.Point(145, 26);
+            this.chkbox_subtotal.Name = "chkbox_subtotal";
+            this.chkbox_subtotal.Size = new System.Drawing.Size(69, 17);
+            this.chkbox_subtotal.TabIndex = 3;
+            this.chkbox_subtotal.Text = "SubTotal";
+            this.chkbox_subtotal.UseVisualStyleBackColor = true;
+            this.chkbox_subtotal.CheckedChanged += new System.EventHandler(this.chkbox_subtotal_CheckedChanged);
+            // 
+            // txtbox_rowlimit
+            // 
+            this.txtbox_rowlimit.Location = new System.Drawing.Point(145, 49);
+            this.txtbox_rowlimit.Name = "txtbox_rowlimit";
+            this.txtbox_rowlimit.Size = new System.Drawing.Size(69, 20);
+            this.txtbox_rowlimit.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(216, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "- Row Limit";
+            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +302,7 @@
             this.Load += new System.EventHandler(this.RDLCReportCompilerView_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -259,16 +319,21 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox txt_oftexpenses;
-        private System.Windows.Forms.Button btnCompileReport;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckedListBox chk_showimagelist;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.CheckBox chk_selectall;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button btnCompileReport;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox txt_oftexpenses;
+        private System.Windows.Forms.TextBox txt_SummaryVat;
+        private System.Windows.Forms.CheckBox chkbox_showVat;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox chkbox_subtotal;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtbox_rowlimit;
     }
 }

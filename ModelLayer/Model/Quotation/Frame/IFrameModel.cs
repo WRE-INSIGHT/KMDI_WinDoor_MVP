@@ -68,8 +68,13 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_SlidingRailsQtyVisibility { get; set; }
         FrameConnectionType Frame_ConnectionType { get; set; }
         bool Frame_ConnectionTypeVisibility { get; set; }
+        bool Frame_TubularVisibility { get; set; }
+        bool Frame_TubularOption { get; set; }
+        bool Frame_TubularWidthVisibility { get; set; }
+        bool Frame_TubularHeightVisibility { get; set; }
+        int Frame_TubularHeight { get; set; }
+        int Frame_TubularWidth { get; set; }
         SealingElement_ArticleNo Frame_SealingElement_ArticleNo { get; set; }
-
         //Frame_MechJointArticleNo Frame_MechJointArticleNo { get; set; }
         bool Frame_TrackProfileArtNoVisibility { get; set; }
         TrackProfile_ArticleNo Frame_TrackProfileArtNo { get; set; }

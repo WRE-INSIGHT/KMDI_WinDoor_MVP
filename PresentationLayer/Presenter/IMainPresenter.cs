@@ -22,6 +22,7 @@ namespace PresentationLayer.Presenter
 {
     public interface IMainPresenter
     {
+        IDictionary<string, string> RDLCHeader { get; set; }
         List<IScreenModel> Screen_List { get; set; }
         Control ControlRaised_forDMSelection { get; }
         IDividerModel DivModel_forDMSelection { get; }
@@ -37,6 +38,7 @@ namespace PresentationLayer.Presenter
         string inputted_projectName { get; set; }
         string inputted_custRefNo { get; set; }
         bool isNewProject { get; set; }
+        bool ProvinceIntownOutofTown { get; set; }
         string aeic { get; set; }
         string position { get; set; }
         string projectAddress { get; set; }

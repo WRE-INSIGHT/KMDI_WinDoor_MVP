@@ -398,7 +398,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 GBpointResultX = ((pInnerX + pInnerWd - sashDeduction) / (verticalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapX)));
                 GeorgianBar_GapX += (pInnerWd + pInnerX - sashDeduction) / (verticalQty + 1);
                 Point[] GeorgianBar_PointsX = null;
-            
+
 
                 GeorgianBar_PointsX = new[]
                 {
@@ -422,7 +422,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 GBpointResultY = ((pInnerY + pInnerHt - sashDeduction) / (horizontalQty + 1) + Convert.ToInt32(Math.Floor((double)GeorgianBar_GapY)));
                 GeorgianBar_GapY += (pInnerHt - sashDeduction + (pInnerY)) / (horizontalQty + 1);
                 Point[] GeorgianBar_PointsY = null;
-               
+
                 GeorgianBar_PointsY = new[]
                 {
                     new Point(pInnerY+1 + sashD,GBpointResultY + addX),
@@ -437,6 +437,27 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
             #endregion
 
 
+            string glassType = "";
+            if (_panelModel.Panel_GlassThicknessDesc != null)
+            {
+                if (_panelModel.Panel_GlassThicknessDesc.Contains("Tempered"))
+                {
+                    glassType = "Tempered";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Unglazed"))
+                {
+                    glassType = "Unglazed";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                {
+                    glassType = "Security Mesh";
+                }
+                else
+                {
+                    glassType = "";
+                }
+            }
+
             Font drawFont = new Font("Times New Roman", font_size);
             StringFormat drawFormat = new StringFormat();
             drawFormat.Alignment = StringAlignment.Center;
@@ -447,11 +468,23 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             tiltNTurn.ClientRectangle.Width,
                                             10);
 
-            g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm",
-                         new Font("Segoe UI", 8.0f, FontStyle.Bold),
-                         new SolidBrush(Color.Black),
-                         rect,
-                         drawFormat);
+            if (glassType == "Unglazed" ||
+                glassType == "Security Mesh")
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
+                                      new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                      new SolidBrush(Color.Black),
+                                      rect,
+                                      drawFormat);
+            }
+            else
+            {
+                g.DrawString("P" + _panelModel.PanelGlass_ID + "-" + _panelModel.Panel_GlassThickness.ToString() + "mm " + glassType,
+                                        new Font("Segoe UI", 8.0f, FontStyle.Bold),
+                                        new SolidBrush(Color.Black),
+                                        rect,
+                                        drawFormat);
+            }
 
             g.DrawRectangle(new Pen(color, w), new Rectangle(0,
                                                            0,

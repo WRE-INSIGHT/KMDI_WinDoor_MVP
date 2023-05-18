@@ -422,6 +422,7 @@ namespace PresentationLayer.Presenter.UserControls
                 int propertiesScroll = _mainPresenter.PropertiesScroll;
                 _divModel.Div_ArtNo = (Divider_ArticleNo)((ComboBox)sender).SelectedValue;
                 _mainPresenter.PropertiesScroll = propertiesScroll;
+                _mainPresenter.GetCurrentPrice();
             }
         }
 

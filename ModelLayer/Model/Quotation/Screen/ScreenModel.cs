@@ -1470,6 +1470,21 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+        private string _screen_displayeddimension;
+
+        public string Screen_DisplayedDimension
+        {
+            get
+            {
+                return _screen_displayeddimension;
+            }
+            set
+            {
+                _screen_displayeddimension = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private string _screen_description;
 
         public string Screen_Description
@@ -1632,6 +1647,7 @@ namespace ModelLayer.Model.Quotation.Screen
             }
         }
 
+
         #endregion
 
         List<decimal> ItemList = new List<decimal>();
@@ -1662,11 +1678,14 @@ namespace ModelLayer.Model.Quotation.Screen
         {
             if (Screen_PriceIncreaseVisibilityOption == true)
             {
-                IncreasePercentage = Screen_PriceIncreasePercentage / 100m;
-                TotalUnitPrice = ((Screen_UnitPrice * IncreasePercentage) + Screen_UnitPrice);
-                Console.WriteLine(" Percentage increase by " + IncreasePercentage);
-                Console.WriteLine(" TotalUnitPrice " + TotalUnitPrice);
-                Screen_UnitPrice = TotalUnitPrice;
+                if (FromCellEndEdit != true)
+                {
+                    IncreasePercentage = Screen_PriceIncreasePercentage / 100m;
+                    TotalUnitPrice = ((Screen_UnitPrice * IncreasePercentage) + Screen_UnitPrice);
+                    Console.WriteLine(" Percentage increase by " + IncreasePercentage);
+                    Console.WriteLine(" TotalUnitPrice " + TotalUnitPrice);
+                    Screen_UnitPrice = TotalUnitPrice;
+                }
             }
 
         }
@@ -1731,22 +1750,23 @@ namespace ModelLayer.Model.Quotation.Screen
             Console.WriteLine("Addons is using a Factor " + AddOnsSpecialFactor);
 
             #endregion
+
             #region ChangeScreenWidthPerPanel
-            if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR && _screenOriginalWidth != 0)
-            {
-                if(Screen_Width == _plisséSRPerPanelWidth)
-                {
-                    Screen_Width = _screenOriginalWidth;
-                }
-                else
-                {
-                    Screen_Width = Screen_Width;
-                }
-            }
-            else
-            {
-                Screen_Width = Screen_Width;
-            }
+            //if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR && _screenOriginalWidth != 0)
+            //{
+            //    if (Screen_Width == _plisséSRPerPanelWidth)
+            //    {
+            //        Screen_Width = _screenOriginalWidth;
+            //    }
+            //    else
+            //    {
+            //        Screen_Width = Screen_Width;
+            //    }
+            //}
+            //else
+            //{
+            //    Screen_Width = Screen_Width;
+            //}
             #endregion
 
             if (Screen_Width != 0 &&
@@ -2289,7 +2309,6 @@ namespace ModelLayer.Model.Quotation.Screen
 
 
                             #endregion
-
                         }
                         else if (Magnum_ScreenType == Magnum_ScreenType._Single_Central)
                         {
@@ -2459,7 +2478,6 @@ namespace ModelLayer.Model.Quotation.Screen
                             _woodFinish = Foiled_TotalCost;
 
                             #endregion
-
                         }
 
                         Black_Alum_base = (2 * (Screen_Height - 1581m) / 1000m) * (23.0817m / 2.8m);
@@ -6249,7 +6267,14 @@ namespace ModelLayer.Model.Quotation.Screen
                 }
                 else if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR)
                 {
-                    Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    if(Reinforced == true)
+                    {
+                        Screen_Description = "Reinforced Plissé SR Slim Line Insect Screen";
+                    }
+                    else
+                    {
+                        Screen_Description = "Plissé SR Slim Line Insect Screen";
+                    }
                 }
                 else if (Screen_Types == ScreenType._Freedom)
                 {
@@ -6318,8 +6343,8 @@ namespace ModelLayer.Model.Quotation.Screen
                         Screen_Description = Screen_Description + " - Center Closure ";
 
                         _plisséSRPerPanelWidth = Screen_Width / 2;
-                        _screenPreviousWidth = Screen_Width;
-                        _screenOriginalWidth = Screen_Width;
+                        //_screenPreviousWidth = Screen_Width;
+                        //_screenOriginalWidth = Screen_Width;
                         Screen_Width = _plisséSRPerPanelWidth;
                     }
                     else
@@ -6331,6 +6356,12 @@ namespace ModelLayer.Model.Quotation.Screen
                 {
                     Screen_Description = Screen_Description;
                 }
+
+                #endregion
+
+                #region Screen DisplayedDimension
+
+                Screen_DisplayedDimension = Screen_Width + " x " + Screen_Height;
 
                 #endregion
 
@@ -6619,7 +6650,8 @@ namespace ModelLayer.Model.Quotation.Screen
                            decimal screen_totalAmount,
                            string screen_description,
                            decimal factor,
-                           decimal addonsspecialfactor
+                           decimal addonsspecialfactor,
+                           string screen_displayeddimension
                            )
         {
             Screen_ItemNumber = screen_itemnumber;
@@ -6636,6 +6668,7 @@ namespace ModelLayer.Model.Quotation.Screen
             Screen_Description = screen_description;
             Screen_Factor = factor;
             Screen_AddOnsSpecialFactor = addonsspecialfactor;
+            Screen_DisplayedDimension = screen_displayeddimension;
         }
     }
 }

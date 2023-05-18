@@ -21,6 +21,7 @@ namespace PresentationLayer.Presenter
         void PrintWindoorRDLC();
         void PrintContractSummaryRDLC();
         void PrintScreenRDLC();
+        void QuoteItemList_PrintAnnexRDLC();
         List<IQuoteItemListUCPresenter> LstQuoteItemUC { get; set; }
         List<ShowItemImage> ShowItemImage_CheckList { get; set; }
         List<int> RDLCReportCompilerItemIndexes { get; set; }
@@ -28,7 +29,11 @@ namespace PresentationLayer.Presenter
         string RDLCReportCompilerOutOfTownExpenses { get; set; }
         bool CallFrmRDLCCompiler { get; set; }
         decimal OutOfTownCharges { get; }
+        string RDLCReportCompilerVatContractSummery { get; set; }
+        bool RDLCReportCompilerShowSubTotal { get; set; }
         void ContractSummaryComputation();
+        bool ShowVatContactSummary { get; set; }
+        string RDLCReportCompilerRowLimit { get; set; }
 
         //List<IQuoteItemListUCPresenter> _lstQuoteItemUC { get; set; }
     }

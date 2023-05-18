@@ -47,6 +47,8 @@ namespace ModelLayer.Model.Quotation
         public bool BOM_Status { get; set; }
         public string BOMandItemlistStatus { get; set; }
         public bool itemSelectStatus { get; set; }
+        public bool ProvinceIntownOrOutoftown { get; set; }//Intown = true , OutOfTown = false
+
         private DataColumn CreateColumn(string columname, string caption, string type)
         {
             DataColumn col = new DataColumn();
@@ -55,7 +57,6 @@ namespace ModelLayer.Model.Quotation
             col.Caption = caption;
             return col;
         }
-
         public DataTable GetListOfMaterials(IWindoorModel item)
         {
             DataTable Material_List = new DataTable();
@@ -163,7 +164,7 @@ namespace ModelLayer.Model.Quotation
                                         divBotOrRight = null,
                                         divTopOrLeft_lvl3 = null,
                                         divBotOrRight_lvl3 = null;
-
+                        
                         IMultiPanelModel mpnl_Parent_lvl3 = null;
                         string mpanel_placement = "",
                                mpanelParentlvl2_placement = "",
@@ -1377,6 +1378,10 @@ namespace ModelLayer.Model.Quotation
                                     {
                                         OverLappingPanel_Qty += 1;
                                     }
+                                    else if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                    {
+                                        OverLappingPanel_Qty += 2;
+                                    }
                                     pnl.Panel_OverLappingPanelQty = OverLappingPanel_Qty;
                                 }
 
@@ -1488,13 +1493,17 @@ namespace ModelLayer.Model.Quotation
                                         }
 
 
-                                        if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                            pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Right)
+                                        if (pnl_curCtrl.Panel_Overlap_Sash != OverlapSash._None)
                                         {
+                                            int bothOverlapQtyMultiplier = 1;
+                                            if (pnl_curCtrl.Panel_Overlap_Sash == OverlapSash._Both)
+                                            {
+                                                bothOverlapQtyMultiplier = 2;
+                                            }
                                             //if (OverLappingPanel_Qty != 0)
                                             //{
-                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List);
-                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                            pnl_curCtrl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                            pnl_curCtrl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
                                             // } 
                                         }
 
@@ -1541,7 +1550,6 @@ namespace ModelLayer.Model.Quotation
                                                 if (pnl_curCtrl.Panel_ChkText != "dSash")
                                                 {
                                                     pnl_curCtrl.Insert_SealingBlock_MaterialList(Material_List);
-
                                                 }
 
                                                 if (frame.Frame_Type == FrameModel.Frame_Padding.Door &&
@@ -1937,12 +1945,16 @@ namespace ModelLayer.Model.Quotation
                                         perFrame = false;
                                     }
 
-                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                        pnl.Panel_Overlap_Sash == OverlapSash._Right)
+                                    if (pnl.Panel_Overlap_Sash != OverlapSash._None)
                                     {
+                                        int bothOverlapQtyMultiplier = 1;
+                                        if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                        {
+                                            bothOverlapQtyMultiplier = 2;
+                                        }
                                         pnl.Insert_SealingBlock_MaterialList(Material_List);
-                                        pnl.Insert_Interlock_MaterialList(Material_List);
-                                        pnl.Insert_ExternsionForInterlock_MaterialList(Material_List);
+                                        pnl.Insert_Interlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
+                                        pnl.Insert_ExternsionForInterlock_MaterialList(Material_List, bothOverlapQtyMultiplier);
 
                                     }
                                     if (pnl.Panel_RollersTypes != null)
@@ -2355,13 +2367,10 @@ namespace ModelLayer.Model.Quotation
         int CostPerPoints = 60,
              GeorgianBarVerticalQty = 0,
             GeorgianBarHorizontalQty = 0;
-        //Frame_SealantWHQty_Total = 0,
-        //Glass_SealantWHQty_Total = 0;
 
         bool ChckDM = false,
              ChckPlasticWedge = false,
              chckAlumPullHandle = false,
-             // ChckColor = false,
              check1stFrame = false,
             chckPerFrameMotorMech = false;
 
@@ -2415,6 +2424,9 @@ namespace ModelLayer.Model.Quotation
                 SashReinPricePerLinearMeter_6040 = 287.58m,
                 SashReinPricePerLinearMeter_6041 = 655.49m,
 
+                ExtensionProfile15mmPricePerLinearMeter_WoodGrain = 910.00m,
+                ExtensionProfile15mmPricePerLinearMeter_White = 790.00m,
+
                 FramePerimeter,
                 FramePrice,
                 FrameReinPrice,
@@ -2422,19 +2434,25 @@ namespace ModelLayer.Model.Quotation
                 FrameReinPricePerLinearMeter,
                 FrameThresholdPricePerLinearMeter,
 
+                ExtensionProfile15mmPricePerLinearMeter,
 
                 SashPerimeter,
                 SashPrice = 0,
                 SashReinPrice,
                 SashPricePerLinearMeter,
                 SashReinPricePerLinearMeter,
+
+                ExtensionProfile15mmPrice,
+
+
+
         #endregion
         #region Mullion/TransomPrice
 
-        Divider_7536_PricePerSqrMeter = 663.32m,
+                Divider_7536_PricePerSqrMeter = 663.32m,
                 Divider_7538_PricePerSqrMeter = 817.34m,
                 Divider_2069_PricePerSqrMeter = 284.12m, // G58
-                DividerRein_7536_PricePerSqrMeter = 866.23m,
+                DividerRein_7536_PricePerSqrMeter = 406.86m,
                 DividerRein_7538_PricePerSqrMeter = 858.52m,
 
                 claddingPricePerLinearMeter = 907.62m,//profile and reinforcement price
@@ -2464,7 +2482,7 @@ namespace ModelLayer.Model.Quotation
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
         Glass_12mmClr_PricePerSqrMeter = 1941.00m,
-        Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,
+        Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,                                                                                                                          
         Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
         Glass_8mmTemp_PricePerSqrMeter = 3201.00m,
         Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
@@ -2561,17 +2579,22 @@ namespace ModelLayer.Model.Quotation
         Glass_Double_13mmTempClr_SGInt_TempClr = 8000.00m,
         Glass_Double_21mmTempClr_SGInt_TempClr = 11650.00m,
         Glass_Double_25mmTempClr_SGInt_TempClr = 12750.00m,
+
         Glass_Double_9mmTempClrLowe_ClrPvb_TempClr = 5650.00m,
         Glass_Double_13mmTempClrLowe_ClrPvb_TempClr = 6850.00m,
         Glass_Double_23mmTempClrLowe_ClrPvb_TempClr = 14850.00m,
+
         Glass_Double_9mmTempClr_ClrPvb_TempTinted = 5000.00m,
         Glass_Double_10mmTempClr_ClrPvb_TempTinted = 5200.00m,
         Glass_Double_11mmTempClr_ClrPvb_TempTinted = 5500.00m,
         Glass_Double_13mmTempClr_ClrPvb_TempTinted = 6150.00m,
+
         Glass_Double_9mmTempTinted_ClrPvb_TempTinted = 5500.00m,
         Glass_Double_12mmTempTinted_ClrPvb_TempTinted = 6300.00m,
         Glass_Double_13mmTempTinted_ClrPvb_TempTinted = 6500.00m,
+
         Glass_Double_12mmTempClrLowe_ClrPvb_TempTinted = 7200.00m,
+
         Glass_Double_13mmTempHeatSoakedClr_Pvb_TempHeatSoakedClr = 7500.00m,
 
         Glass_Double_6mmAnnealedClr_ClrPvb_AnnealedClr = 2350.00m,
@@ -2579,17 +2602,22 @@ namespace ModelLayer.Model.Quotation
         Glass_Double_11mmAnnealedClr_ClrPvb_AnnealedClr = 3900.00m,
         Glass_Double_12mmAnnealedClr_ClrPvb_AnnealedClr = 4100.00m,
         Glass_Double_21mmAnnealedClr_ClrPvb_AnnealedClr = 8000.00m,
+
         Glass_Double_7mmAnnealedClrLowe_ClrPvb_AnnealedClr = 3800.00m,
         Glass_Double_11mmAnnealedClrLowe_ClrPvb_AnnealedClr = 5000.00m,
         Glass_Double_12mmAnnealedClrLowe_ClrPvb_AnnealedClr = 5500.00m,
         Glass_Double_5mmAnnealedClrLowe_ClrPvb_AnnealedTinted = 4200.00m,
+
         Glass_Double_6mmAnnealedTinted_ClrPvb_AnnealedClr = 2950.00m,
         Glass_Double_11mmAnnealedTinted_ClrPvb_AnnealedClr = 4216.00m,
         Glass_Double_12mmAnnealedTinted_ClrPvb_AnnealedClr = 4600.00m,
+
         Glass_Double_6mmAnnealedClr_WhitePvb_AnnealedClr = 2900.00m,
         Glass_Double_8mmAnnealedClr_WhitePvb_AnnealedClr = 3300.00m,
         Glass_Double_11mmAnnealedClr_WhitePvb_AnnealedClr = 5325.00m,
+
         Glass_Double_12mmAnnealedClr_SGInt_AnnealedClr = 5285.00m,
+
         Glass_Double_7mmTempClr_ClrPvb_TempClr = 4050.00m,
         Glass_Double_9mmTempClr_ClrPvb_TempClr = 4600.00m,
         Glass_Double_11mmTempClr_ClrPvb_TempClr = 5200.00m,
@@ -2622,7 +2650,6 @@ namespace ModelLayer.Model.Quotation
 
         FilmPrice,
         GlassPrice,
-        Glass_HeightxWidth_Total,
         #endregion
         #region FittingAndSupplies
 
@@ -2764,10 +2791,11 @@ namespace ModelLayer.Model.Quotation
             InterlockPricePerPiece = 333.77m,
             ExtensionForInterlockPricePerPiece = 789.01m,
             AluminumTrackPricePerLinearMeter = 251.10m,
-            WaterSeepagePricePerLinearMeter = 153.73m,
+            WaterSeepagePricePerLinearMeter = 378.47m,//alum //153.73m,//pvc
             AluminumPullHandlePricePerLinearMeter = 2480.18m,
+            GlazingAdaptorPricePerMeter = 250.00m,
 
-
+            GlazingAdaptorPrice,
             GlazingGasketPrice,
             GeorgianBarCost,
             CoverProfileCost,
@@ -2782,9 +2810,11 @@ namespace ModelLayer.Model.Quotation
 
             GeorgianBarPrice,
             CoverProfilePrice,
+
+            GlazingBeadPerimeter,
         #endregion
         #region LouverMatsPrice
-            LouvreFrameWeatherStripHeadPricePerMeter = 108.45m, // 629/5.8
+        LouvreFrameWeatherStripHeadPricePerMeter = 108.45m, // 629/5.8
             LouvreFrameBottomWeatherStripPricePerMeter = 87.07m, // 505/5.8
             PlantonWeatherStripHeadPricePerMeter = 153.79m, // 892/5.8
             PlantonWeatherStripSillPricePerMeter = 190.86m, // 1107/5.8
@@ -2866,6 +2896,9 @@ namespace ModelLayer.Model.Quotation
             SecurityKit_16blades = 4368.00m,
             SecurityKit_17blades = 4641.00m,
 
+            RingpullLeverHandlePricePerPiece = 1500.00m,
+            TubularPricePerLinearMeter = 1000.00m,
+
             LouvreFrameWeatherStripHeadPrice,
             LouvreFrameBottomWeatherStripPrice,
             PlantonWeatherStripHeadPrice,
@@ -2887,9 +2920,17 @@ namespace ModelLayer.Model.Quotation
             SecurityKitPrice,
             SecurityKitCost,
 
+            RingpullLeverHandlePrice,
+            TubularPrice,
+
         #endregion
 
-                BrushSealPricePerLinearMeter = 15.80m,
+        SecurityMeshPricePerSquaremeter = 2904.00m,
+
+
+        SecurityMeshPrice,
+
+        BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
                 SealantPricePerCan_Clear = 170m,
                 PUFoamingPricePerCan = 210m,
@@ -2912,7 +2953,9 @@ namespace ModelLayer.Model.Quotation
                 FittingAndSuppliesCost,
                 AccesorriesCost,
                 AncillaryProfileCost,
-                TotaPrice;
+                TotaPrice,
+
+                provinceBaseMultiplier;
         #endregion
 
         #region changePriceBasedOnDate
@@ -3910,6 +3953,30 @@ namespace ModelLayer.Model.Quotation
                         }
                         #endregion
 
+                        #region ExtensionProfile
+                        if ((fr.Frame_ArtNo == FrameProfile_ArticleNo._6050 || fr.Frame_ArtNo == FrameProfile_ArticleNo._6052) &&
+                            fr.Frame_Width > 6000)
+                        {
+                            if (wdm.WD_BaseColor == Base_Color._White || wdm.WD_BaseColor == Base_Color._Ivory)
+                            {
+                                ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_White;
+                            }
+                            else
+                            {
+                                ExtensionProfile15mmPricePerLinearMeter = ExtensionProfile15mmPricePerLinearMeter_WoodGrain;
+                            }
+
+                            ExtensionProfile15mmPrice += (fr.Frame_Width / 1000m) * ExtensionProfile15mmPricePerLinearMeter;
+                        }
+                        #endregion
+
+                        #region Tubular
+                        if (fr.Frame_TubularVisibility == true)
+                        {
+                            TubularPrice += ((fr.Frame_TubularWidth / 1000m) * TubularPricePerLinearMeter) + ((fr.Frame_TubularHeight / 1000m) * TubularPricePerLinearMeter);
+                        }
+                        #endregion
+
                         #region SealantPrice 
                         Frame_SealantWHQty_Total = (int)Math.Ceiling((decimal)((fr.Frame_Width * 2) + (fr.Frame_Height * 2)) / 3570);
 
@@ -3927,7 +3994,7 @@ namespace ModelLayer.Model.Quotation
                         #region bottomFramePrice
                         if (fr.Frame_BotFrameVisible == true &&
                             (fr.Frame_BotFrameArtNo != BottomFrameTypes._7507 &&
-                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6050))
+                             fr.Frame_BotFrameArtNo != BottomFrameTypes._6052))
                         {
                             FramePrice -= (fr.Frame_Width / 1000m) * FramePricePerLinearMeter;
                             FrameReinPrice -= (fr.Frame_Width / 1000m) * FrameReinPricePerLinearMeter;
@@ -4342,6 +4409,23 @@ namespace ModelLayer.Model.Quotation
                                                 CornerDrivePrice += CornerDrivePricePerPiece * 2;
                                             }
 
+                                            if (wdm.WD_profile == "PremiLine Profile" &&
+                                                                                        (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 ||
+                                                                                        fr.Frame_ArtNo == FrameProfile_ArticleNo._6050))
+                                            {
+                                                if (pnl.Panel_Overlap_Sash != OverlapSash._None)
+                                                {
+                                                    int bothOverlapQtyMultiplier = 1;
+                                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                                    {
+                                                        bothOverlapQtyMultiplier = 2;
+                                                    }
+
+                                                    InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                                    ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                                    SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
+                                                }
+                                            }
                                         }
                                         #endregion
                                         #region Awning
@@ -4462,12 +4546,18 @@ namespace ModelLayer.Model.Quotation
                                             GuideTrackPrice += ((GuideTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
                                             AlumTrackPrice += ((AluminumTrackPricePerLinearMeter * (fr.Frame_Width / 1000m)) * 2) * pnl.Panel_AluminumTrackQty;
 
-                                            if (pnl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                                pnl.Panel_Overlap_Sash == OverlapSash._Right)
+
+                                            if (pnl.Panel_Overlap_Sash != OverlapSash._None)
                                             {
-                                                InterlockPrice += 2 * InterlockPricePerPiece;
-                                                ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
-                                                SealingBlockPrice += 2 * SealingBlockPricePerPiece;
+                                                int bothOverlapQtyMultiplier = 1;
+                                                if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                                {
+                                                    bothOverlapQtyMultiplier = 2;
+                                                }
+
+                                                InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                                ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                                SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
                                             }
 
                                             if (fr.Frame_Type == FrameModel.Frame_Padding.Door &&
@@ -4580,6 +4670,24 @@ namespace ModelLayer.Model.Quotation
 
                                             MiddleCLoserPrice += MiddleCLoserPricePerPiece * pnl.Panel_MiddleCloserPairQty;
                                             SpacerFixSashPrice += 2 * SpacerFixSashPricePerPiece;
+
+                                            if (wdm.WD_profile == "PremiLine Profile" &&
+                                            (fr.Frame_ArtNo == FrameProfile_ArticleNo._6052 ||
+                                            fr.Frame_ArtNo == FrameProfile_ArticleNo._6050))
+                                            {
+                                                if (pnl.Panel_Overlap_Sash != OverlapSash._None)
+                                                {
+                                                    int bothOverlapQtyMultiplier = 1;
+                                                    if (pnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                                    {
+                                                        bothOverlapQtyMultiplier = 2;
+                                                    }
+
+                                                    InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                                    ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                                    SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
+                                                }
+                                            }
                                         }
                                         else
                                         {
@@ -5686,6 +5794,25 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
+                                        #region GlazingAdaptor
+                                        if (pnl.Panel_ChkGlazingAdaptor == true)
+                                        {
+                                            GlazingBeadPerimeter = (pnl.Panel_GlazingBeadHeight + pnl.Panel_GlazingBeadWidth) * 2;
+                                            GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                        }
+                                        #endregion
+
+                                        #region SecurityMesh
+                                        if (pnl.Panel_GlassThicknessDesc != null)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                                            {
+                                                SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
+                                            }
+                                        }
+                                        #endregion
+
                                         HandleDesc = pnl.Panel_HandleType.ToString();
 
                                         CostingPoints += ProfileColorPoints * 4;
@@ -6472,6 +6599,24 @@ namespace ModelLayer.Model.Quotation
                                         }
                                         #endregion
 
+                                        #region GlazingAdaptor
+                                        if (pnl.Panel_ChkGlazingAdaptor == true)
+                                        {
+                                            GlazingBeadPerimeter = (pnl.Panel_GlazingBeadHeight + pnl.Panel_GlazingBeadWidth) * 2;
+                                            GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                        }
+                                        #endregion
+
+                                        #region SecurityMesh
+                                        if (pnl.Panel_GlassThicknessDesc != null)
+                                        {
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                                            {
+                                                SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
+                                            }
+                                        }
+                                        #endregion
                                     }
                                     else if (pnl.Panel_Type.Contains("Louver"))
                                     {
@@ -6736,8 +6881,15 @@ namespace ModelLayer.Model.Quotation
                                             }
                                         }
 
+                                        #region RingpullLeverHandle
+                                        if (pnl.Panel_LouverRPLeverHandleCheck == true)
+                                        {
+                                            RingpullLeverHandlePrice = RingpullLeverHandlePricePerPiece;
+                                        }
+                                        #endregion
+
                                         #region Glass 
-                                        if (pnl.Panel_GlassThickness >= 6.0f)
+                                        if (pnl.Panel_GlassThickness == 6.0f)
                                         {
                                             if (pnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
                                             {
@@ -6752,6 +6904,7 @@ namespace ModelLayer.Model.Quotation
                                                     {
                                                         GlassBladePrice += (pnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
                                                     }
+                                                    pnl.Panel_GlassPricePerSqrMeter = 152m;
                                                 }
                                                 else
                                                 {
@@ -6773,18 +6926,26 @@ namespace ModelLayer.Model.Quotation
                                                     if (pnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                                     {
                                                         GlassBladePrice += ((191.21m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        pnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
+
                                                     }
                                                     else if (pnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
                                                     {
                                                         GlassBladePrice += ((286.81m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        pnl.Panel_GlassPricePerSqrMeter = ((286.81m * forex) / 40);
+
                                                     }
                                                     else if (pnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
                                                     {
                                                         GlassBladePrice += ((262.91m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        pnl.Panel_GlassPricePerSqrMeter = ((262.91m * forex) / 40);
+
                                                     }
                                                     else if (pnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                                     {
                                                         GlassBladePrice += ((215.11m * forex) / 40) * Math.Round(BladeGlassMultiplier);
+                                                        pnl.Panel_GlassPricePerSqrMeter = ((215.11m * forex) / 40);
+
                                                     }
                                                 }
                                             }
@@ -6821,6 +6982,7 @@ namespace ModelLayer.Model.Quotation
                                                 }
 
                                                 GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
+                                                pnl.Panel_GlassPricePerSqrMeter = alumBladesPrice;
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness >= 6.0f &&
@@ -6829,10 +6991,13 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_PricePerSqrMeter;
                                             }
                                             else
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_6mmClr_PricePerSqrMeter;
+
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness == 10.0f ||
@@ -6841,10 +7006,14 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_PricePerSqrMeter;
+
                                             }
                                             else
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_10mmClr_PricePerSqrMeter;
+
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness >= 12.0f)
@@ -6852,15 +7021,21 @@ namespace ModelLayer.Model.Quotation
                                             if (pnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
+
                                             }
                                             else
                                             {
                                                 GlassPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
+
                                             }
                                         }
                                         else if (pnl.Panel_GlassThickness == 0.0f)
                                         {
                                             GlassPrice += 0;
+                                            pnl.Panel_GlassPricePerSqrMeter = GlassPrice;
+
                                         }
 
                                         //sealant for glass
@@ -7356,12 +7531,17 @@ namespace ModelLayer.Model.Quotation
                                     GuideTrackPrice += ((GuideTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
                                     AlumTrackPrice += ((AluminumTrackPricePerLinearMeter / 1000m) * 2) * Singlepnl.Panel_AluminumTrackQty;
 
-                                    if (Singlepnl.Panel_Overlap_Sash == OverlapSash._Left ||
-                                        Singlepnl.Panel_Overlap_Sash == OverlapSash._Right)
+                                    if (Singlepnl.Panel_Overlap_Sash != OverlapSash._None)
                                     {
-                                        InterlockPrice += 2 * InterlockPricePerPiece;
-                                        ExtensionForInterlockPrice += 2 * ExtensionForInterlockPricePerPiece;
-                                        SealingBlockPrice += 2 * SealingBlockPricePerPiece;
+                                        int bothOverlapQtyMultiplier = 1;
+                                        if (Singlepnl.Panel_Overlap_Sash == OverlapSash._Both)
+                                        {
+                                            bothOverlapQtyMultiplier = 2;
+                                        }
+
+                                        InterlockPrice += (2 * bothOverlapQtyMultiplier) * InterlockPricePerPiece;
+                                        ExtensionForInterlockPrice += (2 * bothOverlapQtyMultiplier) * ExtensionForInterlockPricePerPiece;
+                                        SealingBlockPrice += (2 * bothOverlapQtyMultiplier) * SealingBlockPricePerPiece;
                                     }
 
                                     if (fr.Frame_Type == FrameModel.Frame_Padding.Door &&
@@ -7872,7 +8052,6 @@ namespace ModelLayer.Model.Quotation
                                 if ((Singlepnl.Panel_GlassType_Insu_Lami == "NA") || Singlepnl.Panel_GlassType_Insu_Lami == "")
                                 {
                                     #region Single 
-
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
@@ -8558,6 +8737,25 @@ namespace ModelLayer.Model.Quotation
                                 }
                                 #endregion
 
+                                #region GlazingAdaptor
+                                if (Singlepnl.Panel_ChkGlazingAdaptor == true)
+                                {
+                                    GlazingBeadPerimeter = (Singlepnl.Panel_GlazingBeadHeight + Singlepnl.Panel_GlazingBeadWidth) * 2;
+                                    GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                }
+                                #endregion
+
+                                #region SecurityMesh
+                                if (Singlepnl.Panel_GlassThicknessDesc != null)
+                                {
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                                    {
+                                        SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
+                                    }
+                                }
+                                #endregion
+
                                 HandleDesc = Singlepnl.Panel_HandleType.ToString();
 
                                 CostingPoints += ProfileColorPoints * 4;
@@ -8582,7 +8780,6 @@ namespace ModelLayer.Model.Quotation
                                 if ((Singlepnl.Panel_GlassType_Insu_Lami == "NA") || Singlepnl.Panel_GlassType_Insu_Lami == "")
                                 {
                                     #region Single 
-
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("5 mm Clear"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
@@ -9334,6 +9531,25 @@ namespace ModelLayer.Model.Quotation
                                     FilmPrice += ((Singlepnl.Panel_GlassWidth / 1000m) * (Singlepnl.Panel_GlassHeight / 1000m)) * FrostedFilmPrice_PricePerSqrMeter;
                                 }
                                 #endregion
+
+                                #region GlazingAdaptor
+                                if (Singlepnl.Panel_ChkGlazingAdaptor == true)
+                                {
+                                    GlazingBeadPerimeter = (Singlepnl.Panel_GlazingBeadHeight + Singlepnl.Panel_GlazingBeadWidth) * 2;
+                                    GlazingAdaptorPrice += (GlazingBeadPerimeter / 1000) * GlazingAdaptorPricePerMeter;
+                                }
+                                #endregion
+
+                                #region SecurityMesh
+                                if (Singlepnl.Panel_GlassThicknessDesc != null)
+                                {
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Security Mesh"))
+                                    {
+                                        SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
+                                    }
+                                }
+                                #endregion
                             }
                             else if (Singlepnl.Panel_Type.Contains("Louver"))
                             {
@@ -9644,11 +9860,19 @@ namespace ModelLayer.Model.Quotation
                                             SecurityKitPrice += SecurityKitCost + (Singlepnl.Panel_DisplayHeight / 1000m) * 685 * 2; // =(285+400)
                                         }
                                         #endregion
+
                                     }
                                 }
 
+                                #region RingpullLeverHandle
+                                if (Singlepnl.Panel_LouverRPLeverHandleCheck == true)
+                                {
+                                    RingpullLeverHandlePrice = RingpullLeverHandlePricePerPiece;
+                                }
+                                #endregion
+
                                 #region Glass 
-                                if (Singlepnl.Panel_GlassThickness >= 6.0f)
+                                if (Singlepnl.Panel_GlassThickness == 6.0f)
                                 {
                                     if (Singlepnl.Panel_LouverBladeTypeOption == BladeType_Option._glass)
                                     {
@@ -9658,11 +9882,13 @@ namespace ModelLayer.Model.Quotation
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
                                                 GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                               
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tinted"))
                                             {
-                                                GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
+                                                GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);                                      
                                             }
+                                            Singlepnl.Panel_GlassPricePerSqrMeter = 152m;
                                         }
                                         else
                                         {
@@ -9684,18 +9910,24 @@ namespace ModelLayer.Model.Quotation
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
                                                 GlassBladePrice += ((191.21m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((191.21m * forex) / 40);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc == "6mm Acid Etched Euro Grey")
                                             {
                                                 GlassBladePrice += ((286.81m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((286.81m * forex) / 40);
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Acid Etched"))
                                             {
                                                 GlassBladePrice += ((262.91m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((262.91m * forex) / 40);
+
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Euro Grey"))
                                             {
                                                 GlassBladePrice += ((215.11m * forex) / 40) * Math.Ceiling(BladeGlassMultiplier);
+                                                Singlepnl.Panel_GlassPricePerSqrMeter = ((215.11m * forex) / 40);
+
                                             }
                                         }
                                     }
@@ -9732,6 +9964,7 @@ namespace ModelLayer.Model.Quotation
                                             alumBladesPrice = 926.47m * 5.8m;
                                         }
                                         GlassBladePrice = alumBladesPrice * Math.Ceiling(BladeAluMultiplier);
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = alumBladesPrice;
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness >= 6.0f &&
@@ -9740,10 +9973,12 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmTemp_PricePerSqrMeter;
                                     }
                                     else
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_6mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_6mmClr_PricePerSqrMeter;
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness == 10.0f ||
@@ -9752,10 +9987,14 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmTemp_PricePerSqrMeter;
+
                                     }
                                     else
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_10mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_10mmClr_PricePerSqrMeter;
+
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness >= 12.0f)
@@ -9763,15 +10002,21 @@ namespace ModelLayer.Model.Quotation
                                     if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tempered"))
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmTemp_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmTemp_PricePerSqrMeter;
+
                                     }
                                     else
                                     {
                                         GlassPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * Glass_12mmClr_PricePerSqrMeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = Glass_12mmClr_PricePerSqrMeter;
+
                                     }
                                 }
                                 else if (Singlepnl.Panel_GlassThickness == 0.0f)
                                 {
                                     GlassPrice += 0;
+                                    Singlepnl.Panel_GlassPricePerSqrMeter = GlassPrice;
+
                                 }
 
                                 //sealant for glass
@@ -9808,6 +10053,16 @@ namespace ModelLayer.Model.Quotation
 
                         #endregion
 
+                    }
+
+                    //CostingFactor
+                    if (ProvinceIntownOrOutoftown == true)
+                    {
+                        provinceBaseMultiplier = 2.90m;
+                    }
+                    else if (ProvinceIntownOrOutoftown == false)
+                    {
+                        provinceBaseMultiplier = 3.00m;
                     }
 
                     wdm.WD_CostingPoints = CostingPoints;
@@ -9848,7 +10103,7 @@ namespace ModelLayer.Model.Quotation
 
                     AncillaryProfileCost = Math.Round(ThresholdPrice, 2) +
                                            Math.Round(GbPrice, 2) +
-                                           Math.Round((GeorgianBarCost * 3), 2) + // 3 = costing factor for Georgian bar
+                                           Math.Round((GeorgianBarCost * provinceBaseMultiplier), 2) + // 3 = costing factor for Georgian bar
                                            Math.Round(CoverProfileCost, 2) +
                                            Math.Round(GlazingGasketPrice, 2) +
                                            Math.Round(WeatherBarPrice, 2) +
@@ -9858,7 +10113,8 @@ namespace ModelLayer.Model.Quotation
                                            Math.Round(AlumTrackPrice, 2) +
                                            Math.Round(InterlockPrice, 2) +
                                            Math.Round(ExtensionForInterlockPrice, 2) +
-                                           Math.Round(AluminumPullHandlePrice, 2);
+                                           Math.Round(AluminumPullHandlePrice, 2) +
+                                           Math.Round((GlazingAdaptorPrice * provinceBaseMultiplier), 2);// 3 = costing factor for Glazing Adaptor
 
                     AccesorriesCost = Math.Round(EndCapPrice, 2) +
                                       Math.Round(MechJointPrice, 2) +
@@ -9876,6 +10132,8 @@ namespace ModelLayer.Model.Quotation
                                    Math.Round(claddingPrice, 2) +
                                    Math.Round(DMPrice, 2) +
                                    Math.Round(DMReinforcementPrice, 2) +
+                                   Math.Round(ExtensionProfile15mmPrice, 2) +
+                                   Math.Round(TubularPrice, 2) +
                                    Math.Round(SealantPrice, 2) +
                                    Math.Round(PUFoamingPrice, 2) +
                                    Math.Round(FittingAndSuppliesCost, 2) +
@@ -9893,7 +10151,8 @@ namespace ModelLayer.Model.Quotation
                                  Math.Round(GlassBladePrice, 2) +
                                  Math.Round(GalleryPrice, 2) +
                                  Math.Round(PowerKitIncludingWiresPrice, 2) +
-                                 Math.Round(SecurityKitPrice, 2);
+                                 Math.Round(SecurityKitPrice, 2) +
+                                 Math.Round(RingpullLeverHandlePrice, 2);
 
                     LouverPrice = LouverCost;
                     LouverCost = LouverCost * PricingFactor * 1.12m; //1.12vat
@@ -9908,7 +10167,8 @@ namespace ModelLayer.Model.Quotation
                                 Math.Round(InstallationCost, 2) +
                                 Math.Round(MaterialCost, 2) +
                                 Math.Round(GlassPrice, 2) +
-                                Math.Round(FilmPrice, 2);
+                                Math.Round(FilmPrice, 2) +
+                                Math.Round(SecurityMeshPrice, 2);
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
@@ -9999,6 +10259,13 @@ namespace ModelLayer.Model.Quotation
                                             Math.Round((FilmPrice * PricingFactor) + FilmPrice, 2).ToString("N", new CultureInfo("en-US")),
                                             "Price Break Down");
 
+                        Price_List.Rows.Add("Security Mesh",
+                                           "",
+                                           Math.Round(SecurityMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(SecurityMeshPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
+                                           Math.Round((SecurityMeshPrice * PricingFactor) + SecurityMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "Price Break Down");
+
                         Price_List.Rows.Add("",
                                             "",
                                             "",
@@ -10079,6 +10346,20 @@ namespace ModelLayer.Model.Quotation
                         Price_List.Rows.Add("Dummy Mullion Reinforcement Price",
                                            FrameReinPricePerLinearMeter_7502.ToString("N", new CultureInfo("en-US")),
                                            Math.Round(DMReinforcementPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                           "",
+                                           "",
+                                           "Material Cost");
+
+                        Price_List.Rows.Add("15mm Extension Profile Price",
+                                       ExtensionProfile15mmPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(ExtensionProfile15mmPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Material Cost");
+
+                        Price_List.Rows.Add("Tubular Price",
+                                           TubularPricePerLinearMeter.ToString("N", new CultureInfo("en-US")),
+                                           Math.Round(TubularPrice, 2).ToString("N", new CultureInfo("en-US")),
                                            "",
                                            "",
                                            "Material Cost");
@@ -10272,6 +10553,13 @@ namespace ModelLayer.Model.Quotation
                                    "",
                                    "",
                                    "Ancillary Profile");
+
+                        Price_List.Rows.Add("Glazing Adaptor Price",
+                              GlazingAdaptorPricePerMeter.ToString("N", new CultureInfo("en-US")),
+                              Math.Round(GlazingAdaptorPrice, 2).ToString("N", new CultureInfo("en-US")),
+                              "",
+                              "",
+                              "Ancillary Profile");
 
                         Price_List.Rows.Add("Total",
                                           "",
@@ -10573,6 +10861,13 @@ namespace ModelLayer.Model.Quotation
                                         "",
                                         "Louver Material Cost");
 
+                        Price_List.Rows.Add("Ringpull Lever Handle Price",
+                                     Math.Round(RingpullLeverHandlePricePerPiece, 2).ToString("N", new CultureInfo("en-US")),
+                                     Math.Round(RingpullLeverHandlePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                     "",
+                                     "",
+                                     "Louver Material Cost");
+
                         Price_List.Rows.Add("Total Price",
                                        "",
                                        Math.Round(LouverPrice, 2).ToString("N", new CultureInfo("en-US")),
@@ -10654,8 +10949,11 @@ namespace ModelLayer.Model.Quotation
             claddingPrice = 0;
             DMPrice = 0;
             DMReinforcementPrice = 0;
+            ExtensionProfile15mmPrice = 0;
+            TubularPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
+            SecurityMeshPrice = 0;
             FilmPrice = 0;
             SealantPrice = 0;
             PUFoamingPrice = 0;
@@ -10706,7 +11004,7 @@ namespace ModelLayer.Model.Quotation
             InterlockPrice = 0;
             ExtensionForInterlockPrice = 0;
             AluminumPullHandlePrice = 0;
-
+            GlazingAdaptorPrice = 0;
 
             AccesorriesCost = 0;
             EndCapPrice = 0;
@@ -10727,7 +11025,7 @@ namespace ModelLayer.Model.Quotation
             GlassBladePrice = 0;
             GalleryPrice = 0;
             LouverPrice = 0;
-
+            RingpullLeverHandlePrice = 0;
         }
     }
 }
