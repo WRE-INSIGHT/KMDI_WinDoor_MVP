@@ -65,6 +65,23 @@ namespace PresentationLayer.Presenter
             _printQuoteView.chkboxVATCheckedChangedEventRaised += _printQuoteView_chkboxVATCheckedChangedEventRaised;
             _printQuoteView.PrintQuoteViewFormClosingEventRaised += _printQuoteView_PrintQuoteViewFormClosingEventRaised;
             _printQuoteView.chkboxLessDCheckedChangedEventRaised += _printQuoteView_chkboxLessDCheckedChangedEventRaised;
+            _printQuoteView.chkboxsubtotalCheckedChangedEventRaised += _printQuoteView_chkboxsubtotalCheckedChangedEventRaised;
+        }
+
+        private void _printQuoteView_chkboxsubtotalCheckedChangedEventRaised(object sender, EventArgs e)
+        {
+            if(_mainPresenter.printStatus == "ScreenItem")
+            {
+                if (_printQuoteView.GetSubTotalCheckBox().Checked)
+                {
+                    _printQuoteView.GetRowLimitTxtBox().Visible = true;
+                    _printQuoteView.GetRowLimitTxtBox().Location = new System.Drawing.Point(330,117);
+                }
+                else
+                {
+                    _printQuoteView.GetRowLimitTxtBox().Visible = false;
+                }
+            }
         }
 
         private void _printQuoteView_chkboxLessDCheckedChangedEventRaised(object sender, EventArgs e)
@@ -391,6 +408,7 @@ namespace PresentationLayer.Presenter
                 _printQuoteView.LessDiscount = "30";
             }
             _printQuoteView.GetDTPDate().Value = DateTime.Now;
+            _printQuoteView.RowLimit = "22";
         }
         private void _printQuoteView_PrintQuoteViewLoadEventRaised(object sender, System.EventArgs e)
         {
@@ -656,10 +674,12 @@ namespace PresentationLayer.Presenter
                     _printQuoteView.GetLabor_N_MobiChkbox().Visible = true;
                     _printQuoteView.GetFreightChargesChkbox().Visible = true;
                     _printQuoteView.GetVatChkbox().Visible = true;
+                    _printQuoteView.GetSubTotalCheckBox().Visible = true;
                     _printQuoteView.GetAdditionalInfoLabel().Location = new System.Drawing.Point(265, 3);
                     _printQuoteView.GetLabor_N_MobiChkbox().Location = new System.Drawing.Point(205, 26);
                     _printQuoteView.GetFreightChargesChkbox().Location = new System.Drawing.Point(205, 59);
                     _printQuoteView.GetVatChkbox().Location = new System.Drawing.Point(205, 88);
+                    _printQuoteView.GetSubTotalCheckBox().Location = new System.Drawing.Point(205, 117);
                     #endregion
 
                     #region save files without pos in AEIC
@@ -669,7 +689,7 @@ namespace PresentationLayer.Presenter
                     }
                     #endregion
 
-                    ReportParameter[] RParam = new ReportParameter[16];
+                    ReportParameter[] RParam = new ReportParameter[18];
                     RParam[0] = new ReportParameter("deyt", _printQuoteView.GetDTPDate().Value.ToString("MM/dd/yyyy"));
                     RParam[1] = new ReportParameter("Address", _printQuoteView.QuotationAddress);
                     RParam[2] = new ReportParameter("Salutation", _printQuoteView.QuotationSalutation);
@@ -681,6 +701,7 @@ namespace PresentationLayer.Presenter
                     RParam[13] = new ReportParameter("VatPercentage", _printQuoteView.VatPercentage);
                     RParam[14] = new ReportParameter("LaborandMobilization", _printQuoteView.LaborandMobilization);
                     RParam[15] = new ReportParameter("FreightCharge", _printQuoteView.FreightCharge);
+                    RParam[17] = new ReportParameter("RowLimit", _printQuoteView.RowLimit);
 
                     if (_printQuoteView.ShowLastPage().Checked)
                     {
@@ -724,7 +745,23 @@ namespace PresentationLayer.Presenter
                     {
                         RParam[12] = new ReportParameter("ShowVat", "False");
                     }
-                    
+                    if (_printQuoteView.GetSubTotalCheckBox().Checked)
+                    {
+                        RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                    }
+                    else
+                    {
+                        RParam[16] = new ReportParameter("ShowSubTotal", "False");
+                    }
+
+                    if(_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerShowSubTotal == true)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                    }
+
 
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 

@@ -43,11 +43,14 @@ namespace PresentationLayer.Presenter
         private List<int> _lstItemArea = new List<int>();
         private string _rdlcReportCompilerOutofTownExpenses;
         private string _rdlcReportCompilerVatContractSummary;
+        private string _rdlcReportCompilerRowLimit;
         private string[] province;
         private string archi;
         private bool _callFrmRDLCCompiler;
         private bool _renderPDFAtBackground;
         private bool _showVatContractSummary;
+        private bool _rdlcReportCompilerShowSubTotal;
+
 
         int count = 0,
             newlinecount = 0;
@@ -99,6 +102,28 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerOutofTownExpenses = value;
             }
         }
+        public string RDLCReportCompilerRowLimit
+        {
+            get
+            {
+                return _rdlcReportCompilerRowLimit;
+            }
+            set
+            {
+                _rdlcReportCompilerRowLimit = value;
+            }
+        }
+        public bool RDLCReportCompilerShowSubTotal
+        {
+            get
+            {
+                return _rdlcReportCompilerShowSubTotal;
+            }
+            set
+            {
+                _rdlcReportCompilerShowSubTotal = value;
+            }
+        }
         public bool RenderPDFAtBackGround
         {
             get
@@ -110,7 +135,7 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-   
+        
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -154,7 +179,7 @@ namespace PresentationLayer.Presenter
             ScreenTotalListCount = 0,
             divisor = 2;
 
-        String prev_GlassSize,
+        string prev_GlassSize,
                prev_GlassRef,
                prev_GlassLoc, prev_GlassDesc,
                curr_GlassSize,
@@ -192,6 +217,7 @@ namespace PresentationLayer.Presenter
         decimal windoorpricecheck;//check price in rdlc report 
         decimal olddiscount, updateddiscount;
         int countfortick;
+
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -255,17 +281,25 @@ namespace PresentationLayer.Presenter
 
                     if (item.Screen_Set > 1)
                     {
-                        setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        if (item.Screen_Description.Contains("(Sets of"))
+                        {
+                            setDesc = " ";
+                        }
+                        else
+                        {
+                            setDesc = " (Sets of " + item.Screen_Set.ToString() + ")";
+                        }
                     }
                     else
                     {
                         setDesc = " ";
                     }
 
+
                     if(item.Screen_Types == ScreenType._NoInsectScreen || item.Screen_Types == ScreenType._UnnecessaryForInsectScreen)
                     {
                         Screen_DimensionFormat = " - ";
-                        Screen_UnitPrice = " - ";
+                        Screen_UnitPrice = "0";
                         Screen_Qty = null;
                         Screen_Discount = " - ";
                         Screen_NetPrice = " - "; 
@@ -305,6 +339,7 @@ namespace PresentationLayer.Presenter
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
             printQuote.EventLoad();
+            printQuote.GetPrintQuoteView().RowLimit = _rdlcReportCompilerRowLimit;
             printQuote.PrintRDLCReport();
 
         }
@@ -589,7 +624,7 @@ namespace PresentationLayer.Presenter
 
             try
             {
-                ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
+                //ScreenTotalListPrice = _mainPresenter.Screen_List.Sum(x => x.Screen_TotalAmount);
                 ScreenTotalListCount = _mainPresenter.Screen_List.Sum(x => x.Screen_Quantity);
 
                 foreach (var item in _mainPresenter.Screen_List)
@@ -607,6 +642,7 @@ namespace PresentationLayer.Presenter
                     {
                         screentotaldiscount = screentotaldiscount + item.Screen_Discount;
                     }
+                    ScreenTotalListPrice += Math.Round(item.Screen_TotalAmount,2);
                 }
 
                 ScreenDiscountAverage = (screentotaldiscount / ScreenTotalListCount) / 100;

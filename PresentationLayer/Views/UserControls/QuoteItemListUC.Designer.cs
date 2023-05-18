@@ -80,7 +80,7 @@
             this.rtboxDesc.Name = "rtboxDesc";
             this.rtboxDesc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.rtboxDesc.Size = new System.Drawing.Size(201, 138);
-            this.rtboxDesc.TabIndex = 4;
+            this.rtboxDesc.TabIndex = 5;
             this.rtboxDesc.Text = "";
             this.rtboxDesc.TextChanged += new System.EventHandler(this.rtboxDesc_TextChanged);
             // 
@@ -91,7 +91,7 @@
             this.tboxWindoorNumber.Location = new System.Drawing.Point(0, 0);
             this.tboxWindoorNumber.Name = "tboxWindoorNumber";
             this.tboxWindoorNumber.Size = new System.Drawing.Size(201, 25);
-            this.tboxWindoorNumber.TabIndex = 3;
+            this.tboxWindoorNumber.TabIndex = 4;
             this.tboxWindoorNumber.TextChanged += new System.EventHandler(this.tboxWindoorNumber_TextChanged);
             // 
             // lblQuantity
@@ -154,7 +154,7 @@
             this.panel2.Location = new System.Drawing.Point(1, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 165);
-            this.panel2.TabIndex = 23;
+            this.panel2.TabIndex = 1;
             // 
             // pboxItemImage
             // 
@@ -184,7 +184,7 @@
             this.chk_showitemImage.Location = new System.Drawing.Point(55, 6);
             this.chk_showitemImage.Name = "chk_showitemImage";
             this.chk_showitemImage.Size = new System.Drawing.Size(15, 14);
-            this.chk_showitemImage.TabIndex = 1;
+            this.chk_showitemImage.TabIndex = 2;
             this.chk_showitemImage.UseVisualStyleBackColor = true;
             // 
             // tboxItemName
@@ -196,7 +196,7 @@
             this.tboxItemName.Location = new System.Drawing.Point(71, 0);
             this.tboxItemName.Name = "tboxItemName";
             this.tboxItemName.Size = new System.Drawing.Size(128, 25);
-            this.tboxItemName.TabIndex = 2;
+            this.tboxItemName.TabIndex = 3;
             this.tboxItemName.TextChanged += new System.EventHandler(this.tboxItemName_TextChanged);
             // 
             // txt_ItemNumber
