@@ -13037,7 +13037,6 @@ namespace PresentationLayer.Presenter
             SetChangesMark();
         }
 
-
         public void updatePriceFromMainViewToItemList()
         {
             if (_quotationModel != null)
