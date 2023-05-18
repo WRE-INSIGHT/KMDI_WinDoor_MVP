@@ -36,7 +36,21 @@ namespace PresentationLayer.Views
                 txt_SummaryVat.Text = value;
             }
         }
-
+        public string TxtBxRowlimit
+        {
+            get
+            {
+                return txtbox_rowlimit.Text;
+            }
+            set
+            {
+                txtbox_rowlimit.Text = value;
+            }
+        }
+        public CheckBox GetSubTotalCheckBox()
+        {
+            return chkbox_subtotal;
+        }
         public TextBox GetContracSummaryVatTextBox()
         {
             return txt_SummaryVat;
@@ -44,13 +58,11 @@ namespace PresentationLayer.Views
         public CheckBox GetShowVatCheckBox()
         {
             return chkbox_showVat;
-        }
-        
+        }    
         public TextBox GetOOTTextBox()
         {
             return txt_oftexpenses;
         }
-
         public CheckedListBox GetChecklistBoxIndex()
         {
             return chk_showimagelist;
@@ -76,6 +88,7 @@ namespace PresentationLayer.Views
             return this;
         }
 
+        public event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         public event EventHandler BtnCompileReportClickEventRaised;
         public event EventHandler RDLCReportCompilerViewLoadEventRaised;
         public event EventHandler chkselectallCheckedChangedEventRaised;
@@ -104,6 +117,11 @@ namespace PresentationLayer.Views
         private void chkbox_showVat_CheckedChanged(object sender, EventArgs e)
         {
             EventHelpers.RaiseEvent(sender, chkboxshowVatCheckedChangedEventRaised, e);
+        }
+
+        private void chkbox_subtotal_CheckedChanged(object sender, EventArgs e)
+        {
+            EventHelpers.RaiseEvent(sender,chkboxsubtotalCheckedChangedEventRaised, e);
         }
     }
 }

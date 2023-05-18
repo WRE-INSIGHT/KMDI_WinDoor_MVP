@@ -7912,9 +7912,16 @@ namespace PresentationLayer.Presenter
                             {
                                 #region Salutation 
 
-                                if (value.ToLower().Contains("dear"))
+                                if (value != "")
                                 {
-                                    value = "\n" + "\n" + value;
+                                    if (!value.ToLower().Contains("dear"))
+                                    {
+                                        value = value + "\n" + "\n";
+                                    }
+                                    else
+                                    {
+                                        value = value + "";
+                                    }
                                 }
 
                                 #endregion
