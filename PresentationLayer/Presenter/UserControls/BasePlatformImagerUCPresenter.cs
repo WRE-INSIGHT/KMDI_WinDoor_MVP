@@ -524,6 +524,26 @@ namespace PresentationLayer.Presenter.UserControls
             {
                 BotPad = 70 * 10;
             }
+            else if (_windoorModel.GetZoom_forRendering() == 0.08f)
+            {
+                BotPad = 70 * 12;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.06f)
+            {
+                BotPad = 70 * 16;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.05f)
+            {
+                BotPad = 70 * 20;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.02f)
+            {
+                BotPad = 70 * 20;
+            }
+            else if (_windoorModel.GetZoom_forRendering() == 0.01f)
+            {
+                BotPad = 70 * 22;
+            }
             return BotPad;
         }
 

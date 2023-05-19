@@ -224,7 +224,7 @@
               <Width>0.94449in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.4218in</Width>
+              <Width>2.46347in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.04898in</Width>
@@ -973,9 +973,9 @@
                           <Value>=Fields!dtImage.Value</Value>
                           <MIMEType>image/png</MIMEType>
                           <Sizing>FitProportional</Sizing>
-                          <Left>0.00555in</Left>
+                          <Left>0.01944in</Left>
                           <Height>1.24172in</Height>
-                          <Width>2.41625in</Width>
+                          <Width>2.44403in</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1024,7 +1024,7 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>dtDescription</rd:DefaultName>
-                          <Left>0.04167in</Left>
+                          <Left>0.05556in</Left>
                           <Height>1.24172in</Height>
                           <Width>1.91879in</Width>
                           <Style>
@@ -1229,7 +1229,7 @@
         <Top>0.96454in</Top>
         <Left>0.23097in</Left>
         <Height>1.30944in</Height>
-        <Width>7.66878in</Width>
+        <Width>7.71045in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
