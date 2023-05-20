@@ -762,6 +762,8 @@ namespace PresentationLayer.Presenter
 
         public void GetCurrentAmount()
         {
+            _screenModel.Screen_Height = Convert.ToInt32(_screenView.screen_height.Value);
+            _screenModel.Screen_Width = Convert.ToInt32(_screenView.screen_width.Value);
             _screenModel.FromCellEndEdit = false;
             _screenModel.ComputeScreenTotalPrice();
             _screenView.GetNudTotalPrice().Value = _screenModel.Screen_TotalAmount;

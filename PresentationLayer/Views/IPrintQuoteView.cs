@@ -14,6 +14,8 @@ namespace PresentationLayer.Views
         string LaborandMobilization { get; set; }
         string FreightCharge { get; set; }
         string LessDiscount { get; set; }
+        string RowLimit { get; set; }
+        TextBox GetRowLimitTxtBox();
         TextBox GetLessDiscountTxtBox();
         CheckBox GetLessDiscountchkbox();
         CheckBox ShowLastPage();
@@ -22,6 +24,8 @@ namespace PresentationLayer.Views
         TextBox GetOutofTownExpenses();
         CheckedListBox GetChkLstBox();
         CheckBox GetShowPageNum();
+        CheckBox GetSubTotalCheckBox();
+   
         void ShowPrintQuoteView();
 
 
@@ -33,6 +37,7 @@ namespace PresentationLayer.Views
         event EventHandler chkboxFCCheckedChangedEventRaised;
         event EventHandler chkboxVATCheckedChangedEventRaised;
         event EventHandler chkboxLessDCheckedChangedEventRaised;
+        event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         event FormClosingEventHandler PrintQuoteViewFormClosingEventRaised;
 
         ReportViewer GetReportViewer();

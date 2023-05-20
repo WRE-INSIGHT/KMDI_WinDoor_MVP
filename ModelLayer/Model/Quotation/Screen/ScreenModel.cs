@@ -1678,11 +1678,14 @@ namespace ModelLayer.Model.Quotation.Screen
         {
             if (Screen_PriceIncreaseVisibilityOption == true)
             {
-                IncreasePercentage = Screen_PriceIncreasePercentage / 100m;
-                TotalUnitPrice = ((Screen_UnitPrice * IncreasePercentage) + Screen_UnitPrice);
-                Console.WriteLine(" Percentage increase by " + IncreasePercentage);
-                Console.WriteLine(" TotalUnitPrice " + TotalUnitPrice);
-                Screen_UnitPrice = TotalUnitPrice;
+                if (FromCellEndEdit != true)
+                {
+                    IncreasePercentage = Screen_PriceIncreasePercentage / 100m;
+                    TotalUnitPrice = ((Screen_UnitPrice * IncreasePercentage) + Screen_UnitPrice);
+                    Console.WriteLine(" Percentage increase by " + IncreasePercentage);
+                    Console.WriteLine(" TotalUnitPrice " + TotalUnitPrice);
+                    Screen_UnitPrice = TotalUnitPrice;
+                }
             }
 
         }
@@ -1747,22 +1750,23 @@ namespace ModelLayer.Model.Quotation.Screen
             Console.WriteLine("Addons is using a Factor " + AddOnsSpecialFactor);
 
             #endregion
+
             #region ChangeScreenWidthPerPanel
-            if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR && _screenOriginalWidth != 0)
-            {
-                if(Screen_Width == _plisséSRPerPanelWidth)
-                {
-                    Screen_Width = _screenOriginalWidth;
-                }
-                else
-                {
-                    Screen_Width = Screen_Width;
-                }
-            }
-            else
-            {
-                Screen_Width = Screen_Width;
-            }
+            //if (Screen_Types == ScreenType._Plisse && Screen_PlisséType == PlisseType._SR && _screenOriginalWidth != 0)
+            //{
+            //    if (Screen_Width == _plisséSRPerPanelWidth)
+            //    {
+            //        Screen_Width = _screenOriginalWidth;
+            //    }
+            //    else
+            //    {
+            //        Screen_Width = Screen_Width;
+            //    }
+            //}
+            //else
+            //{
+            //    Screen_Width = Screen_Width;
+            //}
             #endregion
 
             if (Screen_Width != 0 &&
@@ -6339,8 +6343,8 @@ namespace ModelLayer.Model.Quotation.Screen
                         Screen_Description = Screen_Description + " - Center Closure ";
 
                         _plisséSRPerPanelWidth = Screen_Width / 2;
-                        _screenPreviousWidth = Screen_Width;
-                        _screenOriginalWidth = Screen_Width;
+                        //_screenPreviousWidth = Screen_Width;
+                        //_screenOriginalWidth = Screen_Width;
                         Screen_Width = _plisséSRPerPanelWidth;
                     }
                     else
