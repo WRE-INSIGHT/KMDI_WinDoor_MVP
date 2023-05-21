@@ -164,7 +164,7 @@ namespace ModelLayer.Model.Quotation
                                         divBotOrRight = null,
                                         divTopOrLeft_lvl3 = null,
                                         divBotOrRight_lvl3 = null;
-                        
+
                         IMultiPanelModel mpnl_Parent_lvl3 = null;
                         string mpanel_placement = "",
                                mpanelParentlvl2_placement = "",
@@ -2482,7 +2482,7 @@ namespace ModelLayer.Model.Quotation
         Glass_8mmClr_PricePerSqrMeter = 1662.00m,
         Glass_10mmClr_PricePerSqrMeter = 1662.00m,
         Glass_12mmClr_PricePerSqrMeter = 1941.00m,
-        Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,                                                                                                                          
+        Glass_12mmClrOversized_PricePerSqrMeter = 6000.00m,
         Glass_6mmTemp_PricePerSqrMeter = 1614.00m,
         Glass_8mmTemp_PricePerSqrMeter = 3201.00m,
         Glass_10mmTemp_PricePerSqrMeter = 3201.00m,
@@ -2924,11 +2924,27 @@ namespace ModelLayer.Model.Quotation
             TubularPrice,
 
         #endregion
-
+        #region Mesh
         SecurityMeshPricePerSquaremeter = 2904.00m,
+        WireMeshPricePerSquaremeter = 2904.00m,
+        PetMeshPricePerSquaremeter = 650.00m,
+        TuffMeshPricePerSquaremeter = 401.70m,
+        PhiferMeshPricePerSquaremeter = 132.72m,
 
 
         SecurityMeshPrice,
+        WireMeshPrice,
+        PetMeshPrice,
+        TuffMeshPrice,
+        PhiferMeshPrice,
+
+        AluminumFramePricePerSquaremeter = 844.49m,
+        AluminumFramePrice,
+
+        MeshPrice,
+        MeshCost,
+        #endregion
+
 
         BrushSealPricePerLinearMeter = 15.80m,
                 SealantPricePerCan_BrownBlack = 430m,
@@ -5810,6 +5826,31 @@ namespace ModelLayer.Model.Quotation
                                                 SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
                                                 pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                             }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                                            {
+                                                WireMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * WireMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = WireMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                                            {
+                                                PetMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PetMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = PetMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                                            {
+                                                TuffMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * TuffMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = TuffMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                                            {
+                                                PhiferMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PhiferMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = PhiferMeshPricePerSquaremeter;
+                                            }
+
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                            {
+                                                AluminumFramePrice += (((pnl.Panel_GlassHeight / 1000m) + (pnl.Panel_GlassWidth / 1000m)) * 2) * AluminumFramePricePerSquaremeter;
+                                            }
                                         }
                                         #endregion
 
@@ -6614,6 +6655,31 @@ namespace ModelLayer.Model.Quotation
                                             {
                                                 SecurityMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
                                                 pnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                                            {
+                                                WireMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * WireMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = WireMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                                            {
+                                                PetMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PetMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = PetMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                                            {
+                                                TuffMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * TuffMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = TuffMeshPricePerSquaremeter;
+                                            }
+                                            else if (pnl.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                                            {
+                                                PhiferMeshPrice += ((pnl.Panel_GlassHeight / 1000m) * (pnl.Panel_GlassWidth / 1000m)) * PhiferMeshPricePerSquaremeter;
+                                                pnl.Panel_GlassPricePerSqrMeter = PhiferMeshPricePerSquaremeter;
+                                            }
+
+                                            if (pnl.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                            {
+                                                AluminumFramePrice += (((pnl.Panel_GlassHeight / 1000m) + (pnl.Panel_GlassWidth / 1000m)) * 2) * AluminumFramePricePerSquaremeter;
                                             }
                                         }
                                         #endregion
@@ -8753,6 +8819,31 @@ namespace ModelLayer.Model.Quotation
                                         SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                                    {
+                                        WireMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * WireMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = WireMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                                    {
+                                        PetMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PetMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PetMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                                    {
+                                        TuffMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * TuffMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = TuffMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                                    {
+                                        PhiferMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PhiferMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PhiferMeshPricePerSquaremeter;
+                                    }
+
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                    {
+                                        AluminumFramePrice += (((Singlepnl.Panel_GlassHeight / 1000m) + (Singlepnl.Panel_GlassWidth / 1000m)) * 2) * AluminumFramePricePerSquaremeter;
+                                    }
                                 }
                                 #endregion
 
@@ -9548,6 +9639,31 @@ namespace ModelLayer.Model.Quotation
                                         SecurityMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * SecurityMeshPricePerSquaremeter;
                                         Singlepnl.Panel_GlassPricePerSqrMeter = SecurityMeshPricePerSquaremeter;
                                     }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                                    {
+                                        WireMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * WireMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = WireMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                                    {
+                                        PetMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PetMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PetMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                                    {
+                                        TuffMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * TuffMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = TuffMeshPricePerSquaremeter;
+                                    }
+                                    else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                                    {
+                                        PhiferMeshPrice += ((Singlepnl.Panel_GlassHeight / 1000m) * (Singlepnl.Panel_GlassWidth / 1000m)) * PhiferMeshPricePerSquaremeter;
+                                        Singlepnl.Panel_GlassPricePerSqrMeter = PhiferMeshPricePerSquaremeter;
+                                    }
+
+                                    if (Singlepnl.Panel_GlassThicknessDesc.Contains("Mesh"))
+                                    {
+                                        AluminumFramePrice += (((Singlepnl.Panel_GlassHeight / 1000m) + (Singlepnl.Panel_GlassWidth / 1000m)) * 2) * AluminumFramePricePerSquaremeter;
+                                    }
                                 }
                                 #endregion
                             }
@@ -9882,11 +9998,11 @@ namespace ModelLayer.Model.Quotation
                                             if (Singlepnl.Panel_GlassThicknessDesc.Contains("Clear"))
                                             {
                                                 GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTemp_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
-                                               
+
                                             }
                                             else if (Singlepnl.Panel_GlassThicknessDesc.Contains("Tinted"))
                                             {
-                                                GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);                                      
+                                                GlassBladePrice += (Singlepnl.Panel_Width * 152m / 1000000m) * Glass_6mmTempTinted_PricePerSqrMeter * Convert.ToInt32(lvrgBlades);
                                             }
                                             Singlepnl.Panel_GlassPricePerSqrMeter = 152m;
                                         }
@@ -10157,6 +10273,18 @@ namespace ModelLayer.Model.Quotation
                     LouverPrice = LouverCost;
                     LouverCost = LouverCost * PricingFactor * 1.12m; //1.12vat
 
+
+                    MeshCost = Math.Round(SecurityMeshPrice, 2) +
+                               Math.Round(WireMeshPrice, 2) +
+                               Math.Round(PetMeshPrice, 2) +
+                               Math.Round(TuffMeshPrice, 2) +
+                               Math.Round(PhiferMeshPrice, 2) +
+                               Math.Round(AluminumFramePrice, 2);
+
+                    MeshPrice = MeshCost;
+                    MeshCost = MeshCost * PricingFactor * 1.10m;
+
+
                     MaterialCost = MaterialCost +
                                    (MaterialCost * 0.05m) +
                                    (MaterialCost * 0.10m) +
@@ -10172,7 +10300,7 @@ namespace ModelLayer.Model.Quotation
 
                     TotaPrice = (TotaPrice * PricingFactor) + TotaPrice;
 
-                    TotaPrice = TotaPrice + LouverCost;
+                    TotaPrice = TotaPrice + LouverCost + MeshCost;
 
                     wdm.WD_currentPrice = TotaPrice;
                     lstTotalPrice.Add(TotaPrice);
@@ -10244,6 +10372,14 @@ namespace ModelLayer.Model.Quotation
                                         Math.Round((LouverPrice * PricingFactor * 1.12m), 2).ToString("N", new CultureInfo("en-US")),
                                         "Price Break Down");
 
+
+                        Price_List.Rows.Add("Mesh Cost",
+                                      "",
+                                      Math.Round(MeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      Math.Round((MeshPrice * PricingFactor * 1.10m) - MeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                      Math.Round((MeshPrice * PricingFactor * 1.10m), 2).ToString("N", new CultureInfo("en-US")),
+                                      "Price Break Down");
+
                         Price_List.Rows.Add("Glass",
                                             "",
                                             Math.Round(GlassPrice, 2).ToString("N", new CultureInfo("en-US")),
@@ -10259,12 +10395,8 @@ namespace ModelLayer.Model.Quotation
                                             Math.Round((FilmPrice * PricingFactor) + FilmPrice, 2).ToString("N", new CultureInfo("en-US")),
                                             "Price Break Down");
 
-                        Price_List.Rows.Add("Security Mesh",
-                                           "",
-                                           Math.Round(SecurityMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                           Math.Round(SecurityMeshPrice * PricingFactor, 2).ToString("N", new CultureInfo("en-US")),
-                                           Math.Round((SecurityMeshPrice * PricingFactor) + SecurityMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
-                                           "Price Break Down");
+
+
 
                         Price_List.Rows.Add("",
                                             "",
@@ -10877,6 +11009,60 @@ namespace ModelLayer.Model.Quotation
 
                         #endregion
 
+                        #region Mesh Cost
+
+                        Price_List.Rows.Add("Security Mesh Price",
+                                       SecurityMeshPricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                       Math.Round(SecurityMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                       "",
+                                       "",
+                                       "Mesh Cost");
+
+                        Price_List.Rows.Add("Wire Mesh Price",
+                                          WireMeshPricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(WireMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Mesh Cost");
+
+                        Price_List.Rows.Add("Pet Mesh Price",
+                                          PetMeshPricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(PetMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Mesh Cost");
+
+                        Price_List.Rows.Add("Tuff Mesh Price",
+                                          TuffMeshPricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(TuffMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Mesh Cost");
+
+                        Price_List.Rows.Add("Phifer Mesh Price",
+                                          PhiferMeshPricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(PhiferMeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Mesh Cost");
+
+                        Price_List.Rows.Add("Aluminum Frame Price",
+                                          AluminumFramePricePerSquaremeter.ToString("N", new CultureInfo("en-US")),
+                                          Math.Round(AluminumFramePrice, 2).ToString("N", new CultureInfo("en-US")),
+                                          "",
+                                          "",
+                                          "Mesh Cost");
+
+
+                        Price_List.Rows.Add("Total Price",
+                                            "",
+                                            Math.Round(MeshPrice, 2).ToString("N", new CultureInfo("en-US")),
+                                            "",
+                                            "",
+                                            "Mesh Cost");
+
+                        #endregion
+
                         var query = from r in Price_List.AsEnumerable()
                                     where r.Field<string>("Nett") != "0.00" &&
                                      r.Field<string>("Filter") == BOM_Filter.ToString()
@@ -10953,7 +11139,6 @@ namespace ModelLayer.Model.Quotation
             TubularPrice = 0;
             GbPrice = 0;
             GlassPrice = 0;
-            SecurityMeshPrice = 0;
             FilmPrice = 0;
             SealantPrice = 0;
             PUFoamingPrice = 0;
@@ -11026,6 +11211,15 @@ namespace ModelLayer.Model.Quotation
             GalleryPrice = 0;
             LouverPrice = 0;
             RingpullLeverHandlePrice = 0;
+
+            MeshCost = 0;
+            MeshPrice = 0;
+            SecurityMeshPrice = 0;
+            WireMeshPrice = 0;
+            PetMeshPrice = 0;
+            TuffMeshPrice = 0;
+            PhiferMeshPrice = 0; 
+            AluminumFramePrice = 0; 
         }
     }
 }
