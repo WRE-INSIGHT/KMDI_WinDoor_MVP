@@ -418,8 +418,11 @@ namespace PresentationLayer.Presenter
             }
 
 
-            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
-            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+            if (_mainPresenter.frameModel_MainPresenter != null)
+            {
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+            }
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
