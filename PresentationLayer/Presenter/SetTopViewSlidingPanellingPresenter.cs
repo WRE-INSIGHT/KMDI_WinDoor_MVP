@@ -185,7 +185,7 @@ namespace PresentationLayer.Presenter
                     {
                         g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
                     }
-                    //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+
                     InitialDistance = x2;
                 }
                 if (pnlCount != 0)
@@ -376,8 +376,11 @@ namespace PresentationLayer.Presenter
             //}
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
 
-            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
-            _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+            if (_mainPresenter.frameModel_MainPresenter != null)
+            {
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+            }
 
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
@@ -524,6 +527,8 @@ namespace PresentationLayer.Presenter
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
+
+
             return binding;
         }
 
