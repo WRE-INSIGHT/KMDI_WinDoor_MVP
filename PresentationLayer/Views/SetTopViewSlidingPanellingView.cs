@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static EnumerationTypeLayer.EnumerationTypes;
 
 namespace PresentationLayer.Views
 {
@@ -32,6 +33,7 @@ namespace PresentationLayer.Views
         public void ThisBinding(Dictionary<string, Binding> ModelBinding)
         {
             pbox_frame.DataBindings.Add(ModelBinding["pboxFrame"]);
+            cmb_topViewType.DataBindings.Add(ModelBinding["WD_TopViewType"]);
         }
 
         public PictureBox GetPbox()
@@ -46,6 +48,13 @@ namespace PresentationLayer.Views
 
         private void SetTopViewSlidingPanellingView_Load(object sender, EventArgs e)
         {
+            List<TopViewType> topview = new List<TopViewType>();
+            foreach (TopViewType item in TopViewType.GetAll())
+            {
+                topview.Add(item);
+            }
+            cmb_topViewType.DataSource = topview;
+
             EventHelpers.RaiseEvent(sender, SetTopViewSlidingPanellingViewLoadEventRaised, e);
         }
 
