@@ -1229,6 +1229,33 @@ namespace ModelLayer.Model.Quotation.Frame
             }
         }
 
+        private int _frameFoldAndSlideTopViewLeftCount;
+        public int Frame_FoldAndSlideTopViewLeftCount
+        {
+            get
+            {
+                return _frameFoldAndSlideTopViewLeftCount;
+            }
+            set
+            {
+                _frameFoldAndSlideTopViewLeftCount = value;
+            }
+        }
+
+        private int _frameFoldAndSlideTopViewRightCount;
+        public int Frame_FoldAndSlideTopViewRightCount
+        {
+            get
+            {
+                return _frameFoldAndSlideTopViewRightCount;
+            }
+            set
+            {
+                _frameFoldAndSlideTopViewRightCount = value;
+            }
+        }
+
+
         public void SetExplosionValues_Frame()
         {
             if (Lst_Panel.Count == 1 && Lst_MultiPanel.Count == 0) // 1panel

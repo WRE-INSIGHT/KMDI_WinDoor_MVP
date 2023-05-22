@@ -1240,7 +1240,7 @@ namespace PresentationLayer.Presenter
 
         private void OnSlidingTopViewToolStripMenuItemClickRaiseEvent(object sender, EventArgs e)
         {
-            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel, _itemInfoUCPresenter);
+            ISetTopViewSlidingPanellingPresenter TopView = _setTopViewSlidingPanellingPresenter.CreateNewInstance(_unityC, this, _windoorModel);
             TopView.GetSetTopViewSlidingPanellingView().GetSetTopSlidingPanellingView();
         }
 
