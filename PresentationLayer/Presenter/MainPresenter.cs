@@ -1258,7 +1258,6 @@ namespace PresentationLayer.Presenter
 
         private void OnSaveToolStripButtonClickEventRaised(object sender, EventArgs e)
         {
-
             wndr_content = new List<string>();
             SaveChanges();
         }
@@ -2390,7 +2389,7 @@ namespace PresentationLayer.Presenter
             f.MoveTo(Path.ChangeExtension(_wndrFilePath, ".txt"));
             string outFile = _wndrFilePath.Substring(0, startFileName) +
                              _wndrFilePath.Substring(startFileName, _wndrFilePath.LastIndexOf(".") - startFileName) + ".txt";
-
+            
             file_lines = File.ReadAllLines(outFile);
             f.MoveTo(Path.ChangeExtension(outFile, ".wndr"));
             onload = true;
