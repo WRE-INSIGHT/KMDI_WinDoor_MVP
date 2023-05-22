@@ -32,15 +32,13 @@
             this.lbl_item = new System.Windows.Forms.Label();
             this.pnl_itmbot_ = new System.Windows.Forms.Panel();
             this.lbl_desc = new System.Windows.Forms.RichTextBox();
-            this.lbl_dimension = new System.Windows.Forms.Label();
-            this.pbox_itemImage = new System.Windows.Forms.PictureBox();
-            this.pboxSlidingTopView = new System.Windows.Forms.PictureBox();
             this.cms_Default_Desc = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.defaultDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_dimension = new System.Windows.Forms.Label();
+            this.pbox_itemImage = new System.Windows.Forms.PictureBox();
             this.pnl_itmbot_.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxSlidingTopView)).BeginInit();
             this.cms_Default_Desc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_item
@@ -91,6 +89,20 @@
             this.lbl_desc.TabIndex = 1;
             this.lbl_desc.Text = "";
             // 
+            // cms_Default_Desc
+            // 
+            this.cms_Default_Desc.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultDescriptionToolStripMenuItem});
+            this.cms_Default_Desc.Name = "cms_Default_Desc";
+            this.cms_Default_Desc.Size = new System.Drawing.Size(176, 26);
+            // 
+            // defaultDescriptionToolStripMenuItem
+            // 
+            this.defaultDescriptionToolStripMenuItem.Name = "defaultDescriptionToolStripMenuItem";
+            this.defaultDescriptionToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.defaultDescriptionToolStripMenuItem.Text = "Default Description";
+            this.defaultDescriptionToolStripMenuItem.Click += new System.EventHandler(this.defaultDescriptionToolStripMenuItem_Click);
+            // 
             // lbl_dimension
             // 
             this.lbl_dimension.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -105,37 +117,13 @@
             // 
             // pbox_itemImage
             // 
-            this.pbox_itemImage.Location = new System.Drawing.Point(-1, 20);
+            this.pbox_itemImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbox_itemImage.Location = new System.Drawing.Point(0, 20);
             this.pbox_itemImage.Name = "pbox_itemImage";
-            this.pbox_itemImage.Size = new System.Drawing.Size(166, 178);
+            this.pbox_itemImage.Size = new System.Drawing.Size(166, 220);
             this.pbox_itemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbox_itemImage.TabIndex = 9;
             this.pbox_itemImage.TabStop = false;
-            // 
-            // pboxSlidingTopView
-            // 
-            this.pboxSlidingTopView.BackColor = System.Drawing.Color.White;
-            this.pboxSlidingTopView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pboxSlidingTopView.Location = new System.Drawing.Point(0, 200);
-            this.pboxSlidingTopView.Name = "pboxSlidingTopView";
-            this.pboxSlidingTopView.Size = new System.Drawing.Size(166, 40);
-            this.pboxSlidingTopView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pboxSlidingTopView.TabIndex = 10;
-            this.pboxSlidingTopView.TabStop = false;
-            // 
-            // cms_Default_Desc
-            // 
-            this.cms_Default_Desc.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultDescriptionToolStripMenuItem});
-            this.cms_Default_Desc.Name = "cms_Default_Desc";
-            this.cms_Default_Desc.Size = new System.Drawing.Size(176, 48);
-            // 
-            // defaultDescriptionToolStripMenuItem
-            // 
-            this.defaultDescriptionToolStripMenuItem.Name = "defaultDescriptionToolStripMenuItem";
-            this.defaultDescriptionToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.defaultDescriptionToolStripMenuItem.Text = "Default Description";
-            this.defaultDescriptionToolStripMenuItem.Click += new System.EventHandler(this.defaultDescriptionToolStripMenuItem_Click);
             // 
             // ItemInfoUC
             // 
@@ -144,16 +132,14 @@
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pbox_itemImage);
-            this.Controls.Add(this.pboxSlidingTopView);
             this.Controls.Add(this.lbl_item);
             this.Controls.Add(this.pnl_itmbot_);
             this.Name = "ItemInfoUC";
             this.Size = new System.Drawing.Size(166, 373);
             this.Load += new System.EventHandler(this.ItemInfoUC_Load);
             this.pnl_itmbot_.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxSlidingTopView)).EndInit();
             this.cms_Default_Desc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_itemImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,7 +149,6 @@
         private System.Windows.Forms.Panel pnl_itmbot_;
         public System.Windows.Forms.Label lbl_dimension;
         public System.Windows.Forms.PictureBox pbox_itemImage;
-        public System.Windows.Forms.PictureBox pboxSlidingTopView;
         public System.Windows.Forms.RichTextBox lbl_desc;
         private System.Windows.Forms.ContextMenuStrip cms_Default_Desc;
         private System.Windows.Forms.ToolStripMenuItem defaultDescriptionToolStripMenuItem;

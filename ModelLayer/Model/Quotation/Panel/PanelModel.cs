@@ -3207,8 +3207,7 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelMargin_using_ZoomPercentage()
         {
-            if ((Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
-                 Panel_Zoom == 0.13f || Panel_Zoom == 0.10f) &&
+            if ((Panel_Zoom >= 0.01f && Panel_Zoom <= 0.26f) &&
                 Panel_ParentMultiPanelModel != null)
             {
                 int right = 0,
@@ -3425,8 +3424,8 @@ namespace ModelLayer.Model.Quotation.Panel
 
         public void SetPanelMarginImager_using_ImageZoomPercentage()
         {
-            if ((PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
-                 PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.13f) &&
+            if ((/*PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
+                 PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.13f*/PanelImageRenderer_Zoom >= 0.01f && PanelImageRenderer_Zoom <= 0.26f) &&
                 Panel_ParentMultiPanelModel != null)
             {
                 int right = 0,
@@ -3471,8 +3470,7 @@ namespace ModelLayer.Model.Quotation.Panel
             else if (Panel_ParentMultiPanelModel.MPanel_ParentModel.MPanel_Parent.Name.Contains("Frame")) //drawing of 3rd level multipanel objs
             {
                 int mpnl_deduct = 0;
-                if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
-                    Panel_Zoom == 0.13f || Panel_Zoom == 0.10f)
+                if (Panel_Zoom >= 0.01f && Panel_Zoom <= 0.26f)
                 {
                     if (Panel_ParentFrameModel.Frame_Type == FrameModel.Frame_Padding.Window)
                     {
@@ -3616,8 +3614,7 @@ namespace ModelLayer.Model.Quotation.Panel
                 mpnlHt_deduct = 0,
                 divSize = 0;
 
-            if (Panel_Zoom == 0.26f || Panel_Zoom == 0.17f ||
-                Panel_Zoom == 0.13f || Panel_Zoom == 0.10f)
+            if (Panel_Zoom >= 0.01f && Panel_Zoom <= 0.26f)
             {
                 if (Panel_ParentMultiPanelModel != null)
                 {
@@ -4105,8 +4102,8 @@ namespace ModelLayer.Model.Quotation.Panel
             int panelTotalHt = 0, panelTotalWd = 0;
             int count = 0;
             int totalPanelCount = Panel_ParentMultiPanelModel.MPanel_Divisions + 1;
-            if (PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
-                PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.10f)
+            if (/*PanelImageRenderer_Zoom == 0.26f || PanelImageRenderer_Zoom == 0.17f ||
+                PanelImageRenderer_Zoom == 0.13f || PanelImageRenderer_Zoom == 0.10f*/PanelImageRenderer_Zoom >= 0.01f && PanelImageRenderer_Zoom <= 0.26f)
             {
                 if (Panel_ParentMultiPanelModel != null)
                 {
@@ -7465,7 +7462,7 @@ namespace ModelLayer.Model.Quotation.Panel
                                 }
                             }
                         }
-
+                         
                     }
 
                     if (allow_adjStriker)

@@ -1,7 +1,6 @@
 ﻿using ModelLayer.Model.Quotation.Frame;
 using ModelLayer.Model.Quotation.MultiPanel;
 using ModelLayer.Model.Quotation.WinDoor;
-using PresentationLayer.Presenter.UserControls;
 using PresentationLayer.Views;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace PresentationLayer.Presenter
         private IUnityContainer _unityC;
         private IMainPresenter _mainPresenter;
         private IWindoorModel _windoorModel;
-        private IItemInfoUCPresenter _itemInfoUCP;
+        //private IItemInfoUCPresenter _itemInfoUCP;
 
         PictureBox _pboxFrame;
         Panel _pnlPanelling;
@@ -29,6 +28,8 @@ namespace PresentationLayer.Presenter
             line_X_Distance,
             pnlCount;
         string lineLocation;
+
+
         public SetTopViewSlidingPanellingPresenter(ISetTopViewSlidingPanellingView setTopViewSlidingPanelling)
         {
             _setTopViewSlidingPanelling = setTopViewSlidingPanelling;
@@ -54,8 +55,10 @@ namespace PresentationLayer.Presenter
             if (pnlRightCounter != 0)
             {
                 pnlRightCounter -= 1;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = pnlRightCounter;
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlRightCounter);
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
             }
         }
 
@@ -76,8 +79,11 @@ namespace PresentationLayer.Presenter
             if (pnlCount > (pnlLeftCounter + pnlRightCounter))
             {
                 pnlRightCounter += 1;
+
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = pnlRightCounter;
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlRightCounter);
             }
         }
 
@@ -99,10 +105,10 @@ namespace PresentationLayer.Presenter
             if (pnlLeftCounter != 0)
             {
                 pnlLeftCounter -= 1;
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
-
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = pnlLeftCounter;
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
                 _pnlPanelling.Invalidate();
-                Console.WriteLine(pnlLeftCounter);
 
             }
 
@@ -139,11 +145,13 @@ namespace PresentationLayer.Presenter
             if (pnlCount > (pnlLeftCounter + pnlRightCounter))
             {
                 pnlLeftCounter += 1;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = pnlLeftCounter;
                 _pnlPanelling.Invalidate();
-                _mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                //_mainPresenter.basePlatformWillRenderImg_MainPresenter.Invalidate_flpMain();
+                _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
 
-                Console.WriteLine(pnlLeftCounter);
             }
+
 
         }
 
@@ -165,16 +173,11 @@ namespace PresentationLayer.Presenter
                     endOfLine = _pnlPanelling.Width - 10;
 
                 g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance - 3, line_LtR_Y), new Point(_pnlPanelling.Width - 7, line_LtR_Y));
-
  
-              
-
                 if (_windoorModel.WD_TopViewType == "Fold and Slide")
                 {
                     for (int a = 0; a < pnlLeftCounter; a++)
-                    {
-
-
+                    { 
                         int x1 = InitialDistance,
                             x2 = InitialDistance + (line_X_Distance / 2);
 
@@ -196,13 +199,10 @@ namespace PresentationLayer.Presenter
                     }
                     InitialDistance = _pnlPanelling.Width - 20;
                     for (int a = 0; a < pnlRightCounter; a++)
-                    {
-
-
+                    { 
                         int x1 = InitialDistance,
                             x2 = InitialDistance + (line_X_Distance / 2);
-
-
+ 
                         if (a % 2 == 0)
                         {
                             g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
@@ -233,9 +233,7 @@ namespace PresentationLayer.Presenter
 
                         endOfLine -= 10;
                     }
-                }
-
-
+                } 
             }
             if ((pnlLeftCounter + pnlRightCounter) != 0)
             {
@@ -405,7 +403,16 @@ namespace PresentationLayer.Presenter
             {
                 _windoorModel.WD_TopViewType = "Fold and Slide";
             }
+ 
+            if (_mainPresenter.frameModel_MainPresenter != null)
+            {
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
+                _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewLeftCount = 0;
+            }
 
+            _mainPresenter.basePlatformWillRenderImg_MainPresenter.InvalidateBasePlatform();
+
+            SetImagerHeight();
             _mainPresenter.basePlatformWillRenderImg_MainPresenter.SetWdFlpImage();
             _setTopViewSlidingPanelling.ThisBinding(CreateBindingDictionary());
         }
@@ -534,10 +541,12 @@ namespace PresentationLayer.Presenter
 
                 //_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight = 240;
             }
-            Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
-            Console.WriteLine(_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight);
+            //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
+            //Console.WriteLine(_itemInfoUCP.GetItemInfoUC().PboxItemImagerHeight);
 
         }
+
+
         public ISetTopViewSlidingPanellingView GetSetTopViewSlidingPanellingView()
         {
             return _setTopViewSlidingPanelling;
@@ -547,15 +556,14 @@ namespace PresentationLayer.Presenter
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
             binding.Add("WD_TopViewType", new Binding("TEXT", _windoorModel, "WD_TopViewType", true, DataSourceUpdateMode.OnPropertyChanged));
-
-
+ 
             return binding;
         }
 
         public ISetTopViewSlidingPanellingPresenter CreateNewInstance(IUnityContainer unityC,
                                                                       IMainPresenter mainPresenter,
-                                                                      IWindoorModel windoorModel,
-                                                                      IItemInfoUCPresenter itemInfoUCP)
+                                                                      IWindoorModel windoorModel)
+        //IItemInfoUCPresenter itemInfoUCP)
         {
             unityC
                 .RegisterType<ISetTopViewSlidingPanellingView, SetTopViewSlidingPanellingView>()
@@ -564,7 +572,7 @@ namespace PresentationLayer.Presenter
             TopView._unityC = unityC;
             TopView._mainPresenter = mainPresenter;
             TopView._windoorModel = windoorModel;
-            TopView._itemInfoUCP = itemInfoUCP;
+            // TopView._itemInfoUCP = itemInfoUCP;
 
             return TopView;
         }

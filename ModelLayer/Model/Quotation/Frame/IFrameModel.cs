@@ -91,6 +91,8 @@ namespace ModelLayer.Model.Quotation.Frame
         bool Frame_BotFrameVisible { get; set; }
         Frame_MechJointArticleNo Frame_MechanicalJointConnector_Artno { get; set; }
         int Frame_MechanicalJointConnectorQty { get; set; }
+        int Frame_FoldAndSlideTopViewLeftCount { get; set; }
+        int Frame_FoldAndSlideTopViewRightCount { get; set; }
         void SetExplosionValues_Frame();
         void AdjustPropertyPanelHeight(string objtype, string mode);
         void DeductPropertyPanelHeight(int propertyHeight);
