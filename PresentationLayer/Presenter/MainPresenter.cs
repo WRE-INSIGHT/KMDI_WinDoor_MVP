@@ -3869,7 +3869,10 @@ namespace PresentationLayer.Presenter
                         if (row_str.Contains("WD_WindoorNumber:"))
                         {
                             _windoorModel.WD_WindoorNumber = extractedValue_str;
-
+                        }
+                        if (row_str.Contains("IsFromLoad:"))
+                        {
+                           _windoorModel.IsFromLoad = Convert.ToBoolean(extractedValue_str);
                         }
                         #endregion
                     }

@@ -646,6 +646,18 @@ namespace ModelLayer.Model.Quotation.WinDoor
                 NotifyPropertyChanged();
             }
         }
+        private bool _isFromLoad;
+        public bool IsFromLoad
+        {
+            get
+            {
+                return _isFromLoad;
+            }
+            set
+            {
+                _isFromLoad = value;
+            }
+        }
 
         #region Methods
 
@@ -1299,7 +1311,8 @@ namespace ModelLayer.Model.Quotation.WinDoor
                             List<Control> wdlstobjects,
                             Base_Color wd_basecolor,
                             Foil_Color wd_insidecolor,
-                            Foil_Color wd_outisdecolor
+                            Foil_Color wd_outisdecolor,
+                            bool isFromLoad
                             //int wd_costingPoints
                             )
         {
@@ -1329,6 +1342,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             WD_fileLoad = false;
             Dictionary_wd_redArrowLines = new Dictionary<int, decimal>();
             Dictionary_ht_redArrowLines = new Dictionary<int, decimal>();
+            IsFromLoad = isFromLoad;
 
         }
     }
