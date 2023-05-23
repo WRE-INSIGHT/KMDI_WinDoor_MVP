@@ -74,6 +74,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         string WD_WindoorNumber { get; set; }
         string setDiscount { get; set; }
+        string WD_TopViewType { get; set; }
         string WD_itemName { get; set; }
         void Fit_MyControls_ToBindDimensions();
         void SetfrmDimentionZoom();

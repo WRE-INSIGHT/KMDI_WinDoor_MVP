@@ -633,7 +633,19 @@ namespace ModelLayer.Model.Quotation.WinDoor
 
         public string setDiscount { get; set; }
 
-      
+        private string _wd_TopViewType;
+        public string WD_TopViewType
+        {
+            get
+            {
+                return _wd_TopViewType;
+            }
+            set
+            {
+                _wd_TopViewType = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #region Methods
 
@@ -677,7 +689,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
             else if (area > 16000000) // more than (4000w x 4001h / 4001w x 4000h)
             {
-                zm = _arr_zoomPercentage[0];            
+                zm = _arr_zoomPercentage[0];
             }
 
             return zm;
@@ -890,7 +902,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
                                     i++;
                                 }
                             }
-                           
+
                         }
                         else if (ctrl.Name.Contains("MultiTransom") || ctrl.Name.Contains("MultiMullion"))
                         {
@@ -1111,7 +1123,7 @@ namespace ModelLayer.Model.Quotation.WinDoor
             }
 
             int diff_BasePlatform_VS_MyCtrlsWidth = objectWidth - (WD_width_4basePlatform - 70);
-            if(diff_BasePlatform_VS_MyCtrlsWidth > 0)
+            if (diff_BasePlatform_VS_MyCtrlsWidth > 0)
                 WD_width_4basePlatform += diff_BasePlatform_VS_MyCtrlsWidth;
         }
 

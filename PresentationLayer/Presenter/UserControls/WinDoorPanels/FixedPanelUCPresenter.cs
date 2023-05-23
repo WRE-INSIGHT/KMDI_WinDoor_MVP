@@ -1231,6 +1231,22 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                 {
                     glassType = "Security Mesh";
                 }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Wire Mesh"))
+                {
+                    glassType = "Wire Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Pet Mesh"))
+                {
+                    glassType = "Pet Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Tuff Mesh"))
+                {
+                    glassType = "Tuff Mesh";
+                }
+                else if (_panelModel.Panel_GlassThicknessDesc.Contains("Phifer Mesh"))
+                {
+                    glassType = "Phifer Mesh";
+                }
                 else
                 {
                     glassType = "";
@@ -1248,7 +1264,7 @@ namespace PresentationLayer.Presenter.UserControls.WinDoorPanels
                                             fixedpnl.ClientRectangle.Width,
                                             10);
             if (glassType == "Unglazed" ||
-                glassType == "Security Mesh")
+                glassType.Contains("Mesh"))
             {
                 g.DrawString("P" + _panelModel.PanelGlass_ID + "- " + glassType,
                                       new Font("Segoe UI", 8.0f, FontStyle.Bold),

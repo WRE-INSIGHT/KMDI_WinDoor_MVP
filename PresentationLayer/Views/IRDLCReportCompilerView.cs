@@ -7,6 +7,10 @@ namespace PresentationLayer.Views
     {
         string TxtBxOutofTownExpenses { get; set; }
         string TxtBxContractSummaryVat { get; set; }
+        string TxtBxRowlimit { get; set; }
+        CheckBox GetSubTotalCheckBox();
+
+        event EventHandler chkboxsubtotalCheckedChangedEventRaised;
         event EventHandler BtnCompileReportClickEventRaised;
         event EventHandler RDLCReportCompilerViewLoadEventRaised;
         event EventHandler chkselectallCheckedChangedEventRaised;

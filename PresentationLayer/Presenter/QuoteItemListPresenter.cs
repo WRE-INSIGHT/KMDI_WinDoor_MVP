@@ -43,11 +43,14 @@ namespace PresentationLayer.Presenter
         private List<int> _lstItemArea = new List<int>();
         private string _rdlcReportCompilerOutofTownExpenses;
         private string _rdlcReportCompilerVatContractSummary;
+        private string _rdlcReportCompilerRowLimit;
         private string[] province;
         private string archi;
         private bool _callFrmRDLCCompiler;
         private bool _renderPDFAtBackground;
         private bool _showVatContractSummary;
+        private bool _rdlcReportCompilerShowSubTotal;
+
 
         int count = 0,
             newlinecount = 0;
@@ -99,6 +102,28 @@ namespace PresentationLayer.Presenter
                 _rdlcReportCompilerOutofTownExpenses = value;
             }
         }
+        public string RDLCReportCompilerRowLimit
+        {
+            get
+            {
+                return _rdlcReportCompilerRowLimit;
+            }
+            set
+            {
+                _rdlcReportCompilerRowLimit = value;
+            }
+        }
+        public bool RDLCReportCompilerShowSubTotal
+        {
+            get
+            {
+                return _rdlcReportCompilerShowSubTotal;
+            }
+            set
+            {
+                _rdlcReportCompilerShowSubTotal = value;
+            }
+        }
         public bool RenderPDFAtBackGround
         {
             get
@@ -110,7 +135,7 @@ namespace PresentationLayer.Presenter
                 _renderPDFAtBackground = value;
             }
         }
-   
+        
         public List<IQuoteItemListUCPresenter> LstQuoteItemUC
         {
             get { return _lstQuoteItemUC; }
@@ -154,7 +179,7 @@ namespace PresentationLayer.Presenter
             ScreenTotalListCount = 0,
             divisor = 2;
 
-        String prev_GlassSize,
+        string prev_GlassSize,
                prev_GlassRef,
                prev_GlassLoc, prev_GlassDesc,
                curr_GlassSize,
@@ -193,7 +218,6 @@ namespace PresentationLayer.Presenter
         decimal olddiscount, updateddiscount;
         int countfortick;
 
-        decimal asd = 0m;
         #endregion
 
         public QuoteItemListPresenter(IQuoteItemListView quoteItemListView,
@@ -315,6 +339,7 @@ namespace PresentationLayer.Presenter
             IPrintQuotePresenter printQuote = _printQuotePresenter.GetNewInstance(_unityC, this, _mainPresenter, _quotationModel);
             printQuote.GetPrintQuoteView().GetBindingSource().DataSource = _dsq.dtScreen.DefaultView;
             printQuote.EventLoad();
+            printQuote.GetPrintQuoteView().RowLimit = _rdlcReportCompilerRowLimit;
             printQuote.PrintRDLCReport();
 
         }

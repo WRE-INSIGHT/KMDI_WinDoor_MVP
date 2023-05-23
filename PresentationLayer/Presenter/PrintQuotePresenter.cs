@@ -754,6 +754,15 @@ namespace PresentationLayer.Presenter
                         RParam[16] = new ReportParameter("ShowSubTotal", "False");
                     }
 
+                    if(_quoteItemListPresenter != null)
+                    {
+                        if (_quoteItemListPresenter.RenderPDFAtBackGround == true && _quoteItemListPresenter.RDLCReportCompilerShowSubTotal == true)
+                        {
+                            RParam[16] = new ReportParameter("ShowSubTotal", "True");
+                        }
+                    }
+
+
                     _printQuoteView.GetReportViewer().LocalReport.SetParameters(RParam);
 
                     try

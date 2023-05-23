@@ -46,6 +46,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.chkbox_subtotal = new System.Windows.Forms.CheckBox();
+            this.txtbox_rowlimit = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -102,6 +105,9 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.txtbox_rowlimit);
+            this.panel2.Controls.Add(this.chkbox_subtotal);
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
@@ -252,6 +258,34 @@
             this.saveFileDialog.Filter = "Pdf Files|*.pdf";
             this.saveFileDialog.Title = "Save ";
             // 
+            // chkbox_subtotal
+            // 
+            this.chkbox_subtotal.AutoSize = true;
+            this.chkbox_subtotal.Location = new System.Drawing.Point(145, 26);
+            this.chkbox_subtotal.Name = "chkbox_subtotal";
+            this.chkbox_subtotal.Size = new System.Drawing.Size(69, 17);
+            this.chkbox_subtotal.TabIndex = 3;
+            this.chkbox_subtotal.Text = "SubTotal";
+            this.chkbox_subtotal.UseVisualStyleBackColor = true;
+            this.chkbox_subtotal.CheckedChanged += new System.EventHandler(this.chkbox_subtotal_CheckedChanged);
+            // 
+            // txtbox_rowlimit
+            // 
+            this.txtbox_rowlimit.Location = new System.Drawing.Point(145, 49);
+            this.txtbox_rowlimit.Name = "txtbox_rowlimit";
+            this.txtbox_rowlimit.Size = new System.Drawing.Size(69, 20);
+            this.txtbox_rowlimit.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(216, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "- Row Limit";
+            // 
             // RDLCReportCompilerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,6 +302,7 @@
             this.Load += new System.EventHandler(this.RDLCReportCompilerView_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -297,5 +332,8 @@
         private System.Windows.Forms.TextBox txt_SummaryVat;
         private System.Windows.Forms.CheckBox chkbox_showVat;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox chkbox_subtotal;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtbox_rowlimit;
     }
 }
