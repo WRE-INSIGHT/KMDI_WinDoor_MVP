@@ -38,11 +38,14 @@
             this.btnAddLeftLine = new System.Windows.Forms.Button();
             this.pbox_frame = new System.Windows.Forms.PictureBox();
             this.pnl_SlidingArrow = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cmb_topViewType = new System.Windows.Forms.ComboBox();
             this.pnl_SlidingTopView.SuspendLayout();
             this.pnl_right.SuspendLayout();
             this.pnl_left.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).BeginInit();
             this.pnl_SlidingArrow.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_SlidingTopView
@@ -135,7 +138,7 @@
             this.pbox_frame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbox_frame.Location = new System.Drawing.Point(70, 35);
             this.pbox_frame.Name = "pbox_frame";
-            this.pbox_frame.Size = new System.Drawing.Size(404, 366);
+            this.pbox_frame.Size = new System.Drawing.Size(404, 339);
             this.pbox_frame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_frame.TabIndex = 0;
             this.pbox_frame.TabStop = false;
@@ -145,13 +148,32 @@
             this.pnl_SlidingArrow.BackColor = System.Drawing.Color.White;
             this.pnl_SlidingArrow.Controls.Add(this.pbox_frame);
             this.pnl_SlidingArrow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_SlidingArrow.Location = new System.Drawing.Point(0, 0);
+            this.pnl_SlidingArrow.Location = new System.Drawing.Point(0, 27);
             this.pnl_SlidingArrow.Name = "pnl_SlidingArrow";
             this.pnl_SlidingArrow.Padding = new System.Windows.Forms.Padding(70, 35, 0, 0);
-            this.pnl_SlidingArrow.Size = new System.Drawing.Size(474, 401);
+            this.pnl_SlidingArrow.Size = new System.Drawing.Size(474, 374);
             this.pnl_SlidingArrow.TabIndex = 16;
             this.pnl_SlidingArrow.SizeChanged += new System.EventHandler(this.pnl_SlidingArrow_SizeChanged);
             this.pnl_SlidingArrow.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_SlidingArrow_Paint);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.cmb_topViewType);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(474, 27);
+            this.panel1.TabIndex = 17;
+            // 
+            // cmb_topViewType
+            // 
+            this.cmb_topViewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_topViewType.FormattingEnabled = true;
+            this.cmb_topViewType.Location = new System.Drawing.Point(3, 3);
+            this.cmb_topViewType.Name = "cmb_topViewType";
+            this.cmb_topViewType.Size = new System.Drawing.Size(147, 21);
+            this.cmb_topViewType.TabIndex = 0;
             // 
             // SetTopViewSlidingPanellingView
             // 
@@ -159,6 +181,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 528);
             this.Controls.Add(this.pnl_SlidingArrow);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnl_SlidingTopView);
             this.Name = "SetTopViewSlidingPanellingView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -169,6 +192,7 @@
             this.pnl_left.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_frame)).EndInit();
             this.pnl_SlidingArrow.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -185,5 +209,7 @@
         private System.Windows.Forms.Panel pnl_left;
         private System.Windows.Forms.Button btnMinusLeftLine;
         private System.Windows.Forms.Button btnAddLeftLine;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cmb_topViewType;
     }
 }

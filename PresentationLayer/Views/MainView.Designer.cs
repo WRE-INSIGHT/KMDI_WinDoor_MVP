@@ -73,6 +73,7 @@
             this.glassBalancingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customArrowHeadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.slidingTopViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeItemDimensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsBtnNwin = new System.Windows.Forms.ToolStripButton();
             this.tsBtnNdoor = new System.Windows.Forms.ToolStripButton();
@@ -428,7 +429,8 @@
             this.changeItemColorToolStripMenuItem,
             this.glassBalancingToolStripMenuItem,
             this.customArrowHeadToolStripMenuItem,
-            this.slidingTopViewToolStripMenuItem});
+            this.slidingTopViewToolStripMenuItem,
+            this.changeItemDimensionToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -436,14 +438,14 @@
             // changeSyncDirectoryToolStripMenuItem
             // 
             this.changeSyncDirectoryToolStripMenuItem.Name = "changeSyncDirectoryToolStripMenuItem";
-            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeSyncDirectoryToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.changeSyncDirectoryToolStripMenuItem.Text = "Change sync directory";
             this.changeSyncDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeSyncDirectoryToolStripMenuItem_Click);
             // 
             // syncLocalToCloudToolStripMenuItem
             // 
             this.syncLocalToCloudToolStripMenuItem.Name = "syncLocalToCloudToolStripMenuItem";
-            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.syncLocalToCloudToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.syncLocalToCloudToolStripMenuItem.Text = "Sync local to cloud";
             this.syncLocalToCloudToolStripMenuItem.Visible = false;
             // 
@@ -452,7 +454,7 @@
             this.editorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.invertOrientationToolStripMenuItem});
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.editorToolStripMenuItem.Text = "Editor";
             // 
             // invertOrientationToolStripMenuItem
@@ -466,7 +468,7 @@
             // 
             this.listOfMaterialsToolStripMenuItem.Enabled = false;
             this.listOfMaterialsToolStripMenuItem.Name = "listOfMaterialsToolStripMenuItem";
-            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.listOfMaterialsToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.listOfMaterialsToolStripMenuItem.Text = "List of Materials";
             this.listOfMaterialsToolStripMenuItem.Click += new System.EventHandler(this.listOfMaterialsToolStripMenuItem_Click);
             // 
@@ -474,7 +476,7 @@
             // 
             this.changeItemColorToolStripMenuItem.Enabled = false;
             this.changeItemColorToolStripMenuItem.Name = "changeItemColorToolStripMenuItem";
-            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.changeItemColorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.changeItemColorToolStripMenuItem.Text = "Change Item Color";
             this.changeItemColorToolStripMenuItem.Click += new System.EventHandler(this.changeItemColorToolStripMenuItem_Click);
             // 
@@ -483,7 +485,7 @@
             this.glassBalancingToolStripMenuItem.CheckOnClick = true;
             this.glassBalancingToolStripMenuItem.Enabled = false;
             this.glassBalancingToolStripMenuItem.Name = "glassBalancingToolStripMenuItem";
-            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.glassBalancingToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.glassBalancingToolStripMenuItem.Text = "Glass Balancing";
             this.glassBalancingToolStripMenuItem.Visible = false;
             this.glassBalancingToolStripMenuItem.Click += new System.EventHandler(this.glassBalancingToolStripMenuItem_Click);
@@ -492,7 +494,7 @@
             // 
             this.customArrowHeadToolStripMenuItem.Enabled = false;
             this.customArrowHeadToolStripMenuItem.Name = "customArrowHeadToolStripMenuItem";
-            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.customArrowHeadToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.customArrowHeadToolStripMenuItem.Text = "Custom Arrow Head";
             this.customArrowHeadToolStripMenuItem.Click += new System.EventHandler(this.customArrowHeadToolStripMenuItem_Click);
             // 
@@ -500,9 +502,17 @@
             // 
             this.slidingTopViewToolStripMenuItem.Enabled = false;
             this.slidingTopViewToolStripMenuItem.Name = "slidingTopViewToolStripMenuItem";
-            this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.slidingTopViewToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.slidingTopViewToolStripMenuItem.Text = "Sliding Top View";
             this.slidingTopViewToolStripMenuItem.Click += new System.EventHandler(this.slidingTopViewToolStripMenuItem_Click);
+            // 
+            // changeItemDimensionToolStripMenuItem
+            // 
+            this.changeItemDimensionToolStripMenuItem.Enabled = false;
+            this.changeItemDimensionToolStripMenuItem.Name = "changeItemDimensionToolStripMenuItem";
+            this.changeItemDimensionToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.changeItemDimensionToolStripMenuItem.Text = "Change Item Dimension";
+            this.changeItemDimensionToolStripMenuItem.Click += new System.EventHandler(this.lblSize_Click);
             // 
             // tsMain
             // 
@@ -1160,5 +1170,6 @@
         private System.Windows.Forms.NumericUpDown Nud_CurrentPrice;
         private System.Windows.Forms.ToolStripButton newfactorBtn;
         private System.Windows.Forms.ToolStripButton ScreentoolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem changeItemDimensionToolStripMenuItem;
     }
 }
