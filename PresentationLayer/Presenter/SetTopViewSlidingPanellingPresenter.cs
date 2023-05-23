@@ -166,15 +166,10 @@ namespace PresentationLayer.Presenter
 
                 g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance - 3, line_LtR_Y), new Point(_pnlPanelling.Width - 7, line_LtR_Y));
 
- 
-              
-
                 if (_windoorModel.WD_TopViewType == "Fold and Slide")
                 {
                     for (int a = 0; a < pnlLeftCounter; a++)
                     {
-
-
                         int x1 = InitialDistance,
                             x2 = InitialDistance + (line_X_Distance / 2);
 
