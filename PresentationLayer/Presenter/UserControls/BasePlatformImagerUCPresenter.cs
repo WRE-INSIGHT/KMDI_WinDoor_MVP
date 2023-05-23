@@ -1383,9 +1383,9 @@ namespace PresentationLayer.Presenter.UserControls
                         }
                         for (int a = 0; a < pnlRightCounter; a++)
                         {
-                            int x1 = endOfLine;
+                            int x1 = endOfLine + 75;
 
-                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, 10));
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, line_LtR_Y - 60));
 
                             endOfLine -= 10;
                         }
