@@ -1378,13 +1378,12 @@ namespace EnumerationTypeLayer
             private LouverColor_Option(int value, string displayName) : base(value, displayName) { }
         }
 
-        //public class Frame_MechJointArticleNo : Enumeration<Frame_MechJointArticleNo, int>
-        //{
-        //    public static readonly Frame_MechJointArticleNo _9C52 = new Frame_MechJointArticleNo(0, "9C52");
+        public class TopViewType : Enumeration<TopViewType, int>
+        {
+            public static readonly TopViewType _FoldAndSlide = new TopViewType(0, "Fold and Slide");
+            public static readonly TopViewType _SlidingPivot = new TopViewType(1, "Sliding Pivot");
 
-        //    private Frame_MechJointArticleNo(int value, string displayName) : base(value, displayName) { }
-
-
-        //}
+            private TopViewType(int value, string displayName) : base(value, displayName) { }
+        }
     }
 }

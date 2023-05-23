@@ -100,7 +100,7 @@ namespace PresentationLayer.Presenter
             //    _windoorModel.WD_pboxImagerHeight = 100;
             //}
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
-            SetImagerHeight();
+            // SetImagerHeight();
 
             if (pnlLeftCounter != 0)
             {
@@ -140,7 +140,7 @@ namespace PresentationLayer.Presenter
             //    _windoorModel.WD_pboxImagerHeight = 100;
             //}
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
-            SetImagerHeight();
+            //SetImagerHeight();
 
             if (pnlCount > (pnlLeftCounter + pnlRightCounter))
             {
@@ -169,49 +169,71 @@ namespace PresentationLayer.Presenter
                 {
                     line_X_Distance = _pnlPanelling.Width / pnlCount;
                 }
-                int InitialDistance = 50;
-                g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance, line_LtR_Y), new Point(_pnlPanelling.Width - 10, line_LtR_Y));
+                int InitialDistance = 25,
+                    endOfLine = _pnlPanelling.Width - 10;
 
-                for (int a = 0; a < pnlLeftCounter; a++)
+                g.DrawLine(new Pen(Color.Black, 5), new Point(InitialDistance - 3, line_LtR_Y), new Point(_pnlPanelling.Width - 7, line_LtR_Y));
+ 
+                if (_windoorModel.WD_TopViewType == "Fold and Slide")
                 {
-                    int x1 = InitialDistance,
-                        x2 = InitialDistance + (line_X_Distance / 2);
+                    for (int a = 0; a < pnlLeftCounter; a++)
+                    { 
+                        int x1 = InitialDistance,
+                            x2 = InitialDistance + (line_X_Distance / 2);
 
-                    if (a % 2 == 0)
-                    {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
-                    }
-                    else
-                    {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
-                    }
 
-                    InitialDistance = x2;
+                        if (a % 2 == 0)
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
+                        }
+                        else
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
+                        }
+                        //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+                        InitialDistance = x2;
+                    }
+                    if (pnlCount != 0)
+                    {
+                        line_X_Distance = -System.Math.Abs(_pnlPanelling.Width / pnlCount);
+                    }
+                    InitialDistance = _pnlPanelling.Width - 20;
+                    for (int a = 0; a < pnlRightCounter; a++)
+                    { 
+                        int x1 = InitialDistance,
+                            x2 = InitialDistance + (line_X_Distance / 2);
+ 
+                        if (a % 2 == 0)
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
+                        }
+                        else
+                        {
+                            g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
+                        }
+                        //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
+                        InitialDistance = x2;
+                    }
                 }
-                if (pnlCount != 0)
+                else if (_windoorModel.WD_TopViewType == "Sliding Pivot")
                 {
-                    line_X_Distance = -System.Math.Abs(_pnlPanelling.Width / pnlCount);
-                }
-                InitialDistance = _pnlPanelling.Width - 20;
-                for (int a = 0; a < pnlRightCounter; a++)
-                {
-
-
-                    int x1 = InitialDistance,
-                        x2 = InitialDistance + (line_X_Distance / 2);
-
-
-                    if (a % 2 == 0)
+                    for (int a = 0; a < pnlLeftCounter; a++)
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y - 10), new Point(x2, 10));
+                        int x1 = InitialDistance;
+
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, 10));
+
+                        InitialDistance += 10;
                     }
-                    else
+                    for (int a = 0; a < pnlRightCounter; a++)
                     {
-                        g.DrawLine(new Pen(Color.Black, 5), new Point(x2, line_LtR_Y - 10), new Point(x1, 10));
+                        int x1 = endOfLine;
+
+                        g.DrawLine(new Pen(Color.Black, 5), new Point(x1, line_LtR_Y), new Point(x1, 10));
+
+                        endOfLine -= 10;
                     }
-                    //Console.WriteLine(x1 + "\n" + x2 + "\n\n");
-                    InitialDistance = x2;
-                }
+                } 
             }
             if ((pnlLeftCounter + pnlRightCounter) != 0)
             {
@@ -375,7 +397,13 @@ namespace PresentationLayer.Presenter
             //    _windoorModel.WD_pboxImagerHeight = 100; 
             //}
             //Console.WriteLine(_windoorModel.WD_SlidingTopViewVisibility);
+            //SetImagerHeight();
 
+            if (_windoorModel.WD_TopViewType == null)
+            {
+                _windoorModel.WD_TopViewType = "Fold and Slide";
+            }
+ 
             if (_mainPresenter.frameModel_MainPresenter != null)
             {
                 _mainPresenter.frameModel_MainPresenter.Frame_FoldAndSlideTopViewRightCount = 0;
@@ -527,8 +555,8 @@ namespace PresentationLayer.Presenter
         {
             Dictionary<string, Binding> binding = new Dictionary<string, Binding>();
             binding.Add("pboxFrame", new Binding("Image", _windoorModel, "WD_flpImage", true, DataSourceUpdateMode.OnPropertyChanged));
-
-
+            binding.Add("WD_TopViewType", new Binding("TEXT", _windoorModel, "WD_TopViewType", true, DataSourceUpdateMode.OnPropertyChanged));
+ 
             return binding;
         }
 
